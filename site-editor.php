@@ -9,7 +9,7 @@ Version: 0.9.0
 */
 define( 'WPSED_VERSION', '0.9.0' );
 
-define( 'SED_APP_VERSION', '0.9.0' );
+define( 'SED_APP_VERSION', '0.9.0' );/*--------------------*/
 
 if(!defined('DS'))
     define('DS', DIRECTORY_SEPARATOR);
