@@ -55,9 +55,6 @@ class SiteEditorManager{
 
 		}
 
-		add_action('sed_print_scripts',         array( $this, 'wp_print_scripts_action'), 0);
-		//add_action('sed_print_footer_scripts',  array( $this, 'wp_print_scripts_action'), 0);
-
 		/*
 		ini_set('xdebug.var_display_max_children',1000 );
 		ini_set('xdebug.var_display_max_depth',20 );
@@ -188,90 +185,6 @@ class SiteEditorManager{
      */
     public function allow_insert_empty_post( $allow_empty ) {
         return false;
-    }
-
-    function get_file($path) {
-
-    	if ( function_exists('realpath') )
-    		$path = realpath($path);
-
-    	if ( ! $path || ! @is_file($path) )
-    		return '';
-
-    	return @file_get_contents($path);
-    }
-
-    public function wp_print_scripts_action(){
-        global $wp_scripts;
-		if (! is_a($wp_scripts, 'WP_Scripts')) return;
-
-        $queue = $wp_scripts->queue;
-        $wp_scripts->all_deps($queue);
-        $scripts_handle = $wp_scripts->to_do;
-
-        if(is_array($scripts_handle) && !empty($scripts_handle))
-            $scripts = implode(",", $scripts_handle);
-
-        //self::print_js_script_tag( site_url( "/wp-admin/load-scripts.php?c=1&load=".$scripts ) );
-        $out = "";
-        foreach( $scripts_handle as $handle ) {
-        	if ( !array_key_exists($handle, $wp_scripts->registered) )
-        		continue;
-
-			var_dump( $handle );
-
-        	$path = ABSPATH . $wp_scripts->registered[$handle]->src;
-        	$out .= self::get_file($path) . "\n";
-        }
-
-		$upload_dir = wp_upload_dir();
-
-		if (!file_exists(trailingslashit($upload_dir['basedir']) . "site-editor")) {
-			mkdir(trailingslashit($upload_dir['basedir']) . "site-editor", 0777, true);
-		}
-
-		$filename = trailingslashit($upload_dir['basedir']) . "site-editor/siteeditor.min.js";
-
-		global $wp_filesystem;
-		if( empty( $wp_filesystem ) ) {
-			require_once( ABSPATH .'/wp-admin/includes/file.php' );
-			WP_Filesystem();
-		}
-
-		if( $wp_filesystem ) {
-			$wp_filesystem->put_contents(
-				$filename,
-				$out,
-				FS_CHMOD_FILE // predefined mode settings for WP files
-			);
-		}
-
-        foreach( $wp_scripts->to_do as $key => $handle ) {
-            // Standard way
-            if ( $wp_scripts->do_item( $handle, $wp_scripts->groups ) ) { var_dump( $handle );
-                $wp_scripts->done[] = $handle;
-            }
-            unset( $wp_scripts->to_do[$key] );
-        }
-
-
-    }
-
-    static private function print_js_script_tag($url, $conditional = '', $is_cache = true, $localize = '', $error_message = '') {
-
-        if ($localize) {
-            echo "<script type='text/javascript'>\n/* <![CDATA[ */\n$localize\n/* ]]> */\n</script>\n";
-        }
-
-        if ($conditional) {
-            echo "<!--[if " . $conditional . "]>\n";
-        }
-
-        echo '<script type="text/javascript" src="' . $url . '">' . ($is_cache ? '/*Cache!*/' : '') . $error_message . '</script>' . "\n";
-
-        if ($conditional) {
-            echo "<![endif]-->" . "\n";
-        }
     }
 
     function wp_scripts_loaded() {

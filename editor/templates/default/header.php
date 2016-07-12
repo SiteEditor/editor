@@ -284,12 +284,8 @@ do_action( 'sed_enqueue_scripts' );
      * @since 3.4.0
      */
     do_action( 'sed_print_scripts' );
-
-    $upload_dir = wp_upload_dir();
-    $upload_url = $upload_dir['baseurl'];
-    $full_scripts_src = $upload_url."/site-editor/siteeditor.min.js";
     ?>
-    <script type="text/javascript" src="<?php echo $full_scripts_src;?>" ></script>
+
     <?php do_action( 'sed_top_head' ); ?>
 
 	<?php echo $site_editor_head; ?>
