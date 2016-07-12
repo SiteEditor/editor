@@ -201,7 +201,7 @@ class SiteEditorManager{
     	return @file_get_contents($path);
     }
 
-    static private function wp_print_scripts_action(){
+    public function wp_print_scripts_action(){
         global $wp_scripts;
 		if (! is_a($wp_scripts, 'WP_Scripts')) return;
 
@@ -217,6 +217,8 @@ class SiteEditorManager{
         foreach( $scripts_handle as $handle ) {
         	if ( !array_key_exists($handle, $wp_scripts->registered) )
         		continue;
+
+			var_dump( $handle );
 
         	$path = ABSPATH . $wp_scripts->registered[$handle]->src;
         	$out .= self::get_file($path) . "\n";
@@ -246,7 +248,7 @@ class SiteEditorManager{
 
         foreach( $wp_scripts->to_do as $key => $handle ) {
             // Standard way
-            if ( $wp_scripts->do_item( $handle, $group ) ) {
+            if ( $wp_scripts->do_item( $handle, $wp_scripts->groups ) ) { var_dump( $handle );
                 $wp_scripts->done[] = $handle;
             }
             unset( $wp_scripts->to_do[$key] );

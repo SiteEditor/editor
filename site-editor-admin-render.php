@@ -10,7 +10,7 @@ class SiteEditorAdminRender{
     function __construct(){
 
         if( !defined( 'SED_ADMIN_INC_PATH' ) )
-            define('SED_ADMIN_INC_PATH', SED_BASE_DIR . DS . 'admin' . DS . 'includes');
+            define('SED_ADMIN_INC_PATH', SED_EDITOR_DIR . DS . 'admin' . DS . 'includes');
 
         if( !class_exists( 'SiteEditorSetup' ) )
             require_once( SED_ADMIN_INC_PATH . DS . 'sed-setup.class.php' );
@@ -21,7 +21,7 @@ class SiteEditorAdminRender{
         add_action( 'admin_enqueue_scripts', array( $this , 'render_scripts' ) );
 
         add_action('admin_init', array( $this, 'options_admin_init' ) );
-        add_action('admin_init', array( $this, 'sed_page_options_admin_init' ) );
+        //add_action('admin_init', array( $this, 'sed_page_options_admin_init' ) );
 
         if( SiteEditorSetup::is_installed() ){
 
@@ -94,9 +94,9 @@ class SiteEditorAdminRender{
             include_once SED_PLUGIN_DIR . DS . 'site-editor-main.php';
             global $sed_apps;
             //include_once( SED_BASE_DIR . DS . 'application' . DS . "modules.class.php"  );
-            include_once( SED_BASE_DIR . DS . 'application' . DS . "application.class.php"  );
-            include_once( SED_BASE_DIR . DS . 'applications' . DS . 'siteeditor' . DS . "siteeditor.class.php"  );
-            require_once SED_BASE_DIR . DS . 'applications' . DS . 'siteeditor' . DS . 'index.php';
+            include_once( SED_EDITOR_DIR . DS . 'application' . DS . "application.class.php"  );
+            include_once( SED_EDITOR_DIR . DS . 'applications' . DS . 'siteeditor' . DS . "siteeditor.class.php"  );
+            require_once SED_EDITOR_DIR . DS . 'applications' . DS . 'siteeditor' . DS . 'index.php';
 
 
             do_action( 'sed_app_register', $sed_apps->editor_manager );
@@ -179,8 +179,8 @@ class SiteEditorAdminRender{
 
         if( in_array( $hook , $this->_pagehooks ) ){
 
-            wp_enqueue_script( "sed-admin-scripts" , plugins_url('site-editor-app/admin/templates/default/js/scripts.js', __FILE__ ) , array('jquery' , 'wp-color-picker') , '1.0.0' , false );
-            wp_enqueue_style( "sed-admin-style" , plugins_url('site-editor-app/admin/templates/default/css/style.css', __FILE__ ) , array() , '1.0.0' , 'all');
+            wp_enqueue_script( "sed-admin-scripts" , plugins_url('editor/admin/templates/default/js/scripts.js', __FILE__ ) , array('jquery' , 'wp-color-picker') , '1.0.0' , false );
+            wp_enqueue_style( "sed-admin-style" , plugins_url('editor/admin/templates/default/css/style.css', __FILE__ ) , array() , '1.0.0' , 'all');
         }
 
         if( !isset( $this->_pagehooks['site-editor-settings'] ) || !isset( $this->_pagehooks['site-editor'] ) )
@@ -302,7 +302,7 @@ class SiteEditorAdminRender{
 
     //admin Controller:: index admin page
     function get_site_editor_admin(){
-        require_once SED_BASE_DIR . DS .'admin' . DS . 'index.php';
+        require_once SED_EDITOR_DIR . DS .'admin' . DS . 'index.php';
     }
 
 
