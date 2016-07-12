@@ -1,0 +1,39 @@
+/*
+#less_info#(
+"handle" => "social-bar-skin6",
+"deps" => array('social-bar-main-less'),  
+"ver" => "1.0.0",
+"media" => "all"
+)#
+*/
+.spcial-bar.social-bar-skin6{
+
+            li {
+                a {
+                      
+                      .base-color(@body-bg;25%);
+                      //background: @body-bg;
+                      -webkit-border-radius: 99px;
+                     // min-width: 40px;
+                      padding: 2px;
+                      border-radius: 100%;
+                      border: 1px solid @base-border-color-b;
+                      text-align: center;
+                      .transition(all 500ms);
+                      &:hover{
+                          border-color: transparent;
+                          color:#fff;
+                      }
+                }
+            }
+       .vine { a{&:hover{ background-color: #7AC043; border-color: #7AC043; }}}
+       .linked-in { a{&:hover{ background-color:#419cca ; border-color:#419cca ; }}}
+       .tumblr { a{&:hover{ background-color: #345574; border-color: #345574;  }}}
+       .facebook { a{&:hover{ background-color: #37589b; border-color: #37589b; }}}
+       .pinterest { a{&:hover{ background-color: #cb2027; border-color: #cb2027;  }}}
+       .dribbble { a{&:hover{ background-color: #F4498B; border-color: #F4498B;  }}}
+       .twitter { a{&:hover{ background-color: #46d4fe; border-color: #46d4fe;  }}}
+       .google-plus { a{&:hover{ background-color: #de5a49; border-color: #de5a49;  }}}
+       .behance { a{&:hover{ background-color: #0093FB; border-color: #0093FB;  }}}
+
+}

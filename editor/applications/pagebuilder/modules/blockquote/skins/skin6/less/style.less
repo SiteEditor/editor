@@ -1,0 +1,40 @@
+/*
+#less_info#(
+"handle"  =>"blockquote-skin6",
+"deps"    => array('main-blockquote'),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/blockquote/less/variables.less" ,
+),
+)#
+*/
+@import "../../../less/variables.less";
+.module-blockquote.blockquote-skin6{
+  .sed-blockquote-skin{
+      text-indent: 100px;
+      border: none;
+      background-color: @blockquote-base-color-a-bg;
+      .border-radius(@blockquote-border-radius);
+      .multi-box-shadow(0 2px 0 @blockquote-main-border-color inset, 0 -1px 9px rgba(0, 0, 0, 0.3));
+      padding-left: 20px;
+      &:before{
+        font-size: 150px;
+        font-style: normal;
+        font-weight: 700;
+        left: -70px;
+        .text-shadow( 2px 4px 6px rgba(0, 0, 0, 0.1));
+        top: -60px;
+      }
+  }
+}
+.rtl-body .module-blockquote.blockquote-skin6{
+  .sed-blockquote-skin{
+      padding-right: 20px !important;
+      &:before{
+        right: -70px;
+        left: auto !important;
+        .text-shadow(-2px 4px 6px rgba(0, 0, 0, 0.1)) !important;
+      }
+  }
+}

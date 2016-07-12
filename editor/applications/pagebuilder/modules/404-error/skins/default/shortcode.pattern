@@ -1,0 +1,29 @@
+[sed_404_error skin="default"]
+
+    [sed_text_title parent_module="404-error" class="m-404-title" toolbar1="simple-text" toolbar2="simple-text" tag="div" contextmenu_disabled = "disabled" settings_disabled = "disabled"]
+        <h1>404</h1>
+    [/sed_text_title]
+
+    [sed_text_title parent_module="404-error" class="m-404-desc" toolbar1="title" toolbar2="title" tag="div" contextmenu_disabled = "disabled" settings_disabled = "disabled"]
+        <h3>Oops, Page Not Found!</h3>
+    [/sed_text_title]
+
+    [sed_search contextmenu_disabled = "disabled" parent_module="404-error" skin="skin5"]
+    [/sed_search]
+
+[/sed_404_error]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

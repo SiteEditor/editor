@@ -1,0 +1,101 @@
+.icon-alert-error,
+.mCSB_buttonUp,
+.mCSB_buttonDown,
+.widget_pages,
+.widget_text,
+.widget_search,
+.widget_rss,
+.widget_rss1,
+.widget_rss2,
+.widget_archive,
+.widget_archive1,
+.widget_nav_menu,
+.widget_categories,
+.widget_categories1,
+.ui-icon-closethick,
+.ui-icon-triangle-1-e,
+.ui-icon-triangle-1-s,
+.ui-icon-triangle-1-n,
+.glyph-244,
+.glyph-245,
+.widget_calendar,
+.widget_recent_comments,
+.widget_recent_comments1,
+.widget_recent_entries,
+.widget_tag_cloud,
+.widget_meta,
+.widget_calendar2,
+.widget_calendar1,
+.ui-icon ,
+.widget_display_search,
+.widget_display_forums,
+.bbp_widget_login,
+.widget_display_replies,
+.widget_display_topics,
+.widget_display_stats,
+.widget_display_views,
+.toolbar .btn-default3 .fa.woocommerce,
+[class^="icon-"],.f-sed , [class*="icon-"].menu_item_icon{
+    font-family: 'siteeditor';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.ui-icon-triangle-1-e:before,.icon-chevron-right:before {
+    content: "\e80d";
+}
+.mCSB_buttonUp:before,.ui-icon-triangle-1-n:before,.icon-expand-more:before {
+    content: "\e816";
+}
+.mCSB_buttonDown:before,.ui-icon-triangle-1-s:before,.icon-expand-less:before{
+    content: "\e817";
+}
+.icon-alert-error:before ,.icon-alert:before {
+    content: "\e819";
+}
+.ui-icon-closethick:before,.icon-delete:before {
+    content: "\e892";
+}
+.icon-alert-success:before,.icon-check:before {
+    content: "\e8ff";
+}
+.widget_search:before,.icon-search:before {
+    content: "\e905";
+}
+.widget_text:before,
+.icon-text:before {
+    content: "\e935";
+}
+.widget_pages:before,
+.icon-pages:before {
+	content: "\e8e8";
+}
+.icon-pagetitle:before,
+.widget_archive1:before {
+	content: "\e834";
+}
+.icon-font:before,
+.icon-text:before {
+	content: "\e935";
+}
+.toolbar .btn-default3 .fa.woocommerce:before,
+.icon-woo:before {
+	content: "\e609";
+}
+.widget_display_search:before,
+.widget_display_forums:before,
+.bbp_widget_login:before,
+.widget_display_replies:before,
+.widget_display_topics:before,
+.widget_display_stats:before,
+.widget_display_views:before,
+.icon-bbpress:before {
+	content: "\e603";
+}

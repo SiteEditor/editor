@@ -1,0 +1,63 @@
+/*#less_info#(
+"handle"    => "posts-share-skin3",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.posts-share-skin3{
+    .social-navs {
+        .social-list {
+            margin: 0;
+            display: inline-block;
+            font-size: 0;
+            li {
+                display: inline-block;
+                margin: 0 5px 5px 0;
+                a {
+                    .border-radius(4px);
+                    display: block;
+                    font-size: 15px;
+                    text-align: center;
+                    color: @base-border-color-b;
+                    .transition(500ms all);
+                    .hi-icon{
+                        color: @base-border-color-b;
+                    }
+                    &:hover{
+                      .hi-icon{
+                        color:#fff;
+                      }
+                    }
+                }
+            }
+            .mailto { &:hover{a{ background-color: #9fae37; border-color: #9fae37; }}}
+            .linked-in { &:hover{a{ background-color:#419cca ; border-color:#419cca ; }}}
+            .tumblr { &:hover{a{ background-color: #345574; border-color: #345574;  }}}
+            .facebook { &:hover{a{ background-color: #37589b; border-color: #37589b; }}}
+            .pinterest { &:hover{a{ background-color: #cb2027; border-color: #cb2027;  }}}
+            .reddit { &:hover{a{ background-color: #ff4500; border-color: #ff4500;  }}}
+            .twitter { &:hover{a{ background-color: #46d4fe; border-color: #46d4fe;  }}}
+            .google-plus { &:hover{a{ background-color: #de5a49; border-color: #de5a49;  }}}
+            .vkontakte { &:hover{a{ background-color: #597ba5; border-color: #597ba5;  }}}
+        }
+    }
+
+    .module.module-icons.icons-default{
+        margin-bottom: 0px;
+        .hi-icon{
+            height: 2.2em;
+            line-height: 2.2em !important;
+            width: 2.2em;
+        }
+    }
+
+}
+.rtl-body .posts-share-skin3{
+    .social-navs {
+        .social-list {
+            li {
+                margin: 0 0 5px 5px;
+            }
+        }
+    }
+}

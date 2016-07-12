@@ -1,0 +1,18 @@
+[sed_testimonial override_skins="default, skin2"]
+
+	[sed_testimonial_item class="author customer clearfix" parent_module="testimonial"]
+
+    	[sed_text_title tag="strong" toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" class="name" parent_module="testimonial"]
+    	   Aajami,
+    	[/sed_text_title]
+    	[sed_text_title tag="span" toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" class="company" parent_module="testimonial"]
+    	   Siteeditor
+    	[/sed_text_title]
+
+	[/sed_testimonial_item]
+
+	[sed_paragraph tag="blockquote" toolbar1="normal-paragraph" toolbar2="normal-paragraph" contextmenu_disabled = "disabled" settings_disabled = "disabled"  parent_module="testimonial"]
+		<p>I bought this theme and i would like to recommend it to every one interested in building a website without knowledge of php or html. It is very convenient and the customer service is very reactive. I will say it in French “Bravo” for this work!</p>
+	[/sed_paragraph]
+
+[/sed_testimonial]

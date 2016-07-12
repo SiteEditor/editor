@@ -1,0 +1,5 @@
+[sed_archive force_do_shortcode="true" skin='skin4']
+    [sed_archive_posts skin="skin4"]
+    [/sed_archive_posts]                          
+    [sed_page_nav skin="skin3"][/sed_page_nav]
+[/sed_archive]

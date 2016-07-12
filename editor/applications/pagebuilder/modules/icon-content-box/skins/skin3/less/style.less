@@ -1,0 +1,70 @@
+/*
+#less_info#(
+"handle"  =>"icon-content-box-skin3",
+"deps"    => array("main-icon-content-box"),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/icon-content-box/less/variables.less" 
+)
+)#
+*/
+@import "../../../less/variables.less";
+.module-icon-content-box.icon-content-box-skin3 {
+    text-align: center;
+    .sed-boxed-icon{
+        background:  @body-modules-bg;
+        border: 1px solid lighten(@icon-ct-border-color,6%);
+        .border-radius( @icon-ct-border-radius);
+        margin-top: 45px;
+        padding: 0 20px 20px;
+        position: relative;
+        .module.module-icons.icons-default .hi-icon {
+            margin-top: -0.75em;
+            background: @body-modules-bg;
+           .border-radius(1000px);
+        }
+        .module.module-icons.icons-skin3{
+          margin-top: -1.86em;
+        }
+        .module.module-icons.icons-skin5{
+          margin-top: -1.36em;
+        }
+        .module.module-icons.icons-skin4 {
+            margin-top: -1.86em;
+        }
+        .module.module-icons.icons-skin1,
+        .module.module-icons.icons-skin2,
+        .module.module-icons.icons-skin6{
+           margin-top: -1.25em;
+        }
+
+        .module-icons {
+            text-align: center;
+            .hi-icon{
+               /* position: relative;
+                text-align: center;
+                top: -1.25em;
+                margin-bottom: -1.25em; */
+            }
+            .icon-flat{
+                background:  @body-modules-bg;
+            }
+            &.hi-icon-effect-5,
+            &.hi-icon-effect-2b,
+            &.hi-icon-effect-3{
+                .hi-icon{
+                  .transition(background 0.2s ease 0s);
+                  &:hover{
+                    background:  @body-modules-bg;
+                  }
+                }
+            }
+        }
+        .heading-box{
+          display: block;
+          text-align: center;
+          margin: 15px 0 0;
+        }
+    }
+}

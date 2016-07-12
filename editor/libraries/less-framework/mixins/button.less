@@ -1,0 +1,85 @@
+.button-variant(@background; @border) {
+  .base-color(@background);
+  background-color: @background;
+  border-color: @border;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    .high-color(@background);
+    background-color: darken(@background, 7%);
+    border-color: darken(@border, 8%);
+    .icon-button-df{
+        color: darken(@background, 7%);
+    }
+  }
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    background-image: none;
+  }
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: @background;
+          border-color: @border;
+    }
+  }
+ .icon-button-df{
+ color: @background;
+ }
+
+}
+.button-flat(@color){
+  color:@color;
+  background-color: transparent;
+  border-color: @color;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active{
+    background-color: fade(@color,3%);
+    color: lighten(@color, 2%);
+    border-color: lighten(@color, 2%);
+  }
+  .module-button.button-skin6 &,
+  .module-button.button-skin2 &{
+    .sed-icons.icon-button-pd {
+      border-color:@color;
+    }
+  }
+}
+.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+  padding: @padding-vertical @padding-horizontal;
+  font-size: @font-size;
+  line-height: @line-height;
+  min-width: 4 * @padding-horizontal;
+  .border-radius(@border-radius);
+  div .hi-icon{
+    font-size: @font-size + 4;
+
+  }
+
+  .icon-button-pd,.icon-button-df {
+    padding: 0 @padding-horizontal/2 - 2;
+    .module-button.button-skin1 &{
+        padding: 0 @padding-horizontal/2 + 5;
+    }
+    .module-button.button-skin4 &{
+        padding: @padding-vertical - 1 @padding-horizontal/2 + 5;
+    }
+  }
+   .span-padding{
+     padding: @padding-vertical @padding-horizontal/2 + 5;
+     min-width: 4 * @padding-horizontal;
+     display: block;
+   }
+}

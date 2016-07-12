@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>jQuery Lazy Scroll Loading Plugin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Expires" content="-1" />
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.lazyscrollloading-src.js"></script>
+<style type="text/css">
+body {
+	margin: 20px 30px 30px 30px;
+	padding: 0;
+	font: 14px verdana, geneva, lucida, 'lucida grande', arial, helvetica,
+		sans-serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+a.original {
+	text-decoration: underline;
+}
+
+fieldset {
+	padding: 0 15px 15px 15px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	/* for IE9/10.. */
+	margin-top: 15px;
+}
+
+/* for IE9/10.. */
+fieldset span.legend {
+	color: #4578D4;
+	font-size: 12px;
+	font-weight: bold;
+	background-color: white;
+	position: relative;
+	top: -8px;
+	padding: 3px 15px;
+	cursor: pointer;
+}
+
+fieldset span.legend i.newlabel {
+	color: red;
+	font-size: 10px;
+	padding-left: 10px;
+}
+
+pre {
+	background-color: #eee;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	font-size: 0.8em;
+	padding: 5px 15px;
+	margin: 0;
+}
+
+ul {
+	border: 1px solid #aaa;
+	height: 200px;
+	list-style-type: none;
+	margin: 0;
+	overflow: auto;
+	padding: 1px 0;
+	width: 500px;
+	/* corner */
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 0 0 5px #888;
+}
+
+li.lazyItem {
+	height: 30px;
+}
+</style>
+</head>
+<body>
+
+	<h3 style="text-align: center; text-decoration: underline;">jQuery
+		Lazy Scroll Loading Plugin</h3>
+	<br />
+
+	<!-- ============================================================================================================== -->
+	<!-- Description -->
+	<!-- ============================================================================================================== -->
+
+	<br />
+	<font size="4"><b>[ The jQuery lazy scroll loading plugin ]</b></font>
+	<br />
+	<br />
+	<small><a
+		href="http://plugins.jquery.com/jQueryLazyScrollLoading/">http://plugins.jquery.com/jQueryLazyScrollLoading/</a>
+		<br /> <a href="https://code.google.com/p/jquerylazyscrollloading/">https://code.google.com/p/jquerylazyscrollloading/</a>
+	</small>
+	<br />
+	<br />
+	<small>The example show how to use the jQueryLazyScrollLoading
+		to fire your onFirstVisible event.</small>
+	<br />
+	<small>You can see the result when controlling the scrollbar.</small>
+	<br />
+	<br />
+	<small><b>Tested with: </b>Chrome22+, IE6+, Firefox 16+, Opera
+		12+, Saferi 5+</small>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple demo: Customized mode -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			demo:</span>
+		<div>
+			<ul id="lazyScrollLoading">
+				<li class="lazyItem" lazy-text="Lazy Item 1">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 2">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 3">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 4">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 5">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 6">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 7">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 8">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 9">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 10">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 11">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 12">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 13">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 14">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 15">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 16">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 17">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 18">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 19">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 20">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 21">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 22">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 23">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 24">&nbsp;</li>
+				<li class="lazyItem" lazy-text="Lazy Item 25">&nbsp;</li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#lazyScrollLoading").lazyScrollLoading({
+						lazyItemSelector : ".lazyItem",
+						onLazyItemFirstVisible : function(e, $lazyItems, $firstVisibleLazyItems) {
+							$firstVisibleLazyItems.each(function() {
+								this.innerHTML = this.getAttribute("lazy-text");
+							});
+						}
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	$("#lazyScrollLoading").lazyScrollLoading({
+		lazyItemSelector : ".lazyItem",
+		onLazyItemFirstVisible : function(e, $lazyItems, $firstVisibleLazyItems) {
+			$firstVisibleLazyItems.each(function() {
+				this.innerHTML = this.getAttribute("lazy-text");
+			});
+		}
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple demo: Image mode -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<span class="legend"
+			onclick="$(this).next().slideToggle('slow');$('#lazyScrollLoading_ImageMode').trigger('scroll');">Simple
+			demo: Image mode <small>(copy attribute lazy-img into src)</small>
+		</span>
+		<div style="display: none;">
+			<ul id="lazyScrollLoading_ImageMode">
+				<li><img lazy-img="http://image_url_1" alt="Image1" /></li>
+				<li><img lazy-img="http://image_url_2" alt="Image2" /></li>
+				<li><img lazy-img="http://image_url_3" alt="Image3" /></li>
+				<li><img lazy-img="http://image_url_4" alt="Image4" /></li>
+				<li><img lazy-img="http://image_url_5" alt="Image5" /></li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$("#lazyScrollLoading_ImageMode").lazyScrollLoading({
+						isDefaultLazyImageMode : true
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	$("#lazyScrollLoading_ImageMode").lazyScrollLoading({
+		isDefaultLazyImageMode : true
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple demo: Scroll event -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			demo: Scroll event</span>
+		<div style="display: none;">
+			<ul id="lazyScrollLoading_ScrollEvent"
+				style="width: 300px; height: 200px;">
+				<li style="width: 400px; height: 300px;">Scroll my scrollbar</li>
+			</ul>
+			<br />
+			<div style="color: gray;">logger:</div>
+			<div id="scrollEventLogger"></div>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					var $loger = $("#scrollEventLogger");
+					$("#lazyScrollLoading_ScrollEvent").lazyScrollLoading({
+						onScrollToTop : function() {
+							$loger.append($("<div>on scroll to top</div>"));
+						},
+						onScrollToBottom : function() {
+							$loger.append($("<div>on scroll to bottom</div>"));
+						},
+						onScrollToLeftmost : function() {
+							$loger.append($("<div>on scroll to leftmost</div>"));
+						},
+						onScrollToRightmost : function() {
+							$loger.append($("<div>on scroll to rightmost</div>"));
+						}
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	var $loger = $("#scrollEventLogger");
+	$("#lazyScrollLoading_ScrollEvent").lazyScrollLoading({
+		onScrollToTop : function() {
+			$loger.append($("&#60;div&#62;on scroll to top&#60;/div&#62;"));
+		},
+		onScrollToBottom : function() {
+			$loger.append($("&#60;div&#62;on scroll to bottom&#60;/div&#62;"));
+		},
+		onScrollToLeftmost : function() {
+			$loger.append($("&#60;div&#62;on scroll to leftmost&#60;/div&#62;"));
+		},
+		onScrollToRightmost : function() {
+			$loger.append($("&#60;div&#62;on scroll to rightmost&#60;/div&#62;"));
+		}
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Simple demo: Window scroll to the end -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Simple
+			demo: Window scroll to the end</span>
+		<div style="display: none;">
+			<ul id="lazyScrollLoading_WindowScrollToEnd" style="height: auto;">
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+				<li>Lazy Item</li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					var $container = $("#lazyScrollLoading_WindowScrollToEnd");
+					$(window).lazyScrollLoading({
+						onScrollToBottom : function(e, $lazyItems) {
+							$container.append($("<li>New Lazy Item</li>"));
+						}
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	var $container = $("#lazyScrollLoading_WindowScrollToEnd");
+	$(window).lazyScrollLoading({
+		onScrollToBottom : function(e, $lazyItems) {
+			$container.append($("&#60;li&#62;New Lazy Item&#60;/li&#62;"));
+		}
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- ============================================================================================================== -->
+	<!-- Advance demo: Lazy tree -->
+	<!-- ============================================================================================================== -->
+
+	<fieldset>
+		<span class="legend" onclick="$(this).next().slideToggle('slow');">Advance
+			demo: Lazy tree<i class="newlabel">New!</i></span>
+		<div style="display: none;">
+			<ul id="lazyScrollLoading_LazyTree">
+				<li>1. Lazy tree node</li>
+				<li style="padding-left: 30px;">1.1 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.2 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.3 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.4 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.5 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.6 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.7 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.8 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.9 Lazy tree node</li>
+				<li style="padding-left: 30px;">1.10 Lazy tree node</li>
+				<li>2. Lazy tree node</li>
+				<li style="padding-left: 30px;" class="loadingPoint">2.1 Loading ...</li>
+			</ul>
+			<br />
+			<script type="text/javascript">
+				$(document).ready(function() {
+					var count = 0;
+					$("#lazyScrollLoading_LazyTree").lazyScrollLoading({
+						lazyItemSelector : ".loadingPoint",
+						onLazyItemFirstVisible : function(e, $lazyItems, $firstVisibleLazyItems) {
+							$firstVisibleLazyItems.removeClass("loadingPoint").text($firstVisibleLazyItems.text().replace("Loading ...", "Lazy tree node"));
+							for ( var i = 0; i < 14; i++) {
+								count++;
+								$(this).append($("<li style='padding-left: 30px;'>2." + count + " Lazy tree node</li>"));
+							}
+							count++;
+							$(this).append($("<li style='padding-left: 30px;' class='loadingPoint'>2." + count + " Loading ...</li>"));
+							$(this).clearLazyScrollLoadingCachedLazyItems();
+						}
+					});
+				});
+			</script>
+			<small><b>Usage: </b></small><br />
+			<pre>
+$(document).ready(function() {
+	var count = 0;
+	$("#lazyScrollLoading_LazyTree").lazyScrollLoading({
+		lazyItemSelector : ".loadingPoint",
+		onLazyItemFirstVisible : function(e, $lazyItems, $firstVisibleLazyItems) {
+			$firstVisibleLazyItems.removeClass("loadingPoint").text($firstVisibleLazyItems.text().replace("Loading ...", "Lazy tree node"));
+			for ( var i = 0; i &#60; 14; i++) {
+				count++;
+				$(this).append($("&#60;li style='padding-left: 30px;'&#62;2." + count + " Lazy tree node&#60;/li&#62;"));
+			}
+			count++;
+			$(this).append($("&#60;li style='padding-left: 30px;' class='loadingPoint'&#62;2." + count + " Loading ...&#60;/li&#62;"));
+			$(this).clearLazyScrollLoadingCachedLazyItems();
+		}
+	});
+});</pre>
+		</div>
+	</fieldset>
+
+	<!-- google-analytics -->
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-28376808-3' ]);
+		_gaq.push([ '_trackPageview' ]);
+
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+</html>

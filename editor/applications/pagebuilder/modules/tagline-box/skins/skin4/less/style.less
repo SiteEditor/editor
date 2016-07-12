@@ -1,0 +1,21 @@
+/*
+#less_info#(
+"handle"  =>"tagline-box-skin4",
+"deps"    => array('main-tagline-box'),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/tagline-box/less/variables.less" ,
+),
+)#
+*/
+@import "../../../less/variables.less";
+
+.module-tagline-box.tagline-box-skin4{
+ .reading-box{
+  background: @tagline-box-base-color-b-ltr-bg;
+  border-style: solid;
+  border-width: 0px;
+  .base-color(@tagline-box-base-color-b-ltr-bg);
+}
+}

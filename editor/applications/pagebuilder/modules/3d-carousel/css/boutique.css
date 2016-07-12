@@ -1,0 +1,78 @@
+
+/* SETTINGS */
+
+.sed_3d_carousel{
+	display: none; /* Start invisible until the plugin is loaded */
+	margin: 0 auto;
+}
+
+/* The frames */
+.sed_3d_carousel li{
+	background: #eee3db url(../demo_files/images/loading.gif) center no-repeat; /* Color of the frame behind and around the image */
+	border: 1px solid; /* Outer border around frame */
+	border-color: #f5eee9 #d0c2b6 #d0c2b6 #f5eee9;
+}
+
+/* Headers of all frames */
+.sed_3d_carousel h6{
+	margin: 0;
+	line-height: 130%;
+	font-family: sans-serif;
+	font-weight: normal;
+	color: #222;
+}
+
+/* Description text of all frames */
+/* Note that this is the complete text layer, including the header inside */
+.sed_3d_carousel span{
+	font-family: Verdana, sans-serif;
+	line-height: 120%;
+	color: #444;
+	background: #eee3db;
+	margin: 0;
+	padding: 10px 15px 14px;
+}
+
+/* The most frontal item */
+.sed_3d_carousel .front img{
+	margin: 6px; /* Determines the gap between image and frame border */
+}
+.sed_3d_carousel .front h6{
+	font-size: 28px; /* Front frame header */
+}
+.sed_3d_carousel .front span{
+	font-size: 11px; /* Front frame description text */
+}
+
+/* The further back items */
+.sed_3d_carousel .behind img{ /* Determines the gap between image and frame border */
+	margin: 3px;
+}
+.sed_3d_carousel .behind h6{ /* Behind frame headers */
+	font-size: 18px;
+}
+.sed_3d_carousel .behind span{ /* Behind frame description text */
+	font-size: 9px;
+}
+
+/* The furthest back items */
+.sed_3d_carousel img{ /* Determines the gap between image and frame border */
+	margin: 1px;
+}
+.sed_3d_carousel .back h6{ /* Back frames header */
+	font-size: 13px;
+}
+.sed_3d_carousel .back span{ /* Back frame description text */
+	font-size: 9px;
+}
+
+/* That's it for the settings */
+
+.boutique{ margin:0 auto; padding:0; position:relative; z-index:1 }
+.boutique li{ margin:0; padding:0; list-style:none; position:absolute; z-index:1; display:none; border-width:0 }
+.boutique img{ border:0; vertical-align:bottom }
+.boutique span{ display:block; position:absolute; left:0; right:0; bottom:0; text-align:left; cursor:default; margin:0 }
+.boutique h6{ cursor:default }
+.boutique a, .boutique a:hover{ cursor:default; text-decoration:none; outline:none }
+.boutique img, .boutique li, .boutique a{ -webkit-user-select:none; -khtml-user-select:none; -moz-user-select:none; -o-user-select:none; user-select:none; -webkit-user-drag:none; -moz-user-drag:none; user-drag:none }
+.boutique.rtl h6, .boutique.rtl span{ text-align:right }

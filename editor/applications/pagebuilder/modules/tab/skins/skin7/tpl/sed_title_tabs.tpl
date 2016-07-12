@@ -1,0 +1,1 @@
+<ul {{sed_attrs}} class="{{class}} nav nav-tabs" role="tablist">{{{content}}}</ul>

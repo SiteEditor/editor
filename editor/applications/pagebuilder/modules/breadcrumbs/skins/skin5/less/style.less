@@ -1,0 +1,89 @@
+/*#less_info#(
+"handle"    => "breadcrumbs-skin5",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.breadcrumbs-skin5 {
+    position: relative;
+    background-color: transparent;
+    border:1px solid @base-border-color-light;
+    ul{
+        line-height: 12px;
+        margin: 0 auto;
+        .clearfix();
+        li{
+            display: inline-block;
+            .high-color(@body-bg);
+            font-size: @font-size-small;
+            margin-right: @padding-xl;
+            padding: 0 @padding-xl 0 0;
+            position: relative;
+            line-height: 3.5em;
+            a{
+                display: inline-block;
+                &::before {
+                    top: -2px;
+                    .rotate(-30deg);
+                }
+                &::before, &::after {
+                    background: none repeat scroll 0 0 @base-border-color-light;
+                    content: "";
+                    height: 25px;
+                    position: absolute;
+                    right: 0;
+                    width: 1px;
+                }
+                &::after {
+                    bottom: -2px;
+                    .rotate(30deg);
+                }
+            }
+            a:hover{
+                color:@main-color;
+            }
+            &.current span {
+                .lower-color(@body-bg);
+            }
+            i {
+              font-size: 16px;
+              padding: 0 8px;
+              vertical-align: middle;
+            }
+            &:last-child a:before,
+            &:last-child a:after {
+              background: none repeat scroll 0 0 transparent !important;
+            }
+        }
+
+    }
+
+  @media (max-width: @screen-sm-max) {
+    display: none !important;
+  }
+
+}
+.rtl-body .module.module-breadcrumbs.breadcrumbs-skin5 {
+    ul{
+        li{
+            a{
+                margin-right:0;
+                margin-left: @padding-xl;
+                padding: @padding-lg 0 @padding-lg @padding-xl;
+                &::before {
+                    .rotate(30deg);
+                }
+                &::before, &::after {
+                    right: auto;
+                    left: 0;
+                }
+                &::after {
+                    .rotate(-30deg);
+                }
+            }
+        }
+
+    }
+}
+
+

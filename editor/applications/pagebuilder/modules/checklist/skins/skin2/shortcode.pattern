@@ -1,0 +1,36 @@
+[sed_checklist override_skins="default,skin1"]
+
+	[sed_item_checklist skin="skin2" parent_module="checklist" ]
+		[sed_paragraph class="checklist-txt" tag="div"  toolbar1="simple-paragraph" toolbar2="simple-paragraph" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="checklist" ]
+            <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam.</p>
+        [/sed_paragraph]
+	[/sed_item_checklist]
+
+	[sed_item_checklist skin="skin2" parent_module="checklist" ]
+		[sed_paragraph class="checklist-txt" tag="div"  toolbar1="simple-paragraph" toolbar2="simple-paragraph" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="checklist" ]
+            <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus.</p>
+        [/sed_paragraph]
+	[/sed_item_checklist]
+
+	[sed_item_checklist skin="skin2" parent_module="checklist" ]
+		[sed_paragraph class="checklist-txt" tag="div"  toolbar1="simple-paragraph" toolbar2="simple-paragraph" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="checklist" ]
+            <p>Phasellus pellentesque purus in massa.</p>
+        [/sed_paragraph]
+	[/sed_item_checklist]
+
+	[sed_item_checklist skin="skin2" parent_module="checklist" ]
+		[sed_paragraph class="checklist-txt" tag="div"  toolbar1="simple-paragraph" toolbar2="simple-paragraph" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="checklist" ]
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        [/sed_paragraph]
+	[/sed_item_checklist]
+
+[/sed_checklist]
+[sed_add_item_pattern parent_module="checklist" class="add-item-checklist" show_add_button="false"]
+
+	[sed_item_checklist skin="skin2" parent_module="checklist" ]
+		[sed_paragraph class="checklist-txt" tag="div"  toolbar1="simple-paragraph" toolbar2="simple-paragraph" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="checklist" ]
+            <p>Phasellus pellentesque purus in massa.</p>
+        [/sed_paragraph]
+	[/sed_item_checklist]
+
+[/sed_add_item_pattern]

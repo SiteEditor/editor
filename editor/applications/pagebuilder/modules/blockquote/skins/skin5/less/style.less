@@ -1,0 +1,57 @@
+/*
+#less_info#(
+"handle"  =>"blockquote-skin5",
+"deps"    => array('main-blockquote'),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/blockquote/less/variables.less" ,
+),
+)#
+*/
+@import "../../../less/variables.less";
+.module-blockquote.blockquote-skin5{
+  background:@blockquote-main-color-bg;
+  border-style: none;
+  border-width: 0;
+  .sed-blockquote-skin{
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px 50px;
+      text-align: center;
+      border: none; 
+      .base-color(@blockquote-main-color-bg;60%);
+      &:before{
+        .base-color(@blockquote-main-color-bg);
+        left: 12px;
+        top: -4px;
+      }
+      &:after{
+        content: "\201D";
+        font-family: @blockquote-quote-font-family;
+        font-size: 55px;
+        font-weight: bold;
+        position: absolute;
+        .base-color(@blockquote-main-color-bg);
+        right: 12px;
+        bottom: -28px;
+      }
+      p{
+        .base-color(@blockquote-main-color-bg;60%);
+        margin: 0;
+      }
+  }
+}
+.rtl-body .module-blockquote.blockquote-skin5{
+  .sed-blockquote-skin{
+      &:before{
+        left: auto !important;
+        right: 12px;
+      }
+      &:after{
+        content: "\201C";
+        right: auto !important;
+        left: 12px;
+      }
+  }
+}

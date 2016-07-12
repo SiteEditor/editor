@@ -1,0 +1,192 @@
+/*#less_info#(
+"handle" => "single-posts-skin3",
+"deps" => array("post-main-less"),
+"ver" => "1.0.0",
+"media" => "all"
+)#
+*/
+/*for all */
+.module.single-posts.single-posts-skin3 {
+    .entry-header {
+        margin-bottom:0  !important;
+        .thumb{
+            img {
+                max-width: 100%;
+            }
+            &.image_type_full-width img{
+                width: 100%;
+            }
+            &.image_type_center-align {
+                text-align: center;
+            }
+        }
+        .entry-meta {
+            margin-bottom: 0 !important;
+            display: block;
+            padding: @padding-base 0  @padding-sm;
+            color:@base-color-b-dark;
+            .item,.edit-link  ,i ,span,a{
+             color:@base-color-b-dark;
+            }
+            .item,.edit-link {
+              display: inline-block;
+              padding: 0 8px 0 0;
+              i.fa{
+                padding: 0 2px 0 0;
+              }
+
+              &:hover {
+              i ,span,a{
+                color: @main-color;
+              }
+             }
+           }
+        }
+        .title{
+            border-top: 1px solid @base-border-color-light;
+            margin: 0 0 10px;
+            padding: @padding-lg 0 0;
+            h1 {
+                font-size: @font-size-h3;
+                display: inline-block;
+                vertical-align: middle;
+
+            }/*
+            .post-format {
+                display: inline-block;
+                vertical-align: middle;
+                i {
+                      color: @main-color;
+                      font-size: 2*@font-size-h3 - 4;
+                      margin:5px 10px;
+                }
+            }  */
+        }
+
+
+
+    }
+
+    .entry-footer {
+        margin-top: 20px;
+        text-align: right;
+        .entry-inner {
+            .border-radius(3px);
+            margin-bottom: 20px;
+            overflow: hidden;
+            padding: @padding-sm @padding-base;
+            color: @main-color;
+            .post-tags{
+                text-align: left;
+                .label {
+                  margin: 0 10px 0 0;
+                  font-weight: normal;
+                }
+                i {
+                  padding: 0 @padding-sm - 1 0 0;
+                }
+                .post-tag {
+                  display: inline-block;
+                  padding: 0;
+                  &:after {
+                      content: " /";
+                      color: @base-color-b-dark;
+                      font-size: @font-size-small -1;
+                  }
+                  &:last-child:after{
+                      content: "";
+                  }
+                }
+                h4{
+                  margin: 0;
+                }
+            }
+            .post-cats{
+                text-align: left;
+                .label {
+                  margin: 0 10px 0 0;
+                }
+                i {
+                  padding: 0 @padding-sm - 1 0 0;
+                }
+                .post-cat {
+                  display: inline-block;
+                  padding: 0px;
+                  &:after {
+                      content: " /";
+                      color: @base-color-b-dark;
+                      font-size: @font-size-small -1;
+                  }
+                  &:last-child:after{
+                      content: "";
+                  }
+                }
+                h4{
+                  margin: 0;
+                }
+            }
+          .post-cat a,
+          .post-tag a {
+            font-size: @font-size-small;
+            color:@base-color-b-dark;
+            &:hover{
+             color: @main-color;
+            }
+          }
+        }
+    }
+}
+
+.rtl-body .module.single-posts.single-posts-skin3 {
+
+    .entry-header {
+        .entry-meta {
+            .item,.edit-link {
+              padding: 0 0 0 8px;
+              i.fa{
+                padding: 0 0 0 2px;
+              }
+           }
+        }
+    }
+
+  .entry-footer {
+      text-align: left;
+      .entry-inner {
+          .post-tags{
+            text-align: right;
+            i {
+                padding: 0 0 0 @padding-sm - 1;
+            }
+            .label {
+              margin: 0 0 0 10px;
+            }
+            .post-tag {
+              &:after {
+                  content: " \\";
+              }
+              &:last-child:after{
+                  content: "";
+              }
+            }
+          }
+          .post-cats{
+            text-align: right;
+            i {
+            padding: 0 0 0 @padding-sm - 1;
+            }
+            .label {
+              margin: 0 0 0 10px;
+            }
+            .post-cat {
+              &:after {
+                  content: " \\";
+              }
+              &:last-child:after{
+                  content: "";
+              }
+            }
+          }
+      }
+  }
+}

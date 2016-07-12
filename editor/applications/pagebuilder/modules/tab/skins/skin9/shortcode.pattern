@@ -1,0 +1,72 @@
+[sed_tabs override_skins="skin2,skin3,skin4,skin5,skin6,skin7,default" ]
+
+	[sed_title_tabs parent_module="tab"]
+
+		[sed_title_tab parent_module="tab" href="#tab_content1"]
+			[sed_text_title tag="span" toolbar1="simple-text" toolbar2="simple-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="tab"]Risponsive Design[/sed_text_title]
+		[/sed_title_tab]
+
+		[sed_title_tab parent_module="tab" href="#tab_content2"]
+			[sed_text_title tag="span" toolbar1="simple-text" toolbar2="simple-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="tab"]Fully Documented[/sed_text_title]
+		[/sed_title_tab]
+
+		[sed_title_tab parent_module="tab" href="#tab_content3"]
+			[sed_text_title tag="span" toolbar1="simple-text" toolbar2="simple-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="tab"]Esily Costomizable[/sed_text_title]
+		[/sed_title_tab]
+
+	[/sed_title_tabs]
+	[sed_content_tabs parent_module="tab" sed_tabs_content_container = "true"]
+
+		[sed_content_tab parent_module="tab" sed_id="tab_content1" ]
+            [sed_row_inner  shortcode_tag="sed_row" type="static-element"]
+                [sed_module_inner  shortcode_tag="sed_module"]
+        			[sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="tab"]
+                      <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna.</p>
+                    [/sed_paragraph]
+                [/sed_module_inner]
+            [/sed_row_inner]
+		[/sed_content_tab]
+
+		[sed_content_tab parent_module="tab" sed_id="tab_content2"]
+            [sed_row_inner  shortcode_tag="sed_row" type="static-element"]
+                [sed_module_inner  shortcode_tag="sed_module"]
+        			[sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="tab"]
+                      <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
+                    [/sed_paragraph]
+                [/sed_module_inner]
+            [/sed_row_inner]
+		[/sed_content_tab]
+
+		[sed_content_tab parent_module="tab" sed_id="tab_content3"]
+            [sed_row_inner  shortcode_tag="sed_row" type="static-element"]
+                [sed_module_inner  shortcode_tag="sed_module"]
+        			[sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="tab"]
+                         <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est.
+                         Suspendisse eu nisl.Nullam ut libero. Integer dignissim consequat lectus.</p>
+                     [/sed_paragraph]
+                [/sed_module_inner]
+            [/sed_row_inner]
+		[/sed_content_tab]
+
+	[/sed_content_tabs]
+
+[/sed_tabs]
+
+[sed_add_item_pattern parent_module="tab" class="add-item-tab-pattern" show_add_button="false"]
+		[sed_title_tab parent_module="tab" href="#tab_content4"]
+            [sed_icons sed_support_id="icons-tab" parent_module="tab" icon="fa fa-paint-brush" font_size="20"][/sed_icons]
+			[sed_text_title tag="span" toolbar1="simple-text" toolbar2="simple-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="tab"]Esily Costomizable[/sed_text_title]
+		[/sed_title_tab]
+[/sed_add_item_pattern]
+
+[sed_add_item_pattern parent_module="tab" class="add-item-content-tab-pattern" show_add_button="false"]
+    [sed_content_tab parent_module="tab" sed_id="tab_content4" ]
+        [sed_row_inner  shortcode_tag="sed_row" type="static-element" class="module_sed_paragraph_contextmenu_container"]
+            [sed_module_inner class="module_sed_paragraph_contextmenu_container" shortcode_tag="sed_module"]
+            	[sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="tab"]
+                    <p>Nullam ut libero. Integer dignissim consequat lectus.</p>
+                [/sed_paragraph]
+            [/sed_module_inner]
+        [/sed_row_inner]
+    [/sed_content_tab]
+[/sed_add_item_pattern]

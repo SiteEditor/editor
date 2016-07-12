@@ -1,0 +1,38 @@
+/*
+#less_info#(
+"handle" => "circle-spinner",
+"deps" => array('single-image-main-less'),
+"ver" => "1.0.0",
+"media" => "all"
+)#
+*/
+@image-main-border-color:  darken(@main-color,6%);
+@image-pmain-border-color: darken(@perfect-main-color,6%);
+.module-single-image.single-image-circle-spinner{
+ .spinner {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: block;
+    position: absolute;
+    border: 10px solid transparent;
+    border-color:@image-main-border-color @image-pmain-border-color @image-pmain-border-color @image-main-border-color;
+    .border-radius(50%);
+    .transition(all 0.8s ease-in-out);
+    z-index: 11;
+
+ }
+        .info-back {
+            .border-radius(50%);
+            width: 100%;
+            height: 100%;
+            }
+    &:hover {
+    .spinner {
+      .transform( rotate(180deg) );
+      }
+    }
+}

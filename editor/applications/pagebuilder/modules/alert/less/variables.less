@@ -1,0 +1,21 @@
+@alert-padding:               20px;
+@alert-border-radius:         @border-radius-base;
+@alert-link-font-weight:      bold;
+
+
+//@brand-primary:             desaturate(hsl(hue(#0088FF),saturation(#0088FF),(luma(@base-color-a)/2.5 + 50%)), luma(@base-color-a)/3);
+@alert-info-bg:               desaturate(hsl(hue(#00AAFF),saturation(#00AAFF),(luma(@base-color-a)/2.5 + 50%)),luma(@base-color-a)/3);
+@alert-success-bg:            desaturate(hsl(hue(#4CFF00),saturation(#4CFF00),(luma(@base-color-a)/2 + 35%)),luma(@base-color-a)/2);
+@alert-warning-bg:            desaturate(hsl(hue(#FFD500),saturation(#FFD500),(luma(@base-color-a)/2.5 + 50%)),luma(@base-color-a)/4);
+@alert-danger-bg:             desaturate(hsl(hue(#FF0000),saturation(#FF0000),(luma(@base-color-a)/2 + 40%)),luma(@base-color-a)/2);
+
+@alert-success-border:        darken(@alert-success-bg, 15%);
+@alert-info-border:           darken(@alert-info-bg, 15%);
+@alert-warning-border:        darken(@alert-warning-bg, 15%);
+@alert-danger-border:         darken(@alert-danger-bg, 15%);    
+
+@alert-success-text:          @state-success-text;
+@alert-info-text:             @state-info-text ;
+@alert-warning-text:          @state-warning-text;
+@alert-danger-text:           @state-danger-text ;
+

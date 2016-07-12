@@ -1,0 +1,81 @@
+[sed_table]
+
+    [sed_thead_table parent_module="table" ]
+
+        [sed_tr_table parent_module="table"  class="list-group-hr-rows" ]
+              [sed_th_table parent_module="table" ][sed_paragraph  tag="span" parent_module="table" ] Prodesset    [/sed_paragraph][/sed_th_table]
+
+              [sed_th_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Ornatus      [/sed_paragraph][/sed_th_table]
+
+              [sed_th_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Interesset   [/sed_paragraph][/sed_th_table]
+
+              [sed_th_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Comprehensam [/sed_paragraph][/sed_th_table]
+        [/sed_tr_table]
+
+    [/sed_thead_table]
+
+  [sed_tbody_table parent_module="table"  class="list-group-rows" ]
+        [sed_tr_table parent_module="table" class="list-group-tr-rows" ]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Appellantur [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Ornatus     [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Interesset  [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Scripserit  [/sed_paragraph][/sed_td_table]
+
+        [/sed_tr_table]
+        [sed_tr_table parent_module="table" class="list-group-tr-rows" ]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Appellantur [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Ornatus     [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Interesset  [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Scripserit  [/sed_paragraph][/sed_td_table]
+
+        [/sed_tr_table]
+        [sed_tr_table parent_module="table" class="list-group-tr-rows" ]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Appellantur [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Ornatus     [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Interesset  [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Scripserit  [/sed_paragraph][/sed_td_table]
+
+        [/sed_tr_table]
+        [sed_tr_table parent_module="table" class="list-group-tr-rows" ]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Appellantur [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Ornatus     [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Interesset  [/sed_paragraph][/sed_td_table]
+
+            [sed_td_table parent_module="table" ][sed_paragraph tag="span" parent_module="table" ] Scripserit  [/sed_paragraph][/sed_td_table]
+
+        [/sed_tr_table]
+  [/sed_tbody_table]
+
+[/sed_table]
+
+[sed_add_item_pattern parent_module="table" class = "add-item-head-column-table" show_add_button="false"]
+    [sed_th_table parent_module="table" ]
+        [sed_paragraph tag="span" parent_module="table" ] Comprehensam [/sed_paragraph]
+    [/sed_th_table]
+[/sed_add_item_pattern]
+
+[sed_add_item_pattern parent_module="table" class ="add-item-row-table" show_add_button="false"]
+    [sed_tr_table parent_module="table" class="list-group-tr-rows" ][/sed_tr_table]
+[/sed_add_item_pattern]
+
+[sed_add_item_pattern parent_module="table" class = "add-item-column-table" show_add_button="false"]
+    [sed_td_table parent_module="table" class="list-group-column" ]
+        [sed_paragraph tag="span" parent_module="table" ] Appellantur [/sed_paragraph]
+    [/sed_td_table]
+[/sed_add_item_pattern]
+

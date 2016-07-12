@@ -1,0 +1,62 @@
+/*#less_info#(
+"handle"    => "search-result-default",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.search-results-default{
+    .module-search {
+        margin-bottom: 50px;
+        margin-top: 20px;
+        max-width: 400px;
+    }
+    .not-found-post{
+      padding: 0 20px;
+      font-size: 16px;
+    }
+
+    position: relative;
+    padding-left: 0;
+    margin: 20px 0;
+    border-radius: 4px;
+    .results-items {
+        list-style: none; 
+        overflow: hidden;
+        li {
+            border-bottom: 1px solid #CCC;
+            padding: 15px 0;
+            h1{
+                margin: 5px 0;
+                a{
+                    display: block;
+                }
+            }
+            .content {
+                overflow: hidden;
+                .thumb {
+                    float: left;
+                    margin-left: 5px;
+                    img {
+                        max-width: 90px;
+                        max-height: 90px;
+                    }
+                }
+                .excerpt {
+                    float: left;
+                    margin-left: 15px;
+                    max-width: 90%;
+                    text-align: left;
+                }
+            }
+            
+        }
+        .item-info {
+            border: 1px dotted #CCC;
+            padding: 5px;
+            border-right: none;
+            border-left: none;
+            margin-bottom: 10px;
+        } 
+    }
+}
+

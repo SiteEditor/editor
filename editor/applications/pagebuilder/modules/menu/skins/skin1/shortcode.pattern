@@ -1,0 +1,4 @@
+[sed_menu skin="skin1"]
+    [sed_menu_drag_area]        
+    [/sed_menu_drag_area]
+[/sed_menu]

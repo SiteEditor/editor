@@ -1,0 +1,51 @@
+jQueryLazyScrollLoading Change Log
+
+Version 0.4.5
+====================
+．Fix bug for isScrollToBottom() and isScrollToRightmost()
+．Minor changes
+
+Version 0.4.4
+====================
+．Fix bug for triggering onLazyItemFirstVisible event dynamically
+
+Version 0.4.3
+====================
+．Remove getLazyScrollLoadingCachedLazyItems's isReNew parameter
+．Add method: clearLazyScrollLoadingCachedLazyItems and clearLazyScrollLoadingScrollHistory
+
+Version 0.4.2
+====================
+．Add onLazyItemInvisible
+．Fix bug for jQuery 1.2
+．Change the trigger sequence between onLazyItemFirstVisible and onLazyItemVisible
+
+Version 0.4.1
+====================
+．Republish for git
+
+Version 0.4.0
+====================
+．Add onScroll, onScrollVertically, onScrollHorizontally, onScrollUp, onScrollDown, onScrollLeft, onScrollRight
+．Rename scrollLeft and scrollTop to getScrollLeft and getScrollTop at getLazyScrollLoadingViewport
+．Fix bug for jQuery 1.9
+
+Version 0.3.1
+====================
+．Add getLazyScrollLoadingViewport
+．Rename isLazyScrollLoadingLazyItemVisible
+
+Version 0.3.0
+====================
+．Change parameter onScrollToEnd to onScrollToBottom
+．Add onScrollToTop, onScrollToLeftmost and onScrollToRightmost
+．More browser tested
+
+Version 0.2.0
+====================
+．Window scrolling supported
+．Change parameter duration to delay
+
+Version 0.1.0
+====================
+．First prototype version completed

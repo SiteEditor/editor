@@ -1,0 +1,64 @@
+/*
+#less_info#(
+"handle"  =>"icon-content-box-skin7",
+"deps"    => array("main-icon-content-box"),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/icon-content-box/less/variables.less" 
+)
+)#
+*/
+@import "../../../less/variables.less";
+.module-icon-content-box.icon-content-box-skin7 {
+  .sed-boxed-icon{
+    background:  @body-modules-bg;
+    border: 1px solid lighten(@icon-ct-border-color,6%);
+    .border-radius(@icon-ct-border-radius);
+    padding:20px 30px;
+    .heading{
+        display: table-cell;
+        margin: 0 15px 0 0;
+        padding-right: 15px;
+        .module-icons {
+          .hi-icon{
+              text-align: center;
+          }
+        }
+        .heading-box{
+          white-space: nowrap;
+          display: block;
+          text-align: center;
+        }
+    }
+    .paragraph-box{
+        display: table-cell;
+        max-width: 60%;
+        vertical-align: top;
+        text-align: left;
+        padding: 10px 0;
+    }
+    .module-button {
+        text-align: right;
+    }
+    &:hover{
+      .heading-box{
+        color: @icon-ct-color;
+      }
+    }
+  }
+}
+.rtl-body .module-icon-content-box.icon-content-box-skin7 {
+  .sed-boxed-icon{
+    .heading{
+      padding-right: 0px !important;
+      padding-left: 15px;
+    }
+    .paragraph-box{
+        text-align: right !important;
+    }
+    .module-button {
+        text-align: left !important;
+    }
+  }
+}

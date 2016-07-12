@@ -1,0 +1,20 @@
+/*
+#less_info#(
+"handle"  =>"tagline-box-skin3",
+"deps"    => array('main-tagline-box'),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/tagline-box/less/variables.less" ,
+),
+)#
+*/
+@import "../../../less/variables.less";
+
+.module-tagline-box.tagline-box-skin3{
+ .reading-box{
+    background: @tagline-box-base-color-a-bg;
+    border: 3px solid @tagline-box-base-border-color;
+    .base-color(@tagline-box-base-color-a-bg);
+ }
+}

@@ -1,0 +1,51 @@
+/*#less_info#(
+"handle"  => "button-skin6",
+"deps"    => array('main-button'),
+"ver"     => "1.0.0",
+"media"   => "all"
+)#
+*/
+.module-button.button-skin6 {
+
+  .btn{
+   @btn-main-bg2 :  darken(@main-color, 4%);
+   padding: 0;
+   .border-radius(3px);
+   }
+  span{
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .sed-icons{
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 7px;
+   // vertical-align: middle;
+    .box-shadow(-2px 0 2px -3px rgba(0, 0, 0, 0.25) inset);
+    .box-shadow(2px 0 2px -3px rgba(0, 0, 0, 0.25));
+  }
+  .hi-icon {
+  }
+
+  .sed-icons span{
+    background-color:rgba(0, 0, 0, 0.07);
+    border-radius: 50%;
+    .box-shadow(0 1px 0 rgba(0, 0, 0, 0.3) inset);
+    .box-shadow(0 1px 0 rgba(255, 255, 255, 0.5));
+    display: block;
+    padding:0;
+    height: 1.6em;
+    line-height: 1.6em !important;
+    width: 1.62em;
+}
+}
+.rtl-body .module.module-button.button-skin6 {
+  .sed-icons{
+    border-right: 0px solid rgba(0, 0, 0, 0.1);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    .box-shadow(2px 0 2px -3px rgba(0, 0, 0, 0.25) inset);
+    .box-shadow(-2px 0 2px -3px rgba(0, 0, 0, 0.25));
+  }
+}

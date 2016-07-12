@@ -1,0 +1,57 @@
+.module.module-alert.alert-skin2{
+
+  .alert {
+    padding: @alert-padding;
+    border: 1px solid transparent;
+    .border-radius( @alert-border-radius );
+  }
+  .alert-title {
+    font-size: @font-size-h4;
+    font-weight: normal;
+    //display: table-cell;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 @padding-sm;
+  }
+  .alert-description{
+    margin: 10px 0 0;
+    padding: 0;
+  }
+  .alert-icons {
+    //display: table-cell;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: @font-size-h4 - 1;
+    margin: 0 3px;
+    position: relative;
+    top: 1px;
+  }
+  .message-inner-separator{
+      clear: both;
+      margin-top: 10px;
+      margin-bottom: 13px;
+      //border: 0;
+      //height: 1px;
+      //background: -moz-linear-gradient(left center , rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0)) repeat scroll 0 0 rgba(0, 0, 0, 0);
+  }
+  &.style-success{
+   .alert-variant-style {
+    .alert-variant(@alert-success-bg; @alert-success-border);
+   }
+  }
+  &.style-info{
+   .alert-variant-style {
+    .alert-variant(@alert-info-bg; @alert-info-border);
+   }
+  }
+  &.style-warning{
+   .alert-variant-style {
+    .alert-variant(@alert-warning-bg; @alert-warning-border);
+   }
+  }
+  &.style-danger{
+    .alert-variant-style {
+     .alert-variant(@alert-danger-bg; @alert-danger-border);
+    }
+  }
+}

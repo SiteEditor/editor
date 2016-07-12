@@ -1,0 +1,1 @@
+<tr {{sed_attrs}} class="{{class}}">{{{content}}}</tr> 

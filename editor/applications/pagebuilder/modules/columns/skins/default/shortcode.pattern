@@ -1,0 +1,9 @@
+[sed_columns class="" title="columns"]
+    [sed_column parent_module="columns"][/sed_column]
+    [sed_column parent_module="columns"][/sed_column]
+    [sed_column parent_module="columns"][/sed_column]
+[/sed_columns]                
+                                       
+[sed_add_item_pattern parent_module="columns"]
+    [sed_column parent_module="columns"][/sed_column]
+[/sed_add_item_pattern]

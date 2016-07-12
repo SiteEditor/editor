@@ -1,0 +1,35 @@
+/*
+#less_info#(
+"handle"  =>"icon-content-box-skin8",
+"deps"    => array("main-icon-content-box"),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/icon-content-box/less/variables.less" 
+)
+)#
+*/
+@import "../../../less/variables.less";
+.module-icon-content-box.icon-content-box-skin8 {
+  text-align: center;
+  .sed-boxed-icon{
+      border: 1px solid @icon-ct-border-light;
+      padding: 0;
+      border-radius: @icon-ct-border-radius;
+    .module-icons {
+        margin: 15px 0;
+        text-align: center;
+    }
+   .content-icb{
+      border-top: 1px solid @icon-ct-border-light;
+      background: none repeat scroll 0 0 lighten(@icon-ct-base-b-bg,2%);
+      padding: 15px;
+    }
+    &:hover{
+       .heading-box{
+      color: @icon-ct-main-bg;
+     }
+    }
+
+  }
+}

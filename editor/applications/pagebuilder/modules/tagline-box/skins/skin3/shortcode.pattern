@@ -1,0 +1,18 @@
+[sed_tagline_box]
+
+  [sed_item_tagline_box class="item-content" parent_module="tagline-box"]
+    [sed_text_title tag="div" toolbar1="title" toolbar2="title" parent_module="tagline-box"]
+       <h4>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h4>
+    [/sed_text_title]
+    [sed_paragraph tag="div" toolbar1="normal-paragraph" toolbar2="normal-paragraph" parent_module="tagline-box"]
+       <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui. Ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    [/sed_paragraph]
+  [/sed_item_tagline_box]
+
+  [sed_item_tagline_box class="item-button" parent_module="tagline-box"]
+    [sed_button parent_module="tagline-box"]
+    	[sed_text_title tag="span" toolbar1="simple-text" toolbar2="simple-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="button"]Purchase Now[/sed_text_title]
+    [/sed_button]
+  [/sed_item_tagline_box]
+
+[/sed_tagline_box]

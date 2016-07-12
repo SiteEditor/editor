@@ -1,0 +1,42 @@
+/*#less_info#(
+"handle"    => "woocomerce-product-categories-skin2",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.product-categories-skin2{
+    .sed-products-list{
+      .clearfix();
+    }
+    .product-category {
+        float: left;
+        a {
+            display: block;
+            overflow: hidden;
+            padding: 7px;
+            text-align: center;
+            .box-shadow(0 0 4px fade(@base-color-c,25%));
+            border-top: 3px solid @main-color;
+            .base-color(@body-bg);
+            margin-bottom: 20px;
+            .transition( 500ms all );
+             min-width: 100%;
+            img{
+                display: block;
+                height: auto;
+                max-width: 100%;
+                min-width: 100%;
+                position: relative;
+            }
+            h4 {
+                margin: 20px 0;
+            }
+            &:hover {
+                .box-shadow(0 0 6px fade(@base-color-c,40%));
+                h4 {
+                    color: @main-color;
+                }
+            }
+        }
+    }
+}

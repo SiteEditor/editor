@@ -1,0 +1,1 @@
+<tfoot <?php echo $sed_attrs; ?> ><?php $content; ?></tfoot>

@@ -1,0 +1,23 @@
+[sed_about_author skin="skin3"]
+
+    [sed_about_author_item skin="skin3" parent_module="about-author" class="linked-in"]
+        [sed_icons  skin="default" parent_module="about-author" icon="fa fa-linkedin" font_size="14"][/sed_icons]
+    [/sed_about_author_item]
+
+    [sed_about_author_item skin="skin3" parent_module="about-author" class="facebook"]
+        [sed_icons  skin="default" parent_module="about-author" icon="fa fa-facebook" font_size="14"][/sed_icons]
+    [/sed_about_author_item]
+
+    [sed_about_author_item skin="skin3" parent_module="about-author" class="twitter"]
+        [sed_icons  skin="default" parent_module="about-author" icon="fa fa-twitter" font_size="14"][/sed_icons]
+    [/sed_about_author_item]
+
+    [sed_about_author_item skin="skin3" parent_module="about-author" class="google-plus"]
+        [sed_icons  skin="default" parent_module="about-author" icon="fa fa-google-plus" font_size="14"][/sed_icons]
+    [/sed_about_author_item]
+
+    [sed_about_author_item skin="skin3" parent_module="about-author" class="pinterest"]
+        [sed_icons  skin="default" parent_module="about-author" icon="fa fa-pinterest" font_size="14"][/sed_icons]
+    [/sed_about_author_item]
+
+[/sed_about_author]

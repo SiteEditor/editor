@@ -1,0 +1,110 @@
+/*
+#less_info#(
+"handle" => "header-main-less",
+"deps" => array(),
+"ver" => "1.0.0",
+"media" => "all"
+)#
+*/   
+
+@navbar-header-height:             60px;
+@navbar-padding-horizontal:        floor((@grid-gutter-width / 2));
+@navbar-padding-vertical:          ((@navbar-header-height - @line-height-computed) / 2);
+
+//** Point at which the navbar becomes uncollapsed.
+@grid-float-breakpoint:     @screen-sm-min;
+//** Point at which the navbar begins collapsing.
+@grid-float-breakpoint-max: (@grid-float-breakpoint - 1);
+
+.module-header{
+  z-index: 2000;
+  position: relative;
+    .header-bar {
+        height: 100%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+
+    .brand-header{
+        .navbar-brand {
+            .clearfix();
+            &:hover,
+            &:focus {
+              text-decoration: none;
+            }
+
+            @media (min-width: @grid-float-breakpoint) {
+              .navbar > .container &,
+              .navbar > .container-fluid & {
+                margin-left: -@navbar-padding-horizontal;
+              }
+            }
+
+        }
+        @media (max-width: @grid-float-breakpoint) {
+            &:after,&:before{
+               content:  "";
+           }
+           width:100%;
+           display: block;
+        }
+    }
+
+
+
+ /*  .module-megamenu.megamenu-defult.navbar-wrap {
+        position: static;
+        .container-megamenu{
+            position: static;   
+        }
+    }
+*/
+
+ }
+
+  #header-sticky.sticky-header {
+      background: none repeat scroll 0 0 transparent;
+      display: none;
+      left: 0;
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      width: 100%;
+      z-index: 99997;
+  }
+
+  #header-sticky.sticky-header .sticky-header-inner {
+      background: none repeat scroll 0 0 rgba(255, 255, 255, 0.97);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  }
+
+
+  .sticky-header-row:after {
+      clear: both;
+      content: "";
+      display: block;
+  }
+
+  #sticky-logo {
+      float: left;
+      margin-bottom: 0;
+      margin-top: 0;
+      max-height: 65px;
+      width: auto;
+      overflow: hidden;
+  }
+
+  nav#sticky-nav {
+      float: right;
+      font: 14px/16px "MuseoSlab500Regular",arial,helvetica,sans-serif;
+      z-index: 99997;
+  }
+
+
+
+}
+
+body.sed-app-editor #header-sticky.sticky-header{
+    display: none !important;
+}
+

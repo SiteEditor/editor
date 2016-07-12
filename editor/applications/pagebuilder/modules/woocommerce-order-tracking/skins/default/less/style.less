@@ -1,0 +1,47 @@
+/*#less_info#(
+"handle"    => "woocomerce-order-tracking-default ",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.woocommerce-order-tracking.order-tracking-default {
+
+  @track-order-bg:  @base-border-color-light;
+
+  .track-order-outer {
+      border: 1px solid @track-order-bg;
+      padding: 30px;
+      background: @track-order-bg;
+      border-left: 30px solid @main-color;
+      .rtl-body &{
+          border-left: 1px solid @track-order-bg;
+          border-right: 30px solid @main-color;
+      }
+
+  }
+  .track-order-title {
+      font-size: @font-size-h4 + 1;
+      margin-top: 0px;
+      margin-bottom: 12px;
+  }
+  .form-row{
+    label{
+      .base-color(@track-order-bg);
+      font-size: @font-size-base - 1;
+      line-height: @font-size-base + 8;
+    }
+
+  }
+  .form-row-submit{
+    padding-top: 10px;
+    margin-bottom: 0;
+    .btn {
+        width: 100%;
+    }
+  }
+
+  .form-control{
+    max-width: 1200px;
+  }
+
+}

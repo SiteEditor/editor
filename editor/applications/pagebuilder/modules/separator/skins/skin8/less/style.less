@@ -1,0 +1,44 @@
+/*#less_info#(
+"handle"	=> "separator-skin8",
+"deps"		=> array("separator-main-less"),
+"ver"		=> "1.0.0",
+"media"		=> "all"
+)#
+*/
+.module-separator.separator-skin8{
+    //display: inline-block;
+    .separator-inner{
+      display: table;
+      overflow: hidden;
+    }
+    .spr-special{
+        span{
+            border: 2px solid @base-border-color-light;
+            .border-radius(100%);
+            display: block;
+            padding: 3px;
+        }
+    }
+    .special-spr-center{
+        display: table-cell;
+        line-height: normal;
+        white-space: nowrap;
+        margin: 0;
+        padding: 0 5px 0;
+    }
+
+    .spr-container {
+        display: table-cell;
+        position: relative;
+        vertical-align: middle;
+        width: 50%;
+        .separator {
+            .box-sizing(content-box);
+            border-color: @base-border-color-light;
+            display: block;
+            position: relative;
+            width: 100%;
+        }
+    }
+}
+

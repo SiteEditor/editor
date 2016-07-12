@@ -1,0 +1,29 @@
+/*#less_info#(
+"handle"    => "posts-nav-skin2",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/    
+.posts-nav-skin2{     
+    .post-nav-next {
+        text-align: right;
+    }
+    .post-nav-prev {
+        text-align: left;
+    }
+    .btn-sm {
+      min-width: 120px;
+      @media (max-width: @screen-xs-max) {
+          min-width: 105px;
+      }
+    }
+
+}
+.rtl-body .posts-nav-skin2{
+    .post-nav-next {
+        text-align: left;
+    }
+    .post-nav-prev{
+        text-align: right;
+    }
+}

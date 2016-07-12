@@ -1,0 +1,1 @@
+<li <?php echo $sed_attrs; ?> class="<?php echo $class ?>"><a class="tab-item-before tab-item-after" href="<?php echo $href ?>" role="tab" data-toggle="tab"><?php echo $content ?></a></li>

@@ -1,0 +1,38 @@
+/*#less_info#(
+"handle"	=> "progress-bar-default",
+"deps"		=> array('progress-bar-main'),
+"ver"		=> "1.0.0",
+"media"		=> "all",
+)#*/
+
+.module-progress-bar.progress-bar-default{
+
+    .progress{
+       .progressbar-text {
+              padding: 0 10px;
+              top: 50%;
+              line-height: 26px;
+              margin: -13px 5px 0;
+              .high-color(@base-color-c);
+              .border-radius(4px);
+              background-color: fade(@base-color-c,30%);
+              font-size: 12px;
+        }
+        &.vertical{
+          .progressbar-text {
+              top: 6px;
+              margin: 0px 6px;
+              width: auto;
+              line-height: 22px;
+          }
+          &.bottom{
+              .progressbar-text {
+                  top: auto;
+                  bottom: 6px;
+              }
+          }
+
+        }
+    }
+
+}

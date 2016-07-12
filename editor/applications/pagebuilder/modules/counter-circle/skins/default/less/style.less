@@ -1,0 +1,45 @@
+/*#less_info#(
+"handle"    => "counter-circle-default",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.module-counter-circle.counter-circle-default{
+      display: inline-block;
+    .counter-circle-item {
+        position: relative;
+        &:hover .circle-text,
+        &:hover .circle-text-half{
+            color: @main-color;
+            .transition(all .3s ease);
+        }
+
+    }
+    [data-type="half"]{
+        overflow: hidden;
+    }
+    .hi-icon {
+    z-index: 1 !important;
+    }
+    .fa{
+        //line-height: 170px;
+        //font-size: 30px;
+    }
+
+    .circle-text, .circle-info, .circle-text-half, .circle-info-half{
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        display: inline-block;
+        .contrast(@body-bg);
+        .transition(all .3s ease);
+    }
+
+
+    .counter-circle-item[data-icon]:before {
+        font-family: fontawesome;
+        margin: -10px 3px 0 3px;
+        position: relative;
+        bottom: 4px;
+    }
+}

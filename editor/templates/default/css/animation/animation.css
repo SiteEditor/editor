@@ -1,0 +1,96 @@
+
+.setting-animation .row_setting_box{
+    margin: 17px 0 !important;
+}
+.sed-dialog-type3 label {
+    display: block;
+    width: 226px !important;
+}
+.ui-datepicker-trigger {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: medium none;
+}
+#sed-dialog-document .row_setting_box {
+    height: 90px;
+}
+.chosen-container {
+    margin: 10px 0 5px;
+}
+.editor-animation-container {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+    height: 60px;
+    margin: 6px;
+    position: relative;
+}
+.editor-animation-container2 {
+    float: left;
+    margin-right: 2px;
+    position: relative;
+    visibility: visible;
+
+}
+.editor-animation-icon {
+    background: url("http://static.parastorage.com/services/skins/2.842.5/images/wysiwyg/core/themes/editor_web/animation/icon-animation-flyin.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+    display: block;
+    height: 40px;
+    margin: 4px auto;
+    width: 70px;
+}
+.editor-animation-icon2 {
+    background: url("http://static.parastorage.com/services/skins/2.842.5/images/wysiwyg/core/themes/editor_web/animation/icon-animation-flyin.png") no-repeat scroll center center rgba(0, 0, 0, 0);
+    display: block;
+    float: left;
+    height: 40px;
+    margin: 10px 15px 0 0;
+    width: 70px;
+
+}
+
+.label-add-animation {
+    bottom: 5px;
+    color: #404040;
+    font-size: 11px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.label-add-animation2 {
+    color: #404040;
+    display: inline-block;
+    float: right;
+    font-size: 14px;
+    line-height: 1.4em !important;
+    margin: 21px 0 10px -15px;
+}
+.animation-box1 {
+    min-height: 70px;
+}
+.animation-box2 {
+    min-height: 120px;
+    padding: 10px 0 5px;
+}
+.animation-box3 {
+    min-height: 40px;
+    padding: 10px 0 5px;
+}
+.editor-animation {
+    float: right;
+    padding: 15px 0;
+}
+.setting-animation-box {
+    margin: 15px 0;
+    width: 230pxpx;
+}
+.type-animation {
+     height: 180px !important;
+    width: 265px !important;
+}
+.title-animation {
+    margin: 5px 5px -10px;
+}

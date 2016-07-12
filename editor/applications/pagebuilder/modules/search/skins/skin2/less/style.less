@@ -1,0 +1,51 @@
+/*
+#less_info#(
+"handle"  =>"search-skin2",
+"deps"    => array('main-search'),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/search/less/variables.less" ,
+)
+)#
+*/
+@import "../../../less/variables.less";
+.module-search.search-skin2 {
+  form {
+      //padding-right: 89px;
+  }
+  .search-box{
+    display: block;
+    padding-right: 60px;
+    position: relative;
+  }
+
+  .search-button {
+      background-color: @main-color;
+      .base-color(@main-color);
+      .border-radius(0px @border-radius-base @border-radius-base 0px);
+      border-width: 0;
+      display: block;
+      font-size: @font-size-base;
+      //line-height: 38px;
+      position: absolute ;
+      right: 0;
+      top: 0;
+      bottom: 0;
+  }
+}
+.rtl-body .module.module-search.search-skin2 {
+  form {
+      //padding-right: 0px;
+      //padding-left: 89px;
+  }
+  .search-box{
+    padding-left: 60px;
+    padding-right: 12px;
+  }
+  .search-button {
+      .border-radius(@border-radius-base 0px 0px @border-radius-base);
+      right: auto;
+      left: 0;
+  }
+}

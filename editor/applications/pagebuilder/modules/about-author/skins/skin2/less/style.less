@@ -1,0 +1,144 @@
+/*#less_info#(
+"handle"    => "about-author-skin2",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+
+.about-author-skin2{
+    .media.bio-author-box {
+        display: table;
+        width: 100%;
+        .media-left{
+            width: 90px;
+            padding-right: @padding-xl;
+            margin-bottom: 2px;
+            @media (max-width: @screen-xs-min) {
+                padding-right: 0px;
+            }
+            .photo {
+                border: 1px solid @base-border-color-light;
+                .border-radius(100%);
+                padding: @padding-xs + 1;
+                margin-bottom: 16px;
+                img {
+                    vertical-align: middle;
+                }
+            }
+        }
+
+        .media-body {
+          width: 100%;
+          .media-body-inner{
+                border: 1px solid @base-border-color-light;
+                width: 100%;
+                .border-radius(4px);
+                display: inline-block;
+                padding: @padding-xl (@padding-xl + 5);
+                position: relative;
+                background: @body-modules-bg;
+                &:before {
+                    background: none repeat scroll 0 0 @body-modules-bg;
+                    border-color:@base-border-color-light;
+                    border-style:solid;
+                    border-width: 0 0 1px 1px;
+                    content: "";
+                    height: 16px;
+                    left:-9px;
+                    position: absolute;
+                    top: 25px;
+                    .rotate(45deg);
+                    width: 16px;
+                }
+                @media (max-width: @screen-xs-min) {
+                  &:before {
+                      border-width: 1px 0 0 1px;
+                      left:50%;
+                      margin-left: -8px;
+                      right: auto ;
+                      top: -9px;
+                  }
+              }
+          }
+        }
+
+        .media-left, .media-body {
+            display: table-cell;
+            vertical-align: top;
+            @media (max-width: @screen-xs-min) {
+              display: block !important;
+              text-align: center;
+              margin: 0 auto;
+            }
+            .media-heading {
+                margin-bottom: 5px;
+                margin-top: 0;
+                text-transform: capitalize;
+                font-size: @font-size-base + 1;
+            }
+            .author-link {
+                float: right;
+                text-align: right;
+            }
+        }
+    }
+    .author_social_profiles{
+
+    li {
+        display: inline-block;
+        margin-right: 2px;
+        a,>div {
+              display: inline-block;
+              .low-color(@body-modules-bg);
+              background: @body-bg;
+              padding: 2px;
+              .border-radius(100%);
+              text-align: center;
+              .transition(all 500ms);
+              &:hover{
+                  color:#fff;
+              }
+        }
+    }
+    .linked-in { a,>div{&:hover{ background-color:#419cca ; border-color:#419cca ; }}}
+    .facebook { a,>div{&:hover{ background-color: #37589b; border-color: #37589b; }}}
+    .pinterest { a,>div{&:hover{ background-color: #cb2027; border-color: #cb2027;  }}}
+    .twitter { a,>div{&:hover{ background-color: #46d4fe; border-color: #46d4fe;  }}}
+    .google-plus { a,>div{&:hover{ background-color: #de5a49; border-color: #de5a49;  }}}
+
+    }
+}
+.rtl-body .module.about-author.about-author-skin2{
+  .media.bio-author-box{
+      .media-left{
+          padding-right: 0px;
+          padding-left: @padding-xl;
+          @media (max-width: @screen-xs-min) {
+              padding-right: 0px;
+              padding-left: 0px;
+          }
+      }
+      .media-body {
+        .media-body-inner{
+              &:before {
+                  border-width: 1px 1px 0 0;
+                  left: auto;
+                  right:-9px;
+              }
+            @media (max-width: @screen-xs-min) {
+              &:before {
+                border-width: 1px 0 0 1px;
+                left: auto;
+                margin-right: -8px;
+                margin-left: 0;
+                right: 50% ;
+              }
+          }
+        }
+      }
+  }
+  .author_social_profiles{
+      margin-left: 2px;
+      margin-right: 0px;
+  }
+}

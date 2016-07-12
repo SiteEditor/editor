@@ -1,0 +1,42 @@
+/*#less_info#(
+"handle"	=> "separator-skin2",
+"deps"		=> array("separator-main-less"),
+"ver"		=> "1.0.0",
+"media"		=> "all"
+)#
+*/
+.module-separator.separator-skin2{
+    //display: inline-block;
+    margin: 0;
+    .separator-inner{
+      display: table;
+      //overflow: hidden;
+    }
+    .special-spr-left{
+        display: table-cell;
+        line-height: normal;
+        white-space: nowrap;
+        text-align: center;
+        margin: 0;
+        padding: 0 8px 0 0;
+    }
+
+    .spr-container {
+        display: table-cell;
+        position: relative;
+        vertical-align: middle;
+        width: 100%;
+        .separator {
+            .box-sizing(content-box);
+            border-color: @base-border-color-light;
+            display: block;
+            position: relative;
+            width: 100%;
+        }
+    }
+}
+.rtl-body .module-separator.separator-skin2{
+  .special-spr-left{
+      padding: 0 0 0 8px;
+  }
+}
