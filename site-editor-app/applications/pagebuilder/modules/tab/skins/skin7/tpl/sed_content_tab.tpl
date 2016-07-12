@@ -1,1 +1,0 @@
-<div {{sed_attrs}} role="tabpanel" class="tab-pane fade bp-component {{class}}" data-parent-id="{{sed_model_id}}"> {{{content}}} </div>                        

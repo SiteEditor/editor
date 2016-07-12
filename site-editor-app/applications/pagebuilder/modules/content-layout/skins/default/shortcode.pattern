@@ -1,4 +1,0 @@
-[sed_content_layout title="columns"]
-    [sed_content_layout_column width="71%" sed_main_content = "true" parent_module="content-layout"]{{content}}[/sed_content_layout_column]
-    [sed_content_layout_column width="29%" parent_module="content-layout"][/sed_content_layout_column]
-[/sed_content_layout]

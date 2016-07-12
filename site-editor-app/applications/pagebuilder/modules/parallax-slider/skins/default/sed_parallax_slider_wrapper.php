@@ -1,1 +1,0 @@
-<div <?php echo $sed_attrs; ?> class="pxs_slider_wrapper <?php echo $class?>"><?php echo $content ?></div>

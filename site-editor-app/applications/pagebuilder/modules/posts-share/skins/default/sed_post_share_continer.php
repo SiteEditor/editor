@@ -1,1 +1,0 @@
-<ul class="<?php echo $class; ?> social-list" <?php echo $sed_attrs; ?>><?php echo $content;?></ul>  

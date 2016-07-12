@@ -1,4 +1,0 @@
-[sed_page_title skin="skin2"]
-  [sed_text_title sed_support_id="title-page-title" toolbar1="link unlink" toolbar2="charmap | undo redo" contextmenu_disabled = "disabled" parent_skin="skin2" tag="div" parent_module="page-title"]@@@[/sed_text_title]
-  [sed_breadcrumbs sed_support_id="breadcrumbs-page-title" skin="skin4" parent_module="page-title"][/sed_breadcrumbs]
-[/sed_page_title]

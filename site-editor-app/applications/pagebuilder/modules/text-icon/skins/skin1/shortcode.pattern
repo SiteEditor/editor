@@ -1,3 +1,0 @@
-[sed_text_icon skin="skin1" ]
-    [sed_text_title tag="div" toolbar1="normal-text" toolbar2="normal-text" parent_module="text-icon"]<h5>Content Boxes</h5>[/sed_text_title]
-[/sed_text_icon]

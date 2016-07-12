@@ -1,5 +1,0 @@
-<?php $color = str_replace("#" , "" , $color);?>
-<div <?php echo $sed_attrs; ?> class="sed-soundcloud  <?php echo $class;?> " width="<?php  echo $width ?>" height="<?php  echo $height ?>"  <?php echo $has_cover;?>>
-<iframe width="<?php  echo $width ?>" height="<?php if($visual) echo $height; else echo "auto"; ?>" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=<?php  echo $url ?>&amp;color=<?php  echo $color ?>&amp;auto_play=<?php  echo $auto_play ?>&amp;show_comments=<?php  echo $comments ?>&amp;visual=<?php  echo $visual ?>"></iframe></div>
-
- <!--src="https://w.soundcloud.com/player/?url={{url}}&amp;color={{color}}&amp;auto_play={{auto_play}}&amp;hide_related={{hide_related}}&amp;show_comments={{comments}}&amp;show_user={{show_user}}&amp;show_reposts={{show_reposts}}&amp;visual={{visual}}" -->
