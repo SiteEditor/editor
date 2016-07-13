@@ -42,6 +42,9 @@ if ( ! defined( 'SED_FRAMEWORK_DIR' ) )
 if ( ! defined( 'SED_FRAMEWORK_URL' ) )
     define( 'SED_FRAMEWORK_URL', SED_PLUGIN_URL . '/framework/framework' );
 
+if ( ! defined( 'SED_ASSETS_URL' ) )
+    define( 'SED_ASSETS_URL', SED_PLUGIN_URL . '/assets' );
+
 if ( ! defined( 'SED_PATH_BASE' ) )
   define ('SED_PATH_BASE', SED_EDITOR_DIR);
 

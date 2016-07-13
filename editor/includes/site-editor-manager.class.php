@@ -51,8 +51,6 @@ class SiteEditorManager{
 			add_action('customize_register', array($this, 'register_dynamic_settings'), 11); // allow code to create settings first
 			add_action('sed_controls_enqueue_scripts', array($this, 'enqueue_control_scripts'));
 
-			add_action( 'sed_enqueue_scripts' , array( $this , 'enqueue_editor_scripts' ) );
-
 		}
 
 		/*
@@ -995,50 +993,6 @@ class SiteEditorManager{
 	 */
 	public function register_dynamic_settings() {
 		$this->add_dynamic_settings( array_keys( $this->unsanitized_post_values() ) );
-	}
-
-	public function enqueue_editor_scripts(){
-		global $site_editor_script;
-		$site_editor_script->load_scripts(array(
-			'jquery' ,
-			'backbone' ,
-			'yepnope' ,
-			'modernizr',
-			'underscore' ,
-			'ajax-queue' ,
-			'jquery-css' ,
-			'jquery-livequery' ,
-			'jquery-browser' ,
-			'jquery-ui-full',
-			'sed-colorpicker',
-			'bootstrap' ,
-			'jquery-scrollbar',
-			'multi-level-box',
-			'plupload' ,
-			'seduploader' ,
-			'sed-drag-drop',
-			'siteeditor-base' ,
-			'siteeditor-shortcode' ,
-			'siteeditor-ajax' ,
-			'siteeditor-modules-scripts' ,
-			//'undomanager' ,
-			//'sed-undomanager' ,
-			'siteeditor-css',
-
-			//'siteeditor' ,
-			"siteEditorControls",
-			"styleEditorControls",
-			"pbModulesControls",
-			"mediaClass",
-			"appPreviewClass",
-			"appTemplateClass",
-			"pagebuilder",
-			"contextmenu",
-			"sed-settings",
-			"sed-save",
-
-			'chosen'
-		));
 	}
 
 	/**

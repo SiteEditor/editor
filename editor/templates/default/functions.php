@@ -33,7 +33,7 @@ class siteEditorFunctions{
     function theme_scripts(){
         global $site_editor_script;
         $site_editor_script->add("siteeditor-settings-render", $this->base_library_url."siteeditor/siteeditor-settings-render".$this->suffix.".js" , array( 'jquery') , "1.0.0",1 );
-        $site_editor_script->add("render-js-theme", $this->base_theme_url."js/render".$this->suffix.".js" , array( 'jquery', 'jquery-ui-full', 'bootstrap') , "1.0.0",1 );
+        $site_editor_script->add("render-js-theme", $this->base_theme_url."js/render".$this->suffix.".js" , array( 'jquery', 'jquery-ui-full') , "1.0.0",1 );
         $site_editor_script->load_scripts(array( 'jquery-ui-timepicker' , 'siteeditor-settings-render' ,'render-js-theme'));
     }
 

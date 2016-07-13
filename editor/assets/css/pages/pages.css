@@ -1,0 +1,175 @@
+.list-menu {
+    background: none repeat scroll 0 0 #fff;
+    border-bottom: 1px solid #cccccc;
+    border-top: 1px solid #ffffff;
+    box-shadow: 2px -2px 15px -3px rgba(0, 0, 0, 0.1) inset;
+    display: block;
+    height: 53px;
+    line-height: 1.4em;
+    padding: 9px 25px 8px 10px;
+    width: 100%;
+}
+a.list-menu:hover {
+    color: #00ccff !important;
+    background-image: none !important;
+    box-shadow: none;
+}
+.link-pages ul {
+    height: 100% !important;
+    list-style-type: none;
+}
+.link-pages li {
+    position: relative;
+}
+.title-pages{
+   display: none;
+}
+.list-menu .arrow-caret {
+    float: right !important;
+    margin: 4px 0 0;
+}
+.pages-link-group .icon-chevron-right,
+.list-menu .icon-chevron-right,
+.link-pages .ui-accordion-header-icon {
+    color: #24a9f1;
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
+    right: 4px;
+    top: 11px;
+}
+.icon-list-menu {
+    top: 18px !important;
+}
+.link-pages .accordion-title-deactive .ui-icon {
+    display: none;
+}
+.link-pages .ui-accordion-header-icon{
+    margin: 0 !important;
+    position: absolute;
+    right: 8px;
+    top: 18px;
+}
+.list-menu.ui-accordion-header-active {
+    border-bottom: 1px solid #cccccc !important;
+    border-radius: 0 !important;
+}
+.list-menu-sub-item .ui-widget-content {
+    border: 0 none;
+}
+.pages-link-group {
+    background: none repeat scroll 0 0 #f8f8f8;
+    border-bottom: 1px solid #cccccc;
+    border-top: 1px solid #ffffff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0) inset;
+    cursor: pointer;
+    display: block;
+    height: 42px;
+    line-height: 1.98em;
+    overflow: hidden;
+    padding: 7px 25px 7px 30px;
+    width: 100%;
+}
+.pages-link-group:hover {
+    background: #f2f2f2;
+    box-shadow: 2px -2px 7px -3px rgba(0, 0, 0, 0.1) inset;
+}
+.active .pages-link-group {
+    background: none repeat scroll 0 0 #f0f0f0;
+    color: #00ccff;
+}
+.active .pages-link-group .icon-link-group {
+    color: #00ccff;
+}
+.sed-pages-link {
+    background: none repeat scroll 0 0 #fefefe;
+    border-bottom: 1px solid #cccccc;
+    border-top: 1px solid #ffffff;
+    box-shadow: 0 2px 10px -4px rgba(0, 0, 0, 0.1) inset;
+    cursor: pointer;
+    display: block;
+    line-height: 1.91em;
+    height: 42px;
+    overflow: hidden;
+    padding: 8px 24px 7px 20px;
+    width: 100%;
+}
+.sed-pages-link:hover {
+    background: none repeat scroll 0 0 #f8f8f8 !important;
+}
+.search-pages label {
+    background: -moz-linear-gradient(center bottom , rgba(197, 197, 197, 0.2) 0%, rgba(206, 206, 206, 0.2) 4%, rgba(251, 251, 251, 0.2) 17%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 100%) repeat scroll 0 0 transparent;
+    border-bottom: 1px solid #CCCCCC;
+    display: block;
+    height: 95px;
+}
+.screen-pages-text {
+    display: block;
+    padding: 9px 12px;
+    width: 100%;
+}
+.search-pages-field {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) inset;
+    color: #2B2B2B;
+    float: left;
+    margin: 0 0 5px 11px;
+    padding: 4px 26px 5px 9px;
+    transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+    width: 91%;
+}
+.search-color {
+    color: #DDDDDD;
+    margin: 2px 0 0 -27px !important;
+}
+.link-pages .plate {
+    padding: 0 !important;
+}
+.footer-pages {
+    background: -moz-linear-gradient(center top , rgba(193, 193, 193, 0.3) 0%, rgba(192, 196, 196, 0.3) 1%, rgba(251, 251, 251, 0.3) 29%, rgba(255, 255, 255, 0.3) 77%, rgba(255, 255, 255, 0.3) 100%) repeat scroll 0 0 transparent;
+    height: 57px;
+}
+#pages li {
+    height: 43px;
+}
+.link-pages {
+    overflow: hidden;
+}
+.sed-pages-link .setting-pages {
+    color: rgba(0, 0, 0, 0) !important;
+    position: absolute;
+    right: 4px;
+    top: 14px;
+}
+.all-pages a:hover .setting-pages {
+    color: #4FC3D4 !important;
+}
+.list-menu .el_txt {
+    line-height: 2.65em !important ;
+}
+.select-pages-link {
+    background-color: #F4F4F4;
+    background-image: none !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.09) !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1) inset;
+    color: #00CCFF !important;
+}
+a.sed-pages-link:hover{
+    background-color: #FFF;
+    color: #00ccff !important;
+    background-image: none !important;
+}
+
+.select-pages-link .fa,
+a.sed-pages-link:hover .fa,
+a.list-menu:hover .fa{
+   color: #00ccff !important;
+}
+.list-menu .fa-2x{
+  font-size: 1.75em !important;
+}
+.link-pages-scrollbar {
+    height: 460px;
+    overflow: hidden;
+}

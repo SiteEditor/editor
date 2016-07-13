@@ -5,7 +5,7 @@
 
  <div class="left_palette">
  <div class="bs-example bs-example-tabs height_pl" >
- <div class="plate1 nav nav-tabs" id="zmind-platte">
+ <div class="plate1 nav nav-tabs" id="sed-right-side-panel">
  <ul>
  <li class="icona"><a  id="button" class="btn112 btn-default112"><span class="fa111 right-open fa-lg111 "></span></a></li>
 <?php

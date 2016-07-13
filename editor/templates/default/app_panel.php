@@ -5,7 +5,7 @@
 
 <div class="left_palette">
     <div class="bs-example bs-example-tabs height_pl" >
-        <div class="plate1 nav nav-tabs" id="zmind-platte">
+        <div class="plate1 nav nav-tabs" id="sed-right-side-panel">
             <ul>
                 <?php
                   foreach($panels AS $item){

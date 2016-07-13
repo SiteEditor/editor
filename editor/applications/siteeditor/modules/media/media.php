@@ -21,8 +21,28 @@ if(!class_exists('SiteEditorMediaManager'))
             add_action("site_editor_ajax_load_medias", array($this,"library_load_medias") );
 
             add_filter( "sed_js_I18n", array($this,'js_I18n'));
+
+            add_action("wp_default_scripts" , array( $this , "default_scripts" ) );
+
+            add_filter('sed_enqueue_scripts', array($this,'add_js_plugin') );
 		}
 
+        function default_scripts(){
+
+            //SiteEditor Uploader
+            wp_register_script("seduploader", SED_EDITOR_FOLDER_URL . 'applications/siteeditor/modules/media/js/siteeditor.plupload'.$this->suffix.'.js' , array('jquery' , 'plupload' ) , "1.0.0" );
+
+            wp_register_script("sed-media-class", SED_EDITOR_FOLDER_URL . 'applications/siteeditor/modules/media/js/media-class-plugin.min'.$this->suffix.'.js' , array( 'jquery' , 'siteeditor' , 'jquery-ui-progressbar' ) , "1.0.0" );
+
+        }
+
+        function add_js_plugin(){
+
+            wp_enqueue_script( "seduploader" );
+
+            wp_enqueue_script( "sed-media-class" );
+
+        }
 
         function js_I18n( $I18n ){
 
