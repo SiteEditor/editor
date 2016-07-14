@@ -5,26 +5,32 @@
  */
 if(!class_exists('SEDEditorAssetsManager'))
 {
-    class SEDEditorAssetsManager
+    class SEDEditorAssetsManager extends SiteEditorAssetsManager
     {
 
-        public $suffix;
-
         function __construct( ) {
-            $this->suffix = ".min";
 
-            add_action("wp_default_scripts" , array( $this , "default_scripts" ) );
+            add_action( 'wp_default_scripts'  , array( $this , 'default_scripts' ) );
 
-            add_action( 'sed_enqueue_scripts' , array( $this , 'enqueue_editor' ) );
+            add_action( 'wp_default_styles'   , array( $this , 'default_styles' ) );
 
-            add_action( 'wp_enqueue_scripts' , array( $this , 'enqueue_frontend_editor' ) );
+            add_action( 'sed_enqueue_scripts' , array( $this , 'enqueue_editor_scripts' ) );
+
+            add_action( 'wp_enqueue_scripts'  , array( $this , 'enqueue_frontend_scripts' ) );
+
+            add_action( 'sed_enqueue_styles'  , array( $this , 'enqueue_editor_styles' ) );
+
+            add_action( 'wp_enqueue_styles'   , array( $this , 'enqueue_frontend_styles' ) );
 
         }
 
         function default_scripts(){
 
             //register Editor Core & plugin scripts
-            $this->register_editor_scripts();
+            if( is_site_editor() )
+                $this->register_editor_scripts();
+            else
+                $this->register_frontend_scripts();
 
         }
 
@@ -126,7 +132,7 @@ if(!class_exists('SEDEditorAssetsManager'))
          * 
          * 'chosen'
          */
-        function enqueue_editor(){
+        function enqueue_editor_scripts(){
             
             wp_enqueue_script( 'siteeditor' );
             
@@ -144,7 +150,7 @@ if(!class_exists('SEDEditorAssetsManager'))
 
             $this->add( 'tinycolor',            SED_EDITOR_ASSETS_URL . '/js/colorpicker/js/tinycolor'.$this->suffix.'.js', array( ),"",1 );
 
-            $this->add( 'sed-tinymce',           SED_EDITOR_FOLDER_URL . '/lib/tinymce/tinymce.min.js', array() ,"4.0.5");
+            $this->add( 'sed-tinymce',           SED_EDITOR_FOLDER_URL . '/lib/tinymce/tinymce'.$this->suffix.'.js', array() ,"4.0.5");
 
             $deps = array(
                 'jquery' ,
@@ -165,25 +171,55 @@ if(!class_exists('SEDEditorAssetsManager'))
 
         }
 
-        function enqueue_frontend_editor(){
+        function enqueue_frontend_scripts(){
 
             wp_enqueue_script( 'sed-frontend-editor' );
             
         }
 
-        function add( $handle, $src, $deps = array(), $ver = false, $in_footer = null ){
-            
-            wp_register_script( $handle, $src, $deps, $ver, $in_footer );
-            
-        }
-        
         function default_styles(){
 
+            //register Editor Core & plugin scripts
+            if( is_site_editor() )
+                $this->register_editor_styles();
+            else
+                $this->register_frontend_styles();
+
         }
 
-        function default_fonts(){
+        function register_editor_styles(){
+
+            $this->add_css( 'siteeditor',       SED_EDITOR_ASSETS_URL . '/css/siteeditor'.$this->suffix.'.css', array(), SED_APP_VERSION );
 
         }
+
+
+        function enqueue_editor_styles(){
+
+            wp_enqueue_style('siteeditor');
+
+        }
+
+
+        function register_frontend_styles(){
+
+            $this->add_css( 'site-iframe',      SED_EDITOR_ASSETS_URL . '/css/frontend-editor/site-iframe'.$this->suffix.'.css' , array(), SED_APP_VERSION  );
+
+            $this->add_css( 'contextmenu',      SED_EDITOR_ASSETS_URL . '/css/frontend-editor/contextmenu'.$this->suffix.'.css' , array(), SED_APP_VERSION  );
+
+            $this->add_css( 'fonts-sed-iframe', SED_EDITOR_ASSETS_URL . '/css/frontend-editor/fonts-sed-iframe'.$this->suffix.'.css' , array(), SED_APP_VERSION  );
+
+        }
+
+
+        function enqueue_frontend_styles(){
+
+            wp_enqueue_style("contextmenu");
+            wp_enqueue_style("site-iframe");
+            wp_enqueue_style("fonts-sed-iframe");
+
+        }
+
 
     }
 

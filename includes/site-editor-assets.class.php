@@ -24,18 +24,18 @@ if(!class_exists('SiteEditorAssetsManager'))
             $this->register_bootstrap_scripts();
 
             //register chosen
-            $this->add("chosen", SED_ASSETS_URL . "/js/chosen/chosen.jquery".$this->suffix.".js" , array('jquery'  ) , "1.1.0" );
+            $this->add("chosen",                SED_ASSETS_URL . "/js/chosen/chosen.jquery".$this->suffix.".js" , array('jquery'  ) , "1.1.0" );
             
             //register livequery
-            $this->add( 'jquery-livequery'  , SED_ASSETS_URL . '/js/livequery/jquery.livequery'.$this->suffix.'.js', array( 'jquery' ) , '1.0.0' );
-            $this->add( 'sed-livequery'     , SED_ASSETS_URL . '/js/livequery/sed.livequery'.$this->suffix.'.js', array( 'jquery-livequery' ) , '1.0.0' );
+            $this->add( 'jquery-livequery',     SED_ASSETS_URL . '/js/livequery/jquery.livequery'.$this->suffix.'.js', array( 'jquery' ) , '1.0.0' );
+            $this->add( 'sed-livequery',        SED_ASSETS_URL . '/js/livequery/sed.livequery'.$this->suffix.'.js', array( 'jquery-livequery' ) , '1.0.0' );
 
             //register modernizr
-            $this->add( 'yepnope'   , SED_ASSETS_URL . '/js/yepnope/yepnope'.$this->suffix.'.js', array(), '2.5.6' );
-            $this->add( 'modernizr' , SED_ASSETS_URL . '/js/modernizr/modernizr.custom'.$this->suffix.'.js', array('yepnope'), '2.8.1' );
+            $this->add( 'yepnope'   ,           SED_ASSETS_URL . '/js/yepnope/yepnope'.$this->suffix.'.js', array(), '2.5.6' );
+            $this->add( 'modernizr' ,           SED_ASSETS_URL . '/js/modernizr/modernizr.custom'.$this->suffix.'.js', array('yepnope'), '2.8.1' );
 
             //scrollbar
-            $this->add( 'jquery-scrollbar', SED_ASSETS_URL . '/js/scrollbar/jquery.mCustomScrollbar.concat'.$this->suffix.'.js', array('jquery'), '2.3' );
+            $this->add( 'jquery-scrollbar',     SED_ASSETS_URL . '/js/scrollbar/jquery.mCustomScrollbar.concat'.$this->suffix.'.js', array('jquery'), '2.3' );
             
         }
 
@@ -71,12 +71,14 @@ if(!class_exists('SiteEditorAssetsManager'))
             wp_register_script( $handle, $src, $deps, $ver, $in_footer );
             
         }
-        
-        function default_styles(){
+
+        function add_css($handle , $src , $deps = array() , $ver = SED_APP_VERSION , $media = "all"){
+
+            wp_register_style( $handle, $src, $deps, $ver, $media );
 
         }
-
-        function default_fonts(){
+        
+        function default_styles(){
 
         }
 
