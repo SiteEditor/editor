@@ -7,9 +7,10 @@
  */
 
 /*global siteEditor:true */
-siteEditor.PluginManager.add('save', function(siteEditor) {
+(function( exports, $ ){
 
-  var api = siteEditor.sedAppClass.editor , $ = siteEditor.dom.Sizzle;
+  var api = sedApp.editor;
+
   api.postsContent = {};
 
   $( function() {
@@ -21,9 +22,6 @@ siteEditor.PluginManager.add('save', function(siteEditor) {
 		  save : function() {
             //for sub_theme module-----
             api.Events.trigger( "beforeSave" );
-
-            //before save page sync is true
-            api( 'page_sync' ).set( true );
 
             var appPagesCustomized      = {} ,
                 appPostsContent         = {} ,
@@ -51,7 +49,7 @@ siteEditor.PluginManager.add('save', function(siteEditor) {
             var self  = this,
             query = {
                 action                  : 'customize_save',
-            	sed_app_editor          : 'on',   //wp_customize
+            	sed_app_editor          : 'on',
             	theme                   : api.settings.theme.stylesheet,
             	sed_page_customized     : JSON.stringify( api.get() ),
                 nonce                   :  this.nonce.save ,
@@ -210,4 +208,4 @@ siteEditor.PluginManager.add('save', function(siteEditor) {
 
 	});
 
-});
+})( sedApp, jQuery );

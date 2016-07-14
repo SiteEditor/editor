@@ -21,20 +21,16 @@
                 self.syncMediaAttachments( data );
             });
 
-            api.preview.bind( "syncImageUsingSize" , function( data ) {
-                self.syncImageUsingSize( data );
-            });
-
-            api.Events.bind( "mediaGroupUsingSize" , function( modules , elementId , shortcode_tag ,attr ){
+            /*api.Events.bind( "mediaGroupUsingSize" , function( modules , elementId , shortcode_tag ,attr ){
                 self.updateGroupUsingSize( modules , elementId , shortcode_tag ,attr );
-            });
+            });*/
 
 
         },
 
-        updateGroupUsingSize : function( modules , elementId , shortcode_tag ,attr ){
+        /*updateGroupUsingSize : function( modules , elementId , shortcode_tag ,attr ){
                          
-            var postId = api.pageBuilder.getPostId( $("#" + elementId) ) ,
+            var postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) ,
                 sizeType = attr.replace("_using_size" , "") ,
                 shortcode = api.contentBuilder.getShortcode( elementId ) ,
                 currentSize = modules[elementId][attr];
@@ -67,12 +63,7 @@
 
             api.contentBuilder.refreshModule( elementId );
 
-        },
-
-        syncImageUsingSize : function( data ){
-            var size = data.size , targetElement = data.targetElement;
-            api.contentBuilder.updateShortcodeAttr( "using_size"  , size , targetElement);
-        },
+        }, */
 
         syncMediaAttachments : function( data ){
             //attachment , elementId
@@ -86,7 +77,7 @@
 
             api.attachmentsSettings.push( attachment );
 
-            if(shortcodeName == "sed_image" && attachment.type == "image"){
+            /*if(shortcodeName == "sed_image" && attachment.type == "image"){
                 var shortcode = api.shortcodes[shortcodeName] ,
                     currAttrs = api.contentBuilder.getAttrs( targetElement ) ,
                     attachAttrs = {
@@ -141,7 +132,7 @@
                     targetAttrs : _.keys( attachAttrs )
                 });
 
-            }
+            }  */
 
 
         },

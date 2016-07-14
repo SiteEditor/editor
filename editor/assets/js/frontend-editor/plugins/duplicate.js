@@ -12,37 +12,27 @@
             this.ready();
 
             this.elementId;
+            this.newElementId;
             this.Ids = {};
         },
 
         ready : function(){
             var self = this;
 
-            api.preview.bind( "duplicateSettingsSynced" , function( synced ){
-
-                if( !_.isUndefined( synced.modelsSettings['sed_pb_modules'] ) ){
-                    var sed_page_customized = api.get();
-                    $.extend( true, sed_page_customized['sed_pb_modules'] , synced.modelsSettings['sed_pb_modules'] );
-                }
-
-                self.styleEditorSettings( synced.modelsSettings );
-            });
-
         },
 
-        styleEditorSettings : function( settings ){
+        syncStyleEditorPreview : function( sed_css ){
+            var self = this;
+            $.each( sed_css , function( selector , properties ){
 
-            $.each( settings , function( setting_id , selectors ){
+                var patt = /\[\s*(sed_model_id)\s*=\s*["\']?([^"\']*)["\']?\s*\]/g;
+                var new_selector = selector.replace( patt , '[sed_model_id="' + self.newElementId + '"]' );
+                             
+                $.each( properties , function( setting_id , value ){
+                    api.preview.trigger( 'current_css_setting_type' , "module" );
+                    api.preview.trigger( 'current_css_selector' , new_selector );
+                    api( setting_id ).set( value );
 
-                if( setting_id == 'sed_pb_modules' )
-                    return ;
-
-                $.each( selectors , function(selector , value){
-                    api.preview.trigger( 'current_css_selector' , selector );
-
-                    var $thisValue = api( setting_id )();
-                    $thisValue[ selector ] = value;
-                    api( setting_id ).set( $thisValue );
                 });
 
             });
@@ -56,13 +46,13 @@
                 element = element.find(">.sed-pb-module-container .sed-pb-module-container:first");
             }
 
-            this.elementId = element.attr("id");
+            this.elementId = element.attr("sed_model_id");
 
             api.Events.trigger( "sedBeforeDuplicate" , this.elementId );
             api.Events.trigger( "before-duplicate-" + this.elementId );
 
             var elementId = this.elementId,
-                postId = api.pageBuilder.getPostId( $("#" + elementId) ) ,
+                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) ,
                 mainShortcode = api.contentBuilder.getShortcode(elementId) ,
                 parentId = mainShortcode.parent_id ,
                 modulesShortcodes = api.contentBuilder.findAllTreeChildrenShortcode( parentId , postId ),
@@ -76,13 +66,20 @@
 
             modulesShortcodesCopy = $.extend( true, {} , modulesShortcodes );//_.map( modulesShortcodes , _.clone );
 
-            modulesShortcodesCopy = this.modifyModels( modulesShortcodesCopy , postId );
+            modulesShortcodesCopy = this.modifyModels( modulesShortcodesCopy );
 
             if( !_.isUndefined( modulesShortcodesCopy[0].theme_id ) )
                 delete modulesShortcodesCopy[0].theme_id;
 
             if( !_.isUndefined( modulesShortcodesCopy[0].is_customize ) )
                 delete modulesShortcodesCopy[0].is_customize;
+
+            if( !_.isUndefined( mainShortcode.attrs ) && !_.isUndefined( mainShortcode.attrs.sed_css ) && !_.isEmpty( mainShortcode.attrs.sed_css ) && _.isObject( mainShortcode.attrs.sed_css ) ){
+                var sedCssCopy = $.extend( true, {} , mainShortcode.attrs.sed_css );
+                modulesShortcodesCopy[2].attrs.sed_css = {};
+            }
+
+            this.newElementId = modulesShortcodesCopy[2].id;
 
             index = modulesShortcodesCopy.length + rowIdx;
 
@@ -91,13 +88,19 @@
             api.doShortcodeMode = "normal";
             html = api.contentBuilder.do_shortcode( "sed_row" , modulesShortcodesCopy[0].id , modulesShortcodesCopy[0].id );
 
-            newItem = $(html).insertAfter( $("#" + rowSh.id ) );
+            newItem = $(html).insertAfter( $( '[sed_model_id="' + rowSh.id + '"]'  ) );
 
-            api.preview.send( "duplicateSettingsSync" , {
+            api.selectPlugin.select( $( '[sed_model_id="' + this.newElementId + '"]' ) , false );
+
+            /*api.preview.send( "duplicateSettingsSync" , {
                 modelsParentId : modulesShortcodesCopy[0].id ,
                 place          : api.shortcodeCurrentPlace ,
                 ids            : this.Ids
-            });
+            });*/
+
+            if( !_.isUndefined( sedCssCopy ) && !_.isEmpty( sedCssCopy ) && _.isObject( sedCssCopy ) ){
+                this.syncStyleEditorPreview( sedCssCopy );
+            }
 
             api.Events.trigger( "sedAfterDuplicate" , elementId , newItem );
             api.Events.trigger( "after-duplicate-" + elementId );
@@ -107,23 +110,13 @@
 
         },
 
-        modifyModels : function( modulesShortcodesCopy , postId ){
+        modifyModels : function( modulesShortcodesCopy ){
             var self = this;
             this.Ids = {};
 
             modulesShortcodesCopy = _.map( modulesShortcodesCopy , function(shortcode){
 
-                if( shortcode.tag != "content" ){
-                    shortcode_info = api.shortcodes[shortcode.tag];
-
-                    if(shortcode_info.asModule){
-                        id = api.pageBuilder.getNewId( shortcode_info.moduleName , "module" , postId );
-                    }else{
-                        id = api.pageBuilder.getNewId( shortcode.tag , "shortcode" , postId );
-                    }
-                }else{
-                    id = api.pageBuilder.getNewId( shortcode.tag , "shortcode" , postId );
-                }
+                var id = api.pageBuilder.getNewId( );
 
                 self.Ids[shortcode.id] = id;
 

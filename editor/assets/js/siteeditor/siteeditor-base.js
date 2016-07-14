@@ -136,7 +136,7 @@ window.sedApp = window.sedApp || {};
 			return this;
 		},
 
-		unbind: function( id ) {    
+		unbind: function( id ) {
 			if ( this.topics && this.topics[ id ] )
 				this.topics[ id ].remove.apply( this.topics[ id ], slice.call( arguments, 1 ) );
 			return this;
@@ -152,6 +152,7 @@ window.sedApp = window.sedApp || {};
 			this._value = initial; // @todo: potentially change this to a this.set() call.
 			this.callbacks = $.Callbacks();
             //this.history = [this._value];
+            this._dirty = false;
 
 			$.extend( this, options || {} );
 
@@ -179,8 +180,9 @@ window.sedApp = window.sedApp || {};
 			// Bail if the sanitized value is null or unchanged.
 			if ( null === to  || (_.isEqual( from , to ) && $.inArray( this.stype , ["module" , "style-editor"] ) == -1 ) )    //  :: change by parsaatef
 				return this;
-                
+                              
 			this._value = to;
+            this._dirty = true;
 
 			this.callbacks.fireWith( this, [ to, from ] );
 
@@ -410,8 +412,13 @@ window.sedApp = window.sedApp || {};
 					type = this.element.prop('type');
 					if ( api.Element.synchronizer[ type ] )
 						synchronizer = api.Element.synchronizer[ type ];
-					if ( 'text' === type || 'password' === type )
+
+					if ( 'text' === type || 'password' === type ) {
 						this.events += ' keyup';
+					} else if ( 'range' === type ) {
+						this.events += ' input propertychange';
+					}
+
 				} else if ( this.element.is('textarea') ) {
 					this.events += ' keyup';
 				}
@@ -505,10 +512,33 @@ window.sedApp = window.sedApp || {};
 
 			this.add( 'channel', params.channel );
 			this.add( 'url', params.url || '' );
-			this.add( 'targetWindow', params.targetWindow || defaultTarget );
+			//this.add( 'targetWindow', params.targetWindow || defaultTarget );
 			this.add( 'origin', this.url() ).link( this.url ).setter( function( to ) {
 				return to.replace( /([^:]+:\/\/[^\/]+).*/, '$1' );
 			});
+
+			// first add with no value
+			this.add( 'targetWindow', null );
+			// This avoids SecurityErrors when setting a window object in x-origin iframe'd scenarios.
+			this.targetWindow.set = function( to ) {
+				var from = this._value;
+
+				to = this._setter.apply( this, arguments );
+				to = this.validate( to );
+
+				if ( null === to || from === to ) {
+					return this;
+				}
+
+				this._value = to;
+				this._dirty = true;
+
+				this.callbacks.fireWith( this, [ to, from ] );
+
+				return this;
+			};
+			// now set it
+			this.targetWindow( params.targetWindow || defaultTarget );
 
 			// Since we want jQuery to treat the receive function as unique
 			// to this instance, we give the function a new guid.
@@ -589,7 +619,100 @@ window.sedApp = window.sedApp || {};
 		return result;
 	};
 
-    api.log = function() {
+
+	api.Filters = api.Class.extend({
+
+		initialize: function () {
+			this.topics = {};
+		},
+
+		add : function( id, callback , priority ){
+
+			if( _.isUndefined( this.topics[id] ) ){
+				this.topics[id] = [];
+			}
+
+			this.topics[id].push({
+				callback : callback ,
+				priority  : priority || 10 , //1 , 2 , 3 , ...
+				type	 : "add"
+			});
+
+		},
+
+		remove : function( id, callback , priority ){
+
+			if( _.isUndefined( this.topics[id] ) ){
+				this.topics[id] = [];
+			}
+
+			this.topics[id].push({
+				callback : callback ,
+				priority  : priority || 10 ,
+				type	 : "remove"
+			});
+
+		},
+
+		render : function( id , args ){
+
+			if( _.isUndefined( this.topics[id] ) ){
+				if( args.length > 0 )
+					return args[0];
+				else
+					return false;
+			}
+
+			var topics = _.sortBy( this.topics[id] , 'priority'),
+				result;
+
+			_.each( topics , $.proxy( function( obj ){
+
+				var callback = obj.callback;
+				result = obj.callback.apply( obj , args);
+
+			} , this) );
+
+			return result;
+
+			/*var callbacks = $.Callbacks();
+
+			_.each( topics , $.proxy( function( obj ){
+
+				var callback = obj.callback;
+
+				if( obj.type == "add" )
+					callbacks.add( callback );
+				else if( obj.type == "remove" )
+					callbacks.remove( callback );
+
+			} , this) );
+
+			//callback && callback.apply( this, [ result1, result2 ]);
+
+			console.log( "--------------------callBack---------------" , callbacks );
+
+			return callbacks.fire( args );*/
+		},
+
+	});
+
+	api.filters = new api.Filters();
+
+	api.applyFilters = function( id ) {
+		return api.filters.render(id, slice.call( arguments, 1 ) );
+	};
+
+	api.addFilter = function(id, callback, priority) {
+		api.filters.add(id, callback , priority);
+	};
+
+	/*api.removeFilter = function( id, callback , priority ) {
+		api.filters.remove( id, callback , priority );
+	};*/
+
+
+	api.log = function() {
         var args = arguments , Debaug = false;
 
         if( args.length == 0 || Debaug === false )
@@ -606,7 +729,7 @@ window.sedApp = window.sedApp || {};
 
     };
 
-    api.styleCurrentSelector = '';
+    api.currentSedElementId = '';
     api.fn = {};
 
     api.fn.ucfirst = function(str) {

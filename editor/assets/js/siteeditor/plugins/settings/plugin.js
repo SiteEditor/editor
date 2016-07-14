@@ -1,13 +1,15 @@
-siteEditor.PluginManager.add('settings', function(siteEditor) {
+(function( exports, $ ){
 
-    var api = siteEditor.sedAppClass.editor ,
-        $ = siteEditor.dom.Sizzle , siteEditorCss =  new sedApp.css;
+    var api = sedApp.editor;
 
     api.currentCssSelector = api.currentCssSelector || "";
     //handels of all loaded scripts in siteeditor app
     api.sedAppLoadedScripts = api.sedAppLoadedScripts || [];
 
     api.fn.getStyle = function (el, styleProp , pseudo) {
+      if( _.isUndefined( el ) || $(el).length == 0 )
+        return false;
+
       var value, defaultView = (el.ownerDocument || document).defaultView;
       // W3C standard way:
       if (defaultView && defaultView.getComputedStyle) {
@@ -47,13 +49,15 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
             this.initControls = [];
             this.currentDialogSelector = "none";
             this.dialogsContents = {};
-            this.dialogsTitles = {},
+            this.dialogsTitles = {};
             this.currentSettingsId;
             this.sedDialog;
             //in this version only using in design panel(for back btn and update settings)
             this.forceUpdate = false;
             this.rowContainerSettingsData = {};
-            this.lastSedDialog;
+            //this.lastSedDialog;
+            this.panelsNeedToUpdate = [];
+            //this.lastPanelsNeedToUpdate = [];
 
             this.ready();
         },
@@ -81,7 +85,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             //when change skin current element updated
             api.previewer.bind( 'changeCurrentElementBySkinChange', function( dataEl ) {
-                self.updateByChangeSkin( dataEl );
+                self.updateByChangePattern( dataEl );
             });
 
             api.previewer.bind( 'shortcodeControlsUpdate' , function( data  ) {
@@ -90,11 +94,6 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             api.previewer.bind( "currentElementId" , function( id ) {
                 api.currentTargetElementId = id;
-                //api.currentCssSelector = "#" + id;
-            });
-
-            api.previewer.bind( "currentCssSelector" , function( selector ) {
-                api.currentCssSelector = selector;
             });
 
             api.previewer.bind( 'currentPostId' , function( id ) {
@@ -137,15 +136,19 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             if( !_.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
 
-                self.dialogsContents[self.currentSettingsId].appendTo( $( selector ) );
+                var $currentElDialog = self.dialogsContents[self.currentSettingsId].appendTo( $( selector ) );
                 self.dialogsTitles[self.currentSettingsId].appendTo( $( selector ).siblings(".ui-dialog-titlebar:first") );
+
+                api.Events.trigger( "afterAppendModulesSettingsTmpl" , this , $currentElDialog );
 
                 if( reset === true )
                     $( selector ).data('sed.multiLevelBoxPlugin')._reset();
 
             }else{
 
-                $( $("#sed-tmpl-dialog-settings-" + self.currentSettingsId ).html() ).appendTo( $( selector ) );
+                var $currentElDialog = $( $("#sed-tmpl-dialog-settings-" + self.currentSettingsId ).html() ).appendTo( $( selector ) );
+
+                api.Events.trigger( "afterInitAppendModulesSettingsTmpl" , this , $currentElDialog );
 
                 $( selector ).data('sed.multiLevelBoxPlugin').options.innerContainer = $( selector ).find(".dialog-level-box-settings-container");
                 $( selector ).data('sed.multiLevelBoxPlugin')._render();
@@ -181,35 +184,34 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
             var self = this ,
                 selector = "#sed-dialog-settings";
 
-            $( selector ).find(".sed-all-attachments-sizes").livequery(function(){
-                if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
+            api.Events.bind( "beforerCreateSettingsControls" , function(id, data , extra){
+                if( !_.isUndefined( data ) && !_.isUndefined( data.is_image_size ) ){
+                    var $field_id = 'sed_pb_' + id;
 
                     var optionsStr = "" ;
+
+                    if( !_.isUndefined( data.has_custom_size ) && data.has_custom_size ){
+                        optionsStr += '<option value="" > ' + api.I18n.custom_size + ' </option>'
+                    }
+
                     _.each( api.addOnSettings.imageModule.sizes  , function( size , key ){
-                        var selected = ( 'sedXLarge' == key) ? 'selected="selected"': '' ,
-                            sizeWidth = !_.isUndefined( size.width ) ? size.width : "" ,
+                        var sizeWidth = !_.isUndefined( size.width ) ? size.width : "" ,
                             sizeHeight = !_.isUndefined( size.height ) ? size.height : "" ;
-                        optionsStr += '<option value="' + key + '" ' + selected + '> ' + size.label + ' - ' + sizeWidth + " x " + sizeHeight + ' </option>';
+                        optionsStr += '<option value="' + key + '" > ' + size.label + ' - ' + sizeWidth + " x " + sizeHeight + ' </option>';
                     });
 
-                    $(this).html( optionsStr );
-
-                    var dataElement = self.sedDialog.data ,
-                        extra       = $.extend({} , self.sedDialog.extra || {}),
-                        ccId        = $(this).parents(".sed-container-control-element:first").attr("id") ,
-                        id          = ccId.replace("sed-app-control-" , "") ,
-                        attr        = id.replace(dataElement.shortcodeName + "_" , "") ,
-                        data        = _.findWhere(api.modulesSettingsControls[dataElement.shortcodeName], {attr_name: attr});
-
-                    self.updateSettings( id , data , dataElement.shortcodeName , extra);
-
+                    $( "#" + $field_id ).html( optionsStr );
                 }
             });
 
             $( selector ).find(".go-panel-element").livequery(function(){
                 if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
                     $(this).click(function(){ //go-accordion-panel
-                        self.initSettings( $(this).data("panelId") );
+                        var panelId = $(this).data("panelId");
+                        if( $.inArray( panelId , self.panelsNeedToUpdate) == -1 ){
+                            self.initSettings( panelId );
+                            self.panelsNeedToUpdate.push( panelId );
+                        }
                     });
                 }
             });
@@ -217,10 +219,11 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
             $( selector ).find(".go-row-container-settings").livequery(function(){
                 if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
                     $(this).click(function(){ //go-accordion-panel
-                        self.lastSedDialog = self.sedDialog;
+                        //self.lastSedDialog = self.sedDialog;
                         self.lastTargetElementId = _.clone( api.currentTargetElementId );
+                        //self.lastPanelsNeedToUpdate = self.panelsNeedToUpdate;
                         api.currentTargetElementId = self.rowContainerSettingsData.rowId;
-                        api.previewer.send('current_element' , "#" + api.currentTargetElementId  );
+                        api.previewer.send('current_element' , api.currentTargetElementId  );
                         self.openInitDialogSettings( self.rowContainerSettingsData );
                     });
                 }
@@ -230,7 +233,10 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
                 if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
                     $(this).click(function(){ //go-accordion-panel
                         api.currentTargetElementId = self.lastTargetElementId;
-                        self.openInitDialogSettings( self.lastSedDialog );
+                        //api.previewer.send('current_element' , api.currentTargetElementId  );
+                        api.previewer.send( 'go_back_to_main_module' , api.currentTargetElementId  );
+                        //self.panelsNeedToUpdate = self.lastPanelsNeedToUpdate;
+                        //self.openInitDialogSettings( self.lastSedDialog , false );
                     });
                 }
             });
@@ -307,8 +313,8 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
         initDialogMultiLevelBox : function( dialogSelector ){
 
             $( dialogSelector ).multiLevelBoxPlugin({
-              titleBar: $( dialogSelector ).siblings(".ui-dialog-titlebar:first"),
-              innerContainer : $( dialogSelector ).find(".dialog-level-box-settings-container"),
+                titleBar: $( dialogSelector ).siblings(".ui-dialog-titlebar:first"),
+                innerContainer : $( dialogSelector ).find(".dialog-level-box-settings-container"),
             });
             $( dialogSelector ).siblings(".ui-dialog-titlebar:first").find(".close-page-box").livequery(function(){
                 $(this).click(function(e){
@@ -351,6 +357,15 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             if( $.inArray(id , this.initControls) == -1 ){
 
+                if( !_.isUndefined( data.category ) && data.category == "style-editor" ){
+                    var cssSelector = !_.isUndefined( data.selector ) ? data.selector : '';
+                    var sValue = api.appStyleEditorSettings.getCurrentValue( id , data , cssSelector );
+                    if( !_.isNull( sValue ) ){
+                        data.default_value = _.clone( sValue );
+                    }
+
+                }
+
                 api.Events.trigger( "renderSettingsControls" , id, data , extra);
                 this.initControls.push( id );
 
@@ -360,17 +375,22 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             }else if( $.inArray(id , this.initControls) != -1 ){
 
-                if( data.is_attr === false )
-                    return ;
+                /*if( data.is_attr === false )
+                    return ;*/
 
                 var control = api.control.instance( id );
                 $( control.container ).parents(".row_settings:first").show();
                 this.controlFilter( extra.attrs , shortcodeName , control );
 
-                if( !_.isUndefined(control.params) && !_.isUndefined(control.params.is_style_setting) && control.params.is_style_setting === true && !_.isUndefined(control.params.selector) ){
+                if( control.isStyleControl ){
 
-                    var targetEl =  "#" + api.currentTargetElementId + " " + control.params.selector;
-                    control.update( targetEl );
+                    var sValue = api.appStyleEditorSettings.getCurrentValue( control.id , data , control.cssSelector );
+                    if( !_.isNull( sValue ) ){
+                        var cValue = _.clone( sValue );
+                        control.update( cValue );
+                    }else{
+                        control.update( );
+                    }
 
                 }else if( !_.isUndefined(extra.attrs) )
                     control.update(extra.attrs);
@@ -578,7 +598,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             if( !_.isUndefined( panelId ) && panelId && panelId != "root" ){
 
-                return _.filter( api.modulesSettingsControls[dataElement.shortcodeName] , function( data ){
+                return _.filter( api.sedGroupControls[dataElement.shortcodeName] , function( data ){
 
                     //remove widget instance from settings
                     if( !_.isUndefined( data.shortcode ) && data.shortcode == "sed_widget" && !_.isUndefined( data.attr_name ) && data.attr_name == "instance")
@@ -597,7 +617,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             }else{
 
-                return _.filter( api.modulesSettingsControls[dataElement.shortcodeName] , function( data ){
+                return _.filter( api.sedGroupControls[dataElement.shortcodeName] , function( data ){
 
                     //remove widget instance from settings
                     if( !_.isUndefined( data.shortcode ) && data.shortcode == "sed_widget" && !_.isUndefined( data.attr_name ) && data.attr_name == "instance")
@@ -639,7 +659,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
                              //console.log( "Settings ------- : " , settings  );
             _.each( settings , function( data ) {
                 //var startTime = new Date();
-                self.updateSettings( dataElement.shortcodeName + "_" + data.attr_name , data , dataElement.shortcodeName , extra);
+                self.updateSettings( data.control_id , data , dataElement.shortcodeName , extra);
                 //console.log( "Update ------- : " , dataElement.shortcodeName + "_" + data.attr_name , " ----- " , new Date() - startTime );
             });
 
@@ -659,12 +679,17 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             api.Events.trigger(  "after_shortcode_update_setting" , dataElement.shortcodeName );
 
+            api.Events.trigger(  "after_group_settings_update" , dataElement.shortcodeName );
+
             api.Events.trigger( dataElement.shortcodeName + "_dialog_settings" , extra.attrs || {} );
         },
 
+        // , needToUpdateSettings
         openInitDialogSettings : function( sedDialog , forceOpen ){
             var self = this,
                 isOpen = $( "#sed-dialog-settings" ).dialog( "isOpen" );
+
+            //needToUpdateSettings = !_.isUndefined( needToUpdateSettings) ? needToUpdateSettings : true ;
 
             forceOpen = !_.isUndefined( forceOpen) ? forceOpen : true ;
 
@@ -675,6 +700,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
             if( !isOpen && forceOpen === true ){
 
                 this.currentSettingsId = sedDialog.selector;
+                this.panelsNeedToUpdate = [];
 
                 $( "#sed-dialog-settings" ).dialog( "open" );
 
@@ -686,6 +712,8 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
                 this.currentSettingsId = sedDialog.selector;
 
+                this.panelsNeedToUpdate = [];
+
                 var reset =  !_.isUndefined( sedDialog.reset ) ? sedDialog.reset : true;
 
                 this.switchTmpl( reset );
@@ -694,7 +722,6 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
                 return ;
 
             //console.log( "Open Dialog ------- : " , new Date() - startTime );
-
             if( !_.isUndefined( sedDialog.data.panelId ) )
                 this.initSettings( sedDialog.data.panelId );
             else
@@ -711,7 +738,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
         },
 
         //when skin change
-        updateByChangeSkin : function( dataEl ){
+        updateByChangePattern : function( dataEl ){
             var self = this;
 
       		_.each( api.modulesSettingsControls[dataEl.shortcode_name] , function( data ) {
@@ -1040,14 +1067,14 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
             $( "#sed-dialog-settings" ).find( ".accordion-panel-settings .design_ac_header" ).each(function(){
 
                 var selector = $(this).data("selector"),
-                    selectorT = "#" + api.currentTargetElementId + " " + selector ,
+                    selectorT = ( selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]' ,
                     index = selectorT.indexOf(":");
 
                 if(index > -1){
                     var pseudo = selectorT.substring( index );
                     selectorT = selectorT.substring( 0 , index );
                 }
-
+                
                 var $el = $("#website")[0].contentWindow.jQuery( selectorT ) ,
                     el = $el[0];
 
@@ -1087,7 +1114,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
                 panelTpl = $("#style_editor_settings_" + styleId + "_tmpl" ) ,
                 lvlBox = "modules_styles_settings_"+ shortcodeName +"_level_box";
 
-            api.currentCssSelector = "#" + api.currentTargetElementId + " " + selector;
+            api.currentCssSelector = ( selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]';
 
             this.styleBoxContainer = $("#" + lvlBox ).find(".styles_settings_container:first");
 
@@ -1136,7 +1163,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
         },
 
         getStyleValue : function( selector , styleProp ){
-            var selectorT = "#" + api.currentTargetElementId + " " + selector ,
+            var selectorT = ( selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]' ,
                 index = selectorT.indexOf(":") ,
                 pseudo;
 
@@ -1234,7 +1261,28 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
               break;*/
               default:
 
-              if( $.inArray( this.currentStyleId , ["margin","padding","border_radius" , "line_height" ] ) > -1 || $.inArray( styleProp , ["font-size","border-top-width","border-bottom-width" , "border-left-width" , "border-right-width" ] ) > -1 ){
+              var propsWithPx = [
+                  "border-top-width" ,
+                  "border-right-width" ,
+                  "border-bottom-width" ,
+                  "border-left-width" ,
+                  "padding-top",
+                  "padding-right",
+                  "padding-bottom",
+                  "padding-left",
+                  "margin-top",
+                  "margin-right",
+                  "margin-bottom",
+                  "margin-left",
+                  "border-top-left-radius" ,
+                  "border-top-right-radius" ,
+                  "border-bottom-left-radius" ,
+                  "border-bottom-right-radius" ,
+                  "font-size" ,
+                  "line-height"
+              ];
+
+              if( $.inArray( styleProp , propsWithPx ) > -1 ){
                   return parseInt( api.fn.getStyle( el , styleProp , pseudo ) );
               }
 
@@ -1251,7 +1299,7 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
             if( !_.isUndefined( this.defaultValues[data.style_props] ) && !_.isUndefined( this.defaultValues[data.style_props][selectorT] ) ){
 
-                defaultValue = this.defaultValues[data.style_props][selectorT];
+                defaultValue = _.clone( this.defaultValues[data.style_props][selectorT] );
             }else{
                 defaultValue = this.getStyleValue( selector , data.style_props );
 
@@ -1265,15 +1313,38 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
         },
 
+        getCurrentValue : function( id , data , selector ){
+
+            var selectorT = ( selector && selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]',
+                extra  = $.extend({} , api.appModulesSettings.sedDialog.extra || {}) ,
+                cValue = null;
+
+            if( !_.isUndefined( api.currenStyleEditorContolsValues[selectorT] ) && !_.isUndefined( api.currenStyleEditorContolsValues[selectorT][data.settings["default"]] ) ){
+                cValue = api.currenStyleEditorContolsValues[selectorT][data.settings["default"]];
+            }else{
+
+                if( !_.isUndefined( extra.attrs ) && !_.isUndefined( extra.attrs.sed_css ) &&  !_.isUndefined( extra.attrs.sed_css[selectorT] ) && !_.isUndefined( data.settings ) && !_.isUndefined( data.settings["default"] ) && !_.isUndefined( extra.attrs.sed_css[selectorT][data.settings["default"]] ) ){
+                    cValue = extra.attrs.sed_css[selectorT][data.settings["default"]];
+                }else if( !_.isUndefined( data.style_props ) && data.settings["default"] != "external_background_image" ){
+                    cValue = this.getDefaultValue( data , selector , selectorT );
+                }
+
+            }
+
+            return !_.isObject( cValue ) ? _.clone( cValue ) : cValue;
+
+        },
+
         updateSettings: function(  id , data , selector  ){
             //var selectorT = "#" + api.currentTargetElementId + " " + selector ,
                 //$el = $("#website")[0].contentWindow.jQuery( selectorT );
 
-            if( $.inArray(id , api.appModulesSettings.initControls) == -1 ){
-                                                       //&& $el.length > 0
-                if( !_.isUndefined( data.style_props ) ){
-                    var selectorT = "#" + api.currentTargetElementId + " " + selector;
-                    data.default_value = _.clone( this.getDefaultValue( data , selector , selectorT ) );
+            if( $.inArray(id , api.appModulesSettings.initControls) == -1 ){  //&& $el.length > 0
+
+                var cValue = this.getCurrentValue( id , data , selector  );
+
+                if( !_.isNull( cValue ) ){
+                    data.default_value = _.clone( cValue );
                 }
 
                 api.Events.trigger( "renderSettingsControls" , id, data );
@@ -1289,14 +1360,13 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
                 $( control.container ).parents(".row_settings:first").show();
                 //this.controlFilter( extra.attrs , shortcodeName );
 
-                var targetEl =  "#" + api.currentTargetElementId + " " + selector ,
-                    $thisValue = control.setting();
-                                                                                      // && $el.length > 0
-                if( _.isUndefined( $thisValue[targetEl] ) && !_.isUndefined( data.style_props ) ){
-                    control.defaultValue = _.clone( this.getDefaultValue( data , selector , targetEl ) );
+                var cValue = this.getCurrentValue( id , data , selector  );
+                                         //alert( cValue );
+                if( !_.isNull( cValue ) ){
+                    control.update( cValue );
+                }else{
+                    control.update( );
                 }
-
-                control.update( targetEl );
 
             }
 
@@ -1304,9 +1374,6 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
 
     });
-
-
-
 
     $( function() {
 
@@ -1344,7 +1411,9 @@ siteEditor.PluginManager.add('settings', function(siteEditor) {
 
                 control.update( targetEl );
             });
+
+            api.Events.trigger(  "after_group_settings_update" , "general_settings" );
         });
     });
 
-});
+})( sedApp, jQuery );

@@ -43,17 +43,35 @@
              var self = this;
 
             $('.sed-handle-sort-row .remove_pb_btn').livequery( function(){
-                $(this).not('.disabled').popover({
-                    html : true ,
-                    content :  function(){
-                        return $("#sed-remove-alert-tmpl").html();
-                    } ,
-                    placement : "auto top" ,
-                    container: 'body'
-                });
+                if( !$(this).parents(".sed-row-pb:first").hasClass('sed-main-content-role') && !$(this).parents(".sed-row-pb:first").hasClass('sed-main-content-row-role') ){
+                    /*$(this).popover({
+                        html : true ,
+                        content :  function(){
+                            return $("#sed-remove-alert-tmpl").html();
+                        } ,
+                        placement : "auto top" ,
+                        container: 'body'
+                    });*/
+                    $(this).on( "click" , function(){
+                        api.preview.send( "sedRemoveModuleElementsSync" , $(this).data("moduleRelId") );
+                    });
+
+                }else{
+                    $(this).addClass('disabled');
+                }
             });
 
-            $(".close-popover").livequery( function(){
+            api.preview.bind( "sedRemoveModulesApply" , function( moduleId ){
+
+                var dropArea = $( '[sed_model_id="' + moduleId + '"]' ).parents(".bp-component:first");
+
+                self.remove( moduleId );
+
+                api.pageBuilder.addRemoveSortableClass( dropArea );
+
+            });
+
+            /*$(".close-popover").livequery( function(){
                 $(this).click(function(){
                     var id = $(this).parents(".popover:first").attr("id");
                     $('[aria-describedby="' + id + '"]').popover('hide');
@@ -64,7 +82,7 @@
                 $(this).click(function(){
                     var id = $(this).parents(".popover:first").attr("id");
                     var moduleId = $('[aria-describedby="' + id + '"]').data( "moduleRelId" ) ,
-                        dropArea = $("#" + moduleId).parents(".bp-component:first");
+                        dropArea = $( '[sed_model_id="' + moduleId + '"]' ).parents(".bp-component:first");
                     $('[aria-describedby="' + id + '"]').popover('hide');
                     self.remove( moduleId );
 
@@ -74,7 +92,7 @@
             });
 
             $('body').on('click', function (e) {
-                $('.sed-handle-sort-row .remove_pb_btn').each(function () {
+                $('.sed-handle-sort-row .remove_pb_btn').not('.disabled').each(function () {
 
                     if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0 ) {
                         $(this).popover('hide');
@@ -82,16 +100,16 @@
                     }
                 });
 
-            });
+            });*/
 
         },
 
         removeFromDom : function( ){
-            $( "#" + this.elementId ).detach();
+            $( '[sed_model_id="' + this.elementId + '"]'  ).detach();
         },
 
         removeFromShortcodes : function( ){
-            var postId = api.pageBuilder.getPostId( $("#" + this.elementId) );
+            var postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + this.elementId + '"]' ) );
             api.contentBuilder.deleteModule( this.elementId , postId);
         },
 

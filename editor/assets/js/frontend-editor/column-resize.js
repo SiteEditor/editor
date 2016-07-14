@@ -7,6 +7,7 @@
                 column: "sed-column-pb", //column class
                 unit : "px" , // % || px
                 //columnInner : "sed-column-contents-pb",
+                isRtl : false ,
                 resizeStart :  function() {},
                 resize : function() {},
                 stop : function() {}
@@ -81,21 +82,40 @@
 
                             d = x + e.pageX - w;
 
-                            if(pW - d >= options.minWidth && pW - d <= maxWidth){
+                            if( options.isRtl === true ){
+                                if(pW + d >= options.minWidth && pW + d <= maxWidth){
 
-                                /*targetElm.offset({
-                                    left: x + e.pageX,
-                                    top: y
-                                });*/
-                                     // //api.log(maxWidth + "," + d + "," + pW);
-                                //if(pW - d >= options.minWidth && pW - d <= maxWidth){
+                                    /*targetElm.offset({
+                                        left: x + e.pageX,
+                                        top: y
+                                    });*/
+                                         // //api.log(maxWidth + "," + d + "," + pW);
+                                    //if(pW - d >= options.minWidth && pW - d <= maxWidth){
 
-                                if(options.unit == "%")                            //+ ppad + pbor + pmar
-                                    targetElm.parent().css("width", ( ( ( (pW - d) + ppad + pbor  ) / ppW) * 100 ) + "%");
-                                else
-                                    targetElm.parent().width( pW - d + ppad + pbor );
+                                    if(options.unit == "%")                            //+ ppad + pbor + pmar
+                                        targetElm.parent().css("width", ( ( ( (pW + d) + ppad + pbor  ) / ppW) * 100 ) + "%");
+                                    else
+                                        targetElm.parent().width( pW + d + ppad + pbor );
 
-                                options.resize(e, d, targetElm.parent(), maxWidth , options );
+                                    options.resize(e, d, targetElm.parent(), maxWidth , options );
+                                }
+                            }else{
+                                if(pW - d >= options.minWidth && pW - d <= maxWidth){
+
+                                    /*targetElm.offset({
+                                        left: x + e.pageX,
+                                        top: y
+                                    });*/
+                                         // //api.log(maxWidth + "," + d + "," + pW);
+                                    //if(pW - d >= options.minWidth && pW - d <= maxWidth){
+
+                                    if(options.unit == "%")                            //+ ppad + pbor + pmar
+                                        targetElm.parent().css("width", ( ( ( (pW - d) + ppad + pbor  ) / ppW) * 100 ) + "%");
+                                    else
+                                        targetElm.parent().width( pW - d + ppad + pbor );
+
+                                    options.resize(e, d, targetElm.parent(), maxWidth , options );
+                                }
                             }
 
                         })

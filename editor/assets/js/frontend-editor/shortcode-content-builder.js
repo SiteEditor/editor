@@ -1,6 +1,6 @@
 (function( exports, $ ) {
 
-    var api = sedApp.editor , currentElement = api.styleCurrentSelector;
+    var api = sedApp.editor;
     api.shortcodeCreate = api.shortcodeCreate || {};
 
     api.ShortcodeBuilder = api.Class.extend({
@@ -16,7 +16,7 @@
             $.each( this.postsContent , function(indexS , shortcodes){
                 if( $.isArray( shortcodes ) ){
                     $.each(shortcodes , function(index , shortcode){
-                        $("#" + shortcode.id).attr("sed-shortcode" , "true");
+                        $( '[sed_model_id="' + shortcode.id + '"]' ).attr("sed-shortcode" , "true");
                     });
                 }
             });
@@ -90,11 +90,11 @@
             }*/
 
             if( !_.isUndefined(index) && _.isNumber(index) && index > -1 )
-                index = index;
+                var newIndex = index;
             else{
                 var tCh = this.findAllTreeChildren( parent_id , postId ) ,
                     pIdx = this.getShortcodeIndex( parent_id );
-                index = tCh.length + pIdx + 1;
+                var newIndex = tCh.length + pIdx + 1;
             }
 
             shortcodes = _.map( shortcodes , function( shortcode ){
@@ -103,8 +103,8 @@
             });
 
 
-            if( index <= self.contentModel[postId].length ){
-                var args = $.merge([index ,0 ] , shortcodes);
+            if( newIndex  <= self.contentModel[postId].length ){
+                var args = $.merge([ newIndex ,0 ] , shortcodes);
 
                 Array.prototype.splice.apply(this.contentModel[postId] , args);
             }else
@@ -178,7 +178,7 @@
                 else
                     return true;
             });
-                 ////api.log( contentModel );
+
             this.deleteShortcode( elementId , postId , contentModelName );
         },
 
@@ -228,7 +228,7 @@
 
             this.checkContentType();
 
-            var contentModel = this.getContentModel( contentModelName );
+            var contentModel = this.getContentModel( contentModelName ); console.log( "contentModel[postId]" , postId , contentModel[postId] );
 
             $.each( contentModel[postId] , function(index , shortcode){
                 if(shortcode.parent_id == parent_id){
@@ -264,15 +264,15 @@
             for(var prop in shortcode["attrs"]){
                 new_obj[prop] = shortcode["attrs"][prop];
             }
-            new_obj.id = shortcode.id;
+            new_obj.sed_model_id = shortcode.id;
             shortcode["attrs"] = new_obj; ////api.log( new_obj );
             return shortcode;
         },
 
         getShortcode: function( id , contentModelName ){
 
-            if($("#" + id).length > 0){
-                var parentC = $("#" + id).parents(".sed-pb-post-container:first");
+            if($( '[sed_model_id="' + id + '"]' ).length > 0){
+                var parentC = $( '[sed_model_id="' + id + '"]' ).parents(".sed-pb-post-container:first");
                 api.shortcodeCurrentPlace = parentC.data("contentType");
                   // alert( api.shortcodeCurrentPlace );
                 this.checkContentType();
@@ -294,8 +294,8 @@
 
         getAttrs: function( id ){
 
-            if($("#" + id).length > 0){
-                var parentC = $("#" + id).parents(".sed-pb-post-container:first");
+            if($( '[sed_model_id="' + id + '"]' ).length > 0){
+                var parentC = $( '[sed_model_id="' + id + '"]' ).parents(".sed-pb-post-container:first");
                 api.shortcodeCurrentPlace = parentC.data("contentType");
 
                 this.checkContentType();
@@ -311,8 +311,8 @@
 
         getShortcodeIndex: function( id , contentModelName ){
 
-            if($("#" + id).length > 0){
-                var parentC = $("#" + id).parents(".sed-pb-post-container:first");
+            if($( '[sed_model_id="' + id + '"]' ).length > 0){
+                var parentC = $( '[sed_model_id="' + id + '"]' ).parents(".sed-pb-post-container:first");
                 api.shortcodeCurrentPlace = parentC.data("contentType");
 
                 this.checkContentType();
@@ -334,11 +334,11 @@
 
         //when sort modules   .empty-column
         updateModulesOrder: function( ui , sender , currentSortArea , contentModelName ){
-            if( !currentSortArea || !ui.item.attr("id") )
+            if( !currentSortArea || !ui.item.attr("sed_model_id") )
                 return ;
 
             var element = ui.item , parentId = currentSortArea.data("parentId") ,
-                id = element.attr("id") ,
+                id = element.attr("sed_model_id") ,
                 $thisShortcode = this.getShortcode( id , contentModelName ) ,
                 //$thisIndex = this.getShortcodeIndex( id , contentModelName ),
                 next = element.next(".sed-row-pb") , prev = element.prev() ,
@@ -361,7 +361,7 @@
             var modShLen = modulesShortcodes.length;
 
             if(next.length > 0){
-                var nextId = next.attr("id") , nextIndex = this.getShortcodeIndex( nextId ) ,
+                var nextId = next.attr("sed_model_id") , nextIndex = this.getShortcodeIndex( nextId ) ,
                     nextShortcode = this.getShortcode( nextId );
 
                 parentId = nextShortcode.parent_id;
@@ -370,7 +370,7 @@
 
                 Array.prototype.splice.apply(this.contentModel[postId] , args);
             }else if(prev.length > 0){
-                var prevId = prev.attr("id") , prevIndex = this.getShortcodeIndex( prevId ) ,
+                var prevId = prev.attr("sed_model_id") , prevIndex = this.getShortcodeIndex( prevId ) ,
                     prevShortcode = this.getShortcode( prevId );
 
                 parentId = prevShortcode.parent_id;
@@ -400,8 +400,8 @@
         updateShortcode: function( new_shortcode ){
             var self = this;
 
-            if($("#" + new_shortcode.id).length > 0){
-                var parentC = $("#" + new_shortcode.id).parents(".sed-pb-post-container:first");
+            if($( '[sed_model_id="' + new_shortcode.id + '"]' ).length > 0){
+                var parentC = $( '[sed_model_id="' + new_shortcode.id + '"]' ).parents(".sed-pb-post-container:first");
                 api.shortcodeCurrentPlace = parentC.data("contentType");
 
                 this.checkContentType();
@@ -424,7 +424,7 @@
 
         updateShortcodeAttr: function(attr , value , id){
 
-            id = (!id) ? ((!api.styleCurrentSelector) ? "": api.styleCurrentSelector.replace("#" , "")) : id;
+            id = (!id) ? ((!api.currentSedElementId) ? "": api.currentSedElementId) : id;
             if( !id )
                 return ;
 
@@ -476,13 +476,13 @@
 
             var self = this , param , template , currModule , data;
 
-            if( mainShortcodeId != id && shortcode_name == "sed_row" && $("#" + id).length > 0 ){
-                var moduleId = $("#" + id).find(">.sed-pb-module-container .sed-pb-module-container:first").attr("id"),
+            if( mainShortcodeId != id && shortcode_name == "sed_row" && $( '[sed_model_id="' + id + '"]' ).length > 0 ){
+                var moduleId = $( '[sed_model_id="' + id + '"]' ).find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id"),
                     shortcode = this.getShortcode( moduleId ),
                     moduleName = api.shortcodes[shortcode.tag].moduleName;
 
                 if( _.isUndefined( api.modulesSettings[moduleName].refresh_in_drag_area ) || !api.modulesSettings[moduleName].refresh_in_drag_area )
-                    return $("#" + id)[0].outerHTML;
+                    return $( '[sed_model_id="' + id + '"]' )[0].outerHTML;
             }
 
             //moduleSkin = ( _.isUndefined( moduleSkin ) || !$.trim(moduleSkin) ) ?  "default" : moduleSkin;
@@ -557,16 +557,18 @@
 
             //this.saveDoShortcodeResult( param.context , content , param.skinId );
 
+            content = api.applyFilters( 'doShortcodeFilter' , content , shortcode_name , id , mainShortcodeId );
+
             return content;
         },
 
 
         loadShortcodeParam: function( id ){
-            
+
             var shortcode = this.getShortcode( id ) ,
-                module_name = shortcode.attrs.parent_module || "" ,
+                module_name = !_.isUndefined( shortcode.attrs ) && !_.isUndefined( shortcode.attrs.parent_module ) ? shortcode.attrs.parent_module : "" ,
                 shortcode_info = api.shortcodes[shortcode.tag] ,
-                param = {} , atts , currEl = $("#" + id) , currentSkin , paramSkinId ;
+                param = {} , atts , currEl = $( '[sed_model_id="' + id + '"]' ) , currentSkin , paramSkinId ;
 
             //load this main shortcode scripts
             //load ===="module"====== scripts && module styles
@@ -586,19 +588,12 @@
 
             atts = $.extend({} , shortcode_info.attrs , shortcode.attrs);
 
-            alert( shortcode_info.name );
+
             if( $.inArray( shortcode_info.name , ["sed_module" , "sed_row"] ) == -1 && _.isUndefined( atts["contextmenu_disabled"] ) ){
                 if(!$.trim(atts['class']))
                     atts['class'] = "module_" + shortcode.tag + "_contextmenu";
                 else
                     atts['class'] = $.trim( atts['class'] ) + " module_" + shortcode.tag + "_contextmenu";
-            }
-
-            if( shortcode.tag != "sed_row" && !_.isUndefined( atts["align"] ) ){
-                if(!$.trim(atts['class']))
-                    atts['class'] = "sed-text-align-" + $.trim( atts["align"] );
-                else
-                    atts['class'] = $.trim( atts['class'] ) + " sed-text-align-" + $.trim( atts["align"] );
             }
 
             if( !_.isUndefined( atts["has_cover"] ) ){
@@ -613,26 +608,33 @@
 
             animateSettings = animateSettings.split(",");
 
-            atts.animateAttr  = "";
+            var animateAttr  = "";
 
             if( animateSettings[3] ){
-                atts.animateClass = animateSettings[3]; //"wow " +
-                atts.animateAttr += 'data-sed-animation=' + animateSettings[3] + ' ';
-            }else{
-                atts.animateClass = "";
+                atts['class'] += " " + animateSettings[3]; //"wow " +
+                animateAttr += 'data-sed-animation=' + animateSettings[3] + ' ';
             }
 
     		if( animateSettings[0] != "" )
-    			atts.animateAttr += 'data-wow-delay=' + animateSettings[0] + 'ms ';
+    			animateAttr += 'data-wow-delay=' + animateSettings[0] + 'ms ';
 
     		if( animateSettings[1] != "" )
-    			atts.animateAttr += 'data-wow-iteration=' + animateSettings[1] + ' ';
+    			animateAttr += 'data-wow-iteration=' + animateSettings[1] + ' ';
 
     		if( animateSettings[2] != "")
-    			atts.animateAttr += 'data-wow-duration=' + animateSettings[2] + 'ms ';
+    			animateAttr += 'data-wow-duration=' + animateSettings[2] + 'ms ';
 
     		if( animateSettings[4] != "")
-    			atts.animateAttr += 'data-wow-offset=' + animateSettings[4] + ' ';
+    			animateAttr += 'data-wow-offset=' + animateSettings[4] + ' ';
+
+            //set
+            var sed_attrs = '';
+
+            sed_attrs += animateAttr;
+
+            sed_attrs += 'sed_model_id=' + atts.sed_model_id + ' ';
+
+            atts["sed_attrs"] = sed_attrs;
 
             var parentModule = ( !_.isUndefined( shortcode.attrs.parent_module ) && shortcode.attrs.parent_module ) ?  shortcode.attrs.parent_module : "";
 
@@ -640,9 +642,9 @@
                 if( !_.isUndefined( shortcode.attrs ) && !_.isUndefined( shortcode.attrs.skin ) ){
                     currentSkin = _.clone( shortcode.attrs.skin );
                 }else{     //alert( parentModule );  
-                    var parentModel = this.findParentModule( shortcode.parent_id , parentModule, shortcode );
+                    var parentModel = this.findParentModule( shortcode.parent_id , parentModule, shortcode );console.log( "-------------parentModel----" , parentModel );
                        //alert( shortcode.parent_id );  alert( parentModule );  console.log( "parentModel----" , parentModel );
-                    currentSkin = ( !_.isUndefined( parentModel.attrs ) && !_.isUndefined( parentModel.attrs.skin ) ) ? parentModel.attrs.skin: atts.skin;
+                    currentSkin = ( !_.isUndefined( parentModel ) && !_.isUndefined( parentModel.attrs ) && !_.isUndefined( parentModel.attrs.skin ) ) ? parentModel.attrs.skin: atts.skin;
                 }
                 module_name = parentModule;
             }
@@ -783,15 +785,19 @@
                                 
                 //html = this.do_shortcode( parentModel.tag , parentModel.id );
                 var transport = api.pageBuilder.getModuleTransport( parentModel.tag  , "shortcode");
-
+                          
                 if( transport == "default" ){
                     
                     api.doShortcodeMode = "normal";
                     html = this.do_shortcode( "sed_module" , parentModel.parent_id , parentModel.parent_id );
-                    $("#" + parentModel.parent_id).replaceWith( html );
+                    $( '[sed_model_id="' + parentModel.parent_id + '"]' ).replaceWith( html );
+
+                    api.Events.trigger( "sedAfterRefreshModule" , elementId , shortcode , html );
+
                 }else if( transport == "ajax" ){
                     var _success = function( response ){
-                            $("#" + parentModel.parent_id).replaceWith( response.data );
+                            $( '[sed_model_id="' + parentModel.parent_id + '"]' ).replaceWith( response.data );
+                            api.Events.trigger( "sedAfterRefreshModule" , elementId , shortcode , response.data );
                         };
 
                     api.pageBuilder.ajaxLoadModules( parentModel.parent_id , _success );
@@ -804,12 +810,13 @@
 
                 if(shortcode.tag == "sed_module"){
                     html = this.do_shortcode( shortcode.tag , elementId , elementId );
-                    $("#" + elementId).replaceWith( html );
+                    $( '[sed_model_id="' + elementId + '"]' ).replaceWith( html );
                 }else{
                     html = this.do_shortcode( "sed_module" , shortcode.parent_id , shortcode.parent_id );
-                    $("#" + shortcode.parent_id).replaceWith( html );
+                    $( '[sed_model_id="' + shortcode.parent_id + '"]' ).replaceWith( html );
                 }
 
+                api.Events.trigger( "sedAfterRefreshModule" , elementId , shortcode , html );
                 //$("#" + elementId).parent().html( html );
                 /*
                 if(shortcode.tag == "sed_module")
@@ -864,7 +871,7 @@
         //using in save page As one template
         api.pageModulesUsing    = window._sedAppPageModulesUsing;
 
-        //api.log( "api.defaultPatterns --------- : " , api.defaultPatterns );
+        console.log( "api.defaultPatterns --------- : " , api.defaultPatterns );
 
         //api.log( "api.shortcodes ------- : " , api.shortcodes );
 
@@ -890,13 +897,16 @@
 
                 var element = $(this);
 
-                var moduleId = element.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("id");
+                var moduleId = element.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id");
 
                 if( _.isUndefined( moduleId ) || !moduleId )
                     return ;
 
-                var shortcode = api.contentBuilder.getShortcode( moduleId ) ,
-                    shortcode_info = api.shortcodes[ shortcode.tag ] ,
+
+                var shortcode = api.contentBuilder.getShortcode( moduleId );
+                console.log( "-----------shortcode--------------" , shortcode );
+
+                var shortcode_info = api.shortcodes[ shortcode.tag ] ,
                     moduleName ,
                     module ;
 
@@ -921,7 +931,7 @@
 
         api.preview.bind( "defaultModulePatterns" , function( patterns ){
             api.defaultPatterns = patterns;
-            //api.log( "api.defaultPatterns --------- : " , api.defaultPatterns );
+            console.log( "api.defaultPatterns 222222222--------- : " , api.defaultPatterns );
         });
 
         api.contentBuilder = new api.ShortcodeBuilder({} , {

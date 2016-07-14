@@ -8,38 +8,35 @@
 
     api.currentCssSelector = "";
 
+    api.currentCssSettingType = "";
+
     api.currentAttr = "";
 
-    var _getStyleId = function( element , type , prop ){
+    var _saveCustomCss = function( setting , value ) {
 
-        var styleId;
-
-        if( _.isUndefined( styleIdElements[api.currentCssSelector] ) || _.isUndefined( styleIdElements[api.currentCssSelector][prop] ) ){
-            styleId = _.uniqueId( type + '_') + '_css';
-
-            if( _.isUndefined( styleIdElements[api.currentCssSelector] ) )
-                styleIdElements[api.currentCssSelector] = {} ;
-
-            styleIdElements[api.currentCssSelector][prop] = styleId;
-        }else
-            styleId = styleIdElements[api.currentCssSelector][prop] ;
-
-        return styleId;
-
-       /* if( !_.isString( type ) || element.length == 0 )
+        if( _.isUndefined( api.currentCssSelector ) || !api.currentCssSelector )
             return ;
 
-        if( _.isUndefined( element.data( "styleId" ) ) || _.isUndefined( element.data( "styleId" )[prop] ) ){
-            styleId = _.uniqueId( type + '_') + '_css';
+        if( _.isUndefined( api.currentCssSettingType ) || !api.currentCssSettingType )
+            return ;
 
-            if( _.isUndefined( element.data( "styleId" ) ) )
-                element.data( "styleId" , {} );
+        if( api.currentCssSettingType == "module" ){
 
-            element.data( "styleId" )[prop] = styleId;
-        }else
-            styleId = element.data( "styleId" )[prop];
+            if( _.isUndefined( api.currentSedElementId ) || !api.currentSedElementId )
+                return ;
 
-        return styleId; */
+            var id = api.currentSedElementId ,
+                attrs = api.contentBuilder.getAttrs( id ) , sedCss , attrValue;
+
+            sedCss = ( !_.isUndefined( attrs ) && !_.isUndefined( attrs["sed_css"] ) && _.isObject( attrs["sed_css"] ) ) ? attrs["sed_css"] : {};
+
+            if( _.isUndefined( sedCss[api.currentCssSelector] ) )
+                sedCss[api.currentCssSelector] = {};
+
+            sedCss[api.currentCssSelector][setting] = value;
+
+            api.contentBuilder.updateShortcodeAttr( "sed_css" , sedCss , id );
+        }
 
     };
 
@@ -49,7 +46,8 @@
         //api.templateSettings = window._sedAppTemplateOptions;
         api.I18n = window._sedAppEditorI18n;
         api.addOnSettings = window._sedAppEditorAddOnSettings;
-                          api.log( "api.addOnSettings ---------- : " , api.addOnSettings );
+                          console.log( "api.addOnSettings ---------- : " , api.addOnSettings );
+                          console.log( "api.settings IN IFRAME ---------- : " , api.settings );
 		if ( ! api.settings )
 			return;
 
@@ -71,13 +69,23 @@
 					} );
 			});
 		});
-                    console.log( "api.settings.values-------" , api.settings.values );
+
 		api.preview.trigger( 'settings', api.settings.values );
 
-        //for all settings but style editor settings not
-        api.preview.bind( 'current_element', function( element ) {
-            //api.currentCssSelector = element;
-            api.styleCurrentSelector = element;
+        // Display a loading indicator when preview is reloading, and remove on failure.
+        api.preview.bind( 'loading-initiated', function () {
+            //$( 'body' ).addClass( 'wp-customizer-unloading' );
+        });
+        api.preview.bind( 'loading-failed', function () {
+            //$( 'body' ).removeClass( 'wp-customizer-unloading' );
+        });
+
+        api.preview.bind( 'current_element', function( elementId ) {
+            api.currentSedElementId = elementId;
+        });
+
+        api.preview.bind( 'current_css_setting_type', function( type ) {
+            api.currentCssSettingType = type;
         });
 
         //for style editor settings
@@ -86,13 +94,1104 @@
         });
 
 
+		api.preview.bind( 'setting', function( args ) {
+			var value;
+            console.log( "-------------api.preview.bind args--------------" , args );
+			args = args.slice();
+
+			if ( value = api( args.shift() ) )
+				value.set.apply( value, args );
+		});
+
+		api.preview.bind( 'sync', function( events ) {
+			$.each( events, function( event, args ) {
+				api.preview.trigger( event, args );
+			});
+			api.preview.send( 'synced' );
+		});
+
+        api.preview.bind( 'active', function() {
+
+            api.Events.trigger("startActivePreview");
+
+            if ( api.settings.nonce )
+                api.preview.send( 'nonce', api.settings.nonce );
+
+            api.preview.send( 'currentPostId' , api.settings.post.id );
+
+            api.preview.send( 'contextmenu-ready' );
+            $(document).trigger("update_sort_row");
+        });
+
+        api.preview.bind( 'nonce-refresh', function( nonce ) {
+            $.extend( api.settings.nonce, nonce );
+        } );
+
+		api.preview.send( 'ready' );
+
+        sedApp.editor( 'page_main_row', function( value ) {
+    		value.bind( function( to ) {
+    			//alert(to);
+    		});
+        });
+
+
+        sedApp.editor( 'sheet_width', function( value ) {
+    		value.bind( function( to ) {
+               $("#sed-sheet-width-style").remove();
+               $("<style id='sed-sheet-width-style'>.sed-row-boxed{max-width : " + to + "px !important;}</style>").appendTo($("head"));
+
+              $("#main").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedSheetWidth");
+
+    		});
+        });
+
+
+        sedApp.editor( 'page_length', function( value ) {
+    		value.bind( function( to ) {
+
+                var targEl = $("#main");
+
+                if(to == "boxed")
+                    targEl.addClass( "sed-row-boxed" ).removeClass("sed-row-wide");
+                else
+                    targEl.addClass( "sed-row-wide" ).removeClass("sed-row-boxed");
+
+                $("#main").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedPageLength" , [to]);
+
+    		});
+        });
+
+
+        //for api.Ajax :: than user login ajax render
+        api.preview.bind("user_login_done" , function(){
+            if(api.currentAjax)
+                api.currentAjax.render();
+        });
+
+        api.sedCustomStyle = {};
+        api.sedCustomStyleString = "";
+
+        api.preview.bind( 'sedCustomStyleUpdate', function( newStyle ) {
+
+            if( _.isUndefined( newStyle ) || _.isUndefined( newStyle.css ) || _.isUndefined( newStyle.setting ) || !api.currentCssSelector )
+                return ;
+
+            var css     = newStyle.css ,
+                setting = newStyle.setting ,
+                //prop    = newStyle.prop ,
+                value   = newStyle.value ,
+                needToSave = newStyle.save;
+
+            if( _.isUndefined( api.sedCustomStyle[api.currentCssSelector] ) || _.isUndefined( api.sedCustomStyle[api.currentCssSelector][setting] ) ){
+
+                if( _.isUndefined( api.sedCustomStyle[api.currentCssSelector] ) )
+                    api.sedCustomStyle[api.currentCssSelector] = {};
+
+                api.sedCustomStyle[api.currentCssSelector][setting] = css;
+                api.sedCustomStyleString += css;
+
+            }else{
+
+                api.sedCustomStyleString = api.sedCustomStyleString.replace( api.sedCustomStyle[api.currentCssSelector][setting] , css );
+                api.sedCustomStyle[api.currentCssSelector][setting] = css;
+            }
+
+            if( needToSave === true )
+                _saveCustomCss( setting , value );
+
+      		// Refresh the stylesheet by removing and recreating it.
+      		$( "#sed_custom_css_editor_generate" ).remove();
+      		style = $('<style type="text/css" id="sed_custom_css_editor_generate">' + api.sedCustomStyleString + '</style>').appendTo( $('head') );
+
+        });
+
+
+        var _styleSettingsMap = {
+            "padding_top"           : "padding-top" ,
+            "padding_right"         : "padding-right" ,
+            "padding_left"          : "padding-left" ,
+            "padding_bottom"        : "padding-bottom" ,
+            "margin_top"            : "margin-top" ,
+            "margin_right"          : "margin-right" ,
+            "margin_left"           : "margin-left" ,
+            "margin_bottom"         : "margin-bottom" ,
+            "trancparency"          : "opacity" ,
+            "border_top_color"      : "border-top-color" ,
+            "border_top_width"      : "border-top-width"  ,
+            "border_top_style"      : "border-top-style" ,
+            "border_left_color"     : "border-left-color" ,
+            "border_left_width"     : "border-left-width"  ,
+            "border_left_style"     : "border-left-style" ,
+            "border_bottom_color"   : "border-bottom-color" ,
+            "border_bottom_width"   : "border-bottom-width"  ,
+            "border_bottom_style"   : "border-bottom-style" ,
+            "border_right_color"    : "border-right-color" ,
+            "border_right_width"    : "border-right-width"  ,
+            "border_right_style"    : "border-right-style" ,
+            "border_radius_tr"      : "border-top-right-radius" ,
+            "border_radius_tl"      : "border-top-left-radius" ,
+            "border_radius_br"      : "border-bottom-right-radius" ,
+            "border_radius_bl"      : "border-bottom-left-radius" ,
+            "font_family"           : "font-family"    ,
+            "font_size"             : "font-size"      ,
+            "font_weight"           : "font-weight"    ,
+            "font_style"            : "font-style"     ,
+            "text_decoration"       : "text-decoration",
+            "text_align"            : "text-align"     ,
+            "font_color"            : "color"          ,
+            "line_height"           : "line-height"    ,
+            "position"              : "position"       ,
+            "shadow_color"          : "box-shadow"     ,
+            "shadow"                : "box-shadow"     ,
+            "text_shadow_color"     : "text-shadow"    ,
+            "text_shadow"           : "text-shadow"    ,
+            "parallax_background_image" : "" ,
+            "parallax_background_ratio" : "" ,
+            "background_attachment" : "background-attachment" ,
+            "background_color"      : "background-color" ,
+            "background_position"   : "background-position" ,
+            "background_image"      : "background-image" ,
+            "external_background_image" : "background-image" ,
+            "background_gradient"       : "background-image" ,
+            "background_image_scaling"  : ["background-repeat" , "background-size"] ,
+        };
+
+        _.each( _styleSettingsMap , function( prop , setting ){
+            api( setting , function( value ) {
+        		value.bind( function( to ) {
+
+                    if( !api.currentCssSelector )
+                        return ;
+
+                    var sedCss = _getCurrentSedCss(),
+                        needToSave = true ,
+                        styleSetting = setting;
+
+                    switch ( setting ) {
+                      case "trancparency":
+
+                          var newVal = ( !to ) ? "initial" : to ;
+                          var css =  api.currentCssSelector + "{" + siteEditorCss.transparency( newVal ) + "}";
+
+                      break;
+                      case "border_radius_tr":
+
+                          var newVal = ( !to ) ? "initial" : to ;
+                          var css =  api.currentCssSelector + "{" + siteEditorCss.sedBorderRadius( newVal , "tr" ) + "}";
+
+                      break;
+                      case "border_radius_tl":
+
+                          var newVal = ( !to ) ? "initial" : to ;
+                          var css =  api.currentCssSelector + "{" + siteEditorCss.sedBorderRadius( newVal , "tl" ) + "}";
+
+                      break;
+                      case "border_radius_br":
+
+                          var newVal = ( !to ) ? "initial" : to ;
+                          var css =  api.currentCssSelector + "{" + siteEditorCss.sedBorderRadius( newVal , "br" ) + "}";
+
+                      break;
+                      case "border_radius_bl":
+
+                          var newVal = ( !to ) ? "initial" : to ;
+                          var css =  api.currentCssSelector + "{" + siteEditorCss.sedBorderRadius( newVal , "bl" ) + "}";
+
+                      break;
+                      case "border_top_color":
+                      case "border_top_style":
+                      case "border_right_color":
+                      case "border_right_style":
+                      case "border_left_color":
+                      case "border_left_style":
+                      case "border_bottom_color":
+                      case "border_bottom_style":
+                      case "font_family":
+                      case "font_weight":
+                      case "font_style":
+                      case "text_decoration":
+                      case "text_align":
+                      case "font_color":
+                      case "position":
+                      case "background_color" :
+                      case "background_attachment" :
+
+                		  var newVal = ( !to ) ? "initial" : to + " !important" ;
+                          var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
+
+                      break;
+                      case "background_position" :
+
+                		  var newVal = ( !to ) ? "initial" : to ;
+                          var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
+
+                      break;
+                      case "border_top_width" :
+                      case "border_right_width" :
+                      case "border_bottom_width" :
+                      case "border_left_width" :
+                      case "padding_top":
+                      case "padding_right":
+                      case "padding_bottom":
+                      case "padding_left":
+                      case "margin_top":
+                      case "margin_right":
+                      case "margin_bottom":
+                      case "margin_left":
+                      case "font_size" :
+                      case "line_height" :
+
+                          var newVal = ( !to && to != 0 ) ? "initial" : to + "px !important" ;
+                          var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
+
+                      break;
+                      case "shadow" :
+
+                          var shColor = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["shadow_color"] ) ) ? sedCss[api.currentCssSelector]["shadow_color"] : "#000000";
+                          var strSh = to;
+                          var css = api.currentCssSelector + "{" + _getShadow( strSh , shColor ) + "}";
+
+                      break;
+                      case "shadow_color" :
+
+                          if( ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["shadow"] ) ) ){
+                              var shColor = to;
+                              _saveCustomCss( setting , to );
+
+                              var strSh = sedCss[api.currentCssSelector]["shadow"];
+                              var css = _getShadow( strSh , shColor );
+                              styleSetting = "shadow";
+                              needToSave = false;
+                          }else{
+                              _saveCustomCss( setting , to );
+                              return ;
+                          }
+
+                      break;
+                      case "text_shadow" :
+
+                          var shColor = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["text_shadow_color"] ) ) ? sedCss[api.currentCssSelector]["text_shadow_color"] : "#000000";
+                          var strSh = to;
+                          var css = api.currentCssSelector + '{text-shadow: ' + strSh + " " + shColor + ' !important;}';
+
+                      break;
+                      case "text_shadow_color" :
+
+                          if( ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["text_shadow"] ) ) ){
+                              var shColor = to;
+                              _saveCustomCss( setting , to );
+
+                              var strSh = sedCss[api.currentCssSelector]["text_shadow"];
+                              var css =  api.currentCssSelector + '{text-shadow: ' + strSh + " " + shColor + ' !important;}';
+                              styleSetting = "text_shadow";
+                              needToSave = false;
+                          }else{
+                              _saveCustomCss( setting , to );
+                              return ;
+                          }
+
+                      break;
+                      case "parallax_background_image" :
+
+                          var ratioNum = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["parallax_background_ratio"] ) ) ? sedCss[api.currentCssSelector]["parallax_background_ratio"] : 0.5;
+
+                          _saveCustomCss( setting , to );
+
+                          _setParallax( to , ratioNum );
+
+                          return ;
+
+                      break;
+                      case "parallax_background_ratio" :
+
+                          if( ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["parallax_background_image"] ) ) ){
+                              var ratioNum = to;
+                              var isPlx = sedCss[api.currentCssSelector]["parallax_background_image"];
+                              _setParallax( isPlx , to );
+                          }
+
+                          _saveCustomCss( setting , to );
+                          return ;
+
+                      break;
+                      case "background_image_scaling" :
+                          var css = api.currentCssSelector + "{" + _getImageScaling( to ) + "}";
+                      break;
+                      case "background_image" :
+                      case "external_background_image" :
+
+                          _saveCustomCss( setting , to );
+
+                          var sGradient = !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_gradient"] ) && !_.isEmpty( sedCss[api.currentCssSelector]["background_gradient"] ) && _.isObject( sedCss[api.currentCssSelector]["background_gradient"] ),
+                              bgImage = _getBackgroundImage() ,
+                              isBgImage = bgImage && bgImage != "none";
+
+                          var css = api.currentCssSelector + "{" + _getCssBackgroundImage( bgImage , isBgImage , sGradient ) + "}";
+
+                          styleSetting = "background_image";
+                          needToSave = false;
+
+                      break;
+                      case "background_gradient" :
+
+                          var sGradient = !_.isEmpty( to ) && to && _.isObject( to ),
+                              bgImage = _getBackgroundImage() ,
+                              isBgImage = bgImage && bgImage != "none";
+
+                          _saveCustomCss( setting , to );
+
+                          var css = api.currentCssSelector + "{" + _getCssBackgroundImage( bgImage , isBgImage , sGradient ) + "}";
+
+                          styleSetting = "background_image";
+                          needToSave = false;
+                      break;
+
+                    }
+
+                    api.preview.trigger( 'sedCustomStyleUpdate' , {
+                        css     : css ,
+                        setting : styleSetting ,
+                        //prop    : prop ,
+                        value   : to ,
+                        save    : needToSave
+                    });
+
+        		});
+            });
+        });
+
+        var _getCurrentSedCss = function(){
+            var id = api.currentSedElementId ,
+                attrs = api.contentBuilder.getAttrs( id ) , sedCss;
+
+            sedCss = ( !_.isUndefined( attrs ) && !_.isUndefined( attrs["sed_css"] ) && _.isObject( attrs["sed_css"] ) ) ? attrs["sed_css"] : {};
+            return sedCss;
+        };
+
+        var _getShadow = function( strSh , shColor ){
+            if( strSh.indexOf( "inset" ) > -1 ){
+                strSh = strSh.replace( "inset" , "" );
+                strSh = $.trim( strSh );
+                strSh += " " + shColor;
+                strSh += " inset";
+            }else{
+                strSh += " " + shColor;
+            }
+
+            var css = siteEditorCss.boxShadow( strSh );
+            return css;
+        };
+
+        var initParallax = {},
+            parallaxRatio = {};
+        var _setParallax = function( isParallax , ratio , selector ){
+
+            selector = ( !_.isUndefined( selector ) && selector ) ? selector : api.currentCssSelector;
+
+            if( !selector )
+                return ;
+
+    		if ( isParallax ){
+
+                var ratioNum = ( ratio ) ? ratio : 0.5;
+
+                if( !_.isUndefined( initParallax[selector] ) && initParallax[selector] === true ){
+                    $( selector ).parallax("destroy");
+                }
+
+                $( selector ).parallax({
+                    xpos           : "50%",
+                    speedFactor    : ratioNum,
+                });
+
+                initParallax[selector] = true;
+
+            }else{
+                $( selector ).parallax("destroy");
+                initParallax[selector] = false;
+            }
+
+            parallaxRatio[selector] = ratio || 0.5;
+        };
+
+        var _refreshParallaxElements = function(){
+            $.each( initParallax , function( selector , status ){
+                if( status === true && !_.isUndefined( parallaxRatio[selector] ) ){
+                    _setParallax( status , parallaxRatio[selector] , selector );
+                }
+            });
+        };
+
+        api.Events.bind( "changePreviewMode" , function( mode ){
+            _refreshParallaxElements();
+        });
+
+        api.Events.bind( "moduleSortableStopEvent" , function( ui ){
+            _refreshParallaxElements();
+        });
+
+        var _getImageScaling = function( value ){
+            var bgSize = "auto",
+                bgRepeat = "no-repeat";
+
+            switch ( value ) {
+               case "fullscreen":
+                    bgSize = "100% 100%";
+               break;
+               case "fit":
+                    bgSize = "100% auto";
+                    bgRepeat = "repeat-y";
+               break;
+               case "tile":
+                    bgSize = "auto";
+                    bgRepeat = "repeat";
+               break;
+               case "tile-horizontally":
+                    bgSize = "auto";
+                    bgRepeat = "repeat-x";
+               break;
+               case "tile-vertically":
+                    bgSize = "auto";
+                    bgRepeat = "repeat-y";
+               break;
+               case "normal":
+                    bgSize = "auto";
+                    bgRepeat = "no-repeat";
+               break;
+               case "cover":
+                    bgSize = "cover";
+                    //bgRepeat = "no-repeat";
+               break;
+            }
+
+            var css = 'background-repeat: ' + bgRepeat + ' !important;';
+            css += siteEditorCss.backgroundSize( bgSize );
+
+            return css;
+        };
+
+        var _getGradient = function(){
+
+            var sedCss = _getCurrentSedCss(),
+                gradient = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_gradient"] ) ) ? sedCss[api.currentCssSelector]["background_gradient"] : "";
+
+            if( !_.isEmpty( gradient ) && _.isObject( gradient ) ){
+                var bgColor = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_color"] ) ) ? sedCss[api.currentCssSelector]["background_color"] : $(api.currentCssSelector).css("background-color");
+
+                bgColor = bgColor || "#000000";
+
+                var tColor = tinycolor( bgColor ) ,
+                    endColor = siteEditorCss.gradientEndColor( tColor.toRgb() ) ,
+                    startColor = tColor.toHexString();
+
+                startColor =  siteEditorCss.hexToRgb( startColor );
+                startColor = 'rgb(' + startColor.r + ',' + startColor.g + ',' + startColor.b + ')';
+
+                gradient.start = startColor;
+                gradient.end = endColor;
+            }
+
+            return gradient;
+        };
+
+        var _getCssBackgroundImage = function( bgImg , isBgImg , isGradient ){
+
+            if( !isBgImg && !isGradient ){
+                var css = 'background-image: none !important;';
+            }else if( !isBgImg && isGradient ){
+                var gradient = _getGradient();    
+                var css = siteEditorCss.gradient( gradient.start , gradient.end , gradient );
+            }else if( isBgImg && isGradient ){
+                var gradient = _getGradient();
+                var css = siteEditorCss.gradient( gradient.start , gradient.end , gradient , bgImg ) ;
+            }else{
+                /*var img = api.fn.getAttachmentImage( bgImg , "full" ),
+                    src = !_.isUndefined( img ) && !_.isUndefined( img.src ) ? img.src : "" ; */
+
+                var css = 'background-image: url("' + bgImg + '") !important;';
+            }
+
+            return css;
+        };
+
+        var _getBackgroundImage = function( ){
+            var sedCss = _getCurrentSedCss(),
+                bgImage = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_image"] ) ) ? sedCss[api.currentCssSelector]["background_image"] : "";
+
+            if( !bgImage || bgImage == "none" ){
+                bgImage = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["external_background_image"] ) ) ? sedCss[api.currentCssSelector]["external_background_image"] : "";
+            }
+
+            return bgImage;
+        };
+
+
+        /* Custom Paddings */
+        /*paddings = $.map(['top' , 'right' , 'bottom' , 'left' , 'lock'], function( prop ) {
+        	return 'padding_' + prop;
+        });
+        api.when.apply( api, paddings ).done( function( top , right , bottom , left , lock ) {
+        	var update , head = $('head') ,
+                lastValue , width;
+            update = function(index) {
+
+                if( !api.currentCssSelector )
+                    return ;
+
+        	    var css = '', styleId,
+                      //elementClass = 'sed-custom-' + api.currentCssSelector,
+                    element = $( api.currentCssSelector ) , propStr;
+
+                styleId = _getStyleId( element , 'sed_padding' , 'padding');
+
+        		if ( !_.isUndefined( top() ) )
+                    css += "padding-top : " + top()+ "px !important;";
+
+        		if ( !_.isUndefined( right() ) ){ alert( right() );
+        		    propStr = ( api.isRTL ) ? "padding-left : " : "padding-right : ";
+                    css += propStr + right()+ "px !important;";
+                }
+
+        		if ( !_.isUndefined( bottom() ) )
+                    css += "padding-bottom : " + bottom()+ "px !important;";
+                                              alert( left() );
+        		if ( !_.isUndefined( left() ) ){
+        		    propStr = ( api.isRTL ) ? "padding-right : " : "padding-left : ";
+                    css += propStr + left()+ "px !important;";
+                }
+                     alert( api.currentCssSelector );
+
+        		// Refresh the stylesheet by removing and recreating it.
+        		$( "#" + styleId ).remove();
+        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
+
+            };
+
+        	$.each( arguments, function(index , value) {
+        		this.bind( function(){
+                    update( index );
+        		});
+        	});
+        });*/
+
+        /* Custom Radius */
+        /*radius = $.map(['tl' , 'tr' , 'br' , 'bl' , 'lock'], function( prop ) {
+        	return 'border_radius_' + prop;
+        });
+
+        api.when.apply( api, radius ).done( function( tl , tr , br , bl , lock ) {
+        	var update , head = $('head') ,
+                lastValue;
+            update = function(index) {
+                if( !api.currentCssSelector )
+                    return ;
+
+        	    var css = '', styleId ,
+                      //elementClass = 'sed-custom-' + api.currentCssSelector,
+                    element = $( api.currentCssSelector ),
+                    side;
+                        //widthEl = element.outerWidth() ,
+                        //borderSides = currentBorderSides
+
+                styleId = _getStyleId( element , 'sed_radius' , 'radius');
+
+        		if ( !_.isUndefined( tl() ) ){
+
+                    if( api.isRTL )
+                        side = "tr";
+                    else
+                        side = "tl";
+
+                    css += siteEditorCss.sedBorderRadius( tl() , side );
+                }
+
+        		if ( !_.isUndefined( tr() ) ){
+
+                    if( api.isRTL )
+                        side = "tl";
+                    else
+                        side = "tr";
+
+                    css += siteEditorCss.sedBorderRadius( tr() , side );
+                }
+
+        		if ( !_.isUndefined( br() ) ){
+
+                    if( api.isRTL )
+                        side = "bl";
+                    else
+                        side = "br";
+
+                    css += siteEditorCss.sedBorderRadius( br() , side );
+                }
+
+        		if ( !_.isUndefined( bl() ) ){
+
+                    if( api.isRTL )
+                        side = "br";
+                    else
+                        side = "bl";
+
+                    css += siteEditorCss.sedBorderRadius( bl() , side );
+                }
+
+        		// Refresh the stylesheet by removing and recreating it.
+        		$( "#" + styleId ).remove();
+        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
+            };
+
+        	$.each( arguments, function(index , value) {
+        		this.bind( function(){
+                    update( index );
+        		});
+        	});
+        });*/
+
+        /*stylesProp = ['shadow_color' , 'shadow'];
+        api.when.apply( api, stylesProp ).done( function( shadowColor , shadow ) {
+        	var update , head = $('head');
+
+            update = function() {
+                if( !api.currentCssSelector )
+                    return ;
+
+        	    var css = '', styleId ,
+                      //elementClass = 'sed-custom-' + api.currentCssSelector,
+                    element = $( api.currentCssSelector );
+
+                styleId = _getStyleId( element , 'sed_styles' , 'styles');
+
+                if ( !_.isUndefined( shadowColor() ) ){
+                    _saveCustomCss( "shadow_color" , shadowColor() );
+                }
+
+        		if ( !_.isUndefined( shadow() ) ){
+        		    if( !shadow() || shadow() == "none" ){
+                        var strSh = "none";
+                        _saveCustomCss( "shadow" , strSh );
+        		    }else{
+            		    var shColor = shadowColor() || "#000000";
+            		    var strSh = shadow();
+                        if( strSh.indexOf( "inset" ) > -1 ){
+                            strSh = strSh.replace( "inset" , "" );
+                            strSh = $.trim( strSh );
+                            strSh += " " + shColor;
+                            strSh += " inset";
+                        }else{
+                            strSh += " " + shColor;
+                        }
+                        _saveCustomCss( "shadow" , strSh );
+                        _saveCustomCss( "shadow_color" , strSh );
+                    }
+
+                    css += siteEditorCss.boxShadow( strSh );
+
+        		}
+
+        		// Refresh the stylesheet by removing and recreating it.
+        		$( "#" + styleId ).remove();
+        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
+
+            };
+
+        	$.each( arguments, function() {
+        		this.bind( update );
+        	});
+        }); */
+
+        /* font */     //
+        /*font = $.map(['color','style', 'weight', 'size', 'family'], function( prop ) {
+        	return 'font_' + prop;
+        });
+
+        api.when.apply( api, font ).done( function( color, style, weight, size, family ) {
+        	var update , head = $('head');
+
+
+        	update = function() {
+                if( !api.currentCssSelector )
+                    return ;
+                               alert( api.currentCssSelector );
+                      //alert(api.currentCssSelector.attr("class"));
+        	    var css = '', styleId ,
+                      //elementClass = 'sed-custom-' + api.currentCssSelector,
+                      element = $( api.currentCssSelector );
+
+                styleId = _getStyleId( element , 'sed_font' , 'font');
+
+        		if ( !_.isUndefined( color() ) )
+                    css += 'color: ' + color() + ' !important;';
+
+        		if ( !_.isUndefined( style() ) )
+                    css += 'font-style: ' + style() + ' !important;';
+
+        		if ( !_.isUndefined( size() ) )
+                    css += 'font-size: ' + size() + 'px !important;';
+
+        		if ( !_.isUndefined( weight() ) )
+                    css += 'font-weight: ' + weight() + ' !important;';
+
+        		if ( !_.isUndefined( family() ) ){
+        		    api.typography.loadFont( family() );
+                    css += 'font-family: ' + family() + ' ';
+                }
+
+        		// Refresh the stylesheet by removing and recreating it.
+        		$( "#" + styleId ).remove();
+        		styleEl = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
+
+        	};
+
+        	$.each( arguments, function() {
+        		this.bind( update );
+        	});
+        });*/
+
+        /*textProp = $.map(['shadow', 'shadow_color'], function( prop ) {
+        	return 'text_' + prop;
+        });
+                                                                                           //
+        api.when.apply( api, textProp ).done( function( shadow, shadow_color ) {
+        	var update , head = $('head') ;
+
+
+        	update = function() {
+                if( !api.currentCssSelector )
+                    return ;
+
+                      //alert(api.currentCssSelector.attr("class"));
+        	    var css = '', styleId ,
+                      //elementClass = 'sed-custom-' + api.currentCssSelector,
+                      element = $( api.currentCssSelector ) ,
+                      text_shadow , alignVal , newVal;
+
+                styleId = _getStyleId( element , 'sed_text' , 'text');
+
+        		if ( !_.isUndefined( shadow() ) ){
+                    text_shadow = shadow();
+                    _saveCustomCss( "text_shadow" , shadow() );
+                }
+
+                if( !_.isUndefined( shadow_color() ) ){
+                    _saveCustomCss( "text_shadow_color" , shadow_color() );
+                }
+
+                if ( !_.isUndefined( shadow_color() ) && !_.isUndefined( shadow() ) && shadow() != "none" )
+                    text_shadow += " " + shadow_color();
+
+                if ( !_.isUndefined( text_shadow ) )
+                    css += 'text-shadow: ' + text_shadow + ' !important;';
+
+        		// Refresh the stylesheet by removing and recreating it.
+        		$( "#" + styleId ).remove();
+        		styleEl = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
+
+        	};
+
+        	$.each( arguments, function() {
+        		this.bind( update );
+        	});
+        }); */
+
+
+        /*sedApp.editor( 'background_color', function( value ) {
+    		value.bind( function( to ) {
+    			api.preview.send( 'update_gradient' , api.currentCssSelector , to );
+    		});
+        });*/
+
+        /*parallax = $.map(['ratio' , 'image'], function( prop ) {
+        	return 'parallax_background_' + prop;
+        });
+
+        var initParallax = {};
+        api.when.apply( api, parallax ).done( function( ratio, image ) {
+        	var update , ratioNum;
+
+
+        	update = function() {
+                if( !api.currentCssSelector )
+                    return ;
+
+        		if ( !_.isUndefined( image() ) && image()  ){
+                    _saveCustomCss( "parallax_background_image" , image() );
+                    if( !_.isUndefined( ratio() ) && ratio() )
+                        ratioNum = ratio();
+                    else
+                        ratioNum = 0.5;
+
+                    if( !_.isUndefined( initParallax[api.currentCssSelector] ) && initParallax[api.currentCssSelector] === true )
+                        $( api.currentCssSelector ).parallax.destroy();
+
+                    $( api.currentCssSelector ).parallax("50%", ratioNum );
+                    _saveCustomCss( "background_attachment" , attachment() );
+
+                    initParallax[api.currentCssSelector] = true;
+                }else{
+                    $( api.currentCssSelector ).parallax.destroy();
+                    initParallax[api.currentCssSelector] = false;
+                }
+
+                if( !_.isUndefined( ratio() ) && ratio() ){
+                    _saveCustomCss( "parallax_background_ratio" , ratio() );
+                }
+
+            };
+
+          	$.each( arguments, function() {
+          		this.bind( update );
+          	});
+        });*/
+
+        /* Custom Backgrounds */
+        /*bg = $.map(['color', 'image', 'position', 'image_scaling', 'attachment', 'gradient'], function( prop ) {
+        	return 'background_' + prop;
+        });
+
+        api.when.apply( api, bg ).done( function( color, image, position, image_scaling, attachment, gradient ) {
+        	var update ,
+                bgSize = "auto",
+                bgRepeat = "no-repeat", bgImg,
+                head = $('head'), bgColor;
+
+
+        	update = function() {
+                if( !api.currentCssSelector )
+                    return ;
+
+        	    var css = '',
+                      styleId ,
+                      //elementClass = 'sed-custom-' + api.currentCssSelector,
+                      element = $( api.currentCssSelector ) ,
+                      sGradient = !_.isUndefined( gradient() ) && gradient() ,
+                      bgImage  = !_.isUndefined( image() ) && image() && image() != "none";
+
+                styleId = _getStyleId( element , 'sed_background' , 'background');
+
+                      //element.toggleClass( elementClass , !! ( color() || image() ) )
+
+        		// The body will support custom backgrounds if either
+        		// the color or image are set.
+
+        		if ( !_.isUndefined( color() ) ){
+                    css += 'background-color: ' + color() + ' !important;';
+                    _saveCustomCss( "background_color" , color() );
+                }
+
+                if( !_.isUndefined( image() ) )
+                    _saveCustomCss( "background_image" , image() );
+
+        		if ( !_.isUndefined( image() ) ){ //&& !sGradient
+
+        		    if( !image() || image() == "none" )
+        			    css += 'background-image: none !important;';
+                    else{
+                        var img = api.fn.getAttachmentImage( image() , "full" ),
+                            src = !_.isUndefined( img ) && !_.isUndefined( img.src ) ? img.src : "" ;
+
+                        css += 'background-image: url("' + src + '") !important;';
+                    }
+
+                }else if ( _.isUndefined( image() ) && !_.isUndefined( gradient() ) && !gradient() )
+                    css += 'background-image: none !important;';
+
+
+                /*else if( !bgImage && sGradient )
+                    css += siteEditorCss.gradient( gradient().start , gradient().end , gradient() );
+                else if( bgImage &&  sGradient )
+                    css += siteEditorCss.gradient( gradient().start , gradient().end , gradient() , image() ) ;
+                */
+                /*if( gradient() ) {
+                    api.preview.send( 'update_gradient' , api.currentCssSelector , color() );
+                }*/ /*
+
+        		if ( bgImage ) {
+
+                    if ( !_.isUndefined( position() ) ){
+        			    css += 'background-position: ' + position() + ';';
+                    }
+
+                    if ( !_.isUndefined( attachment() ) ){
+                        css += 'background-attachment: ' + attachment() + ' !important;';
+                    }
+
+                    if( image_scaling() ) {
+                        switch ( image_scaling() ) {
+                           case "fullscreen":
+                                bgSize = "100% 100%";
+                           break;
+                           case "fit":
+                                bgSize = "100% auto";
+                                bgRepeat = "repeat-y";
+                           break;
+                           case "tile":
+                                bgSize = "auto";
+                                bgRepeat = "repeat";
+                           break;
+                           case "tile-horizontally":
+                                bgSize = "auto";
+                                bgRepeat = "repeat-x";
+                           break;
+                           case "tile-vertically":
+                                bgSize = "auto";
+                                bgRepeat = "repeat-y";
+                           break;
+                           case "normal":
+                                bgSize = "auto";
+                                bgRepeat = "no-repeat";
+                           break;
+                           case "cover":
+                                bgSize = "cover";
+                                //bgRepeat = "no-repeat";
+                           break;
+                        }
+
+                        css += 'background-repeat: ' + bgRepeat + ' !important;';
+                        css += siteEditorCss.backgroundSize( bgSize );
+                    }
+
+
+        		}
+
+                if( gradient() || image_scaling())
+                    css += "behavior: url(" + LIBBASE.url + "PIE/PIE.htc" + ");";
+
+                if( image_scaling() )
+                    _saveCustomCss( "background_image_scaling" , image_scaling() );
+
+                if ( !_.isUndefined( attachment() ) )
+                    _saveCustomCss( "background_attachment" , attachment() );
+
+                if ( !_.isUndefined( position() ) )
+                    _saveCustomCss( "background_position" , position() );
+
+        		// Refresh the stylesheet by removing and recreating it.
+        		$( "#" + styleId ).remove();
+        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
+
+                if( !_.isUndefined( image() )  && api('parallax_background_image')() ){
+                    //$(window).stellar('refresh');
+                }
+
+        	};
+
+        	$.each( arguments, function() {
+        		this.bind( update );
+        	});
+        }); */
+
+        /* Custom Borders */
+        /*$.each( [ "top" , "left" , "right" , "bottom" ], function(idx , side){
+            var bordersArr = $.map(['style' , 'width' , 'color' ], function( prop ) {
+            	return 'border_'+ side + '_' + prop;
+            });
+
+            api.when.apply( api, bordersArr ).done( function( style , width , color ) {
+            	var update , head = $('head') ;
+                update = function(index) {
+                    if( !api.currentCssSelector )
+                        return ;
+
+            	    var css = '',
+                        styleId ,
+                        element = $( api.currentCssSelector ),
+                        newSide = side;
+                        //widthEl = element.outerWidth() ,
+                        //borderSides = currentBorderSides
+
+                    if( api.isRTL && side == "left" )
+                        newSide = "right";
+                    else if( api.isRTL && side == "right" )
+                        newSide = "left";
+
+
+                    styleId = _getStyleId( element , 'sed_border_' + side , 'border_' + side );
+
+                    if( !_.isUndefined( width() ) ){
+                        css += "border-" + newSide + "-width :" + width() + "px !important;";
+                        //if(val == "right" || val == "left")
+                            //widthEl -= width();
+                    }
+
+                    if( !_.isUndefined( style() ) )
+                        css += "border-" + newSide + "-style :" + style() + " !important;";
+
+                    if( !_.isUndefined( color() ) )
+                        css += "border-" + newSide + "-color :" + color() + " !important;";
+
+
+                    //css += "max-width : " + widthEl + "px !important;";
+
+            		// Refresh the stylesheet by removing and recreating it.
+            		$( "#" + styleId ).remove();
+            		style2 = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
+
+                    if($(api.currentCssSelector).attr("sed-layout") == "row"){
+                        $(document).trigger("rowCheckBorder" , [api.currentCssSelector]);
+                    }
+                };
+
+            	$.each( arguments, function(index , value) {
+            		this.bind( function(){
+                        update( index );
+            		});
+            	});
+            });
+        });*/
+
+        /* Custom Margins */
+        /*margins = $.map(['top' , 'right' , 'bottom' , 'left' , 'lock'], function( prop ) {
+        	return 'margin_' + prop;
+        });
+
+        api.when.apply( api, margins ).done( function( top , right , bottom , left , lock ) {
+        	var update , head = $('head') ,
+                lastValue , width;
+            update = function(index) {
+                if( !api.currentCssSelector )
+                    return ;
+
+        	    var css = '', styleId ,
+                      //elementClass = 'sed-custom-' + api.currentCssSelector,
+                    element = $( api.currentCssSelector ) , propStr;
+
+                styleId = _getStyleId( element , 'sed_margin' , 'margin');
+
+        		if ( !_.isUndefined( top() ) )
+                    css += "margin-top : " + top()+ "px !important;";
+
+        		if ( !_.isUndefined( right() ) ){
+        		    propStr = ( api.isRTL ) ? "margin-left : " : "margin-right : ";
+                    css += propStr + right()+ "px !important;";
+                }
+
+        		if ( !_.isUndefined( bottom() ) )
+                    css += "margin-bottom : " + bottom()+ "px !important;";
+
+        		if ( !_.isUndefined( left() ) ){
+        		    propStr = ( api.isRTL ) ? "margin-right : " : "margin-left : ";
+                    css += propStr + left()+ "px !important;";
+                }
+
+        		$( "#" + styleId ).remove();
+        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
+
+            };
+
+        	$.each( arguments, function(index , value) {
+        		this.bind( function(){
+                    update( index );
+        		});
+        	});
+        });*/
 
         /*$.each(api.templateSettings.patterns.rows , function(index , val){
             rowTmpl[val.role] = val;
         });*/
 
         //draggable modules in modules tab and drop in page content
-        parent.jQuery( ".sed-draggable" ).sedDraggable({
+        /*parent.jQuery( ".sed-draggable" ).sedDraggable({
             scrollSensitivity : 20,
             scrollSpeed : 20,
             dropInSortable: ".sed-drop-area-layout",
@@ -172,9 +1271,9 @@
                     attr      : {}
                 });
 
-                $(document).trigger("update_sort_row");*/
+                $(document).trigger("update_sort_row");*/ /*
             }
-        });
+        }); */
 
         //parent.jQuery( ".sed-draggable" ).sedDraggable({
 
@@ -184,7 +1283,7 @@
             colTmpl[val.role] = val;
         });*/
 
-        parent.jQuery( ".sed-col-draggable" ).sedDraggable({
+        /*parent.jQuery( ".sed-col-draggable" ).sedDraggable({
             scrollSensitivity : 20,
             scrollSpeed : 20,
             axis : 'x',
@@ -211,7 +1310,7 @@
                 $('[sed-layout="column"]').each( function (i,el) {
                     var newW = $(this).width() - t;
                     $(this).css("width", newW + "px");
-                    api.preview.send( 'update_col_width' , {id : $(this).attr("id"),width : newW/columnRowWidth});
+                    api.preview.send( 'update_col_width' , {id : $(this).attr("sed_model_id"),width : newW/columnRowWidth});
                 });
 
                 if(ui.direction == "down"){
@@ -245,619 +1344,42 @@
                     settings  : {width : (100 + ncw)/columnRowWidth}
                 });
 
-                $(document).trigger("update_sort_col"); */
+                $(document).trigger("update_sort_col"); */ /*
             }
-        });
+        });  */
 
-		api.preview.bind( 'setting', function( args ) {
-			var value;
+    /*var _getStyleId = function( element , type , prop ){
 
-			args = args.slice();
+        var styleId;
 
-			if ( value = api( args.shift() ) )
-				value.set.apply( value, args );
-		});
+        if( _.isUndefined( styleIdElements[api.currentCssSelector] ) || _.isUndefined( styleIdElements[api.currentCssSelector][prop] ) ){
+            styleId = _.uniqueId( type + '_') + '_css';
 
-		api.preview.bind( 'sync', function( events ) {
-			$.each( events, function( event, args ) {
-				api.preview.trigger( event, args );
-			});
-			api.preview.send( 'synced' );
-		});
+            if( _.isUndefined( styleIdElements[api.currentCssSelector] ) )
+                styleIdElements[api.currentCssSelector] = {} ;
 
-        api.preview.bind( 'active', function() {
+            styleIdElements[api.currentCssSelector][prop] = styleId;
+        }else
+            styleId = styleIdElements[api.currentCssSelector][prop] ;
 
-            api.Events.trigger("startActivePreview");
+        return styleId;
 
-            if ( api.settings.nonce )
-                api.preview.send( 'nonce', api.settings.nonce );
+       /* if( !_.isString( type ) || element.length == 0 )
+            return ;
 
-            api.preview.send( 'currentPostId' , api.settings.post.id );
+        if( _.isUndefined( element.data( "styleId" ) ) || _.isUndefined( element.data( "styleId" )[prop] ) ){
+            styleId = _.uniqueId( type + '_') + '_css';
 
-            api.preview.send( 'contextmenu-ready' );
-            $(document).trigger("update_sort_row");
-        });
+            if( _.isUndefined( element.data( "styleId" ) ) )
+                element.data( "styleId" , {} );
 
-		api.preview.send( 'ready' );
+            element.data( "styleId" )[prop] = styleId;
+        }else
+            styleId = element.data( "styleId" )[prop];
 
-        sedApp.editor( 'page_main_row', function( value ) {
-    		value.bind( function( to ) {
-    			//alert(to);
-    		});
-        });
+        return styleId; */ /*
 
-
-        sedApp.editor( 'sheet_width', function( value ) {
-    		value.bind( function( to ) {
-               $("#sed-sheet-width-style").remove();
-               $("<style id='sed-sheet-width-style'>.sed-row-boxed{max-width : " + to + "px !important;}</style>").appendTo($("head"));
-
-              $("#main").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedSheetWidth");
-
-    		});
-        });
-
-
-        sedApp.editor( 'page_length', function( value ) {
-    		value.bind( function( to ) {
-
-                var targEl = $("#main");
-
-                if(to == "boxed")
-                    targEl.addClass( "sed-row-boxed" ).removeClass("sed-row-wide");
-                else
-                    targEl.addClass( "sed-row-wide" ).removeClass("sed-row-boxed");
-
-                $("#main").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedPageLength" , [to]);
-
-    		});
-        });
-
-
-        //for api.Ajax :: than user login ajax render
-        api.preview.bind("user_login_done" , function(){
-            if(api.currentAjax)
-                api.currentAjax.render();
-        });
-
-
-        /* Custom Borders */
-        $.each( [ "top" , "left" , "right" , "bottom" ], function(idx , side){
-            var bordersArr = $.map(['style' , 'width' , 'color' ], function( prop ) {
-            	return 'border_'+ side + '_' + prop;
-            });
-
-            api.when.apply( api, bordersArr ).done( function( style , width , color ) {
-            	var update , head = $('head') ;
-                update = function(index) {
-                    if( !api.currentCssSelector )
-                        return ;
-
-            	    var css = '',
-                        styleId ,
-                        element = $( api.currentCssSelector ),
-                        newSide = side;
-                        //widthEl = element.outerWidth() ,
-                        //borderSides = currentBorderSides
-
-                    if( api.isRTL && side == "left" )
-                        newSide = "right";
-                    else if( api.isRTL && side == "right" )
-                        newSide = "left";
-
-
-                    styleId = _getStyleId( element , 'sed_border_' + side , 'border_' + side );
-
-                    if( !_.isUndefined( width()[api.currentCssSelector] ) ){
-                        css += "border-" + newSide + "-width :" + width()[api.currentCssSelector] + "px !important;";
-                        //if(val == "right" || val == "left")
-                            //widthEl -= width()[api.currentCssSelector];
-                    }
-
-                    if( !_.isUndefined( style()[api.currentCssSelector] ) )
-                        css += "border-" + newSide + "-style :" + style()[api.currentCssSelector] + " !important;";
-
-                    if( !_.isUndefined( color()[api.currentCssSelector] ) )
-                        css += "border-" + newSide + "-color :" + color()[api.currentCssSelector] + " !important;";
-
-
-                    //css += "max-width : " + widthEl + "px !important;";
-
-            		// Refresh the stylesheet by removing and recreating it.
-            		$( "#" + styleId ).remove();
-            		style2 = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
-
-                    if($(api.currentCssSelector).attr("sed-layout") == "row"){
-                        $(document).trigger("rowCheckBorder" , [api.currentCssSelector]);
-                    }
-                };
-
-            	$.each( arguments, function(index , value) {
-            		this.bind( function(){
-                        update( index );
-            		});
-            	});
-            });
-        });
-
-        /* Custom Margins */
-        margins = $.map(['top' , 'right' , 'bottom' , 'left' , 'lock'], function( prop ) {
-        	return 'margin_' + prop;
-        });
-
-        api.when.apply( api, margins ).done( function( top , right , bottom , left , lock ) {
-        	var update , head = $('head') ,
-                lastValue , width;
-            update = function(index) {
-                if( !api.currentCssSelector )
-                    return ;
-
-        	    var css = '', styleId ,
-                      //elementClass = 'sed-custom-' + api.currentCssSelector,
-                    element = $( api.currentCssSelector ) , propStr;
-
-                styleId = _getStyleId( element , 'sed_margin' , 'margin');
-
-        		if ( !_.isUndefined( top()[api.currentCssSelector] ) )
-                    css += "margin-top : " + top()[api.currentCssSelector]+ "px !important;";
-
-        		if ( !_.isUndefined( right()[api.currentCssSelector] ) ){
-        		    propStr = ( api.isRTL ) ? "margin-left : " : "margin-right : ";
-                    css += propStr + right()[api.currentCssSelector]+ "px !important;";
-                }
-
-        		if ( !_.isUndefined( bottom()[api.currentCssSelector] ) )
-                    css += "margin-bottom : " + bottom()[api.currentCssSelector]+ "px !important;";
-
-        		if ( !_.isUndefined( left()[api.currentCssSelector] ) ){
-        		    propStr = ( api.isRTL ) ? "margin-right : " : "margin-left : ";
-                    css += propStr + left()[api.currentCssSelector]+ "px !important;";
-                }
-
-        		$( "#" + styleId ).remove();
-        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
-
-            };
-
-        	$.each( arguments, function(index , value) {
-        		this.bind( function(){
-                    update( index );
-        		});
-        	});
-        });
-
-        /* Custom Paddings */
-        paddings = $.map(['top' , 'right' , 'bottom' , 'left' , 'lock'], function( prop ) {
-        	return 'padding_' + prop;
-        });
-
-        api.when.apply( api, paddings ).done( function( top , right , bottom , left , lock ) {
-        	var update , head = $('head') ,
-                lastValue , width;
-            update = function(index) {
-
-                if( !api.currentCssSelector )
-                    return ;
-
-        	    var css = '', styleId,
-                      //elementClass = 'sed-custom-' + api.currentCssSelector,
-                    element = $( api.currentCssSelector ) , propStr;
-
-                styleId = _getStyleId( element , 'sed_padding' , 'padding');
-
-        		if ( !_.isUndefined( top()[api.currentCssSelector] ) )
-                    css += "padding-top : " + top()[api.currentCssSelector]+ "px !important;";
-
-        		if ( !_.isUndefined( right()[api.currentCssSelector] ) ){
-        		    propStr = ( api.isRTL ) ? "padding-left : " : "padding-right : ";
-                    css += propStr + right()[api.currentCssSelector]+ "px !important;";
-                }
-
-        		if ( !_.isUndefined( bottom()[api.currentCssSelector] ) )
-                    css += "padding-bottom : " + bottom()[api.currentCssSelector]+ "px !important;";
-
-        		if ( !_.isUndefined( left()[api.currentCssSelector] ) ){
-        		    propStr = ( api.isRTL ) ? "padding-right : " : "padding-left : ";
-                    css += propStr + left()[api.currentCssSelector]+ "px !important;";
-                }
-                     //alert( api.currentCssSelector );
-        		// Refresh the stylesheet by removing and recreating it.
-        		$( "#" + styleId ).remove();
-        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
-
-            };
-
-        	$.each( arguments, function(index , value) {
-        		this.bind( function(){
-                    update( index );
-        		});
-        	});
-        });
-
-        /* Custom Radius */
-        radius = $.map(['tl' , 'tr' , 'br' , 'bl' , 'lock'], function( prop ) {
-        	return 'border_radius_' + prop;
-        });
-
-        api.when.apply( api, radius ).done( function( tl , tr , br , bl , lock ) {
-        	var update , head = $('head') ,
-                lastValue;
-            update = function(index) {
-                if( !api.currentCssSelector )
-                    return ;
-
-        	    var css = '', styleId ,
-                      //elementClass = 'sed-custom-' + api.currentCssSelector,
-                    element = $( api.currentCssSelector ),
-                    side;
-                        //widthEl = element.outerWidth() ,
-                        //borderSides = currentBorderSides
-
-                styleId = _getStyleId( element , 'sed_radius' , 'radius');
-
-        		if ( !_.isUndefined( tl()[api.currentCssSelector] ) ){
-
-                    if( api.isRTL )
-                        side = "tr";
-                    else
-                        side = "tl";
-
-                    css += siteEditorCss.sedBorderRadius( tl()[api.currentCssSelector] , side );
-                }
-
-        		if ( !_.isUndefined( tr()[api.currentCssSelector] ) ){
-
-                    if( api.isRTL )
-                        side = "tl";
-                    else
-                        side = "tr";
-
-                    css += siteEditorCss.sedBorderRadius( tr()[api.currentCssSelector] , side );
-                }
-
-        		if ( !_.isUndefined( br()[api.currentCssSelector] ) ){
-
-                    if( api.isRTL )
-                        side = "bl";
-                    else
-                        side = "br";
-
-                    css += siteEditorCss.sedBorderRadius( br()[api.currentCssSelector] , side );
-                }
-
-        		if ( !_.isUndefined( bl()[api.currentCssSelector] ) ){
-
-                    if( api.isRTL )
-                        side = "br";
-                    else
-                        side = "bl";
-
-                    css += siteEditorCss.sedBorderRadius( bl()[api.currentCssSelector] , side );
-                }
-
-        		// Refresh the stylesheet by removing and recreating it.
-        		$( "#" + styleId ).remove();
-        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
-            };
-
-        	$.each( arguments, function(index , value) {
-        		this.bind( function(){
-                    update( index );
-        		});
-        	});
-        });
-
-        stylesProp = ['trancparency' , 'shadow_color' , 'shadow' , 'position'];
-        api.when.apply( api, stylesProp ).done( function( opacity , shadowColor , shadow , position ) {
-        	var update , head = $('head');
-
-            update = function() {
-                if( !api.currentCssSelector )
-                    return ;
-
-        	    var css = '', styleId ,
-                      //elementClass = 'sed-custom-' + api.currentCssSelector,
-                    element = $( api.currentCssSelector );
-
-                styleId = _getStyleId( element , 'sed_styles' , 'styles');
-
-        		if ( !_.isUndefined( shadow()[api.currentCssSelector] ) ){
-        		    if(!shadow()[api.currentCssSelector].values || shadow()[api.currentCssSelector].values== "none"){
-                        strSh = "none";
-        		    }else{
-            		    var shColor = shadowColor()[api.currentCssSelector] || "#000000";
-            		    var strSh = shadow()[api.currentCssSelector].values + " " + shColor;
-                        strSh += shadow()[api.currentCssSelector].inset !== false ? " inset" : "";
-                    }
-
-                    css += siteEditorCss.boxShadow( strSh );
-        		}
-
-        		if ( !_.isUndefined( opacity()[api.currentCssSelector] ) )
-                    css += siteEditorCss.transparency( opacity()[api.currentCssSelector] );
-
-        		if ( !_.isUndefined( position()[api.currentCssSelector] ) )
-                    css += 'position: ' + position()[api.currentCssSelector] + ' !important;';
-
-
-        		// Refresh the stylesheet by removing and recreating it.
-        		$( "#" + styleId ).remove();
-        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
-
-            };
-
-        	$.each( arguments, function() {
-        		this.bind( update );
-        	});
-        });
-
-        /* font */
-        font = $.map(['color', 'style', 'weight', 'size', 'family'], function( prop ) {
-        	return 'font_' + prop;
-        });
-
-        api.when.apply( api, font ).done( function( color, style, weight, size, family ) {
-        	var update , head = $('head');
-
-
-        	update = function() {
-                if( !api.currentCssSelector )
-                    return ;
-
-                      //alert(api.currentCssSelector.attr("class"));
-        	    var css = '', styleId ,
-                      //elementClass = 'sed-custom-' + api.currentCssSelector,
-                      element = $( api.currentCssSelector );
-
-                styleId = _getStyleId( element , 'sed_font' , 'font');
-
-        		if ( !_.isUndefined( color()[api.currentCssSelector] ) )
-                    css += 'color: ' + color()[api.currentCssSelector] + ' !important;';
-
-        		if ( !_.isUndefined( style()[api.currentCssSelector] ) )
-                    css += 'font-style: ' + style()[api.currentCssSelector] + ' !important;';
-
-        		if ( !_.isUndefined( size()[api.currentCssSelector] ) )
-                    css += 'font-size: ' + size()[api.currentCssSelector] + 'px !important;';
-
-        		if ( !_.isUndefined( weight()[api.currentCssSelector] ) )
-                    css += 'font-weight: ' + weight()[api.currentCssSelector] + ' !important;';
-
-        		if ( !_.isUndefined( family()[api.currentCssSelector] ) ){
-        		    api.typography.loadFont( family()[api.currentCssSelector] );
-                    css += 'font-family: ' + family()[api.currentCssSelector] + ' ';
-                }
-
-        		// Refresh the stylesheet by removing and recreating it.
-        		$( "#" + styleId ).remove();
-        		styleEl = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
-
-        	};
-
-        	$.each( arguments, function() {
-        		this.bind( update );
-        	});
-        });
-
-        textProp = $.map(['decoration', 'align', 'shadow', 'shadow_color'], function( prop ) {
-        	return 'text_' + prop;
-        });
-
-        textProp.push( 'line_height' );
-                                                                                           //
-        api.when.apply( api, textProp ).done( function( decoration, align, shadow, shadow_color, line_height ) {
-        	var update , head = $('head') ;
-
-
-        	update = function() {
-                if( !api.currentCssSelector )
-                    return ;
-
-                      //alert(api.currentCssSelector.attr("class"));
-        	    var css = '', styleId ,
-                      //elementClass = 'sed-custom-' + api.currentCssSelector,
-                      element = $( api.currentCssSelector ) ,
-                      text_shadow , alignVal , newVal;
-
-                styleId = _getStyleId( element , 'sed_text' , 'text');
-
-        		if ( !_.isUndefined( decoration()[api.currentCssSelector] ) )
-                    css += 'text-decoration: ' + decoration()[api.currentCssSelector] + ' !important;';
-
-        		if ( !_.isUndefined( align()[api.currentCssSelector] ) ){
-                        alignVal = align()[api.currentCssSelector];
-                        //widthEl = element.outerWidth() ,
-                        //borderSides = currentBorderSides
-
-                    if( api.isRTL && alignVal == "left" )
-                        newVal = "right";
-                    else if( api.isRTL && alignVal == "right" )
-                        newVal = "left";
-                    else
-                        newVal = alignVal;
-
-
-                    css += 'text-align: ' + newVal + ' !important;';
-                }
-
-        		if ( !_.isUndefined( shadow()[api.currentCssSelector] ) )
-                    text_shadow = shadow()[api.currentCssSelector];
-
-                if ( !_.isUndefined( shadow_color()[api.currentCssSelector] ) && !_.isUndefined( shadow()[api.currentCssSelector] ) && shadow()[api.currentCssSelector] != "none" )
-                    text_shadow += " " + shadow_color()[api.currentCssSelector];
-
-                if ( !_.isUndefined( text_shadow ) )
-                    css += 'text-shadow: ' + text_shadow + ' !important;';
-
-        	   	if ( !_.isUndefined( line_height()[api.currentCssSelector] ) )
-                    css += 'line-height: ' + line_height()[api.currentCssSelector] + 'px !important;';
-
-        		// Refresh the stylesheet by removing and recreating it.
-        		$( "#" + styleId ).remove();
-        		styleEl = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
-
-        	};
-
-        	$.each( arguments, function() {
-        		this.bind( update );
-        	});
-        });
-
-
-        /*sedApp.editor( 'background_color', function( value ) {
-    		value.bind( function( to ) {
-    			api.preview.send( 'update_gradient' , api.currentCssSelector , to );
-    		});
-        });*/
-
-        parallax = $.map(['ratio' , 'image'], function( prop ) {
-        	return 'parallax_background_' + prop;
-        });
-
-        api.when.apply( api, parallax ).done( function( ratio, image ) {
-        	var update , ratioNum;
-
-
-        	update = function() {
-                if( !api.currentCssSelector )
-                    return ;
-
-        		if ( !_.isUndefined( image()[api.currentCssSelector] ) && image()[api.currentCssSelector]  ){
-
-                    if( !_.isUndefined( ratio()[api.currentCssSelector] ) )
-                        ratioNum = ratio()[api.currentCssSelector];
-                    else
-                        ratioNum = 0.5;
-
-                    $( api.currentCssSelector ).attr("data-stellar-background-ratio" , ratioNum );
-                    $( api.currentCssSelector ).data("stellarBackgroundRatio" , ratioNum );
-                    $(window).stellar('refresh');
-                }else{
-                    $( api.currentCssSelector ).removeData("stellarBackgroundRatio");
-                    $( api.currentCssSelector ).removeAttr("data-stellar-background-ratio");
-                    $(window).stellar('refresh');
-                }
-
-            };
-
-          	$.each( arguments, function() {
-          		this.bind( update );
-          	});
-        });
-
-        /* Custom Backgrounds */
-        bg = $.map(['color', 'image', 'position', 'image_scaling', 'attachment', 'gradient'], function( prop ) {
-        	return 'background_' + prop;
-        });
-
-        api.when.apply( api, bg ).done( function( color, image, position, image_scaling, attachment, gradient ) {
-        	var update ,
-                bgSize = "auto",
-                bgRepeat = "no-repeat", bgImg,
-                head = $('head'), bgColor;
-
-
-        	update = function() {
-                if( !api.currentCssSelector )
-                    return ;
-
-        	    var css = '',
-                      styleId ,
-                      //elementClass = 'sed-custom-' + api.currentCssSelector,
-                      element = $( api.currentCssSelector ) ,
-                      sGradient = !_.isUndefined( gradient()[api.currentCssSelector] ) && gradient()[api.currentCssSelector] ,
-                      bgImage  = !_.isUndefined( image()[api.currentCssSelector] ) && image()[api.currentCssSelector] && image()[api.currentCssSelector] != "none";
-
-                styleId = _getStyleId( element , 'sed_background' , 'background');
-
-                      //element.toggleClass( elementClass , !! ( color()[api.currentCssSelector] || image()[api.currentCssSelector] ) )
-
-        		// The body will support custom backgrounds if either
-        		// the color or image are set.
-
-        		if ( !_.isUndefined( color()[api.currentCssSelector] ) )
-                    css += 'background-color: ' + color()[api.currentCssSelector] + ' !important;';
-
-        		if ( !_.isUndefined( image()[api.currentCssSelector] ) && !sGradient){
-
-        		    if( !image()[api.currentCssSelector] || image()[api.currentCssSelector] == "none" )
-        			    css += 'background-image: none !important;';
-                    else
-                        css += 'background-image: url("' + image()[api.currentCssSelector] + '") !important;';
-
-                }else if( !bgImage && sGradient )
-                    css += siteEditorCss.gradient( gradient()[api.currentCssSelector].start , gradient()[api.currentCssSelector].end , gradient()[api.currentCssSelector] );
-                else if( bgImage &&  sGradient )
-                    css += siteEditorCss.gradient( gradient()[api.currentCssSelector].start , gradient()[api.currentCssSelector].end , gradient()[api.currentCssSelector] , image()[api.currentCssSelector] ) ;
-                else if ( _.isUndefined( image()[api.currentCssSelector] ) && !_.isUndefined( gradient()[api.currentCssSelector] ) && !gradient()[api.currentCssSelector] )
-                    css += 'background-image: none !important;';
-                /*if( gradient()[api.currentCssSelector] ) {
-                    api.preview.send( 'update_gradient' , api.currentCssSelector , color()[api.currentCssSelector] );
-                }*/
-
-        		if ( bgImage ) {
-
-                    if ( !_.isUndefined( position()[api.currentCssSelector] ) )
-        			    css += 'background-position: ' + position()[api.currentCssSelector] + ';';
-
-                    if ( !_.isUndefined( attachment()[api.currentCssSelector] ) )
-                        css += 'background-attachment: ' + attachment()[api.currentCssSelector] + ' !important;';
-
-                    if( image_scaling()[api.currentCssSelector] ) {
-                        switch ( image_scaling()[api.currentCssSelector] ) {
-                           case "fullscreen":
-                                bgSize = "100% 100%";
-                           break;
-                           case "fit":
-                                bgSize = "100% auto";
-                                bgRepeat = "repeat-y";
-                           break;
-                           case "tile":
-                                bgSize = "auto";
-                                bgRepeat = "repeat";
-                           break;
-                           case "tile-horizontally":
-                                bgSize = "auto";
-                                bgRepeat = "repeat-x";
-                           break;
-                           case "tile-vertically":
-                                bgSize = "auto";
-                                bgRepeat = "repeat-y";
-                           break;
-                           case "normal":
-                                bgSize = "auto";
-                                bgRepeat = "no-repeat";
-                           break;
-                           case "cover":
-                                bgSize = "cover";
-                                //bgRepeat = "no-repeat";
-                           break;
-                        }
-
-                        css += 'background-repeat: ' + bgRepeat + ' !important;';
-                        css += siteEditorCss.backgroundSize( bgSize );
-                    }
-
-
-        		}
-
-                if( gradient()[api.currentCssSelector] || image_scaling()[api.currentCssSelector])
-                    css += "behavior: url(" + LIBBASE.url + "PIE/PIE.htc" + ");";
-
-        		// Refresh the stylesheet by removing and recreating it.
-        		$( "#" + styleId ).remove();
-        		style = $('<style type="text/css" id="' + styleId + '">' + api.currentCssSelector + '{ ' + css + ' }</style>').appendTo( head );
-
-                if( !_.isUndefined( image()[api.currentCssSelector] )  && api('parallax_background_image')() ){
-                    $(window).stellar('refresh');
-                }
-
-        	};
-
-        	$.each( arguments, function() {
-        		this.bind( update );
-        	});
-        });
+    }; */
 
 	});
 

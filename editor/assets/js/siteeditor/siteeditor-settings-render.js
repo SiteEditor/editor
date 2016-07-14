@@ -21,6 +21,8 @@
 
         api.Events.bind( "renderSettingsControls" , function(id, data , extra){
 
+            api.Events.trigger( "beforerCreateSettingsControls" , id, data , extra);
+
 			var constructor = api.controlConstructor[ data.type ] || api.Control,
 				control;
                              //
@@ -37,6 +39,20 @@
         });
 
         api.modulesSettingsControls = _.groupBy( modulesControls , function(data , id){ return data.shortcode; });
+        console.log( "----api.modulesSettingsControls-------" , api.modulesSettingsControls );
+
+        var allControls = _.map( api.settings.controls ,function( data , id ){
+            var newData = _.clone( data );
+            newData.control_id = id;
+            return newData;
+        });
+
+        var allControlsWithGroup = _.filter( allControls , function( data , key ){
+            return !_.isUndefined(data.sub_category);
+        });
+
+        api.sedGroupControls = _.groupBy( allControlsWithGroup , function(data , id){ return data.sub_category; });
+        console.log( "----api.groupControls-------" , api.sedGroupControls );
 
         var stylesControls = _.filter( api.settings.controls , function( data , id){
             return !_.isUndefined(data.category) && data.category == 'style-editor';
@@ -47,12 +63,13 @@
         var startTime = new Date();
 		$.each( api.settings.controls, function( id, data ) {
 
-            if( _.isUndefined( data.category )  ||  $.inArray( data.category , ['module-settings','style-editor'] ) == -1 || ( !_.isUndefined( data.sub_category ) &&  data.sub_category == "general_settings" && data.category == 'style-editor')  ){
+            if( _.isUndefined( data.category )  ||  $.inArray( data.category , ['module-settings','style-editor' , 'layout'] ) == -1 || ( !_.isUndefined( data.sub_category ) &&  data.sub_category == "general_settings" && data.category == 'style-editor')  ){
                 api.Events.trigger( "renderSettingsControls" , id, data);
             }
 
 		});
 
+        console.log("--------------api.controlConstructor---------------------" , api.controlConstructor);
 
         //console.log( "api.settings.controls : new Date() - startTime ------ : " , new Date() - startTime );
 
@@ -73,7 +90,7 @@
                 //$.when( api.previewerActive )
                 api.previewer.bind( 'previewerActive' ,function(){
                     $.extend( api.defaultPatterns , response || {} );
-					var patterns = api.applyFilters( 'sedDefaultPatternsFilter' , api.defaultPatterns );
+                    var patterns = api.applyFilters( 'sedDefaultPatternsFilter' , $.extend( true , {} , api.defaultPatterns ) );
                     api.previewer.send( "defaultModulePatterns" , patterns );
                 });
             },
@@ -113,11 +130,11 @@
         }); */
 
 		// Check if preview url is valid and load the preview frame.
-		if ( api.previewer.previewUrl() )
-			api.previewer.refresh();
-		else
-			api.previewer.previewUrl( api.settings.url.home );
-
+		if ( api.previewer.previewUrl() ) {
+            api.previewer.refresh();
+        }else {
+            api.previewer.previewUrl(api.settings.url.home);
+        }
 
 		// Control visibility for default controls
         /*

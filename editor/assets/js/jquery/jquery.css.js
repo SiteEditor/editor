@@ -40,6 +40,20 @@ if ( borderRadius && borderRadius !== "borderRadius" ) {
     }
   };
 }
-alert(borderRadius );
+
+var backgroundSize = styleSupport( "backgroundSize" );
+
+// Set cssHooks only for browsers that support a vendor-prefixed border radius
+if ( backgroundSize && backgroundSize !== "backgroundSize" ) {
+  $.cssHooks.backgroundSize = {
+    get: function( elem, computed, extra ) {
+      return $.css( elem, backgroundSize );
+    },
+    set: function( elem, value) {
+      elem.style[ backgroundSize ] = value;
+    }
+  };
+}
+
 
 })( jQuery );

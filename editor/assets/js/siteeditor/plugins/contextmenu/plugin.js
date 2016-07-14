@@ -7,9 +7,11 @@
  */
 
 /*global siteEditor:true */
-siteEditor.PluginManager.add('contextmenu', function(siteEditor) {
+(function( exports, $ ){
 
-  var api = siteEditor.sedAppClass.editor , $ = siteEditor.dom.Sizzle , _directlyTransition;
+  var api = sedApp.editor ,
+      _directlyTransition;
+
   api.currentCssSelector = api.currentCssSelector || "";
   //handels of all loaded scripts in siteeditor app
   api.sedAppLoadedScripts = api.sedAppLoadedScripts || [];
@@ -26,7 +28,7 @@ siteEditor.PluginManager.add('contextmenu', function(siteEditor) {
         api.wpScripts = window._wpRegisteredScripts;
         api.widgetScripts = window._sedAppWidgetScripts;
 		api.l10n = window._sedAppEditorControlsL10n;
-        api.paramsSettingsValid = window._paramsSettingsValid;
+        //api.paramsSettingsValid = window._paramsSettingsValid;
 
 		// Check if we can run the customizer.
 		if ( ! api.settings )
@@ -37,50 +39,18 @@ siteEditor.PluginManager.add('contextmenu', function(siteEditor) {
 		if ( ! $.support.postMessage || (  api.settings.isCrossDomain ) )  //! $.support.cors &&
 			return window.location = api.settings.url.fallback;
 
-        api.previewer.bind( 'contextmenu-ready', function() {  //html : $("#tmpl-contextmenu").html() ,
+        /*api.previewer.bind( 'contextmenu-ready', function() {  //html : $("#tmpl-contextmenu").html() ,
             api.previewer.send( 'contextmenu', { settingsValid: api.paramsSettingsValid } );
-        });
+        });*/
 
         api.Events.bind("sedDialogWebAddress" , function(data){
 
         });
 
 
-        api.Events.bind( 'sed_image_dialog_settings' , function( attrs ) {
-            attrs = $.extend( {} , api.shortcodes.sed_image.attrs || {} , attrs );
-            api.Events.trigger( 'imageUpdateUsingSizes' , attrs );
-        });
-
-        api.Events.bind( 'imageUpdateUsingSizes' , function( attrs ) {
-            if( !_.isUndefined( attrs ) &&  !_.isUndefined( attrs.using_size ) ){
-                if( _.isUndefined( attrs.post_id ) || attrs.post_id == 0 )
-                    $("#sed-app-control-sed_image_using_size").parents(".row_settings:first").hide();
-                else{
-                    $("#sed-app-control-sed_image_using_size").parents(".row_settings:first").show();
-
-                    var optionsStr = "" , id = attrs.post_id;
-                    _.each( api.attachmentSizes[id] , function( size , key ){
-                        var selected = (attrs.using_size == key) ? 'selected="selected"': '';
-                        optionsStr += '<option value="' + key + '" ' + selected + '> ' + api.addOnSettings.imageModule.sizes[key].label + ' - ' + size.width + " x " + size.height + ' </option>';
-                    });
-                    $("#sed_pb_sed_image_using_size").html( optionsStr );
-                }
-            }
-        });
-
-        api.previewer.bind( 'addAttachmentSizes' , function( data ) {
-            var id = data.id , sizes = data.sizes;
-            if( _.isUndefined( api.attachmentSizes ) )
-                api.attachmentSizes = {};
-
-            api.attachmentSizes[id] = sizes;
-        });
-
-
-
-
         var dialogCtxtLoaded = [];
-        api.previewer.bind( 'element_open_dialog', function( sedDialog ) {
+
+        var _elementOpenDialog = function( sedDialog ){
 
             var tmplType = (typeof sedDialog.data.dialogTmplType != "undefined") ? sedDialog.data.dialogTmplType : "static";
 
@@ -112,11 +82,16 @@ siteEditor.PluginManager.add('contextmenu', function(siteEditor) {
             var extra = $.extend({} , sedDialog.extra || {});     //console.log( "dataElement.extra First : ----" , extra );
 
             api.Events.trigger(sedDialog.id , [sedDialog.data] , extra , sedDialog);
+        };
+
+        api.Events.bind( 'element_open_dialog', function( sedDialog ) {
+            _elementOpenDialog( sedDialog );
         });
 
-
+        api.previewer.bind( 'element_open_dialog', function( sedDialog ) {
+            _elementOpenDialog( sedDialog );
+        });
 
 	});
 
-}); //,['background']  :: for dependencies means background related
-                         // to media and int in header.php should using from '-background' instade 'background'
+})( sedApp, jQuery );

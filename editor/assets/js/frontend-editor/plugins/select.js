@@ -23,7 +23,8 @@
                                                                                //.is(".drag_pb_btn")|| $(e.target).is(".drag_pb_btn")
             $( ".sed-pb-module-container" ).livequery(function(){
                 $(this).on("click" , function(e){     // $(this).is(".drag_pb_btn")
-                    if(api.styleEditor.editorState == "on" || self.resizing === true || api.appPreview.mode == "on" || $(this).is("[sed-disable-editing='yes']") )
+                    //api.styleEditor.editorState == "on" ||
+                    if( self.resizing === true || api.appPreview.mode == "on" || $(this).is("[sed-disable-editing='yes']") )
                         return ;
 
                     e.preventDefault();
@@ -42,7 +43,7 @@
                     if (!$(this).is(e.target) && $(this).has(e.target).length === 0 ) {
                         api.preview.send( 'dialogSettingsClose' );
                         api.isOpenDialogSettings = false;
-                        api.styleCurrentSelector = "";
+                        api.currentSedElementId = "";
                     }
                 });
             });
@@ -69,15 +70,11 @@
             }
 
 
-            var elementId = element.attr("id");
+            var elementId = element.attr("sed_model_id");
 
 			var module_container = element.parents(".sed-pb-module-container:first");
-			if(module_container.length > 0)
-				api.preview.send("currentCssSelector" , "#" + module_container.attr("id") );
 
-			api.preview.send( 'currentElementId' , elementId);
-
-            if(!elementId || ( api.styleCurrentSelector == ( "#" + elementId ) && api.isOpenDialogSettings === true ) ){
+            if(!elementId || ( api.currentSedElementId == elementId && api.isOpenDialogSettings === true ) ){
             	//api.log("Error : id and module class Should exist in one container on line 28  : siteeditor/site-iframe/plugin/select.min.js" , elementId);
                 return ;
             }
@@ -94,13 +91,13 @@
 
             api.currentModule =  shortcode_info.moduleName;
 
-            //api.currentModuleId =  elementId;
+            api.preview.send( 'currentElementId' , elementId);
 
-            api.styleCurrentSelector = "#" + elementId;
+            api.currentSedElementId = elementId;
 
-            api.preview.send( 'currentPostId' , $("#" + elementId).parents(".sed-pb-post-container:first").data("postId") );
+            api.preview.send( 'currentPostId' , $( '[sed_model_id="' + elementId + '"]' ).parents(".sed-pb-post-container:first").data("postId") );
 
-            api.Events.trigger("openUpdateModuleSettings" , shortcode , elementId);
+            //api.Events.trigger("openUpdateModuleSettings" , shortcode , elementId);
 
             api.pageBuilder.sendRowData( element );
 

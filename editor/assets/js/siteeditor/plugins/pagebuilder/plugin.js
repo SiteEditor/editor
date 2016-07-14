@@ -7,16 +7,9 @@
  */
 
 /*global siteEditor:true */
-siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
+(function( exports, $ ){
 
-  var api = siteEditor.sedAppClass.editor , $ = siteEditor.dom.Sizzle;
-  //previewer = siteEditor.siteEditorControls;
-  ////api.log( siteEditor );
-  ////api.log( sedApp.editor === api );
-  ////api.log( siteEditor.dom.Sizzle === jQuery );
-  ////api.log( sedApp );
-  ////api.log( jQuery );
-  ////api.log( siteEditor );
+  var api = sedApp.editor;
 
   $( function() {
       api.settings = window._sedAppEditorSettings;
@@ -202,7 +195,7 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
 
        api.previewer.bind("resetSettings" , function( data ){
                        // alert( data.pageId );
-           if( _.isUndefined(data.settings) || _.isUndefined(data.pageId) || _.isUndefined(data.pageType)  )
+           if( _.isUndefined(data.pageId) || _.isUndefined(data.pageType)  )
               return ;                                  
                       //api.log( "data.settings --------------------------- : "  , data );
            /*$.each( data.settings, function( id, value ) {
@@ -222,6 +215,16 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
 
            api.settings.page.id = data.pageId;
            api.settings.page.type = data.pageType;
+
+       });
+
+       api.previewer.bind("resetpageInfoSettings" , function( data ){
+
+          if( _.isUndefined(data.pageId) || _.isUndefined(data.pageType)  )
+              return ;
+
+          api.settings.page.id = data.pageId;
+          api.settings.page.type = data.pageType;
 
        });
 
@@ -265,23 +268,18 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
         api.previewer.bind( 'posts_content_update', function( postsContent ) {
             api.trigger("change");    console.log( 'postsContent ------ : ' , postsContent ); //alert("test");
             api.postsContent = postsContent;
-
+            //api.shortcodeCurrentPlace = "content";
+            
         });
 
         api.previewer.bind( 'pages_theme_content_update', function( pagesContent ) {
-            api.trigger("change");   console.log( 'themeContent ------ : ' , pagesContent );
-            api.pagesThemeContent = pagesContent; console.log( api.pagesThemeContent[api.settings.page.id] );
+            api.trigger("change");   console.log( 'themeContent ------ : ' , pagesContent ); 
+            api.pagesThemeContent = pagesContent;
+            //api.shortcodeCurrentPlace = "theme";
 
-                    _.each( api.pagesThemeContent[api.settings.page.id] , function( shortcode , index ){
+            //api( 'theme_content' ).set( api.pagesThemeContent[api.settings.page.id] );
 
-                        if( !_.isUndefined( shortcode.theme_id ) && !_.isUndefined( shortcode.is_customize ) ){
-                            console.log( "shortcode.is_customize------------," , shortcode );
-                        }else if( !_.isUndefined( shortcode.theme_id ) && _.isUndefined( shortcode.is_customize ) ){
-                            console.log( "shortcode not customize------------," , shortcode );
-                        }
-                    });
-
-            api( 'theme_content' ).set( api.pagesThemeContent[api.settings.page.id] );
+            api.Events.trigger( "sedAfterThemeContentUpdate" );
         });
 
         api.previewer.bind( 'set_editor_current_page', function( obj ) {
@@ -317,6 +315,13 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
                                     //api.log( data );
             api.attachmentsSettings = data;
 
+            _.each( data , function(index, attachment) {
+                api.previewer.trigger( 'addAttachmentSizes' , {
+                    sizes : attachment.sizes,
+                    id : attachment.id,
+                });    
+            });
+
             /*if( _.isUndefined( api.attachmentsSettings ) )
                 api.attachmentsSettings = data;
             else{
@@ -337,7 +342,7 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
         });
 
 
-        api.previewer.bind( 'duplicateSettingsSync', function( sync ) {
+        /*api.previewer.bind( 'duplicateSettingsSync', function( sync ) {
 
             var sed_pb_modules = api( 'sed_pb_modules' )() ,
                  sed_pb_modules_ids = _.keys( sed_pb_modules ) ,
@@ -368,7 +373,7 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
             /*var reg = "#(" + shortcodeIds.join("|") + ")\s+" ,
                 patt = new RegExp( reg , 'i' );
                 patt.test( selector ); */
-
+            /*
             _.each( styleEditorSettings , function( id ){
 
                 var values = sed_page_customized[id],
@@ -376,7 +381,7 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
 
                 _.each( selectors , function( selector ){
                     _.each( shortcodeIds , function( sid ){
-                        var str = "#" + sid;
+                        var str = '[sed_model_id="' + sid + '"]';
                         if( str == selector || selector.indexOf( str + " " ) > -1 ){
                             if( _.isUndefined( rowShortcodes[id] ) )
                                 rowShortcodes[id] = {};
@@ -401,7 +406,7 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
                 //cssSelectors   :  cssSelectors
             });
 
-        });
+        });*/
 
        $(".site-editor-app-tools-button .sed-module-gideline").click(function(){
           if( $(this).hasClass("modules-guideline-on") ){
@@ -431,6 +436,12 @@ siteEditor.PluginManager.add('pagebuilder', function(siteEditor) {
           }
       });
 
+
+      api.previewer.bind( 'pageWidgetsList', function( value ) {
+          var setting = api.instance("page_widgets_list");
+          setting.set( value );
+      });
+
   });
 
-});
+})( sedApp, jQuery );

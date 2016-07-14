@@ -1,6 +1,6 @@
 (function( exports, $ ) {
 
-    var api = sedApp.editor , currentElement = api.styleCurrentSelector;
+    var api = sedApp.editor;
 
     api.SiteEditorIframe = api.Class.extend({
         initialize: function( options , params ){
@@ -1164,7 +1164,7 @@
                             return ;
                         }
                         //this.save();
-                          ////api.log( contentModel );
+                          ////api.log( contentModel );    
                         contentModel.content = content;
                         api.contentBuilder.updateShortcode( contentModel );
 

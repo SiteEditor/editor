@@ -40,10 +40,8 @@
 
                             
 							var module_container = $thisElement.parents(".sed-pb-module-container:first");
-							if(module_container.length > 0)
-								contextmenu.preview.send("currentCssSelector" , "#" + module_container.attr("id") );
 								
-							//contextmenu.preview.send("currentElementId" , $thisElement.attr("id"));
+							//contextmenu.preview.send("currentElementId" , '[sed_model_id="' + $thisElement.attr("sed_model_id") + '"]' );
 							
                             var role = $thisElement.attr("sed-role") || "custom-row",
                                 flength = $("[sed-role='footer']").length,
@@ -92,7 +90,7 @@
                         else
                             $(this).parents(".context-menu-root:first").find(".element-settings").removeClass("context-menu-item-disable");
 
-                        contextmenu.send( 'change_role_row' , {id : $thisElement.attr("id"), role : value});
+                        contextmenu.send( 'change_role_row' , {id : $thisElement.attr("sed_model_id"), role : value});
                     }
                 });
 
@@ -202,7 +200,7 @@
 
         //support contextmenu for sub modules
         filterItems: function( context , element ) {
-            var id = $( context ).attr("id") ,
+            var id = $( context ).attr("sed_model_id") ,
                 shortcode = api.contentBuilder.getShortcode( id ) ,
                 attrs = shortcode.attrs;
 
@@ -257,7 +255,7 @@
 
             api.Events.trigger( "sedShowContextmenu" , event , context , element );
 
-            //this.preview.send("currentElementId" , $thisElement.attr("id"));
+            //this.preview.send("currentElementId" , $thisElement.attr("sed_model_id"));
 
         },
         /****
@@ -312,7 +310,7 @@
 
         $.each( api.itemContextMenuSettings , function( id, item ){
             $( "#" + id ).data( "options", item.options );
-        })
+        });
 
         /*$('.sed-handle-sort-row .setting_btn').livequery( function(){
             $(this).click(function(){
@@ -326,7 +324,7 @@
             $(this).on("click", function(){
                 if(!$(this).hasClass("context-menu-item-disable")){
 
-                    var id = $thisElement.attr("id");//api.log( id );  //api.log( $(this).attr("sed-dialog-id") );
+                    var id = $thisElement.attr("sed_model_id");//api.log( id );  //api.log( $(this).attr("sed-dialog-id") );
                     api.preview.send( 'element_open_dialog' , {
                         tmpl      :  $(this).attr("sed-dialog-tmpl-id"),
                         selector  :  $(this).attr("sed-dialog-selector") ,
@@ -341,7 +339,7 @@
                     //api.styleCurrentSelector = "#" + id;
 
                     $(document).trigger( $(this).attr("sed-dialog-id") , [this]);
-                    //api.preview.send( 'currentElementId' , $thisElement.attr("id"));
+                    //api.preview.send( 'currentElementId' , $thisElement.attr("sed_model_id"));
                 }
             });
 
@@ -351,7 +349,7 @@
 
         api.Events.bind( "ctxtAct_openDialogSettings"  , function(event , context , element){
 
-            var id = $thisElement.attr("id");
+            var id = $thisElement.attr("sed_model_id");
 
             api.preview.send( 'openDialogSettings' , {
                 selector        :  element.attr("sed-dialog-selector") ,
@@ -374,7 +372,7 @@
 
         api.Events.bind( "ctxtAct_duplicate"  , function(event , context , element){
 
-            var id = $thisElement.attr("id");    //api.contentBuilder.getAttrs( id )
+            var id = $thisElement.attr("sed_model_id");    //api.contentBuilder.getAttrs( id )
                                   // element.attr("sed-dialog-selector")   element.data()
            // $thisElement
 
@@ -422,36 +420,49 @@
             //$thisElement.contextMenu("hide");
         });  */
                 //$(".some-selector").contextMenu("hide");
+        /*
+         attachment_id
+         image_url
+        */
 
-        api.Events.bind( "ctxtAct_openMediaLibrary"  , function(event , context , element){
-            var post_id = api.pageBuilder.getPostId( $(context) ) ,
-            containerId = $(context).parents(".sed-pb-module-container:first").attr("id"),
-            shortcode_models = api.contentBuilder.findAllTreeChildrenShortcode( containerId , post_id );
+        var _openLibraryMediaGallery = function( element , options ){
+            var post_id = api.pageBuilder.getPostId( element ) ,
+            containerId = element.parents(".sed-pb-module-container:first").attr("sed_model_id"),
+            shortcode_models = api.contentBuilder.findAllTreeChildrenShortcode( containerId , post_id ) ,
+            media_attrs = options.media_attrs;
 
             shortcode_models = _.map( shortcode_models , function( shortcode ){
-                if(shortcode.id == $(context).attr("id")){
+                if(shortcode.id == element.attr("sed_model_id")){
                     var shortcode_info = api.shortcodes[shortcode.tag];
                     shortcode.attrs = $.extend({} , shortcode_info.attrs , shortcode.attrs);
                 }
 
                 return shortcode;
             });
-                         
+
             //api.log( shortcode_models );
             api.preview.send( 'openMediaLibrary' , {
-                moduleId            : $(context).attr("id") ,
-                options             : element.data("options"),
+                moduleId            : element.attr("sed_model_id") ,
+                options             : options,
                 models              : shortcode_models,
                 moduleContainerId   : containerId
             });
+        };
 
-            //alert( $(context).attr("id") );
 
+        api.Events.bind( "ctxtAct_openMediaLibrary"  , function(event , context , element){
+            var options = element.data("options");
+            _openLibraryMediaGallery( $(context) , options );
+
+        });
+
+        api.preview.bind("openMediaLibraryEditGallery" , function( options ){
+            _openLibraryMediaGallery( $( '[sed_model_id="' + api.currentSedElementId + '"]' ) , { 'media' : options } );
         });
 
         api.preview.bind("updateMediaListModule" , function( data ){
             ////api.log( data );
-            var postId = api.pageBuilder.getPostId( $("#" + data.moduleContainerId) ) ,
+            var postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + data.moduleContainerId + '"]' ) ) ,
                 shortcode = api.contentBuilder.getShortcode( data.moduleContainerId ) ,
                 syncMediaAttachments = [];
 
@@ -463,17 +474,8 @@
                 api.contentBuilder.contentModel[postId] = _.map( api.contentBuilder.contentModel[postId] , function(shortcode){
 
                     if(shortcode.newModel === true){
-                        if( shortcode.tag != "content" ){
-                            shortcode_info = api.shortcodes[shortcode.tag];
 
-                            if(shortcode_info.asModule){
-                                id = api.pageBuilder.getNewId( shortcode_info.moduleName , "module" , postId );
-                            }else{
-                                id = api.pageBuilder.getNewId( shortcode.tag , "shortcode" , postId );
-                            }
-                        }else{
-                            id = api.pageBuilder.getNewId( shortcode.tag , "shortcode" , postId );
-                        }
+                        var id = api.pageBuilder.getNewId( );
 
                         ////update post_id attr and other in sed_{{media}} shortcode
                         if( !_.isUndefined(shortcode.attrs) && !_.isUndefined(shortcode.attrs.sed_main_media) && shortcode.attrs.sed_main_media ){

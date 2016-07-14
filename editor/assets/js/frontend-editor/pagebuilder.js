@@ -1,8 +1,9 @@
 (function( exports, $ ) {
 
-    var api = sedApp.editor , currentElement = api.styleCurrentSelector;
+    var api = sedApp.editor ;
     api.shortcodeUpdate = api.shortcodeUpdate || {};
     api.moduleAttrUpdate = api.moduleAttrUpdate || {};
+    api.sedModulesAttrsValues = api.sedModulesAttrsValues || {};
     api.fn = api.fn || {};
 
     api.PageBuilder = api.Class.extend({
@@ -10,7 +11,7 @@
             var self = this;
             //, $parent = $('[sed-role="row-pb"]').parent()
             //$parent.addClass("sed-pb-rows-box bp-component");
-
+                                  
             $.extend( this, options || {} );
 
             this.jsCounter = 0;
@@ -67,12 +68,28 @@
                 api.currentModule = name;
 
                 if(name == "widget"){
-                       api.widgetBuilder.widgetsHandler($element , name, $this, ui.direction );
+
+                    var _callback = function(){
+                        api.widgetBuilder.widgetsHandler($element , name, $this, ui.direction );
+                    },jsModules = [];
+
+                    jsModules.push( api.ModulesEditorJs[name] );
+
+                    var scripts = this._checkLoadedScript( jsModules , this.wpScripts );
+
+                    if($.isArray( scripts )  && scripts.length > 0 )
+                        this.moduleScriptsLoad( scripts , _callback );
+                    else
+                        _callback();
+
                 }else{
+                    /*var dropItem = ( $this.attr("sed_model_id") ) ? $this : $this.parents(".bp-component:first") ,
+                        direction =  ( $this.attr("sed_model_id") ) ? ui.direction : "none";*/
+
                     if( !_.isUndefined( api.modulesSettings[name] ) && !_.isUndefined( api.modulesSettings[name].transport ) && api.modulesSettings[name].transport == "ajax" ){
                         pagebuilder.ajaxHandlerModules(name, $this, ui.direction );
                     }else{
-                        pagebuilder.directlyHandlerModules(name, $this, ui.direction );
+                        pagebuilder.directlyHandlerModules(name, $this , ui.direction );
                     }
                 }
             }else if( option == "drop" ){
@@ -90,7 +107,20 @@
                 pagebuilder.currentHelperOffset = ui.offset;
 
                 if(name == "widget"){
-                       api.widgetBuilder.widgetsHandler($element , name, $this, "none" );
+
+                    var _callback = function(){
+                        api.widgetBuilder.widgetsHandler($element , name, $this, "none" );
+                    },jsModules = [];
+
+                    jsModules.push( api.ModulesEditorJs[name] );
+
+                    var scripts = this._checkLoadedScript( jsModules , this.wpScripts );
+
+                    if($.isArray( scripts )  && scripts.length > 0 )
+                        this.moduleScriptsLoad( scripts , _callback );
+                    else
+                        _callback();
+
                 }else{
                     if(   !_.isUndefined( api.modulesSettings[name] ) && !_.isUndefined( api.modulesSettings[name].transport ) && api.modulesSettings[name].transport == "ajax"  ){
                         pagebuilder.ajaxHandlerModules(name, $this, "none" );
@@ -110,18 +140,18 @@
                 mRowSh = api.contentBuilder.getShortcode( module_id );
 
 
-            if( $("#" + module_id).length > 0 )
-                postId = this.getPostId( $("#" + module_id) );
+            if( $('[sed_model_id="' + module_id + '"]').length > 0 )
+                postId = this.getPostId( $('[sed_model_id="' + module_id + '"]') );
             else
                 postId = this.currentPostId;
 
-            container = ( !_.isUndefined( container )  ) ? container : ( $("#" + module_id).length > 0 ) ? $("#" + module_id) : "body";
+            container = ( !_.isUndefined( container )  ) ? container : ( $('[sed_model_id="' + module_id + '"]').length > 0 ) ? $('[sed_model_id="' + module_id + '"]') : "body";
 
             if( _.isUndefined( postId ) || postId == 0 ){
                 api.log("---------postId Error : postId Is Undefined. pagebuilder.min.js *ajaxLoadModules* method  ");
                 return ;
             }
-                   
+
             pattern = api.contentBuilder.findAllTreeChildrenShortcode( module_id , postId );
             pattern.unshift( mRowSh );
 
@@ -278,7 +308,7 @@
             if(!$shortcode_name)
                 return false;
             else
-                return api.defaultPatterns[$shortcode_name];
+                return api.applyFilters( 'sedDefaultPatternFilter' , api.defaultPatterns[$shortcode_name] , $shortcode_name );
         },
 
         //for modules with default transport
@@ -286,7 +316,7 @@
             var elementId;
 
             if(this.currentDragType == "free" || direction != "none" )
-                elementId = dropItem.attr("id");
+                elementId = dropItem.attr("sed_model_id");
             else
                 elementId = dropItem.data("parentId");
 
@@ -306,7 +336,7 @@
             var elementId;
 
             if(this.currentDragType == "free" || direction != "none" )
-                elementId = dropItem.attr("id");
+                elementId = dropItem.attr("sed_model_id");
             else
                 elementId = dropItem.data("parentId");
 
@@ -404,9 +434,9 @@
 
 
             //apply align And spacing of the module container
-            var postId              = this.getPostId( newItem ) ,
-                id                  = this.getModuleId( name , postId ) ,
-                module_container    = $( "#" + id ).parents(".sed-pb-module-container:first");
+            var postId              = this.getPostId( newItem );
+                id                  = newItem.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
+                module_container    = $( '[sed_model_id="' + id + '"]' ).parents(".sed-pb-module-container:first");
 
 
 			/*if(module_container.length > 0 && !_.isUndefined( api.shortcodes[shortcode.name] ) && !_.isUndefined( api.shortcodes[shortcode.name].params ) ){
@@ -442,8 +472,8 @@
             //show modules settings on create
             if( !_.isUndefined( api.modulesSettings[name] ) && !_.isUndefined( api.modulesSettings[name].show_settings_on_create ) && api.modulesSettings[name].show_settings_on_create )
                 forceOpen = true;
-                                       
-            api.selectPlugin.select( $( "#" + id ) , forceOpen );
+
+            api.selectPlugin.select( $( '[sed_model_id="' + id + '"]' ) , forceOpen );
 
             return newItem;
         },
@@ -509,93 +539,71 @@
                 //parentId = newItem.parents('[sed-shortcode="true"]:first').attr("id");
             }
 
-            pattern = this.getPatternByModuleName(name); ////api.log( pattern );
+            pattern = this.getPatternByModuleName(name);
             if(!$.isArray( pattern ) || pattern.length == 0)
                 return ;
 
-            var moduleShortcode = api.modulesSettings[name].shortcode;
+            //pattern = api.applyFilters( 'sedDefaultPatternFilter' , pattern , name );
 
-            if(self.currentDragType == "regular"){
+            var currPattern = $.extend( true, {} , pattern ) ,
+                modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
+                rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
+                moduleShortcode = api.modulesSettings[name].shortcode ,
+                className = self.setModuleContextmenuClass( modulePattern[0]  , moduleShortcode  ) ,
+                attrs = {} , newPattern;
 
-                var module = api.defaultPatterns['sed_module'];
+            attrs.class = className;
 
-                //var newModule = _.clone( self.setModuleContextmenuClass( module[0]  , moduleShortcode  ) );
-                var className = self.setModuleContextmenuClass( module[0]  , moduleShortcode  );
-                var attrs = {} , newModule = $.extend(true, {}, module[0]);
-                attrs.class = className;
+            attrs = this.addAlignSpacingAttrToModule( name , attrs );
 
-                attrs = this.addAlignSpacingAttrToModule( name , attrs );
+            if( self.currentDragType == "regular" ){
+                rowPattern[0].attrs.type = 'static-element';
 
-                if( !_.isObject( newModule.attrs ) )
-                    newModule.attrs = {};
-                                                     
-                $.extend( newModule.attrs , attrs );
-                     //console.log("newModule.attrs--------------------" , newModule.attrs);
-                if( typeof( module ) == 'undefined' ){
-                    //api.log("=================== SED ERROR ==========================");
-                    //api.log("module base is not defined");
-                }
+                var rowClassName = self.setModuleContextmenuClass( rowPattern[0]  , moduleShortcode  );
 
-                var row    = api.shortcodes['sed_row'];
-                newModule.children = pattern;
-                pattern = [newModule];
-
-                var id = this.getNewId( 'row' );
-
-                row.attrs.type = 'static-element';
-
-                var rowClassName = self.setModuleContextmenuClass( row  , moduleShortcode  );
-
-                row.attrs.class = className;
+                rowPattern[0].attrs.class = rowClassName;
 
                 if(name == "row-container"){
-                    row.attrs.length = "boxed";
+                    rowPattern[0].attrs.length = "boxed";
                 }else{
-                    row.attrs.length = "wide";
+                    rowPattern[0].attrs.length = "wide";
                 }
 
-                var new_shortcode = {
-                  parent_id : parentId,
-                  tag       : 'sed_row',
-                  attrs     : self.sanitizeAttrsValues( row.attrs )  || {},
-                  id        : id,
-                  //type      :
-                };
             }else if(self.currentDragType == "free"){
-
-                var module  = api.shortcodes['sed_module'];
-                var className = self.setModuleContextmenuClass( module , moduleShortcode  );
-
-                var id = this.getNewId( 'module' );
-
-                //var className = (module.attrs.class) ? module.attrs.class + " " : "";
-                var attrs = _.clone( module.attrs ) || {};
-                attrs.class = className + "module-element-draggable";
-
-                attrs = this.addAlignSpacingAttrToModule( name , attrs );
-
-                var new_shortcode = {
-                  parent_id : parentId,
-                  tag       : 'sed_module',
-                  attrs     : self.sanitizeAttrsValues( attrs ),
-                  id        : id,
-                  //type      :
-                };
+                attrs.class += "module-element-draggable";
             }
 
-            var shortcodes = this.loadPattern( pattern , id ),
+            modulePattern[0].attrs = attrs;
+
+            currPattern = _.map( currPattern , function( shModel ){
+                if( shModel.parent_id == currPattern[0].parent_id ){
+                    shModel.parent_id = modulePattern[0].id;
+                }
+                return shModel;
+            });
+
+            if( self.currentDragType == "regular" ){
+                modulePattern[0].parent_id = rowPattern[0].id;
+                newPattern = $.merge( $.merge( $.merge( [], rowPattern ), modulePattern ) , currPattern );
+            }else if(self.currentDragType == "free"){
+                newPattern = $.merge( $.merge( [], modulePattern ), currPattern ) ;
+            }
+
+            var shortcodes = this.loadPattern( newPattern , parentId ),
             postId , typeS;
             if(elementId == "root" && direction == "none"){
                 api.shortcodeCurrentPlace = dropItem.data("contentType");
                 postId = dropItem.data("postId");
             }else{
-                postId = this.getPostId( $("#" + elementId) );
+                postId = this.getPostId( $( '[sed_model_id="' + elementId + '"]' ) );
             }
 
-            shortcodes.unshift( new_shortcode );
+            var id = shortcodes[0].id;
 
             shortcodes = this.setHelperShortcodes( shortcodes , name );
             shortcodes = this.shortcodesPatternFilter( shortcodes );
+console.log(" -----------------CREATED PATTERN ------------------------ " , shortcodes );
+            this.syncStyleEditorPreview( shortcodes );
 
             if(direction == "down"){
               typeS = 0;
@@ -605,9 +613,9 @@
               this.contentBuilder.addShortcodesToParent(  parentId , shortcodes , postId );
               return id;
             }
-
+                                        console.log( "-----------------shortcodes---------------------" , shortcodes );
             var nextPreId = (nextPre) ? elementId: "";
-                                                       //api.log( shortcodes );
+
             this.contentBuilder.addShortcodeModule( shortcodes , postId, nextPreId , typeS);
             return id;
         },
@@ -756,8 +764,8 @@
         },
 
         directlyHandlerModules: function( name , dropItem, direction ){
-            var html = $("#sed-shortcode-module-" + name + "-tmpl").html() ,
-            inline_js , inline_css , newItem , self = this;
+            //var html = $("#sed-shortcode-module-" + name + "-tmpl").html() ,
+            var inline_js , inline_css , newItem , self = this;
 
             var _callback = function(){
                 self.addModuleToPost( name , dropItem , direction );
@@ -792,56 +800,19 @@
             return parentC.data("postId");
         },
 
-        getCurrentModuleId : function( name ){
-
-            return 'sed-bp-module-' + name + "-" + this.currentPostId + "-" + api.modules[this.currentPostId][name].length;
+        sedGuid : function() {
+            return this.SEDID() + this.SEDID() + "-" + this.SEDID();
         },
 
-
-        //for child shortcode , this shortcode not modules
-        getCurrentShortcodeId : function( name ){
-            return 'sed-bp-shortcode-' + name + "-" + this.currentPostId + "-" + api.childShortcode[this.currentPostId][name].length;
+        SEDID : function () {
+            return (65536 * (1 + Math.random()) | 0).toString(16).substring(1);
         },
 
-        getNewId : function( name , type , postId  ){
-            var id;
-			type = type || "module";
+        getNewId : function( ){
 
-            if( !_.isUndefined( postId ) )
-                this.currentPostId = postId;
-
-            if(type == "module"){
-
-                api.modules[this.currentPostId] = _.isEmpty( api.modules[this.currentPostId] ) ? {} : api.modules[this.currentPostId];
-
-                if(typeof api.modules[this.currentPostId][name] == 'undefined'){
-                    api.modules[this.currentPostId][name] = {
-                        length : 1
-                    };
-                }else{
-                    api.modules[this.currentPostId][name].length += 1;
-                }
-                           console.log( "api.modules------" , api.modules );
-
-                id = 'sed-bp-module-' + name + "-" + this.currentPostId + "-" + api.modules[this.currentPostId][name].length;
-            }else{
-
-                api.childShortcode[this.currentPostId] = _.isEmpty( api.childShortcode[this.currentPostId] ) ? {} : api.childShortcode[this.currentPostId];
-
-                if(typeof api.childShortcode[this.currentPostId][name] == 'undefined'){
-                    api.childShortcode[this.currentPostId][name] = {
-                        length : 1
-                    };
-                }else{
-                    api.childShortcode[this.currentPostId][name].length += 1;
-                }
-
-
-
-                id = 'sed-bp-shortcode-' + name + "-" + this.currentPostId + "-" + api.childShortcode[this.currentPostId][name].length;
-            }
-
-            return id;
+            //return Date.now() + "-" + this.sedGuid();
+            //return "sed-gid-" + Date.now();
+            return _.uniqueId("sed-gid-");
         },
 
         loadPattern : function( pattern , parent_id ){
@@ -849,126 +820,123 @@
             if(!$.isArray(pattern) || pattern.length == 0)
                 return ;
 
-            var id ,
-                shortcodes = [] ,
-                new_shortcode ,
+            pattern[0].parent_id = parent_id;
+
+            var shortcodes = [] ,
                 self = this ,
-                shortcode_info ,
                 scripts ,
-                styles ;
+                styles ,
+                patternIds = {};
+                                   console.log( "pattern-----------" , pattern );
+            shortcodes = _.map( pattern , function( shortcode , index ){
+                var id;
 
-            $.each( pattern , function( index , shortcode){
+                if( self.currentAjaxModule ){
 
-                if( shortcode.name != "content" ){
-                    shortcode_info = api.shortcodes[shortcode.name];
+                    self.ajaxModuleScripts[self.currentAjaxModule] = $.merge( self.ajaxModuleScripts[self.currentAjaxModule] , api.shortcodesScripts[shortcode.tag] || []);
 
-                    if( self.currentAjaxModule ){
+                    self.ajaxModuleStyles[self.currentAjaxModule] = $.merge( self.ajaxModuleStyles[self.currentAjaxModule] , api.shortcodesStyles[shortcode.tag] || []);
+                }
 
-                        self.ajaxModuleScripts[self.currentAjaxModule] = $.merge( self.ajaxModuleScripts[self.currentAjaxModule] , api.shortcodesScripts[shortcode.name] || []);
-
-                        self.ajaxModuleStyles[self.currentAjaxModule] = $.merge( self.ajaxModuleStyles[self.currentAjaxModule] , api.shortcodesStyles[shortcode.name] || []);
-                    }
+                if( shortcode.tag != "content" ){
+                    var shortcode_info = api.shortcodes[shortcode.tag];
 
                     if( typeof( shortcode_info ) == 'undefined' ){
                         //api.log("=================== SED ERROR ==========================");
-                        console.error("shortcode " + shortcode.name +" is not defined");
+                        console.error("shortcode " + shortcode.tag +" is not defined");
                         return ;
                     }
-
-                    if(shortcode_info.asModule){
-                        id = self.getNewId( shortcode_info.moduleName );
-                    }else{
-                    	if(shortcode_info.asModule){
-	                        id = self.getNewId( shortcode_info.moduleName );
-	                    }else{
-	                        id = self.getNewId( shortcode.name , "shortcode" );
-	                    }
-                    }
-                }else{
-                    id = self.getNewId( shortcode.name , "shortcode" );
                 }
 
-                new_shortcode = {
-                    parent_id : parent_id,
-                    tag       : shortcode.name,
-                    attrs     : self.sanitizeAttrsValues(shortcode.attrs) || {},
-                    id        : id,
-                    //type      :
-                };
+                id = self.getNewId( );
 
-                if( shortcode.name == "content" ){
-                    new_shortcode.content = shortcode.content;
+                patternIds[shortcode.id] = id;
+
+                shortcode.id = id;
+
+                if( _.isUndefined( shortcode.attrs ) ){
+                    shortcode.attrs = {};
                 }
 
-                shortcodes.push( new_shortcode );
+                shortcode.attrs.sed_model_id = id;
 
-                if($.isArray( shortcode.children ) && shortcode.children.length > 0){
-                    var shortcodes_children = self.loadPattern( shortcode.children , id);
-                    shortcodes = $.merge( shortcodes , shortcodes_children || []);
-                }
+                shortcode.attrs = self.sanitizeAttrsValues(shortcode.attrs) || {};
 
+                return shortcode;
+
+            });
+
+            if( parent_id != "root" )
+                patternIds["root"] = parent_id;
+
+            shortcodes = _.map( shortcodes , function(shortcode){
+
+                if( !_.isUndefined( patternIds[shortcode.parent_id] ) )
+                    shortcode.parent_id = patternIds[shortcode.parent_id];
+
+                return shortcode;
             });
 
             return shortcodes;
 
         },
 
+        syncStyleEditorPreview : function( shortcodes ){
+            var self = this;
+            _.each( shortcodes , function( shortcode ){
+                if( !_.isUndefined( shortcode.attrs ) && !_.isUndefined( shortcode.attrs.sed_css ) && !_.isEmpty( shortcode.attrs.sed_css ) ) {
+                    _.each( shortcode.attrs.sed_css , function (properties, selector) {
+
+                        var patt = /\[\s*(sed_model_id)\s*=\s*["\']?([^"\']*)["\']?\s*\]/g;
+                        var new_selector = selector.replace( patt , '[sed_model_id="' + shortcode.id + '"]' );
+
+                        $.each(properties, function (setting_id, value) {
+
+                            api.preview.trigger('current_css_setting_type', "module");
+                            api.preview.trigger('current_css_selector', new_selector);
+                            api(setting_id).set(value);
+
+                        });
+
+                    });
+                }
+            })
+        },
+
         sanitizeAttrsValues : function( attrs ){
 
-            $.each( attrs , function( attr , value){
+            if( _.isObject( attrs ) && !_.isEmpty( attrs ) ){
+                _.each( attrs , function( value , attr ){
 
-               if( value === "true" )
-                  value = true;
-               else if( value === "false" )
-                  value = false;
+                   if( value === "true" )
+                      value = true;
+                   else if( value === "false" )
+                      value = false;
 
-                attrs[attr] = value;
-            });
+                    attrs[attr] = value;
+                });
+            }
 
             return attrs;
 
         },
 
-        getModuleId : function( name , postId , index ){
-            index = (index) ? index : "last";
-            if(index == "last")
-                return 'sed-bp-module-' + name + "-" + postId + "-" + api.modules[postId][name].length;
-        },
-
         //this function for add new items by sed_add_shortcode
-        addNewShortcodeElement : function( elmId , attrs , parent_id , postId){
-
-            if( _.isUndefined(postId) )
-                postId = this.getPostId( $("#" + elmId) );
-
-            postId = postId || this.currentPostId;
-
-            if( !postId )
-                alert("postId undefined error in line 826 pagebuilder.min.js");
+        addNewShortcodeElement : function( elmId , attrs , parent_id ){
 
             var children = api.contentBuilder.getShortcodeChildren( elmId );
-            attrs = attrs || [];        //alert( parent_id );
+            attrs = attrs || [];
                                  ////api.log( attrs );
             if(!$.isArray(children) || children.length == 0){
                 return [];
             }else{
-                var id , shortcodes = [] , new_shortcode , self = this, shortcode_info;
+                var shortcodes = [] , new_shortcode , self = this, shortcode_info;
 
                 $.each( children , function( index , shortcode){
 
-                    if( shortcode.tag != "content" ){
-                        shortcode_info = api.shortcodes[shortcode.tag];
+                    var id = self.getNewId();
+                    var $thisAttrs = attrs[index];
 
-                        if(shortcode_info.asModule){
-                            id = self.getNewId( shortcode_info.moduleName , "module" , postId );
-                        }else{
-                            id = self.getNewId( shortcode.tag , "shortcode" , postId );
-                        }
-                    }else{
-                        id = self.getNewId( shortcode.tag , "shortcode" , postId );
-                    }
-                      var $thisAttrs = attrs[index];
-                      ////api.log( $.extend(true, shortcode.attrs || {}, $thisAttrs || {}) );
                     new_shortcode = {
                       parent_id : parent_id,
                       tag       : shortcode.tag,
@@ -986,7 +954,7 @@
                     if(attrs.length > 0)
                         var shifted = attrs.shift();
 
-                    var shortcodes_children = self.addNewShortcodeElement( shortcode.id , attrs , id , postId);
+                    var shortcodes_children = self.addNewShortcodeElement( shortcode.id , attrs , id );
                     shortcodes = $.merge( shortcodes , shortcodes_children || []);
 
                 });
@@ -1003,12 +971,6 @@
         @direction      :::   down | up
         */
 
-           /* if(shortcode.asModule == "true"){
-                shortcode.id = this.getCurrentModuleId( shortcode.moduleName );
-            }else{
-                shortcode.id = this.getCurrentShortcodeId( shortcode.name  );
-            } */
-
         modulesSortable: function(){
             var self = this , oldWidth , sortAreaStart ,
                 domUpdate = false , sender = null , currentSortArea , contentModel;
@@ -1024,6 +986,7 @@
                 cancel: ".empty-column",
                 items : ">.sed-row-pb" ,
                 zIndex: 1070 ,
+                revert : true ,
                 //cursorAt: { left: 5 },
                 //forceHelperSize: true,
                 //forcePlaceholderSize: true,
@@ -1040,7 +1003,7 @@
 
                     contentModel = parentC.data("contentType");
 
-                    $(".sed-app-editor #main").css("padding" , "25px 0 40px");
+                    //$(".sed-app-editor #main").css("padding" , "25px 0 40px");
                     $("body").addClass("module-dragging-mode");
 
                     //for sub_theme module-----
@@ -1069,8 +1032,7 @@
 
                 stop : function( event, ui ){
 
-
-                    $(".sed-app-editor #main").css("padding" , "");
+                    //$(".sed-app-editor #main").css("padding" , "");
                     $("body").removeClass("module-dragging-mode");
 
                     $('.bp-component').each(function( i , element ){
@@ -1078,6 +1040,27 @@
                         self.addRemoveSortableClass( $(this) );
 
                     });
+
+                    if( !ui.item.parent().hasClass("site-main") && ui.item.hasClass("sed-main-content-row-role") ){
+                        self.addRemoveSortableClass( ui.item.parents(".bp-component:first") , 1 );
+                        sortAreaStart.removeClass("sed-pb-empty-sortable-area");
+                        alert("You do not Allow to Content layout drag in to any drop area only allow sort it with layout rows");
+                        domUpdate = false;
+                        return false;
+                    }
+
+                    api.Events.trigger( "moduleBeforeSortableStopEvent" , ui , $(this) );
+
+                    var result = api.applyFilters( 'modulesSortableFilters' , {
+                        sort        : true ,
+                        domUpdate   : domUpdate
+                    } , ui , sender , currentSortArea , sortAreaStart , contentModel );
+
+                    domUpdate = _.clone( result.domUpdate );
+
+                    if( result.sort === false ){
+                        return false;
+                    }
 
                     if(domUpdate === true){
                         api.contentBuilder.updateModulesOrder( ui , sender , currentSortArea , contentModel );
@@ -1092,7 +1075,7 @@
                     });
 
                     //for sub_theme module-----
-                    api.Events.trigger( "moduleSortableStopEvent" , ui );
+                    api.Events.trigger( "moduleSortableStopEvent" , ui , $(this) );
                 },
 
                 update : function( event, ui ){
@@ -1146,6 +1129,44 @@
         modulesHandles: function(){
             var self = this;
 
+            $('[sed-role="static-template-content"]').livequery(function(){
+                if( $(this).is("[sed-disable-editing='yes']") )
+                    return ;
+
+                var element = $(this);
+                tmpl = "#sed-static-module-handle-tmpl";
+                var dnp = $( $( tmpl ).html() ).appendTo( element );
+
+                dnp.data( "moduleStaticSelector" , '[sed-role="static-template-content"]' );
+                dnp.data( "moduleSettingId" , 'sed_content_options' );
+
+                element.hover(function(e){
+                    //api.styleEditor.editorState == "on" ||
+                    if( self.resizing === true)
+                        return ;
+
+                    e.stopPropagation();
+
+                    dnp.show();
+
+                },function(e){
+                    //api.styleEditor.editorState == "on" ||
+                    if( self.resizing === true)
+                        return ;
+
+                    dnp.hide();
+                });
+
+                dnp.find(".edit-action-item").click(function(){
+                    api.preview.send( "openAppSettings" , {
+                        settingId : "sed_content_options" ,
+                        forceOpen : true ,
+                        reset     : true
+                    });
+                });
+
+            });
+
             // add controller to each element in pages include settings And Delete And Move
             $('.sed-bp-element').livequery(function(){
                 if( $(this).is("[sed-disable-editing='yes']") )
@@ -1155,11 +1176,11 @@
                 tmpl = "#sed-bp-element-handle-tmpl";
                 var dnp = $( $( tmpl ).html() ).appendTo( element );
 
-                dnp.find('.remove_pb_btn').data( "moduleRelId" , element.attr("id") );
+                dnp.find('.remove_pb_btn').data( "moduleRelId" , element.attr("sed_model_id") );
 
                 element.not("[data-type-row='draggable-element']").hover(function(e){
-
-                    if(api.styleEditor.editorState == "on" || self.resizing === true)
+                    //api.styleEditor.editorState == "on" ||
+                    if(self.resizing === true)
                         return ;
 
                     e.stopPropagation();
@@ -1182,8 +1203,8 @@
 
                     dnp.show();
                 },function(e){
-
-                    if(api.styleEditor.editorState == "on" || self.resizing === true)
+                    //api.styleEditor.editorState == "on" ||
+                    if( self.resizing === true)
                         return ;
 
                     //e.stopPropagation();
@@ -1195,13 +1216,13 @@
 
             $('[sed-module-cover="has-cover"]').livequery(function(){
                 if( $(this).is("[sed-disable-editing='yes']") ){
-                    var id = $(this).attr("id") ,
+                    var id = $(this).attr("sed_model_id") ,
                     cid = id + "-cover";
 
                     $('<div id="' + cid + '" class="module-element-force-cover"></div').insertAfter( $(this) )
                 }else{
-                    var id = $(this).attr("id") ,
-                        shortcode= api.contentBuilder.getShortcode( $(this).attr("id") ) ,
+                    var id = $(this).attr("sed_model_id") ,
+                        shortcode= api.contentBuilder.getShortcode( id ) ,
                         $moduleContextmenuId;
                             //console.log( "api.contextMenuSettings ----- : " , api.contextMenuSettings );
                     $.each( api.contextMenuSettings , function( id, data ){
@@ -1224,11 +1245,11 @@
             $(".jp-jplayer video,.jp-jplayer audio,.fullwidth-video video").livequery(function(){
                 if( api.appPreview.mode == "off" ){
 
-                    var moduleId = $(this).parents(".sed-pb-module-container:first").attr("id");
+                    var moduleId = $(this).parents(".sed-pb-module-container:first").attr("sed_model_id");
 
-                    /*if( $("#" + moduleId).is("[sed-disable-editing='yes']") ){
-                        alert( $("#" + moduleId).find(".module-element-force-cover").length );
-                        $("#" + moduleId).find(".module-element-force-cover").addClass("force-show");
+                    /*if( $('[sed_model_id="' + moduleId + '"]').is("[sed-disable-editing='yes']") ){
+                        alert( $('[sed_model_id="' + moduleId + '"]').find(".module-element-force-cover").length );
+                        $('[sed_model_id="' + moduleId + '"]').find(".module-element-force-cover").addClass("force-show");
                     } */
 
                     if( _.isUndefined( api.videoAudioTags ) ){
@@ -1289,8 +1310,10 @@
 
                 ////api.log( $(this).attr("class") );
                 if(!$(this).hasClass("sed-pb-first-col")){ //alert("jclejeri");
+                    var _rtl = ( $("body").hasClass("rtl-body") ) ? true : false;
                     $( this ).sedColumnResize({
                         unit : "%" ,
+                        isRtl : _rtl ,
                         resizeStart : function(event , item){
                             prevWidth = item.prev().width();
                             prevOWidth = item.prev().outerWidth();
@@ -1309,12 +1332,27 @@
                             var minWidth = options.minWidth , unit = options.unit ;
                             self.resizing = true;
                             var p = item.prev();   //alert( maxWidth );
-                            if(prevWidth + d >= minWidth && prevWidth + d <= maxWidth){
-                                if(unit == "%")                       //+ ppad + pbor + pmar
-                                   p.css("width", ( ( ( prevOWidth + d  ) / ppW) * 100 ) + "%");
-                                else
-                                   p.width( prevOWidth + d );
-                                //p.find(">.sed-column-contents-pb > [sed-layout-role='pb-module']").css( 'width', (prevWidth + d) + "px" );
+
+                            if( options.isRtl === true ){
+
+                                if(prevWidth - d >= minWidth && prevWidth - d <= maxWidth){
+                                    if(unit == "%")                       //+ ppad + pbor + pmar
+                                       p.css("width", ( ( ( prevOWidth - d  ) / ppW) * 100 ) + "%");
+                                    else
+                                       p.width( prevOWidth - d );
+                                    //p.find(">.sed-column-contents-pb > [sed-layout-role='pb-module']").css( 'width', (prevWidth + d) + "px" );
+                                }
+
+                            }else{
+
+                                if(prevWidth + d >= minWidth && prevWidth + d <= maxWidth){
+                                    if(unit == "%")                       //+ ppad + pbor + pmar
+                                       p.css("width", ( ( ( prevOWidth + d  ) / ppW) * 100 ) + "%");
+                                    else
+                                       p.width( prevOWidth + d );
+                                    //p.find(">.sed-column-contents-pb > [sed-layout-role='pb-module']").css( 'width', (prevWidth + d) + "px" );
+                                }
+
                             }
 
                             lazyResize();
@@ -1329,7 +1367,7 @@
 
                             $.each( [item , item.prev()] , function(i,item){
 
-                                api.contentBuilder.updateShortcodeAttr( "width"  , ( (item.outerWidth()/ppW) * 100) + "%" , item.attr("id") );
+                                api.contentBuilder.updateShortcodeAttr( "width"  , ( (item.outerWidth()/ppW) * 100) + "%" , item.attr("sed_model_id") );
                             });
 
                             modules.trigger( "sed.moduleResizeStop" );
@@ -1386,13 +1424,13 @@
                 }
 
                 if(self.columnsMod == "update")
-                    api.contentBuilder.updateShortcodeAttr( "width"  , _w , $(this).attr("id") );
+                    api.contentBuilder.updateShortcodeAttr( "width"  , _w , $(this).attr("sed_model_id") );
 
             });
         },
 
         updateColumnsNumber: function( elementId , attrValue){
-            var tr = $("#" + elementId) ,
+            var tr = $( '[sed_model_id="' + elementId + '"]' ) ,
                 tds = tr.children(".sed-column-pb") ,
                 tdsLen = tds.length;
 
@@ -1424,7 +1462,7 @@
             }else if(tdsLen < attrValue){
 
                 for (var i=0; i < attrValue - tdsLen ; i++)  {
-                    var id = $("#" + elementId).parents(".sed-cols-table:first").next().attr("id");
+                    var id = $( '[sed_model_id="' + elementId + '"]' ).parents(".sed-cols-table:first").next().attr("sed_model_id");
                     api.Events.trigger("sed_add_new_shortcode_element" , id , [] , "sed_columns" , '' , elementId);
                 }
 
@@ -1432,7 +1470,7 @@
 
                 for (var i = 1; i <=  tdsLen - attrValue; i++)  {
                     ////api.log( tds.eq(tdsLen - i) );
-                    api.remove( tds.eq(tdsLen - i).attr("id") );
+                    api.remove( tds.eq(tdsLen - i).attr("sed_model_id") );
                 }
 
                 this.setColsWidth( tr );
@@ -1476,7 +1514,7 @@
                         api.pageBuilder.masonrySpacing( elementId , attrValue); */
 
         masonryNumberColumns: function( elementId , number , masonrySelector , masonryItemSelector ){
-            var $element = $("#" + elementId),
+            var $element = $( '[sed_model_id="' + elementId + '"]' ),
                 masonrySelector = masonrySelector || '.sed-archive-masonry',
                 masonryItemSelector = masonryItemSelector || '.sed-archive-masonry > div',
                 $container = $element.find( masonrySelector );
@@ -1513,9 +1551,9 @@
                 selector        :  "sed_row" ,
                 data            :  rowDialogData,
                 extra :  {
-                    attrs : api.contentBuilder.getAttrs( rowElement.attr("id") ) || {}
+                    attrs : api.contentBuilder.getAttrs( rowElement.attr("sed_model_id") ) || {}
                 },
-                rowId : rowElement.attr("id")
+                rowId : rowElement.attr("sed_model_id")
             });
         },
 
@@ -1538,6 +1576,8 @@
         api.contextMenuSettings = window._sedAppEditorContextMenuSettings;
         api.itemContextMenuSettings = window._sedAppEditorItemContextMenuSettings;
 
+        api.pageStaticContentInfo = window._sedAppPageContentInfo;
+
         api.pageBuilder = new api.PageBuilder({} , {
             preview         : api.preview,
             contentBuilder  : api.contentBuilder,
@@ -1555,16 +1595,33 @@
             api.pageBuilder.modulesDrag( handle.option , handle.args );
         });
 
+        if( $("#sed-post-content-container").length > 0 ){
+            var content = decodeURIComponent( $("#sed_template_post_content").html() );
+            $("#sed-post-content-container").html( content );
+        }
+
         //update current page settings
         api.preview.bind( 'active', function() {
+
+            api.preview.send( 'resetpageInfoSettings' , {
+                //settings    : api.settings.values  ,
+                pageId      : api.currentPageInfo.id  ,
+                pageType    : api.currentPageInfo.type ,
+                //isFrontPage : api.currentPageInfo.isFrontPage ,
+                //isHome      : api.currentPageInfo.isHome
+                //previewUrl  : api.currentPageInfo.preview_url
+            } );
 
             api.preview.send( 'checkModuleDragSync' );
 
             api.preview.send( 'mainContentShortcodeUpdate' , api.mainContentShortcode);
-
+            
 			api.preview.send( 'syncAttachmentsSettings' , api.attachmentsSettings);
 
             api.preview.send( 'currentPageInfo' , api.currentPageInfo);
+
+            api.preview.send( 'pageStaticContentInfo' , api.pageStaticContentInfo);
+
 
          /* api.preview.send( 'set_editor_current_page' , {
                 changePage  : false ,
@@ -1572,14 +1629,19 @@
             }); */
         });
 
+        //select module from top iframe
+        api.preview.bind( 'go_back_to_main_module' , function( elementId ) {
+            api.selectPlugin.select( $( '[sed_model_id="' + elementId + '"]' ) , false );
+        });
+
         api.preview.bind( 'changePreviewType', function( attr ) {
             //reset settings if preview type is new
             api.preview.send( 'resetSettings' , {
-                settings    : api.settings.values  ,
+                //settings    : api.settings.values  ,
                 pageId      : api.currentPageInfo.id  ,
                 pageType    : api.currentPageInfo.type ,
-                isFrontPage : api.currentPageInfo.isFrontPage ,
-                isHome      : api.currentPageInfo.isHome
+                //isFrontPage : api.currentPageInfo.isFrontPage ,
+                //isHome      : api.currentPageInfo.isHome
                 //previewUrl  : api.currentPageInfo.preview_url
             } );
 		});
@@ -1603,7 +1665,7 @@
 		});
 
 
-        api.Events.bind("openUpdateModuleSettings" , function( shortcode , elementId){
+        /*api.Events.bind("openUpdateModuleSettings" , function( shortcode , elementId){
             if( shortcode.tag == "sed_image" && !_.isUndefined( shortcode.attrs )
                 && !_.isUndefined( shortcode.attrs.post_id ) && shortcode.attrs.post_id > 0 ){
                 var attachment = _.findWhere( api.attachmentsSettings , { id : shortcode.attrs.post_id}  );
@@ -1614,7 +1676,7 @@
                     });
                 }
             }
-        });
+        });*/
 
 
         api.preview.bind( 'moduleSkinsTpl', function( skinsTpl ) {
@@ -1631,12 +1693,19 @@
         } );
 
         api( 'sed_pb_modules', function( value ) {
-    		value.bind( function( modules ) {
-    		    var elementId = api.styleCurrentSelector.replace("#" , "");
+    		value.bind( function( currentAttrValue ) {
+    		    var elementId = api.currentSedElementId;
 
-                if( _.isUndefined( elementId ) || !elementId || _.isUndefined( modules[elementId] ) || _.isUndefined( modules[elementId][api.currentAttr] ) )
+                if( _.isUndefined( elementId ) || !elementId  )
                     return ;
 
+                if( _.isUndefined( api.sedModulesAttrsValues[elementId] ) ){
+                    api.sedModulesAttrsValues[elementId] = {};
+                }
+
+                api.sedModulesAttrsValues[elementId][api.currentAttr] = currentAttrValue;
+
+                var modules = api.sedModulesAttrsValues || {};
 
                 var _filterFloat = function (value) {
                     if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
@@ -1652,7 +1721,15 @@
                 if( api.currentAttr != "skin" )
                     api.contentBuilder.updateShortcodeAttr( api.currentAttr  , attrValue , elementId );
 
+                if( api.currentAttr == "hidden_in_mobile" || api.currentAttr == "show_mobile_only" ){
+            
+                    var $module = $( '[sed_model_id="' + elementId + '"]' ).parents(".sed-pb-module-container:first").parent();
+                    api.contentBuilder.updateShortcodeAttr( api.currentAttr  , attrValue , $module.attr("sed_model_id") );
 
+                    var $row = $module.parent();
+                    api.contentBuilder.updateShortcodeAttr( api.currentAttr  , attrValue , $row.attr("sed_model_id") );
+
+                }
 
                 var transport = api.pageBuilder.getModuleTransport( api.currentShortcode  , "shortcode");
 
@@ -1664,7 +1741,7 @@
 
                     if( !_.isUndefined( ajaxInfo ) && ajaxInfo.processing === true ){
                         var _success = function( response ){
-                            $("#" + shortcode.parent_id).replaceWith( response.data );
+                            $( '[sed_model_id="' + shortcode.parent_id + '"]' ).replaceWith( response.data );
                         };
 
                         ajaxInfo.request.abort();
@@ -1683,7 +1760,7 @@
                     return ;
                 }
 
-                if( !_.isUndefined( api.shortcodeUpdate[api.currentShortcode] ) && !_.isUndefined( api.shortcodeUpdate[api.currentShortcode][api.currentAttr] ) ){ 
+                if( !_.isUndefined( api.shortcodeUpdate[api.currentShortcode] ) && !_.isUndefined( api.shortcodeUpdate[api.currentShortcode][api.currentAttr] ) ){
                     api.shortcodeUpdate[api.currentShortcode][api.currentAttr]( elementId , attrValue );
                     return ;
                 }
@@ -1718,7 +1795,7 @@
 
                     key_setting = key_setting.join("");
 
-                    var $element = $("#" + elementId).find('.sed-carousel');
+                    var $element = $( '[sed_model_id="' + elementId + '"]' ).find('.sed-carousel');
                     $element.data(key_setting , attrValue );
                     //console.log( attrValue === true );
                     //$element.slick( 'slickSetOption' , key_setting , attrValue , true );
@@ -1779,7 +1856,7 @@
                     return ;
                 }
 
-                var alignSpacingAttrs = {
+                /*var alignSpacingAttrs = {
                     'module_align'  :   'text-align'   ,
                     'spacing_left'  :   'padding-left' ,
                     'spacing_top'   :   'padding-top'  ,
@@ -1788,8 +1865,8 @@
                 };
 
                 if( $.inArray( api.currentAttr , _.keys( alignSpacingAttrs ) ) > -1 ){
-                    var moduleParent = $("#" + elementId).parents(".sed-pb-module-container:first") ,
-                        moduleParentId = moduleParent.attr("id") ,
+                    var moduleParent = $( '[sed_model_id="' + elementId + '"]' ).parents(".sed-pb-module-container:first") ,
+                        moduleParentId = moduleParent.attr("sed_model_id") ,
                         moduleParentSh = api.contentBuilder.getShortcode( moduleParentId );
 
                     if( moduleParentSh.tag != "sed_module" )
@@ -1829,14 +1906,14 @@
              		$( "#" + styleId ).remove();
                 	style = $('<style type="text/css" id="' + styleId + '">#' + moduleParentId + '{ ' + css + ' }</style>').appendTo( body );
                     return ;
-                }
+                } */
 
                 switch ( api.currentAttr ) {
                     case "group_icon_size" :
 
                         api.fn.updateGroupIcons( elementId , "font_size"  , attrValue );
-                        var currEl = $("#" + elementId).find(".hi-icon"),
-                            currMo = $("#" + elementId);
+                        var currEl = $( '[sed_model_id="' + elementId + '"]' ).find(".hi-icon"),
+                            currMo = $( '[sed_model_id="' + elementId + '"]' );
                         currEl.css("fontSize" , attrValue + "px");
                         currMo.css("fontSize" , attrValue + "px");
                         currEl.trigger( "sed.changeIconSize", [ attrValue ] );
@@ -1845,7 +1922,7 @@
                     case "group_icon_color" :
 
                         api.fn.updateGroupIcons( elementId , "color"  , attrValue );
-                        var currEl = $("#" + elementId).find(".hi-icon");
+                        var currEl = $( '[sed_model_id="' + elementId + '"]' ).find(".hi-icon");
                         currEl.css("color" , attrValue);
 
                     break;
@@ -1859,23 +1936,23 @@
                         api.Events.trigger( "setImageGroupAttrs" , modules , elementId , "images_group" , "image_click" );
                     break;
                     /*if( attrValue )
-                        $("#" + elementId).find(".ih-item h3").show();
+                        $( '[sed_model_id="' + elementId + '"]' ).find(".ih-item h3").show();
                     else
-                        $("#" + elementId).find(".ih-item h3").hide();
+                        $( '[sed_model_id="' + elementId + '"]' ).find(".ih-item h3").hide();
 
                     if( attrValue )
-                        $("#" + elementId).find(".ih-item p").show();
+                        $( '[sed_model_id="' + elementId + '"]' ).find(".ih-item p").show();
                     else
-                        $("#" + elementId).find(".ih-item p").hide();*/
+                        $( '[sed_model_id="' + elementId + '"]' ).find(".ih-item p").hide();*/
 
                     case "pb_columns":
                         api.pageBuilder.updateColumnsNumber( elementId , attrValue);
                     break;
                     case "equal_column_width":
                         if( attrValue === true ){
-                            var numCols = $("#" + elementId).find(">.sed-column-pb").length;
-                            $("#" + elementId).find(">.sed-column-pb").each(function(){
-                                api.contentBuilder.updateShortcodeAttr( "width"  , ( 100/numCols ) + "%" , $(this).attr("id") );
+                            var numCols = $( '[sed_model_id="' + elementId + '"]' ).find(">.sed-column-pb").length;
+                            $( '[sed_model_id="' + elementId + '"]' ).find(">.sed-column-pb").each(function(){
+                                api.contentBuilder.updateShortcodeAttr( "width"  , ( 100/numCols ) + "%" , $(this).attr("sed_model_id") );
                             });
                             api.Events.trigger( "syncModuleTmpl" , elementId , api.currentShortcode );
                         }
@@ -1888,17 +1965,17 @@
                     break;
                     case "length" :
                         var targEl;
-                        if( !_.isUndefined( $("#" + elementId).attr("length_element") ) )
-                            targEl = $("#" + elementId);
+                        if( !_.isUndefined( $( '[sed_model_id="' + elementId + '"]' ).attr("length_element") ) )
+                            targEl = $( '[sed_model_id="' + elementId + '"]' );
                         else
-                            targEl = $("#" + elementId).find("[length_element]");
+                            targEl = $( '[sed_model_id="' + elementId + '"]' ).find("[length_element]");
 
                         if(attrValue == "boxed")
                             targEl.addClass( "sed-row-boxed" ).removeClass("sed-row-wide");
                         else
                             targEl.addClass( "sed-row-wide" ).removeClass("sed-row-boxed");
 
-                        $("#" + elementId ).find(".sed-row-pb > .sed-pb-module-container").trigger( "sedChangeModulesLength" , [attrValue] );
+                        $( '[sed_model_id="' + elementId + '"]' ).find(".sed-row-pb > .sed-pb-module-container").trigger( "sedChangeModulesLength" , [attrValue] );
 
                     break;
                     case "skin":
@@ -1931,7 +2008,7 @@
 
                                 var shortcode = api.contentBuilder.getShortcode( elementId ),
                                     _success = function( response ){
-                                        $("#" + shortcode.parent_id).replaceWith( response.data );
+                                        $( '[sed_model_id="' + shortcode.parent_id + '"]' ).replaceWith( response.data );
                                     };
 
                                 api.pageBuilder.ajaxLoadModules( shortcode.parent_id , _success );
@@ -1955,7 +2032,7 @@
 
         var _getGroupItems = function( modules , elementId , groupAttr , groupVal ){
             var mainShortcode = api.contentBuilder.getShortcode(elementId) ,
-                postId = api.pageBuilder.getPostId( $("#" + elementId) ) ,
+                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) ,
                 currentAttr = api.currentAttr ,
                 modulesShortcodes = api.contentBuilder.findAllTreeChildrenShortcode( mainShortcode.id , postId );
 
@@ -1994,7 +2071,7 @@
 
         api.Events.bind( "loadGroupModulesSkin" , function( modules , elementId , skinGroup ){
             var mainShortcode = api.contentBuilder.getShortcode(elementId) ,
-                postId = api.pageBuilder.getPostId( $("#" + elementId) ) ,
+                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) ,
                 currentSkin = modules[elementId][api.currentAttr] ,
                 modulesShortcodes = api.contentBuilder.findAllTreeChildrenShortcode( mainShortcode.id , postId );
 
@@ -2057,7 +2134,7 @@
             var shortcode_info = api.shortcodes[shortcode_name] ,
                 refresh = !_.isUndefined( refresh ) ? refresh : false ,
                 module , dataSkins , scripts , styles , pattern, shortcodes ,
-                postId = ( $("#" + elementId).length > 0 ) ? api.pageBuilder.getPostId( $("#" + elementId) ) : api.pageBuilder.currentPostId ,
+                postId = ( $( '[sed_model_id="' + elementId + '"]' ).length > 0 ) ? api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) : api.pageBuilder.currentPostId ,
                 mainShortcode = api.contentBuilder.getShortcode(elementId) ,
                 parentId , newMainShortcode;
                                             //api.log( api.dataModulesSkins , "----" , mainShortcode , "----" , shortcode_info.asModule  );
@@ -2086,10 +2163,11 @@
                 return ;
             }
 
-            if( $("#" + elementId).length > 0 )
-                api.pageBuilder.currentPostId = api.pageBuilder.getPostId( $("#" + elementId) );
+            if( $( '[sed_model_id="' + elementId + '"]' ).length > 0 )
+                api.pageBuilder.currentPostId = api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) );
 
             shortcodes = api.pageBuilder.loadPattern( pattern , parentId );
+
               ////api.log( _.clone(shortcodes) );
             var mainIndex = api.contentBuilder.getShortcodeIndex( elementId );
 
@@ -2168,7 +2246,7 @@
                        }
 
                        //apply new id attribute
-                       //arr2obj.attrs.id = arr2objCopy.attrs.id;
+                       //arr2obj.attrs.sed_model_id = arr2objCopy.attrs.sed_model_id;
                        //arr2obj.attrs.class = arr2objCopy.attrs.class;
                        //arr2obj.attrs.skin = arr2objCopy.attrs.skin;
 
@@ -2206,19 +2284,13 @@
             ////api.log(shortcodes);
             ////api.log(modulesShortcodesCopy);
 
-            var getModuleId = function( name , postId , index ){
-                index = (index) ? index : "last";
-                if(index == "last")
-                    return 'sed-bp-module-' + name + "-" + postId + "-" + api.modules[postId][name].length;
-            };
-
 
             scripts = dataSkin.js;
             styles = dataSkin.css;
 
             var _callback = function(){
                                          ////api.log( api.contentBuilder.getShortcodeChildren( newMainShortcode.parent_id ) );
-                api.contentBuilder.updateShortcodeAttr( "skin"  , currentSkin , newMainShortcode.id ); //getModuleId( module ,postId )
+                api.contentBuilder.updateShortcodeAttr( "skin"  , currentSkin , newMainShortcode.id ); 
 
                 /*//using in save page As one template
                 api.pageModulesUsing = _.map(api.pageModuleUsing , function( module ){
@@ -2231,7 +2303,7 @@
 
                 //not needed in group skins
                 if( type != "group" ){
-                    api.styleCurrentSelector = newMainShortcode.id;//"#" + getModuleId( module ,postId );
+                    api.currentSedElementId = newMainShortcode.id;
                 }
 
                 /*var html = api.contentBuilder.do_shortcode( "sed_items_elastic_slider" , parentId );
@@ -2245,18 +2317,16 @@
 
 
                 if( type != "group" ){
-                    //$("#" + parentId)[0].outerHTML = html;
+                    //$( '[sed_model_id="' + parentId + '"]' )[0].outerHTML = html;
                     if( refresh === false )
                         api.contentBuilder.refreshModule( parentId );
 
                     //not needed in group skins
-                    newMainShortcode.attrs.id = newMainShortcode.id;//getModuleId( module ,postId );
+                    newMainShortcode.attrs.sed_model_id = newMainShortcode.id;
 
-        			var module_container = $("#" + newMainShortcode.id ).parents(".sed-pb-module-container:first");
-        			if(module_container.length > 0)
-        				api.preview.send("currentCssSelector" , "#" + module_container.attr("id") );
+        			var module_container = $( '[sed_model_id="' + newMainShortcode.id + '"]'  ).parents(".sed-pb-module-container:first");
 
-                    api.Events.trigger("openUpdateModuleSettings" , newMainShortcode , newMainShortcode.id);
+                    //api.Events.trigger("openUpdateModuleSettings" , newMainShortcode , newMainShortcode.id);
 
                    //not needed in group skins
                     api.preview.send( 'changeCurrentElementBySkinChange', {
@@ -2278,7 +2348,7 @@
             }else if( refresh == "ajax" ){
                 _callback();
                 var _success = function( response ){
-                        $("#" + newMainShortcode.parent_id ).replaceWith( response.data );
+                        $( '[sed_model_id="' + newMainShortcode.parent_id + '"]'  ).replaceWith( response.data );
                     };
 
                 api.pageBuilder.ajaxLoadModules( newMainShortcode.parent_id , _success );
@@ -2312,7 +2382,7 @@
         $("#page").find('[data-sed-animation]').livequery(function(){
             $(this).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 
-                var styleId = 'sed-pb-animations-'+ $(this).attr("id");
+                var styleId = 'sed-pb-animations-'+ $(this).attr("sed_model_id");
 
                 $(this).removeClass( 'animated');
                 $(this).css('animation-name' , 'none');
@@ -2340,13 +2410,13 @@
 
         var _testAnim = function(x , elementId , styleId ) {
 
-            var animation = $('#' + elementId).data("sedAnimation");
+            var animation = $( '[sed_model_id="' + elementId + '"]' ).data("sedAnimation");
 
             if( animation ){
-                $('#' + elementId).removeClass( animation );
-                $('#' + elementId).removeClass( 'animated');
-                $('#' + elementId).removeClass( 'wow');
-                $('#' + elementId).css({   //.removeClass( x + ' wow' )
+                $( '[sed_model_id="' + elementId + '"]' ).removeClass( animation );
+                $( '[sed_model_id="' + elementId + '"]' ).removeClass( 'animated');
+                $( '[sed_model_id="' + elementId + '"]' ).removeClass( 'wow');
+                $( '[sed_model_id="' + elementId + '"]' ).css({   //.removeClass( x + ' wow' )
                     "animationName" : "" ,
                     "visibility" : "" ,
                     "animationIterationCount" : "" ,
@@ -2355,7 +2425,7 @@
                 });
             }
 
-            $('#' + elementId).addClass( x + ' animated' ).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $( '[sed_model_id="' + elementId + '"]' ).addClass( x + ' animated' ).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 
                 $(this).removeClass( 'animated');
                 $(this).css('animation-name' , 'none');
@@ -2373,8 +2443,8 @@
             animateSettings = animateSettings.split(",");
 
             if(!animateSettings){
-                $('#' + elementId).removeData( 'sedAnimation' );
-                $('#' + elementId).removeAttr( 'data-sed-animation' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'sedAnimation' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-sed-animation' );
 
                 if($( "#" + styleId ).length > 0)
                     $( "#" + styleId ).remove();
@@ -2384,13 +2454,13 @@
 
             if( _.isUndefined( animateSettings[3] ) || !_.isString( animateSettings[3] ) || !$.trim( animateSettings[3] ) ){
 
-                var sedAnimation = $('#' + elementId).data( 'sedAnimation' );
+                var sedAnimation = $( '[sed_model_id="' + elementId + '"]' ).data( 'sedAnimation' );
 
-                if( sedAnimation && $('#' + elementId).hasClass( sedAnimation ) )
-                    $('#' + elementId).removeClass( sedAnimation )
+                if( sedAnimation && $( '[sed_model_id="' + elementId + '"]' ).hasClass( sedAnimation ) )
+                    $( '[sed_model_id="' + elementId + '"]' ).removeClass( sedAnimation )
 
-                $('#' + elementId).removeData( 'sedAnimation' );
-                $('#' + elementId).removeAttr( 'data-sed-animation' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'sedAnimation' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-sed-animation' );
 
                 if($( "#" + styleId ).length > 0)
                     $( "#" + styleId ).remove();
@@ -2400,36 +2470,36 @@
             }
 
             if( !_.isUndefined( animateSettings[2] ) && _isInteger( animateSettings[2] ) ){
-                $('#' + elementId).attr( 'data-wow-duration' , animateSettings[2] + "ms"  );
+                $( '[sed_model_id="' + elementId + '"]' ).attr( 'data-wow-duration' , animateSettings[2] + "ms"  );
                 css += '-webkit-animation-duration: ' + animateSettings[2] + 'ms;animation-duration: ' + animateSettings[2] + 'ms;';
             }else{
-                $('#' + elementId).removeAttr( 'data-wow-duration' );
-                $('#' + elementId).removeData( 'wowDuration' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-wow-duration' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'wowDuration' );
             }
 
             if( !_.isUndefined( animateSettings[0] ) && _isInteger( animateSettings[0] ) ){
-                $('#' + elementId).attr( 'data-wow-delay' , animateSettings[0] + "ms" );
+                $( '[sed_model_id="' + elementId + '"]' ).attr( 'data-wow-delay' , animateSettings[0] + "ms" );
                 css += '-webkit-animation-delay: ' + animateSettings[0] + 'ms;animation-delay: ' + animateSettings[0] + 'ms;';
             }else{
-                $('#' + elementId).removeAttr( 'data-wow-delay' );
-                $('#' + elementId).removeData( 'wowDelay' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-wow-delay' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'wowDelay' );
             }
 
 
             if( !_.isUndefined( animateSettings[1] ) && _isInteger( animateSettings[1] ) ){
-                $('#' + elementId).attr( 'data-wow-iteration' , animateSettings[1] );
+                $( '[sed_model_id="' + elementId + '"]' ).attr( 'data-wow-iteration' , animateSettings[1] );
                 count = (animateSettings[1] == -1) ?  'infinite': animateSettings[1];
                 css += '-webkit-animation-iteration-count: ' + count + ';animation-iteration-count: ' + count + ';';
             }else{
-                $('#' + elementId).removeAttr( 'data-wow-iteration' );
-                $('#' + elementId).removeData( 'wowIteration' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-wow-iteration' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'wowIteration' );
             }
 
     		if(  !_.isUndefined( animateSettings[4] ) && _isInteger( animateSettings[4] ) )
-    			$('#' + elementId).attr( 'data-wow-offset' , animateSettings[4] );
+    			$( '[sed_model_id="' + elementId + '"]' ).attr( 'data-wow-offset' , animateSettings[4] );
             else{
-                $('#' + elementId).removeAttr( 'data-wow-offset' );
-                $('#' + elementId).removeData( 'wowOffset' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-wow-offset' );
+                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'wowOffset' );
             }
 
             if(!css)
@@ -2438,12 +2508,12 @@
             if($( "#" + styleId ).length > 0)
                 $( "#" + styleId ).remove();
                                                      //[sed-role="mm-element"]
-            style = $('<style type="text/css" id="' + styleId + '">#' + elementId + ' { ' + css + ' }</style>').appendTo( $('head') );
+            style = $('<style type="text/css" id="' + styleId + '"> [sed_model_id="' + elementId + '"]  { ' + css + ' }</style>').appendTo( $('head') );
 
 
             _testAnim( animateSettings[3] , elementId , styleId  );  //+ " wow"
-            $('#' + elementId).data( 'sedAnimation' , animateSettings[3] );
-            $('#' + elementId).attr( 'data-sed-animation' , animateSettings[3] );
+            $( '[sed_model_id="' + elementId + '"]' ).data( 'sedAnimation' , animateSettings[3] );
+            $( '[sed_model_id="' + elementId + '"]' ).attr( 'data-sed-animation' , animateSettings[3] );
 
 
         });
@@ -2531,7 +2601,7 @@
                         o.group.each(function(idx , element){
                             var list = ( !_.isUndefined( o.list ) ) ? $(this).find( o.list ) : $(this);
                             o.onCreate();
-                            api.Events.trigger("sed_add_new_shortcode_element" , o.patternId , o.attrs[i] || [] , o.shortcode_name , o.onAddPatten , list.attr("id") , o.refresh);
+                            api.Events.trigger("sed_add_new_shortcode_element" , o.patternId , o.attrs[i] || [] , o.shortcode_name , o.onAddPatten , list.attr("sed_model_id") , o.refresh);
                         });
 
                     }
@@ -2548,14 +2618,14 @@
                     if(type == "single"){
 
                         o.onRemove( o.list.eq(oldValue - i) );
-                        api.remove( o.list.eq(oldValue - i).attr("id") );
+                        api.remove( o.list.eq(oldValue - i).attr("sed_model_id") );
 
                     }else if(type == "multiple"){
 
                         o.group.each(function(idx , element){
                             var list = ( !_.isUndefined( o.list ) ) ? $(this).find( o.list ) : $(this);
                             o.onRemove( list.find( o.memberG ).eq( oldValue - i ) );
-                            api.remove( list.find( o.memberG ).eq( oldValue - i ).attr("id") );
+                            api.remove( list.find( o.memberG ).eq( oldValue - i ).attr("sed_model_id") );
                         });
 
                     }
@@ -2571,11 +2641,11 @@
 
         api.Events.bind("sed_add_new_shortcode_element" ,function( patternId , attrs , currentShortcode , callback , parent_id , refresh){
 
-            var  id = patternId, parent_id = (!parent_id) ? $("#" + id).prev().attr("id") : parent_id ,
+            var  id = patternId, parent_id = (!parent_id) ? $( '[sed_model_id="' + id + '"]' ).prev().attr("sed_model_id") : parent_id ,
                 shortcodes = api.pageBuilder.addNewShortcodeElement(id , attrs , parent_id) ,
-                postId = api.pageBuilder.getPostId( $("#" + id) ) ,
+                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + id + '"]' ) ) ,
                 refresh = (_.isUndefined( refresh )) ? true : refresh;
-                               //appendShortcodes
+
             api.contentBuilder.addShortcodesToParent( parent_id , shortcodes , postId );
             if(refresh)
                 api.Events.trigger( "syncModuleTmpl" , parent_id , currentShortcode );
@@ -2586,7 +2656,7 @@
 
         api.fn.setNumberColumns = function( to , $element ){
 
-            var $id  = $element.attr("id") ,
+            var $id  = $element.attr("sed_model_id") ,
                 $container  = $element.find('.sed-products-list');
 
 
@@ -2610,7 +2680,7 @@
             if( $container.hasClass('sed-products-masonry') ){
                 $container.masonry();
             }else if( $container.hasClass('sed-products-grid') ){
-                var css = '#'+ $id + ' .sed-products-grid .sed-item-product:nth-of-type(' + to + 'n+1){ clear: both;}';
+                var css = '[sed_model_id="' + module_id + '"] .sed-products-grid .sed-item-product:nth-of-type(' + to + 'n+1){ clear: both;}';
                 $("#sed-products-grid-clear").remove();
                 $("head").append( '<style id="sed-products-grid-clear" type="text/css">' + css + '</style>' );
             }
@@ -2641,9 +2711,33 @@
 
         };
 
+         api.preview.bind( "subShortcodesAttrUpdate" , function( obj ){
+              var className = obj["class"] ,
+                  parentModelId = api.currentSedElementId ,
+                  attr = obj.attr ,
+                  value = obj.value;
+
+              if( $.isArray( value ) ){
+                  value = value.join(",");
+              }
+
+              var mainShortcode = api.contentBuilder.getShortcode( parentModelId ) ,
+                  postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + parentModelId + '"]' ) ) ,
+                  shortcodes = api.contentBuilder.findAllTreeChildrenShortcode( mainShortcode.parent_id , postId );
+
+              var groupItems = _.filter( shortcodes , function( shortcode ){
+                  return !_.isUndefined(shortcode.attrs) && !_.isUndefined(shortcode.attrs["class"]) && shortcode.attrs["class"] == className;
+              });
+
+              _.each( groupItems  , function( shortcode ){
+                  api.contentBuilder.updateShortcodeAttr( attr  , value , shortcode.id);
+              });
+         });
+
+
         api.fn.updateGroupIcons = function( elementId , attr , value ){
             var mainShortcode = api.contentBuilder.getShortcode(elementId) ,
-                postId = api.pageBuilder.getPostId( $("#" + elementId) ) ,
+                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) ,
                 modulesShortcodes = api.contentBuilder.findAllTreeChildrenShortcode( mainShortcode.parent_id , postId );
 
             var groupItems = _.filter( modulesShortcodes , function( shortcode ){
@@ -2655,9 +2749,9 @@
             });
         };
 
-        api.fn.changeIcon = function( icon ){  
+        api.fn.changeIcon = function( icon ){
             var iconClass = icon.className ,
-                currEl = $( api.styleCurrentSelector ).find(".hi-icon");
+                currEl = $( '[sed_model_id="' + api.currentSedElementId + '"]' ).find(".hi-icon");
 
             currEl.removeClass( currEl.attr("sed-icon") ).addClass(iconClass);
             currEl.attr("sed-icon" , iconClass);
@@ -2669,6 +2763,151 @@
             api.Events.trigger( "change_icon_" + icon.shortcodeName , icon );
 
         });
+
+        api.fn.getAttachmentImageFullSrc = function( attach_id ){
+            var attachment;
+            if( attach_id > 0 ){
+                attachment = _.findWhere( api.attachmentsSettings , { id : attach_id }  );
+            }
+
+            var imgUrl = SED_BASE_URL + 'images/no-image.jpg';
+            if( !_.isUndefined( attachment ) && attachment && !_.isUndefined( attachment.url ) ){
+                if( !_.isUndefined( attachment.sizes) && !_.isUndefined( attachment.sizes.full ) ){
+                    imgUrl = attachment.sizes.full.url;
+                }else{
+                    imgUrl = attachment.url;
+                }
+            }
+
+            return imgUrl;
+        };
+
+        api.fn.getAttachmentImage = function( attach_id , size , is_custom ){
+            var attachment , imgUrl , _height , _width , _caption , _description , _title;
+            attach_id = parseInt( attach_id );
+            if( attach_id > 0 ){
+                attachment = _.findWhere( api.attachmentsSettings , { id : attach_id }  );
+            }
+
+            if( !_.isUndefined( attachment ) && attachment && !_.isUndefined( attachment.url ) ){
+
+                if( attachment.type != "image" ){
+                    alert( "Attachment With ID : " + attach_id + " is not image." );
+                    return false;
+                }
+
+                size = ( !_.isUndefined( size ) ) ? size : "thumbnail" ;
+                is_custom = ( !_.isUndefined( is_custom ) ) ? is_custom : false ;
+
+                if( !is_custom ){
+                    if( !_.isUndefined( attachment.sizes) && !_.isUndefined( attachment.sizes[size] ) ){
+                        imgUrl = attachment.sizes[size].url;
+                    }else if( !_.isUndefined( attachment.sizes) && !_.isUndefined( attachment.sizes.large ) ){
+                        imgUrl = attachment.sizes.large.url;
+                        size = "large";
+                    }else if( !_.isUndefined( attachment.sizes) && !_.isUndefined( attachment.sizes.full ) ){
+                        imgUrl = attachment.sizes.full.url;
+                        size = "full";
+                    }
+                }else if( _.isString( size ) ){
+                    size = size.toLowerCase();
+                    var sizes = size.split("x");
+                    if( sizes.length == 2 ){
+                        _width = parseInt(sizes[0]);
+                        _height = parseInt(sizes[1]);
+                        imgUrl = attachment.url;
+                    }
+                }
+
+                if( !imgUrl ){
+                    imgUrl = attachment.url;
+                    _height = attachment.height;
+                    _width = attachment.width;
+                }else if( !_.isUndefined( attachment.sizes) && !_.isUndefined( attachment.sizes[size] ) ){
+                    _height = attachment.sizes[size].height;
+                    _width = attachment.sizes[size].width;
+                }
+
+                _caption = attachment.caption;
+                _description = attachment.description;
+                _title = attachment.title;
+
+            }else{
+                imgUrl = SED_BASE_URL + 'images/no-image.jpg';
+                _height = "auto";
+                _width = "auto";
+                _caption = "";
+                _description = "";
+                _title = "";
+            }
+
+            return {
+                src         : imgUrl,
+                width       : _width ,
+                height      : _height ,
+                title       : _title ,
+                caption     : _caption ,
+                description : _description
+            };
+        };
+
+        api.fn.getAttachmentImageHtml = function( attach_id , size , is_custom , attrs ){
+            var image = api.fn.getAttachmentImage( attach_id , size , is_custom ),
+                html , attrsString = "";
+
+            if( !image || !_.isObject( image ) )
+                return "";
+
+            var className = "" ,
+                alt = image.title;
+
+            if( _.isObject( attrs ) ){
+                _.each( attrs , function( attr , value ){
+                    if( attr == "class" ){
+                        className += value;
+                    }else if( attr == "alt" ){
+                        alt = value;
+                    }else{
+                        attrsString += attr + '="' + value + '" ';
+                    }
+                });
+            }
+
+            html = '<img width="' + image.width + '" height="' + image.height + '" src="' + image.src + '" alt="' + alt + '" ' + attrsString + ' class="' + className + '">';
+            return html;
+        };
+
+        api.fn.getSedAttachmentImageHtml = function( image_source , attachment_id , image_url , default_image_size , external_image_size, attrs ){
+            var sedImageHtml = "";
+
+            if( image_source == "attachment" ){
+                var is_custom_size = ( _.isEmpty( default_image_size ) ) ? true : false;
+                if( !is_custom_size )
+                    sedImageHtml = api.fn.getAttachmentImageHtml( attachment_id , default_image_size , false , attrs );
+                else
+                    sedImageHtml = api.fn.getAttachmentImageHtml( attachment_id , custom_image_size , is_custom_size , attrs );
+
+            }else if( image_source == "external" ){
+                if( !_.isEmpty( image_url ) ){
+                    var _width = "auto" ,
+                        _height = "auto";
+
+                    if( _.isString( external_image_size ) ){
+                        var size = external_image_size.toLowerCase();
+                        var sizes = size.split("x");
+                        if( sizes.length == 2 ){
+                            _width = parseInt(sizes[0]);
+                            _height = parseInt(sizes[1]);
+                        }
+                    }
+
+                    sedImageHtml = '<img src="' + image_url + '" height="' + _height + '" width="' + _width + '" />';
+                }
+            }
+
+            return sedImageHtml;
+        };
+
 
         api( "archive_pagination_type" , function( value ) {
             value.bind( function( to ) {
@@ -2690,12 +2929,12 @@
         });
 
         api.preview.bind("moduleDragStart" , function(){
-            $(".sed-app-editor #main").css("padding" , "15px 0 40px");
+            //$(".sed-app-editor #main").css("padding" , "15px 0 40px");
             $("body").addClass("module-dragging-mode");
         });
 
         api.preview.bind("moduleDragStop" , function(){
-            $(".sed-app-editor #main").css("padding" , "");
+            //$(".sed-app-editor #main").css("padding" , "");
             $("body").removeClass("module-dragging-mode");
         });
 
@@ -2706,7 +2945,6 @@
         api.preview.bind("modulesGuidelineOn" , function(){
             $("body").addClass("modules-guideline-on");
         });
-
 
     });
 
