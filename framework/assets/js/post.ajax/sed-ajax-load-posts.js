@@ -9,7 +9,6 @@
             container           : window ,    //container for scroll lazy load posts
             current_url         : "" ,
             btn_more            : "" ,
-            nonce               : "" ,
             offset              : 20 ,
             max_pages           : 1 ,
             success             : function(){}
@@ -89,11 +88,16 @@
 
         },
         load_posts   : function( args ){
-            var self    = this,
-                nonce   = '';
+            var self    = this ,
+                loadingContainer;
 
+            if( this.options.pagination_type == "button"){
+                loadingContainer = $( this.options.btn_more );
+            }else{
+                loadingContainer = $( this.options.btn_more ).next(); //".load-more-posts-infinite-scroll"
+            }
+                     //console.log( $(this.element) );
             args = {
-                nonce           : this.options.nonce || "" ,
                 //paged           : this.paged + 1 ,
                 ajax_archive    : true
             };
@@ -115,13 +119,14 @@
                     {
                         self.flag = false;
 
-                        $('.icon-loading').css({opacity:0, display:"block", visibility:'visible',position:'absolute', top:'21px', left:'345px'}).animate({opacity:1});
+                        loadingContainer.addClass("loading");
                     },
 
                     success: function( data )
                     {
+                        loadingContainer.removeClass("loading");
                         self.flag = true;
-                        elements = $( $( data ).find('#archive-update-post').html() ).appendTo( $( self.element ) );
+                        elements = $( $( data ).find('#ajax-update-posts').html() ).appendTo( $( self.element ) );
 
                         if(typeof self.options.success == "function"){
                             self.options.success( elements );
@@ -133,6 +138,7 @@
 
                     },
                     error: function(xhr, status, error) {
+                         loadingContainer.removeClass("loading");
                         //console.log(xhr);
                         //console.log(status);
                         //console.log(error);
@@ -165,7 +171,7 @@
             var $this = $(this);
 
               var $this   = $(this);
-              var data    = $this.data('sed.sedmegamenu') ;
+              var data    = $this.data('sedAjaxLoadPosts') ;
 
               var options = typeof option == 'object' && option;
               if (!data) $this.data('sedAjaxLoadPosts', (data = new SEDAjaxLoadPosts( this , options )));

@@ -68,7 +68,7 @@ if(!class_exists('SEDEditorAssetsManager'))
             );
 
             //register SiteEditor Script
-            $this->add("siteeditor", SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor".$this->suffix.".js" , $deps , SED_APP_VERSION , 1 );
+            $this->add("siteeditor", SED_EDITOR_ASSETS_URL . "/js/siteeditor".$this->suffix.".js" , $deps , SED_APP_VERSION , 1 );
 
             $deps = array(
                 'bootstrap-tab' ,
@@ -167,7 +167,7 @@ if(!class_exists('SEDEditorAssetsManager'))
             );
 
             //register SiteEditor Script For Editor in the Front End
-            $this->add( 'sed-frontend-editor',  SED_EDITOR_ASSETS_URL . "/js/frontend-editor/frontend-editor".$this->suffix.".js" , $deps , SED_APP_VERSION );
+            $this->add( 'sed-frontend-editor',  SED_EDITOR_ASSETS_URL . "/js/frontend-editor".$this->suffix.".js" , $deps , SED_APP_VERSION );
 
         }
 
