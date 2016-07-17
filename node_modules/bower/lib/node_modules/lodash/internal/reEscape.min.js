@@ -1,0 +1,1 @@
+var reEscape=/<%-([\s\S]+?)%>/g;module.exports=reEscape;

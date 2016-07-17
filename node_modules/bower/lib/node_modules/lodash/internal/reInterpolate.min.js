@@ -1,0 +1,1 @@
+var reInterpolate=/<%=([\s\S]+?)%>/g;module.exports=reInterpolate;

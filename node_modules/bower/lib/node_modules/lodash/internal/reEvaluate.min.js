@@ -1,0 +1,1 @@
+var reEvaluate=/<%([\s\S]+?)%>/g;module.exports=reEvaluate;
