@@ -1,0 +1,26 @@
+{
+  "author"    : "Site Editor Team",
+  "name"      : "siteeditor",
+  "title"     : "SiteEditor",
+  "version"   : "0.9.0",
+  "homepage"  : "https://siteeditor.org/",
+  "repository": {
+    "type"      : "git",
+    "url"       : "https://github.com/SiteEditor/editor.git"
+  },
+  "license"   : "GPL-3.0+",
+  "main"      : "Gruntfile.js",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-checktextdomain": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-wp-i18n": "^0.5.4"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.1.0"
+  }
+}

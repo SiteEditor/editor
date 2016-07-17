@@ -59,7 +59,7 @@ Class AppOptionsEngine {
 
     }
 
-    function sed_ajax_load_options(){
+    function sed_ajax_load_options(){ 
         //$this->set_group_params( $group , $params_title , $params = array() , $panels = array() , "module-settings" );
         //$this->add_settings( array() );
         //global $sed_apps;

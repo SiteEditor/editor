@@ -9,13 +9,12 @@ if(!class_exists('SiteEditorAssetsManager'))
     {
 
         public static $bootstrap_version;
-        public $suffix;
+        public $suffix = ".min";
 
         function __construct( ) {
             self::$bootstrap_version = "3.3.5";
-            $this->suffix = ".min";
 
-            add_action("wp_default_scripts" , array( $this , "default_scripts" ) );
+            add_action("init" , array( $this , "default_scripts" ) , 0 );
         }
 
         function default_scripts(){
@@ -72,16 +71,18 @@ if(!class_exists('SiteEditorAssetsManager'))
             
         }
 
-        function add_css($handle , $src , $deps = array() , $ver = SED_APP_VERSION , $media = "all"){
+        function add_css($handle , $src , $deps = array() , $ver = '' , $media = "all"){
 
             wp_register_style( $handle, $src, $deps, $ver, $media );
 
         }
-        
+
         function default_styles(){
 
         }
 
     }
+
+    new SiteEditorAssetsManager();
 
 }

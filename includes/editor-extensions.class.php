@@ -11,7 +11,7 @@ if(!class_exists('SiteEditorExtensionsManager'))
     	}
 
         function include_extensions() {
-            require_once SED_EDITOR_DIR . '/applications/siteeditor/modules/a-preset/includes/preset-init.class.php';
+            require_once SED_EXT_PATH . '/preset/includes/preset-init.class.php';
             new SiteEditorPresetInit();
         }
 
