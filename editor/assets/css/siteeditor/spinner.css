@@ -1,0 +1,117 @@
+
+/* spinner  */
+.ui-spinner {
+     border: 1px solid #ccc ;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+    vertical-align: middle;
+    border-radius: 0px !important;
+    width: 58px;
+
+}
+.ui-spinner .ui-spinner-button {
+    border: 1px solid #e3e3e3 !important;
+    font-size: 9px;
+    line-height: 1;
+    padding: 0;
+    text-align: left !important;
+}
+.ui-spinner .ui-spinner-button.ui-spinner-up {
+    border-bottom-color: #fff !important;
+    border-width: 0 0 1px 1px !important;
+    top: 0;
+}
+.ui-spinner .ui-spinner-button.ui-spinner-down {
+    border-width: 1px 0 0 1px !important;
+    bottom: 0 !important;
+}
+.ui-spinner-button > .ui-button-text {
+    clip: rect(0px, 16px, 16px, 0px);
+    overflow: visible !important;
+}
+.ui-spinner .ui-icon {
+    color: #aaa;
+    cursor: pointer;
+    display: block;
+    font-size: 14px;
+    margin: -3px 0 0;
+    overflow: visible !important;
+    padding: 1px 0;
+    position: absolute;
+    text-align: center;
+}
+.ui-spinner a.ui-spinner-button {
+    border-bottom: medium none;
+    border-right: medium none;
+    border-top: medium none;
+}
+.ui-icon {
+    height: 16px;
+    width: 16px;
+    display: block;
+    overflow: hidden;
+}
+.ui-spinner-input.spinner {
+    border-color: #e3e3e3 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.ui-spinner-button {
+    cursor: default;
+    display: block;
+    font-size: 0.5em;
+    height: 50%;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    width: 16px;
+}
+.ui-spinner.ui-widget.ui-widget-content.ui-corner-all {
+    border-color: #e3e3e3 !important;
+    line-height: 1.6em;
+    padding: 0 2px 0 5px !important;
+}
+.ui-spinner-input {
+      width: 30px;
+      border: 0 none !important;
+      box-shadow: none !important;
+      font-size: 12px;
+
+}
+.ui-spinner-button {
+      background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+      border-radius: 0 !important ;
+      -moz-border-radius:0px !important ;
+      -webkit-border-radius: 0px !important ;
+}
+.ui-spinner {
+      border-radius: 0px !important  ;
+      -moz-border-radius:0px  !important;
+      -webkit-border-radius: 0px !important;
+      width: 58px;
+      text-align: left;
+}
+.ui-spinner.ui-widget.ui-widget-content.ui-corner-all {
+    background-color: #fff;  
+    border-color: #d5d5d5 !important;
+    line-height: 1.6em;
+    padding: 0px 16px 0px 0px !important;
+}
+.ui-spinner input.spinner{
+      height: 22px;
+      line-height: 22px;
+      padding: 1px 0px 1px 8px !important;
+      border-radius: 0px !important  ;
+      -moz-border-radius:0px  !important;
+      -webkit-border-radius: 0px !important;
+}
+.ui-spinner-up {
+      border-color: #E3E3E3 !important;
+}
+.ui-spinner-down {
+      border-color: #E3E3E3 !important;
+}

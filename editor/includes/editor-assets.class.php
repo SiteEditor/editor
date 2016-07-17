@@ -190,14 +190,97 @@ if(!class_exists('SEDEditorAssetsManager'))
 
         function register_editor_styles(){
 
-            $this->add_css( 'siteeditor',       SED_EDITOR_ASSETS_URL . '/css/siteeditor'.$this->suffix.'.css', array(), SED_APP_VERSION );
+            if( SED()->version_type == "production" ){
 
+                $this->add_css( 'siteeditor',           SED_EDITOR_ASSETS_URL . '/css/siteeditor'.$this->suffix.'.css', array(), SED_APP_VERSION );
+
+            }else{
+
+                $this->add_css( 'sed-main-accordion',            SED_EDITOR_ASSETS_URL . '/css/siteeditor/accordion.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-alert',                SED_EDITOR_ASSETS_URL . '/css/siteeditor/alert.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-animation' ,           SED_EDITOR_ASSETS_URL . '/css/siteeditor/animation.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-button',               SED_EDITOR_ASSETS_URL . '/css/siteeditor/button.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-color-fonts',          SED_EDITOR_ASSETS_URL . '/css/siteeditor/color-fonts.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-colorselector',        SED_EDITOR_ASSETS_URL . '/css/siteeditor/colorselector.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-dialog',               SED_EDITOR_ASSETS_URL . '/css/siteeditor/dialog.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-dialog-page-box',      SED_EDITOR_ASSETS_URL . '/css/siteeditor/dialog-page-box.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-dropdown',             SED_EDITOR_ASSETS_URL . '/css/siteeditor/dropdown.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-dropdown-styleeditor', SED_EDITOR_ASSETS_URL . '/css/siteeditor/dropdown-styleeditor.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-icon-library',         SED_EDITOR_ASSETS_URL . '/css/siteeditor/icon-library.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-library',              SED_EDITOR_ASSETS_URL . '/css/siteeditor/library.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-loading',              SED_EDITOR_ASSETS_URL . '/css/siteeditor/loading.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-multilevelbox',        SED_EDITOR_ASSETS_URL . '/css/siteeditor/multilevelbox.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-chosen',               SED_EDITOR_ASSETS_URL . '/css/siteeditor/chosen.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-sp-dark',              SED_EDITOR_ASSETS_URL . '/css/siteeditor/sp-dark.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-spectrum',             SED_EDITOR_ASSETS_URL . '/css/siteeditor/spectrum.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-scrollbar',            SED_EDITOR_ASSETS_URL . '/css/siteeditor/scrollbar.css', array(), SED_APP_VERSION  );
+                //$this->add_css( 'sed-main-jquery-ui' ,           SED_EDITOR_ASSETS_URL . '/css/siteeditor/jquery-ui.css', array(), SED_APP_VERSION );
+                //$this->add_css( 'sed-main-jquery-ui-ie',         SED_EDITOR_ASSETS_URL . '/css/siteeditor/jquery-ui-ie.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-organize-posts',       SED_EDITOR_ASSETS_URL . '/css/siteeditor/organize-posts.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-pages',                SED_EDITOR_ASSETS_URL . '/css/siteeditor/pages.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-panel',                SED_EDITOR_ASSETS_URL . '/css/siteeditor/panel.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-preview',              SED_EDITOR_ASSETS_URL . '/css/siteeditor/preview.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-siteeditor-app',       SED_EDITOR_ASSETS_URL . '/css/siteeditor/siteeditor-app.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-settings',             SED_EDITOR_ASSETS_URL . '/css/siteeditor/settings.css', array(), SED_APP_VERSION  );  
+                $this->add_css( 'sed-main-slider' ,              SED_EDITOR_ASSETS_URL . '/css/siteeditor/slider.css', array(), SED_APP_VERSION );
+                $this->add_css( 'sed-main-spinner',              SED_EDITOR_ASSETS_URL . '/css/siteeditor/spinner.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-style-editor',         SED_EDITOR_ASSETS_URL . '/css/siteeditor/style-editor.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-tab',                  SED_EDITOR_ASSETS_URL . '/css/siteeditor/tab.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-template-library',     SED_EDITOR_ASSETS_URL . '/css/siteeditor/template-library.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-tooltip',              SED_EDITOR_ASSETS_URL . '/css/siteeditor/tooltip.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-z2',                   SED_EDITOR_ASSETS_URL . '/css/siteeditor/z2/z.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-font-icon-siteeditor', SED_EDITOR_ASSETS_URL . '/css/siteeditor/font-icon-siteeditor.css', array(), SED_APP_VERSION  );
+                $this->add_css( 'sed-main-font-extra',           SED_EDITOR_ASSETS_URL . '/css/siteeditor/font-extra.css', array(), SED_APP_VERSION );
+
+            }
         }
 
 
         function enqueue_editor_styles(){
 
-            wp_enqueue_style('siteeditor');
+            if( SED()->version_type == "production" ){
+
+                wp_enqueue_style( 'siteeditor'  );
+
+            }else{
+
+                wp_enqueue_style( 'sed-main-accordion'  );
+                wp_enqueue_style( 'sed-main-alert'  );
+                wp_enqueue_style( 'sed-main-animation'  );
+                wp_enqueue_style( 'sed-main-button'  );
+                wp_enqueue_style( 'sed-main-color-fonts'  );
+                wp_enqueue_style( 'sed-main-colorselector' );
+                wp_enqueue_style( 'sed-main-dialog' );
+                wp_enqueue_style( 'sed-main-dialog-page-box' );
+                wp_enqueue_style( 'sed-main-dropdown' );
+                wp_enqueue_style( 'sed-main-dropdown-styleeditor' );
+                wp_enqueue_style( 'sed-main-icon-library' );
+                wp_enqueue_style( 'sed-main-library' );
+                wp_enqueue_style( 'sed-main-loading' );
+                wp_enqueue_style( 'sed-main-multilevelbox'  );
+                wp_enqueue_style( 'sed-main-chosen'  );
+                wp_enqueue_style( 'sed-main-sp-dark'  );
+                wp_enqueue_style( 'sed-main-spectrum'  );
+                wp_enqueue_style( 'sed-main-scrollbar'  );
+                //wp_enqueue_style( 'sed-main-jquery-ui'  );
+                //wp_enqueue_style( 'sed-main-jquery-ui-ie'  );
+                wp_enqueue_style( 'sed-main-organize-posts'  );
+                wp_enqueue_style( 'sed-main-pages'  );
+                wp_enqueue_style( 'sed-main-panel'  );
+                wp_enqueue_style( 'sed-main-preview'  );
+                wp_enqueue_style( 'sed-main-siteeditor-app'  );
+                wp_enqueue_style( 'sed-main-settings'  );
+                wp_enqueue_style( 'sed-main-slider'  );
+                wp_enqueue_style( 'sed-main-spinner'  );
+                wp_enqueue_style( 'sed-main-style-editor'  );
+                wp_enqueue_style( 'sed-main-tab'  );
+                wp_enqueue_style( 'sed-main-template-library'  );
+                wp_enqueue_style( 'sed-main-tooltip'  );
+                wp_enqueue_style( 'sed-main-z2' );
+                wp_enqueue_style( 'sed-main-font-icon-siteeditor' );
+                wp_enqueue_style( 'sed-main-font-extra' ); 
+
+            }        
 
         }
 

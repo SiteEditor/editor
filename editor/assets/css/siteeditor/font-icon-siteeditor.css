@@ -12,7 +12,7 @@
 }
 
 [class^="icon-"], [class*="icon-"].menu_item_icon,.f-sed {
-    font-family: 'siteeditor';
+    font-family: 'siteeditor' !important;
     speak: none;
     font-style: normal;
     font-weight: normal;

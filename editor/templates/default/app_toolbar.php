@@ -72,7 +72,7 @@ $tabs = current_type_elemans($current_type , $tabs);
         </li>  -->
         <li class="sed-logo">
           <a  href="#">
-          <img src="<?php echo SED_EDITOR_FOLDER_URL;?>templates/default/images/logo.png" alt="logo" style="width: 25px; margin: 4px 0 0 0;" />
+          <img src="<?php echo SED_EDITOR_ASSETS_URL;?>/images/logo.png" alt="logo" style="width: 25px; margin: 4px 0 0 0;" />
           </a>
         </li>
         <!--

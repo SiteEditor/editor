@@ -24,6 +24,14 @@ final Class SiteEditor {
     public $version = '0.9.0';
 
     /**
+     * SiteEditor version type
+     * @development || @production
+     *
+     * @var string
+     */
+    public $version_type = 'development';
+
+    /**
      * The single instance of the class.
      *
      * @var SiteEditor

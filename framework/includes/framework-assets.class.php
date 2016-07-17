@@ -20,7 +20,7 @@ if(!class_exists('SEDFrameworkAssetsManager'))
 
             add_action( 'init'                , array( $this , 'default_styles' ) , 0 );
 
-            add_action( 'wp_enqueue_styles'   , array( $this , 'enqueue_styles' ) );
+            add_action( 'wp_enqueue_scripts'   , array( $this , 'enqueue_styles' ) );
 
         }
 

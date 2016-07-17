@@ -1,0 +1,94 @@
+
+#saccess{
+      border-radius: 0px;
+      -moz-border-radius:4px ;
+      -webkit-border-radius:4px ;
+      color: #3c763d;
+      background-color: #dff0d8;
+      border-color: #d6e9c6;
+      box-shadow: -4px 1px 4px 0 rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: -4px 1px 4px 0 rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: -4px 1px 4px 0 rgba(0, 0, 0, 0.3);
+      height: 20px;
+      left: 49%;
+      padding: 0 10px;
+      position: absolute;
+      text-align: center;
+      top: 4px;
+      width: auto;
+      z-index: 3000 !important;
+      display: none;
+}
+#error{
+      background-color: #F2DEDE;
+      border-color: #EBCCD1;
+      border-radius: 0px;
+      -moz-border-radius:0px ;
+      -webkit-border-radius:0px ;
+      box-shadow: -4px 1px 4px 0 rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: -4px 1px 4px 0 rgba(0, 0, 0, 0.3);
+      -webkit-box-shadow: -4px 1px 4px 0 rgba(0, 0, 0, 0.3);
+      color: #A94442;
+      height: 20px;
+      left: 49%;
+      padding: 0 10px;
+      position: absolute;
+      text-align: center;
+      top: 4px;
+      width: auto;
+      z-index: 3000 !important;
+      display: none;
+}
+.error {
+  background-color: #F2DEDE;
+  border-color: #EBCCD1;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  margin: 0px 15px 5px;
+  padding: 6px 10px;
+  position: relative;
+}
+.error-box {
+      position: relative;
+      z-index: 1000;
+      font-size: 12px;
+      color:#CC0000;
+}
+
+.usersrating .error2{
+      color: red;
+}
+
+.texterror {
+  font-size: 13px;
+  font-weight: bold;
+}
+.error-item{
+  margin-right: 6px;
+}
+
+.error-font-icon-remove,
+.error-icon-items-lib,
+.empty-icon-items,
+.error-font-icon-load {
+    background: none repeat scroll 0 0 #FFCCC9;
+    border: 1px solid #F44824;
+    border-radius: 0;
+    color: #F44824;
+    display: block;
+    margin: 5px 25px !important;
+    padding: 5px 20px !important;
+    text-align: center;
+}
+.success-font-icon-remove,
+.success-font-icon-load{
+    background: none repeat scroll 0 0 #C4F9A9;
+    border: 1px solid #7AC659;
+    border-radius: 0;
+    color: #7AC659;
+    display: block;
+    margin: 5px 25px !important;
+    padding: 5px 20px !important;
+    text-align: center;
+}

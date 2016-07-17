@@ -1,0 +1,32 @@
+.sed-accordion-content{
+    border: 1px solid #e6e6e6;
+    border-radius:0px;
+    margin: 0px 11px 10px;
+    padding: 8px;
+    width: 92%;
+}
+.sed-accordion-header {
+    border-radius: 0px;
+    margin: 10px 11px 0 !important;
+    border: 1px solid #e6e6e6;
+    line-height: 20px;
+    padding: 8px;
+    width: 92%;
+}
+.accordion-panel-settings .ui-icon {
+    line-height: 20px;
+}
+.ui-accordion-header-active{
+    border-radius: 0;
+    border-bottom: 1px solid transparent;
+}
+
+.dialog-page-box .sed-accordion-content label {
+    display: block;
+    margin: 0 6px;
+    vertical-align: top;
+    width: 100%;
+}
+#dialog-options-navigator {
+    overflow: hidden;
+}

@@ -1,0 +1,133 @@
+
+.sed-font-icon-box {
+    padding: 0 20px;
+    margin-bottom: 5px;
+}
+.sed-font-icon-box > ul:after,.sed-font-icon-box > ul:before{
+    display: table;
+    content: "";
+}
+.sed-font-icon-box > ul:after{
+    clear: both;
+}
+.sed-font-icon-box > ul {
+    padding: 10px;
+    text-align: center;
+}
+.sed-font-icon-box li {
+    display: block;
+    float: left;
+    height: 100px;
+    width: 80px;
+    box-shadow: none !important;
+}
+.icon-library-dialog #site-editor-icon-library li i {
+    color: #00CCFF;
+    display: block;
+    font-size: 2em;
+    height: 70px;
+    line-height: 2.5em;
+    margin:5px 5px 0 !important;
+    padding: 1px !important;
+    position: relative !important;
+    text-align: center;
+    width: 70px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 2px solid transparent;
+    border-radius: 0px;
+}
+.sed-font-icon-box label {
+    display: block;
+    text-align: center;
+}
+.icon-library-dialog .Tapcircle1.active {
+    border-bottom: 0 none !important;
+}
+.icon-library-dialog .Tapcircle1 {
+    background: none repeat scroll 0 0 #FFFFFF !important;
+    border: 1px solid #DDDDDD !important;
+    border-radius: 0 !important;
+    float: left !important;
+    height: 35px !important;
+    margin: 3px 0 0 3px !important;
+    padding: 3px !important;
+    position: relative;
+    width: 100px !important;
+    z-index: 10000 !important;
+}
+
+.sed-font-icon-title {
+/*    background: linear-gradient(#FFFFFF, #FFFFFF 30%, #E6E6E6 129%) repeat scroll 0 0 transparent;        */
+    background: none repeat scroll 0 0 #fafafa;
+    border: 1px solid #dfdfdf !important;
+    border-image: none;
+    color: #686868;
+    font-size: 14px !important;
+    border-radius: 0 !important;
+    font-weight: normal;
+    margin: 0 !important;
+    padding: 8px 10px;
+    width: 100%;
+    display: block;
+    line-height: 15px;
+    cursor: pointer;
+}
+.sed-font-icon-title .ui-icon{
+    line-height: 1.3em;
+}
+#sed-icon-search {
+    float: right;
+}
+.default-remove.remove-font-icon {
+    color: #000;
+    float: right;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0.2;
+}
+.default-remove.remove-font-icon:hover{
+    opacity: 0.4; :
+}
+
+.sed-font-icon-box {
+/*    border-bottom: 1px solid #EEEEEE;
+    float: left;
+    margin-right: 4px;
+    width: 100%;               */
+}
+.arrow-font-icon {
+    margin: 0 6px 0 0;
+}
+
+#sed-icon-lib-uploader-items{
+  margin: 0 25px 5px !important;
+  display: block;
+}
+#sed-icon-lib-uploader-items .icon-item{
+    list-style-type: none;
+}
+#sed-icon-lib-uploader-items .filename{
+    display: none;
+}
+#sed_icon_library_panel .sed-loading-small-continer {
+  position: relative;
+}
+#sed_icon_library_panel .sed-loading {
+  position: relative;
+  left: 50%;
+  margin-left: -15px;
+  margin-bottom: 5px;
+}
+#sed-media-lib-uploader-drop-area,
+#sed-icon-lib-uploader-drop-area{
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.drag-over {
+  background: #f5f5f5;
+  height: 100%;
+}

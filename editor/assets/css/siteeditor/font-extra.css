@@ -36,7 +36,7 @@
 .widget_display_views,
 .toolbar .btn-default3 .fa.woocommerce,
 [class^="icon-"],.f-sed , [class*="icon-"].menu_item_icon{
-    font-family: 'siteeditor';
+    font-family: 'siteeditor' !important;
     speak: none;
     font-style: normal;
     font-weight: normal;
