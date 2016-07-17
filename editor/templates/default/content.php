@@ -5,13 +5,22 @@
  * Contains footer content and the closing of the
  * #main and #page div elements.
  *
- * @package Zmind
+ * @package SiteEditor
  * @subpackage defualt
  */
 
 ?>
 
+<!--
+Editor Main Part
+-- Header
+---- Toolbar
+-- Content
+---- Iframe
+-- Right Panel
+--->
 <?php echo $app_header; ?>
 <?php echo $app_content; ?>
 <?php echo $app_panel; ?>
-<?php //echo $app_footer; ?>  
+<!-- End Editor Main Part --->
+

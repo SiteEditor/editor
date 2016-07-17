@@ -1,3 +1,4 @@
+<!-- Editor Right Sidebar Panel Part --->
 <?php
   $panel = $site_editor_app->panel;
   $panels = $panel->panels;
@@ -45,3 +46,4 @@
         </div>
     </div>
 </div>
+<!-- End Editor Right Sidebar Panel Part --->

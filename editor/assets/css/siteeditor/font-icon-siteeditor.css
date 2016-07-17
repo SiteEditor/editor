@@ -2,11 +2,11 @@
 
 @font-face {
 	font-family: 'siteeditor';
-	src:url('../fonts/siteeditor.eot?-gomp5c');
-	src:url('../fonts/siteeditor.eot?#iefix-gomp5c') format('embedded-opentype'),
-		url('../fonts/siteeditor.ttf?-gomp5c') format('truetype'),
-		url('../fonts/siteeditor.woff?-gomp5c') format('woff'),
-		url('../fonts/siteeditor.svg?-gomp5c#siteeditor') format('svg');
+	src:url('../../fonts/siteeditor.eot?-gomp5c');
+	src:url('../../fonts/siteeditor.eot?#iefix-gomp5c') format('embedded-opentype'),
+		url('../../fonts/siteeditor.ttf?-gomp5c') format('truetype'),
+		url('../../fonts/siteeditor.woff?-gomp5c') format('woff'),
+		url('../../fonts/siteeditor.svg?-gomp5c#siteeditor') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }

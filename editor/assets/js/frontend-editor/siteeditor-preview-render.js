@@ -1055,7 +1055,7 @@
         		}
 
                 if( gradient() || image_scaling())
-                    css += "behavior: url(" + LIBBASE.url + "PIE/PIE.htc" + ");";
+                    css += "behavior: url(" + _sedAssetsUrls.base.js + "/PIE/PIE.htc" + ");";
 
                 if( image_scaling() )
                     _saveCustomCss( "background_image_scaling" , image_scaling() );

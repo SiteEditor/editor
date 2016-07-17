@@ -735,7 +735,7 @@
                 }
 
                 if(typeof tinymce == "undefined") {
-                    self.autoLoadScripts(LIBBASE.url + "tinymce/tinymce.min.js", function () {
+                    self.autoLoadScripts( _sedAssetsUrls.editor.libs + "/tinymce/tinymce.min.js", function () {
                          self.textEditable( "#" + elId );
                          //self.textEditable( ".sed-title2" );
                     });
@@ -839,7 +839,7 @@
             /*
             $(document).on("textEdit", function(event , selector){
                 if(typeof tinymce == "undefined") {
-                    self.autoLoadScripts(LIBBASE.url + "tinymce/tinymce.min.js", function () {
+                    self.autoLoadScripts( _sedAssetsUrls.editor.libs + "/tinymce/tinymce.min.js", function () {
                          self.textEditable( selector );
                          //self.textEditable( ".sed-title2" );
                     });

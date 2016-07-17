@@ -1149,7 +1149,7 @@
                     var imgUrl = ( !_.isUndefined( attachment.sizes ) && !_.isUndefined( attachment.sizes.thumbnail ) ) ? attachment.sizes.thumbnail.url : attachment.url;
                 }
             }else{
-                var imgUrl = SED_BASE_URL + 'images/no-image.jpg';
+                var imgUrl = SEDNOPIC.url;
             }
 
             return imgUrl;
@@ -1339,7 +1339,7 @@
                     if( attach_id && attach_id > 0 && !_.isUndefined( attachment ) ){
                         var imgUrl = ( attachment.sizes && attachment.sizes.thumbnail ) ? attachment.sizes.thumbnail.url  : attachment.url;
                     }else{
-                        var imgUrl = SED_BASE_URL + 'images/no-image.jpg';
+                        var imgUrl = SEDNOPIC.url;
                         attach_id = 0;
                     }
 

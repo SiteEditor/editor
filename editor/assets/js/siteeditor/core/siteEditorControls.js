@@ -230,9 +230,9 @@ api	 * @param options
             }
 
             if ( control.params.media_group ) {
-                this.uploader.url = LIBBASE.url + "media/uploader/upload.php?media_group=" + control.params.media_group;
+                this.uploader.url = SEDEXTBASE.url + "media/includes/upload.php?media_group=" + control.params.media_group;
             }else{
-                this.uploader.url = LIBBASE.url + "media/uploader/upload.php";
+                this.uploader.url = SEDEXTBASE.url + "media/includes/upload.php";
             }
 
             if ( control.params.multi_selection ) {
@@ -288,7 +288,7 @@ api	 * @param options
 
                 if(control.imgLoaded === false){
                     yepnope({
-                      load: LIBBASE.url + "lazyload/js/jquery.bttrlazyloading.min.js",
+                      load: _sedAssetsUrls.base.js + "/lazyload/js/jquery.bttrlazyloading.min.js",
                       callback: function (url, result, key) {
                           // whenever this runs, your script has just executed.
                           $this.next().find(".library-bg-img").bttrlazyloading({

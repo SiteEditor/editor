@@ -230,7 +230,7 @@ class SedAppSettings{
     public function _preview_base_option_settings( $original ){
 
         global $sed_apps;
-        $sed_page_id = $sed_apps->sed_page_id;
+        $sed_page_id = $sed_apps->framework->sed_page_id;
         $value = $this->base_value( $this->default , $sed_page_id );
 
         if ( ! isset( $value ) ){

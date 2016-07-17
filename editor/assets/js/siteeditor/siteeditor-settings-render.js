@@ -74,7 +74,7 @@
         //console.log( "api.settings.controls : new Date() - startTime ------ : " , new Date() - startTime );
 
         var AjaxLoadDefPatterns = new api.Ajax({
-            url  :  SED_BASE_URL + "/applications/siteeditor/includes/pagebuilder/ajax_shortcode_pattern.php" ,
+            url  :  SED_BASE_URL + "extensions/pagebuilder/includes/ajax_shortcode_pattern.php" ,
             //dataType : "jsonp" ,
             data : {
                 action        : 'shortcodes_default_pattern',
@@ -105,7 +105,7 @@
         });
 
         /*var AjaxLoadStyleEditorSettings = new api.Ajax({
-            url  :  SED_BASE_URL + "/applications/siteeditor/includes/pagebuilder/ajax_style_editor_settings.php" ,
+            url  :  SED_BASE_URL + "/extensions/pagebuilder/includes/ajax_style_editor_settings.php" ,
             //dataType : "jsonp" ,
             data : {
                 action        : 'shortcodes_default_pattern2',
@@ -130,7 +130,7 @@
         }); */
 
 		// Check if preview url is valid and load the preview frame.
-		if ( api.previewer.previewUrl() ) {
+		if ( api.previewer.previewUrl() ) { 
             api.previewer.refresh();
         }else {
             api.previewer.previewUrl(api.settings.url.home);

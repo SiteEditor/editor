@@ -12,7 +12,7 @@
     * @global WP_Scripts           $wp_scripts
     * @global WP_Customize_Manager $wp_customize
     */
-    global $wp_scripts, $wp_customize;
+    global $wp_scripts;
 
     $registered = $wp_scripts->registered;
     $wp_scripts = new WP_Scripts;
@@ -60,7 +60,7 @@
 
     $preview_url = isset($_GET['preview_url']) && $_GET['preview_url'] ? $_GET['preview_url'] : home_url( '/' );
 
-    $info = $sed_apps->editor_manager->get_page_editor_info();
+    $info = $sed_apps->editor->manager->get_page_editor_info();
 
     $sed_page_id    =  $info['id'];
     $sed_page_type  =  $info['type'];
@@ -102,7 +102,7 @@
     global $sed_data;
 
 	// Prepare Customize Setting objects to pass to JavaScript.
-	foreach ( $sed_apps->editor_manager->settings() as $id => $setting ) {
+	foreach ( $sed_apps->editor->manager->settings() as $id => $setting ) {
 	    //var_dump( $id );
 
 		$settings['settings'][ $id ] = array(
@@ -115,34 +115,10 @@
 	}
 
 	// Prepare Customize Control objects to pass to JavaScript.
-	foreach ( $sed_apps->editor_manager->controls() as $id => $control ) {
+	foreach ( $sed_apps->editor->manager->controls() as $id => $control ) {
 		$settings['controls'][ $id ] = $control;
 	}
 
-
-  /*$custom_settings = $site_editor_app->settings->params;
-  $params_settings_valid = array();
-  if(!empty( $custom_settings )){
-    foreach($custom_settings AS $name => $value){
-      if(!empty($value['settings_output'])){
-          $params_settings_valid[$name] = true;
-      }else{
-          $params_settings_valid[$name] = false;
-      }
-    }
-  }*/
-
-$media_settings = array(
-    'types' =>   $sed_apps->media_types(),
-    'I18n'  =>   array(
-        'empty_lib'    =>  __("There are no any media items" , "site-editor"),
-        'invalid_data' =>  __('Sent Data, Invalid' , "site-editor")
-    ),
-    'nonce'  => wp_create_nonce( 'sed_app_media_load_' . $site_editor_app->get_stylesheet() ),
-    'params'  =>  array(
-        'max_upload_size' => $sed_apps->sed_max_upload_size()
-    )
-);
 
 $sed_addon_settings = $site_editor_app->addon_settings();
 
@@ -195,13 +171,13 @@ do_action( 'sed_enqueue_scripts' );
     <meta name="siteeditor" content="notranslate">
 	<meta name="viewport" content="width=device-width">
     <script>
-        var SEDAJAX = {url : "<?php echo SED_EDITOR_FOLDER_URL."libraries/ajax/site_editor_ajax.php"?>"};
-        var SEDLIBBASE = {url : "<?php echo SED_EDITOR_FOLDER_URL."libraries/siteeditor/"?>"};
-        var LIBBASE = {url : "<?php echo SED_EDITOR_FOLDER_URL."libraries/"?>"};
-        var SEDEXTBASE = {url : "<?php echo SED_EDITOR_FOLDER_URL."applications/siteeditor/modules/"?>"};
-        var SED_PB_MODULES_URL = "<?php echo SED_EDITOR_FOLDER_URL."applications/pagebuilder/modules/"?>";
+        var SEDAJAX = {url : "<?php echo SED_EDITOR_FOLDER_URL . "includes/ajax/site_editor_ajax.php"?>"};
+        var SEDEXTBASE = {url : "<?php echo SED_EXT_URL?>"};
+        var SEDNOPIC = {url : "<?php echo SED_ASSETS_URL . "/images/no_pic.png";?>"};
+        var SED_PB_MODULES_URL = "<?php echo SED_PB_MODULES_URL?>";
         var SED_UPLOAD_URL = "<?php echo site_url("/wp-content/uploads/site-editor/");?>";
         var SED_BASE_URL = "<?php echo SED_EDITOR_FOLDER_URL;?>";
+        var _sedAssetsUrls = <?php echo wp_json_encode( $sed_apps->editor->manager->assets_urls ); ?>;
         var loadUploader = false;
         var SEDUploader = false;
         var loadLazyLoader = false;
@@ -262,8 +238,6 @@ do_action( 'sed_enqueue_scripts' );
 
         var _sedAppEditorSettings = <?php echo wp_json_encode( $settings ); ?>;
 
-        var _sedAppEditorMediaSettings = <?php echo wp_json_encode( $media_settings )?>;
-
         var _sedAppEditorI18n = <?php echo wp_json_encode( $sed_js_I18n )?>;
 
         var _sedAppEditorAddOnSettings = <?php echo wp_json_encode( $sed_addon_settings )?>;
@@ -271,6 +245,7 @@ do_action( 'sed_enqueue_scripts' );
     </script>
 
     <?php
+
     /**
      * Fires when Customizer control styles are printed.
      *
@@ -284,32 +259,19 @@ do_action( 'sed_enqueue_scripts' );
      * @since 3.4.0
      */
     do_action( 'sed_print_scripts' );
+
+    do_action( 'sed_top_head' );
+
+	echo $site_editor_head;
+
+    do_action( 'sed_head' );
+
     ?>
 
-    <?php do_action( 'sed_top_head' ); ?>
 
-	<?php echo $site_editor_head; ?>
-    <?php do_action( 'sed_head' ); ?>
-
-    <script>
-         /*sed.init({
-           siteSelector : "#website",              
-           plugins:['pagebuilder' , 'contextmenu' , 'settings' , 'save' ], //,'header','content','footer'
-           external_plugins : <?php //echo wp_json_encode( $sed_apps->sed_custom_js_plugins() )?>,
-           I18n:{
-             GRADIENT_FIREFOX_NOT_SUPPORT: "<?php //echo __("Firefox 3.5 OR lower does not support gradient.","site-editor"); ?>",
-             GRADIENT_SAFARI_NOT_SUPPORT: "<?php //echo __("Safari 5 OR lower version not have support for gradient","site-editor"); ?>",
-             GRADIENT_OPERA_NOT_SUPPORT:  "<?php //echo __("Opera 11 OR lower version not have support for gradient","site-editor"); ?>",
-             GRADIENT_MSIE_NOT_SUPPORT:   "<?php //echo __("IE9 And lower version the 6 not have support for gradient","site-editor"); ?>"
-           }
-         });*/
-
-
-    </script>
- 	<link rel="stylesheet" href="<?php echo SED_EDITOR_FOLDER_URL?>templates/default/css/siteeditor.css">
-
-
-	<!--[if lte IE 7]><script src="js/icons-lte-ie7.js"></script><![endif]-->
+	<!--[if lte IE 7]>
+        <script src="js/icons-lte-ie7.js"></script>
+    <![endif]-->
 
 
 </head>
@@ -317,6 +279,6 @@ do_action( 'sed_enqueue_scripts' );
 <body>
 <!--<form id="customize-controls"> -->
 <div id="main-box-site-editor">
-<div id="map-loading"></div>
-<div id="saccess"></div>
-<div id="error"></div>
+    <div id="map-loading"></div>
+    <div id="saccess"></div>
+    <div id="error"></div>

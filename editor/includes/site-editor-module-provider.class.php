@@ -15,7 +15,10 @@ class SEDPBModuleProvider{
     function siteeditor_check_less_compailer(){
        global $sed_apps;
 
-       $modules_activate = array_keys( sed_get_setting("live_module") );
+        if( ! $live_modules = sed_get_setting("live_module") )
+            return ;
+
+       $modules_activate = array_keys( $live_modules );
        $modules = $sed_apps->module_info;
        $not_compiled_files = array();
 
@@ -54,7 +57,7 @@ class SEDPBModuleProvider{
 
         		$constants = array(
         			'@sed-root'				=> SED_PLUGIN_DIR  ,
-        			'@sed-framework-root'	=> SED_LIB_PATH. DS ."less-framework" ,
+        			'@sed-framework-root'	=> SED_FRAMEWORK_ASSETS_DIR. DS ."less" . DS . "siteeditor" ,
         			'@sed-modules-root'		=> SED_PB_MODULES_PATH ,
                     '@sed-images-root'		=> SED_PB_IMAGES_PATH ,
         			'@sed-plugins-root'		=> WP_PLUGIN_DIR ,
@@ -82,7 +85,7 @@ class SEDPBModuleProvider{
             $css_abs_path = SED_UPLOAD_PATH . str_replace( '/' , DS , '/modules' . $less_info["src_rel"] );
 
             if( !class_exists( 'SEDAppLess' ) ) 
-                require_once SED_APP_PATH . DS . 'sed_app_less.class.php';
+                require_once SED_INC_DIR . DS . 'sed_app_less.class.php';
 
             $is_compiled = SEDAppLess::checkedCompile( $less_files , $css_abs_path );
             if( !$is_compiled )
@@ -93,12 +96,20 @@ class SEDPBModuleProvider{
     }
 
     public function sed_app_pagebuilder_modules(){
+
         global $sed_apps;
 
-      	$attachments = array_map( 'wp_prepare_attachment_for_js', $sed_apps->attachments_loaded );
-      	$attachments = array_filter( $attachments );
+        if( is_array( $sed_apps->editor->attachments_loaded) && !empty( $sed_apps->editor->attachments_loaded ) ) {
+            $attachments = array_map('wp_prepare_attachment_for_js', $sed_apps->attachments_loaded);
+            $attachments = array_filter($attachments);
+        }else
+            $attachments = array();
 
-        $modules_activate = array_keys( sed_get_setting("live_module") );
+        if( ! $live_modules = sed_get_setting("live_module") )
+            $modules_activate = array();
+        else
+            $modules_activate = array_keys( $live_modules );
+
         $modules_info = array();
         foreach( $modules_activate AS $module_name ){
             $module_info = $sed_apps->module_info[$module_name];
@@ -145,8 +156,7 @@ class SEDPBModuleProvider{
 
 		<script type="text/javascript">
                 var _sedAppPageBuilderModulesInfo = <?php echo wp_json_encode( $modules_info ); ?>;
-                var _sedAppPBAttachmentsSettings = <?php echo wp_json_encode( $attachments ); ?>;
-
+                var _sedAppPBAttachmentsSettings = <?php if( !empty( $attachments ) ) echo wp_json_encode( $attachments ); echo "{}"; ?>;
 		</script>
 
         <?php

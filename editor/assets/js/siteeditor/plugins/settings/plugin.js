@@ -772,7 +772,7 @@
         }
 
     });
-
+    
 
     api.AppWidgetsSettings = api.Class.extend({
         initialize: function( options ){

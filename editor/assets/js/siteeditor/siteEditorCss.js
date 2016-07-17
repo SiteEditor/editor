@@ -304,7 +304,7 @@ window.sedApp = window.sedApp || {};
             var css  =  "-webkit-box-shadow: " + shadow + " !important;"
                       +  "-moz-box-shadow: " + shadow + " !important;"
                       +  "box-shadow: " + shadow + " !important;"
-                      +  "behavior: url(" + LIBBASE.url + "PIE/PIE.htc);";
+                      +  "behavior: url(" + _sedAssetsUrls.base.js + "/PIE/PIE.htc);";
             return css;
         },
 
@@ -314,7 +314,7 @@ window.sedApp = window.sedApp || {};
                 var css  =  "-webkit-border-radius: " + sizes + " !important;"
                           +  "-moz-border-radius: " + sizes + " !important;"
                           +  "border-radius: " + sizes + " !important;"
-                          +  "behavior: url(" + LIBBASE.url + "PIE/PIE.htc);";
+                          +  "behavior: url(" + _sedAssetsUrls.base.js + "/PIE/PIE.htc);";
                 return css;
             //}else{
               //  return "";
@@ -345,7 +345,7 @@ window.sedApp = window.sedApp || {};
                 var css  =  "-webkit-border-" + cornerSide + "-radius: " + size + unit + " !important;"
                           +  "-moz-border-" + cornerSide + "-radius: " + size + unit + " !important;"
                           +  "border-" + cornerSide + "-radius: " + size + unit + " !important;"
-                          +  "behavior: url(" + LIBBASE.url + "PIE/PIE.htc);";
+                          +  "behavior: url(" + _sedAssetsUrls.base.js + "/PIE/PIE.htc);";
                 return css;
             //}else{
               //  return "";

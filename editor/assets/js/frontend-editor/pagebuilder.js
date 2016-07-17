@@ -2770,7 +2770,7 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
                 attachment = _.findWhere( api.attachmentsSettings , { id : attach_id }  );
             }
 
-            var imgUrl = SED_BASE_URL + 'images/no-image.jpg';
+            var imgUrl = SEDNOPIC.url;
             if( !_.isUndefined( attachment ) && attachment && !_.isUndefined( attachment.url ) ){
                 if( !_.isUndefined( attachment.sizes) && !_.isUndefined( attachment.sizes.full ) ){
                     imgUrl = attachment.sizes.full.url;
@@ -2833,7 +2833,7 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
                 _title = attachment.title;
 
             }else{
-                imgUrl = SED_BASE_URL + 'images/no-image.jpg';
+                imgUrl = SEDNOPIC.url;
                 _height = "auto";
                 _width = "auto";
                 _caption = "";

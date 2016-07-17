@@ -53,6 +53,30 @@ class SiteEditorManager{
 
 		}
 
+		$this->assets_urls = array(
+			'base'=> array(
+				'css'     => esc_url_raw( SED_ASSETS_URL . '/css' ) ,
+				'fonts'   => esc_url_raw( SED_ASSETS_URL . '/fonts' ) ,
+				'images'  => esc_url_raw( SED_ASSETS_URL . '/images' ) ,
+				'js'      => esc_url_raw( SED_ASSETS_URL . '/js' )
+			) ,
+
+			'editor'=> array(
+				'css'     => esc_url_raw( SED_EDITOR_ASSETS_URL . '/css' ) ,
+				'fonts'   => esc_url_raw( SED_EDITOR_ASSETS_URL . '/fonts' ) ,
+				'images'  => esc_url_raw( SED_EDITOR_ASSETS_URL . '/images' ) ,
+				'js'      => esc_url_raw( SED_EDITOR_ASSETS_URL . '/js' )  ,
+				'libs'    => esc_url_raw( SED_EDITOR_ASSETS_URL . '/libs' )
+			) ,
+
+			'framework' => array(
+				'css'     => esc_url_raw( SED_FRAMEWORK_ASSETS_URL . '/css' ) ,
+				'fonts'   => esc_url_raw( SED_FRAMEWORK_ASSETS_URL . '/fonts' ) ,
+				'images'  => esc_url_raw( SED_FRAMEWORK_ASSETS_URL . '/images' ) ,
+				'js'      => esc_url_raw( SED_FRAMEWORK_ASSETS_URL . '/js' )
+			)
+		);
+
 		/*
 		ini_set('xdebug.var_display_max_children',1000 );
 		ini_set('xdebug.var_display_max_depth',20 );
@@ -74,10 +98,10 @@ class SiteEditorManager{
         add_action( 'sed_app_register' ,  array( $this, 'register_settings' ) );
 
         if( site_editor_app_on() ){
-            if( !class_exists('SEDAjaxLess') )
-                require_once SED_PLUGIN_DIR . DS . 'framework' . DS . 'SEDAjaxLess' . DS  . 'SEDAjaxLess.php';
+            //if( !class_exists('SEDAjaxLess') )
+                //require_once SED_PLUGIN_DIR . DS . 'framework' . DS . 'SEDAjaxLess' . DS  . 'SEDAjaxLess.php';
 
-            new SEDAjaxLess();
+            //new SEDAjaxLess();
         }
 
         if( is_site_editor() ){
@@ -86,7 +110,25 @@ class SiteEditorManager{
 
         $this->wp_theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
 
+		add_action("wp_footer" , array( $this , 'page_settings' ) );
     }
+
+	function page_settings( ){
+		global $sed_apps;
+		$info_u = $sed_apps->framework->get_sed_page_info_uniqe();
+		$sed_page_id = $info_u['id'];
+		$sed_page_type = $info_u['type'];
+		?>
+		<script>
+			var _sedAppCurrentPageInfo = {
+				id          : "<?php echo $sed_page_id; ?>"  ,
+				type        : "<?php echo $sed_page_type; ?>" ,
+				isHome      : <?php if( is_home() ) echo 'true'; else echo 'false'; ?> ,
+				isFrontPage : <?php if( is_front_page() ) echo 'true'; else echo 'false'; ?>
+			};
+		</script>
+		<?php
+	}
 
     //only for siteeditor
     function get_page_editor_info(){
@@ -208,131 +250,6 @@ class SiteEditorManager{
             var _wpStyles = <?php echo wp_json_encode( $all_styles ); ?>;
         </script>
         <?php
-    }
-
-    function render_site_editor_base_scripts(){
-
-        wp_enqueue_script("jquery-ui-full");
-
-        wp_enqueue_script('sed-guidelines');
-
-        wp_enqueue_script('sed-overlap');
-
-        wp_enqueue_script( 'underscore' );
-
-		//wp_enqueue_script( 'backbone');
-
-        wp_enqueue_script( 'modernizr' );
-
-        wp_enqueue_script( 'handlebars' );
-
-        wp_enqueue_script('sed-handlebars');
-
-        wp_enqueue_script('jquery-contextmenu');
-
-        //wp_enqueue_script('jquery-contenteditable');
-
-        wp_enqueue_script('column-resize');
-
-        wp_enqueue_script( 'siteeditor-base' );
-
-        wp_enqueue_script( 'siteeditor-shortcode' );
-
-        //plugins
-        wp_enqueue_script( 'delete-plugin');
-        wp_enqueue_script( 'select-plugin');
-        wp_enqueue_script( 'media-plugin');
-        wp_enqueue_script( 'preview-plugin' );
-        wp_enqueue_script( 'sub-themes-plugin' );
-        wp_enqueue_script( 'duplicate-plugin' );
-
-        wp_enqueue_script( 'siteeditor-modules-scripts' );
-
-        wp_enqueue_script( 'siteeditor-ajax' );
-
-        wp_enqueue_script( 'tinycolor' );
-
-        wp_enqueue_script( 'siteeditor-css' );
-
-        //wp_enqueue_script( 'sed-app-synchronization' );
-
-		wp_enqueue_script( 'sed-app-preview' );
-
-        wp_enqueue_script( 'sed-app-contextmenu-render' );
-
-        wp_enqueue_script( 'sed-app-preview-render' );
-
-        //wp_enqueue_script('sed-style-editor');
-
-        wp_enqueue_script("sed-tinymce");
-
-        wp_enqueue_script("site-iframe");
-
-        wp_enqueue_script('sed-app-shortcode-builder');
-
-        wp_enqueue_script('sed-pagebuilder');
-
-        wp_enqueue_script( 'sed-module-free-draggable');
-
-        wp_enqueue_script('sed-app-widgets');
-
-        wp_enqueue_script('bootstrap-tooltip' );
-
-        wp_enqueue_script('bootstrap-popover' );
-
-
-        /*
-        global $site_editor_app;
-        $modules_options = $site_editor_app->pagebuilder->modules;
-
-        $modules_scripts = $site_editor_app->pagebuilder->modules_scripts;
-        if(!empty($modules_scripts)){
-            foreach($modules_scripts as $module => $scripts){
-                if($modules_options[$module]['transport'] == "default"){
-                    foreach($scripts as $script){
-                        if(isset( $script[0] )){
-                            $script[1] = !isset($script[1]) ? false: $script[1];
-                            $script[2] = !isset($script[2]) ? array(): $script[2];
-                            $script[3] = !isset($script[3]) ? false: $script[3];
-                            $script[4] = !isset($script[4]) ? "all": $script[4];
-
-                            wp_enqueue_script($script[0] , $script[1] , $script[2] , $script[3] , $script[4]);
-                        }
-                    }
-                }
-            }
-        } */
-    }
-
-
-    function render_site_editor_base_styles(){
-        //wp_enqueue_style("jquery-ui-full");
-        wp_enqueue_style("contextmenu");
-        wp_enqueue_style("site-iframe");
-        wp_enqueue_style("fonts-sed-iframe");
-        wp_enqueue_style("bootstrap-popover");
-
-        /*
-        global $site_editor_app;
-        $modules_options = $site_editor_app->pagebuilder->modules;
-
-        $modules_styles = $site_editor_app->pagebuilder->modules_styles;
-        if(!empty($modules_styles)){
-            foreach($modules_styles as $module => $styles){
-                if($modules_options[$module]['transport'] == "default"){
-                    foreach($styles as $style){
-                        if(isset( $style[0] )){
-                            $style[1] = !isset($style[1]) ? false: $style[1];
-                            $style[2] = !isset($style[2]) ? array(): $style[2];
-                            $style[3] = !isset($style[3]) ? false: $style[3];
-                            $style[4] = !isset($style[4]) ? "all": $style[4];
-
-                            wp_enqueue_style($style[0] , $style[1] , $style[2] , $style[3] , $style[4]);
-                        }
-                    }
-                }
-            }
-        }*/
     }
 
 	/**
@@ -615,18 +532,17 @@ class SiteEditorManager{
 	 */
 	public function setup_theme() {
 		send_origin_headers();
-        global $sed_apps;
 
 		if ( is_site_editor() && ! is_user_logged_in() )
 		    auth_redirect();
 
-		if ( $sed_apps->doing_ajax() && ! is_user_logged_in() ){
-		    $sed_apps->sed_die( 0 );
+		if ( $this->doing_ajax() && ! is_user_logged_in() ){
+		    $this->sed_die( 0 );
         }
 		show_admin_bar( false );
 
 		if( !current_user_can( 'edit_theme_options' ) ) {
-            $sed_apps->sed_die(-1);
+            $this->sed_die(-1);
         }
 
 		//$this->original_stylesheet = get_stylesheet();
@@ -657,7 +573,12 @@ class SiteEditorManager{
 
     function wp_loaded(){
 
-        //do_action( 'sed_app_register', $this );
+		do_action( 'sed_shortcode_register', $this );
+
+		do_action( 'sed_module_register', $this );
+
+        do_action( 'sed_app_register', $this );
+		
 		if ( $this->is_preview() && site_editor_app_on()  )
 			$this->sed_app_preview_init();
 
@@ -684,12 +605,8 @@ class SiteEditorManager{
 	 * @since 3.4.0
 	 */
 	public function sed_app_preview_init() {
-	    global $sed_apps;
 
 		$this->nonce_tick = check_ajax_referer( 'sed_app_preview_' . $this->get_stylesheet(), 'nonce' );
-
-        $this->render_site_editor_base_scripts();
-        $this->render_site_editor_base_styles();
 
         do_action("render_sed_scripts");
         do_action("render_sed_styles");
@@ -711,9 +628,6 @@ class SiteEditorManager{
 		}
 
         do_action( 'sed_app_preview_init', $this );
-
-        //site-editor template
-        add_filter( 'template_include', array($sed_apps,'template_chooser') );
 
         // Add specific CSS class by filter
         add_filter( 'body_class', array( $this, 'sed_app_body_class' ) );
@@ -791,16 +705,17 @@ class SiteEditorManager{
 		?>
 
 		<script type="text/javascript">
-                var SED_PB_MODULES_URL = "<?php echo SED_EDITOR_FOLDER_URL."applications/pagebuilder/modules/"?>";
+                var SED_PB_MODULES_URL = "<?php echo SED_PB_MODULES_URL?>";
                 var SED_UPLOAD_URL = "<?php echo site_url("/wp-content/uploads/site-editor/");?>";
                 var SED_BASE_URL = "<?php echo SED_EDITOR_FOLDER_URL;?>";
+				var SEDNOPIC = {url : "<?php echo SED_ASSETS_URL . "/images/no_pic.png";?>"};
                 var IS_SSL = <?php if( is_ssl() ) echo "true";else echo "false";?>;
 				var IS_RTL = <?php if( is_rtl() ) echo "true";else echo "false";?>;
-                var LIBBASE = {url : "<?php echo SED_EDITOR_FOLDER_URL;?>libraries/"};
-                var SEDAJAX = {url : "<?php echo SED_EDITOR_FOLDER_URL;?>libraries/ajax/site_editor_ajax.php"};
+                var SEDAJAX = {url : "<?php echo SED_EDITOR_FOLDER_URL;?>includes/ajax/site_editor_ajax.php"};
+				var _sedAssetsUrls = <?php echo wp_json_encode( $this->assets_urls ); ?>;
 		        var _sedAppEditorSettings = <?php echo wp_json_encode( $settings ); ?>;
-                //var _sedAppPageBuilderModulesScripts = <?php echo wp_json_encode( $site_editor_app->pagebuilder->modules_scripts ); ?>;
-                //var _sedAppPageBuilderModulesStyles = <?php echo wp_json_encode( $site_editor_app->pagebuilder->modules_styles ); ?>;
+                //var _sedAppPageBuilderModulesScripts = <?php //echo wp_json_encode( $site_editor_app->pagebuilder->modules_scripts ); ?>;
+                //var _sedAppPageBuilderModulesStyles = <?php //echo wp_json_encode( $site_editor_app->pagebuilder->modules_styles ); ?>;
                 var _sedAppEditorI18n = <?php echo wp_json_encode( $sed_js_I18n )?>;
                 var _sedAppEditorAddOnSettings = <?php echo wp_json_encode( $sed_addon_settings )?>;
                 var _sedAppPageContentInfo = <?php echo wp_json_encode( $this->get_page_content_info() )?>;
@@ -854,6 +769,51 @@ class SiteEditorManager{
 
         return $info;
     }
+
+	/**
+	 * Return true if it's an AJAX request.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @return bool
+	 */
+	public function doing_ajax() {
+		return isset( $_POST['sed_page_customized'] ) || ( defined( 'DOING_SITE_EDITOR_AJAX' ) && DOING_SITE_EDITOR_AJAX );
+	}
+
+	function check_ajax_handler($ajax , $nonce){
+		if ( is_admin() && ! $this->doing_ajax() )
+			auth_redirect();
+		elseif ( $this->doing_ajax() && ! is_user_logged_in() ){
+			$this->sed_die( 0 );
+		}
+
+		if ( ! current_user_can( 'edit_theme_options' ) )
+			$this->sed_die( -1 );
+
+		if( !check_ajax_referer( $nonce . '_' . $this->editor_manager->get_stylesheet(), 'nonce' , false ) ){
+			$this->sed_die( -2 );
+		}
+		if( !isset($_POST['sed_page_ajax']) || $_POST['sed_page_ajax'] !=  $ajax){
+			$this->sed_die( -2 );
+		}
+	}
+
+	/**
+	 * Custom wp_die wrapper. Returns either the standard message for UI
+	 * or the AJAX message.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @param mixed $ajax_message AJAX return
+	 * @param mixed $message UI message
+	 */
+	public function sed_die( $message = null ) {
+		if ( is_scalar( $message ) )
+			die( (string) $message );
+		die( '0' );
+	}
+
 	/**
 	 * Print a workaround to handle HTML5 tags in IE < 9
 	 *
@@ -1013,8 +973,8 @@ class SiteEditorManager{
 
             if( site_editor_app_on() ){
                 global $sed_apps;
-                $sed_page_id    = $sed_apps->sed_page_id;
-                $sed_page_type  = $sed_apps->sed_page_type;
+                $sed_page_id    = $sed_apps->framework->sed_page_id;
+                $sed_page_type  = $sed_apps->framework->sed_page_type;
             }else if( is_site_editor() ){
                 $info = $this->get_page_editor_info();
                 $sed_page_id    = $info['id'];
@@ -1028,8 +988,6 @@ class SiteEditorManager{
             return $this->_page_settings;
 
     }
-
-	
 
 }
 
