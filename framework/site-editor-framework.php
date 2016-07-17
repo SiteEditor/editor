@@ -62,10 +62,8 @@ final Class SiteEditorFramework {
 
         require_once SED_INC_FRAMEWORK_DIR . DS . 'framework-assets.class.php';
         require_once SED_INC_FRAMEWORK_DIR . DS . 'theme-integration.class.php';
-        require_once SED_INC_FRAMEWORK_DIR . DS . 'theme-framework.class.php';
         require_once SED_INC_FRAMEWORK_DIR . DS . 'site-editor-css.class.php';
-
-
+        
     }
 
     function get_sed_page_info_uniqe(){

@@ -221,6 +221,12 @@ final Class SiteEditor {
             $this->load_framework();
         }
 
+        /**
+         * Load in ajax mode , editor , editor_frontend , frontend
+         */
+        if ( ! $this->is_request( 'admin' ) || $this->is_request( 'editor' ) ) {
+            require_once SED_INC_FRAMEWORK_DIR . DS . 'theme-framework.class.php';
+        }
     }
 
     /**
