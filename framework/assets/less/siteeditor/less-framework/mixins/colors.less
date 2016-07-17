@@ -1,0 +1,135 @@
+/*****
+- .smart-variant()  ======= a function to generate color based on given background color
+- @attr     Atribute name, eg. color, border-color or background-color
+- @color    The backgound color, that the contrast color should generate against that
+- @percent  Optional, a percentage balance point between the two colors, defaults to 50%.
+- function call examples: .smart-variant(color; @bg-color);
+*/
+.smart-variant(@attr:color;@color:#fff;@percent) {
+  @{attr}:     mix(contrast(@color),@color,@percent);
+}
+
+// contrasts text against a given background color
+.contrast(@color:#fff;@percent) {
+  @sed-color:  mix(contrast(@color),@color,@percent);
+}
+
+.high-color(@color ;@attr:color){
+    .contrast(@color;100%);
+    @{attr}: @sed-color;
+}
+.base-color(@color; @percent: 80% ;@attr:color){
+    .contrast(@color;@percent);
+    @{attr}: @sed-color;
+}
+.low-color(@color ;@attr:color){
+    .contrast(@color;40%);
+    @{attr}: @sed-color;
+}
+.lower-color(@color ;@attr:color){
+    .contrast(@color;20%);
+    @{attr}: @sed-color;  
+}
+
+
+
+.bg-variant(@color) {
+  background-color: @color;
+  a&:hover {
+    background-color: darken(@color, 10%);
+  }
+}
+
+// Typography
+
+.text-emphasis-variant(@color) {
+  color: @color;
+  a&:hover {
+    color: darken(@color, 10%);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+/*mixins are for create rtl*/
+/*The second argument is automatic (auto) by default in all mixins ,
+but if to it awarded amount you should insert it.*/
+  
+
+.alignleft(){float: left;  .rtl-body &{float: right;} }
+
+.alignright() {float: right;  .rtl-body &{float: left;} }
+
+
+.left(@left:0;@right:auto) {
+  left: @left;
+  right: @right;
+    .rtl-body &{
+        left: @right;
+        right: @left;
+    }
+}
+
+.right(@right:0;@left:auto) {
+  left: @left;
+  right: @right;
+    .rtl-body &{
+        left: @right;
+        right: @left;
+    }
+}
+
+
+.textleft() {text-align: left; .rtl-body &{text-align: right;}}
+
+.textright() {text-align: right; .rtl-body &{text-align: left;}}
+
+
+.margin-left(@left:0;@right:auto){
+    margin-left:@left;
+    margin-right: @right;
+    .rtl-body &{
+        margin-left: @right;
+        margin-right: @left;
+    }
+}
+
+.margin-right(@right:0;@left:auto){
+    margin-left:@left;
+    margin-right: @right;
+    .rtl-body &{
+        margin-left: @right;
+        margin-right: @left;
+    }
+}
+
+
+
+.padding-left(@left:0;@right:auto){
+    padding-left:@left;
+    padding-right: @right;
+    .rtl-body &{
+        padding-left: @right;
+        padding-right: @left;
+    }
+}
+
+.padding-right(@right:0;@left:auto){
+    padding-left:@left;
+    padding-right: @right;
+    .rtl-body &{
+        padding-left: @right;
+        padding-right: @left;
+    }
+}
+
+
+
