@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'siteeditor';
-	src:url('../fonts-sed-iframe/siteeditor.eot?krmpga');
-	src:url('../fonts-sed-iframe/siteeditor.eot?#iefixkrmpga') format('embedded-opentype'),
-		url('../fonts-sed-iframe/siteeditor.ttf?krmpga') format('truetype'),
-		url('../fonts-sed-iframe/siteeditor.woff?krmpga') format('woff'),
-		url('../fonts-sed-iframe/siteeditor.svg?krmpga#siteeditor') format('svg');
+	src:url('../../fonts-sed-iframe/siteeditor.eot?krmpga');
+	src:url('../../fonts-sed-iframe/siteeditor.eot?#iefixkrmpga') format('embedded-opentype'),
+		url('../../fonts-sed-iframe/siteeditor.ttf?krmpga') format('truetype'),
+		url('../../fonts-sed-iframe/siteeditor.woff?krmpga') format('woff'),
+		url('../../fonts-sed-iframe/siteeditor.svg?krmpga#siteeditor') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }

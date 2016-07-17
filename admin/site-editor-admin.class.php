@@ -18,7 +18,7 @@ class SiteEditorAdminRender{
         require_once( SED_ADMIN_INC_PATH . DS . 'class_sed_error.php' );
         $GLOBALS['sed_error'] = new SED_Error;
 
-        $GLOBALS['sed_pb_modules'] = "" ;
+        
         add_action("init" ,  array( $this ,"load_page_builder_app") );
 
         //add admin menu

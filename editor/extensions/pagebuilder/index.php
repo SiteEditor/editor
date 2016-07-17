@@ -7,6 +7,11 @@ defined('_SEDEXEC') or die;
 
 include_once( SED_INC_DIR . DS . "app_pb_modules.class.php"  );
 
+global $sed_pb_modules;
+$pb_modules = new SEDPageBuilderModules( );
+$pb_modules->app_modules_dir = SED_PB_MODULES_PATH;
+$sed_pb_modules = $pb_modules;
+
 //load page builder
 require_once SED_EXT_PATH . DS . "pagebuilder" . DS . "includes" . DS . "pagebuilder.class.php";
 

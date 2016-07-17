@@ -1,8 +1,4 @@
-<?php
-add_action( 'wp_footer', 'load_site_iframe_tmpl' );
 
-function load_site_iframe_tmpl(){
-?>
 <script type="text/html" id="tmpl-hd-dpa">
     <div id="sed-header-drop-area" class="sed-drop-area-layout"> </div>
 </script>
@@ -147,10 +143,3 @@ function load_site_iframe_tmpl(){
 </div>
 
 </script>
-
-
-<?php
-}
-
-
-?>

@@ -41,7 +41,7 @@ Class PageBuilderApplication {
 
     public $sed_post_shortcodes_model = array();
 
-    public $shortcodes_tagnames = array();
+    public static $shortcodes_tagnames = array();
 
     public $sed_theme_content = array();
 
@@ -68,12 +68,13 @@ Class PageBuilderApplication {
         add_filter('the_excerpt', array($this, 'sed_excerpt_filter') );
 
         //load helper shortcodes & ready for do shortcode
-        add_action( "sed_shortcode_register" , array( $this , "register_helper_shortcodes" ) , 99999   ); //after_sed_pb_modules_loaded
+        add_action( "wp_loaded" , array( $this , "register_helper_shortcodes" ) , 99999   ); //after_sed_pb_modules_loaded
 
         if( site_editor_app_on() ){
             add_action( 'the_post'      , array( $this  , 'preview_setup_post_content' ) );
             add_action( 'the_post'      , array( &$this , 'parse_editable_content' ), 99999 );
             add_action( 'wp_footer'     , array( $this  , "get_pb_posts_shortcode_content") );
+            add_action( 'wp_footer'     , array( $this  , 'load_front_end_tmpl' ) );
         }
 
         if( !site_editor_app_on() ){
@@ -153,6 +154,8 @@ Class PageBuilderApplication {
     * Main purpose of this function is ready helper shortcodes for do_shortcode
     */
     public function register_helper_shortcodes(  ){
+        global $shortcode_tags;
+
         $sed_helper_shortcodes = $this->get_helper_shortcodes();
         $sed_helper_shortcodes = ( $sed_helper_shortcodes && is_array( $sed_helper_shortcodes ) ) ? $sed_helper_shortcodes : array();
 
@@ -168,14 +171,13 @@ Class PageBuilderApplication {
 
         if( !empty( $sed_helper_shortcodes ) ){
 
-            $this->shortcodes_tagnames = array_merge( $this->shortcodes_tagnames , array_keys( $sed_helper_shortcodes ) );
+            self::$shortcodes_tagnames = array_merge( self::$shortcodes_tagnames , array_keys( $sed_helper_shortcodes ) );
 
-            $this->shortcodes_tagnames = array_unique( $this->shortcodes_tagnames );
+            self::$shortcodes_tagnames = array_unique( self::$shortcodes_tagnames );
 
             foreach( $sed_helper_shortcodes AS $shortcode => $main_shortcode_name ){
-                if( isset( $this->shortcodes[ $main_shortcode_name ] ) ){
-                    $main_shortcode_obj = $this->shortcodes[ $main_shortcode_name ]['object'];
-                    add_shortcode( $shortcode , array( $main_shortcode_obj , 'shortcode_render' ) );
+                if( shortcode_exists( $main_shortcode_name ) ){ //var_dump( $shortcode_tags[$main_shortcode_name] );
+                    add_shortcode( $shortcode , $shortcode_tags[$main_shortcode_name] );
                 }
             }
         }
@@ -473,8 +475,7 @@ Class PageBuilderApplication {
     public static function shortcodes_regexp( $tagnames = array() ){
 
         if( empty($tagnames) ){
-            global $site_editor_app;
-            $tagnames = $site_editor_app->pagebuilder->shortcodes_tagnames;
+            $tagnames = self::$shortcodes_tagnames;
         }
 
         if( isset( $_POST['default_helper_shortcodes'] ) && is_array( $_POST['default_helper_shortcodes'] ) ){
@@ -729,8 +730,8 @@ Class PageBuilderApplication {
        }else{
             $this->shortcodes[$name] = $shortcode_options_arr;
 
-            if( !in_array( $name , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , $name );
+            if( !in_array( $name , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , $name );
 
             if( is_site_editor() ){
                 $module_name = (!empty($moduleName)) ? $moduleName : $parentModule;
@@ -860,7 +861,7 @@ Class PageBuilderApplication {
         $styles     = array();
         $shortcodes = $this->shortcodes;
         $shortcodes_settings = array();
-        
+
         foreach( $shortcodes AS $name => $shortcode){
             if($shortcode['asModule'])
                 $parent_module = $shortcode['moduleName'];
@@ -937,7 +938,7 @@ Class PageBuilderApplication {
 
         $shortcode_settings_content = '<?php $shortcodes_tagnames = array();';
 
-        foreach( $this->shortcodes_tagnames as $tag ){
+        foreach( self::$shortcodes_tagnames as $tag ){
             $shortcode_settings_content .= ' $shortcodes_tagnames[] = "'.$tag.'";';
         }
   		$shortcode_settings_content .= ' $shortcodes = array();';
@@ -1130,23 +1131,23 @@ Class PageBuilderApplication {
         if( $include_row === true ){
             $default_pattern = $site_editor_app->layout_patterns['default'] ;
 
-            if( !in_array( "sed_module_outer" , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , "sed_module_outer");
+            if( !in_array( "sed_module_outer" , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , "sed_module_outer");
 
-            if( !in_array( "sed_row_outer" , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , "sed_row_outer");
+            if( !in_array( "sed_row_outer" , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , "sed_row_outer");
 
-            if( !in_array( "sed_column_outer" , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , "sed_column_outer");
+            if( !in_array( "sed_column_outer" , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , "sed_column_outer");
 
-            if( !in_array( "sed_columns_outer" , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , "sed_columns_outer");
+            if( !in_array( "sed_columns_outer" , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , "sed_columns_outer");
 
-            if( !in_array( "sed_module_outer_outer" , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , "sed_module_outer_outer");
+            if( !in_array( "sed_module_outer_outer" , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , "sed_module_outer_outer");
 
-            if( !in_array( "sed_row_outer_outer" , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , "sed_row_outer_outer");
+            if( !in_array( "sed_row_outer_outer" , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , "sed_row_outer_outer");
 
             $activate_modules = SiteEditorModules::pb_module_active_list();
             $module_base_url = content_url( "/" . dirname( dirname( $activate_modules[ $module ] ) ) );
@@ -1160,11 +1161,11 @@ Class PageBuilderApplication {
               [/sed_module_outer]
             [/sed_row_outer]';
 
-            if( !in_array( "sed_module_outer" , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , "sed_module_outer");
+            if( !in_array( "sed_module_outer" , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , "sed_module_outer");
 
-            if( !in_array( "sed_row_outer" , $this->shortcodes_tagnames ) )
-                array_push( $this->shortcodes_tagnames , "sed_row_outer");
+            if( !in_array( "sed_row_outer" , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , "sed_row_outer");
 
         }
 
@@ -1701,6 +1702,10 @@ Class PageBuilderApplication {
 
     }
 
+    public function load_front_end_tmpl(){
+        include SED_BASE_PB_APP_PATH . "/view/front-end-tmpl.php";
+    }
+
     /*public function get_home_main_content_patterns(){
         $latest_posts_pattern = $this->get_main_content_shortcode_pattern( "default" , "archive" , "sed_archive" );
         $static_page_pattern = $this->get_main_content_shortcode_pattern( "default" , "posts" , "sed_post" );
@@ -1887,8 +1892,8 @@ Class PageBuilderApplication {
 
     function check_exist_main_content_model(){
 
-        global $site_editor_app;
-        $page_layout = $site_editor_app->layout->get_page_layout();
+        require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
+        $page_layout = SiteEditorLayoutManager::get_page_layout();
         $sed_layout_models = get_option( 'sed_layouts_models' );
 
         var_dump( $sed_layout_models );
@@ -2011,7 +2016,7 @@ Class PageBuilderApplication {
 
     }
 
-    function sed_process_template(){ var_dump( "test..................." );
+    function sed_process_template(){
         $main_content = $this->main_content_template();
 
         if( !$this->check_exist_main_content_model() ){
@@ -2021,8 +2026,8 @@ Class PageBuilderApplication {
             global $sed_data;
             $sub_themes_models = get_option("sed_layouts_models");
 
-            global $site_editor_app;
-            $page_layout = $site_editor_app->layout->get_page_layout();
+            require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
+            $page_layout = SiteEditorLayoutManager::get_page_layout();
 
             //if( isset( $sub_themes_models[ $sub_theme ] ) && is_array( $sub_themes_models[ $sub_theme ] ) && !empty( $sub_themes_models[ $sub_theme ] ) ){
             $curr_sub_themes_models = $sub_themes_models[ $page_layout ];

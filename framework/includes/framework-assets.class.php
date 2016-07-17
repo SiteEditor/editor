@@ -74,7 +74,7 @@ if(!class_exists('SEDFrameworkAssetsManager'))
 
         function default_styles(){
 
-            $this->add_css( 'css3-animate',     SED_FRAMEWORK_ASSETS_URL . '/css/animate/css/animate'.$this->suffix.'.css' );
+            $this->add_css( 'css3-animate',     SED_FRAMEWORK_ASSETS_URL . '/css/animate/animate'.$this->suffix.'.css' );
 
             $this->add_css( 'lightbox',         SED_FRAMEWORK_ASSETS_URL . '/css/lightbox/lightbox'.$this->suffix.'.css' );
 

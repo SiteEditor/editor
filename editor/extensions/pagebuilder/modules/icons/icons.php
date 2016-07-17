@@ -30,7 +30,7 @@ class PBIconsShortcode extends PBShortcodeClass{
 
     //loaded FontAwesome allways
     function load_default_font_icon(){
-        wp_enqueue_style('sed-FontAwesome' , SED_EDITOR_FOLDER_URL.'applications/siteeditor/modules/icon-library/fonts/FontAwesome/FontAwesome.css' , array() , "4.3");
+        wp_enqueue_style('sed-FontAwesome' , SED_EXT_URL.'icon-library/fonts/FontAwesome/FontAwesome.css' , array() , "4.3");
     }
 
     function get_atts(){

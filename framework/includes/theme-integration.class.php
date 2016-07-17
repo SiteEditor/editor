@@ -235,7 +235,7 @@ function sed_tpl_classes() {
   return sprintf( 'class="%s" %s', join( ' ', $classes ), join( ' ', $attributes ) );
 }
 
-function sed_primary_template() {
+function sed_primary_template() { 
 
   global $sed_static_template_output;
   global $sed_running_integration , $sed_data;
