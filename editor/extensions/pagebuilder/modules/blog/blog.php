@@ -92,7 +92,7 @@ class PBBlogShortcode extends PBShortcodeClass{
             "number_columns"        => 4,
             "masonry_spacing"       => 15,
             "border_width"          => 1,
-            //'skin_default_style'    => 'default',
+            'skin_default_style'    => 'default',
             "excerpt_content_show"  => true,
             "excerpt_length"        => 'refresh',
             "excerpt_html"          => false,

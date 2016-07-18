@@ -708,6 +708,7 @@ class SiteEditorManager{
                 var SED_PB_MODULES_URL = "<?php echo SED_PB_MODULES_URL?>";
                 var SED_UPLOAD_URL = "<?php echo site_url("/wp-content/uploads/site-editor/");?>";
                 var SED_BASE_URL = "<?php echo SED_EDITOR_FOLDER_URL;?>";
+				var SED_SITE_URL = "<?php echo site_url();?>";
 				var SEDNOPIC = {url : "<?php echo SED_ASSETS_URL . "/images/no_pic.png";?>"};
                 var IS_SSL = <?php if( is_ssl() ) echo "true";else echo "false";?>;
 				var IS_RTL = <?php if( is_rtl() ) echo "true";else echo "false";?>;
@@ -791,7 +792,7 @@ class SiteEditorManager{
 		if ( ! current_user_can( 'edit_theme_options' ) )
 			$this->sed_die( -1 );
 
-		if( !check_ajax_referer( $nonce . '_' . $this->editor_manager->get_stylesheet(), 'nonce' , false ) ){
+		if( !check_ajax_referer( $nonce . '_' . $this->get_stylesheet(), 'nonce' , false ) ){
 			$this->sed_die( -2 );
 		}
 		if( !isset($_POST['sed_page_ajax']) || $_POST['sed_page_ajax'] !=  $ajax){

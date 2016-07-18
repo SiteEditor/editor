@@ -49,7 +49,7 @@ class PBGoogleMapShortcode extends PBShortcodeClass{
 
         $atts['setting_url']  = SED_PB_MODULES_URL . 'google-map/sed-gmap-custom.php';
 
-        $atts['setting_base_url'] = SED_EDITOR_FOLDER_URL;
+        $atts['setting_base_url'] = includes_url();
 
         $atts['setting_module_url'] = SED_PB_MODULES_URL;
 

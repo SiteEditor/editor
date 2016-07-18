@@ -64,7 +64,7 @@
 	<meta name="viewport" content="width=device-width">
     <title>Custom Google Map</title>
       <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-      <script type="text/javascript" src="<?php echo $baseUrl . 'libraries/jquery/jquery.js';?>"></script>
+      <script type="text/javascript" src="<?php echo $baseUrl . '/wp-includes/js/jquery/jquery.js';?>"></script>
       <script type="text/javascript" src="<?php echo $moduleUrl . 'google-map/js/gmap-min.js';?>"></script>
       <style type="text/css">
       <!--

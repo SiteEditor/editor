@@ -66,9 +66,27 @@ if(!class_exists('SEDEditorAssetsManager'))
                 //'seduploader' ,
                 'sed-drag-drop' ,
             );
-      
-            //register SiteEditor Script
-            $this->add("siteeditor", SED_EDITOR_ASSETS_URL . "/js/siteeditor".$this->suffix.".js" , $deps , SED_APP_VERSION , 1 );
+
+            if( SED()->version_type == "production" ) {
+                //register SiteEditor Script
+                $this->add("siteeditor", SED_EDITOR_ASSETS_URL . "/js/siteeditor" . $this->suffix . ".js", $deps, SED_APP_VERSION, 1);
+            }else{
+                $this->add("siteeditor-base"            , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-base.js", $deps, SED_APP_VERSION, 1);
+                $this->add("siteeditor-shortcode"       , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-shortcode.js", array( "siteeditor-base" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-ajax"            , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-ajax.js", array( "siteeditor-shortcode" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-scripts"         , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-modules-scripts.js", array( "siteeditor-ajax" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-css"             , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteEditorCss.js", array( "siteeditor-scripts" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-main"            , SED_EDITOR_ASSETS_URL . "/js/siteeditor/core/siteEditorControls.js", array( "siteeditor-css" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-style"           , SED_EDITOR_ASSETS_URL . "/js/siteeditor/core/styleEditorControls.js", array( "siteeditor-main" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-control"         , SED_EDITOR_ASSETS_URL . "/js/siteeditor/core/pbModulesControls.js", array( "siteeditor-style" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-preview"         , SED_EDITOR_ASSETS_URL . "/js/siteeditor/modules/appPreviewClass.js", array( "siteeditor-control" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-template"        , SED_EDITOR_ASSETS_URL . "/js/siteeditor/modules/appTemplateClass.js", array( "siteeditor-preview" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-pagebuilder"     , SED_EDITOR_ASSETS_URL . "/js/siteeditor/plugins/pagebuilder/plugin.js", array( "siteeditor-template" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-contextmenu"     , SED_EDITOR_ASSETS_URL . "/js/siteeditor/plugins/contextmenu/plugin.js", array( "siteeditor-pagebuilder" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-settings"        , SED_EDITOR_ASSETS_URL . "/js/siteeditor/plugins/settings/plugin.js", array( "siteeditor-contextmenu" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-save"            , SED_EDITOR_ASSETS_URL . "/js/siteeditor/plugins/save/plugin.js", array( "siteeditor-settings" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor"                 , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-settings-render.js", array( "siteeditor-save" ), SED_APP_VERSION, 1);
+            }
 
             $deps = array(
                 'bootstrap-tab' ,
@@ -133,9 +151,31 @@ if(!class_exists('SEDEditorAssetsManager'))
          * 'chosen'
          */
         function enqueue_editor_scripts(){
-            
-            wp_enqueue_script( 'siteeditor' );
-            
+
+            if( SED()->version_type == "production" ) {
+
+                wp_enqueue_script('siteeditor');
+
+            }else{
+
+                wp_enqueue_script( "siteeditor-base" );
+                wp_enqueue_script( "siteeditor-shortcode" );
+                wp_enqueue_script( "siteeditor-ajax" );
+                wp_enqueue_script( "siteeditor-scripts" );
+                wp_enqueue_script( "siteeditor-css" );
+                wp_enqueue_script( "siteeditor-main" );
+                wp_enqueue_script( "siteeditor-style" );
+                wp_enqueue_script( "siteeditor-control" );
+                wp_enqueue_script( "siteeditor-preview" );
+                wp_enqueue_script( "siteeditor-template" );
+                wp_enqueue_script( "siteeditor-pagebuilder" );
+                wp_enqueue_script( "siteeditor-contextmenu" );
+                wp_enqueue_script( "siteeditor-settings" );
+                wp_enqueue_script( "siteeditor-save" );
+                wp_enqueue_script( "siteeditor" );
+
+            }
+
             wp_enqueue_script( 'sed-render' );
             
         }
@@ -165,14 +205,64 @@ if(!class_exists('SEDEditorAssetsManager'))
                 'sed-tinymce'
             );
 
-            //register SiteEditor Script For Editor in the Front End
-            $this->add( 'sed-frontend-editor',  SED_EDITOR_ASSETS_URL . "/js/frontend-editor".$this->suffix.".js" , $deps , SED_APP_VERSION );
+            if( SED()->version_type == "production" ) {
 
+                //register SiteEditor Script For Editor in the Front End
+                $this->add('sed-frontend-editor', SED_EDITOR_ASSETS_URL . "/js/frontend-editor" . $this->suffix . ".js", $deps, SED_APP_VERSION);
+
+            }else{
+
+                $this->add("siteeditor-base"                , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-base.js", $deps, SED_APP_VERSION, 1);
+                $this->add("siteeditor-shortcode"           , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-shortcode.js", array( "siteeditor-base" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-ajax"                , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-ajax.js", array( "siteeditor-shortcode" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-scripts"             , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteeditor-modules-scripts.js", array( "siteeditor-ajax" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-css"                 , SED_EDITOR_ASSETS_URL . "/js/siteeditor/siteEditorCss.js", array( "siteeditor-scripts" ), SED_APP_VERSION, 1);
+
+                $this->add("siteeditor-col-resize"          , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/column-resize.js", array( "siteeditor-css" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-preview"             , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/siteeditor-preview.js", array( "siteeditor-col-resize" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-preview-render"      , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/siteeditor-preview-render.js", array( "siteeditor-preview" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-selective-refresh"   , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/sed-app-selective-refresh.js", array( "siteeditor-preview-render" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-content-builder"     , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/shortcode-content-builder.js", array( "siteeditor-selective-refresh" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-site-iframe"         , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/site-iframe.js", array( "siteeditor-content-builder" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-app-preview"         , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/plugins/app-preview.js", array( "siteeditor-site-iframe" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-pagebuilder"         , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/pagebuilder.js", array( "siteeditor-app-preview" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-contextmenu"         , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/siteeditor-contextmenu.js", array( "siteeditor-pagebuilder" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-delete"              , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/plugins/delete.js", array( "siteeditor-contextmenu" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-select"              , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/plugins/select.js", array( "siteeditor-delete" ), SED_APP_VERSION, 1);
+                $this->add("siteeditor-media"               , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/plugins/media.js", array( "siteeditor-select" ), SED_APP_VERSION, 1);
+                $this->add("sed-frontend-editor"            , SED_EDITOR_ASSETS_URL . "/js/frontend-editor/plugins/duplicate.js", array( "siteeditor-media" ), SED_APP_VERSION, 1);
+
+            }
         }
 
         function enqueue_frontend_scripts(){
 
-            wp_enqueue_script( 'sed-frontend-editor' );
+            if( SED()->version_type == "production" ) {
+
+                wp_enqueue_script('sed-frontend-editor');
+
+            }else{
+
+                wp_enqueue_script( "siteeditor-base" );
+                wp_enqueue_script( "siteeditor-shortcode" );
+                wp_enqueue_script( "siteeditor-ajax" );
+                wp_enqueue_script( "siteeditor-scripts" );
+                wp_enqueue_script( "siteeditor-css" );
+                wp_enqueue_script( "siteeditor-col-resize" );
+                wp_enqueue_script( "siteeditor-preview" );
+                wp_enqueue_script( "siteeditor-preview-render" );
+                wp_enqueue_script( "siteeditor-selective-refresh" );
+                wp_enqueue_script( "siteeditor-content-builder" );
+                wp_enqueue_script( "siteeditor-site-iframe" );
+                wp_enqueue_script( "siteeditor-app-preview" );
+                wp_enqueue_script( "siteeditor-pagebuilder" );
+                wp_enqueue_script( "siteeditor-contextmenu" );
+                wp_enqueue_script( "siteeditor-delete" );
+                wp_enqueue_script( "siteeditor-select" );
+                wp_enqueue_script( "siteeditor-media" );
+                wp_enqueue_script( "sed-frontend-editor" );
+
+            }
 
             wp_enqueue_script( 'jquery-contextmenu' );
             

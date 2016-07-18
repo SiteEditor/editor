@@ -177,6 +177,7 @@ do_action( 'sed_enqueue_scripts' );
         var SED_PB_MODULES_URL = "<?php echo SED_PB_MODULES_URL?>";
         var SED_UPLOAD_URL = "<?php echo site_url("/wp-content/uploads/site-editor/");?>";
         var SED_BASE_URL = "<?php echo SED_EDITOR_FOLDER_URL;?>";
+        var SED_SITE_URL = "<?php echo site_url();?>";
         var _sedAssetsUrls = <?php echo wp_json_encode( $sed_apps->editor->manager->assets_urls ); ?>;
         var loadUploader = false;
         var SEDUploader = false;

@@ -36,7 +36,7 @@ if(!class_exists('SEDFrameworkAssetsManager'))
 
             $this->add( 'carousel',             SED_FRAMEWORK_ASSETS_URL . '/js/slick.carousel/slick'.$this->suffix.'.js', array( ) ,"1.3.7");
 
-            $this->add( 'easing',               SED_FRAMEWORK_ASSETS_URL . '/js/easing/jquery.easing'.$this->suffix.'.js', array('jquery') ,"1.3");
+            $this->add( 'easing',               SED_FRAMEWORK_ASSETS_URL . '/js/easing/jquery-easing'.$this->suffix.'.js', array('jquery') ,"1.3");
 
             $this->add( 'sed-masonry',          SED_FRAMEWORK_ASSETS_URL . '/js/masonry/sed-masonry'.$this->suffix.'.js', array('masonry','sed-livequery' , 'images-loaded') ,"1.2.4");
 
