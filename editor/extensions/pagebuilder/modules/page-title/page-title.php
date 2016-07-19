@@ -272,7 +272,7 @@ $sed_pb_app->register_module(array(
     "tpl_type"    => "underscore" ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
     "sub_modules"   => array('breadcrumbs', 'title'),
-    //"js_module"   => array( 'sed_page_title_module_script', 'page-title/js/page-title-module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'sed_page_title_module_script', 'page-title/js/page-title-module.min.js', array('sed-frontend-editor') )
 ));
 
 

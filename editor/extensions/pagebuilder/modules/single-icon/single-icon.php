@@ -243,7 +243,7 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_single_icon",
     "tpl_type"    => "underscore" ,
     //"js_plugin"   => '',
-    "js_module"   => array( 'sed_single_icon_module_script', 'single-icon/js/icons-module.min.js', array('site-iframe'))
+    "js_module"   => array( 'sed_single_icon_module_script', 'single-icon/js/icons-module.min.js', array('sed-frontend-editor'))
 ));
 
 

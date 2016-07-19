@@ -252,6 +252,6 @@ $sed_pb_app->register_module(array(
     "priority"          => 11 ,
     "transport"   => "refresh" ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'page_nav_module_script', 'page-nav/js/page-nav-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'page_nav_module_script', 'page-nav/js/page-nav-module.min.js', array('sed-frontend-editor') )
 ));
 

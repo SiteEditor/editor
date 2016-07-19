@@ -332,7 +332,7 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_parallax_slider",
     //"js_plugin"   => '',
     "sub_modules"   => array('image'),
-    "js_module"   => array( 'parallax-slider-module', 'parallax-slider/js/parallax-slider-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'parallax-slider-module', 'parallax-slider/js/parallax-slider-module.min.js', array('sed-frontend-editor') )
 ));
 
 require_once( SED_PB_MODULES_PATH . "/parallax-slider/sub-shortcode/sub-shortcode.php");

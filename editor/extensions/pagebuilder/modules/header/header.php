@@ -160,7 +160,7 @@ $sed_pb_app->register_module(array(
     "is_special"  => true ,
     "has_extra_spacing"   =>  true ,
     "sub_modules"   => array(),
-    //"js_module"   => array( 'sed_header_module_script', 'header/js/header-module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'sed_header_module_script', 'header/js/header-module.min.js', array('sed-frontend-editor') )
 ));
 
 

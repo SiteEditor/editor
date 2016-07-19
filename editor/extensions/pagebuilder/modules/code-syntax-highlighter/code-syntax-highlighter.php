@@ -839,7 +839,7 @@ $sed_pb_app->register_module(array(
     "sub_modules"   => array('paragraph'),
     //"transport"   => "ajax" ,
     "tpl_type"    => "underscore" ,
-    "js_module"   => array( 'sed-code-syntax-highlighter-module', 'code-syntax-highlighter/js/sed-code-syntax-highlighter-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed-code-syntax-highlighter-module', 'code-syntax-highlighter/js/sed-code-syntax-highlighter-module.min.js', array('sed-frontend-editor') )
     //"helper_shortcodes" => array('sed_items_code_syntax_highlighter_inner'),
 ));
 

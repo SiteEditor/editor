@@ -687,7 +687,7 @@ $sed_pb_app->register_module(array(
     "transport"             =>  "ajax" ,
     "sub_modules"           =>  array('page-nav'),
     //"js_plugin"             =>  'blog/js/blog-plugin.min.js',
-    //"js_module"              =>  array( 'sed_blog_module_script', 'blog/js/blog-module.min.js', array('site-iframe') )
+    //"js_module"              =>  array( 'sed_blog_module_script', 'blog/js/blog-module.min.js', array('sed-frontend-editor') )
 ));
 
 

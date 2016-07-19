@@ -97,5 +97,5 @@ $sed_pb_app->register_module(array(
     "type_icon"   => "font",
     "shortcode"   => "sed_sidebar",
     //"sub_modules"   => array('title', 'paragraph', 'image', 'icons' , 'separator'),
-    //"js_module"   => array( 'sed_sidebar _module_script', 'sidebar /js/sed-sidebar -module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'sed_sidebar _module_script', 'sidebar /js/sed-sidebar -module.min.js', array('sed-frontend-editor') )
 ));

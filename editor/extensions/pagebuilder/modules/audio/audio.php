@@ -329,5 +329,5 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-earphones",
     "shortcode"   => "sed_audio",
     //"js_plugin"   => '',
-    "js_module"   => array( 'sed-audio-module', 'audio/js/sed-audio-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed-audio-module', 'audio/js/sed-audio-module.min.js', array('sed-frontend-editor') )
 ));

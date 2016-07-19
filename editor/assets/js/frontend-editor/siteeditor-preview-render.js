@@ -46,8 +46,7 @@
         //api.templateSettings = window._sedAppTemplateOptions;
         api.I18n = window._sedAppEditorI18n;
         api.addOnSettings = window._sedAppEditorAddOnSettings;
-                          console.log( "api.addOnSettings ---------- : " , api.addOnSettings );
-                          console.log( "api.settings IN IFRAME ---------- : " , api.settings );
+
 		if ( ! api.settings )
 			return;
 
@@ -96,7 +95,7 @@
 
 		api.preview.bind( 'setting', function( args ) {
 			var value;
-            console.log( "-------------api.preview.bind args--------------" , args );
+
 			args = args.slice();
 
 			if ( value = api( args.shift() ) )

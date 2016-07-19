@@ -106,7 +106,7 @@
                 if( _.isUndefined( api.currenStyleEditorContolsValues[currentCssSelector] ) )
                     api.currenStyleEditorContolsValues[currentCssSelector] = {};
 
-                api.currenStyleEditorContolsValues[currentCssSelector][settingId] = val;  console.log( "api.currenStyleEditorContolsValues------------" , api.currenStyleEditorContolsValues );
+                api.currenStyleEditorContolsValues[currentCssSelector][settingId] = val; 
             }
 
             this.setValue( val );
@@ -1834,7 +1834,7 @@
         _skinSupport : function( ){
             if( _.isUndefined( this.params.support ) )
                 return ;
-                         //console.log( "this.params.support ---------- : " , this.params.support   );
+
             var self = this,
                 skins = this.params.support ,
                 type = ( !_.isUndefined( skins.type ) ) ? skins.type.toLowerCase() : "include";
@@ -2138,8 +2138,6 @@
 
         renderRelations : function(  ){
             var relations = this.getRelations() , self = this;
-            //console.log( "------currentId------" , this.currentId );
-            //console.log( "------relations------" , relations );
             this.itemApplyRelations( relations.controls );
 
             //this.itemApplyRelations( relations.values , "values" );
@@ -2391,8 +2389,6 @@
 	  api.modulesGeneralSettings  = window._sedAppModulesGeneralSettings;
       api.defaultHelperShortcodes  = window._sedAppDefaultHelperShortcodes;
 
-      console.log( " ---------api.settingsRelations ----------------- " , api.settingsRelations );
-
       var modulesSettingsRelations = new api.ModulesSettingsRelations({});
 
 	  api.previewer.bind( 'previewerActive', function( ) {
@@ -2412,7 +2408,7 @@
       });
 
       $(".open-media-library-edit-gallery").livequery(function(){
-          $(this).click(function(){    console.log("-------support TYPES----------" , $(this).attr("support_types").split(",") );
+          $(this).click(function(){   
                 var options =  {
                     "supportTypes"       : !_.isUndefined( $(this).attr("support_types") ) ? $(this).attr("support_types").split(",") : ["image"],
                     "ShowOrganizeTab"    : true,

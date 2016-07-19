@@ -164,5 +164,5 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_alert",
     "tpl_type"    => "underscore" ,
     "sub_modules"   => array('title', 'paragraph', 'image', 'icons' , 'separator'),
-    "js_module"   => array( 'sed_alert_module_script', 'alert/js/sed-alert-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_alert_module_script', 'alert/js/sed-alert-module.min.js', array('sed-frontend-editor') )
 ));

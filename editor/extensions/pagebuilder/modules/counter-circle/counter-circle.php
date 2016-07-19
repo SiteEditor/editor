@@ -307,7 +307,7 @@ $sed_pb_app->register_module(array(
     "icon"          => "icon-countercircle",
     "shortcode"     => "sed_counter_circle",
     "refresh_in_drag_area" => true ,  //for drag area refresh like tab , accordion and columns ,  ....
-    "js_module"   => array( 'counter_circle_module_script', 'counter-circle/js/counter-circle-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'counter_circle_module_script', 'counter-circle/js/counter-circle-module.min.js', array('sed-frontend-editor') )
 ));
 
 

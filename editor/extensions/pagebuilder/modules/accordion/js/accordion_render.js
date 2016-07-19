@@ -7,7 +7,7 @@ jQuery( document ).ready( function ( $ ) {
             icons = {
                 header:         "ui-icon-free-plus",
                 activeHeader:   "ui-icon-free-minus"
-            };                 //console.log(id_box);console.log(data );
+            };      
 
         var _fixDragDrop = function(){
             $( '#' + id_box ).find(".ui-accordion-content").addClass("sed-sortable-disabled");

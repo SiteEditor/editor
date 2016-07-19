@@ -663,7 +663,7 @@ $sed_pb_app->register_module(array(
     "transport"   => "ajax" ,
     "helper_shortcodes" => array('sed_row_outer' => 'sed_row','sed_module_outer' => 'sed_module'),
     "sub_modules" => array('image'),
-    "js_module"   => array( 'sed_menu_module_script', 'menu/js/menu-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_menu_module_script', 'menu/js/menu-module.min.js', array('sed-frontend-editor') )
 ));
 
 

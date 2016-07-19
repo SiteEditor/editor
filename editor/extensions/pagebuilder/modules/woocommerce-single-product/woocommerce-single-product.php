@@ -702,5 +702,5 @@ $sed_pb_app->register_module(array(
     "is_special"  => true ,
     "has_extra_spacing"   =>  true ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-   //"js_module"   => array( 'sed_woocommerce_single_product_module_script', 'archive/js/archive-module.min.js', array('site-iframe') )
+   //"js_module"   => array( 'sed_woocommerce_single_product_module_script', 'archive/js/archive-module.min.js', array('sed-frontend-editor') )
 ));

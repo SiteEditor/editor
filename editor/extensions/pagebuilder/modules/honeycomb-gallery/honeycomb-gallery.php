@@ -268,5 +268,5 @@ $sed_pb_app->register_module(array(
     "has_extra_spacing"   =>  true ,
     //"js_plugin"   => '',
     "sub_modules"   => array('image'),
-    "js_module"   => array( 'honeycomb-gallery-module', 'honeycomb-gallery/js/honeycomb-gallery-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'honeycomb-gallery-module', 'honeycomb-gallery/js/honeycomb-gallery-module.min.js', array('sed-frontend-editor') )
 ));

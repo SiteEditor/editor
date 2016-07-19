@@ -254,6 +254,6 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_counter_box",
     "tpl_type"    => "underscore" ,
     "sub_modules"   => array('image', 'icons'),
-    "js_module"   => array( 'counter-box-module', 'counter-box/js/counter-box-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'counter-box-module', 'counter-box/js/counter-box-module.min.js', array('sed-frontend-editor') )
 ));
 

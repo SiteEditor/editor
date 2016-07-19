@@ -313,7 +313,7 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-gridgallery",
     "shortcode"   => "sed_grid_gallery",
     "has_extra_spacing"   =>  true ,
-    "js_module"   => array( 'sed-grid-gallery-module', 'grid-gallery/js/grid-gallery-module.min.js', array('site-iframe') ), 
+    "js_module"   => array( 'sed-grid-gallery-module', 'grid-gallery/js/grid-gallery-module.min.js', array('sed-frontend-editor') ), 
     "sub_modules"   => array('image')
 ));
 

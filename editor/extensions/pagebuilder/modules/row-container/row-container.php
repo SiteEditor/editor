@@ -312,7 +312,7 @@ $sed_pb_app->register_module(array(
     "is_special"  => true ,
     "has_extra_spacing"   =>  true ,
     "priority"          => 15  ,
-    "js_module"   => array( 'sed_row_container_module_script', 'row-container/js/row-container-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_row_container_module_script', 'row-container/js/row-container-module.min.js', array('sed-frontend-editor') )
 ));
 
 

@@ -168,5 +168,5 @@ $sed_pb_app->register_module(array(
     "refresh_in_drag_area" => true ,  //for drag area refresh like tab , accordion and columns ,  ....
     //"js_plugin"   => '',
     "sub_modules"   => array('image'),
-    "js_module"   => array( 'sed_3d_carousel_module_script', '3d-carousel/js/3d-carousel-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_3d_carousel_module_script', '3d-carousel/js/3d-carousel-module.min.js', array('sed-frontend-editor') )
 ));

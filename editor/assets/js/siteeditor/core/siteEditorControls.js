@@ -548,7 +548,7 @@ api	 * @param options
 					withCredentials: true
 				}
 			});
-                 console.log("----------------this.request-----------------" , this.request );
+
 			this.request.fail( function() {
 				deferred.rejectWith( self, [ 'request failure' ] );
 			});
@@ -843,7 +843,6 @@ api	 * @param options
 				signature:  this.signature
 			});
 
-            console.log( "-----------this.loading------------" , this.loading );
 
 			this.loading.done( function() {
                 $("#sed_full_editor_loading").hide();
@@ -1062,8 +1061,6 @@ api	 * @param options
 
                 });
 
-                console.log("---------------mainCustomizedSettings---------------------" , mainCustomizedSettings);
-
                 _.extend( query, {
                     //sed_page_id             : api.settings.page.id ,
                     //sed_page_type           : api.settings.page.type ,
@@ -1093,7 +1090,6 @@ api	 * @param options
                     });
                 }
 
-                console.log( "-------------query.sed_posts_content-------------------" , appPostsContent );
 
                 query.sed_posts_content = JSON.stringify( appPostsContent );
 
@@ -1107,8 +1103,6 @@ api	 * @param options
                 if( !_.isUndefined( api.currentPreviewUrl ) ){
                     api.previewerQueries[ api.settings.page.id ] = primaryQuery;
                 }
-
-                console.log( "-------------FIRST QUERY-------------------" , query );
 
 				return query;
 			}
@@ -1245,11 +1239,6 @@ api	 * @param options
                 },
                 error: function(xhr, status, error) {
                      api.previewer.AjaxRefreshRequests[id].processing = false;
-                     //alert( error );
-                     //loadingContainer.removeClass("loading");
-                    //console.log(xhr);
-                    //console.log(status);
-                    //console.log(error);
                 }
             });
 

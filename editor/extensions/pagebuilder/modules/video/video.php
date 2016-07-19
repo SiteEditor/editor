@@ -316,6 +316,6 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-video1",
     "shortcode"   => "sed_video",
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'sed-video-module', 'video/js/sed-video-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed-video-module', 'video/js/sed-video-module.min.js', array('sed-frontend-editor') )
     
 ));

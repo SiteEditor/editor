@@ -228,7 +228,7 @@
 
             this.checkContentType();
 
-            var contentModel = this.getContentModel( contentModelName ); console.log( "contentModel[postId]" , postId , contentModel[postId] );
+            var contentModel = this.getContentModel( contentModelName ); 
 
             $.each( contentModel[postId] , function(index , shortcode){
                 if(shortcode.parent_id == parent_id){
@@ -343,7 +343,7 @@
                 //$thisIndex = this.getShortcodeIndex( id , contentModelName ),
                 next = element.next(".sed-row-pb") , prev = element.prev() ,
                 modulesShortcodes = [] , postId = api.pageBuilder.getPostId( element );
-             //console.log( element );
+
             if( sender ){
                 if(!$thisShortcode){
                 	//api.log( "error :  ---" ,$thisShortcode , "--- not defined in line 189 : : siteeditor/site-iframe/shortcode-content-builder.min.js" );
@@ -641,9 +641,9 @@
             if(parentModule){
                 if( !_.isUndefined( shortcode.attrs ) && !_.isUndefined( shortcode.attrs.skin ) ){
                     currentSkin = _.clone( shortcode.attrs.skin );
-                }else{     //alert( parentModule );  
-                    var parentModel = this.findParentModule( shortcode.parent_id , parentModule, shortcode );console.log( "-------------parentModel----" , parentModel );
-                       //alert( shortcode.parent_id );  alert( parentModule );  console.log( "parentModel----" , parentModel );
+                }else{     
+                    var parentModel = this.findParentModule( shortcode.parent_id , parentModule, shortcode );
+
                     currentSkin = ( !_.isUndefined( parentModel ) && !_.isUndefined( parentModel.attrs ) && !_.isUndefined( parentModel.attrs.skin ) ) ? parentModel.attrs.skin: atts.skin;
                 }
                 module_name = parentModule;
@@ -871,8 +871,6 @@
         //using in save page As one template
         api.pageModulesUsing    = window._sedAppPageModulesUsing;
 
-        console.log( "api.defaultPatterns --------- : " , api.defaultPatterns );
-
         //api.log( "api.shortcodes ------- : " , api.shortcodes );
 
         api.preview.bind( "sed_api_shortcodes" , function( shortcodes ){
@@ -904,7 +902,6 @@
 
 
                 var shortcode = api.contentBuilder.getShortcode( moduleId );
-                console.log( "-----------shortcode--------------" , shortcode );
 
                 var shortcode_info = api.shortcodes[ shortcode.tag ] ,
                     moduleName ,
@@ -931,7 +928,6 @@
 
         api.preview.bind( "defaultModulePatterns" , function( patterns ){
             api.defaultPatterns = patterns;
-            console.log( "api.defaultPatterns 222222222--------- : " , api.defaultPatterns );
         });
 
         api.contentBuilder = new api.ShortcodeBuilder({} , {

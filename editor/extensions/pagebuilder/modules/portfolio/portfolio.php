@@ -859,7 +859,7 @@ $sed_pb_app->register_module(array(
     "has_extra_spacing"   =>  true ,
     "js_plugin"   => 'portfolio/js/portfolio-plugin.min.js',
     "transport"   => "refresh" ,
-   "js_module"   => array( 'sed_portfolio_module_script', 'portfolio/js/portfolio-module.min.js', array('site-iframe') )
+   "js_module"   => array( 'sed_portfolio_module_script', 'portfolio/js/portfolio-module.min.js', array('sed-frontend-editor') )
 ));
 
 

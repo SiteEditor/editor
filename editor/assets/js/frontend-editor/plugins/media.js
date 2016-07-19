@@ -54,7 +54,7 @@
             var list = _.filter( listShortcodes , function( shortcode ){
                 return !_.isUndefined(shortcode.attrs) && !_.isUndefined(shortcode.attrs.sed_main_media) && shortcode.attrs.sed_main_media ;
             });
-               //console.log( list );
+      
             _.each( list  , function( shortcode ){
                 api.contentBuilder.updateShortcodeAttr( 'using_size'  , currentSize , shortcode.id);
                 if(!_.isUndefined(shortcode.attrs) && !_.isUndefined(shortcode.attrs.post_id) && shortcode.attrs.post_id > 0)

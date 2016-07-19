@@ -149,7 +149,7 @@ $sed_pb_app->register_module(array(
     "transport"   => "refresh" ,
     "show_ui_in_toolbar"    => false ,
     "sub_modules"   => array('icons'),
-    "js_module"   => array( 'sed_about_author_module', 'about-author/js/about-author-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_about_author_module', 'about-author/js/about-author-module.min.js', array('sed-frontend-editor') )
 ));
 
 

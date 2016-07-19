@@ -228,7 +228,7 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-accardion",
     "shortcode"   => "sed_accordion",
     "refresh_in_drag_area" => true ,  //for drag area refresh like tab , accordion and columns ,  .... 
-    "js_module"   => array( 'sed_accordion_module_script', 'accordion/js/accordion-module.min.js', array('site-iframe') ),
+    "js_module"   => array( 'sed_accordion_module_script', 'accordion/js/accordion-module.min.js', array('sed-frontend-editor') ),
     "helper_shortcodes" => array('sed_row_inner' => 'sed_row' ,'sed_module_inner' => 'sed_module' ),
     "sub_modules"   => array('title', 'paragraph')                
 ));

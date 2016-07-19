@@ -572,5 +572,5 @@ $sed_pb_app->register_module(array(
     "has_extra_spacing"     =>  true ,
     //"js_plugin"           => 'image/js/image-plugin.min.js',
     "sub_modules"           => array('icons', 'posts-nav', 'posts-share', 'related-posts', 'comments', 'about-author', 'separator', 'title'),
-    "js_module"             => array( 'sed_posts_module', 'posts/js/posts-module.min.js', array('site-iframe') )
+    "js_module"             => array( 'sed_posts_module', 'posts/js/posts-module.min.js', array('sed-frontend-editor') )
 ));

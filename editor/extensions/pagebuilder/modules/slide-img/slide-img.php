@@ -175,6 +175,6 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-image",
     "shortcode"   => "sed_slide_img",
     "tpl_type"    => "underscore" ,
-    "js_module"   => array( 'sed_slide_img_module_script', 'slide-img/js/slide-img-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_slide_img_module_script', 'slide-img/js/slide-img-module.min.js', array('sed-frontend-editor') )
 ));
                  

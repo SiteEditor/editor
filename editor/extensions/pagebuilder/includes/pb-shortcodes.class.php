@@ -331,7 +331,7 @@ class PBShortcodeClass{
 
         if( site_editor_app_on() && !$this->shortcode->is_child && !$this->init_module_js && isset( $sed_pb_app->js_modules[$this->shortcode->module] ) ){
 
-            $js_module = $sed_pb_app->js_modules[$this->shortcode->module];
+            $js_module = $sed_pb_app->js_modules[$this->shortcode->module]; 
 
             if( isset($js_module[0]) && !empty( $js_module[0] ) && isset($js_module[1]) && !empty( $js_module[1] ) ){
                 $activate_modules = SiteEditorModules::pb_module_active_list();

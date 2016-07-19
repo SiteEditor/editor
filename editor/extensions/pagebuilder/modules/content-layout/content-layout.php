@@ -331,6 +331,6 @@ $sed_pb_app->register_module(array(
     "tpl_type"              => "underscore" ,
     "shortcode"             => "sed_content_layout",
     "priority"              => 10 ,
-    "js_module"             => array( 'sed-content-layout-module', 'content-layout/js/sed-content-layout-module.min.js', array('site-iframe') )
+    "js_module"             => array( 'sed-content-layout-module', 'content-layout/js/sed-content-layout-module.min.js', array('sed-frontend-editor') )
 ));
 

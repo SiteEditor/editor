@@ -275,7 +275,7 @@ $sed_pb_app->register_module(array(
     "refresh_in_drag_area" => true ,  //for drag area refresh like tab , accordion and columns ,  ....  
     //"js_plugin"   => '',
     "sub_modules"   => array('image'),
-    "js_module"   => array( 'diamond-gallery-module', 'diamond-gallery/js/diamond-gallery-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'diamond-gallery-module', 'diamond-gallery/js/diamond-gallery-module.min.js', array('sed-frontend-editor') )
 ));
 
 

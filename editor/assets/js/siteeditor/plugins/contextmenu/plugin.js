@@ -79,7 +79,7 @@
 
             $( sedDialog.selector ).dialog( "open" );
 
-            var extra = $.extend({} , sedDialog.extra || {});     //console.log( "dataElement.extra First : ----" , extra );
+            var extra = $.extend({} , sedDialog.extra || {});     
 
             api.Events.trigger(sedDialog.id , [sedDialog.data] , extra , sedDialog);
         };

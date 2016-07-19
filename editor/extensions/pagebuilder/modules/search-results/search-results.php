@@ -87,5 +87,5 @@ $sed_pb_app->register_module(array(
     "has_extra_spacing"   =>  true ,
     "sub_modules"   => array('search', 'archive', 'page-nav'),
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-   // "js_module"   => array( 'sed_image_module_script', 'image/js/image-module.min.js', array('site-iframe') )
+   // "js_module"   => array( 'sed_image_module_script', 'image/js/image-module.min.js', array('sed-frontend-editor') )
 ));

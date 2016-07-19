@@ -266,14 +266,14 @@
        });
 
         api.previewer.bind( 'posts_content_update', function( postsContent ) {
-            api.trigger("change");    console.log( 'postsContent ------ : ' , postsContent ); //alert("test");
+            api.trigger("change");  
             api.postsContent = postsContent;
             //api.shortcodeCurrentPlace = "content";
             
         });
 
         api.previewer.bind( 'pages_theme_content_update', function( pagesContent ) {
-            api.trigger("change");   console.log( 'themeContent ------ : ' , pagesContent ); 
+            api.trigger("change");  
             api.pagesThemeContent = pagesContent;
             //api.shortcodeCurrentPlace = "theme";
 

@@ -382,7 +382,6 @@
         });
 
        /* api.Events.bind( "ctxtAct_formElement" , function( event , context , element ){
-              console.log( "event" , event );
             return false;
         });*/
 

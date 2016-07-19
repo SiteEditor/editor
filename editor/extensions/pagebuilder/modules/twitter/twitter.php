@@ -135,5 +135,5 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_twitter",
     "transport"   => "ajax" ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    //"js_module"   => array( 'twitter-api-module', 'twitter/js/twitter-api-module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'twitter-api-module', 'twitter/js/twitter-api-module.min.js', array('sed-frontend-editor') )
 ));

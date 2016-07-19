@@ -267,6 +267,6 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_single_image",
     "tpl_type"    => "underscore" ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'sed_single_image_module_script', 'image/js/image-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_single_image_module_script', 'image/js/image-module.min.js', array('sed-frontend-editor') )
 ));
                  

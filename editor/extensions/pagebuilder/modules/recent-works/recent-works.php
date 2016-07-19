@@ -544,7 +544,7 @@ $sed_pb_app->register_module(array(
     "shortcode"         => "sed_recent_works",
     "transport"   => "ajax" ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'recent_works_module_script', 'recent-works/js/recent-works-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'recent_works_module_script', 'recent-works/js/recent-works-module.min.js', array('sed-frontend-editor') )
 ));
 
 

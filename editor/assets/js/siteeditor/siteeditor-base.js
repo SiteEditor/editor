@@ -690,8 +690,6 @@ window.sedApp = window.sedApp || {};
 
 			//callback && callback.apply( this, [ result1, result2 ]);
 
-			console.log( "--------------------callBack---------------" , callbacks );
-
 			return callbacks.fire( args );*/
 		},
 

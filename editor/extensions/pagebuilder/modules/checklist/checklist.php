@@ -157,5 +157,5 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-checklist",
     "shortcode"   => "sed_checklist",
     "sub_modules"   => array('icons' , 'paragraph'),
-    "js_module"   => array( 'sed_checklist_module_script', 'checklist/js/checklist-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_checklist_module_script', 'checklist/js/checklist-module.min.js', array('sed-frontend-editor') )
 ));

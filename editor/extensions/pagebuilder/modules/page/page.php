@@ -125,5 +125,5 @@ $sed_pb_app->register_module(array(
     "has_extra_spacing"     =>  true ,
     //"js_plugin"           => 'image/js/image-plugin.min.js',
     "sub_modules"           => array('comments'),
-    "js_module"             => array( 'sed_page_module', 'page/js/page-module.min.js', array('site-iframe') )
+    "js_module"             => array( 'sed_page_module', 'page/js/page-module.min.js', array('sed-frontend-editor') )
 ));

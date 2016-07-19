@@ -448,5 +448,5 @@ $sed_pb_app->register_module(array(
     "is_special"  => true ,
     "has_extra_spacing"   =>  true ,
     //"js_plugin"   => '',
-    "js_module"   => array( 'sed_woocommerce_cart_module_script', 'woocommerce-cart/js/woo-cart-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_woocommerce_cart_module_script', 'woocommerce-cart/js/woo-cart-module.min.js', array('sed-frontend-editor') )
 ));

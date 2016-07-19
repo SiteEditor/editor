@@ -157,6 +157,6 @@ $sed_pb_app->register_module(array(
     "tpl_type"    => "underscore" ,
     "shortcode"   => "sed_youtube",
     //"js_plugin"   => '',
-    //"js_module"   => array( 'sed_youtube_module_script', 'youtube/js/youtube-module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'sed_youtube_module_script', 'youtube/js/youtube-module.min.js', array('sed-frontend-editor') )
 ));
 

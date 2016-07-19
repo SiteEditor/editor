@@ -704,7 +704,7 @@ $sed_pb_app->register_module(array(
     "shortcode"         => "sed_products_tab",
     "transport"   => "ajax" ,
     "js_plugin"   => 'woocommerce-products-tab/js/woocommerce-products-tab-plugin.min.js',
-    //"js_module"   => array( 'sed_woocommerce_archive_module_script', 'woocommerce-archive/js/woo-archive-module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'sed_woocommerce_archive_module_script', 'woocommerce-archive/js/woo-archive-module.min.js', array('sed-frontend-editor') )
 ));
 
 

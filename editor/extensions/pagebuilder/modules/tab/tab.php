@@ -210,6 +210,6 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_tabs",
     "refresh_in_drag_area" => true ,  //for drag area refresh like tab , accordion and columns ,  .... 
     "sub_modules"   => array('title', 'icons', 'image' , 'paragraph'),
-    "js_module"   => array( 'sed_tabs_module_script', 'tab/js/tab-module.min.js', array('site-iframe') ) ,
+    "js_module"   => array( 'sed_tabs_module_script', 'tab/js/tab-module.min.js', array('sed-frontend-editor') ) ,
     "helper_shortcodes" => array('sed_row_inner' => 'sed_row' ,'sed_module_inner' => 'sed_module'),
 ));

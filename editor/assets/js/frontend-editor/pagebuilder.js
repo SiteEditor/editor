@@ -603,7 +603,7 @@
 
             shortcodes = this.setHelperShortcodes( shortcodes , name );
             shortcodes = this.shortcodesPatternFilter( shortcodes );
-console.log(" -----------------CREATED PATTERN ------------------------ " , shortcodes );
+
             this.syncStyleEditorPreview( shortcodes );
 
             if(direction == "down"){
@@ -614,7 +614,7 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
               this.contentBuilder.addShortcodesToParent(  parentId , shortcodes , postId );
               return id;
             }
-                                        console.log( "-----------------shortcodes---------------------" , shortcodes );
+                                     
             var nextPreId = (nextPre) ? elementId: "";
 
             this.contentBuilder.addShortcodeModule( shortcodes , postId, nextPreId , typeS);
@@ -828,7 +828,7 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
                 scripts ,
                 styles ,
                 patternIds = {};
-                                   console.log( "pattern-----------" , pattern );
+                            
             shortcodes = _.map( pattern , function( shortcode , index ){
                 var id;
 
@@ -1225,7 +1225,7 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
                     var id = $(this).attr("sed_model_id") ,
                         shortcode= api.contentBuilder.getShortcode( id ) ,
                         $moduleContextmenuId;
-                            //console.log( "api.contextMenuSettings ----- : " , api.contextMenuSettings );
+                   
                     $.each( api.contextMenuSettings , function( id, data ){
                         if(data.shortcode && data.shortcode == shortcode.tag){
                             $moduleContextmenuId = data.menu_id;
@@ -1798,7 +1798,7 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
 
                     var $element = $( '[sed_model_id="' + elementId + '"]' ).find('.sed-carousel');
                     $element.data(key_setting , attrValue );
-                    //console.log( attrValue === true );
+       
                     //$element.slick( 'slickSetOption' , key_setting , attrValue , true );
                     $element.slick('unslick');
 
@@ -1833,7 +1833,7 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
                           }
                         ]
                     } , $element.data() );
-                                           //console.log( options);
+                                       
                     $element.slick( options );
 
                     return ;
@@ -2079,9 +2079,9 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
             var groupItems = _.filter( modulesShortcodes , function( shortcode ){
                 return !_.isUndefined(shortcode.attrs) && !_.isUndefined(shortcode.attrs.sed_skin_group) && shortcode.attrs.sed_skin_group == skinGroup;
             });
-                //console.log( "groupItems ------ : " , groupItems);
+          
             _.each( groupItems  , function( shortcode ){
-                //console.log(  modules , shortcode.id , shortcode.tag , currentSkin );
+             
                 api.Events.trigger( "loadModuleskin" , modules , shortcode.id , shortcode.tag , currentSkin , "group" );
             });
 
@@ -2182,9 +2182,8 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
                 modulesShortcodes.push( api.contentBuilder.getShortcode( id ) );
             });
 
-            //console.log( "change skin : modulesShortcodes : ---- , " , modulesShortcodes );
             var modulesShortcodesCopy = $.extend( true, {} , modulesShortcodes );//_.map( modulesShortcodes , _.clone );
-                                    //alert( module );
+                         
             //delete pre pattern && replace new pattren         , modulesShortcodes
             api.contentBuilder.deleteModule( elementId , postId);
 
@@ -2263,7 +2262,7 @@ console.log(" -----------------CREATED PATTERN ------------------------ " , shor
 
             shortcodes = api.pageBuilder.setHelperShortcodes( shortcodes , mainShortcode.tag , "tag" );
             shortcodes = api.pageBuilder.shortcodesPatternFilter( shortcodes )
-                   //console.log( "change skin : new shortcodes : ---- , " , shortcodes );
+ 
             //if( type == "group" ){
                 newMainShortcode.attrs.skin =  currentSkin;
             //}

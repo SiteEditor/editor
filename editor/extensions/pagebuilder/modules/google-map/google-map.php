@@ -233,6 +233,6 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-googlemap",
     "shortcode"   => "sed_google_map",
     //"js_plugin"   => '',
-    "js_module"   => array( 'sed_google_map_module_script', 'google-map/js/gmap-ui-editor.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_google_map_module_script', 'google-map/js/gmap-ui-editor.min.js', array('sed-frontend-editor') )
 ));
 

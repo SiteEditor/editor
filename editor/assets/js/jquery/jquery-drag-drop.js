@@ -156,7 +156,7 @@
         			for (var i = m.length-1; i >= 0; i--)
         			{
         			   var elm = (m[i].targetWindow == "parent") ? $(m[i].selector) : m[i].targetWindow.jQuery(m[i].selector);
-                            //console.log( elm );
+                      
                         elm.each(function(index,elment){
 
             				if (isLocationInElement($(this), event.pageX, event.pageY, $.SiteEditorDroppable.currentIframe))
@@ -225,7 +225,7 @@
         	function performDrop (event)
         	{
                 droppableElm.attr("current-droppable-item" , "yes");
-                //console.log( droppableElm );
+   
                 var ui = {
                     helper : helper,
                     droppable : droppableElm ,
@@ -297,10 +297,10 @@
                     }else{
                         var offsetTop = $("#" + targetWindow).offset().top;
                         var offsetLeft = $("#" + targetWindow).offset().left;
-                    }         //console.log( element.offset() );
+                    }
             		var elmOffsetY = (element.offset().top - $("#" + targetWindow).contents().scrollTop()) + ( offsetTop - $( window ).scrollTop() );
                     var elmOffsetX = (element.offset().left - $("#" + targetWindow).contents().scrollLeft()) + ( offsetLeft - $( window ).scrollLeft() );
-                                //console.log("test droppable ......");
+                        
 
             		if (x >= elmOffsetX && x <= (elmOffsetX + element.width()) &&
             			y >= elmOffsetY && y <= (elmOffsetY + element.height()))
@@ -415,7 +415,7 @@
              floating = false, lastPositionAbs, direction,_counter;
              function _sortable(event, x, y){
           		//Rearrange
-                //console.log(sortableItems.length);
+            
                 if(currentContainer == null)
                     return ;
 
@@ -493,7 +493,7 @@
 
         		_delay(function() {
         			if(counter === _counter) {
-        			  //console.log(counter);
+   
         				refreshPositions(!hardRefresh); //Precompute after each DOM insertion, NOT on mousemove
         			}
         		});
@@ -651,7 +651,6 @@
                   });
               }else{
                   var iframe = "#" + options.iframeSortable;
-                  //console.log($(iframe)[0].contentWindow.jQuery( options.dropInSortable ).length);
 
                   $(iframe)[0].contentWindow.jQuery( options.dropInSortable ).each(function(){
                       containers.push({
@@ -739,17 +738,14 @@
                   }
                }else{
                     droppableElm.addClass("sed-row-drop-area");
-                    //console.log("you are in drop area");
                }
 
-               //console.log(currentContainer);
 
                if(currentContainer == null){
                     placeHolderElement = placeHolderElement.detach();
 
                }
 
-               //console.log(currentContainer);
            }
 
 
@@ -766,7 +762,6 @@
                         t = item.top + iframe[targetWindow].offset.top;
                         x1 += $("#" + targetWindow).contents().scrollLeft();
                         y1 += $("#" + targetWindow).contents().scrollTop();
-                        //console.log(t + "," + y1);
                     }
         			var x2 = x1 + helperProportions.width,
         			y2 = y1 + helperProportions.height,
@@ -800,7 +795,6 @@
               offsetParent = targetElm.offsetParent();
 
               //The element's absolute position on the page minus margins
-              //console.log(targetElm.offset().top + "," + targetElm.offset().left);
               offset = {
                   top: targetElm.offset().top - margins.top,
                   left: targetElm.offset().left - margins.left
@@ -876,8 +870,6 @@
                             });
 
 
-
-                           /* console.log(offset.click.top + "," + offset.click.left);*/
 
                             positionAbs = {
                                 top: y + e.pageY - margins.top  ,

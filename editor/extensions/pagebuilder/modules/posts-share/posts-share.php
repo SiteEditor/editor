@@ -161,7 +161,7 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_posts_share",
     //"js_plugin" => '',
     "sub_modules" => array('icons'),
-    "js_module"   => array( 'sed-posts-share-module', 'posts-share/js/posts-share-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed-posts-share-module', 'posts-share/js/posts-share-module.min.js', array('sed-frontend-editor') )
 ));
 
 

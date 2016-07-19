@@ -801,7 +801,7 @@ $sed_pb_app->register_module(array(
     "transport"             =>  "refresh" ,
     "sub_modules"           =>  array('page-nav'),
     "js_plugin"             =>  'archive/js/archive-plugin.min.js',
-   "js_module"              =>  array( 'sed_archive_module_script', 'archive/js/archive-module.min.js', array('site-iframe') )
+   "js_module"              =>  array( 'sed_archive_module_script', 'archive/js/archive-module.min.js', array('sed-frontend-editor') )
 ));
 
 

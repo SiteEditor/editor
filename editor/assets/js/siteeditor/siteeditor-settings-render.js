@@ -11,7 +11,7 @@
                 stype    : data.type || "general"  //settings type :: general type not support object values
 			} );
 		});
-                 console.log( api.settings);
+
         api.styleEditorSettings = api.styleEditorSettings || [];
   	    $.each( api.settings.settings, function( id, data ) {
              if( !_.isUndefined( data.type ) && data.type == "style-editor" ){
@@ -39,7 +39,6 @@
         });
 
         api.modulesSettingsControls = _.groupBy( modulesControls , function(data , id){ return data.shortcode; });
-        console.log( "----api.modulesSettingsControls-------" , api.modulesSettingsControls );
 
         var allControls = _.map( api.settings.controls ,function( data , id ){
             var newData = _.clone( data );
@@ -52,14 +51,13 @@
         });
 
         api.sedGroupControls = _.groupBy( allControlsWithGroup , function(data , id){ return data.sub_category; });
-        console.log( "----api.groupControls-------" , api.sedGroupControls );
 
         var stylesControls = _.filter( api.settings.controls , function( data , id){
             return !_.isUndefined(data.category) && data.category == 'style-editor';
         });
 
         api.stylesSettingsControls = _.groupBy( stylesControls , function(data , id){ return data.sub_category; });
-             //console.log("api.settings.controls-----------" , api.settings.controls);
+
         var startTime = new Date();
 		$.each( api.settings.controls, function( id, data ) {
 
@@ -68,10 +66,6 @@
             }
 
 		});
-
-        console.log("--------------api.controlConstructor---------------------" , api.controlConstructor);
-
-        //console.log( "api.settings.controls : new Date() - startTime ------ : " , new Date() - startTime );
 
         var AjaxLoadDefPatterns = new api.Ajax({
             url  :  SED_BASE_URL + "extensions/pagebuilder/includes/ajax_shortcode_pattern.php" ,

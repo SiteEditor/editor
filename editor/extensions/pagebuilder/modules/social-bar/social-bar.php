@@ -216,5 +216,5 @@ $sed_pb_app->register_module(array(
     "has_extra_spacing"   =>  true ,
     "sub_modules"   => array('icons'),
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'sed-social-bar-module', 'social-bar/js/social-bar-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed-social-bar-module', 'social-bar/js/social-bar-module.min.js', array('sed-frontend-editor') )
 ));

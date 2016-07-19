@@ -273,6 +273,6 @@ $sed_pb_app->register_module(array(
     "transport"                 => "refresh" ,     //not support show on create settings
     "show_settings_on_create"   => false,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'sed_widget_module_script', 'widget/js/widget-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_widget_module_script', 'widget/js/widget-module.min.js', array('sed-frontend-editor') )
 ));
 

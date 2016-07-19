@@ -475,7 +475,7 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_icons",
     "tpl_type"    => "underscore" ,
     //"js_plugin"   => '',
-    "js_module"   => array( 'sed_icons_module_script', 'icons/js/icons-module.min.js', array('site-iframe'))
+    "js_module"   => array( 'sed_icons_module_script', 'icons/js/icons-module.min.js', array('sed-frontend-editor'))
 ));
 
 

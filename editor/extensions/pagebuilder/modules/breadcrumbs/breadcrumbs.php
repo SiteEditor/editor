@@ -432,6 +432,6 @@ $sed_pb_app->register_module(array(
     "priority"          => 12 ,
     "tpl_type"    => "underscore" ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'sed_breadcrumbs_module_script', 'breadcrumbs/js/breadcrumbs-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_breadcrumbs_module_script', 'breadcrumbs/js/breadcrumbs-module.min.js', array('sed-frontend-editor') )
 ));
 

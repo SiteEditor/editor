@@ -192,7 +192,7 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_pricing_table",
     "has_extra_spacing"   =>  true ,
     "sub_modules"   => array('title'),
-    "js_module"   => array( 'sed_pricing_table_module_script', 'pricing-table/js/pricing-table-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_pricing_table_module_script', 'pricing-table/js/pricing-table-module.min.js', array('sed-frontend-editor') )
 ));
 require_once( SED_PB_MODULES_PATH . DS ."pricing-table". DS ."sub-shortcode". DS ."sub-shortcode.php");
 

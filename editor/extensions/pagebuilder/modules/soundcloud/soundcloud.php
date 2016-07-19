@@ -170,6 +170,6 @@ $sed_pb_app->register_module(array(
     "tpl_type"    => "underscore" ,
     "shortcode"   => "sed_soundcloud",
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    //"js_module"   => array( 'sed_image_module_script', 'image/js/image-module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'sed_image_module_script', 'image/js/image-module.min.js', array('sed-frontend-editor') )
 ));
 

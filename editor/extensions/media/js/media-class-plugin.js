@@ -1036,7 +1036,7 @@
                     var treeChildren = self.addNewShortcoModel( patternModel.id , model ,list.id , list );
 
                     if(indexLCH < self.shortcodeModels.length){
-                        var args = $.merge([indexLCH ,0 ] , treeChildren);      // console.log( "args args args ------- , " , args );
+                        var args = $.merge([indexLCH ,0 ] , treeChildren);      
                         Array.prototype.splice.apply(self.shortcodeModels , args);
                     }else{
                         self.shortcodeModels = $.merge(self.shortcodeModels , treeChildren);
@@ -2140,7 +2140,7 @@
       libView : function( query ){
           var html = "" , self = this;
           this.template = api.template("sed-media-lib-item");  //self.template( model )
-              //console.log( query.models );
+          
           _.each(query.models , function( model , key){
               html += self.template( model );
           });

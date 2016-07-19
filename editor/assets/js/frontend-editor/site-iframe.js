@@ -1092,7 +1092,7 @@
                             editor.theme.panel.settings.autohide = true;
                             panel.close();
                             panel.disabled();
-                            console.log( "panel" , panel );
+                
                             //$(this).parents(".mce-tinymce.mce-floatpanel:first").hide();
 
                             /*var index1 = $.inArray( edId , api.initParagraphsEditors );
@@ -1130,7 +1130,7 @@
 
                      editor.on('change', function(e) {
 
-                                       // console.log( "editor.on('change'" , e );        //     {format : 'html'}
+                                           //     {format : 'html'}
                          if( !_.isUndefined( e.originalEvent ) && !_.isUndefined( e.originalEvent.command ) && e.originalEvent.command.toLowerCase() == "fontname" ){
                             //e.target.setAttribute('data-sed-font-family' , e.originalEvent.value );
                             var fonts = [];
@@ -1182,7 +1182,7 @@
                         });*/
 
           /*tinymce.activeEditor.selection.onSetContent(function(){
-              console.log( arguments );
+          
           });*/
 
                   }
@@ -1291,7 +1291,7 @@
                 return $.inArray( font , _.keys( self.fonts["custom_fonts"] ) ) != -1 || $.inArray( font , _.keys( self.fonts["google_fonts"] ) ) != -1;
             });*/
 
-            //console.log( "allFonts mceUsingFonts----- , " , this.mceUsingFonts );
+
             //should before sub_themes_models_update sended
             api.preview.send( 'page_mce_used_fonts' , this.mceUsingFonts );
 
@@ -1308,7 +1308,7 @@
             googleFontsSettings : window._sedGoogleFontsSettings ,
             customFontsSettings : window._sedCustomFontsSettings ,
             baseLoadedFonts     : window._sedBaseLoadedFonts
-        });   //console.log( "api.typography ------- : " , api.typography );
+        });  
 
         api.siteIframe = new api.SiteEditorIframe({} , {
             preview : api.preview

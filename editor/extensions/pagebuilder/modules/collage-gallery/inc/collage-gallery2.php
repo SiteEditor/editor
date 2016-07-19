@@ -382,5 +382,5 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_collage_gallery",
     "has_extra_spacing"   =>  true ,
     "sub_modules"   => array('image'),
-    "js_module"   => array( 'sed-collage-gallery-module', 'collage-gallery/js/collage-gallery-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed-collage-gallery-module', 'collage-gallery/js/collage-gallery-module.min.js', array('sed-frontend-editor') )
 ));

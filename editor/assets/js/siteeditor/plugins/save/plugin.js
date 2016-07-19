@@ -44,8 +44,6 @@
 
             appPagesTypes[api.settings.page.id] = api.settings.page.type;
 
-            //console.log( appPostsContent );
-
             var self  = this,
             query = {
                 action                  : 'customize_save',

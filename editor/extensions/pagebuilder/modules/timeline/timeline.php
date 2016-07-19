@@ -226,6 +226,6 @@ $sed_pb_app->register_module(array(
     "description" => __("","site-editor"),
     "icon"        => "icon-timeline",
     "shortcode"   => "sed_timeline",
-    "js_module"   => array( 'sed_timeline_module_script', 'timeline/js/timeline-module.min.js', array('site-iframe') ) ,
+    "js_module"   => array( 'sed_timeline_module_script', 'timeline/js/timeline-module.min.js', array('sed-frontend-editor') ) ,
     "sub_modules"   => array('image' , 'icon' , 'title' , 'paragraph' , 'social-bar' , 'separator' ) 
 ));

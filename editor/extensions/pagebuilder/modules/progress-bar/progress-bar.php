@@ -386,7 +386,7 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_progress_bar",
     "sub_modules"   => array('title'),
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'sed_progressbar_module_script', 'progress-bar/js/progressbar-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_progressbar_module_script', 'progress-bar/js/progressbar-module.min.js', array('sed-frontend-editor') )
 ));
 
 

@@ -656,14 +656,11 @@
                 settings = this.getSettings();
             else
                 settings = this.getSettings( panelId );
-                             //console.log( "Settings ------- : " , settings  );
-            _.each( settings , function( data ) {
-                //var startTime = new Date();
-                self.updateSettings( data.control_id , data , dataElement.shortcodeName , extra);
-                //console.log( "Update ------- : " , dataElement.shortcodeName + "_" + data.attr_name , " ----- " , new Date() - startTime );
-            });
 
-            //console.log( "Update Settings ------- : " , new Date() - startTime );
+            _.each( settings , function( data ) {
+                self.updateSettings( data.control_id , data , dataElement.shortcodeName , extra);
+
+            });
 
             if(this.forceUpdate === true)
                 return ;
@@ -721,7 +718,6 @@
             }else
                 return ;
 
-            //console.log( "Open Dialog ------- : " , new Date() - startTime );
             if( !_.isUndefined( sedDialog.data.panelId ) )
                 this.initSettings( sedDialog.data.panelId );
             else
@@ -1158,7 +1154,6 @@
             _.each( api.stylesSettingsControls[styleId] , function( data ) {
                 var startTime = new Date();
                 self.updateSettings( data.control_id , data , selector );
-                //console.log( "Update styles------- : " , data.control_id , " ----- " , new Date() - startTime );
             });
         },
 

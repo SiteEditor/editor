@@ -134,7 +134,7 @@ $sed_pb_app->register_module(array(
     "shortcode"         => "sed_order_tracking",
     "transport"   => "ajax" , 
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-   //"js_module"   => array( 'sed_order_tracking_module_script', 'archive/js/archive-module.min.js', array('site-iframe') )
+   //"js_module"   => array( 'sed_order_tracking_module_script', 'archive/js/archive-module.min.js', array('sed-frontend-editor') )
 ));
 
 

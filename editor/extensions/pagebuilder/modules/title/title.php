@@ -113,5 +113,5 @@ $sed_pb_app->register_module(array(
     "type_icon"   => "font",
     "shortcode"   => "sed_text_title",
     "priority"    => 20 ,
-    "js_module"   => array( 'sed_text_title_module_script', 'title/js/title-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_text_title_module_script', 'title/js/title-module.min.js', array('sed-frontend-editor') )
 ));

@@ -345,7 +345,7 @@ $sed_pb_app->register_module(array(
     "description" => __("","site-editor"),
     "icon"        => "icon-elasticslider",
     "shortcode"   => "sed_elastic_slider",
-    "js_module"   => array( 'elastic-slider-module', 'elastic-slider/js/elastic-slider-module.min.js', array('site-iframe') ),
+    "js_module"   => array( 'elastic-slider-module', 'elastic-slider/js/elastic-slider-module.min.js', array('sed-frontend-editor') ),
     "sub_modules" => array('image', 'paragraph', 'title')
 ));
 

@@ -338,5 +338,5 @@ $sed_pb_app->register_module(array(
         "tpl_type"    => "underscore",
         "sub_modules"   => array('title', 'paragraph' , 'image'),
         //"js_plugin"   => '',
-        "js_module"   => array( 'sed_accordion_slider_module', 'accordion-slider/js/accordion-slider-module.min.js', array('site-iframe') )
+        "js_module"   => array( 'sed_accordion_slider_module', 'accordion-slider/js/accordion-slider-module.min.js', array('sed-frontend-editor') )
 ));

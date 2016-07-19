@@ -151,5 +151,5 @@ $sed_pb_app->register_module(array(
     "has_extra_spacing"   =>  true ,
     "sub_modules"   => array('title', 'paragraph', 'image' , 'button'),
     //"js_plugin"   => 'image/js/image-plugin.min.js',
-    //"js_module"   => array( 'sed_honeycomb_module_script', 'honeycomb-gallery/js/honeycomb-gallery-module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'sed_honeycomb_module_script', 'honeycomb-gallery/js/honeycomb-gallery-module.min.js', array('sed-frontend-editor') )
 ));

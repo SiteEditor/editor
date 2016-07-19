@@ -421,7 +421,7 @@ $sed_pb_app->register_module(array(
     "shortcode"         => "sed_product_categories",
     "transport"   => "ajax" ,
     //"js_plugin"   => '',
-    "js_module"   => array( 'sed_woocommerce_categories_module_script', 'woocommerce-categories/js/woo-categories-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'sed_woocommerce_categories_module_script', 'woocommerce-categories/js/woo-categories-module.min.js', array('sed-frontend-editor') )
 ));
 
 

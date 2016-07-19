@@ -261,7 +261,7 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_masonry_gallery",
     "has_extra_spacing"   =>  true ,
     "sub_modules" => array('image'),
-    //"js_module"   => array( 'sed-masonry-gallery-settings', 'masonry-gallery/js/masonry-gallery-module.min.js', array('site-iframe') )
+    //"js_module"   => array( 'sed-masonry-gallery-settings', 'masonry-gallery/js/masonry-gallery-module.min.js', array('sed-frontend-editor') )
 ));
 require_once( SED_PB_MODULES_PATH . DS . "masonry-gallery" . DS . "sub-shortcode" . DS . "sub-shortcode.php");
 

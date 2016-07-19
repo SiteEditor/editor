@@ -149,5 +149,5 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-table",
     "shortcode"   => "sed_table",
     "has_extra_spacing"   =>  true ,
-    "js_module"   => array( 'table_module_script', 'table/js/table-module.min.js', array('site-iframe') )
+    "js_module"   => array( 'table_module_script', 'table/js/table-module.min.js', array('sed-frontend-editor') )
 ));
