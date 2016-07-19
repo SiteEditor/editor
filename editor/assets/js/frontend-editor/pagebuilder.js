@@ -575,8 +575,9 @@
 
             modulePattern[0].attrs = attrs;
 
+            var mainModelParentId = _.clone( currPattern[0].parent_id );
             currPattern = _.map( currPattern , function( shModel ){
-                if( shModel.parent_id == currPattern[0].parent_id ){
+                if( shModel.parent_id == mainModelParentId ){
                     shModel.parent_id = modulePattern[0].id;
                 }
                 return shModel;

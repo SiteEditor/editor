@@ -403,7 +403,11 @@ Class PageBuilderApplication {
                                 $selector = str_replace("##sed_custom_class##" , '[sed_model_id="'.$id.'"]' , $selector );
                                 $new_css_data[$selector] = $data;
                             }
-                            $sed_apps->framework->dynamic_css_data = array_merge( $sed_apps->framework->dynamic_css_data , $new_css_data );
+
+                            if( site_editor_app_on() ) {
+                                $sed_apps->framework->dynamic_css_data = array_merge($sed_apps->framework->dynamic_css_data, $new_css_data);
+                            }
+
                             $shortcode['attrs']['sed_css'] = $new_css_data;
                         }
 

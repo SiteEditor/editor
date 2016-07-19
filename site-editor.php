@@ -198,6 +198,8 @@ final Class SiteEditor {
                 return site_editor_app_on();
             case 'ajax' :
                 return defined( 'DOING_AJAX' );
+            case 'sed_wp_ajax' :
+                return defined( 'DOING_AJAX' ) && isset( $_POST['sed_app_editor'] ) && $_POST['sed_app_editor'] == "on";
             case 'cron' :
                 return defined( 'DOING_CRON' );
             case 'frontend' :
@@ -217,15 +219,15 @@ final Class SiteEditor {
 
         $this->module_info = sed_get_setting("module_info");
 
-        if ( $this->is_request( 'admin' ) && ! $this->is_request( 'editor' ) ) {
+        if ( $this->is_request( 'admin' ) && ! $this->is_request( 'editor' ) && ! $this->is_request("sed_wp_ajax") ) {
             require_once  SED_ADMIN_DIR . DS . 'site-editor-admin.class.php' ;
         }
 
-        if ( $this->is_request( 'editor' ) || $this->is_request( 'editor_frontend' ) ||  $this->is_request( 'editor_ajax' ) ) {
+        if ( $this->is_request( 'editor' ) || $this->is_request( 'editor_frontend' ) ||  $this->is_request( 'editor_ajax' ) || $this->is_request( 'sed_wp_ajax' ) ) {
             $this->load_editor();
         }
 
-        if ( $this->is_request( 'frontend' ) ) {
+        if ( $this->is_request( 'frontend' ) && ! $this->is_request("sed_wp_ajax")  ) {
             $this->load_framework();
         }
 

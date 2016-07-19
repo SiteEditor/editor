@@ -567,6 +567,11 @@ class SiteEditorPreset{
         $shortcode_name = self::extract_shortcode_mime_type( $preset->post_mime_type );
 
         if( !empty( $preset->post_content ) ) {
+
+            if( ! did_action( 'sed_shortcode_register' ) ) { 
+                do_action('sed_shortcode_register');
+            }
+
             $shortcodes_models = PageBuilderApplication::get_pattern_shortcodes( $preset->post_content );
 
             $content = $shortcodes_models['shortcodes'];

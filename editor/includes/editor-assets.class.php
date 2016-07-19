@@ -10,13 +10,13 @@ if(!class_exists('SEDEditorAssetsManager'))
 
         function __construct( ) {
 
-            add_action( 'init'                , array( $this , 'default_scripts' ) , 0 );
+            add_action( 'init'                 , array( $this , 'default_scripts' ) , 0 );
 
-            add_action( 'init'                , array( $this , 'default_styles' ) , 0 );
+            add_action( 'init'                 , array( $this , 'default_styles' ) , 0 );
 
-            add_action( 'sed_enqueue_scripts' , array( $this , 'enqueue_editor_scripts' ) );
+            add_action( 'sed_enqueue_scripts'  , array( $this , 'enqueue_editor_scripts' ) );
 
-            add_action( 'wp_enqueue_scripts'  , array( $this , 'enqueue_frontend_scripts' ) );
+            add_action( 'wp_enqueue_scripts'   , array( $this , 'enqueue_frontend_scripts' ) );
 
             add_action( 'sed_enqueue_scripts'  , array( $this , 'enqueue_editor_styles' ) );
 

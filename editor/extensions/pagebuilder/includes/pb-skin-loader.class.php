@@ -78,6 +78,8 @@ class PBSkinLoaderClass{
         global $sed_apps;
         $sed_apps->editor->manager->check_ajax_handler('module_load_skins' , 'sed_app_module_load_skins');
 
+        do_action( 'sed_shortcode_register' );
+        
         if(!empty( $_POST['module'] )){
             $this->module = $_POST['module'];
             $this->shortcode = $_POST['shortcode'];

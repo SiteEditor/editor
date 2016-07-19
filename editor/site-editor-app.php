@@ -34,9 +34,17 @@ final Class SiteEditorApp {
      */
     private function init_hooks() {
 
-        add_action( 'admin_init'        , array( $this  , 'editor_init' ) );
-        
-        add_action( 'current_screen'    , array( &$this , 'editor_render' ) );
+        /**
+         * only load editor request
+         * forbidden load in wp admin ajax request or front end editor request and ...
+         */
+        if( is_site_editor() ) {
+
+            add_action('admin_init', array($this, 'editor_init'));
+
+            add_action('current_screen', array(&$this, 'editor_render'));
+
+        }
 
         add_action( 'plugins_loaded'    , array( $this  , 'extension_loaded' ) );
 
@@ -52,6 +60,15 @@ final Class SiteEditorApp {
         require_once SED_INC_EDITOR_DIR . DS . "siteeditor.class.php";
 
         require_once SED_INC_EDITOR_DIR . DS . 'editor-assets.class.php';
+
+        /*
+         * framework-assets loaded in editor , site , front editor
+         * framework-assets.class.php loaded in site-editor-framework.php for site ande front editor
+         * register shortcodes scripts in SiteEditor needed to load site-editor-framework.php
+         */
+        if( is_site_editor() ){
+            require_once SED_INC_FRAMEWORK_DIR . DS . 'framework-assets.class.php';
+        }
 
         require_once SED_INC_EDITOR_DIR . DS . "module_settings.class.php";
 

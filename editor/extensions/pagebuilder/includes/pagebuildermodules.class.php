@@ -13,7 +13,7 @@ class PageBuilderModulesClass{
 
         $this->set_skin_loader();
 
-        add_action( 'sed_module_register', array($this , 'add_modules') , 11 , 1 );
+        add_action( 'sed_module_register', array($this , 'add_modules') , 11 );
         add_filter('sed_custom_js_plugins', array($this , 'sed_add_js_plugins' ) );
                                     
         if( site_editor_app_on() ){

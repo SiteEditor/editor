@@ -573,9 +573,9 @@ class SiteEditorManager{
 
     function wp_loaded(){
 
-		do_action( 'sed_shortcode_register', $this );
+		do_action( 'sed_shortcode_register' );
 
-		do_action( 'sed_module_register', $this );
+		do_action( 'sed_module_register' );
 
         do_action( 'sed_app_register', $this );
 		

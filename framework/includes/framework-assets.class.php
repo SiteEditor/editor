@@ -14,17 +14,17 @@ if(!class_exists('SEDFrameworkAssetsManager'))
 
             $this->suffix = ".min";
 
-            add_action( 'init'  , array( $this , 'default_scripts' ) , 0 );
+            add_action( 'init'                  , array( $this , 'default_scripts' ) , 0 );
 
-            add_action( 'wp_enqueue_scripts'  , array( $this , 'enqueue_scripts' ) );
+            add_action( 'wp_enqueue_scripts'    , array( $this , 'enqueue_scripts' ) );
 
-            add_action( 'init'                , array( $this , 'default_styles' ) , 0 );
+            add_action( 'init'                  , array( $this , 'default_styles' ) , 0 );
 
-            add_action( 'wp_enqueue_scripts'   , array( $this , 'enqueue_styles' ) );
+            add_action( 'wp_enqueue_scripts'    , array( $this , 'enqueue_styles' ) );
 
         }
 
-        function default_scripts(){
+        function default_scripts( ){
 
             $this->add( 'images-loaded',        SED_FRAMEWORK_ASSETS_URL . '/js/imagesloaded/imagesloaded.pkgd'.$this->suffix.'.js', array() ,"1.2.4");
 

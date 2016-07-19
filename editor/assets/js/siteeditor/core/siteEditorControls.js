@@ -959,7 +959,7 @@ api	 * @param options
                     theme: api.settings.theme.stylesheet
                 } ,
 
-                url: api.settings.url.ajax
+                url: api.settings.url.ajax 
             });
 
             request.done( function( response ) {

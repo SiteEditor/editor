@@ -17,7 +17,7 @@ if(!class_exists('SiteEditorAssetsManager'))
             add_action("init" , array( $this , "default_scripts" ) , 0 );
         }
 
-        function default_scripts(){
+        function default_scripts( ){
 
             //register bootstrap js plugins
             $this->register_bootstrap_scripts();

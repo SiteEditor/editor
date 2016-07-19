@@ -229,6 +229,7 @@ final Class SiteEditorFramework {
     }
 
     public function print_parallax_data(){
+
         $css_data = $this->dynamic_css_data;
         $parallax_backgrounds = array();
 

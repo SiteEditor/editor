@@ -57,13 +57,29 @@ class PBShortcodeClass{
 
             return $script;
         }else{
+            
            if( wp_script_is( $handle, 'registered' ) ) {
 
                if($this->is_render === true)
                   wp_enqueue_script( $handle );
 
                $registered = $wp_scripts->registered[$handle];
-               $script = array($handle , $registered->src , $registered->deps , $registered->ver , $registered->args);
+
+               $src = $registered->src;
+
+               $content_url = content_url();
+
+               if ( ! preg_match( '|^(https?:)?//|', $src ) && ! ( $content_url && 0 === strpos( $src, $content_url ) ) ) {
+                   $src = site_url() . $src;
+               }
+
+               /** This filter is documented in wp-includes/class.wp-scripts.php */
+               $src = esc_url( apply_filters( 'script_loader_src', $src, $handle ) );
+
+               if ( ! $src )
+                   return false;
+
+               $script = array($handle , $src , $registered->deps , $registered->ver , $registered->args);
                return $script;
            }
         }

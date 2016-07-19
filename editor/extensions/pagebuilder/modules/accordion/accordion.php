@@ -78,7 +78,10 @@ class PBAccordionShortcode extends PBShortcodeClass{
 
     function scripts(){
         return array(
-            array( "accordion-js" , SED_PB_MODULES_URL . "accordion/js/accordion.js",array("jquery"),'3.4.0',true ) ,
+            array( 'jquery-ui-core' ) ,
+            array( 'jquery-ui-widget' ) ,
+            array( "jquery-ui-accordion" ) ,
+            array( "accordion-js" , SED_PB_MODULES_URL . "accordion/js/accordion.js",array("jquery" , "jquery-ui-accordion"),'3.4.0',true ) ,
             array( "accordion-render" , SED_PB_MODULES_URL . "accordion/js/accordion_render.js",array("jquery" , "accordion-js"),'3.4.0',true )
         );
     }
