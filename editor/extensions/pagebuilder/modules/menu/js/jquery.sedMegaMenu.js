@@ -120,11 +120,11 @@
                 $("#megamenu-overlay").height( $("body").height() );
                 element.parents(".dropdown-menu:first").addClass("megamenu-drag-area-mode");
 
-                $(".bp-component").each(function(){
+                $(".sed-pb-component").each(function(){
 
                     if( !$(this).hasClass("sed-sortable-disabled") && !$(this).hasClass("megamenu-module-widget-area") && $(this).parents(".megamenu-module-widget-area").length == 0 ){
                         $(this).addClass("sed-sortable-disabled megamenu-mode");
-                        $(this).removeClass("bp-component");
+                        $(this).removeClass("sed-pb-component");
                     }
 
                 });
@@ -140,7 +140,7 @@
 
                 $(".sed-sortable-disabled.megamenu-mode").each(function(){
                     $(this).removeClass("sed-sortable-disabled megamenu-mode");
-                    $(this).addClass("bp-component");
+                    $(this).addClass("sed-pb-component");
                 });
 
                 $("body").removeClass("drag-area-overlay-mode");

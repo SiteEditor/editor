@@ -83,7 +83,7 @@ Class PageBuilderApplication {
 
         add_action("sed_footer" , array( $this, 'registered_shortcodes_settings') , 10000 );
         add_action("sed_footer" , array( $this, "write_shortcode_settings") );
-        add_action("sed_footer" , array( $this, "write_style_editor_settings") );
+        //add_action("sed_footer" , array( $this, "write_style_editor_settings") );
 
         add_action( "site_editor_ajax_load_modules" , array($this, "page_builder_load_modules") );
         add_filter( "sed_addon_settings" , array($this,'load_modules_settings') );
@@ -97,12 +97,14 @@ Class PageBuilderApplication {
 
         add_action( "sed_editor_init" , array( $this, "add_toolbar_elements" ) );
 
-    }
+        add_filter( "sed_start_page_customize_rows" , array( $this, "get_start_page_rows" ) , 10 , 1 );
 
-    function vc_shortcode_custom_css_class( $param_value, $prefix = '' ) {
-    	$css_class = preg_match( '/\s*\.([^\{]+)\s*\{\s*([^\}]+)\s*\}\s*/', $param_value ) ? $prefix . preg_replace( '/\s*\.([^\{]+)\s*\{\s*([^\}]+)\s*\}\s*/', '$1', $param_value ) : '';
+        add_filter( "sed_before_layout_row"  , array( $this, "get_before_layout_rows" ) , 10 , 2 );
 
-    	return $css_class;
+        add_filter( "sed_after_layout_row"  , array( $this, "get_after_layout_rows" ) , 10 , 2 );
+
+        add_filter( "sed_end_page_customize_rows"  , array( $this, "get_end_page_rows" ) , 10 , 1 );
+
     }
 
 
@@ -260,7 +262,7 @@ Class PageBuilderApplication {
 
         global $post;
         $id = $post->ID;
-        $output = '<div id="sed-post-content-container" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box bp-component">';
+        $output = '<div id="sed-post-content-container" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box sed-pb-component">';
         $output .= '</div>';
 
 		return $output;
@@ -274,7 +276,7 @@ Class PageBuilderApplication {
 
         if( is_singular() && $sed_data['page_id'] == $post->ID  ){
             $id = $post->ID;
-            $output = '<div id="sed-pb-post-container'.$id.'" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box bp-component">';
+            $output = '<div id="sed-pb-post-container'.$id.'" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box sed-pb-component">';
             $output .= $content;
             $output .= '</div>';
         }elseif( $post->ID ){
@@ -841,23 +843,6 @@ Class PageBuilderApplication {
         return $attrs;
     }
 
-    function get_shortcode_js_attrs($shortcode_params){
-        $attrs = array();
-        if(!empty($shortcode_params)){
-            foreach($shortcode_params AS $key => $param){
-
-                if($key != "content" && !preg_match("/^fieldset/", $key)){
-                    $attrs[$key] = $param["value"];
-                }elseif(preg_match("/^fieldset/", $key)){
-                    foreach( $param as $fskey => $fsparam ){
-                        $attrs[$fskey] = $fsparam["value"];
-                    }
-                }
-            }
-        }
-        return $attrs;
-    }
-
     public function registered_shortcodes_settings(){
         global $sed_pb_app;
         $pattern_settings   = array();
@@ -1037,27 +1022,13 @@ Class PageBuilderApplication {
         return $sed_addon_settings;
     }
 
-    function page_builder_load_modules(){
-        global $sed_apps ;  //@args ::: sed_page_ajax , nonce
-        $sed_apps->editor->manager->check_ajax_handler('sed_load_modules' , 'sed_app_modules_load');
-
-        $shortcodes = json_decode( wp_unslash( $_REQUEST['pattern'] ), true );
-        $parent_id = $_REQUEST['parent_id'];
-        $tree_shortcodes = $sed_apps->editor->save->build_tree_shortcode( $shortcodes , $parent_id );
-        //convert to normal content with sed_do_shortcode
-        $content = $this->sed_do_shortcode( $tree_shortcodes );
-
-        $output = do_shortcode( $content );
-
-        wp_send_json_success( $output );
-    }
 
     function sed_page_builder_post_ready($content){
         global $post , $sed_data;
 
         if( is_singular() && $sed_data['page_id'] == $post->ID  ){
             $id = $post->ID;
-            $output = '<div id="sed-pb-post-container'.$id.'" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box bp-component">';
+            $output = '<div id="sed-pb-post-container'.$id.'" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box sed-pb-component">';
             $output .= $content;
             $output .= '</div>';
         }elseif( $post->ID ){
@@ -1072,141 +1043,71 @@ Class PageBuilderApplication {
     }
 
 
+    function page_builder_load_modules(){
+        global $sed_apps ;  //@args ::: sed_page_ajax , nonce
+        $sed_apps->editor->manager->check_ajax_handler('sed_load_modules' , 'sed_app_modules_load');
+
+        $parent_id = $_REQUEST['parent_id'];
+
+        $content_shortcodes = json_decode( wp_unslash( $_REQUEST['pattern'] ), true );
+
+        $tree_shortcodes = $sed_apps->editor->save->build_tree_shortcode( $content_shortcodes , $parent_id );
+
+        $content = $sed_apps->editor->save->create_shortcode_content( $tree_shortcodes , array() );
+
+        $output = do_shortcode( $content );
+
+        wp_send_json_success( $output );
+    }
+
+
     function get_theme_shortcode_content(){
         return $this->sed_theme_content;
     }
 
-    /*function get_shortcodes_modules_length_tag( $shortcodes , $tag ){
-        $shortcodes_length = array();
-        if(!empty( $shortcodes )){
-            foreach($shortcodes AS $shortcode){
-                if( $shortcode['tag'] == $tag  ){
-                    if( isset($shortcodes_lengh[$tag]) ){
-                        $shortcodes_length[$tag]['length'] += 1;
-                    }else{
-                        $shortcodes_length[$tag] = array( 'length' => 1 );
-                    }
-                }
-            }
-            return $shortcodes_length[$tag]['length'];
-        }else{
-            return 0;
-        }
+    /*
+        function get_main_content_shortcode_pattern( $skin = "default" , $module = "posts" , $shortcode = "sed_post" , $base_path = SED_PB_MODULES_PATH ){
 
-
-    }*/
-
-    function get_main_content_shortcode_pattern( $skin = "default" , $module = "posts" , $shortcode = "sed_post" , $base_path = SED_PB_MODULES_PATH ){
-
-
-        $activate_modules = SiteEditorModules::pb_module_active_list();
-        $module_path = WP_CONTENT_DIR . DS . dirname( $activate_modules[ $module ] );
-
-        $path_skin = $module_path . DS .'skins'. DS . $skin . DS;
-
-        foreach (glob($path_skin.'*') as $file) {
-            if( is_file($file) ){
-                $file_name = basename($file);
-
-                if( $file_name == "shortcode.pattern" ){
-                    $content = file_get_contents( $file );
-
-                    $module_base_url = content_url( "/" . dirname( $activate_modules[ $module ] ) );
-                    $content = str_replace("{{@sed_module_url}}", $module_base_url , $content );
-                    $content = str_replace("{{@sed_skin_url}}", $module_base_url . "/skins/$skin", $content );
-                    continue;
-                }
-            }
-        }
-        return $content;
-
-    }
-
-    function get_default_theme_main_model( $skin = "default" , $module = "posts" , $shortcode = "sed_posts" , $include_row = true , $parent_id = "root" , $base_path = SED_PB_MODULES_PATH ){
-        global $site_editor_app , $sed_apps ,$sed_data;
-
-        $sed_page_id = $sed_data['page_id'];
-        $sed_page_type = $sed_data['page_type'];
-
-        $content = $this->get_main_content_shortcode_pattern( $skin , $module , $shortcode);
-
-        //$content = do_shortcode( $content );
-
-        if( $include_row === true ){
-            $default_pattern = $site_editor_app->layout_patterns['default'] ;
-
-            if( !in_array( "sed_module_outer" , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , "sed_module_outer");
-
-            if( !in_array( "sed_row_outer" , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , "sed_row_outer");
-
-            if( !in_array( "sed_column_outer" , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , "sed_column_outer");
-
-            if( !in_array( "sed_columns_outer" , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , "sed_columns_outer");
-
-            if( !in_array( "sed_module_outer_outer" , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , "sed_module_outer_outer");
-
-            if( !in_array( "sed_row_outer_outer" , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , "sed_row_outer_outer");
 
             $activate_modules = SiteEditorModules::pb_module_active_list();
-            $module_base_url = content_url( "/" . dirname( dirname( $activate_modules[ $module ] ) ) );
+            $module_path = WP_CONTENT_DIR . DS . dirname( $activate_modules[ $module ] );
 
-            $default_pattern = str_replace("{{@sed_module_url}}", $module_base_url , $default_pattern );
-            $default_pattern = str_replace("{{content}}" , $content ,$default_pattern );
-        }else{
-            $default_pattern .= '[sed_row_outer shortcode_tag="sed_row" type="static-element" sed_main_content = "true" ]
-              [sed_module_outer shortcode_tag="sed_module"]
-                '.$content.'
-              [/sed_module_outer]
-            [/sed_row_outer]';
+            $path_skin = $module_path . DS .'skins'. DS . $skin . DS;
 
-            if( !in_array( "sed_module_outer" , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , "sed_module_outer");
+            foreach (glob($path_skin.'*') as $file) {
+                if( is_file($file) ){
+                    $file_name = basename($file);
 
-            if( !in_array( "sed_row_outer" , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , "sed_row_outer");
+                    if( $file_name == "shortcode.pattern" ){
+                        $content = file_get_contents( $file );
+
+                        $module_base_url = content_url( "/" . dirname( $activate_modules[ $module ] ) );
+                        $content = str_replace("{{@sed_module_url}}", $module_base_url , $content );
+                        $content = str_replace("{{@sed_skin_url}}", $module_base_url . "/skins/$skin", $content );
+                        continue;
+                  }
+                }
+            }
+            return $content;
 
         }
 
+        /*
 
-        //create base pattern
-        $shortcodes = $this->get_pattern_shortcodes( $default_pattern );
+        $module_base_url = content_url( "/" . dirname( dirname( $activate_modules[ $module ] ) ) );
 
+        $default_pattern = str_replace("{{@sed_module_url}}", $module_base_url , $default_pattern );
 
-        //$this->load_pb_stock_modules_shortcodes();
-
-
-        //convert to shortcode model
-        $shortcodes_models = $this->build_shortcode_models($shortcodes , $parent_id , $sed_page_id );
-
-        //set Helper Id
-        $shortcodes_models = $this->set_helper_shortcodes( $shortcodes_models );
-
-        return $shortcodes_models;
-    }
-
-    function get_default_theme_shortcode( $skin = "default" , $module = "posts" , $shortcode = "sed_posts" , $base_path = SED_PB_MODULES_PATH ){
-
-        $shortcodes_models = $this->get_default_theme_main_model( $skin , $module , $shortcode , true , "root" , $base_path );
-
-        $contents = $this->load_page_theme_content( $shortcodes_models , false );
-
-        return $contents;
-    }
-
+         */
     //set helper shortcodes like setHelperShortcodes in pagebuilder.min.js
-    function set_helper_shortcodes( $shortcodes_models ){
+    function set_helper_shortcodes( $shortcodes_models )
+    {
 
-        foreach( $shortcodes_models AS $mkey => $model ){
-            if( isset($model['attrs']) && isset($model['attrs']['have_helper_id']) ){
-                foreach( $shortcodes_models AS $key => $in_model ){
-                    if($in_model['parent_id'] == $model['parent_id'] && $in_model['id'] != $model['id'] ){
-                        if( isset($in_model['attrs']) && isset($in_model['attrs']['is_helper_id']) ){
+        foreach ($shortcodes_models AS $mkey => $model) {
+            if (isset($model['attrs']) && isset($model['attrs']['have_helper_id'])) {
+                foreach ($shortcodes_models AS $key => $in_model) {
+                    if ($in_model['parent_id'] == $model['parent_id'] && $in_model['id'] != $model['id']) {
+                        if (isset($in_model['attrs']) && isset($in_model['attrs']['is_helper_id'])) {
                             $shortcodes_models[$key]['attrs']['module_helper_id'] = $model['id'];
                             unset($shortcodes_models[$key]['attrs']['is_helper_id']);
                         }
@@ -1220,21 +1121,6 @@ Class PageBuilderApplication {
 
     }
 
-    //START ******** for sub_theme module-----
-    public static function get_sub_themes_content_models(){
-        if( get_option( 'sed_layouts_content' ) !== false )
-            return get_option( 'sed_layouts_content' );
-        else
-            return array();
-    }
-
-    public static function get_theme_main_contents(){
-        if( get_option( 'sed_main_theme_content' ) !== false )
-            return get_option( 'sed_main_theme_content' );
-        else
-            return array();
-    }
-
     public static function theme_row_order($a, $b) {
 		if ( $a['order'] === $b['order'] ) {
 			return $a['instance_number'] - $b['instance_number'];
@@ -1243,216 +1129,7 @@ Class PageBuilderApplication {
 		}
     }
 
-    function get_theme_rows_models( $curr_sub_themes_models , $theme_orders , $sed_layouts_content ){
-        global $sed_data;
-                                    //var_dump( $sed_layouts_content );
-        if( empty( $curr_sub_themes_models ) )
-            return array();
-
-        $theme_rows = array();
-        $orders = array();
-
-        $i = 1;
-        foreach( $curr_sub_themes_models AS $key => $model ){
-            if( !in_array( $sed_data['page_id'] , $model['exclude'] ) ){
-                $curr_sub_themes_models[$key]['instance_number'] = $i;
-                $i++;
-            }else
-                unset( $curr_sub_themes_models[$key] );
-        }
-
-        uasort( $curr_sub_themes_models , array( 'PageBuilderApplication', 'theme_row_order' ) );
-
-        foreach( $curr_sub_themes_models AS $model ){
-            /*if( is_array($theme_orders) && isset( $theme_orders[ $model['theme_id'] ] ) ){
-                $order = $theme_orders[ $model['theme_id'] ];
-            }else */
-                $order = $model['order'];
-
-            $order = $this->get_theme_row_order( $orders , $order );
-
-            array_push( $orders , $order );
-
-            $new_model = $model;
-
-            unset( $new_model['order'] );
-
-            $new_model['content'] = $sed_layouts_content[ $model['theme_id'] ];
-
-            $theme_rows[$order] = $new_model;
-
-        }
-
-        return $theme_rows;
-
-    }
-
-    function get_theme_row_order( $orders , $order ){
-        if( in_array( $order , $orders ) ){
-            $order +=1;
-            return $this->get_theme_row_order( $orders , $order );
-        }else
-            return $order;
-    }
-
-    function load_sub_theme( $def_sub_theme , $skin , $module , $shortcode , $base_path = SED_PB_MODULES_PATH ){
-
-        global $sed_data , $site_editor_app , $post , $content_width;
-
-
-        if( !is_array( $sed_data['theme_content'] ) )
-            $sed_data['theme_content'] = array();
-
-        $sub_themes_models = get_option("sed_layouts_models");
-
-        $sub_theme = !empty( $sed_data['page_layout'] ) ? $sed_data['page_layout'] : $def_sub_theme;
-
-        if( isset( $sub_themes_models[ $sub_theme ] ) && is_array( $sub_themes_models[ $sub_theme ] ) && !empty( $sub_themes_models[ $sub_theme ] ) ){
-            $curr_sub_themes_models = $sub_themes_models[ $sub_theme ];
-
-            $sed_layouts_content = self::get_sub_themes_content_models();
-
-            $is_customize_main_row = false;
-
-            if( is_array( $sed_data['theme_content'] ) && !empty( $sed_data['theme_content'] ) ){
-
-                foreach( $sed_data['theme_content'] AS $index => $row ){
-                    foreach( $row AS $key => $sh_model ){
-                        if( isset( $sh_model['attrs'] ) && isset( $sh_model['attrs']['sed_main_content_row'] ) && $sh_model['attrs']['sed_main_content_row'] && isset( $sh_model['is_customize'] ) && $sh_model['is_customize']   ){
-                            $is_customize_main_row = true;
-                            break;
-                        }
-                    }
-                }
-
-            }
-
-            $load_stock_mod_sh = true;
-
-
-
-            $main_content = false;
-            $main_row_theme_id = false;
-
-            if( $is_customize_main_row === false ){
-
-                $sub_theme_ids = !empty( $curr_sub_themes_models ) ? wp_list_pluck( $curr_sub_themes_models, 'theme_id' ) : array();
-
-                $sed_main_theme_content = self::get_theme_main_contents();
-
-                foreach( $sed_main_theme_content AS $main_cmodel ){
-                    if( in_array( $main_cmodel['theme_id'] , $sub_theme_ids ) ) {
-
-                        $main_row_theme_id = $main_cmodel['theme_id'];
-
-                        if( $main_cmodel['module'] == $module ){
-                            $main_content = $main_cmodel['content'];
-                            break;
-                        }
-
-                    }
-                }
-
-                if( $main_row_theme_id === false && ( !isset( $sed_data['page_sync'] ) || $sed_data['page_sync'] === false || ( isset( $sed_data['changed_sub_theme'] ) && $sed_data['changed_sub_theme'] === true && isset( $sed_data['changed_sub_theme_mode'] ) && $sed_data['changed_sub_theme_mode'] == "has_main_content" ) )  ){
-
-                    $sed_data['theme_content'][] = $this->get_default_theme_main_model( $skin , $module , $shortcode , true , "root" , $base_path );
-
-                    $load_stock_mod_sh = false;
-
-                }else if( $main_row_theme_id !== false && $main_content === false ){
-
-                    foreach( $sed_layouts_content[$main_row_theme_id] AS $key => $shortcode ){
-                        if( isset($shortcode['attrs'] ) && isset($shortcode['attrs']['sed_main_content'] ) ){
-
-                            $main_content = $this->get_default_theme_main_model( $skin , $module , $shortcode , false , $shortcode['parent_id'] , $base_path );
-
-                            array_splice( $sed_layouts_content[$main_row_theme_id] , $key , 1 , $main_content);
-
-                        }
-                    }
-
-                    $load_stock_mod_sh = false;
-
-
-                }else if( $main_row_theme_id !== false && $main_content !== false ){
-                    $index = 0;
-                    foreach( $sed_layouts_content[$main_row_theme_id] AS $key => $shortcode ){
-                        if( isset($shortcode['attrs'] ) && isset($shortcode['attrs']['sed_main_content'] ) ){
-                            $index = $key;
-                            $parent_id = $shortcode['parent_id'];
-                        }
-                    }
-                         // var_dump( $main_content );
-                    $main_content[0]['parent_id'] = $parent_id;   //var_dump( $parent_id );
-
-                    array_splice( $sed_layouts_content[$main_row_theme_id] , $index , 1 , $main_content );
-
-                }
-            }
-                                
-            $theme_rows_models = $this->get_theme_rows_models( $curr_sub_themes_models , $sed_data['page_theme_rows_orders'] , $sed_layouts_content );
-            //var_dump( $theme_rows_models );
-
-            $theme_content_models = array();
-
-            $num_rows = count( $sed_data['theme_content'] ) + count( $curr_sub_themes_models ) ;
-
-            $j = 0;
-
-            for ($i=0; $i < $num_rows  ; $i++)  {
-
-                if( isset( $theme_rows_models[$i] ) ){
-                    if( isset( $theme_rows_models[$i]['content'] ) && is_array( $theme_rows_models[$i]['content'] ) ){
-                        $theme_content_models = array_merge( $theme_content_models , $theme_rows_models[$i]['content'] );
-                    }
-
-                    unset( $theme_rows_models[$i] );
-                }else if( isset( $sed_data['theme_content'][$j] ) ){
-
-                    $sh_model = $sed_data['theme_content'][$j][0];
-                    if( isset( $sh_model['attrs'] ) && isset( $sh_model['attrs']['sed_main_content_row'] ) && $sh_model['attrs']['sed_main_content_row'] && !isset( $sh_model['is_customize'] ) && $main_row_theme_id !== false ){
-                        continue;
-                    }
-
-                    $theme_content_models = array_merge( $theme_content_models , $sed_data['theme_content'][$j] );
-                    $j++;
-                }
-
-            }
-
-            //merge other theme rows with order more than $num_rows
-            if( !empty( $theme_rows_models ) ){
-                foreach( $theme_rows_models AS $model ){
-                    $theme_content_models = array_merge( $theme_content_models , $model['content'] );
-                }
-            }
-
-            $sed_data['theme_content'] = $theme_content_models;
-
-        }else{
-
-            if( !isset( $sed_data['page_sync'] ) || $sed_data['page_sync'] === false ){
-                $sed_data['theme_content'] = $this->get_default_theme_main_model( $skin , $module , $shortcode , true , "root" , $base_path );
-                $load_stock_mod_sh = false;
-            }else{
-                                                      //var_dump( $sed_data['theme_content'] );
-                $theme_content_models = array();
-
-                $num_rows = count( $sed_data['theme_content'] ) ;
-
-                for ($i=0; $i < $num_rows  ; $i++)  {
-                    $theme_content_models = array_merge( $theme_content_models , $sed_data['theme_content'][$i] );
-                }
-
-                $sed_data['theme_content'] =  $theme_content_models;
-
-                $load_stock_mod_sh = true; 
-
-            }
-        }
-
-
-
+    /*
         $theme_content = $sed_data['theme_content'];
 
         if( !empty( $theme_content ) ){
@@ -1468,7 +1145,7 @@ Class PageBuilderApplication {
                         }
 
                         $content_width = floor( ($width * $sheet_width)/100 );
-                                    
+
                         if( isset( $theme_content[$key+1]['attrs'] ) && isset( $theme_content[$key+1]['attrs']['spacing_right'] ) ){
                             $spacing_right = $theme_content[$key+1]['attrs']['spacing_right'];
                             $spacing_right = ( $spacing_right == "auto" ) ? 0 : (int)$spacing_right;
@@ -1493,187 +1170,8 @@ Class PageBuilderApplication {
                 }
             }
         }
+     */
 
-        $content = $site_editor_app->pagebuilder->load_page_theme_content( $theme_content , $load_stock_mod_sh );
-
-        ob_start();
-        ?>
-         <script>
-            var _sedAppMainContentShortcode = "<?php echo $shortcode;?>";
-            var _sedAppMainContentModule = "<?php echo $module;?>";
-            var _sedAppDefaultSubTheme = "<?php echo $def_sub_theme;?>";
-         </script>
-        <?php
-        $content .= ob_get_clean();
-
-        return $content;
-    }
-    //END ********* for sub_theme module-----
-
-    function load_page_theme_content( $shortcodes_models , $load_stock_mod_sh = true ){
-        global $sed_apps;
-
-        $this->sed_theme_content = $shortcodes_models;
-
-        //if($load_stock_mod_sh === true)
-            //$this->load_pb_stock_modules_shortcodes();
-
-        //convert to tree model
-        $tree_shortcodes = $sed_apps->editor->save->build_tree_shortcode( $shortcodes_models , "root" );
-
-        $contents = $this->sed_do_shortcode( $tree_shortcodes );
-
-        //convert to normal content with sed_do_shortcode
-        $contents = do_shortcode( $contents );
-
-        return $contents;
-    }
-
-    function do_shortcode_post_content( $content ){
-        global $site_editor_app , $post, $sed_apps ;
-
-        if(isset( $_POST['sed_page_customized'] ) && isset( $_POST['sed_posts_content'] ) ){
-            $sed_posts_content = json_decode( wp_unslash( $_POST['sed_posts_content'] ), true );
-        }else{
-            $sed_posts_content = array();
-        }
-
-        $sed_posts_content = apply_filters( "sed_posts_content_filter" , $sed_posts_content );
-
-        if( isset($sed_posts_content[ $post->ID ]) )
-            $shortcodes_models = $sed_posts_content[ $post->ID ];
-
-
-        if( !isset( $shortcodes_models ) ){
-            //sync content
-            $content = $this->post_content_synchronization( $content , $post->ID );
-
-            //create base pattern
-            $shortcodes = $this->get_pattern_shortcodes( $content );
-
-            //load old saved shortcodes models
-            $old_shortcodes = $this->get_pb_post_content( $post->ID );
-
-            //convert to shortcode model
-            $shortcodes_models = $this->build_shortcode_models($shortcodes , "root" , $post->ID , $old_shortcodes );
-        }//else
-            //$shortcodes_models = array();
-
-        //add model to js
-        $this->sed_post_shortcodes_model[$post->ID] = $shortcodes_models;
-
-        //convert to tree model
-        $tree_shortcodes = $sed_apps->editor->save->build_tree_shortcode( $shortcodes_models , "root" );
-
-        //convert to normal content with sed_do_shortcode
-        $contents = $this->sed_do_shortcode( $tree_shortcodes );
-
-        return  $contents;
-    }
-
-    function sed_do_shortcode( $tree_shortcodes ){
-
-        $content = $this->sed_shortcode_content( $tree_shortcodes , array() );
-
-        return $content;
-    }
-
-    function sed_shortcode_content( $tree_shortcodes , $tree_path  ){
-
-        $content = "";
-        if(!empty( $tree_shortcodes ) && is_array( $tree_shortcodes ) ){
-            foreach( $tree_shortcodes AS $shortcode ){
-
-                $attrs_string = "";
-                if(!empty( $shortcode['attrs'] )){
-                    foreach($shortcode['attrs'] AS $attr => $value){
-                        $attrs_string .= $attr.'="'.self::sanitize_attr_value( $value ).'" ';
-                    }
-                }
-                $shortcode_content = "";
-
-                if($shortcode['tag'] != "content"){
-                    $shortcode_content .= '['.$shortcode['tag'] . ' ' . $attrs_string .']';
-
-                    if( isset($shortcode['children']) ){
-                        $new_path = $tree_path;
-                        array_push( $new_path , $shortcode['tag'] );
-
-                        $shortcode_content .= $this->sed_shortcode_content( $shortcode['children'] , $new_path  );
-
-                    }
-
-                    $shortcode_content .= '[/'.$shortcode['tag'].']';
-
-                    if( in_array( $shortcode['tag'] , $tree_path ) || ( isset( $shortcode['attrs'] ) && isset( $shortcode['attrs']['force_do_shortcode'] ) && $shortcode['attrs']['force_do_shortcode'] == "true"   ) ){
-                        $shortcode_content = do_shortcode( $shortcode_content );
-                        $shortcode_content = $this->filter_shortcode_code( $shortcode_content );
-                    }
-
-                }else{
-                    $shortcode_content = $shortcode['content'];
-                }
-
-                $content .= $shortcode_content;
-
-            }
-        }
-
-        return $content;
-    }
-
-    function filter_shortcode_code( $shortcode_content ){
-        global $shortcode_tags;
-
-        $tagnames = array_keys($shortcode_tags);
-    	$tagregexp = join( '|', array_map('preg_quote', $tagnames) );
-    	$pattern = "/\\[($tagregexp)/s";
-
-    	if ( 1 === preg_match( $pattern, $shortcode_content ) ) {
-
-            $pattern = get_shortcode_regex();
-            $shortcode_content = preg_replace_callback( "/$pattern/s", array( $this , 'modify_shortcode_code' ) , $shortcode_content );
-
-    	}
-
-        return $shortcode_content;
-
-    }
-
-    function modify_shortcode_code( $m ){
-        return "[" . $m[0] . "]";
-    }
-
-    function get_shortcodes_modules_length( $shortcodes , $asModule = "true" , $id ){
-
-        if(!empty($shortcodes) && is_array($shortcodes) ){
-
-            foreach($shortcodes AS $shortcode){
-                $tag = $shortcode['tag'];
-                if( $this->shortcodes[$tag]["asModule"] !== false  && $asModule == "true" ){
-                    $name = $this->shortcodes[$tag]['moduleName'];
-                    if( isset($this->modules_length[$id][$name]) ){
-                        $this->modules_length[$id][$name]['length'] += 1;
-                    }else{
-                        $this->modules_length[$id][$name] = array( 'length' => 1 );
-                    }
-                }elseif( $this->shortcodes[$tag]["asModule"] === false  && $asModule == "false" ){
-                    if( isset($this->shortcodes_length[$id][$tag]) ){
-                        $this->shortcodes_length[$id][$tag]['length'] += 1;
-                    }else{
-                        $this->shortcodes_length[$id][$tag] = array( 'length' => 1 );
-                    }
-                }elseif($tag == "content" && $asModule == "false" ){
-                    if( isset($this->shortcodes_length[$id][$tag]) ){
-                        $this->shortcodes_length[$id][$tag]['length'] += 1;
-                    }else{
-                        $this->shortcodes_length[$id][$tag] = array( 'length' => 1 );
-                    }
-                }
-            }
-        }
-
-    }
 
     function get_pb_posts_shortcode_content(){
         global $sed_data , $post;
@@ -1683,7 +1181,7 @@ Class PageBuilderApplication {
 
         $sed_posts_content       = array();
         $sed_pages_theme_content = array();
-                                     //|| (is_front_page() === true && is_home() === false)
+
         if( $sed_page_type == "post" ){
             $id = $sed_page_id;
             $content_shortcode = ( isset( $this->sed_post_shortcodes_model[$id] ) ) ? $this->sed_post_shortcodes_model[$id] : array() ;
@@ -1695,7 +1193,6 @@ Class PageBuilderApplication {
         $theme_shortcode = apply_filters( "sed_theme_shortcode_content_output" , $theme_shortcode );
 
         $sed_pages_theme_content[$sed_page_id] = $theme_shortcode;
-        //$home_patterns = $this->get_home_main_content_patterns();
 
         $output = "<script>";
         $output .= "var _sedAppPagesThemeContent = " .wp_json_encode( $sed_pages_theme_content).";";
@@ -1710,14 +1207,6 @@ Class PageBuilderApplication {
         include SED_BASE_PB_APP_PATH . "/view/front-end-tmpl.php";
     }
 
-    /*public function get_home_main_content_patterns(){
-        $latest_posts_pattern = $this->get_main_content_shortcode_pattern( "default" , "archive" , "sed_archive" );
-        $static_page_pattern = $this->get_main_content_shortcode_pattern( "default" , "posts" , "sed_post" );
-        return array(
-
-        );
-    } */
-
     public function find_shortcode_model( $shortcodes_models , $id ){
         if(!empty( $shortcodes_models ) && is_array( $shortcodes_models )){
             foreach( $shortcodes_models AS $shortcode ){
@@ -1729,149 +1218,8 @@ Class PageBuilderApplication {
 
         return false;
     }
-           // loadPattern in js === this function
-    public function build_shortcode_models( $tree_shortcodes , $parent_id = 'root' , $post_id , $old_shortcodes = array() ){
-
-        $shortcodes = array();
-        if(is_array($tree_shortcodes) && !empty($tree_shortcodes) ){
-            foreach( $tree_shortcodes AS $shortcode ){
-                //( isset( $shortcode['parent_id'] ) && !empty(  $shortcode['parent_id'] ) && isset( $shortcode['id'] ) && !empty(  $shortcode['id'] ) )
-
-                $model_finded = null;
-                if( isset($shortcode['attrs']) && isset($shortcode['attrs']['id']) && !is_null($old_shortcodes) && !empty( $old_shortcodes ) && is_array( $old_shortcodes ) ){
-                    $model_finded = $this->find_shortcode_model( $old_shortcodes , $shortcode['attrs']['id'] );
-                    //var_dump( $model_finded );
-                }
-
-                if( !is_null( $model_finded ) && $model_finded )
-                    $new_shortcode = $model_finded;
-                else{
-                    if( $shortcode['name'] == "sed_module" && count( $shortcode['children'] ) > 0 ){
-                        $shortcode_name = $shortcode['children'][0]['name'];
-                    }else if( $shortcode['name'] == "sed_row" && count( $shortcode['children'] ) > 0 ){
-                        $sed_module = $shortcode['children'][0];
-
-                        if( count( $sed_module['children'] ) > 0 )
-                            $shortcode_name = $sed_module['children'][0]['name'];
-                        else
-                            $shortcode_name = "";
-                    }else{
-                        $shortcode_name = "";
-                    }
-                    $new_shortcode = $this->add_new_shortcode_model( $shortcode , $parent_id , $post_id , $shortcode_name );
-                }
-
-                if( is_null( $new_shortcode ) )
-                    continue;
-
-                array_push( $shortcodes , $new_shortcode );
-
-                if(is_array( $shortcode['children'] ) && count( $shortcode['children'] ) > 0){
-                    $shortcodes_children = $this->build_shortcode_models( $shortcode['children'] , $new_shortcode['id'] , $post_id , $old_shortcodes);
-                    foreach( $shortcodes_children AS $shortcode_model ){
-                        array_push( $shortcodes , $shortcode_model );
-                    }
-                }
-            }
-        }
-
-        return $shortcodes;
-    }
-
-    function add_new_shortcode_model( $shortcode , $parent_id , $post_id , $shortcode_name ){
-
-        if( !isset( $shortcode['name'] ) )
-            return false;
-
-        $shortcode_info = ( isset( $this->shortcodes[$shortcode['name']] ) ) ? $this->shortcodes[$shortcode['name']] : null;
-
-        if( $shortcode['name'] != "content" && !is_null( $shortcode_info ) ){
-
-            if( !empty( $shortcode_info ) ){
-                if($shortcode_info['asModule']){
-                    $id = $this->get_new_id( $shortcode_info['moduleName'] , 'module' , $post_id );
-                }else{
-                    $id = $this->get_new_id( $shortcode['name'] , "shortcode" , $post_id );
-                }
-            }
-
-        }else{
-            $shortcode['name'] = "content";
-            $id = $this->get_new_id( $shortcode['name'] , "shortcode" , $post_id );
-        }
-               // var_dump( $id );
-        $new_shortcode = array(
-          'parent_id' => $parent_id,
-          'tag'       => $shortcode['name'],
-          'id'        => $id,
-        );
-
-        if( isset($shortcode['attrs']) )
-            $new_shortcode['attrs'] = $shortcode['attrs'];
-        else
-            $new_shortcode['attrs'] = array();
-
-            $new_shortcode['attrs']['id'] = $id;
-
-        $new_shortcode['attrs'] = self::set_module_contextmenu_class( $new_shortcode['attrs'] , $shortcode['name'] , $shortcode_name  );
-
-        if( $shortcode['name'] == "content" ){
-            $new_shortcode['content'] = $shortcode['content'];
-        }
-
-        return $new_shortcode;
-    }
-
-    public static function set_module_contextmenu_class( $attrs , $shortcode_name , $shortcode_contextmenu ){
-
-        if( ( $shortcode_name != "sed_module" && $shortcode_name != "sed_row" ) || !$shortcode_contextmenu )
-            return $attrs;
-
-        if( isset( $attrs['class'] ) ){
-            $attrs['class'] .= " module_" . $shortcode_contextmenu . "_contextmenu_container";
-        }else{
-            $attrs['class'] = "module_" . $shortcode_contextmenu . "_contextmenu_container";
-        }
-        return $attrs;
-    }
 
 
-    function get_new_id( $name , $type = "module" , $pid ){
-
-        if($type == "module"){
-
-            if( !isset( $this->modules_length[$pid]) ){
-                $this->modules_length[$pid] = array();
-            }
-
-            if( !isset( $this->modules_length[$pid][$name] ) ){
-                $this->modules_length[$pid][$name] = array(
-                    'length' => 1
-                );
-            }else{
-                $this->modules_length[$pid][$name]['length'] += 1;
-            }
-
-            $id = 'sed-bp-module-' . $name . "-" . $pid . "-" . $this->modules_length[$pid][$name]['length'];
-        }else{
-
-            if( !isset( $this->shortcodes_length[$pid]) ){
-                $this->shortcodes_length[$pid] = array();
-            }
-
-            if( !isset( $this->shortcodes_length[$pid][$name] ) ){
-                $this->shortcodes_length[$pid][$name] = array(
-                    'length' => 1
-                );
-            }else{
-                $this->shortcodes_length[$pid][$name]['length'] += 1;
-            }
-
-            $id = 'sed-bp-shortcode-' . $name . "-" . $pid . "-" . $this->shortcodes_length[$pid][$name]['length'];
-        }
-
-        return $id;
-    }
 
 /*======================================================
     new system for theme content load
@@ -1879,7 +1227,6 @@ Class PageBuilderApplication {
      * sed_layouts_settings
      * sed_pages_layouts
      * sed_layouts_models ------
-     * sed_layout_shortcodes_content -------------
      * sed_layouts_content ------------
      * sed_last_theme_id ------------
 
@@ -1974,24 +1321,6 @@ Class PageBuilderApplication {
             $sed_main_row_shortcodes_string = $shortcodes_models["string"];
             $main_row_models = $shortcodes_models["shortcodes"];
 
-            $sed_layout_shortcodes_content = get_option( 'sed_layout_shortcodes_content' );
-
-            $new_sed_layout_shortcodes_content = $sed_layout_shortcodes_content;
-
-            if( !is_array( $new_sed_layout_shortcodes_content ) ){
-                $new_sed_layout_shortcodes_content = array();
-            }
-
-            $new_sed_layout_shortcodes_content[$theme_id] = $default_layout;
-
-            if( $sed_layout_shortcodes_content === false ){
-                $deprecated = null;
-                $autoload = 'yes';
-                add_option( 'sed_layout_shortcodes_content' , $new_sed_layout_shortcodes_content , $deprecated, $autoload );
-            }else{
-                update_option( 'sed_layout_shortcodes_content' , $new_sed_layout_shortcodes_content );
-            }
-
             $sed_layouts_content = get_option( 'sed_layouts_content' );
 
             $new_sed_layouts_content = $sed_layouts_content;
@@ -2002,7 +1331,7 @@ Class PageBuilderApplication {
 
             $this->sed_theme_content = $main_row_models;
 
-            $new_sed_layouts_content[$theme_id] = $main_row_models;
+            $new_sed_layouts_content[$theme_id] = $default_layout;
 
             if( $sed_layouts_content === false ){
                 $deprecated = null;
@@ -2021,64 +1350,81 @@ Class PageBuilderApplication {
     }
 
     function sed_process_template(){
+
+        //get wp page content
         $main_content = $this->main_content_template();
 
+        //if not exist main content model for this page , first create it
         if( !$this->check_exist_main_content_model() ){
             global $sed_main_row_shortcodes_string;
             $content = do_shortcode( $sed_main_row_shortcodes_string );
         }else{
             global $sed_data;
+
+            //Page Layouts Models
             $sub_themes_models = get_option("sed_layouts_models");
 
             require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
             $page_layout = SiteEditorLayoutManager::get_page_layout();
 
-            //if( isset( $sub_themes_models[ $sub_theme ] ) && is_array( $sub_themes_models[ $sub_theme ] ) && !empty( $sub_themes_models[ $sub_theme ] ) ){
+            //Current Page Layout Models
             $curr_sub_themes_models = $sub_themes_models[ $page_layout ];
 
-            $sed_layout_shortcodes_content = get_option("sed_layout_shortcodes_content");
+            //Current Page Layout Content
+            $sed_layouts_content = get_option("sed_layouts_content");
 
-            $sed_layouts_content = self::get_sub_themes_content_models();
-
-            /*if( empty( $curr_sub_themes_models ) )
-                return array();*/
-
-            $theme_rows = array();
-            $orders = array();
-
+            //Sort current page layout models by order attribute
             $i = 1;
             foreach( $curr_sub_themes_models AS $key => $model ){
-                if( !in_array( $sed_data['page_id'] , $model['exclude'] ) ){
+
+                //remove row if marked as hidden in this page and site editor front end is not on
+                if( !isset( $model['hidden'] ) || !in_array( $sed_data['page_id'] , $model['hidden'] ) || site_editor_app_on() ){
                     $curr_sub_themes_models[$key]['instance_number'] = $i;
                     $i++;
                 }else
                     unset( $curr_sub_themes_models[$key] );
+
             }
 
-            uasort( $curr_sub_themes_models , array( 'PageBuilderApplication', 'theme_row_order' ) );
+            uasort( $curr_sub_themes_models , array( __CLASS__ , 'theme_row_order' ) );
 
+            //Create current page content
             $shortcodes_pattern_string = "";
-            foreach( $curr_sub_themes_models AS $model ){
-                /*do_action( "sed_before_layout_row_" . $model['theme_id'] , $model );
-                $this->sed_theme_content = array_merge( $this->sed_theme_content , $sed_layouts_content[ $model['theme_id'] ] );*/
 
-                $shortcodes_pattern_string = apply_filters( "sed_before_layout_row_" . $model['theme_id'] , $shortcodes_pattern_string );
-                $shortcodes_pattern_string .= $sed_layout_shortcodes_content[ $model['theme_id'] ];
+            $shortcodes_pattern_string = apply_filters( "sed_start_page_customize_rows" , $shortcodes_pattern_string );
+
+            foreach( $curr_sub_themes_models AS $model ){
+
+                $shortcodes_pattern_string = apply_filters( "sed_before_layout_row"  , $shortcodes_pattern_string , $model['theme_id'] );
+
+                var_dump( $sed_layouts_content );
+
+                if( !in_array( $sed_data['page_id'] , $model['exclude'] ) ) {
+                    $shortcodes_pattern_string .= $sed_layouts_content[$model['theme_id']];
+                }else{
+                    $shortcodes_pattern_string .= $this->get_row_customized_content( $model['theme_id'] );
+                }
+
+                $shortcodes_pattern_string = apply_filters( "sed_after_layout_row"  , $shortcodes_pattern_string , $model['theme_id'] );
+
             }
+
+            $shortcodes_pattern_string = apply_filters( "sed_end_page_customize_rows" , $shortcodes_pattern_string );
 
             do_action( "sed_after_layout_" . $page_layout , $model );
 
             do_action( "sed_after_layout" , $model );
 
             $shortcodes_models = self::get_pattern_shortcodes( $shortcodes_pattern_string );
+
             $content = do_shortcode( $shortcodes_models["string"] );
+
+            //set current page content shortcodes models in @$this->sed_theme_content for js
             $this->sed_theme_content = $shortcodes_models["shortcodes"];
 
         }
-           /*var_dump( get_option( 'sed_layouts_models' ) );
-           var_dump( get_option( 'sed_last_theme_id' ) );
-           var_dump( get_option( 'sed_pages_layouts' ) );
-           var_dump( get_option( 'sed_layouts_settings' ) );*/
+
+        //replace wp page content in current page content
         $content = str_replace( "{{content}}" , $main_content , $content );
         echo $content;
 
@@ -2086,14 +1432,130 @@ Class PageBuilderApplication {
 
     function main_content_template() {
 
-      //if ( pl_is_static_template() ) {
-
         global $sed_static_template_output;
 
         return sprintf( '<div class="sed-page-content">%s</div>', $sed_static_template_output );
 
-      //}
+    }
 
+    /**
+     * theme_content MODEL :
+     * array(
+     *      0  =>  array(
+     *          "content"       => [sed_button] New Button [/sed_button] ,
+     *          "rel_theme_id"  => "theme_id_7" ,
+     *          "row_type"          => "after"
+     *      ),
+     *
+     *      1  =>  array(
+     *          "content"       => [sed_image] [/sed_image] ,
+     *          "rel_theme_id"  => "theme_id_2" ,
+     *          "row_type"          => "before"
+     *      ),
+     *
+     *      2  =>  array(
+     *          "content"       => [sed_text_title] Title [/sed_text_title] ,
+     *          "rel_theme_id"  => "" ,
+     *          "row_type"          => "start"
+     *      ),
+     *
+     *      3  =>  array(
+     *          "content"       => [sed_paragraph] New Button [/sed_paragraph] ,
+     *          "rel_theme_id"  => "" ,
+     *          "row_type"          => "end"
+     *      ) ,
+     *
+     *      3  =>  array(
+     *          "content"       => [sed_paragraph] New Button [/sed_paragraph] ,
+     *          "theme_id"      => "theme_id_7" ,
+     *          "is_customize"  => true
+     *      )
+     *
+     * );
+     * @param $shortcodes_pattern_string
+     * @return mixed
+     */
+    function get_row_customized_content( $theme_id ){
+        global $sed_data;
+
+        $content = '';
+
+        if( isset( $sed_data['theme_content'] ) && is_array( $sed_data['theme_content'] ) && !empty( $sed_data['theme_content'] ) ){
+
+            foreach( $sed_data['theme_content'] AS $index => $row ){
+                if( isset( $row['is_customize'] ) && isset( $row['theme_id'] ) && $row['theme_id'] == $theme_id ){
+                    $content = $row['content'];
+                    breack;
+                }
+            }
+
+        }
+
+        return $content;
+    }
+
+    function get_start_page_rows( $shortcodes_pattern_string ){
+        global $sed_data;
+
+        if( isset( $sed_data['theme_content'] ) && is_array( $sed_data['theme_content'] ) && !empty( $sed_data['theme_content'] ) ){
+
+            foreach( $sed_data['theme_content'] AS $index => $row ){
+                if( isset( $row['row_type'] ) && $row['row_type'] == "start" ){
+                    $shortcodes_pattern_string .= $row['content'];
+                }
+            }
+
+        }
+
+        return $shortcodes_pattern_string;
+    }
+
+    function get_before_layout_rows( $shortcodes_pattern_string , $theme_id ){
+        global $sed_data;
+
+        if( isset( $sed_data['theme_content'] ) && is_array( $sed_data['theme_content'] ) && !empty( $sed_data['theme_content'] ) ){
+
+            foreach( $sed_data['theme_content'] AS $index => $row ){
+                if( isset( $row['row_type'] ) && $row['row_type'] == "before" && isset( $row['rel_theme_id'] )  && $row['rel_theme_id'] == $theme_id ){
+                    $shortcodes_pattern_string .= $row['content'];
+                }
+            }
+
+        }
+
+        return $shortcodes_pattern_string;
+    }
+
+    function get_after_layout_rows( $shortcodes_pattern_string , $theme_id ){
+        global $sed_data;
+
+        if( isset( $sed_data['theme_content'] ) && is_array( $sed_data['theme_content'] ) && !empty( $sed_data['theme_content'] ) ){
+
+            foreach( $sed_data['theme_content'] AS $index => $row ){
+                if( isset( $row['row_type'] ) && $row['row_type'] == "after" && isset( $row['rel_theme_id'] )  && $row['rel_theme_id'] == $theme_id ){
+                    $shortcodes_pattern_string .= $row['content'];
+                }
+            }
+
+        }
+
+        return $shortcodes_pattern_string;
+    }
+
+    function get_end_page_rows( $shortcodes_pattern_string ){
+        global $sed_data;
+
+        if( isset( $sed_data['theme_content'] ) && is_array( $sed_data['theme_content'] ) && !empty( $sed_data['theme_content'] ) ){
+
+            foreach( $sed_data['theme_content'] AS $index => $row ){
+                if( isset( $row['row_type'] ) && $row['row_type'] == "end" ){
+                    $shortcodes_pattern_string .= $row['content'];
+                }
+            }
+
+        }
+
+        return $shortcodes_pattern_string;
     }
 
 

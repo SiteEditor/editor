@@ -24,6 +24,20 @@
           <div class="row_setting_inner">
             <div id="sed-app-control-<?php echo $control_id; ?>" class="clearfix sed-container-control-element">
                 <ul>
+
+                    <li>
+                        <div id="sed_theme_custom_row_type_container">
+                            <label for="sed_theme_custom_row_type"><?php echo __( "Select Row Type : " , "site-editor" );?></label>
+                            <select name="sed_theme_custom_row_type" id="sed_theme_custom_row_type" >
+                                <option value="after"><?php echo __( "After" , "site-editor" );?></option>
+                                <option value="before"><?php echo __( "Before" , "site-editor" );?></option>
+                                <option value="start"><?php echo __( "Start" , "site-editor" );?></option>
+                                <option value="end"><?php echo __( "End" , "site-editor" );?></option>
+                            </select>
+
+                        </div>
+                    </li>
+
                     <li class="scope-settings-action sed-bp-form-checkbox" >
                         <div class="sed-bp-form-radio-item">
                             <label>
@@ -33,13 +47,6 @@
                         </div>
 
                         <ul class="select-pubic-scope hide">
-
-                            <li class="sed-bp-form-text" >
-                                <div class="sed-bp-form-text-item">
-                                    <label><?php echo __("Row Name","site-editor");?>  </label>
-                                    <input type="text" name="sed_layout_row_title" class="sed-settings-theme-type sed-element-control sed-bp-input sed-bp-text-input" value="">
-                                </div>
-                            </li>
 
                             <li class="scope-settings-action sed-bp-form-radio" >
                                 <div class="sed-bp-form-radio-item">
@@ -91,9 +98,19 @@
        </fieldset>
 
     </div>
+
 </script>
 
-<div id="sed-edit-layout-rows-dialog" title="<?php echo __("Edit Layout Rows" , "site-editor");?>"></div>
+<script type="text/html" id="manage-layout-theme-rows-page-box-tpl" >
+
+    <?php $action_page_box_id = "manage_layout_theme_rows"; ?>
+    <div id="dialog_page_box_<?php echo $action_page_box_id; ?>" class=""  data-title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>" data-multi-level-box="true">
+        <div class="sed-dialog-page-box-inner">
+
+        </div>
+    </div>
+
+</script>
 
 <script type="text/html" id="change-public-to-private-confirm-tpl" >
     <div class="sed_message_box">
@@ -141,21 +158,109 @@
 
 
 <script type="text/html" id="tmpl-sed-layout-edit-rows" >
-    <div class="layout-row-container">
+
+    <div class="sed-layout-row-error-box sed-error">
+        <p></p>
+    </div>
+
+    <ul class="layout-row-container">
         <#
         layoutRows = _.sortBy( data.layoutRows , 'order');
 
         _.each( layoutRows , function( row ){
             var title = row.title || data.noTitle ,
-                id = layout.theme_id ,
+                id = row.theme_id ,
                 className = ( data.currThemeId == row.theme_id ) ? "current-row" : "";
         #>
-            <div data-row-id="{{id}}" class="sed-layout-row-box {{className}}">{{title}}</div>
+            <li data-row-id="{{id}}" class="sed-layout-row-box {{className}}">
+                <label class="row-title-label" title="{{title}}">{{title}}</label>
+                <div class="layout-row-actions">
+                    <span data-action="edit" class="edit action"><span class="fa fa-pencil fa-lg"></span></span>
+                    <span data-action="sort" class="sort action"><span class="fa fa-arrows fa-lg"></span></span>
+                </div>
+                <input class="layout-row-title-edit" type="text" value="{{title}}" />
+            </li>
         <#
         });
         #>
-    <div>
+    </ul>
 </script>
+
+<style>
+    .layout-row-container{
+        margin: 20px;
+    }
+
+    input.layout-row-title-edit {
+        display: none;
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .editing input.layout-row-title-edit {
+        display: block;
+    }
+
+    span.action{
+        display: block;
+    }
+
+    .layout-row-container > li {
+        position: relative;
+    }
+    .sed-layout-row-box {
+        /*background-color: #fafafa !important;*/
+        border: 1px solid #d5d5d5;
+        border-radius: 2px;
+        box-shadow: none;
+        color: #666;
+        font-size: 12px;
+        margin: 0 0 5px;
+        padding: 5px 10px;
+        width: 100%;
+    }
+
+    .sed-layout-row-box > label {
+        line-height: 20px;
+        max-width: 50%;
+        width: 50%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: inline-block;
+        white-space: nowrap;
+    }
+    .sed-layout-row-box:after,
+    .sed-layout-row-box:before {
+        display: table;
+        content: "";
+    }
+    .sed-layout-row-box:after {
+        clear: both;
+    }
+    .layout-row-actions {
+        float: right;
+    }
+    .layout-row-actions > span.action {
+        display: inline-block;
+        margin: 0 2px;
+    }
+
+    .layout-row-actions > span.action .fa {
+        color: #888;
+        font-size: 1.15em;
+        cursor: pointer;
+    }
+    .layout-row-actions > span.action:hover .fa {
+        color: #00A9E8;
+    }
+    .layout-row-actions > span.sort .fa {
+        cursor: move;
+    }
+
+</style>
 
 <div id="sed-confirm-message-dialog" title="<?php echo __("Confirm Message" , "site-editor");?>">
 
@@ -172,7 +277,8 @@
             <input type="checkbox" id="sed_sub_theme_check_{{num}}" name="sed_scope_layout" value="{{layout}}" class="">
             <span class="sub_theme_title">{{title}}</span>
         </label>
-        <a href="javascript:void(0);" data-layout-name="{{layout}}" class="edit-layout-rows hide">
+        <?php $action_page_box_id = "manage_layout_theme_rows"; ?>
+        <a href="javascript:void(0);" data-layout="{{layout}}" data-related-level-box="dialog_page_box_<?php echo $action_page_box_id; ?>" class="edit-layout-rows hide field_desc"  title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>">
             <span class="icon icon-edit"></span>
         </a>
     </li>

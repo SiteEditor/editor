@@ -66,14 +66,14 @@
 
             var _fixDragDrop = function( type ){
                 $('#' + id_box ).find('[role="tabpanel"]').addClass("sed-sortable-disabled");
-                $('#' + id_box ).find('[role="tabpanel"]').removeClass("bp-component");
+                $('#' + id_box ).find('[role="tabpanel"]').removeClass("sed-pb-component");
 
                 if(type == 0){
                     $( '#' + id_box ).find('.active[role="tabpanel"]').removeClass("sed-sortable-disabled");
-                    $( '#' + id_box ).find('.active[role="tabpanel"]').addClass("bp-component");
+                    $( '#' + id_box ).find('.active[role="tabpanel"]').addClass("sed-pb-component");
                 }else if(type == 1){
                     $( '#' + id_box ).find('[role="tabpanel"]').eq(0).removeClass("sed-sortable-disabled");
-                    $( '#' + id_box ).find('[role="tabpanel"]').eq(0).addClass("bp-component");
+                    $( '#' + id_box ).find('[role="tabpanel"]').eq(0).addClass("sed-pb-component");
                 }
             };
 

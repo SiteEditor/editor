@@ -10,7 +10,7 @@ jQuery( document ).ready( function ( $ ) {
 
     $('body').livequery(function(){
         var $element =$(this),
-            pageContainer =  $element.find(".site-main"),
+            pageContainer =  $element.find(".sed-site-main-part"),
             headerFixed   =  $element.find(".header-skin1 .header-fixed") ,
             navbarHeader  =  $element.find(".sed-navbar-header"),
             navbarToggle  =  $element.find(".sed-navbar-toggle");
@@ -57,7 +57,7 @@ jQuery( document ).ready( function ( $ ) {
     $(document).click(function (event) {
         var clickover = $(event.target);   //_opened === true &&
         if ( clickover.parents(".header-fixed").length == 0 && !clickover.hasClass("header-fixed") &&  clickover.parents(".sed-navbar-header").length == 0 &&  !clickover.hasClass("sed-navbar-header") ) {
-            $(".site-main").removeClass("site-menu-open");
+            $(".sed-site-main-part").removeClass("site-menu-open");
             $(".header-skin1 .header-fixed").removeClass("header-fixed-menu-open");
         }
     });

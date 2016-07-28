@@ -12,6 +12,8 @@
 			} );
 		});
 
+        console.log( "---------------api.settings-----------" , api.settings )
+
         api.styleEditorSettings = api.styleEditorSettings || [];
   	    $.each( api.settings.settings, function( id, data ) {
              if( !_.isUndefined( data.type ) && data.type == "style-editor" ){

@@ -10,7 +10,7 @@
         initialize: function( params , options ){
             var self = this;
             //, $parent = $('[sed-role="row-pb"]').parent()
-            //$parent.addClass("sed-pb-rows-box bp-component");
+            //$parent.addClass("sed-pb-rows-box sed-pb-component");
                                   
             $.extend( this, options || {} );
 
@@ -83,7 +83,7 @@
                         _callback();
 
                 }else{
-                    /*var dropItem = ( $this.attr("sed_model_id") ) ? $this : $this.parents(".bp-component:first") ,
+                    /*var dropItem = ( $this.attr("sed_model_id") ) ? $this : $this.parents(".sed-pb-component:first") ,
                         direction =  ( $this.attr("sed_model_id") ) ? ui.direction : "none";*/
 
                     if( !_.isUndefined( api.modulesSettings[name] ) && !_.isUndefined( api.modulesSettings[name].transport ) && api.modulesSettings[name].transport == "ajax" ){
@@ -359,7 +359,7 @@
                 newItem = $(html).appendTo( dropItem );
             }
 
-            api.Events.trigger( "afterCreateModule" , newItem , name  );
+            api.Events.trigger( "afterCreateModule" , newItem , name , dropItem , direction  );
 
                  ////api.log( this.wpStyles );
             if(name == "row"){
@@ -415,7 +415,7 @@
             }else{
 
                 //set sheet width for main rows (with add class)
-                /*if(newItem.parent().hasClass("site-main")){
+                /*if(newItem.parent().hasClass("sed-site-main-part")){
                     newItem.addClass("sed-row-boxed");
                     var row_shortcode = api.contentBuilder.getShortcode( newItem.attr("id") );
 
@@ -886,7 +886,12 @@
             var self = this;
             _.each( shortcodes , function( shortcode ){
                 if( !_.isUndefined( shortcode.attrs ) && !_.isUndefined( shortcode.attrs.sed_css ) && !_.isEmpty( shortcode.attrs.sed_css ) ) {
-                    _.each( shortcode.attrs.sed_css , function (properties, selector) {
+
+                    var sedCssCopy = $.extend( true, {} , shortcode.attrs.sed_css );
+
+                    api.contentBuilder.updateShortcodeAttr( "sed_css" , {} , shortcode.id );
+
+                    _.each( sedCssCopy , function (properties, selector) {
 
                         var patt = /\[\s*(sed_model_id)\s*=\s*["\']?([^"\']*)["\']?\s*\]/g;
                         var new_selector = selector.replace( patt , '[sed_model_id="' + shortcode.id + '"]' );
@@ -895,6 +900,7 @@
 
                             api.preview.trigger('current_css_setting_type', "module");
                             api.preview.trigger('current_css_selector', new_selector);
+                            api.preview.trigger('current_element' , shortcode.id );
                             api(setting_id).set(value);
 
                         });
@@ -983,7 +989,7 @@
                 containment: 'body',
                 cursorAt: { top: 15,left: 114 },
                 cursor: "move",
-                connectWith: '.bp-component',
+                connectWith: '.sed-pb-component,.sed-pb-main-component',
                 cancel: ".empty-column",
                 items : ">.sed-row-pb" ,
                 zIndex: 1070 ,
@@ -1004,7 +1010,7 @@
 
                     contentModel = parentC.data("contentType");
 
-                    //$(".sed-app-editor #main").css("padding" , "25px 0 40px");
+                    //$(".sed-app-editor #site-editor-main-part").css("padding" , "25px 0 40px");
                     $("body").addClass("module-dragging-mode");
 
                     //for sub_theme module-----
@@ -1033,17 +1039,17 @@
 
                 stop : function( event, ui ){
 
-                    //$(".sed-app-editor #main").css("padding" , "");
+                    //$(".sed-app-editor #site-editor-main-part").css("padding" , "");
                     $("body").removeClass("module-dragging-mode");
 
-                    $('.bp-component').each(function( i , element ){
+                    $('.sed-pb-component').each(function( i , element ){
 
                         self.addRemoveSortableClass( $(this) );
 
                     });
 
-                    if( !ui.item.parent().hasClass("site-main") && ui.item.hasClass("sed-main-content-row-role") ){
-                        self.addRemoveSortableClass( ui.item.parents(".bp-component:first") , 1 );
+                    if( !ui.item.parent().hasClass("sed-site-main-part") && ui.item.hasClass("sed-main-content-row-role") ){
+                        self.addRemoveSortableClass( ui.item.parents(".sed-pb-component:first") , 1 );
                         sortAreaStart.removeClass("sed-pb-empty-sortable-area");
                         alert("You do not Allow to Content layout drag in to any drop area only allow sort it with layout rows");
                         domUpdate = false;
@@ -1094,12 +1100,19 @@
                 //dropOnEmpty: false
             };
 
-            $('.bp-component').livequery(function(){
+            $('.sed-pb-component').livequery(function(){
                 $(this).sortable( options );
 
                 self.addRemoveSortableClass( $(this) );
 
             });
+
+            var options_main = $.extend( true , {} , options );
+
+            options_main.cancel = ".sed-public-theme-row,.empty-column";
+            options_main.connectWith = ".sed-pb-component";
+
+            $('.sed-pb-main-component').sortable( options_main );
 
         },
 
@@ -1122,7 +1135,7 @@
             $(".sed-pb-post-container-disable-editing").find(".sed-bp-element").attr( "sed-disable-editing" , "yes" );
             $(".sed-pb-post-container-disable-editing").find('[sed-module-cover="has-cover"]').attr( "sed-disable-editing" , "yes" );
             $(".sed-pb-post-container-disable-editing").find('.sed-column-pb').attr( "sed-disable-editing" , "yes" );
-            $(".sed-pb-post-container-disable-editing").find('.bp-component').addClass('bp-component-no-editable').removeClass('bp-component');
+            $(".sed-pb-post-container-disable-editing").find('.sed-pb-component').addClass('sed-pb-component-no-editable').removeClass('sed-pb-component');
             $(".sed-pb-post-container-disable-editing").find( ".sed-pb-module-container" ).attr( "sed-disable-editing" , "yes" );
 
         },
@@ -1572,7 +1585,7 @@
               ////api.log( window._sedAppPageBuilderModulesStyles );
         api.currentPageInfo = window._sedAppCurrentPageInfo;
         api.attachmentsSettings = window._sedAppPBAttachmentsSettings;
-        api.mainContentShortcode = window._sedAppMainContentShortcode;
+        //api.mainContentShortcode = window._sedAppMainContentShortcode;
 
         api.contextMenuSettings = window._sedAppEditorContextMenuSettings;
         api.itemContextMenuSettings = window._sedAppEditorItemContextMenuSettings;
@@ -1615,7 +1628,7 @@
 
             api.preview.send( 'checkModuleDragSync' );
 
-            api.preview.send( 'mainContentShortcodeUpdate' , api.mainContentShortcode);
+            //api.preview.send( 'mainContentShortcodeUpdate' , api.mainContentShortcode);
             
 			api.preview.send( 'syncAttachmentsSettings' , api.attachmentsSettings);
 
@@ -2929,12 +2942,12 @@
         });
 
         api.preview.bind("moduleDragStart" , function(){
-            //$(".sed-app-editor #main").css("padding" , "15px 0 40px");
+            //$(".sed-app-editor #site-editor-main-part").css("padding" , "15px 0 40px");
             $("body").addClass("module-dragging-mode");
         });
 
         api.preview.bind("moduleDragStop" , function(){
-            //$(".sed-app-editor #main").css("padding" , "");
+            //$(".sed-app-editor #site-editor-main-part").css("padding" , "");
             $("body").removeClass("module-dragging-mode");
         });
 

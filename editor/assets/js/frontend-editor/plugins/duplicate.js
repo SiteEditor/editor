@@ -64,15 +64,9 @@
             //add row && module shortcode To models
             modulesShortcodes.unshift( rowSh , moduleSh );
 
-            modulesShortcodesCopy = $.extend( true, {} , modulesShortcodes );//_.map( modulesShortcodes , _.clone );
+            modulesShortcodesCopy = api.sedShortcode.clone( modulesShortcodes );//_.map( modulesShortcodes , _.clone );
 
-            modulesShortcodesCopy = this.modifyModels( modulesShortcodesCopy );
-
-            if( !_.isUndefined( modulesShortcodesCopy[0].theme_id ) )
-                delete modulesShortcodesCopy[0].theme_id;
-
-            if( !_.isUndefined( modulesShortcodesCopy[0].is_customize ) )
-                delete modulesShortcodesCopy[0].is_customize;
+            modulesShortcodesCopy = this.modifyModels( modulesShortcodesCopy ); 
 
             if( !_.isUndefined( mainShortcode.attrs ) && !_.isUndefined( mainShortcode.attrs.sed_css ) && !_.isEmpty( mainShortcode.attrs.sed_css ) && _.isObject( mainShortcode.attrs.sed_css ) ){
                 var sedCssCopy = $.extend( true, {} , mainShortcode.attrs.sed_css );

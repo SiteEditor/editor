@@ -140,7 +140,7 @@
                $("#sed-sheet-width-style").remove();
                $("<style id='sed-sheet-width-style'>.sed-row-boxed{max-width : " + to + "px !important;}</style>").appendTo($("head"));
 
-              $("#main").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedSheetWidth");
+              $("#site-editor-main-part").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedSheetWidth");
 
     		});
         });
@@ -149,14 +149,14 @@
         sedApp.editor( 'page_length', function( value ) {
     		value.bind( function( to ) {
 
-                var targEl = $("#main");
+                var targEl = $("#site-editor-main-part");
 
                 if(to == "boxed")
                     targEl.addClass( "sed-row-boxed" ).removeClass("sed-row-wide");
                 else
                     targEl.addClass( "sed-row-wide" ).removeClass("sed-row-boxed");
 
-                $("#main").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedPageLength" , [to]);
+                $("#site-editor-main-part").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedPageLength" , [to]);
 
     		});
         });

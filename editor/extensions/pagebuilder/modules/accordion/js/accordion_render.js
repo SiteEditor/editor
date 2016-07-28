@@ -11,9 +11,9 @@ jQuery( document ).ready( function ( $ ) {
 
         var _fixDragDrop = function(){
             $( '#' + id_box ).find(".ui-accordion-content").addClass("sed-sortable-disabled");
-            $( '#' + id_box ).find(".ui-accordion-content").removeClass("bp-component");
+            $( '#' + id_box ).find(".ui-accordion-content").removeClass("sed-pb-component");
             $( '#' + id_box ).find(".ui-accordion-content-active").removeClass("sed-sortable-disabled");
-            $( '#' + id_box ).find(".ui-accordion-content-active").addClass("bp-component");
+            $( '#' + id_box ).find(".ui-accordion-content-active").addClass("sed-pb-component");
         };
 
         $( '#' + id_box ).accordion({

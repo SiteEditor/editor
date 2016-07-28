@@ -116,7 +116,7 @@ class SedAppSettings{
 	 *
 	 * @since 3.4.0
 	 */
-	public function preview() {
+	public function preview() {  
 
 		switch( $this->option_type ) {
 			case 'theme_mod' :
@@ -348,14 +348,6 @@ class SedAppSettings{
 
 			case 'option' :
 				return $this->_update_option( $value );
-
-            /*
-            case 'post_meta' :
-                return $this->_update_post_meta( $value );
-
-            case 'post' :
-            in site-editor-posts.php > function update_post
-            */
 
 			default :
 
@@ -639,3 +631,89 @@ class SedAppSettings{
 	}
 }
 
+class SedThemeContentSetting extends SedAppSettings{
+
+	public function __construct( $manager, $id, $args = array() ) {
+
+		add_filter( "base_settings_save_filter" , array( $this , "save_theme_content" ) );
+
+		return parent::__construct( $manager, $id, $args );
+	}
+
+	public function _preview_base_meta_settings( $original_meta_value, $post_id, $meta_key, $single ) {
+
+		if ( isset( $meta_key ) && $meta_key == 'sed_post_settings' ) {
+
+			$value = $this->base_value( $this->default , $post_id );
+
+			if ( ! isset( $value ) ){
+				return $original_meta_value;
+			}else{
+				$meta_value = ( !empty( $original_meta_value ) && is_array( $original_meta_value ) ) ? $original_meta_value : array();
+
+				if( $value !== false && !empty( $value ) && is_array( $value ) ) {
+					foreach ($value AS $key => $model) {
+						$value[$key]['content'] = $this->_filter_row_content($model['content']);
+					}
+				}
+
+				if( $single )
+					$meta_value[0][ $this->id ] = $value;
+				else
+					$meta_value[ $this->id ] = $value;
+
+				return $single ? $meta_value : array( $meta_value );
+			}
+		}
+
+	}
+
+
+	public function _preview_base_option_settings( $original ){
+
+		global $sed_apps;
+		$sed_page_id = $sed_apps->framework->sed_page_id;
+		$value = $this->base_value( $this->default , $sed_page_id );
+
+		if ( ! isset( $value ) ){
+			return $original;
+		}else{
+
+			if( $value !== false && !empty( $value ) && is_array( $value ) ) {
+				foreach ($value AS $key => $model) {
+					$value[$key]['content'] = $this->_filter_row_content($model['content']);
+				}
+			}
+
+			$current_page_settings = $original;
+			$current_page_settings[ $this->id ] = $value;
+			return $current_page_settings;
+		}
+
+	}
+
+	public function save_theme_content( $base_settings_values , $page_id ){
+
+		if( isset( $base_settings_values['theme_content'] ) ) {
+			$theme_content = $base_settings_values['theme_content'];
+
+			foreach ( $theme_content AS $key => $model ){
+				$theme_content[$key]['content'] = $this->_filter_row_content( $model['content'] );
+			}
+
+			$base_settings_values['theme_content'] = $theme_content;
+		}
+
+		return $base_settings_values;
+	}
+
+	public function _filter_row_content( $content_shortcodes ){
+
+		global $sed_apps;
+		$tree_shortcodes = $sed_apps->editor->save->build_tree_shortcode( $content_shortcodes , $content_shortcodes[0]['parent_id'] );
+		$content = $sed_apps->editor->save->create_shortcode_content( $tree_shortcodes , array() );
+
+		return $content;
+	}
+
+}

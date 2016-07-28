@@ -387,7 +387,7 @@ class SiteEditorManager{
 			}
 
 			$setting_args = false;
-			$setting_class = 'WP_Customize_Setting';
+			$setting_class = 'SedAppSettings';
 
 			/**
 			 * Filter a dynamic setting's constructor args.
@@ -934,12 +934,14 @@ class SiteEditorManager{
             'transport'      => 'postMessage'
 		) );
 
-        $this->add_setting( 'theme_content' , array(
-            'default'       => false,
-            'option_type'    => 'base' ,
-            'capability'     => 'manage_options',
-            'transport'     => 'postMessage'
-        ));
+        $this->add_setting( new SedThemeContentSetting( $this, 'theme_content', array(
+				 'default'       => false,
+				 'option_type'    => 'base' ,
+				 'capability'     => 'manage_options',
+				 'transport'     => 'postMessage'
+			   )
+			)
+		);
 
     }
 

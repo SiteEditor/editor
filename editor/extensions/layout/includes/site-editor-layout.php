@@ -1,14 +1,10 @@
 <?php
-/*
-Module Name: Content
-Module URI: http://www.siteeditor.org/modules/content
-Description: Module Content For Site Editor Application
-Author: Site Editor Team
-Author URI: http://www.siteeditor.org
-Version: 1.0.0
-*/
+
 
 if(!class_exists('SiteEditorLayoutManager')){
+    /**
+     * Class SiteEditorLayoutManager
+     */
     class SiteEditorLayoutManager{
 
         public $scope_control_id;
@@ -261,6 +257,10 @@ if(!class_exists('SiteEditorLayoutManager')){
         public function add_js_plugin() {
             wp_register_script("sed-app-layout", SED_EXT_URL . 'layout/js/app-layout-plugin.min.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
             wp_enqueue_script( 'sed-app-layout' );
+
+            wp_register_script("sed-app-settings-manager", SED_EXT_URL . 'layout/js/settings-manager-plugin.min.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
+            wp_enqueue_script( 'sed-app-settings-manager' );
+
         }
 
         public function js_I18n( $I18n ){
@@ -274,6 +274,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             $I18n['empty_layout_title']         =  __("Please enter title" , "site-editor");
             $I18n['invalid_layout_title']       =  __("Layout title not validate , only using letter , number , - , _ and space" , "site-editor");
+            $I18n['invalid_layout_row_title']   =  __("Row title not validate , only using letter , number , - , _ and space" , "site-editor");
             $I18n['empty_layout_slug']          =  __("Please enter slug" , "site-editor");
             $I18n['invalid_layout_slug']        =  __("Layout slug not validate , It should be English and only using letter , number , - and _" , "site-editor");
             $I18n['layout_already_exist']       =  __("The item is already exist in your leyouts." , "site-editor");
@@ -584,12 +585,23 @@ if(!class_exists('SiteEditorLayoutManager')){
                 add_option( 'sed_layouts_content' , array() , $deprecated, $autoload );
             }
 
-            $settings['sed_layouts_content'] = array(
+            require_once dirname( __FILE__ ) . '/content-layout-setting.php';
+
+            SED()->editor->manager->add_setting( new SedLayoutContentSetting( SED()->editor->manager , 'sed_layouts_content' , array(
+                    'default'        => get_option( 'sed_layouts_content' ),
+                    'capability'     => 'manage_options',
+                    'option_type'    => 'option' ,
+                    'transport'      => 'postMessage'
+                  )
+                )
+            );
+
+            /*$settings['sed_layouts_content'] = array(
     			'default'        => get_option( 'sed_layouts_content' ),
     			'capability'     => 'manage_options',
     			'option_type'    => 'option' ,
                 'transport'      => 'postMessage'
-    		);
+    		);*/
 
             $settings['page_layout'] = array(
     			'default'        => '' ,

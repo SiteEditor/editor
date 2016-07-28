@@ -49,6 +49,13 @@
     </div>
 </div>
 
+<?php $action_page_box_id = "manage_layout_theme_rows"; ?>
+<div id="dialog_page_box_<?php echo $action_page_box_id; ?>" class=""  data-title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>" data-multi-level-box="true">
+    <div class="sed-dialog-page-box-inner">
+
+    </div>
+</div>
+
 <script type="text/html" id="tmpl-sed-layouts-manager" >
     <#
         var num = 1;
@@ -68,6 +75,8 @@
                 <span data-action="delete" data-layout="{{layout}}" class="fa fa-close" title="<?php echo __("Remove" , "site-editor");?>"></span>
                 <# } #>
                 <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}"  class="fa fa-edit" title="<?php echo __("Edit" , "site-editor");?>"></span>
+
+                <span data-action="manage" data-layout="{{layout}}" data-related-level-box="dialog_page_box_<?php echo $action_page_box_id; ?>" class="fa fa-trash sed_go_to_manage_layout_rows"  title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>" ></span>
             </div>
 
             <div class="sed-edit-mode">

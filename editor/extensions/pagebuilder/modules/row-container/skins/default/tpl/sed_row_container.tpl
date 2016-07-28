@@ -65,14 +65,14 @@ if( bg_type == 'video' ) {
 
 if(content) { #>
        <div class="s-tb-sm row-container-module {{responsive_option}} {{className}}  {{arrow}} <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
-            <div class="bp-component" data-parent-id="{{sed_model_id}}">
+            <div class="sed-pb-component" data-parent-id="{{sed_model_id}}">
                 {{{content}}}
             </div>
             {{{outer_html}}}
        </div>
 <# }else{ #>
       <div class="s-tb-sm row-container-module {{responsive_option}} {{className}}  {{arrow}} <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
-          <div class="bp-component" data-parent-id="{{sed_model_id}}" drop-placeholder="Drop A Module Here">
+          <div class="sed-pb-component" data-parent-id="{{sed_model_id}}" drop-placeholder="Drop A Module Here">
 
           </div>
           {{{outer_html}}}
@@ -83,7 +83,7 @@ if(content) { #>
 <# if(responsive_spacing){ #>
   @media (max-width: 768px){
 
-  [sed_model_id="{{sed_model_id}}"] > .bp-component > .sed-row-pb > .sed-pb-module-container{
+  [sed_model_id="{{sed_model_id}}"] > .sed-pb-component > .sed-row-pb > .sed-pb-module-container{
       padding : {{responsive_spacing}} !important;
   }
 

@@ -199,7 +199,7 @@ if ( ($args->has_children && $depth == 0 ) || ($args->has_children && $depth > 0
 if( $parent_is_megamenu && $depth == 1 && !empty( $area_module ) && isset( $args->parent_megamenu_children) && is_numeric( $args->parent_megamenu_children ) && $args->parent_megamenu_children > 0 ) :
 ?>
 <div id="megamenu-module-widget-area-<?php echo $item->ID; ?>">
-    <div class="bp-component megamenu-module-widget-area" data-menu-id="<?php echo $this->menu_atts['id'];?>" data-parent-id="megamenu-module-widget-area-<?php echo $item->ID; ?>"  drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>" >
+    <div class="sed-pb-component megamenu-module-widget-area" data-menu-id="<?php echo $this->menu_atts['id'];?>" data-parent-id="megamenu-module-widget-area-<?php echo $item->ID; ?>"  drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>" >
          <?php echo PBMenuShortcode::get_menu_content( $this->menu_content , "megamenudragarea" , "megamenu-module-widget-area-".$item->ID ); ;?>
     </div>
 </div>

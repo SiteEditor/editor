@@ -64,7 +64,7 @@ $class_draggable_area="menu-draggable-area-right";
             $matches = PBMenuShortcode::get_menu_content( $content , "menudragarea" );
         ?>
         <div id="<?php echo $matches[3][0];?>">
-            <div class="bp-component menu-draggable-area <?php echo $class_draggable_area; ?>"  data-parent-id="<?php echo $matches[3][0]; ?>"  drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>" >
+            <div class="sed-pb-component menu-draggable-area <?php echo $class_draggable_area; ?>"  data-parent-id="<?php echo $matches[3][0]; ?>"  drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>" >
               <?php echo $matches[4][0];?>
             </div>
         </div>

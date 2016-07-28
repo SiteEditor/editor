@@ -106,6 +106,37 @@
             });
 
             return modulesShortcodesCopy;
+        },
+
+        /**
+         * only using in front end editor
+         * @param Model Id
+         * @returns array , collection of shortcode models
+         */
+        getContentModel : function( modelId ){
+
+            var parentC = $( '[sed_model_id="' + modelId + '"]' ).parents(".sed-pb-post-container:first"),
+                type = parentC.data("contentType") ,
+                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + modelId + '"]' ) );
+
+            if(type == "theme")
+                var contentModel = api.pagesThemeContent[postId];
+            else
+                var contentModel = api.postsContent[postId];
+
+            return contentModel;
+        },
+
+        replaceModel : function( oldModelId , newModel ){
+
+            var contentModel = this.getContentModel( oldModelId ) ,
+                oldIndex = this.index( oldModelId , contentModel ) ,
+                newModelLength = newModel.length;
+
+            var args = $.merge([ oldIndex , newModelLength ] , newModel);
+
+            Array.prototype.splice.apply( contentModel , args );
+
         }
 
     });

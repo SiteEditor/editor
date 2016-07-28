@@ -63,11 +63,12 @@
 
             api.preview.bind( "sedRemoveModulesApply" , function( moduleId ){
 
-                var dropArea = $( '[sed_model_id="' + moduleId + '"]' ).parents(".bp-component:first");
+                var dropArea = $( '[sed_model_id="' + moduleId + '"]' ).parents(".sed-pb-component:first");
 
                 self.remove( moduleId );
 
-                api.pageBuilder.addRemoveSortableClass( dropArea );
+                if( dropArea.length > 0 )
+                    api.pageBuilder.addRemoveSortableClass( dropArea );
 
             });
 
@@ -82,7 +83,7 @@
                 $(this).click(function(){
                     var id = $(this).parents(".popover:first").attr("id");
                     var moduleId = $('[aria-describedby="' + id + '"]').data( "moduleRelId" ) ,
-                        dropArea = $( '[sed_model_id="' + moduleId + '"]' ).parents(".bp-component:first");
+                        dropArea = $( '[sed_model_id="' + moduleId + '"]' ).parents(".sed-pb-component:first");
                     $('[aria-describedby="' + id + '"]').popover('hide');
                     self.remove( moduleId );
 

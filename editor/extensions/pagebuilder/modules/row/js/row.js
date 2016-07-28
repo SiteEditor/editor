@@ -7,7 +7,7 @@
           var $element = $('body') ,
               Browser_w  = $(window).width(),
               sheetWidth = $('body').data("sheetWidth"),
-              main = $('body').find("#main");
+              main = $('body').find("#site-editor-main-part");
 
           if(Browser_w <= sheetWidth || (main.hasClass("sed-row-boxed") == true)){
             //console.log($element.find('.sed-pb-post-container > .sed-row-wide .sed-row-boxed:first'));
@@ -26,10 +26,10 @@
                 "paddingRight":'30px'
             });
 
-           /* $element.find('.site-main > .sed-row-wide').each(function(){
+           /* $element.find('.sed-site-main-part > .sed-row-wide').each(function(){
               if($(this).hasClass("sed-main-content-row-role") == false){   */
-                $element.find('.site-main > .sed-row-wide .sed-row-boxed').each(function(){
-                    if( $(this).parentsUntil( $( '.site-main' ), ".sed-row-boxed" ).length == 0 && $(this).parentsUntil( $( '.site-main' ), ".sed-column-pb").length == 0 ){
+                $element.find('.sed-site-main-part > .sed-row-wide .sed-row-boxed').each(function(){
+                    if( $(this).parentsUntil( $( '.sed-site-main-part' ), ".sed-row-boxed" ).length == 0 && $(this).parentsUntil( $( '.sed-site-main-part' ), ".sed-column-pb").length == 0 ){
                         $(this).css({
                             "paddingLeft": '30px',
                             "paddingRight":'30px'

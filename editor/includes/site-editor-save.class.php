@@ -131,11 +131,13 @@ class SEDAppSave{
 
                foreach ( $sed_apps->editor->manager->settings() as $id => $setting ) {
                    if($setting->option_type != "base" && !empty( $setting->option_type ) ){
-                       //$setting->save();
+
                        unset( $base_settings_values[$id] );  //$setting->id
                    }
                }
-                                                                              //$_POST['sed_page_type']
+
+               $base_settings_values = apply_filters( "base_settings_save_filter" , $base_settings_values , $page_id );
+
                $this->sed_update_settings( $base_settings_values , $page_id , $sed_pages_types[$page_id] );
            }
            /*
@@ -145,7 +147,6 @@ class SEDAppSave{
            //save general settings( general settings is option_type != "base" OR option_type not empty  )
            foreach ( $sed_apps->editor->manager->settings() as $id => $setting ) {
                if($setting->option_type != "base" && !empty( $setting->option_type ) ){
-                   //var_dump( $id );
                    $setting->save();
                }
            }

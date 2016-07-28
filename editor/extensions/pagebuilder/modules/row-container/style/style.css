@@ -63,7 +63,7 @@ min-height: 100vh;
     z-index: 2;
 }
 
-.row-container-module.video-background .bp-component {
+.row-container-module.video-background .sed-pb-component {
     position: relative;
     z-index: 10;
 }

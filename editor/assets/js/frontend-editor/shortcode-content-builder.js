@@ -12,7 +12,7 @@
             this.loadedSkins = [];
 
             $.extend( this, options || {} );
-            //????????
+
             $.each( this.postsContent , function(indexS , shortcodes){
                 if( $.isArray( shortcodes ) ){
                     $.each(shortcodes , function(index , shortcode){

@@ -36,7 +36,6 @@
       if ( ! api.settings )
       	return;
 
-
       // Redirect to the fallback preview if any incompatibilities are found.
       if ( ! $.support.postMessage || (  api.settings.isCrossDomain ) )  //! $.support.cors &&
       	return window.location = api.settings.url.fallback;
@@ -114,7 +113,7 @@
             $( ".sed-module-pb" ).sedDraggable({
                 scrollSensitivity : 30,
                 scrollSpeed : 30,
-                dropInSortable: ".bp-component",
+                dropInSortable: ".sed-pb-component,.sed-pb-main-component",
                 items: ".sed-row-pb" ,    //children only
                 cancelSortable : '[data-type-row="draggable-element"],[sed-disable-editing="yes"]',
                 iframeSortable: "website",

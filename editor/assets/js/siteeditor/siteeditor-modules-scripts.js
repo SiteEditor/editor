@@ -10,7 +10,7 @@
         initialize: function( params , options ){
             var self = this;
             //, $parent = $('[sed-role="row-pb"]').parent()
-            //$parent.addClass("sed-pb-rows-box bp-component");
+            //$parent.addClass("sed-pb-rows-box sed-pb-component");
 
             $.extend( this, options || {} );
 

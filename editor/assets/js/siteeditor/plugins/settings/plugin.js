@@ -40,17 +40,317 @@
       }
     };
 
+    api.SiteEditorDialogSettings = api.Class.extend({
 
-    api.AppModulesSettings = api.Class.extend({
         initialize: function( options ){
 
             $.extend( this, options || {} );
 
+            /**
+             * Load Settings From 'js' or 'html' Template Or Load with 'Ajax'
+             * @type {string}
+             */
+            this.templateType = "html";
+
+            /**
+             * Settings Type : include 'module' , 'app'
+             * @type {string}
+             */
+            this.settingsType = "module";
+
+            this.dialogsContents = {};
+
+            this.dialogsTitles = {};
+
+            this.currentSettingsId = "";
+
+            this.dialogSelector = "#sed-dialog-settings";
+
+            this._dialogInit();
+
+            this.ready();
+        },
+
+        /**
+         *
+         * @private
+         */
+        _dialogInit : function(){
+
+            var self = this ,
+                selector = this.dialogSelector;
+
+            $( selector ).dialog({
+                "autoOpen"  : false,
+                "modal"     : false,
+                //draggable: false,
+                resizable: false,
+                "width"     : 295,
+                "height"    : 600 ,
+                "position"  : {
+                    "my"    : "right-20",
+                    "at"    : "right" ,
+                    "of"    : "#sed-site-preview"
+                },
+                open: function () {
+                    self._switchTmpl();
+                },
+                close : function(){
+                    api.previewer.send("isOpenDialogSettings" , false);
+                    self._resetTmpl();
+                }
+            });
+
+            this._initDialogMultiLevelBox( selector );
+            this._initDialogScrollBar( selector );
+
+        },
+
+        /**
+         * for override in extends classes
+         */
+        ready : function(){},
+
+        /**
+         *
+         * @param dialogSelector
+         * @private
+         */
+        _initDialogMultiLevelBox : function( dialogSelector ){
+
+            $( dialogSelector ).multiLevelBoxPlugin({
+                titleBar: $( dialogSelector ).siblings(".ui-dialog-titlebar:first"),
+                innerContainer : $( dialogSelector ).find(".dialog-level-box-settings-container"),
+            });
+            $( dialogSelector ).siblings(".ui-dialog-titlebar:first").find(".close-page-box").livequery(function(){
+                $(this).click(function(e){
+                    $( dialogSelector ).dialog( "close" );
+                });
+            });
+
+        },
+
+        /**
+         *
+         * @param dialogSelector
+         * @private
+         */
+        _initDialogScrollBar : function( dialogSelector ){
+            var self = this;
+
+            $( dialogSelector ).find('[data-multi-level-box="true"]').livequery(function(){
+                if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
+                    $(this).mCustomScrollbar({
+                        //autoHideScrollbar:true ,
+                        advanced:{
+                            updateOnBrowserResize:true, /*update scrollbars on browser resize (for layouts based on percentages): boolean*/
+                            updateOnContentResize:true,
+                        },
+                        scrollButtons:{
+                            enable:true
+                        },
+                        callbacks:{
+                            onOverflowY:function(){
+                                $(this).find(".mCSB_container").addClass("mCSB_ctn_margin");
+                            },
+                            onTotalScrollOffset:120,
+                            onOverflowYNone:function(){
+                                $(this).find(".mCSB_container").removeClass("mCSB_ctn_margin");
+                            }
+                        }
+                    });
+                }
+            });
+
+        },
+
+        /**
+         *
+         * @param reset
+         * @private
+         */
+        _switchTmpl : function( reset ){
+            var self = this ,
+                selector = this.dialogSelector;
+
+            reset = !_.isUndefined( reset ) ? reset : true;
+
+            if( !_.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
+
+                var $currentElDialog = self.dialogsContents[self.currentSettingsId].appendTo( $( selector ) );
+                self.dialogsTitles[self.currentSettingsId].appendTo( $( selector ).siblings(".ui-dialog-titlebar:first") );
+
+                api.Events.trigger( "afterAppendSettingsTmpl" , $currentElDialog , this.settingsType , this.currentSettingsId );
+
+                if( reset === true )
+                    $( selector ).data('sed.multiLevelBoxPlugin')._reset();
+
+            }else{
+
+                if( this.templateType == "ajax" ) {
+                    this._ajaxLoadSettings();
+                }else if( this.templateType == "html" ){
+
+                    var $currentElDialog = $( $("#sed-tmpl-dialog-settings-" + self.currentSettingsId ).html() ).appendTo( $( selector ) );
+
+                    api.Events.trigger( "afterInitAppendSettingsTmpl" , $currentElDialog , this.settingsType , this.currentSettingsId );
+
+                    $( selector ).data('sed.multiLevelBoxPlugin').options.innerContainer = $( selector ).find(".dialog-level-box-settings-container");
+                    $( selector ).data('sed.multiLevelBoxPlugin')._render();
+
+                    api.Events.trigger( "endInitAppendSettingsTmpl" , $currentElDialog , this.settingsType , this.currentSettingsId );
+
+                }
+
+            }
+        },
+
+        /**
+         *
+         * @private
+         */
+        _resetTmpl : function(){
+            var self = this ,
+                selector = this.dialogSelector;
+
+            api.Events.trigger( "beforeResetSettingsTmpl" , self.currentSettingsId , this.settingsType );
+
+            self.dialogsTitles[self.currentSettingsId] = $( selector ).siblings(".ui-dialog-titlebar:first").children(".multi-level-box-title").detach();
+            self.dialogsContents[self.currentSettingsId] = $( selector ).children().detach();
+
+            api.Events.trigger( "afterResetSettingsTmpl" , self.currentSettingsId , this.settingsType );
+
+        },
+
+        /**
+         *
+         * @private
+         */
+        _ajaxLoadSettings : function( ){
+            var initLayoutsControls = [],
+                self = this,
+                selector = this.dialogSelector;
+
+            var data = {
+                action          : 'sed_load_options',
+                setting_id      : this.currentSettingsId,
+                nonce           : api.addOnSettings.optionsEngine.nonce.load,
+                sed_page_ajax   : 'sed_options_loader'
+            };
+
+            data = api.applyFilters( 'sedAjaxLoadOptionsDataFilter' , data );
+
+            var optionsAjaxloader = new api.Ajax({
+
+                type: "POST",
+                //url: api.settings.url.ajax,
+                data : data,
+                success : function(){
+
+                    var output = this.response.data.output ,
+                        controls = this.response.data.controls,
+                        relations = this.response.data.relations;
+
+                    var $currentElDialog = $( output ).appendTo( $( selector ) );
+
+                    api.Events.trigger( "afterInitAppendSettingsTmpl" , $currentElDialog , self.settingsType , self.currentSettingsId );
+
+                    $( selector ).data('sed.multiLevelBoxPlugin').options.innerContainer = $( selector ).find(".dialog-level-box-settings-container");
+                    $( selector ).data('sed.multiLevelBoxPlugin')._render();
+
+                    api.Events.trigger( "endInitAppendSettingsTmpl" , $currentElDialog , self.settingsType , self.currentSettingsId );
+
+                    if( !_.isUndefined( relations ) && !_.isEmpty( relations ) && _.isObject( relations ) ){
+                        var groupRelations = {};
+
+                        groupRelations[self.currentSettingsId] = relations;
+
+                        api.settingsRelations = $.extend( api.settingsRelations , groupRelations);
+                        console.log( " ---------api.settingsRelations2 ----------------- " , api.settingsRelations );
+                    }
+
+                    if( !_.isEmpty( controls ) ){
+                        _.each( controls , function( data , id ){
+
+                            if( $.inArray( id , initLayoutsControls ) == -1  ){
+                                api.settings.controls[id] = data;
+                                api.Events.trigger( "renderSettingsControls" , id , data );
+                                initLayoutsControls.push( id );
+                            }
+
+                            /*var control = api.control.instance( id );
+
+                             control.update( );*/
+
+                        });
+                        console.log( " ---------ajax control load ----------------- " , controls );
+                        api.Events.trigger(  "after_group_settings_update" , self.currentSettingsId );
+                    }
+
+
+                },
+                error : function(){
+                    alert( this.response.data.output );
+                }
+
+            },{
+                container   : this.dialogSelector
+            });
+
+        },
+
+        openInitDialogSettings : function( settingId , forceOpen , reset , settingsType , templateType ){
+            var isOpen = $( this.dialogSelector ).dialog( "isOpen" );
+
+            //needToUpdateSettings = !_.isUndefined( needToUpdateSettings) ? needToUpdateSettings : true ;
+            
+            forceOpen = !_.isUndefined( forceOpen) ? forceOpen : true ;
+
+            if( !isOpen && forceOpen === true ){
+
+                this.currentSettingsId = settingId;
+                //this.panelsNeedToUpdate = [];
+
+                this.templateType = templateType;
+
+                this.settingsType = settingsType;
+
+                $( this.dialogSelector ).dialog( "open" );
+
+                api.previewer.send("isOpenDialogSettings" , true);
+
+            }else if( isOpen ){
+
+                this._resetTmpl();
+
+                this.templateType = templateType;
+
+                this.settingsType = settingsType;
+
+                this.currentSettingsId = settingId;
+
+                //this.panelsNeedToUpdate = [];
+
+                reset =  !_.isUndefined( reset ) ? reset : true;
+
+                this._switchTmpl( reset );
+
+            }else
+                return ;
+        }
+
+    });
+
+    api.AppModulesSettings = api.Class.extend({
+
+        initialize: function( options ){
+
+            $.extend( this, options || {} );
+
+
             this.initControls = [];
             this.currentDialogSelector = "none";
-            this.dialogsContents = {};
-            this.dialogsTitles = {};
-            this.currentSettingsId;
+
             this.sedDialog;
             //in this version only using in design panel(for back btn and update settings)
             this.forceUpdate = false;
@@ -58,6 +358,8 @@
             //this.lastSedDialog;
             this.panelsNeedToUpdate = [];
             //this.lastPanelsNeedToUpdate = [];
+
+            this.dialogSelector = "#sed-dialog-settings";
 
             this.ready();
         },
@@ -105,16 +407,17 @@
         },
 
         readySettingsType : function(){
+            var self = this;
 
             api.Events.bind("animationSettingsType" , function(dataElement , extra){  //alert( dataElement.shortcodeName );
 
-                $( "#sed-dialog-settings" ).data('sed.multiLevelBoxPlugin')._callDirectlyLevelBox( "dialog_page_box_" + dataElement.shortcodeName + "_animation"  );
+                $( self.dialogSelector ).data('sed.multiLevelBoxPlugin')._callDirectlyLevelBox( "dialog_page_box_" + dataElement.shortcodeName + "_animation"  );
 
             });
 
             api.Events.bind("changeSkinSettingsType" , function(dataElement , extra){
 
-                $( "#sed-dialog-settings" ).data('sed.multiLevelBoxPlugin')._callDirectlyLevelBox( "dialog_page_box_" + dataElement.shortcodeName + "_skin" );
+                $( self.dialogSelector ).data('sed.multiLevelBoxPlugin')._callDirectlyLevelBox( "dialog_page_box_" + dataElement.shortcodeName + "_skin" );
 
                 api.Events.trigger( "loadSkinsDirectly" , dataElement.moduleName );
 
@@ -122,67 +425,73 @@
 
             api.Events.bind("linkToSettingsType" , function(dataElement , extra){
 
-                $( "#sed-dialog-settings" ).data('sed.multiLevelBoxPlugin')._callDirectlyLevelBox( dataElement.shortcodeName + "_link_to_panel_level_box" );
+                $( self.dialogSelector ).data('sed.multiLevelBoxPlugin')._callDirectlyLevelBox( dataElement.shortcodeName + "_link_to_panel_level_box" );
+
+            });
+
+            api.Events.bind("afterAppendSettingsTmpl" , function( dialog , settingsType , currentSettingsId ){
+
+                if( settingsType == "module" ){
+
+                    api.Events.trigger( "afterAppendModulesSettingsTmpl" , self , dialog );
+
+                }
+
+            });
+
+            api.Events.bind("afterInitAppendSettingsTmpl" , function( dialog , settingsType , currentSettingsId ){
+
+                if( settingsType == "module" ){ 
+
+                    api.Events.trigger( "afterInitAppendModulesSettingsTmpl" , self , dialog );
+
+                }
+
+            });
+
+            api.Events.bind("endInitAppendSettingsTmpl" , function( dialog , settingsType , currentSettingsId ){
+
+                if( settingsType == "module" ){
+
+                    if( self.sedDialog.data.shortcodeName == "sed_row" ){
+                        var html = '<span id="row_back_settings_element" class="icon-close-level-box"><i class="icon-chevron-left"></i></span>';
+                        $(self.dialogSelector).siblings(".ui-dialog-titlebar:first").find("[data-self-level-box='dialog-level-box-settings-sed_row-container']").prepend( $(html) );
+                    }
+
+                }
+
+            });
+
+            api.Events.bind("beforeResetSettingsTmpl" , function( currentSettingsId , settingsType ){
+
+                if( settingsType == "module" ){
+
+                    api.Events.trigger( "beforeResetDialogSettingsTmpl" , currentSettingsId );
+
+                }
+
+            });
+
+            api.Events.bind("afterResetSettingsTmpl" , function( currentSettingsId , settingsType ){
+
+                if( settingsType == "module" ){
+
+                    self.forceUpdate = false;
+
+                    //for skins support :: when dialog close or switch remove this event
+                    if( !_.isUndefined( self._skinSupport ) && _.isFunction( self._skinSupport ) ) {
+                        api.Events.unbind("skins_loaded_" + self.sedDialog.data.shortcodeName + "_skin", self._skinSupport);
+                        delete self._skinSupport;
+                    }
+                }
 
             });
 
         },
 
-        switchTmpl : function( reset ){
-            var self = this ,
-                selector = "#sed-dialog-settings";
-
-            reset = !_.isUndefined( reset ) ? reset : true;
-
-            if( !_.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
-
-                var $currentElDialog = self.dialogsContents[self.currentSettingsId].appendTo( $( selector ) );
-                self.dialogsTitles[self.currentSettingsId].appendTo( $( selector ).siblings(".ui-dialog-titlebar:first") );
-
-                api.Events.trigger( "afterAppendModulesSettingsTmpl" , this , $currentElDialog );
-
-                if( reset === true )
-                    $( selector ).data('sed.multiLevelBoxPlugin')._reset();
-
-            }else{
-
-                var $currentElDialog = $( $("#sed-tmpl-dialog-settings-" + self.currentSettingsId ).html() ).appendTo( $( selector ) );
-
-                api.Events.trigger( "afterInitAppendModulesSettingsTmpl" , this , $currentElDialog );
-
-                $( selector ).data('sed.multiLevelBoxPlugin').options.innerContainer = $( selector ).find(".dialog-level-box-settings-container");
-                $( selector ).data('sed.multiLevelBoxPlugin')._render();
-
-                if( self.sedDialog.data.shortcodeName == "sed_row" ){
-                    var html = '<span id="row_back_settings_element" class="icon-close-level-box"><i class="icon-chevron-left"></i></span>';
-                    $(selector).siblings(".ui-dialog-titlebar:first").find("[data-self-level-box='dialog-level-box-settings-sed_row-container']").prepend( $(html) );
-                }
-
-
-            }
-        },
-
-        resetTmpl : function(){
-            var self = this ,
-                selector = "#sed-dialog-settings";
-
-            api.Events.trigger( "beforeResetDialogSettingsTmpl" , self.currentSettingsId );
-
-            self.dialogsTitles[self.currentSettingsId] = $( selector ).siblings(".ui-dialog-titlebar:first").children(".multi-level-box-title").detach();
-            self.dialogsContents[self.currentSettingsId] = $( selector ).children().detach();
-
-            this.forceUpdate = false;
-
-            //for skins support :: when dialog close or switch remove this event
-            if( !_.isUndefined( this._skinSupport ) && _.isFunction( this._skinSupport ) ){
-                api.Events.unbind( "skins_loaded_" + this.sedDialog.data.shortcodeName + "_skin" , this._skinSupport );
-                delete this._skinSupport;
-            }
-        },
-
         initDialogSettings : function(){
             var self = this ,
-                selector = "#sed-dialog-settings";
+                selector = self.dialogSelector;
 
             api.Events.bind( "beforerCreateSettingsControls" , function(id, data , extra){
                 if( !_.isUndefined( data ) && !_.isUndefined( data.is_image_size ) ){
@@ -205,7 +514,7 @@
             });
 
             $( selector ).find(".go-panel-element").livequery(function(){
-                if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
+                if( _.isUndefined( api.sedDialogSettings.dialogsContents[self.currentSettingsId] ) ){
                     $(this).click(function(){ //go-accordion-panel
                         var panelId = $(this).data("panelId");
                         if( $.inArray( panelId , self.panelsNeedToUpdate) == -1 ){
@@ -217,7 +526,7 @@
             });
 
             $( selector ).find(".go-row-container-settings").livequery(function(){
-                if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
+                if( _.isUndefined( api.sedDialogSettings.dialogsContents[self.currentSettingsId] ) ){
                     $(this).click(function(){ //go-accordion-panel
                         //self.lastSedDialog = self.sedDialog;
                         self.lastTargetElementId = _.clone( api.currentTargetElementId );
@@ -230,7 +539,7 @@
             });
 
             $("#row_back_settings_element").livequery(function(){
-                if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
+                if( _.isUndefined( api.sedDialogSettings.dialogsContents[self.currentSettingsId] ) ){
                     $(this).click(function(){ //go-accordion-panel
                         api.currentTargetElementId = self.lastTargetElementId;
                         //api.previewer.send('current_element' , api.currentTargetElementId  );
@@ -242,8 +551,8 @@
             });
 
             //for update after click on back btn
-            $( "#sed-dialog-settings" ).siblings(".ui-dialog-titlebar:first").find('[data-self-level-box] >.icon-close-level-box').livequery(function(){
-                if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
+            $( self.dialogSelector ).siblings(".ui-dialog-titlebar:first").find('[data-self-level-box] >.icon-close-level-box').livequery(function(){
+                if( _.isUndefined( api.sedDialogSettings.dialogsContents[self.currentSettingsId] ) ){
                     $(this).click(function(){
                         if( !_.isUndefined( self.sedDialog ) && $(this).parent().data("selfLevelBox") == 'dialog_page_box_'+ self.sedDialog.data.shortcodeName +'_design_panel' && self.forceUpdate === true ){
                             self.initSettings();
@@ -275,80 +584,13 @@
                 }
             });
 
-            $( selector ).dialog({
-                "autoOpen"  : false,
-                "modal"     : false,
-                //draggable: false,
-                resizable: false,
-                "width"     : 295,
-                "height"    : 600 ,
-                "position"  : {
-                    "my"    : "right-20",
-                    "at"    : "right" ,
-                    "of"    : "#sed-site-preview"
-                },
-                open: function () {
-                    self.switchTmpl();
-                },
-                close : function(){
-                    api.previewer.send("isOpenDialogSettings" , false);
-                    self.resetTmpl();
-                }
-            });
-
-            self.initDialogMultiLevelBox( selector );
-            self.initDialogScrollBar( selector );
-
 
             api.previewer.bind( 'dialogSettingsClose' , function( ) {
 
-                var isOpen = $( selector ).dialog( "isOpen" );
+                var isOpen = $( self.dialogSelector ).dialog( "isOpen" );
                 if( isOpen )
-                    $( selector ).dialog( "close" );
+                    $( self.dialogSelector ).dialog( "close" );
 
-            });
-
-        },
-
-        initDialogMultiLevelBox : function( dialogSelector ){
-
-            $( dialogSelector ).multiLevelBoxPlugin({
-                titleBar: $( dialogSelector ).siblings(".ui-dialog-titlebar:first"),
-                innerContainer : $( dialogSelector ).find(".dialog-level-box-settings-container"),
-            });
-            $( dialogSelector ).siblings(".ui-dialog-titlebar:first").find(".close-page-box").livequery(function(){
-                $(this).click(function(e){
-                  $( dialogSelector ).dialog( "close" );
-                });
-            });
-
-        },
-
-        initDialogScrollBar : function( dialogSelector ){
-            var self = this;
-
-            $( dialogSelector ).find('[data-multi-level-box="true"]').livequery(function(){
-                if( _.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
-                    $(this).mCustomScrollbar({
-                        //autoHideScrollbar:true ,
-                        advanced:{
-                            updateOnBrowserResize:true, /*update scrollbars on browser resize (for layouts based on percentages): boolean*/
-                            updateOnContentResize:true,
-                        },
-                      scrollButtons:{
-                        enable:true
-                      },
-                      callbacks:{
-                          onOverflowY:function(){
-                             $(this).find(".mCSB_container").addClass("mCSB_ctn_margin");
-                          },
-                          onTotalScrollOffset:120,
-                          onOverflowYNone:function(){
-                            $(this).find(".mCSB_container").removeClass("mCSB_ctn_margin");
-                          }
-                      }
-                    });
-                }
             });
 
         },
@@ -406,7 +648,7 @@
 
         controlFilter : function( attrs , shortcodeName , control ){
 
-            $("#sed-dialog-settings").find("fieldset").show();
+            $(this.dialogSelector).find("fieldset").show();
 
             if( !_.isUndefined( attrs) && !_.isUndefined( attrs.parent_module ) && !_.isUndefined( attrs.sed_support_id ) ){
 
@@ -425,7 +667,7 @@
                     else
                         $(control.selector).parents(".row_settings:first").hide();
 
-                    $("#sed-dialog-settings").find("fieldset").each(function(){
+                    $(this.dialogSelector).find("fieldset").each(function(){
                         var $i = 0;
                         $(this).find(".row_settings").each(function(){
                             if($(this).is(":visible"))
@@ -566,7 +808,7 @@
         postButtonIdUpdate : function( dataElement ){
             //add data-post-id to post edit buttons
             if( !_.isUndefined( dataElement.contextmenuPostId ) ){
-                var postEditBtn = $( "#sed-dialog-settings" ).find(".sed_post_edit_button");
+                var postEditBtn = $( this.dialogSelector ).find(".sed_post_edit_button");
 
                 if(postEditBtn.length > 0){
                     postEditBtn.data("postId" , dataElement.contextmenuPostId);
@@ -581,10 +823,10 @@
                 var widgetIdBase = dataElement.contextmenuWidgetIdBase ,
                     widgetTitle = $("#widget-tpl-" + widgetIdBase ).data( "widgetTitle" );
 
-                //$( "#sed-dialog-settings" ).dialog( "option" , "title", widgetTitle );
-                $( "#sed-dialog-settings" ).siblings(".ui-dialog-titlebar:first").find('[data-self-level-box="dialog-level-box-settings-sed_widget-container"] >.ui-dialog-title').text( widgetTitle );
+                //$( this.dialogSelector ).dialog( "option" , "title", widgetTitle );
+                $( this.dialogSelector ).siblings(".ui-dialog-titlebar:first").find('[data-self-level-box="dialog-level-box-settings-sed_widget-container"] >.ui-dialog-title').text( widgetTitle );
 
-                var widgetIdBaseBtn = $("#sed-dialog-settings").find(".sed_widget_button");
+                var widgetIdBaseBtn = $(this.dialogSelector).find(".sed_widget_button");
 
                 if(widgetIdBaseBtn.length > 0){
                     widgetIdBaseBtn.data("widgetIdBase" , widgetIdBase);
@@ -683,40 +925,18 @@
 
         // , needToUpdateSettings
         openInitDialogSettings : function( sedDialog , forceOpen ){
-            var self = this,
-                isOpen = $( "#sed-dialog-settings" ).dialog( "isOpen" );
 
             //needToUpdateSettings = !_.isUndefined( needToUpdateSettings) ? needToUpdateSettings : true ;
 
-            forceOpen = !_.isUndefined( forceOpen) ? forceOpen : true ;
-
-            var startTime = new Date();   //alert( !isOpen && forceOpen === true );
-
             this.sedDialog = sedDialog;
 
-            if( !isOpen && forceOpen === true ){
+            this.currentSettingsId = sedDialog.selector;
 
-                this.currentSettingsId = sedDialog.selector;
-                this.panelsNeedToUpdate = [];
+            this.panelsNeedToUpdate = [];
 
-                $( "#sed-dialog-settings" ).dialog( "open" );
+            var reset =  !_.isUndefined( sedDialog.reset ) ? sedDialog.reset : true;
 
-                api.previewer.send("isOpenDialogSettings" , true);
-
-            }else if( isOpen ){
-
-                this.resetTmpl();
-
-                this.currentSettingsId = sedDialog.selector;
-
-                this.panelsNeedToUpdate = [];
-
-                var reset =  !_.isUndefined( sedDialog.reset ) ? sedDialog.reset : true;
-
-                this.switchTmpl( reset );
-
-            }else
-                return ;
+            api.sedDialogSettings.openInitDialogSettings( this.currentSettingsId , forceOpen , reset , "module" , "html" );
 
             if( !_.isUndefined( sedDialog.data.panelId ) )
                 this.initSettings( sedDialog.data.panelId );
@@ -787,7 +1007,7 @@
             var self = this;
 
             $(".sed_widget_button").livequery(function(){
-                if( _.isUndefined( api.appModulesSettings.dialogsContents['sed_widget'] ) ){
+                if( _.isUndefined( api.sedDialogSettings.dialogsContents['sed_widget'] ) ){
                     $(this).click(function(){
                         var widgetIdBase = $(this).data("widgetIdBase");
                         if(!widgetIdBase)
@@ -800,7 +1020,7 @@
             });
 
             $('[data-self-level-box="dialog-page-box-widgets-settings"] > .icon-close-level-box').livequery(function(){
-                if( _.isUndefined( api.appModulesSettings.dialogsContents['sed_widget'] ) ){
+                if( _.isUndefined( api.sedDialogSettings.dialogsContents['sed_widget'] ) ){
                     $(this).click(function(){
                         self.dialogSetWidth();
                     });
@@ -963,7 +1183,7 @@
             });
 
             $( "#sed-dialog-settings" ).find(".sed_style_editor_btn").livequery(function(){
-                if( _.isUndefined( api.appModulesSettings.dialogsContents[api.appModulesSettings.currentSettingsId] ) ){
+                if( _.isUndefined( api.sedDialogSettings.dialogsContents[api.appModulesSettings.currentSettingsId] ) ){
                     $(this).click(function(){
 
                         self.openPanelSettings( );
@@ -1372,11 +1592,13 @@
 
     $( function() {
 
-        api.appModulesSettings = new api.AppModulesSettings({});
+        api.sedDialogSettings       = new api.SiteEditorDialogSettings({});
 
-        api.appWidgetsSettings = new api.AppWidgetsSettings({});
+        api.appModulesSettings      = new api.AppModulesSettings({});
 
-        api.appStyleEditorSettings = new api.AppStyleEditorSettings({});
+        api.appWidgetsSettings      = new api.AppWidgetsSettings({});
+
+        api.appStyleEditorSettings  = new api.AppStyleEditorSettings({});
 
         var generalStyleEditor;
         $( "#page_general_settings" ).click(function() {
@@ -1393,8 +1615,8 @@
                 var control = api.control.instance( id );
                 $( control.container ).parents(".row_settings:first").show();
 
-                api.currentTargetElementId = "page";
-                var targetEl =  "#page" ,
+                api.currentTargetElementId = "site-editor-page-part";
+                var targetEl =  "#site-editor-page-part" ,
                     $thisValue = control.setting();
                                                                                       // && $el.length > 0
                 if( _.isUndefined( $thisValue[targetEl] ) && !_.isUndefined( data.style_props ) ){
