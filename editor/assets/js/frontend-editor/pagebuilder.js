@@ -1636,7 +1636,7 @@
 
             api.preview.send( 'pageStaticContentInfo' , api.pageStaticContentInfo);
 
-
+            api.Events.trigger( 'afterPageInfoReady' );
          /* api.preview.send( 'set_editor_current_page' , {
                 changePage  : false ,
                 page        : api.currentPageInfo

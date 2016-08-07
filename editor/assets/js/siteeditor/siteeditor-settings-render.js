@@ -5,14 +5,17 @@
     $( function() {
 
 	   $.each( api.settings.settings, function( id, data ) {
+
 			api.create( id, id, data.value, {
-				transport: data.transport,
-				previewer: api.previewer,
-                stype    : data.type || "general"  //settings type :: general type not support object values
+				transport   : data.transport,
+				previewer   : api.previewer,
+                stype       : data.type || "general" ,  //settings type :: general type not support object values
+                dirty       : !! data.dirty
 			} );
+
 		});
 
-        console.log( "---------------api.settings-----------" , api.settings )
+        console.log( "---------------api.settings-----------" , api.settings );
 
         api.styleEditorSettings = api.styleEditorSettings || [];
   	    $.each( api.settings.settings, function( id, data ) {

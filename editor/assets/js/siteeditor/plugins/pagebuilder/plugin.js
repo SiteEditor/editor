@@ -14,8 +14,8 @@
   $( function() {
       api.settings = window._sedAppEditorSettings;
       api.l10n = window._sedAppEditorControlsL10n;
-      api.postsContent = [];
-      api.pagesThemeContent = [];
+      api.postsContent = api.postsContent || {};
+      api.pagesThemeContent = api.pagesThemeContent || {};
       api.modules = {};
       api.childShortcode = {};
       api.moduleDragSync = false;
@@ -264,22 +264,107 @@
 
        });
 
+        api.previewer.bind( 'posts_content_ready', function( postsContent ) {
+
+            if( !_.isUndefined( postsContent ) ) {
+
+                var contents = $.extend( true , {} , postsContent );
+
+                $.each( contents , function ( post_id, models ) { 
+                    api.postsContent[post_id] = models;
+                });
+            }
+
+        });
+
         api.previewer.bind( 'posts_content_update', function( postsContent ) {
-            api.trigger("change");  
-            api.postsContent = postsContent;
-            //api.shortcodeCurrentPlace = "content";
+
+            api.trigger("change");
+
+            if( !_.isUndefined( postsContent ) ) {
+
+                var contents = $.extend( true , {} , postsContent );
+
+                $.each( contents , function ( post_id, models ) { 
+                    api.postsContent[post_id] = models;
+                });
+            }
             
         });
 
-        api.previewer.bind( 'pages_theme_content_update', function( pagesContent ) {
-            api.trigger("change");  
-            api.pagesThemeContent = pagesContent;
-            //api.shortcodeCurrentPlace = "theme";
+      /*var _filterDataSettings = function( currentSettingId , settings ){
 
-            //api( 'theme_content' ).set( api.pagesThemeContent[api.settings.page.id] );
+          var copySettings = $.extend( {} , true , settings );
+
+          _.each( settings , function( args , id ){
+
+              //remove Current theme_content setting id from here and add this later
+              if( id == currentSettingId ){
+                  delete copySettings[ id ];
+              }
+
+          });
+
+          return copySettings;
+
+      };
+
+      api.addFilter( "GeneralOptionsDataSettings" , function( settings ){
+
+          if( api.settings.page.type == "post" )
+              return settings;
+
+          alert( api.settings.page.type );
+
+          var currentSettingId =  "sed_" + api.settings.page.id + "_settings[theme_content]";
+
+          return _filterDataSettings( currentSettingId , settings );
+
+      });
+
+      api.addFilter( "postOptionsDataSettings" , function( settings , postType ){
+
+          if( api.settings.page.type != "post" )
+              return settings;
+
+          //alert( postType );
+
+          var currentSettingId =  "postmeta[" + postType + "][" + api.settings.page.id + "][theme_content]";
+
+          return _filterDataSettings( currentSettingId , settings );
+
+      });*/
+
+        api.previewer.bind( 'pages_theme_content_ready', function( obj ) {
+
+            if( api.settings.page.type == "post" ) {
+
+                api.currentPageThemeContentSettingId = "postmeta[" + obj.postType + "][" + api.settings.page.id + "][theme_content]";
+
+                api.settings.currentPostType = obj.postType;
+
+            }else{
+
+                api.currentPageThemeContentSettingId = "sed_" + api.settings.page.id + "_settings[theme_content]";
+
+            }
+
+            api.pagesThemeContent = obj.content;
+
+            api.Events.trigger( "sedAfterThemeContentReady" );
+
+        });
+
+        api.previewer.bind( 'pages_theme_content_update', function( pagesContent ) {
+
+            api.trigger("change");
+
+            api.pagesThemeContent = pagesContent;
 
             api.Events.trigger( "sedAfterThemeContentUpdate" );
+
         });
+
 
         api.previewer.bind( 'set_editor_current_page', function( obj ) {
 

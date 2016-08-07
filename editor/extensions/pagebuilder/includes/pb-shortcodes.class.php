@@ -40,6 +40,9 @@ class PBShortcodeClass{
 
         add_shortcode( $this->shortcode->name , array( $this , 'shortcode_render') );
 
+        if( !in_array( $this->shortcode->name , PageBuilderApplication::$shortcodes_tagnames ) )
+            array_push( PageBuilderApplication::$shortcodes_tagnames , $this->shortcode->name );
+
         add_action( 'sed_shortcode_register', array( $this , 'register_module_shortcode' ), 10   );
         //add_action( 'sed_ajax_pb', array( $this , 'ajax_register_shortcode' ), 10 , 1  );
         add_action( 'sed_contextmenu_init', array( $this , 'add_contextmenu' ) , 10 );

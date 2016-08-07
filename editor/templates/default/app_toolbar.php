@@ -75,6 +75,11 @@ $tabs = current_type_elemans($current_type , $tabs);
           <img src="<?php echo SED_EDITOR_ASSETS_URL;?>/images/logo.png" alt="logo" style="width: 25px; margin: 4px 0 0 0;" />
           </a>
         </li>
+        <!--<li class="sed-close-editor">
+            <a class="close-editor" href="<?php //echo esc_url( SED()->editor->manager->get_return_url() ); ?>">
+                <span class="screen-reader-text"><?php //_e( 'Cancel' ); ?></span>
+            </a>
+        </li>-->
         <!--
         <li class=" redo-site-editor">
           <a  href="#">

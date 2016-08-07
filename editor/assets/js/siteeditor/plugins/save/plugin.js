@@ -9,107 +9,100 @@
 /*global siteEditor:true */
 (function( exports, $ ){
 
-  var api = sedApp.editor;
+    var api = sedApp.editor;
 
-  api.postsContent = {};
+    api.postsContent = api.postsContent || {};
 
-  $( function() {
+    $( function() {
 
-        var topFocus,
-			body = $( document.body );
+        var body = $( document.body );
 
 		$.extend( api.previewer , {
-		  save : function() {
-            //for sub_theme module-----
-            api.Events.trigger( "beforeSave" );
+            save : function() {
+                //for sub_theme module-----
+                api.Events.trigger( "beforeSave" );
 
-            var appPagesCustomized      = {} ,
-                appPostsContent         = {} ,
-                appPagesTypes           = {} ,
-                appPagesStockShortcodes = {} ;
-
-            $.each( api.previewerQueries , function( url , query){
-                appPagesCustomized[query.sed_page_id]   = query.sed_page_customized;
-
-                $.each( query.sed_posts_content , function( post_id , models ){
-                    appPostsContent[post_id] = models;
-                });
-
-                appPagesTypes[query.sed_page_id]        = query.sed_page_type;
-            });
-
-            $.each( api.postsContent , function( post_id , models ){
-                appPostsContent[post_id] = models;
-            });
-
-            appPagesTypes[api.settings.page.id] = api.settings.page.type;
-
-            var self  = this,
-            query = {
-                action                  : 'customize_save',
-            	sed_app_editor          : 'on',
-            	theme                   : api.settings.theme.stylesheet,
-            	sed_page_customized     : JSON.stringify( api.get() ),
-                nonce                   :  this.nonce.save ,
-                sed_app_editor          : "save" ,
-                sed_page_id             : api.settings.page.id ,
-                sed_page_type           : api.settings.page.type ,
-                other_pages_customized  : JSON.stringify( appPagesCustomized ) ,
-                sed_pages_types         : JSON.stringify( appPagesTypes ) ,
-                sed_posts_content       : JSON.stringify( appPostsContent ) ,
-                //sed_pages_theme_content : JSON.stringify( api.pagesThemeContent ) ,
-            },
-            processing = api.state( 'processing' ),
-            submitWhenDoneProcessing,
-            submit;
-
-            body.addClass( 'saving' );
-            $('#save').find("span.el_txt").text( api.l10n.saving );
-
-            submit = function () {
-                var request = $.post( SEDAJAX.url , query );
-
-                api.trigger( 'save', request );
-
-                request.always( function () {
-                    body.removeClass( 'saving' );
+                var dirtyCustomized = {};
+                api.each( function ( value, key ) {
+                    if ( value._dirty ) {
+                        dirtyCustomized[ key ] = value();
+                    }
                 } );
 
-                request.done( function( response ) {  //alert(response);
-                    // Check if the user is logged out.
-                    if ( '0' === response ) {
-                        self.preview.iframe.hide();
-                        self.login().done( function() {
-                            self.save();
-                            self.preview.iframe.show();
+                var self  = this,
+                query = {
+                    //sed_app_editor          : 'on',
+                    action                  : 'customize_save',
+                    sed_app_editor          : 'save' ,
+                    theme                   : api.settings.theme.stylesheet,
+                    sed_page_customized     : JSON.stringify( dirtyCustomized ),
+                    sed_posts_content       : JSON.stringify( api.postsContent || {} ) ,
+                    nonce                   : this.nonce.save
+                    //sed_pages_theme_content : JSON.stringify( api.pagesThemeContent ) ,
+                },
+                processing = api.state( 'processing' ),
+                submitWhenDoneProcessing,
+                submit;
+
+                body.addClass( 'saving' );
+                $('#save').find("span.el_txt").text( api.l10n.saving );
+
+                submit = function () {
+
+
+                    query = api.applyFilters( "sedSaveQueryFilter" , query );
+
+                    var request = $.post( SEDAJAX.url , query );
+
+                    api.trigger( 'save', request );
+
+                    request.always( function () {
+                        body.removeClass( 'saving' );
+                    } );
+
+                    request.done( function( response ) {  //alert(response);
+                        // Check if the user is logged out.
+                        if ( '0' === response ) {
+                            self.preview.iframe.hide();
+                            self.login().done( function() {
+                                self.save();
+                                self.preview.iframe.show();
+                            } );
+                            return;
+                        }
+
+                        // Check for cheaters.
+                        if ( '-1' === response ) {
+                            self.cheatin();
+                            return;
+                        }
+
+                        // Clear setting dirty states
+                        api.each( function ( value ) {
+                            value._dirty = false;
                         } );
-                        return;
-                    }
 
-                    // Check for cheaters.
-                    if ( '-1' === response ) {
-                        self.cheatin();
-                        return;
-                    }
+                        api.previewer.send( 'saved', response );
 
-                    api.trigger( 'saved' );
-                } );
-            };
+                        api.trigger( 'saved', response );
 
-            if ( 0 === processing() ) {
-                submit();
-            } else {
-                submitWhenDoneProcessing = function () {
-                    if ( 0 === processing() ) {
-                        api.state.unbind( 'change', submitWhenDoneProcessing );
-                        submit();
-                    }
+                    } );
                 };
 
-                api.state.bind( 'change', submitWhenDoneProcessing );
-            }
+                if ( 0 === processing() ) {
+                    submit();
+                } else {
+                    submitWhenDoneProcessing = function () {
+                        if ( 0 === processing() ) {
+                            api.state.unbind( 'change', submitWhenDoneProcessing );
+                            submit();
+                        }
+                    };
 
-		 }
+                    api.state.bind( 'change', submitWhenDoneProcessing );
+                }
+
+            }
         });
 
 		// Save and activated states

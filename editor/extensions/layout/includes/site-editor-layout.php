@@ -2,14 +2,30 @@
 
 
 if(!class_exists('SiteEditorLayoutManager')){
+
     /**
      * Class SiteEditorLayoutManager
      */
     class SiteEditorLayoutManager{
 
+        /**
+         * @var SedThemeContentSetting
+         */
+        public $page_theme_content_settings;
+
+        /**
+         * @var string
+         */
         public $scope_control_id;
 
+        /**
+         * SiteEditorLayoutManager constructor.
+         */
         function __construct( ) {
+
+            require_once dirname( __FILE__ ) . '/theme-content-setting.class.php';
+
+            $this->page_theme_content_settings = new SedThemeContentSetting();
 
             add_filter('sed_enqueue_scripts' , array( $this, 'add_js_plugin' ) );
 
@@ -32,7 +48,8 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             add_action( "sed_editor_init" , array( $this, "add_toolbar_elements" ) );
 
-            //add_filter( "sed_addon_settings", array($this,'icon_settings'));
+            add_action( 'sed-app-save-data' , array( $this , 'save_check_main_content' ) , 10 , 2 );
+
 		}
 
         function add_layout_options(){
@@ -282,6 +299,7 @@ if(!class_exists('SiteEditorLayoutManager')){
             $I18n['remove_current_layout']      =  __("you can not remove current page layout" , "site-editor");
             $I18n['layout_not_exist']           =  __("this layout not exist." , "site-editor");
             $I18n['invalid_layout']             =  __("The item is not valid layout." , "site-editor");
+            $I18n['main_row_content']           =  __("Content" , "site-editor");
 
             return $I18n;
         }
@@ -291,9 +309,10 @@ if(!class_exists('SiteEditorLayoutManager')){
         }
 
         function print_wp_footer(){
+            $page_layout = self::get_default_page_layout();  var_dump( $page_layout ); var_dump( "-------------test--------------------" );
           ?>
             <script type="text/javascript">
-                var _sedAppDefaultPageLayout = "<?php echo self::get_default_page_layout();?>";
+                var _sedAppDefaultPageLayout = "<?php echo $page_layout;?>";
                 var _sedAppCurrentLayoutGroup = "<?php echo $this->get_current_layout_group();?>";
             </script>
           <?php
@@ -414,8 +433,154 @@ if(!class_exists('SiteEditorLayoutManager')){
             return $default_pages_layouts;
         }
 
+
+        public static function check_exist_main_content_model( $page_layout = '' ){
+
+            if( empty( $page_layout ) ) {
+                
+                $page_layout = self::get_page_layout();
+            }
+
+            $sed_layout_models = get_option( 'sed_layouts_models' );
+
+            $has_main_row = false;
+            $sed_last_theme_id = get_option( 'sed_last_theme_id' );
+            $main_row_theme_id = '';
+
+            if( $sed_layout_models !== false && is_array( $sed_layout_models ) && isset( $sed_layout_models[$page_layout] ) ){
+
+                foreach( $sed_layout_models[$page_layout] AS $key => $model ){
+                    if( isset($model['main_row']) ){
+                        $has_main_row = true;
+                        $main_row_theme_id = $model['theme_id'];
+                    }
+                }
+
+            }
+
+            $sed_layouts_content = get_option( 'sed_layouts_content' );
+
+            if( $has_main_row === false ) {
+                if ($sed_last_theme_id !== false) {
+                    $sed_last_theme_id += 1;
+                    update_option('sed_last_theme_id', $sed_last_theme_id);
+                } else {
+                    $sed_last_theme_id = 1;
+                    $deprecated = null;
+                    $autoload = 'yes';
+                    add_option('sed_last_theme_id', $sed_last_theme_id , $deprecated, $autoload);
+                }
+
+                $theme_id = "theme_id_" . $sed_last_theme_id;
+
+                $new_model = array(
+                    'order'     => 0,
+                    'theme_id'  => $theme_id,
+                    'main_row'  => true,
+                    'hidden'    => array(),
+                    'exclude'   => array(),
+                    'title'     => __("Content", "site-editor")
+                );
+
+                $main_row_theme_id = $theme_id;
+
+                $sed_newlayout_models = $sed_layout_models;
+
+                if (!is_array($sed_newlayout_models)) {
+                    $sed_newlayout_models = array();
+                }
+
+                if (!isset($sed_newlayout_models[$page_layout])) {
+                    $sed_newlayout_models[$page_layout] = array();
+                }
+
+                array_push($sed_newlayout_models[$page_layout], $new_model);
+
+                if ($sed_layout_models === false) {
+                    $deprecated = null;
+                    $autoload = 'yes';
+                    add_option('sed_layouts_models', $sed_newlayout_models, $deprecated, $autoload);
+                } else {
+                    update_option('sed_layouts_models', $sed_newlayout_models);
+                }
+            }
+
+            if( !is_array( $sed_layouts_content ) || ! isset( $sed_layouts_content[ $main_row_theme_id ] ) ){
+
+                $default_layout = '[sed_row_outer_outer class="module_sed_content_layout_contextmenu_container" sed_theme_id="' . $main_row_theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="boxed"]
+                    [sed_module_outer_outer class="module_sed_content_layout_contextmenu_container" shortcode_tag="sed_module"]
+                        [sed_content_layout layout="without-sidebar" title="columns"]
+                            [sed_content_layout_column width="100%" sed_main_content="yes" parent_module="content-layout"]
+                                {{content}}
+                            [/sed_content_layout_column]
+                        [/sed_content_layout]
+                    [/sed_module_outer_outer]
+                [/sed_row_outer_outer]';
+
+                $new_sed_layouts_content = $sed_layouts_content;
+
+                if( !is_array( $new_sed_layouts_content ) ){
+                    $new_sed_layouts_content = array();
+                }
+
+                $new_sed_layouts_content[$main_row_theme_id] = $default_layout;
+
+                if( $sed_layouts_content === false ){
+                    $deprecated = null;
+                    $autoload = 'yes';
+                    add_option( 'sed_layouts_content' , $new_sed_layouts_content , $deprecated, $autoload );
+                }else{
+                    update_option( 'sed_layouts_content' , $new_sed_layouts_content );
+                }
+
+                return false;
+
+            }
+
+            return true;
+
+        }
+
+        function save_check_main_content( $sed_page_customized , $all_posts_content ){
+
+            if( isset( $sed_page_customized['sed_layouts_models'] ) ) {
+
+                $value = $sed_page_customized['sed_layouts_models'] ;
+
+                if (is_array($value) && !empty($value)) {
+
+                    foreach ($value AS $layout => $models) {
+
+                        self::check_exist_main_content_model($layout);
+
+                    }
+
+                }
+            }
+
+        }
+
         function register_settings( ){
             $settings = array();
+
+            $default_layouts = array(
+                "archive"   =>  array(
+                    "title"         =>  __("Archive" , "site-editor")  ,
+                ),
+
+                "default"   =>  array(
+                    "title"         =>  __("Default" , "site-editor") ,
+                ),
+
+                "post"      =>  array(
+                    "title"         =>  __("Single Post" , "site-editor") ,
+                ),
+
+                "page"      =>  array(
+                    "title"         =>  __("Page" , "site-editor") ,
+                ),
+            );
+
 
             if ( get_option( 'sed_layouts_settings' ) === false ) {
 
@@ -423,25 +588,12 @@ if(!class_exists('SiteEditorLayoutManager')){
                 $deprecated = null;
                 $autoload = 'yes';
 
-                $default_layouts = array(
-                    "archive"   =>  array(
-                        "title"         =>  __("Archive" , "site-editor")  ,
-                    ),
-
-                    "default"   =>  array(
-                        "title"         =>  __("Default" , "site-editor") ,
-                    ),
-
-                    "post"      =>  array(
-                        "title"         =>  __("Single Post" , "site-editor") ,
-                    ),
-
-                    "page"      =>  array(
-                        "title"         =>  __("Page" , "site-editor") ,
-                    ),
-                );
-
                 add_option( 'sed_layouts_settings' , $default_layouts , $deprecated, $autoload );
+
+                //@TODO call this codes after install for prevent error in front end in first time
+                foreach( $default_layouts AS $layout => $layout_settings ) {
+                    self::check_exist_main_content_model( $layout );
+                }
             }
 
             $settings['sed_layouts_settings'] = array(
@@ -560,6 +712,23 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'transport'      => 'postMessage'
     		);
 
+            if ( get_option( 'sed_layouts_removed_rows' ) === false ) {
+
+                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+                $deprecated = null;
+                $autoload = 'yes';
+                add_option( 'sed_layouts_removed_rows' , array() , $deprecated, $autoload );
+            }
+
+            update_option( 'sed_pages_layouts' , $current_pages_layouts );
+
+            $settings['sed_layouts_removed_rows'] = array(
+                'default'        => get_option( 'sed_layouts_removed_rows' ),
+                'capability'     => 'manage_options',
+                'option_type'    => 'option' ,
+                'transport'      => 'postMessage'
+            );
+
 
             if ( get_option( 'sed_last_theme_id' ) === false ) {
 
@@ -583,25 +752,13 @@ if(!class_exists('SiteEditorLayoutManager')){
                 $deprecated = null;
                 $autoload = 'yes';
                 add_option( 'sed_layouts_content' , array() , $deprecated, $autoload );
+
             }
 
+            //register sed layouts content settings
             require_once dirname( __FILE__ ) . '/content-layout-setting.php';
 
-            SED()->editor->manager->add_setting( new SedLayoutContentSetting( SED()->editor->manager , 'sed_layouts_content' , array(
-                    'default'        => get_option( 'sed_layouts_content' ),
-                    'capability'     => 'manage_options',
-                    'option_type'    => 'option' ,
-                    'transport'      => 'postMessage'
-                  )
-                )
-            );
-
-            /*$settings['sed_layouts_content'] = array(
-    			'default'        => get_option( 'sed_layouts_content' ),
-    			'capability'     => 'manage_options',
-    			'option_type'    => 'option' ,
-                'transport'      => 'postMessage'
-    		);*/
+            new SedLayoutContentSetting();
 
             $settings['page_layout'] = array(
     			'default'        => '' ,

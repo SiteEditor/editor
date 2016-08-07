@@ -6,7 +6,7 @@
  *
  * @package SiteEditor
  * @subpackage Settings
- * @since 3.4.0
+ * @since 1.0.0
  */
 class SedAppSettings{
 	/**
@@ -31,7 +31,7 @@ class SedAppSettings{
 	 * @access public
 	 * @var string
 	 */
-	public $option_type = 'base';  //option || post_meta || post || theme_mod || custom || base
+	public $option_type = 'base';  //option || post_meta || post || theme_mod || custom || base || helper
 
 	/**
 	 * Capability required to edit this setting.
@@ -45,8 +45,8 @@ class SedAppSettings{
 	 *
 	 * @access public
 	 * @var string
-
-	public $theme_supports  = ''; */
+	 */
+	public $theme_supports  = '';
 	public $default         = '';
 	public $transport       = 'refresh';
 
@@ -58,17 +58,52 @@ class SedAppSettings{
 	public $sanitize_callback    = '';
 	public $sanitize_js_callback = '';
 
+	/**
+	 * Whether or not the setting is initially dirty when created.
+	 *
+	 * This is used to ensure that a setting will be sent from the pane to the
+	 * preview when loading the Customizer. Normally a setting only is synced to
+	 * the preview if it has been changed. This allows the setting to be sent
+	 * from the start.
+	 *
+	 * @since 4.2.0
+	 * @access public
+	 * @var bool
+	 */
+	public $dirty = false;
+
+	/**
+	 * @var array
+	 */
 	protected $id_data = array();
 
 	/**
-	 * Cached and sanitized $_POST value for the setting.
+	 * Whether or not preview() was called.
 	 *
-	 * @access private
-	 * @var mixed
+	 * @since 4.4.0
+	 * @access protected
+	 * @var bool
 	 */
-	private $_post_value;
+	protected $is_previewed = false;
 
-    private $_base_value;
+    /**
+     * Cache of multidimensional values to improve performance.
+     *
+     * @since 4.4.0
+     * @access protected
+     * @var array
+     * @static
+     */
+    protected static $aggregated_multidimensionals = array();
+
+    /**
+     * Whether the multidimensional setting is aggregated.
+     *
+     * @since 4.4.0
+     * @access protected
+     * @var bool
+     */
+    protected $is_multidimensional_aggregated = false;
 
 	/**
 	 * Constructor.
@@ -108,62 +143,189 @@ class SedAppSettings{
 		if ( $this->sanitize_js_callback )
 			add_filter( "sed_app_sanitize_js_{$this->id}", $this->sanitize_js_callback, 10, 2 );
 
-		return $this;
+        if ( 'option' === $this->option_type || 'theme_mod' === $this->option_type ) {
+            // Other setting types can opt-in to aggregate multidimensional explicitly.
+            $this->aggregate_multidimensional();
+
+            // Allow option settings to indicate whether they should be autoloaded.
+            if ( 'option' === $this->option_type && isset( $args['autoload'] ) ) {
+                self::$aggregated_multidimensionals[ $this->option_type ][ $this->id_data['base'] ]['autoload'] = $args['autoload'];
+            }
+        }
+
 	}
+
+
+    /**
+     * Get parsed ID data for multidimensional setting.
+     *
+     * @since 4.4.0
+     * @access public
+     *
+     * @return array {
+     *     ID data for multidimensional setting.
+     *
+     *     @type string $base ID base
+     *     @type array  $keys Keys for multidimensional array.
+     * }
+     */
+    final public function id_data() {
+        return $this->id_data;
+    }
+
+    /**
+     * Set up the setting for aggregated multidimensional values.
+     *
+     * When a multidimensional setting gets aggregated, all of its preview and update
+     * calls get combined into one call, greatly improving performance.
+     *
+     * @since 4.4.0
+     * @access protected
+     */
+    protected function aggregate_multidimensional() {
+        $id_base = $this->id_data['base'];
+        if ( ! isset( self::$aggregated_multidimensionals[ $this->option_type ] ) ) {
+            self::$aggregated_multidimensionals[ $this->option_type ] = array();
+        }
+        if ( ! isset( self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ] ) ) {
+            self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ] = array(
+                'previewed_instances'       => array(), // Calling preview() will add the $setting to the array.
+                'preview_applied_instances' => array(), // Flags for which settings have had their values applied.
+                'root_value'                => $this->get_root_value( array() ), // Root value for initial state, manipulated by preview and update calls.
+            );
+        }
+
+        if ( ! empty( $this->id_data['keys'] ) ) {
+            // Note the preview-applied flag is cleared at priority 9 to ensure it is cleared before a deferred-preview runs.
+            add_action( "sed_app_post_value_set_{$this->id}", array( $this, '_clear_aggregated_multidimensional_preview_applied_flag' ), 9 );
+            $this->is_multidimensional_aggregated = true;
+        }
+    }
+
+    /**
+     * Reset `$aggregated_multidimensionals` static variable.
+     *
+     * This is intended only for use by unit tests.
+     *
+     * @since 4.5.0
+     * @access public
+     * @ignore
+     */
+    static public function reset_aggregated_multidimensionals() {
+        self::$aggregated_multidimensionals = array();
+    }
+
+    /**
+     * The ID for the current site when the preview() method was called.
+     *
+     * @since 4.2.0
+     * @access protected
+     * @var int
+     */
+    protected $_previewed_blog_id;
+
+
+    /**
+     * Original non-previewed value stored by the preview method.
+     *
+     * @see WP_Customize_Setting::preview()
+     * @since 4.1.1
+     * @var mixed
+     */
+    protected $_original_value;
+
+
+    /**
+     * Return true if the current site is not the same as the previewed site.
+     *
+     * @since 4.2.0
+     * @access public
+     *
+     * @return bool If preview() has been called.
+     */
+    public function is_current_blog_previewed() {
+        if ( ! isset( $this->_previewed_blog_id ) ) {
+            return false;
+        }
+        return ( get_current_blog_id() === $this->_previewed_blog_id );
+    }
+
 
 	/**
 	 * Handle previewing the setting.
 	 *
 	 * @since 3.4.0
 	 */
-	public function preview() {  
+	public function preview() {
+        if ( ! isset( $this->_previewed_blog_id ) ) {
+            $this->_previewed_blog_id = get_current_blog_id();
+        }
+
+        // Prevent re-previewing an already-previewed setting.
+        if ( $this->is_previewed ) {
+            return true;
+        }
+
+        $id_base = $this->id_data['base'];
+        $is_multidimensional = ! empty( $this->id_data['keys'] );
+        $multidimensional_filter = array( $this, '_multidimensional_preview_filter' );
+
+        /*
+         * Check if the setting has a pre-existing value (an isset check),
+         * and if doesn't have any incoming post value. If both checks are true,
+         * then the preview short-circuits because there is nothing that needs
+         * to be previewed.
+         */
+        $undefined = new stdClass();
+        $needs_preview = ( $undefined !== $this->post_value( $undefined ) );
+        $value = null;
+
+        // Since no post value was defined, check if we have an initial value set.
+        if ( ! $needs_preview ) {
+            if ( $this->is_multidimensional_aggregated ) {
+                $root = self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['root_value'];
+                $value = $this->multidimensional_get( $root, $this->id_data['keys'], $undefined );
+            } else {
+                $default = $this->default;
+                $this->default = $undefined; // Temporarily set default to undefined so we can detect if existing value is set.
+                $value = $this->value();
+                $this->default = $default;
+            }
+            $needs_preview = ( $undefined === $value ); // Because the default needs to be supplied.
+        }
+
+        // If the setting does not need previewing now, defer to when it has a value to preview.
+        if ( ! $needs_preview ) {
+            if ( ! has_action( "sed_app_post_value_set_{$this->id}", array( $this, 'preview' ) ) ) {
+                add_action( "sed_app_post_value_set_{$this->id}", array( $this, 'preview' ) );
+            }
+            return false;
+        }
 
 		switch( $this->option_type ) {
-			case 'theme_mod' :
-				add_filter( 'theme_mod_' . $this->id_data[ 'base' ], array( $this, '_preview_filter' ) );
-				break;
-			case 'option' :
-				if ( empty( $this->id_data[ 'keys' ] ) )
-					add_filter( 'pre_option_' . $this->id_data[ 'base' ], array( $this, '_preview_filter' ) );
-				else {
-					add_filter( 'option_' . $this->id_data[ 'base' ], array( $this, '_preview_filter' ) );
-					add_filter( 'default_option_' . $this->id_data[ 'base' ], array( $this, '_preview_filter' ) );
-				}
-				break;
-            case 'base' :
-
-                $_base_values = json_decode( wp_unslash( $_POST['sed_page_base_settings'] ), true );
-
-                if( !empty( $_base_values ) && is_array( $_base_values ) ) {
-                    $sed_page_ids = array_keys($_base_values);
-                    $is_once = false;
-
-                    foreach ($sed_page_ids AS $sed_page_id) {
-                        $is_post = false;
-
-                        if ( preg_match( '/(\d+)/', $sed_page_id , $matches ) && ( $post_id = (int) $matches[1] ) && !is_null( get_post( $post_id ) ) ) {
-                            $is_post = true;
-                        }
-
-                        if( $is_post === true && $is_once === false ){
-                            add_filter('get_post_metadata', array($this, '_preview_base_meta_settings'), 1, 4);
-                            $is_once = true;
-                        } else if( $is_post !== true && $sed_page_id != 0 ) {
-                            $option_name = 'sed_' . $sed_page_id . '_settings';
-                            add_filter('option_' . $option_name, array($this, '_preview_base_option_settings'));
-                            add_filter('default_option_' . $option_name, array($this, '_preview_base_option_settings'));
-                        }
-
+            case 'theme_mod' :
+                if ( ! $is_multidimensional ) {
+                    add_filter( "theme_mod_{$id_base}", array( $this, '_preview_filter' ) );
+                } else {
+                    if ( empty( self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['previewed_instances'] ) ) {
+                        // Only add this filter once for this ID base.
+                        add_filter( "theme_mod_{$id_base}", $multidimensional_filter );
                     }
+                    self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['previewed_instances'][ $this->id ] = $this;
                 }
-
                 break;
-            /*case 'post_meta' :
-                add_filter( "get_". $this->id_data[ 'base' ] ."_metadata", array( $this, '_preview_filter' ) );
+            case 'option' :
+                if ( ! $is_multidimensional ) {
+                    add_filter( "pre_option_{$id_base}", array( $this, '_preview_filter' ) );
+                } else {
+                    if ( empty( self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['previewed_instances'] ) ) {
+                        // Only add these filters once for this ID base.
+                        add_filter( "option_{$id_base}", $multidimensional_filter );
+                        add_filter( "default_option_{$id_base}", $multidimensional_filter );
+                    }
+                    self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['previewed_instances'][ $this->id ] = $this;
+                }
                 break;
-            case 'post' :
-                //add_filter( "get_". $this->id_data[ 'base' ] ."_metadata", array( $this, '_preview_filter' ) );
-                break; */
 			default :
 
 				/**
@@ -190,7 +352,28 @@ class SedAppSettings{
 				 */
 				do_action( "sed_app_preview_{$this->option_type}", $this );
 		}
+
+        $this->is_previewed = true;
+
+        return true;
+
 	}
+
+    /**
+     * Clear out the previewed-applied flag for a multidimensional-aggregated value whenever its post value is updated.
+     *
+     * This ensures that the new value will get sanitized and used the next time
+     * that `WP_Customize_Setting::_multidimensional_preview_filter()`
+     * is called for this setting.
+     *
+     * @since 4.4.0
+     * @access private
+     * @see WP_Customize_Manager::set_post_value()
+     * @see WP_Customize_Setting::_multidimensional_preview_filter()
+     */
+    final public function _clear_aggregated_multidimensional_preview_applied_flag() {
+        unset( self::$aggregated_multidimensionals[ $this->option_type ][ $this->id_data['base'] ]['preview_applied_instances'][ $this->id ] );
+    }
 
 	/**
 	 * Callback function to filter the theme mods and options.
@@ -202,47 +385,70 @@ class SedAppSettings{
 	 * @return mixed New or old value.
 	 */
 	public function _preview_filter( $original ) {
-		return $this->multidimensional_replace( $original, $this->id_data[ 'keys' ], $this->post_value() );
+        if ( ! $this->is_current_blog_previewed() ) {
+            return $original;
+        }
+
+        $undefined = new stdClass(); // Symbol hack.
+        $post_value = $this->post_value( $undefined );
+        if ( $undefined !== $post_value ) {
+            $value = $post_value;
+        } else {
+            /*
+             * Note that we don't use $original here because preview() will
+             * not add the filter in the first place if it has an initial value
+             * and there is no post value.
+             */
+            $value = $this->default;
+        }
+        return $value;
 	}
 
-    public function _preview_base_meta_settings( $original_meta_value, $post_id, $meta_key, $single ) {
 
-        if ( isset( $meta_key ) && $meta_key == 'sed_post_settings' ) {
-
-            $value = $this->base_value( $this->default , $post_id );
-
-            if ( ! isset( $value ) ){
-                return $original_meta_value;
-            }else{
-                $meta_value = ( !empty( $original_meta_value ) && is_array( $original_meta_value ) ) ? $original_meta_value : array();
-
-                if( $single )
-                    $meta_value[0][ $this->id ] = $value;
-                else
-                    $meta_value[ $this->id ] = $value;
-
-                return $single ? $meta_value : array( $meta_value );
-            }
-        }
-
-    }
-
-    public function _preview_base_option_settings( $original ){
-
-        global $sed_apps;
-        $sed_page_id = $sed_apps->framework->sed_page_id;
-        $value = $this->base_value( $this->default , $sed_page_id );
-
-        if ( ! isset( $value ) ){
+    /**
+     * Callback function to filter multidimensional theme mods and options.
+     *
+     * For all multidimensional settings of a given type, the preview filter for
+     * the first setting previewed will be used to apply the values for the others.
+     *
+     * @since 4.4.0
+     * @access private
+     *
+     * @see WP_Customize_Setting::$aggregated_multidimensionals
+     * @param mixed $original Original root value.
+     * @return mixed New or old value.
+     */
+    final public function _multidimensional_preview_filter( $original ) {
+        if ( ! $this->is_current_blog_previewed() ) {
             return $original;
-        }else{
-            $current_page_settings = $original;
-            $current_page_settings[ $this->id ] = $value;
-            return $current_page_settings;
         }
 
-    }
+        $id_base = $this->id_data['base'];
 
+        // If no settings have been previewed yet (which should not be the case, since $this is), just pass through the original value.
+        if ( empty( self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['previewed_instances'] ) ) {
+            return $original;
+        }
+
+        foreach ( self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['previewed_instances'] as $previewed_setting ) {
+            // Skip applying previewed value for any settings that have already been applied.
+            if ( ! empty( self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['preview_applied_instances'][ $previewed_setting->id ] ) ) {
+                continue;
+            }
+
+            // Do the replacements of the posted/default sub value into the root value.
+            $value = $previewed_setting->post_value( $previewed_setting->default );
+            $root = self::$aggregated_multidimensionals[ $previewed_setting->option_type ][ $id_base ]['root_value'];
+            $root = $previewed_setting->multidimensional_replace( $root, $previewed_setting->id_data['keys'], $value );
+            self::$aggregated_multidimensionals[ $previewed_setting->option_type ][ $id_base ]['root_value'] = $root;
+
+            // Mark this setting having been applied so that it will be skipped when the filter is called again.
+            self::$aggregated_multidimensionals[ $previewed_setting->option_type ][ $id_base ]['preview_applied_instances'][ $previewed_setting->id ] = true;
+        }
+
+        return self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['root_value'];
+    }
+    
 	/**
 	 * Check user capabilities and theme supports, and then save
 	 * the value of the setting.
@@ -271,67 +477,103 @@ class SedAppSettings{
 
         $value = apply_filters( 'sed_app_save_' . $this->id_data[ 'base' ] , $value );
 
+        $value = apply_filters( 'sed_app_save_setting' , $value , $this );
+
 		$this->update( $value );
 	}
 
-	/**
-	 * Fetch and sanitize the $_POST value for the setting.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param mixed $default A default value which is used as a fallback. Default is null.
-	 * @return mixed The default value on failure, otherwise the sanitized value.
-	 */
-	public final function post_value( $default = null ) {
-		// Check for a cached value
-		if ( isset( $this->_post_value ) )
-		   	return $this->_post_value;
-
-
-		// Call the manager for the post value
-		$result = $this->manager->post_value( $this );
-
-		if ( isset( $result ) )
-			return $this->_post_value = $result;
-		else
-			return $default;
-	}
-
-    public final function base_value( $default = null , $sed_page_id ) {
-        // Check for a cached value
-        if ( isset( $this->_base_value ) )
-            return $this->_base_value;
-
-        // Call the manager for the post value
-        $result = $this->manager->base_value( $this , $sed_page_id );
-
-        if ( isset( $result ) )
-            return $this->_base_value = $result;
-        else
-            return $default;
+    /**
+     * Fetch and sanitize the $_POST value for the setting.
+     *
+     * @since 3.4.0
+     *
+     * @param mixed $default A default value which is used as a fallback. Default is null.
+     * @return mixed The default value on failure, otherwise the sanitized value.
+     */
+    final public function post_value( $default = null ) {
+        return $this->manager->post_value( $this, $default );
     }
 
-	/**
-	 * Sanitize an input.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param mixed $value The value to sanitize.
-	 * @return mixed Null if an input isn't valid, otherwise the sanitized value.
-	 */
-	public function sanitize( $value ) {
-		$value = wp_unslash( $value );
+    /**
+     * Sanitize an input.
+     *
+     * @since 3.4.0
+     *
+     * @param string|array $value The value to sanitize.
+     * @return string|array|null Null if an input isn't valid, otherwise the sanitized value.
+     */
+    public function sanitize( $value ) {
 
-		/**
-		 * Filter a Customize setting value in un-slashed form.
-		 *
-		 * @since 3.4.0
-		 *
-		 * @param mixed                $value Value of the setting.
-		 * @param SedAppSettings $this  SedAppSettings instance.
-		 */
-		return apply_filters( "sed_app_sanitize_{$this->id}", $value, $this );
-	}
+        /**
+         * Filter a Customize setting value in un-slashed form.
+         *
+         * @since 3.4.0
+         *
+         * @param mixed                $value Value of the setting.
+         * @param WP_Customize_Setting $this  WP_Customize_Setting instance.
+         */
+
+        $value = apply_filters( "sed_app_sanitize_setting", $value, $this );
+
+        return apply_filters( "sed_app_sanitize_{$this->id}", $value, $this );
+    }
+
+
+    /**
+     * Get the root value for a setting, especially for multidimensional ones.
+     *
+     * @since 4.4.0
+     * @access protected
+     *
+     * @param mixed $default Value to return if root does not exist.
+     * @return mixed
+     */
+    protected function get_root_value( $default = null ) {
+        $id_base = $this->id_data['base'];
+        if ( 'option' === $this->option_type ) {
+            return get_option( $id_base, $default );
+        } else if ( 'theme_mod' ) {
+            return get_theme_mod( $id_base, $default );
+        } else {
+            /*
+             * Any WP_Customize_Setting subclass implementing aggregate multidimensional
+             * will need to override this method to obtain the data from the appropriate
+             * location.
+             */
+            return $default;
+        }
+    }
+
+
+    /**
+     * Set the root value for a setting, especially for multidimensional ones.
+     *
+     * @since 4.4.0
+     * @access protected
+     *
+     * @param mixed $value Value to set as root of multidimensional setting.
+     * @return bool Whether the multidimensional root was updated successfully.
+     */
+    protected function set_root_value( $value ) {
+        $id_base = $this->id_data['base'];
+        if ( 'option' === $this->option_type ) {
+            $autoload = true;
+            if ( isset( self::$aggregated_multidimensionals[ $this->option_type ][ $this->id_data['base'] ]['autoload'] ) ) {
+                $autoload = self::$aggregated_multidimensionals[ $this->option_type ][ $this->id_data['base'] ]['autoload'];
+            }
+            return update_option( $id_base, $value, $autoload );
+        } else if ( 'theme_mod' ) {
+            set_theme_mod( $id_base, $value );
+            return true;
+        } else {
+            /*
+             * Any WP_Customize_Setting subclass implementing aggregate multidimensional
+             * will need to override this method to obtain the data from the appropriate
+             * location.
+             */
+            return false;
+        }
+    }
 
 	/**
 	 * Save the value of the setting, using the related API.
@@ -342,69 +584,55 @@ class SedAppSettings{
 	 * @return mixed The result of saving the value.
 	 */
 	protected function update( $value ) {
-		switch( $this->option_type ) {
-			case 'theme_mod' :
-				return $this->_update_theme_mod( $value );
 
-			case 'option' :
-				return $this->_update_option( $value );
+        $id_base = $this->id_data['base'];
+        if ( 'option' === $this->option_type || 'theme_mod' === $this->option_type ) {
+            if ( ! $this->is_multidimensional_aggregated ) {
+                return $this->set_root_value( $value );
+            } else {
+                $root = self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['root_value'];
+                $root = $this->multidimensional_replace( $root, $this->id_data['keys'], $value );
+                self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['root_value'] = $root;
+                return $this->set_root_value( $root );
+            }
+        } else {
+            /**
+             * Fires when the {@see WP_Customize_Setting::update()} method is called for settings
+             * not handled as theme_mods or options.
+             *
+             * The dynamic portion of the hook name, `$this->option_type`, refers to the type of setting.
+             *
+             * @since 3.4.0
+             *
+             * @param mixed                $value Value of the setting.
+             * @param WP_Customize_Setting $this  WP_Customize_Setting instance.
+             */
+            do_action( "sed_app_update_{$this->option_type}", $value, $this );
 
-			default :
+            return has_action( "sed_app_update_{$this->option_type}" );
+        }
 
-				/**
-				 * Fires when the {@see SedAppSettings::update()} method is called for settings
-				 * not handled as theme_mods or options.
-				 *
-				 * The dynamic portion of the hook name, `$this->option_type`, refers to the option_type of setting.
-				 *
-				 * @since 3.4.0
-				 *
-				 * @param mixed                $value Value of the setting.
-				 * @param SedAppSettings $this  SedAppSettings instance.
-				 */
-				return do_action( 'sed_app_update_' . $this->option_type, $value, $this );
-		}
 	}
 
-	/**
-	 * Update the theme mod from the value of the parameter.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param mixed $value The value to update.
-	 * @return mixed The result of saving the value.
-	 */
-	protected function _update_theme_mod( $value ) {
-		// Handle non-array theme mod.
-		if ( empty( $this->id_data[ 'keys' ] ) )
-			return set_theme_mod( $this->id_data[ 'base' ], $value );
+    /**
+     * Deprecated method.
+     *
+     * @since 3.4.0
+     * @deprecated 4.4.0 Deprecated in favor of update() method.
+     */
+    protected function _update_theme_mod() {
+        _deprecated_function( __METHOD__, '4.4.0', __CLASS__ . '::update()' );
+    }
 
-		// Handle array-based theme mod.
-		$mods = get_theme_mod( $this->id_data[ 'base' ] );
-		$mods = $this->multidimensional_replace( $mods, $this->id_data[ 'keys' ], $value );
-		if ( isset( $mods ) )
-			return set_theme_mod( $this->id_data[ 'base' ], $mods );
-	}
-
-	/**
-	 * Update the option from the value of the setting.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param mixed $value The value to update.
-	 * @return bool|null The result of saving the value.
-	 */
-	protected function _update_option( $value ) {
-		// Handle non-array option.
-		if ( empty( $this->id_data[ 'keys' ] ) )
-			return update_option( $this->id_data[ 'base' ], $value );
-
-		// Handle array-based options.
-		$options = get_option( $this->id_data[ 'base' ] );
-		$options = $this->multidimensional_replace( $options, $this->id_data[ 'keys' ], $value );
-		if ( isset( $options ) )
-			return update_option( $this->id_data[ 'base' ], $options );
-	}
+    /**
+     * Deprecated method.
+     *
+     * @since 3.4.0
+     * @deprecated 4.4.0 Deprecated in favor of update() method.
+     */
+    protected function _update_option() {
+        _deprecated_function( __METHOD__, '4.4.0', __CLASS__ . '::update()' );
+    }
 
 	/**
 	 * Fetch the value of the setting.
@@ -415,76 +643,34 @@ class SedAppSettings{
 	 */
 	public function value() {
 
-        //(only using on ****top iframe****) this condition using only site editor page not sed app iframes
-        /*if( $this->option_type == "base" || empty( $this->option_type ) ){
+        $id_base = $this->id_data['base'];
+        $is_core_type = ( 'option' === $this->option_type || 'theme_mod' === $this->option_type );
 
-			//only using on ****sed app iframes****
-			if ( isset( $_POST['sed_page_customized'] ) && isset($_POST['preview_type']) && $_POST['preview_type'] == "refresh" ){
+        if ( ! $is_core_type && ! $this->is_multidimensional_aggregated ) {
+            $value = $this->get_root_value( $this->default );
 
-				$value = $this->post_value();
-				return $value;
+            /**
+             * Filter a Customize setting value not handled as a theme_mod or option.
+             *
+             * The dynamic portion of the hook name, `$this->id_date['base']`, refers to
+             * the base slug of the setting name.
+             *
+             * For settings handled as theme_mods or options, see those corresponding
+             * functions for available hooks.
+             *
+             * @since 3.4.0
+             *
+             * @param mixed $default The setting default value. Default empty.
+             */
+            $value = apply_filters( "sed_app_value_{$id_base}", $value );
+        } else if ( $this->is_multidimensional_aggregated ) {
+            $root_value = self::$aggregated_multidimensionals[ $this->option_type ][ $id_base ]['root_value'];
+            $value = $this->multidimensional_get( $root_value, $this->id_data['keys'], $this->default );
+        } else {
+            $value = $this->get_root_value( $this->default );
+        }
 
-			}else{
-
-				$sed_settings = $this->manager->sed_page_settings();
-
-				if( isset($sed_settings[$this->id]) )
-					return $sed_settings[$this->id];
-				else
-					return $this->default;
-
-			}
-
-        }*/
-
-         //using for all options except base options(page options)
-        //using on ****sed app iframes**** and ****top iframe****
-		// Get the callback that corresponds to the setting option_type.
-		switch( $this->option_type ) {
-			case 'theme_mod' :
-				$function = 'get_theme_mod';
-				break;
-			case 'option' :
-				$function = 'get_option';
-				break;
-            case 'base' :
-                $sed_settings = $this->manager->sed_page_settings();
-                $value = ( isset( $sed_settings[ $this->id ] ) ) ? $sed_settings[ $this->id ] : $this->default;
-                return $value;
-                break;
-			/*case 'post_meta' :
-				$function = 'get_post_meta';
-				break;
-			case 'post' :
-				$function = 'get_post';
-				break; */
-			default :
-
-				/**
-				 * Filter a Customize setting value not handled as a theme_mod or option.
-				 *
-				 * The dynamic portion of the hook name, `$this->id_date['base']`, refers to
-				 * the base slug of the setting name.
-				 *
-				 * For settings handled as theme_mods or options, see those corresponding
-				 * functions for available hooks.
-				 *
-				 * @since 3.4.0
-				 *
-				 * @param mixed $default The setting default value. Default empty.
-				 */
-				return apply_filters( 'sed_app_value_' . $this->id_data[ 'base' ], $this->default );
-		}
-
-		// Handle non-array value
-		if ( empty( $this->id_data[ 'keys' ] ) )
-			return $function( $this->id_data[ 'base' ], $this->default );
-
-
-
-		// Handle array-based value
-		$values = $function( $this->id_data[ 'base' ] );
-		return $this->multidimensional_get( $values, $this->id_data[ 'keys' ], $this->default );
+        return $value;
 	}
 
 	/**
@@ -508,6 +694,8 @@ class SedAppSettings{
 		 */
 		$value = apply_filters( "sed_app_sanitize_js_{$this->id}", $this->value(), $this );
 
+        $value = apply_filters( "sed_app_sanitize_js_setting", $this->value(), $this );
+
 		if ( is_string( $value ) )
 			return html_entity_decode( $value, ENT_QUOTES, 'UTF-8');
 
@@ -525,195 +713,115 @@ class SedAppSettings{
 		if ( $this->capability && ! call_user_func_array( 'current_user_can', (array) $this->capability ) )
 			return false;
 
-		/*if ( $this->theme_supports && ! call_user_func_array( 'current_theme_supports', (array) $this->theme_supports ) )
+		if ( $this->theme_supports && ! call_user_func_array( 'current_theme_supports', (array) $this->theme_supports ) )
 			return false;
-        */
+
 		return true;
 	}
 
-	/**
-	 * Multidimensional helper function.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param $root
-	 * @param $keys
-	 * @param bool $create Default is false.
-	 * @return null|array Keys are 'root', 'node', and 'key'.
-	 */
-	final protected function multidimensional( &$root, $keys, $create = false ) {
-		if ( $create && empty( $root ) )
-			$root = array();
+    /**
+     * Multidimensional helper function.
+     *
+     * @since 3.4.0
+     *
+     * @param $root
+     * @param $keys
+     * @param bool $create Default is false.
+     * @return array|void Keys are 'root', 'node', and 'key'.
+     */
+    final protected function multidimensional( &$root, $keys, $create = false ) {
+        if ( $create && empty( $root ) )
+            $root = array();
 
-		if ( ! isset( $root ) || empty( $keys ) )
-			return;
+        if ( ! isset( $root ) || empty( $keys ) )
+            return;
 
-		$last = array_pop( $keys );
-		$node = &$root;
+        $last = array_pop( $keys );
+        $node = &$root;
 
-		foreach ( $keys as $key ) {
-			if ( $create && ! isset( $node[ $key ] ) )
-				$node[ $key ] = array();
+        foreach ( $keys as $key ) {
+            if ( $create && ! isset( $node[ $key ] ) )
+                $node[ $key ] = array();
 
-			if ( ! is_array( $node ) || ! isset( $node[ $key ] ) )
-				return;
+            if ( ! is_array( $node ) || ! isset( $node[ $key ] ) )
+                return;
 
-			$node = &$node[ $key ];
-		}
+            $node = &$node[ $key ];
+        }
 
-		if ( $create && ! isset( $node[ $last ] ) )
-			$node[ $last ] = array();
+        if ( $create ) {
+            if ( ! is_array( $node ) ) {
+                // account for an array overriding a string or object value
+                $node = array();
+            }
+            if ( ! isset( $node[ $last ] ) ) {
+                $node[ $last ] = array();
+            }
+        }
 
-		if ( ! isset( $node[ $last ] ) )
-			return;
+        if ( ! isset( $node[ $last ] ) )
+            return;
 
-		return array(
-			'root' => &$root,
-			'node' => &$node,
-			'key'  => $last,
-		);
-	}
+        return array(
+            'root' => &$root,
+            'node' => &$node,
+            'key'  => $last,
+        );
+    }
 
-	/**
-	 * Will attempt to replace a specific value in a multidimensional array.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param $root
-	 * @param $keys
-	 * @param mixed $value The value to update.
-	 * @return
-	 */
-	final protected function multidimensional_replace( $root, $keys, $value ) {
-		if ( ! isset( $value ) )
-			return $root;
-		elseif ( empty( $keys ) ) // If there are no keys, we're replacing the root.
-			return $value;
+    /**
+     * Will attempt to replace a specific value in a multidimensional array.
+     *
+     * @since 3.4.0
+     *
+     * @param $root
+     * @param $keys
+     * @param mixed $value The value to update.
+     * @return mixed
+     */
+    final protected function multidimensional_replace( $root, $keys, $value ) {
+        if ( ! isset( $value ) )
+            return $root;
+        elseif ( empty( $keys ) ) // If there are no keys, we're replacing the root.
+            return $value;
 
-		$result = $this->multidimensional( $root, $keys, true );
+        $result = $this->multidimensional( $root, $keys, true );
 
-		if ( isset( $result ) )
-			$result['node'][ $result['key'] ] = $value;
+        if ( isset( $result ) )
+            $result['node'][ $result['key'] ] = $value;
 
-		return $root;
-	}
+        return $root;
+    }
 
-	/**
-	 * Will attempt to fetch a specific value from a multidimensional array.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param $root
-	 * @param $keys
-	 * @param mixed $default A default value which is used as a fallback. Default is null.
-	 * @return mixed The requested value or the default value.
-	 */
-	final protected function multidimensional_get( $root, $keys, $default = null ) {
-		if ( empty( $keys ) ) // If there are no keys, test the root.
-			return isset( $root ) ? $root : $default;
+    /**
+     * Will attempt to fetch a specific value from a multidimensional array.
+     *
+     * @since 3.4.0
+     *
+     * @param $root
+     * @param $keys
+     * @param mixed $default A default value which is used as a fallback. Default is null.
+     * @return mixed The requested value or the default value.
+     */
+    final protected function multidimensional_get( $root, $keys, $default = null ) {
+        if ( empty( $keys ) ) // If there are no keys, test the root.
+            return isset( $root ) ? $root : $default;
 
-		$result = $this->multidimensional( $root, $keys );
-		return isset( $result ) ? $result['node'][ $result['key'] ] : $default;
-	}
+        $result = $this->multidimensional( $root, $keys );
+        return isset( $result ) ? $result['node'][ $result['key'] ] : $default;
+    }
 
-	/**
-	 * Will attempt to check if a specific value in a multidimensional array is set.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @param $root
-	 * @param $keys
-	 * @return bool True if value is set, false if not.
-	 */
-	final protected function multidimensional_isset( $root, $keys ) {
-		$result = $this->multidimensional_get( $root, $keys );
-		return isset( $result );
-	}
-}
-
-class SedThemeContentSetting extends SedAppSettings{
-
-	public function __construct( $manager, $id, $args = array() ) {
-
-		add_filter( "base_settings_save_filter" , array( $this , "save_theme_content" ) );
-
-		return parent::__construct( $manager, $id, $args );
-	}
-
-	public function _preview_base_meta_settings( $original_meta_value, $post_id, $meta_key, $single ) {
-
-		if ( isset( $meta_key ) && $meta_key == 'sed_post_settings' ) {
-
-			$value = $this->base_value( $this->default , $post_id );
-
-			if ( ! isset( $value ) ){
-				return $original_meta_value;
-			}else{
-				$meta_value = ( !empty( $original_meta_value ) && is_array( $original_meta_value ) ) ? $original_meta_value : array();
-
-				if( $value !== false && !empty( $value ) && is_array( $value ) ) {
-					foreach ($value AS $key => $model) {
-						$value[$key]['content'] = $this->_filter_row_content($model['content']);
-					}
-				}
-
-				if( $single )
-					$meta_value[0][ $this->id ] = $value;
-				else
-					$meta_value[ $this->id ] = $value;
-
-				return $single ? $meta_value : array( $meta_value );
-			}
-		}
-
-	}
-
-
-	public function _preview_base_option_settings( $original ){
-
-		global $sed_apps;
-		$sed_page_id = $sed_apps->framework->sed_page_id;
-		$value = $this->base_value( $this->default , $sed_page_id );
-
-		if ( ! isset( $value ) ){
-			return $original;
-		}else{
-
-			if( $value !== false && !empty( $value ) && is_array( $value ) ) {
-				foreach ($value AS $key => $model) {
-					$value[$key]['content'] = $this->_filter_row_content($model['content']);
-				}
-			}
-
-			$current_page_settings = $original;
-			$current_page_settings[ $this->id ] = $value;
-			return $current_page_settings;
-		}
-
-	}
-
-	public function save_theme_content( $base_settings_values , $page_id ){
-
-		if( isset( $base_settings_values['theme_content'] ) ) {
-			$theme_content = $base_settings_values['theme_content'];
-
-			foreach ( $theme_content AS $key => $model ){
-				$theme_content[$key]['content'] = $this->_filter_row_content( $model['content'] );
-			}
-
-			$base_settings_values['theme_content'] = $theme_content;
-		}
-
-		return $base_settings_values;
-	}
-
-	public function _filter_row_content( $content_shortcodes ){
-
-		global $sed_apps;
-		$tree_shortcodes = $sed_apps->editor->save->build_tree_shortcode( $content_shortcodes , $content_shortcodes[0]['parent_id'] );
-		$content = $sed_apps->editor->save->create_shortcode_content( $tree_shortcodes , array() );
-
-		return $content;
-	}
-
+    /**
+     * Will attempt to check if a specific value in a multidimensional array is set.
+     *
+     * @since 3.4.0
+     *
+     * @param $root
+     * @param $keys
+     * @return bool True if value is set, false if not.
+     */
+    final protected function multidimensional_isset( $root, $keys ) {
+        $result = $this->multidimensional_get( $root, $keys );
+        return isset( $result );
+    }
 }

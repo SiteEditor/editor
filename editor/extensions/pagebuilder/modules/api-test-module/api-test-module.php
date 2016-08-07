@@ -104,7 +104,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "priority"      => "param_priority" ,
             "html"          => "param_html" , //only support if type === custom
             "options"       => "param_options" , //types support : select , multi-checkbox , multi-select,
-            "groups"        => "param_selct_groups" , //only for select and multi-select type
+            "groups"        => "param_select_groups" , //only for select and multi-select type
         );
         */
 

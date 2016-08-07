@@ -84,20 +84,6 @@ if(!empty($elements)){
 
 global $sed_data , $sed_dynamic_css_string;
 
-/*if(!empty($sed_data) && isset($sed_data['page_main_col'])){
-    $output_css .= '@media screen and (min-width: 846px) {';
-    $page_main_cols = $sed_data['page_main_col'];
-    if(!empty($page_main_cols)){
-        foreach($page_main_cols AS $col_id => $col){
-           if($col_id != "default"){
-              $col['id'] = $col_id;
-              $output_css .= "#". $col_id . "{width : " . ($col['settings']['width'] * 100) . "% }";
-           }
-        }
-    }
-    $output_css .= '}';
-}*/
-
 if(!empty($sed_data) && isset($sed_data['sheet_width']))
     $output_css .= ".sed-row-boxed{max-width : " . $sed_data['sheet_width'] . "px !important;}";
 

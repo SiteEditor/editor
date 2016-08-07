@@ -281,6 +281,7 @@ function get_site_editor_url( $sed_page_id = '' , $sed_page_type = '' , $permali
     return get_sed_url( $sed_page_id , $sed_page_type , $permalink , $args );
 }
 
+//@TODO FiX SiteEditor Url For WOOCOMMERCE ( Shop Page )
 function woo_shop_fix_sed_url( $editor_url , $sed_page_id = '' , $sed_page_type = '' , $permalink = '' , $args = array() ){
     global $post;
 
@@ -1018,65 +1019,40 @@ function get_sed_external_image_html( $image_url , $external_image_size = "" , $
     return $img;
 }
 
-function sed_get_page_options($sed_page_id = "general_home" , $sed_page_type = "general"){
 
-    if($sed_page_type == "post")
-        $option_name = 'sed_post_settings' ;
-    else
-        $option_name = 'sed_'. $sed_page_id .'_settings' ;
+/**
+ * get general page options
+ * @param string $sed_page_id
+ * @param string $sed_page_type
+ * @return mixed|void
+ */
+function sed_get_page_options( $sed_page_id = "general_home" , $sed_page_type = "general" ){
 
-    switch ($sed_page_type) {
-        case "tax":
-        case "general":
-        case "post_type":
-            //case "author":
-            $settings = get_option( $option_name ) ;
-            break;
-        case "post":
-            $settings = get_post_meta( $sed_page_id, $option_name , true );
-            if(empty( $settings )){
-                $settings = false;
-            }
-            break;
+    $options = array();
+
+    $default_settings = array(
+
+        'page_layout'       => '',
+
+        'theme_content'     => array()
+
+    );
+
+    if( $sed_page_type == "post" ){
+
+        foreach( $default_settings AS $setting_id => $args ){
+            $options[$setting_id] = get_post_meta( $sed_page_id, $setting_id , true );
+        }
+
+    }else{
+
+        $option_name = "sed_" . $sed_page_id . "_settings";
+
+        $options = get_option( $option_name , $default_settings );
+
     }
 
-    return apply_filters( "sed_current_page_options" , $settings );
-
-}
-
-
-
-function sed_update_page_options($settings , $sed_page_id = "general_home" , $sed_page_type = "general"){
-
-    if($sed_page_type == "post")
-        $option_name = 'sed_post_settings' ;
-    else
-        $option_name = 'sed_'. $sed_page_id .'_settings' ;
-
-    switch ($sed_page_type) {
-        case "tax":
-        case "general":
-        case "post_type":
-        case "author":
-            if ( get_option( $option_name ) !== false ) {
-
-                // The option already exists, so we just update it.
-                $res = update_option( $option_name, $settings );
-                //var_dump($res , "update_option :: teeeeeeeeeeeeeeeeeeees...............");
-            } else {
-
-                // The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-                $deprecated = null;
-                $autoload = 'no';
-                $res = add_option( $option_name, $settings, $deprecated, $autoload );
-                //var_dump($res , "add_option :: teeeeeeeeeeeeeeeeeeees...............");
-            }
-            break;
-        case "post":
-            if( !update_post_meta( $sed_page_id , $option_name , $settings ) )
-                add_post_meta( $sed_page_id , $option_name , $settings, true );
-            break;
-    }
+    return apply_filters( "sed_current_page_options" , $options );
 
 }
 

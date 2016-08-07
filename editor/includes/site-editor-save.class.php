@@ -5,55 +5,6 @@ class SEDAppSave{
         $this->wp_theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
     }
 
-    function sed_update_page_options($settings , $option_name , $sed_page_id = "general_home" , $sed_page_type = "general"){
-        switch ($sed_page_type) {
-          case "tax":
-          case "general":
-          case "post_type":
-          case "author":
-              if ( get_option( $option_name ) !== false ) {
-
-                  // The option already exists, so we just update it.
-                  $res = update_option( $option_name, $settings );
-                  //var_dump($res , "update_option :: teeeeeeeeeeeeeeeeeeees...............");
-              } else {
-
-                  // The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-                  $deprecated = null;
-                  $autoload = 'no';
-                  $res = add_option( $option_name, $settings, $deprecated, $autoload );
-                  //var_dump($res , "add_option :: teeeeeeeeeeeeeeeeeeees...............");
-              }
-          break;
-          case "post":
-              if( !update_post_meta( $sed_page_id , $option_name , $settings ) )
-                  add_post_meta( $sed_page_id , $option_name , $settings, true );
-          break;
-        }
-    }
-
-    //Edit for sub_theme module-----  ( add sed_current_page_options filter )
-    function sed_get_page_options( $option_name , $sed_page_id = "general_home" , $sed_page_type = "general"){
-
-        switch ($sed_page_type) {
-          case "tax":
-          case "general":
-          case "post_type":
-          //case "author":
-            return get_option( $option_name ) ;
-          break;
-          case "post":
-              $settings = get_post_meta( $sed_page_id, $option_name , true );
-              if(empty( $settings )){
-                return false;
-              }else{
-                return $settings;
-              }
-          break;
-        }
-
-    }        
-
 	/**
 	 * Retrieve the stylesheet name of the previewed theme.
 	 *
@@ -96,59 +47,21 @@ class SEDAppSave{
     } */
 
     function site_editor_app_save(){
-        global $sed_apps;
 
-		if ( ! $sed_apps->editor->manager->is_preview() )
+		if ( ! SED()->editor->manager->is_preview() )
 			die;
 
        check_ajax_referer( 'sed_app_save_' . $this->get_stylesheet(), 'nonce' );
 
        if( isset($_POST['sed_page_customized']) && isset($_POST['sed_posts_content'])){
 
-           /*
-           start save all pages base settings
-           */
-           $all_pages_settings = array();
-           if( isset($_POST['other_pages_customized']) ){
-               $other_pages_settings = json_decode( wp_unslash( $_POST['other_pages_customized'] ), true );
-               if( is_array( $other_pages_settings ) )
-                   $all_pages_settings = $other_pages_settings;
-           }
-
-           $sed_pages_types = json_decode( wp_unslash( $_POST['sed_pages_types'] ), true );
-           //save all page options
            $sed_page_customized = json_decode( wp_unslash( $_POST['sed_page_customized'] ), true );
-
-           if( is_array($sed_page_customized) )
-               $all_pages_settings[ $_POST['sed_page_id'] ] = $sed_page_customized;
-
-           foreach( $all_pages_settings AS $page_id => $page_settings ){
-
-               $base_settings_values = $page_settings;
-
-               //update dynamic css file related to this page
-               //$sed_apps->sed_add_dynamic_css_file( $_POST['sed_page_id'] , $_POST['sed_page_type'] , $page_settings );
-
-               foreach ( $sed_apps->editor->manager->settings() as $id => $setting ) {
-                   if($setting->option_type != "base" && !empty( $setting->option_type ) ){
-
-                       unset( $base_settings_values[$id] );  //$setting->id
-                   }
-               }
-
-               $base_settings_values = apply_filters( "base_settings_save_filter" , $base_settings_values , $page_id );
-
-               $this->sed_update_settings( $base_settings_values , $page_id , $sed_pages_types[$page_id] );
-           }
-           /*
-           end save all pages base settings
-           */
-
            //save general settings( general settings is option_type != "base" OR option_type not empty  )
-           foreach ( $sed_apps->editor->manager->settings() as $id => $setting ) {
-               if($setting->option_type != "base" && !empty( $setting->option_type ) ){
-                   $setting->save();
-               }
+           foreach ( $sed_page_customized as $setting_id => $setting_val) {
+
+               $setting = SED()->editor->manager->get_setting( $setting_id );
+
+               $setting->save();
            }
 
            /*
@@ -222,7 +135,14 @@ class SEDAppSave{
         return $branch;
     }
 
-    function create_shortcode_content( $tree_shortcodes , $tree_path , $post_id = 0 ){
+    /**
+     * @param $tree_shortcodes
+     * @param $tree_path
+     * @param int $post_id
+     * @param bool $convert_theme_info : only for sed_row shortcode , and top level
+     * @return string
+     */
+    function create_shortcode_content( $tree_shortcodes , $tree_path , $post_id = 0 , $convert_theme_info = false ){
         global $site_editor_app;
 
         $post_id = (int) $post_id ;
@@ -231,6 +151,31 @@ class SEDAppSave{
         foreach($tree_shortcodes AS $shortcode){
             $attrs_string = "";
             if(!empty( $shortcode['attrs'] )){
+
+                if( $convert_theme_info === true ) {
+
+                    if (isset($shortcode['row_type'])) {
+                        $shortcode['attrs']['sed_row_type'] = $shortcode['row_type'];
+                    }
+
+                    if (isset($shortcode['rel_theme_id'])) {
+                        $shortcode['attrs']['sed_rel_theme_id'] = $shortcode['rel_theme_id'];
+                    }
+
+                    if (isset($shortcode['theme_id'])) {
+                        $shortcode['attrs']['sed_theme_id'] = $shortcode['theme_id'];
+                    }
+
+                    if (isset($shortcode['is_customize'])) {
+                        $shortcode['attrs']['sed_is_customize'] = $shortcode['is_customize'];
+                    }
+
+                    if (isset($shortcode['is_hidden'])) {
+                        $shortcode['attrs']['sed_is_hidden'] = $shortcode['is_hidden'];
+                    }
+
+                }
+
                 foreach($shortcode['attrs'] AS $attr => $value){
                     if( $attr == "sed_css" && !empty( $value ) ){
 
@@ -310,17 +255,6 @@ class SEDAppSave{
             return $this->generate_helper_shortcodes( $new_tag , $tree_path );
         else
             return $new_tag;
-    }
-
-    function sed_update_settings($settings , $sed_page_id = "general_home" , $sed_page_type = "general"){
-        if($sed_page_type == "post")
-            $option_name = 'sed_post_settings' ;
-        else
-            $option_name = 'sed_'. $sed_page_id .'_settings' ;
-
-        $settings = apply_filters( 'sed_update_settings' , $settings , $option_name , $sed_page_id  , $sed_page_type );
-
-        $this->sed_update_page_options($settings , $option_name , $sed_page_id  , $sed_page_type );
     }
 
 } 

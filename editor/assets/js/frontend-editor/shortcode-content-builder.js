@@ -22,9 +22,15 @@
             });
 
 
-            api.preview.bind( 'active', function() {
-                self.preview.send( 'pages_theme_content_update' , self.pagesThemeContent );
-                self.preview.send( 'posts_content_update' , self.postsContent );
+            api.Events.bind( 'afterPageInfoReady', function() {
+
+                self.preview.send( 'pages_theme_content_ready' , {
+                    content     :   self.pagesThemeContent ,
+                    postType    :   api.currentPageInfo.post_type 
+                });
+
+                self.preview.send( 'posts_content_ready' , self.postsContent );
+
             });
 
         },
@@ -833,7 +839,7 @@
 
         sendData: function( currentPlace ){
 
-            this.checkContentType();
+            this.checkContentType(); console.log( "------------this.postsContent---------------" , this.postsContent );
 
             var place = ( !_.isUndefined( currentPlace ) ) ? currentPlace : api.shortcodeCurrentPlace;
 

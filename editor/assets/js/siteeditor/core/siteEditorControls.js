@@ -15,7 +15,6 @@
     api.currentControl = api.currentControl || "";
     api.frontPageDisplayChange = false;
     api.previewerActive = api.previewerActive || false;
-    api.sedPageBaseSettings  = api.sedPageBaseSettings || {};
 
 	/**
 api	 * @param options
@@ -28,7 +27,7 @@ api	 * @param options
 
 			this.id = id;
 			this.transport = this.transport || 'refresh';
-            //this.ajaxParams = this.ajaxParams || false;
+			this._dirty = options.dirty || false;
 
 			this.bind( this.preview );
 		},
@@ -40,7 +39,7 @@ api	 * @param options
 
 			switch ( transport ) {
 				case 'refresh':
-                    api.Events.trigger("beforeRefreshPreviewer");
+                    api.Events.trigger( "beforeRefreshPreviewer" , this.id );
 					return this.previewer.refresh( );
 				//case 'ajax':
 					//return this.previewer.ajax( this.ajaxParams , [ this.id, this() ]);
@@ -1034,8 +1033,7 @@ api	 * @param options
 			query: function() {
 
                 var query = {} ,
-                    pUrl = this.previewUrl() ,
-                    primaryQuery ;
+                    pUrl = this.previewUrl();
 
                 if( (_.isUndefined( api.currentPreviewUrl ) || api.currentPreviewUrl === pUrl ) && api.frontPageDisplayChange === false  ){
                     query.preview_type = "refresh";
@@ -1045,66 +1043,24 @@ api	 * @param options
                     api.currentPreviewType = "new";
                 }
 
-                var customized = api.get(),
-                    mainCustomizedSettings = {};
+				var dirtyCustomized = {};
+				api.each( function ( value, key ) {
+					if ( value._dirty ) {
+						dirtyCustomized[ key ] = value();
+					}
+				} );
 
-                if( _.isUndefined( api.sedPageBaseSettings[api.settings.page.id] ) )
-                    api.sedPageBaseSettings[api.settings.page.id] = {};
-
-                $.each( api.settings.settings, function( id, options ) {
-
-                    if( _.isUndefined( options.option_type ) || ( options.option_type == "base" ) ){
-                        api.sedPageBaseSettings[api.settings.page.id][id] = ( _.isObject( customized[id] ) ) ? $.extend( true, {} , customized[id] ) : customized[id];
-                    }else{
-                        mainCustomizedSettings[id] = ( _.isObject( customized[id] ) ) ? $.extend( true, {} , customized[id] ) : customized[id];
-                    }
-
-                });
+				console.log( "-------------dirtyCustomized---------------" , dirtyCustomized );
 
                 _.extend( query, {
-                    //sed_page_id             : api.settings.page.id ,
-                    //sed_page_type           : api.settings.page.type ,
-					sed_app_editor          : 'on',   //wp_customize
+					sed_app_editor          : 'on',
 					theme                   : api.settings.theme.stylesheet,
-					sed_page_customized     : JSON.stringify( mainCustomizedSettings ),  //customized
-                    sed_page_base_settings  : JSON.stringify( api.sedPageBaseSettings ),
+					sed_page_customized     : JSON.stringify( dirtyCustomized ),
+					sed_posts_content		: JSON.stringify( api.postsContent || {} ),
 					nonce                   : this.nonce.preview
                 });
 
-                if( _.isUndefined( api.previewerQueries ) )
-                    api.previewerQueries = {};
-
-                var appPostsContent = {} ;
-
-                $.each( api.previewerQueries , function( page_id , oQuery ){
-
-                    $.each( oQuery.sed_posts_content , function( post_id , models ){
-                        appPostsContent[post_id] = models;
-                    });
-
-                });
-
-                if( !_.isUndefined( api.postsContent ) ) {
-                    $.each(api.postsContent, function (post_id, models) {
-                        appPostsContent[post_id] = models;
-                    });
-                }
-
-
-                query.sed_posts_content = JSON.stringify( appPostsContent );
-
-                primaryQuery = {
-                    sed_posts_content       : api.postsContent || {} ,
-                    sed_page_id             : api.settings.page.id ,
-                    sed_page_type           : api.settings.page.type ,
-                    theme                   : api.settings.theme.stylesheet,
-                };
-
-                if( !_.isUndefined( api.currentPreviewUrl ) ){
-                    api.previewerQueries[ api.settings.page.id ] = primaryQuery;
-                }
-
-				return query;
+				return api.applyFilters( "sedPreviewerQueryFilter" , query );
 			}
 		});
 
@@ -1154,111 +1110,6 @@ api	 * @param options
         api.previewer.bind( "check_cheaters" , function(){
             api.previewer.cheatin();
         });
-
-
-        api.previewer.bind( "sed_ajax_refresh" , function( id ){
-
-            if( !_.isUndefined( api.previewer.AjaxRefreshRequests ) && !_.isUndefined( api.previewer.AjaxRefreshRequests[id] ) ){
-                if( api.previewer.AjaxRefreshRequests[id].processing === true ){
-                    api.previewer.AjaxRefreshRequests[id].request.abort();
-                }
-            }
-
-            api.Events.trigger("beforeAjaxRefresh");
-
-            var query = {} ,
-                primaryQuery ;
-
-            query.preview_type = "refresh";
-            //api.currentPreviewType = "refresh";
-
-            if( !_.isUndefined( api.postsContent ) )
-                query.sed_posts_content = JSON.stringify( api.postsContent );
-
-            var pageCustomizedSettings;
-            if( !_.isUndefined( api.pageCustomizedSettings ) )
-                pageCustomizedSettings = api.pageCustomizedSettings;
-            else
-                pageCustomizedSettings = api.get();
-
-            _.extend( query, {
-                sed_page_id             : api.settings.page.id ,
-                sed_page_type           : api.settings.page.type ,
-            	sed_app_editor          : 'on',   //wp_customize
-            	theme                   : api.settings.theme.stylesheet,
-            	sed_page_customized     : JSON.stringify( pageCustomizedSettings ),  //customized
-            	nonce                   : this.nonce.preview
-            });
-
-            primaryQuery = {
-                sed_posts_content       : api.postsContent || {} ,
-                sed_page_id             : api.settings.page.id ,
-                sed_page_type           : api.settings.page.type ,
-            	sed_app_editor          : 'on',   //wp_customize
-            	theme                   : api.settings.theme.stylesheet,
-            	sed_page_customized     : pageCustomizedSettings ,  //customized
-                            //sed_query_url           : api.currentPreviewUrl
-            };
-
-            if( _.isUndefined( api.previewerQueries ) )
-                api.previewerQueries = {};
-
-            if( !_.isUndefined( api.currentPreviewUrl ) ){
-                //api.log( "primaryQuery ------- : " , primaryQuery );
-                api.previewerQueries[ api.settings.page.id ] = primaryQuery;
-            }
-
-            var request = $.ajax({
-                type: "POST",
-                url: api.previewer.previewUrl() ,
-                data: query,/*{
-                    page_options            : JSON.stringify( api.get() ) ,
-                    sed_posts_content       : JSON.stringify( api.postsContent ) ,
-                    sed_ajax_refresh        : true
-                },*/
-                beforeSend: function()
-                {
-
-                    //loadingContainer.addClass("loading");
-                },
-
-                success: function( data )
-                {
-                    //loadingContainer.removeClass("loading");
-                    api.previewer.AjaxRefreshRequests[id].processing = false;
-                    if( $( data ).find('#' + id ).length > 0 ){
-                        var htm = $( data ).find('#' + id )[0].outerHTML;
-                        api.previewer.send( "ajax_refresh_data" , {
-                            id : id ,
-                            html : htm ,
-                        } );
-                    }else{   alert("Error");
-                        //Error
-                    }
-
-                },
-                error: function(xhr, status, error) {
-                     api.previewer.AjaxRefreshRequests[id].processing = false;
-                }
-            });
-
-            request.fail(function(){
-                api.previewer.AjaxRefreshRequests[id].processing = false;
-            });
-
-            if( _.isUndefined( api.previewer.AjaxRefreshRequests ) )
-                api.previewer.AjaxRefreshRequests = {};
-
-            api.previewer.AjaxRefreshRequests[id] = {
-                processing  :  true  ,
-                request     :  request
-            };
-
-            api.trigger( 'AjaxRefreshRequest', request );
-
-        });
-
-
 
   });
 

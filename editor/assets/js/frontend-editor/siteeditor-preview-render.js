@@ -58,7 +58,7 @@
 			channel: api.settings.channel
 		});
 
-		api.preview.bind( 'settings', function( values ) {
+		/*api.preview.bind( 'settings', function( values ) {
 			$.each( values, function( id, value ) {
 				if ( api.has( id ) )
 					api( id ).set( value );
@@ -66,10 +66,54 @@
 					api.create( id, value ,{
 					    stype : api.settings.types[id] || "general"
 					} );
-			});
+			}); 
 		});
 
-		api.preview.trigger( 'settings', api.settings.values );
+		api.preview.trigger( 'settings', api.settings.values );*/
+
+        /**
+         * Create/update a setting value.
+         *
+         * @param {string}  id            - Setting ID.
+         * @param {*}       value         - Setting value.
+         * @param {boolean} [createDirty] - Whether to create a setting as dirty. Defaults to false.
+         */
+        var setValue = function( id, value, createDirty ) {
+            var setting = api( id );
+            if ( setting ) {
+                setting.set( value );
+            } else {
+                createDirty = createDirty || false;
+                setting = api.create( id, value, {
+                    id: id ,
+                    stype : api.settings.types[id] || "general"
+                } );
+
+                // Mark dynamically-created settings as dirty so they will get posted.
+                if ( createDirty ) {
+                    setting._dirty = true;
+                }
+            }
+        };
+
+        api.preview.bind( 'settings', function( values ) {
+            $.each( values, setValue );
+        });
+
+        api.preview.trigger( 'settings', api.settings.values );
+
+
+        $.each( api.settings._dirty, function( i, id ) {
+            var setting = api( id );
+            if ( setting ) {
+                setting._dirty = true;
+            }
+        } );
+
+        api.preview.bind( 'setting', function( args ) {
+            var createDirty = true;
+            setValue.apply( null, args.concat( createDirty ) );
+        });
 
         // Display a loading indicator when preview is reloading, and remove on failure.
         api.preview.bind( 'loading-initiated', function () {
@@ -92,15 +136,14 @@
             api.currentCssSelector = selector;
         });
 
-
-		api.preview.bind( 'setting', function( args ) {
+		/*api.preview.bind( 'setting', function( args ) {
 			var value;
 
 			args = args.slice();
 
 			if ( value = api( args.shift() ) )
 				value.set.apply( value, args );
-		});
+		});*/
 
 		api.preview.bind( 'sync', function( events ) {
 			$.each( events, function( event, args ) {
@@ -119,8 +162,20 @@
             api.preview.send( 'currentPostId' , api.settings.post.id );
 
             api.preview.send( 'contextmenu-ready' );
+
             $(document).trigger("update_sort_row");
+
         });
+
+        api.preview.bind( 'saved', function( response ) {
+            api.trigger( 'saved', response );
+        } );
+
+        api.bind( 'saved', function() {
+            api.each( function( setting ) {
+                setting._dirty = false;
+            } );
+        } );
 
         api.preview.bind( 'nonce-refresh', function( nonce ) {
             $.extend( api.settings.nonce, nonce );
@@ -1379,6 +1434,8 @@
         return styleId; */ /*
 
     }; */
+
+        api.trigger( 'preview-ready' );
 
 	});
 

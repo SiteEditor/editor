@@ -121,13 +121,11 @@ Class PageBuilderApplication {
             return;
         }
 
-        global $sed_apps;
-
         $shortcodes = $all_posts_content_models[$post->ID];
 
         if(!empty($shortcodes)){
-            $tree_shortcodes = $sed_apps->editor->save->build_tree_shortcode( $shortcodes , "root" );
-            $content = $sed_apps->editor->save->create_shortcode_content( $tree_shortcodes , array() , $post->ID );
+            $tree_shortcodes = SED()->editor->save->build_tree_shortcode( $shortcodes , "root" );
+            $content = SED()->editor->save->create_shortcode_content( $tree_shortcodes , array() , $post->ID );
         }else{
             $content = "";
         }
@@ -418,6 +416,26 @@ Class PageBuilderApplication {
                     if( isset( $shortcode['attrs']['sed_theme_id'] ) ){
                         $shortcode['theme_id'] = $shortcode['attrs']['sed_theme_id'];
                         unset( $shortcode['attrs']['sed_theme_id'] );
+                    }
+
+                    if( isset( $shortcode['attrs']['sed_row_type'] ) ){
+                        $shortcode['row_type'] = $shortcode['attrs']['sed_row_type'];
+                        unset( $shortcode['attrs']['sed_row_type'] );
+                    }
+
+                    if( isset( $shortcode['attrs']['sed_rel_theme_id'] ) ){
+                        $shortcode['rel_theme_id'] = $shortcode['attrs']['sed_rel_theme_id'];
+                        unset( $shortcode['attrs']['sed_rel_theme_id'] );
+                    }
+
+                    if( isset( $shortcode['attrs']['sed_is_customize'] ) ){
+                        $shortcode['is_customize'] = $shortcode['attrs']['sed_is_customize'];
+                        unset( $shortcode['attrs']['sed_is_customize'] );
+                    }
+
+                    if( isset( $shortcode['attrs']['sed_is_hidden'] ) ){
+                        $shortcode['is_hidden'] = $shortcode['attrs']['sed_is_hidden'];
+                        unset( $shortcode['attrs']['sed_is_hidden'] );
                     }
 
                     $shortcodes[] = $shortcode ;
@@ -736,8 +754,9 @@ Class PageBuilderApplication {
        }else{
             $this->shortcodes[$name] = $shortcode_options_arr;
 
-            if( !in_array( $name , self::$shortcodes_tagnames ) )
-                array_push( self::$shortcodes_tagnames , $name );
+            //move to pb-shortcodes.class.php
+            /*if( !in_array( $name , self::$shortcodes_tagnames ) )
+                array_push( self::$shortcodes_tagnames , $name );*/
 
             if( is_site_editor() ){
                 $module_name = (!empty($moduleName)) ? $moduleName : $parentModule;
@@ -1241,191 +1260,77 @@ Class PageBuilderApplication {
         return $helper_shortcodes;
     }
 
-    function check_exist_main_content_model(){
-
-        require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
-        $page_layout = SiteEditorLayoutManager::get_page_layout();
-        $sed_layout_models = get_option( 'sed_layouts_models' );
-
-        var_dump( $sed_layout_models );
-        var_dump( $page_layout );
-
-        $has_main_row = false;
-        $sed_last_theme_id = get_option( 'sed_last_theme_id' );
-
-        if( $sed_layout_models !== false && is_array( $sed_layout_models ) && isset( $sed_layout_models[$page_layout] ) ){
-
-            foreach( $sed_layout_models[$page_layout] AS $key => $model ){
-                if( isset($model['main_row']) ){
-                    $has_main_row = true;
-                }
-            }
-
-        }
-
-        if( $has_main_row === false ){
-            if( $sed_last_theme_id !== false ){
-                $sed_last_theme_id++;
-                update_option( 'sed_last_theme_id' , $sed_last_theme_id );
-            }else{
-                $sed_last_theme_id = 1;
-                $deprecated = null;
-                $autoload = 'yes';
-                add_option( 'sed_last_theme_id' , array() , $deprecated, $autoload );
-            }
-
-            $theme_id = "theme_id_" . $sed_last_theme_id;
-
-            $new_model = array(
-                'order'         =>    0 ,
-                'theme_id'      =>    $theme_id ,
-                //'after_content' =>    true ,
-                'main_row'      =>    true ,
-                'exclude'       =>    array() ,
-                'title'         =>    __("Content" , "site-editor")
-            );
-
-            $sed_newlayout_models = $sed_layout_models;
-
-            if( !is_array( $sed_newlayout_models ) ){
-                $sed_newlayout_models = array();
-            }
-
-            if( !isset( $sed_newlayout_models[$page_layout] ) ){
-                $sed_newlayout_models[$page_layout] = array();
-            }
-
-            array_push( $sed_newlayout_models[$page_layout] , $new_model );
-
-            if( $sed_layout_models === false ){
-                $deprecated = null;
-                $autoload = 'yes';
-                add_option( 'sed_layouts_models' , $sed_newlayout_models , $deprecated, $autoload );
-            }else{
-                update_option( 'sed_layouts_models' , $sed_newlayout_models );
-            }
-
-            $default_layout = '[sed_row_outer_outer class="module_sed_content_layout_contextmenu_container" sed_theme_id="' . $theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="boxed"]
-                    [sed_module_outer_outer class="module_sed_content_layout_contextmenu_container" shortcode_tag="sed_module"]
-                        [sed_content_layout layout="without-sidebar" title="columns"]
-                            [sed_content_layout_column width="100%" sed_main_content="yes" parent_module="content-layout"]
-                                {{content}}
-                            [/sed_content_layout_column]
-                        [/sed_content_layout]
-                    [/sed_module_outer_outer]
-                [/sed_row_outer_outer]';
-
-            global $sed_main_row_shortcodes_string;
-
-            $shortcodes_models = self::get_pattern_shortcodes( $default_layout );
-            $sed_main_row_shortcodes_string = $shortcodes_models["string"];
-            $main_row_models = $shortcodes_models["shortcodes"];
-
-            $sed_layouts_content = get_option( 'sed_layouts_content' );
-
-            $new_sed_layouts_content = $sed_layouts_content;
-
-            if( !is_array( $new_sed_layouts_content ) ){
-                $new_sed_layouts_content = array();
-            }
-
-            $this->sed_theme_content = $main_row_models;
-
-            $new_sed_layouts_content[$theme_id] = $default_layout;
-
-            if( $sed_layouts_content === false ){
-                $deprecated = null;
-                $autoload = 'yes';
-                add_option( 'sed_layouts_content' , $new_sed_layouts_content , $deprecated, $autoload );
-            }else{
-                update_option( 'sed_layouts_content' , $new_sed_layouts_content );
-            }
-
-            return false;
-
-        }
-
-        return true;
-
-    }
-
     function sed_process_template(){
 
         //get wp page content
         $main_content = $this->main_content_template();
 
-        //if not exist main content model for this page , first create it
-        if( !$this->check_exist_main_content_model() ){
-            global $sed_main_row_shortcodes_string;
-            $content = do_shortcode( $sed_main_row_shortcodes_string );
-        }else{
-            global $sed_data;
+        global $sed_data;
 
-            //Page Layouts Models
-            $sub_themes_models = get_option("sed_layouts_models");
+        //Page Layouts Models
+        $sub_themes_models = get_option("sed_layouts_models");
 
-            require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
-            $page_layout = SiteEditorLayoutManager::get_page_layout();
+        require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
+        $page_layout = SiteEditorLayoutManager::get_page_layout();
 
-            //Current Page Layout Models
-            $curr_sub_themes_models = $sub_themes_models[ $page_layout ];
+        //Current Page Layout Models
+        $curr_sub_themes_models = $sub_themes_models[ $page_layout ];
 
-            //Current Page Layout Content
-            $sed_layouts_content = get_option("sed_layouts_content");
+        //Current Page Layout Content
+        $sed_layouts_content = get_option("sed_layouts_content");
 
-            //Sort current page layout models by order attribute
-            $i = 1;
-            foreach( $curr_sub_themes_models AS $key => $model ){
+        //Sort current page layout models by order attribute
+        $i = 1;
+        foreach( $curr_sub_themes_models AS $key => $model ){
 
-                //remove row if marked as hidden in this page and site editor front end is not on
-                if( !isset( $model['hidden'] ) || !in_array( $sed_data['page_id'] , $model['hidden'] ) || site_editor_app_on() ){
-                    $curr_sub_themes_models[$key]['instance_number'] = $i;
-                    $i++;
-                }else
-                    unset( $curr_sub_themes_models[$key] );
-
-            }
-
-            uasort( $curr_sub_themes_models , array( __CLASS__ , 'theme_row_order' ) );
-
-            //Create current page content
-            $shortcodes_pattern_string = "";
-
-            $shortcodes_pattern_string = apply_filters( "sed_start_page_customize_rows" , $shortcodes_pattern_string );
-
-            foreach( $curr_sub_themes_models AS $model ){
-
-                $shortcodes_pattern_string = apply_filters( "sed_before_layout_row"  , $shortcodes_pattern_string , $model['theme_id'] );
-
-                var_dump( $sed_layouts_content );
-
-                if( !in_array( $sed_data['page_id'] , $model['exclude'] ) ) {
-                    $shortcodes_pattern_string .= $sed_layouts_content[$model['theme_id']];
-                }else{
-                    $shortcodes_pattern_string .= $this->get_row_customized_content( $model['theme_id'] );
-                }
-
-                $shortcodes_pattern_string = apply_filters( "sed_after_layout_row"  , $shortcodes_pattern_string , $model['theme_id'] );
-
-            }
-
-            $shortcodes_pattern_string = apply_filters( "sed_end_page_customize_rows" , $shortcodes_pattern_string );
-
-            do_action( "sed_after_layout_" . $page_layout , $model );
-
-            do_action( "sed_after_layout" , $model );
-
-            $shortcodes_models = self::get_pattern_shortcodes( $shortcodes_pattern_string );
-
-            $content = do_shortcode( $shortcodes_models["string"] );
-
-            //set current page content shortcodes models in @$this->sed_theme_content for js
-            $this->sed_theme_content = $shortcodes_models["shortcodes"];
+            //remove row if marked as hidden in this page and site editor front end is not on
+            if( !isset( $model['hidden'] ) || !in_array( $sed_data['page_id'] , $model['hidden'] ) || site_editor_app_on() ){
+                $curr_sub_themes_models[$key]['instance_number'] = $i;
+                $i++;
+            }else
+                unset( $curr_sub_themes_models[$key] );
 
         }
 
+        uasort( $curr_sub_themes_models , array( __CLASS__ , 'theme_row_order' ) );
+
+        self::fix_page_theme_content( $curr_sub_themes_models );
+
+        //Create current page content
+        $shortcodes_pattern_string = "";
+
+        $shortcodes_pattern_string = apply_filters( "sed_start_page_customize_rows" , $shortcodes_pattern_string );
+
+        foreach( $curr_sub_themes_models AS $model ){
+
+            $shortcodes_pattern_string = apply_filters( "sed_before_layout_row"  , $shortcodes_pattern_string , $model['theme_id'] );
+
+            if( !in_array( $sed_data['page_id'] , $model['exclude'] ) ) {
+                $shortcodes_pattern_string .= $sed_layouts_content[$model['theme_id']];
+            }else{
+                $shortcodes_pattern_string .= $this->get_row_customized_content( $model['theme_id'] );
+            }
+
+            $shortcodes_pattern_string = apply_filters( "sed_after_layout_row"  , $shortcodes_pattern_string , $model['theme_id'] );
+
+        }
+
+        $shortcodes_pattern_string = apply_filters( "sed_end_page_customize_rows" , $shortcodes_pattern_string );
+
+        do_action( "sed_after_layout_" . $page_layout , $model );
+
+        do_action( "sed_after_layout" , $model );
+
+        $shortcodes_models = self::get_pattern_shortcodes( $shortcodes_pattern_string );
+
+        $content = do_shortcode( $shortcodes_models["string"] );
+
+        //set current page content shortcodes models in @$this->sed_theme_content for js
+        $this->sed_theme_content = $shortcodes_models["shortcodes"];
+
         //replace wp page content in current page content
         $content = str_replace( "{{content}}" , $main_content , $content );
+
         echo $content;
 
     }
@@ -1485,7 +1390,7 @@ Class PageBuilderApplication {
             foreach( $sed_data['theme_content'] AS $index => $row ){
                 if( isset( $row['is_customize'] ) && isset( $row['theme_id'] ) && $row['theme_id'] == $theme_id ){
                     $content = $row['content'];
-                    breack;
+                    break;
                 }
             }
 
@@ -1558,6 +1463,142 @@ Class PageBuilderApplication {
         return $shortcodes_pattern_string;
     }
 
+    /**
+     * @param $curr_sub_themes_models
+     *
+     * @Fix Current Page Theme Content ( Private Rows )
+     * if remove a public row from layout or page layout changed
+     * all related private rows have wrong rel_theme_id & row_type
+     * @this Func will fixed rel_theme_id & row_type for this private rows
+     * too if removed a public row & we customized in this page , we removed
+     * this customized row from this page , Although this customized row can not appear
+     * in this page Even if not removed from this page ( for optimize & clean database from extra data that not needed ).
+     * too if changed page layout we done like work top
+     */
+    public static function fix_page_theme_content( $curr_sub_themes_models ){
+        global $sed_data;
+
+        $theme_ids = wp_list_pluck( $curr_sub_themes_models , 'theme_id' );
+
+        if( isset( $sed_data['theme_content'] ) && is_array( $sed_data['theme_content'] ) && !empty( $sed_data['theme_content'] ) ){
+
+            $changed = false;
+
+            foreach( $sed_data['theme_content'] AS $index => $row ){
+
+                if( isset( $row['rel_theme_id'] ) && !empty( $row['rel_theme_id']  ) && ! in_array( $row['rel_theme_id']  , $theme_ids ) ){
+
+                    $info = self::find_valid_public_row( $theme_ids , $row['rel_theme_id'] , $row['row_type'] );
+
+                    $sed_data['theme_content'][$index]['row_type'] = $info['row_type'];
+
+                    $sed_data['theme_content'][$index]['rel_theme_id'] = $info['rel_theme_id'];
+
+                    $changed = true;
+
+                }else if( isset( $row['theme_id'] ) && isset( $row['is_customize'] ) && $row['is_customize'] && ! in_array( $row['theme_id']  , $theme_ids ) ){
+
+                    unset( $sed_data['theme_content'][$index] );
+
+                    $changed = true;
+
+                }
+
+            }
+
+            if( $changed === true ){
+                //update_option(  )
+            }
+
+        }
+    }
+
+    /**
+     * @When Public To Private
+     * @When removed a public row
+     * @When unchecked a public row for specify layout
+     *
+     * @model : removed Model
+     *   array(
+     *
+     *       "default"   =>  array(
+     *           0  =>  array(
+     *               "theme_id"         =>  "theme_id_3" ,
+     *               "after"            =>  array(
+     *                    "rel_theme_id"    =>      "theme_id_4" ,
+     *                    "row_type"        =>      "before"
+     *                ) ,
+     *               "before"           =>  array(
+     *                    "rel_theme_id"    =>      "theme_id_1"
+     *                    "row_type"        =>      "after"
+     *               ) ,
+     *           ),
+     *
+     *           1  =>  array(
+     *               "theme_id"         =>  "theme_id_3" ,
+     *               "after"            =>  array(
+     *                   "rel_theme_id"    =>      "theme_id_4" ,
+     *                   "row_type"        =>      "before"
+     *               ) ,
+     *               "before"           =>  array(
+     *                   "rel_theme_id"    =>      "theme_id_1"
+     *                   "row_type"        =>      "after"
+     *               ) ,
+     *           )
+     *       ),
+     *
+     *       "page"   =>  array(
+     *           ...
+     *       )
+     *
+     *   );
+     */
+    public static function find_valid_public_row( $theme_ids , $theme_id , $row_type ){
+
+        $sed_layouts_removed_rows = get_option( "sed_layouts_removed_rows" );
+
+        $page_layout = SiteEditorLayoutManager::get_page_layout();
+
+        //for prevent error if not exist $theme_id in removed rows models
+        $rel_theme_id   = '';
+        $new_row_type   = 'end';
+
+        if( isset( $sed_layouts_removed_rows[ $page_layout ] ) && is_array( $sed_layouts_removed_rows[ $page_layout ] ) ) {
+            foreach ( $sed_layouts_removed_rows[ $page_layout ] AS  $index => $row ){
+                if( $row['theme_id'] == $theme_id ){
+
+                    if( $row_type == "after" ){
+
+                        $rel_theme_id   = $row['after']['rel_theme_id'];
+
+                        $new_row_type   = $row['after']['row_type'];
+
+                        if( !empty( $rel_theme_id  ) && ! in_array( $rel_theme_id  , $theme_ids ) ){
+                            return self::find_valid_public_row( $theme_ids , $rel_theme_id , $new_row_type );
+                        }
+
+                    }else if( $row_type == "before" ){
+
+                        $rel_theme_id   = $row['before']['rel_theme_id'];
+
+                        $new_row_type   = $row['before']['row_type'];
+
+                        if( !empty( $rel_theme_id  ) && ! in_array( $rel_theme_id  , $theme_ids ) ){
+                            return self::find_valid_public_row( $theme_ids , $rel_theme_id , $new_row_type );
+                        }
+
+                    }
+
+                    break;
+                }
+            }
+        }
+
+        return array(
+            "rel_theme_id"    => $rel_theme_id  ,
+            "row_type"        => $new_row_type
+        );
+    }
 
 }
 
