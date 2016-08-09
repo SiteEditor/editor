@@ -53,6 +53,8 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 
+            $value          = $this->settings['default'];
+
 			?>
 
 			<label class=""><?php echo $this->label;?></label>
@@ -65,8 +67,8 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 				?>
 
 					<div class="sed-bp-form-radio-item">
-						<label for="<?php echo $sed_field_id . $i ;?>">
-							<input  type="radio" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo $key_val;?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
+						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
+							<input  type="radio" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
 							<?php echo $choice;?>
 						</label>
 					</div>
@@ -94,3 +96,5 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 		}
 	}
 }
+
+sed_options()->register_control_type( 'radio' , 'SiteEditorRadioControl' );
