@@ -33,6 +33,12 @@ class SedAppSettings{
 	 */
 	public $option_type = 'base';  //option || post_meta || post || theme_mod || custom || base || helper
 
+    /**
+     * @access public
+     * @var string
+     */
+    public $option_group = '';
+
 	/**
 	 * Capability required to edit this setting.
 	 *

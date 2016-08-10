@@ -26,7 +26,7 @@ require_once SED_EXT_PATH . DS . "pagebuilder" . DS . "includes" . DS . "module_
 require_once SED_EXT_PATH . DS . "design-editor" . DS . "includes" . DS . "module_styles_controls.class.php";
 require_once SED_EXT_PATH . DS . "pagebuilder" . DS . "includes" . DS . "pb-shortcodes.class.php";
 
-do_action( 'before_sed_pb_modules_loaded', $this->app );
+do_action( 'before_sed_pb_modules_loaded', $this->app ); 
 
 $live_module = sed_get_setting( "live_module" );
 

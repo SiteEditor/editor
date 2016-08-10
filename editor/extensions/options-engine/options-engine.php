@@ -22,14 +22,22 @@ Version: 1.0.0
  */
 class SedOptionsEngineExtension {
     
-    public function __construct(){
+    public function __construct( $editor ){
 
-        require_once SED_EXT_PATH . "/options-engine/includes/general-settings.class.php";
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'general-settings.class.php';
 
         new SiteEditorGeneralSettings();
+
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-options-manager.class.php';
+
+        $editor->options = new SiteEditorOptionsManager();
 
     }
 
 }
 
-new SedOptionsEngineExtension;
+new SedOptionsEngineExtension( $this );
+
+function sed_options(){
+    return SED()->editor->options;
+}

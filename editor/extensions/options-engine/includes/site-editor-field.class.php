@@ -22,7 +22,7 @@ class SiteEditorField{
      * @access protected
      * @var string
      */
-    protected $setting_id = '';
+    public $setting_id = '';
 
     /**
      * Type of setting Use :
@@ -31,7 +31,7 @@ class SiteEditorField{
      * @access protected
      * @var string
      */
-    protected $option_type = 'option';
+    public $option_type = 'option';
 
     /**
      * Capability required to edit this field.
@@ -54,7 +54,7 @@ class SiteEditorField{
      * @access protected
      * @var string
      */
-    protected $type = '';
+    public $type = 'text';
 
     /**
      * Some fields require options to be set.
@@ -63,7 +63,7 @@ class SiteEditorField{
      * @access protected
      * @var array
      */
-    protected $choices = array();
+    public $choices = array();
 
     /**
      * Assign this field to a panel.
@@ -71,7 +71,7 @@ class SiteEditorField{
      * @access protected
      * @var string
      */
-    protected $panel = '';
+    public $panel = '';
 
     /**
      * The default value for this field.
@@ -79,7 +79,7 @@ class SiteEditorField{
      * @access protected
      * @var string|array
      */
-    protected $default = '';
+    public $default = '';
 
     /**
      * Priority determines the position of a control inside a section.
@@ -88,7 +88,7 @@ class SiteEditorField{
      * @access protected
      * @var int
      */
-    protected $priority = 10;
+    public $priority = 10;
 
     /**
      * Unique ID for this field.
@@ -97,7 +97,7 @@ class SiteEditorField{
      * @access protected
      * @var string
      */
-    protected $id = '';
+    public $id = '';
 
     /**
      * A custom callback to determine if the field should be visible or not.
@@ -105,7 +105,7 @@ class SiteEditorField{
      * @access protected
      * @var string|array
      */
-    protected $active_callback = '__return_true';
+    public $active_callback = '__return_true';
 
     /**
      * A custom sanitize callback that will be used to properly save the values.
@@ -113,7 +113,7 @@ class SiteEditorField{
      * @access protected
      * @var string|array
      */
-    protected $sanitize_callback = '';
+    public $sanitize_callback = '';
 
     /**
      * Use 'refresh', 'postMessage' or 'auto'.
@@ -122,7 +122,7 @@ class SiteEditorField{
      * @access protected
      * @var string
      */
-    protected $transport = 'refresh';
+    public $transport = 'refresh';
 
     /**
      * Define dependencies to show/hide this field based on the values of other fields.
@@ -130,7 +130,7 @@ class SiteEditorField{
      * @access protected
      * @var array
      */
-    protected $dependency = array();
+    public $dependency = array();
 
     /**
      * Partial Refreshes array.
@@ -138,7 +138,7 @@ class SiteEditorField{
      * @access protected
      * @var array
      */
-    protected $partial_refresh = array();
+    public $partial_refresh = array();
 
     /**
      * Custom params For this field
@@ -146,23 +146,13 @@ class SiteEditorField{
      * @access protected
      * @var array
      */
-    protected $params = array();
+    public $params = array();
 
     /**
-     * If current field is a module field , related attribute
-     *
-     * @access protected
+     * @access public
      * @var array
      */
-    protected $is_module_field = false;
-
-    /**
-     * If current field is a module field , related attribute
-     *
-     * @access protected
-     * @var array
-     */
-    protected $shortcode_attr = '';
+    public $input_attrs = array();
 
     /**
      * this field group use :
@@ -171,7 +161,7 @@ class SiteEditorField{
      * @access protected
      * @var array
      */
-    protected $group = 'general';
+    public $option_group = 'general';
 
     /**
      * this field label
@@ -179,7 +169,7 @@ class SiteEditorField{
      * @access protected
      * @var array
      */
-    protected $label = '';
+    public $label = '';
 
     /**
      * this field description for user help
@@ -187,7 +177,7 @@ class SiteEditorField{
      * @access protected
      * @var array
      */
-    protected $description = '';
+    public $description = '';
 
     /**
      * SiteEditorField constructor.
@@ -203,7 +193,54 @@ class SiteEditorField{
                 $this->$key = $args[ $key ];
         }
 
+        $this->set_field();
+
     }
+
+
+    /**
+     * Processes the field arguments
+     *
+     * @param array $whitelisted_properties Defines an array of arguments that will skip validation at this point.
+     */
+    protected function set_field() {
+
+        $properties = get_class_vars( __CLASS__ );
+
+        // Some things must run before the others.
+        $priorities = array(
+            'option_name',
+            'option_type',
+            'settings',
+        );
+
+        foreach ( $priorities as $property ) {
+            if ( method_exists( $this, 'set_' . $property ) ) {
+                $method_name = 'set_' . $property;
+                $this->$method_name();
+            }
+        }
+
+        // Sanitize the properties, skipping the ones run from the $priorities.
+        foreach ( $properties as $property => $value ) {
+            if ( in_array( $property, $priorities, true ) ) {
+                continue;
+            }
+            if ( method_exists( $this, 'set_' . $property ) ) {
+                $method_name = 'set_' . $property;
+                $this->$method_name();
+            }
+        }
+
+    }
+
+    /**
+     * This allows us to process this on a field-basis
+     * by using sub-classes which can override this method.
+     *
+     * @access protected
+     */
+    protected function set_default() {}
 
     /**
      * Escape the $section.
@@ -214,6 +251,21 @@ class SiteEditorField{
 
         $this->panel = sanitize_key( $this->panel );
 
+    }
+
+    /**
+     * Checks the capability chosen is valid.
+     * If not, then falls back to 'edit_theme_options'
+     *
+     * @access protected
+     */
+    protected function set_capability() {
+        // Early exit if we're using 'edit_theme_options'.
+        if ( 'edit_theme_options' === $this->capability ) {
+            return;
+        }
+        // Escape & trim the capability.
+        $this->capability = trim( esc_attr( $this->capability ) );
     }
 
     /**
@@ -231,23 +283,6 @@ class SiteEditorField{
             return false;
 
         return true;
-    }
-
-    /**
-     * Make sure we're using the correct option_type
-     *
-     * @access protected
-     */
-    protected function set_option_type() {
-
-        // Take care of common typos.
-        if ( 'options' === $this->option_type ) {
-            $this->option_type = 'option';
-        }
-        // Take care of common typos.
-        if ( 'theme_mods' === $this->option_type ) {
-            $this->option_type = 'theme_mod';
-        }
     }
 
     /**
@@ -285,6 +320,8 @@ class SiteEditorField{
 
     }
 
+    
+
 
     /**
      * Sets the active_callback
@@ -294,17 +331,7 @@ class SiteEditorField{
      * @access protected
      */
     protected function set_active_callback() {
-
-        if ( is_array( $this->active_callback ) && ! is_callable( $this->active_callback ) ) {
-            if ( isset( $this->active_callback[0] ) ) {
-                $this->required = $this->active_callback;
-            }
-        }
-
-        if ( ! empty( $this->required ) ) {
-            $this->active_callback = array( 'Kirki_Active_Callback', 'evaluate' );
-            return;
-        }
+        
         // No need to proceed any further if we're using the default value.
         if ( '__return_true' === $this->active_callback ) {
             return;
@@ -312,6 +339,69 @@ class SiteEditorField{
         // Make sure the function is callable, otherwise fallback to __return_true.
         if ( ! is_callable( $this->active_callback ) ) {
             $this->active_callback = '__return_true';
+        }
+
+    }
+
+    /**
+     * Sets the control type.
+     *
+     * @access protected
+     */
+    protected function set_type() {
+
+        // Escape the control type (it doesn't hurt to be sure).
+        $this->type = esc_attr( $this->type );
+
+    }
+
+    /**
+     * Sets the $sanitize_callback
+     *
+     * @access protected
+
+    protected function set_sanitize_callback() {
+
+        // If a custom sanitize_callback has been defined,
+        // then we don't need to proceed any further.
+        if ( ! empty( $this->sanitize_callback ) ) {
+            return;
+        }
+
+        $default_callbacks = array(
+            'kirki-multicheck'       => array( 'Kirki_Sanitize_Values', 'multicheck' ),
+            'kirki-sortable'         => array( 'Kirki_Sanitize_Values', 'sortable' ),
+            'kirki-typography'       => array( 'Kirki_Sanitize_Values', 'typography' ),
+        );
+
+        if ( array_key_exists( $this->type, $default_callbacks ) ) {
+            $this->sanitize_callback = $default_callbacks[ $this->type ];
+        }
+
+    }*/
+
+    /**
+     * Sets the $choices.
+     *
+     * @access protected
+     */
+    protected function set_choices() {
+
+        if ( ! is_array( $this->choices ) ) {
+            $this->choices = array();
+        }
+
+    }
+
+    /**
+     * Sets the $transport
+     *
+     * @access protected
+     */
+    protected function set_transport() {
+
+        if ( 'postmessage' === trim( strtolower( $this->transport ) ) ) {
+            $this->transport = 'postMessage';
         }
 
     }

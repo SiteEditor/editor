@@ -43,7 +43,11 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 		 */
 		protected function render() {
 
-			$atts           = $this->options->template->get_atts( $this->input_attrs );
+			//$atts           = $this->options->template->get_atts( $this->input_attrs );
+			$atts 			= array(
+				'atts'		=> '' ,
+				'class'		=> ''
+			);
 
 			$atts_string    = $atts["atts"];
 
@@ -97,4 +101,4 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'radio' , 'SiteEditorRadioControl' );
+$this->register_control_type( 'radio' , 'SiteEditorRadioControl' );

@@ -68,6 +68,15 @@ class SiteEditorManager{
     protected $settings   = array();
 
 	/**
+	 * Registered instances of SiteEditorOptionsGroup.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 * @var array
+	 */
+	protected $groups = array();
+
+	/**
 	 * Registered instances of WP_Customize_Panel.
 	 *
 	 * @since 4.0.0
@@ -122,6 +131,15 @@ class SiteEditorManager{
 	protected $registered_control_types = array();
 
 	/**
+	 * Group types that may be rendered from JS templates.
+	 *
+	 * @since 4.1.0
+	 * @access protected
+	 * @var array
+	 */
+	protected $registered_group_types = array();
+
+	/**
 	 * Initial URL being previewed.
 	 *
 	 * @since 4.4.0
@@ -146,16 +164,14 @@ class SiteEditorManager{
 	 */
 	private $_post_values;
 
-    private $_base_values;
-
-    private $_page_settings;
-
     function __construct(  ) {
 
+		require_once SED_INC_EDITOR_DIR . DS . 'site-editor-options-group.class.php';
 		require_once SED_INC_EDITOR_DIR . DS . 'site-editor-setting.class.php';
-		//require_once SED_INC_EDITOR_DIR . DS . 'site-editor-panel.class.php';
-		//require_once SED_INC_EDITOR_DIR . DS . 'site-editor-control.class.php';
+		require_once SED_INC_EDITOR_DIR . DS . 'site-editor-panel.class.php';
+		require_once SED_INC_EDITOR_DIR . DS . 'site-editor-control.class.php';
 
+		do_action( 'sed_app_register_components' , $this );
         /**
          * Filter the core Customizer components to load.
          *
@@ -198,11 +214,15 @@ class SiteEditorManager{
 
         add_action( 'sed_app_register'                  ,  array( $this, 'register_settings' ) );
         add_action( 'sed_app_register'                  ,  array($this, 'register_dynamic_settings'), 11); // allow code to create settings first
-        add_action( 'sed_controls_enqueue_scripts'      , array($this, 'enqueue_control_scripts') );
+        add_action( 'sed_print_footer_scripts'      	,  array($this, 'enqueue_control_scripts') );
 
-        add_action( 'sed_app_controls_print_footer_scripts', array( $this, 'render_control_templates' ), 1 );
+		// Render Panel, Group, and Control templates.
+		add_action( 'sed_print_footer_scripts', array( $this, 'render_panel_templates' ), 1 );
+		add_action( 'sed_print_footer_scripts', array( $this, 'render_group_templates' ), 1 );
+		add_action( 'sed_print_footer_scripts', array( $this, 'render_control_templates' ), 1 );
 
-		add_action( 'sed_print_footer_scripts', array( $this, 'sed_app_pane_settings' ), 1 );
+		// Export the settings to JS via the _sedAppEditorSettings variable.
+		add_action( 'sed_print_footer_scripts', array( $this, 'sed_app_pane_settings' ), 1000 );
 
         if( is_site_editor() ){
             add_action( "init" , array(&$this, 'editor_init') );
@@ -616,22 +636,26 @@ class SiteEditorManager{
 	}
 
 	/**
-	 * Add a customize control.
+	 * Add a options control.
 	 *
 	 * @since 3.4.0
 	 *
-	 * @param WP_Customize_Control|string $id   Customize Control object, or ID.
+	 * @param SiteEditorOptionsControl|string $id   Customize Control object, or ID.
 	 * @param array                       $args Control arguments; passed to WP_Customize_Control
 	 *                                          constructor.
+	 * @return object ( instance of SiteEditorOptionsControl or extends )
 	 */
 	public function add_control( $id, $args = array() ) {
-		/*if ( is_a( $id, 'SEDAppControl' ) )
-			$control = $id;
-		else
-			$control = new WP_Customize_Control( $this, $id, $args );
-        */
 
-		$this->controls[ $id ] = $args;
+		if ( $id instanceof SiteEditorOptionsControl ) {
+			$control = $id;
+		} else {
+			$control = new SiteEditorOptionsControl( $this, $id, $args );
+		}
+
+		$this->controls[ $control->id ] = $control;
+
+		return $control;
 	}
 
 	/**
@@ -643,8 +667,11 @@ class SiteEditorManager{
 	 * @return WP_Customize_Control $control The control object.
 	 */
 	public function get_control( $id ) {
-		if ( isset( $this->controls[ $id ] ) )
-			return $this->controls[ $id ];
+
+		if ( isset( $this->controls[ $id ] ) ) {
+			return $this->controls[$id];
+		}
+
 	}
 
 	/**
@@ -655,7 +682,10 @@ class SiteEditorManager{
 	 * @param string $id ID of the control.
 	 */
 	public function remove_control( $id ) {
-		unset( $this->controls[ $id ] );
+
+		if ( isset( $this->controls[ $id ] ) ) {
+			unset($this->controls[$id]);
+		}
 	}
 
     /**
@@ -698,6 +728,205 @@ class SiteEditorManager{
 			$control->enqueue();
 		}
 	}
+
+	/**
+	 * Get the registered controls.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @return array
+	 */
+	public function groups() {
+		return $this->groups;
+	}
+
+	/**
+	 * Add a options control.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @param SiteEditorOptionsControl|string $id   Customize Control object, or ID.
+	 * @param array                       $args Control arguments; passed to WP_Customize_Control
+	 *                                          constructor.
+	 * @return object ( instance of SiteEditorOptionsControl or extends )
+	 */
+	public function add_group( $id, $args = array() ) {
+
+		if ( $id instanceof SiteEditorOptionsGroup ) {
+			$group = $id;
+		} else {
+			$group = new SiteEditorOptionsGroup( $this, $id, $args );
+		}
+
+		$this->groups[ $group->id ] = $group;
+
+		return $group;
+	}
+
+	/**
+	 * Retrieve a customize control.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @param string $id ID of the control.
+	 * @return WP_Customize_Control $control The control object.
+	 */
+	public function get_group( $id ) {
+
+		if ( isset( $this->groups[ $id ] ) ) {
+			return $this->groups[$id];
+		}
+
+	}
+
+	/**
+	 * Remove a customize control.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @param string $id ID of the control.
+	 */
+	public function remove_group( $id ) {
+
+		if ( isset( $this->groups[ $id ] ) ) {
+			unset($this->groups[$id]);
+		}
+	}
+
+	/**
+	 * Register a customize control type.
+	 *
+	 * Registered types are eligible to be rendered via JS and created dynamically.
+	 *
+	 * @since 4.1.0
+	 * @access public
+	 *
+	 * @param string $control Name of a custom control which is a subclass of
+	 *                        {@see WP_Customize_Control}.
+	 */
+	public function register_group_type( $group ) {
+		$this->registered_group_types[] = $group;
+	}
+
+	/**
+	 * Render JS templates for all registered control types.
+	 *
+	 * @since 4.1.0
+	 * @access public
+	 */
+	public function render_group_templates() {
+		foreach ( $this->registered_group_types as $group_type ) {
+			$group = new $group_type( $this, 'temp', array(
+				'settings' => array(),
+			) );
+			$group->print_template();
+		}
+	}
+
+	/**
+	 * Get the registered panels.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @return array
+	 */
+	public function panels() {
+		return $this->panels;
+	}
+	
+	/**
+	 * Add a customize panel.
+	 *
+	 * @since 4.0.0
+	 * @since 4.5.0 Return added WP_Customize_Panel instance.
+	 * @access public
+	 *
+	 * @param WP_Customize_Panel|string $id   Customize Panel object, or Panel ID.
+	 * @param array                     $args Optional. Panel arguments. Default empty array.
+	 *
+	 * @return WP_Customize_Panel             The instance of the panel that was added.
+	 */
+	public function add_panel( $id, $args = array() ) {
+
+		if ( $id instanceof SiteEditorOptionsPanel ) {
+			$panel = $id;
+		} else {
+			$panel = new SiteEditorOptionsPanel( $this, $id, $args );
+		}
+
+		$this->panels[ $panel->id ] = $panel;
+
+		return $panel;
+
+	}
+
+
+	/**
+	 * Retrieve a customize panel.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $id Panel ID to get.
+	 * @return WP_Customize_Panel|void Requested panel instance, if set.
+	 */
+	public function get_panel( $id ) {
+		if ( isset( $this->panels[ $id ] ) ) {
+			return $this->panels[ $id ];
+		}
+	}
+
+	/**
+	 * Remove a customize panel.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 *
+	 * @param string $id Panel ID to remove.
+	 */
+	public function remove_panel( $id ) {
+		// Removing core components this way is _doing_it_wrong().
+		if ( in_array( $id, SED()->editor->manager->components, true ) ) {
+			/* translators: 1: panel id, 2: link to 'customize_loaded_components' filter reference */
+			$message = sprintf( __( 'Removing %1$s manually will cause PHP warnings. Use the %2$s filter instead.' ),
+				$id,
+				'<a href="' . esc_url( 'https://developer.wordpress.org/reference/hooks/customize_loaded_components/' ) . '"><code>customize_loaded_components</code></a>'
+			);
+
+			_doing_it_wrong( __METHOD__, $message, '4.5' );
+		}
+		unset( $this->panels[ $id ] );
+	}
+
+	/**
+	 * Register a customize panel type.
+	 *
+	 * Registered types are eligible to be rendered via JS and created dynamically.
+	 *
+	 * @since 4.3.0
+	 * @access public
+	 *
+	 * @see WP_Customize_Panel
+	 *
+	 * @param string $panel Name of a custom panel which is a subclass of WP_Customize_Panel.
+	 */
+	public function register_panel_type( $panel ) {
+		$this->registered_panel_types[] = $panel;
+	}
+
+
+	/**
+	 * Render JS templates for all registered panel types.
+	 *
+	 * @since 4.3.0
+	 * @access public
+	 */
+	public function render_panel_templates() {
+		foreach ( $this->registered_panel_types as $panel_type ) {
+			$panel = new $panel_type( $this, 'temp', array() );
+			$panel->print_template();
+		}
+	}	
 
 	/**
 	 * Prevents AJAX requests from following redirects when previewing a theme
@@ -1165,7 +1394,10 @@ class SiteEditorManager{
 		 */
 		do_action( 'sed_app_post_value_set', $setting_id, $value, $this );
 	}
-                                  //$pagebuilder
+
+    /**
+     * Register default settings
+     */
     function register_settings( ){
 
         //for typography
@@ -1381,9 +1613,18 @@ class SiteEditorManager{
 				'ios'    => $this->is_ios(),
 				'mobileVersion'     => sed_is_mobile_version() || wp_is_mobile()
 			),
+			'panels'   => array(),
+			'groups'   => array(),
 			'nonce'    => $this->get_nonces(),
 			'documentTitleTmpl' => $this->get_document_title_template()
 		);
+
+		// Prepare Customize Section objects to pass to JavaScript.
+		foreach ( $this->groups() as $id => $options_group ) {
+			if ( $options_group->check_capabilities() ) {
+				$settings['groups'][ $id ] = $options_group->json();
+			}
+		}
 
 		?>
 		<script type="text/javascript">
@@ -1414,13 +1655,13 @@ class SiteEditorManager{
 			// Serialize controls one by one to improve memory usage.
 			echo "(function ( c ){\n";
 			foreach ( $this->controls() as $id => $control ) {
-				//if ( $control->check_capabilities() ) {
+				if ( $control->check_capabilities() ) {
 					printf(
 						"c[%s] = %s;\n",
-						wp_json_encode( $id ), //$control->id
-						wp_json_encode( $control ) //$control->json()
+						wp_json_encode( $control->id ), //$control->id
+						wp_json_encode( $control->json() ) //$control->json()
 					);
-				//}
+				}
 			}
 			echo "})( _sedAppEditorSettings.controls );\n";
 			?>

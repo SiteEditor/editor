@@ -18,108 +18,582 @@
  * @since 1.0.0
  */
 
-class SiteEditorOptionsManager{
+final class SiteEditorOptionsManager{
 
     /**
-     * An array containing all fields.
+     * An array of our panel types.
+     * Or panel types that may be rendered from JS templates.
      *
-     * @static
-     * @access public
+     * @access private
      * @var array
      */
-    public static $fields   = array();
+    private $panel_types = array(
+        'default'   => 'SiteEditorOptionsPanel'
+    );
 
     /**
-     * An array containing all panels.
+     * An array of our control types.
+     * Or panel types that may be rendered from JS templates.
      *
-     * @static
-     * @access public
+     * @access private
      * @var array
      */
-    public static $panels   = array();
+    private $control_types = array();
 
     /**
-     * An array containing all sections.
+     * An array of our field types.
+     * Or panel types that may be rendered from JS templates.
      *
-     * @static
-     * @access public
+     * @access private
      * @var array
      */
-    public static $groups = array();
+    private $field_types = array();
+
+    /**
+     * Registered instances of SiteEditorField.
+     *
+     * @since 1.0.0
+     * @access protected
+     * @var array
+     */
+    protected $fields = array();
 
     /**
      * SiteEditorOptionsManager constructor.
      */
     function __construct(  ) {
+        
+        require_once dirname( __FILE__ ) . DS . 'site-editor-options-template.class.php';
 
-        add_action( 'customize_register', array( $this, 'register_control_types' ) );
-        add_action( 'customize_register', array( $this, 'add_panels' ), 97 );
-        add_action( 'customize_register', array( $this, 'add_sections' ), 98 );
-        add_action( 'customize_register', array( $this, 'add_fields' ), 99 );
+        require_once dirname( __FILE__ ) . DS . 'site-editor-field.class.php';
+
+        add_action( 'sed_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );
+
+        add_action( 'sed_after_init_manager', array( $this, 'register_default_groups' ) , 10 , 1 );
+
+        add_action( 'sed_app_register', array( $this, 'register_fields' ) , 1000 );
 
         add_action( 'site_editor_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options
 
+        add_action( 'sed_app_register', array( $this, 'register_partials' ), 99 );
 
     }
 
-    function sed_ajax_load_options(){
+    public function sed_ajax_load_options(){
 
-        do_action( "sed_load_options_" . $_POST['group_id'] );
+        do_action( "sed_register_{$_POST['setting_id']}_options" );
 
-        $options = self::get_options( $_POST['group_id'] );
+        $this->register_fields();
+
+        $data = self::get_settings_data( $_POST['setting_id'] );
+
+        if( is_wp_error( $data ) ){
+
+            die( wp_json_encode( array(
+                'success'   => false,
+                'message'   => $data->get_error_message(),
+            ) ) );
+
+        }
 
         die( wp_json_encode( array(
             'success' => true,
-            'data'    => $options,
+            'data'    => $data,
         ) ) );
 
     }
 
-    function get_options( $group_id ){
+    public function get_settings_data( $group_id ){
 
-        return array(
-            "settings"      =>  $settings ,
-            "controls"      =>  $controls ,
-            "panels"        =>  $panels ,
-            "dependencies"  =>  $dependencies
+        $data = array(
+            "settings"      =>  array() ,
+            "controls"      =>  array() ,
+            "panels"        =>  array() ,
+            "relations"     =>  array() ,
+            "output"        =>  ""
         );
+
+        $groups = SED()->editor->manager->groups();
+
+        foreach ( $groups AS $group_id => $group ){
+
+            if( $group->id == $group_id ){
+                $current_group = $group;
+                break;
+            }
+
+        }
+
+        if( ! isset( $current_group ) ){
+            return new WP_Error( 'options_group_invalid', __( "This group not registered already", "site-editor" ) );
+        }
+
+        if( ! $current_group->check_capabilities() ){
+            return new WP_Error( 'options_not_access', __( "You can not access to this group options", "site-editor" ) );
+        }
+
+        $panels = SED()->editor->manager->panels();
+
+        $group_panels = array();
+
+        foreach ( $panels AS $panel_id => $panel ){
+
+            if ( $panel->check_capabilities() ) {
+
+                if ( $panel->option_group == $group_id ) {
+
+                    $group_panels[$panel_id] = $panel;
+
+                    $data['panels'][$panel_id] = $panel->json();
+
+                }
+
+            }
+
+        }
+
+        $current_group->panels = $group_panels;
+
+        $controls = SED()->editor->manager->controls(); //var_dump( $group_panels );
+
+        $group_controls = array();
+
+        foreach ( $controls AS $control_id => $control ){
+
+            if ( $control->check_capabilities() ) {
+
+                if ( $control->option_group == $group_id ) {
+
+                    $group_controls[$control_id] = $control;
+
+                    $data['controls'][$control_id] = $control->json();
+
+                }
+
+            }
+
+        }
+
+        $current_group->controls = $group_controls;
+
+        $settings = SED()->editor->manager->settings();
+
+        $group_settings = array();
+
+        foreach ( $settings AS $setting_id => $setting ){
+
+            if ( $setting->check_capabilities() ) {
+
+                if ( $setting->option_group == $group_id ) {
+
+                    $group_settings[$setting_id] = $setting;
+
+                    $data['settings'][$setting_id] = array(
+                        'value'     	=> $setting->js_value(),
+                        'transport' 	=> $setting->transport,
+                        'dirty'     	=> $setting->dirty,
+                        'type'          => $setting->type ,
+                        'option_type'   => $setting->option_type ,
+                    );
+
+                }
+
+            }
+
+        }
+
+        $current_group->settings = $group_settings;
+
+
+        $data['output'] = $current_group->get_content();
+
+        return $data;
+    }
+
+    public function register_components(  ){
+
+        $this->register_panels_components(  );
+
+        $this->register_controls_components(  );
+
+        $this->register_fields_components(  );
+
+    }
+
+
+    public function register_default_groups(){
+
+        SED()->editor->manager->add_group('sed_add_layout', array(
+            'capability'        => 'edit_theme_options',
+            'theme_supports'    => '',
+            'title'             => __("Add New Layout", "site-editor"),
+            'description'       => __("Add Layout Options", "site-editor"),
+            'type'              => 'default',
+        ));
+
+    }
+
+    private function register_panels_components(  ){
+
+        $panels_path = dirname( __FILE__ ) . DS . "panels" . DS . "*panel.class.php" ;
+
+        foreach ( glob( $panels_path ) as $php_file ) {
+            require_once $php_file;
+        }
+
+    }
+
+    private function register_fields_components(  ){
+
+        $panels_path = dirname( __FILE__ ) . DS . "fields" . DS . "*field.class.php" ;
+
+        foreach ( glob( $panels_path ) as $php_file ) {
+            require_once $php_file;
+        }
+
+    }
+
+    private function register_controls_components(  ){
+
+        $panels_path = dirname( __FILE__ ) . DS . "controls" . DS . "*control.class.php" ;
+
+        foreach ( glob( $panels_path ) as $php_file ) {
+            require_once $php_file;
+        }
+
+    }
+
+    final protected function add_setting( $id , $args = array() ) {
+
+        SED()->editor->manager->add_setting( $id , $args );
+
     }
 
     /**
-     * Create a new panel.
+     * Register new control type
      *
-     * @static
+     * @since 1.0.0
      * @access public
-     * @param string $id   The ID for this panel.
-     * @param array  $args The panel arguments.
+     *
+     * @param $type
+     * @param $php_class --- panel class
      */
-    public static function add_panel( $id = '', $args = array() ) {
+    public function register_control_type( $type , $php_class ){
 
-        $args['id']          = esc_attr( $id );
-        $args['description'] = ( isset( $args['description'] ) ) ? esc_textarea( $args['description'] ) : '';
-        $args['priority']    = ( isset( $args['priority'] ) ) ? esc_attr( $args['priority'] ) : 10;
-        $args['type']        = ( isset( $args['type'] ) ) ? $args['type'] : 'default';
-        if ( ! isset( $args['active_callback'] ) ) {
-            $args['active_callback'] = ( isset( $args['required'] ) ) ? array( 'Kirki_Active_Callback', 'evaluate' ) : '__return_true';
-        }
+        $this->control_types[ $type ] = $php_class;
 
-        self::$panels[ $args['id'] ] = $args;
+        SED()->editor->manager->register_control_type( $php_class );
 
     }
 
-    public static function add_panels( $panels = array() ){
+    /**
+     * Adds the control.
+     *
+     * @access protected
+     * @param array $args The field definition as sanitized in Kirki_Field.
+     */
+    final protected function add_control( $id, $args = array() ) {
+
+        if ( $id instanceof SiteEditorOptionsControl ) {
+            $control = $id;
+        } else {
+
+            $class_name = 'SiteEditorOptionsControl';
+
+            if ( array_key_exists( $args['type'], $this->control_types ) ) {
+                $class_name = $this->control_types[ $args['type'] ];
+            }
+
+            $control = new $class_name( SED()->editor->manager , sanitize_key( $id ), $args );
+
+        }
+
+        SED()->editor->manager->add_control( $control );
+
+    }
+
+    /**
+     * Register multi controls
+     *
+     * @param array $panels
+     * @access public
+     */
+    public static function add_controls( $panels = array() ){
 
         if( !empty( $panels ) && is_array( $panels ) ) {
 
             foreach ( $panels AS $panel_id => $args ) {
-                self::add_panel( $panel_id , $args );
+
+                if ( $args instanceof SiteEditorOptionsControl ) {
+                    self::add_control( $args );
+                }else {
+                    self::add_control( $panel_id , $args );
+                }
+
             }
 
         }
 
     }
 
-    public static function add_group(  $id = '', $args = array() ){
+    /**
+     * Register new panel type
+     *
+     * @since 1.0.0
+     * @access public
+     *
+     * @param $type
+     * @param $php_class --- panel class
+     */
+    public function register_panel_type( $type , $php_class ){
+
+        $this->panel_types[ $type ] = $php_class;
+
+        SED()->editor->manager->register_panel_type( $php_class );
+
+    }
+
+    /**
+     * Add a customize panel.
+     *
+     * @since 4.0.0
+     * @since 4.5.0 Return added WP_Customize_Panel instance.
+     * @access public
+     *
+     * @param WP_Customize_Panel|string $id   Customize Panel object, or Panel ID.
+     * @param array                     $args Optional. Panel arguments. Default empty array.
+     *
+     * @return WP_Customize_Panel             The instance of the panel that was added.
+     */
+    public function add_panel( $id, $args = array() ) {
+
+        if ( $id instanceof SiteEditorOptionsPanel ) {
+            $panel = $id;
+        } else {
+
+            if ( ! isset( $args['type'] ) || ! array_key_exists( $args['type'], $this->panel_types ) ) {
+                $args['type'] = 'default';
+            }
+
+            $panel_class_name = $this->panel_types[ $args['type'] ];
+
+            $panel = new $panel_class_name( SED()->editor->manager, sanitize_key( $id ), $args );
+
+        }
+
+        SED()->editor->manager->add_panel( $panel );
+    }
+    
+    /**
+     * Register multi panels
+     *
+     * @param array $panels
+     * @access public
+     */
+    public static function add_panels( $panels = array() ){
+
+        if( !empty( $panels ) && is_array( $panels ) ) {
+
+            foreach ( $panels AS $panel_id => $args ) {
+
+                if ( $args instanceof SiteEditorOptionsPanel ) {
+                    self::add_panel($args);
+                }else {
+                    self::add_panel($panel_id, $args);
+                }
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Register Controls And Settings By fields
+     */
+    public function register_fields(){
+
+        foreach ( $this->fields as $id => $field ) {
+
+            if ( ! $field instanceof SiteEditorField ) {
+                continue;
+            }
+
+            if( ! $field->check_capabilities() ){
+                continue;
+            }
+
+            $args = get_object_vars( $field );
+
+            $setting_id = $args['setting_id'];
+
+            unset( $args['setting_id'] );
+
+            unset( $args['id'] );
+
+            /*$setting_args = array(
+                'option_type'           =>  $field->option_type ,
+                'capability'            =>  $field->capability ,
+                'theme_supports'        =>  $field->theme_supports ,
+                'default'               =>  $field->default ,
+                'transport'             =>  $field->transport ,
+                'sanitize_callback'     =>  $field->sanitize_callback ,
+                'sanitize_js_callback'  =>  $field->sanitize_js_callback
+            );*/
+
+            // Create the settings.
+            $this->add_setting( $setting_id , $args );
+
+            $args['settings'] = $setting_id;
+
+            /*$control_args = array(
+                'capability'        =>  $field->capability ,
+                'priority'          =>  $field->priority ,
+                'panel'             =>  $field->panel ,
+                'label'             =>  $field->label ,
+                'description'       =>  $field->description ,
+                'choices'           =>  $field->choices ,
+                'input_attrs'       =>  $field->input_attrs ,
+                'type'              =>  $field->type ,
+                'option_group'      =>  $field->option_group ,
+                'active_callback'   =>  $field->active_callback
+            );*/
+
+            // Create the control.
+            $this->add_control( $id , $args );
+
+        }
+
+    }
+
+    /**
+     * @param $id
+     * @param array $args
+     * @return SiteEditorField
+     */
+    public function add_field(  $id , $args = array() ){
+
+        if ( $id instanceof SiteEditorField ) {
+            $field = $id;
+        } else {
+
+            $class_name = 'SiteEditorField';
+
+            if ( array_key_exists( $args['type'], $this->field_types ) ) {
+                $class_name = $this->field_types[ $args['type'] ];
+            }
+
+            $field = new $class_name( sanitize_key( $id ), $args );
+
+        }
+
+        $this->fields[ $field->id ] = $field;
+
+        return $field;
+
+    }
+
+    /**
+     * @param array $fields
+     */
+    public function add_fields( $fields = array() ){
+
+        if( !empty( $fields ) && is_array( $fields ) ) {
+
+            foreach ( $fields AS $field_id => $args ) {
+
+                if ( $args instanceof SiteEditorField ) {
+                    $this->add_field( $args );
+                }else {
+                    $this->add_field( $field_id , $args );
+                }
+
+            }
+
+        }
+
+    }
+
+    /**
+     * Retrieve a customize panel.
+     *
+     * @since 4.0.0
+     * @access public
+     *
+     * @param string $id Panel ID to get.
+     * @return WP_Customize_Panel|void Requested panel instance, if set.
+     */
+    public function get_field( $id ) {
+        if ( isset( $this->fields[ $id ] ) ) {
+            return $this->fields[ $id ];
+        }
+    }
+
+    /**
+     * Remove a customize panel.
+     *
+     * @since 4.0.0
+     * @access public
+     *
+     * @param string $id Panel ID to remove.
+     */
+    public function remove_field( $id ) {
+
+        if( isset( $this->fields[ $id ] ) ) {
+            unset( $this->fields[$id] );
+        }
+
+    }
+
+    /**
+     * Register a customize field type.
+     *
+     * Registered types are eligible to be rendered via JS and created dynamically.
+     *
+     * @since 1.0.0
+     * @access public
+     *
+     * @see WP_Customize_Panel
+     *
+     * @param string $php_class Name of a custom field which is a subclass of SiteEditorField.
+     */
+    public function register_field_type( $type , $php_class ) {
+
+        $this->field_types[$type] = $php_class;
+
+    }
+
+    /**
+     * Parses all fields and searches for the "partial_refresh" argument inside them.
+     * If that argument is found, then it starts parsing the array of arguments.
+     * Registers a selective_refresh in the customizer for each one of them.
+     *
+     * @param object $wp_customize WP_Customize_Manager.
+     */
+    public function register_partials( $manager ) {
+
+        // Get an array of all fields.
+        $fields = $this->fields;
+
+        // Start parsing the fields.
+        foreach ( $fields as $field_id => $field ) {
+            if ( isset( $field->partial_refresh ) && ! empty( $field->partial_refresh ) ) {
+                // Start going through each item in the array of partial refreshes.
+                foreach ( $field->partial_refresh as $partial_refresh => $partial_refresh_args ) {
+                    // If we have all we need, create the selective refresh call.
+                    if ( isset( $partial_refresh_args['render_callback'] ) && isset( $partial_refresh_args['selector'] ) ) {
+                        $manager->selective_refresh->add_partial( $partial_refresh, array(
+                            'selector'        => $partial_refresh_args['selector'],
+                            'settings'        => array( $field->setting_id ),
+                            'render_callback' => $partial_refresh_args['render_callback'],
+                        ) );
+                    }
+                }
+            }
+        }
+    }
+
+    public static function add_group(  $id , $args = array() ){
 
     }
 
@@ -127,15 +601,108 @@ class SiteEditorOptionsManager{
 
     }
 
-    public static function add_field(  $id = '', $args = array() ){
+}
 
-    }
+/*function register_default_groups(){
 
-    public static function add_fields( $groups = array() ){
+    sed_options()->add_group('site', array(
+        'capability'        => 'edit_theme_options',
+        'theme_supports'    => '',
+        'title'             => __("Site Options", "site-editor"),
+        'description'       => __("General Site Options", "site-editor"),
+        'type'              => 'default',
+    ));
 
-    }
+    sed_options()->add_group('theme', array(
+        'capability'        => 'edit_theme_options',
+        'theme_supports'    => '',
+        'title'             => __("Theme Options", "site-editor"),
+        'description'       => __("Theme Options for any theme", "site-editor"),
+        'type'              => 'default',
+    ));
+
+    sed_options()->add_group('add_layout', array(
+        'capability'        => 'edit_theme_options',
+        'theme_supports'    => '',
+        'title'             => __("Add Layout", "site-editor"),
+        'description'       => __("Add Custom Layout", "site-editor"),
+        'type'              => 'default',
+    ));
+
+    sed_options()->add_group('pages_layouts', array(
+        'capability'        => 'edit_theme_options',
+        'theme_supports'    => '',
+        'title'             => __("Layout settings", "site-editor"),
+        'description'       => __("Page layout settings", "site-editor"),
+        'type'              => 'default',
+    ));
+
+    sed_options()->add_group('page_general', array(
+        'capability'        => 'edit_theme_options',
+        'theme_supports'    => '',
+        'title'             => __("Page options", "site-editor"),
+        'description'       => __("Page general settings", "site-editor"),
+        'type'              => 'default',
+    ));
+
+    sed_options()->add_group('single_posts', array(
+        'capability'        => 'edit_theme_options',
+        'theme_supports'    => '',
+        'title'             => __("Single posts options", "site-editor"),
+        'description'       => __("Single posts settings", "site-editor"),
+        'type'              => 'default',
+    ));
+
+    sed_options()->add_group('posts_archive', array(
+        'capability'        => 'edit_theme_options',
+        'theme_supports'    => '',
+        'title'             => __("Posts archive options", "site-editor"),
+        'description'       => __("Archive settings", "site-editor"),
+        'type'              => 'default',
+    ));
+
+    sed_options()->add_group('sed_image', array(
+        'capability'        => 'edit_theme_options',
+        'theme_supports'    => '',
+        'title'             => __("Image settings", "site-editor"),
+        'description'       => __("Image module settings", "site-editor"),
+        'type'              => 'default',
+    ));
 
 }
+
+add_action( 'sed_app_register_components', 'register_default_groups' );
+
+
+function register_site_options(){
+
+    sed_options()->add_panel('panel_id', array(
+        'priority'          => 10,
+        'type'              => 'inner_panel',
+        'title'             => __('My Title', 'textdomain'),
+        'description'       => __('My Description', 'textdomain'),
+        'option_group'      => 'site_options',
+        'capability'        => '',
+        'theme_supports'    => '',
+        'parent_id '        => "root",
+        'atts'              => array(),
+        'active_callback'   => ''
+    ));
+
+    sed_options()->add_field('field_id' , array(
+        'settings'          => 'my_setting',
+        'label'             => __('My custom control', 'translation_domain'),
+        'type'              => 'text',
+        'priority'          => 10,
+        'default'           => 'some-default-value',
+        //panel or group
+        'panel'             => 'panel_id',
+        'option_group'      => 'site_options',
+    ));
+
+}
+
+add_action( 'sed_register_site_options' , 'register_site_options' );
 
 
 function register_options_groups()
@@ -172,38 +739,118 @@ add_action("sed_app_register", "register_options_groups");
 
 function register_params( )
 {
+    $panels = array(
 
-    sed_options()->add_panel('panel_id', array(
-        'priority' => 10,
-        'type' => 'inner_panel',
-        'title' => __('My Title', 'textdomain'),
-        'description' => __('My Description', 'textdomain'),
-        'group' => 'group_id'
-    ));
+        'panel_id1' =>  array(
+            'priority'          => 10,
+            'type'              => 'inner_panel',
+            'title'             => __('My Title', 'textdomain'),
+            'description'       => __('My Description', 'textdomain'),
+            'option_group'      => 'group_id' ,
+            'capability'        => '' ,
+            'theme_supports'    => '' ,
+            'parent_id '        => "root",
+            'atts'              => array() ,
+            'active_callback'   => ''
+        ) ,
+
+        new myCustomOptionsPanel( 'panel_id2' , array(
+            'priority'          => 10,
+            'type'              => 'inner_panel',
+            'title'             => __('My Title', 'textdomain'),
+            'description'       => __('My Description', 'textdomain'),
+            'option_group'      => 'group_id' ,
+            'capability'        => '' ,
+            'theme_supports'    => '' ,
+            'parent_id '        => "root",
+            'atts'              => array() ,
+            'active_callback'   => ''
+        )) ,
+
+        'panel_id3' =>  array(
+            'priority'          => 10,
+            'type'              => 'inner_panel',
+            'title'             => __('My Title', 'textdomain'),
+            'description'       => __('My Description', 'textdomain'),
+            'option_group'      => 'group_id' ,
+            'capability'        => '' ,
+            'theme_supports'    => '' ,
+            'parent_id '        => "root",
+            'atts'              => array() ,
+            'active_callback'   => ''
+        ) ,
+
+    );
+
+    sed_options()->add_panels( $panels );
 
 
-    sed_options()->add_panels($panel_ids);
+    $fields = array(
 
+        'field_id1'=> array(
+            'settings' => 'my_setting',
+            'label' => __('My custom control', 'translation_domain'),
+            'section' => 'my_section',
+            'type' => 'text',
+            'priority' => 10,
+            'default' => 'some-default-value',
+            //panel or group
+            'panel' => 'panel_id'
+        ) ,
 
-    sed_options()->add_field('field_id', array(
-        'settings' => 'my_setting',
-        'label' => __('My custom control', 'translation_domain'),
-        'section' => 'my_section',
-        'type' => 'text',
-        'priority' => 10,
-        'default' => 'some-default-value',
-        //panel or group
-        'panel' => 'panel_id'
-    ));
+        new myCustomField( 'field_id2' , array(
+            'settings' => 'my_setting',
+            'label' => __('My custom control', 'translation_domain'),
+            'section' => 'my_section',
+            'type' => 'text',
+            'priority' => 10,
+            'default' => 'some-default-value',
+            //panel or group
+            'panel' => 'panel_id'
+        )) ,
 
-    sed_options()->add_fields($fields);
+        'field_id3'=> array(
+            'settings' => 'my_setting',
+            'label' => __('My custom control', 'translation_domain'),
+            'section' => 'my_section',
+            'type' => 'text',
+            'priority' => 10,
+            'default' => 'some-default-value',
+            //panel or group
+            'panel' => 'panel_id'
+        ) ,
+
+    );
+
+    sed_options()->add_fields( $fields );
 }
 
 add_action( "sed_load_options_group_id1" , "register_params" );
+*/
+
+function sed_add_layout_options(){
+
+    sed_options()->add_field( 'radio_field_id' , array(
+        'setting_id'        => 'my_setting',
+        'label'             => __('My custom control', 'translation_domain'),
+        'type'              => 'radio',
+        'priority'          => 10,
+        'default'           => 'some-default-value',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "options1_value" ,
+            "options2_key"      =>    "options2_value" ,
+            "options3_key"      =>    "options3_value" ,
+            "options4_key"      =>    "options4_value" ,
+        ) ,
+        //'input_attrs'
+    ));
 
 
 
-
-function sed_options(){
-    return SED()->editor->options;
 }
+
+add_action( "sed_register_sed_add_layout_options" , "sed_add_layout_options" );

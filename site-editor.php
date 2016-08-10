@@ -333,7 +333,7 @@ function SED() {
 // Global for backwards compatibility.
 $GLOBALS['sed_apps'] = SED();
 
-$GLOBALS['sed_pb_modules'] = "" ;
+$GLOBALS['sed_pb_modules'] = "" ; 
 
 
 

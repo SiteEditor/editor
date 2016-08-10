@@ -249,7 +249,7 @@
 
                     var output = this.response.data.output ,
                         controls = this.response.data.controls,
-                        relations = this.response.data.relations;
+                        relations = this.response.data.relations; 
 
                     var $currentElDialog = $( output ).appendTo( $( selector ) );
 

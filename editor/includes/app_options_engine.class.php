@@ -55,7 +55,7 @@ Class AppOptionsEngine {
         add_action("sed_footer" , array($this, 'print_settings_template') , 10000 );
         add_filter( "sed_js_I18n", array($this,'js_I18n'));
 
-        add_action( 'site_editor_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options
+        //add_action( 'site_editor_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options
 
     }
 

@@ -80,7 +80,7 @@ final Class SiteEditorApp {
 
         $this->save = new SEDAppSave();
 
-        $this->app = new SiteEditorApplication();
+        $this->app = new SiteEditorApplication(); 
 
         // Global for backwards compatibility
         $GLOBALS['site_editor_app'] = $this->app;
@@ -110,6 +110,8 @@ final Class SiteEditorApp {
         require_once SED_INC_EDITOR_DIR . DS . 'site-editor-contextmenu.class.php';
         require_once SED_INC_EDITOR_DIR . DS . 'site-editor-module-provider.class.php';
         $this->manager = new SiteEditorManager();
+
+        do_action( "sed_after_init_manager" );
 
     }
 
