@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: checkbox.
+ * SiteEditor Control: dimension.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,22 +12,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
+if ( ! class_exists( 'SiteEditorDimensionControl' ) ) {
 
 	/**
-	 * Checkbox control
+	 * Dimension control
 	 */
-	class SiteEditorCheckboxControl extends SiteEditorOptionsControl {
+	class SiteEditorDimensionControl extends SiteEditorOptionsControl {
 
 		/**
 		 * The control type.
 		 *
-		 * @access public
+		 * @access public 
 		 * @var string
 		 */
-		public $type = 'checkbox';
+		public $type = 'dimension';
 
-		/**  
+		public $invalid_value = '';		
+
+		/**
 		 * Enqueue control related scripts/styles.
 		 *
 		 * @access public
@@ -47,7 +49,7 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-checkbox-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-dimension-input sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -58,15 +60,12 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 			?>
 
 
-
-	        <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-	        <?php $checked = ( "true" == $value ) ? 'checked="checked"' : ''; ?>
-
-            <label for="<?php echo $sed_field_id ;?>" class="sed-bp-form-checkbox">
-                <input  type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="true" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $checked;?> <?php echo $atts_string;?> />
-                <?php echo $this->label;?>
-            </label>
-
+			<label class=""><?php echo $this->label;?></label>
+			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+			<div class="sed-bp-form-dimension">
+				<input type="text" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $value );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>"  <?php echo $atts_string;?> />
+				<span class="invalid-value"><?php echo $this->invalid_value;?></span>
+			</div>
 
 			<?php
 		}
@@ -86,4 +85,4 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'checkbox' , 'SiteEditorCheckboxControl' );
+sed_options()->register_control_type( 'dimension' , 'SiteEditorDimensionControl' );

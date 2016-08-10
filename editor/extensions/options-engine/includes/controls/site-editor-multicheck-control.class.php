@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
+if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 
 	/**
-	 * Checkbox control
+	 * Multicheck control
 	 */
-	class SiteEditorCheckboxControl extends SiteEditorOptionsControl {
+	class SiteEditorMulticheckControl extends SiteEditorOptionsControl {
 
 		/**
 		 * The control type.
@@ -53,6 +53,8 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 
+            $value          = $this->settings['default'];
+
 			?>
 
 
@@ -63,7 +65,7 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
             <h5 class="sed-multicheck-title"><?php echo $this->label .' :';?></h5>
 
 	        <?php             
-	            $values = explode( "," , $this->settings['default']);
+	            $values = explode( "," , $value);
 	            $values = array_map( 'trim' , $values );
 	            $i = 1;
 	            foreach( $choices as $key_val => $choice ){
@@ -100,3 +102,5 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 		}
 	}
 }
+
+sed_options()->register_control_type( 'multicheck' , 'SiteEditorMulticheckControl' );
