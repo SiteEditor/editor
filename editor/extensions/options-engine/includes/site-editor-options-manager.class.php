@@ -78,7 +78,7 @@ final class SiteEditorOptionsManager{
         add_action( 'sed_app_register', array( $this, 'register_partials' ), 99 );
 
         add_action( 'sed_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-        
+
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ) );
 
     }

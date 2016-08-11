@@ -33,7 +33,7 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 		 * @access public
 		 */
 		public function enqueue() {
-
+			
 		}
 
 		/**

@@ -2370,22 +2370,81 @@
         checkbox                : api.SiteEditorElements ,
         image                   : api.ChangeImageControl ,
         multi_images            : api.MultiImagesControl ,
+        "multi-image"           : api.MultiImagesControl ,
+        gallery                 : api.MultiImagesControl ,
         video                   : api.ChangeVideoControl ,
         audio                   : api.ChangeAudioControl ,
         file                    : api.ChangeFilesControl ,
         dropdown                : api.SedDropdownControl ,
         spinner                 : api.SpinnerControl,
+        number                  : api.SpinnerControl,
         checkboxes              : api.CheckBoxesControl,
+        multicheck              : api.CheckBoxesControl,
         spinner_lock            : api.SpinnerLockControl ,
         color                   : api.ColorControl,
         multi_icons             : api.OrganizeIconsControl,
+        "multi-icon"            : api.OrganizeIconsControl,
         icon                    : api.ChangeIconControl,
         animations              : api.Animations ,
         skins                   : api.ModuleSkins ,
         widget                  : api.WidgetControl ,
-        gradient                : api.GradientControl,
+        gradient                : api.GradientControl
         //module_element          : api.ModulesElement ,
         //style_editor_element    : api.StyleEditorElements
+        /**
+         * ----------------------------
+         * @todo : other types for the future
+         * ----------------------------
+         * @ajax-button
+         * @google-map
+         * ...
+         * -----------------------------
+         * @New *****
+         * -----------------------------
+         * @code
+         * @custom
+         * @dropdown-pages
+         * @multicolor
+         * @radio-image
+         * @radio-buttonset
+         * @repeater
+         * @slider
+         * @sortable
+         * @switch
+         * @toggle
+         * @date : for date & time
+         * @dimension
+         * @wp_editor
+         * -----------------------------
+         * @Primary *****
+         * -----------------------------
+         * @text
+         * @radio
+         * @select
+         * @textarea
+         * @checkbox
+         * @multicheck
+         * @image
+         * @multi-image
+         * @video
+         * @audio
+         * @file
+         * @number
+         * @color
+         * @icon
+         * @multi-icon
+         * ------------------------------
+         * @Module *****
+         * ------------------------------
+         * @animations
+         * @skin
+         * ------------------------------
+         * @Other *****
+         * ------------------------------
+         * @widget
+         * @gradient
+         * @spinner_lock
+         */
     });
 
   $( function() {

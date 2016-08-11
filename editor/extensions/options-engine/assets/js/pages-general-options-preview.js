@@ -10,7 +10,7 @@
 
     $( function() {
 
-        api.appPreset = new api.AppPreset({});
+        api.appPreset = new api.AppPreset({}); 
 
     });
 

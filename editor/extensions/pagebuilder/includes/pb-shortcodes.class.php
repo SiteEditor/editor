@@ -588,6 +588,7 @@ class PBShortcodeClass{
     }
 
     function create_settings(){
+
         $this->atts = $this->default_atts();
         $params = apply_filters( "sed_shortcode_settings" , $this->shortcode_settings() , $this );
 
