@@ -431,6 +431,10 @@ final class SiteEditorOptionsManager{
 
             unset( $args['id'] );
 
+            $setting_args = $args;
+
+            unset( $setting_args['type'] );
+
             /*$setting_args = array(
                 'option_type'           =>  $field->option_type ,
                 'capability'            =>  $field->capability ,
@@ -442,9 +446,11 @@ final class SiteEditorOptionsManager{
             );*/
 
             // Create the settings.
-            $this->add_setting( $setting_id , $args );
+            $this->add_setting( $setting_id , $setting_args );
 
-            $args['settings'] = $setting_id;
+            $control_args = $args;
+
+            $control_args['settings'] = $setting_id;
 
             /*$control_args = array(
                 'capability'        =>  $field->capability ,
@@ -460,7 +466,7 @@ final class SiteEditorOptionsManager{
             );*/
 
             // Create the control.
-            $this->add_control( $id , $args );
+            $this->add_control( $id , $control_args );
 
         }
 

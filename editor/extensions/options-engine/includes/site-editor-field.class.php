@@ -193,6 +193,8 @@ class SiteEditorField{
                 $this->$key = $args[ $key ];
         }
 
+        $this->id = $id;
+
         $this->set_field();
 
     }
