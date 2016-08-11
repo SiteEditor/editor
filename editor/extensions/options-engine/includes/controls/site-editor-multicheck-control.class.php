@@ -58,17 +58,15 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 			?>
 
 
-
+            <label class=""><?php echo $this->label;?></label>
 	        <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-
             <div for="<?php echo $sed_field_id . $i ;?>" class="sed-bp-form-multicheck sed-multicheck">
-            <h5 class="sed-multicheck-title"><?php echo $this->label .' :';?></h5>
 
 	        <?php             
 	            $values = explode( "," , $value);
 	            $values = array_map( 'trim' , $values );
 	            $i = 1;
-	            foreach( $choices as $key_val => $choice ){
+	            foreach( $this->choices as $key_val => $choice ){
 	            $checked = ( is_array( $values ) && in_array( $key_val , $values) ) ? 'checked="checked"' : '';	
 	    	?>
 

@@ -76,14 +76,14 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 	        <div class="sed-bp-form-select-field-container">
 
 		        <label><?php echo $this->label;?></label>
-		        <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>">"></span>
+		        <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
 
 		        <select  name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" class="<?php echo esc_attr( $classes ); ?>" <?php echo $atts_string;?>>
 
 				<?php
 		        if( $this->optgroup === false ){
 
-		            foreach( $choices as $key_val => $choice )
+		            foreach( $this->choices as $key_val => $choice )
 		            {
 		                $selected = ($value == $key_val) ? 'selected="selected"' : '';
 	            ?>
@@ -94,7 +94,7 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 
 		        }else{
 
-		            foreach( $choices as $this->optgroup => $group_options )
+		            foreach( $this->choices as $this->optgroup => $group_options )
 		            {
 		        ?>    	
 		                <optgroup label="<?php echo $this->groups[$this->optgroup];?>">

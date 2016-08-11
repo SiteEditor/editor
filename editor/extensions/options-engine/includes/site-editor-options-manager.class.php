@@ -857,7 +857,7 @@ function sed_add_layout_options(){
 
     sed_options()->add_field( 'change_media_field_id' , array(
         'setting_id'        => 'my_setting2',
-        'label'             => __('My custom control', 'translation_domain'),
+        'label'             => __('Change Media', 'translation_domain'),  
         'type'              => 'change_media',
         'priority'          => 11,
         'default'           => '',
@@ -883,7 +883,7 @@ function sed_add_layout_options(){
 
     sed_options()->add_field( 'color_field_id' , array(
         'setting_id'        => 'my_setting4',
-        'label'             => __('My custom control', 'translation_domain'),
+        'label'             => __('Color control', 'translation_domain'),
         'type'              => 'color',
         'priority'          => 13,
         'default'           => '',
@@ -893,6 +893,171 @@ function sed_add_layout_options(){
         'transport'         => 'postMessage' ,
         //'input_attrs'
     ));
+
+    sed_options()->add_field( 'icon_field_id' , array(
+        'setting_id'        => 'my_setting5',
+        'label'             => __('Icon control', 'translation_domain'),
+        'type'              => 'icon',
+        'priority'          => 14,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'multi_icons_field_id' , array(
+        'setting_id'        => 'my_setting6',
+        'label'             => __('Multi Icons control', 'translation_domain'),
+        'type'              => 'multi_icons',
+        'priority'          => 15,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'image_field_id' , array(
+        'setting_id'        => 'my_setting7',
+        'label'             => __('Image control', 'translation_domain'),
+        'type'              => 'image',
+        'priority'          => 16,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'multi_images_field_id' , array(
+        'setting_id'        => 'my_setting8',
+        'label'             => __('Multi Images control', 'translation_domain'),
+        'type'              => 'multi_images', 
+        'priority'          => 17,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'multicheck_field_id' , array(
+        'setting_id'        => 'my_setting9',
+        'label'             => __('Multi Checkbox', 'translation_domain'),
+        'type'              => 'multicheck',
+        'priority'          => 18,
+        'default'           => 'options3_key',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "options1_value" ,
+            "options2_key"      =>    "options2_value" ,
+            "options3_key"      =>    "options3_value" ,
+            "options4_key"      =>    "options4_value" ,
+        ) ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'select_field_id' , array(
+        'setting_id'        => 'my_setting10',
+        'label'             => __('Select', 'translation_domain'),
+        'type'              => 'select',
+        'priority'          => 19,
+        'default'           => 'options3_key',
+        'subtype'           => 'single',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "options1_value" ,
+            "options2_key"      =>    "options2_value" ,
+            "options3_key"      =>    "options3_value" ,
+            "options4_key"      =>    "options4_value" ,
+        ) ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'multiselect_field_id' , array(
+        'setting_id'        => 'my_setting11',
+        'label'             => __('Multi Select', 'translation_domain'),
+        'type'              => 'select',
+        'priority'          => 20,
+        'default'           => 'options3_key',
+        'subtype'           => 'multi',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "options1_value" ,
+            "options2_key"      =>    "options2_value" ,
+            "options3_key"      =>    "options3_value" ,
+            "options4_key"      =>    "options4_value" ,
+        ) ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'spinner_field_id' , array(
+        'setting_id'        => 'my_setting12',
+        'label'             => __('Spinner control', 'translation_domain'),
+        'type'              => 'spinner', 
+        'priority'          => 21,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'text_field_id' , array(
+        'setting_id'        => 'my_setting13',
+        'label'             => __('Text control', 'translation_domain'),
+        'type'              => 'text', 
+        'priority'          => 22,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'text_field_id_2' , array(
+        'setting_id'        => 'my_setting14',
+        'label'             => __('Text control', 'translation_domain'),
+        'type'              => 'text', 
+        'subtype'           => 'email', 
+        'priority'          => 23,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'textarea_field_id' , array(
+        'setting_id'        => 'my_setting15',
+        'label'             => __('Textarea control', 'translation_domain'),
+        'type'              => 'textarea', 
+        'priority'          => 24,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
 }
 
 add_action( "sed_register_sed_add_layout_options" , "sed_add_layout_options" );

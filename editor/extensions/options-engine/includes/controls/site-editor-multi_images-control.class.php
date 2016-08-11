@@ -58,17 +58,17 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 			?>
 
 
-        	<div class="setting-image">';
+        	<div class="setting-image">
 	        	<div class="images-organize-box">
 	        		<ul class="images-sortable"></ul>
-	        	</div>';
-	        	<div class="select-img-btns">';
+	        	</div>
+	        	<div class="select-img-btns">
 
-	        		<button class="<?php echo esc_attr( $classes ); ?>" ><?php echo $this->label;?></button>';
+	        		<button class="<?php echo esc_attr( $classes ); ?>" ><?php echo $this->label;?></button>
 
 	        	</div>
 	        	<div class="clr"></div>
-        	</div>';
+        	</div>
 
 
 			<?php
