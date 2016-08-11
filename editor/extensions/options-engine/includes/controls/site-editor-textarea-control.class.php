@@ -80,4 +80,4 @@ if ( ! class_exists( 'SiteEditorTextareaControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'textarea' , 'SiteEditorTextareaControl' );
+$this->register_control_type( 'textarea' , 'SiteEditorTextareaControl' );

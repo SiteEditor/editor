@@ -103,4 +103,4 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'multicheck' , 'SiteEditorMulticheckControl' );
+$this->register_control_type( 'multicheck' , 'SiteEditorMulticheckControl' );

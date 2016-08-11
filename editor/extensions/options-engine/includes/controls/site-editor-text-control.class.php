@@ -83,4 +83,4 @@ if ( ! class_exists( 'SiteEditorTextControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'text' , 'SiteEditorTextControl' );
+$this->register_control_type( 'text' , 'SiteEditorTextControl' );

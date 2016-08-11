@@ -79,4 +79,4 @@ if ( ! class_exists( 'SiteEditorDatepickerControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'datepicker' , 'SiteEditorDatepickerControl' );
+$this->register_control_type( 'datepicker' , 'SiteEditorDatepickerControl' );

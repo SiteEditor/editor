@@ -97,4 +97,4 @@ if ( ! class_exists( 'SiteEditorSwitchControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'switch' , 'SiteEditorSwitchControl' );
+$this->register_control_type( 'switch' , 'SiteEditorSwitchControl' );

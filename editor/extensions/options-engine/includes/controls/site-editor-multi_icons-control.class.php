@@ -88,4 +88,4 @@ if ( ! class_exists( 'SiteEditorMultiIconsControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'multi_icons' , 'SiteEditorMultiIconsControl' );
+$this->register_control_type( 'multi_icons' , 'SiteEditorMultiIconsControl' );

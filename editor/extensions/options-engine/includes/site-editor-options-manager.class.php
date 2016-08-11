@@ -849,6 +849,44 @@ function sed_add_layout_options(){
         //'input_attrs'
     ));
 
+    sed_options()->add_field( 'change_media_field_id' , array(
+        'setting_id'        => 'my_setting2',
+        'label'             => __('My custom control', 'translation_domain'),
+        'type'              => 'change_media',
+        'priority'          => 11,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'checkbox_field_id' , array(
+        'setting_id'        => 'my_setting3',
+        'label'             => __('Checkbox', 'translation_domain'),
+        'type'              => 'checkbox',
+        'priority'          => 12,
+        'default'           => true, 
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'color_field_id' , array(
+        'setting_id'        => 'my_setting4',
+        'label'             => __('My custom control', 'translation_domain'),
+        'type'              => 'color',
+        'priority'          => 13,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
 }
 
 add_action( "sed_register_sed_add_layout_options" , "sed_add_layout_options" );

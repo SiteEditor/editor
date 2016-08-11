@@ -55,7 +55,7 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 
             $value          = $this->value();
 
-	        $dialog_class = (isset($dialog['class'])) ? $dialog['class']: "";
+	        /*$dialog_class = (isset($dialog['class'])) ? $dialog['class']: "";
 	        $dialog_attrs = "";
 	        if(!empty($dialog) && is_array($dialog)){
 	            foreach($dialog AS $attr => $value){
@@ -84,7 +84,7 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 	        }
 
 	        $class = (!empty($class)) ? $class_style . " " . $class : $class_style;
-
+           */
 
 			?>
 
@@ -93,7 +93,7 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 				<?php echo $this->label;?>
 				<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
 			</button>
-			<div id="<?php echo esc_attr( $sed_field_id );?>_dialog" class="sed-dialog content <?php echo $dialog_class; ?>" <?php echo $dialog_attrs; ?>></div>
+			<div id="<?php echo esc_attr( $sed_field_id );?>_dialog" class="sed-dialog content <?php //echo $dialog_class; ?>" <?php //echo $dialog_attrs; ?>></div>
 
 
 			<?php
@@ -114,4 +114,4 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'button' , 'SiteEditorButtonControl' );
+$this->register_control_type( 'button' , 'SiteEditorButtonControl' );

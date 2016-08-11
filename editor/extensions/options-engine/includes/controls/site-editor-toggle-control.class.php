@@ -85,4 +85,4 @@ if ( ! class_exists( 'SiteEditorToggleControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'toggle' , 'SiteEditorToggleControl' );
+$this->register_control_type( 'toggle' , 'SiteEditorToggleControl' );

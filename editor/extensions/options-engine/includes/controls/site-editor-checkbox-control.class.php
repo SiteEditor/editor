@@ -86,4 +86,4 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'checkbox' , 'SiteEditorCheckboxControl' );
+$this->register_control_type( 'checkbox' , 'SiteEditorCheckboxControl' );

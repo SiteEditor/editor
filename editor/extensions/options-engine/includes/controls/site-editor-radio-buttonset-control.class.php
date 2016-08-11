@@ -95,4 +95,4 @@ if ( ! class_exists( 'SiteEditorRadioButtonsetControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'radio-buttonset' , 'SiteEditorRadioButtonsetControl' );
+$this->register_control_type( 'radio-buttonset' , 'SiteEditorRadioButtonsetControl' );

@@ -85,4 +85,4 @@ if ( ! class_exists( 'SiteEditorDimensionControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'dimension' , 'SiteEditorDimensionControl' );
+$this->register_control_type( 'dimension' , 'SiteEditorDimensionControl' );

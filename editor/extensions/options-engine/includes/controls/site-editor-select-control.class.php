@@ -140,4 +140,4 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'select' , 'SiteEditorSelectControl' );
+$this->register_control_type( 'select' , 'SiteEditorSelectControl' );

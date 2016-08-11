@@ -100,4 +100,4 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'image' , 'SiteEditorImageControl' ); 
+$this->register_control_type( 'image' , 'SiteEditorImageControl' ); 

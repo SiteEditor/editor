@@ -57,7 +57,7 @@ if ( ! class_exists( 'SiteEditorColorControl' ) ) {
 
 			?>
 
-            <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>">"></span>
+            <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
             <div class="colorpicker">
 	            <label><?php echo $this->label;?></label>
 	            <span class="colorselector">
@@ -84,4 +84,4 @@ if ( ! class_exists( 'SiteEditorColorControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'color' , 'SiteEditorColorControl' );
+$this->register_control_type( 'color' , 'SiteEditorColorControl' );

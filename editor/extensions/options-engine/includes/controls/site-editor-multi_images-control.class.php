@@ -89,4 +89,4 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'multi_images' , 'SiteEditorMultiImagesControl' );
+$this->register_control_type( 'multi_images' , 'SiteEditorMultiImagesControl' );

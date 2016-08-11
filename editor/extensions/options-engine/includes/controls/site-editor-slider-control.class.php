@@ -104,4 +104,4 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'slider' , 'SiteEditorSliderControl' );
+$this->register_control_type( 'slider' , 'SiteEditorSliderControl' );

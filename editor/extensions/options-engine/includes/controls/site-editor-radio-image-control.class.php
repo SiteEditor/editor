@@ -98,4 +98,4 @@ if ( ! class_exists( 'SiteEditorRadioImageControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'radio-image' , 'SiteEditorRadioImageControl' );
+$this->register_control_type( 'radio-image' , 'SiteEditorRadioImageControl' );

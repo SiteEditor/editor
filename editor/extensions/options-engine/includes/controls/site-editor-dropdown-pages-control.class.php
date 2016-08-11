@@ -106,4 +106,4 @@ if ( ! class_exists( 'SiteEditorDropdownPagesControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'dropdown-pages' , 'SiteEditorDropdownPagesControl' );
+$this->register_control_type( 'dropdown-pages' , 'SiteEditorDropdownPagesControl' );

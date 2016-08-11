@@ -97,4 +97,4 @@ if ( ! class_exists( 'SiteEditorRepeaterControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'repeater' , 'SiteEditorRepeaterControl' );
+$this->register_control_type( 'repeater' , 'SiteEditorRepeaterControl' );

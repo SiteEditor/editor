@@ -93,4 +93,4 @@ if ( ! class_exists( 'SiteEditorChangeMediaControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'change_media' , 'SiteEditorChangeMediaControl' );
+$this->register_control_type( 'change_media' , 'SiteEditorChangeMediaControl' );

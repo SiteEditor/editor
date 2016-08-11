@@ -84,4 +84,4 @@ if ( ! class_exists( 'SiteEditorSpinnerControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'spinner' , 'SiteEditorSpinnerControl' );
+$this->register_control_type( 'spinner' , 'SiteEditorSpinnerControl' );

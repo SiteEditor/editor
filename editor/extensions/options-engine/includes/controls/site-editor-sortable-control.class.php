@@ -97,4 +97,4 @@ if ( ! class_exists( 'SiteEditorSortableControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'sortable' , 'SiteEditorSortableControl' );
+$this->register_control_type( 'sortable' , 'SiteEditorSortableControl' );

@@ -95,4 +95,4 @@ if ( ! class_exists( 'SiteEditorIconControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'icon' , 'SiteEditorIconControl' );
+$this->register_control_type( 'icon' , 'SiteEditorIconControl' );
