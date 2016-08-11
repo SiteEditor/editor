@@ -36,7 +36,7 @@ class SedOptionsEngineExtension {
 
 }
 
-new SedOptionsEngineExtension( $this );
+new SedOptionsEngineExtension( $this ); 
 
 function sed_options(){
     return SED()->editor->options;

@@ -41,13 +41,9 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 		 *
 		 * @since 3.4.0
 		 */
-		protected function render() {
+		protected function render_content() {
 
-			//$atts           = $this->options->template->get_atts( $this->input_attrs );
-			$atts 			= array(
-				'atts'		=> '' ,
-				'class'		=> ''
-			);
+			$atts           = $this->input_attrs();
 
 			$atts_string    = $atts["atts"];
 
@@ -57,7 +53,7 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 
-            $value          = $this->settings['default'];
+            $value          = $this->value();
 
 			?>
 

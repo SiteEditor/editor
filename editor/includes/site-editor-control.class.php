@@ -126,6 +126,12 @@ class SiteEditorOptionsControl{
 	public $type = 'text';
 
 	/**
+	 * @access public
+	 * @var string
+	 */
+	public $has_border_box = true;
+
+	/**
 	 * Option group id of this panel.
 	 *
 	 * @since 1.0.0
@@ -397,16 +403,35 @@ class SiteEditorOptionsControl{
 
 	/**
 	 * Renders the control wrapper and calls $this->render_content() for the internals.
+	 * @todo: Using Tpl file for template instead directly in class
 	 *
 	 * @since 3.4.0
 	 */
 	protected function render() {
-		$id    = 'customize-control-' . str_replace( array( '[', ']' ), array( '-', '' ), $this->id );
-		$class = 'customize-control customize-control-' . $this->type;
 
-		?><li id="<?php echo esc_attr( $id ); ?>" class="<?php echo esc_attr( $class ); ?>">
-		<?php $this->render_content(); ?>
-		</li><?php
+		$id    = 'sed-app-control-' . str_replace( array( '[', ']' ), array( '-', '' ), $this->id );
+
+		$class = 'row_setting_inner sed-app-container-control sed-app-container-control-' . $this->type;
+
+		$class .= ( $this->has_border_box ) ? ' row_setting_box' : '';
+
+		?>
+
+		<div class="row_settings">
+
+			<div class="<?php echo esc_attr( $class ); ?>">
+
+				<div id="<?php echo esc_attr( $id ); ?>" class="clearfix">
+
+					<?php $this->render_content(); ?>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<?php
 	}
 
 	/**
@@ -416,13 +441,33 @@ class SiteEditorOptionsControl{
 	 * @access public
 	 */
 	public function input_attrs() {
-		foreach ( $this->input_attrs as $attr => $value ) {
-			echo $attr . '="' . esc_attr( $value ) . '" ';
+
+		$atts_string = "";
+		$class = "";
+
+		if( is_array( $this->input_attrs ) ) {
+
+			foreach ($this->input_attrs as $attr => $value) {
+
+				if( $attr == "class" ){
+					$class = $value;
+				}else{
+					$atts_string .= $attr . '="' . esc_attr($value) . '" ';
+				}
+
+			}
+
 		}
+
+		return array(
+			"atts"   =>  $atts_string  ,
+			"class"  =>  $class
+		);
 	}
 
 	/**
 	 * Render the control's content.
+	 * @todo: Using Tpl file for template instead directly in class
 	 *
 	 * Allows the content to be overriden without having to rewrite the wrapper in $this->render().
 	 *

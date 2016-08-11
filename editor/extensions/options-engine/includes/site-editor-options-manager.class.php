@@ -835,7 +835,7 @@ function sed_add_layout_options(){
         'label'             => __('My custom control', 'translation_domain'),
         'type'              => 'radio',
         'priority'          => 10,
-        'default'           => 'some-default-value',
+        'default'           => 'options3_key',
         //panel or group
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
@@ -848,8 +848,6 @@ function sed_add_layout_options(){
         ) ,
         //'input_attrs'
     ));
-
-
 
 }
 
