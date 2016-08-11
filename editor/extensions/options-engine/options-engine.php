@@ -32,6 +32,50 @@ class SedOptionsEngineExtension {
 
         $editor->options = new SiteEditorOptionsManager();
 
+        add_action( 'wp_default_scripts'			, array( $this, 'register_scripts' ), 11 );
+
+        add_action( 'wp_default_styles'				, array( $this, 'register_styles' ), 11 );
+
+    }
+
+    /**
+     * Register scripts for Customize Posts.
+     *
+     * @param WP_Scripts $wp_scripts Scripts.
+     */
+    public function register_scripts( WP_Scripts $wp_scripts ) {
+        $suffix = ( SCRIPT_DEBUG ? '' : '.min' ) . '.js';
+
+        $handle = 'sed-options-controls';
+        $src = SED_EXT_URL . 'options-engine/assets/js/options-controls' . $suffix ;
+        $deps = array( 'siteeditor' );
+
+        $in_footer = 1;
+        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
+
+
+        $handle = 'sed-options-controls-preview';
+        $src = SED_EXT_URL . 'options-engine/assets/js/options-controls-preview' . $suffix ;
+        $deps = array( 'sed-frontend-editor' );
+
+        $in_footer = 1;
+        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
+
+    }
+
+    /**
+     * Register styles for Customize Posts.
+     *
+     * @param WP_Styles $wp_styles Styles.
+     */
+    public function register_styles( WP_Styles $wp_styles ) {
+        $suffix = ( SCRIPT_DEBUG ? '' : '.min' ) . '.css';
+
+        $handle = 'sed-options-controls';
+        $src = SED_EXT_URL . 'options-engine/assets/css/options-controls' . $suffix ;
+        $deps = array( 'siteeditor' );
+        $wp_styles->add( $handle, $src, $deps, SED_VERSION );
+
     }
 
 }

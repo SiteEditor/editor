@@ -77,6 +77,10 @@ final class SiteEditorOptionsManager{
 
         add_action( 'sed_app_register', array( $this, 'register_partials' ), 99 );
 
+        add_action( 'sed_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+        
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ) );
+
     }
 
     public function sed_ajax_load_options(){
@@ -425,13 +429,17 @@ final class SiteEditorOptionsManager{
 
             $args = get_object_vars( $field );
 
+            $primary_args = $args['primary_args'];
+
+            unset( $args['primary_args'] );
+
             $setting_id = $args['setting_id'];
 
             unset( $args['setting_id'] );
 
             unset( $args['id'] );
 
-            $setting_args = $args;
+            $setting_args = array_merge( $primary_args , $args );
 
             unset( $setting_args['type'] );
 
@@ -448,7 +456,7 @@ final class SiteEditorOptionsManager{
             // Create the settings.
             $this->add_setting( $setting_id , $setting_args );
 
-            $control_args = $args;
+            $control_args = array_merge( $primary_args , $args );
 
             $control_args['settings'] = $setting_id;
 
@@ -606,6 +614,21 @@ final class SiteEditorOptionsManager{
     public static function add_groups( $groups = array() ){
 
     }
+
+    public function enqueue_scripts(){
+
+        wp_enqueue_script( 'sed-options-controls' );
+        wp_enqueue_style( 'sed-options-controls' );
+
+    }
+
+    public function enqueue_preview_scripts(){
+
+        wp_enqueue_script( 'sed-options-controls-preview' );
+
+    }
+
+
 
 }
 

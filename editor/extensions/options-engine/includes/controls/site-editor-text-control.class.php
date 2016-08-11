@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'SiteEditorTextControl' ) ) {
 
 	/**
-	 * Text control
+	 * Text control class
 	 */
 	class SiteEditorTextControl extends SiteEditorOptionsControl {
 
@@ -27,8 +27,20 @@ if ( ! class_exists( 'SiteEditorTextControl' ) ) {
 		 */
 		public $type = 'text';
 
+		/**
+		 * Text input placeholder
+		 *
+		 * @access public
+		 * @var string
+		 */
 		public $placeholder = '';
 
+		/**
+		 * Text input html5 type
+		 *
+		 * @access public
+		 * @var string
+		 */
 		public $subtype = 'text'; //email | url | search | password | tel | text
 		/**
 		 * Enqueue control related scripts/styles.

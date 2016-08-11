@@ -180,6 +180,14 @@ class SiteEditorField{
     public $description = '';
 
     /**
+     * Primary args when create instance
+     *
+     * @access public
+     * @var array
+     */
+    public $primary_args = array();
+
+    /**
      * SiteEditorField constructor.
      *
      * @param $id
@@ -187,11 +195,18 @@ class SiteEditorField{
      */
     public function __construct( $id, $args = array() ) {
 
+        //primary_args is reserved var for this class and user can not using it
+        if( isset( $args['primary_args'] ) ){
+            unset( $args['primary_args'] );
+        }
+
         $keys = array_keys( get_object_vars( $this ) );
         foreach ( $keys as $key ) {
             if ( isset( $args[ $key ] ) )
                 $this->$key = $args[ $key ];
         }
+
+        $this->primary_args = $args;
 
         $this->id = $id;
 
