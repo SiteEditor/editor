@@ -41,9 +41,9 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 		 *
 		 * @since 3.4.0
 		 */
-		protected function render() {
+		protected function render_content() {
 
-			$atts           = $this->options->template->get_atts( $this->input_attrs );
+			$atts           = $this->input_attrs();
 
 			$atts_string    = $atts["atts"];
 
@@ -53,7 +53,7 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 
-            $value          = $this->settings['default'];
+            $value          = $this->value();
 
 	        $dialog_class = (isset($dialog['class'])) ? $dialog['class']: "";
 	        $dialog_attrs = "";

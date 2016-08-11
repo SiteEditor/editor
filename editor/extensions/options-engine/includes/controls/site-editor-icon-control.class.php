@@ -43,9 +43,9 @@ if ( ! class_exists( 'SiteEditorIconControl' ) ) {
 		 *
 		 * @since 3.4.0
 		 */
-		protected function render() {
+		protected function render_content() {
 
-			$atts           = $this->options->template->get_atts( $this->input_attrs );
+			$atts           = $this->input_attrs();
 
 			$atts_string    = $atts["atts"];
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'SiteEditorIconControl' ) ) {
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 
-            $value          = $this->settings['default'];
+            $value          = $this->value();
 
 			?>
 
