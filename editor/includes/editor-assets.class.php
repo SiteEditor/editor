@@ -320,8 +320,8 @@ if(!class_exists('SEDEditorAssetsManager'))
                 $this->add_css( 'sed-main-tooltip',              SED_EDITOR_ASSETS_URL . '/css/siteeditor/tooltip.css', array(), SED_APP_VERSION  );
                 $this->add_css( 'sed-main-z2',                   SED_EDITOR_ASSETS_URL . '/css/siteeditor/z2/z.css', array(), SED_APP_VERSION  );
                 $this->add_css( 'sed-main-font-icon-siteeditor', SED_EDITOR_ASSETS_URL . '/css/siteeditor/font-icon-siteeditor.css', array(), SED_APP_VERSION  );
-                $this->add_css( 'sed-main-font-extra',           SED_EDITOR_ASSETS_URL . '/css/siteeditor/font-extra.css', array(), SED_APP_VERSION );
-
+                $this->add_css( 'siteeditor',                    SED_EDITOR_ASSETS_URL . '/css/siteeditor/font-extra.css', array(), SED_APP_VERSION );
+                //'sed-main-font-extra'
             }
         }
 
@@ -368,7 +368,7 @@ if(!class_exists('SEDEditorAssetsManager'))
                 wp_enqueue_style( 'sed-main-tooltip'  );
                 wp_enqueue_style( 'sed-main-z2' );
                 wp_enqueue_style( 'sed-main-font-icon-siteeditor' );
-                wp_enqueue_style( 'sed-main-font-extra' ); 
+                wp_enqueue_style( 'siteeditor' ); //'sed-main-font-extra'
 
             }        
 
