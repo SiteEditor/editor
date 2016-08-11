@@ -249,7 +249,9 @@
 
                     var output = this.response.data.output ,
                         controls = this.response.data.controls,
-                        relations = this.response.data.relations; 
+                        relations = this.response.data.relations ,
+                        settings = this.response.data.settings ,
+                        panels = this.response.data.panels;
 
                     var $currentElDialog = $( output ).appendTo( $( selector ) );
 
@@ -268,6 +270,31 @@
                         api.settingsRelations = $.extend( api.settingsRelations , groupRelations);
                         console.log( " ---------api.settingsRelations2 ----------------- " , api.settingsRelations );
                     }
+
+                    if( !_.isEmpty( settings ) ) {
+                        var setting;
+
+                        _.each( settings , function (settingArgs, id) {
+
+                            if (!api.has(id)) {
+                                setting = api.create(id, id, settingArgs.value, {
+                                    transport: settingArgs.transport || "refresh",
+                                    previewer: api.previewer,
+                                    stype: settingArgs.type || "general",
+                                    dirty: settingArgs.dirty
+                                });
+
+                                api.settings.settings[id] = settingArgs;
+
+                                if (settingArgs.dirty) {
+                                    setting.callbacks.fireWith(setting, [setting.get(), {}]);
+                                }
+
+                            }
+
+                        });
+                    }
+
 
                     if( !_.isEmpty( controls ) ){
                         _.each( controls , function( data , id ){

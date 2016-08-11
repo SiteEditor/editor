@@ -832,7 +832,7 @@ function register_params( )
 }
 
 add_action( "sed_load_options_group_id1" , "register_params" );
-*/
+*/ 
 
 function sed_add_layout_options(){
 
@@ -873,7 +873,7 @@ function sed_add_layout_options(){
         'label'             => __('Checkbox', 'translation_domain'),
         'type'              => 'checkbox',
         'priority'          => 12,
-        'default'           => true, 
+        'default'           => true,
         //panel or group
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',

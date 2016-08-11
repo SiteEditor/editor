@@ -9,7 +9,7 @@
 /*global diagram:true */                           // , "siteEditor/siteEditorCss"
 (function( exports, $ ){
 	var api = sedApp.editor;
-    
+
     api.MSElement = {};
     api.modulesShortcodesAttrs = api.modulesShortcodesAttrs || {} ;
     api.createRelations = api.createRelations || {};
@@ -488,7 +488,7 @@
 
             colorPickerOptionBG.hide = function(color) {
                 _refresh( color );
-            }
+            };
 
             this.picker.spectrum(colorPickerOptionBG);
         },
@@ -2363,6 +2363,11 @@
 
     api.controlConstructor = $.extend( api.controlConstructor, {
         sed_element             : api.SiteEditorElements ,
+        radio                   : api.SiteEditorElements ,
+        text                    : api.SiteEditorElements ,
+        select                  : api.SiteEditorElements ,
+        textarea                : api.SiteEditorElements ,
+        checkbox                : api.SiteEditorElements ,
         image                   : api.ChangeImageControl ,
         multi_images            : api.MultiImagesControl ,
         video                   : api.ChangeVideoControl ,

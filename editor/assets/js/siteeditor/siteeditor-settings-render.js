@@ -30,13 +30,15 @@
 
 			var constructor = api.controlConstructor[ data.type ] || api.Control,
 				control;
-                             //
+
 			control = api.control.add( id, new constructor( id, {
 				params: data,
 				previewer: api.previewer ,
                 mediaSettings : api.mediaSettings ,
                 extraOpt : extra || {}
 			} ) );
+
+
         });
 
         var modulesControls = _.filter( api.settings.controls , function( data , id){

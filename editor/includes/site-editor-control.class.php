@@ -132,6 +132,14 @@ class SiteEditorOptionsControl{
 	public $has_border_box = true;
 
 	/**
+	 * Custom user params for send to js
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $js_params = array();
+
+	/**
 	 * Option group id of this panel.
 	 *
 	 * @since 1.0.0
@@ -154,6 +162,69 @@ class SiteEditorOptionsControl{
 	 *               currently being previewed).
 	 */
 	public $active_callback = '';
+
+    /**
+     * Control category like "app-settings" or "module-settings" or "style-editor"
+     *
+     * @since 1.0.0
+     * @access public
+     * @var string
+     */
+    public $category = 'app-settings';
+
+    /**
+     * Control sub category sample for "module-settings" category is "sed_image"
+     *
+     * @since 1.0.0
+     * @access public
+     * @var string
+     */
+    public $sub_category = '';
+
+    /**
+     * Control default value for modules controls
+     *
+     * @since 1.0.0
+     * @access public
+     * @var string
+     */
+    public $default_value;
+
+    /**
+     * Control shortcode for modules controls
+     *
+     * @since 1.0.0
+     * @access public
+     * @var string
+     */
+    public $shortcode;
+
+    /**
+     * Control shortcode attribute name for modules controls
+     *
+     * @since 1.0.0
+     * @access public
+     * @var string
+     */
+    public $attr_name;
+
+    /**
+     * If control is module control is_attr will be true
+     *
+     * @since 1.0.0
+     * @access public
+     * @var bool
+     */
+    public $is_attr = false;
+
+    /**
+     * is control a style setting ?
+     *
+     * @since 1.0.0
+     * @access public
+     * @var bool
+     */
+    public $is_style_setting = false;
 
 	/**
 	 * Constructor.
@@ -196,6 +267,12 @@ class SiteEditorOptionsControl{
 	 * }
 	 */
 	public function __construct( $manager, $id, $args = array() ) {
+
+        if( isset( $args['control_param'] ) ){
+            $args['js_params'] = $args['control_param'];
+            unset( $args['control_param'] );
+        }
+
 		$keys = array_keys( get_object_vars( $this ) );
 		foreach ( $keys as $key ) {
 			if ( isset( $args[ $key ] ) ) {
@@ -301,14 +378,25 @@ class SiteEditorOptionsControl{
 			$this->json['settings'][ $key ] = $setting->id;
 		}
 
+        $this->json = array_merge( $this->json , $this->js_params );
+
 		$this->json['type'] = $this->type;
 		$this->json['priority'] = $this->priority;
 		$this->json['active'] = $this->active();
 		$this->json['panel'] = $this->panel;
-		$this->json['content'] = $this->get_content();
 		$this->json['label'] = $this->label;
 		$this->json['description'] = $this->description;
 		$this->json['instanceNumber'] = $this->instance_number;
+        $this->json['category'] = $this->category;
+        $this->json['sub_category'] = $this->sub_category;
+        $this->json['default_value'] = $this->default_value;
+        $this->json['is_style_setting'] = $this->is_style_setting;
+
+        if( $this->category == "module-settings" ){
+            $this->json['shortcode'] = $this->shortcode;
+            $this->json['attr_name'] = $this->attr_name;
+            $this->json['is_attr'] = $this->is_attr;
+        }
 	}
 
 	/**
