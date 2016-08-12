@@ -57,15 +57,17 @@ if ( ! class_exists( 'SiteEditorToggleControl' ) ) {
 
 			?>
 
-			<label class=""><?php echo $this->label;?></label>
-			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-			<div class="sed-bp-form-toggle">
-				<?php
-					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
-				?>
-			    <input type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $value );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>"  <?php echo $checked;?> <?php echo $atts_string;?>>
-			    <span class="handle"></span>
-			</div>
+			<label class="">
+				<?php echo $this->label;?>
+				<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+				<div class="sed-bp-form-toggle">
+					<?php
+						$checked = ( $value ) ? 'checked="checked"' : '';
+					?>
+				    <input type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $value );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>"  <?php echo $checked;?> <?php echo $atts_string;?>>
+				    <span  class="switch"></span>
+				</div>
+			</label>
 
 			<?php
 		}

@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
 		 * @access public
 		 */
 		public function enqueue() {
-
+			
 		}
 
 		/**
@@ -70,20 +70,14 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
             $value          = $this->value();
 
 			?>
-
-			<label class=""><?php echo $this->label; ?></label>
+			
+			<label for="slider-amount"><?php echo $this->label; ?></label>
 			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
 			<div class="sed-bp-form-slider">
-				<input type="range" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id );?>" min="$choices['min']" max="$choices['max']" step="$choices['step']" value="<?php echo esc_attr( $value );?>" $link data-reset_value="$default" <?php echo $atts_string;?> />
-				<div class="sed-bp-form_range_value">
-					<span class="value">$value</span>
-					<?php if ( $choices['suffix'] ) {
-						echo $choices['suffix'];
-					} ?>
-				</div>
-				<div class="sed-bp-form-slider-reset">
-					<span class="fa f-sed icon-question"></span>
-				</div>
+                <div class="sed-bp-form-slider-container"></div>
+				<div>
+				  <input type="text" id="slider-amount" readonly >
+				</div>	
 			</div>
 
 			<?php

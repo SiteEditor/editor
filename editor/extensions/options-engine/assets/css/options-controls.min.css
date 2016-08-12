@@ -1,0 +1,286 @@
+
+/**toggle
+****************/
+  
+.sed-bp-form-toggle input[type="checkbox"] {
+    display: none;
+}
+.sed-bp-form-toggle .switch {
+    border: 1px solid rgba(0,0,0,.1);
+    display: inline-block;
+    width: 35px;
+    height: 12px;
+    border-radius: 8px;
+    background: #ccc;
+    vertical-align: middle;
+    position: relative;
+    top: 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 350ms ease;
+}
+.sed-bp-form-toggle .switch:after,
+.sed-bp-form-toggle .switch:before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: -3px;
+    transition: all 350ms cubic-bezier(0,.95,.38,.98), background 150ms ease;
+}
+.sed-bp-form-toggle .switch:before {
+    background: rgba(0,0,0,.2);
+    transform: translate3d(0, -50%, 0) scale(0);
+}
+.sed-bp-form-toggle .switch:after {
+    background: #999;
+    border: 1px solid rgba(0,0,0,.1);
+    transform: translate3d(0, -50%, 0);
+}
+.sed-bp-form-toggle .switch:active:before {
+    transform: translate3d(0, -50%, 0) scale(3);
+}
+.sed-bp-form-toggle input:checked + .switch {
+    background: rgba(52, 152, 222,.3);
+}  
+.sed-bp-form-toggle input:checked + .switch:before {
+    background: rgba(52, 152, 222, 0.075);
+    transform: translate3d(100%, -50%, 0) scale(1);
+}
+.sed-bp-form-toggle input:checked + .switch:after {
+    background: #3498DE;
+    transform: translate3d(100%, -50%, 0);
+}
+.sed-bp-form-toggle input:checked + .switch:active:before {
+    background: rgba(52, 152, 222, 0.075);
+    transform: translate3d(100%, -50%, 0) scale(3);
+}
+
+/**Switch
+****************/
+
+.sed-bp-form-switch input[type="checkbox"] {
+  display: none;
+}
+.sed-bp-form-switch {
+  border: none;
+  margin-bottom: 1.5rem;
+  outline: 0;
+  padding: 0;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+} 
+.sed-bp-form-switch .switch-label {
+  background: rgba(0,0,0,.2);
+  color: transparent;
+  cursor: pointer;
+  display: block;
+  margin-bottom: 1rem;
+  position: relative;
+  transition: left 0.15s ease-out;
+  height: 2rem;
+  width: auto;
+  display: inline-block;
+  border-radius: 1000px;
+  font-family: Monaco, "Lucida Sans Typewriter", "Lucida Typewriter", "Courier New", Courier, monospace;
+}
+.sed-bp-form-switch .switch-label:after {
+  background: #FFFFFF;
+  content: "";
+  display: block;
+  height: 1.5rem;
+  left: 0.25rem;
+  position: absolute;
+  top: 0.25rem;
+  width: 48%;
+  border-radius: 1000px;
+  -webkit-transition: all 0.25s ease-in-out;
+  -moz-transition: all 0.25s ease-in-out;
+  -ms-transition: all 0.25s ease-in-out;
+  -o-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+  
+.sed-bp-form-switch input {
+  left: 10px;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+  top: 9px;
+}  
+.sed-bp-form-switch input + label {
+  margin-left: 0;
+  margin-right: 0;
+}
+.sed-bp-form-switch input:checked + label {
+  background: #3498DB;
+}  
+.sed-bp-form-switch input:checked + label:after {
+  left: 48%;
+  /*right: 0.25rem;*/
+  background: #ffffff;
+}
+
+.sed-bp-form-switch .switch-off,
+.sed-bp-form-switch .switch-on {
+  line-height: 32px;
+  font-weight: bold;
+  padding: 0 10px;
+}
+.sed-bp-form-switch .switch-on {
+  color: #fff;
+  padding-right: 5px;
+}
+.sed-bp-form-switch .switch-off {
+  color: #777;
+  padding-left: 5px;
+}
+  
+
+/**Radio Image
+****************/
+
+.sed-bp-form-radio-image label {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.sed-bp-form-radio-image input {
+  display: none;
+}  
+.sed-bp-form-radio-image input img {
+  border: 1px solid transparent;
+}
+.sed-bp-form-radio-image input:checked + label img {
+    -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,.25);
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.25);
+    border: 1px solid #3498DB;
+} 
+
+
+ 
+/**Radio Buttonset
+*******************/
+.sed-bp-form-radio-buttonset .buttonset-label {
+    border-right: 1px solid rgba(0,0,0,.2);
+}
+.sed-bp-form-radio-buttonset .buttonset-label:last-child {
+    border-right: none;
+}
+.sed-bp-form-radio-buttonset .buttonset-input {
+    display: none;
+}
+.sed-bp-form-radio-buttonset .buttonset-input:checked  + .buttonset-label {
+    background-color: #3498DB;
+    color: #fff;
+}
+
+
+ 
+/**Slider
+*******************/
+.sed-bp-form-slider .sed-bp-form-slider-container{
+    clear: both;
+    background-color: #ddd;
+    box-shadow: 0 0 2px 0 #ddd inset;
+    border-radius: 1000px;
+    height: 3px;
+    position: relative;
+    margin-bottom: 20px;
+}    
+.sed-bp-form-slider .sed-bp-form-slider-container .ui-slider-range{
+    background: #3498DB;
+    height: 100%;
+    top: 0;
+    border: 0 none;
+    border-radius:  1000px;
+    display: block;
+    position: absolute;
+    z-index: 1;
+}
+.sed-bp-form-slider .sed-bp-form-slider-container .ui-slider-handle{
+    background: #3498DB;
+    border-radius: 1000px;
+    cursor: pointer;
+    height: 12px;
+    margin-top: -6px;
+    margin-left: -6px;
+    outline: 0 none;
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    z-index: 2;
+}
+.sed-bp-form-slider .sed-bp-form-slider-container .ui-slider-handle:last-child {
+  left: 0;
+}
+.sed-bp-form-slider .sed-bp-form-slider-container .ui-slider-handle:before {
+    background-color: #fff;
+    border-radius: 1000px;
+    content: "";
+    height: 4px;
+    left: 50%;
+    margin: -2px 0 0 -2px;
+    position: absolute;
+    top: 50%;
+    width: 4px;
+}
+
+
+ 
+/**Sortable
+*******************/
+.sed-bp-form-sortable .sed-bp-form-sortable-item {
+    background-color: #fff;
+    border: 1px solid #d5d5d5;
+    border-radius: 0px;
+    box-shadow: none;
+    color: #666;
+    font-size: 12px;
+    margin: 0 0 5px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.sed-bp-form-sortable .sed-bp-form-sortable-item > label {
+    line-height: 20px;
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+}
+.sed-bp-form-sortable .sed-bp-form-sortable-item:after,
+.sed-bp-form-sortable .sed-bp-form-sortable-item:before {
+    display: table;
+    content: "";
+}
+.sed-bp-form-sortable .sed-bp-form-sortable-item:after {
+    clear: both;
+}
+.sed-bp-form-sortable .sed-bp-form-sortable-actions {
+    float: right;
+}
+.sed-bp-form-sortable .sed-bp-form-sortable-actions > .sortable-action {
+    display: inline-block;
+    margin: 0 2px; 
+}
+
+.sed-bp-form-sortable .sed-bp-form-sortable-actions > .sortable-action .fa {
+    color: #888;
+    font-size: 1.15em;
+    cursor: pointer;
+}
+.sed-bp-form-sortable .sed-bp-form-sortable-actions > .sortable-action:hover .fa {
+    color: #00A9E8;
+}
+.sed-bp-form-sortable .sed-bp-form-sortable-actions > .sortable-action.sort .fa {
+    cursor: move;
+}

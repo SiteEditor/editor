@@ -619,6 +619,7 @@ final class SiteEditorOptionsManager{
 
         wp_enqueue_script( 'sed-options-controls' );
         wp_enqueue_style( 'sed-options-controls' );
+        wp_enqueue_script( 'jquery-ui-slider' );
 
     }
 
@@ -985,7 +986,11 @@ function sed_add_layout_options(){
             "options3_key"      =>    "options3_value" ,
             "options4_key"      =>    "options4_value" ,
         ) ,
-        //'input_attrs'
+        //'input_attrs',
+        'js_params' => array(
+            "options_selector" => ".sed-bp-checkbox-input"
+        )
+
     ));
 
     sed_options()->add_field( 'select_field_id' , array(
@@ -1078,6 +1083,109 @@ function sed_add_layout_options(){
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'toggle_field_id' , array(
+        'setting_id'        => 'my_setting16',
+        'label'             => __('Toggle', 'translation_domain'),
+        'type'              => 'toggle',
+        'priority'          => 25,
+        'default'           => true,
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'switch_field_id' , array(
+        'setting_id'        => 'my_setting17',
+        'label'             => __('Switch', 'translation_domain'),
+        'type'              => 'switch',
+        'priority'          => 26,
+        'default'           => true,
+        //panel or group 
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "on"       =>    "Enable" ,
+            "off"      =>    "Disable" ,
+        ) ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'radio_buttonset_field_id' , array(
+        'setting_id'        => 'my_setting18',
+        'label'             => __('Radio Buttonset control', 'translation_domain'),
+        'type'              => 'radio-buttonset',
+        'priority'          => 26, 
+        'default'           => 'options3_key',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "One" ,  
+            "options2_key"      =>    "Two" ,
+            "options3_key"      =>    "Three" ,
+        ) ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'radio_image_field_id' , array(
+        'setting_id'        => 'my_setting19',
+        'label'             => __('Radio Image control', 'translation_domain'),
+        'type'              => 'radio-image',
+        'priority'          => 27, 
+        'default'           => 'options3_key',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>   SED_EDITOR_FOLDER_URL.'images/no-image.jpg',  
+            "options2_key"      =>   SED_EDITOR_FOLDER_URL.'images/no-image.jpg',
+            "options3_key"      =>   SED_EDITOR_FOLDER_URL.'images/no-image.jpg',
+        ) ,
+        //'input_attrs'
+    ));  
+
+    sed_options()->add_field( 'slider_field_id' , array(
+        'setting_id'        => 'my_setting20',
+        'label'             => __('Slider', 'translation_domain'),
+        'type'              => 'slider',
+        'priority'          => 28,
+        'default'           => 20,
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs',
+        'js_params' => array(
+            "min" => 0,
+            "max" => 100, 
+        )
+    ));
+
+    sed_options()->add_field( 'sortable_field_id' , array(
+        'setting_id'        => 'my_setting21',
+        'label'             => __('Sortable control', 'translation_domain'),
+        'type'              => 'sortable',
+        'priority'          => 29, 
+        'default'           => 'options3_key',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "One" ,  
+            "options2_key"      =>    "Two" ,
+            "options3_key"      =>    "Three" ,
+            "options4_key"      =>    "Four" ,
+            "options5_key"      =>    "Five" ,
+        ) ,
         //'input_attrs'
     ));
 

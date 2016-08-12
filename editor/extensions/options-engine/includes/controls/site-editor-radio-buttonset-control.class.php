@@ -65,12 +65,11 @@ if ( ! class_exists( 'SiteEditorRadioButtonsetControl' ) ) {
 				foreach( $this->choices as $key_val => $choice ) {
 					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
 				?>
-					<div class="sed-bp-form-radio-buttonset-item">
-						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
-							<input  type="radio" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
+					<input  type="radio" class="<?php echo esc_attr( $classes ); ?> buttonset-input" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
+						<label class="buttonset-label sed-btn-blue" for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
 							<?php echo $choice;?>
 						</label>
-					</div>
+				    </input> 
 				<?php 
 				    $i++;
 				  } 

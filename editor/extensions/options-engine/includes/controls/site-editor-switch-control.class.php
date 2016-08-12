@@ -57,27 +57,17 @@ if ( ! class_exists( 'SiteEditorSwitchControl' ) ) {
 
 			?>
 
+
 			<label class=""><?php echo $this->label;?></label>
 			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-			<div class="sed-bp-form-switch">
-				<?php
-				$i = 1;
-				foreach( $this->choices as $key_val => $choice ) {
-					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
-				?>
-
-					<div class="sed-bp-form-switch-item">
-						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
-							<input  type="switch" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
-							<?php echo $choice;?>
-						</label>
-					</div>
-
-				<?php 
-				    $i++;
-				  } 
-				?>
-			</div>
+			<div class="sed-bp-form-switch"> 
+			    <?php $checked = ( "true" == $value ) ? 'checked="checked"' : ''; ?>
+				<input  type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="true" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $checked;?> <?php echo $atts_string;?> />
+				<label class="switch-label" for="<?php echo esc_attr( $sed_field_id );?>">
+					<span class="switch-on"><?php echo $this->choices['on']; ?> </span>
+					<span class="switch-off"><?php echo  $this->choices['off']; ?> </span>
+				</label>
+			</div>	  
 
 			<?php
 		}

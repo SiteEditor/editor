@@ -59,25 +59,26 @@ if ( ! class_exists( 'SiteEditorSortableControl' ) ) {
 
 			<label class=""><?php echo $this->label;?></label>
 			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-			<div class="sed-bp-form-sortable">
+			<ul class="sed-bp-form-sortable">
+		
 				<?php
 				$i = 1;
 				foreach( $this->choices as $key_val => $choice ) {
 					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
 				?>
 
-					<div class="sed-bp-form-sortable-item">
-						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
-							<input  type="sortable" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
-							<?php echo $choice;?>
-						</label>
-					</div>
+					<li class="sed-bp-form-sortable-item" class="<?php echo esc_attr( $classes ); ?> <?php echo $checked;?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"   <?php echo $atts_string;?>>
+						<label><?php echo $choice;?></label>
+		                <div class="sed-bp-form-sortable-actions">
+		                    <span class="sortable-action sort"><span class="fa fa-arrows fa-lg"></span></span>
+		                </div>
+					</li>
 
 				<?php 
 				    $i++;
 				  } 
 				?>
-			</div>
+			</ul>
 
 			<?php
 		}

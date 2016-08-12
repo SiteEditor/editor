@@ -723,7 +723,7 @@ class SiteEditorManager{
 	 *
 	 * @since 3.4.0
 	 */
-	public function enqueue_control_scripts() {
+	public function enqueue_control_scripts() { 
 		foreach ( $this->controls as $control ) {
 			$control->enqueue();
 		}

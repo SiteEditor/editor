@@ -1,4 +1,4 @@
- /* slider */
+ /* slider 
 .ui-slider-horizontal {
     background: none repeat scroll 0 0 #eee !important;
     border: 0 solid transparent !important;
@@ -14,7 +14,7 @@
     width: 100%;
 }
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-  /*  background: none repeat scroll 0 0  transparent;    */
+  /*  background: none repeat scroll 0 0  transparent;    *
     color: #555555;
 }
 .ui-slider-horizontal .ui-slider-handle {
@@ -30,4 +30,4 @@
     position: absolute !important;
     width: 13px !important;
     z-index: 2 !important;
-}
+}*/
