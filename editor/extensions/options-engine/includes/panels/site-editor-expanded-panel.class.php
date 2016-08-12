@@ -32,7 +32,7 @@ if ( ! class_exists( 'SiteEditorExpandedOptionsPanel' ) ) {
 		 */
 		protected function render( ) {
 
-			$atts           = $this->options->template->get_atts( $this->atts );
+			$atts           = $this->input_attrs();
 
 			$atts_string    = $atts["atts"];
 

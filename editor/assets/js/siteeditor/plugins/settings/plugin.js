@@ -62,6 +62,14 @@
 
             this.dialogsTitles = {};
 
+            this.ajaxProcessing = {};
+
+            this.ajaxResetTmpls = {};
+
+            this.ajaxCachTmpls = {};
+
+            this.backgroundAjaxload = {};
+
             this.currentSettingsId = "";
 
             this.dialogSelector = "#sed-dialog-settings";
@@ -109,7 +117,31 @@
         /**
          * for override in extends classes
          */
-        ready : function(){},
+        ready : function(){
+            var self = this;
+
+            api.Events.bind( "moduleDragStartEvent" , function( moduleName ){
+
+                var shortcodeName;
+                $.each(api.shortcodes , function( name, shortcode){
+                    if(shortcode.asModule && shortcode.moduleName == moduleName){
+                        shortcodeName = name;
+                        return false;
+                    }
+                });
+
+                if( ! shortcodeName )
+                    return ;
+
+                if( _.isUndefined( self.backgroundAjaxload[shortcodeName] ) ) {
+                    self._sendRequest(shortcodeName, "module");
+
+                    self.backgroundAjaxload[shortcodeName] = 1;
+                }
+
+            });
+
+        },
 
         /**
          *
@@ -213,6 +245,11 @@
             var self = this ,
                 selector = this.dialogSelector;
 
+            if( !_.isUndefined( this.ajaxProcessing[self.currentSettingsId] ) ){
+                this.ajaxResetTmpls[self.currentSettingsId] = 'yes';
+                return ;
+            }
+
             api.Events.trigger( "beforeResetSettingsTmpl" , self.currentSettingsId , this.settingsType );
 
             self.dialogsTitles[self.currentSettingsId] = $( selector ).siblings(".ui-dialog-titlebar:first").children(".multi-level-box-title").detach();
@@ -226,14 +263,53 @@
          *
          * @private
          */
-        _ajaxLoadSettings : function( ){
+        _ajaxLoadSettings : function( ) {
+            var self = this ,
+                selector = this.dialogSelector;
+
+            if (!_.isUndefined(self.ajaxResetTmpls[self.currentSettingsId])) {
+                delete self.ajaxResetTmpls[self.currentSettingsId];
+                return;
+            }
+
+            if (!_.isUndefined(self.ajaxCachTmpls[self.currentSettingsId])) {
+
+                var output = self.ajaxCachTmpls[self.currentSettingsId];
+
+                var $currentElDialog = $(output).appendTo($(selector));
+
+                api.Events.trigger("afterInitAppendSettingsTmpl", $currentElDialog, self.settingsType, self.currentSettingsId);
+
+                $(selector).data('sed.multiLevelBoxPlugin').options.innerContainer = $(selector).find(".dialog-level-box-settings-container");
+                $(selector).data('sed.multiLevelBoxPlugin')._render();
+
+                api.Events.trigger("endInitAppendSettingsTmpl", $currentElDialog, self.settingsType, self.currentSettingsId);
+
+                delete self.ajaxCachTmpls[self.currentSettingsId];
+
+                return;
+            }
+
+            if (!_.isUndefined(this.backgroundAjaxload[this.currentSettingsId])) {
+                delete this.backgroundAjaxload[this.currentSettingsId];
+                return;
+            }
+
+            this._sendRequest( this.currentSettingsId , this.settingsType );
+        },
+
+        _sendRequest : function( settingIdReq , settingsTypeReq ) {
+
             var initLayoutsControls = [],
                 self = this,
                 selector = this.dialogSelector;
 
+            this.ajaxProcessing[settingIdReq] = 1;
+
             var data = {
                 action          : 'sed_load_options',
-                setting_id      : this.currentSettingsId,
+                setting_id      : settingIdReq ,
+                setting_type    : settingsTypeReq ,
                 nonce           : api.addOnSettings.optionsEngine.nonce.load,
                 sed_page_ajax   : 'sed_options_loader'
             };
@@ -251,21 +327,39 @@
                         controls = this.response.data.controls,
                         relations = this.response.data.relations ,
                         settings = this.response.data.settings ,
-                        panels = this.response.data.panels;
+                        panels = this.response.data.panels ,
+                        settingId = this.response.data.settingId ,
+                        settingType = this.response.data.settingType;
 
-                    var $currentElDialog = $( output ).appendTo( $( selector ) );
+                    delete self.ajaxProcessing[settingId];
 
-                    api.Events.trigger( "afterInitAppendSettingsTmpl" , $currentElDialog , self.settingsType , self.currentSettingsId );
+                    if( _.isUndefined( self.ajaxResetTmpls[settingId] ) && _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
 
-                    $( selector ).data('sed.multiLevelBoxPlugin').options.innerContainer = $( selector ).find(".dialog-level-box-settings-container");
-                    $( selector ).data('sed.multiLevelBoxPlugin')._render();
+                        var $currentElDialog = $(output).appendTo($(selector));
 
-                    api.Events.trigger( "endInitAppendSettingsTmpl" , $currentElDialog , self.settingsType , self.currentSettingsId );
+                        api.Events.trigger( "afterInitAppendSettingsTmpl" , $currentElDialog , settingType , settingId );
+
+                        $( selector ).data('sed.multiLevelBoxPlugin').options.innerContainer = $( selector ).find(".dialog-level-box-settings-container");
+                        $( selector ).data('sed.multiLevelBoxPlugin')._render();
+
+                        api.Events.trigger( "endInitAppendSettingsTmpl" , $currentElDialog , settingType , settingId );
+
+                    }else{
+
+                        self.ajaxCachTmpls[settingId] = output;
+
+                        if( ! _.isUndefined( self.ajaxResetTmpls[settingId] ) )
+                            delete self.ajaxResetTmpls[settingId] ;
+
+                        if( ! _.isUndefined( self.backgroundAjaxload[settingId] ) )
+                            delete self.backgroundAjaxload[settingId] ;
+
+                    }
 
                     if( !_.isUndefined( relations ) && !_.isEmpty( relations ) && _.isObject( relations ) ){
                         var groupRelations = {};
 
-                        groupRelations[self.currentSettingsId] = relations;
+                        groupRelations[settingId] = relations;
 
                         api.settingsRelations = $.extend( api.settingsRelations , groupRelations);
                         console.log( " ---------api.settingsRelations2 ----------------- " , api.settingsRelations );
@@ -311,13 +405,27 @@
 
                         });
                         console.log( " ---------ajax control load ----------------- " , controls );
-                        api.Events.trigger(  "after_group_settings_update" , self.currentSettingsId );
+                        api.Events.trigger(  "after_group_settings_update" , settingId );
                     }
 
 
                 },
                 error : function(){
+
+                    var settingId = this.response.data.settingId;
+
+                    if( !_.isUndefined( self.ajaxResetTmpls[settingId] ) ) {
+                        delete self.ajaxResetTmpls[settingId];
+                    }
+
+                    if( !_.isUndefined( self.backgroundAjaxload[settingId] ) ) {
+                        delete self.backgroundAjaxload[settingId];
+                    }
+
+                    delete self.ajaxProcessing[settingId];
+
                     alert( this.response.data.output );
+
                 }
 
             },{
@@ -331,7 +439,7 @@
 
             //needToUpdateSettings = !_.isUndefined( needToUpdateSettings) ? needToUpdateSettings : true ;
             
-            forceOpen = !_.isUndefined( forceOpen) ? forceOpen : true ;
+            forceOpen = !_.isUndefined( forceOpen) ? forceOpen : true ; 
 
             if( !isOpen && forceOpen === true ){
 
@@ -963,7 +1071,7 @@
 
             var reset =  !_.isUndefined( sedDialog.reset ) ? sedDialog.reset : true;
 
-            api.sedDialogSettings.openInitDialogSettings( this.currentSettingsId , forceOpen , reset , "module" , "html" );
+            api.sedDialogSettings.openInitDialogSettings( this.currentSettingsId , forceOpen , reset , "module" , "ajax" );//"html"
 
             if( !_.isUndefined( sedDialog.data.panelId ) )
                 this.initSettings( sedDialog.data.panelId );

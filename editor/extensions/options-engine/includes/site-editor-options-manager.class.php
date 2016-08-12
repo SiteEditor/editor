@@ -69,7 +69,7 @@ final class SiteEditorOptionsManager{
 
         add_action( 'sed_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );
 
-        add_action( 'sed_after_init_manager', array( $this, 'register_default_groups' ) , 10 , 1 );
+        add_action( 'sed_after_init_manager', array( $this, 'register_default_groups' ) , 10  );
 
         add_action( 'sed_app_register', array( $this, 'register_fields' ) , 1000 );
 
@@ -89,7 +89,7 @@ final class SiteEditorOptionsManager{
 
         $this->register_fields();
 
-        $data = self::get_settings_data( $_POST['setting_id'] );
+        $data = $this->get_settings_data( $_POST['setting_id'] , $_POST['setting_type'] );
 
         if( is_wp_error( $data ) ){
 
@@ -107,21 +107,23 @@ final class SiteEditorOptionsManager{
 
     }
 
-    public function get_settings_data( $group_id ){
+    public function get_settings_data( $group_id , $group_type ){
 
         $data = array(
             "settings"      =>  array() ,
             "controls"      =>  array() ,
             "panels"        =>  array() ,
             "relations"     =>  array() ,
-            "output"        =>  ""
+            "output"        =>  "" ,
+            "settingId"     =>  $group_id ,
+            "settingType"   =>  $group_type
         );
 
         $groups = SED()->editor->manager->groups();
 
-        foreach ( $groups AS $group_id => $group ){
+        foreach ( $groups AS $id => $group ){
 
-            if( $group->id == $group_id ){
+            if( $id == $group_id ){
                 $current_group = $group;
                 break;
             }
@@ -394,16 +396,16 @@ final class SiteEditorOptionsManager{
      * @param array $panels
      * @access public
      */
-    public static function add_panels( $panels = array() ){
+    public function add_panels( $panels = array() ){
 
         if( !empty( $panels ) && is_array( $panels ) ) {
 
             foreach ( $panels AS $panel_id => $args ) {
 
                 if ( $args instanceof SiteEditorOptionsPanel ) {
-                    self::add_panel($args);
+                    $this->add_panel($args);
                 }else {
-                    self::add_panel($panel_id, $args);
+                    $this->add_panel($panel_id, $args);
                 }
 
             }
@@ -439,22 +441,27 @@ final class SiteEditorOptionsManager{
 
             unset( $args['id'] );
 
-            $setting_args = array_merge( $primary_args , $args );
+            $setting = SED()->editor->manager->get_setting( $setting_id );
 
-            unset( $setting_args['type'] );
+            if( ! isset( $setting ) ) {
 
-            /*$setting_args = array(
-                'option_type'           =>  $field->option_type ,
-                'capability'            =>  $field->capability ,
-                'theme_supports'        =>  $field->theme_supports ,
-                'default'               =>  $field->default ,
-                'transport'             =>  $field->transport ,
-                'sanitize_callback'     =>  $field->sanitize_callback ,
-                'sanitize_js_callback'  =>  $field->sanitize_js_callback
-            );*/
+                $setting_args = array_merge($primary_args, $args);
 
-            // Create the settings.
-            $this->add_setting( $setting_id , $setting_args );
+                unset($setting_args['type']);
+
+                /*$setting_args = array(
+                    'option_type'           =>  $field->option_type ,
+                    'capability'            =>  $field->capability ,
+                    'theme_supports'        =>  $field->theme_supports ,
+                    'default'               =>  $field->default ,
+                    'transport'             =>  $field->transport ,
+                    'sanitize_callback'     =>  $field->sanitize_callback ,
+                    'sanitize_js_callback'  =>  $field->sanitize_js_callback
+                );*/
+
+                // Create the settings.
+                $this->add_setting($setting_id, $setting_args);
+            }
 
             $control_args = array_merge( $primary_args , $args );
 

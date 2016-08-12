@@ -42,13 +42,17 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             $this->scope_control_id = "main_layout_row_scope_control";
 
-            add_action( "sed_ajax_load_options_sed_add_layout" , array( $this, "add_layout_options" ) );
-
-            add_action( "sed_ajax_load_options_sed_pages_layouts" , array( $this, "pages_layouts_options" ) );
-
             add_action( "sed_editor_init" , array( $this, "add_toolbar_elements" ) );
 
             add_action( 'sed-app-save-data' , array( $this , 'save_check_main_content' ) , 10 , 2 );
+
+            add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
+
+            add_action( "sed_register_sed_add_layout_options" , array( $this, 'register_add_layout_group' ) , -9999 );
+
+            add_action( "sed_register_sed_pages_layouts_options" , array( $this , 'pages_layouts_options' ) );
+
+            add_action( "sed_register_sed_pages_layouts_options" , array( $this, 'register_pages_layouts_group' ) , -9999 );
 
 		}
 
@@ -70,6 +74,30 @@ if(!class_exists('SiteEditorLayoutManager')){
             );
 
             $sed_options_engine->set_group_params( "sed_add_layout" , __("Add New Layout" , "site-editor") , $params , array() , "app-settings" );
+        }
+
+        function register_add_layout_group(){
+
+            SED()->editor->manager->add_group( 'sed_add_layout' , array(
+                'capability'        => 'edit_theme_options',
+                'theme_supports'    => '',
+                'title'             => __("Add New Layout" , "site-editor") ,
+                'description'       => __("Add New Layout And Manage Layouts" , "site-editor") ,
+                'type'              => 'default',
+            ));
+
+        }
+
+        function register_pages_layouts_group(){
+
+            SED()->editor->manager->add_group( 'sed_pages_layouts' , array(
+                'capability'        => 'edit_theme_options',
+                'theme_supports'    => '',
+                'title'             => __("Pages Layouts Settings" , "site-editor"),
+                'description'       => __("Pages Layouts Settings" , "site-editor") ,
+                'type'              => 'default',
+            ));
+
         }
 
         function pages_layouts_options(){

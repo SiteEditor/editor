@@ -25,11 +25,15 @@ class PBShortcodeClass{
 
     function __construct(  $args = array() ) {
         global $sed_pb_app;
+
         $args = array_merge( array(
             "type_icon"   => "font",
             "shortcode_type" => "enclosing",
-            "is_child"       => false
+            "is_child"       => false ,
+            "title"          => "" ,
+            "description"    => ""
         ) , $args);
+
         extract( $args );
 
         if(!isset($name) || empty($name) || !isset($module) || empty($module) )
@@ -44,10 +48,18 @@ class PBShortcodeClass{
             array_push( PageBuilderApplication::$shortcodes_tagnames , $this->shortcode->name );
 
         add_action( 'sed_shortcode_register', array( $this , 'register_module_shortcode' ), 10   );
+
         //add_action( 'sed_ajax_pb', array( $this , 'ajax_register_shortcode' ), 10 , 1  );
+
         add_action( 'sed_contextmenu_init', array( $this , 'add_contextmenu' ) , 10 );
-        add_filter( 'sed_shortcode_scripts_'.$this->shortcode->name , array( $this , 'call_scripts' ) , 10 , 1 );
-        add_filter( 'sed_shortcode_styles_'.$this->shortcode->name , array( $this , 'call_styles' ) , 10 , 1 );
+
+        add_filter( "sed_shortcode_scripts_{$this->shortcode->name}" , array( $this , 'call_scripts' ) , 10 , 1 );
+
+        add_filter( "sed_shortcode_styles_{$this->shortcode->name}" , array( $this , 'call_styles' ) , 10 , 1 );
+
+        add_action( "sed_register_{$this->shortcode->name}_options" , array( $this , 'create_settings' ) );
+
+        add_action( "sed_register_{$this->shortcode->name}_options" , array( $this, 'register_shortcode_group' ) , -9999 );
     }
 
     function add_script($handle , $src = "" , $deps = array() , $version = SED_APP_VERSION , $in_footer = true){
@@ -537,16 +549,16 @@ class PBShortcodeClass{
         unset($shortcode['module']);
         unset($shortcode["is_child"]);
 
-        if( is_site_editor() )
-            $this->create_settings();
+        /*if( is_site_editor() )
+            $this->create_settings();*/
 
         $shortcode['styles']  = array();//$this->call_styles();
         $shortcode['scripts'] = array();//$this->call_scripts();
 
-        if( is_site_editor() ){
+        /*if( is_site_editor() ){
             $params = array("params" => $this->settings);
             $shortcode = array_merge($shortcode , $params);
-        }
+        }*/
 
         $shortcode['attrs'] = $this->default_atts();
 
@@ -554,7 +566,7 @@ class PBShortcodeClass{
             if($shortcode["asModule"])
                 $pagebuilder->register_supports( $this->module , $this->supports() );
 
-            $shortcode['panels'] = $this->panels();
+            //$shortcode['panels'] = $this->panels();
         }
 
         $shortcode['php_class'] = get_class( $this );
@@ -658,10 +670,162 @@ class PBShortcodeClass{
             );
         }
 
-        if(!empty( $params )){
+        /*if(!empty( $params )){
 
             $this->settings = $this->get_params( $params );
+        }*/
+
+
+
+        global $sed_options_engine;
+
+        $params = $sed_options_engine->params_type_process( $params );
+
+        $params = $this->get_params( $params );
+
+        $panels = $this->panels();
+
+        foreach($params AS $key => $param){
+
+            $control_id = $this->shortcode->name . "_" . $key;
+
+            if( $key != "content" ){
+
+                $param = $this->add_control_param( $this->shortcode->name , $key , $param );
+
+                //var_dump( $param );
+
+                sed_options()->add_field( $control_id , $param );
+
+            }
         }
+
+        foreach( $panels AS $key => $panel ){
+
+            if( $panel['type'] == 'fieldset' ){
+                $panels[$key]['type'] = 'default';
+            }else if( $panel['type']  == 'accordion_item' ){
+                $panels[$key]['type'] = 'expanded';
+            }
+
+            $panels[$key]['option_group'] = $this->shortcode->name;
+
+        }
+
+        sed_options()->add_panels( $panels );
+
+    }
+
+    public function register_shortcode_group(){
+
+        SED()->editor->manager->add_group( $this->shortcode->name , array(
+            'capability'        => 'edit_theme_options',
+            'theme_supports'    => '',
+            'title'             => $this->shortcode->title ,
+            'description'       => $this->shortcode->description ,
+            'type'              => 'default',
+        ));
+
+    }
+
+    /*case 'group_skin' :
+      case 'group_hover_effect' :
+      skin_refresh
+    */
+    function get_params( $params ){
+
+        $new_params = array();
+
+        if( !empty( $params ) ){
+            foreach( $params AS $key => $param ){
+                if( is_array( $param ) ){
+
+                    if( isset( $param["type"] ) && $param["type"] == "skin" ){
+                        if( !isset( $param["atts"] ) )
+                            $param["atts"] = array();
+
+                        $param["atts"]['data-module-name']  = $this->module;
+                    }
+
+
+                    $new_params[$key] = $param;
+
+                    if( isset( $param["desc"] ) ){
+
+                        unset( $new_params[$key]["desc"] );
+
+                        $new_params[$key]["description"] = $param["desc"];
+
+                    }
+
+                    if( isset( $param["options"] ) ){
+
+                        unset( $new_params[$key]["options"] );
+
+                        $new_params[$key]["choices"] = $param["options"];
+
+                    }
+
+                    if( isset( $param["atts"] ) ){
+
+                        unset( $new_params[$key]["atts"] );
+
+                        $new_params[$key]["input_attrs"] = $param["atts"];
+
+                    }
+
+                    $new_params[$key]["value"] =  ( isset($this->atts[$key]) ) ? $this->atts[$key] : ( ( isset($param["value"]) ) ? $param["value"] : "" );
+                    $new_params[$key]["is_attr"] = ( isset($this->atts[$key]) ) ? true : ( ( isset($param["is_attr"]) ) ? $param["is_attr"] : false );
+
+
+
+                }
+            }
+        }
+
+        return $new_params;
+    }
+
+    public function add_control_param( $name , $key , $param ){
+
+        $settings_type = ( isset( $param['settings_type'] ) && !empty( $param['settings_type'] ) ) ?  $param['settings_type'] : 'sed_pb_modules';
+
+        $param['setting_id'] = $settings_type;
+
+        unset( $param['settings_type'] );
+
+        $category = ( isset( $param['control_category'] ) && !empty( $param['control_category'] ) ) ?  $param['control_category'] : 'module-settings';
+
+        $param['category'] = $category;
+
+        unset( $param['control_category'] );
+
+        $is_style_setting = ( isset( $param['is_style_setting'] ) && is_bool( $param['is_style_setting'] ) ) ?  $param['is_style_setting'] : false;
+
+        $param['is_style_setting'] = $is_style_setting;
+
+        $param['sub_category'] = $name;
+
+        $value = isset( $param["value"] ) ? $param["value"] :  "";
+
+        global $sed_options_engine;
+
+        $param['default_value'] = is_array( $value ) ?  implode("," , $value): $sed_options_engine->sanitize_control_value( $value );
+
+        unset( $param["value"] );
+
+        $param['option_group'] = $name;
+
+        //edit risk
+        $is_attr = isset( $param["is_attr"] ) ? $param["is_attr"]: false;
+
+        if( $settings_type == 'sed_pb_modules' ){
+            $param['shortcode'] = $name;
+            $param['attr_name'] = ( isset( $param['attr_name'] ) && !empty( $param['attr_name'] ) ) ? $param['attr_name'] : $key;
+            $param['is_attr']   = $is_attr;
+        }
+
+        return $param;
 
     }
 
@@ -750,35 +914,6 @@ class PBShortcodeClass{
 
     function contextmenu( $context_menu ){
 
-    }
-
-    /*case 'group_skin' :
-    case 'group_hover_effect' :
-    skin_refresh
-    */
-    function get_params( $params ){
-
-        $new_params = array();
-
-        if( !empty( $params ) ){
-            foreach( $params AS $key => $param ){
-                if( is_array( $param ) ){
-
-                    if( isset( $param["type"] ) && $param["type"] == "skin" ){
-                        if( !isset( $param["atts"] ) )
-                            $param["atts"] = array();
-
-                        $param["atts"]['data-module-name']  = $this->module;
-                    }
-
-                    $new_params[$key] = $param;
-                    $new_params[$key]["value"] =  ( isset($this->atts[$key]) ) ? $this->atts[$key] : ( ( isset($param["value"]) ) ? $param["value"] : "" );
-                    $new_params[$key]["is_attr"] = ( isset($this->atts[$key]) ) ? true : ( ( isset($param["is_attr"]) ) ? $param["is_attr"] : false );
-                }
-            }
-        }
-
-        return $new_params;
     }
 
     //@mixin attachment ID or object

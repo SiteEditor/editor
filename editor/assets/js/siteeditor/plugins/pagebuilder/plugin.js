@@ -120,7 +120,9 @@
                 placeholder:"<div class='sed-state-highlight-row'></div>",
                 dragStart : function(event , element, helper){
                     $("#iframe_cover").show();
-                    api.previewer.send("moduleDragStart");
+                    api.previewer.send("moduleDragStart"); 
+
+                    api.Events.trigger( "moduleDragStartEvent" , helper.attr("sed-module-name") );
                 },
                 stop : function(event , element, helper){
                     $("#iframe_cover").hide();

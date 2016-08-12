@@ -315,7 +315,7 @@ class SiteEditorOptionsPanel{
 		 *
 		 * @param WP_Customize_Panel $this WP_Customize_Panel instance.
 		 */
-		do_action( 'sed_app_render_panel', $this , $panel_content );
+		do_action( 'sed_app_render_panel', $this );
 
 		/**
 		 * Fires before rendering a specific Customizer panel.
@@ -325,7 +325,7 @@ class SiteEditorOptionsPanel{
 		 *
 		 * @since 4.0.0
 		 */
-		do_action( "sed_app_render_panel_{$this->id}" , $panel_content );
+		do_action( "sed_app_render_panel_{$this->id}" );
 
 		$this->render();
 	}
@@ -340,7 +340,7 @@ class SiteEditorOptionsPanel{
 	 */
 	protected function render() {
 
-		$atts           = $this->options->template->get_atts( $this->atts );
+		$atts           = $this->input_attrs();
 
 		$atts_string    = $atts["atts"];
 
@@ -358,6 +358,37 @@ class SiteEditorOptionsPanel{
 		</fieldset>
 		<?php
 
+	}
+
+	/**
+	 * Render the custom attributes for the control's input element.
+	 *
+	 * @since 4.0.0
+	 * @access public
+	 */
+	public function input_attrs() {
+
+		$atts_string = "";
+		$class = "";
+
+		if( is_array( $this->atts ) ) {
+
+			foreach ($this->atts as $attr => $value) {
+
+				if( $attr == "class" ){
+					$class = $value;
+				}else{
+					$atts_string .= $attr . '="' . esc_attr($value) . '" ';
+				}
+
+			}
+
+		}
+
+		return array(
+			"atts"   =>  $atts_string  ,
+			"class"  =>  $class
+		);
 	}
 
 	/**

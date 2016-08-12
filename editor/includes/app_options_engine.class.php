@@ -411,6 +411,7 @@ Class AppOptionsEngine {
                 'sub_category'        =>  $name,           //shortcode name :: sed_image
                 'default_value'       =>  is_array( $value ) ?  implode("," , $value): $this->sanitize_control_value( $value ),
                 'is_style_setting'    =>  $is_style_setting ,
+                'option_group'        =>  $name
             );
 
             if( $settings_type == 'sed_pb_modules' ){
@@ -450,42 +451,17 @@ Class AppOptionsEngine {
         if(isset($param['control_type']) && !empty($param['control_type'])){
             return $param;
         }else{
-            $control_type = '';
+
             switch ($param['type']) {
-                case "select":
-                case "text":
-                case "textarea":
-                case "radio":
-                    $control_type = "sed_element";
-                break;
-                case "image":
-                    $control_type = "image";
-                break;
                 case "spinner":
-                    $control_type = "spinner";
+                    $control_type = "number";
                 break;
-                case "color":
-                    $control_type = "color";
-                break;
-                case "icon":
-                    $control_type = "icon";
-                break;
-                case "multi_icons" :
-                    $control_type = "multi_icons";
-                break;
-                case "checkbox":
-                    if( isset( $param['subtype'] ) && $param['subtype'] == "multi" ){
-                        $control_type = "checkboxes";
-                    }else{
-                        $control_type = "sed_element";
-                    }
-                break;
-                //default:
-                    //$control_type = $param['type'];
+                default:
+                    $control_type = $param['type'];
             }
 
             if( !empty( $control_type ) )
-                $param['control_type'] = $control_type;
+                $param['type'] = $control_type;
 
             return $param;
         }
@@ -502,13 +478,6 @@ Class AppOptionsEngine {
                     case 'image_size' :
                         unset( $param['type'] );
                         $param = $this->add_image_sizes( $param );
-                        $new_params[$key] = $param;
-                    break;
-                    case "video" :
-                    case "audio" :
-                    case "file"  :
-                        $param['control_type'] = $param['type'];
-                        $param['type'] = "change_media";
                         $new_params[$key] = $param;
                     break;
                     case "animation" :
@@ -578,22 +547,9 @@ Class AppOptionsEngine {
                         $new_params[$key]['type'] = "select";
                         $new_params[$key]['subtype'] = "multiple";
                     break;
-                    case "multi-icon" :
-                        $new_params[$key] = $param;
-                        $new_params[$key]['type'] = "multi_icons";
-                    break;
-                    case "multi-image" :
-                        $new_params[$key] = $param;
-                        $new_params[$key]['type'] = "multi_images";
-                        $new_params[$key]['control_type'] = 'multi_images';
-                    break;
                     case "multi-checkbox" :
                         $new_params[$key] = $param;
-                        $new_params[$key]['type'] = "checkbox";
-                        $new_params[$key]['subtype'] = "multi";
-
-                        if( !isset( $new_params[$key]['control_param'] ) )
-                            $new_params[$key]['control_param'] = array();
+                        $new_params[$key]['type'] = "multicheck";
 
                         $new_params[$key]['control_param']["options_selector"] = ".sed-bp-checkbox-input";
                         
