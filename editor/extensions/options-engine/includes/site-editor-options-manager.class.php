@@ -271,7 +271,23 @@ final class SiteEditorOptionsManager{
 
     final protected function add_setting( $id , $args = array() ) {
 
-        SED()->editor->manager->add_setting( $id , $args );
+        if ( $id instanceof SedAppSettings ) {
+            $setting = $id;
+        } else {
+
+            $class_name = 'SedAppSettings';
+
+            if ( isset( $args['setting_class'] ) && class_exists( $args['setting_class'] ) ) {
+                $class_name = $args['setting_class'] ;
+            }
+
+            $setting = new $class_name( SED()->editor->manager , $id, $args );
+
+        }
+
+        SED()->editor->manager->add_setting( $setting );
+
+        return $setting;
 
     }
 
@@ -439,7 +455,15 @@ final class SiteEditorOptionsManager{
 
             unset( $args['setting_id'] );
 
+            if( isset( $primary_args['setting_id'] ) ){
+                unset( $args['setting_id'] );
+            }
+
             unset( $args['id'] );
+
+            if( isset( $primary_args['id'] ) ){
+                unset( $args['id'] );
+            }
 
             $setting = SED()->editor->manager->get_setting( $setting_id );
 
@@ -1190,15 +1214,15 @@ function sed_add_layout_options(){
         'label'             => __('Slider', 'translation_domain'),
         'type'              => 'slider',
         'priority'          => 28,
-        'default'           => 20,
+        'default'           => 30,
         //panel or group
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
         //'input_attrs',
         'js_params' => array(
-            "min" => 0,
-            "max" => 100, 
+            "min" => 20,
+            "max" => 150,
         )
     ));
 

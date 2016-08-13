@@ -41,10 +41,10 @@
                 this.cssSettingType = ( !_.isUndefined( control.params.css_setting_type ) ) ? control.params.css_setting_type : "module";
             }
 
-            if( !_.isUndefined( control.params.default_value ) )
+            if( !_.isUndefined( control.params.default_value ) && !_.isNull( control.params.default_value ) )
                 control.defaultValue = control.params.default_value;
             else
-                control.defaultValue = "";
+                control.defaultValue = control.setting();
 
             this._ready();
 

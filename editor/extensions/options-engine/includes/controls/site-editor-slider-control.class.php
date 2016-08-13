@@ -32,14 +32,18 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
 		 *
 		 * @access public
 		 *
-		public function to_json() {
-			parent::to_json();
-			$this->json['choices']['min']  = ( isset( $this->choices['min'] ) ) ? $this->choices['min'] : '0';
-			$this->json['choices']['max']  = ( isset( $this->choices['max'] ) ) ? $this->choices['max'] : '100';
-			$this->json['choices']['step'] = ( isset( $this->choices['step'] ) ) ? $this->choices['step'] : '1';
+		 */
+		public function json() {
+
+			$json_array = parent::json();
+			$json_array['min']  = ( isset( $this->js_params['min'] ) ) ? $this->js_params['min'] : '0';
+			$json_array['max']  = ( isset( $this->js_params['max'] ) ) ? $this->js_params['max'] : '100';
+			$json_array['step'] = ( isset( $this->js_params['step'] ) ) ? $this->js_params['step'] : '1';
+
+			return $json_array;
 		}
 
-		*/
+
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -73,10 +77,10 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
 			
 			<label for="slider-amount"><?php echo $this->label; ?></label>
 			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-			<div class="sed-bp-form-slider">
+			<div  class="sed-bp-form-slider">
                 <div class="sed-bp-form-slider-container"></div>
 				<div>
-				  <input type="text" id="slider-amount" readonly >
+				  <input type="text" value="<?php echo $value;?>" class="slider-demo-value" readonly >
 				</div>	
 			</div>
 

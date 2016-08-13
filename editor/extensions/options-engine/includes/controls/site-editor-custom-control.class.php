@@ -28,6 +28,22 @@ if ( ! class_exists( 'SiteEditorCustomControl' ) ) {
 		public $type = 'custom';
 
 		/**
+		 * The Custom Js Control type.
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $js_type = 'custom';
+
+		/**
+		 * The Custom raw html template code.
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $custom_template = '';
+
+		/**
 		 * Enqueue control related scripts/styles.
 		 *
 		 * @access public
@@ -43,26 +59,17 @@ if ( ! class_exists( 'SiteEditorCustomControl' ) ) {
 		 */
 		protected function render_content() {
 
-			$atts           = $this->input_attrs();
+			echo $this->custom_template;
 
-			$atts_string    = $atts["atts"];
+		}
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-form-custom sed-bp-input sed-control-{$this->type} {$atts['class']}";
+		public function json() {
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$json_array = parent::json();
+			$json_array['type'] = $this->js_type;
 
-			$sed_field_id   = 'sed_pb_' . $pkey;
+			return $json_array;
 
-            $value          = $this->value();
-
-			?>
-
-				<label><?php echo $this->label;?></label>
-				<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-				<textarea rows="5" cols="30" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" class="<?php echo esc_attr( $classes ); ?>"><?php echo $value; ?></textarea>
-
-
-			<?php
 		}
 
 		/**

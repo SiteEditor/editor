@@ -373,30 +373,7 @@ class SiteEditorOptionsControl{
 	 * @since 3.4.0
 	 */
 	public function to_json() {
-		$this->json['settings'] = array();
-		foreach ( $this->settings as $key => $setting ) {
-			$this->json['settings'][ $key ] = $setting->id;
-		}
 
-        $this->json = array_merge( $this->json , $this->js_params );
-
-		$this->json['type'] = $this->type;
-		$this->json['priority'] = $this->priority;
-		$this->json['active'] = $this->active();
-		$this->json['panel'] = $this->panel;
-		$this->json['label'] = $this->label;
-		$this->json['description'] = $this->description;
-		$this->json['instanceNumber'] = $this->instance_number;
-        $this->json['category'] = $this->category;
-        $this->json['sub_category'] = $this->sub_category;
-        $this->json['default_value'] = $this->default_value;
-        $this->json['is_style_setting'] = $this->is_style_setting;
-
-        if( $this->category == "module-settings" ){
-            $this->json['shortcode'] = $this->shortcode;
-            $this->json['attr_name'] = $this->attr_name;
-            $this->json['is_attr'] = $this->is_attr;
-        }
 	}
 
 	/**
@@ -408,7 +385,37 @@ class SiteEditorOptionsControl{
 	 */
 	public function json() {
 		$this->to_json();
-		return $this->json;
+
+		$json_array = array();
+
+		$json_array['settings'] = array();
+		foreach ( $this->settings as $key => $setting ) {
+			$json_array['settings'][ $key ] = $setting->id;
+		}
+
+		$json_array = array_merge( $json_array , $this->js_params );
+
+		$json_array['type'] = $this->type;
+		$json_array['priority'] = $this->priority;
+		$json_array['active'] = $this->active();
+		$json_array['panel'] = $this->panel;
+		$json_array['label'] = $this->label;
+		$json_array['description'] = $this->description;
+		$json_array['instanceNumber'] = $this->instance_number;
+		$json_array['category'] = $this->category;
+		$json_array['sub_category'] = $this->sub_category;
+		$json_array['default_value'] = $this->default_value;
+		$json_array['is_style_setting'] = $this->is_style_setting;
+
+		if( $this->category == "module-settings" ){
+			$json_array['shortcode'] = $this->shortcode;
+			$json_array['attr_name'] = $this->attr_name;
+			$json_array['is_attr'] = $this->is_attr;
+		}
+
+		$json_array = array_merge( $json_array , $this->json );
+
+		return $json_array;
 	}
 
 	/**

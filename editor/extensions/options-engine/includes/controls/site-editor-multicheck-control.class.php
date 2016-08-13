@@ -57,30 +57,33 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 
 			?>
 
-
             <label class=""><?php echo $this->label;?></label>
-	        <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-            <div for="<?php echo $sed_field_id . $i ;?>" class="sed-bp-form-multicheck sed-multicheck">
 
-	        <?php             
-	            $values = explode( "," , $value);
-	            $values = array_map( 'trim' , $values );
-	            $i = 1;
-	            foreach( $this->choices as $key_val => $choice ){
-	            $checked = ( is_array( $values ) && in_array( $key_val , $values) ) ? 'checked="checked"' : '';	
-	    	?>
+			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
 
-                <div>
-	                <label for="<?php echo $sed_field_id . $i ;?>">
-		            	<input type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo $key_val;?>" name="<?php echo esc_attr( $sed_field_id );?>[]" id="<?php echo $sed_field_id . $i ;?>" <?php echo $checked;?> <?php echo $atts_string;?>  />
-		                <?php echo $choice;?>
-	                </label>
-                </div>
+			<div class="sed-bp-form-multicheck sed-multicheck">
 
-            <?php 
-	                $i++;
-	            }
-            ?>
+				<?php
+					$values = explode( "," , $value);
+					$values = array_map( 'trim' , $values );
+					$i = 1;
+					foreach( $this->choices as $key_val => $choice ){
+					$checked = ( is_array( $values ) && in_array( $key_val , $values) ) ? 'checked="checked"' : '';
+				?>
+
+					<div>
+
+						<label for="<?php echo $sed_field_id . $i ;?>">
+							<input type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo $key_val;?>" name="<?php echo esc_attr( $sed_field_id );?>[]" id="<?php echo $sed_field_id . $i ;?>" <?php echo $checked;?> <?php echo $atts_string;?>  />
+							<?php echo $choice;?>
+						</label>
+
+					</div>
+
+				<?php
+						$i++;
+					}
+				?>
             </div>
 
 			<?php

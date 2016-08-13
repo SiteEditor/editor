@@ -46,9 +46,9 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             add_action( 'sed-app-save-data' , array( $this , 'save_check_main_content' ) , 10 , 2 );
 
-            add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
+            //add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
 
-            add_action( "sed_register_sed_add_layout_options" , array( $this, 'register_add_layout_group' ) , -9999 );
+            //add_action( "sed_register_sed_add_layout_options" , array( $this, 'register_add_layout_group' ) , -9999 );
 
             add_action( "sed_register_sed_pages_layouts_options" , array( $this , 'pages_layouts_options' ) );
 
@@ -56,26 +56,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
 		}
 
-        function add_layout_options(){
-            global $sed_options_engine;
-            ob_start();
-            include dirname( dirname( __FILE__ ) ) . DS . "view" . DS . "add_layout.tpl.php";
-            $html = ob_get_clean();
-
-            $params = array(
-                'layouts_manager' => array(
-                    'type'              =>  'custom',
-                    //'in_box'            =>   true ,
-                    'html'              =>  $html ,
-                    'control_type'      => 'layouts_manager' ,
-                    'control_category'  => 'app-settings' ,
-                    'settings_type'     => "sed_layouts_settings" ,
-                )
-            );
-
-            $sed_options_engine->set_group_params( "sed_add_layout" , __("Add New Layout" , "site-editor") , $params , array() , "app-settings" );
-        }
-
+        
         function register_add_layout_group(){
 
             SED()->editor->manager->add_group( 'sed_add_layout' , array(
@@ -87,6 +68,31 @@ if(!class_exists('SiteEditorLayoutManager')){
             ));
 
         }
+        
+        
+        function add_layout_options(){
+
+            ob_start();
+            include dirname( dirname( __FILE__ ) ) . DS . "view" . DS . "add_layout.tpl.php";
+            $html = ob_get_clean();
+
+
+            sed_options()->add_field( 'layouts_manager' , array(
+                'type'              => 'custom',
+                'has_border_box'    => false ,
+                'custom_template'   => $html ,
+                'js_type'           => 'layouts_manager' ,
+                'category'          => 'app-settings' ,
+                'setting_id'        => "sed_layouts_settings" ,
+                'option_group'      => 'sed_add_layout',
+                'default'           => get_option( 'sed_layouts_settings' ),
+                'capability'        => 'manage_options',
+                'option_type'       => 'option' ,
+                'transport'         => 'postMessage'
+            ));
+
+        }
+
 
         function register_pages_layouts_group(){
 
@@ -624,12 +630,12 @@ if(!class_exists('SiteEditorLayoutManager')){
                 }
             }
 
-            $settings['sed_layouts_settings'] = array(
+            /*$settings['sed_layouts_settings'] = array(
     			'default'        => get_option( 'sed_layouts_settings' ),
     			'capability'     => 'manage_options',
     			'option_type'    => 'option' ,
                 'transport'      => 'postMessage'
-    		);
+    		);*/
 
             $default_pages_layouts = $this->default_pages_layouts_list();
 
