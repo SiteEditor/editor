@@ -59,7 +59,9 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 
 
 
-	        <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+	        <?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
 	        <?php $checked = ( "true" == $value ) ? 'checked="checked"' : ''; ?>
 
             <label for="<?php echo $sed_field_id ;?>" class="sed-bp-form-checkbox">

@@ -1343,7 +1343,7 @@
                         attach_id = 0;
                     }
 
-                    images_html += '<li sed-attachment-id="' + attach_id + '" class="item-image"><img class="gallery-img" src="' + imgUrl + '" width="100" height="100"><span class="remove-img-action icon-delete"></span></li>';
+                    images_html += '<li sed-attachment-id="' + attach_id + '" class="item-image"><img class="gallery-img" src="' + imgUrl + '" width="100" height="100"><span class="remove-img-action icon-delete f-sed"></span></li>';
                 });
 
                 control.sortableImages.html( images_html );
@@ -1383,6 +1383,10 @@
 
             this.sedDialog = sedDialog;
 
+            if( _.isEmpty( control.defaultValue ) ) {
+                control.defaultValue = 'fa fa-magic';
+            }
+
             selectButton.livequery(function(){
                 $(this).click(function(){
                     api.Events.trigger( 'element_open_dialog' , control.sedDialog );
@@ -1392,7 +1396,7 @@
                 $(this).unbind('click');
             });
 
-            control.icoDemo = control.container.find(".icon-demo");
+            control.icoDemo = control.container.find(".sed-bp-icon-demo");
 
             removeButton.livequery(function(){
                 $(this).click(function(){
@@ -1549,7 +1553,7 @@
 
                 var icons_html = "";
                 _.each( currValue , function( icon ){
-                    icons_html += '<li sed-icon="' + icon + '" class="item-icon"><span class="' + icon + '"></span><span class="remove-icon-action icon-delete"></span></li>';
+                    icons_html += '<li sed-icon="' + icon + '" class="item-icon"><span class="' + icon + '"></span><span class="remove-icon-action icon-delete f-sed"></span></li>';
                 });
                 control.sortableIcons.html( icons_html );
 
@@ -2380,6 +2384,7 @@
         number                  : api.SpinnerControl,
         checkboxes              : api.CheckBoxesControl,
         multicheck              : api.CheckBoxesControl,
+        "multi-check"           : api.CheckBoxesControl,
         spinner_lock            : api.SpinnerLockControl ,
         color                   : api.ColorControl,
         multi_icons             : api.OrganizeIconsControl,
@@ -2404,7 +2409,7 @@
          * @code
          * @custom
          * @dropdown-pages
-         * @multicolor
+         * @multi-color
          * @radio-image
          * @radio-buttonset
          * @repeater
@@ -2423,7 +2428,7 @@
          * @select
          * @textarea
          * @checkbox
-         * @multicheck
+         * @multi-check
          * @image
          * @multi-image
          * @video

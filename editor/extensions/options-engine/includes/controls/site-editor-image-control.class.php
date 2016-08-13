@@ -62,13 +62,15 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 			?>
 
 
+		    <?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
 	        <div class="setting-img">
 		        <div class="change-img-setting">
 			        <div class="change-img-container">
 			        	<img class="change_img" src="<?php echo esc_attr( $value );?>"/>
 			        </div>
 		        </div>
-		        <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
 		        <div class="change-img-setting">
 
 			        <button class="<?php echo esc_attr( $classes ); ?>" data-media-type="image" data-selcted-type="single"><?php echo $this->label; ?></button>

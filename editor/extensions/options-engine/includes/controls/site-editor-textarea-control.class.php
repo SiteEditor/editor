@@ -58,7 +58,9 @@ if ( ! class_exists( 'SiteEditorTextareaControl' ) ) {
 			?>
 
 				<label><?php echo $this->label;?></label>
-				<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+				<?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
 				<textarea rows="5" cols="30" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" class="<?php echo esc_attr( $classes ); ?>"><?php echo $value; ?></textarea>
 
 

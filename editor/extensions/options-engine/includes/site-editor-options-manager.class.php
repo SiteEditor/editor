@@ -992,10 +992,10 @@ function sed_add_layout_options(){
         //'input_attrs'
     ));
 
-    sed_options()->add_field( 'multi_icons_field_id' , array(
+    sed_options()->add_field( 'multi-icon_field_id' , array(
         'setting_id'        => 'my_setting6',
         'label'             => __('Multi Icons control', 'translation_domain'),
-        'type'              => 'multi_icons',
+        'type'              => 'multi-icon',
         'priority'          => 15,
         'default'           => '',
         //panel or group
@@ -1018,10 +1018,10 @@ function sed_add_layout_options(){
         //'input_attrs'
     ));
 
-    sed_options()->add_field( 'multi_images_field_id' , array(
+    sed_options()->add_field( 'multi-image_field_id' , array(
         'setting_id'        => 'my_setting8',
         'label'             => __('Multi Images control', 'translation_domain'),
-        'type'              => 'multi_images', 
+        'type'              => 'multi-image', 
         'priority'          => 17,
         'default'           => '',
         //panel or group
@@ -1031,10 +1031,10 @@ function sed_add_layout_options(){
         //'input_attrs'
     ));
 
-    sed_options()->add_field( 'multicheck_field_id' , array(
+    sed_options()->add_field( 'multi-check_field_id' , array(
         'setting_id'        => 'my_setting9',
         'label'             => __('Multi Checkbox', 'translation_domain'),
-        'type'              => 'multicheck',
+        'type'              => 'multi-check',
         'priority'          => 18,
         'default'           => 'options3_key',
         //panel or group
@@ -1293,10 +1293,10 @@ function sed_add_layout_options(){
         )
     ));
 
-    sed_options()->add_field( 'multicolor_field_id' , array(
+    sed_options()->add_field( 'multi-color_field_id' , array(
         'setting_id'        => 'my_setting25',
         'label'             => __('Multicolor control', 'translation_domain'),
-        'type'              => 'multicolor',
+        'type'              => 'multi-color',
         'priority'          => 33,
         //panel or group
         //'panel'             => 'panel_id',

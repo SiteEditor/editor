@@ -58,7 +58,9 @@ if ( ! class_exists( 'SiteEditorRepeaterControl' ) ) {
 			?>
 
 			<label class=""><?php echo $this->label;?></label>
-			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+			<?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
 			<div class="sed-bp-form-repeater">
 				<?php
 				$i = 1;

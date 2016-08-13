@@ -57,14 +57,20 @@ if ( ! class_exists( 'SiteEditorIconControl' ) ) {
 
             $value          = $this->value();
 
+            $value = (!empty($value)) ? $value : 'fa fa-magic';
+
 			?>
 
-
+            <?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
 	        <div class="setting-icon">
-		        <div class="change-icon-container">
-		        	<span sed-icon="<?php echo esc_attr( $value );?>" class="icon-demo <?php echo esc_attr( $value );?>"></span>
+		        <div class="change-icon-setting">
+			        <div class="change-icon-container">
+			        	<span sed-icon="<?php echo esc_attr( $value );?>" class="sed-bp-icon-demo <?php echo esc_attr( $value );?>"></span>
+			        </div>
 		        </div>
-		        <div class="change-icon-btns">
+		        <div class="change-icon-setting">
 
 			        <button class="<?php echo esc_attr( $classes ); ?>" ><?php echo $this->label; ?></button>
 

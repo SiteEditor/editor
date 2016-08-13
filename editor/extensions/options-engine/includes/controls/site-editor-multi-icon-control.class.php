@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: multi_images.
+ * SiteEditor Control: multi-icon.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
+if ( ! class_exists( 'SiteEditorMultiIconsControl' ) ) {
 
 	/**
-	 * MultiImages control
+	 * MultiIcons control
 	 */
-	class SiteEditorMultiImagesControl extends SiteEditorOptionsControl {
+	class SiteEditorMultiIconsControl extends SiteEditorOptionsControl {
 
 		/**
 		 * The control type.
@@ -25,7 +25,7 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'multi_images';
+		public $type = 'multi-icon';
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "select-img-btn change_image_btn sed-btn-blue sed-control-{$this->type} {$atts['class']}";
+			$classes        = "select-icon-btn change_icon sed-btn-blue sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -57,20 +57,22 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 
 			?>
 
-
-        	<div class="setting-image">
-	        	<div class="images-organize-box">
-	        		<ul class="images-sortable"></ul>
+            <?php if(!empty($this->description)){ ?> 
+			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			<?php } ?>
+        	<div class="setting-icon">
+	        	<div class="icons-organize-box">
+	        		<ul class="icons-sortable"></ul>
 	        	</div>
-	        	<div class="select-img-btns">
+	        	<div class="select-icon-btns">
 
-	        		<button class="<?php echo esc_attr( $classes ); ?>" ><?php echo $this->label;?></button>
+	        		<button class="<?php echo esc_attr( $classes ); ?>" ><?php echo $this->label; ?></button>
 
 	        	</div>
 	        	<div class="clr"></div>
         	</div>
 
-
+    
 			<?php
 		}
 
@@ -89,4 +91,4 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 	}
 }
 
-$this->register_control_type( 'multi_images' , 'SiteEditorMultiImagesControl' );
+$this->register_control_type( 'multi-icon' , 'SiteEditorMultiIconsControl' );

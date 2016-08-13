@@ -58,8 +58,10 @@ if ( ! class_exists( 'SiteEditorToggleControl' ) ) {
 			?>
 
 			<label class="">
-				<?php echo $this->label;?>
-				<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+				<span><?php echo $this->label;?></span>  
+				<?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
 				<div class="sed-bp-form-toggle">
 					<?php
 						$checked = ( $value ) ? 'checked="checked"' : '';

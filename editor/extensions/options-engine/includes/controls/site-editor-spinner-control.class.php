@@ -60,7 +60,9 @@ if ( ! class_exists( 'SiteEditorSpinnerControl' ) ) {
 			?>
 
 
-			<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+			<?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
             <label for="<?php echo esc_attr( $sed_field_id );?>" ><?php echo $this->label; ?></label>  
             <span class="after_field"><?php echo $this->after_field; ?></span> 
             <input type="text" class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo esc_attr( $value ); ?>" <?php echo $atts_string;?> />

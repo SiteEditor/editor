@@ -73,7 +73,9 @@ if ( ! class_exists( 'SiteEditorTextControl' ) ) {
 			?>
 
 			<label><?php echo $this->label;?></label>
-            <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+            <?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
             <input type="<?php echo esc_attr( $this->subtype ); ?>" placeholder="<?php echo esc_attr( $this->placeholder ); ?>" class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo $value; ?>" <?php echo $atts_string;?> />
 
 

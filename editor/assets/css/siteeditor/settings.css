@@ -91,31 +91,89 @@ input[type="rodio"]
     vertical-align: middle;
     width: 13px !important;
 }
+.setting-icon,
 .setting-img {
     margin: 0 auto;
-    width: 218px;
+    width: 100%;
+    display: table;
 }
+.change-icon-setting,
 .change-img-setting {
     display: table-cell;
     margin: 0 auto;
     vertical-align: middle;
+    text-align: center;
 }
 .change_image {
     width: 100%;
 }
+.change-icon-container .sed-bp-icon-demo {
+    font-size: 26px;
+    vertical-align: sub;
+}
+.images-organize-box .item-image,
+.icons-organize-box .item-icon, 
+.change-icon-container,
 .change-img-container{
-   /* border: 1px solid #E6E6E6;   */
-    box-shadow: 2px 2px 3px -2px #DCDCDC;
+    border: 1px solid #E6E6E6;   
+    /*box-shadow: 2px 2px 3px -2px #DCDCDC;*/   
     height: 64px;
+    line-height: 64px;
     margin: 0 20px 0 0;
     position: relative !important;
     width: 64px;
     overflow: hidden;
+    border: 1px solid #e6e6e6;
+    background: #fff;
+    display: block;
+    text-align: center;
+}
+.images-organize-box ,
+.icons-organize-box {
+    margin: 3px -3px;
+}
+.images-organize-box .item-image,
+.icons-organize-box .item-icon {
+    margin: 2px;
+    display: inline-block;
+    width: 54px;
+    height: 54px;
+    line-height: 54px;
+    cursor: move;
+    overflow: visible;
+}
+.icons-organize-box .item-icon > span{
+    font-size: 20px;
+}
+.images-organize-box .item-image > span.remove-img-action,
+.icons-organize-box .item-icon > span.remove-icon-action {
+    position: absolute;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    font-size: 11px;
+    height: 1.2em;
+    width: 1.2em;
+    line-height: 1.3em;
+    top: -3px;
+    right: -3px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+.images-organize-box .item-image:hover > span.remove-img-action,
+.icons-organize-box .item-icon:hover > span.remove-icon-action {
+    opacity: 1;
+}
+.images-organize-box .item-image > img {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
 }
 .change_img {
     width:100%;
     height: auto;
-    min-height: 100%;
+    display: inline-block;
+    vertical-align: middle;
 }
 .pb-skins-modules-container:after,.pb-skins-modules-container:before {
     display: table;

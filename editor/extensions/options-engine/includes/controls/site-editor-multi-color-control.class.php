@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: multicolor.
+ * SiteEditor Control: multi-color.
  *
  * @package     SiteEditor  
  * @subpackage  Options
@@ -25,7 +25,7 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'multicolor';
+		public $type = 'multi-color';
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "input-multicolorpicker sed-colorpicker sed-control-{$this->type} {$atts['class']}";
+			$classes        = "input-multi-colorpicker sed-colorpicker sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -58,19 +58,22 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
 			?>
 
             <label><?php echo $this->label;?></label>
-            <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
-            <div class="colorpicker sed-bp-form-multicolor">
+            <?php if(!empty($this->description)){ ?> 
+			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			<?php } ?>
+            <div class="colorpicker sed-bp-form-multi-color">
 	            
 	            <?php
 				  $i = 1;
 				  foreach( $this->choices as $key_val => $choice ) {
 				?>
-
-					<label><?php echo $choice;?></label>
-		            <span class="colorselector">
-			            <input type="text" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i;?>" name="<?php echo esc_attr( $sed_field_id ) . $i;?>" value="<?php echo esc_attr( $value[$key_val] ); ?>">
-			            &nbsp;&nbsp;  
-		            </span> 
+                    <div class="multi-color-item">
+						<label><?php echo $choice;?></label>
+			            <span class="colorselector">
+				            <input type="text" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i;?>" name="<?php echo esc_attr( $sed_field_id ) . $i;?>" value="<?php echo esc_attr( $value[$key_val] ); ?>">
+				            &nbsp;&nbsp;  
+			            </span> 
+		            </div>
 
 				<?php 
 				    $i++;
@@ -96,4 +99,4 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
 	}
 }
 
-$this->register_control_type( 'multicolor' , 'SiteEditorMulticolorControl' );
+$this->register_control_type( 'multi-color' , 'SiteEditorMulticolorControl' );

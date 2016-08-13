@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: multicheck.
+ * SiteEditor Control: multi-check.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -25,7 +25,7 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'multicheck';
+		public $type = 'multi-check';
 
 		/**  
 		 * Enqueue control related scripts/styles.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-multicheck-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-multi-check-input sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -59,9 +59,11 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 
             <label class=""><?php echo $this->label;?></label>
 
-			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+			<?php if(!empty($this->description)){ ?> 
+			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			<?php } ?>
 
-			<div class="sed-bp-form-multicheck sed-multicheck">
+			<div class="sed-bp-form-multi-check sed-multi-check">
 
 				<?php
 					$values = explode( "," , $value);
@@ -104,4 +106,4 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 	}
 }
 
-$this->register_control_type( 'multicheck' , 'SiteEditorMulticheckControl' );
+$this->register_control_type( 'multi-check' , 'SiteEditorMulticheckControl' );

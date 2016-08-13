@@ -88,7 +88,10 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 
 			?>
 
-			<span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>">"></span>
+			
+            <?php if(!empty($this->description)){ ?> 
+			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			<?php } ?>
 			<button type="button" class="<?php echo esc_attr( $classes ); ?>"  name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string; ?>>
 				<?php echo $this->label;?>
 				<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>

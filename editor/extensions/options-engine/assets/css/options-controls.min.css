@@ -1,20 +1,25 @@
 
 /**toggle
 ****************/
-  
+.sed-bp-form-toggle {
+    float: right;
+    display: block;    
+    height: 28px;
+    width: 40px; 
+} 
 .sed-bp-form-toggle input[type="checkbox"] {
     display: none;
 }
 .sed-bp-form-toggle .switch {
-    border: 1px solid rgba(0,0,0,.1);
+    border: 1px solid #ddd;
     display: inline-block;
     width: 35px;
     height: 12px;
     border-radius: 8px;
-    background: #ccc;
+    background: #ddd;
     vertical-align: middle;
     position: relative;
-    top: 4px;
+    top: 0;
     cursor: pointer;
     user-select: none;
     transition: background 350ms ease;
@@ -32,30 +37,32 @@
     transition: all 350ms cubic-bezier(0,.95,.38,.98), background 150ms ease;
 }
 .sed-bp-form-toggle .switch:before {
-    background: rgba(0,0,0,.2);
+    background: rgba(221,221,221,0.3);
     transform: translate3d(0, -50%, 0) scale(0);
 }
 .sed-bp-form-toggle .switch:after {
-    background: #999;
-    border: 1px solid rgba(0,0,0,.1);
+    background: #fff;
+    border: 1px solid #ddd;
     transform: translate3d(0, -50%, 0);
 }
 .sed-bp-form-toggle .switch:active:before {
     transform: translate3d(0, -50%, 0) scale(3);
 }
 .sed-bp-form-toggle input:checked + .switch {
-    background: rgba(52, 152, 222,.3);
+    background: #00aaff;
+    border-color: #00aaff;
 }  
 .sed-bp-form-toggle input:checked + .switch:before {
-    background: rgba(52, 152, 222, 0.075);
+    background: rgba(0,170,255,0.3);
     transform: translate3d(100%, -50%, 0) scale(1);
 }
 .sed-bp-form-toggle input:checked + .switch:after {
-    background: #3498DE;
+    background: #fff;
+    border-color: #00aaff;
     transform: translate3d(100%, -50%, 0);
 }
 .sed-bp-form-toggle input:checked + .switch:active:before {
-    background: rgba(52, 152, 222, 0.075);
+    background: rgba(0,170,255,0.3);
     transform: translate3d(100%, -50%, 0) scale(3);
 }
 
@@ -66,8 +73,9 @@
   display: none;
 }
 .sed-bp-form-switch {
+  float: right;
   border: none;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
   outline: 0;
   padding: 0;
   position: relative;
@@ -77,28 +85,30 @@
   user-select: none;
 } 
 .sed-bp-form-switch .switch-label {
-  background: rgba(0,0,0,.2);
+  background: #ddd;
   color: transparent;
   cursor: pointer;
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   position: relative;
   transition: left 0.15s ease-out;
-  height: 2rem;
+  height: 20px;
+  border: 1px solid #ddd;
+  font-size: 0;     
   width: auto;
   display: inline-block;
   border-radius: 1000px;
-  font-family: Monaco, "Lucida Sans Typewriter", "Lucida Typewriter", "Courier New", Courier, monospace;
 }
 .sed-bp-form-switch .switch-label:after {
   background: #FFFFFF;
+  border: 1px solid #ddd;
   content: "";
   display: block;
-  height: 1.5rem;
-  left: 0.25rem;
+  height: 18px;
+  left: 0;
   position: absolute;
-  top: 0.25rem;
-  width: 48%;
+  top: 0;
+  width: 50%;
   border-radius: 1000px;
   -webkit-transition: all 0.25s ease-in-out;
   -moz-transition: all 0.25s ease-in-out;
@@ -119,19 +129,21 @@
   margin-right: 0;
 }
 .sed-bp-form-switch input:checked + label {
-  background: #3498DB;
+  background: #00aaff;
+  border-color: #00aaff;
 }  
 .sed-bp-form-switch input:checked + label:after {
-  left: 48%;
-  /*right: 0.25rem;*/
+  left: 50%;
+  border-color: #00aaff;
   background: #ffffff;
 }
 
 .sed-bp-form-switch .switch-off,
 .sed-bp-form-switch .switch-on {
-  line-height: 32px;
-  font-weight: bold;
-  padding: 0 10px;
+    line-height: 20px;
+    font-weight: bold;
+    padding: 0 7px;
+    font-size: 10px;  
 }
 .sed-bp-form-switch .switch-on {
   color: #fff;
@@ -160,24 +172,29 @@
 .sed-bp-form-radio-image input:checked + label img {
     -webkit-box-shadow: 0 0 5px 2px rgba(0,0,0,.25);
     box-shadow: 0 0 5px 2px rgba(0,0,0,.25);
-    border: 1px solid #3498DB;
+    border: 1px solid #00aaff;
 } 
 
 
  
 /**Radio Buttonset
 *******************/
-.sed-bp-form-radio-buttonset .buttonset-label {
-    border-right: 1px solid rgba(0,0,0,.2);
+.sed-bp-form-radio-buttonset .buttonset-label{
+  font-size: 0;
 }
-.sed-bp-form-radio-buttonset .buttonset-label:last-child {
+.sed-bp-form-radio-buttonset .buttonset-label > div {
+    border-right: 1px solid rgba(0,0,0,.2);    
+    display: inline-block;
+    width: auto;
+}
+.sed-bp-form-radio-buttonset .buttonset-label > div:last-child {
     border-right: none;
 }
 .sed-bp-form-radio-buttonset .buttonset-input {
     display: none;
 }
-.sed-bp-form-radio-buttonset .buttonset-input:checked  + .buttonset-label {
-    background-color: #3498DB;
+.sed-bp-form-radio-buttonset .buttonset-input:checked  + .buttonset-label > div {
+    background-color: #00aaff;
     color: #fff;
 }
 
@@ -190,12 +207,15 @@
     background-color: #ddd;
     box-shadow: 0 0 2px 0 #ddd inset;
     border-radius: 1000px;
-    height: 3px;
+    height: 2px;
     position: relative;
-    margin-bottom: 20px;
+    margin-bottom: 10px;    
+    float: left;
+    min-width: 80%;
+    margin-top: 8px;
 }    
 .sed-bp-form-slider .sed-bp-form-slider-container .ui-slider-range{
-    background: #3498DB;
+    background: #00aaff;
     height: 100%;
     top: 0;
     border: 0 none;
@@ -205,7 +225,8 @@
     z-index: 1;
 }
 .sed-bp-form-slider .sed-bp-form-slider-container .ui-slider-handle{
-    background: #3498DB;
+    background: #fff;
+    border: 1px solid #00aaff;
     border-radius: 1000px;
     cursor: pointer;
     height: 12px;
@@ -220,16 +241,16 @@
 .sed-bp-form-slider .sed-bp-form-slider-container .ui-slider-handle:last-child {
   left: 0;
 }
-.sed-bp-form-slider .sed-bp-form-slider-container .ui-slider-handle:before {
-    background-color: #fff;
-    border-radius: 1000px;
-    content: "";
-    height: 4px;
-    left: 50%;
-    margin: -2px 0 0 -2px;
-    position: absolute;
-    top: 50%;
-    width: 4px;
+.sed-bp-form-slider .slider-value { 
+    float: right;
+}
+.sed-bp-form-slider .slider-value input.slider-demo-value {
+    width: 30px;
+    padding: 0;
+    min-width: 30px;
+    display: inline-block;
+    background: transparent !important;
+    border: none;
 }
 
 
@@ -381,7 +402,27 @@ div.ui-datepicker .ui-datepicker-calendar tr td.ui-state-disabled .ui-state-defa
   display: block;
   width: 98%;
   text-align: center;
+  margin-top: 5px;
 }
 .sed-bp-form-dimension.invalid input[type="text"]:focus {
   border-color: #D32F2F;
+}
+
+
+/**Multicolor
+*******************/
+
+.sed-bp-form-multi-color .multi-color-item {
+    display: inline-block;
+    font-size: 0;
+    padding: 3px;
+}
+.sed-bp-form-multi-color .multi-color-item label {
+    display: block;
+    text-align: center;
+}
+.sed-bp-form-multi-color .multi-color-item .colorselector {
+    text-align: center;
+    float: none !important;
+    display: block !important;
 }

@@ -64,7 +64,10 @@ if ( ! class_exists( 'SiteEditorChangeMediaControl' ) ) {
 
             <div class="">
 	            <label><?php  __("Url" ,"site-editor"); ?></label>
-	            <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo esc_attr( $this->description );?>">"></span>
+	          
+	            <?php if(!empty($this->description)){ ?> 
+				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				<?php } ?>
 
 	            <input type="text"  class="sed-bp-form-text sed-bp-input media-url-field" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="" disabled="disabled" />
 	            <a class="remove-media-src-btn" href="#">
