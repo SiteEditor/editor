@@ -627,6 +627,32 @@ final class SiteEditorOptionsManager{
         wp_enqueue_script( 'sed-options-controls' );
         wp_enqueue_style( 'sed-options-controls' );
         wp_enqueue_script( 'jquery-ui-slider' );
+        wp_enqueue_script( 'jquery-ui-datepicker' );
+        wp_enqueue_script( 'codemirror' );
+        wp_enqueue_style( 'codemirror' );
+
+
+        /**codemirror 
+        // Add theme styles.
+        wp_enqueue_style( 'codemirror-theme-' . $this->choices['theme'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/' . $this->choices['theme'] . '.css' ); 
+        *********************/  
+        // If we're using html mode, we'll also need to include the multiplex addon
+        // as well as dependencies for XML, JS, CSS languages.
+        //if ( in_array( $this->choices['language'], array( 'html', 'htmlmixed' ) ) ) {
+            wp_enqueue_script( 'codemirror-multiplex', SED_EDITOR_ASSETS_URL . '/libs/codemirror/addon/mode/multiplex.js', array( 'jquery', 'codemirror' ) );
+            wp_enqueue_script( 'codemirror-language-xml', SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/xml/xml.js', array( 'jquery', 'codemirror' ) );
+            wp_enqueue_script( 'codemirror-language-javascript', SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/javascript/javascript.js', array( 'jquery', 'codemirror' ) );
+            wp_enqueue_script( 'codemirror-language-css', SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/css/css.js', array( 'jquery', 'codemirror' ) );
+            wp_enqueue_script( 'codemirror-language-htmlmixed', SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/htmlmixed/htmlmixed.js', array( 'jquery', 'codemirror', 'codemirror-multiplex', 'codemirror-language-xml', 'codemirror-language-javascript', 'codemirror-language-css' ) );
+        //} elseif ( 'php' === $this->choices['language'] ) {
+            wp_enqueue_script( 'codemirror-language-xml', SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/xml/xml.js', array( 'jquery', 'codemirror' ) );
+            wp_enqueue_script( 'codemirror-language-php', SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/php/php.js', array( 'jquery', 'codemirror' ) );
+        //} else {
+            // Add language script.
+            //wp_enqueue_script( 'codemirror-language-' . $this->choices['language'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/' . $this->choices['language'] . '/' . $this->choices['language'] . '.js', array( 'jquery', 'codemirror' ) );
+        //}       
+
+        //wp_enqueue_style( 'codemirror-theme-' . $this->choices['theme'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/' . $this->choices['theme'] . '.css' );     
 
     }
 
@@ -1194,6 +1220,71 @@ function sed_add_layout_options(){
             "options5_key"      =>    "Five" ,
         ) ,
         //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'date_field_id' , array(
+        'setting_id'        => 'my_setting22',
+        'label'             => __('Date', 'translation_domain'),
+        'type'              => 'date',
+        'priority'          => 30,
+        'default'           => "",
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'dimension_field_id' , array(
+        'setting_id'        => 'my_setting23',
+        'label'             => __('Dimension', 'translation_domain'),
+        'type'              => 'dimension',
+        'priority'          => 31,
+        'default'           => 0,
+        'invalid_value'     => "Invalid Value", 
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'code_field_id' , array(
+        'setting_id'        => 'my_setting24',
+        'label'             => __('Code', 'translation_domain'),
+        'type'              => 'code',
+        'priority'          => 32,
+        'default'           => "",
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs',
+        'js_params' => array(
+            "mode" => "html",
+        )
+    ));
+
+    sed_options()->add_field( 'multicolor_field_id' , array(
+        'setting_id'        => 'my_setting25',
+        'label'             => __('Multicolor control', 'translation_domain'),
+        'type'              => 'multicolor',
+        'priority'          => 33,
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs',
+        'choices'     => array( 
+            'link'    => 'Color',
+            'hover'   => 'Hover',
+            'active'  => 'Active',
+        ),
+        'default'     => array(
+            'link'    => '#0088cc',
+            'hover'   => '#00aaff',
+            'active'  => '#00ffff',
+        ),
     ));
 
 }

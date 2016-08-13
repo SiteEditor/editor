@@ -36,6 +36,9 @@ if(!class_exists('SEDEditorAssetsManager'))
 
         function register_editor_scripts(){
 
+            //codemirror
+            $this->add( 'codemirror',           SED_EDITOR_ASSETS_URL . '/libs/codemirror/lib/codemirror'.$this->suffix.'.js', array('jquery'), '5.17.0' );
+ 
             //jquery css 3 support
             $this->add( 'jquery-css',           SED_EDITOR_ASSETS_URL . '/js/jquery/jquery-css'.$this->suffix.'.js', array('jquery'), '2.3' );
 
@@ -279,6 +282,9 @@ if(!class_exists('SEDEditorAssetsManager'))
         }
 
         function register_editor_styles(){
+
+            //codemirror
+            $this->add_css( 'codemirror', SED_EDITOR_ASSETS_URL . '/libs/codemirror/lib/codemirror'.$this->suffix.'.css', array(), '5.17.0' ); 
 
             if( SED()->version_type == "production" ){
 
