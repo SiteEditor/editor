@@ -152,7 +152,7 @@ class SiteEditorField{
      * @access public
      * @var array
      */
-    public $input_attrs = array();
+    public $atts = array();
 
     /**
      * this field group use :

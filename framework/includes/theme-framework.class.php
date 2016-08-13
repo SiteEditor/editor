@@ -964,7 +964,7 @@ Class StarsIdeasTheme extends SiteEditorThemeFramework {
 
 }
 
-new StarsIdeasTheme;
+//new StarsIdeasTheme;
 
 
  /*       $panels = array();

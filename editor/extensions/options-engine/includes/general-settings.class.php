@@ -36,7 +36,7 @@ class SiteEditorGeneralSettings {
         add_filter( 'sed_app_dynamic_setting_class' , array( $this , 'filter_dynamic_setting_class' ), 5, 3 );
 
         //after site editor manager loaded
-        add_action( "plugins_loaded"                , array( $this , 'register_settings' ) , 100  );
+        add_action( "plugins_loaded"                , array( $this , 'register_settings' ) , 9999  );
 
         add_action( "plugins_loaded"                , array( $this , 'create_post_meta' ) , 10000  );
 
@@ -67,23 +67,23 @@ class SiteEditorGeneralSettings {
         $settings = array(
 
             'page_layout' => array(
-                'value'          => '',
+                'default'        => '',
                 'transport'      => 'refresh'
             ),
 
             'theme_content' => array(
-                'value'          => array(),
+                'default'        => array(),
                 'transport'      => 'postMessage' ,
                 //'setting_class'  => 'SedThemeContentSetting'
             ),
 
         );
 
+        $settings = apply_filters( 'sed_app_register_general_options' , $settings ); 
+
         foreach( $settings  AS $id => $args ){
             $this->add_setting( $id , $args );
         }
-
-        do_action( 'sed_app_register_general_options' );
 
     }
 
@@ -93,7 +93,11 @@ class SiteEditorGeneralSettings {
 
             foreach ( $this->settings AS $id => $args ) {
 
-                $post_types = array_keys( SED()->editor->manager->posts->get_post_types() );
+                $post_type_objects = get_post_types( array( 'public' => true , 'show_ui' => true ), 'objects' );
+
+                unset( $post_type_objects['attachment'] );
+
+                $post_types = array_keys( $post_type_objects );
 
                 $args = array(
                     'meta_key'              =>  $id   ,

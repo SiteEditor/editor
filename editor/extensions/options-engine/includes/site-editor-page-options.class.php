@@ -37,14 +37,21 @@ class SiteEditorPageOptions {
      *
      * @var string
      */
-    public $settings = array();
+    public $public_settings = array();
 
     /**
-     * Setting id for save in db
+     * Public base setting id for save in db
      *
      * @var string
      */
-    public $option_name = 'sed_page_options';
+    public $public_option_name = 'sed_page_options'; //sed_theme_options
+
+    /**
+     * layout base setting id for save in db
+     *
+     * @var string
+     */
+    public $layout_option_name = 'sed_layout_options';
 
     /**
      * Capability required to edit this field.
@@ -83,12 +90,17 @@ class SiteEditorPageOptions {
      */
     public function __construct(){
 
+        $this->title = __("Page Settings" , "site-editor");
+
+        $this->description = __("Page general settings" , "site-editor");
+
+        add_action( "plugins_loaded"                , array( $this , 'register_options' ) , 9998  );
 
         add_filter( 'sed_app_dynamic_setting_args'  , array( $this , 'filter_dynamic_setting_args' ), 10, 2 );
 
         add_filter( 'sed_app_dynamic_setting_class' , array( $this , 'filter_dynamic_setting_class' ), 5, 3 );
 
-        add_action( 'sed_app_register_general_options' , array( $this, 'register_options' ) );
+        add_action( 'sed_app_register_general_options' , array( $this, 'register_private_settings' ) );
 
         add_action( "sed_register_{$this->option_group}_options" , array( $this , 'register_pages_options' ) );
 
@@ -108,14 +120,31 @@ class SiteEditorPageOptions {
      * @since 1.0.0
      * @access public
      */
-    public function register_options(){
+    public function register_private_settings( $settings ){
 
-        foreach( $this->params AS $id => $param ){
+        foreach( $this->fields AS $id => $args ){
 
+            if( !isset( $args['setting_id'] ) )
+                continue;
 
+            $setting_id = $args['setting_id'];
 
+            unset( $args['setting_id'] );
+
+            if( isset( $args['id'] ) )
+                unset( $args['id'] );
+
+            if( isset( $args['type'] ) )
+                unset( $args['type'] );
+
+            $this->public_settings[ $this->layout_option_name . "[" . $setting_id . "]" ] = $args;
+
+            $this->public_settings[ $this->public_option_name . "[" . $setting_id . "]" ] = $args;
+
+            $settings[ $setting_id ] = $args;
         }
 
+        return $settings;
     }
 
     /**
@@ -138,48 +167,93 @@ class SiteEditorPageOptions {
 
     public function register_pages_options(){
 
+        $options = $this->get_page_options();
 
-        $page_params = $this->get_params();
-        
-        $fields = $page_params['fields'];
+        $panels = $options['panels']; //var_dump( $panels );
 
-        $new_fields = array();
+        sed_options()->add_panels( $panels );
 
-        foreach( $fields AS $id => $args ){
+        $fields = $options['fields']; //var_dump( $fields );
 
-            $new_fields["sed_public_" . $id] = $args;
-
-
-
-            $setting['option_type'] = 'option';
-            $settings[ $this->public_option_name . "[" . $id . "]" ] = $setting;
-
-            $settings[ $this->layout_option_name . "[" . $id . "]" ] = $setting;
-
-            $setting['option_type'] = 'base';
-            $settings[ $id ] = $setting;
-        }
-
-
+        sed_options()->add_fields( $fields );
 
     }
 
-    public function get_page_options(){
-        global $sed_options_engine;
-
-        $params = array();
-        $page_params = array_merge( $this->default_page_options()['params'] , $this->page_options()['params'] );
-
-        $panels = array();
-        $page_panels = array_merge( $this->default_page_options()['panels'] , $this->page_options()['panels'] );
-
-        $params['sed_tab_scope_options'] = array(
-            'type'              =>  'custom',
-            'html'              =>  $this->view_tab_scope() ,
-            'priority'          => -10000
+    private function get_panel( $id, $args = array() ){
+        /**
+         * Define the array of defaults
+         */
+        $defaults = array(
+            'id'            => $id  ,
+            'title'         => ''  ,
+            'capability'    => 'edit_theme_options' ,
+            'type'          => 'fieldset' ,
+            'description'   => '' ,
+            'priority'      => 10
         );
 
-        foreach( $page_panels AS $key => $args ){
+        /**
+         * Parse incoming $args into an array and merge it with $defaults
+         */
+        $args = wp_parse_args( $args, $defaults );
+
+        return $args;
+    }
+
+    private function view_tab_scope( $layout = true ){
+        ob_start();
+
+        ?>
+        <div class="sed-tab-scope-options" sed-role="tab-scope">
+            <ul>
+                <li data-type="public-scope" class="tab-scope-item active"><a href="#"><span><?php echo __( "Public" , "site-editor");?></span></a></li>
+                <?php if( $layout === true ){ ?>
+                    <li data-type="layout-scope" class="tab-scope-item"><a href="#"><span><?php echo __( "Current Layout" , "site-editor");?></span></a></li>
+                <?php } ?>
+                <li data-type="page-customize-scope" class="tab-scope-item"><a href="#"><span><?php echo __( "Current Page" , "site-editor");?></span></a></li>
+            </ul>
+        </div>
+        <?php
+
+        return ob_get_clean();
+    }
+
+    private function get_page_options(){
+
+        $new_fields = array();
+        $fields = $this->fields;
+
+        $new_panels = array();
+        $panels = $this->panels;
+
+        /*$new_fields['sed_tab_scope_options'] = array(
+            'type'              =>  'custom',
+            'custom_template'   =>  $this->view_tab_scope() ,
+            'priority'          => 0 ,
+            'has_border_box'    => false ,
+            'js_type'           => '' ,
+            'category'          => 'page-settings' ,
+            'option_group'      => $this->option_group,
+        );*/
+
+        $new_fields['sed_page_options_scope'] = array(
+            'type'              => 'radio-buttonset',
+            'setting_id'        => 'page_options_scope',
+            'label'             => __("Select Scope", "site-editor"),
+            'default'           => 'public-scope',
+            'priority'          => 0 ,
+            'description'       => __("This option allows you to set a title for your image.", "site-editor"),
+            'choices'       =>  array(
+                "public-scope"              =>    __( "Public" , "site-editor") ,
+                "layout-scope"              =>    __( "Current Layout" , "site-editor") ,
+                "page-customize-scope"      =>    __( "Current Page" , "site-editor") ,
+            ),
+            'transport'         => 'postMessage' ,
+            'category'          => 'page-settings' ,
+            'option_group'      => $this->option_group
+        );
+
+        foreach( $panels AS $key => $args ){
 
             if( !isset( $args['atts'] ) ){
                 $args['atts'] = array();
@@ -191,20 +265,24 @@ class SiteEditorPageOptions {
                 $org_class = "";
             }
 
+            $args['option_group'] = $this->option_group;
+
             $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-            $panels[ $key ] = $this->get_panel( $key , $args );
+            $new_panels[ $key ] = $this->get_panel( $key , $args );
 
             $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
-            $panels[ "sed_layout_" . $key ] = $this->get_panel( "sed_layout_" . $key , $args );
+            $new_panels[ "sed_layout_" . $key ] = $this->get_panel( "sed_layout_" . $key , $args );
 
             $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
-            $panels[ "sed_public_" . $key ] = $this->get_panel( "sed_public_" . $key , $args );
+            $new_panels[ "sed_public_" . $key ] = $this->get_panel( "sed_public_" . $key , $args );
 
         }
 
-        foreach( $page_params AS $id => $args ){
+        foreach( $fields AS $id => $args ){
 
-            $args['control_category']  = 'page-settings';
+            $args['category']  = 'page-settings';
+
+            $args['option_group'] = $this->option_group;
 
             if( !isset( $args['panel'] ) ) {
                 if (!isset($args['atts'])) {
@@ -223,32 +301,36 @@ class SiteEditorPageOptions {
             else
                 $org_panel = $args['panel'];
 
-            $params[$id] = $args;
+            $new_fields[$id] = $args;
 
-            $settings_type = $args['settings_type'];
+            $setting_id = $args['setting_id'];
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
             else
                 $args['panel'] = "sed_layout_" . $org_panel;
 
-            $args['settings_type'] = $this->layout_option_name . "[" . $settings_type . "]";
-            $params["sed_layout_" . $id] = $args;
+            $args['setting_id'] = $this->layout_option_name . "[" . $setting_id . "]";
+            $new_fields["sed_layout_" . $id] = $args;
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
             else
                 $args['panel'] = "sed_public_" . $org_panel;
 
-            $args['settings_type'] = $this->theme_option_name . "[" . $settings_type . "]";
-            $params["sed_public_" . $id] = $args;
+            $args['setting_id'] = $this->public_option_name . "[" . $setting_id . "]";
+            $new_fields["sed_public_" . $id] = $args;
         }
 
-        $sed_options_engine->set_group_params( "sed_page_options" , __("Page Options" , "site-editor") , $params , $panels , "page-settings" );
+        return array(
+            "fields"    => $new_fields ,
+            "panels"    => $new_panels
+        );
+
     }
 
 
-    public function get_params(){
+    public function register_options(){
 
         $panels = array(
 
@@ -270,55 +352,53 @@ class SiteEditorPageOptions {
                 "label"             => __("Sheet Width", "site-editor"),
                 'default'           => 1100,
                 'after_field'       => "px" ,
-                "desc"              => __("This option allows you to set a title for your image.", "site-editor"),
+                "description"              => __("This option allows you to set a title for your image.", "site-editor"),
                 'transport'         => 'postMessage' ,
+                'priority'          => 9 ,
             ),
 
             'page_length' => array(
                 'setting_id'        => "page_length" ,
                 "type"              => "select" ,
                 "label"             => __("Page Length", "site-editor"),
-                "desc"              => __("This option allows you to set a title for your image.", "site-editor"),
+                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
                 'default'           => 'wide',
                 "choices"       =>  array(
                     "wide"          =>    __( "Wide" , "site-editor" ) ,
                     "boxed"         =>    __( "Boxed" , "site-editor" ) ,
                 ),
-                'panel'             => 'general_page_style' ,
+                //'panel'             => 'general_page_style' ,
                 'transport'         => 'postMessage' ,
+                'priority'          => 11 ,
             ),
 
             'change_image_panel' => array(
                 'setting_id'        => "page_background" ,
                 "type"              => "image" ,
                 "label"             => __("Background Image", "site-editor"),
-                "desc"              => __("This option allows you to set a title for your image.", "site-editor"),
+                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
                 'remove_btn'        => true ,
-                'panel'             => 'general_page_style' ,
+                //'panel'             => 'general_page_style' ,
                 'default'           => '',
                 'transport'         => 'postMessage' ,
+                'priority'          => 8 ,
             )
 
         );
 
-        $fields = apply_filters( 'sed_page_options_fields_filter' , $fields );
+        $this->fields = apply_filters( 'sed_page_options_fields_filter' , $fields );
 
-        $panels = apply_filters( 'sed_page_options_panels_filter' , $panels );
-
-        return array(
-            "fields"    => $fields ,
-            "panels"    => $panels
-        );
+        $this->panels = apply_filters( 'sed_page_options_panels_filter' , $panels );
 
     }
 
     public function filter_dynamic_setting_args( $args, $setting_id ) {
 
-        $key = array_search( $setting_id ,  array_keys( $this->settings ) );
+        $settings = $this->public_settings;
 
-        if (  $key !== false ) {
+        if (  array_key_exists( $setting_id ,  $settings )) {
 
-            $registered = $this->settings[ $key ];
+            $registered = $settings[ $setting_id ];
 
             if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] ) ) {
                 // We don't really need this because theme_supports will already filter it out of being exported.
@@ -356,7 +436,7 @@ class SiteEditorPageOptions {
     }
 
 
-    public function sed_app_preview_init(){
+    /*public function sed_app_preview_init(){
         //add_action( 'wp_footer', array( $this, 'export_preview_data' ), 10 );
         add_action( 'wp_enqueue_scripts'           , array( $this, 'preview_enqueue_scripts' ), 10 );
 
@@ -447,9 +527,9 @@ class SiteEditorPageOptions {
             ),
         );
 
-        wp_scripts()->add_data( 'sed-pages-general-options' , 'data', sprintf( 'var _sedAppPagesGeneralSettings = %s;', wp_json_encode( $exports ) ) );*/
+        wp_scripts()->add_data( 'sed-pages-general-options' , 'data', sprintf( 'var _sedAppPagesGeneralSettings = %s;', wp_json_encode( $exports ) ) );
 
-    }
+    }*/
 
 }
 

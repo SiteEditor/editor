@@ -67,6 +67,10 @@ final class SiteEditorOptionsManager{
 
         require_once dirname( __FILE__ ) . DS . 'site-editor-field.class.php';
 
+        require_once dirname( __FILE__ ) . DS . 'site-editor-page-options.class.php';
+
+        new SiteEditorPageOptions();
+
         add_action( 'sed_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );
 
         add_action( 'sed_after_init_manager', array( $this, 'register_default_groups' ) , 10  );
@@ -498,7 +502,7 @@ final class SiteEditorOptionsManager{
                 'label'             =>  $field->label ,
                 'description'       =>  $field->description ,
                 'choices'           =>  $field->choices ,
-                'input_attrs'       =>  $field->input_attrs ,
+                'atts'              =>  $field->atts ,
                 'type'              =>  $field->type ,
                 'option_group'      =>  $field->option_group ,
                 'active_callback'   =>  $field->active_callback

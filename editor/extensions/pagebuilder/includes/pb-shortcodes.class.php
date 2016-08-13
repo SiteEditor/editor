@@ -766,13 +766,13 @@ class PBShortcodeClass{
 
                     }
 
-                    if( isset( $param["atts"] ) ){
+                    /*if( isset( $param["atts"] ) ){
 
                         unset( $new_params[$key]["atts"] );
 
                         $new_params[$key]["input_attrs"] = $param["atts"];
 
-                    }
+                    }*/
 
                     $new_params[$key]["value"] =  ( isset($this->atts[$key]) ) ? $this->atts[$key] : ( ( isset($param["value"]) ) ? $param["value"] : "" );
                     $new_params[$key]["is_attr"] = ( isset($this->atts[$key]) ) ? true : ( ( isset($param["is_attr"]) ) ? $param["is_attr"] : false );

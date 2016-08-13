@@ -110,7 +110,7 @@ class SiteEditorOptionsControl{
 	 * @access public
 	 * @var array
 	 */
-	public $input_attrs = array();
+	public $atts = array();
 
 	/**
 	 * @deprecated It is better to just call the json() method
@@ -255,7 +255,7 @@ class SiteEditorOptionsControl{
 	 *     @type array                $choices         List of choices for 'radio' or 'select' type controls, where
 	 *                                                 values are the keys, and labels are the values.
 	 *                                                 Default empty array.
-	 *     @type array                $input_attrs     List of custom input attributes for control output, where
+	 *     @type array                $atts     	   List of custom input attributes for control output, where
 	 *                                                 attribute names are the keys and values are the values. Not
 	 *                                                 used for 'checkbox', 'radio', 'select', 'textarea', or
 	 *                                                 'dropdown-pages' control types. Default empty array.
@@ -530,7 +530,7 @@ class SiteEditorOptionsControl{
 	}
 
 	/**
-	 * Render the custom attributes for the control's input element.
+	 * Render the custom attributes for the control's input or main element.
 	 *
 	 * @since 4.0.0
 	 * @access public
@@ -540,9 +540,9 @@ class SiteEditorOptionsControl{
 		$atts_string = "";
 		$class = "";
 
-		if( is_array( $this->input_attrs ) ) {
+		if( is_array( $this->atts ) ) {
 
-			foreach ($this->input_attrs as $attr => $value) {
+			foreach ($this->atts as $attr => $value) {
 
 				if( $attr == "class" ){
 					$class = $value;

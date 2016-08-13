@@ -226,7 +226,7 @@ class SiteEditorPostSetting extends SedAppSettings {
 			}
 		}
 
-		$post_data = $this->normalize_post_data( $post_data );
+		$post_data = $this->normalize_post_data( $post_data ); 
 		return $post_data;
 	}
 
