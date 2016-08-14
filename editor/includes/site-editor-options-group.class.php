@@ -108,6 +108,15 @@ class SiteEditorOptionsGroup {
 	public $type = 'default';
 
 	/**
+	 * Type of this options group.
+	 *
+	 * @since 4.1.0
+	 * @access public
+	 * @var string
+	 */
+	public $pages_dependency = false;
+
+	/**
 	 * Constructor.
 	 *
 	 * Any supplied $args override class property defaults.
@@ -146,7 +155,7 @@ class SiteEditorOptionsGroup {
 	 * @return array The array to be exported to the client as JSON.
 	 */
 	public function json() {
-		$array = wp_array_slice_assoc( (array) $this, array( 'id', 'description', 'type' ) );
+		$array = wp_array_slice_assoc( (array) $this, array( 'id', 'description', 'type' , 'pages_dependency' ) );
 		$array['title'] = html_entity_decode( $this->title, ENT_QUOTES, get_bloginfo( 'charset' ) );
 		//$array['content'] = $this->get_content();
 

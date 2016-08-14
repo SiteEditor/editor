@@ -89,25 +89,24 @@ final class SiteEditorOptionsManager{
 
     public function sed_ajax_load_options(){
 
-        do_action( "sed_register_{$_POST['setting_id']}_options" );
+        do_action( "sed_register_{$_POST['options_group']}_options" );
 
         $this->register_fields();
 
-        $data = $this->get_settings_data( $_POST['setting_id'] , $_POST['setting_type'] );
+        $data = $this->get_settings_data( $_POST['options_group'] , $_POST['setting_type'] );
 
         if( is_wp_error( $data ) ){
 
-            die( wp_json_encode( array(
-                'success'   => false,
-                'message'   => $data->get_error_message(),
-            ) ) );
+            $data = array(
+                'settingId'   => $_POST['setting_id'],
+                'message'     => $data->get_error_message(),
+            );
+
+            wp_send_json_error( $data );
 
         }
 
-        die( wp_json_encode( array(
-            'success' => true,
-            'data'    => $data,
-        ) ) );
+        wp_send_json_success( $data );
 
     }
 
@@ -119,8 +118,9 @@ final class SiteEditorOptionsManager{
             "panels"        =>  array() ,
             "relations"     =>  array() ,
             "output"        =>  "" ,
-            "settingId"     =>  $group_id ,
-            "settingType"   =>  $group_type
+            "settingId"     =>  $_POST['setting_id'] ,
+            "settingType"   =>  $group_type ,
+            "groups"        =>  array()
         );
 
         $groups = SED()->editor->manager->groups();
@@ -141,6 +141,8 @@ final class SiteEditorOptionsManager{
         if( ! $current_group->check_capabilities() ){
             return new WP_Error( 'options_not_access', __( "You can not access to this group options", "site-editor" ) );
         }
+
+        $data['groups'][$current_group->id] = $current_group->json();
 
         $panels = SED()->editor->manager->panels();
 

@@ -194,31 +194,6 @@
 
         });
 
-       api.previewer.bind("resetSettings" , function( data ){
-                       // alert( data.pageId );
-           if( _.isUndefined(data.pageId) || _.isUndefined(data.pageType)  )
-              return ;                                  
-                      //api.log( "data.settings --------------------------- : "  , data );
-           /*$.each( data.settings, function( id, value ) {
-            var setting = api.settings.settings[id];
-            if( _.isUndefined( setting.type ) || (setting.type != "style-editor" && setting.type != "module" ) ){
-                //api( id ).set( value );
-             }
-
-           });
-
-           $.each( api.settings.controls, function( id, data ) {
-               if(!data.category || data.category != 'module-settings'){
-                   var control = api.control.instance( id );
-                   //control.update();
-               }
-           });*/
-
-           api.settings.page.id = data.pageId;
-           api.settings.page.type = data.pageType;
-
-       });
-
        api.previewer.bind("resetpageInfoSettings" , function( data ){
 
           if( _.isUndefined(data.pageId) || _.isUndefined(data.pageType)  )
@@ -226,6 +201,8 @@
 
           api.settings.page.id = data.pageId;
           api.settings.page.type = data.pageType;
+
+           api.Events.trigger( "afterResetpageInfoSettings" );
 
        });
 

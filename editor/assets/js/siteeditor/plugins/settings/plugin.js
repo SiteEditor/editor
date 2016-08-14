@@ -70,6 +70,10 @@
 
             this.backgroundAjaxload = {};
 
+            this.optionsGroup = "";
+
+            this.needToRefreshGroups = [];
+
             this.currentSettingsId = "";
 
             this.dialogSelector = "#sed-dialog-settings";
@@ -134,9 +138,29 @@
                     return ;
 
                 if( _.isUndefined( self.backgroundAjaxload[shortcodeName] ) ) {
-                    self._sendRequest(shortcodeName, "module");
+                    self._sendRequest(shortcodeName, "module" , shortcodeName);
 
                     self.backgroundAjaxload[shortcodeName] = 1;
+                }
+
+            });
+
+            api.Events.bind( "afterResetpageInfoSettings" , function(){
+
+                if( !_.isEmpty( self.needToRefreshGroups ) ){
+
+                    _.each( self.needToRefreshGroups , function( optionsGroup ){
+
+                        var settingId = optionsGroup + "_" + api.settings.page.id;
+
+                        if( _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
+                            self._sendRequest(settingId, "module" , optionsGroup);
+
+                            self.backgroundAjaxload[settingId] = 1;
+                        }
+
+                    });
+
                 }
 
             });
@@ -295,10 +319,10 @@
                 return;
             }
 
-            this._sendRequest( this.currentSettingsId , this.settingsType );
+            this._sendRequest( this.currentSettingsId , this.settingsType , this.optionsGroup );
         },
 
-        _sendRequest : function( settingIdReq , settingsTypeReq ) {
+        _sendRequest : function( settingIdReq , settingsTypeReq , optionsGroup ) {
 
             var initLayoutsControls = [],
                 self = this,
@@ -310,26 +334,28 @@
                 action          : 'sed_load_options',
                 setting_id      : settingIdReq ,
                 setting_type    : settingsTypeReq ,
+                options_group   : optionsGroup ,
                 nonce           : api.addOnSettings.optionsEngine.nonce.load,
                 sed_page_ajax   : 'sed_options_loader'
             };
 
             data = api.applyFilters( 'sedAjaxLoadOptionsDataFilter' , data );
 
-            var optionsAjaxloader = new api.Ajax({
+            var ajaxOptionsRequest = api.wpAjax.send({
 
                 type: "POST",
                 //url: api.settings.url.ajax,
                 data : data,
-                success : function(){
+                success : function( responseData ){
 
-                    var output = this.response.data.output ,
-                        controls = this.response.data.controls,
-                        relations = this.response.data.relations ,
-                        settings = this.response.data.settings ,
-                        panels = this.response.data.panels ,
-                        settingId = this.response.data.settingId ,
-                        settingType = this.response.data.settingType;
+                    var output = responseData.output ,
+                        controls = responseData.controls,
+                        relations = responseData.relations ,
+                        settings = responseData.settings ,
+                        panels = responseData.panels ,
+                        settingId = responseData.settingId ,
+                        settingType = responseData.settingType,
+                        groups  = responseData.groups;
 
                     delete self.ajaxProcessing[settingId];
 
@@ -366,12 +392,13 @@
                     }
 
                     if( !_.isEmpty( settings ) ) {
-                        var setting;
+                        var createdSettings = {};
 
                         _.each( settings , function (settingArgs, id) {
 
-                            if (!api.has(id)) {
-                                setting = api.create(id, id, settingArgs.value, {
+                            if ( ! api.has( id ) ) {
+
+                                var setting = api.create(id, id, settingArgs.value, {
                                     transport: settingArgs.transport || "refresh",
                                     previewer: api.previewer,
                                     stype: settingArgs.type || "general",
@@ -380,13 +407,26 @@
 
                                 api.settings.settings[id] = settingArgs;
 
-                                if (settingArgs.dirty) {
-                                    setting.callbacks.fireWith(setting, [setting.get(), {}]);
-                                }
+                                createdSettings[id] = settingArgs.value;
 
                             }
 
                         });
+
+                        api.previewer.send( "settings" , createdSettings );
+
+                        $.each( settings , function ( id , settingArgs ){
+
+                            if( $.inArray( id , _.keys( createdSettings ) ) == -1 )
+                                return true; //continue
+
+                            if ( settingArgs.dirty ) {
+                                var setting = api(id);
+                                setting.callbacks.fireWith(setting, [setting.get(), {}]);
+                            }
+
+                        });
+
                     }
 
 
@@ -408,11 +448,29 @@
                         api.Events.trigger(  "after_group_settings_update" , settingId );
                     }
 
+                    if( !_.isEmpty( groups ) ){
+
+                        _.each( groups , function( data , id ){
+
+                            if( $.inArray( id , _.keys( api.settings.groups ) ) == -1  ){
+
+                                api.settings.groups[id] = data;
+                            }
+
+                            if( data.pages_dependency && $.inArray( id , self.needToRefreshGroups ) == -1 ){
+                                self.needToRefreshGroups.push( id );
+                            }
+
+                        });
+
+                    }
+
 
                 },
-                error : function(){
 
-                    var settingId = this.response.data.settingId;
+                error : function( responseData ){
+
+                    var settingId = responseData.settingId;
 
                     if( !_.isUndefined( self.ajaxResetTmpls[settingId] ) ) {
                         delete self.ajaxResetTmpls[settingId];
@@ -424,17 +482,17 @@
 
                     delete self.ajaxProcessing[settingId];
 
-                    alert( this.response.data.output );
+                    alert( responseData.message );
 
                 }
 
-            },{
-                container   : this.dialogSelector
+
             });
+                //container   : this.dialogSelector
 
         },
 
-        openInitDialogSettings : function( settingId , forceOpen , reset , settingsType , templateType ){
+        openInitDialogSettings : function( settingId , forceOpen , reset , settingsType , templateType , optionsGroup ){
             var isOpen = $( this.dialogSelector ).dialog( "isOpen" );
 
             //needToUpdateSettings = !_.isUndefined( needToUpdateSettings) ? needToUpdateSettings : true ;
@@ -445,6 +503,8 @@
 
                 this.currentSettingsId = settingId;
                 //this.panelsNeedToUpdate = [];
+
+                this.optionsGroup = optionsGroup;
 
                 this.templateType = templateType;
 
@@ -457,6 +517,8 @@
             }else if( isOpen ){
 
                 this._resetTmpl();
+
+                this.optionsGroup = optionsGroup;
 
                 this.templateType = templateType;
 
@@ -1071,7 +1133,7 @@
 
             var reset =  !_.isUndefined( sedDialog.reset ) ? sedDialog.reset : true;
 
-            api.sedDialogSettings.openInitDialogSettings( this.currentSettingsId , forceOpen , reset , "module" , "ajax" );//"html"
+            api.sedDialogSettings.openInitDialogSettings( this.currentSettingsId , forceOpen , reset , "module" , "ajax" , this.currentSettingsId );//"html"
 
             if( !_.isUndefined( sedDialog.data.panelId ) )
                 this.initSettings( sedDialog.data.panelId );

@@ -33,11 +33,18 @@ class SiteEditorPageOptions {
     public $panels = array();
 
     /**
-     * All page options panels.
+     * All Public options
      *
      * @var string
      */
     public $public_settings = array();
+
+    /**
+     * All page options
+     *
+     * @var string
+     */
+    public $settings = array();
 
     /**
      * Public base setting id for save in db
@@ -106,9 +113,9 @@ class SiteEditorPageOptions {
 
         add_action( "sed_register_{$this->option_group}_options" , array( $this, 'register_page_options_group' ) , -9999 );
 
-       // add_action( 'sed_app_preview_init'          , array( $this, 'sed_app_preview_init' ) );
+        add_action( 'sed_app_preview_init'          , array( $this, 'sed_app_preview_init' ) );
 
-        //add_action( 'wp_default_scripts'			, array( $this, 'register_scripts' ), 11 );
+        add_action( 'wp_default_scripts'			, array( $this, 'register_scripts' ), 11 );
 
         //add_action( 'sed_enqueue_scripts'           , array( $this, 'enqueue_scripts' ), 10 );
 
@@ -141,6 +148,8 @@ class SiteEditorPageOptions {
 
             $this->public_settings[ $this->public_option_name . "[" . $setting_id . "]" ] = $args;
 
+            $this->settings[$setting_id] = $args;
+
             $settings[ $setting_id ] = $args;
         }
 
@@ -161,13 +170,14 @@ class SiteEditorPageOptions {
             'title'             => $this->title ,
             'description'       => $this->description ,
             'type'              => 'default',
+            'pages_dependency'  => true
         ));
 
     }
 
     public function register_pages_options(){
 
-        $options = $this->get_page_options();
+        $options = $this->get_page_options( $_POST['page_id'] , $_POST['page_type'] , $_POST['post_type'] );
 
         $panels = $options['panels']; //var_dump( $panels );
 
@@ -218,7 +228,7 @@ class SiteEditorPageOptions {
         return ob_get_clean();
     }
 
-    private function get_page_options(){
+    private function get_page_options( $page_id , $page_type , $post_type = '' ){
 
         $new_fields = array();
         $fields = $this->fields;
@@ -236,6 +246,8 @@ class SiteEditorPageOptions {
             'option_group'      => $this->option_group,
         );*/
 
+        $page_option_name = ( $page_type != "post" ) ? "sed_{$page_id}_settings" : "postmeta[{$post_type}][{$page_id}]";
+
         $new_fields['sed_page_options_scope'] = array(
             'type'              => 'radio-buttonset',
             'setting_id'        => 'page_options_scope',
@@ -245,7 +257,7 @@ class SiteEditorPageOptions {
             'description'       => __("This option allows you to set a title for your image.", "site-editor"),
             'choices'       =>  array(
                 "public-scope"              =>    __( "Public" , "site-editor") ,
-                "layout-scope"              =>    __( "Current Layout" , "site-editor") ,
+                "layout-scope"              =>    __( "Layout" , "site-editor") ,
                 "page-customize-scope"      =>    __( "Current Page" , "site-editor") ,
             ),
             'transport'         => 'postMessage' ,
@@ -301,9 +313,11 @@ class SiteEditorPageOptions {
             else
                 $org_panel = $args['panel'];
 
-            $new_fields[$id] = $args;
-
             $setting_id = $args['setting_id'];
+
+            $args['setting_id'] = $page_option_name . "[" . $setting_id . "]";
+
+            $new_fields[$id] = $args;
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
@@ -436,62 +450,41 @@ class SiteEditorPageOptions {
     }
 
 
-    /*public function sed_app_preview_init(){
-        //add_action( 'wp_footer', array( $this, 'export_preview_data' ), 10 );
+    public function sed_app_preview_init(){
+
         add_action( 'wp_enqueue_scripts'           , array( $this, 'preview_enqueue_scripts' ), 10 );
 
-        add_action( 'wp'                , array( $this , 'add_dynamic_settings') );
     }
 
     public function preview_enqueue_scripts(){
-        wp_enqueue_script( 'sed-pages-general-options-preview' );
+        wp_enqueue_script( 'sed-pages-options-preview' );
 
-        $general_settings = array();
+        $page_id = SED()->framework->sed_page_id;
 
         if( SED()->framework->sed_page_type != "post" ) {
+            $page_option_name = "sed_{$page_id}_settings";
+        }else{
+            $post = get_post( SED()->framework->sed_page_id );
+            $page_option_name = "postmeta[{$post->post_type}][{$page_id}]";
+        }
 
-            foreach ($this->settings as $id => $args) {
+        $settings = array();
 
-                $setting_id = "sed_" . SED()->framework->sed_page_id . "_settings[" . $id . "]";
-
-                $setting = SED()->editor->manager->get_setting( $setting_id );
-
-                if( isset( $setting ) ) {
-
-                    if (isset($args['capability']) && !current_user_can($args['capability'])) {
-                        continue;
-                    }
-
-                    if (!current_user_can('edit_theme_options')) {
-                        continue;
-                    }
-
-                    $general_settings[$setting_id] = array_merge(array(
-                        'transport' => 'refresh',
-                        'type' => 'general'
-                    ),
-                        $args
-                    );
-
-                    $general_settings[$setting_id]['option_type'] = 'option';
-
-                    if( isset( $general_settings[$setting_id]['value'] ) )
-                        unset( $general_settings[$setting_id]['value'] );
-
-                }
-            }
-
+        foreach ( $this->settings as $id => $args ) {
+            $settings[$id] = array(
+                'transport' => isset( $args['transport'] ) ? $args['transport'] : 'refresh',
+                'value'     => isset( $args['default'] ) ? $args['default'] : ''
+            );
         }
 
         $exports = array(
-            'settings'      => $general_settings ,
-            'l10n'          => array(
-                'fieldTitleLabel' => __( 'Title', 'site-editor' ),
-
-            ),
+            'settings'              => $settings ,
+            'publicOption'          => $this->public_option_name . '[##id##]' ,
+            'layoutOption'          => $this->layout_option_name . '[##id##]' ,
+            'privateOption'         => $page_option_name . '[##id##]' ,
         );
 
-        wp_scripts()->add_data( 'sed-pages-general-options-preview' , 'data', sprintf( 'var _sedAppPreviewPagesGeneralSettings = %s;', wp_json_encode( $exports ) ) );
+        wp_scripts()->add_data( 'sed-pages-options-preview' , 'data', sprintf( 'var _sedAppPreviewPageOptionsData = %s;', wp_json_encode( $exports ) ) );
     }
 
 
@@ -499,15 +492,15 @@ class SiteEditorPageOptions {
 
         $suffix = ( SCRIPT_DEBUG ? '' : '.min' ) . '.js';
 
-        $handle = 'sed-pages-general-options';
+        /*$handle = 'sed-pages-general-options';
         $src = SED_EXT_URL . 'options-engine/assets/js/pages-general-options' . $suffix ;
         $deps = array( 'siteeditor' );
 
         $in_footer = 1;
-        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
+        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );*/
 
-        $handle = 'sed-pages-general-options-preview';
-        $src = SED_EXT_URL . 'options-engine/assets/js/pages-general-options-preview' . $suffix ;
+        $handle = 'sed-pages-options-preview';
+        $src = SED_EXT_URL . 'options-engine/assets/js/pages-options-preview' . $suffix ;
         $deps = array( 'sed-frontend-editor' );
 
         $in_footer = 1;
@@ -515,7 +508,7 @@ class SiteEditorPageOptions {
 
     }
 
-    public function enqueue_scripts(){
+    /*public function enqueue_scripts(){
 
         wp_enqueue_script( 'sed-pages-general-options' );
 

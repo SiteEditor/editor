@@ -100,6 +100,8 @@
             $.each( values, setValue );
         });
 
+        console.log( "--------------api.settings.values----------------" , api.settings.values );
+
         api.preview.trigger( 'settings', api.settings.values );
 
 
@@ -146,7 +148,7 @@
 		});*/
 
 		api.preview.bind( 'sync', function( events ) {
-			$.each( events, function( event, args ) {
+			$.each( events, function( event, args ) { 
 				api.preview.trigger( event, args );
 			});
 			api.preview.send( 'synced' );

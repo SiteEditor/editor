@@ -845,6 +845,8 @@ api	 * @param options
 
 			this.loading.done( function() {
                 $("#sed_full_editor_loading").hide();
+				api.previewer.trigger( 'beforeNewPreviewerActive'  );
+
 				// 'this' is the loading frame
 				this.bind( 'synced', function() {
 					if ( self.preview )

@@ -505,8 +505,9 @@
             param = data.param;
             currModule = data.module;
                          
-            if(api.shortcodeCreate[shortcode_name])
-                param = api.shortcodeCreate[shortcode_name]( id , param );
+            if( !_.isUndefined( api.shortcodeCreate[shortcode_name] ) && _.isFunction( api.shortcodeCreate[shortcode_name] ) ) {
+                param = api.shortcodeCreate[shortcode_name](id, param);
+            }
             //{{shortcode_content}} is reserved key for do shortcode content
 
             var source   = $("#" + param.skinId).html();
