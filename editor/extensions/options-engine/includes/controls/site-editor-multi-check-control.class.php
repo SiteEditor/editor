@@ -27,6 +27,19 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 		 */
 		public $type = 'multi-check';
 
+		/*
+		 * Refresh the parameters passed to the JavaScript via JSON.
+		 *
+		 * @access public
+		 *
+		 */
+		public function json() { 
+
+			$json_array = parent::json();
+			$json_array['options_selector'] = ( isset( $this->js_params['options_selector'] ) ) ? $this->js_params['options_selector'] : '.sed-bp-checkbox-input';
+
+			return $json_array;
+		}
 		/**  
 		 * Enqueue control related scripts/styles.
 		 *
@@ -47,7 +60,7 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-multi-check-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-checkbox-input sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -63,7 +76,7 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
 
-			<div class="sed-bp-form-multi-check sed-multi-check">
+			<div class="sed-bp-form-checkboxes sed-checkboxes">
 
 				<?php
 					$values = explode( "," , $value);
@@ -75,8 +88,8 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 
 					<div>
 
-						<label for="<?php echo $sed_field_id . $i ;?>">
-							<input type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo $key_val;?>" name="<?php echo esc_attr( $sed_field_id );?>[]" id="<?php echo $sed_field_id . $i ;?>" <?php echo $checked;?> <?php echo $atts_string;?>  />
+						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>" class="sed-bp-form-checkbox">
+							<input type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>[]" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>" <?php echo $checked;?> <?php echo $atts_string;?> />
 							<?php echo $choice;?>
 						</label>
 

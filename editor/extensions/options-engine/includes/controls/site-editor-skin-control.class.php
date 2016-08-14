@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: switch.
+ * SiteEditor Control: skin.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorSwitchControl' ) ) {
+if ( ! class_exists( 'SiteEditorSkinControl' ) ) {
 
 	/**
-	 * Switch control
+	 * Skin control
 	 */
-	class SiteEditorSwitchControl extends SiteEditorOptionsControl {
+	class SiteEditorSkinControl extends SiteEditorOptionsControl {
 
 		/**
 		 * The control type.
@@ -25,7 +25,7 @@ if ( ! class_exists( 'SiteEditorSwitchControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'switch';
+		public $type = 'skin';
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorSwitchControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-switch-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-skin-input sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -57,19 +57,29 @@ if ( ! class_exists( 'SiteEditorSwitchControl' ) ) {
 
 			?>
 
-
 			<label class=""><?php echo $this->label;?></label>
 			<?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
-			<div class="sed-bp-form-switch"> 
-			    <?php $checked = ( "true" == $value ) ? 'checked="checked"' : ''; ?>
-				<input  type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="true" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $checked;?> <?php echo $atts_string;?> />
-				<label class="switch-label" for="<?php echo esc_attr( $sed_field_id );?>">
-					<span class="switch-on"><?php echo $this->choices['on']; ?> </span>
-					<span class="switch-off"><?php echo  $this->choices['off']; ?> </span>
-				</label>
-			</div>	  
+			<div class="sed-bp-form-skin">
+				<?php
+				$i = 1;
+				foreach( $this->choices as $key_val => $choice ) {
+					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
+				?>
+
+					<div class="sed-bp-form-skin-item">
+						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
+							<input  type="skin" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
+							<?php echo $choice;?>
+						</label>
+					</div>
+
+				<?php 
+				    $i++;
+				  } 
+				?>
+			</div>
 
 			<?php
 		}
@@ -89,4 +99,4 @@ if ( ! class_exists( 'SiteEditorSwitchControl' ) ) {
 	}
 }
 
-$this->register_control_type( 'switch' , 'SiteEditorSwitchControl' );
+$this->register_control_type( 'skin' , 'SiteEditorSkinControl' );

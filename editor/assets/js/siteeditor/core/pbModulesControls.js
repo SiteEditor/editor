@@ -1383,9 +1383,9 @@
 
             this.sedDialog = sedDialog;
 
-            if( _.isEmpty( control.defaultValue ) ) {
+            /*if( _.isEmpty( control.defaultValue ) ) {
                 control.defaultValue = 'fa fa-magic';
-            }
+            }*/
 
             selectButton.livequery(function(){
                 $(this).click(function(){
@@ -1425,6 +1425,11 @@
         },
 
         _updateIconDemo : function( icon ){
+
+            if( _.isEmpty( icon ) ) {
+                icon = 'fa f-sed icon-icons sed-bp-icon-empty'; 
+            }
+
             this.icoDemo.removeClass( this.icoDemo.attr("sed-icon") ).addClass( icon );
             this.icoDemo.attr("sed-icon" , icon);
         },
@@ -1735,7 +1740,7 @@
 
         _update: function( val ){
             var control = this,
-                currValue = [];
+                currValue = []; 
 
             if( _.isString( val ) )
                 currValue = val.split(",");
@@ -2368,10 +2373,14 @@
     api.controlConstructor = $.extend( api.controlConstructor, {
         sed_element             : api.SiteEditorElements ,
         radio                   : api.SiteEditorElements ,
+        "radio-image"           : api.SiteEditorElements ,
+        "radio-buttonset"       : api.SiteEditorElements ,
         text                    : api.SiteEditorElements ,
         select                  : api.SiteEditorElements ,
         textarea                : api.SiteEditorElements ,
         checkbox                : api.SiteEditorElements ,
+        toggle                  : api.SiteEditorElements ,
+        switch                  : api.SiteEditorElements ,
         image                   : api.ChangeImageControl ,
         multi_images            : api.MultiImagesControl ,
         "multi-image"           : api.MultiImagesControl ,
@@ -2419,7 +2428,7 @@
          * @toggle
          * @date : for date & time
          * @dimension
-         * @wp_editor
+         * @wp-editor
          * -----------------------------
          * @Primary *****
          * -----------------------------

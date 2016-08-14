@@ -57,27 +57,26 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 
             $value          = $this->value();
 
-            $value = (!empty($value)) ? $value : SED_EDITOR_FOLDER_URL.'images/no-image.jpg';
+            $value = (!empty($value)) ? $value : SED_ASSETS_URL.'/images/no_pic.png';
 
 			?>
 
 
 		    <?php if(!empty($this->description)){ ?> 
-				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
-				<?php } ?>
+			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			<?php } ?>
 	        <div class="setting-img">
 		        <div class="change-img-setting">
 			        <div class="change-img-container">
 			        	<img class="change_img" src="<?php echo esc_attr( $value );?>"/>
+				        <?php if($this->remove_btn === true){ ?>
+				            <a class="remove-img-btn" href="#"><span class="remove-img-action icon-delete f-sed"></span></a>
+	                    <?php } ?>
 			        </div>
 		        </div>
 		        <div class="change-img-setting">
 
-			        <button class="<?php echo esc_attr( $classes ); ?>" data-media-type="image" data-selcted-type="single"><?php echo $this->label; ?></button>
-
-			        <?php if($this->remove_btn === true){ ?>
-			            <a class="remove-img-btn" href="#"><span class="fa f-sed fa-lg icon-delete"></span></a>
-                    <?php } ?>
+			        <button class="<?php echo esc_attr( $classes ); ?>" data-media-type="image" data-selcted-type="single" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?>><?php echo $this->label; ?></button>
 
 		        </div>
 		        <div class="clr"></div>

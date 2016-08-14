@@ -89,7 +89,7 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 		            {
 		                $selected = ($value == $key_val) ? 'selected="selected"' : '';
 	            ?>
-		                <option value="<?php echo $key_val ;?>" <?php echo $selected ;?>><?php echo $choice ;?></option>
+		                <option value="<?php echo esc_attr( $key_val );?>" <?php echo $selected ;?>> <?php echo $choice ;?></option>
 
 				<?php
 		            }
@@ -99,7 +99,7 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 		            foreach( $this->choices as $this->optgroup => $group_options )
 		            {
 		        ?>    	
-		                <optgroup label="<?php echo $this->groups[$this->optgroup];?>">
+		                <optgroup label="<?php echo esc_attr( $this->groups[$this->optgroup] );?>">
 
 		                <?php
 		                foreach( $group_options as $key_val => $choice ){
@@ -107,10 +107,10 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 		                    $selected = ($value == $key_val) ? 'selected="selected"' : '';
 	                    ?> 
 
-		                    <option value="<?php echo $key_val ;?>" <?php echo $selected ;?>><?php echo $choice ;?></option>
+		                    <option value="<?php echo esc_attr( $key_val );?>" <?php echo $selected ;?>> <?php echo $choice ;?></option>
 
 		                <?php
-		                } 
+		                }   
 		                ?>
 
 		                </optgroup>

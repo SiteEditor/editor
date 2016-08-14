@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: change_media.
+ * SiteEditor Control: file.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorChangeMediaControl' ) ) {
+if ( ! class_exists( 'SiteEditorMediaControl' ) ) {
 
 	/**
-	 * ChangeMedia control
+	 * Media control
 	 */
-	class SiteEditorChangeMediaControl extends SiteEditorOptionsControl {
+	class SiteEditorMediaControl extends SiteEditorOptionsControl {
 
 		/**
 		 * The control type.
@@ -25,7 +25,7 @@ if ( ! class_exists( 'SiteEditorChangeMediaControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'change_media';
+		public $type = 'file';
 
         public $media_type =  'all';
 
@@ -51,7 +51,7 @@ if ( ! class_exists( 'SiteEditorChangeMediaControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "change_media sed-change-media-button sed-btn-blue sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-bp-form-text sed-bp-input media-url-field sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -69,13 +69,13 @@ if ( ! class_exists( 'SiteEditorChangeMediaControl' ) ) {
 				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
 
-	            <input type="text"  class="sed-bp-form-text sed-bp-input media-url-field" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="" disabled="disabled" />
+	            <input type="text" class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo esc_attr( $value );?>" disabled="disabled" <?php echo $atts_string;?>/>
 	            <a class="remove-media-src-btn" href="#">
 	            	<span class="fa f-sed fa-lg icon-delete"></span>
 	            </a>
             </div>
 
-            <button class="<?php echo esc_attr( $classes ); ?>" data-media-type="<?php echo $this->media_type; ?>" data-selcted-type="<?php echo $this->selcted_type; ?>"><?php echo $this->label;?></button>
+            <button class="change_media sed-change-media-button sed-btn-blue" data-media-type="<?php echo esc_attr( $this->media_type ); ?>" data-selcted-type="<?php echo esc_attr( $this->selcted_type ); ?>"><?php echo $this->label;?></button>
 
 
 			<?php
@@ -96,4 +96,4 @@ if ( ! class_exists( 'SiteEditorChangeMediaControl' ) ) {
 	}
 }
 
-$this->register_control_type( 'change_media' , 'SiteEditorChangeMediaControl' );
+$this->register_control_type( 'file' , 'SiteEditorMediaControl' );

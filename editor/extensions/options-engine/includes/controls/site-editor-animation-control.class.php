@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: datepicker.
+ * SiteEditor Control: animation.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorDatepickerControl' ) ) {
+if ( ! class_exists( 'SiteEditorAnimationControl' ) ) {
 
 	/**
-	 * Datepicker control
+	 * Animation control
 	 */
-	class SiteEditorDatepickerControl extends SiteEditorOptionsControl {
+	class SiteEditorAnimationControl extends SiteEditorOptionsControl {
 
 		/**
 		 * The control type.
@@ -25,7 +25,7 @@ if ( ! class_exists( 'SiteEditorDatepickerControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'datepicker';
+		public $type = 'animation';
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorDatepickerControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-form-datepicker sed-bp-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-animation-input sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -57,11 +57,29 @@ if ( ! class_exists( 'SiteEditorDatepickerControl' ) ) {
 
 			?>
 
-			<label><?php echo $this->label;?></label>
-            <?php if(!empty($this->description)){ ?> 
+			<label class=""><?php echo $this->label;?></label>
+			<?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
-            <input type="date"  class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo $value ; ?>" <?php echo $atts_string;?> />
+			<div class="sed-bp-form-animation">
+				<?php
+				$i = 1;
+				foreach( $this->choices as $key_val => $choice ) {
+					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
+				?>
+
+					<div class="sed-bp-form-animation-item">
+						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
+							<input  type="animation" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
+							<?php echo $choice;?>
+						</label>
+					</div>
+
+				<?php 
+				    $i++;
+				  } 
+				?>
+			</div>
 
 			<?php
 		}
@@ -81,4 +99,4 @@ if ( ! class_exists( 'SiteEditorDatepickerControl' ) ) {
 	}
 }
 
-$this->register_control_type( 'datepicker' , 'SiteEditorDatepickerControl' );
+$this->register_control_type( 'animation' , 'SiteEditorAnimationControl' );

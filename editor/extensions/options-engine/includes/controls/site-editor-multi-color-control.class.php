@@ -70,7 +70,7 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
                     <div class="multi-color-item">
 						<label><?php echo $choice;?></label>
 			            <span class="colorselector">
-				            <input type="text" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i;?>" name="<?php echo esc_attr( $sed_field_id ) . $i;?>" value="<?php echo esc_attr( $value[$key_val] ); ?>">
+				            <input type="text" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i;?>" name="<?php echo esc_attr( $sed_field_id ) . $i;?>" value="<?php echo esc_attr( $value[$key_val] ); ?>" <?php echo $atts_string;?>>
 				            &nbsp;&nbsp;  
 			            </span> 
 		            </div>

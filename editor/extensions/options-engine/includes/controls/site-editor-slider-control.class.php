@@ -65,7 +65,7 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-slider-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-slider-input slider-demo-value sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -82,7 +82,7 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
 			<div  class="sed-bp-form-slider">
                 <div class="sed-bp-form-slider-container"></div>
 				<div class="slider-value"> 
-				  <input type="text" value="<?php echo $value;?>" class="slider-demo-value" readonly >
+				  <input type="text" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $value );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?> readonly >
 				</div>	
 			</div>
 

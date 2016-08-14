@@ -27,6 +27,19 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 		 */ 
 		public $type = 'code';
 
+		/*
+		 * Refresh the parameters passed to the JavaScript via JSON.
+		 *
+		 * @access public
+		 *
+		 */
+		public function json() {
+
+			$json_array = parent::json();
+			$json_array['mode'] = ( isset( $this->js_params['mode'] ) ) ? $this->js_params['mode'] : 'html';
+
+			return $json_array;
+		}
 		/**
 		 * Enqueue control related scripts/styles.
 		 *
@@ -47,7 +60,7 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-form-code sed-bp-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-module-element-control sed-element-control sed-bp-form-code sed-bp-input sed-pb-codemirror-editor sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -61,8 +74,8 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 				<?php if(!empty($this->description)){ ?> 
 				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
-				<a href="#" class="button edit button-primary">code</a>
-				<textarea name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" class="<?php echo esc_attr( $classes ); ?> sed-pb-codemirror-editor"><?php echo $value; ?></textarea
+				<!--<a href="#" class="sed-btn-blue">code</a>-->
+				<textarea class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>><?php echo $value; ?></textarea>
 
 			<?php
 		}

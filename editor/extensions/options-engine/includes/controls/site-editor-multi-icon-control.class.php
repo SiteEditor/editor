@@ -66,7 +66,7 @@ if ( ! class_exists( 'SiteEditorMultiIconsControl' ) ) {
 	        	</div>
 	        	<div class="select-icon-btns">
 
-	        		<button class="<?php echo esc_attr( $classes ); ?>" ><?php echo $this->label; ?></button>
+	        		<button class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?>><?php echo $this->label; ?></button>
 
 	        	</div>
 	        	<div class="clr"></div>

@@ -59,17 +59,16 @@ if ( ! class_exists( 'SiteEditorSortableControl' ) ) {
 
 			<label class=""><?php echo $this->label;?></label>
 			<?php if(!empty($this->description)){ ?> 
-				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
-				<?php } ?>
+				 <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			<?php } ?>
 			<ul class="sed-bp-form-sortable">
 		
 				<?php
 				$i = 1;
 				foreach( $this->choices as $key_val => $choice ) {
-					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
 				?>
 
-					<li class="sed-bp-form-sortable-item" class="<?php echo esc_attr( $classes ); ?> <?php echo $checked;?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"   <?php echo $atts_string;?>>
+					<li class="sed-bp-form-sortable-item <?php echo esc_attr( $classes ); ?>" data-value="<?php echo esc_attr( $key_val ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"   <?php echo $atts_string;?>>
 						<label><?php echo $choice;?></label>
 		                <div class="sed-bp-form-sortable-actions">
 		                    <span class="sortable-action sort"><span class="fa fa-arrows fa-lg"></span></span>

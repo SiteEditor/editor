@@ -265,6 +265,7 @@ final class SiteEditorOptionsManager{
 
     private function register_controls_components(  ){
 
+        require_once dirname( __FILE__ ) . DS . "controls" . DS . "site-editor-media-controls.class .php" ;
         $panels_path = dirname( __FILE__ ) . DS . "controls" . DS . "*control.class.php" ;
 
         foreach ( glob( $panels_path ) as $php_file ) {
@@ -922,7 +923,7 @@ add_action( "sed_load_options_group_id1" , "register_params" );
 function sed_add_layout_options(){
 
     sed_options()->add_field( 'radio_field_id' , array(
-        'setting_id'        => 'my_setting',
+        'setting_id'        => 'my_setting2',
         'label'             => __('My custom control', 'translation_domain'),
         'type'              => 'radio',
         'priority'          => 10,
@@ -940,18 +941,6 @@ function sed_add_layout_options(){
         //'input_attrs'
     ));
 
-    sed_options()->add_field( 'change_media_field_id' , array(
-        'setting_id'        => 'my_setting2',
-        'label'             => __('Change Media', 'translation_domain'),  
-        'type'              => 'change_media',
-        'priority'          => 11,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_add_layout',
-        'transport'         => 'postMessage' ,
-        //'input_attrs'
-    ));
 
     sed_options()->add_field( 'checkbox_field_id' , array(
         'setting_id'        => 'my_setting3',
@@ -1080,7 +1069,7 @@ function sed_add_layout_options(){
         'type'              => 'select',
         'priority'          => 20,
         'default'           => 'options3_key',
-        'subtype'           => 'multi',
+        'subtype'           => 'multiple',
         //panel or group
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
@@ -1171,8 +1160,8 @@ function sed_add_layout_options(){
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
         'choices'           => array(
-            "on"       =>    "Enable" ,
-            "off"      =>    "Disable" ,
+            "on"       =>    "ON" ,
+            "off"      =>    "OFF" ,
         ) ,
         //'input_attrs'
     ));
@@ -1206,9 +1195,9 @@ function sed_add_layout_options(){
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
         'choices'           => array(
-            "options1_key"      =>   SED_EDITOR_FOLDER_URL.'images/no-image.jpg',  
-            "options2_key"      =>   SED_EDITOR_FOLDER_URL.'images/no-image.jpg',
-            "options3_key"      =>   SED_EDITOR_FOLDER_URL.'images/no-image.jpg',
+            "options1_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',  
+            "options2_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
+            "options3_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png', 
         ) ,
         //'input_attrs'
     ));  
@@ -1313,6 +1302,45 @@ function sed_add_layout_options(){
             'hover'   => '#00aaff',
             'active'  => '#00ffff',
         ),
+    ));
+
+    sed_options()->add_field( 'file_field_id' , array(
+        'setting_id'        => 'my_setting26',
+        'label'             => __('Change file', 'translation_domain'),  
+        'type'              => 'file',
+        'priority'          => 34,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'audio_field_id' , array(
+        'setting_id'        => 'my_setting27',
+        'label'             => __('Change Audio', 'translation_domain'),  
+        'type'              => 'audio',
+        'priority'          => 35,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+    ));
+
+    sed_options()->add_field( 'video_field_id' , array(
+        'setting_id'        => 'my_setting28',
+        'label'             => __('Change Video', 'translation_domain'),  
+        'type'              => 'video',
+        'priority'          => 36,
+        'default'           => '',
+        //panel or group
+        //'panel'             => 'panel_id',
+        'option_group'      => 'sed_add_layout',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
     ));
 
 }

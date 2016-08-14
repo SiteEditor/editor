@@ -107,9 +107,14 @@ input[type="rodio"]
 .change_image {
     width: 100%;
 }
+.change-icon-container .sed-bp-icon-empty.sed-bp-icon-demo{
+    color: #ced0d2;    
+}
 .change-icon-container .sed-bp-icon-demo {
     font-size: 26px;
-    vertical-align: sub;
+    height: 58px;
+    vertical-align: top;
+    line-height: 58px;
 }
 .images-organize-box .item-image,
 .icons-organize-box .item-icon, 
@@ -122,7 +127,7 @@ input[type="rodio"]
     margin: 0 20px 0 0;
     position: relative !important;
     width: 64px;
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid #e6e6e6;
     background: #fff;
     display: block;
@@ -145,6 +150,8 @@ input[type="rodio"]
 .icons-organize-box .item-icon > span{
     font-size: 20px;
 }
+.change-icon-setting .remove-icon-action,
+.change-img-setting .remove-img-action, 
 .images-organize-box .item-image > span.remove-img-action,
 .icons-organize-box .item-icon > span.remove-icon-action {
     position: absolute;
@@ -160,6 +167,8 @@ input[type="rodio"]
     cursor: pointer;
     z-index: 1;
 }
+.change-icon-setting .change-icon-container:hover .remove-icon-action,
+.change-img-setting .change-img-container:hover .remove-img-action, 
 .images-organize-box .item-image:hover > span.remove-img-action,
 .icons-organize-box .item-icon:hover > span.remove-icon-action {
     opacity: 1;
@@ -172,8 +181,12 @@ input[type="rodio"]
 .change_img {
     width:100%;
     height: auto;
-    display: inline-block;
-    vertical-align: middle;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);    
+    margin-top: 50%;
 }
 .pb-skins-modules-container:after,.pb-skins-modules-container:before {
     display: table;
@@ -213,12 +226,16 @@ input.media-url-field {
   margin-bottom: 8px;
 }
 .remove-media-src-btn .fa{
-  color: #aaa;
-  border: 1px solid #ccc;
-  border-radius: 1000px;
-  margin-left: 3px;
-  font-size: 14px;
-  padding: 2px;
+    color: #aaa;
+    border: 1px solid #ccc;
+    border-radius: 1000px;
+    margin-left: 3px;
+    font-size: 12px;
+    padding: 0;
+    width: 1.32em;
+    height: 1.3em;
+    line-height: 1.2em;
+    text-align: center; 
 }
 .remove-media-src-btn:hover .fa{
     color: #333;
