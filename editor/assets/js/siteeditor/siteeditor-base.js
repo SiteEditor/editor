@@ -180,7 +180,7 @@ window.sedApp = window.sedApp || {};
 			// Bail if the sanitized value is null or unchanged.
 			if ( null === to  || (_.isEqual( from , to ) && $.inArray( this.stype , ["module" , "style-editor"] ) == -1 ) )    //  :: change by parsaatef
 				return this;
-                              
+    
 			this._value = to;
             this._dirty = true;
 

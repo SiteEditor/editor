@@ -68,6 +68,8 @@
 
             this.ajaxCachTmpls = {};
 
+            this.ajaxCachControls = {};
+
             this.backgroundAjaxload = {};
 
             this.optionsGroup = "";
@@ -159,14 +161,20 @@
 
                             var isOpen = $( self.dialogSelector ).dialog( "isOpen" );
 
-                            if( isOpen && self.optionsGroup == optionsGroup ){ alert("test...");
+                            if( isOpen && self.optionsGroup == optionsGroup ){
+
+                                self._resetTmpl();
                                 self.currentSettingsId = settingId;
-                                self._addLoading( );
+                                self._addLoading();
+
+                                self._sendRequest(settingId, "app" , optionsGroup);
+                            }else{
+
+                                self._sendRequest(settingId, "app" , optionsGroup);
+                                self.backgroundAjaxload[settingId] = 1;
+
                             }
 
-                            self._sendRequest(settingId, "app" , optionsGroup);
-
-                            self.backgroundAjaxload[settingId] = 1;
                         }
 
                     });
@@ -321,6 +329,12 @@
 
                 delete self.ajaxCachTmpls[self.currentSettingsId];
 
+                var controls = $.extend( true , {} , self.ajaxCachControls[self.currentSettingsId]);
+
+                self.setControls( controls , self.currentSettingsId , self.settingsType );
+
+                delete self.ajaxCachControls[self.currentSettingsId];
+
                 return;
             }
 
@@ -350,8 +364,7 @@
 
         _sendRequest : function( settingIdReq , settingsTypeReq , optionsGroup ) {
 
-            var initLayoutsControls = [],
-                self = this,
+            var self = this,
                 selector = this.dialogSelector;
 
             this.ajaxProcessing[settingIdReq] = 1;
@@ -386,8 +399,17 @@
                     delete self.ajaxProcessing[settingId];
 
                     if( !_.isUndefined( self.loading[settingId] ) ) {
-                        //self.loading[settingId].hide();
+                        self.loading[settingId].hide();
+                        self.loading[settingId].remove();
+                        delete self.loading[settingId];
                     }
+
+                    self.setDependencies( relations , settingId );
+
+                    self.setSettings( settings , settingId );
+
+                    self.setGroups( groups , settingId );
+
 
                     if( _.isUndefined( self.ajaxResetTmpls[settingId] ) && _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
 
@@ -400,98 +422,19 @@
 
                         api.Events.trigger( "endInitAppendSettingsTmpl" , $currentElDialog , settingType , settingId );
 
+                        self.setControls( controls , settingId , settingType );
+
                     }else{
 
                         self.ajaxCachTmpls[settingId] = output;
+
+                        self.ajaxCachControls[settingId] = controls;
 
                         if( ! _.isUndefined( self.ajaxResetTmpls[settingId] ) )
                             delete self.ajaxResetTmpls[settingId] ;
 
                         if( ! _.isUndefined( self.backgroundAjaxload[settingId] ) )
                             delete self.backgroundAjaxload[settingId] ;
-
-                    }
-
-                    if( !_.isUndefined( relations ) && !_.isEmpty( relations ) && _.isObject( relations ) ){
-                        var groupRelations = {};
-
-                        groupRelations[settingId] = relations;
-
-                        api.settingsRelations = $.extend( api.settingsRelations , groupRelations);
-                        console.log( " ---------api.settingsRelations2 ----------------- " , api.settingsRelations );
-                    }
-
-                    if( !_.isEmpty( settings ) ) {
-                        var createdSettings = {};
-
-                        _.each( settings , function (settingArgs, id) {
-
-                            if ( ! api.has( id ) ) {
-
-                                var setting = api.create(id, id, settingArgs.value, {
-                                    transport: settingArgs.transport || "refresh",
-                                    previewer: api.previewer,
-                                    stype: settingArgs.type || "general",
-                                    dirty: settingArgs.dirty
-                                });
-
-                                api.settings.settings[id] = settingArgs;
-
-                                createdSettings[id] = settingArgs.value;
-
-                            }
-
-                        });
-
-                        api.previewer.send( "settings" , createdSettings );
-
-                        $.each( settings , function ( id , settingArgs ){
-
-                            if( $.inArray( id , _.keys( createdSettings ) ) == -1 )
-                                return true; //continue
-
-                            if ( settingArgs.dirty ) {
-                                var setting = api(id);
-                                setting.callbacks.fireWith(setting, [setting.get(), {}]);
-                            }
-
-                        });
-
-                    }
-
-
-                    if( !_.isEmpty( controls ) ){
-                        _.each( controls , function( data , id ){
-
-                            if( $.inArray( id , initLayoutsControls ) == -1  ){
-                                api.settings.controls[id] = data;
-                                api.Events.trigger( "renderSettingsControls" , id , data );
-                                initLayoutsControls.push( id );
-                            }
-
-                            /*var control = api.control.instance( id );
-
-                             control.update( );*/
-
-                        });
-                        console.log( " ---------ajax control load ----------------- " , controls );
-                        api.Events.trigger(  "after_group_settings_update" , settingId );
-                    }
-
-                    if( !_.isEmpty( groups ) ){
-
-                        _.each( groups , function( data , id ){
-
-                            if( $.inArray( id , _.keys( api.settings.groups ) ) == -1  ){
-
-                                api.settings.groups[id] = data;
-                            }
-
-                            if( data.pages_dependency && $.inArray( id , self.needToRefreshGroups ) == -1 ){
-                                self.needToRefreshGroups.push( id );
-                            }
-
-                        });
 
                     }
 
@@ -504,6 +447,8 @@
 
                     if( !_.isUndefined( self.loading[settingId] ) ) {
                         self.loading[settingId].hide();
+                        self.loading[settingId].remove();
+                        delete self.loading[settingId];
                     }
 
                     if( !_.isUndefined( self.ajaxResetTmpls[settingId] ) ) {
@@ -516,13 +461,137 @@
 
                     delete self.ajaxProcessing[settingId];
 
-                    alert( responseData.message );
+                    var template = api.template("sed-load-options-errors"), html;
 
+                    html = template( { message: responseData.message } ); // loadingType : "small" || "medium" || ""
+
+                    $(html).appendTo( $(self.dialogSelector) );
+
+                    //for show dialog title
+                    $( selector ).data('sed.multiLevelBoxPlugin').options.innerContainer = $( selector ).find(".dialog-level-box-settings-container");
+                    $( selector ).data('sed.multiLevelBoxPlugin')._render();
                 }
 
 
             });
                 //container   : this.dialogSelector
+
+        },
+
+
+        setDependencies : function( relations , settingId ){
+
+            if( !_.isUndefined( relations ) && !_.isEmpty( relations ) && _.isObject( relations ) ){
+                var groupRelations = {};
+
+                groupRelations[settingId] = relations;
+
+                api.settingsRelations = $.extend( api.settingsRelations , groupRelations);
+
+            }
+
+        },
+
+        setSettings : function( settings , settingId ){
+
+            if( !_.isEmpty( settings ) ) {
+                var createdSettings = {};
+
+                _.each( settings , function (settingArgs, id) {
+
+                    if ( ! api.has( id ) ) {
+
+                        var setting = api.create(id, id, settingArgs.value, {
+                            transport: settingArgs.transport || "refresh",
+                            previewer: api.previewer,
+                            stype: settingArgs.type || "general",
+                            dirty: settingArgs.dirty
+                        });
+
+                        api.settings.settings[id] = settingArgs;
+
+                        createdSettings[id] = settingArgs.value;
+
+                    }
+
+                });
+
+                api.previewer.send( "settings" , createdSettings );
+
+                $.each( settings , function ( id , settingArgs ){
+
+                    if( $.inArray( id , _.keys( createdSettings ) ) == -1 )
+                        return true; //continue
+
+                    if ( settingArgs.dirty ) {
+                        var setting = api(id);
+                        setting.callbacks.fireWith(setting, [setting.get(), {}]);
+                    }
+
+                });
+
+            }
+
+        },
+
+        setControls : function( controls , settingId , settingType ){
+
+            if( !_.isEmpty( controls ) ){
+
+                if( settingType == "module" ){
+
+                    if( _.isUndefined( api.sedGroupControls[settingId] ) ) {
+                        api.sedGroupControls[settingId] = [];
+                    }
+
+                    _.each( controls , function ( data , id ) {
+                        api.sedGroupControls[settingId].push( data );
+                    });
+
+                    if ( !_.isUndefined( api.appModulesSettings.sedDialog.data.panelId ) )
+                        api.appModulesSettings.initSettings( api.appModulesSettings.sedDialog.data.panelId );
+                    else
+                        api.appModulesSettings.initSettings();
+
+                } else {
+
+                    _.each(controls, function (data, id) {
+
+                        if ($.inArray(id, _.keys(api.settings.controls)) == -1) {
+
+                            api.settings.controls[id] = data;
+
+                            api.Events.trigger("renderSettingsControls", id, data);
+
+                        }
+
+                    });
+
+                    api.Events.trigger("after_group_settings_update", settingId);
+                }
+            }
+
+        },
+
+        setGroups : function( groups , settingId ){
+            var self = this;
+
+            if( !_.isEmpty( groups ) ){
+
+                _.each( groups , function( data , id ){
+
+                    if( $.inArray( id , _.keys( api.settings.groups ) ) == -1  ){
+
+                        api.settings.groups[id] = data;
+                    }
+
+                    if( data.pages_dependency && $.inArray( id , self.needToRefreshGroups ) == -1 ){
+                        self.needToRefreshGroups.push( id );
+                    }
+
+                });
+
+            }
 
         },
 
@@ -578,8 +647,6 @@
 
             $.extend( this, options || {} );
 
-
-            this.initControls = [];
             this.currentDialogSelector = "none";
 
             this.sedDialog;
@@ -703,21 +770,6 @@
 
             });
 
-            api.Events.bind("afterResetSettingsTmpl" , function( currentSettingsId , settingsType ){
-
-                if( settingsType == "module" ){
-
-                    self.forceUpdate = false;
-
-                    //for skins support :: when dialog close or switch remove this event
-                    if( !_.isUndefined( self._skinSupport ) && _.isFunction( self._skinSupport ) ) {
-                        api.Events.unbind("skins_loaded_" + self.sedDialog.data.shortcodeName + "_skin", self._skinSupport);
-                        delete self._skinSupport;
-                    }
-                }
-
-            });
-
         },
 
         initDialogSettings : function(){
@@ -828,7 +880,7 @@
 
         updateSettings: function(  id , data , shortcodeName , extra , needReturn ){
 
-            if( $.inArray(id , this.initControls) == -1 ){
+            if( $.inArray(id , _.keys( api.settings.controls ) ) == -1 ){
 
                 if( !_.isUndefined( data.category ) && data.category == "style-editor" ){
                     var cssSelector = !_.isUndefined( data.selector ) ? data.selector : '';
@@ -840,20 +892,17 @@
                 }
 
                 api.Events.trigger( "renderSettingsControls" , id, data , extra);
-                this.initControls.push( id );
 
                 var control = api.control.instance( id );
                 $( control.container ).parents(".row_settings:first").show();
-                this.controlFilter( extra.attrs , shortcodeName , control );
 
-            }else if( $.inArray(id , this.initControls) != -1 ){
+            }else {
 
                 /*if( data.is_attr === false )
                     return ;*/
 
                 var control = api.control.instance( id );
                 $( control.container ).parents(".row_settings:first").show();
-                this.controlFilter( extra.attrs , shortcodeName , control );
 
                 if( control.isStyleControl ){
 
@@ -865,175 +914,17 @@
                         control.update( );
                     }
 
-                }else if( !_.isUndefined(extra.attrs) )
+                }else if( !_.isUndefined(extra.attrs) ) {
                     control.update(extra.attrs);
-                else
+                }else {
                     control.update();
+                }
 
             }
 
             if( !_.isUndefined(needReturn) && needReturn === true )
                 return control;
 
-        },
-
-        controlFilter : function( attrs , shortcodeName , control ){
-
-            $(this.dialogSelector).find("fieldset").show();
-
-            if( !_.isUndefined( attrs) && !_.isUndefined( attrs.parent_module ) && !_.isUndefined( attrs.sed_support_id ) ){
-
-                var $support = api.settingsSupports[ attrs.parent_module ];
-
-                if( !_.isUndefined( $support ) && !_.isUndefined( $support.subShortcode ) && !_.isUndefined( $support.subShortcode[attrs.sed_support_id] )  && !_.isUndefined( $support.subShortcode[attrs.sed_support_id].settings )  ){
-                    var settings = $support.subShortcode[attrs.sed_support_id].settings ,
-                        type = ( !_.isUndefined( settings.type ) ) ? settings.type.toLowerCase() : "include";
-
-                    if( !$.isArray(settings.fields) || settings.fields.length == 0 )
-                        return ;
-
-                    if( ($.inArray(control.attr , settings.fields ) == -1 && type == "exclude") ||
-                        ($.inArray(control.attr , settings.fields ) != -1 && type == "include")  )
-                        $(control.selector).parents(".row_settings:first").show();
-                    else
-                        $(control.selector).parents(".row_settings:first").hide();
-
-                    $(this.dialogSelector).find("fieldset").each(function(){
-                        var $i = 0;
-                        $(this).find(".row_settings").each(function(){
-                            if($(this).is(":visible"))
-                                $i++;
-                        });
-                        if($i == 0)
-                            $(this).hide();
-                        else
-                            $(this).show();
-                    });
-
-                }
-            }
-
-        },
-
-        filterSettings : function( attrs , shortcodeName ){
-
-            var _showHideGSettings = function( type ){
-                _.each( api.modulesGeneralSettings , function( field ){
-
-                    var settingEl = $( "#sed-app-control-" + shortcodeName + "_" + field );
-                    if( settingEl.length > 0 ){
-                        if( _.isUndefined( type ) || type == "show" )
-                            settingEl.parents(".row_settings:first").show();
-                        else
-                            settingEl.parents(".row_settings:first").hide();
-                    }
-                });
-            };
-
-            _showHideGSettings();
-
-            var _showHideGPanels = function( type ){
-                _.each( api.settingsPanels[shortcodeName] , function( panel ){
-                    var panelBtn = $( "#sed_pb_" + shortcodeName + "_" + panel.id );
-                    if( panelBtn.length > 0 ){
-                        if( _.isUndefined( type ) || type == "show" )
-                            panelBtn.parents(".row_settings:first").show();
-                        else
-                            panelBtn.parents(".row_settings:first").hide();
-                    }
-
-                });
-            };
-
-            _showHideGPanels();
-
-            if( !_.isUndefined( attrs) && !_.isUndefined( attrs.parent_module ) && !_.isUndefined( attrs.sed_support_id ) ){
-
-                var $support = api.settingsSupports[ attrs.parent_module ];
-
-                if( !_.isUndefined( $support ) && !_.isUndefined( $support.subShortcode ) && !_.isUndefined( $support.subShortcode[attrs.sed_support_id] ) ){
-
-                    if( !_.isUndefined( $support.subShortcode[attrs.sed_support_id].general_settings )  ){
-                        var general_settings = $support.subShortcode[attrs.sed_support_id].general_settings ,
-                            type = ( !_.isUndefined( general_settings.type ) ) ? general_settings.type.toLowerCase() : "include";
-
-                        if( !$.isArray(general_settings.fields) || general_settings.fields.length == 0 )
-                            return ;
-
-                        if( type == "include" )
-                            _showHideGSettings("hide");
-
-                        _.each( general_settings.fields , function( field ){
-
-                            var settingEl = $( "#sed-app-control-" + shortcodeName + "_" + field );
-
-                            if( settingEl.length > 0 && type == "include"  )
-                                settingEl.parents(".row_settings:first").show();
-                            else if( settingEl.length > 0 && type == "exclude"  )
-                                settingEl.parents(".row_settings:first").hide();
-                        });
-                    }
-
-                    if( !_.isUndefined( $support.subShortcode[attrs.sed_support_id].panels )  ){
-                        var panels = $support.subShortcode[attrs.sed_support_id].panels ,
-                            type = ( !_.isUndefined( panels.type ) ) ? panels.type.toLowerCase() : "include";
-
-                        if( !$.isArray(panels.fields) || panels.fields.length == 0 )
-                            return ;
-
-                        if( type == "include" )
-                            _showHideGPanels("hide");
-
-                        _.each( panels.fields , function( field ){
-
-                            var panelBtn = $( "#sed_pb_" + shortcodeName + "_" + field );
-
-                            if( panelBtn.length > 0 && type == "include"  )
-                                panelBtn.parents(".row_settings:first").show();
-                            else if( panelBtn.length > 0 && type == "exclude"  )
-                                panelBtn.parents(".row_settings:first").hide();
-                        });
-                    }
-
-                    var _skinSupport = function(){
-                        if( !_.isUndefined( $support.subShortcode[attrs.sed_support_id].skins )  ){
-                            var skins = $support.subShortcode[attrs.sed_support_id].skins ,
-                                type = ( !_.isUndefined( skins.type ) ) ? skins.type.toLowerCase() : "include" ,
-                                dialog = $( "#dialog_page_box_" + shortcodeName + "_skin" );
-
-                            if( !$.isArray(skins.fields) || skins.fields.length == 0 )
-                                return ;
-
-                            if( type == "include" )
-                                dialog.find("li:first").hide();
-
-                            _.each( skins.fields , function( field ){
-
-                                var skinEl = dialog.find("[data-skin-name='" + field + "']").parents("li:first");
-
-                                if( skinEl.length > 0 && type == "include"  )
-                                    skinEl.show();
-                                else if( skinEl.length > 0 && type == "exclude"  )
-                                    skinEl.hide();
-                            });
-                        }
-                    };
-
-                    this._skinSupport = _skinSupport;
-
-                    api.Events.bind( "skins_loaded_" + shortcodeName + "_skin" , this._skinSupport );
-
-
-
-            /*if($("#sed-tmpl-modules-skins-" + control.attr + "-" +  control.shortcode).length > 0 ){
-                tmpl = $("#sed-tmpl-modules-skins-" + control.attr + "-" +  control.shortcode);
-                dialog.find(".skins-dialog-inner").html( tmpl.html() );
-            }else{
-                control.loadmoduleSkins();
-            } */
-
-                }
-            }
         },
 
         postButtonIdUpdate : function( dataElement ){
@@ -1066,8 +957,7 @@
         },
 
         getSettings : function( panelId ){
-            var self        = this ,
-                dataElement = this.sedDialog.data;
+            var dataElement = this.sedDialog.data;
 
             if( !_.isUndefined( panelId ) && panelId && panelId != "root" ){
 
@@ -1081,11 +971,9 @@
                         return false;
 
                     var panel = api.settingsPanels[dataElement.shortcodeName][data.panel];
-                                       
-                    if( panel.id == panelId )
-                        return true;
-                    else
-                        return false;
+
+                    return panel.id == panelId;
+
                 });
 
             }else{
@@ -1101,10 +989,8 @@
 
                     var panel = api.settingsPanels[dataElement.shortcodeName][data.panel];
 
-                    if( $.inArray( panel.type , ['dialog' , 'inner_box' , 'accordion' , 'tab'] ) == -1 )
-                        return true;
-                    else
-                        return false;
+                    return $.inArray( panel.type , ['dialog' , 'inner_box' , 'accordion' , 'tab'] ) == -1;
+
                 });
             }
 
@@ -1118,12 +1004,7 @@
             var self        = this ,
                 dataElement = this.sedDialog.data ,
                 extra       = $.extend({} , this.sedDialog.extra || {}) ,
-                sedDialog   = this.sedDialog ,
                 settings;
-
-            var startTime = new Date();
-
-            this.filterSettings( extra.attrs , dataElement.shortcodeName );
 
             if( _.isUndefined( panelId ) )
                 settings = this.getSettings();
@@ -1145,8 +1026,6 @@
                 api.Events.trigger( dataElement.settingsType + "SettingsType" , dataElement , extra );
             }
 
-            //api.log( " extra.attrs ----- : " ,  extra.attrs );
-
             api.Events.trigger(  "after_shortcode_update_setting" , dataElement.shortcodeName );
 
             api.Events.trigger(  "after_group_settings_update" , dataElement.shortcodeName );
@@ -1167,12 +1046,19 @@
 
             var reset =  !_.isUndefined( sedDialog.reset ) ? sedDialog.reset : true;
 
+            var needToUpdate = !_.isUndefined( api.sedDialogSettings.dialogsContents[this.currentSettingsId] );
+
             api.sedDialogSettings.openInitDialogSettings( this.currentSettingsId , forceOpen , reset , "module" , "ajax" , this.currentSettingsId );//"html"
 
-            if( !_.isUndefined( sedDialog.data.panelId ) )
-                this.initSettings( sedDialog.data.panelId );
-            else
-                this.initSettings( );
+            /**
+             * update settings if created current settings template already
+             */
+            if( needToUpdate ) {
+                if (!_.isUndefined(sedDialog.data.panelId))
+                    this.initSettings(sedDialog.data.panelId);
+                else
+                    this.initSettings();
+            }
 
         },
 
@@ -1315,10 +1201,11 @@
                 });
 
                 scripts = _.filter( scripts , function( script ){
-                    if($.inArray(script[0] , api.sedAppLoadedScripts) == -1)
-                        return true
-                    else
+                    if($.inArray(script[0] , api.sedAppLoadedScripts) == -1) {
+                        return true;
+                    }else {
                         return false;
+                    }
                 });
 
                 if( scripts.length > 0 ){
@@ -1785,7 +1672,7 @@
             //var selectorT = "#" + api.currentTargetElementId + " " + selector ,
                 //$el = $("#website")[0].contentWindow.jQuery( selectorT );
 
-            if( $.inArray(id , api.appModulesSettings.initControls) == -1 ){  //&& $el.length > 0
+            if( $.inArray( id , _.keys( api.settings.controls ) ) == -1 ){  //&& $el.length > 0
 
                 var cValue = this.getCurrentValue( id , data , selector  );
 
@@ -1794,17 +1681,14 @@
                 }
 
                 api.Events.trigger( "renderSettingsControls" , id, data );
-                api.appModulesSettings.initControls.push( id );
 
                 var control = api.control.instance( id );
                 $( control.container ).parents(".row_settings:first").show();
-                //this.controlFilter( extra.attrs , shortcodeName );
 
-            }else if( $.inArray(id , api.appModulesSettings.initControls) != -1 ){
+            } else {
 
                 var control = api.control.instance( id );
                 $( control.container ).parents(".row_settings:first").show();
-                //this.controlFilter( extra.attrs , shortcodeName );
 
                 var cValue = this.getCurrentValue( id , data , selector  );
                                          //alert( cValue );
@@ -1816,7 +1700,7 @@
 
             }
 
-        },
+        }
 
 
     });

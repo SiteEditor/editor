@@ -317,7 +317,7 @@ class SiteEditorPageOptions {
 
             $args['setting_id'] = $page_option_name . "[" . $setting_id . "]";
 
-            $new_fields[$id] = $args;
+            $new_fields[$id . "_" . $page_id] = $args;
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";

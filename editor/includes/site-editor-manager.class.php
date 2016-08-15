@@ -1216,14 +1216,14 @@ class SiteEditorManager{
 		return isset( $_POST['sed_page_customized'] ) || ( defined( 'DOING_SITE_EDITOR_AJAX' ) && DOING_SITE_EDITOR_AJAX );
 	}
 
-	function check_ajax_handler($ajax , $nonce){
+	function check_ajax_handler($ajax , $nonce , $capability = 'edit_theme_options'){
 		if ( is_admin() && ! $this->doing_ajax() )
 			auth_redirect();
 		elseif ( $this->doing_ajax() && ! is_user_logged_in() ){
 			$this->sed_die( 0 );
 		}
 
-		if ( ! current_user_can( 'edit_theme_options' ) )
+		if ( ! current_user_can( $capability ) )
 			$this->sed_die( -1 );
 
 		if( !check_ajax_referer( $nonce . '_' . $this->get_stylesheet(), 'nonce' , false ) ){

@@ -182,7 +182,9 @@ class SiteEditorOptionsControl{
     public $sub_category = '';
 
     /**
-     * Control default value for modules controls
+     * Control default value for modules controls ( sed_pb_modules or style editor settings )
+	 * default value is for helper settings
+	 * helper settings not saved in db directly 
      *
      * @since 1.0.0
      * @access public
@@ -395,6 +397,7 @@ class SiteEditorOptionsControl{
 
 		$json_array = array_merge( $json_array , $this->js_params );
 
+		$json_array['control_id'] = $this->id;
 		$json_array['type'] = $this->type;
 		$json_array['priority'] = $this->priority;
 		$json_array['active'] = $this->active();

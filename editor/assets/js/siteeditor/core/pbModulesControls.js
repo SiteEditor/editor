@@ -41,19 +41,27 @@
                 this.cssSettingType = ( !_.isUndefined( control.params.css_setting_type ) ) ? control.params.css_setting_type : "module";
             }
 
-            if( !_.isUndefined( control.params.default_value ) && !_.isNull( control.params.default_value ) )
+            var needToUpdate = false;
+
+            if( !_.isUndefined( control.params.default_value ) && !_.isNull( control.params.default_value ) ) {
+                needToUpdate = true;
                 control.defaultValue = control.params.default_value;
-            else
+            }else {
                 control.defaultValue = control.setting();
+            }
 
             this._ready();
 
-            if( !_.isUndefined( this.extraOpt ) && !_.isUndefined( this.extraOpt.attrs ) ){
-                this.update( this.extraOpt.attrs );
-            }else if( !_.isUndefined( this.extraOpt ) ){
-                this.update( this.extraOpt );
-            }else{
-                this.update( );
+            if( needToUpdate === true ) {
+
+                if (!_.isUndefined(this.extraOpt) && !_.isUndefined(this.extraOpt.attrs)) {
+                    this.update(this.extraOpt.attrs);
+                } else if (!_.isUndefined(this.extraOpt)) {
+                    this.update(this.extraOpt);
+                } else {
+                    this.update();
+                }
+
             }
 
         },
@@ -153,7 +161,7 @@
                 cValue = control.defaultValue;
             }
 
-            this.currentValue = cValue;
+            this.currentValue = cValue; //alert( cValue );
 
             this._update( cValue );
 
@@ -1881,7 +1889,6 @@
                 dialog.find(".skins-dialog-inner").html( tmpl.html() );
 
                 this._skinSupport();
-                api.Events.trigger( "skins_loaded_" + control.shortcode + "_skin" );
             }else{
                 control.loadmoduleSkins();
             }
@@ -1963,7 +1970,6 @@
                         $('<script type="text/html" id="sed-tmpl-modules-skins-' + control.attr + "-" + control.shortcode + '">' + skinTmpl + '</script>').appendTo( $("body") );
 
                         control._skinSupport();
-                        api.Events.trigger( "skins_loaded_" + control.shortcode + "_skin" );
                         //dialog.dialog("option" , "position" , { my: "right-20", at: "right" , of: "#sed-site-preview" });
 
                         if(response.data.js_tpl)
@@ -2463,15 +2469,9 @@
 
   $( function() {
       api.settingsRelations = window._sedAppModulesSettingsRelations;
-      api.settingsSupports  = window._sedAppModulesSettingsSupports;
-	  api.modulesGeneralSettings  = window._sedAppModulesGeneralSettings;
       api.defaultHelperShortcodes  = window._sedAppDefaultHelperShortcodes;
 
       var modulesSettingsRelations = new api.ModulesSettingsRelations({});
-
-	  api.previewer.bind( 'previewerActive', function( ) {
-		  api.previewer.send( "sed_api_settings_supports" , api.settingsSupports );
-	  });
 
       api.previewer.bind( 'moduleForceRefresh', function(){
           api.previewer.refresh();

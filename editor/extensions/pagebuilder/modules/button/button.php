@@ -74,39 +74,41 @@ class PBButtonShortcode extends PBShortcodeClass{
           			'desc'      => __('Set a title attribute for the link the button consists of', 'site-editor'),
                     "panel"     => "button_settings_panel",
           	   	),       */
-                  'size' => array(
-          			'type' => 'select',
-          			'label' => __('Button Size', 'site-editor'),
-          			'desc' => __("This option allows you to set some predefined sizes for your buttons. The available options are extra-large, large, normal, small and extra small. It should be said that the size of the buttons are flexible and can change in the following situations:
-                              <br /> Change the button text with the inline text editor. Your button width will adjust to the text size and if you create new lines, the height of your button will also change.
-                              <br /> You can change the width and height of your modules by using the padding settings in the design editor.", "site-editor"),
-                      'options' =>array(
-                          ''       => __('Normal', 'site-editor'),
-                          'btn-xs' => __('Extra small', 'site-editor'),
-                          'btn-sm' => __('Small', 'site-editor'),
-                          'btn-lg' => __('Large', 'site-editor'),
-                          'btn-xl' => __('Extra Large', 'site-editor'),
-                      ),
-                    "panel"     => "button_settings_panel",
-          		),
-                'type' => array(
-          			'type' => 'select',
-          			'label' => __('Button Type', 'site-editor'),
-          			'desc' => __("This option allows you to set the current button type. The options to select from are info, success, purple, default, none, flat, danger, warning and primary.
-                              <br />It should be mentioned that this option is not for setting color for your buttons. It helps you to create commonly used buttons. You can use the design editor to easily change the color of your buttons.", "site-editor"),
-                      'options' =>array(
-                          'btn-main'        => __('Primary', 'site-editor'),
-                          'btn-default'     => __('Default', 'site-editor'),
-                          'btn-purple'      => __('Purple', 'site-editor'),
-                          'btn-success'     => __('Success', 'site-editor'),
-                          'btn-info'        => __('Info', 'site-editor'),
-                          'btn-warning'     => __('Warning', 'site-editor'),
-                          'btn-danger'      => __('Danger', 'site-editor'),
-                          'btn-flat'        => __('Flat', 'site-editor'),
-                          'btn-none'        => __('None', 'site-editor'),
-                      ),
-                    "panel"     => "button_settings_panel",
-          		),
+            'size' => array(
+                'type' => 'select',
+                'label' => __('Button Size', 'site-editor'),
+                'desc' => __("This option allows you to set some predefined sizes for your buttons. The available options are extra-large, large, normal, small and extra small. It should be said that the size of the buttons are flexible and can change in the following situations:
+                          <br /> Change the button text with the inline text editor. Your button width will adjust to the text size and if you create new lines, the height of your button will also change.
+                          <br /> You can change the width and height of your modules by using the padding settings in the design editor.", "site-editor"),
+                'options' =>array(
+                    ''       => __('Normal', 'site-editor'),
+                    'btn-xs' => __('Extra small', 'site-editor'),
+                    'btn-sm' => __('Small', 'site-editor'),
+                    'btn-lg' => __('Large', 'site-editor'),
+                    'btn-xl' => __('Extra Large', 'site-editor'),
+                ),
+                "has_border_box"    => false ,
+                "panel"     => "button_settings_panel",
+            ),
+            'type' => array(
+                'type' => 'select',
+                'label' => __('Button Type', 'site-editor'),
+                'desc' => __("This option allows you to set the current button type. The options to select from are info, success, purple, default, none, flat, danger, warning and primary.
+                          <br />It should be mentioned that this option is not for setting color for your buttons. It helps you to create commonly used buttons. You can use the design editor to easily change the color of your buttons.", "site-editor"),
+                  'options' =>array(
+                      'btn-main'        => __('Primary', 'site-editor'),
+                      'btn-default'     => __('Default', 'site-editor'),
+                      'btn-purple'      => __('Purple', 'site-editor'),
+                      'btn-success'     => __('Success', 'site-editor'),
+                      'btn-info'        => __('Info', 'site-editor'),
+                      'btn-warning'     => __('Warning', 'site-editor'),
+                      'btn-danger'      => __('Danger', 'site-editor'),
+                      'btn-flat'        => __('Flat', 'site-editor'),
+                      'btn-none'        => __('None', 'site-editor'),
+                  ),
+                "has_border_box"    => false ,
+                "panel"     => "button_settings_panel",
+            ),
             "skin"  =>  array(
                 "type"          => "skin" ,
                 "label"         => __("Change skin", "site-editor"),

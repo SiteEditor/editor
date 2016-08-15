@@ -83,11 +83,26 @@ final class SiteEditorOptionsManager{
 
         add_action( 'sed_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
+        add_action( 'sed_print_footer_scripts', array( $this, 'print_templates' ) );
+
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ) );
 
     }
 
     public function sed_ajax_load_options(){
+
+        SED()->editor->manager->check_ajax_handler( 'sed_options_loader' , 'sed_app_options_load' , 'sed_manage_settings' );
+
+        if( !isset( $_POST['options_group'] ) || empty( $_POST['options_group'] ) || !isset( $_POST['setting_id'] ) || empty( $_POST['setting_id'] ) ){
+
+            $data = array(
+                'settingId'   => isset( $_POST['setting_id'] ) ? $_POST['setting_id'] : '',
+                'message'     => __( 'Data is not valid.' , 'site-editor' ),
+            );
+
+            wp_send_json_error( $data );
+
+        }
 
         do_action( "sed_register_{$_POST['options_group']}_options" );
 
@@ -472,7 +487,7 @@ final class SiteEditorOptionsManager{
                 unset( $args['id'] );
             }
 
-            $setting = SED()->editor->manager->get_setting( $setting_id );
+            $setting = SED()->editor->manager->get_setting( $setting_id ); 
 
             if( ! isset( $setting ) ) {
 
@@ -685,6 +700,24 @@ final class SiteEditorOptionsManager{
 
         //wp_enqueue_style( 'codemirror-theme-' . $this->choices['theme'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/' . $this->choices['theme'] . '.css' );     
 
+    }
+
+    public function print_templates(){
+        ?>
+        <script type="text/html" id="tmpl-sed-load-options-errors" >
+            <div id="sed-load-options-errors-box" data-title="<?php echo __("Error" , "site-editor");?>" class="dialog-level-box-settings-container " >
+
+                <div  class="error-box">
+
+                    <div class="load-options-error error">
+                        <span class="error-message">{{data.message}}</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </script>
+        <?php
     }
 
     public function enqueue_preview_scripts(){

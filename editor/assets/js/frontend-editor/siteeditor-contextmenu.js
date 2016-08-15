@@ -198,51 +198,10 @@
 
         ready: function() {},
 
-        //support contextmenu for sub modules
-        filterItems: function( context , element ) {
-            var id = $( context ).attr("sed_model_id") ,
-                shortcode = api.contentBuilder.getShortcode( id ) ,
-                attrs = shortcode.attrs;
-
-            element.find(".contextmenu-item-container").removeClass("contextmenu-hide-item");
-
-            if( !_.isUndefined( attrs) && !_.isUndefined( attrs.parent_module ) && !_.isUndefined( attrs.sed_support_id ) ){
-
-                var $support = api.settingsSupports[ attrs.parent_module ];
-
-                if( !_.isUndefined( $support ) && !_.isUndefined( $support.subShortcode ) && !_.isUndefined( $support.subShortcode[attrs.sed_support_id] ) ){
-
-                    if( !_.isUndefined( $support.subShortcode[attrs.sed_support_id].contextmenu )  ){
-                        var contextmenu = $support.subShortcode[attrs.sed_support_id].contextmenu ,
-                            type = ( !_.isUndefined( contextmenu.type ) ) ? contextmenu.type.toLowerCase() : "include";
-
-                        if( !$.isArray(contextmenu.fields) || contextmenu.fields.length == 0 )
-                            return ;
-
-                        if( type == "include" )
-                            element.find(".contextmenu-item-container").addClass("contextmenu-hide-item");
-
-                        _.each( contextmenu.fields , function( field ){
-
-                            var menu_item = element.find('[data-name="' + field + '"]') ;
-
-                            if( menu_item.length > 0 && type == "include"  )
-                                menu_item.removeClass("contextmenu-hide-item");
-                            else if( menu_item.length > 0 && type == "exclude"  )
-                                menu_item.addClass("contextmenu-hide-item");
-                        });
-                    }
-                }
-            }
-
-        },
-
         onShow : function( event , context , element ){
 
             $thisElement = $( context );
             api.selectPlugin.select( $( context ) );
-
-            this.filterItems( context , element );
 
             var arrangementItem = element.find(".modules-arrangement");
 

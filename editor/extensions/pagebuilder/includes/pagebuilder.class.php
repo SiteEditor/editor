@@ -931,10 +931,6 @@ Class PageBuilderApplication {
             var _sedRegisteredShortcodesStyles = <?php echo wp_json_encode( $styles ); ?>;
             var _sedAppJsModulesForEditor = <?php echo wp_json_encode( $js_modules ); ?>;
 
-            var _sedAppModulesSettingsSupports = <?php echo wp_json_encode( $this->settings_supports ); ?>;
-
-            var _sedAppModulesGeneralSettings = <?php echo wp_json_encode( array( 'design_panel' , 'row_container' ) ); ?>;
-
             var _sedAppDefaultHelperShortcodes = <?php echo wp_json_encode( $helper_shortcodes ); ?>;
 		</script>
 		<?php

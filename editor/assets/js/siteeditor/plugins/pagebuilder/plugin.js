@@ -199,8 +199,11 @@
           if( _.isUndefined(data.pageId) || _.isUndefined(data.pageType)  )
               return ;
 
-          api.settings.page.id = data.pageId;
-          api.settings.page.type = data.pageType;
+           api.settings.page.id = data.pageId;
+           
+           api.settings.page.type = data.pageType;
+
+           api.settings.currentPostType = data.postType;
 
            api.Events.trigger( "afterResetpageInfoSettings" );
 

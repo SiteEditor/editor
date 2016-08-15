@@ -92,3 +92,7 @@
     padding: 5px 20px !important;
     text-align: center;
 }
+
+#sed-load-options-errors-box .error-box{
+    padding-top: 20px;
+}

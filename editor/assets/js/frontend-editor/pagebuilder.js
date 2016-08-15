@@ -1601,10 +1601,6 @@
 
         api.pageBuilder.render();    ////api.log( scripts );
 
-        api.preview.bind( "sed_api_settings_supports" , function( settingsSupports ){
-            api.settingsSupports  = settingsSupports;
-        });
-
         api.preview.bind( 'moduleDragHandler', function( handle ) {
             api.pageBuilder.modulesDrag( handle.option , handle.args );
         });
@@ -1621,6 +1617,7 @@
                 //settings    : api.settings.values  ,
                 pageId      : api.currentPageInfo.id  ,
                 pageType    : api.currentPageInfo.type ,
+                postType    : api.currentPageInfo.post_type
                 //isFrontPage : api.currentPageInfo.isFrontPage ,
                 //isHome      : api.currentPageInfo.isHome
                 //previewUrl  : api.currentPageInfo.preview_url
@@ -1708,7 +1705,7 @@
 
         api( 'sed_pb_modules', function( value ) {
     		value.bind( function( currentAttrValue ) {
-    		    var elementId = api.currentSedElementId;
+    		    var elementId = api.currentSedElementId; 
 
                 if( _.isUndefined( elementId ) || !elementId  )
                     return ;

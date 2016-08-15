@@ -54,7 +54,7 @@
         });
 
         var allControlsWithGroup = _.filter( allControls , function( data , key ){
-            return !_.isUndefined(data.sub_category);
+            return !_.isUndefined(data.sub_category) && data.sub_category;
         });
 
         api.sedGroupControls = _.groupBy( allControlsWithGroup , function(data , id){ return data.sub_category; });
