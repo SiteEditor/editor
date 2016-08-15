@@ -74,6 +74,8 @@
 
             this.needToRefreshGroups = [];
 
+            this.loading = {};
+
             this.currentSettingsId = "";
 
             this.dialogSelector = "#sed-dialog-settings";
@@ -154,7 +156,15 @@
                         var settingId = optionsGroup + "_" + api.settings.page.id;
 
                         if( _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
-                            self._sendRequest(settingId, "module" , optionsGroup);
+
+                            var isOpen = $( self.dialogSelector ).dialog( "isOpen" );
+
+                            if( isOpen && self.optionsGroup == optionsGroup ){ alert("test...");
+                                self.currentSettingsId = settingId;
+                                self._addLoading( );
+                            }
+
+                            self._sendRequest(settingId, "app" , optionsGroup);
 
                             self.backgroundAjaxload[settingId] = 1;
                         }
@@ -314,12 +324,28 @@
                 return;
             }
 
+            this._addLoading();
+
             if (!_.isUndefined(this.backgroundAjaxload[this.currentSettingsId])) {
                 delete this.backgroundAjaxload[this.currentSettingsId];
                 return;
             }
 
             this._sendRequest( this.currentSettingsId , this.settingsType , this.optionsGroup );
+        },
+
+        _addLoading : function( ){
+
+            if( _.isUndefined( this.loading[this.currentSettingsId] ) ) {
+                var tpl = api.template("sed-ajax-loading"), html;
+
+                html = tpl({type: "medium"}); // loadingType : "small" || "medium" || ""
+
+                this.loading[this.currentSettingsId] = $(html).appendTo($(this.dialogSelector));//
+
+                this.loading[this.currentSettingsId].show();
+            }
+
         },
 
         _sendRequest : function( settingIdReq , settingsTypeReq , optionsGroup ) {
@@ -358,6 +384,10 @@
                         groups  = responseData.groups;
 
                     delete self.ajaxProcessing[settingId];
+
+                    if( !_.isUndefined( self.loading[settingId] ) ) {
+                        //self.loading[settingId].hide();
+                    }
 
                     if( _.isUndefined( self.ajaxResetTmpls[settingId] ) && _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
 
@@ -471,6 +501,10 @@
                 error : function( responseData ){
 
                     var settingId = responseData.settingId;
+
+                    if( !_.isUndefined( self.loading[settingId] ) ) {
+                        self.loading[settingId].hide();
+                    }
 
                     if( !_.isUndefined( self.ajaxResetTmpls[settingId] ) ) {
                         delete self.ajaxResetTmpls[settingId];
