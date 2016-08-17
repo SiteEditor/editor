@@ -46,9 +46,9 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             add_action( 'sed-app-save-data' , array( $this , 'save_check_main_content' ) , 10 , 2 );
 
-            //add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
+            add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
 
-            //add_action( "sed_register_sed_add_layout_options" , array( $this, 'register_add_layout_group' ) , -9999 );
+            add_action( "sed_register_sed_add_layout_options" , array( $this, 'register_add_layout_group' ) , -9999 );
 
             add_action( "sed_register_sed_pages_layouts_options" , array( $this , 'pages_layouts_options' ) );
 
@@ -112,33 +112,35 @@ if(!class_exists('SiteEditorLayoutManager')){
             include dirname( dirname( __FILE__ ) ) . DS . "view" . DS . "pages_layouts.tpl.php";
             $html = ob_get_clean();*/
 
-            $params = array();
+            $fields = array();
             $panels = array();
 
             $panels['current_page_layout_panel'] = array(
                 'id'            => 'current_page_layout_panel'  ,
                 'title'         =>  __('Current Page Layout Settings',"site-editor")  ,
                 'capability'    => 'edit_theme_options' ,
-                'type'          => 'fieldset' ,
+                'type'          => 'default' ,
                 'description'   => '' ,
                 'priority'      => 9 ,
+                'option_group'  => 'sed_pages_layouts'
             );
 
-            $params['page_layout'] = array(
-                'type'      => 'select',
-                'value'     => $_POST['page_layout'] ,
-                'label'     => __("Select page layout" ,"site-editor"),
-                'desc'      => '',
-                'options'   => array(
-                    ''  =>   __( "Using Default settings" , "site-editor" )
+            $fields['page_layout'] = array(
+                'type'              => 'select',
+                'default'           => $_POST['page_layout'] ,
+                'label'             => __("Select page layout" ,"site-editor"),
+                'description'       => '',
+                'choices'           => array(
+                    ''                  =>   __( "Using Default settings" , "site-editor" )
                 ),
-                'atts'      => array(
-                    "class"     =>  "sed_all_layouts_options_select"
+                'atts'              => array(
+                    "class"             =>  "sed_all_layouts_options_select"
                 ),
-                'priority'  => 9 ,
-                'control_category'  => 'app-settings' ,
-                'settings_type'     => "page_layout" ,
-                "panel"             => 'current_page_layout_panel'
+                'priority'          => 9 ,
+                'category'          => 'app-settings' ,
+                'setting_id'        => "page_layout" ,
+                "panel"             => 'current_page_layout_panel' ,
+                'option_group'      => 'sed_pages_layouts'
             );
 
             $default_pages_layouts = $this->default_pages_layouts_list();
@@ -162,9 +164,10 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'id'            => 'default_pages_layouts' ,
                 'title'         =>  __('Default Pages Layouts',"site-editor")  ,
                 'capability'    => 'edit_theme_options' ,
-                'type'          => 'fieldset' ,
+                'type'          => 'default' ,
                 'description'   => '' ,
                 'priority'      => 10 ,
+                'option_group'  => 'sed_pages_layouts'
             );
 
             foreach( $default_pages_layouts AS $page_group => $layout ){
@@ -172,19 +175,20 @@ if(!class_exists('SiteEditorLayoutManager')){
                 $id = 'sed_pages_layouts[' . $page_group . ']';
                 $layout = $current_pages_layouts[$page_group];
 
-                $params["group_".$page_group] = array(
-                    'type'      => 'select',
-                    'value'     => $layout ,
-                    'label'     => $default_pages_layouts_labels[$page_group],
-                    'desc'      => '',
-                    'options'   => array(),
-                    'atts'      => array(
-                        "class"     =>  "sed_all_layouts_options_select"
+                $fields["group_".$page_group] = array(
+                    'type'              => 'select',
+                    'default'           => $layout ,
+                    'label'             => $default_pages_layouts_labels[$page_group],
+                    'description'       => '',
+                    'choices'           => array(),
+                    'atts'              => array(
+                        "class"             =>  "sed_all_layouts_options_select"
                     ),
-                    'priority'  => 15 ,
-                    'control_category'  => 'app-settings' ,
-                    'settings_type'     => $id ,
-                    "panel"         => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "default_pages_layouts"
+                    'priority'          => 15 ,
+                    'category'          => 'app-settings' ,
+                    'setting_id'        => $id ,
+                    "panel"             => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "default_pages_layouts" ,
+                    'option_group'      => 'sed_pages_layouts'
                 );
             }
 
@@ -196,9 +200,10 @@ if(!class_exists('SiteEditorLayoutManager')){
                     'id'            => 'custom_post_types_layouts' ,
                     'title'         =>  __('Custom Post Types Layouts',"site-editor")  ,
                     'capability'    => 'edit_theme_options' ,
-                    'type'          => 'fieldset' ,
+                    'type'          => 'default' ,
                     'description'   => '' ,
                     'priority'      => 10 ,
+                    'option_group'  => 'sed_pages_layouts'
                 );
 
                 foreach ($post_types AS $post_type_name => $post_type) {
@@ -210,19 +215,20 @@ if(!class_exists('SiteEditorLayoutManager')){
                     $id = 'sed_pages_layouts[' . $page_group . ']';
                     $layout = $current_pages_layouts[$page_group];
 
-                    $params["group_".$page_group] = array(
-                        'type'      => 'select',
-                        'value'     => $layout ,
-                        'label'     => sprintf( __("%s post type archive layout" , "site-editor") , $post_type->labels->name ),
-                        'desc'      => '',
-                        'options'   => array(),
-                        'atts'      => array(
-                            "class"     =>  "sed_all_layouts_options_select"
+                    $fields["group_".$page_group] = array(
+                        'type'              => 'select',
+                        'default'           => $layout ,
+                        'label'             => sprintf( __("%s post type archive layout" , "site-editor") , $post_type->labels->name ),
+                        'description'       => '',
+                        'choices'           => array(),
+                        'atts'              => array(
+                            "class"             =>  "sed_all_layouts_options_select"
                         ),
-                        'priority'  => 15 ,
-                        'control_category'  => 'app-settings' ,
-                        'settings_type'     => $id ,
-                        "panel"         => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_post_types_layouts"
+                        'priority'          => 15 ,
+                        'category'          => 'app-settings' ,
+                        'setting_id'        => $id ,
+                        "panel"             => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_post_types_layouts" ,
+                        'option_group'      => 'sed_pages_layouts'
                     );
 
 
@@ -230,19 +236,20 @@ if(!class_exists('SiteEditorLayoutManager')){
                     $id = 'sed_pages_layouts[' . $page_group . ']';
                     $layout = $current_pages_layouts[$page_group];
 
-                    $params["group_".$page_group] = array(
-                        'type'      => 'select',
-                        'value'     => $layout ,
-                        'label'     => sprintf( __("%s single pages layout" , "site-editor") , $post_type->labels->name ),
-                        'desc'      => '',
-                        'options'   => array(),
-                        'atts'      => array(
-                            "class"     =>  "sed_all_layouts_options_select"
+                    $fields["group_".$page_group] = array(
+                        'type'              => 'select',
+                        'default'           => $layout ,
+                        'label'             => sprintf( __("%s single pages layout" , "site-editor") , $post_type->labels->name ),
+                        'description'       => '',
+                        'choices'           => array(),
+                        'atts'              => array(
+                            "class"         =>  "sed_all_layouts_options_select"
                         ),
-                        'priority'  => 15 ,
-                        'control_category'  => 'app-settings' ,
-                        'settings_type'     => $id ,
-                        "panel"         => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_post_types_layouts"
+                        'priority'          => 15 ,
+                        'category'          => 'app-settings' ,
+                        'setting_id'        => $id ,
+                        "panel"             => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_post_types_layouts" ,
+                        'option_group'      => 'sed_pages_layouts'
                     );
 
                 }
@@ -265,6 +272,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                     'type'          => 'fieldset' ,
                     'description'   => '' ,
                     'priority'      => 10 ,
+                    'option_group'  => 'sed_pages_layouts'
                 );
 
                 foreach ( $taxonomies  as $taxonomy ) {
@@ -273,25 +281,29 @@ if(!class_exists('SiteEditorLayoutManager')){
                     $id = 'sed_pages_layouts[' . $page_group . ']';
                     $layout = $current_pages_layouts[$page_group];
 
-                    $params["group_".$page_group] = array(
-                        'type'      => 'select',
-                        'value'     => $layout ,
-                        'label'     => sprintf( __("%s term pages layout" , "site-editor") , $taxonomy->label ),
-                        'desc'      => '',
-                        'options'   => array(),
-                        'atts'      => array(
-                            "class"     =>  "sed_all_layouts_options_select"
+                    $fields["group_".$page_group] = array(
+                        'type'              => 'select',
+                        'default'           => $layout ,
+                        'label'             => sprintf( __("%s term pages layout" , "site-editor") , $taxonomy->label ),
+                        'description'       => '',
+                        'choices'           => array(),
+                        'atts'              => array(
+                            "class"         =>  "sed_all_layouts_options_select"
                         ),
-                        'priority'  => 15 ,
-                        'control_category'  => 'app-settings' ,
-                        'settings_type'     => $id ,
-                        "panel"         => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_taxonomies_layouts"
+                        'priority'          => 15 ,
+                        'category'          => 'app-settings' ,
+                        'setting_id'        => $id ,
+                        "panel"             => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_taxonomies_layouts" ,
+                        'option_group'      => 'sed_pages_layouts'
                     );
 
                 }
             }
 
-            $sed_options_engine->set_group_params( "sed_pages_layouts" , __("Pages Layouts Settings" , "site-editor") , $params , $panels , "app-settings" );
+            sed_options()->add_panels( $panels );
+
+            sed_options()->add_fields( $fields );
+
         }
 
         /*function icon_settings( $sed_addon_settings ){
@@ -394,57 +406,6 @@ if(!class_exists('SiteEditorLayoutManager')){
                  'all' ,
                  array(),
                  array()
-            );
-
-            $site_editor_app->toolbar->add_element(
-                "layout" ,
-                "settings" ,
-                "general-options" ,
-                __("Site Settings","site-editor") ,
-                "general_options_element" ,     //$func_action
-                "" ,                //icon
-                "" ,  //$capability=
-                array(  ),  //"class"  => "btn_default3"
-                array( "row" => 1 ,"rowspan" => 2 ),
-                array('module' => 'layout' , 'file' => 'site_options.php'),
-                //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
-                 'all' ,
-                array(),
-                array()
-            );
-
-            $site_editor_app->toolbar->add_element(
-                "layout" ,
-                "settings" ,
-                "theme-options" ,
-                __("Layout options","site-editor") ,
-                "sub_theme_element" ,     //$func_action
-                "" ,                //icon
-                "" ,  //$capability=
-                array( ),// "class"  => "btn_default3"
-                array( "row" => 1 ,"rowspan" => 2 ),
-                array('module' => 'layout' , 'file' => 'theme_options.php'),
-                //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
-                'all' ,
-                array(),
-                array()
-            );
-
-            $site_editor_app->toolbar->add_element(
-                "layout" ,
-                "settings" ,
-                "page-options" ,
-                __("Page Settings","site-editor") ,
-                "page_options_element" ,     //$func_action
-                "" ,                //icon
-                "" ,  //$capability=
-                array(  ),  //"class"  => "btn_default3"
-                array( "row" => 1 ,"rowspan" => 2 ),
-                array('module' => 'layout' , 'file' => 'page_options.php'),
-                //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
-                'all' ,
-                array() ,
-                array()
             );
 
         }

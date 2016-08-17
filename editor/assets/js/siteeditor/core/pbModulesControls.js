@@ -2173,7 +2173,7 @@
 
                 var selector = ( isPanel ) ? '#sed-app-panel-' + id : '#sed-app-control-' + id;
 
-                $( selector ).parents(".row_settings:first").fadeIn( "slow" );
+                $( selector ).parents(".row_settings:first").removeClass("sed-hide-dependency").fadeIn( "slow" );
 
                 /*switch (type) {
                   case "controls":
@@ -2193,7 +2193,7 @@
 
                 var selector = ( isPanel ) ? '#sed-app-panel-' + id : '#sed-app-control-' + id;
 
-                $( selector ).parents(".row_settings:first").fadeOut( 200 );
+                $( selector ).parents(".row_settings:first").addClass("sed-hide-dependency").fadeOut( 200 );
                 /*var selectedControl;
                 switch (type) {
                   case "controls":

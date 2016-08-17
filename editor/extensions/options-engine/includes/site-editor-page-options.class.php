@@ -101,6 +101,8 @@ class SiteEditorPageOptions {
 
         $this->description = __("Page general settings" , "site-editor");
 
+        add_action( "sed_editor_init"               , array( $this, "add_toolbar_elements" ) );
+
         add_action( "plugins_loaded"                , array( $this , 'register_options' ) , 9998  );
 
         add_filter( 'sed_app_dynamic_setting_args'  , array( $this , 'filter_dynamic_setting_args' ), 10, 2 );
@@ -120,6 +122,28 @@ class SiteEditorPageOptions {
         add_filter( 'sed_control_sub_category'      , array( $this, 'set_sub_category' ) , 10 , 2 );
 
         //add_action( 'sed_enqueue_scripts'           , array( $this, 'enqueue_scripts' ), 10 );
+
+    }
+
+    function add_toolbar_elements(){
+        global $site_editor_app;
+
+        $site_editor_app->toolbar->add_element(
+            "layout" ,
+            "settings" ,
+            "page-options" ,
+            __("Page Settings","site-editor") ,
+            "page_options_element" ,     //$func_action
+            "" ,                //icon
+            "" ,  //$capability=
+            array(  ),  //"class"  => "btn_default3"
+            array( "row" => 1 ,"rowspan" => 2 ),
+            array('module' => 'options-engine' , 'file' => 'page_options.php'),
+            //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
+            'all' ,
+            array() ,
+            array()
+        );
 
     }
 
@@ -279,16 +303,27 @@ class SiteEditorPageOptions {
                 $org_class = "";
             }
 
+            $private_id = $page_id . "_" . $key;
+            $public_id  = "sed_public_" . $key;
+            $layout_id  = "sed_layout_" . $key;
+
             $args['option_group'] = $this->option_group;
 
             $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-            $new_panels[ $key ] = $this->get_panel( $key , $args );
+            $new_panels[ $private_id ] = $this->get_panel( $private_id , $args );
 
             $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
-            $new_panels[ "sed_layout_" . $key ] = $this->get_panel( "sed_layout_" . $key , $args );
+            $new_panels[ $layout_id ] = $this->get_panel( $layout_id , $args );
 
             $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
-            $new_panels[ "sed_public_" . $key ] = $this->get_panel( "sed_public_" . $key , $args );
+            $new_panels[ $public_id ] = $this->get_panel( $public_id , $args );
+
+            if( isset( $args['dependency'] ) && !empty( $args['dependency'] ) && is_array( $args['dependency'] ) ){
+                $dependency_original = $args['dependency'];
+                $new_panels[$private_id]['dependency'] = $this->fix_dependency_controls_ids( $dependency_original , $page_id );
+                $new_panels[$layout_id]['dependency']  = $this->fix_dependency_controls_ids( $dependency_original , "sed_layout" );
+                $new_panels[$public_id]['dependency']  = $this->fix_dependency_controls_ids( $dependency_original , "sed_public" );
+            }
 
         }
 
@@ -310,16 +345,22 @@ class SiteEditorPageOptions {
                 }
             }
 
+            $private_id = $page_id . "_" . $id;
+            $public_id  = "sed_public_" . $id;
+            $layout_id  = "sed_layout_" . $id;
+
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-            else
+            else {
                 $org_panel = $args['panel'];
+                $args['panel'] = $page_id . "_" . $org_panel;
+            }
 
             $setting_id = $args['setting_id'];
 
             $args['setting_id'] = $page_option_name . "[" . $setting_id . "]";
 
-            $new_fields[$id . "_" . $page_id] = $args;
+            $new_fields[$private_id] = $args;
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
@@ -327,7 +368,7 @@ class SiteEditorPageOptions {
                 $args['panel'] = "sed_layout_" . $org_panel;
 
             $args['setting_id'] = $this->layout_option_name . "[" . $setting_id . "]";
-            $new_fields["sed_layout_" . $id] = $args;
+            $new_fields[$layout_id] = $args;
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
@@ -335,7 +376,15 @@ class SiteEditorPageOptions {
                 $args['panel'] = "sed_public_" . $org_panel;
 
             $args['setting_id'] = $this->public_option_name . "[" . $setting_id . "]";
-            $new_fields["sed_public_" . $id] = $args;
+            $new_fields[$public_id] = $args;
+
+            if( isset( $args['dependency'] ) && !empty( $args['dependency'] ) && is_array( $args['dependency'] ) ){
+                $dependency_original = $args['dependency'];
+                $new_fields[$private_id]['dependency'] = $this->fix_dependency_controls_ids( $dependency_original , $page_id );
+                $new_fields[$layout_id]['dependency']  = $this->fix_dependency_controls_ids( $dependency_original , "sed_layout" );
+                $new_fields[$public_id]['dependency']  = $this->fix_dependency_controls_ids( $dependency_original , "sed_public" );
+            }
+
         }
 
         return array(
@@ -345,13 +394,29 @@ class SiteEditorPageOptions {
 
     }
 
+    public function fix_dependency_controls_ids( $dependency , $prefix ){
+
+        if( is_array( $dependency ) && isset( $dependency['controls'] ) ){
+            if( isset( $dependency['controls']['control'] ) ){
+                $dependency['controls']['control'] = $prefix."_".$dependency['controls']['control'];
+            }else{
+                foreach( $dependency['controls'] AS $index => $control ){
+                    if( isset( $control['control'] ) )
+                        $dependency['controls'][$index]['control'] = $prefix."_".$control['control'];
+                }
+            }
+        }
+
+        return $dependency;
+    }
+
 
     public function register_options(){
 
         $panels = array(
 
             'general_page_style' => array(
-                'title'         =>  __('Static Front Page',"site-editor")  ,
+                'title'         =>  __('Page General Style',"site-editor")  ,
                 'capability'    => 'edit_theme_options' ,
                 'type'          => 'inner_box' ,
                 'description'   => '' ,
@@ -364,13 +429,19 @@ class SiteEditorPageOptions {
 
             'page_sheet_width' => array(
                 'setting_id'        => 'sheet_width',
-                "type"              => "spinner" ,
+                "type"              => "dimension" ,
                 "label"             => __("Sheet Width", "site-editor"),
-                'default'           => 1100,
-                'after_field'       => "px" ,
+                'default'           => "1100px",
+                //'after_field'       => "px" ,
                 "description"              => __("This option allows you to set a title for your image.", "site-editor"),
                 'transport'         => 'postMessage' ,
-                'priority'          => 9 ,
+                'priority'          => 11 ,
+                'dependency' => array(
+                    'controls'  =>  array(
+                        "control"   => "page_length" ,
+                        "value"     => "wide" , //value with @string , values with @array
+                    )
+                )
             ),
 
             'page_length' => array(
@@ -385,7 +456,7 @@ class SiteEditorPageOptions {
                 ),
                 //'panel'             => 'general_page_style' ,
                 'transport'         => 'postMessage' ,
-                'priority'          => 11 ,
+                'priority'          => 9 ,
             ),
 
             'change_image_panel' => array(
@@ -394,7 +465,7 @@ class SiteEditorPageOptions {
                 "label"             => __("Background Image", "site-editor"),
                 "description"       => __("This option allows you to set a title for your image.", "site-editor"),
                 'remove_btn'        => true ,
-                //'panel'             => 'general_page_style' ,
+                'panel'             => 'general_page_style' ,
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'priority'          => 8 ,
