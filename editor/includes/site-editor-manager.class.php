@@ -1626,6 +1626,18 @@ class SiteEditorManager{
 			}
 		}
 
+		foreach ( $this->panels() AS $panel_id => $panel ){
+
+			if ( $panel->check_capabilities() ) {
+
+					$group_panels[$panel_id] = $panel;
+
+					$settings['panels'][$panel_id] = $panel->json();
+
+			}
+
+		}
+
 		?>
 		<script type="text/javascript">
 			var _sedAppEditorSettings = <?php echo wp_json_encode( $settings ); ?>;

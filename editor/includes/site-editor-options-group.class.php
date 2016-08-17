@@ -234,8 +234,11 @@ class SiteEditorOptionsGroup {
 	 * @since 3.4.0
 	 */
 	protected function render() {
+
+		$classes = "dialog-level-box-settings-container hide sed-app-settings-normal";
+
 		?>
-		<div id="dialog-level-box-settings-<?php echo $this->id;?>-container" data-title="<?php echo $this->title;?>" class="dialog-level-box-settings-container " ><!--hide-->
+		<div id="dialog-level-box-settings-<?php echo esc_attr( $this->id );?>-container" data-title="<?php echo esc_attr( $this->title );?>" class="<?php echo esc_attr( $classes );?>" >
 
             <?php $this->render_content(); ?>
 

@@ -117,6 +117,8 @@ class SiteEditorPageOptions {
 
         add_action( 'wp_default_scripts'			, array( $this, 'register_scripts' ), 11 );
 
+        add_filter( 'sed_control_sub_category'      , array( $this, 'set_sub_category' ) , 10 , 2 );
+
         //add_action( 'sed_enqueue_scripts'           , array( $this, 'enqueue_scripts' ), 10 );
 
     }
@@ -447,6 +449,23 @@ class SiteEditorPageOptions {
 
         }
         return $class;
+    }
+
+    /**
+     * sub_category === settings id === $this->option_group . "_" . $page_id
+     *
+     * @param $sub_category
+     * @param $control
+     * @return string
+     */
+    public function set_sub_category( $sub_category , $control ){
+
+        if( $control->option_group == $this->option_group && isset( $_POST['setting_id'] ) ){
+            $sub_category = $_POST['setting_id'];
+        }
+
+        return $sub_category;
+
     }
 
 

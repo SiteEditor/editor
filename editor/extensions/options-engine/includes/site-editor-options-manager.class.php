@@ -50,6 +50,14 @@ final class SiteEditorOptionsManager{
     private $field_types = array();
 
     /**
+     * An array of our fields dependencies.
+     *
+     * @access private
+     * @var array
+     */
+    private $settings_dependencies = array();
+
+    /**
      * Registered instances of SiteEditorField.
      *
      * @since 1.0.0
@@ -86,6 +94,8 @@ final class SiteEditorOptionsManager{
         add_action( 'sed_print_footer_scripts', array( $this, 'print_templates' ) );
 
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ) );
+
+        add_action( 'sed_print_footer_scripts' , array($this, 'print_settings_dependencies') , 10000 );
 
     }
 
@@ -231,6 +241,7 @@ final class SiteEditorOptionsManager{
 
         $current_group->settings = $group_settings;
 
+        $data['relations'] = isset( $this->settings_dependencies[ $group_id ] ) ? $this->settings_dependencies[ $group_id ] : array();
 
         $data['output'] = $current_group->get_content();
 
@@ -270,6 +281,12 @@ final class SiteEditorOptionsManager{
 
     }
 
+    /**
+     * Full support nesting level by all panels
+     * Load all panel file
+     * Current register types : 1. default(fieldset) 2.expanded( accordion-item ) 3. inner_box
+     * @todo add 3 panels new type : 1.group-expanded( accordion )  2.tab-items   3.dialog   4.tab-tour
+     */
     private function register_fields_components(  ){
 
         $panels_path = dirname( __FILE__ ) . DS . "fields" . DS . "*field.class.php" ;
@@ -425,6 +442,17 @@ final class SiteEditorOptionsManager{
 
         }
 
+        /**
+         * @important todo For Fix Bug
+         * @todo add panel dependencies to site editor manager class
+         * in this version not support call directly SED()->editor->manager->add_panel()
+         * if panel dependency not empty instead using sed_options()->add_panel()
+         */
+
+        if( !empty( $panel->dependency ) && is_array( $panel->dependency ) ){
+            $this->set_group_dependencies( $panel->option_group , $panel->dependency , $panel->id );
+        }
+
         SED()->editor->manager->add_panel( $panel );
     }
     
@@ -525,6 +553,11 @@ final class SiteEditorOptionsManager{
                 'option_group'      =>  $field->option_group ,
                 'active_callback'   =>  $field->active_callback
             );*/
+
+            if( isset( $control_args["dependency"] ) && ! empty( $control_args["dependency"] ) ){
+                $this->set_group_dependencies( $control_args['option_group'] , $control_args["dependency"] , $id );
+                unset( $control_args["dependency"] );
+            }
 
             // Create the control.
             $this->add_control( $id , $control_args );
@@ -660,9 +693,46 @@ final class SiteEditorOptionsManager{
         }
     }
 
+
+    /**
+     * set field dependencies for each group
+     *
+     * @param $group
+     * @param $dependency
+     * @param $id
+     */
+    public function set_group_dependencies( $group , $dependency , $id ){
+        if( !isset( $this->settings_dependencies[$group] ) ){
+            $this->settings_dependencies[$group] = array();
+        }
+
+        /*if( isset( $dependency['controls'] ) ){
+            if( isset( $dependency['controls']['control'] ) ){
+                $dependency['controls']['control'] = $group."_".$dependency['controls']['control'];
+            }else{
+                foreach( $dependency['controls'] AS $index => $control ){
+                    if( isset( $control['control'] ) )
+                        $dependency['controls'][$index]['control'] = $group."_".$control['control'];
+                }
+            }
+        }*/
+        $this->settings_dependencies[$group][$id] = $dependency;
+    }
+
+    public function print_settings_dependencies(){
+        ?>
+        <script type="text/javascript">
+            var _sedAppModulesSettingsRelations = <?php echo wp_json_encode( $this->settings_dependencies ); ?>;
+
+        </script>
+        <?php
+    }
+
+
     public static function add_group(  $id , $args = array() ){
 
     }
+
 
     public static function add_groups( $groups = array() ){
 
@@ -957,6 +1027,99 @@ add_action( "sed_load_options_group_id1" , "register_params" );
 
 function sed_add_layout_options(){
 
+    //support full nesting level panels
+    $panels = array(
+
+        'panel_id1' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('My Panel 1', 'textdomain'),
+            'description'       => __('My Description', 'textdomain'),
+            'option_group'      => 'sed_add_layout' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+            'dependency' => array(
+                'controls'  =>  array(
+                    "control"   => "switch_field_id" ,
+                    "value"     => true , //value with @string , values with @array
+                    "is_panel"  => true
+                )
+            )
+        ) ,
+
+        'panel_id2' =>  array(
+            'priority'          => 8,
+            'type'              => 'default',
+            'title'             => __('My Panel 2', 'textdomain'),
+            'description'       => __('My Description', 'textdomain'),
+            'option_group'      => 'sed_add_layout' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "panel_id1",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+            'dependency' => array(
+                'controls'  =>  array(
+                    "control"   => "checkbox_field_id" ,
+                    "value"     => true , //value with @string , values with @array
+                    "is_panel"  => true
+                )
+            )
+        ) ,
+
+        'panel_id3' =>  array(
+            'priority'          => 9,
+            'type'              => 'expanded',
+            'title'             => __('My Panel 3', 'textdomain'),
+            'description'       => __('My Description', 'textdomain'),
+            'option_group'      => 'sed_add_layout' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            //'parent_id '        => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+            'dependency' => array(
+                'controls'  =>  array(
+                    "control"   => "toggle_field_id" ,
+                    "value"     => true , //value with @string , values with @array
+                    "is_panel"  => true
+                )
+            )
+        ) ,
+
+        'panel_id4' =>  array(
+            'priority'          => 18,
+            'type'              => 'expanded',
+            'title'             => __('My Panel 4', 'textdomain'),
+            'description'       => __('My Description', 'textdomain'),
+            'option_group'      => 'sed_add_layout' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'        => "panel_id3",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        ),
+
+        'panel_id5' =>  array(
+            'priority'          => 21,
+            'type'              => 'inner_box',
+            'title'             => __('My Panel 5', 'textdomain'),
+            'description'       => __('My Description', 'textdomain'),
+            'option_group'      => 'sed_add_layout' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "panel_id2",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        )
+
+    );
+
+    sed_options()->add_panels( $panels );
+
     sed_options()->add_field( 'radio_field_id' , array(
         'setting_id'        => 'my_setting2',
         'label'             => __('My custom control', 'translation_domain'),
@@ -973,6 +1136,7 @@ function sed_add_layout_options(){
             "options3_key"      =>    "options3_value" ,
             "options4_key"      =>    "options4_value" ,
         ) ,
+        'panel'             =>  'panel_id1'
         //'input_attrs'
     ));
 
@@ -981,12 +1145,13 @@ function sed_add_layout_options(){
         'setting_id'        => 'my_setting3',
         'label'             => __('Checkbox', 'translation_domain'),
         'type'              => 'checkbox',
-        'priority'          => 12,
-        'default'           => true,
+        'priority'          => 8,
+        'default'           => false,
         //panel or group
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id1'
         //'input_attrs'
     ));
 
@@ -994,12 +1159,27 @@ function sed_add_layout_options(){
         'setting_id'        => 'my_setting4',
         'label'             => __('Color control', 'translation_domain'),
         'type'              => 'color',
-        'priority'          => 13,
+        'priority'          => 8,
         'default'           => '',
         //panel or group
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id1' ,
+        'dependency' => array(
+            'controls'  =>  array(
+                "relation"     =>  "and" ,
+                array(
+                    "control"  => "radio_field_id" ,
+                    "value"    => "options2_key" , //value with @string , values with @array
+                    "type"     => "exclude"
+                ),
+                array(
+                    "control"  => "checkbox_field_id" ,
+                    "value"    => false ,
+                )
+            )
+        )
         //'input_attrs'
     ));
 
@@ -1013,6 +1193,8 @@ function sed_add_layout_options(){
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             => 'panel_id2' ,
+        'has_border_box'    => false
         //'input_attrs'
     ));
 
@@ -1026,6 +1208,8 @@ function sed_add_layout_options(){
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id2' ,
+        'has_border_box'    => false
         //'input_attrs'
     ));
 
@@ -1039,6 +1223,8 @@ function sed_add_layout_options(){
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id2' ,
+        'has_border_box'    => false
         //'input_attrs'
     ));
 
@@ -1052,6 +1238,7 @@ function sed_add_layout_options(){
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id3'
         //'input_attrs'
     ));
 
@@ -1074,7 +1261,9 @@ function sed_add_layout_options(){
         //'input_attrs',
         'js_params' => array(
             "options_selector" => ".sed-bp-checkbox-input"
-        )
+        ) ,
+        'panel'             =>  'panel_id3' ,
+        'has_border_box'    => false
 
     ));
 
@@ -1095,6 +1284,7 @@ function sed_add_layout_options(){
             "options3_key"      =>    "options3_value" ,
             "options4_key"      =>    "options4_value" ,
         ) ,
+        'panel'             =>  'panel_id3'
         //'input_attrs'
     ));
 
@@ -1115,6 +1305,7 @@ function sed_add_layout_options(){
             "options3_key"      =>    "options3_value" ,
             "options4_key"      =>    "options4_value" ,
         ) ,
+        'panel'             =>  'panel_id4'
         //'input_attrs'
     ));
 
@@ -1128,6 +1319,7 @@ function sed_add_layout_options(){
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id4'
         //'input_attrs'
     ));
 
@@ -1141,6 +1333,7 @@ function sed_add_layout_options(){
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id5'
         //'input_attrs'
     ));
 
@@ -1155,6 +1348,7 @@ function sed_add_layout_options(){
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_add_layout',
         'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id5'
         //'input_attrs'
     ));
 

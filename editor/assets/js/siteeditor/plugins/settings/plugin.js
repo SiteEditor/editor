@@ -155,11 +155,10 @@
 
                     _.each( self.needToRefreshGroups , function( optionsGroup ){
 
-                        var settingId = optionsGroup + "_" + api.settings.page.id;
+                        var settingId = optionsGroup + "_" + api.settings.page.id ,
+                            isOpen = $( self.dialogSelector ).dialog( "isOpen" );
 
-                        if( _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
-
-                            var isOpen = $( self.dialogSelector ).dialog( "isOpen" );
+                        if( _.isUndefined( self.backgroundAjaxload[settingId] ) && _.isUndefined( self.dialogsContents[settingId] ) ) {
 
                             if( isOpen && self.optionsGroup == optionsGroup ){
 
@@ -175,6 +174,12 @@
 
                             }
 
+                        }else if( !_.isUndefined( self.dialogsContents[settingId] ) ){
+
+                            if( isOpen && self.optionsGroup == optionsGroup ) {
+                                self._resetTmpl();
+                                self._switchTmpl();
+                            }
                         }
 
                     });
@@ -251,7 +256,7 @@
 
             if( !_.isUndefined( self.dialogsContents[self.currentSettingsId] ) ){
 
-                var $currentElDialog = self.dialogsContents[self.currentSettingsId].appendTo( $( selector ) );
+                var $currentElDialog = self.dialogsContents[self.currentSettingsId].appendTo( $( selector ) ).fadeIn( "slow" );
                 self.dialogsTitles[self.currentSettingsId].appendTo( $( selector ).siblings(".ui-dialog-titlebar:first") );
 
                 api.Events.trigger( "afterAppendSettingsTmpl" , $currentElDialog , this.settingsType , this.currentSettingsId );
@@ -265,7 +270,7 @@
                     this._ajaxLoadSettings();
                 }else if( this.templateType == "html" ){
 
-                    var $currentElDialog = $( $("#sed-tmpl-dialog-settings-" + self.currentSettingsId ).html() ).appendTo( $( selector ) );
+                    var $currentElDialog = $( $("#sed-tmpl-dialog-settings-" + self.currentSettingsId ).html() ).appendTo( $( selector ) ).fadeIn( "slow" );
 
                     api.Events.trigger( "afterInitAppendSettingsTmpl" , $currentElDialog , this.settingsType , this.currentSettingsId );
 
@@ -295,7 +300,7 @@
             api.Events.trigger( "beforeResetSettingsTmpl" , self.currentSettingsId , this.settingsType );
 
             self.dialogsTitles[self.currentSettingsId] = $( selector ).siblings(".ui-dialog-titlebar:first").children(".multi-level-box-title").detach();
-            self.dialogsContents[self.currentSettingsId] = $( selector ).children().detach();
+            self.dialogsContents[self.currentSettingsId] = $( selector ).children().hide().detach();
 
             api.Events.trigger( "afterResetSettingsTmpl" , self.currentSettingsId , this.settingsType );
 
@@ -313,7 +318,7 @@
                 delete self.ajaxResetTmpls[self.currentSettingsId];
                 return;
             }
-
+ 
             if (!_.isUndefined(self.ajaxCachTmpls[self.currentSettingsId])) {
 
                 var output = self.ajaxCachTmpls[self.currentSettingsId];
@@ -410,6 +415,7 @@
 
                     self.setGroups( groups , settingId );
 
+                    self.setPanels( panels , settingId );
 
                     if( _.isUndefined( self.ajaxResetTmpls[settingId] ) && _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
 
@@ -534,16 +540,36 @@
 
         },
 
+        setPanels : function( panels , settingId ){
+
+            if( _.isUndefined( api.settingsPanels[settingId] ) ) {
+                api.settingsPanels[settingId] = {};
+            }
+
+            _.each( panels , function( data , id ){
+                api.settingsPanels[settingId][id] = data;
+            });
+
+        },
+
+        /**
+         * Create Controls after load & append in settings dialog
+         * @todo create app settings controls just on time like module settings
+         *
+         * @param controls
+         * @param settingId
+         * @param settingType
+         */
         setControls : function( controls , settingId , settingType ){
 
             if( !_.isEmpty( controls ) ){
 
+                if( _.isUndefined( api.sedGroupControls[settingId] ) ) {
+                    api.sedGroupControls[settingId] = [];
+                }
+
                 if( settingType == "module" ){
-
-                    if( _.isUndefined( api.sedGroupControls[settingId] ) ) {
-                        api.sedGroupControls[settingId] = [];
-                    }
-
+                    
                     _.each( controls , function ( data , id ) {
                         api.sedGroupControls[settingId].push( data );
                     });
@@ -564,6 +590,8 @@
                             api.Events.trigger("renderSettingsControls", id, data);
 
                         }
+
+                        api.sedGroupControls[settingId].push( data );
 
                     });
 
@@ -843,7 +871,7 @@
                         }
                     });
                 }
-            });
+            }); 
 
             $( ".accordion-panel-settings" ).livequery(function(){
                 if( _.isUndefined( $(this).data( "acInit" ) ) ||  $(this).data( "acInit" ) !== true ){
@@ -989,7 +1017,7 @@
 
                     var panel = api.settingsPanels[dataElement.shortcodeName][data.panel];
 
-                    return $.inArray( panel.type , ['dialog' , 'inner_box' , 'accordion' , 'tab'] ) == -1;
+                    return $.inArray( panel.type , [ 'inner_box'  ] ) == -1; //, 'expanded'
 
                 });
             }
@@ -1715,7 +1743,7 @@
 
         api.appStyleEditorSettings  = new api.AppStyleEditorSettings({});
 
-        var generalStyleEditor;
+        /*var generalStyleEditor;
         $( "#page_general_settings" ).click(function() {
 
             if( _.isUndefined( generalStyleEditor ) ){
@@ -1745,7 +1773,8 @@
             });
 
             api.Events.trigger(  "after_group_settings_update" , "general_settings" );
-        });
+        });*/
+
     });
 
 })( sedApp, jQuery );

@@ -305,7 +305,7 @@ class SiteEditorField{
     /**
      * Modifications for partial refreshes.
      *
-     * @access protected
+     *
      */
     protected function set_partial_refresh() {
         if ( ! is_array( $this->partial_refresh ) ) {
@@ -337,7 +337,7 @@ class SiteEditorField{
 
     }
 
-    
+
 
 
     /**

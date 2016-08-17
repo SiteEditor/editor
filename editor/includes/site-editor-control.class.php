@@ -174,6 +174,8 @@ class SiteEditorOptionsControl{
 
     /**
      * Control sub category sample for "module-settings" category is "sed_image"
+	 * For "app-settings" category : sub category === settings Id === optionsGroup [+ "_" + CurrentPageId] (if options group
+	 * === "sed_page_options" or "sed_content_options" )
      *
      * @since 1.0.0
      * @access public
@@ -405,10 +407,18 @@ class SiteEditorOptionsControl{
 		$json_array['label'] = $this->label;
 		$json_array['description'] = $this->description;
 		$json_array['instanceNumber'] = $this->instance_number;
+
 		$json_array['category'] = $this->category;
-		$json_array['sub_category'] = $this->sub_category;
+
+        $sub_category = ( !empty( $this->sub_category ) ) ? $this->sub_category : $this->option_group;
+        $sub_category = apply_filters( "sed_control_sub_category" , $sub_category , $this );
+
+		$json_array['sub_category'] = $sub_category;
+
 		$json_array['default_value'] = $this->default_value;
 		$json_array['is_style_setting'] = $this->is_style_setting;
+
+		$json_array['option_group'] = $this->option_group;
 
 		if( $this->category == "module-settings" ){
 			$json_array['shortcode'] = $this->shortcode;
@@ -515,6 +525,7 @@ class SiteEditorOptionsControl{
 
 		?>
 
+        <!-- * required for panel & control container because needed for dependency in js -->
 		<div class="row_settings">
 
 			<div class="<?php echo esc_attr( $class ); ?>">

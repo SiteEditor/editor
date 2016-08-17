@@ -24,7 +24,7 @@ defined('_SEDEXEC') or die;
  */
 Class AppOptionsEngine {
 
-    private $settings_dependencies = array();
+
     public $group_name = "";
     public $controls = array();
     public $params = array();
@@ -50,8 +50,7 @@ Class AppOptionsEngine {
     function __construct(  $args = array() ) {
 
         add_filter( "sed_addon_settings", array($this,'addon_settings'));
-
-        add_action("sed_footer" , array($this, 'print_settings_dependencies') , 10000 );
+        
         add_action("sed_footer" , array($this, 'print_settings_template') , 10000 );
         add_filter( "sed_js_I18n", array($this,'js_I18n'));
 
@@ -169,15 +168,6 @@ Class AppOptionsEngine {
         return $sizes;
     }
 
-    public function print_settings_dependencies(){
-		?>
-		<script type="text/javascript">
-            var _sedAppModulesSettingsRelations = <?php echo wp_json_encode( $this->settings_dependencies ); ?>;
-
-		</script>
-		<?php
-    }
-
     public function print_settings_template(){
         ?>
 
@@ -292,24 +282,6 @@ Class AppOptionsEngine {
         }
     }
 
-    function set_group_dependencies( $group , $dependency , $id ){
-        if( !isset( $this->settings_dependencies[$group] ) ){
-            $this->settings_dependencies[$group] = array();
-        }
-
-        if( isset( $dependency['controls'] ) ){
-            if( isset( $dependency['controls']['control'] ) ){
-                $dependency['controls']['control'] = $group."_".$dependency['controls']['control'];
-            }else{
-                foreach( $dependency['controls'] AS $index => $control ){
-                    if( isset( $control['control'] ) )
-                        $dependency['controls'][$index]['control'] = $group."_".$control['control'];
-                }
-            }
-        }
-        $this->settings_dependencies[$group][$id] = $dependency;
-    }
-
     /*
     * @Function :: static , this func create params for groups
     * @groups  :: groups are collection settings for same settings like image module settings or general settings or background settings
@@ -358,10 +330,6 @@ Class AppOptionsEngine {
             foreach($params AS $key => $param){
 
                 $control_id = $group."_".$key;
-                if( isset( $param["dependency"] ) ){
-                    $this->set_group_dependencies( $group , $param["dependency"] , $control_id );
-                    unset( $param["dependency"] );
-                }
 
                 if( $key != "content" ){
 
@@ -372,15 +340,6 @@ Class AppOptionsEngine {
                 }
             }
 
-        }
-
-        if( isset( $this->panels[ $group ] ) && !empty( $this->panels[ $group ] ) ){
-            foreach( $this->panels[ $group ] AS $key => $panel ){
-                if( isset( $panel["dependency"] ) ){
-                    $this->set_group_dependencies( $group , $panel["dependency"] , $panel['id'] );
-                    unset( $this->panels[ $group ][$key]["dependency"] );
-                }
-            }
         }
 
         if( !empty( $controls ) ){

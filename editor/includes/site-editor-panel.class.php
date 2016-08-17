@@ -348,14 +348,31 @@ class SiteEditorOptionsPanel{
 
 		$pkey			= "{$this->option_group}_{$this->id}";
 
+		/**
+		 * @id : sed-app-panel-<?php echo esc_attr( $this->id ); ?> * required for panel main or container
+		 *  element because needed for dependency in js.
+		 */
 		?>
-		<fieldset id="<?php echo $pkey; ?>_fieldset" class="<?php echo $classes;?>" <?php echo $atts_string;?>>
+		<!-- * required for panel & control container because needed for dependency in js -->
+		<div class="row_settings">
 
-			<legend id="<?php echo $pkey; ?>_title"><?php echo $this->title;?></legend>
+			<div id="sed-app-panel-<?php echo esc_attr( $this->id ); ?>" class="row_setting_inner sed-app-container-panel sed-app-container-panel-<?php echo  esc_attr( $this->type );?>">
 
-			<?php $this->render_content(); ?>
+				<fieldset id="<?php echo  esc_attr( $pkey ); ?>_fieldset" class="<?php echo  esc_attr( $classes );?>" <?php echo $atts_string;?>>
 
-		</fieldset>
+					<legend id="<?php echo  esc_attr( $pkey ); ?>_title"><?php echo $this->title;?></legend>
+
+					<?php if( !empty( $this->description ) ): ?>
+						<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo $this->description;?>"></span>
+					<?php endif; ?>
+
+					<?php $this->render_content(); ?>
+
+				</fieldset>
+
+			</div>
+
+		</div>
 		<?php
 
 	}

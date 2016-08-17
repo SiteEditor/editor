@@ -261,7 +261,7 @@ api	 * @param options
                 control.setting.set( $thisValue );
 
 				 if( !_.isUndefined( control.params.shortcode ) && !_.isUndefined( control.params.attr_name ) )
-				    api.Events.trigger("moduleControlRefresh" , control.params.shortcode , src);
+				    api.Events.trigger("afterControlValueRefresh" , control.params.shortcode , src);
 
             });
         },

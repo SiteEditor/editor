@@ -57,7 +57,9 @@ class SiteEditorOptionsTemplate{
     protected $root_controls = array();
 
     /**
-     * SiteEditorOptionsManager constructor.
+     * SiteEditorOptionsTemplate constructor.
+     * @param array $controls
+     * @param array $panels
      */
     function __construct( $controls = array() , $panels = array() ) {
 
@@ -67,6 +69,30 @@ class SiteEditorOptionsTemplate{
 
         $this->prepare_controls();
 
+    }
+
+    protected function get_sub_panels( $panels , $parent_id = "root" ) {
+        $sub_panels = array();
+
+        if( !empty( $panels ) ){
+            foreach( $panels AS $id => $panel ){
+
+                if( ($parent_id == "root" && !isset( $panel->parent_id ) ) || ( isset( $panel->parent_id ) && $panel->parent_id == $parent_id ) ){
+
+                    $child_sub_panels = $this->get_sub_panels( $panels , $id );
+
+                    uasort( $child_sub_panels , array( $this, '_cmp_priority' ) );
+
+                    $panel->sub_panels = $child_sub_panels;
+
+                    $this->panels[$id] = $panel;
+
+                    $sub_panels[$id] = $panel ;
+                }
+            }
+        }
+
+        return $sub_panels;
     }
 
     /**
@@ -91,7 +117,7 @@ class SiteEditorOptionsTemplate{
             }
 
             if( empty( $control->panel ) || $control->panel == "root" ){
-                $this->root_controls[] = $control;
+                $this->root_controls[ $id ] = $control;
                 $controls[ $id ] = $control;
                 continue;
             }
@@ -107,54 +133,34 @@ class SiteEditorOptionsTemplate{
 
         $this->controls = $controls;
 
-        // Prepare panels.
+        //Prepare panels.
         uasort( $this->panels, array( $this, '_cmp_priority' ) );
 
         $panels = array();
 
-        foreach ( $this->panels as $panel ) {
+        //Prepare sub panels
+        foreach ( $this->panels as $id => $panel ) {
 
             if ( ! $panel->check_capabilities() || ! $panel->controls ) {
                 continue;
             }
 
+            //remove panel if parent id not exist in panels ids
             if( $panel->parent_id != "root" && !isset( $this->panels[ $panel->parent_id ] ) ){
                 continue;
             }
 
             usort( $panel->controls , array( $this, '_cmp_priority' ) );
 
-            // This section belongs to a panel.
-            if ( $panel->parent_id != "root" && isset( $this->panels[ $panel->parent_id ] ) ) {
-
-                $this->panels[ $panel->parent_id ]->sub_panels[ $panel->id ] = $panel;
-
-            }else{
-
-                $this->root_panels[] = $panel;
-
-            }
-
             $panel->template = $this;
-
-            $panels[ $panel->id ] = $panel;
-
-        }
-
-
-        foreach ( $panels as $id => $panel ) {
-
-            uasort( $panel->sub_panels , array( $this, '_cmp_priority' ) );
 
             $panels[ $id ] = $panel;
 
         }
 
-        $this->panels = $panels;
+        $this->root_panels = $this->get_sub_panels( $panels );
 
-        //var_dump( $this->panels );
-
-        //var_dump( $this->controls );
+        //$this->panels = $panels;
 
     }
 
@@ -274,7 +280,7 @@ class SiteEditorOptionsTemplate{
      */
     protected function _cmp_priority( $a, $b ) {
         if ( $a->priority === $b->priority ) {
-            return $a->instance_number - $a->instance_number;
+            return $a->instance_number - $b->instance_number;
         } else {
             return $a->priority - $b->priority;
         }

@@ -62,6 +62,10 @@
                     this.update();
                 }
 
+            }else{
+                //need for dependency or relations
+                this.currentValue = control.setting();
+
             }
 
         },
@@ -121,11 +125,12 @@
 
             this.currentValue = val;
 
-            if( this.isModuleControl && !_.isUndefined( control.params.sub_category ) ){
-                this.setAtts( val );
-                api.Events.trigger("moduleControlRefresh" , control.params.sub_category , control , val );
-            }else if( !_.isUndefined( control.params.sub_category ) ){
-                api.Events.trigger("appControlValueRefresh" , control.params.sub_category , control , val );
+            if( this.isModuleControl && !_.isUndefined( control.params.sub_category ) ) {
+                this.setAtts(val);
+            }
+
+            if( !_.isUndefined( control.params.sub_category ) && !_.isEmpty( control.params.sub_category ) ){
+                api.Events.trigger("afterControlValueRefresh" , control.params.sub_category , control , val );
             }
 
         },
@@ -155,7 +160,7 @@
                     cValue = control.defaultValue;
                 }
 
-            }else if( !_.isUndefined( value ) && !_.isObject( value ) ){
+            }else if( !_.isUndefined( value ) ){ //&& !_.isObject( value )
                 cValue = value;
             }else{
                 cValue = control.defaultValue;
@@ -2098,18 +2103,11 @@
         refresh : function( ){
             var self = this;
 
-            api.Events.bind("moduleControlRefresh" , function( group , control , value ){
+            api.Events.bind("afterControlValueRefresh" , function( group , control , value ){
                 self.mode = "refresh";
                 self.set( group , control.id , value );
                 api.Events.trigger( "after_apply_settings_relations_refresh" , group , control , value  );
             });
-
-            api.Events.bind("appControlValueRefresh" , function( group , control , value ){
-                self.mode = "refresh";
-                self.set( group , control.id , value );
-                api.Events.trigger( "after_apply_settings_relations_refresh" , group , control , value  );
-            });
-
 
         },
 
@@ -2122,7 +2120,7 @@
             api.Events.bind( "after_group_settings_update" , function( group ){
                 self.mode = "update";
 
-                _.each( api.sedGroupControls[group] , function( data , key ){
+                _.each( api.sedGroupControls[group] , function( data ){
 
                     var control = api.control.instance( data.control_id );
 
@@ -2134,8 +2132,6 @@
                 api.Events.trigger( "after_apply_settings_relations_update" , group );
             });
 
-
-
         },
 
         /*
@@ -2144,6 +2140,9 @@
         * @
         */
         set : function(group , id , value ){
+            /**
+             * this.group === settingsId
+             */
             this.group          = group;
             this.currentId      = id;
             this.value          = value;
@@ -2153,6 +2152,9 @@
 
         renderRelations : function(  ){
             var relations = this.getRelations() , self = this;
+
+            //console.log( "group" , this.group ,"   relations" , relations , "  this.currentId  " , this.currentId , "   value   " , this.value );
+
             this.itemApplyRelations( relations.controls );
 
             //this.itemApplyRelations( relations.values , "values" );
@@ -2168,8 +2170,10 @@
             type = (!type) ?  "controls": type;
 
             this._showItem = function( id , isPanel ){  //value , relValues
-                var selector = ( isPanel ) ? '#sed_pb_' + this.group + "_" + id : '#sed-app-control-' + id;
-                $( selector ).parents(".row_settings:first").show();
+
+                var selector = ( isPanel ) ? '#sed-app-panel-' + id : '#sed-app-control-' + id;
+
+                $( selector ).parents(".row_settings:first").fadeIn( "slow" );
 
                 /*switch (type) {
                   case "controls":
@@ -2186,9 +2190,10 @@
             };
 
             this._hideItem = function( id , isPanel ){    //value , relValues
-                var selector = ( isPanel ) ? '#sed_pb_' + this.group + "_" + id : '#sed-app-control-' + id;
 
-                $( selector ).parents(".row_settings:first").hide();
+                var selector = ( isPanel ) ? '#sed-app-panel-' + id : '#sed-app-control-' + id;
+
+                $( selector ).parents(".row_settings:first").fadeOut( 200 );
                 /*var selectedControl;
                 switch (type) {
                   case "controls":

@@ -58,23 +58,36 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
 
             $sed_field_id   = 'sed_pb_' . $pkey;
 
+			/**
+			 * @id : sed-app-panel-<?php echo esc_attr( $this->id ); ?> * required for panel main or container
+			 *  element because needed for dependency in js.
+			 */
 			?>
-            <div class="row_setting_inner <?php if( $this->in_box === true ) echo "row_setting_box";?>">
+			<!-- * required for panel & control container because needed for dependency in js -->
+			<div class="row_settings">
 
-                <div class="clearfix">
+				<div id="sed-app-panel-<?php echo esc_attr( $this->id ); ?>" class="row_setting_inner sed-app-container-panel sed-app-container-panel-<?php echo  esc_attr( $this->type );?> <?php if( $this->in_box === true ) echo "row_setting_box";?>">
 
-                    <button data-related-level-box="<?php echo esc_attr( $pkey ); ?>_level_box" type="button" class="<?php echo esc_attr( $classes );?>" data-panel-id="<?php esc_attr( $this->id );?>"  name="<?php echo esc_attr( $sed_field_id );?>"
-                            id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
+					<div class="clearfix">
 
-                        <?php echo $this->title;?>
+						<button data-related-level-box="<?php echo esc_attr( $pkey ); ?>_level_box" type="button" class="<?php echo esc_attr( $classes );?>" data-panel-id="<?php esc_attr( $this->id );?>"  name="<?php echo esc_attr( $sed_field_id );?>"
+								id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
 
-                        <span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
+							<?php echo $this->title;?>
 
-                    </button>
+							<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
 
-                </div>
+						</button>
 
-            </div>
+                        <?php if( !empty( $this->description ) ): ?>
+                            <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo $this->description;?>"></span>
+                        <?php endif; ?>
+
+					</div>
+
+				</div>
+
+			</div>
 
             <div id="<?php echo esc_attr( $pkey ); ?>_level_box" data-multi-level-box="true" data-title="<?php echo esc_attr( $this->title );?>" class="sed-dialog content " >
 
