@@ -494,9 +494,6 @@ Class AppOptionsEngine {
                     case "search" :
                     case "password" :
                     case "tel" :
-                    case "date" :
-                    case "time" :
-                    case "range" :
                         $new_params[$key] = $param;
                         $new_params[$key]['type'] = "text";
                         $new_params[$key]['subtype'] = $param['type'];

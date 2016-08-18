@@ -341,7 +341,7 @@ function sed_sample_options_register(){
         'label'             => __('Text control', 'translation_domain'),
         'type'              => 'text',
         'priority'          => 22,
-        'default'           => '',
+        'default'           => 'test value',
         //panel or group
         //'panel'             => 'panel_id',
         'option_group'      => 'sed_sample_options',
