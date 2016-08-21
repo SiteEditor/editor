@@ -298,7 +298,9 @@
             return $thisShortcode;
         },
 
-        getAttrs: function( id ){
+        getAttrs: function( id , includeContent ){
+
+            includeContent = !!( !_.isUndefined( includeContent ) && includeContent === true );
 
             if($( '[sed_model_id="' + id + '"]' ).length > 0){
                 var parentC = $( '[sed_model_id="' + id + '"]' ).parents(".sed-pb-post-container:first");
@@ -308,11 +310,30 @@
             }
 
             var $thisShortcode = this.getShortcode( id );
+
             if( !$thisShortcode ){
                 //api.log("for : " + id + " not found shortcode");
                 return ;
-            }else
-                return $thisShortcode.attrs;
+            }else {
+
+                if( includeContent === false )
+                    return $thisShortcode.attrs;
+
+                var contentModel = this.getContentModel( ) ,
+                    postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + id + '"]' ) );
+
+                var shortcodeContent = _.findWhere( contentModel[postId] , { tag : "content" , parent_id : id } );
+
+                if( ! shortcodeContent ){
+                    return $thisShortcode.attrs;
+                }else{
+
+                    $thisShortcode.attrs.sed_shortcode_content = shortcodeContent.content;
+
+                }
+
+                return $.extend( true , {} , $thisShortcode.attrs );
+            }
         },
 
         getShortcodeIndex: function( id , contentModelName ){
@@ -442,6 +463,27 @@
             }
 
             $thisShortcode.attrs[attr] = value;
+            this.updateShortcode( $thisShortcode );
+
+        },
+
+        updateShortcodeContent: function( id , value ){
+
+            if( _.isUndefined( id ) || !id || _.isUndefined( value ) )
+                return ;
+
+            var contentModel = this.getContentModel( ) ,
+                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + id + '"]' ) );
+
+            var $thisShortcode = _.findWhere( contentModel[postId] , { tag : "content" , parent_id : id } );
+
+            if( !$thisShortcode ){
+                //api.log("for : " + id + " not found shortcode");
+                return ;
+            }
+
+            $thisShortcode.content = value;
+
             this.updateShortcode( $thisShortcode );
         },
 

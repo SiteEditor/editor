@@ -1229,14 +1229,20 @@
             });
 
             $('[sed-module-cover="has-cover"]').livequery(function(){
+
+                var id , cid;
+
                 if( $(this).is("[sed-disable-editing='yes']") ){
-                    var id = $(this).attr("sed_model_id") ,
+
+                    id = $(this).attr("sed_model_id");
+
                     cid = id + "-cover";
 
                     $('<div id="' + cid + '" class="module-element-force-cover"></div').insertAfter( $(this) )
                 }else{
-                    var id = $(this).attr("sed_model_id") ,
-                        shortcode= api.contentBuilder.getShortcode( id ) ,
+                    id = $(this).attr("sed_model_id");
+
+                    var shortcode= api.contentBuilder.getShortcode( id ) ,
                         $moduleContextmenuId;
                    
                     $.each( api.contextMenuSettings , function( id, data ){
@@ -1248,8 +1254,9 @@
 
                     //add cover to module needed to cover like youtube , video , google-map , ...
 
-                    var cid = id + "-cover" ,
-                        cover = $('<div id="' + cid + '" class="module-element-force-cover"></div').insertAfter( $(this) );
+                    cid = id + "-cover";
+
+                    var cover = $('<div id="' + cid + '" class="module-element-force-cover"></div').insertAfter( $(this) );
 
                     cover.addClass( $moduleContextmenuId + "_cover");
                 }
@@ -1565,7 +1572,7 @@
                 selector        :  "sed_row" ,
                 data            :  rowDialogData,
                 extra :  {
-                    attrs : api.contentBuilder.getAttrs( rowElement.attr("sed_model_id") ) || {}
+                    attrs : api.contentBuilder.getAttrs( rowElement.attr("sed_model_id") , true ) || {}
                 },
                 rowId : rowElement.attr("sed_model_id")
             });
@@ -1705,7 +1712,7 @@
 
         api( 'sed_pb_modules', function( value ) {
     		value.bind( function( currentAttrValue ) {
-    		    var elementId = api.currentSedElementId; 
+    		    var elementId = api.currentSedElementId;
 
                 if( _.isUndefined( elementId ) || !elementId  )
                     return ;
@@ -1723,14 +1730,18 @@
                       .test(value))
                       return Number(value);
                   return false;
-                }
+                };
 
                 var attrValue = modules[elementId][api.currentAttr];
 
                 attrValue = ( _filterFloat(attrValue) === false ) ? attrValue : _filterFloat(attrValue);
 
-                if( api.currentAttr != "skin" )
+                if( api.currentAttr != "skin" &&  api.currentAttr != "sed_shortcode_content" )
                     api.contentBuilder.updateShortcodeAttr( api.currentAttr  , attrValue , elementId );
+
+                if( api.currentAttr == "sed_shortcode_content" ){
+                    api.contentBuilder.updateShortcodeContent( elementId , attrValue );
+                }
 
                 if( api.currentAttr == "hidden_in_mobile" || api.currentAttr == "show_mobile_only" ){
             
@@ -1791,7 +1802,7 @@
                         var f = str.charAt(0).toUpperCase();
 
                         return f + str.substr(1);
-                    }
+                    };
 
 
                     key_setting = key_setting.split( "_" );

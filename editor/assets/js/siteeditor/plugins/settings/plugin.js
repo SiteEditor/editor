@@ -100,7 +100,7 @@
                 "autoOpen"  : false,
                 "modal"     : false,
                 //draggable: false,
-                resizable: false,
+                resizable   : true,
                 "width"     : 295,
                 "height"    : 600 ,
                 "position"  : {
@@ -919,6 +919,8 @@
 
                 }
 
+                api.settings.controls[id] = data;
+
                 api.Events.trigger( "renderSettingsControls" , id, data , extra);
 
                 var control = api.control.instance( id );
@@ -1074,7 +1076,7 @@
 
             var reset =  !_.isUndefined( sedDialog.reset ) ? sedDialog.reset : true;
 
-            var needToUpdate = !_.isUndefined( api.sedDialogSettings.dialogsContents[this.currentSettingsId] );
+            var needToUpdate = !_.isUndefined( api.sedGroupControls[this.currentSettingsId] );
 
             api.sedDialogSettings.openInitDialogSettings( this.currentSettingsId , forceOpen , reset , "module" , "ajax" , this.currentSettingsId );//"html"
 

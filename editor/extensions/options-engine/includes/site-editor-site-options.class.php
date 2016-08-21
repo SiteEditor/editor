@@ -239,11 +239,11 @@ class SiteEditorSiteOptions {
             ),
 
             'posts_page' => array(
-                "type"          => "select" ,
+                "type"          => 'dropdown-pages' ,
                 "label"         => __("Posts page", "site-editor"),
                 'default'       => get_option( 'page_for_posts' ),
                 "description"   => __("This option allows you to set a title for your image.", "site-editor"),
-                "choices"       =>  $pages_list,
+                //"choices"       =>  $pages_list,
                 'setting_id'    => "page_for_posts" ,
                 'panel'         => "static_front_page" ,
                 'dependency' => array(

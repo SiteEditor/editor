@@ -66,11 +66,12 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
 	            <?php
 				  $i = 1;
 				  foreach( $this->choices as $key_val => $choice ) {
+					  $single_val = ( isset( $value[$key_val] ) ) ? $value[$key_val] : "";
 				?>
                     <div class="multi-color-item">
 						<label><?php echo $choice;?></label>
 			            <span class="colorselector">
-				            <input type="text" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i;?>" name="<?php echo esc_attr( $sed_field_id ) . $i;?>" value="<?php echo esc_attr( $value[$key_val] ); ?>" <?php echo $atts_string;?>>
+				            <input type="text" data-key="<?php echo esc_attr( $key_val ); ?>" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i;?>" name="<?php echo esc_attr( $sed_field_id ) . $i;?>" value="<?php echo esc_attr( $single_val ); ?>" <?php echo $atts_string;?>>
 				            &nbsp;&nbsp;  
 			            </span> 
 		            </div>

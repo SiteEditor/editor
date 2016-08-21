@@ -27,20 +27,53 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 		 */ 
 		public $type = 'code';
 
-		/*
-		 * Refresh the parameters passed to the JavaScript via JSON.
-		 *
-		 * @access public
-		 *
-		 */
-		public function json() {
+        /**
+         * The type of update data for previewer. using "auto-change" or "button"
+         *
+         * @access public
+         * @var string
+         */
+        public $update_type = 'auto-change';
 
-			$json_array = parent::json();
-			$json_array['mode'] = ( isset( $this->js_params['mode'] ) ) ? $this->js_params['mode'] : 'html';
+        /*
+         * Refresh the parameters passed to the JavaScript via JSON.
+         *
+         * @access public
+         *
+         */
+        public function json() {
 
-			return $json_array;
-		}
-		/**
+            $json_array = parent::json();
+
+            $json_array['updateType'] = $this->update_type;
+
+            return $json_array;
+        }
+
+        /**
+         * js_params support all jquery ui date picker options
+         *
+         * @param $json_array
+         * @return mixed
+         */
+        protected function js_params_json( $json_array ){
+
+            $this->js_params = ( !is_array( $this->js_params ) ) ? array() : $this->js_params;
+
+            $js_params = array_merge( array(
+                    'language'	=>  'html' ,
+                    'theme'		=>	'default' ,
+                    'height'	=>	'250px'
+                ), $this->js_params
+            );
+
+            $json_array['code'] = $js_params;
+
+            return $json_array;
+        }
+
+
+        /**
 		 * Enqueue control related scripts/styles.
 		 *
 		 * @access public
@@ -76,6 +109,15 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 				<?php } ?>
 				<!--<a href="#" class="sed-btn-blue">code</a>-->
 				<textarea class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>><?php echo $value; ?></textarea>
+
+                <?php if( $this->update_type == "button" ) : ?>
+                <!--<button value="Saved" class="btn button-primary save" id="save" name="save" disabled="">
+                    <span class="fa f-sed icon-spin f-sed-spin fa-lg "></span>
+                    <span class="fa f-sed icon-savepublish  fa-lg "></span>
+                    <span class="el_txt">Saved</span>
+                </button> -->
+                <a href="#" class="sed-save-code-changes sed-btn-default"><?php echo __( "Save Changes" , "site-editor" );?></a>
+                <?php endif;?>
 
 			<?php
 		}

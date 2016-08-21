@@ -21,11 +21,12 @@ if ( ! class_exists( 'SiteEditorDateControl' ) ) {
 
 		/**
 		 * The control type.
+		 * @todo add timepicker jquery ui addon for support time
 		 *
 		 * @access public
 		 * @var string
 		 */ 
-		public $type = 'date';  
+		public $type = 'date';
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -34,6 +35,21 @@ if ( ! class_exists( 'SiteEditorDateControl' ) ) {
 		 */
 		public function enqueue() {
 
+		}
+
+		/**
+		 * js_params support all jquery ui date picker options
+		 *
+		 * @param $json_array
+		 * @return mixed
+		 */
+		protected function js_params_json( $json_array ){
+
+			if( !empty( $this->js_params ) && is_array( $this->js_params ) ){
+				$json_array['datepicker'] = $this->js_params;
+			}
+
+			return $json_array;
 		}
 
 		/**

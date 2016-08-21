@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorWpEditorControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-wp-editor-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-wp-editor-input site-editor-tinymce sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -57,30 +57,15 @@ if ( ! class_exists( 'SiteEditorWpEditorControl' ) ) {
 
 			?>
 
-			<label class=""><?php echo $this->label;?></label>
+			<label><?php echo $this->label;?></label>
 			<?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
+
 			<div class="sed-bp-form-wp-editor">
-				<?php
-				$i = 1;
-				foreach( $this->choices as $key_val => $choice ) {
-					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
-				?>
-
-					<div class="sed-bp-form-wp-editor-item">
-						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
-							<input  type="wp-editor" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
-							<?php echo $choice;?>
-						</label>
-					</div>
-
-				<?php 
-				    $i++;
-				  } 
-				?>
+				<a href="#" class="sed-open-wp-editor-btn sed-btn-default <?php echo esc_attr( $classes );?>" <?php echo $atts_string;?>><?php echo __( "Open WP Editor" , "site-editor" );?></a>
+                <input type="hidden" class="sed-textarea-html-content sed-wp-editor-value" value="<?php echo htmlspecialchars( $value );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" />
 			</div>
-
 			<?php
 		}
 

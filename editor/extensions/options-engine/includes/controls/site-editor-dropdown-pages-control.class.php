@@ -35,34 +35,20 @@ if ( ! class_exists( 'SiteEditorDropdownPagesControl' ) ) {
 		public function enqueue() {
 
 		}
-		/*
-		public function enqueue() {
-			wp_enqueue_script( 'sed-dropdown-pages' );
-		}
 
 		/**
 		 * Refresh the parameters passed to the JavaScript via JSON.
 		 *
 		 * @access public
-		 *
-		public function to_json() {
-			parent::to_json();
-			$l10n = Kirki_l10n::get_strings( $this->sed_config );
-			$dropdown = wp_dropdown_pages(
-				array(
-					'name'              => '_customize-dropdown-pages-' . esc_attr( $this->id ),
-					'echo'              => 0,
-					'show_option_none'  => esc_attr( $l10n['select-page'] ),
-					'option_none_value' => '0',
-					'selected'          => esc_attr( $this->value() ),
-				)
-			);
+		 */
+		public function json() {
 
-			// Hackily add in the data link parameter.
-			$dropdown = str_replace( '<select', '<select ' . $this->get_link(), $dropdown );
+			$json_array = parent::json();
+			$json_array['type'] = 'select';
 
-			$this->json['dropdown'] = $dropdown;
-		}*/
+			return $json_array;
+		}
+
 		/**
 		 * Renders the control wrapper and calls $this->render_content() for the internals.
 		 *
@@ -74,7 +60,7 @@ if ( ! class_exists( 'SiteEditorDropdownPagesControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-dropdown-pages-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-select-input sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -82,13 +68,25 @@ if ( ! class_exists( 'SiteEditorDropdownPagesControl' ) ) {
 
             $value          = $this->value();
 
+			$dropdown = wp_dropdown_pages(
+				array(
+					'name'              => '_sed-app-dropdown-pages-' . esc_attr( $this->id ),
+					'id'				=> $sed_field_id ,
+                    'class'             => esc_attr( $classes ) ,
+					'echo'              => 0,
+					'show_option_none'  => esc_attr( __("Select Page" , "site-editor") ),
+					'option_none_value' => '0',
+					'selected'          => esc_attr( $value ),
+				)
+			);
+
 			?>
 
 			<label class=""><?php echo $this->label;?></label>
 			<?php if(!empty($this->description)){ ?> 
 				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
-			<div class="<?php echo esc_attr( $classes ); ?>"></div>
+			<div <?php echo $atts_string; ?>> <?php echo $dropdown; ?> </div>
 
 			<?php
 		}

@@ -57,6 +57,8 @@ if ( ! class_exists( 'SiteEditorDimensionControl' ) ) {
 
             $value          = $this->value();
 
+			$invalid_msg = ( !empty( $this->invalid_value ) ) ? $this->invalid_value : __( "Invalid Value" , "site-editor" );
+
 			?>
 
 
@@ -66,7 +68,7 @@ if ( ! class_exists( 'SiteEditorDimensionControl' ) ) {
 			<?php } ?>
 			<div class="sed-bp-form-dimension">
 				<input type="text" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $value );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>"  <?php echo $atts_string;?> />
-				<span class="invalid-value"><?php echo $this->invalid_value;?></span>
+				<span class="invalid-value"><?php echo $invalid_msg;?></span>
 			</div>
 
 			<?php

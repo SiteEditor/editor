@@ -67,7 +67,8 @@ class PBAPITestModule extends PBShortcodeClass{
             "attachment_id" => 0  ,
             "default_image_size"  => "thumbnail" ,
             "custom_image_size"   => "" ,
-            "external_image_size" => ""
+            "external_image_size" => "" ,
+            "sortable_field_id"   => 'options3_key,options5_key'
         );
         return $atts;
     }
@@ -190,6 +191,12 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
+            'js_params'     => array(
+                //"showAnim"          =>  "bounce" ,
+                "showButtonPanel"   =>   true ,
+                "changeMonth"       =>   true ,
+                "changeYear"        =>   true ,
+            ),
             "panel"         => "text_settings_panel"
         );
 
@@ -227,7 +234,7 @@ class PBAPITestModule extends PBShortcodeClass{
             ),
             'js_params'     => array(
                 "min"          =>    0 ,
-                "max"          =>    100
+                "max"          =>    100 ,
             ),
             "panel"         => "text_settings_panel"
         );
@@ -556,7 +563,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'style_props'       =>  "color" ,
             ),
             'category'  => "style-editor" ,
-            'settings_type'     =>  "font_color",
+            'setting_id'     =>  "font_color",
         );
 
         $params['icon_size'] = array(
@@ -789,6 +796,18 @@ class PBAPITestModule extends PBShortcodeClass{
             ),
         );
 
+
+        $params['sortable_field_id'] = array(
+            'label'             => __('Sortable control', 'translation_domain'),
+            'type'              => 'sortable',
+            'choices'           => array(
+                "options1_key"      =>    "One" ,
+                "options2_key"      =>    "Two" ,
+                "options3_key"      =>    "Three" ,
+                "options4_key"      =>    "Four" ,
+                "options5_key"      =>    "Five" ,
+            )
+        );
 
         return $params;
     }

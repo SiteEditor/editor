@@ -643,7 +643,7 @@
                 self.refresh( self.getVal() );
 			});
 
-        },
+        }
 
 
     });
@@ -1700,50 +1700,27 @@
 
 	api.CheckBoxesControl = api.SiteEditorControls.extend({
 		_ready: function() {
-			var control = this,
-				checkboxes = this.container.find('.sed-checkboxes'), oldValue;
+			var control = this;
 
-            if( !_.isUndefined( this.params.default_value ) ){
+            this.checkboxes = this.container.find('.sed-bp-checkbox-input');
 
-                if( _.isString( this.params.default_value ) )
-                    this.defaultValue = this.params.default_value.split(",");
-                else if( $.isArray( this.params.default_value ) )
-                    this.defaultValue = this.params.default_value;
-                else
-                    this.defaultValue = [];
-
-            }else
-                this.defaultValue = [];
-
-
-            if ( !_.isUndefined( control.params.options_selector ) ) {
-               this.statuses = $( control.params.options_selector, checkboxes );
-            }else{
-                return ;
+            if( _.isString( control.defaultValue ) ){
+                control.defaultValue = control.defaultValue.split(",");
             }
 
-            this.statuses.on("change", function(){
+            if( ! $.isArray( control.defaultValue ) ) {
+                control.defaultValue = [];
+            }
 
-                var $thisValue = control.setting() ,
-                    attrStatus,
-                    currVal = [];
+            this.checkboxes.on("change", function(){
 
-                control.statuses.each(function(index , el){
-                    var isChecked = $(this).prop( 'checked' );
+                var currVal = [];
 
-                    if( isChecked )
-                        currVal.push( $(this).val() );
+                control.checkboxes.filter(":checked").each(function(index , el){
+
+                    currVal.push( $(this).val() );
 
                 });
-
-                var isChecked = $(this).prop( 'checked' ),
-                index = $.inArray( $(this).val() , currVal );
-
-                if(isChecked &&  index == -1){
-                    currVal.push( $(this).val() );
-                }else if(!isChecked && index > -1){
-                    currVal.splice( index , 1);
-                }
 
                 control.refresh( currVal );
 
@@ -1760,7 +1737,7 @@
             else if( $.isArray( val ) )
                 currValue = val;
 
-            this.statuses.each(function(index , el){
+            this.checkboxes.each(function(index , el){
 
                 if( $.inArray( $(this).val() , currValue) > -1)
                     $(this).prop( 'checked', true );

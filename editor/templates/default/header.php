@@ -58,6 +58,10 @@ $controls_l10n = array(
     'allowedFiles'       => __( 'Allowed Files' , 'site-editor' )
 );
 
+do_action( 'sed_app_controls_init' );
+
+//wp_enqueue_script( 'sed-app-controls' );
+//wp_enqueue_style( 'sed-app-controls' );
 /**
  * Enqueue Customizer control scripts.
  *
@@ -79,7 +83,12 @@ do_action( 'sed_enqueue_scripts' );
 <!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>">
-    <title></title>
+    <title><?php echo __("Site Editor" , "site-editor"); ?></title>
+
+    <script type="text/javascript">
+        var ajaxurl = <?php echo wp_json_encode( admin_url( 'admin-ajax.php', 'relative' ) ); ?>;
+    </script>
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="application-name" content="<?php echo $application_name; ?>">
     <meta name="description" content="<?php echo $application_desc; ?>">

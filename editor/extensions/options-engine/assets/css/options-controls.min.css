@@ -426,3 +426,19 @@ div.ui-datepicker .ui-datepicker-calendar tr td.ui-state-disabled .ui-state-defa
     float: none !important;
     display: block !important;
 }
+
+/**Wp Editor
+*******************/
+div#sed-wp-text-editor-pane {
+    background-color: #eee;
+    position: absolute;
+    width: 650px;
+    height: 530px;
+    z-index: 1060;
+    display: none;
+}
+
+div#sed-wp-editor-dragbar {
+    background-color: #fff;
+    cursor: move;
+}

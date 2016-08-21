@@ -397,7 +397,7 @@ class SiteEditorOptionsControl{
 			$json_array['settings'][ $key ] = $setting->id;
 		}
 
-		$json_array = array_merge( $json_array , $this->js_params );
+		$json_array = $this->js_params_json( $json_array );
 
 		$json_array['control_id'] = $this->id;
 		$json_array['type'] = $this->type;
@@ -429,6 +429,20 @@ class SiteEditorOptionsControl{
 		$json_array = array_merge( $json_array , $this->json );
 
 		return $json_array;
+	}
+
+	/**
+	 * @param $json_array
+	 * @return array
+	 */
+	protected function js_params_json( $json_array ){
+
+		if( !empty( $this->js_params ) && is_array( $this->js_params ) ){
+			$json_array = array_merge( $json_array , $this->js_params );
+		}
+
+		return $json_array;
+
 	}
 
 	/**

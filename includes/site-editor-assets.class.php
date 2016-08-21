@@ -42,25 +42,25 @@ if(!class_exists('SiteEditorAssetsManager'))
 
             $this->add("bootstrap-affix",       SED_ASSETS_URL . "/js/bootstrap/affix/affix".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
             
-            $this->add("bootstrap-alert",       SED_ASSETS_URL . "/js/bootstrap/alert/alert".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
+            $this->add("bootstrap-alert",       SED_ASSETS_URL . "/js/bootstrap/alert/alert".$this->suffix.".js" , array( 'jquery' , 'bootstrap-transition' ) , self::$bootstrap_version );
             
             $this->add("bootstrap-button",      SED_ASSETS_URL . "/js/bootstrap/button/button".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
             
-            $this->add("bootstrap-carousel",    SED_ASSETS_URL . "/js/bootstrap/carousel/carousel".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
+            $this->add("bootstrap-carousel",    SED_ASSETS_URL . "/js/bootstrap/carousel/carousel".$this->suffix.".js" , array( 'jquery' , 'bootstrap-transition' ) , self::$bootstrap_version );
             
-            $this->add("bootstrap-collapse",    SED_ASSETS_URL . "/js/bootstrap/collapse/collapse".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
+            $this->add("bootstrap-collapse",    SED_ASSETS_URL . "/js/bootstrap/collapse/collapse".$this->suffix.".js" , array( 'jquery' , 'bootstrap-transition' ) , self::$bootstrap_version );
             
             $this->add("bootstrap-dropdown",    SED_ASSETS_URL . "/js/bootstrap/dropdown/dropdown".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
             
-            $this->add("bootstrap-modal",       SED_ASSETS_URL . "/js/bootstrap/modal/modal".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
+            $this->add("bootstrap-modal",       SED_ASSETS_URL . "/js/bootstrap/modal/modal".$this->suffix.".js" , array( 'jquery' , 'bootstrap-transition'  ) , self::$bootstrap_version );
             
-            $this->add("bootstrap-popover",     SED_ASSETS_URL . "/js/bootstrap/popover/popover".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
+            $this->add("bootstrap-popover",     SED_ASSETS_URL . "/js/bootstrap/popover/popover".$this->suffix.".js" , array('jquery' , 'bootstrap-tooltip' ) , self::$bootstrap_version );
             
             $this->add("bootstrap-scrollspy",   SED_ASSETS_URL . "/js/bootstrap/scrollspy/scrollspy".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
             
-            $this->add("bootstrap-tab",         SED_ASSETS_URL . "/js/bootstrap/tab/tab".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
+            $this->add("bootstrap-tab",         SED_ASSETS_URL . "/js/bootstrap/tab/tab".$this->suffix.".js" , array( 'jquery' , 'bootstrap-transition' ) , self::$bootstrap_version );
             
-            $this->add("bootstrap-tooltip",     SED_ASSETS_URL . "/js/bootstrap/tooltip/tooltip".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
+            $this->add("bootstrap-tooltip",     SED_ASSETS_URL . "/js/bootstrap/tooltip/tooltip".$this->suffix.".js" , array( 'jquery' , 'bootstrap-transition' ) , self::$bootstrap_version );
             
             $this->add("bootstrap-transition",  SED_ASSETS_URL . "/js/bootstrap/transition/transition".$this->suffix.".js" , array('jquery') , self::$bootstrap_version );
         }

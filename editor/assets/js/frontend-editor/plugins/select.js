@@ -113,7 +113,7 @@
                 reset : reset ,
                 data : dialogData ,
                 extra :  {
-                    attrs : $.extend({} ,  shortcode.attrs || {} )
+                    attrs : api.contentBuilder.getAttrs( elementId , true )
                 },
             });
 

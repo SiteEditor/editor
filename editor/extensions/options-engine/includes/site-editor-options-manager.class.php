@@ -70,7 +70,7 @@ final class SiteEditorOptionsManager{
      * SiteEditorOptionsManager constructor.
      */
     function __construct(  ) {
-        
+
         require_once dirname( __FILE__ ) . DS . 'site-editor-options-template.class.php';
 
         require_once dirname( __FILE__ ) . DS . 'site-editor-field.class.php';
@@ -90,6 +90,10 @@ final class SiteEditorOptionsManager{
 
         new SiteEditorThemeOptions();
 
+        require_once dirname( __FILE__ ) . DS . 'site-editor-custom-code.class.php';
+
+        new SiteEditorCustomCodeOptions();
+
         add_action( 'sed_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );
 
         add_action( 'sed_app_register', array( $this, 'register_fields' ) , 1000 );
@@ -102,9 +106,15 @@ final class SiteEditorOptionsManager{
 
         add_action( 'sed_print_footer_scripts', array( $this, 'print_templates' ) );
 
+        //add_action( 'sed_print_footer_scripts', 'customize_themes_print_templates' );
+
+        add_action( 'sed_app_controls_init', array( $this, 'enqueue_wp_editor' ) );
+
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ) );
 
         add_action( 'sed_print_footer_scripts' , array($this, 'print_settings_dependencies') , 10000 );
+
+        add_action( 'wp_enqueue_media' , array( $this , 'print_media_templates' ) );
 
     }
 
@@ -451,7 +461,7 @@ final class SiteEditorOptionsManager{
 
         SED()->editor->manager->add_panel( $panel );
     }
-    
+
     /**
      * Register multi panels
      *
@@ -511,7 +521,7 @@ final class SiteEditorOptionsManager{
                 unset( $args['id'] );
             }
 
-            $setting = SED()->editor->manager->get_setting( $setting_id ); 
+            $setting = SED()->editor->manager->get_setting( $setting_id );
 
             if( ! isset( $setting ) ) {
 
@@ -736,18 +746,28 @@ final class SiteEditorOptionsManager{
 
     public function enqueue_scripts(){
 
-        wp_enqueue_script( 'sed-options-controls' );
-        wp_enqueue_style( 'sed-options-controls' );
+        //wp_enqueue_script('editor-expand');
+
+        //add_thickbox();
+        wp_enqueue_media();
+
+        //wp_enqueue_script('image-edit');
+
+        //wp_enqueue_style('imgareaselect');
+
         wp_enqueue_script( 'jquery-ui-slider' );
         wp_enqueue_script( 'jquery-ui-datepicker' );
+
+        wp_enqueue_script( 'sed-options-controls' );
+        wp_enqueue_style( 'sed-options-controls' );
+
         wp_enqueue_script( 'codemirror' );
         wp_enqueue_style( 'codemirror' );
 
-
-        /**codemirror 
+        /**codemirror
         // Add theme styles.
-        wp_enqueue_style( 'codemirror-theme-' . $this->choices['theme'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/' . $this->choices['theme'] . '.css' ); 
-        *********************/  
+        wp_enqueue_style( 'codemirror-theme-' . $this->choices['theme'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/' . $this->choices['theme'] . '.css' );
+        *********************/
         // If we're using html mode, we'll also need to include the multiplex addon
         // as well as dependencies for XML, JS, CSS languages.
         //if ( in_array( $this->choices['language'], array( 'html', 'htmlmixed' ) ) ) {
@@ -762,9 +782,11 @@ final class SiteEditorOptionsManager{
         //} else {
             // Add language script.
             //wp_enqueue_script( 'codemirror-language-' . $this->choices['language'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/' . $this->choices['language'] . '/' . $this->choices['language'] . '.js', array( 'jquery', 'codemirror' ) );
-        //}       
+        //}
 
-        //wp_enqueue_style( 'codemirror-theme-' . $this->choices['theme'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/' . $this->choices['theme'] . '.css' );     
+        wp_enqueue_style( 'codemirror-theme-default' , SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/default.css' );
+
+        wp_enqueue_style( 'codemirror-theme-abcdef' , SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/abcdef.css' );
 
     }
 
@@ -790,6 +812,93 @@ final class SiteEditorOptionsManager{
 
         wp_enqueue_script( 'sed-options-controls-preview' );
 
+    }
+
+    public function print_media_templates(){
+        add_action( 'sed_print_footer_scripts', 'wp_print_media_templates' );
+    }
+
+    /**
+     * Enqueue a WP Editor instance we can use for rich text editing.
+     */
+    public function enqueue_wp_editor() {
+
+        add_action( 'sed_print_footer_scripts', array( $this, 'render_wp_editor' ), 0 );
+
+        // Note that WP_Customize_Widgets::print_footer_scripts() happens at priority 10.
+        add_action( 'sed_print_footer_scripts', array( $this, 'maybe_do_admin_print_footer_scripts' ), 20 );
+
+        // @todo These should be included in _WP_Editors::editor_settings()
+        if ( false === has_action( 'sed_print_footer_scripts', array( '_WP_Editors', 'enqueue_scripts' ) ) ) {
+            add_action( 'sed_print_footer_scripts', array( '_WP_Editors', 'enqueue_scripts' ) );
+        }
+    }
+
+    /**
+     * Render rich text editor.
+     */
+    public function render_wp_editor() {
+        ?>
+        <div id="sed-wp-text-editor-pane">
+
+            <div id="sed-wp-editor-dragbar">
+                <span class="ui-dialog-title"><?php echo __("Wp Text Editor" , "site-editor");?></span>
+                <button class="sed-close-wp-editor">
+                    <span class="icon-delete"></span>
+                    <span class="ui-button-text"><?php echo __("Close" , "site-editor");?></span>
+                </button>
+            </div>
+
+            <?php
+
+            /** Remove 3rd party editor buttons.
+            remove_all_actions('media_buttons', 999999);
+            remove_all_actions('media_buttons_context', 999999);
+            remove_all_filters('mce_external_plugins', 999999);**/
+
+            // The settings passed in here are derived from those used in edit-form-advanced.php.
+            wp_editor( '', 'sed-wp-tinymce-text-editor', array(
+                '_content_editor_dfw' => false,
+                'drag_drop_upload' => true,
+                'tabfocus_elements' => 'content-html,save-post',
+                'editor_height' => 390,
+                'default_editor' => 'tinymce',
+                'tinymce' => array(
+                    'resize' => false,
+                    'wp_autoresize_on' => false,
+                    'add_unload_trigger' => false,
+                ),
+            ) );
+            ?>
+
+        </div>
+        <?php
+    }
+
+    /**
+     * Do the admin_print_footer_scripts actions if not done already.
+     *
+     * Another possibility here is to opt-in selectively to the desired widgets
+     * via:
+     * Shortcode_UI::get_instance()->action_admin_enqueue_scripts();
+     * Shortcake_Bakery::get_instance()->action_admin_enqueue_scripts();
+     *
+     * Note that this action is also done in WP_Customize_Widgets::print_footer_scripts()
+     * at priority 10, so this method runs at a later priority to ensure the action is
+     * not done twice.
+     *
+     * @codeCoverageIgnore
+     */
+    public function maybe_do_admin_print_footer_scripts() {
+        if ( ! did_action( 'admin_print_footer_scripts' ) ) {
+            /** This action is documented in wp-admin/admin-footer.php */
+            do_action( 'admin_print_footer_scripts' );
+        }
+
+        if ( ! did_action( 'admin_footer-post.php' ) ) {
+            /** This action is documented in wp-admin/admin-footer.php */
+            do_action( 'admin_footer-post.php' );
+        }
     }
 
 }

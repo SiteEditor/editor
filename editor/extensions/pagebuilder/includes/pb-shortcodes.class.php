@@ -272,7 +272,7 @@ class PBShortcodeClass{
             }
         }
 
-        if( !site_editor_app_on() ){
+        if( !site_editor_app_on() && ( !isset( $_POST['action'] ) || $_POST['action'] != "load_modules" ) ){
             $new_custom_class = $sed_pb_app->generate_custom_css_class();
 
             if( isset( $atts['sed_css'] ) && !empty( $atts['sed_css'] ) ){
@@ -369,7 +369,7 @@ class PBShortcodeClass{
 
         $sed_attrs = '';
 
-        if( site_editor_app_on() ){
+        if( site_editor_app_on() || ( isset( $_POST['action'] )  &&  $_POST['action'] == "load_modules" ) ){ 
             $sed_attrs .= $this->set_attr( 'sed_model_id', trim($this->atts['sed_model_id']) ) . " ";
         }
 

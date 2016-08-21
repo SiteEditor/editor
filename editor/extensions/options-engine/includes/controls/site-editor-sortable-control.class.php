@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorSortableControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-sortable-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-bp-form-sortable-item sed-module-element-control sed-element-control sed-bp-input sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= "{$this->option_group}_{$this->id}";
 
@@ -64,12 +64,20 @@ if ( ! class_exists( 'SiteEditorSortableControl' ) ) {
 			<ul class="sed-bp-form-sortable">
 		
 				<?php
+				$values = ( is_array( $value ) ) ? $value : explode( "," , $value);
+				$values = array_map( 'trim' , $values );
 				$i = 1;
 				foreach( $this->choices as $key_val => $choice ) {
+					$checked = ( is_array( $values ) && in_array( $key_val , $values) ) ? 'checked="checked"' : '';
 				?>
 
-					<li class="sed-bp-form-sortable-item <?php echo esc_attr( $classes ); ?>" data-value="<?php echo esc_attr( $key_val ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"   <?php echo $atts_string;?>>
-						<label><?php echo $choice;?></label>
+					<li class="<?php echo esc_attr( $classes ); ?>" data-value="<?php echo esc_attr( $key_val ); ?>"  <?php echo $atts_string;?>>
+
+						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>" class="sed-bp-form-checkbox">
+							<input type="checkbox" class="sed-bp-input sed-bp-checkbox-input" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>[]" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>" <?php echo $checked;?> />
+							<?php echo $choice;?>
+						</label>
+                        
 		                <div class="sed-bp-form-sortable-actions">
 		                    <span class="sortable-action sort"><span class="fa fa-arrows fa-lg"></span></span>
 		                </div>

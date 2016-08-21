@@ -27,19 +27,6 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 		 */
 		public $type = 'multi-check';
 
-		/*
-		 * Refresh the parameters passed to the JavaScript via JSON.
-		 *
-		 * @access public
-		 *
-		 */
-		public function json() { 
-
-			$json_array = parent::json();
-			$json_array['options_selector'] = ( isset( $this->js_params['options_selector'] ) ) ? $this->js_params['options_selector'] : '.sed-bp-checkbox-input';
-
-			return $json_array;
-		}
 		/**  
 		 * Enqueue control related scripts/styles.
 		 *
@@ -79,7 +66,7 @@ if ( ! class_exists( 'SiteEditorMulticheckControl' ) ) {
 			<div class="sed-bp-form-checkboxes sed-checkboxes">
 
 				<?php
-					$values = explode( "," , $value);
+					$values = ( is_array( $value ) ) ? $value : explode( "," , $value);
 					$values = array_map( 'trim' , $values );
 					$i = 1;
 					foreach( $this->choices as $key_val => $choice ){

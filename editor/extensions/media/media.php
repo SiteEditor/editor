@@ -76,7 +76,7 @@ if(!class_exists('SiteEditorMediaManager'))
 
         	$query = isset( $_REQUEST['query'] ) ? (array) $_REQUEST['query'] : array();
 
-            if(!empty($query['post_mime_type']) && !in_array($query['post_mime_type'] , ["image","video","audio","text"])){
+            if( !empty($query['post_mime_type']) && !in_array($query['post_mime_type'] , array("image","video","audio","text") ) ){
                 //var_dump( $this->get_posts_mime_types( $query['post_mime_type']) );
                 if($mime_type = $this->get_posts_mime_types( $query['post_mime_type'] ))
                     $query['post_mime_type'] = $mime_type;

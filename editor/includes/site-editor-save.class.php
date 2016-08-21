@@ -191,7 +191,7 @@ class SEDAppSave{
                         continue;
                     }
                     //not support any id attr in shortcodes --- only added in Editor
-                    if( $attr != "sed_model_id" )
+                    if( $attr != "sed_model_id" || ( isset( $_POST['action'] )  &&  $_POST['action'] == "load_modules" ) )
                         $attrs_string .= $attr.'="'.PageBuilderApplication::sanitize_attr_value( $value ).'" ';
                 }
             }

@@ -27,24 +27,6 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
 		 */
 		public $type = 'slider';
 
-		/*
-		 * Refresh the parameters passed to the JavaScript via JSON.
-		 *
-		 * @access public
-		 *
-		 */
-		public function json() {
-
-			$json_array = parent::json();
-			$json_array['min']  = ( isset( $this->js_params['min'] ) ) ? $this->js_params['min'] : '0';
-			$json_array['max']  = ( isset( $this->js_params['max'] ) ) ? $this->js_params['max'] : '100';
-			$json_array['step'] = ( isset( $this->js_params['step'] ) ) ? $this->js_params['step'] : '1';
-
-			return $json_array;
-		}
-
-
-
 		/**
 		 * Enqueue control related scripts/styles.
 		 *

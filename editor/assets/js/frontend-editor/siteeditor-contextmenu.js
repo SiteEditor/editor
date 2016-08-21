@@ -291,7 +291,7 @@
                         id        :  $(this).attr("sed-dialog-id"),
                         options   :  $(this).data( "options" ),
                         extra     :  {
-                            attrs : api.contentBuilder.getAttrs( id ) || {}
+                            attrs : api.contentBuilder.getAttrs( id , true ) || {}
                         }
                     });
 
@@ -314,7 +314,7 @@
                 selector        :  element.attr("sed-dialog-selector") ,
                 data            :  element.data(),
                 extra :  {
-                    attrs : api.contentBuilder.getAttrs( id ) || {}
+                    attrs : api.contentBuilder.getAttrs( id , true ) || {}
                 },
 
             });

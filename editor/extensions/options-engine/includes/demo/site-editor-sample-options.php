@@ -43,226 +43,433 @@ function sed_sample_options_register(){
     //support full nesting level panels
     $panels = array(
 
-        'panel_id1' =>  array(
+        'text_box_panel_parent' =>  array(
             'priority'          => 9,
             'type'              => 'inner_box',
-            'title'             => __('My Panel 1', 'textdomain'),
-            'description'       => __('My Description', 'textdomain'),
+            'title'             => __('Text Box Settings Panel', 'textdomain'),
+            'description'       => __('Text Box Settings Panel', 'textdomain'),
             'option_group'      => 'sed_sample_options' ,
             //'capability'        => '' ,
             //'theme_supports'    => '' ,
             'parent_id'         => "root",
             'atts'              => array() ,
             //'active_callback'   => ''
-            'dependency' => array(
+            /*'dependency' => array(
                 'controls'  =>  array(
-                    "control"   => "switch_field_id" ,
-                    "value"     => true , //value with @string , values with @array
+                    "control"   => "multi_check_dependency_section" ,
+                    "value"     => "sed_text_settings_panel",
                     "is_panel"  => true
                 )
-            )
+            )*/
         ) ,
 
-        'panel_id2' =>  array(
-            'priority'          => 8,
+        'text_box_settings_panel' =>  array(
+            'priority'          => 9,
             'type'              => 'default',
-            'title'             => __('My Panel 2', 'textdomain'),
-            'description'       => __('My Description', 'textdomain'),
+            'title'             => __('Text Box Settings', 'textdomain'),
+            'description'       => __('Text Box Settings', 'textdomain'),
             'option_group'      => 'sed_sample_options' ,
             //'capability'        => '' ,
             //'theme_supports'    => '' ,
-            'parent_id'         => "panel_id1",
+            'parent_id'         => "text_box_panel_parent",
             'atts'              => array() ,
             //'active_callback'   => ''
-            'dependency' => array(
-                'controls'  =>  array(
-                    "control"   => "checkbox_field_id" ,
-                    "value"     => true , //value with @string , values with @array
-                    "is_panel"  => true
-                )
-            )
         ) ,
 
-        'panel_id3' =>  array(
+        'check_box_panel_parent' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Check Box Settings Panel', 'textdomain'),
+            'description'       => __('Check Box Settings Panel', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+            /*'dependency' => array(
+                'controls'  =>  array(
+                    "control"   => "multi_check_dependency_section" ,
+                    "value"     => "sed_checkbox_settings_panel",
+                    "is_panel"  => true
+                )
+            )*/
+        ) ,
+
+        'check_box_settings_panel' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Check Box Settings', 'textdomain'),
+            'description'       => __('Check Box Settings', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "check_box_panel_parent",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        ) ,
+
+
+        'code_editor_settings_panel' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Code Editor Settings Panel', 'textdomain'),
+            'description'       => __('Code Editor Settings Panel', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        ) ,
+
+
+        'color_settings_panel' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Color Settings Panel', 'textdomain'),
+            'description'       => __('Color Settings Panel', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        ) ,
+
+
+        'radio_panel_parent' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Radio Settings Panel', 'textdomain'),
+            'description'       => __('Radio Settings Panel', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+            /*'dependency' => array(
+                'controls'  =>  array(
+                    "control"   => "multi_check_dependency_section" ,
+                    "value"     => "sed_radio_settings_panel",
+                    "is_panel"  => true
+                )
+            )*/
+        ) ,
+
+        'radio_settings_panel' =>  array(
             'priority'          => 9,
             'type'              => 'expanded',
-            'title'             => __('My Panel 3', 'textdomain'),
-            'description'       => __('My Description', 'textdomain'),
+            'title'             => __('Radio Settings', 'textdomain'),
+            'description'       => __('Radio Settings', 'textdomain'),
             'option_group'      => 'sed_sample_options' ,
             //'capability'        => '' ,
             //'theme_supports'    => '' ,
-            //'parent_id '        => "root",
+            'parent_id'         => "radio_panel_parent",
             'atts'              => array() ,
             //'active_callback'   => ''
-            'dependency' => array(
-                'controls'  =>  array(
-                    "control"   => "toggle_field_id" ,
-                    "value"     => true , //value with @string , values with @array
-                    "is_panel"  => true
-                )
-            )
         ) ,
 
-        'panel_id4' =>  array(
-            'priority'          => 18,
-            'type'              => 'expanded',
-            'title'             => __('My Panel 4', 'textdomain'),
-            'description'       => __('My Description', 'textdomain'),
-            'option_group'      => 'sed_sample_options' ,
-            //'capability'        => '' ,
-            //'theme_supports'    => '' ,
-            'parent_id'        => "panel_id3",
-            'atts'              => array() ,
-            //'active_callback'   => ''
-        ),
 
-        'panel_id5' =>  array(
-            'priority'          => 21,
+        'select_settings_panel' =>  array(
+            'priority'          => 9,
             'type'              => 'inner_box',
-            'title'             => __('My Panel 5', 'textdomain'),
-            'description'       => __('My Description', 'textdomain'),
+            'title'             => __('Select Settings Panel', 'textdomain'),
+            'description'       => __('Select Settings Panel', 'textdomain'),
             'option_group'      => 'sed_sample_options' ,
             //'capability'        => '' ,
             //'theme_supports'    => '' ,
-            'parent_id'         => "panel_id2",
+            'parent_id'         => "root",
             'atts'              => array() ,
             //'active_callback'   => ''
-        )
+        ) ,
+
+
+        'number_settings_panel' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Number Settings Panel', 'textdomain'),
+            'description'       => __('Number Settings Panel', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        ) ,
+
+
+        'icon_settings_panel' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Icon Settings Panel', 'textdomain'),
+            'description'       => __('Icon Settings Panel', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        ) ,
+
+
+        'media_settings_panel' =>  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Media Settings Panel', 'textdomain'),
+            'description'       => __('Media Settings Panel', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        ) ,
 
     );
 
     sed_options()->add_panels( $panels );
 
-    sed_options()->add_field( 'radio_field_id' , array(
-        'setting_id'        => 'my_setting2',
-        'label'             => __('My custom control', 'translation_domain'),
-        'type'              => 'radio',
-        'priority'          => 10,
-        'default'           => 'options3_key',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'choices'           => array(
-            "options1_key"      =>    "options1_value" ,
-            "options2_key"      =>    "options2_value" ,
-            "options3_key"      =>    "options3_value" ,
-            "options4_key"      =>    "options4_value" ,
-        ) ,
-        'panel'             =>  'panel_id1'
-        //'input_attrs'
-    ));
 
 
-    sed_options()->add_field( 'checkbox_field_id' , array(
-        'setting_id'        => 'my_setting3',
-        'label'             => __('Checkbox', 'translation_domain'),
-        'type'              => 'checkbox',
-        'priority'          => 8,
-        'default'           => false,
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id1'
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'color_field_id' , array(
-        'setting_id'        => 'my_setting4',
-        'label'             => __('Color control', 'translation_domain'),
-        'type'              => 'color',
-        'priority'          => 8,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id1' ,
-        'dependency' => array(
-            'controls'  =>  array(
-                "relation"     =>  "and" ,
-                array(
-                    "control"  => "radio_field_id" ,
-                    "value"    => "options2_key" , //value with @string , values with @array
-                    "type"     => "exclude"
-                ),
-                array(
-                    "control"  => "checkbox_field_id" ,
-                    "value"    => false ,
-                )
-            )
-        )
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'icon_field_id' , array(
-        'setting_id'        => 'my_setting5',
-        'label'             => __('Icon control', 'translation_domain'),
-        'type'              => 'icon',
-        'priority'          => 14,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             => 'panel_id2' ,
-        'has_border_box'    => false
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'multi-icon_field_id' , array(
-        'setting_id'        => 'my_setting6',
-        'label'             => __('Multi Icons control', 'translation_domain'),
-        'type'              => 'multi-icon',
-        'priority'          => 15,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id2' ,
-        'has_border_box'    => false
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'image_field_id' , array(
-        'setting_id'        => 'my_setting7',
-        'label'             => __('Image control', 'translation_domain'),
-        'type'              => 'image',
-        'priority'          => 16,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id2' ,
-        'has_border_box'    => false
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'multi-image_field_id' , array(
-        'setting_id'        => 'my_setting8',
-        'label'             => __('Multi Images control', 'translation_domain'),
-        'type'              => 'multi-image',
-        'priority'          => 17,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id3'
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'multi-check_field_id' , array(
-        'setting_id'        => 'my_setting9',
+    sed_options()->add_field( 'multi_check_dependency_section' , array(
+        'setting_id'        => 'sed_multi-check_dependency',
         'label'             => __('Multi Checkbox', 'translation_domain'),
         'type'              => 'multi-check',
         'priority'          => 18,
-        'default'           => 'options3_key',
+        'default'           => array(
+            "sed_text_settings_panel",
+            "sed_checkbox_settings_panel",
+            "sed_radio_settings_panel",
+        ) ,
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "sed_text_settings_panel"      => __('Text Settings Panel', 'textdomain'),
+            "sed_checkbox_settings_panel"  => __('Checkbox Settings Panel', 'textdomain'),
+            "sed_radio_settings_panel"     => __('Radio Settings Panel', 'textdomain'),
+        ) ,
+        'js_params' => array(
+            "options_selector" => ".sed-bp-checkbox-dependency"
+        ) ,
+    ));
+
+    /*
+    * @Text Box Settings
+    */
+
+    sed_options()->add_field( 'text_section' , array(
+        'setting_id'        => 'sed_text_setting',
+        'label'             => __('Text Field', 'translation_domain'),
+        'type'              => 'text',
+        'priority'          => 10,
+        'default'           => '',
+        "placeholder"       => __("Enter Your Text", "site-editor"),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-class1 custom-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
         //panel or group
-        //'panel'             => 'panel_id',
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'tel_section' , array(
+        'setting_id'        => 'sed_tel_setting',
+        'label'             => __('Tel Field', 'translation_domain'),
+        'type'              => 'text',
+        'subtype'           => 'tel',
+        'priority'          => 10,
+        'default'           => '',
+        "placeholder"       => __("E.g +989190765018", "site-editor"),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-class1 custom-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'password_section' , array(
+        'setting_id'        => 'sed_password_setting',
+        'label'             => __('Password Field', 'translation_domain'),
+        'type'              => 'text',
+        'subtype'           => 'password',
+        'priority'          => 10,
+        'default'           => '',
+        "placeholder"       => __("Password", "site-editor"),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-class1 custom-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'search_section' , array(
+        'setting_id'        => 'sed_search_setting',
+        'label'             => __('Search Field', 'translation_domain'),
+        'type'              => 'text',
+        'subtype'           => 'search',
+        'priority'          => 10,
+        'default'           => '',
+        "placeholder"       => __("Search ...", "site-editor"),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-class1 custom-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'url_section' , array(
+        'setting_id'        => 'sed_url_setting',
+        'label'             => __('Url Field', 'translation_domain'),
+        'type'              => 'text',
+        'subtype'           => 'url',
+        'priority'          => 10,
+        'default'           => '',
+        "placeholder"       => __("E.g www.siteeditor.org", "site-editor"),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-class1 custom-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'email_section' , array(
+        'setting_id'        => 'sed_email_setting',
+        'label'             => __('Email Field', 'translation_domain'),
+        'type'              => 'text',
+        'subtype'           => 'email',
+        'priority'          => 10,
+        'default'           => '',
+        "placeholder"       => __("E.g info@siteeditor.org", "site-editor"),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-class1 custom-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'dimension_section' , array(
+        'setting_id'        => 'sed_dimension_setting',
+        'label'             => __('Dimension Control', 'translation_domain'),
+        'type'              => 'dimension',
+        'priority'          => 10,
+        'default'           => '10px',
+        "placeholder"       => __("10px, 10%, 10em,... ", "site-editor"),
+        'invalid_value'     => __("Invalid Value", "site-editor"),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-dimension-class1 custom-dimension-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'date_section' , array(
+        'setting_id'        => 'sed_date_setting',
+        'label'             => __('Date Control', 'translation_domain'),
+        'type'              => 'date',
+        'priority'          => 10,
+        'default'           => "",
+        'js_params'     => array(
+            //"showAnim"          =>  "bounce"
+            "showButtonPanel"   =>   true ,
+            "changeMonth"       =>   true ,
+            "changeYear"        =>   true ,
+        ),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-class1 custom-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'textarea_section' , array(
+        'setting_id'        => 'sed_textarea_setting',
+        'label'             => __('Textarea Control', 'translation_domain'),
+        'type'              => 'textarea',
+        'priority'          => 10,
+        'default'           => '',
+        "placeholder"       => __("Enter Your Text", "site-editor"),
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'text_box_settings_panel',
+        'has_border_box'    => false
+    ));
+
+
+    /*
+     * @Check Box Settings
+     */
+
+
+    sed_options()->add_field( 'checkbox_section' , array(
+        'setting_id'        => 'sed_checkbox_setting',
+        'label'             => __('Checkbox', 'translation_domain'),
+        'type'              => 'checkbox',
+        'priority'          => 10,
+        'default'           => false,
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-class1 custom-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             => 'check_box_settings_panel'
+    ));
+
+    sed_options()->add_field( 'multi-check_section' , array(
+        'setting_id'        => 'sed_multi-check_setting',
+        'label'             => __('Multi Checkbox', 'translation_domain'),
+        'type'              => 'multi-check',
+        'priority'          => 10,
+        'default'           => 'options3_key',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
         'choices'           => array(
@@ -271,204 +478,42 @@ function sed_sample_options_register(){
             "options3_key"      =>    "options3_value" ,
             "options4_key"      =>    "options4_value" ,
         ) ,
-        //'input_attrs',
         'js_params' => array(
             "options_selector" => ".sed-bp-checkbox-input"
         ) ,
-        'panel'             =>  'panel_id3' ,
-        'has_border_box'    => false
-
-    ));
-
-    sed_options()->add_field( 'select_field_id' , array(
-        'setting_id'        => 'my_setting10',
-        'label'             => __('Select', 'translation_domain'),
-        'type'              => 'select',
-        'priority'          => 19,
-        'default'           => 'options3_key',
-        'subtype'           => 'single',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'choices'           => array(
-            "options1_key"      =>    "options1_value" ,
-            "options2_key"      =>    "options2_value" ,
-            "options3_key"      =>    "options3_value" ,
-            "options4_key"      =>    "options4_value" ,
-        ) ,
-        'panel'             =>  'panel_id3'
         //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'multiselect_field_id' , array(
-        'setting_id'        => 'my_setting11',
-        'label'             => __('Multi Select', 'translation_domain'),
-        'type'              => 'select',
-        'priority'          => 20,
-        'default'           => 'options3_key',
-        'subtype'           => 'multiple',
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
         //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'choices'           => array(
-            "options1_key"      =>    "options1_value" ,
-            "options2_key"      =>    "options2_value" ,
-            "options3_key"      =>    "options3_value" ,
-            "options4_key"      =>    "options4_value" ,
-        ) ,
-        'panel'             =>  'panel_id4'
-        //'input_attrs'
+        'panel'             =>  'check_box_settings_panel' ,
+
     ));
 
-    sed_options()->add_field( 'spinner_field_id' , array(
-        'setting_id'        => 'my_setting12',
-        'label'             => __('Spinner control', 'translation_domain'),
-        'type'              => 'spinner',
-        'priority'          => 21,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id4'
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'text_field_id' , array(
-        'setting_id'        => 'my_setting13',
-        'label'             => __('Text control', 'translation_domain'),
-        'type'              => 'text',
-        'priority'          => 22,
-        'default'           => 'test value',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id5'
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'text_field_id_2' , array(
-        'setting_id'        => 'my_setting14',
-        'label'             => __('Text control', 'translation_domain'),
-        'type'              => 'text',
-        'subtype'           => 'email',
-        'priority'          => 23,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id5'
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'textarea_field_id' , array(
-        'setting_id'        => 'my_setting15',
-        'label'             => __('Textarea control', 'translation_domain'),
-        'type'              => 'textarea',
-        'priority'          => 24,
-        'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'toggle_field_id' , array(
-        'setting_id'        => 'my_setting16',
+    sed_options()->add_field( 'toggle_section' , array(
+        'setting_id'        => 'sed_toggle_setting',
         'label'             => __('Toggle', 'translation_domain'),
         'type'              => 'toggle',
-        'priority'          => 25,
-        'default'           => true,
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'switch_field_id' , array(
-        'setting_id'        => 'my_setting17',
-        'label'             => __('Switch', 'translation_domain'),
-        'type'              => 'switch',
-        'priority'          => 26,
-        'default'           => true,
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'choices'           => array(
-            "on"       =>    "ON" ,
-            "off"      =>    "OFF" ,
-        ) ,
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'radio_buttonset_field_id' , array(
-        'setting_id'        => 'my_setting18',
-        'label'             => __('Radio Buttonset control', 'translation_domain'),
-        'type'              => 'radio-buttonset',
-        'priority'          => 26,
-        'default'           => 'options3_key',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'choices'           => array(
-            "options1_key"      =>    "One" ,
-            "options2_key"      =>    "Two" ,
-            "options3_key"      =>    "Three" ,
-        ) ,
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'radio_image_field_id' , array(
-        'setting_id'        => 'my_setting19',
-        'label'             => __('Radio Image control', 'translation_domain'),
-        'type'              => 'radio-image',
-        'priority'          => 27,
-        'default'           => 'options3_key',
-        //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        'choices'           => array(
-            "options1_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
-            "options2_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
-            "options3_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
-        ) ,
-        //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'slider_field_id' , array(
-        'setting_id'        => 'my_setting20',
-        'label'             => __('Slider', 'translation_domain'),
-        'type'              => 'slider',
         'priority'          => 28,
-        'default'           => 30,
-        //panel or group
-        //'panel'             => 'panel_id',
+        'default'           => true,
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
-        //'input_attrs',
-        'js_params' => array(
-            "min" => 20,
-            "max" => 150,
-        )
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'check_box_settings_panel' ,
     ));
 
-    sed_options()->add_field( 'sortable_field_id' , array(
-        'setting_id'        => 'my_setting21',
+    sed_options()->add_field( 'sortable_section' , array(
+        'setting_id'        => 'sed_sortable_setting',
         'label'             => __('Sortable control', 'translation_domain'),
         'type'              => 'sortable',
-        'priority'          => 29,
+        'priority'          => 30,
         'default'           => 'options3_key',
-        //panel or group
-        //'panel'             => 'panel_id',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
         'choices'           => array(
@@ -479,61 +524,161 @@ function sed_sample_options_register(){
             "options5_key"      =>    "Five" ,
         ) ,
         //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'check_box_settings_panel' ,
     ));
 
-    sed_options()->add_field( 'date_field_id' , array(
-        'setting_id'        => 'my_setting22',
-        'label'             => __('Date', 'translation_domain'),
-        'type'              => 'date',
-        'priority'          => 30,
-        'default'           => "",
-        //panel or group
-        //'panel'             => 'panel_id',
+    sed_options()->add_field( 'switch_section' , array(
+        'setting_id'        => 'sed_switch_setting',
+        'label'             => __('Switch', 'translation_domain'),
+        'type'              => 'switch',
+        'priority'          => 29,
+        'default'           => true,
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "on"       =>    "ON" ,
+            "off"      =>    "OFF" ,
+        ) ,
         //'input_attrs'
-    ));
-
-    sed_options()->add_field( 'dimension_field_id' , array(
-        'setting_id'        => 'my_setting23',
-        'label'             => __('Dimension', 'translation_domain'),
-        'type'              => 'dimension',
-        'priority'          => 31,
-        'default'           => 0,
-        'invalid_value'     => "Invalid Value",
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
         //panel or group
-        //'panel'             => 'panel_id',
-        'option_group'      => 'sed_sample_options',
-        'transport'         => 'postMessage' ,
-        //'input_attrs'
+        'panel'             =>  'check_box_settings_panel' ,
     ));
 
-    sed_options()->add_field( 'code_field_id' , array(
-        'setting_id'        => 'my_setting24',
-        'label'             => __('Code', 'translation_domain'),
+
+    /*
+     * @Code Editor Settings
+     */
+
+    sed_options()->add_field( 'html_code_section' , array(
+        'setting_id'        => 'sed_code_setting',
+        'label'             => __('HTML Code', 'translation_domain'),
         'type'              => 'code',
-        'priority'          => 32,
+        'priority'          => 10,
         'default'           => "",
-        //panel or group
-        //'panel'             => 'panel_id',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
-        //'input_attrs',
         'js_params' => array(
             "mode" => "html",
-        )
+        ),
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'code_editor_settings_panel' ,
     ));
 
-    sed_options()->add_field( 'multi-color_field_id' , array(
-        'setting_id'        => 'my_setting25',
-        'label'             => __('Multicolor control', 'translation_domain'),
-        'type'              => 'multi-color',
-        'priority'          => 33,
-        //panel or group
-        //'panel'             => 'panel_id',
+
+    sed_options()->add_field( 'js_code_section' , array(
+        'setting_id'        => 'sed_js_code_setting',
+        'label'             => __('Javascript Code', 'translation_domain'),
+        'type'              => 'code',
+        'priority'          => 10,
+        'default'           => "",
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
-        //'input_attrs',
+        'js_params' => array(
+            "mode" => "javascript",
+        ),
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'code_editor_settings_panel' ,
+    ));
+
+    sed_options()->add_field( 'css_code_section' , array(
+        'setting_id'        => 'sed_css_code_setting',
+        'label'             => __('Custom Css', 'translation_domain'),
+        'type'              => 'code',
+        'priority'          => 10,
+        'default'           => "",
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'js_params' => array(
+            "mode" => "css",
+        ),
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'code_editor_settings_panel' ,
+    ));
+
+    sed_options()->add_field( 'wp_editor_section' , array(
+        'setting_id'        => 'sed_wp_editor_setting',
+        'label'             => __('WP Editor', 'translation_domain'),
+        'type'              => 'wp-editor',
+        'priority'          => 10,
+        'default'           => "",
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'code_editor_settings_panel' ,
+    ));
+
+    /*
+     * @Color Settings
+     */
+
+    sed_options()->add_field( 'color_section' , array(
+        'setting_id'        => 'sed_color_setting',
+        'label'             => __('Color control', 'translation_domain'),
+        'type'              => 'color',
+        'priority'          => 10,
+        'default'           => '',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'panel'             =>  'panel_id1' ,
+        /*'dependency' => array(
+            'controls'  =>  array(
+                "relation"     =>  "and" ,
+                array(
+                    "control"  => "radio_section" ,
+                    "value"    => "options2_key" , //value with @string , values with @array
+                    "type"     => "exclude"
+                ),
+                array(
+                    "control"  => "checkbox_setting" ,
+                    "value"    => false ,
+                )
+            )
+        ),*/
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'color_settings_panel' ,
+    ));
+
+    sed_options()->add_field( 'multi-color_section' , array(
+        'setting_id'        => 'sed_multi-color_setting',
+        'label'             => __('Multicolor control', 'translation_domain'),
+        'type'              => 'multi-color',
+        'priority'          => 10,
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
         'choices'     => array(
             'link'    => 'Color',
             'hover'   => 'Hover',
@@ -544,45 +689,311 @@ function sed_sample_options_register(){
             'hover'   => '#00aaff',
             'active'  => '#00ffff',
         ),
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'color_settings_panel' ,
     ));
 
-    sed_options()->add_field( 'file_field_id' , array(
-        'setting_id'        => 'my_setting26',
+
+    /*
+     * @Radio Button Settings
+     */
+
+    sed_options()->add_field( 'radio_section' , array(
+        'setting_id'        => 'sed_radio_setting',
+        'label'             => __('My custom control', 'translation_domain'),
+        'type'              => 'radio',
+        'priority'          => 10,
+        'default'           => 'options3_key',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "options1_value" ,
+            "options2_key"      =>    "options2_value" ,
+            "options3_key"      =>    "options3_value" ,
+            "options4_key"      =>    "options4_value" ,
+        ) ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'radio_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'radio_buttonset_section' , array(
+        'setting_id'        => 'sed_radio-buttonset_setting',
+        'label'             => __('Radio Buttonset control', 'translation_domain'),
+        'type'              => 'radio-buttonset',
+        'priority'          => 10,
+        'default'           => 'options3_key',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "One" ,
+            "options2_key"      =>    "Two" ,
+            "options3_key"      =>    "Three" ,
+        ) ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'radio_settings_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'radio_image_section' , array(
+        'setting_id'        => 'sed_radio-image_setting',
+        'label'             => __('Radio Image control', 'translation_domain'),
+        'type'              => 'radio-image',
+        'priority'          => 10,
+        'default'           => 'options3_key',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
+            "options2_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
+            "options3_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
+        ) ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'radio_settings_panel',
+        'has_border_box'    => false
+    ));
+
+
+    /*
+    * @Select Settings
+    */
+
+    sed_options()->add_field( 'select_section' , array(
+        'setting_id'        => 'sed_select_setting',
+        'label'             => __('Select', 'translation_domain'),
+        'type'              => 'select',
+        'priority'          => 10,
+        'default'           => 'options3_key',
+        'subtype'           => 'single',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "options1_value" ,
+            "options2_key"      =>    "options2_value" ,
+            "options3_key"      =>    "options3_value" ,
+            "options4_key"      =>    "options4_value" ,
+        ) ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'select_settings_panel'
+    ));
+
+    sed_options()->add_field( 'multiselect_section' , array(
+        'setting_id'        => 'sed_multiselect_setting',
+        'label'             => __('Multi Select', 'translation_domain'),
+        'type'              => 'select',
+        'priority'          => 10,
+        'default'           => 'options3_key',
+        'subtype'           => 'multiple',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'choices'           => array(
+            "options1_key"      =>    "options1_value" ,
+            "options2_key"      =>    "options2_value" ,
+            "options3_key"      =>    "options3_value" ,
+            "options4_key"      =>    "options4_value" ,
+        ) ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'select_settings_panel'
+    ));
+
+
+    /*
+    * @Number Settings
+    */
+
+    sed_options()->add_field( 'spinner_section' , array(
+        'setting_id'        => 'sed_spinner_setting',
+        'label'             => __('Spinner control', 'translation_domain'),
+        'type'              => 'spinner',
+        'priority'          => 10,
+        'default'           => '',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'number_settings_panel'
+    ));
+
+    sed_options()->add_field( 'slider_section' , array(
+        'setting_id'        => 'sed_slider_setting',
+        'label'             => __('Slider', 'translation_domain'),
+        'type'              => 'slider',
+        'priority'          => 10,
+        'default'           => 30,
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        'js_params' => array(
+            "min" => 20,
+            "max" => 150,
+        ),
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'number_settings_panel'
+    ));
+
+    /*
+    * @Icon Settings
+    */
+
+    sed_options()->add_field( 'icon_section' , array(
+        'setting_id'        => 'sed_icon_setting',
+        'label'             => __('Icon control', 'translation_domain'),
+        'type'              => 'icon',
+        'priority'          => 10,
+        'default'           => '',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             => 'icon_settings_panel' ,
+    ));
+
+    sed_options()->add_field( 'multi-icon_section' , array(
+        'setting_id'        => 'sed_multi-icon_setting',
+        'label'             => __('Multi Icons control', 'translation_domain'),
+        'type'              => 'multi-icon',
+        'priority'          => 10,
+        'default'           => '',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'icon_settings_panel' ,
+    ));
+
+    /*
+    * @Media Settings
+    */
+
+    sed_options()->add_field( 'image_section' , array(
+        'setting_id'        => 'sed_image_setting',
+        'label'             => __('Image control', 'translation_domain'),
+        'type'              => 'image',
+        'priority'          => 10,
+        'default'           => '',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'media_settings_panel' ,
+    ));
+
+    sed_options()->add_field( 'multi-image_section' , array(
+        'setting_id'        => 'sed_multi-image_setting',
+        'label'             => __('Multi Images control', 'translation_domain'),
+        'type'              => 'multi-image',
+        'priority'          => 10,
+        'default'           => '',
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'media_settings_panel'
+    ));
+
+    sed_options()->add_field( 'file_section' , array(
+        'setting_id'        => 'sed_file_setting',
         'label'             => __('Change file', 'translation_domain'),
         'type'              => 'file',
-        'priority'          => 34,
+        'priority'          => 10,
         'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
         //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'media_settings_panel'
     ));
 
-    sed_options()->add_field( 'audio_field_id' , array(
-        'setting_id'        => 'my_setting27',
+    sed_options()->add_field( 'audio_section' , array(
+        'setting_id'        => 'sed_audio_setting',
         'label'             => __('Change Audio', 'translation_domain'),
         'type'              => 'audio',
-        'priority'          => 35,
+        'priority'          => 10,
         'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
         //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'media_settings_panel'
     ));
 
-    sed_options()->add_field( 'video_field_id' , array(
-        'setting_id'        => 'my_setting28',
+    sed_options()->add_field( 'video_section' , array(
+        'setting_id'        => 'sed_video_setting',
         'label'             => __('Change Video', 'translation_domain'),
         'type'              => 'video',
-        'priority'          => 36,
+        'priority'          => 10,
         'default'           => '',
-        //panel or group
-        //'panel'             => 'panel_id',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
         //'input_attrs'
+        "atts"              => array(
+            "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+            "data-custom"   =>    "test" ,
+        ),
+        //panel or group
+        'panel'             =>  'media_settings_panel'
     ));
 
 }
