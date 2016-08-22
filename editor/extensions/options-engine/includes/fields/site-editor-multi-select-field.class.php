@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Field: multi-check.
+ * SiteEditor Field: multi-select.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) )  {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorMultiCheckField' ) ) {
+if ( ! class_exists( 'SiteEditorMultiSelectField' ) ) {
 
 	/**
-	 * Field overrides.
+	 * Class SiteEditorMultiSelectField
 	 */
-	class SiteEditorMultiCheckField extends SiteEditorField {
+	class SiteEditorMultiSelectField extends SiteEditorField {
 
 		/**
 		 * Sets the $sanitize_callback
@@ -44,9 +44,9 @@ if ( ! class_exists( 'SiteEditorMultiCheckField' ) ) {
 		 */
 		public static function sanitize( $value ) {
 
-            if( ! is_array( $value ) && ! is_string( $value ) ){
-                return array();
-            }
+			if( ! is_array( $value ) && ! is_string( $value ) ){
+				return array();
+			}
 
 			$value = ( ! is_array( $value ) ) ? explode( ',', $value ) : $value;
 			return ( ! empty( $value ) ) ? array_map( 'sanitize_text_field', $value ) : array();
@@ -54,17 +54,17 @@ if ( ! class_exists( 'SiteEditorMultiCheckField' ) ) {
 		}
 
 
-        /**
-         * Sets the default value.
-         *
-         * @access protected
-         */
-        protected function set_default() {
+		/**
+		 * Sets the default value.
+		 *
+		 * @access protected
+		 */
+		protected function set_default() {
 
-            $this->default = self::sanitize( $this->default );
-        }
+			$this->default = self::sanitize( $this->default );
+		}
 
 	}
 }
 
-$this->register_field_type( 'multi-check' , 'SiteEditorMultiCheckField' );
+$this->register_field_type( 'multi-select' , 'SiteEditorMultiSelectField' );

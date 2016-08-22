@@ -15,6 +15,8 @@ if(!class_exists('SiteEditorAssetsManager'))
             self::$bootstrap_version = "3.3.5";
 
             add_action("init" , array( $this , "default_scripts" ) , 0 );
+
+            add_action("init" , array( $this , "default_styles" ) , 0 );
         }
 
         function default_scripts( ){
@@ -23,8 +25,14 @@ if(!class_exists('SiteEditorAssetsManager'))
             $this->register_bootstrap_scripts();
 
             //register chosen
+            /**
+             * @deprecate For Use In controls instead using select2
+             */
             $this->add("chosen",                SED_ASSETS_URL . "/js/chosen/chosen.jquery".$this->suffix.".js" , array('jquery'  ) , "1.1.0" );
-            
+
+            //select 2
+            $this->add("select2",                SED_ASSETS_URL . "/js/select2/select2.full".$this->suffix.".js" , array('jquery'  ) , "4.0.3" );
+
             //register livequery
             $this->add( 'jquery-livequery',     SED_ASSETS_URL . '/js/livequery/jquery.livequery'.$this->suffix.'.js', array( 'jquery' ) , '1.0.0' );
             $this->add( 'sed-livequery',        SED_ASSETS_URL . '/js/livequery/sed.livequery'.$this->suffix.'.js', array( 'jquery-livequery' ) , '1.0.0' );
@@ -78,6 +86,9 @@ if(!class_exists('SiteEditorAssetsManager'))
         }
 
         function default_styles(){
+
+            //select 2
+            $this->add_css( "select2",  SED_ASSETS_URL . "/css/select2/select2".$this->suffix.".css" , array( ) , "4.0.3" );
 
         }
 

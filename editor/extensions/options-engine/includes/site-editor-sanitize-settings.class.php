@@ -204,10 +204,13 @@ if ( ! class_exists( 'SiteEditorSanitizeSettings' ) ) {
 			if ( is_string( $value ) && 'transparent' === trim( $value ) ) {
 				return 'transparent';
 			}
+
+            return $value;
+
 			// Instantiate the object.
-			$color = ariColor::newColor( $value );
+			/*$color = ariColor::newColor( $value );
 			// Return a CSS value, using the auto-detected mode.
-			return $color->toCSS( $color->mode );
+			return $color->toCSS( $color->mode );*/
 		}
 
 		/**

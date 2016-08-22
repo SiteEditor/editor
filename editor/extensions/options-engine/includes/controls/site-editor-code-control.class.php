@@ -60,12 +60,41 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 
             $this->js_params = ( !is_array( $this->js_params ) ) ? array() : $this->js_params;
 
-            $js_params = array_merge( array(
+            $js_params = wp_parse_args( array(
                     'language'	=>  'html' ,
                     'theme'		=>	'default' ,
                     'height'	=>	'250px'
                 ), $this->js_params
             );
+
+            // An array of valid languages.
+            $valid_languages = array(
+                'coffescript',
+                'css',
+                'haml',
+                'htmlembedded',
+                'htmlmixed',
+                'javascript',
+                'markdown',
+                'php',
+                'sass',
+                'smarty',
+                'sql',
+                'stylus',
+                'textile',
+                'twig',
+                'xml',
+                'yaml',
+            );
+            // Make sure the defined language exists.
+            // If not, fallback to CSS.
+            if ( ! in_array( $js_params['language'] , $valid_languages, true ) ) {
+                $js_params['language'] = 'css';
+            }
+            // Hack for 'html' mode.
+            if ( 'html' === $js_params['language'] ) {
+                $js_params['language'] = 'htmlmixed';
+            }
 
             $json_array['code'] = $js_params;
 

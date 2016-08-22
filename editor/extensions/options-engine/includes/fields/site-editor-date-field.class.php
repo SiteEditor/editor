@@ -14,10 +14,14 @@ if ( ! defined( 'ABSPATH' ) )  {
 
 if ( ! class_exists( 'SiteEditorDateField' ) ) {
 
+	if( ! class_exists( 'SiteEditorTextField' ) ) {
+		require_once dirname( __FILE__ ) . DS . 'site-editor-text-field.class.php';
+	}
+
 	/**
 	 * Class SiteEditorDateField
 	 */
-	class SiteEditorTextField extends SiteEditorField {
+	class SiteEditorDateField extends SiteEditorTextField {
 
 	}
 

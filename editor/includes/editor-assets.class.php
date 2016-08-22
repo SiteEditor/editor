@@ -155,6 +155,8 @@ if(!class_exists('SEDEditorAssetsManager'))
          */
         function enqueue_editor_scripts(){
 
+            wp_enqueue_script( 'select2' );
+
             if( SED()->version_type == "production" ) {
 
                 wp_enqueue_script('siteeditor');
@@ -178,6 +180,8 @@ if(!class_exists('SEDEditorAssetsManager'))
                 wp_enqueue_script( "siteeditor" );
 
             }
+
+
 
             wp_enqueue_script( 'sed-render' );
             
@@ -333,6 +337,8 @@ if(!class_exists('SEDEditorAssetsManager'))
 
 
         function enqueue_editor_styles(){
+
+            wp_enqueue_style( 'select2' );
 
             if( SED()->version_type == "production" ){
 

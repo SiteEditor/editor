@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Field: textarea.
+ * SiteEditor Field: select.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,12 +12,13 @@ if ( ! defined( 'ABSPATH' ) )  {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorTextareaField' ) ) {
+if ( ! class_exists( 'SiteEditorSelectField' ) ) {
 
 	/**
-	 * Class SiteEditorTextareaField
+	 * Class SiteEditorSelectField
 	 */
-	class SiteEditorTextareaField extends SiteEditorField {
+	class SiteEditorSelectField extends SiteEditorField {
+
 
 		/**
 		 * Sets the $sanitize_callback
@@ -32,19 +33,11 @@ if ( ! class_exists( 'SiteEditorTextareaField' ) ) {
 				return;
 			}
 
-			if ( !current_user_can( 'unfiltered_html' ) ) {
-
-				$this->sanitize_callback = 'wp_kses_post';
-
-			}else{
-
-                $this->sanitize_callback = array( 'SiteEditorSanitizeSettings' , 'unfiltered' );
-
-			}
+			$this->sanitize_callback = 'sanitize_text_field';
 
 		}
 
 	}
 }
 
-$this->register_field_type( 'textarea' , 'SiteEditorTextareaField' );
+$this->register_field_type( 'select' , 'SiteEditorSelectField' );

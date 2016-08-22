@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Field: textarea.
+ * SiteEditor Field: code.  
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) )  {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorTextareaField' ) ) {
+if ( ! class_exists( 'SiteEditorCodeField' ) ) {
 
 	/**
-	 * Class SiteEditorTextareaField
+	 * Field overrides.
 	 */
-	class SiteEditorTextareaField extends SiteEditorField {
+	class SiteEditorCodeField extends SiteEditorField {
 
 		/**
 		 * Sets the $sanitize_callback
@@ -38,13 +38,12 @@ if ( ! class_exists( 'SiteEditorTextareaField' ) ) {
 
 			}else{
 
-                $this->sanitize_callback = array( 'SiteEditorSanitizeSettings' , 'unfiltered' );
+				$this->sanitize_callback = array( 'SiteEditorSanitizeSettings' , 'unfiltered' );
 
 			}
 
 		}
-
 	}
 }
 
-$this->register_field_type( 'textarea' , 'SiteEditorTextareaField' );
+$this->register_field_type( 'code' , 'SiteEditorCodeField' );

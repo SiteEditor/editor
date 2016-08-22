@@ -306,7 +306,7 @@ final class SiteEditorOptionsManager{
     }
 
     private function register_controls_components(  ){
-        
+
         $panels_path = dirname( __FILE__ ) . DS . "controls" . DS . "*control.class.php" ;
 
         foreach ( glob( $panels_path ) as $php_file ) {
@@ -762,6 +762,11 @@ final class SiteEditorOptionsManager{
         wp_enqueue_script( 'sed-options-controls' );
         wp_enqueue_style( 'sed-options-controls' );
 
+        //select 2
+        wp_enqueue_script( 'select2' );
+        wp_enqueue_style( 'select2' );
+
+        //code mirror
         wp_enqueue_script( 'codemirror' );
         wp_enqueue_style( 'codemirror' );
 

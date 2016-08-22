@@ -43,6 +43,19 @@ function sed_sample_options_register(){
     //support full nesting level panels
     $panels = array(
 
+        'checkbox_dependency_panel' =>  array(
+            'priority'          => 9,
+            'type'              => 'default',
+            'title'             => __('Dependency Settings Panel', 'textdomain'),
+            'description'       => __('Dependency Settings Panel', 'textdomain'),
+            'option_group'      => 'sed_sample_options' ,
+            //'capability'        => '' ,
+            //'theme_supports'    => '' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
+            //'active_callback'   => ''
+        ) ,
+
         'text_box_panel_parent' =>  array(
             'priority'          => 9,
             'type'              => 'inner_box',
@@ -54,13 +67,13 @@ function sed_sample_options_register(){
             'parent_id'         => "root",
             'atts'              => array() ,
             //'active_callback'   => ''
-            /*'dependency' => array(
+            'dependency' => array(
                 'controls'  =>  array(
-                    "control"   => "multi_check_dependency_section" ,
-                    "value"     => "sed_text_settings_panel",
+                    "control"   => "sed_text_settings_panel" ,
+                    "value"     => true,
                     "is_panel"  => true
                 )
-            )*/
+            )
         ) ,
 
         'text_box_settings_panel' =>  array(
@@ -89,8 +102,8 @@ function sed_sample_options_register(){
             //'active_callback'   => ''
             /*'dependency' => array(
                 'controls'  =>  array(
-                    "control"   => "multi_check_dependency_section" ,
-                    "value"     => "sed_checkbox_settings_panel",
+                    "control"   => "sed_checkbox_settings_panel" ,
+                    "value"     => true,
                     "is_panel"  => true
                 )
             )*/
@@ -151,8 +164,8 @@ function sed_sample_options_register(){
             //'active_callback'   => ''
             /*'dependency' => array(
                 'controls'  =>  array(
-                    "control"   => "multi_check_dependency_section" ,
-                    "value"     => "sed_radio_settings_panel",
+                    "control"   => "sed_radio_settings_panel" ,
+                    "value"     => true,
                     "is_panel"  => true
                 )
             )*/
@@ -232,27 +245,43 @@ function sed_sample_options_register(){
     sed_options()->add_panels( $panels );
 
 
-
-    sed_options()->add_field( 'multi_check_dependency_section' , array(
-        'setting_id'        => 'sed_multi-check_dependency',
-        'label'             => __('Multi Checkbox', 'translation_domain'),
-        'type'              => 'multi-check',
-        'priority'          => 18,
-        'default'           => array(
-            "sed_text_settings_panel",
-            "sed_checkbox_settings_panel",
-            "sed_radio_settings_panel",
-        ) ,
+    sed_options()->add_field( 'sed_text_settings_panel' , array(
+        'setting_id'        => 'sed_text_settings_panel_setting',
+        'label'             => __('Text Settings Panel', 'translation_domain'),
+        'type'              => 'checkbox',
+        'priority'          => 10,
+        'default'           => true,
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
-        'choices'           => array(
-            "sed_text_settings_panel"      => __('Text Settings Panel', 'textdomain'),
-            "sed_checkbox_settings_panel"  => __('Checkbox Settings Panel', 'textdomain'),
-            "sed_radio_settings_panel"     => __('Radio Settings Panel', 'textdomain'),
-        ) ,
-        'js_params' => array(
-            "options_selector" => ".sed-bp-checkbox-dependency"
-        ) ,
+        //panel or group
+        'panel'             => 'checkbox_dependency_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'sed_checkbox_settings_panel' , array(
+        'setting_id'        => 'sed_checkbox_settings_panel_setting',
+        'label'             => __('Checkbox Settings Panel', 'translation_domain'),
+        'type'              => 'checkbox',
+        'priority'          => 10,
+        'default'           => true,
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //panel or group
+        'panel'             => 'checkbox_dependency_panel',
+        'has_border_box'    => false
+    ));
+
+    sed_options()->add_field( 'sed_radio_settings_panel' , array(
+        'setting_id'        => 'sed_radio_settings_panel_setting',
+        'label'             => __('Radio Settings Panel', 'translation_domain'),
+        'type'              => 'checkbox',
+        'priority'          => 10,
+        'default'           => true,
+        'option_group'      => 'sed_sample_options',
+        'transport'         => 'postMessage' ,
+        //panel or group
+        'panel'             => 'checkbox_dependency_panel',
+        'has_border_box'    => false
     ));
 
     /*
@@ -274,7 +303,7 @@ function sed_sample_options_register(){
             "data-custom"   =>    "test" ,
         ),
         //panel or group
-        'panel'             =>  'text_box_settings_panel',
+        'panel'             =>  'text_box_panel_parent',
         'has_border_box'    => false
     ));
 
@@ -383,7 +412,7 @@ function sed_sample_options_register(){
         'label'             => __('Dimension Control', 'translation_domain'),
         'type'              => 'dimension',
         'priority'          => 10,
-        'default'           => '10px',
+        'default'           => "10px",
         "placeholder"       => __("10px, 10%, 10em,... ", "site-editor"),
         'invalid_value'     => __("Invalid Value", "site-editor"),
         'option_group'      => 'sed_sample_options',
@@ -445,7 +474,6 @@ function sed_sample_options_register(){
     /*
      * @Check Box Settings
      */
-
 
     sed_options()->add_field( 'checkbox_section' , array(
         'setting_id'        => 'sed_checkbox_setting',
@@ -648,21 +676,6 @@ function sed_sample_options_register(){
         'default'           => '',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
-        'panel'             =>  'panel_id1' ,
-        /*'dependency' => array(
-            'controls'  =>  array(
-                "relation"     =>  "and" ,
-                array(
-                    "control"  => "radio_section" ,
-                    "value"    => "options2_key" , //value with @string , values with @array
-                    "type"     => "exclude"
-                ),
-                array(
-                    "control"  => "checkbox_setting" ,
-                    "value"    => false ,
-                )
-            )
-        ),*/
         //'input_attrs'
         "atts"              => array(
             "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
@@ -740,6 +753,20 @@ function sed_sample_options_register(){
             "options2_key"      =>    "Two" ,
             "options3_key"      =>    "Three" ,
         ) ,
+        'dependency' => array(
+            'controls'  =>  array(
+                "relation"     =>  "and" ,
+                array(
+                    "control"  => "radio_section" ,
+                    "value"    => "options2_key" , //value with @string , values with @array
+                    "type"     => "exclude"
+                ),
+                array(
+                    "control"  => "radio_image_section" ,
+                    "value"    => "options3_key" , //value with @string , values with @array
+                ),
+            )
+        ),
         //'input_attrs'
         "atts"              => array(
             "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
@@ -784,7 +811,6 @@ function sed_sample_options_register(){
         'type'              => 'select',
         'priority'          => 10,
         'default'           => 'options3_key',
-        'subtype'           => 'single',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
         'choices'           => array(
@@ -802,13 +828,13 @@ function sed_sample_options_register(){
         'panel'             =>  'select_settings_panel'
     ));
 
+
     sed_options()->add_field( 'multiselect_section' , array(
         'setting_id'        => 'sed_multiselect_setting',
-        'label'             => __('Multi Select', 'translation_domain'),
-        'type'              => 'select',
+        'label'             => __('Multi Select', 'site-editor'),
+        'type'              => 'multi-select',
         'priority'          => 10,
         'default'           => 'options3_key',
-        'subtype'           => 'multiple',
         'option_group'      => 'sed_sample_options',
         'transport'         => 'postMessage' ,
         'choices'           => array(
@@ -831,10 +857,10 @@ function sed_sample_options_register(){
     * @Number Settings
     */
 
-    sed_options()->add_field( 'spinner_section' , array(
-        'setting_id'        => 'sed_spinner_setting',
-        'label'             => __('Spinner control', 'translation_domain'),
-        'type'              => 'spinner',
+    sed_options()->add_field( 'number_section' , array(
+        'setting_id'        => 'sed_number_setting',
+        'label'             => __('Number control', 'translation_domain'),
+        'type'              => 'number',
         'priority'          => 10,
         'default'           => '',
         'option_group'      => 'sed_sample_options',

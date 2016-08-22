@@ -116,13 +116,9 @@
 
     //for chosen select
     $("select.custom-select").livequery(function(){
-        $(this).chosen({
-            disable_search_threshold: 5,
-            no_results_text: "Oops, nothing found!",
-            allow_single_deselect: true,
-            placeholder_text_multiple: "Select Some Options",
-            placeholder_text_single: "Select an Option",
-            width: "95%"
+        $(this).select2({
+            placeholder: 'Select an option' ,
+            allowClear: true
         });
     });
 

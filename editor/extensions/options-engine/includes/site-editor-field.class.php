@@ -218,7 +218,6 @@ class SiteEditorField{
     /**
      * Processes the field arguments
      *
-     * @param array $whitelisted_properties Defines an array of arguments that will skip validation at this point.
      */
     protected function set_field() {
 
