@@ -14,6 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'SiteEditorVideoControl' ) ) {
 
+	if( ! class_exists( 'SiteEditorMediaControl' ) ) {
+		require_once dirname( __FILE__ ) . DS . 'site-editor-media-control.class.php';
+	}
+
 	/**
 	 * Video control
 	 */

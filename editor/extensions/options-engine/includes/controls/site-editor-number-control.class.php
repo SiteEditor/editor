@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorSpinnerControl' ) ) {
+if ( ! class_exists( 'SiteEditorNumberControl' ) ) {
 
 	/**
 	 * Spinner control
@@ -85,4 +85,4 @@ if ( ! class_exists( 'SiteEditorSpinnerControl' ) ) {
 	}
 }
 
-$this->register_control_type( 'number' , 'SiteEditorSpinnerControl' );
+$this->register_control_type( 'number' , 'SiteEditorNumberControl' );

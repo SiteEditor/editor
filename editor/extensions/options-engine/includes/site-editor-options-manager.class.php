@@ -306,8 +306,7 @@ final class SiteEditorOptionsManager{
     }
 
     private function register_controls_components(  ){
-
-        require_once dirname( __FILE__ ) . DS . "controls" . DS . "site-editor-media-controls.class .php" ;
+        
         $panels_path = dirname( __FILE__ ) . DS . "controls" . DS . "*control.class.php" ;
 
         foreach ( glob( $panels_path ) as $php_file ) {
