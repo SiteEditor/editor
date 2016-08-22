@@ -57,7 +57,7 @@ if ( ! class_exists( 'SiteEditorRadioButtonsetControl' ) ) {
 
 			?>
 
-			<label class=""><?php echo $this->label;?></label>
+			<label class=""><?php echo esc_html( $this->label );?></label>
 			<?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
@@ -65,11 +65,11 @@ if ( ! class_exists( 'SiteEditorRadioButtonsetControl' ) ) {
 				<?php
 				$i = 1;
 				foreach( $this->choices as $key_val => $choice ) {
-					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
+					$checked = ( esc_attr( $key_val ) == $value ) ? 'checked="checked"' : '';
 				?>
 					<input  type="radio" class="<?php echo esc_attr( $classes ); ?> buttonset-input" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
 						<label class="buttonset-label" for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
-							<div class="sed-btn-default"><?php echo $choice;?></div>
+							<div class="sed-btn-default"><?php echo esc_html( $choice );?></div>
 						</label>
 				    </input> 
 				<?php 

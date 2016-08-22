@@ -27,9 +27,29 @@ if ( ! class_exists( 'SiteEditorMediaControl' ) ) {
 		 */
 		public $type = 'file';
 
+		/**
+		 * This Field Support Media Type
+		 *
+		 * @access public
+		 * @var string
+		 */
         public $media_type =  'all';
 
-        public $selcted_type =  'single';
+		/**
+		 * This Field Multi Or Single Selected Media Support In Library
+		 *
+		 * @access public
+		 * @var string
+		 */
+        public $selected_type =  'single';
+
+		/**
+		 * The Button Label
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $button_label =  '';
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -59,24 +79,25 @@ if ( ! class_exists( 'SiteEditorMediaControl' ) ) {
 
             $value          = $this->value();
 
+			$button_label 	= ( ! empty( $button_label ) ) ? $button_label : __("Select File" , "site-editor") ;
+
 			?>
 
 
             <div class="">
-	            <label><?php  __("Url" ,"site-editor"); ?></label>
+	            <label><?php echo esc_html( $this->label ); ?></label>
 	          
 	            <?php if(!empty($this->description)){ ?> 
 				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
 
-	            <input type="text" class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo esc_attr( $value );?>" disabled="disabled" <?php echo $atts_string;?>/>
+	            <input type="text" class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo esc_attr( $value );?>" disabled="disabled" <?php echo $atts_string;?> />
 	            <a class="remove-media-src-btn" href="#">
 	            	<span class="fa f-sed fa-lg icon-delete"></span>
 	            </a>
             </div>
 
-            <button class="change_media sed-change-media-button sed-btn-blue" data-media-type="<?php echo esc_attr( $this->media_type ); ?>" data-selcted-type="<?php echo esc_attr( $this->selcted_type ); ?>"><?php echo $this->label;?></button>
-
+            <button class="change_media sed-change-media-button sed-btn-blue" data-media-type="<?php echo esc_attr( $this->media_type ); ?>" data-selcted-type="<?php echo esc_attr( $this->selected_type ); ?>"><?php echo esc_html( $button_label );?></button>
 
 			<?php
 		}

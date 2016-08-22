@@ -94,6 +94,8 @@ final class SiteEditorOptionsManager{
 
         new SiteEditorCustomCodeOptions();
 
+        require_once dirname( __FILE__ ) . DS . 'site-editor-sanitize-settings.class.php';
+        
         add_action( 'sed_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );
 
         add_action( 'sed_app_register', array( $this, 'register_fields' ) , 1000 );
@@ -357,7 +359,7 @@ final class SiteEditorOptionsManager{
      * Adds the control.
      *
      * @access protected
-     * @param array $args The field definition as sanitized in Kirki_Field.
+     * @param array $args The field definition as sanitized in SiteEditorField
      */
     final protected function add_control( $id, $args = array() ) {
 

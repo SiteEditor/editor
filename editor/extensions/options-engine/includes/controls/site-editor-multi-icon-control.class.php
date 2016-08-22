@@ -62,11 +62,19 @@ if ( ! class_exists( 'SiteEditorMultiIconsControl' ) ) {
 			<?php } ?>
         	<div class="setting-icon">
 	        	<div class="icons-organize-box">
-	        		<ul class="icons-sortable"></ul>
+	        		<ul class="icons-sortable">
+					<?php
+                    /**
+                     * Render With Underscore JS Template
+                     */
+                    ?>
+					</ul>
 	        	</div>
 	        	<div class="select-icon-btns">
 
-	        		<button class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?>><?php echo $this->label; ?></button>
+	        		<button class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?>>
+						<?php echo esc_html( $this->label ); ?>
+					</button>
 
 	        	</div>
 	        	<div class="clr"></div>

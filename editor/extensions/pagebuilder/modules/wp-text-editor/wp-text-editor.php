@@ -49,7 +49,6 @@ class PBWPTextEditorShortcode extends PBShortcodeClass{
                 'type'              => 'wp-editor',
                 'priority'          => 10,
                 'default'           => "",
-                'transport'         => 'postMessage' ,
             ) ,
 
             'spacing' => array(
@@ -82,12 +81,11 @@ new PBWPTextEditorShortcode;
 global $sed_pb_app;
 
 $sed_pb_app->register_module(array(
-    "group"         => "apps" ,
+    "group"         => "basic" ,
     "name"          => "wp-text-editor",
     "title"         => __("WP Text Editor","site-editor"),
     "description"   => __("site editor module for WP Text Editor plugin","site-editor"),
-    "icon"          => "icon-contactform",
-    //"tpl_type"    => "underscore" ,
+    "icon"          => "icon-customhtml",
     "shortcode"     => "sed_wp_text_editor",
     "transport"     => "ajax"
     //"js_plugin"   => 'wp-text-editor/js/wp-text-editor-plugin.min.js',

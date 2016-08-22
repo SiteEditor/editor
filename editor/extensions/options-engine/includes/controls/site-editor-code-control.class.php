@@ -103,12 +103,14 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 
 			?>
 
-				<label><?php echo $this->label;?></label>
+				<label><?php echo esc_html( $this->label );?></label>
 				<?php if(!empty($this->description)){ ?> 
 				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
 				<!--<a href="#" class="sed-btn-blue">code</a>-->
-				<textarea class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>><?php echo $value; ?></textarea>
+				<textarea class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
+					<?php echo esc_textarea( $value ); ?>
+				</textarea>
 
                 <?php if( $this->update_type == "button" ) : ?>
                 <!--<button value="Saved" class="btn button-primary save" id="save" name="save" disabled="">
@@ -116,7 +118,7 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
                     <span class="fa f-sed icon-savepublish  fa-lg "></span>
                     <span class="el_txt">Saved</span>
                 </button> -->
-                <a href="#" class="sed-save-code-changes sed-btn-default"><?php echo __( "Save Changes" , "site-editor" );?></a>
+                <a href="#" class="sed-save-code-changes sed-btn-default"><?php echo esc_html__( "Save Changes" , "site-editor" );?></a>
                 <?php endif;?>
 
 			<?php

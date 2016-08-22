@@ -14,6 +14,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'SiteEditorAudioControl' ) ) {
 
+	/*if( ! class_exists( 'SiteEditorMediaControl' ) ) {
+		require_once dirname( __FILE__ ) . DS . 'site-editor-media-field.class.php';
+	}*/
+
 	/**
 	 * Audio control
 	 */

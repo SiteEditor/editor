@@ -1070,7 +1070,9 @@ Class PageBuilderApplication {
 
         $content = $sed_apps->editor->save->create_shortcode_content( $tree_shortcodes , array() );
 
-        $output = do_shortcode( $content );
+        $output = apply_filters( 'the_content' , $content );
+
+        //$output = do_shortcode( $content );
 
         wp_send_json_success( $output );
     }

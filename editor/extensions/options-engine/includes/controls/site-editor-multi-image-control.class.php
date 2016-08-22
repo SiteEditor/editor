@@ -63,11 +63,15 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 			<?php } ?>
         	<div class="setting-image">
 	        	<div class="images-organize-box">
-	        		<ul class="images-sortable"></ul>
+	        		<ul class="images-sortable">
+
+					</ul>
 	        	</div>
 	        	<div class="select-img-btns"> 
 
-	        		<button class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?> ><?php echo $this->label;?></button>
+	        		<button class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?> >
+                        <?php echo esc_attr( $this->label );?>
+                    </button>
 
 	        	</div>
 	        	<div class="clr"></div>

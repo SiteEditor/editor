@@ -57,13 +57,13 @@ if ( ! class_exists( 'SiteEditorWpEditorControl' ) ) {
 
 			?>
 
-			<label><?php echo $this->label;?></label>
+			<label><?php echo esc_html( $this->label );?></label>
 			<?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
 
 			<div class="sed-bp-form-wp-editor">
-				<a href="#" class="sed-open-wp-editor-btn sed-btn-default <?php echo esc_attr( $classes );?>" <?php echo $atts_string;?>><?php echo __( "Open WP Editor" , "site-editor" );?></a>
+				<a href="#" class="sed-open-wp-editor-btn sed-btn-default <?php echo esc_attr( $classes );?>" <?php echo $atts_string;?>><?php echo esc_html__( "Open WP Editor" , "site-editor" );?></a>
                 <input type="hidden" class="sed-textarea-html-content sed-wp-editor-value" value="<?php echo htmlspecialchars( $value );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" />
 			</div>
 			<?php

@@ -8,24 +8,16 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) )  {
 	exit;
 }
 
 if ( ! class_exists( 'SiteEditorTextField' ) ) {
 
 	/**
-	 * Text Field class
+	 * Class SiteEditorTextField
 	 */
 	class SiteEditorTextField extends SiteEditorField {
-
-		/**
-		 * The control type.
-		 *
-		 * @access public
-		 * @var string
-		 */
-		public $type = 'text';
 
 		/**
 		 * Sets the $sanitize_callback
@@ -40,10 +32,9 @@ if ( ! class_exists( 'SiteEditorTextField' ) ) {
 				return;
 			}
 
-			$this->sanitize_callback = 'esc_textarea';
+			$this->sanitize_callback = 'sanitize_text_field';
 
 		}
-
 	}
 }
 

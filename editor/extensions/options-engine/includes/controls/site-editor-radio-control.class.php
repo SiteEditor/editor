@@ -57,7 +57,7 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 
 			?>
 
-			<label class=""><?php echo $this->label;?></label>
+			<label class=""><?php echo esc_html( $this->label );?></label>
 			<?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
@@ -65,13 +65,13 @@ if ( ! class_exists( 'SiteEditorRadioControl' ) ) {
 				<?php
 				$i = 1;
 				foreach( $this->choices as $key_val => $choice ) {
-					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
+					$checked = ( $value == esc_attr( $key_val ) ) ? 'checked="checked"' : '';
 				?>
 
 					<div class="sed-bp-form-radio-item">
 						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
 							<input  type="radio" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
-							<?php echo $choice;?>
+							<?php echo esc_html( $choice );?>
 						</label>
 					</div>
 

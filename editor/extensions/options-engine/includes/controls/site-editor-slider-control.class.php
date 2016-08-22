@@ -56,8 +56,8 @@ if ( ! class_exists( 'SiteEditorSliderControl' ) ) {
             $value          = $this->value();
 
 			?>
-			
-			<label for="slider-amount"><?php echo $this->label; ?></label>
+
+			<label for="slider-amount"><?php echo esc_html( $this->label ); ?></label>
 			<?php if(!empty($this->description)){ ?> 
 				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>

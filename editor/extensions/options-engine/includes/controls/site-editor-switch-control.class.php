@@ -55,15 +55,21 @@ if ( ! class_exists( 'SiteEditorSwitchControl' ) ) {
 
             $value          = $this->value();
 
+			if( ! class_exists( 'SiteEditorCheckboxField' ) ){
+				require_once dirname( dirname( __FILE__ ) ) . DS . 'fields' . DS . 'site-editor-checkbox-field.class.php';
+			}
+
+            $value = SiteEditorCheckboxField::sanitize( $value );
+
 			?>
 
 
-			<label class=""><?php echo $this->label;?></label>
+			<label class=""><?php echo esc_html( $this->label );?></label>
 			<?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
 			<div class="sed-bp-form-switch"> 
-			    <?php $checked = ( "true" == $value ) ? 'checked="checked"' : ''; ?>
+			    <?php $checked = ( "1" == $value ) ? 'checked="checked"' : ''; ?>
 				<input  type="checkbox" class="<?php echo esc_attr( $classes ); ?>" value="true" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $checked;?> <?php echo $atts_string;?> />
 				<label class="switch-label" for="<?php echo esc_attr( $sed_field_id );?>">
 					<span class="switch-on"><?php echo $this->choices['on']; ?> </span>

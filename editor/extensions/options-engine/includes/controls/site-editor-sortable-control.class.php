@@ -55,27 +55,31 @@ if ( ! class_exists( 'SiteEditorSortableControl' ) ) {
 
             $value          = $this->value();
 
+			if( ! class_exists( 'SiteEditorMultiCheckField' ) ){
+				require_once dirname( dirname( __FILE__ ) ) . DS . 'fields' . DS . 'site-editor-multi-check-field.class.php';
+			}
+
+			$value = SiteEditorMultiCheckField::sanitize( $value );
+
 			?>
 
-			<label class=""><?php echo $this->label;?></label>
+			<label class=""><?php echo esc_html( $this->label );?></label>
 			<?php if(!empty($this->description)){ ?> 
 				 <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
 			<ul class="sed-bp-form-sortable">
 		
 				<?php
-				$values = ( is_array( $value ) ) ? $value : explode( "," , $value);
-				$values = array_map( 'trim' , $values );
 				$i = 1;
 				foreach( $this->choices as $key_val => $choice ) {
-					$checked = ( is_array( $values ) && in_array( $key_val , $values) ) ? 'checked="checked"' : '';
+					$checked = ( in_array( esc_attr( $key_val ) , $value ) ) ? 'checked="checked"' : '';
 				?>
 
 					<li class="<?php echo esc_attr( $classes ); ?>" data-value="<?php echo esc_attr( $key_val ); ?>"  <?php echo $atts_string;?>>
 
 						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>" class="sed-bp-form-checkbox">
 							<input type="checkbox" class="sed-bp-input sed-bp-checkbox-input" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>[]" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>" <?php echo $checked;?> />
-							<?php echo $choice;?>
+							<?php echo esc_html( $choice );?>
 						</label>
                         
 		                <div class="sed-bp-form-sortable-actions">

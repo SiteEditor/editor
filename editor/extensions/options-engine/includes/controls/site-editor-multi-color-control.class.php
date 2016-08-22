@@ -57,7 +57,7 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
 
 			?>
 
-            <label><?php echo $this->label;?></label>
+            <label><?php echo esc_html( $this->label );?></label>
             <?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
@@ -66,10 +66,10 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
 	            <?php
 				  $i = 1;
 				  foreach( $this->choices as $key_val => $choice ) {
-					  $single_val = ( isset( $value[$key_val] ) ) ? $value[$key_val] : "";
+					  $single_val = ( isset( $value[esc_attr( $key_val )] ) ) ? $value[esc_attr( $key_val )] : "";
 				?>
                     <div class="multi-color-item">
-						<label><?php echo $choice;?></label>
+						<label><?php echo esc_html( $choice );?></label>
 			            <span class="colorselector">
 				            <input type="text" data-key="<?php echo esc_attr( $key_val ); ?>" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) . $i;?>" name="<?php echo esc_attr( $sed_field_id ) . $i;?>" value="<?php echo esc_attr( $single_val ); ?>" <?php echo $atts_string;?>>
 				            &nbsp;&nbsp;  

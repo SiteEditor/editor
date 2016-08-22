@@ -328,7 +328,7 @@
                     return $thisShortcode.attrs;
                 }else{
 
-                    $thisShortcode.attrs.sed_shortcode_content = shortcodeContent.content;
+                    $thisShortcode.attrs.sed_shortcode_content = decodeURI( shortcodeContent.content );
 
                 }
 
@@ -482,7 +482,7 @@
                 return ;
             }
 
-            $thisShortcode.content = value;
+            $thisShortcode.content = encodeURI( value );
 
             this.updateShortcode( $thisShortcode );
         },

@@ -57,7 +57,7 @@ if ( ! class_exists( 'SiteEditorIconControl' ) ) {
 
             $value          = $this->value();
 
-            $icon_empty     = (empty($value)) ? 'fa f-sed icon-icons sed-bp-icon-empty' : ''; 
+			$value     		= ( ! empty( $value ) ) ?  $value : 'fa f-sed icon-icons sed-bp-icon-empty';
 
 			?>
 
@@ -67,7 +67,7 @@ if ( ! class_exists( 'SiteEditorIconControl' ) ) {
 	        <div class="setting-icon">
 		        <div class="change-icon-setting">
 			        <div class="change-icon-container">
-			        	<span sed-icon="<?php echo esc_attr( $value );?>" class="sed-bp-icon-demo <?php echo esc_attr( $value );?> <?php echo esc_attr( $icon_empty );?>"></span>
+			        	<span sed-icon="<?php echo esc_attr( $value );?>" class="sed-bp-icon-demo <?php echo esc_attr( $value );?>"></span>
 				        <?php if($this->remove_btn === true){ ?>
 				            <a class="remove-icon-btn" href="#"><span class="remove-icon-action icon-delete f-sed"></span></a>
 	                    <?php } ?>
@@ -75,7 +75,9 @@ if ( ! class_exists( 'SiteEditorIconControl' ) ) {
 		        </div>
 		        <div class="change-icon-setting">
 
-			        <button class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?>><?php echo $this->label; ?></button>
+			        <button class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?>>
+						<?php echo esc_html( $this->label ); ?>
+					</button>
 
 		        </div>
 		        <div class="clr"></div> 

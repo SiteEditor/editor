@@ -24,7 +24,7 @@ class SedOptionsEngineExtension {
     
     public function __construct( $editor ){
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'general-settings.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-general-settings.class.php';
 
         new SiteEditorGeneralSettings();
 
