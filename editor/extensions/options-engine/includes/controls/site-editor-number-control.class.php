@@ -51,7 +51,7 @@ if ( ! class_exists( 'SiteEditorNumberControl' ) ) {
 
 			$classes        = "sed-module-element-control sed-element-control sed-spinner spinner sed-bp-spinner sed-bp-input sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

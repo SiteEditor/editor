@@ -537,16 +537,17 @@ class SiteEditorPreset{
         $html = ob_get_clean();
 
         $settings[ 'preset_settings' ] = array(
-            'type'              => 'panel_button',
+            'type'              => 'panel-button',
             'label'             => __('Preset Settings', 'site-editor'),
-            'desc'              => __('Preset settings for save module as custom layouts', 'site-editor') ,
-            'class'             => 'sed_preset_settings_button' ,
-            'dialog_title'      => __('Preset Settings', 'site-editor') ,
-            'dialog_content'    => $html ,
+            'description'       => __('Preset settings for save module as custom layouts', 'site-editor') ,
+            'button_style'      => 'default' ,
+            'panel_title'       => __('Preset Settings', 'site-editor') ,
+            'panel_content'     => $html ,
             'atts'              => array(
-                'data-shortcode-name'       =>  $shortcode_obj->shortcode->name
+                'data-shortcode-name'       =>  $shortcode_obj->shortcode->name ,
+                'class'                     =>  'sed_preset_settings_button'
             ),
-            'priority'          => -10000
+            'priority'          => 1
         );
 
         return $settings;

@@ -26,7 +26,11 @@ Class AppOptionsEngine {
 
 
     public $group_name = "";
+
+    public $group;
+
     public $controls = array();
+
     public $params = array();
 
     public $panels = array();
@@ -39,65 +43,26 @@ Class AppOptionsEngine {
     /**
     * Class constructor.
     *
-    * @param   $args
-    *
-    *
     * @desc    wp_parse_args do not orginal zmind or php fuction
-    *
     *
     * @since   1.0.0
     */
-    function __construct(  $args = array() ) {
+    function __construct( ) {
 
-        add_filter( "sed_addon_settings", array($this,'addon_settings'));
-        
-        add_action("sed_footer" , array($this, 'print_settings_template') , 10000 );
-        add_filter( "sed_js_I18n", array($this,'js_I18n'));
+        add_filter( "sed_addon_settings"    , array($this,'addon_settings') );
 
-        //add_action( 'site_editor_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options
-
+        add_filter( "sed_js_I18n"           , array($this,'js_I18n'));
     }
 
-    function sed_ajax_load_options(){ 
-        //$this->set_group_params( $group , $params_title , $params = array() , $panels = array() , "module-settings" );
-        //$this->add_settings( array() );
-        //global $sed_apps;
-        //$sed_apps->editor->manager->check_ajax_handler('sed_options_loader' , 'sed_app_options_load');
-        do_action( "sed_ajax_load_options_" . $_POST['setting_id'] );
-
-        ob_start();
-        $settings = $this->params[ $_POST['setting_id'] ];
-        if( in_array( $_POST['setting_id'] , array( "sed_page_options" , "sed_content_options" ) ) ){
-            $class = "";
-        }else{
-            $class = "sed-app-settings-normal";
-        }
-        ?>
-        <div id="dialog-level-box-settings-<?php echo $_POST['setting_id'];?>-container" data-title="<?php echo $settings['settings_title'];?>" class="dialog-level-box-settings-container hide <?php echo $class;?>" >
-            <?php echo $settings['settings_output'];?>
-        </div>
-        <?php
-        $output = ob_get_clean();
-
-        die( wp_json_encode( array(
-            'success' => true,
-            'data'    => array(
-                'output'        => $output ,
-                'controls'      => isset( $this->controls[ $_POST['setting_id'] ] ) ? $this->controls[ $_POST['setting_id'] ] : array() ,
-                'relations'     => isset( $this->settings_dependencies[ $_POST['setting_id'] ] ) ? $this->settings_dependencies[ $_POST['setting_id'] ] : array()
-            ),
-        ) ) );
-
-    }
 
     function js_I18n( $I18n ){
 
-        $I18n['custom_size']         =  __("Custom Size","site-editor");
-        $I18n['organize_tab_title']         =  __("Edit Gallery","site-editor");
-        $I18n['update_btn_title']         =  __("Update gallery","site-editor");
-        $I18n['cancel_btn_title']         =  __("Cancel","site-editor");
-        $I18n['images_gallery_update']         =  __("Update Images gallery","site-editor");
-        $I18n['add_btn_title']         =  __("Add To Gallery","site-editor");
+        $I18n['custom_size']            =  __("Custom Size","site-editor");
+        $I18n['organize_tab_title']     =  __("Edit Gallery","site-editor");
+        $I18n['update_btn_title']       =  __("Update gallery","site-editor");
+        $I18n['cancel_btn_title']       =  __("Cancel","site-editor");
+        $I18n['images_gallery_update']  =  __("Update Images gallery","site-editor");
+        $I18n['add_btn_title']          =  __("Add To Gallery","site-editor");
 
         return $I18n;
     }
@@ -105,7 +70,7 @@ Class AppOptionsEngine {
     function addon_settings( $sed_addon_settings ){
 
         $sed_addon_settings["imageModule"] = array(
-            "sizes"               => self::get_all_img_sizes_options() ,
+            "sizes"               => sed_get_image_sizes() ,
             "dialog_title"        =>  __("Image Library") ,
             "add_btn_title"       =>  __("Change Image","site-editor")
         );
@@ -120,102 +85,6 @@ Class AppOptionsEngine {
         return $sed_addon_settings;
     }
 
-    public static function get_all_img_sizes_options(){
-        global $_wp_additional_image_sizes;
-
-        $sizes = array();
-
-		$possible_sizes = apply_filters( 'image_size_names_choose', array(
-			'thumbnail' => __('Thumbnail'),
-			'medium'    => __('Medium'),
-			'large'     => __('Large')
-		) );
-
-
-        foreach( $possible_sizes as $_size => $label ) {
-
-            if ( in_array( $_size, array( 'thumbnail', 'medium', 'large' ) ) ) {
-
-                $sizes[ $_size ]['width'] = get_option( $_size . '_size_w' );
-                $sizes[ $_size ]['height'] = get_option( $_size . '_size_h' );
-                $sizes[ $_size ]['crop'] = (bool) get_option( $_size . '_crop' );
-                $sizes[ $_size ]['label'] =  $label;
-
-            } elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
-
-                $sizes[ $_size ] = array(
-                    'width'  => $_wp_additional_image_sizes[ $_size ]['width'],
-                    'height' => $_wp_additional_image_sizes[ $_size ]['height'],
-                    'crop'   => $_wp_additional_image_sizes[ $_size ]['crop'] ,
-                    'label'  => $label
-                );
-
-            }
-
-        }
-
-        $sizes['full'] = array( 'label'  => __('Full Size') );
-
-        foreach( $_wp_additional_image_sizes AS $img_size => $options ){
-            $sizes[ $img_size ] = array(
-                'width'  => $options['width'],
-                'height' => $options['height'],
-                'crop'   => $options['crop'] ,
-                'label'  => $img_size
-            );
-        }
-
-        return $sizes;
-    }
-
-    public function print_settings_template(){
-        ?>
-
-        <div id="static-module-hover-box">
-            <span class="fa icon icon-edit">edit</span>
-        </div>
-
-        <div id="sed-app-settings-panel" class="sed-dialog" title="<?php echo __("App Settings" , "site-editor");?>">
-
-        </div>
-
-        <div id="sed-dialog-settings" class="sed-dialog" title="">
-
-        </div>
-        <!--
-
-        <?php
-        do_action("print_sed-dialog-settings_tmpl");
-        ?>
-
-        -->
-
-        <?php
-
-         $custom_settings = $this->params;
-          if(!empty( $custom_settings )){
-            foreach($custom_settings AS $name => $settings){
-              if(!empty($settings['settings_output'])){
-        ?>
-              <script type="text/html" data-dialog-title="<?php echo $settings['settings_title'];?>" id="sed-tmpl-dialog-settings-<?php echo $name;?>">
-                <div id="dialog-level-box-settings-<?php echo $name;?>-container" data-title="<?php echo $settings['settings_title'];?>" class="dialog-level-box-settings-container" >
-                    <?php echo $settings['settings_output'];?>
-                    <?php do_action("print_".$name."_settings_tmpl");?>
-                </div>
-              </script>
-        <?php
-              }
-            }
-          }
-
-          $panels = $this->panels;
-        ?>
-
-        <script>
-            var _sedAppSettingsPanels = <?php if( !empty( $panels ) ) echo wp_json_encode( $panels ); else echo "{}"; ?>;
-        </script>
-        <?php
-    }
 
     /*function add_design_options_to_modules(){
         $this->add_style_settings();
@@ -237,9 +106,9 @@ Class AppOptionsEngine {
 
         if( $this->has_styles_settings === true ){
             $params[ 'design_panel' ] = array(
-                'type' => 'panel_button',
+                'type' => 'panel-button',
                 'label' => __('Custom Edit Style',"site-editor"),
-                'desc' => '',
+                'description' => '',
                 'style' => 'blue' ,
                 'class' => 'sed_style_editor_btn' ,
                 'dialog_title' => __('Custom Edit Style',"site-editor") ,
@@ -248,39 +117,6 @@ Class AppOptionsEngine {
             );
         }
     }*/
-
-    public function add_settings( $settings = array() ){
-        global $sed_apps;
-        if( !empty( $settings ) && is_array( $settings ) ){
-            foreach( $settings AS $id => $values ){
-                /*if($this->sed_settings !== false && isset( $this->sed_settings[$id] )){
-                    $values['value'] = $this->js_value( $id, $this->sed_settings[$id] );
-                }
-                $this->settings[ $id ] = $values;*/
-                if( isset( $values['value'] ) ){
-                    $values['default'] = $values['value'];
-                    unset( $values['value'] );
-                }
-
-        		$sed_apps->editor->manager->add_setting( $id, $values );
-            }
-        }
-    }
-
-    public function add_controls( $controls = array() , $group = '' ){
-        global $sed_apps;
-        if(!empty($controls)){
-            foreach($controls AS $id => $values ){
-                if( !empty( $group ) ) {
-                    $this->controls[$group][$id] = $values;
-                }else{
-                    $this->controls["without_group"][$id] = $values;
-                }
-
-                $sed_apps->editor->manager->add_control( $id, $values );
-            }
-        }
-    }
 
     /*
     * @Function :: static , this func create params for groups
@@ -296,7 +132,7 @@ Class AppOptionsEngine {
     * 5. Create controls for params
     * 6. Added Controls , Params And Panels to Final Settings
     */
-    public function set_group_params( $group , $params_title , $params = array() , $panels = array() , $base_category = "module-settings" ){
+    /*public function set_group_params( $group , $params_title , $params = array() , $panels = array() , $base_category = "module-settings" ){
 
         $controls = array();
         $this->group_name = $group;
@@ -346,50 +182,7 @@ Class AppOptionsEngine {
             $this->add_controls( $controls , $group );
         }
 
-    }
-
-    public function create_control( $name , $key , $param ){
-        $args = array();
-        if(isset($param["control_type"])){
-
-            $settings_type = ( isset( $param['settings_type'] ) && !empty( $param['settings_type'] ) ) ?  $param['settings_type'] : 'sed_pb_modules';
-            $category = ( isset( $param['control_category'] ) && !empty( $param['control_category'] ) ) ?  $param['control_category'] : 'module-settings';
-            $is_style_setting = ( isset( $param['is_style_setting'] ) && is_bool( $param['is_style_setting'] ) ) ?  $param['is_style_setting'] : false;
-
-            //edit risk
-            $is_attr = isset( $param["is_attr"] ) ? $param["is_attr"]: false;
-            $value = isset( $param["value"] ) ? $param["value"] :  "";
-
-
-            $args = array(
-                'settings'     => array(
-                    'default'       => $settings_type
-                ),
-                'type'                =>  $param["control_type"],
-                'category'            =>  $category,
-                'sub_category'        =>  $name,           //shortcode name :: sed_image
-                'default_value'       =>  is_array( $value ) ?  implode("," , $value): $this->sanitize_control_value( $value ),
-                'is_style_setting'    =>  $is_style_setting ,
-                'option_group'        =>  $name
-            );
-
-            if( $settings_type == 'sed_pb_modules' ){
-                $args['shortcode'] = $name;
-                $args['attr_name'] = ( isset( $param['attr_name'] ) && !empty( $param['attr_name'] ) ) ? $param['attr_name'] : $key;
-                $args['is_attr'] = $is_attr;
-            }
-
-            if( isset( $param['panel'] ) )
-                $args['panel'] = $param['panel'];
-
-            if(!empty($param["control_param"]))
-                $args = array_merge( $args , $param["control_param"]);
-
-        }
-
-        return $args;
-
-    }
+    }*/
 
     public function sanitize_control_value( $value ){
 
@@ -401,32 +194,18 @@ Class AppOptionsEngine {
         return $value;
     }
 
-    /*public function add_post_control( $id, $values ){
-        global $sed_apps;
-        $sed_apps->editor->manager->add_post_control( $id, $values );
-    }*/
+    /**
+     * alias control type process for developer friendly
+     *
+     * @param $params
+     * @param $group === shortcode
+     * @return array
+     */
+    public function params_type_process( $params , &$group ){
 
-    function control_type_filter( $param ){
-        if(isset($param['control_type']) && !empty($param['control_type'])){
-            return $param;
-        }else{
+        $this->group = $group;
 
-            switch ($param['type']) {
-                case "spinner":
-                    $control_type = "number";
-                break;
-                default:
-                    $control_type = $param['type'];
-            }
-
-            if( !empty( $control_type ) )
-                $param['type'] = $control_type;
-
-            return $param;
-        }
-    }
-
-    function params_type_process( $params ){
+        $this->group_name = $group->shortcode->name;
 
         $new_params = array();
 
@@ -434,61 +213,65 @@ Class AppOptionsEngine {
 
             if( isset( $param['type'] ) ){
                 switch ( $param['type'] ) {
+
+                    case 'spinner' :
+                        $param['type'] = 'number';
+                        $new_params[$key] = $param;
+                        break;
+
                     case 'image_size' :
-                        unset( $param['type'] );
-                        $param = $this->add_image_sizes( $param );
+                        $param['type'] = 'image-size';
                         $new_params[$key] = $param;
-                    break;
-                    case "animation" :
-                        unset( $param['type'] );
-                        $param = $this->add_animation( $param );
-                        $new_params[$key] = $param;
-                    break;
-                    case "skin" :
-                        unset( $param['type'] );
-                        $param = $this->add_skin_control( $param );
-                        $new_params[$key] = $param;
-                    break;
+                        break;
+
                     case "row_container" :
                         unset( $param['type'] );
                         $param = $this->add_row_container_setting( $param );
                         $new_params[$key] = $param;
-                    break;
+                        break;
+
                     case "align" :
                         unset( $param['type'] );
                         $param = $this->add_align_control( $param );
                         $new_params[$key] = $param;
-                    break;
+                        break;
+                    //Todo
                     case "spacing" :
                         unset( $param['type'] );
                         $spacing_params = $this->add_spacing_control( $param );
                         $new_params = array_merge( $new_params , $spacing_params );
-                    break;
+                        break;
+                    //Todo
                     case "dropdown" :
                         $new_params[$key] = $param;
                         $new_params[$key]['type'] = "custom";
-                        $new_params[$key]['control_type'] = 'dropdown';
-                    break;
+                        $new_params[$key]['js_type'] = 'dropdown';
+                        break;
+
                     case "sed_image" :
                         unset( $param['type'] );
                         $img_params = $this->add_image_setting( $param );
                         $new_params = array_merge( $new_params , $img_params );
-                    break;
+                        break;
+
                     case "link" :
                         unset( $param['type'] );
                         $link_params = $this->add_link_control( $param );
                         $new_params = array_merge( $new_params , $link_params );
-                    break;
+                        break;
+
                     case "length" :
                         unset( $param['type'] );
                         $param = $this->add_length_control( $param );
                         $new_params[$key] = $param;
-                    break;
+                        break;
+                    //Todo
                     case "group_skin" :
                         unset( $param['type'] );
                         $param = $this->add_group_skin_control( $param );
                         $new_params[$key] = $param;
-                    break;
+                        break;
+
                     case "email" :
                     case "url" :
                     case "search" :
@@ -497,21 +280,13 @@ Class AppOptionsEngine {
                         $new_params[$key] = $param;
                         $new_params[$key]['type'] = "text";
                         $new_params[$key]['subtype'] = $param['type'];
-                    break;
-                    case "multi-select" :
-                        $new_params[$key] = $param;
-                        $new_params[$key]['type'] = "select";
-                        $new_params[$key]['subtype'] = "multiple";
-                    break;
+                        break;
+
                     case "multi-checkbox" :
                         $new_params[$key] = $param;
-                        $new_params[$key]['type'] = "multicheck";
+                        $new_params[$key]['type'] = "multi-check";
+                        break;
 
-                        $new_params[$key]['control_param']["options_selector"] = ".sed-bp-checkbox-input";
-                        
-                    break;
-                    /*
-                    case "group_hover_effect" : ---- remove*/
                     default :
                     $new_params[$key] = $param;
 
@@ -519,33 +294,8 @@ Class AppOptionsEngine {
             }
         }
 
-        foreach( $new_params AS $key => $param ){
-            $param = $this->control_type_filter( $param );
-            $new_params[$key] = $param;
-
-        }
-
-        //var_dump( $new_params );
-
         return $new_params;
     }
-
-	public function add_panel( $id, $group , $args = array() ) {
-	    if( is_array($args) ){
-	        if( !isset( $this->panels[$group] ) ){
-                $this->panels[$group] = array();
-	        }
-
-		    $this->panels[$group][ $id ] = array_merge( array(
-                'id'            => $id  ,
-                'title'         => ''  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'fieldset' ,
-                'description'   => '' ,
-                'priority'      => 10
-            ) , $args );
-        }
-	}
 
     function add_link_control( $args ){
 
@@ -555,13 +305,11 @@ Class AppOptionsEngine {
         $value = isset($args['value']) ?  $args['value'] : "0 0 0 0";
 
         $panel = array(
-            'label'         =>  $panel_title ,
             'title'         =>  $panel_title ,
+            'description'   => $description ,
             'capability'    => 'edit_theme_options' ,
             'type'          => 'inner_box' ,
-            'desc'          => '' ,
             'parent_id'     => 'root',
-            'description'   => $description ,
             'is_attr'       => true ,
             'priority'      => $priority ,
             'in_box'        => true
@@ -571,38 +319,33 @@ Class AppOptionsEngine {
             $panel['dependency'] = $args['dependency'];
         }
 
-        $this->add_panel( 'link_to_panel' , $this->group_name , $panel );
+        $this->group->add_panel( 'link_to_panel' , $panel );
 
 
         $params = array();
 
         $params["link"] = array(
-            'value'         => $value,
             'type'          => 'text',
-            'placeholder'   => 'E.g www.siteeditor.org' ,
-            'control_type'  =>  "sed_element",
             'label'         => __('Url : ', 'site-editor'),
-            'desc'          => __('Add Link to any module elements that needs a link.', 'site-editor') ,
-            'is_attr'       =>  true ,
+            'description'   => __('Add Link to any module elements that needs a link.', 'site-editor') ,
+            'value'         => $value,
+            'placeholder'   => 'E.g www.siteeditor.org' ,
             'panel'         => 'link_to_panel'
         );
 
         $params["link_target"] = array(
-            'value'         => "_self",
             'type'          => 'radio',
-            'control_type'  =>  "sed_element",
-            'options'       =>  array(
+            'label'         => __('Link Target : ', 'site-editor'),
+            'description'   => __('Add Link target : open link in new window or same window', 'site-editor') ,
+            'value'         => "_self",
+            'options'       => array(
                 "_blank"        => __('Open in new window', 'site-editor')  ,
                 "_self"         => __('Open in same window', 'site-editor')  ,
             ),
-            'label'         => __('Link Target : ', 'site-editor'),
-            'desc'          => __('Add Link target : open link in new window or same window', 'site-editor') ,
             'panel'         => 'link_to_panel' ,
-            'is_attr'       =>  true ,
         );
 
         return $params;
-
     }
 
     function spacing_values_filter( $value ){
@@ -612,6 +355,12 @@ Class AppOptionsEngine {
             return true;
     }
 
+    /**
+     * @Todo Move Spacing Control To Design Editor Controls
+     *
+     * @param array $args
+     * @return array
+     */
     function add_spacing_control( $args = array() ){
 
         $panel_title = isset($args['label']) ?  $args['label'] : __('Spacing',"site-editor") ;
@@ -623,10 +372,10 @@ Class AppOptionsEngine {
          * Parse incoming $args into an array and merge it with $defaults
          */
         $panel_id = $this->group_name . "_spacing_settings_panel";
-        $this->add_panel( $panel_id , $this->group_name , array(
+        $this->group->add_panel( $panel_id , array(
             'title'         =>  $panel_title ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => $description ,
             'priority'      => $priority ,
         ));
@@ -647,11 +396,11 @@ Class AppOptionsEngine {
         $controls = array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" );
 
   		$settings['spacing_top'] = array(
-  			'type' => 'spinner',
+  			'type' => 'number',
             'after_field'  => 'px',
             'value' => $padding_top,
   			'label' => __('Top', 'site-editor'),
-  			'desc' => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
+  			'description' => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
             'is_attr'   =>  true ,
             'atts'  => array(
                 "class" =>   $spinner_class
@@ -673,11 +422,11 @@ Class AppOptionsEngine {
   		);
 
   		$settings['spacing_left'] = array(
-  			'type' => 'spinner',
+  			'type' => 'number',
             'after_field'  => 'px',
             'value' => $padding_left,
   			'label' => is_rtl() ? __('Right', 'site-editor') : __('Left', 'site-editor'),
-  			'desc' => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
+  			'description' => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
             'is_attr'   =>  true ,
             'atts'  => array(
                 "class" =>   $spinner_class
@@ -698,11 +447,11 @@ Class AppOptionsEngine {
   		);
 
   		$settings['spacing_right'] = array(
-  			'type' => 'spinner',
+  			'type' => 'number',
             'after_field'  => 'px',
             'value' => $padding_right,
   			'label' => is_rtl() ? __('Left', 'site-editor') : __('Right', 'site-editor'),
-  			'desc' => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
+  			'description' => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
             'is_attr'   =>  true ,
             'atts'  => array(
                 "class" =>   $spinner_class
@@ -723,11 +472,11 @@ Class AppOptionsEngine {
   		);
 
   		$settings['spacing_bottom'] = array(
-  			'type' => 'spinner',
+  			'type' => 'number',
             'after_field'  => 'px',
             'value' => $padding_bottom,
   			'label' => __('Bottom', 'site-editor'),
-  			'desc' => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
+  			'description' => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
             'is_attr'   =>  true ,
             'atts'  => array(
                 "class" =>   $spinner_class
@@ -751,7 +500,7 @@ Class AppOptionsEngine {
   			'type'          => 'checkbox',
             'value'         => false,
   			'label'         => __('lock Spacing Together', 'site-editor'),
-  			'desc'          => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
+  			'description'   => '<p><strong>Spacing:</strong> Module Spacing from top , left , bottom , right.</p>',
             'is_attr'       =>  true ,
             'control_type'  =>  "spinner_lock" ,
             'atts'          => array(
@@ -767,28 +516,28 @@ Class AppOptionsEngine {
         return $settings;
     }
 
+    /**
+     * @Todo Move Alignment Control To Design Editor Controls
+     *
+     * @param array $args
+     * @return array
+     */
     function add_align_control( $args = array() ){
 
         /**
          * Define the array of defaults
          */
         $defaults = array(
-  			'type' => 'select',
-            'value' => "" ,
-  			'label' => __('Align', 'site-editor'),
-  			'desc' => '<p><strong>Align:</strong> Module Align</p>',
-            'options' =>array(
-                'initial'   => __('Default', 'site-editor'),
-                'left'      => is_rtl() ?  __('Right', 'site-editor') : __('Left', 'site-editor'),
-                'center'    =>__('Center', 'site-editor'),
-                'right'     => is_rtl() ? __('Left', 'site-editor') :  __('Right', 'site-editor'),
-            ),
-            'control_param'     =>  array(
-                'selector' =>  'sed_current' ,
-                'style_props'       =>  "text-align" ,
-            ),
-            'control_category'  => "style-editor" ,
-            'settings_type'     =>  "text_align",
+  			'type'          => 'radio-buttonset',
+            'value'         => "" ,
+  			'label'         => __('Align', 'site-editor'),
+  			'description'   => __('Module container alignment', 'site-editor'),
+            'choices' =>array(
+                'initial'       => __('Default', 'site-editor'),
+                'left'          => is_rtl() ?  __('Right', 'site-editor') : __('Left', 'site-editor'),
+                'center'        => __('Center', 'site-editor'),
+                'right'         => is_rtl() ? __('Left', 'site-editor') :  __('Right', 'site-editor'),
+            )
         );
 
         /**
@@ -796,32 +545,53 @@ Class AppOptionsEngine {
          */
         $param = wp_parse_args( $args, $defaults ) ;
 
+        $required = array(
+            'js_params'     =>  array(
+                'selector'          =>  'sed_current' ,
+                'style_props'       =>  "text-align" ,
+            ),
+
+            'category'          => "style-editor" ,
+            'setting_id'        =>  "text_align"
+        );
+
+        $param = wp_parse_args( $required, $param ) ;
+
         return $param;
     }
 
-    function add_row_container_setting( $args ){
+    /**
+     * @param $args
+     * @access private
+     * @return array
+     */
+    private function add_row_container_setting( $args ){
 
         /**
          * Define the array of defaults
          */
         $defaults = array(
-            'type'          => 'row_settings_button',
+            'type'          => 'button',
             'label'         => __('Go To Row Settings', 'site-editor'),
-            'desc'          => __('Row Settings', 'site-editor'),
+            'description'   => __('Row Container Settings', 'site-editor'),
             'style'         => 'blue',
-            'class'         =>  '',
-            //'panel'    => 'general_settings',
-            //'in_box'   =>'false',
             'priority'      => 20
-            /*'atts'  => array(
-                'data-module-name' => $this->module
-            ) */
         );
 
         /**
          * Parse incoming $args into an array and merge it with $defaults
          */
         $param = wp_parse_args( $args, $defaults ) ;
+
+        if( ! isset( $param['atts'] ) ){
+            $param['atts'] = array();
+        }
+
+        if( ! isset( $param['atts']['class'] ) ){
+            $param['atts']['class'] = 'go-row-container-settings';
+        }else {
+            $param['atts']['class'] .= ' go-row-container-settings';
+        }
 
         return $param;
     }
@@ -832,16 +602,14 @@ Class AppOptionsEngine {
          * Define the array of defaults
          */
         $defaults = array(
-  			'type' => 'select',
-            'value' => "wide" ,
-            'control_type'  =>  "sed_element",
-  			'label' => __('Length', 'site-editor'),
-  			'desc' => '<p><strong>Length:</strong> container Length</p>',
-            'options' =>array(
-                'wide'    => __('Wide', 'site-editor'),
-                'boxed'   => __('Boxed', 'site-editor')
+  			'type'          => 'radio-buttonset',
+            'value'         => 'wide' ,
+  			'label'         => __('Length', 'site-editor'),
+  			'description'   => __('container Length', 'site-editor'),
+            'choices'       => array(
+                'wide'          => __('Wide', 'site-editor'),
+                'boxed'         => __('Boxed', 'site-editor')
             ),
-            'is_attr'   =>  true ,
             'priority'      => 15
         );
 
@@ -853,120 +621,23 @@ Class AppOptionsEngine {
 
     }
 
-    function add_image_sizes( $args = array() ){
+    /*'value' => "1000,1,1000,,0",
+    function add_animation( $args ){}
+    */
 
-        /**
-         * Define the array of defaults
-         */
-        $defaults = array(
-            'value'         =>   '' ,
-            'type'          =>   'select',
-            'control_type'  =>  "sed_element",
-            'label'         =>   '' ,
-            'desc'          =>   '<p><strong>Stretch:</strong> Stretch the image to the size of the image frame.<br>	<strong>Fit:</strong> Fits images to the size of the image frame.</p>',
-            'options'       =>   array() ,
-            'is_attr'       =>  true ,
-            'control_param'     =>  array(
-                "is_image_size" => true
-            ),
-        );
-
-        if( isset( $args['control_param'] ) ){
-            $args['control_param'] = array_merge( $defaults['control_param'] , $args['control_param'] );
-        }
-
-        /**
-         * Parse incoming $args into an array and merge it with $defaults
-         */
-        $param = wp_parse_args( $args, $defaults );
-
-        return $param;
-    }
-
-    function add_animation( $args ){
-
-        /**
-         * Define the array of defaults
-         */
-        $defaults = array(
-            'type' => 'panel_button',
-            'control_type' => 'animations' ,
-            'value' => "1000,1,1000,,0",
-            'label' => __('Add Animation', 'site-editor'),
-            //'desc' => __('Select One image Animation', 'site-editor'),
-            'style' => 'blue' ,
-            'class' => 'sed-animations-btn' ,
-            'is_attr'   =>  true ,
-            'dialog_title' => __('Animation Settings' , 'site-editor') ,
-            'dialog_content' => '<div class="animation-dialog-inner"></div>',
-            //'panel'    => 'general_settings',
-            //'in_box'   =>'false'
-            'priority'      => 19
-        );
-
-        /**
-         * Parse incoming $args into an array and merge it with $defaults
-         */
-        $param = wp_parse_args( $args, $defaults );
-
-        return $param;
-    }
 
     function add_skin_setting($value = "default"){
 
-        $dialog_content = '<div class="loading skin-loading"></div><div class="error error-load-skins"><span></span></div> <div class="skins-dialog-inner"></div>';
-
         return array(
-            'type' => 'panel_button',
-            'value' => $value,
-            'control_type' => 'skins' ,
-            'label' => __('Change Skin', 'site-editor'),
-            //'desc' => __('Select One image skin', 'site-editor'),
-            'style' => 'black',
-            'class' =>  'sed-select-module-skins-btn',
-            /*'dialog' => array(
-                'class' => 'sed-dialog-skins' ,
-                'title' => __('skins' , 'site-editor')
-            ),*/
-            'dialog_title' => __('skins' , 'site-editor') ,
-            'dialog_content' => $dialog_content ,
-            'is_attr'       =>  true ,
+            'type'          => 'skin',
+            'value'         => $value,
+            'label'         => __('Change Skin', 'site-editor'),
+            'button_style'  => 'black',
             'priority'      => 2
         );
+
     }
 
-    function add_skin_control( $args = array() ){
-
-        $dialog_content = '<div class="loading skin-loading"></div><div class="error error-load-skins"><span></span></div> <div class="skins-dialog-inner"></div>';
-
-        /**
-         * Define the array of defaults
-         */
-        $defaults = array(
-            'type' => 'panel_button',
-            'value' => "dafault",
-            'control_type' => 'skins' ,
-            'label' => __('Change Skin', 'site-editor'),
-            //'desc' => __('Select One image skin', 'site-editor'),
-            'style' => 'black',
-            'class' =>  'sed-select-module-skins-btn',
-            /*'dialog' => array(
-                'class' => 'sed-dialog-skins' ,
-                'title' => __('skins' , 'site-editor')
-            ),*/
-            'dialog_title' => __('skins' , 'site-editor') ,
-            'dialog_content' => $dialog_content ,
-            'is_attr'       =>  true ,
-            'priority'      => 20
-        );
-
-        /**
-         * Parse incoming $args into an array and merge it with $defaults
-         */
-        $param = wp_parse_args( $args, $defaults );
-
-        return $param;
-    }
 
     function add_group_skin_control( $args = array() ){
 
@@ -981,8 +652,8 @@ Class AppOptionsEngine {
         $setting["atts"]['data-module-name']  = $sub_module;
         $setting["priority"]  = 11;
 
-        if( !empty( $args['control_param'] ) ){
-            $setting["control_param"] = $args['control_param'] ;
+        if( !empty( $args['js_params'] ) ){
+            $setting["js_params"] = $args['js_params'] ;
         }
         if( !empty( $args['panel_id'] ) ){
             $setting["panel"] = $args['panel_id'];
@@ -991,146 +662,153 @@ Class AppOptionsEngine {
         return $setting;
     }
 
-    function add_image_setting( $args = array() ){
+    /**
+     * using for all type of settings module & app settings
+     *
+     * @param array $args
+     * @access private
+     * @return array
+     */
+    private function add_image_setting( $args = array() ){
         $params = array();
 
-        $panel_title = isset($args['label']) ?  $args['label'] : __('Change Panel',"site-editor") ;
-        $description = isset($args['description']) ?  $args['description'] : '' ;
-        $priority = isset($args['priority']) ?  $args['priority'] : 10 ;
-        $value = isset($args['value']) ?  $args['value'] : "0 0 0 0";
-        $panel_type = isset($args['panel_type']) ?  $args['panel_type'] : "inner_box";
+        /**
+         * Define the array of defaults
+         */
+        $defaults = array(
+            "label"         => __('Change Panel',"site-editor"),
+            "description"   => '',
+            "priority"      => 10 ,
+            "panel_type"    => 'inner_box' ,
+            'controls'      => array(
+                'image_source'          => 'image_source' ,
+                'image_url'             => 'image_url' ,
+                'attachment_id'         => 'attachment_id' ,
+                'default_image_size'    => 'default_image_size' ,
+                'custom_image_size'     => 'custom_image_size' ,
+                'external_image_size'   => 'external_image_size'
+            ),
+            'values'        => array(
+                'image_source'          => 'attachment' ,
+                'image_url'             => '' ,
+                'attachment_id'         => 0 ,
+                'default_image_size'    => 'thumbnail' ,
+                'custom_image_size'     => '' ,
+                'external_image_size'   => ''
+            )
+        );
 
-        $this->add_panel( 'sed_select_image_panel' , $this->group_name , array(
-            'label'         =>  $panel_title ,
-            'title'         =>  $panel_title ,
+        $param = wp_parse_args( $args, $defaults ) ;
+
+        extract( $param );
+
+        $this->group->add_panel( 'sed_select_image_panel' , array(
+            'title'         => $label ,
+            'description'   => $description ,
             'capability'    => 'edit_theme_options' ,
             'type'          => $panel_type ,
-            'desc'          => '' ,
             'parent_id'     => 'root',
-            'description'   => $description ,
-            'is_attr'       => true ,
             'priority'      => $priority ,
-            'in_box'        => true
         ) );
 
-        $params["image_source"] = array(
+        $params[$controls["image_source"]] = array(
             'label'         => __('Image Source', 'site-editor'),
-            'desc'          => __('Select image source.', 'site-editor'),
-            'type'          => 'select',
-            'options'       =>  array(
+            'description'   => __('Select image source.', 'site-editor'),
+            'type'          => 'radio-buttonset',
+            'choices'       =>  array(
                 "attachment"     => __('Media Library', 'site-editor')  ,
                 "external"       => __('External Link', 'site-editor')  ,
             ),
-            'control_type'  => 'sed_element',
-            'value'         => 'attachment',
-            'is_attr'       => true ,
-            //'priority'      => 7 ,
+            'value'         => $values['image_source'],
             'panel'         => 'sed_select_image_panel'
         );
 
-        $params["image_url"] = array(
+        $params[$controls["image_url"]] = array(
             'label'         => __('External link', 'site-editor'),
-            'desc'          => __('Enter an external link.', 'site-editor'),
+            'description'   => __('Enter an external link.', 'site-editor'),
             'type'          => 'text',
-            'control_type'  => 'sed_element',
-            'value'         => '',
-            'is_attr'       => true ,
-            //'priority'      => 8 ,
+            'value'         => $values["image_url"],
             'panel'         => 'sed_select_image_panel',
             'dependency' => array(
                 'controls'  =>  array(
-                    "control"  => "image_source" ,
+                    "control"  => $controls["image_source"] ,
                     "value"    => "external" ,
                 )
             )
         );
 
-        $params["attachment_id"] = array(
-            'label'         => __('Select image', 'site-editor'),
-            'desc'          => __('Select image from media library.', 'site-editor'),
-            'type'          => 'image',
-            'control_type'  => 'image',
-            'value'         => 0,
-            'is_attr'       => true ,
-            //'priority'      => 9 ,
-            'panel'         => 'sed_select_image_panel' ,
+        $params[$controls["attachment_id"]] = array(
+            'label'             => __('Select image', 'site-editor'),
+            'description'       => __('Select image from media library.', 'site-editor'),
+            'type'              => 'image',
+            'value'             => $values["attachment_id"],
+            'panel'             => 'sed_select_image_panel' ,
             "control_param"     => array(
                 "rel_size_control"          => $this->group_name . "_default_image_size"
             ),
             'dependency' => array(
                 'controls'  =>  array(
-                    "control"  => "image_source" ,
+                    "control"  => $controls["image_source"] ,
                     "value"    => "attachment" ,
                 )
             )
         );
 
-        $params["default_image_size"] = array(
+        $params[$controls["default_image_size"]] = array(
             'label'         => __('Select Image Size', 'site-editor'),
-            'desc'          => __('Select a Image Size Or Select Custom size for enter size in px', 'site-editor'),
-            'type'          => 'select',
-            'control_type'  => 'sed_element',
-            'value'         => 'thumbnail',
-            'options'       =>   array() ,
-            'is_attr'       =>  true ,
-            'control_param'     =>  array(
-                "is_image_size"     => true ,
+            'description'   => __('Select a Image Size Or Select Custom size for enter size in px', 'site-editor'),
+            'type'          => 'image-size',
+            'value'         => $values["default_image_size"],
+            'js_params'     =>  array(
                 "has_custom_size"   => true
             ),
-            //'priority'      => 8 ,
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
                 'controls'  =>  array(
                     "relation"     =>  "and" ,
                     array(
-                        "control"  => "attachment_id" ,
+                        "control"  => $controls["attachment_id"] ,
                         "values"    => array( "" , 0 ) ,
                         "type"     => "exclude"
                     ),
                     array(
-                        "control"  => "image_source" ,
+                        "control"  => $controls["image_source"] ,
                         "value"    => "attachment" ,
                     )
                 )
             )
         );
 
-        $params["custom_image_size"] = array(
+        $params[$controls["custom_image_size"]] = array(
             'label'         => __('Custom Image Size', 'site-editor'),
-            'desc'          => __('Enter custom size in pixels (Example: 100x300 (Width x Height)).', 'site-editor'),
+            'description'   => __('Enter custom size in pixels (Example: 100x300 (Width x Height)).', 'site-editor'),
             'type'          => 'text',
-            'control_type'  => 'sed_element',
-            'value'         => '',
-            'is_attr'       => true ,
-            //'priority'      => 8 ,
+            'value'         => $values["custom_image_size"],
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
                 'controls'  =>  array(
                     "relation"     =>  "and" ,
                     array(
-                        "control"  => "default_image_size" ,
+                        "control"  => $controls["default_image_size"] ,
                         "value"    => "" ,
                     ),
                     array(
-                        "control"  => "image_source" ,
+                        "control"  => $controls["image_source"] ,
                         "value"    => "attachment" ,
                     )
                 )
             )
         );
 
-        $params["external_image_size"] = array(
+        $params[$controls["external_image_size"]] = array(
             'label'         => __('Custom Image Size', 'site-editor'),
-            'desc'          => __('Enter custom size in pixels (Example: 100x300 (Width x Height)).', 'site-editor'),
+            'description'   => __('Enter custom size in pixels (Example: 100x300 (Width x Height)).', 'site-editor'),
             'type'          => 'text',
-            'control_type'  => 'sed_element',
-            'value'         => '',
-            'is_attr'       => true ,
-            //'priority'      => 8 ,
+            'value'         => $values["external_image_size"],
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
                 'controls'  =>  array(
-                    "control"  => "image_source" ,
+                    "control"  => $controls["image_source"] ,
                     "value"    => "external" ,
                 )
             )

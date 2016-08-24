@@ -49,7 +49,7 @@ if ( ! class_exists( 'SiteEditorMultiIconsControl' ) ) {
 
 			$classes        = "select-icon-btn change_icon sed-btn-blue sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

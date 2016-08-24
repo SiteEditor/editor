@@ -713,6 +713,17 @@ class PBAPITestModule extends PBShortcodeClass{
         $params['link'] = array(
             "type"          => "link" ,
             "label"         => __("Link Panel Settings", "site-editor"),
+            "description"   => __("Link Panel Description", "site-editor"),
+            "priority"      => 22 ,
+            "controls"      => array(
+                "link"          => "link" ,
+                "link_target"   => "link_target"
+            ),
+            //in modules default value automatic === default attr value and not need to set
+            /*"values"        => array(
+                "link"          => 'E.g www.siteeditor.org' ,
+                "link_target"   => '_self'
+            ),*/
             "dependency"    => array(
                 'controls'  =>  array(
                     "control"  => "length" ,
@@ -745,9 +756,31 @@ class PBAPITestModule extends PBShortcodeClass{
             ),
         );
 
+        $atts = $this->default_atts();
+
         $params['change_image_panel'] = array(
             "type"          => "sed_image" ,
             "label"         => __("Select Image Panel", "site-editor"),
+            "description"   => __("Image Panel Description", "site-editor"),
+            "priority"      => 21 ,
+            "panel_type"    => 'inner_box' ,
+            'controls'      => array(
+                'image_source'          =>  'image_source' ,
+                'image_url'             =>  'image_url' ,
+                'attachment_id'         =>  'attachment_id' ,
+                'default_image_size'    =>  'default_image_size' ,
+                'custom_image_size'     =>  'custom_image_size' ,
+                'external_image_size'   =>  'external_image_size'
+            ),
+            //in modules default value automatic === default attr value and not need to set
+            /*'values'        => array(
+                'image_source'          => $atts['image_source'] ,
+                'image_url'             => $atts['image_url'] ,
+                'attachment_id'         => $atts['attachment_id'] ,
+                'default_image_size'    => $atts['default_image_size'] ,
+                'custom_image_size'     => $atts['custom_image_size'] ,
+                'external_image_size'   => $atts['external_image_size']
+            )*/
         );
 
         $dropdown_html = "";

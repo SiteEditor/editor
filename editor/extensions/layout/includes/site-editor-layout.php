@@ -107,7 +107,7 @@ if(!class_exists('SiteEditorLayoutManager')){
         }
 
         function pages_layouts_options(){
-            global $sed_options_engine;
+ 
             /*ob_start();
             include dirname( dirname( __FILE__ ) ) . DS . "view" . DS . "pages_layouts.tpl.php";
             $html = ob_get_clean();*/

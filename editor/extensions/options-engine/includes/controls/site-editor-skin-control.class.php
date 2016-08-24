@@ -14,10 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'SiteEditorSkinControl' ) ) {
 
+    if( ! class_exists( 'SiteEditorPanelButtonControl' ) ) {
+        require_once dirname( __FILE__ ) . DS . 'site-editor-panel-button-control.class.php';
+    }
+
 	/**
 	 * Skin control
 	 */
-	class SiteEditorSkinControl extends SiteEditorOptionsControl {
+	class SiteEditorSkinControl extends SiteEditorPanelButtonControl {
 
 		/**
 		 * The control type.
@@ -26,6 +30,22 @@ if ( ! class_exists( 'SiteEditorSkinControl' ) ) {
 		 * @var string
 		 */
 		public $type = 'skin';
+
+		/**
+		 * The control Button Style
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $button_style = 'black';
+
+        /**
+         * The Title Of Skin Panel
+         *
+         * @access public
+         * @var string
+         */
+        public $panel_title = '';
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -43,46 +63,41 @@ if ( ! class_exists( 'SiteEditorSkinControl' ) ) {
 		 */
 		protected function render_content() {
 
-			$atts           = $this->input_attrs();
+            if( ! is_array( $this->atts ) ) {
+                $this->atts = array();
+            }
 
-			$atts_string    = $atts["atts"];
+            $this->atts['class'] = ( isset( $this->atts['class'] ) && !empty( $this->atts['class'] ) ) ? $this->atts['class'] . " sed-select-module-skins-btn" : "sed-select-module-skins-btn";
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-skin-input sed-control-{$this->type} {$atts['class']}";
+            $this->panel_title  = ( !empty( $this->panel_title ) ) ? $this->panel_title : __('skins' , 'site-editor');
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+            $this->label        = ( !empty( $this->label ) ) ? $this->label : __('Change Skin' , 'site-editor');
 
-			$sed_field_id   = 'sed_pb_' . $pkey;
+            parent::render_content();
 
-            $value          = $this->value();
-
-			?>
-
-			<label class=""><?php echo $this->label;?></label>
-			<?php if(!empty($this->description)){ ?> 
-			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
-			<?php } ?>
-			<div class="sed-bp-form-skin">
-				<?php
-				$i = 1;
-				foreach( $this->choices as $key_val => $choice ) {
-					$checked = ( $key_val == $value ) ? 'checked="checked"' : '';
-				?>
-
-					<div class="sed-bp-form-skin-item">
-						<label for="<?php echo esc_attr( $sed_field_id ) . $i ;?>">
-							<input  type="skin" class="<?php echo esc_attr( $classes ); ?>" value="<?php echo esc_attr( $key_val );?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id ) . $i ;?>"  <?php echo $checked;?> <?php echo $atts_string;?> />
-							<?php echo $choice;?>
-						</label>
-					</div>
-
-				<?php 
-				    $i++;
-				  } 
-				?>
-			</div>
-
-			<?php
 		}
+
+        /**
+         * Skin Control Panel Content
+         *
+         *
+         * @access protected
+         */
+        protected function panel_content() {
+
+            ?>
+            <div class="loading skin-loading"></div>
+
+            <div class="error error-load-skins">
+                <span></span>
+            </div>
+
+            <div class="skins-dialog-inner">
+
+            </div>
+            <?php
+
+        }
 
 		/**
 		 * An Underscore (JS) template for this control's content (but not its container).

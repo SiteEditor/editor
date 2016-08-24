@@ -255,8 +255,8 @@ class PBElasticSlider extends PBShortcodeClass{
                 'style'  =>  'default',
                 'label'  =>  __("Gallery Managment","site-editor") ,
                 'desc'   =>  '',
-                'class'  =>  'open-media-library-edit-gallery',
                 "atts"   =>  array(
+                    "class"                 => "open-media-library-edit-gallery",
                     "support_types"         => "image" ,
                     "media_attrs"           => "attachment_id,image_url,image_source" ,
                     "organize_tab_title"    => __("Edit Gallery","site-editor") ,

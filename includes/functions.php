@@ -655,18 +655,36 @@ function si_add_mobile_class( $classes ) {
 add_filter( 'body_class', 'si_add_mobile_class' );
 
 function sed_add_settings( $settings ){
-    global $sed_options_engine;
-    $sed_options_engine->add_settings( $settings );
-}
 
-function sed_add_params( $group , $params_title , $params = array() , $panels = array() , $base_category = "module-settings" ){
-    global $sed_options_engine;
-    $sed_options_engine->set_group_params( $group , $params_title , $params , $panels , $base_category );
+    global $sed_apps;
+
+    if( !empty( $settings ) && is_array( $settings ) ){
+        foreach( $settings AS $id => $values ){
+            /*if($this->sed_settings !== false && isset( $this->sed_settings[$id] )){
+                $values['value'] = $this->js_value( $id, $this->sed_settings[$id] );
+            }
+            $this->settings[ $id ] = $values;*/
+            if( isset( $values['value'] ) ){
+                $values['default'] = $values['value'];
+                unset( $values['value'] );
+            }
+
+            $sed_apps->editor->manager->add_setting( $id, $values );
+        }
+    }
+
 }
 
 function sed_add_controls( $controls ){
-    global $sed_options_engine;
-    $sed_options_engine->add_controls( $controls );
+
+    global $sed_apps;
+    if(!empty($controls)){
+        foreach($controls AS $id => $values ){
+
+            $sed_apps->editor->manager->add_control( $id, $values );
+        }
+    }
+
 }
 
 function sed_stringify_atts( $attributes ) {
@@ -1054,6 +1072,58 @@ function sed_get_page_options( $sed_page_id = "general_home" , $sed_page_type = 
 
     return apply_filters( "sed_current_page_options" , $options );
 
+}
+
+/**
+ * Get All WP Image Sizes
+ *
+ */
+function sed_get_image_sizes(){
+    global $_wp_additional_image_sizes;
+
+    $sizes = array();
+
+    $possible_sizes = apply_filters( 'image_size_names_choose', array(
+        'thumbnail' => __('Thumbnail'),
+        'medium'    => __('Medium'),
+        'large'     => __('Large')
+    ) );
+
+
+    foreach( $possible_sizes as $_size => $label ) {
+
+        if ( in_array( $_size, array( 'thumbnail', 'medium', 'large' ) ) ) {
+
+            $sizes[ $_size ]['width'] = get_option( $_size . '_size_w' );
+            $sizes[ $_size ]['height'] = get_option( $_size . '_size_h' );
+            $sizes[ $_size ]['crop'] = (bool) get_option( $_size . '_crop' );
+            $sizes[ $_size ]['label'] =  $label;
+
+        } elseif ( isset( $_wp_additional_image_sizes[ $_size ] ) ) {
+
+            $sizes[ $_size ] = array(
+                'width'  => $_wp_additional_image_sizes[ $_size ]['width'],
+                'height' => $_wp_additional_image_sizes[ $_size ]['height'],
+                'crop'   => $_wp_additional_image_sizes[ $_size ]['crop'] ,
+                'label'  => $label
+            );
+
+        }
+
+    }
+
+    $sizes['full'] = array( 'label'  => __('Full Size') );
+
+    foreach( $_wp_additional_image_sizes AS $img_size => $options ){
+        $sizes[ $img_size ] = array(
+            'width'  => $options['width'],
+            'height' => $options['height'],
+            'crop'   => $options['crop'] ,
+            'label'  => $img_size
+        );
+    }
+
+    return $sizes;
 }
 
 

@@ -124,7 +124,7 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 
 			$classes        = "sed-module-element-control sed-element-control sed-bp-form-code sed-bp-input sed-pb-codemirror-editor sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

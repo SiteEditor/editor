@@ -38,7 +38,7 @@ if ( ! class_exists( 'SiteEditorExpandedOptionsPanel' ) ) {
 
 			$classes        = "sed-accordion-header go-panel-element sed-panel-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			/**
 			 * @id : sed-app-panel-<?php echo esc_attr( $this->id ); ?> * required for panel main or container

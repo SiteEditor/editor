@@ -21,8 +21,6 @@ require_once SED_EXT_PATH . DS . "pagebuilder" . DS . "includes" . DS . "pagebui
 $sed_pb_app = new PageBuilderModulesClass();
 $GLOBALS['sed_pb_app'] = $sed_pb_app;
 
-require_once SED_EXT_PATH . DS . "pagebuilder" . DS . "includes" . DS . "module_animation.class.php";
-
 require_once SED_EXT_PATH . DS . "design-editor" . DS . "includes" . DS . "module_styles_controls.class.php";
 require_once SED_EXT_PATH . DS . "pagebuilder" . DS . "includes" . DS . "pb-shortcodes.class.php";
 

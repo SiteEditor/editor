@@ -73,7 +73,7 @@ if ( ! class_exists( 'SiteEditorMediaControl' ) ) {
 
 			$classes        = "sed-bp-form-text sed-bp-input media-url-field sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

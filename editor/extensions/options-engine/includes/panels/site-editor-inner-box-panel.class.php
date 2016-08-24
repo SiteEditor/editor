@@ -54,7 +54,7 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
 
 			$classes        = "sed-btn-{$this->btn_style} go-panel-element sed-panel-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
             $sed_field_id   = 'sed_pb_' . $pkey;
 

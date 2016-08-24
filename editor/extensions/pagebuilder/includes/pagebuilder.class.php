@@ -785,10 +785,6 @@ Class PageBuilderApplication {
 
                 $this->shortcodes[$name]['pattern'] = $tmpl;
 
-                /*if(!empty($params)){
-                    sed_add_params( $name , $title , $params , $panels );
-                }*/
-
             }
        }
 

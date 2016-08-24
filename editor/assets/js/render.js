@@ -115,7 +115,7 @@
     });
 
     //for chosen select
-    $("select.custom-select").livequery(function(){
+    $("select.sed-custom-select").livequery(function(){
         $(this).select2({
             placeholder: 'Select an option' ,
             allowClear: true

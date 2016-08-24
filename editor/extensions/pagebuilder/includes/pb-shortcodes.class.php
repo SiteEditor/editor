@@ -584,9 +584,9 @@ class PBShortcodeClass{
 		    $this->panels[ $id ] = array_merge( array(
                 'id'            => $id  ,
                 'title'         => ''  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'fieldset' ,
                 'description'   => '' ,
+                'capability'    => 'edit_theme_options' ,
+                'type'          => 'default' ,
                 'priority'      => 10
             ) , $args );
 	}
@@ -602,12 +602,13 @@ class PBShortcodeClass{
     function create_settings(){
 
         $this->atts = $this->default_atts();
+
         $params = apply_filters( "sed_shortcode_settings" , $this->shortcode_settings() , $this );
 
         $params[ 'id' ] = array(
             'type'          => 'text',
             'label'         => __('Module Id', 'site-editor'),
-            'desc'          => __('Module Id For Anchor And ...', 'site-editor') ,
+            'description'   => __('Module Id For Anchor And ...', 'site-editor') ,
             'atts'          => array(
                 "disabled"      =>      "disabled"
             ),
@@ -617,7 +618,7 @@ class PBShortcodeClass{
         $params[ 'class' ] = array(
             'type'          => 'text',
             'label'         => __('Extra class name', 'site-editor'),
-            'desc'          => __('Style particular content element differently - add a class name and refer to it in custom CSS.', 'site-editor') ,
+            'description'   => __('Style particular content element differently - add a class name and refer to it in custom CSS.', 'site-editor') ,
             'priority'      => 1000
         );
 
@@ -625,17 +626,14 @@ class PBShortcodeClass{
         $params[ 'hidden_in_mobile' ] = array(
             'type'          => 'checkbox',
             'label'         => __('Hidden In Mobile', 'site-editor'),
-            'desc'          => __('Hidden Module In Mobile Version', 'site-editor') ,
-            'control_type'  =>  "sed_element",
+            'description'   => __('Hidden Module In Mobile Version', 'site-editor') ,
             'priority'      => 998
         );
-
 
         $params[ 'show_mobile_only' ] = array(
             'type'          => 'checkbox',
             'label'         => __('Show In Mobile Only', 'site-editor'),
-            'desc'          => __('Show Module In Mobile Only', 'site-editor') ,
-            'control_type'  =>  "sed_element",
+            'description'   => __('Show Module In Mobile Only', 'site-editor') ,
             'priority'      => 999
         );
 
@@ -659,27 +657,22 @@ class PBShortcodeClass{
 
         if( $this->has_styles_settings === true ){
             $params[ 'design_panel' ] = array(
-                'type' => 'panel_button',
-                'label' => __('Custom Edit Style',"site-editor"),
-                'desc' => '',
-                'style' => 'blue' ,
-                'class' => 'sed_style_editor_btn' ,
-                'dialog_title' => __('Custom Edit Style',"site-editor") ,
-                'dialog_content' => $dialog_content ,
-                'priority'      => 0
+                'type'          => 'panel-button',
+                'label'         => __('Custom Edit Style',"site-editor"),
+                'description'   => '',
+                'button_style'  => 'blue' ,
+                'atts'          => array(
+                    'class'         =>  'sed_style_editor_btn' 
+                 ) ,   
+                'panel_title'   => __('Custom Edit Style',"site-editor") ,
+                'panel_content' => $dialog_content ,
+                'priority'      => 2
             );
         }
 
-        /*if(!empty( $params )){
-
-            $this->settings = $this->get_params( $params );
-        }*/
-
-
-
         global $sed_options_engine;
 
-        $params = $sed_options_engine->params_type_process( $params );
+        $params = $sed_options_engine->params_type_process( $params , $this );
 
         $params = $this->get_params( $params );
 
@@ -826,7 +819,6 @@ class PBShortcodeClass{
         }
 
         return $param;
-
     }
 
     function add_style_settings(){

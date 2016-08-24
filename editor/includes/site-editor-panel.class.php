@@ -346,7 +346,7 @@ class SiteEditorOptionsPanel{
 
 		$classes        = "row_setting_box sed-panel-{$this->type} {$atts['class']}";
 
-		$pkey			= "{$this->option_group}_{$this->id}";
+		$pkey			= $this->id;
 
 		/**
 		 * @id : sed-app-panel-<?php echo esc_attr( $this->id ); ?> * required for panel main or container

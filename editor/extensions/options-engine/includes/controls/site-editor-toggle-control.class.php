@@ -49,7 +49,7 @@ if ( ! class_exists( 'SiteEditorToggleControl' ) ) {
 
 			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-toggle-input sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

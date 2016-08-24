@@ -123,17 +123,8 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                     "label"         => __("Animation Settings", "site-editor"),
                 ),
                 'row_container' => array(
-                    'type'          => 'row_settings_button',
-                    'label'         => __('Go To Row Settings', 'site-editor'),
-                    'desc'          => __('Row Settings', 'site-editor'),
-                    'style'         => 'blue',
-                    'class'         =>  '',
-                    //'panel'    => 'general_settings',
-                    //'in_box'   =>'false',
-                    'priority'      => 20
-                    /*'atts'  => array(
-                        'data-module-name' => $this->module
-                    ) */
+                    'type'          => 'row_container',
+                    'label'         => __('Go To Row Settings', 'site-editor')
                 )
         );
 

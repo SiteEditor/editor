@@ -65,7 +65,7 @@ if ( ! class_exists( 'SiteEditorDateControl' ) ) {
 
 			$classes        = "sed-module-element-control sed-element-control sed-bp-form-date sed-bp-input sed-bp-form-datepicker-input sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

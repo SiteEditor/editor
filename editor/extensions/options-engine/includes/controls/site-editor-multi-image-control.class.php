@@ -49,7 +49,7 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 
 			$classes        = "select-img-btn change_image_btn sed-btn-blue sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

@@ -1753,9 +1753,8 @@
     api.Animations = api.SiteEditorControls.extend({
 
 		_ready: function() {
-              var control = this ,  dialog = $("#dialog_page_box_" + this.shortcode + "_animation" );
-
-              dialog.find(".animation-dialog-inner").html($("#tmpl-dialog-animations").html());
+              var control = this ,
+                  dialog = $( "#" + this.container.find(".sed-element-control").data("relatedLevelBox") );
 
               var spinner = dialog.find(".sed-bp-spinner");
               this.animateType = dialog.find(".sed_pb_animation_type_class");
@@ -1805,12 +1804,12 @@
     api.ModuleSkins = api.SiteEditorControls.extend({
 
 		_ready: function() {      //'_skin_dialog' : skin is control id in pb-shortcode.class.php line 347
-            var control = this ,  dialog = $("#dialog_page_box_" + this.shortcode + "_" + this.attr ),
-            tmpl;
+            var control = this ,
+                dialog = $( "#" + this.container.find(".sed-element-control").data("relatedLevelBox") );
 
             this.dialog = dialog;
 
-            this.container.find(".sed-select-module-skins-btn").on("click" , function(){
+            this.container.find(".sed-element-control").on("click" , function(){
                 control._loadRender( $(this).data("moduleName") );
             });
 
@@ -1830,34 +1829,9 @@
 
         },
 
-        _skinSupport : function( ){
-            if( _.isUndefined( this.params.support ) )
-                return ;
-
-            var self = this,
-                skins = this.params.support ,
-                type = ( !_.isUndefined( skins.type ) ) ? skins.type.toLowerCase() : "include";
-
-            if( !$.isArray(skins.fields) || skins.fields.length == 0 )
-                return ;
-
-            if( type == "include" )
-                this.dialog.find("li:first").hide();
-
-            _.each( skins.fields , function( field ){
-
-                var skinEl = self.dialog.find("[data-skin-name='" + field + "']").parents("li:first");
-
-                if( skinEl.length > 0 && type == "include"  )
-                    skinEl.show();
-                else if( skinEl.length > 0 && type == "exclude"  )
-                    skinEl.hide();
-            });
-        },
-
         _loadRender : function( moduleName ){
 
-            var dialog = this.dialog
+            var dialog = this.dialog ,
                 control = this;
 
             $(".error-load-skins" , dialog).hide();
@@ -1870,7 +1844,6 @@
                 tmpl = $("#sed-tmpl-modules-skins-" + control.attr + "-" +  control.shortcode);
                 dialog.find(".skins-dialog-inner").html( tmpl.html() );
 
-                this._skinSupport();
             }else{
                 control.loadmoduleSkins();
             }
@@ -1897,6 +1870,14 @@
         loadmoduleSkins:function(){
             var control = this , dialog = this.dialog;
 
+            var tpl = api.template("sed-ajax-loading"), html;
+
+            html = tpl({type: "medium"});
+
+            var loading = $( html ).appendTo( $('.loading' , dialog) );
+
+            loading.show();
+
             $.ajax({
                 type: "POST",
                 url: SEDAJAX.url,
@@ -1909,17 +1890,17 @@
                     nonce                           :  api.addOnSettings.moduleSkins.nonce ,
                     sed_page_ajax                   :  'module_load_skins'
                 },
-                beforeSend: function()
-                {
-                    $('.loading' , dialog).css({opacity:0, display:"block", visibility:'visible',position:'absolute', top:'21px', left:'345px'}).animate({opacity:1});
+                error: function(){
+
+                    loading.hide();
+
+                    alert("Could not add the font because the server did not respond.Please reload the page, then try again");
+
                 },
-                /*error: function()
-                {
-                alert('Couldn\'t add the font because the server didn�t respond.<br/>Please reload the page, then try again');
-                },*/
                 success: function(response)
                 {
-                    $('.loading' , dialog).hide();
+                    loading.hide();
+
                     // Check if the user is logged out.
                     if ( '0' == response ) {
                         api.previewer.preview.iframe.hide();
@@ -1951,7 +1932,6 @@
                         dialog.find(".skins-dialog-inner").html( skinTmpl );
                         $('<script type="text/html" id="sed-tmpl-modules-skins-' + control.attr + "-" + control.shortcode + '">' + skinTmpl + '</script>').appendTo( $("body") );
 
-                        control._skinSupport();
                         //dialog.dialog("option" , "position" , { my: "right-20", at: "right" , of: "#sed-site-preview" });
 
                         if(response.data.js_tpl)
@@ -1968,7 +1948,7 @@
                 }
             });
 
-        },
+        }
 
     });
 
@@ -2388,7 +2368,9 @@
         "multi-icon"            : api.OrganizeIconsControl,
         icon                    : api.ChangeIconControl,
         animations              : api.Animations ,
+        animation               : api.Animations ,
         skins                   : api.ModuleSkins ,
+        skin                    : api.ModuleSkins ,
         widget                  : api.WidgetControl ,
         gradient                : api.GradientControl
         //module_element          : api.ModulesElement ,
@@ -2399,6 +2381,7 @@
          * ----------------------------
          * @ajax-button
          * @google-map
+         * @repeater
          * ...
          * -----------------------------
          * @New *****
@@ -2409,7 +2392,6 @@
          * @multi-color
          * @radio-image
          * @radio-buttonset
-         * @repeater
          * @slider
          * @sortable
          * @switch
@@ -2438,7 +2420,7 @@
          * ------------------------------
          * @Module *****
          * ------------------------------
-         * @animations
+         * @animation
          * @skin
          * ------------------------------
          * @Other *****

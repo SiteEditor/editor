@@ -57,7 +57,7 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 
 			$classes        = "change_image sed-change-media-button sed-btn-blue sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

@@ -49,7 +49,7 @@ if ( ! class_exists( 'SiteEditorMulticolorControl' ) ) {
 
 			$classes        = "input-multi-colorpicker sed-colorpicker sed-control-{$this->type} {$atts['class']}";
 
-			$pkey			= "{$this->option_group}_{$this->id}";
+			$pkey			= $this->id;
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 

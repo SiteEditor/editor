@@ -116,6 +116,8 @@ final class SiteEditorOptionsManager{
 
         add_action( 'sed_print_footer_scripts' , array($this, 'print_settings_dependencies') , 10000 );
 
+        add_action( "sed_footer" , array($this, 'print_settings_template') , 10000 );
+
         add_action( 'wp_enqueue_media' , array( $this , 'print_media_templates' ) );
 
     }
@@ -905,6 +907,58 @@ final class SiteEditorOptionsManager{
             /** This action is documented in wp-admin/admin-footer.php */
             do_action( 'admin_footer-post.php' );
         }
+    }
+
+    /**
+     * Print Settings Templates
+     */
+    public function print_settings_template(){
+        ?>
+
+        <div id="static-module-hover-box">
+            <span class="fa icon icon-edit">edit</span>
+        </div>
+
+        <div id="sed-app-settings-panel" class="sed-dialog" title="<?php echo __("App Settings" , "site-editor");?>">
+
+        </div>
+
+        <div id="sed-dialog-settings" class="sed-dialog" title="">
+
+        </div>
+        <!--
+
+        <?php
+        do_action("print_sed-dialog-settings_tmpl");
+        ?>
+
+        -->
+
+        <?php
+
+        /*$custom_settings = $this->params;
+        if(!empty( $custom_settings )){
+            foreach($custom_settings AS $name => $settings){
+                if(!empty($settings['settings_output'])){
+                    ?>
+                    <script type="text/html" data-dialog-title="<?php echo $settings['settings_title'];?>" id="sed-tmpl-dialog-settings-<?php echo $name;?>">
+                        <div id="dialog-level-box-settings-<?php echo $name;?>-container" data-title="<?php echo $settings['settings_title'];?>" class="dialog-level-box-settings-container" >
+                            <?php echo $settings['settings_output'];?>
+                            <?php do_action("print_".$name."_settings_tmpl");?>
+                        </div>
+                    </script>
+                    <?php
+                }
+            }
+        }*/
+
+        $panels = array();//$this->panels;
+        ?>
+
+        <script>
+            var _sedAppSettingsPanels = <?php if( !empty( $panels ) ) echo wp_json_encode( $panels ); else echo "{}"; ?>;
+        </script>
+        <?php
     }
 
 }

@@ -90,9 +90,9 @@ class PBSlideImageShortcode extends PBShortcodeClass{
 
           $params = array(
               'change_image_panel' => array(
-                  "type"          => "sed_slide_img" ,
+                  "type"          => "sed_image" ,
                   "label"         => __("Select Slide Image", "site-editor"),
-                  "panel_type"    => "fieldset" ,
+                  "panel_type"    => "default" ,
                   'priority'      => 1 ,
               ),
               'title' =>  array(

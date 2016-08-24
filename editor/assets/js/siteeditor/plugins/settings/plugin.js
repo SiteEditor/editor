@@ -813,7 +813,7 @@
                     if( !_.isUndefined( data.has_custom_size ) && data.has_custom_size ){
                         optionsStr += '<option value="" > ' + api.I18n.custom_size + ' </option>'
                     }
-
+                    
                     _.each( api.addOnSettings.imageModule.sizes  , function( size , key ){
                         var sizeWidth = !_.isUndefined( size.width ) ? size.width : "" ,
                             sizeHeight = !_.isUndefined( size.height ) ? size.height : "" ;
