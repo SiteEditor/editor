@@ -36,7 +36,11 @@ if ( ! class_exists( 'SiteEditorExpandedOptionsPanel' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-accordion-header go-panel-element sed-panel-{$this->type} {$atts['class']}";
+			/**
+			 * go-panel-element-update Css Class For Update Panel In Js 
+			 *
+			 */
+			$classes        = "sed-accordion-header go-panel-element go-panel-element-update sed-panel-{$this->type} {$atts['class']}";
 
 			$pkey			= $this->id;
 

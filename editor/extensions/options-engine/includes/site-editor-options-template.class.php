@@ -141,7 +141,7 @@ class SiteEditorOptionsTemplate{
         //Prepare sub panels
         foreach ( $this->panels as $id => $panel ) {
 
-            if ( ! $panel->check_capabilities() || ! $panel->controls ) {
+            if ( ! $panel->check_capabilities() ) {//|| ! $panel->controls
                 continue;
             }
 

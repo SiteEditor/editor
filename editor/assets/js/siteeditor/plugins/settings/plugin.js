@@ -6,6 +6,8 @@
     //handels of all loaded scripts in siteeditor app
     api.sedAppLoadedScripts = api.sedAppLoadedScripts || [];
 
+    api.designEditorTpls = api.designEditorTpls || {};
+
     api.fn.getStyle = function (el, styleProp , pseudo) {
       if( _.isUndefined( el ) || $(el).length == 0 )
         return false;
@@ -399,7 +401,8 @@
                         panels = responseData.panels ,
                         settingId = responseData.settingId ,
                         settingType = responseData.settingType,
-                        groups  = responseData.groups;
+                        groups  = responseData.groups ,
+                        designTemplate = responseData.designTemplate;
 
                     delete self.ajaxProcessing[settingId];
 
@@ -416,6 +419,8 @@
                     self.setGroups( groups , settingId );
 
                     self.setPanels( panels , settingId );
+
+                    self.sedDesignTemplate( designTemplate , settingId );
 
                     if( _.isUndefined( self.ajaxResetTmpls[settingId] ) && _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
 
@@ -484,7 +489,6 @@
 
         },
 
-
         setDependencies : function( relations , settingId ){
 
             if( !_.isUndefined( relations ) && !_.isEmpty( relations ) && _.isObject( relations ) ){
@@ -493,6 +497,16 @@
                 groupRelations[settingId] = relations;
 
                 api.settingsRelations = $.extend( api.settingsRelations , groupRelations);
+
+            }
+
+        },
+
+        sedDesignTemplate : function( designTemplate , settingId ){
+
+            if( !_.isUndefined( designTemplate ) && !_.isEmpty( designTemplate ) ){
+
+                api.designEditorTpls[settingId] = designTemplate;
 
             }
 
@@ -824,14 +838,21 @@
                 }
             });
 
-            $( selector ).find(".go-panel-element").livequery(function(){
+            $( selector ).find(".go-panel-element-update").livequery(function(){
                 if( _.isUndefined( api.sedDialogSettings.dialogsContents[self.currentSettingsId] ) ){
                     $(this).click(function(){ //go-accordion-panel
+
                         var panelId = $(this).data("panelId");
-                        if( $.inArray( panelId , self.panelsNeedToUpdate) == -1 ){
-                            self.initSettings( panelId );
-                            self.panelsNeedToUpdate.push( panelId );
+
+                        if( panelId ) {
+
+                            if ($.inArray(panelId, self.panelsNeedToUpdate) == -1) {
+                                self.initSettings(panelId);
+                                self.panelsNeedToUpdate.push(panelId);
+                            }
+
                         }
+
                     });
                 }
             });
@@ -876,7 +897,7 @@
             $( ".accordion-panel-settings" ).livequery(function(){
                 if( _.isUndefined( $(this).data( "acInit" ) ) ||  $(this).data( "acInit" ) !== true ){
                     $(this).accordion({
-                        active: 0,
+                        active: false,
                         collapsible: true,
                         event: 'click',
                         heightStyle: 'content',
@@ -986,6 +1007,14 @@
             }
         },
 
+        /**
+         * Get settings in root or 'inner_box' Or 'expanded'
+         * @Todo : if 'default' panel in 'inner_box' Or 'expanded' , create and update in
+         * -first time And not sync with update panel , and it's need to update with panel
+         *
+         * @param panelId
+         * @returns {*}
+         */
         getSettings : function( panelId ){
             var dataElement = this.sedDialog.data;
 
@@ -1019,7 +1048,7 @@
 
                     var panel = api.settingsPanels[dataElement.shortcodeName][data.panel];
 
-                    return $.inArray( panel.type , [ 'inner_box'  ] ) == -1; //, 'expanded'
+                    return $.inArray( panel.type , [ 'inner_box' , 'expanded' ] ) == -1; //, 'expanded'
 
                 });
             }
@@ -1404,7 +1433,7 @@
         openPanelSettings : function(  ){
 
             var shortcodeName = api.appModulesSettings.sedDialog.data.shortcodeName,
-                panelTpl = $("#style_editor_panel_" + shortcodeName + "_tmpl" );
+                panelTpl = api.designEditorTpls[shortcodeName];
 
             this.dialogBoxContainer = $("#dialog_page_box_" + shortcodeName + "_design_panel").find(".sed_style_editor_panel_container:first");
 
@@ -1420,7 +1449,9 @@
                 this.panelsContents[this.currentSettingsId].appendTo( this.dialogBoxContainer );
             }else{
 
-                $( panelTpl.html() ).appendTo( this.dialogBoxContainer );
+                $( panelTpl ).appendTo( this.dialogBoxContainer );
+
+                delete api.designEditorTpls[shortcodeName];
 
             }
 
@@ -1476,7 +1507,7 @@
             var self = this ,
                 shortcodeName = api.appModulesSettings.sedDialog.data.shortcodeName,
                 panelTpl = $("#style_editor_settings_" + styleId + "_tmpl" ) ,
-                lvlBox = "modules_styles_settings_"+ shortcodeName +"_level_box";
+                lvlBox = "modules_styles_settings_"+ shortcodeName +"_design_group_level_box";
 
             api.currentCssSelector = ( selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]';
 
@@ -1514,13 +1545,12 @@
 
         },
 
-        initSettings : function( styleId , selector ){
+        initSettings : function( styleId , selector ){ console.log( "--------api.stylesSettingsControls[styleId]-----" , api.stylesSettingsControls[styleId] );
             var self = this;
 
             //this.updateStyleNeeded = true;
 
             _.each( api.stylesSettingsControls[styleId] , function( data ) {
-                var startTime = new Date();
                 self.updateSettings( data.control_id , data , selector );
             });
         },
@@ -1702,7 +1732,9 @@
             //var selectorT = "#" + api.currentTargetElementId + " " + selector ,
                 //$el = $("#website")[0].contentWindow.jQuery( selectorT );
 
-            if( $.inArray( id , _.keys( api.settings.controls ) ) == -1 ){  //&& $el.length > 0
+            var control = api.control.instance( id );
+
+            if( $.inArray( id , _.keys( api.settings.controls ) ) == -1 || ! control ){  //&& $el.length > 0
 
                 var cValue = this.getCurrentValue( id , data , selector  );
 
@@ -1712,12 +1744,12 @@
 
                 api.Events.trigger( "renderSettingsControls" , id, data );
 
-                var control = api.control.instance( id );
+                control = api.control.instance( id );
+
                 $( control.container ).parents(".row_settings:first").show();
 
             } else {
 
-                var control = api.control.instance( id );
                 $( control.container ).parents(".row_settings:first").show();
 
                 var cValue = this.getCurrentValue( id , data , selector  );

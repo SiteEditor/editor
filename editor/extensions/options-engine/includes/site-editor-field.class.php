@@ -116,8 +116,7 @@ class SiteEditorField{
     public $sanitize_callback = '';
 
     /**
-     * Use 'refresh', 'postMessage' or 'auto'.
-     * 'auto' will automatically geberate any 'js_vars' from the 'output' argument.
+     * Use 'refresh', 'postMessage' 
      *
      * @access protected
      * @var string

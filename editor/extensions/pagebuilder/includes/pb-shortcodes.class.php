@@ -23,6 +23,16 @@ class PBShortcodeClass{
 
     public $queue = array();
 
+
+    /**
+     * prefix for controls ids for prevent conflict
+     *
+     * @var string
+     * @access public
+     */
+    public $control_prefix = '';
+
+
     function __construct(  $args = array() ) {
         global $sed_pb_app;
 
@@ -41,6 +51,8 @@ class PBShortcodeClass{
 
         $this->module = $module;        //var_dump($args);
         $this->shortcode = $sed_pb_app->array2obj( $args );
+
+        $this->control_prefix = $this->shortcode->name;
 
         add_shortcode( $this->shortcode->name , array( $this , 'shortcode_render') );
 
@@ -599,11 +611,39 @@ class PBShortcodeClass{
         return array();
     }
 
+    public function register_shortcode_group(){
+
+        SED()->editor->manager->add_group( $this->shortcode->name , array(
+            'capability'        => 'edit_theme_options',
+            'theme_supports'    => '',
+            'title'             => $this->shortcode->title ,
+            'description'       => $this->shortcode->description ,
+            'type'              => 'default',
+        ));
+
+        SED()->editor->manager->add_group( $this->shortcode->name . "_design_group" , array(
+            'capability'        => 'edit_theme_options',
+            'theme_supports'    => '',
+            'title'             => __('Custom Edit Style' , 'site-editor') ,
+            'description'       => '' ,
+            'type'              => 'default',
+        ));
+
+    }
+
     function create_settings(){
 
         $this->atts = $this->default_atts();
 
         $params = apply_filters( "sed_shortcode_settings" , $this->shortcode_settings() , $this );
+
+        $this->add_panel( 'module_general_settings' , array(
+            'title'         =>  __("General Settings" , "site-editor") ,
+            'capability'    => 'edit_theme_options' ,
+            'type'          => 'expanded' ,
+            'description'   => __("Module General Settings" , "site-editor") ,
+            'priority'      => 1000 ,
+        ));
 
         $params[ 'id' ] = array(
             'type'          => 'text',
@@ -612,29 +652,42 @@ class PBShortcodeClass{
             'atts'          => array(
                 "disabled"      =>      "disabled"
             ),
-            'priority'      => 1001
+            'priority'      => 1001 ,
+            'panel'         => 'module_general_settings'
         );
 
         $params[ 'class' ] = array(
             'type'          => 'text',
             'label'         => __('Extra class name', 'site-editor'),
             'description'   => __('Style particular content element differently - add a class name and refer to it in custom CSS.', 'site-editor') ,
-            'priority'      => 1000
+            'priority'      => 1000 ,
+            'panel'         => 'module_general_settings'
         );
 
+        $this->add_panel( 'module_mobile_settings' , array(
+            'title'         =>  __("Mobile Settings" , "site-editor") ,
+            'capability'    => 'edit_theme_options' ,
+            'type'          => 'default' ,
+            //'description'   => __("Mobile Settings" , "site-editor") ,
+            'priority'      => 999 ,
+        ));
 
         $params[ 'hidden_in_mobile' ] = array(
-            'type'          => 'checkbox',
-            'label'         => __('Hidden In Mobile', 'site-editor'),
-            'description'   => __('Hidden Module In Mobile Version', 'site-editor') ,
-            'priority'      => 998
+            'type'              => 'checkbox',
+            'label'             => __('Hidden In Mobile', 'site-editor'),
+            'description'       => __('Hidden Module In Mobile Version', 'site-editor') ,
+            'priority'          => 998 ,
+            'has_border_box'    => false ,
+            'panel'             => 'module_mobile_settings'
         );
 
         $params[ 'show_mobile_only' ] = array(
-            'type'          => 'checkbox',
-            'label'         => __('Show In Mobile Only', 'site-editor'),
-            'description'   => __('Show Module In Mobile Only', 'site-editor') ,
-            'priority'      => 999
+            'type'              => 'checkbox',
+            'label'             => __('Show In Mobile Only', 'site-editor'),
+            'description'       => __('Show Module In Mobile Only', 'site-editor') ,
+            'priority'          => 999 ,
+            'has_border_box'    => false ,
+            'panel'             => 'module_mobile_settings'
         );
 
 
@@ -645,7 +698,7 @@ class PBShortcodeClass{
         <div class="sed_style_editor_panel_container">
 
         </div>
-        <div id="modules_styles_settings_<?php echo $this->shortcode->name;?>_level_box" data-multi-level-box="true" data-title="" class="sed-dialog content " >
+        <div id="modules_styles_settings_<?php echo $this->shortcode->name;?>_design_group_level_box" data-multi-level-box="true" data-title="" class="sed-dialog content " >
 
             <div class="styles_settings_container">
 
@@ -670,28 +723,22 @@ class PBShortcodeClass{
             );
         }
 
-        global $sed_options_engine;
+        global $sed_pb_options_engine;
 
-        $params = $sed_options_engine->params_type_process( $params , $this );
+        $params = $sed_pb_options_engine->params_type_process( $params , $this );
 
         $params = $this->get_params( $params );
 
-        $panels = $this->panels();
-
-        foreach($params AS $key => $param){
-
-            $control_id = $this->shortcode->name . "_" . $key;
+        foreach( $params AS $key => $param ){
 
             if( $key != "content" ){
 
-                $param = $this->add_control_param( $this->shortcode->name , $key , $param );
-
-                //var_dump( $param );
-
-                sed_options()->add_field( $control_id , $param );
+                $params[$key] = $this->add_control_param( $this->shortcode->name , $key , $param );
 
             }
         }
+
+        $panels = $this->panels();
 
         foreach( $panels AS $key => $panel ){
 
@@ -705,26 +752,18 @@ class PBShortcodeClass{
 
         }
 
-        sed_options()->add_panels( $panels );
+        $new_options = sed_options()->fix_controls_panels_ids( $params , $panels , $this->control_prefix );
+
+        $new_params = $new_options['fields'];
+
+        $new_panels = $new_options['panels'];
+
+        sed_options()->add_fields( $new_params );
+
+        sed_options()->add_panels( $new_panels );
 
     }
 
-    public function register_shortcode_group(){
-
-        SED()->editor->manager->add_group( $this->shortcode->name , array(
-            'capability'        => 'edit_theme_options',
-            'theme_supports'    => '',
-            'title'             => $this->shortcode->title ,
-            'description'       => $this->shortcode->description ,
-            'type'              => 'default',
-        ));
-
-    }
-
-    /*case 'group_skin' :
-      case 'group_hover_effect' :
-      skin_refresh
-    */
     function get_params( $params ){
 
         $new_params = array();
@@ -759,18 +798,8 @@ class PBShortcodeClass{
 
                     }
 
-                    /*if( isset( $param["atts"] ) ){
-
-                        unset( $new_params[$key]["atts"] );
-
-                        $new_params[$key]["input_attrs"] = $param["atts"];
-
-                    }*/
-
                     $new_params[$key]["value"] =  ( isset($this->atts[$key]) ) ? $this->atts[$key] : ( ( isset($param["value"]) ) ? $param["value"] : "" );
                     $new_params[$key]["is_attr"] = ( isset($this->atts[$key]) ) ? true : ( ( isset($param["is_attr"]) ) ? $param["is_attr"] : false );
-
-
 
                 }
             }
@@ -779,21 +808,21 @@ class PBShortcodeClass{
         return $new_params;
     }
 
+    /**
+     * @param $name
+     * @param $key
+     * @param $param
+     * @return mixed
+     */
     public function add_control_param( $name , $key , $param ){
 
-        $settings_type = ( isset( $param['settings_type'] ) && !empty( $param['settings_type'] ) ) ?  $param['settings_type'] : 'sed_pb_modules';
+        $param = $this->filter_param_setting_id( $param );
 
-        $param['setting_id'] = $settings_type;
-
-        unset( $param['settings_type'] );
-
-        $category = ( isset( $param['control_category'] ) && !empty( $param['control_category'] ) ) ?  $param['control_category'] : 'module-settings';
-
-        $param['category'] = $category;
-
-        unset( $param['control_category'] );
+        $param = $this->filter_param_category( $param );
 
         $is_style_setting = ( isset( $param['is_style_setting'] ) && is_bool( $param['is_style_setting'] ) ) ?  $param['is_style_setting'] : false;
+
+        $is_style_setting = ( $param['category'] == "style-editor" ) ? true : $is_style_setting;
 
         $param['is_style_setting'] = $is_style_setting;
 
@@ -801,9 +830,9 @@ class PBShortcodeClass{
 
         $value = isset( $param["value"] ) ? $param["value"] :  "";
 
-        global $sed_options_engine;
+        global $sed_pb_options_engine;
 
-        $param['default_value'] = is_array( $value ) ?  implode("," , $value): $sed_options_engine->sanitize_control_value( $value );
+        $param['default_value'] = is_array( $value ) ?  implode("," , $value): $sed_pb_options_engine->sanitize_control_value( $value );
 
         unset( $param["value"] );
 
@@ -812,7 +841,7 @@ class PBShortcodeClass{
         //edit risk
         $is_attr = isset( $param["is_attr"] ) ? $param["is_attr"]: false;
 
-        if( $settings_type == 'sed_pb_modules' ){
+        if( $param['setting_id'] == 'sed_pb_modules' ){
             $param['shortcode'] = $name;
             $param['attr_name'] = ( isset( $param['attr_name'] ) && !empty( $param['attr_name'] ) ) ? $param['attr_name'] : $key;
             $param['is_attr']   = $is_attr;
@@ -821,74 +850,114 @@ class PBShortcodeClass{
         return $param;
     }
 
+    /**
+     * @param $param
+     * @return mixed
+     */
+    public function filter_param_setting_id( $param ){
+
+        if( !isset( $param['setting_id'] ) && isset($param['settings_type']) ) {
+
+            $setting_id = ( !empty( $param['settings_type'] ) ) ? $param['settings_type'] : 'sed_pb_modules';
+
+            $param['setting_id'] = $setting_id;
+
+            unset( $param['settings_type'] );
+
+        }else if( !isset( $param['setting_id'] ) || empty( $param['setting_id'] ) ){
+
+            $param['setting_id'] = 'sed_pb_modules';
+
+        }
+
+        if( isset($param['settings_type']) ){
+            unset( $param['settings_type'] );
+        }
+
+        return $param;
+    }
+
+    /**
+     * @param $param
+     * @return mixed
+     */
+    public function filter_param_category( $param ){
+
+        if( !isset( $param['category'] ) && isset($param['control_category']) ) {
+
+            $category = ( !empty( $param['control_category'] ) ) ? $param['control_category'] : 'module-settings';
+
+            $param['category'] = $category;
+
+            unset( $param['control_category'] );
+        }else if( !isset( $param['category'] ) || empty( $param['category'] ) ){
+
+            $param['category'] = 'module-settings';
+
+        }
+
+        if( isset($param['control_category']) ){
+            unset( $param['control_category'] );
+        }
+
+        return $param;
+    }
+
     function add_style_settings(){
-        global $sed_pb_app , $site_editor_app;
+
+        global $site_editor_app;
+
         $settings = $this->custom_style_settings();
 
         if( !empty( $settings ) ){
 
             $this->has_styles_settings = true;
 
-            //$site_editor_app->style_editor_settings[$this->shortcode->name] = $settings;
-
             $this->style_editor_settings = $settings;
 
-            add_action( "sed_footer" , array( $this , 'print_style_editor_settings' ) );
-        }
+            $panels = array();
+            $controls = array();
+            $option_group = $this->shortcode->name . "_design_group";
 
-    }
+            foreach( $this->style_editor_settings AS $setting ){
+                if( is_array( $setting ) && count( $setting ) == 4 && is_array( $setting[2] ) ){
 
-    function print_style_editor_settings(){
-        global $site_editor_app;
-        $panels = array();
-        $controls = array();
+                    $panel_id = $this->shortcode->name . '_' . $setting[0] . '_panel';
 
-        foreach( $this->style_editor_settings AS $setting ){
-            if( is_array( $setting ) && count( $setting ) == 4 && is_array( $setting[2] ) ){
+                    $panels[$panel_id] = array(
+                        'title'         =>  $setting[3] ,
+                        'capability'    => 'edit_theme_options' ,
+                        'type'          => 'expanded' ,
+                        'description'   => '' ,
+                        'parent_id'     => 'root' ,
+                        'priority'      => 9 ,
+                        'option_group'  => $option_group  ,
+                        'atts'      =>  array(
+                            'class'             => "design_ac_header" ,
+                            'data-selector'     => $setting[1]
+                        )
+                    );
 
-                $panel_id = $this->shortcode->name . '_' . $setting[0] . '_panel';
-
-                $panels[$panel_id] = array(
-                    'title'         =>  $setting[3]  ,
-                    'label'         =>  $setting[3] ,
-                    'capability'    => 'edit_theme_options' ,
-                    'type'          => 'accordion_item' ,
-                    'description'   => '' ,
-                    'parent_id'     => 'root' ,
-                    'priority'      => 9 ,
-                    'id'            => $panel_id  ,
-                    'atts'      =>  array(
-                        'class'             => "design_ac_header" ,
-                        'data-selector'     => $setting[1]
-                    )
-                );
-
-                if( !empty($setting[2]) ){
-                    foreach( $setting[2] AS $control ){
-                        $controls[$this->shortcode->name . '_' . $setting[0] . '_' . $control ] = $site_editor_app->style_editor_controls->add_style_control( $control , $panel_id , $setting[1] );
+                    if( !empty($setting[2]) ){
+                        foreach( $setting[2] AS $control ){
+                            $controls[$this->shortcode->name . '_' . $setting[0] . '_' . $control ] = $site_editor_app->style_editor_controls->add_style_control( $control , $panel_id , $setting[1] , $option_group );
+                        }
                     }
+
                 }
-
             }
+
+            $new_options = sed_options()->fix_controls_panels_ids( $controls , $panels , $option_group );
+
+            $new_params = $new_options['fields'];
+
+            $new_panels = $new_options['panels'];
+
+            sed_options()->add_fields( $new_params );
+
+            sed_options()->add_panels( $new_panels );
+
         }
-
-
-
-        if( !empty( $controls ) ){
-            ModuleSettings::$group_id = $this->shortcode->name;
-            $style_editor_settings = ModuleSettings::create_settings($controls, $panels);
-
-            ?>
-            <script type="text/html"  id="style_editor_panel_<?php echo $this->shortcode->name;?>_tmpl" >
-                <div class="accordion-panel-settings">
-                <?php echo $style_editor_settings;?>
-                </div>
-            </script>
-            <?php
-
-            ModuleSettings::$group_id = "";
-        }
-
 
     }
 

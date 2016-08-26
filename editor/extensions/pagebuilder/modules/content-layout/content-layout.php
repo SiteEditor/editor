@@ -84,10 +84,11 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
 
         $params = array(
         		'layout' => array(
-                    'type'              =>  'dropdown',
-                    'in_box'            =>   true ,
-                    'html'              =>  $dropdown_html ,
-                    'control_param'     =>  array(
+                    'type'              =>  'custom',
+                    'js_type'           =>  'dropdown',
+                    'has_border_box'    =>   true ,
+                    'custom_template'   =>  $dropdown_html ,
+                    'js_params'     =>  array(
                         'options_selector'    => '.content-leyout-item',
                         'selected_class'      => 'selected-layout'
                     ),

@@ -161,23 +161,32 @@ final class SiteEditorOptionsManager{
     public function get_settings_data( $group_id , $group_type ){
 
         $data = array(
-            "settings"      =>  array() ,
-            "controls"      =>  array() ,
-            "panels"        =>  array() ,
-            "relations"     =>  array() ,
-            "output"        =>  "" ,
-            "settingId"     =>  $_POST['setting_id'] ,
-            "settingType"   =>  $group_type ,
-            "groups"        =>  array()
+            "settings"          =>  array() ,
+            "controls"          =>  array() ,
+            "panels"            =>  array() ,
+            "relations"         =>  array() ,
+            "output"            =>  "" ,
+            "settingId"         =>  $_POST['setting_id'] ,
+            "settingType"       =>  $group_type ,
+            "groups"            =>  array() ,
+            "designTemplate"    =>  ""
         );
 
         $groups = SED()->editor->manager->groups();
+
+        /**
+         * Design Group Not Support Js Controls , JS Panels
+         * Dependency And Settings
+         * This Group only output support
+         */
+        $design_group_id = $group_id . "_design_group";
 
         foreach ( $groups AS $id => $group ){
 
             if( $id == $group_id ){
                 $current_group = $group;
-                break;
+            }else if( $id == $design_group_id ){
+                $design_group = $group;
             }
 
         }
@@ -190,11 +199,15 @@ final class SiteEditorOptionsManager{
             return new WP_Error( 'options_not_access', __( "You can not access to this group options", "site-editor" ) );
         }
 
+        $allow_design = isset( $design_group ) &&  $design_group->check_capabilities();
+
         $data['groups'][$current_group->id] = $current_group->json();
 
         $panels = SED()->editor->manager->panels();
 
         $group_panels = array();
+
+        $design_group_panels = array();
 
         foreach ( $panels AS $panel_id => $panel ){
 
@@ -206,6 +219,10 @@ final class SiteEditorOptionsManager{
 
                     $data['panels'][$panel_id] = $panel->json();
 
+                }else if( $panel->option_group == $design_group_id ){
+
+                    $design_group_panels[$panel_id] = $panel;
+
                 }
 
             }
@@ -214,9 +231,14 @@ final class SiteEditorOptionsManager{
 
         $current_group->panels = $group_panels;
 
+        if( $allow_design )
+            $design_group->panels = $design_group_panels;
+
         $controls = SED()->editor->manager->controls(); //var_dump( $group_panels );
 
         $group_controls = array();
+
+        $design_group_controls = array();
 
         foreach ( $controls AS $control_id => $control ){
 
@@ -228,13 +250,22 @@ final class SiteEditorOptionsManager{
 
                     $data['controls'][$control_id] = $control->json();
 
+                }else if( $control->option_group == $design_group_id ){
+
+                    $design_group_controls[$control_id] = $control;
+
                 }
 
             }
 
         }
 
-        $current_group->controls = $group_controls;
+        //var_dump( $allow_design );
+
+        $current_group->controls = $group_controls; //var_dump( $design_group_controls );
+
+        if( $allow_design )
+            $design_group->controls = $design_group_controls;
 
         $settings = SED()->editor->manager->settings();
 
@@ -264,9 +295,14 @@ final class SiteEditorOptionsManager{
 
         $current_group->settings = $group_settings;
 
+        if( $allow_design )
+            $design_group->settings = array();
+
         $data['relations'] = isset( $this->settings_dependencies[ $group_id ] ) ? $this->settings_dependencies[ $group_id ] : array();
 
         $data['output'] = $current_group->get_content();
+
+        $data['designTemplate'] = ( $allow_design ) ? $design_group->get_content() : "";
 
         return $data;
     }
@@ -487,6 +523,86 @@ final class SiteEditorOptionsManager{
 
         }
 
+    }
+
+    /**
+     * Fix all controls ids for a special group options
+     * Add prefix for Controls ids for prevent conflict controls in php & js
+     * Fix Dependency Controls Ids
+     *
+     * @param array $fields
+     * @param array $panels
+     * @param string $prefix
+     * @return array
+     * @access public
+     */
+    public function fix_controls_panels_ids( $fields , $panels , $prefix ){
+
+        $new_panels_ids = array();
+
+        $new_panels = array();
+
+        if( !empty( $panels ) ){
+
+            foreach ( $panels AS $panel_id => $args ){
+
+                if( isset( $args['parent_id'] ) && $args['parent_id'] != "root" ) {
+                    $args['parent_id'] = "{$prefix}_{$args['parent_id']}";
+                }
+
+                if( isset( $args['dependency'] ) && !empty( $args['dependency'] ) ) {
+                    $args['dependency'] = $this->fix_dependency_controls_ids( $args['dependency'] , $prefix );
+                }
+
+                $new_panels["{$prefix}_{$panel_id }"] = $args;
+
+                $new_panels_ids[$panel_id] = "{$prefix}_{$panel_id}";
+
+            }
+
+        }
+
+        $new_fields = array();
+
+        if( !empty( $fields ) ){
+
+            foreach ( $fields AS $field_id => $args ){
+
+                if( isset( $args['panel'] ) && in_array( $args['panel'] , array_keys( $new_panels_ids ) ) ) {
+                    $args['panel'] = $new_panels_ids[$args['panel']];
+                }
+
+                if( isset( $args['dependency'] ) && !empty( $args['dependency'] ) ) {
+                    $args['dependency'] = $this->fix_dependency_controls_ids( $args['dependency'] , $prefix );
+                }
+
+                $new_fields["{$prefix}_{$field_id }"] = $args;
+
+            }
+
+        }
+
+        return array(
+            'fields'    => $new_fields ,
+            'panels'    => $new_panels
+        );
+
+    }
+
+    public function fix_dependency_controls_ids( $dependency , $prefix ){
+
+        if( is_array( $dependency ) && isset( $dependency['controls'] ) ){
+            if( isset( $dependency['controls']['control'] ) ){
+                $dependency['controls']['control'] = $prefix."_".$dependency['controls']['control'];
+            }else{
+                foreach( $dependency['controls'] AS $index => $control ){
+                    if( isset( $control['control'] ) )
+                        $dependency['controls'][$index]['control'] = $prefix."_".$control['control'];
+                }
+            }
+        }
+
+        return $dependency;
     }
 
     /**

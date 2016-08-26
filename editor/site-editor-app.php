@@ -72,11 +72,7 @@ final Class SiteEditorApp {
 
         require_once SED_INC_EDITOR_DIR . DS . "module_settings.class.php";
 
-        require_once SED_INC_EDITOR_DIR . DS . "app_options_engine.class.php";
-
         require_once SED_INC_EDITOR_DIR . DS . "site-editor-save.class.php";
-
-        $GLOBALS['sed_options_engine'] = new AppOptionsEngine;
 
         $this->save = new SEDAppSave();
 

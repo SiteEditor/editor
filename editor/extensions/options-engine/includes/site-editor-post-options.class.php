@@ -203,13 +203,6 @@ class SiteEditorThemeOptions {
 
         );
 
-        /**
-         * desc             ----- description ,
-         * settings_type    ----- setting_id ,
-         * options          ----- choices ,
-         * value            ----- default
-         */
-
         $fields = array(
 
             'default_logo' => array(

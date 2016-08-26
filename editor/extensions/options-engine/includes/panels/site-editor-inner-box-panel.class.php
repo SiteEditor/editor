@@ -52,7 +52,11 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-btn-{$this->btn_style} go-panel-element sed-panel-{$this->type} {$atts['class']}";
+			/**
+			 * go-panel-element-update Css Class For Update Panel In Js
+			 *
+			 */
+			$classes        = "sed-btn-{$this->btn_style} go-panel-element go-panel-element-update sed-panel-{$this->type} {$atts['class']}";
 
 			$pkey			= $this->id;
 
@@ -70,7 +74,7 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
 
 					<div class="clearfix">
 
-						<button data-related-level-box="<?php echo esc_attr( $pkey ); ?>_level_box" type="button" class="<?php echo esc_attr( $classes );?>" data-panel-id="<?php esc_attr( $this->id );?>"  name="<?php echo esc_attr( $sed_field_id );?>"
+						<button data-related-level-box="<?php echo esc_attr( $pkey ); ?>_level_box" type="button" class="<?php echo esc_attr( $classes );?>" data-panel-id="<?php echo esc_attr( $this->id );?>"  name="<?php echo esc_attr( $sed_field_id );?>"
 								id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
 
 							<?php echo $this->title;?>

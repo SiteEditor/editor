@@ -303,7 +303,7 @@ function sed_sample_options_register(){
             "data-custom"   =>    "test" ,
         ),
         //panel or group
-        'panel'             =>  'text_box_panel_parent',
+        'panel'             =>  'text_box_settings_panel',
         'has_border_box'    => false
     ));
 

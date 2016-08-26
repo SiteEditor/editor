@@ -117,23 +117,25 @@ class ModuleStyleControls{
         }
     }
 
-    function add_style_control( $style , $panel_id , $selector ){
+    function add_style_control( $style , $panel_id , $selector , $option_group ){
 
         $icon  = $this->icons_classes[ $style ];
         $label = $this->labeles[ $style ];
 
-        return  array(
-                    'type'      =>  'style_editor_button',
-                    'label'     =>  $label ,
-                    'icon'      =>  $icon,
-                    'class'     =>  'sted_element_control_btn',
-                    'panel'     =>  $panel_id ,
-                    'atts'      =>  array(
-                        'data-style-id'     => $style ,
-                        'data-dialog-title' => $label ,
-                        'data-selector'     => $selector
-                    )
-                );
+        return array(
+            'type'          =>  'design-button',
+            'label'         =>  $label ,
+            'icon'          =>  $icon,
+            'panel'         =>  $panel_id ,
+            'option_group'  =>  $option_group,
+            'has_border_box'=>  false , 
+            'atts'          =>  array(
+                'class'             => 'sted_element_control_btn',
+                'data-style-id'     => $style ,
+                'data-dialog-title' => $label ,
+                'data-selector'     => $selector
+            )
+        );
 
     }
 
@@ -152,7 +154,6 @@ class ModuleStyleControls{
             'style_props'       => "background-color" ,
             
         );
-
 
         $this->controls['background'][$this->id . "_background_image"  ] = array(
             'type'              => 'image',

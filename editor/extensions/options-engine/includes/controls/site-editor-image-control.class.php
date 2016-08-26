@@ -33,7 +33,7 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
          * @access public
          * @var string
          */
-		public $remove_btn = false;
+		public $remove_action = false;
 
 		/**
 		 * Enqueue control related scripts/styles.
@@ -75,7 +75,7 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 		        <div class="change-img-setting">
 			        <div class="change-img-container">
 			        	<img class="change_img" src="<?php echo esc_attr( $value );?>"/>
-				        <?php if($this->remove_btn === true){ ?>
+				        <?php if($this->remove_action === true){ ?>
 				            <a class="remove-img-btn" href="#"><span class="remove-img-action icon-delete f-sed"></span></a>
 	                    <?php } ?>
 			        </div>

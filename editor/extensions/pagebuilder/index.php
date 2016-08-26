@@ -5,6 +5,9 @@
  */
 defined('_SEDEXEC') or die;
 
+require_once SED_EXT_PATH . DS . "pagebuilder" . DS . "includes" . DS . "pagebuilder-options-manager.class.php";
+$GLOBALS['sed_pb_options_engine'] = new SedPageBuilderOptionsManager;
+
 include_once( SED_INC_DIR . DS . "app_pb_modules.class.php"  );
 
 global $sed_pb_modules;

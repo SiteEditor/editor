@@ -108,7 +108,8 @@ class SiteEditorOptionsGroup {
 	public $type = 'default';
 
 	/**
-	 * Type of this options group.
+	 * Is group depends to pages ?
+	 * Means : Is group options changed in each page
 	 *
 	 * @since 4.1.0
 	 * @access public

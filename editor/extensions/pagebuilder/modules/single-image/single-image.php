@@ -150,7 +150,6 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               'change_image_panel'=> array(
                   "type"          => "sed_image" ,
                   "label"         => __("Select Image Panel", "site-editor"),
-                  "panel_type"    => "fieldset" ,
                   'priority'      => 1 ,
               ),      
               'full_src'    => array(

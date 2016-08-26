@@ -1,15 +1,15 @@
 <?php
-/*
-Module Name: Style Editor
-Module URI: http://www.siteeditor.org/modules/modules
-Description: Module Style Editor For Site Editor Application
-Author: Site Editor Team
-Author URI: http://www.siteeditor.org
-Version: 1.0.0
-*/
+/**
+ * Module Name: Design Editor
+ * Module URI: http://www.siteeditor.org/modules/design-editor
+ * Description: Design Editor Module For Site Editor Application
+ * Author: Site Editor Team
+ * Author URI: http://www.siteeditor.org
+ * Version: 1.0.0
+ */
 
-function sed_register_design_editor_settings()
-{
+function sed_register_design_editor_settings(){
+
     sed_add_settings(array(
         'background_position' => array(
             'value' => 'center center',
@@ -295,3 +295,25 @@ function sed_register_design_editor_settings()
 }
 
 add_action( "sed_app_register" , "sed_register_design_editor_settings" );
+
+function sed_load_design_editor_modules(){
+
+    require_once dirname(__FILE__) . DS . "includes" . DS . "design-editor-manager.class.php";
+
+    $design_editor = new SedDesignEditorManager();
+
+    do_action( 'sed_before_design_editor_modules_loaded', $design_editor );
+
+    $modules = $design_editor->modules_activate();
+
+    // Load active extensions.
+    foreach ( $modules as $module_dir )
+        include_once( $module_dir );
+    unset( $module_dir );
+
+
+    do_action( 'sed_design_editor_modules_loaded', $design_editor );
+
+}
+
+sed_load_design_editor_modules();

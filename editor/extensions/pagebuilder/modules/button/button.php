@@ -68,12 +68,12 @@ class PBButtonShortcode extends PBShortcodeClass{
         ) );
 
         $params = array(
-          	 /*  	'title' => array(
-          			'type'      => 'text',
-        			'label'     => __('Title', 'site-editor'),
-          			'desc'      => __('Set a title attribute for the link the button consists of', 'site-editor'),
+             /*  	'title' => array(
+                    'type'      => 'text',
+                    'label'     => __('Title', 'site-editor'),
+                    'desc'      => __('Set a title attribute for the link the button consists of', 'site-editor'),
                     "panel"     => "button_settings_panel",
-          	   	),       */
+                ),       */
             'size' => array(
                 'type' => 'select',
                 'label' => __('Button Size', 'site-editor'),
@@ -135,45 +135,45 @@ class PBButtonShortcode extends PBShortcodeClass{
 
     }
 
-      function custom_style_settings(){
-          return array(
+    function custom_style_settings(){
+        return array(
 
-              /*array(
-              'module-button' , 'sed_current' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Button Module Container" , "site-editor") ) ,
-              */
-              array(
-              'button-container' , '.btn' ,
-              array( 'background','gradient','border','border_radius' ,'padding','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Button Container" , "site-editor") ) ,
+          /*array(
+          'module-button' , 'sed_current' ,
+          array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Button Module Container" , "site-editor") ) ,
+          */
+          array(
+          'button-container' , '.btn' ,
+          array( 'background','gradient','border','border_radius' ,'padding','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Button Container" , "site-editor") ) ,
 
-              array(
-              'button-hover' , '.btn:hover' ,
-              array( 'background','gradient','border','shadow' ,'text_shadow' , 'font' ) , __("Button Hover" , "site-editor") ) ,
+          array(
+          'button-hover' , '.btn:hover' ,
+          array( 'background','gradient','border','shadow' ,'text_shadow' , 'font' ) , __("Button Hover" , "site-editor") ) ,
 
-              array(
-              'button-active' , '.btn:active' ,
-              array( 'background','gradient','border','shadow' ,'text_shadow' , 'font' ) , __("Button Active" , "site-editor") ) ,
+          array(
+          'button-active' , '.btn:active' ,
+          array( 'background','gradient','border','shadow' ,'text_shadow' , 'font' ) , __("Button Active" , "site-editor") ) ,
 
-              array(
-              'module-icons' , '.module-icons' ,
-              array( 'background','gradient','border','border_radius' ,'padding' ,'text_shadow' , 'font' ,'line_height' ) , __("Icons Container" , "site-editor") ) ,
+          array(
+          'module-icons' , '.module-icons' ,
+          array( 'background','gradient','border','border_radius' ,'padding' ,'text_shadow' , 'font' ,'line_height' ) , __("Icons Container" , "site-editor") ) ,
 
-              array(
-              'arrow' , '.sed-button-item .icon-button-df:after' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin' ) , __("Arrow" , "site-editor") ) ,
+          array(
+          'arrow' , '.sed-button-item .icon-button-df:after' ,
+          array( 'background','gradient','border','border_radius' ,'padding','margin' ) , __("Arrow" , "site-editor") ) ,
 
-              array(
-              'item-skin6' , '.sed-button-item-skin6 .hi-icon' ,
-              array( 'background','gradient','border','border_radius','margin','shadow' ) , __("Icons" , "site-editor") ) ,
+          array(
+          'item-skin6' , '.sed-button-item-skin6 .hi-icon' ,
+          array( 'background','gradient','border','border_radius','margin','shadow' ) , __("Icons" , "site-editor") ) ,
 
-          );
-      }
+        );
+    }
 
     function contextmenu( $context_menu ){
-    $button_menu = $context_menu->create_menu( "button" , __("Button","site-editor") , 'button' , 'class' , 'element' , '' , "sed_button" , array(
-            "link_to"      => true ,
-            "seperator"    => array(45 , 75)
-        ) );
+        $button_menu = $context_menu->create_menu( "button" , __("Button","site-editor") , 'button' , 'class' , 'element' , '' , "sed_button" , array(
+                "link_to"      => true ,
+                "seperator"    => array(45 , 75)
+            ) );
     }
 
 }
