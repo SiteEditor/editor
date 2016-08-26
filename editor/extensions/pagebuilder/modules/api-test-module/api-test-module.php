@@ -844,13 +844,22 @@ class PBAPITestModule extends PBShortcodeClass{
             )
         );
 
+        $this->add_panel( 'design_editor_panel' , array(
+            'title'         =>  __('Design Editor Fields',"site-editor")  ,
+            'capability'    => 'edit_theme_options' ,
+            'type'          => 'inner_box' ,
+            'description'   => '' ,
+            'priority'      => 100000
+        ) );
+
         $params['background_color'] = array(
             "type"              => "background-color" ,
             "label"             => __("Background Color", "site-editor"),
             "description"       => __("Add Background Color For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '#F6F6F6'
+            "value"             => '#F6F6F6' ,
+            'panel'             => 'design_editor_panel'
         );
 
         return $params;

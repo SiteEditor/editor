@@ -83,7 +83,7 @@
                     control.previewer.send( 'subShortcodesAttrUpdate', {
                         "class" : control.params.sub_shortcodes_update["class"] ,
                         "attr"  : control.params.sub_shortcodes_update.attr ,
-                        "value" : val,
+                        "value" : val
                     });
                 }
 
@@ -2363,6 +2363,7 @@
         multicheck              : api.CheckBoxesControl,
         "multi-check"           : api.CheckBoxesControl,
         spinner_lock            : api.SpinnerLockControl ,
+        number_lock             : api.SpinnerLockControl ,
         color                   : api.ColorControl,
         multi_icons             : api.OrganizeIconsControl,
         "multi-icon"            : api.OrganizeIconsControl,

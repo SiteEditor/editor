@@ -325,7 +325,6 @@ final class SedPageBuilderOptionsManager{
             'value' => $padding_top,
             'label' => __('Top', 'site-editor'),
             'description' => __('Change Module Top Spacing', 'site-editor'),
-            'is_attr'   =>  true ,
             'atts'  => array(
                 "class" =>   $spinner_class
             ) ,
@@ -351,7 +350,6 @@ final class SedPageBuilderOptionsManager{
             'value' => $padding_left,
             'label' => is_rtl() ? __('Right', 'site-editor') : __('Left', 'site-editor'),
             'description' => __('Change Module Left Spacing', 'site-editor') ,
-            'is_attr'   =>  true ,
             'atts'  => array(
                 "class" =>   $spinner_class
             ) ,
@@ -377,7 +375,6 @@ final class SedPageBuilderOptionsManager{
             'value' => $padding_right,
             'label' => is_rtl() ? __('Left', 'site-editor') : __('Right', 'site-editor'),
             'description' => __('Change Module Right Spacing', 'site-editor') ,
-            'is_attr'   =>  true ,
             'atts'  => array(
                 "class" =>   $spinner_class
             ) ,
@@ -403,7 +400,6 @@ final class SedPageBuilderOptionsManager{
             'value' => $padding_bottom,
             'label' => __('Bottom', 'site-editor'),
             'description' => __('Change Module Bottom Spacing', 'site-editor') ,
-            'is_attr'   =>  true ,
             'atts'  => array(
                 "class" =>   $spinner_class
             ) ,
@@ -428,7 +424,6 @@ final class SedPageBuilderOptionsManager{
             'value'         => false,
             'label'         => __('lock Spacing Together', 'site-editor'),
             'description'   => __('Change Top , bottom , left and right Spacing Together', 'site-editor') ,
-            'is_attr'       =>  true ,
             'js_type'       =>  "spinner_lock" ,
             'atts'          => array(
                 "class"     =>   "sed-lock-spinner"

@@ -798,7 +798,11 @@ class PBShortcodeClass{
 
                     }
 
+                    /**
+                     * if isset
+                     */
                     $new_params[$key]["value"] =  ( isset($this->atts[$key]) ) ? $this->atts[$key] : ( ( isset($param["value"]) ) ? $param["value"] : "" );
+
                     $new_params[$key]["is_attr"] = ( isset($this->atts[$key]) ) ? true : ( ( isset($param["is_attr"]) ) ? $param["is_attr"] : false );
 
                 }
@@ -816,9 +820,9 @@ class PBShortcodeClass{
      */
     public function add_control_param( $name , $key , $param ){
 
-        $param = $this->filter_param_setting_id( $param );
-
         $param = $this->filter_param_category( $param );
+
+        $param = $this->filter_param_setting_id( $param );
 
         $is_style_setting = ( isset( $param['is_style_setting'] ) && is_bool( $param['is_style_setting'] ) ) ?  $param['is_style_setting'] : false;
 
@@ -841,7 +845,7 @@ class PBShortcodeClass{
         //edit risk
         $is_attr = isset( $param["is_attr"] ) ? $param["is_attr"]: false;
 
-        if( $param['setting_id'] == 'sed_pb_modules' ){
+        if( isset( $param['setting_id'] ) && $param['setting_id'] == 'sed_pb_modules' ){
             $param['shortcode'] = $name;
             $param['attr_name'] = ( isset( $param['attr_name'] ) && !empty( $param['attr_name'] ) ) ? $param['attr_name'] : $key;
             $param['is_attr']   = $is_attr;
@@ -855,6 +859,11 @@ class PBShortcodeClass{
      * @return mixed
      */
     public function filter_param_setting_id( $param ){
+
+        //for design editor fields ( like background ) not need to identify setting id
+        if( !isset( $param['settings_type'] ) && !isset( $param['setting_id'] ) && $param['category'] == "style-editor" ){
+            return $param;
+        }
 
         if( !isset( $param['setting_id'] ) && isset($param['settings_type']) ) {
 
