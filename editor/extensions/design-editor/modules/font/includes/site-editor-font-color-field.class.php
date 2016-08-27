@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Field: border-radius-tr.
+ * SiteEditor Field: font-color.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,16 +12,16 @@ if ( ! defined( 'ABSPATH' ) )  {
     exit;
 }
 
-if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
+if ( ! class_exists( 'SiteEditorFontColorField' ) ) {
 
-    if( ! class_exists( 'SiteEditorNumberField' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-number-field.class.php';
+    if( ! class_exists( 'SiteEditorColorField' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-color-field.class.php';
     } 
     
     /**
      * Field overrides.
      */
-    class SiteEditorBorderRadiusTopRightField extends SiteEditorNumberField { 
+    class SiteEditorFontColorField extends SiteEditorColorField {
 
         /**
          * Related setting id for save in db
@@ -29,7 +29,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
          * @access protected
          * @var string
          */
-        public $setting_id = 'border_radius_tr';
+        public $setting_id = 'font_color';
 
         /**
          * The field type.
@@ -37,7 +37,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
          * @access protected
          * @var string
          */
-        public $type = 'border-radius-tr';
+        public $type = 'font-color';
 
         /**
          * Use 'refresh', 'postMessage'
@@ -60,11 +60,11 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
                 return;
             }
 
-            $this->default = '0';
+            $this->default = '#000000';
 
         }
 
     }
 }
 
-sed_options()->register_field_type( 'border-radius-tr' , 'SiteEditorBorderRadiusTopRightField' );
+sed_options()->register_field_type( 'font-color' , 'SiteEditorFontColorField' );

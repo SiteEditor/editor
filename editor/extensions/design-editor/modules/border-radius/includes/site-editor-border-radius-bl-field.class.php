@@ -14,14 +14,14 @@ if ( ! defined( 'ABSPATH' ) )  {
 
 if ( ! class_exists( 'SiteEditorBorderRadiusBottomLeftField' ) ) {
 
-    if( ! class_exists( 'SiteEditorNumberControl' ) ) {
+    if( ! class_exists( 'SiteEditorNumberField' ) ) {
         require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-number-field.class.php';
     } 
     
     /**
      * Field overrides.
      */
-    class SiteEditorBorderRadiusBottomLeftField extends SiteEditorNumberControl { 
+    class SiteEditorBorderRadiusBottomLeftField extends SiteEditorNumberField { 
 
         /**
          * Related setting id for save in db

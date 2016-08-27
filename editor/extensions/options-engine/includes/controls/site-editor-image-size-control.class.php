@@ -49,6 +49,13 @@ if ( ! class_exists( 'SiteEditorImageSizeControl' ) ) {
         public $update_sizes_js = false;
 
 		/**
+		 * Js type for some case with different js type and type
+		 * @access public
+		 * @var string
+		 */
+		public $js_type = 'select';
+
+		/**
 		 * Enqueue control related scripts/styles.
 		 *
 		 * @access public

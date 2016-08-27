@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Field: border-radius-tr.
+ * SiteEditor Field: text-align.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,16 +12,16 @@ if ( ! defined( 'ABSPATH' ) )  {
     exit;
 }
 
-if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
+if ( ! class_exists( 'SiteEditorTextAlignField' ) ) {
 
-    if( ! class_exists( 'SiteEditorNumberField' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-number-field.class.php';
+    if( ! class_exists( 'SiteEditorSelectField' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-select-field.class.php';
     } 
     
     /**
      * Field overrides.
      */
-    class SiteEditorBorderRadiusTopRightField extends SiteEditorNumberField { 
+    class SiteEditorTextAlignField extends SiteEditorSelectField { 
 
         /**
          * Related setting id for save in db
@@ -29,7 +29,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
          * @access protected
          * @var string
          */
-        public $setting_id = 'border_radius_tr';
+        public $setting_id = 'text_align';
 
         /**
          * The field type.
@@ -37,7 +37,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
          * @access protected
          * @var string
          */
-        public $type = 'border-radius-tr';
+        public $type = 'text-align';
 
         /**
          * Use 'refresh', 'postMessage'
@@ -60,11 +60,11 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
                 return;
             }
 
-            $this->default = '0';
+            $this->default = '';
 
         }
 
     }
 }
 
-sed_options()->register_field_type( 'border-radius-tr' , 'SiteEditorBorderRadiusTopRightField' );
+sed_options()->register_field_type( 'text-align' , 'SiteEditorTextAlignField' );

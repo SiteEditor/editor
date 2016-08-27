@@ -276,7 +276,7 @@ class SiteEditorPageOptions {
 
         $new_fields['sed_page_options_scope'] = array(
             'type'              => 'radio-buttonset',
-            'setting_id'        => 'page_options_scope',
+            'setting_id'        => "page_options_scope",
             'label'             => __("Select Scope", "site-editor"),
             'default'           => 'public-scope',
             'priority'          => 0 ,

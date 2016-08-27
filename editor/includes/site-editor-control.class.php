@@ -126,6 +126,13 @@ class SiteEditorOptionsControl{
 	public $type = 'text';
 
 	/**
+	 * Js type for some case with different js type and type
+	 * @access public
+	 * @var string
+	 */
+	public $js_type = '';
+
+	/**
 	 * @access public
 	 * @var string
 	 */
@@ -400,7 +407,7 @@ class SiteEditorOptionsControl{
 		$json_array = $this->js_params_json( $json_array );
 
 		$json_array['control_id'] = $this->id;
-		$json_array['type'] = $this->type;
+		$json_array['type'] = ( !empty( $this->js_type ) ) ? $this->js_type : $this->type;
 		$json_array['priority'] = $this->priority;
 		$json_array['active'] = $this->active();
 		$json_array['panel'] = $this->panel;

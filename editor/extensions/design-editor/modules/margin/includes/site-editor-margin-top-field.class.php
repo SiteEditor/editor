@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Field: border-radius-tr.
+ * SiteEditor Field: margin-top.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) )  {
     exit;
 }
 
-if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
+if ( ! class_exists( 'SiteEditorMarginTopField' ) ) {
 
     if( ! class_exists( 'SiteEditorNumberField' ) ) {
         require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-number-field.class.php';
@@ -21,7 +21,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
     /**
      * Field overrides.
      */
-    class SiteEditorBorderRadiusTopRightField extends SiteEditorNumberField { 
+    class SiteEditorMarginTopField extends SiteEditorNumberField { 
 
         /**
          * Related setting id for save in db
@@ -29,7 +29,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
          * @access protected
          * @var string
          */
-        public $setting_id = 'border_radius_tr';
+        public $setting_id = 'margin_top';
 
         /**
          * The field type.
@@ -37,7 +37,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
          * @access protected
          * @var string
          */
-        public $type = 'border-radius-tr';
+        public $type = 'margin-top';
 
         /**
          * Use 'refresh', 'postMessage'
@@ -67,4 +67,4 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightField' ) ) {
     }
 }
 
-sed_options()->register_field_type( 'border-radius-tr' , 'SiteEditorBorderRadiusTopRightField' );
+sed_options()->register_field_type( 'margin-top' , 'SiteEditorMarginTopField' );

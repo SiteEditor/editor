@@ -954,7 +954,7 @@ class PBAPITestModule extends PBShortcodeClass{
         ); 
 
 
-        $lock_id = "sed_pb_".$this->id."_border_radius_lock";
+        /*$lock_id = "sed_pb_".$this->id."_border_radius_lock";
 
         $spinner_class = 'sed-border-radius-spinner-' . $this->id;    //shortcode_name
         $spinner_class_selector = '.' . $spinner_class;
@@ -962,14 +962,14 @@ class PBAPITestModule extends PBShortcodeClass{
         $sh_name_c = $sh_name. "_border_radius_";
 
         $controls = array( $sh_name_c . "tr" , $sh_name_c . "tl" , $sh_name_c . "br" , $sh_name_c . "bl" );
-
+        */
         $params['border_radius_tl'] = array( 
             "type"              => "border-radius-tl" , 
             "label"             =>  ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'atts'  => array(
+            /*'atts'  => array(
                 "class" =>   $spinner_class
             ) ,
             'js_params'     =>  array(
@@ -984,18 +984,18 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ), 
+            ),*/ 
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
-/*
+
         $params['border_radius_tr'] = array( 
             "type"              => "border-radius-tr" , 
             "label"             =>  ( is_rtl() ) ? __('Top right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'atts'  => array(
+            /*'atts'  => array(
                 "class" =>   $spinner_class
             ) ,
             'js_params'     =>  array(
@@ -1010,7 +1010,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ), 
+            ), */ 
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
@@ -1021,7 +1021,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'atts'  => array(
+            /*'atts'  => array(
                 "class" =>   $spinner_class
             ) ,
             'js_params'     =>  array(
@@ -1036,7 +1036,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ), 
+            ), */ 
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
@@ -1047,7 +1047,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'atts'  => array(
+            /*'atts'  => array(
                 "class" =>   $spinner_class
             ) ,
             'js_params'     =>  array(
@@ -1062,10 +1062,368 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ), 
+            ),*/ 
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
-        ); */
+        ); 
+
+        /*$lock_id = "sed_pb_".$this->id."_padding_lock";
+
+        $spinner_class = 'sed-padding-spinner-' . $this->id;
+        $spinner_class_selector = '.' . $spinner_class;
+        $sh_name = $this->id;
+        $sh_name_c = $sh_name. "_padding_";
+
+        $controls = array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" );
+
+        $this->controls['padding'] = array();*/
+
+        $params['padding_top'] = array( 
+            "type"              => "padding-top" , 
+            "label"             => __('Padding Top', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'control_param'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+                ),
+                'min'   =>  0 ,
+                
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ),*/    
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['padding_right'] = array( 
+            "type"              => "padding-right" , 
+            "label"             => ( is_rtl() ) ? __('Padding Right', 'site-editor') : __('Padding Left', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'control_param'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+                ),
+                'min'   =>  0 ,
+                
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ),*/    
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['padding_bottom'] = array( 
+            "type"              => "padding-bottom" , 
+            "label"             => __('Padding Bottom', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'control_param'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" )
+                ),
+                'min'   =>  0 ,
+                
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ),*/    
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['padding_left'] = array( 
+            "type"              => "padding-left" , 
+            "label"             => ( is_rtl() ) ? __('Padding Left', 'site-editor') : __('Padding Right', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'control_param'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "bottom" )
+                ),
+                'min'   =>  0 ,
+                
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ),*/    
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        );
+
+        /*$lock_id = "sed_pb_".$this->id."_margin_lock";
+
+        $spinner_class = 'sed-margin-spinner-' . $this->id;
+        $spinner_class_selector = '.' . $spinner_class;
+        $sh_name = $this->id;
+        $sh_name_c = $sh_name. "_margin_";
+
+        $controls = array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" );
+
+        $this->controls['margin'] = array();*/
+
+        $params['margin_top'] = array( 
+            "type"              => "margin-top" , 
+            "label"             => __('Margin Top', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'control_param'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+                ),
+                'min'   =>  0 ,
+                
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ),*/    
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['margin_right'] = array( 
+            "type"              => "margin-right" , 
+            "label"             => ( is_rtl() ) ? __('Margin Right', 'site-editor') : __('Margin Left', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'control_param'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+                ),
+                'min'   =>  0 ,
+                
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ),*/    
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['margin_bottom'] = array( 
+            "type"              => "margin-bottom" , 
+            "label"             => __('Margin Bottom', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'control_param'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" )
+                ),
+                'min'   =>  0 ,
+                
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ),*/    
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['margin_left'] = array( 
+            "type"              => "margin-left" , 
+            "label"             => ( is_rtl() ) ? __('Margin Left', 'site-editor') : __('Margin Right', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'control_param'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "bottom" )
+                ),
+                'min'   =>  0 ,
+                
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ),*/    
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        );
+
+
+        $params['line_height'] = array(
+            "type"              => "line-height" , 
+            "label"             => __("line height", "site-editor"),
+            "description"       => __("Add Line Height For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+
+        $params['trancparency'] = array(
+            "type"              => "trancparency" , 
+            "label"             => __("Trancparency", "site-editor"),
+            "description"       => __("Add Trancparency For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+
+        $params['position'] = array(
+            "type"              => "position" , 
+            "label"             => __("Position", "site-editor"),
+            "description"       => __("Add Position For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "choices" =>array(
+                'relative'     => __('relative', 'site-editor'),
+                'absolute'     => __('absolute ', 'site-editor'),
+                'fixed'     => __('fixed', 'site-editor'),
+                'static'     => __('static ', 'site-editor') 
+            ), 
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+
+        $params['text_align'] = array(
+            "type"              => "text-align" , 
+            "label"             => __("Text Align", "site-editor"),
+            "description"       => __("Add Text Align For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'choices' =>array(
+                'left'      => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
+                'center'    => __('Center', 'site-editor'),
+                'right'     => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
+                'justify'   => __('justify', 'site-editor'),
+            ), 
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['font_size'] = array(
+            "type"              => "font-size" , 
+            "label"             => __("Font Size", "site-editor"),
+            "description"       => __("Add Font Size For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['font_color'] = array(
+            "type"              => "font-color" , 
+            "label"             => __("Font Color", "site-editor"),
+            "description"       => __("Add Font Color For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+
+        $params['font_weight'] = array(
+            "type"              => "font-weight" , 
+            "label"             => __("Font Weight", "site-editor"),
+            "description"       => __("Add Font Weight For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,  
+            'choices' =>array(
+                'normal'        => __('normal', 'site-editor'),
+                'bold'          => __('bold', 'site-editor') ,
+                'bolder'        => __('bolder', 'site-editor'),
+                'lighter'       => __('lighter', 'site-editor') ,
+                100             => 100,
+                200             => 200 ,
+                300             => 300,
+                400             => 400 ,
+                500             => 500,
+                600             => 600 ,
+                700             => 700,
+                800             => 800 ,
+                900             => 900 ,
+            ),    
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+
+        $params['font_style'] = array(
+            "type"              => "font-style" ,
+            "label"             => __('Font Style', 'site-editor'),  
+            "description"       => __("Add Font Style For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,  
+            'choices' =>array(
+                'normal'      => __('normal', 'site-editor'),
+                'oblique'    => __('oblique', 'site-editor'),
+                'italic'    => __('italic', 'site-editor'),
+            ),    
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+
+        $params['text_decoration'] = array(
+            "type"              => "text-decoration" , 
+            "label"             => __("Text Decoration", "site-editor"),
+            "description"       => __("Add Text Decoration For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,  
+            'choices' =>array(
+                'none'              => __('none', 'site-editor'),
+                'underline'         => __('underline', 'site-editor') ,
+                'line-through'      => __('line-through', 'site-editor')
+            ),    
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+
 
         return $params;
     }

@@ -138,9 +138,9 @@ final class SedDesignEditorBorderRadius {
 
             'border_radius_tl' => array(
                 "type"              => "border-radius-tl" ,
-                "label"             => "juh",//( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
+                "label"             => ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
+                /*'atts'  => array(
                     "class" =>   $spinner_class
                 ) ,
                 'js_params'     =>  array(
@@ -155,15 +155,15 @@ final class SedDesignEditorBorderRadius {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
-                ), 
+                ),*/ 
             
             ),
 
-/*            'border_radius_tr' => array(
+            'border_radius_tr' => array(
                 "type"              => "border-radius-tr" ,
                 "label"             => ( is_rtl() ) ? __('Top Right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
+                /*'atts'  => array(
                     "class" =>   $spinner_class
                 ) ,
                 'js_params'     =>  array(
@@ -178,7 +178,7 @@ final class SedDesignEditorBorderRadius {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
-                ), 
+                ), */
             
             ),
 
@@ -187,7 +187,7 @@ final class SedDesignEditorBorderRadius {
                 "type"              => "border-radius-br" ,
                 "label"             => ( is_rtl() ) ? __('Bottom Right corner', 'site-editor') : __('Bottom left corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
+                /*'atts'  => array(
                     "class" =>   $spinner_class
                 ) ,
                 'js_params'     =>  array(
@@ -202,7 +202,7 @@ final class SedDesignEditorBorderRadius {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
-                ), 
+                ), */
             
             ),
 
@@ -210,7 +210,7 @@ final class SedDesignEditorBorderRadius {
                 "type"              => "border-radius-bl" ,
                 "label"             => ( is_rtl() ) ? __('Bottom left corner', 'site-editor') : __('Bottom right corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
+                /*'atts'  => array(
                     "class" =>   $spinner_class
                 ) ,  
                 'js_params'     =>  array(
@@ -225,11 +225,11 @@ final class SedDesignEditorBorderRadius {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
-                ), 
+                ), */
             
             ),
 
-*/
+
         );
 
         $fields = apply_filters( 'sed_border_radius_options_fields_filter' , $fields );
