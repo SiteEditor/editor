@@ -95,6 +95,10 @@ final class SedDesignEditorPadding {
 
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-padding-left-field.class.php';
 
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-padding-lock-control.class.php';
+
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-padding-lock-field.class.php';
+
     }
 
     /**
@@ -219,6 +223,19 @@ final class SedDesignEditorPadding {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
+                ),*/           
+            ),
+
+            'padding_lock' => array(
+                "type"              => "padding-lock" ,
+                "label"             => __('lock Spacings Together', 'site-editor'),
+                "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+                /*'atts'  => array(
+                    "class" =>   "sed-lock-spinner"
+                ) ,
+                'control_param'     =>  array(
+                    'spinner' =>  $spinner_class_selector ,
+                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
                 ),*/           
             ),
 

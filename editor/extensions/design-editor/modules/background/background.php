@@ -111,6 +111,10 @@ final class SedDesignEditorBackground{
 
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-background-repeat-field.class.php'; 
 
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-background-position-control.class.php';
+
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-background-position-field.class.php'; 
+
     }
 
     /**
@@ -211,7 +215,18 @@ final class SedDesignEditorBackground{
                     'tile-horizontally'     => __('Tile Horizontally ', 'site-editor'), 
                 ),
             ), 
- 
+
+            'background_position' => array(
+                "type"              => "background-position" ,
+                "label"             => __('Background Position', 'site-editor'),
+                "description"       => __("Background Position", "site-editor"),  
+                'js_type'           =>  'dropdown',
+                'has_border_box'    =>   true ,  
+                'js_params'     =>  array(
+                    'options_selector'  => '.background-psn-sq',
+                    'selected_class'    => 'active_background_position'
+                ),      
+            ), 
 
         );
 

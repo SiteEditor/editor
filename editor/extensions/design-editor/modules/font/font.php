@@ -79,6 +79,10 @@ final class SedDesignEditorFont {
      */
     public function register_components(){
 
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-font-family-control.class.php';
+
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-font-family-field.class.php';
+
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-font-size-control.class.php';
 
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-font-size-field.class.php';
@@ -129,7 +133,33 @@ final class SedDesignEditorFont {
 
         $panels = array();
 
+        $fonts = array();
+
+        $custom_fonts = SiteeditorTypography::get_custom_fonts();
+        if( $custom_fonts !== false ){
+            $fonts["custom_fonts"] = $custom_fonts;
+        }
+
+        $fonts["standard_fonts"] = SiteeditorTypography::get_standard_fonts();
+
+        $fonts["google_fonts"]   = SiteeditorTypography::get_google_fonts();
+
+        $this->controls['font'] = array();
+
         $fields = array(
+
+            'font_family' => array(
+                "type"              => "font-family" ,
+                "label"             => __('Font Family', 'site-editor'),
+                "description"       => __("Font Family", "site-editor"),   
+                "choices"           =>    $fonts,
+                "optgroup"          => true ,
+                "groups"            => array(
+                    "custom_fonts"     => __("Custom Fonts" , "site-editor") ,
+                    "standard_fonts"   => __("Standard Fonts" , "site-editor") ,
+                    "google_fonts"     => __("Google Fonts" , "site-editor") ,
+                ),     
+            ),
 
             'font_size' => array(
                 "type"              => "font-size" ,
@@ -147,7 +177,7 @@ final class SedDesignEditorFont {
                 "type"              => "font-weight" ,
                 "label"             => __('Font Weight', 'site-editor'),
                 "description"       => __("Font Weight", "site-editor"),   
-                'choices' =>array(
+                'choices'           => array(
                     'normal'        => __('normal', 'site-editor'),
                     'bold'          => __('bold', 'site-editor') ,
                     'bolder'        => __('bolder', 'site-editor'),
@@ -168,10 +198,10 @@ final class SedDesignEditorFont {
                 "type"              => "font-style" ,
                 "label"             => __('Font Style', 'site-editor'),
                 "description"       => __("Font Style", "site-editor"),   
-                'choices' =>array(
-                    'normal'      => __('normal', 'site-editor'),
-                    'oblique'    => __('oblique', 'site-editor'),
-                    'italic'    => __('italic', 'site-editor'),
+                'choices'           => array(
+                    'normal'        => __('normal', 'site-editor'),
+                    'oblique'       => __('oblique', 'site-editor'),
+                    'italic'        => __('italic', 'site-editor'),
                 ),       
             ),
 
@@ -179,7 +209,7 @@ final class SedDesignEditorFont {
                 "type"              => "text-decoration" ,
                 "label"             => __('Text Decoration', 'site-editor'),
                 "description"       => __("Text Decoration", "site-editor"),   
-                'choices' =>array(
+                'choices'           => array(
                     'none'              => __('none', 'site-editor'),
                     'underline'         => __('underline', 'site-editor') ,
                     'line-through'      => __('line-through', 'site-editor')

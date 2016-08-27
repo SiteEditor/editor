@@ -953,6 +953,174 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'design_editor_panel'
         ); 
 
+        $params['background_position'] = array(
+            "type"              => "background-position" , 
+            "label"             => __("Background Position", "site-editor"),
+            "description"       => __("Add Background Position For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' , 
+            'js_type'           =>  'dropdown', 
+            'has_border_box'    =>   true ,  
+            'js_params'     =>  array(
+                'options_selector'  => '.background-psn-sq',
+                'selected_class'    => 'active_background_position'
+            ), 
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'  
+        );
+ 
+
+        $params['border_top_style'] = array( 
+            "type"              => "border-top-style" , 
+            "label"             => __('Border Top Style', 'site-editor'),
+            "description"       => __("Module Border Top Style", "site-editor"), 
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,    
+            'js_type'           =>  'dropdown',
+            'has_border_box'    =>   false ,  
+            'js_params'     =>  array(
+                'options_selector'  => '.border-item',
+                'selected_class'    => 'active_border' ,
+            ),      
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['border_right_style'] = array( 
+            "type"              => "border-right-style" ,
+            "label"             => __('Border Right Style', 'site-editor'),
+            "description"       => __("Module Border Right Style", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,   
+            'js_type'           =>  'dropdown',
+            'has_border_box'    =>   false ,  
+            'js_params'     =>  array(
+                'options_selector'  => '.border-item',
+                'selected_class'    => 'active_border' ,
+            ),      
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );   
+
+
+        $params['border_bottom_style'] = array( 
+            "type"              => "border-bottom-style" ,
+            "label"             => __('Border Bottom Style', 'site-editor'),
+            "description"       => __("Module Border Bottom Style", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'js_type'           =>  'dropdown',
+            'has_border_box'    =>   false ,  
+            'js_params'     =>  array(
+                'options_selector'  => '.border-item',
+                'selected_class'    => 'active_border' ,
+            ),      
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );   
+
+
+        $params['border_left_style'] = array( 
+            "type"              => "border-left-style" ,
+            "label"             => __('Border Left Style', 'site-editor'),
+            "description"       => __("Module Border Left Style", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'js_type'           =>  'dropdown',
+            'has_border_box'    =>   false ,  
+            'js_params'     =>  array(
+                'options_selector'  => '.border-item',
+                'selected_class'    => 'active_border' ,
+            ),      
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );  
+ 
+
+        $params['border_top_width'] = array( 
+            "type"              => "border-top-width" , 
+            "label"             => __('Border Top Width', 'site-editor'),
+            "description"       => __("Module Border Top Width", "site-editor"), 
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['border_right_width'] = array( 
+            "type"              => "border-right-width" ,
+            "label"             => __('Border Right Width', 'site-editor'),
+            "description"       => __("Module Border Right Width", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );   
+
+
+        $params['border_bottom_width'] = array( 
+            "type"              => "border-bottom-width" ,
+            "label"             => __('Border Bottom Width', 'site-editor'),
+            "description"       => __("Module Border Bottom Width", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );   
+
+
+        $params['border_left_width'] = array( 
+            "type"              => "border-left-width" ,
+            "label"             => __('Border Left Width', 'site-editor'),
+            "description"       => __("Module Border Left Width", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );   
+
+
+        $params['border_top_color'] = array( 
+            "type"              => "border-top-color" , 
+            "label"             => __('Border Top Color', 'site-editor'),
+            "description"       => __("Module Border Top Color", "site-editor"), 
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['border_right_color'] = array( 
+            "type"              => "border-right-color" ,
+            "label"             => __('Border Right Color', 'site-editor'),
+            "description"       => __("Module Border Right Color", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );   
+
+
+        $params['border_bottom_color'] = array( 
+            "type"              => "border-bottom-color" ,
+            "label"             => __('Border Bottom Color', 'site-editor'),
+            "description"       => __("Module Border Bottom Color", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );   
+
+
+        $params['border_left_color'] = array( 
+            "type"              => "border-left-color" ,
+            "label"             => __('Border Left Color', 'site-editor'),
+            "description"       => __("Module Border Left Color", "site-editor"),  
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );     
 
         /*$lock_id = "sed_pb_".$this->id."_border_radius_lock";
 
@@ -1178,6 +1346,23 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'design_editor_panel'
         );
 
+        $params['padding_lock'] = array( 
+            "type"              => "padding-lock" ,
+            "label"             => __('lock Spacings Together', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            /*'atts'  => array(
+                "class" =>   "sed-lock-spinner"
+            ) ,
+            'control_param'     =>  array(
+                'spinner' =>  $spinner_class_selector ,
+                'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+            ),*/     
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        );
+
         /*$lock_id = "sed_pb_".$this->id."_margin_lock";
 
         $spinner_class = 'sed-margin-spinner-' . $this->id;
@@ -1345,6 +1530,36 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'design_editor_panel'
         );
 
+        $fonts = array();
+
+        $custom_fonts = SiteeditorTypography::get_custom_fonts();
+        if( $custom_fonts !== false ){
+           $fonts["custom_fonts"] = $custom_fonts;
+        }
+
+        $fonts["standard_fonts"] = SiteeditorTypography::get_standard_fonts();
+
+        $fonts["google_fonts"]   = SiteeditorTypography::get_google_fonts();
+
+        $this->controls['font'] = array();
+       
+        $params['font_family'] = array(
+            "type"              => "font-family" ,
+            "label"             => __('Font Family', 'site-editor'),  
+            "description"       => __("Add Font Family For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,  
+            "choices"           =>    $fonts,
+            "optgroup"          => true ,
+            "groups"            => array(
+                "custom_fonts"     => __("Custom Fonts" , "site-editor") ,
+                "standard_fonts"   => __("Standard Fonts" , "site-editor") ,
+                "google_fonts"     => __("Google Fonts" , "site-editor") ,
+            ),    
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );        
+
         $params['font_size'] = array(
             "type"              => "font-size" , 
             "label"             => __("Font Size", "site-editor"),
@@ -1421,8 +1636,75 @@ class PBAPITestModule extends PBShortcodeClass{
             ),    
             "value"             => '' ,
             'panel'             => 'design_editor_panel'
+        );  
+
+        $params['text_shadow'] = array(
+            "type"              => "text-shadow" , 
+            "label"             => __("Text Shadow", "site-editor"),
+            "description"       => __("Add Text Shadow For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' , 
+            'js_type'           =>  'dropdown',
+            'has_border_box'    =>   true ,  
+            'js_params'     =>  array(
+                'options_selector'  => '.text-shadow-box',
+                'selected_class'      => 'text-shadow-active' ,
+            ), 
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
         );
 
+        $params['text_shadow_color'] = array(
+            "type"              => "text-shadow-color" , 
+            "label"             => __("Text Shadow Color", "site-editor"),
+            "description"       => __("Add Text Shadow Color For Element", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,  
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['gradient'] = array(
+            "type"              => "gradient" , 
+            "label"             => __("Gradient", "site-editor"),
+            "description"       => __("Add Gradient For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' , 
+            'js_type'           =>  'gradient',
+            'has_border_box'    =>   true ,  
+            'js_params'     =>  array(
+                'options_selector'  => '.sed-gradient',
+                'selected_class'    => 'gradient_select'
+            ), 
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['shadow'] = array(
+            "type"              => "shadow" , 
+            "label"             => __("Shadow", "site-editor"),
+            "description"       => __("Add Shadow For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' , 
+            'js_type'           =>  'dropdown',
+            'has_border_box'    =>   true ,  
+            'js_params'     =>  array(
+                'options_selector'    => '.shadow',
+                'selected_class'      => 'shadow_select'
+            ), 
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel' 
+        );
+
+        $params['shadow_color'] = array(
+            "type"              => "shadow-color" , 
+            "label"             => __("Text Shadow Color", "site-editor"),
+            "description"       => __("Add Shadow Color For Element", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,  
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );
 
 
         return $params;
