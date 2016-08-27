@@ -1,6 +1,6 @@
 <?php
-/**
- * SiteEditor Field: background-color.
+/**  
+ * SiteEditor Field: background-image.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,16 +12,16 @@ if ( ! defined( 'ABSPATH' ) )  {
     exit;
 }
 
-if ( ! class_exists( 'SiteEditorBackgroundColorField' ) ) {
+if ( ! class_exists( 'SiteEditorBackgroundImageField' ) ) {
 
-    if( ! class_exists( 'SiteEditorColorField' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-color-field.class.php';
-    } 
-    
+    if( ! class_exists( 'SiteEditorImageField' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-image-field.class.php';
+    }
+
     /**
      * Field overrides.
      */
-    class SiteEditorBackgroundColorField extends SiteEditorColorField {
+    class SiteEditorBackgroundImageField extends SiteEditorImageField {
 
         /**
          * Related setting id for save in db
@@ -29,7 +29,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorField' ) ) {
          * @access protected
          * @var string
          */
-        public $setting_id = 'background_color';
+        public $setting_id = 'background_image';
 
         /**
          * The field type.
@@ -37,7 +37,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorField' ) ) {
          * @access protected
          * @var string
          */
-        public $type = 'background-color';
+        public $type = 'background-image';
 
         /**
          * Use 'refresh', 'postMessage'
@@ -60,11 +60,11 @@ if ( ! class_exists( 'SiteEditorBackgroundColorField' ) ) {
                 return;
             }
 
-            $this->default = 'transparent';
+            $this->default = '';
 
         }
 
     }
 }
 
-sed_options()->register_field_type( 'background-color' , 'SiteEditorBackgroundColorField' );
+sed_options()->register_field_type( 'background-image' , 'SiteEditorBackgroundImageField' );

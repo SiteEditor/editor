@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: background-color.
+ * SiteEditor Control: background-repeat.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,18 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
+if ( ! class_exists( 'SiteEditorBackgroundRepeatControl' ) ) {
 
-    if( ! class_exists( 'SiteEditorColorControl' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-color-control.class.php';
+    if( ! class_exists( 'SiteEditorSelectControl' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-select-control.class.php';
     }   
  
 	/**
-	 * Background Color control
+	 * Background Repeat control
 	 *
-	 * Class SiteEditorBackgroundColorControl
+	 * Class SiteEditorBackgroundRepeatControl
 	 */
-	class SiteEditorBackgroundColorControl extends SiteEditorColorControl {
+	class SiteEditorBackgroundRepeatControl extends SiteEditorSelectControl {
 
 		/**
 		 * The control type.
@@ -31,7 +31,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'background-color';
+		public $type = 'background-repeat';
 
         /**
          * The control category.
@@ -63,7 +63,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
          * @access public
          * @var string
          */
-        public $js_type = "color";
+        public $js_type = "select";
 
         /**
          * Css Selector for apply style
@@ -79,7 +79,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
          * @access public
          * @var string
          */
-        public $style_props = "background-color";
+        public $style_props = "background-repeat";
         
         /**
          * Get the data to export to the client via JSON.
@@ -106,4 +106,4 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'background-color' , 'SiteEditorBackgroundColorControl' );
+sed_options()->register_control_type( 'background-repeat' , 'SiteEditorBackgroundRepeatControl' );

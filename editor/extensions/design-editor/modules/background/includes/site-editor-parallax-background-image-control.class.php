@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: background-color.
+ * SiteEditor Control: parallax-background-image.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,18 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
+if ( ! class_exists( 'SiteEditorParallaxBackgroundImageControl' ) ) {
 
-    if( ! class_exists( 'SiteEditorColorControl' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-color-control.class.php';
-    }   
- 
+    if( ! class_exists( 'SiteEditorTextControl' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-checkbox-control.class.php';
+    }
+
 	/**
-	 * Background Color control
+	 * Parallax Background Image control
 	 *
-	 * Class SiteEditorBackgroundColorControl
+	 * Class SiteEditorParallaxBackgroundImageControl
 	 */
-	class SiteEditorBackgroundColorControl extends SiteEditorColorControl {
+	class SiteEditorParallaxBackgroundImageControl extends SiteEditorCheckboxControl {
 
 		/**
 		 * The control type.
@@ -31,7 +31,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'background-color';
+		public $type = 'parallax-background-image';
 
         /**
          * The control category.
@@ -63,7 +63,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
          * @access public
          * @var string
          */
-        public $js_type = "color";
+        public $js_type = "checkbox";
 
         /**
          * Css Selector for apply style
@@ -79,8 +79,10 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
          * @access public
          * @var string
          */
-        public $style_props = "background-color";
-        
+        public $style_props = "parallax-background-image";
+
+
+
         /**
          * Get the data to export to the client via JSON.
          *
@@ -106,4 +108,4 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'background-color' , 'SiteEditorBackgroundColorControl' );
+sed_options()->register_control_type( 'parallax-background-image' , 'SiteEditorParallaxBackgroundImageControl' );

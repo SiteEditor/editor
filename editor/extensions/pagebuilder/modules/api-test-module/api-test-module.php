@@ -862,6 +862,211 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'design_editor_panel'
         );
 
+        $params['background_image'] = array(
+            "type"              => "background-image" , 
+            "label"             => __("Background Image", "site-editor"),
+            "description"       => __("Add Background Image For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "remove_action"     => true , 
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );        
+
+        $params['external_background_image'] = array(
+            "type"              => "external-background-image" , 
+            "label"             => __("External Background Image", "site-editor"),
+            "description"       => __("Add External Background Image For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );    
+
+        $params['parallax_background_image'] = array( 
+            "type"              => "parallax-background-image" , 
+            "label"             => __("Parallax Background Image", "site-editor"),
+            "description"       => __("Add Parallax Background Image For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            "value"             => '' ,
+            'panel'             => 'design_editor_panel'
+        );   
+
+        $params['parallax_background_ratio'] = array( 
+            "type"              => "parallax-background-ratio" , 
+            "label"             => __("Parallax Background Ratio", "site-editor"),
+            "description"       => __("Add Parallax Background Ratio For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' , 
+            'js_params'     =>  array(
+                'step'        => 0.1
+            ),
+            "value"             => 0.5 , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['background_attachment'] = array( 
+            "type"              => "background-attachment" , 
+            "label"             => __("Background Attachment", "site-editor"),
+            "description"       => __("Add Background Attachment For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'choices' =>array(
+                'scroll'     => __('Scroll', 'site-editor'),
+                'fixed'     => __('Fixed ', 'site-editor')
+            ),
+            "value"             => 'scroll' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['background_size'] = array( 
+            "type"              => "background-size" , 
+            "label"             => __("Background Size", "site-editor"),
+            "description"       => __("Add Background Size For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'choices'           =>array(
+                'auto'          => __('Auto', 'site-editor'),
+                'fit'           => __('Fit', 'site-editor'),
+                'fullscreen'    => __('Full Screen ', 'site-editor'),
+                'cover'         => __('Cover ', 'site-editor'),
+                'contain'       => __('Contain ', 'site-editor'), 
+            ),
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['background_repeat'] = array( 
+            "type"              => "background-repeat" , 
+            "label"             => __("Background Repeat", "site-editor"),
+            "description"       => __("Add Background Repeat For Element", "site-editor") ,
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'choices'           =>array(
+                'normal'                => __('Normal', 'site-editor'),
+                'tile'                  => __('Tile ', 'site-editor'),
+                'tile-vertically'       => __('Tile Vertically', 'site-editor'),
+                'tile-horizontally'     => __('Tile Horizontally ', 'site-editor'),  
+            ),
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+
+        $lock_id = "sed_pb_".$this->id."_border_radius_lock";
+
+        $spinner_class = 'sed-border-radius-spinner-' . $this->id;    //shortcode_name
+        $spinner_class_selector = '.' . $spinner_class;
+        $sh_name = $this->id;
+        $sh_name_c = $sh_name. "_border_radius_";
+
+        $controls = array( $sh_name_c . "tr" , $sh_name_c . "tl" , $sh_name_c . "br" , $sh_name_c . "bl" );
+
+        $params['border_radius_tl'] = array( 
+            "type"              => "border-radius-tl" , 
+            "label"             =>  ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
+            "description"       => __("Add corner For Element", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'js_params'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "tr" , $sh_name_c . "br" , $sh_name_c . "bl" )
+                ),
+                
+                'min'   =>  0 ,
+                //'radius_demo' => true,
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ), 
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+/*
+        $params['border_radius_tr'] = array( 
+            "type"              => "border-radius-tr" , 
+            "label"             =>  ( is_rtl() ) ? __('Top right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
+            "description"       => __("Add corner For Element", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'js_params'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "tl" , $sh_name_c . "br" , $sh_name_c . "bl" )
+                ),
+                
+                'min'   =>  0 ,
+                //'radius_demo' => true,
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ), 
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['border_radius_br'] = array( 
+            "type"              => "border-radius-br" , 
+            "label"             =>  ( is_rtl() ) ? __('Bottom right corner', 'site-editor') : __('Bottom left corner', 'site-editor') ,
+            "description"       => __("Add corner For Element", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'js_params'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "tl" , $sh_name_c . "tr" , $sh_name_c . "bl" )
+                ),
+                
+                'min'   =>  0 ,
+                //'radius_demo' => true,
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ), 
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['border_radius_bl'] = array( 
+            "type"              => "border-radius-bl" , 
+            "label"             =>  ( is_rtl() ) ? __('Bottom left corner', 'site-editor') : __('Bottom right corner', 'site-editor') ,
+            "description"       => __("Add corner For Element", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'atts'  => array(
+                "class" =>   $spinner_class
+            ) ,
+            'js_params'     =>  array(
+                'lock'    => array(
+                    'id'       => $lock_id,
+                    'spinner'  => $spinner_class_selector,
+                    'controls' => array( $sh_name_c . "tl" , $sh_name_c . "tr" , $sh_name_c . "br" )
+                ),
+                
+                'min'   =>  0 ,
+                //'radius_demo' => true,
+                //'max'     => 100,
+                //'step'    => 2,
+                //'page'    => 5
+            ), 
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); */
+
         return $params;
     }
 

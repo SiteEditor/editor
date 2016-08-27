@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Field: background-color.
+ * SiteEditor Field: border-radius-tl.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,16 +12,16 @@ if ( ! defined( 'ABSPATH' ) )  {
     exit;
 }
 
-if ( ! class_exists( 'SiteEditorBackgroundColorField' ) ) {
+if ( ! class_exists( 'SiteEditorBorderRadiusTopLeftField' ) ) {
 
-    if( ! class_exists( 'SiteEditorColorField' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-color-field.class.php';
+    if( ! class_exists( 'SiteEditorNumberField' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-number-field.class.php';
     } 
     
     /**
      * Field overrides.
      */
-    class SiteEditorBackgroundColorField extends SiteEditorColorField {
+    class SiteEditorBorderRadiusTopLeftField extends SiteEditorNumberField { 
 
         /**
          * Related setting id for save in db
@@ -29,7 +29,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorField' ) ) {
          * @access protected
          * @var string
          */
-        public $setting_id = 'background_color';
+        public $setting_id = 'border_radius_tl';
 
         /**
          * The field type.
@@ -37,7 +37,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorField' ) ) {
          * @access protected
          * @var string
          */
-        public $type = 'background-color';
+        public $type = 'border-radius-tl';
 
         /**
          * Use 'refresh', 'postMessage'
@@ -60,11 +60,11 @@ if ( ! class_exists( 'SiteEditorBackgroundColorField' ) ) {
                 return;
             }
 
-            $this->default = 'transparent';
+            $this->default = '0';
 
         }
 
     }
 }
 
-sed_options()->register_field_type( 'background-color' , 'SiteEditorBackgroundColorField' );
+sed_options()->register_field_type( 'border-radius-tl' , 'SiteEditorBorderRadiusTopLeftField' );

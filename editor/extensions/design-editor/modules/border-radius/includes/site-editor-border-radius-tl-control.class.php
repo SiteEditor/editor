@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: background-color.
+ * SiteEditor Control: border-radius-tl.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -8,22 +8,22 @@
  */
 
 // Exit if accessed directly.
-if ( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) { 
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
+if ( ! class_exists( 'SiteEditorBorderRadiusTopLeftControl' ) ) {
 
-    if( ! class_exists( 'SiteEditorColorControl' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-color-control.class.php';
+    if( ! class_exists( 'SiteEditorNumberControl' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-number-control.class.php';
     }   
  
 	/**
-	 * Background Color control
+	 * Border Radius Top Left control 
 	 *
-	 * Class SiteEditorBackgroundColorControl
+	 * Class SiteEditorBorderRadiusTopLeftControl
 	 */
-	class SiteEditorBackgroundColorControl extends SiteEditorColorControl {
+	class SiteEditorBorderRadiusTopLeftControl extends SiteEditorNumberControl {
 
 		/**
 		 * The control type.
@@ -31,7 +31,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'background-color';
+		public $type = 'border-radius-tl';
 
         /**
          * The control category.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
          * @access public
          * @var string
          */
-        public $sub_category = 'background';
+        public $sub_category = 'border-radius';
 
         /**
          * The control is style option ?
@@ -63,7 +63,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
          * @access public
          * @var string
          */
-        public $js_type = "color";
+        public $js_type = "number";
 
         /**
          * Css Selector for apply style
@@ -79,7 +79,7 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
          * @access public
          * @var string
          */
-        public $style_props = "background-color";
+        public $style_props = "border-top-left-radius";  
         
         /**
          * Get the data to export to the client via JSON.
@@ -106,4 +106,4 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'background-color' , 'SiteEditorBackgroundColorControl' );
+sed_options()->register_control_type( 'border-radius-tl' , 'SiteEditorBorderRadiusTopLeftControl' );
