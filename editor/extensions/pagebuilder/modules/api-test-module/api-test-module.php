@@ -1122,29 +1122,29 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'design_editor_panel'
         );     
 
-        /*$lock_id = "sed_pb_".$this->id."_border_radius_lock";
+        $corner_lock_id = "sed_pb_".$this->control_prefix."_border_radius_lock";
 
-        $spinner_class = 'sed-border-radius-spinner-' . $this->id;    //shortcode_name
-        $spinner_class_selector = '.' . $spinner_class;
-        $sh_name = $this->id;
-        $sh_name_c = $sh_name. "_border_radius_";
+        $corner_spinner_class = 'sed-border-radius-spinner-' . $this->control_prefix;    //shortcode_name
+        $corner_spinner_class_selector = '.' . $corner_spinner_class;
+        $corner_sh_name = $this->control_prefix;
+        $corner_sh_name_c = $corner_sh_name. "_border_radius_";
 
-        $controls = array( $sh_name_c . "tr" , $sh_name_c . "tl" , $sh_name_c . "br" , $sh_name_c . "bl" );
-        */
+        $corner_controls = array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" );
+
         $params['border_radius_tl'] = array( 
             "type"              => "border-radius-tl" , 
             "label"             =>  ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $corner_spinner_class
             ) ,
             'js_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "tr" , $sh_name_c . "br" , $sh_name_c . "bl" )
+                    'id'       => $corner_lock_id,
+                    'spinner'  => $corner_spinner_class_selector,
+                    'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
                 ),
                 
                 'min'   =>  0 ,
@@ -1152,7 +1152,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/ 
+            ), 
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
@@ -1163,14 +1163,14 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $corner_spinner_class
             ) ,
             'js_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "tl" , $sh_name_c . "br" , $sh_name_c . "bl" )
+                    'id'       => $corner_lock_id,
+                    'spinner'  => $corner_spinner_class_selector,
+                    'controls' => array( $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
                 ),
                 
                 'min'   =>  0 ,
@@ -1178,7 +1178,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ), */ 
+            ), 
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
@@ -1189,14 +1189,14 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $corner_spinner_class
             ) ,
             'js_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "tl" , $sh_name_c . "tr" , $sh_name_c . "bl" )
+                    'id'       => $corner_lock_id,
+                    'spinner'  => $corner_spinner_class_selector,
+                    'controls' => array( $corner_sh_name_c . "tl" , $corner_sh_name_c . "tr" , $corner_sh_name_c . "bl" )
                 ),
                 
                 'min'   =>  0 ,
@@ -1204,7 +1204,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ), */ 
+            ), 
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
@@ -1215,14 +1215,14 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $corner_spinner_class
             ) ,
             'js_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "tl" , $sh_name_c . "tr" , $sh_name_c . "br" )
+                    'id'       => $corner_lock_id,
+                    'spinner'  => $corner_spinner_class_selector,
+                    'controls' => array( $corner_sh_name_c . "tl" , $corner_sh_name_c . "tr" , $corner_sh_name_c . "br" )
                 ),
                 
                 'min'   =>  0 ,
@@ -1230,7 +1230,24 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/ 
+            ), 
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        ); 
+
+        $params['border_radius_lock'] = array( 
+            "type"              => "border-radius-lock" , 
+            "label"             => __('lock Corners Together', 'site-editor'), 
+            "description"       => __("Add corner For Element", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'atts'  => array(
+                "class" =>   "sed-lock-spinner"
+            ) ,
+            'js_params'     =>  array(
+                'spinner' =>  $corner_spinner_class_selector ,
+                'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
+            ),
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
@@ -1254,7 +1271,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'atts'  => array(
                 "class" =>   $padding_spinner_class
             ) ,
-            'is_params'     =>  array(
+            'js_params'     =>  array(
                 'lock'    => array(
                     'id'       => $padding_lock_id,
                     'spinner'  => $padding_spinner_class_selector,
@@ -1279,7 +1296,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'atts'  => array(
                 "class" =>   $padding_spinner_class
             ) ,
-            'is_params'     =>  array(
+            'js_params'     =>  array(
                 'lock'    => array(
                     'id'       => $padding_lock_id,
                     'spinner'  => $padding_spinner_class_selector,
@@ -1304,7 +1321,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'atts'  => array(
                 "class" =>   $padding_spinner_class
             ) ,
-            'is_params'     =>  array(
+            'js_params'     =>  array(
                 'lock'    => array(
                     'id'       => $padding_lock_id,
                     'spinner'  => $padding_spinner_class_selector,
@@ -1329,7 +1346,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'atts'  => array(
                 "class" =>   $padding_spinner_class
             ) ,
-            'is_params'     =>  array(
+            'js_params'     =>  array(
                 'lock'    => array(
                     'id'       => $padding_lock_id,
                     'spinner'  => $padding_spinner_class_selector,
@@ -1354,24 +1371,22 @@ class PBAPITestModule extends PBShortcodeClass{
             'atts'  => array(
                 "class" =>   "sed-lock-spinner"
             ) ,
-            'control_param'     =>  array(
-                'spinner' =>  $spinner_class_selector ,
+            'js_params'     =>  array(
+                'spinner' =>  $padding_spinner_class_selector ,
                 'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
             ),   
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         );
 
-        /*$lock_id = "sed_pb_".$this->id."_margin_lock";
+        $margin_lock_id = "sed_pb_".$this->control_prefix."_margin_lock";
 
-        $spinner_class = 'sed-margin-spinner-' . $this->id;
-        $spinner_class_selector = '.' . $spinner_class;
-        $sh_name = $this->id;
-        $sh_name_c = $sh_name. "_margin_";
+        $margin_spinner_class = 'sed-margin-spinner-' . $this->control_prefix;
+        $margin_spinner_class_selector = '.' . $margin_spinner_class;
+        $margin_sh_name = $this->control_prefix;
+        $margin_sh_name_c = $margin_sh_name. "_margin_";
 
-        $controls = array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" );
-
-        $this->controls['margin'] = array();*/
+        $margin_controls = array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" );
 
         $params['margin_top'] = array( 
             "type"              => "margin-top" , 
@@ -1379,21 +1394,21 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $margin_spinner_class
             ) ,
-            'control_param'     =>  array(
+            'js_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+                    'id'       => $margin_lock_id,
+                    'spinner'  => $margin_spinner_class_selector,
+                    'controls' => array( $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
                 ),
                 'min'   =>  0 ,
                 
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/    
+            ),
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
@@ -1404,21 +1419,21 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $margin_spinner_class
             ) ,
-            'control_param'     =>  array(
+            'js_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+                    'id'       => $margin_lock_id,
+                    'spinner'  => $margin_spinner_class_selector,
+                    'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
                 ),
                 'min'   =>  0 ,
                 
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/    
+            ),    
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         );
@@ -1429,21 +1444,21 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $margin_spinner_class
             ) ,
-            'control_param'     =>  array(
+            'js_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" )
+                    'id'       => $margin_lock_id,
+                    'spinner'  => $margin_spinner_class_selector,
+                    'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" )
                 ),
                 'min'   =>  0 ,
                 
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/    
+            ),    
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         );
@@ -1454,21 +1469,38 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $margin_spinner_class
             ) ,
-            'control_param'     =>  array(
+            'js_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "bottom" )
+                    'id'       => $margin_lock_id,
+                    'spinner'  => $margin_spinner_class_selector,
+                    'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "bottom" )
                 ),
                 'min'   =>  0 ,
                 
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/    
+            ),   
+            "value"             => '' , 
+            'panel'             => 'design_editor_panel'
+        );
+
+        $params['margin_lock'] = array(  
+            "type"              => "margin-lock" ,
+            "label"             => __('lock Spacings Together', 'site-editor'),
+            "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
+            "category"          => 'style-editor' ,
+            "selector"          => 'sed_current' ,
+            'atts'  => array(
+                "class" =>   "sed-lock-spinner"
+            ) ,
+            'js_params'     =>  array(
+                'spinner' =>  $margin_spinner_class_selector ,
+                'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
+            ),   
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         );

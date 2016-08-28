@@ -1,6 +1,6 @@
 <?php
 /**  
- * SiteEditor Field: margin-lock.
+ * SiteEditor Field: border-radius-lock.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) )  {
     exit;
 }
 
-if ( ! class_exists( 'SiteEditorMarginLockField' ) ) {
+if ( ! class_exists( 'SiteEditorBorderRadiusLockField' ) ) {
 
     if( ! class_exists( 'SiteEditorCheckboxField' ) ) {
         require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-checkbox-field.class.php'; 
@@ -21,7 +21,7 @@ if ( ! class_exists( 'SiteEditorMarginLockField' ) ) {
     /**
      * Field overrides.
      */
-    class SiteEditorMarginLockField extends SiteEditorCheckboxField { 
+    class SiteEditorBorderRadiusLockField extends SiteEditorCheckboxField { 
 
         /**
          * Related setting id for save in db
@@ -29,7 +29,7 @@ if ( ! class_exists( 'SiteEditorMarginLockField' ) ) {
          * @access protected
          * @var string
          */
-        public $setting_id = 'margin_lock';
+        public $setting_id = 'border_radius_lock';
 
         /**
          * The field type.
@@ -37,7 +37,7 @@ if ( ! class_exists( 'SiteEditorMarginLockField' ) ) {
          * @access protected
          * @var string
          */
-        public $type = 'margin-lock';
+        public $type = 'border-radius-lock';
 
         /**
          * Use 'refresh', 'postMessage'
@@ -67,4 +67,4 @@ if ( ! class_exists( 'SiteEditorMarginLockField' ) ) {
     }
 }
 
-sed_options()->register_field_type( 'margin-lock' , 'SiteEditorMarginLockField' );
+sed_options()->register_field_type( 'border-radius-lock' , 'SiteEditorBorderRadiusLockField' );

@@ -95,6 +95,10 @@ final class SedDesignEditorBorderRadius {
 
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-br-field.class.php'; 
 
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-lock-control.class.php';
+
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-lock-field.class.php'; 
+
     }
 
     /**
@@ -125,14 +129,14 @@ final class SedDesignEditorBorderRadius {
 
         $panels = array();
 
-        //$lock_id = "sed_pb_".$this->id."_border_radius_lock";
+        $corner_lock_id = "sed_pb_".$this->control_prefix."_border_radius_lock";
 
-        //$spinner_class = 'sed-border-radius-spinner-' . $this->id;    //shortcode_name
-        //$spinner_class_selector = '.' . $spinner_class;
-        //$sh_name = $this->id;
-        //$sh_name_c = $sh_name. "_border_radius_";
+        $corner_spinner_class = 'sed-border-radius-spinner-' . $this->control_prefix;    //shortcode_name
+        $corner_spinner_class_selector = '.' . $corner_spinner_class;
+        $corner_sh_name = $this->control_prefix;
+        $corner_sh_name_c = $corner_sh_name. "_border_radius_";
 
-        //$controls = array( $sh_name_c . "tr" , $sh_name_c . "tl" , $sh_name_c . "br" , $sh_name_c . "bl" );
+        $corner_controls = array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" );
 
         $fields = array(
 
@@ -140,14 +144,14 @@ final class SedDesignEditorBorderRadius {
                 "type"              => "border-radius-tl" ,
                 "label"             => ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                /*'atts'  => array(
-                    "class" =>   $spinner_class
+                'atts'  => array(
+                    "class" =>   $corner_spinner_class
                 ) ,
                 'js_params'     =>  array(
                     'lock'    => array(
-                        'id'       => $lock_id,
-                        'spinner'  => $spinner_class_selector,
-                        'controls' => array( $sh_name_c . "tr" , $sh_name_c . "br" , $sh_name_c . "bl" )
+                        'id'       => $corner_lock_id,
+                        'spinner'  => $corner_spinner_class_selector,
+                        'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
                     ),
                     
                     'min'   =>  0 ,
@@ -155,7 +159,7 @@ final class SedDesignEditorBorderRadius {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
-                ),*/ 
+                ), 
             
             ),
 
@@ -163,14 +167,14 @@ final class SedDesignEditorBorderRadius {
                 "type"              => "border-radius-tr" ,
                 "label"             => ( is_rtl() ) ? __('Top Right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                /*'atts'  => array(
-                    "class" =>   $spinner_class
+                'atts'  => array(
+                    "class" =>   $corner_spinner_class
                 ) ,
                 'js_params'     =>  array(
                     'lock'    => array(
-                        'id'       => $lock_id,
-                        'spinner'  => $spinner_class_selector,
-                        'controls' => array( $sh_name_c . "tl" , $sh_name_c . "br" , $sh_name_c . "bl" )
+                        'id'       => $corner_lock_id,
+                        'spinner'  => $corner_spinner_class_selector,
+                        'controls' => array( $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
                     ),
                     
                     'min'   =>  0 ,
@@ -178,7 +182,7 @@ final class SedDesignEditorBorderRadius {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
-                ), */
+                ), 
             
             ),
 
@@ -187,14 +191,14 @@ final class SedDesignEditorBorderRadius {
                 "type"              => "border-radius-br" ,
                 "label"             => ( is_rtl() ) ? __('Bottom Right corner', 'site-editor') : __('Bottom left corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                /*'atts'  => array(
-                    "class" =>   $spinner_class
+                'atts'  => array(
+                    "class" =>   $corner_spinner_class
                 ) ,
                 'js_params'     =>  array(
                     'lock'    => array(
-                        'id'       => $lock_id,
-                        'spinner'  => $spinner_class_selector,
-                        'controls' => array( $sh_name_c . "tr" , $sh_name_c . "tl" , $sh_name_c . "bl" )
+                        'id'       => $corner_lock_id,
+                        'spinner'  => $corner_spinner_class_selector,
+                        'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "bl" )
                     ),
                     
                     'min'   =>  0 ,
@@ -202,7 +206,7 @@ final class SedDesignEditorBorderRadius {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
-                ), */
+                ), 
             
             ),
 
@@ -210,14 +214,14 @@ final class SedDesignEditorBorderRadius {
                 "type"              => "border-radius-bl" ,
                 "label"             => ( is_rtl() ) ? __('Bottom left corner', 'site-editor') : __('Bottom right corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                /*'atts'  => array(
-                    "class" =>   $spinner_class
+                'atts'  => array(
+                    "class" =>   $corner_spinner_class
                 ) ,  
                 'js_params'     =>  array(
                     'lock'    => array(
-                        'id'       => $lock_id,
-                        'spinner'  => $spinner_class_selector,
-                        'controls' => array( $sh_name_c . "tr" , $sh_name_c . "tl" , $sh_name_c . "br" )
+                        'id'       => $corner_lock_id,
+                        'spinner'  => $corner_spinner_class_selector,
+                        'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" )
                     ),
                     
                     'min'   =>  0 ,
@@ -225,7 +229,24 @@ final class SedDesignEditorBorderRadius {
                     //'max'     => 100,
                     //'step'    => 2,
                     //'page'    => 5
-                ), */
+                ), 
+            
+            ),
+
+            'border_radius_lock' => array(
+                "type"              => "border-radius-lock" ,
+                "label"             => __('lock Corners Together', 'site-editor'), 
+                "description"       => __("Add corner For Element", "site-editor"),
+                'atts'  => array(
+                    "class" =>   $corner_spinner_class
+                ) ,  
+                'atts'  => array(
+                    "class" =>   "sed-lock-spinner"
+                ) ,
+                'js_params'     =>  array(
+                    'spinner' =>  $corner_spinner_class_selector ,
+                    'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
+                ),
             
             ),
 

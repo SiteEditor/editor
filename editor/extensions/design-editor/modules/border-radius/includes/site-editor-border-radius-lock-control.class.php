@@ -1,6 +1,6 @@
 <?php
 /**
- * SiteEditor Control: padding-lock.
+ * SiteEditor Control: border-radius-lock.
  *
  * @package     SiteEditor
  * @subpackage  Options
@@ -12,18 +12,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'SiteEditorPaddingLockControl' ) ) {
+if ( ! class_exists( 'SiteEditorBorderRadiusLockControl' ) ) {
 
     if( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
         require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-checkbox-control.class.php';
     }
 
 	/**
-	 * Padding Lock control
+	 * Border Radius Lock control
 	 *
-	 * Class SiteEditorPaddingLockControl
+	 * Class SiteEditorBorderRadiusLockControl
 	 */
-	class SiteEditorPaddingLockControl extends SiteEditorCheckboxControl {
+	class SiteEditorBorderRadiusLockControl extends SiteEditorCheckboxControl {
 
 		/**
 		 * The control type.
@@ -31,7 +31,7 @@ if ( ! class_exists( 'SiteEditorPaddingLockControl' ) ) {
 		 * @access public
 		 * @var string
 		 */
-		public $type = 'padding-lock';
+		public $type = 'border-radius-lock';
 
         /**
          * The control category.
@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorPaddingLockControl' ) ) {
          * @access public
          * @var string
          */
-        public $sub_category = 'padding';
+        public $sub_category = 'border-radius-lock';
 
         /**
          * The control is style option ?
@@ -79,7 +79,7 @@ if ( ! class_exists( 'SiteEditorPaddingLockControl' ) ) {
          * @access public
          * @var string
          */
-        public $style_props = "padding-lock";
+        public $style_props = "border-radius-lock";
 
 
 
@@ -108,4 +108,4 @@ if ( ! class_exists( 'SiteEditorPaddingLockControl' ) ) {
 	}
 }
 
-sed_options()->register_control_type( 'padding-lock' , 'SiteEditorPaddingLockControl' );
+sed_options()->register_control_type( 'border-radius-lock' , 'SiteEditorBorderRadiusLockControl' );

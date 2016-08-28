@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'SiteEditorMarginLockControl' ) ) {
 
-    if( ! class_exists( 'SiteEditorTextControl' ) ) {
+    if( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
         require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-checkbox-control.class.php';
     }
 
 	/**
-	 * Parallax Background Image control
+	 * Margin Lock control
 	 *
 	 * Class SiteEditorMarginLockControl
 	 */
@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorMarginLockControl' ) ) {
          * @access public
          * @var string
          */
-        public $sub_category = 'background';
+        public $sub_category = 'margin';
 
         /**
          * The control is style option ?

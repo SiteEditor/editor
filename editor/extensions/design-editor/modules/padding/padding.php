@@ -148,7 +148,7 @@ final class SedDesignEditorPadding {
                 'atts'  => array(
                     "class" =>   $padding_spinner_class
                 ) ,
-                'is_params'     =>  array(
+                'js_params'     =>  array(
                     'lock'    => array(
                         'id'       => $padding_lock_id,
                         'spinner'  => $padding_spinner_class_selector,
@@ -169,7 +169,7 @@ final class SedDesignEditorPadding {
                 'atts'  => array(
                     "class" =>   $padding_spinner_class
                 ) ,
-                'is_params'     =>  array(
+                'js_params'     =>  array(
                     'lock'    => array(
                         'id'       => $padding_lock_id,
                         'spinner'  => $padding_spinner_class_selector,
@@ -190,7 +190,7 @@ final class SedDesignEditorPadding {
                 'atts'  => array(
                     "class" =>   $padding_spinner_class
                 ) ,
-                'is_params'     =>  array(
+                'js_params'     =>  array(
                     'lock'    => array(
                         'id'       => $padding_lock_id,
                         'spinner'  => $padding_spinner_class_selector,
@@ -211,7 +211,7 @@ final class SedDesignEditorPadding {
                 'atts'  => array(
                     "class" =>   $padding_spinner_class
                 ) ,
-                'is_params'     =>  array(
+                'js_params'     =>  array(
                     'lock'    => array(
                         'id'       => $padding_lock_id,
                         'spinner'  => $padding_spinner_class_selector,
@@ -233,7 +233,7 @@ final class SedDesignEditorPadding {
                     "class" =>   "sed-lock-spinner"
                 ) ,
                 'control_param'     =>  array(
-                    'spinner' =>  $spinner_class_selector ,
+                    'spinner' =>  $padding_spinner_class_selector ,
                     'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
                 ),           
             ),

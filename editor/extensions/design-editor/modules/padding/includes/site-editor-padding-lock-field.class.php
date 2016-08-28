@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) )  {
 
 if ( ! class_exists( 'SiteEditorPaddingLockField' ) ) {
 
-    if( ! class_exists( 'SiteEditorTextField' ) ) {
+    if( ! class_exists( 'SiteEditorCheckboxField' ) ) {
         require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-checkbox-field.class.php'; 
     }
 
