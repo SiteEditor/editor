@@ -1235,16 +1235,15 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'design_editor_panel'
         ); 
 
-        /*$lock_id = "sed_pb_".$this->id."_padding_lock";
 
-        $spinner_class = 'sed-padding-spinner-' . $this->id;
-        $spinner_class_selector = '.' . $spinner_class;
-        $sh_name = $this->id;
-        $sh_name_c = $sh_name. "_padding_";
+        $padding_lock_id = "sed_pb_".$this->control_prefix."_padding_lock";
 
-        $controls = array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" );
+        $padding_spinner_class = 'sed-padding-spinner-' . $this->control_prefix;
+        $padding_spinner_class_selector = '.' . $padding_spinner_class;
+        $padding_sh_name = $this->control_prefix;
+        $padding_sh_name_c = $padding_sh_name. "_padding_";
 
-        $this->controls['padding'] = array();*/
+        $padding_controls = array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" );
 
         $params['padding_top'] = array( 
             "type"              => "padding-top" , 
@@ -1252,21 +1251,21 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $padding_spinner_class
             ) ,
-            'control_param'     =>  array(
+            'is_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+                    'id'       => $padding_lock_id,
+                    'spinner'  => $padding_spinner_class_selector,
+                    'controls' => array( $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
                 ),
                 'min'   =>  0 ,
                 
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/    
+            ),       
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
@@ -1277,21 +1276,21 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $padding_spinner_class
             ) ,
-            'control_param'     =>  array(
+            'is_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "left" , $sh_name_c . "bottom" )
+                    'id'       => $padding_lock_id,
+                    'spinner'  => $padding_spinner_class_selector,
+                    'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
                 ),
                 'min'   =>  0 ,
                 
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/    
+            ),      
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         );
@@ -1302,21 +1301,21 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $padding_spinner_class
             ) ,
-            'control_param'     =>  array(
+            'is_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" )
+                    'id'       => $padding_lock_id,
+                    'spinner'  => $padding_spinner_class_selector,
+                    'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" )
                 ),
                 'min'   =>  0 ,
                 
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/    
+            ),      
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         );
@@ -1327,21 +1326,21 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
-                "class" =>   $spinner_class
+            'atts'  => array(
+                "class" =>   $padding_spinner_class
             ) ,
-            'control_param'     =>  array(
+            'is_params'     =>  array(
                 'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "bottom" )
+                    'id'       => $padding_lock_id,
+                    'spinner'  => $padding_spinner_class_selector,
+                    'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "bottom" )
                 ),
                 'min'   =>  0 ,
                 
                 //'max'     => 100,
                 //'step'    => 2,
                 //'page'    => 5
-            ),*/    
+            ),      
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         );
@@ -1352,13 +1351,13 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            /*'atts'  => array(
+            'atts'  => array(
                 "class" =>   "sed-lock-spinner"
             ) ,
             'control_param'     =>  array(
                 'spinner' =>  $spinner_class_selector ,
-                'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
-            ),*/     
+                'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
+            ),   
             "value"             => '' , 
             'panel'             => 'design_editor_panel'
         );

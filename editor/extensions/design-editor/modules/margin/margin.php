@@ -95,6 +95,10 @@ final class SedDesignEditorMargin {
 
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-left-field.class.php';
 
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-lock-control.class.php';
+
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-lock-field.class.php';
+
     }
 
     /**
