@@ -1,970 +1,267 @@
 <?php
 Class SiteEditorThemeFramework{
 
-    /*
-     * 1. add panels done
-     * 2. custom settings done
-     * 3. content settings done
-     * 4. add scope tab to content settings && page options done
-     * 5. content settings load & tab done
-     * 6. create all default settings
-     * 7. test create all type settings
-     * 8. style editor settings test
-     * 9. close & open dialog & ajax
-     * 10. dependencies
-     * 11. call options in theme
+    /**
+     * SiteEditorThemeFramework constructor.
      */
-	function __construct( ){
-        $this->post_mata_key        = "sed_post_settings";
-        $this->theme_option_name    = "sed_theme_options";
-        $this->layout_option_name   = "sed_layout_options";
+	public function __construct( ){
 
-        //add_action( "sed_site_options_framework" , array( $this , "get_site_options" ) );
-        add_action( "sed_ajax_load_options_sed_site_options" , array( $this, "get_site_options" ) );
+        //not call in condition if
+        add_filter( 'sed_page_options_panels_filter' , array( $this , 'register_page_panels' ) );
 
-        add_action( "sed_ajax_load_options_sed_theme_options" , array( $this , "get_theme_options" ) );
+        add_filter( 'sed_page_options_fields_filter' , array( $this , 'register_page_fields' ) );
 
-        add_action( "sed_ajax_load_options_sed_page_options" , array( $this , "get_page_options" ) );
+        //do_action( 'activated_plugin', $plugin, $network_wide );
+        //add_action("after_switch_theme", "mytheme_do_something");
+        /*register_activation_hook( __FILE__, 'my_plugin_activation' );
+        function my_plugin_activation() {
+            add_option( 'my_plugin_activated', time() );
+        }*/
 
-        add_action( "sed_ajax_load_options_sed_content_options" , array( $this , "get_content_options" ) , 10 , 1 );
+        add_filter( 'admin_init' , array( $this , 'save_default_page_options' ) );
 
-        add_action( 'sed_app_register' ,  array( $this, 'register_settings' ) );
 	}
 
-    public function get_site_options(){
-        global $sed_options_engine;
+    public function save_default_page_options(){
 
-        $params = array();
+        $fields = apply_filters( 'sed_page_options_fields_filter' , array() );
 
-        $site_params = array_merge( $this->default_site_options()['params'] , $this->site_options()['params'] );
-        $panels = array_merge( $this->default_site_options()['panels'] , $this->site_options()['panels'] );
+        $default_values = array();
 
-        foreach( $site_params AS $id => $args ){
-            $args['control_category']  = 'site-settings';
-            $params[$id] = $args;
-        }
-
-        $sed_options_engine->set_group_params( "sed_site_options" , __("Site Options" , "site-editor") , $params , $panels , "site-settings" );
-    }
-
-    private function view_tab_scope( $layout = true ){
-        ob_start();
-
-        ?>
-            <div class="sed-tab-scope-options" sed-role="tab-scope">
-                <ul>
-                    <li data-type="public-scope" class="tab-scope-item active"><a href="#"><span><?php echo __( "Public" , "site-editor");?></span></a></li>
-                    <?php if( $layout === true ){ ?>
-                    <li data-type="layout-scope" class="tab-scope-item"><a href="#"><span><?php echo __( "Current Layout" , "site-editor");?></span></a></li>
-                    <?php } ?>
-                    <li data-type="page-customize-scope" class="tab-scope-item"><a href="#"><span><?php echo __( "Current Page" , "site-editor");?></span></a></li>
-                </ul>
-            </div>
-        <?php
-
-        return ob_get_clean();
-    }
-
-    public function get_theme_options(){
-        global $sed_options_engine;
-
-        $params = array();
-        $panels = array_merge( $this->default_theme_options()['panels'] , $this->theme_options()['panels'] );
-
-        $theme_params = array_merge( $this->default_theme_options()['params'] , $this->theme_options()['params'] );
-
-        foreach( $theme_params AS $id => $args ){
-            $args['settings_type'] = $this->theme_option_name . "[" . $args['settings_type'] . "]";
-            $args['control_category']  = 'theme-settings';
-            $params[$id] = $args;
-        }
-
-        $sed_options_engine->set_group_params( "sed_theme_options" , __("Theme Options" , "site-editor") , $params , $panels , "theme-settings" );
-    }
-
-    private function get_panel( $id, $args = array() ){
-        /**
-         * Define the array of defaults
-         */
-        $defaults = array(
-            'id'            => $id  ,
-            'title'         => ''  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
-            'description'   => '' ,
-            'priority'      => 10
-        );
-
-        /**
-         * Parse incoming $args into an array and merge it with $defaults
-         */
-        $args = wp_parse_args( $args, $defaults );
-
-        return $args;
-    }
-
-    public function get_page_options(){
-        global $sed_options_engine;
-
-        $params = array();
-        $page_params = array_merge( $this->default_page_options()['params'] , $this->page_options()['params'] );
-
-        $panels = array();
-        $page_panels = array_merge( $this->default_page_options()['panels'] , $this->page_options()['panels'] );
-
-        $params['sed_tab_scope_options'] = array(
-            'type'              =>  'custom',
-            'html'              =>  $this->view_tab_scope() ,
-            'priority'          => -10000
-        );
-
-        foreach( $page_panels AS $key => $args ){
-
-            if( !isset( $args['atts'] ) ){
-                $args['atts'] = array();
-            }
-
-            if( isset( $args['atts']['class'] ) ){
-                $org_class = $args['atts']['class'] . " ";
-            }else{
-                $org_class = "";
-            }
-
-            $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-            $panels[ $key ] = $this->get_panel( $key , $args );
-
-            $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
-            $panels[ "sed_layout_" . $key ] = $this->get_panel( "sed_layout_" . $key , $args );
-
-            $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
-            $panels[ "sed_public_" . $key ] = $this->get_panel( "sed_public_" . $key , $args );
-
-        }
-
-        foreach( $page_params AS $id => $args ){
-
-            $args['control_category']  = 'page-settings';
-
-            if( !isset( $args['panel'] ) ) {
-                if (!isset($args['atts'])) {
-                    $args['atts'] = array();
-                }
-
-                if (isset($args['atts']['class'])) {
-                    $org_class = $args['atts']['class'] . " ";
-                } else {
-                    $org_class = "";
-                }
-            }
-
-            if( !isset( $args['panel'] ) )
-                $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-            else
-                $org_panel = $args['panel'];
-
-            $params[$id] = $args;
-
-            $settings_type = $args['settings_type'];
-
-            if( !isset( $args['panel'] ) )
-                $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
-            else
-                $args['panel'] = "sed_layout_" . $org_panel;
-
-            $args['settings_type'] = $this->layout_option_name . "[" . $settings_type . "]";
-            $params["sed_layout_" . $id] = $args;
-
-            if( !isset( $args['panel'] ) )
-                $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
-            else
-                $args['panel'] = "sed_public_" . $org_panel;
-
-            $args['settings_type'] = $this->theme_option_name . "[" . $settings_type . "]";
-            $params["sed_public_" . $id] = $args;
-        }
-
-        $sed_options_engine->set_group_params( "sed_page_options" , __("Page Options" , "site-editor") , $params , $panels , "page-settings" );
-    }
-
-
-    public function get_content_options( ){
-        global $sed_options_engine;
-
-        $params = array();
-        $panels = array();
-
-        $content = $this->get_content_info( $_POST['content_info'] );
-        $content_type = $content['content_type'];
-        $content_title = $content['title'];
-
-        $content_params = array_merge( $this->default_content_options()['params'] , $this->content_options()['params'] );
-        $content_settings = array_merge( $this->default_content_options()['settings'] , $this->content_options()['settings'] );
-        $content_panels = array_merge( $this->default_content_options()['panels'] , $this->content_options()['panels'] );
-
-        foreach( $content_panels AS $key => $args ){
-
-            if( !isset( $args['atts'] ) ){
-                $args['atts'] = array();
-            }
-
-            if( isset( $args['atts']['class'] ) ){
-                $org_class = $args['atts']['class'] . " ";
-            }else{
-                $org_class = "";
-            }
-
-            $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-            $panels[ $key ] = $this->get_panel( $key , $args );
-
-            $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
-            $panels[ "sed_public_" . $key ] = $this->get_panel( "sed_public_" . $key , $args );
-
-        }
-
-        $params['sed_tab_scope_options'] = array(
-            'type'              =>  'custom',
-            'html'              =>  $this->view_tab_scope( false ) ,
-            'priority'          => -10000
-        );
-
-        foreach( $content_params AS $id => $args ){
-
-            $setting = $content_settings[ $args['settings_type'] ];
-
-            if( $setting['content_type'] == $content_type ) {
-
-                $args['control_category'] = 'content-settings';
-
-                if( !isset( $args['panel'] ) ) {
-
-                    if (!isset($args['atts'])) {
-                        $args['atts'] = array();
-                    }
-
-                    if (isset($args['atts']['class'])) {
-                        $org_class = $args['atts']['class'] . " ";
-                    } else {
-                        $org_class = "";
-                    }
-
-                }else
-                    $org_panel = $args['panel'];
-
-                if( isset( $setting['costomizable'] ) && $setting['costomizable'] === true ) {
-                    if( !isset( $args['panel'] ) )
-                        $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-
-                    $params[$id] = $args;
-                }
-
-                if( !isset( $args['panel'] ) )
-                    $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
-                else
-                    $args['panel'] = "sed_public_" . $org_panel;
-
-                $args['settings_type'] = $this->theme_option_name . "[" . $args['settings_type'] . "]";
-                $params["sed_public_" . $id] = $args;
+        foreach( $fields  AS $key => $field ){
+            if( isset( $field['setting_id'] ) ) {
+                $default_values[$field['setting_id']] = isset($field['default']) ? $field['default'] : '';
             }
         }
-        //"sed_content_" . $content_type
-        $sed_options_engine->set_group_params( "sed_content_options" , sprintf( __("%s Options" , "site-editor") , $content_title ) , $params , $panels , "content-settings" );
+
+        $this->save_default_options( 'default_page_options' , $default_values );
 
     }
 
+    /**
+     * @param $option_name
+     * @param $key
+     * @param $value
+     * @return bool
+     */
+    public function save_default_option( $option_name , $key , $value ){
 
-    private function get_content_info( $info ){
+        do_action('sed_default_option_before_save', $option_name , $key , $value );
 
-        switch( $info['type'] ){
-            case "home_blog" :
-            case "index_blog" :
-            case "author_archive" :
-            case "date_archive" :
-            case "date_archive" :
+        $value = apply_filters('sed_default_option_before_save', $value , $key , $option_name );
 
-                $content_type = "archive";
-                $title = __( "Archive" , "site-editor");
+        $data = $this->get_default_options( $option_name );
+
+        $data[$key] = $value;
+
+        $result = update_option( $option_name , $data );
+
+        do_action('sed_default_option_after_save', $option_name , $key , $value , $result );
+
+        return $result;
+    }
+
+    /**
+     * Save default options in self option or new option
+     *
+     * @param $option_name string
+     * @param $data array
+     * @return mixed
+     */
+    public function save_default_options( $option_name , $data ){
+
+        if( empty($data) )
+            return;
+
+        do_action('sed_default_options_before_save', $option_name , $data );
+
+        $data = apply_filters('sed_default_options_before_save', $data , $option_name );
+
+        $result = update_option( $option_name , $data );
+
+        do_action('sed_default_options_after_save', $option_name , $data , $result );
+
+        return $result;
+    }
+
+    /**
+     * @param $option_name
+     * @param $key
+     * @return mixed|void
+     */
+    public function get_default_option( $option_name , $key ) {
+
+        $default_values = $this->get_default_options( $option_name );
+
+        if ( isset( $default_values[$key] ) ) {
+
+            return apply_filters( "sed_get_default_option_value", $default_values[$key] , $key , $option_name );
+        }
+
+        return apply_filters( "sed_get_default_option_value", null , $key , $option_name );
+    }
+
+    /**
+     * @param $option_name
+     * @return mixed|void
+     */
+    public function get_default_options( $option_name ){
+
+        $values = get_option( $option_name );
+
+        if ( $values === false ) {
+
+            $values = array();
+            // The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+            $deprecated = null;
+            $autoload = 'yes';
+
+            $result = add_option( $option_name , $values , $deprecated, $autoload );
+
+        }
+
+        return apply_filters( "sed_get_default_options_values", $values , $option_name );
+    }
+
+    /**
+     * @param $setting_id
+     * @param $sed_page_id
+     * @param $sed_page_type
+     * @return mixed|void
+     */
+    public function get_page_setting( $setting_id , $sed_page_id , $sed_page_type ){
+
+        if( $sed_page_type == "post" ){
+
+            if( ! in_array( $setting_id , get_post_custom_keys( $sed_page_id ) ) ) {
+                $default = $this->get_default_option( 'default_page_options' , $setting_id );
+                $value = $default;
+            }else {
+                $value = get_post_meta($sed_page_id, $setting_id, true);
+            }
+
+        }else{
+
+            $default = $this->get_default_option( 'default_page_options' , $setting_id );
+
+            $option_name = 'sed_'. $sed_page_id .'_settings';
+
+            $option_values = get_option( $option_name );
+
+            $value = ( is_array( $option_values ) && isset( $option_values[$setting_id] ) ) ? $option_values[$setting_id] : $default;
+
+        }
+
+        return $value;
+    }
+
+    public function get_current_page_setting( $setting_id , $sed_page_id , $sed_page_type ){
+
+        $scope = "public-scope";
+
+        switch ( $scope ){
+            case "public-scope" :
 
                 break;
-            case "search_results":
-
-                $content_type = "search_results";
-                $title = __( "Search Results" , "site-editor");
+            case "layout-scope" :
 
                 break;
-            case "home_page":
-
-                $content_type = "page";
-                $title = __( "Page" , "site-editor");
-
-                break;
-            case "404_page":
-
-                $content_type = "404_page";
-                $title = __( "404 Page" , "site-editor");
-
-                break;
-            case "single":
-
-                if( $info['post_type'] == "page" ) {
-
-                    $content_type = "page";
-                    $title = __("Page", "site-editor");
-
-                }else if( $info['post_type'] == "post" ) {
-
-                    $content_type = "single_post";
-                    $title = __("Single Post", "site-editor");
-
-                }else{
-
-                    $content_type = "single_" . $info['post_type'] ;
-                    $title = sprintf( __("%s Single", "site-editor") , $info['post_type'] );
-                }
-
-                break;
-            case "taxonomy":
-
-                if( $info['taxonomy'] == "category" ||  $info['taxonomy'] == "post_tag" ) {
-                    $content_type = "archive";
-                    $title = __( "Archive" , "site-editor");
-                }else{
-                    $content_type = "custom_taxonomy_" . $info['taxonomy'] ;
-                    $title = sprintf( __("Custom %s Taxonomy", "site-editor") , $info['taxonomy'] );
-                }
-
-                break;
-            case "post_type_archive":
-
-                $content_type = "post_type_archive_" . $info['post_type'] ;
-                $title = sprintf( __("%s Post Type Archive", "site-editor") , $info['post_type'] );
-
+            case "page-customize-scope" :
+                $value = $this->get_page_setting( $setting_id , $sed_page_id , $sed_page_type );
                 break;
         }
 
-        return apply_filters( "sed_content_section_info" , array(
-            "title"         =>  $title ,
-            "content_type"  =>  $content_type
-        ) , $info );
+        return $value;
 
     }
 
+    public function register_page_panels( $panels ){
 
-    public function register_settings(){
-
-        $settings = $this->get_settings();
-
-        sed_add_settings( $settings );
-    }
-
-    private function get_settings(){
-
-        $settings = array_merge( $this->default_site_options()['settings'] , $this->site_options()['settings'] );
-
-        $theme_settings = array_merge( $this->default_theme_options()['settings'] , $this->theme_options()['settings'] );
-
-        foreach( $theme_settings AS $id => $setting ){
-            $setting['option_type'] = 'option';
-            $settings[ $this->theme_option_name . "[" . $id . "]" ] = $setting;
-        }
-
-        $page_settings = array_merge( $this->default_page_options()['settings'] , $this->page_options()['settings'] );
-
-        foreach( $page_settings AS $id => $setting ){
-            $setting['option_type'] = 'option';
-            $settings[ $this->theme_option_name . "[" . $id . "]" ] = $setting;
-
-            $settings[ $this->layout_option_name . "[" . $id . "]" ] = $setting;
-
-            $setting['option_type'] = 'base';
-            $settings[ $id ] = $setting;
-        }
-
-
-        $content_settings = array_merge( $this->default_content_options()['settings'] , $this->content_options()['settings'] );
-
-        foreach( $content_settings AS $id => $setting ){
-            $setting['option_type'] = 'option';
-            $settings[ $this->theme_option_name . "[" . $id . "]" ] = $setting;
-
-            if( isset( $setting['costomizable'] ) && $setting['costomizable'] === true ) {
-                $setting['option_type'] = 'base';
-                $settings[ $id ] = $setting;
-            }
-
-        }
-
-        return $settings;
-    }
-
-
-    public function default_site_options(){
-
-        $settings   = array();
-        $params     = array();
-        $panels     = array();
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-    public function site_options(){
-
-        $settings   = array();
-        $params     = array();
-        $panels     = array();
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-
-    public function default_theme_options(){
-
-        $settings   = array();
-        $params     = array();
-        $panels     = array();
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-    public function theme_options(){
-
-        $settings   = array();
-        $params     = array();
-        $panels     = array();
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-    public function default_page_options(){
-
-        $settings   = array();
-        $params     = array();
-        $panels     = array();
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-    public function page_options(){
-
-        $settings   = array();
-        $params     = array();
-        $panels     = array();
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-    public function default_content_options(){
-
-        $settings   = array();
-        $params     = array();
-        $panels     = array();
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-    public function content_options(){
-
-        $settings   = array();
-        $params     = array();
-        $panels     = array();
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-}
-
-Class StarsIdeasTheme extends SiteEditorThemeFramework {
-
-    function __construct( ){
-
-        $this->post_mata_key        = "sed_post_settings";
-        $this->theme_option_name    = "sed_theme_options";
-        $this->layout_option_name   = "sed_layout_options";
-
-        parent::__construct();
-
-    }
-
-    function site_options(){
-
-        $panels = array(
-
-            'static_front_page' => array(
-                'id'            => 'static_front_page' ,
-                'title'         =>  __('Static Front Page',"site-editor")  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'fieldset' ,
-                'description'   => '' ,
-                'priority'      => 9 ,
-            ) ,
-
-            'title_tagline'  => array(
-                'id'            => 'title_tagline' ,
-                'title'         => __('Site Identity',"site-editor")  ,
-                'label'         => __('Site Identity',"site-editor")  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'inner_box' ,
-                'description'   => '' ,
-                'priority'      => 10 ,
-            ) ,
-
-        );
-
-        $settings = array(
-            /*
-             * @site options
-             * @Show in site settings dialog
-            */
-            'show_on_front' => array(
-                'value'          => get_option( 'show_on_front' ),
-                'capability'     => 'manage_options',
-                'option_type'    => 'option' ,
-                'transport'      => 'refresh'//'postMessage'
-            ),
-
-            'page_on_front' => array(
-                'value'         => get_option( 'page_on_front' ),
-                'option_type'   => 'option',
-                'capability'    => 'manage_options',
-                'transport'     => 'refresh'//'postMessage'
-            ),
-
-            'page_for_posts' => array(
-                'value'          => get_option( 'page_for_posts' ),
-                'option_type'    => 'option',
-                'capability'     => 'manage_options',
-                'transport'      => 'refresh'//'postMessage' ,
-            ),
-
-		    'blogname'  => array(
-                'default'        => get_option( 'blogname' ),
-                'option_type'    => 'option',
-                'capability'     => 'manage_options',
-                'transport'      => 'postMessage'
-            ) ,
-
-            'blogdescription' => array(
-                'default'           => get_option( 'blogdescription' ),
-                'option_type'       => 'option',
-                'capability'        => 'manage_options',
-                'transport'         => 'postMessage'
-            ),
-
-            'posts_per_page' => array(
-                'default'           => get_option( 'posts_per_page' ),
-                'option_type'       => 'option',
-                'capability'        => 'manage_options',
-                'transport'         => 'postMessage'
-            ),
-
-        );
-
-        $pages = get_pages();
-        $pages_list = array();
-        $pages_list['0'] = __( "Select Page" , "site-editor" );
-
-        foreach ( $pages as $page ) {
-            $pages_list[$page->ID] = $page->post_title;
-        }
-
-        $params = array(
-
-            'show_on_front' => array(
-                "type"          => "radio" ,
-                "label"         => __("Front page displays", "site-editor"),
-                'value'         => get_option( 'show_on_front' ),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "options"       =>  array(
-                    "posts"      =>    __( "Your latest posts" , "site-editor" ) ,
-                    "page"       =>    __( "A static page" , "site-editor" ) ,
-                ),
-                'settings_type'     => "show_on_front" ,
-                'panel'             => "static_front_page"
-            ),
-
-            'front_page' => array(
-                "type"          => "select" ,
-                "label"         => __("Front page", "site-editor"),
-                'value'         => get_option( 'page_on_front' ),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "options"       => $pages_list,
-                'settings_type'     => "page_on_front" ,
-                'panel'             => "static_front_page" ,
-                'dependency' => array(
-                    'controls'  =>  array(
-                        "control"  => "show_on_front" ,
-                        "value"    => "page",
-                    )
-                )
-            ),
-
-            'posts_page' => array(
-                "type"          => "select" ,
-                "label"         => __("Posts page", "site-editor"),
-                'value'         => get_option( 'page_for_posts' ),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "options"       =>  $pages_list,
-                'settings_type'     => "page_for_posts" ,
-                'panel'             => "static_front_page" ,
-                'dependency' => array(
-                    'controls'  =>  array(
-                        "control"  => "show_on_front" ,
-                        "value"    => "page",
-                    )
-                )
-            ) ,
-
-            'blogname' => array(
-                "type"          => "text" ,
-                "label"         => __("Site Title", "site-editor"),
-                'value'         => get_option( 'blogname' ) ,
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                'settings_type'     => "blogname" ,
-                'panel'             => "title_tagline" ,
-            ) ,
-
-            'blogdescription' => array(
-                "type"          => "text" ,
-                "label"         => __("Tagline", "site-editor"),
-                'value'         => get_option( 'blogname' ),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                'settings_type'     => "blogdescription" ,
-                'panel'             => "title_tagline" ,
-            ) ,
-
-
-            'posts_per_page' => array(
-                "type"          => "text" ,
-                "label"         => __("Posts Per Page", "site-editor"),
-                'value'         => get_option( 'posts_per_page' ),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                'settings_type'     => "posts_per_page" ,
-            ) ,
-
-        );
-
-        // Add a setting to hide header text if the theme doesn't support custom headers.
-        if ( ! current_theme_supports( 'custom-header', 'header-text' ) ) {
-
-            $settings['header_text'] = array(
-                'theme_supports'    => array( 'custom-logo', 'header-text' ),
-                'default'           => 1,
-                'sanitize_callback' => 'absint',
-                'transport'         => 'postMessage'
-                //'type'       => 'option',
-                //'capability' => 'manage_options',
-            );
-
-            $params['header_text'] = array(
-                'type'              => 'checkbox',
-                'label'             => __( 'Display Site Title and Tagline' ),
-                'settings_type'     => "header_text" ,
-                'value'             => true ,
-                'panel'             => "title_tagline" ,
-            );
-
-        }
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
-    }
-
-
-    function theme_options(){
-
-
-        $panels = array(
-
-            'logo_favicon' => array(
-                'id'            => 'logo_favicon' ,
-                'title'         =>  __('Logo & Favicon',"site-editor")  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'fieldset' ,
-                'description'   => '' ,
-                'priority'      => 9 ,
-            ) ,
-
-        );
-
-        $settings = array(
-
-            'default_logo' => array(
-                'value'          => '',
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage'
-            ),
-
-            'retina_default_logo' => array(
-                'value'          => '' ,
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage'
-            ),
-
-
-            'site_favicon' => array(
-                'value'          => '',
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage'
-            ),
-
-            'apple_iphone_favicon' => array(
-                'value'          => '' ,
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage'
-            ),
-
-            'apple_ipad_favicon' => array(
-                'value'          => '',
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage'
-            ),
-
-        );
-
-        $params = array(
-
-            'default_logo' => array(
-                "type"          => "image" ,
-                'label'             => __( 'Default Logo' , 'site-editor' ),
-                'description'       => __( 'Select an image file for your logo.' , 'site-editor' ),
-                'settings_type'     => "default_logo" ,
-                'remove_btn'        => true ,
-                'panel'             => 'logo_favicon',
-                'priority'          => 60,
-            ) ,
-
-            'retina_default_logo' => array(
-                "type"          => "image" ,
-                'label'             => __( 'Retina Default Logo' , 'site-editor' ),
-                'description'       => sprintf(
-                /* translators: %s: site icon size in pixels */
-                    __( 'Select an image file for the retina version of the logo. It should be exactly %s the size of the main logo.' , 'site-editor' ),
-                    '<strong>2x</strong>'
-                ),
-                'settings_type'     => "retina_default_logo" ,
-                'remove_btn'        => true ,
-                'panel'             => 'logo_favicon',
-                'priority'          => 60,
-            ),
-
-            'site_favicon' => array(
-                "type"          => "image" ,
-                'label'             => __( 'Favicon' , 'site-editor' ),
-                'description'       => sprintf(
-                /* translators: %s: site icon size in pixels */
-                    __( 'Favicon for your website at %s.' , 'site-editor' ),
-                    '<strong>16px x 16px</strong>'
-                ),
-                'settings_type'     => "site_favicon" ,
-                'remove_btn'        => true ,
-                'panel'             => 'logo_favicon',
-                'priority'          => 60,
-            ) ,
-
-            'apple_iphone_favicon' => array(
-                "type"          => "image" ,
-                'label'             => __( 'Apple iPhone Icon Upload' , 'site-editor' ),
-                'description'       => sprintf(
-                /* translators: %s: site icon size in pixels */
-                    __( 'Favicon for your website at %s.' , 'site-editor' ),
-                    '<strong>57px x 57px</strong>'
-                ),
-                'settings_type'     => "apple_iphone_favicon" ,
-                'panel'             => 'logo_favicon',
-                'remove_btn'        => true ,
-                'priority'          => 60,
-            ) ,
-
-            'apple_ipad_favicon' => array(
-                "type"          => "image" ,
-                'label'             => __( 'Apple iPad Icon Upload' , 'site-editor' ),
-                'description'       => sprintf(
-                /* translators: %s: site icon size in pixels */
-                    __( 'Favicon for your website at %s.' , 'site-editor' ),
-                    '<strong>72px x 72px</strong>'
-                ),
-                'settings_type'     => "apple_ipad_favicon" ,
-                'panel'             => 'logo_favicon',
-                'remove_btn'        => true ,
-                'priority'          => 60,
-            ) ,
-
-        );
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels
-        );
-    }
-
-
-    function page_options(){
-
-
-        $panels = array(
+        $panels = array_merge( $panels , array(
 
             'general_page_style' => array(
-                'title'         =>  __('Static Front Page',"site-editor")  ,
-                'label'         => __('Page General Style',"site-editor")  ,
+                'title'         =>  __('Page General Style',"site-editor")  ,
                 'capability'    => 'edit_theme_options' ,
                 'type'          => 'inner_box' ,
                 'description'   => '' ,
                 'priority'      => 9 ,
             )
 
-        );
+        ));
 
-        $settings = array(
+        return $panels;
 
-            'sheet_width' => array(
-                'value'          => 1100,
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage'
-            ),
+    }
 
-            'page_length' => array(
-                'value'          => 'wide',
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage'
-            ),
+    public function register_page_fields( $fields ){
 
-            'page_background' => array(
-                'value'          => 'wide',
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage'
-            ),
-
-        );
-
-        $params = array(
+        $fields = array_merge( $fields , array(
 
             'page_sheet_width' => array(
-                "type"              => "spinner" ,
+                'setting_id'        => 'sheet_width',
+                "type"              => "dimension" ,
                 "label"             => __("Sheet Width", "site-editor"),
-                'value'             => 1100,
-                'after_field'       => "px" ,
-                "desc"              => __("This option allows you to set a title for your image.", "site-editor"),
-                'settings_type'     => "sheet_width" ,
+                'default'           => "1100px",
+                //'after_field'       => "px" ,
+                "description"              => __("This option allows you to set a title for your image.", "site-editor"),
+                'transport'         => 'postMessage' ,
+                'priority'          => 11 ,
+                'dependency' => array(
+                    'controls'  =>  array(
+                        "control"   => "page_length" ,
+                        "value"     => "wide" , //value with @string , values with @array
+                    )
+                )
             ),
 
             'page_length' => array(
+                'setting_id'        => "page_length" ,
                 "type"              => "select" ,
                 "label"             => __("Page Length", "site-editor"),
-                "desc"              => __("This option allows you to set a title for your image.", "site-editor"),
-                'value'             => 'wide',
-                "options"       =>  array(
+                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
+                'default'           => 'wide',
+                "choices"       =>  array(
                     "wide"          =>    __( "Wide" , "site-editor" ) ,
                     "boxed"         =>    __( "Boxed" , "site-editor" ) ,
                 ),
-                'settings_type'     => "sheet_width" ,
-                'panel'             => 'general_page_style'
+                //'panel'             => 'general_page_style' ,
+                'transport'         => 'postMessage' ,
+                'priority'          => 9 ,
             ),
 
             'change_image_panel' => array(
+                'setting_id'        => "page_background" ,
                 "type"              => "image" ,
                 "label"             => __("Background Image", "site-editor"),
-                "desc"              => __("This option allows you to set a title for your image.", "site-editor"),
+                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
                 'remove_btn'        => true ,
-                'settings_type'     => "page_background" ,
-                'panel'             => 'general_page_style'
+                'panel'             => 'general_page_style' ,
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'priority'          => 8 ,
             )
 
-        );
+        ));
 
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => $panels ,
-        );
+        return $fields;
 
     }
 
-    function content_options(){
+    public function get_theme_options(){
 
-        $settings = array(
+    }
 
-            'single_page_show_comments' => array(
-                'value'          => false ,
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage' ,
-                'content_type'   => 'page' ,
-                'costomizable'   => true
-            ),
+    public function get_site_options(){
 
-            'single_page_show_featured_image' => array(
-                'value'          => false ,
-                'capability'     => 'edit_theme_options',
-                'transport'      => 'postMessage' ,
-                'content_type'   => 'page' ,
-                'costomizable'   => true
-            ),
+    }
 
-        );
+    public function get_content_options( ){
 
-
-        $params = array(
-
-            'show_comments' => array(
-                "type"          => "checkbox" ,
-                "label"         => __("Allow Comments on Pages", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                'settings_type'     => "single_page_show_comments" ,
-            ) ,
-
-            'show_featured_image' => array(
-                "type"          => "checkbox" ,
-                "label"         => __("Featured Images on Pages", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                'settings_type'     => "single_page_show_featured_image" ,
-            )
-
-        );
-
-        return array(
-            "settings"  => $settings ,
-            "params"    => $params ,
-            "panels"    => array() ,
-        );
     }
 
 }
 
-//new StarsIdeasTheme;
+new SiteEditorThemeFramework;
 
 
  /*       $panels = array();

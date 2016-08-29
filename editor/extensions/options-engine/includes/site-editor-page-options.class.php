@@ -413,65 +413,9 @@ class SiteEditorPageOptions {
 
     public function register_options(){
 
-        $panels = array(
+        $panels = array();
 
-            'general_page_style' => array(
-                'title'         =>  __('Page General Style',"site-editor")  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'inner_box' ,
-                'description'   => '' ,
-                'priority'      => 9 ,
-            )
-
-        );
-
-        $fields = array(
-
-            'page_sheet_width' => array(
-                'setting_id'        => 'sheet_width',
-                "type"              => "dimension" ,
-                "label"             => __("Sheet Width", "site-editor"),
-                'default'           => "1100px",
-                //'after_field'       => "px" ,
-                "description"              => __("This option allows you to set a title for your image.", "site-editor"),
-                'transport'         => 'postMessage' ,
-                'priority'          => 11 ,
-                'dependency' => array(
-                    'controls'  =>  array(
-                        "control"   => "page_length" ,
-                        "value"     => "wide" , //value with @string , values with @array
-                    )
-                )
-            ),
-
-            'page_length' => array(
-                'setting_id'        => "page_length" ,
-                "type"              => "select" ,
-                "label"             => __("Page Length", "site-editor"),
-                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
-                'default'           => 'wide',
-                "choices"       =>  array(
-                    "wide"          =>    __( "Wide" , "site-editor" ) ,
-                    "boxed"         =>    __( "Boxed" , "site-editor" ) ,
-                ),
-                //'panel'             => 'general_page_style' ,
-                'transport'         => 'postMessage' ,
-                'priority'          => 9 ,
-            ),
-
-            'change_image_panel' => array(
-                'setting_id'        => "page_background" ,
-                "type"              => "image" ,
-                "label"             => __("Background Image", "site-editor"),
-                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
-                'remove_btn'        => true ,
-                'panel'             => 'general_page_style' ,
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'priority'          => 8 ,
-            )
-
-        );
+        $fields = array();
 
         $this->fields = apply_filters( 'sed_page_options_fields_filter' , $fields );
 

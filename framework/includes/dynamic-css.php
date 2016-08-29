@@ -1,6 +1,8 @@
 <?php
 $css = new SiteEditorCss();
 
+do_action( "sed_before_dynamic_css_output" );
+
 $css->add_settings_property(array(
     'background_gradient' , 'background_image_scaling', 'length' ,'border_radius_tr' ,
     'border_radius_tl', 'border_radius_br', 'border_radius_bl' ,'trancparency' ,
