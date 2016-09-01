@@ -1,0 +1,169 @@
+.mCustomScrollBox {
+    direction: ltr;
+    height: 100%;
+    max-width: 100%;
+    outline: medium none;
+    overflow: hidden;
+    position: relative;
+}
+.mCSB_inside > .mCSB_container {
+    /*margin-right: 30px; */
+}
+.mCSB_inside > .mCSB_ctn_margin {
+    margin-right: 12px !important;
+}
+.mCSB_container {
+    height: auto;
+    overflow: hidden;
+    width: auto;
+}
+.mCS-light.mCSB_scrollTools_vertical, .mCS-3d-thick-dark.mCSB_scrollTools_vertical {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08) inset;
+}
+.mCS-light.mCSB_scrollTools, .mCS-light-dark.mCSB_scrollTools, .mCS-light.mCSB_scrollTools .mCSB_draggerContainer, .mCS-light-dark.mCSB_scrollTools .mCSB_draggerContainer {
+    border-radius: 66px;
+}
+.mCS-light.mCSB_scrollTools, .mCS-light-dark.mCSB_scrollTools {
+    opacity: 1;
+}
+.mCSB_scrollTools {
+    opacity: 0.75;
+}
+.mCSB_scrollTools, .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
+    transition: opacity 0.2s ease-in-out 0s, background-color 0.2s ease-in-out 0s;
+}
+.mCSB_scrollTools {
+    bottom: 0;
+    height: auto;
+    left: auto;
+    position: absolute;
+    right: 0px;
+    top: 0;
+    width: 12px;
+}
+/*       a         */
+.mCS-light.mCSB_scrollTools .mCSB_buttonUp {
+    background-position: -113px -72px;
+}
+.mCSB_scrollTools .mCSB_buttonUp {
+    background-position: 0 0;
+}
+.mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
+    background-image: url("../images/mCSB_buttons.png");
+    background-repeat: no-repeat;
+    opacity: 0.4;
+}
+.mCSB_scrollTools, .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
+    transition: opacity 0.2s ease-in-out 0s, background-color 0.2s ease-in-out 0s;
+}
+.mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown {
+    color: #333;
+    cursor: pointer;
+    display: block;
+    font-size: 16px;
+    height: 12px !important;
+    margin: 0 -2px !important;
+    opacity: 1;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.mCS-light.mCSB_scrollTools .mCSB_buttonDown {
+
+}
+.mCSB_scrollTools .mCSB_buttonDown {
+    margin-bottom: 3px !important;
+}
+.mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
+    background-image: url("mCSB_buttons.png");
+    background-repeat: no-repeat;
+    opacity: 0.4;
+}
+.mCSB_scrollTools, .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
+    transition: opacity 0.2s ease-in-out 0s, background-color 0.2s ease-in-out 0s;
+}
+.mCSB_scrollTools .mCSB_buttonDown {
+    bottom: 0;
+}
+.mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown {
+    cursor: pointer;
+    display: block;
+    height: 20px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+.mCS-light.mCSB_scrollTools .mCSB_draggerContainer {
+    background-color: rgba(0, 0, 0, 0.01);
+    border: 1px solid #e9e9e9;
+    box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.02) inset;
+}
+.mCS-light.mCSB_scrollTools, .mCS-light-dark.mCSB_scrollTools, .mCS-light.mCSB_scrollTools .mCSB_draggerContainer, .mCS-light-dark.mCSB_scrollTools .mCSB_draggerContainer {
+    border-radius: 66px;
+}
+.mCSB_scrollTools a + .mCSB_draggerContainer {
+    margin: 12px 0;
+}
+.mCSB_scrollTools .mCSB_draggerContainer {
+    bottom: 0;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.mCSB_scrollTools .mCSB_dragger {
+    cursor: pointer;
+    height: 30px;
+    width: 100%;
+    z-index: 1;
+}
+.mCS-light.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-light.mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar, .mCS-light.mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar, .mCS-light.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar {
+    background-color: rgba(51, 204, 255, 0.75);
+    border: 1px solid #19c3fd;
+}
+.mCS-light.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-light-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    bottom: 0;
+    height: auto;
+    left: 0;
+    margin: 1px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 8px;
+}
+.mCS-light.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-light-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    border-radius: 20px;
+}
+.mCS-3d.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-3d-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-light.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCS-light-dark.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    background-repeat: repeat-y;
+}
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+.mCSB_scrollTools, .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar, .mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
+    transition: opacity 0.2s ease-in-out 0s, background-color 0.2s ease-in-out 0s;
+}
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    border-radius: 20px;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: 4px;
+}
+.mCS-light.mCSB_scrollTools .mCSB_draggerRail {
+    background-color: transparent;
+}
+.mCSB_scrollTools .mCSB_draggerRail {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.mCSB_scrollTools .mCSB_draggerRail {
+    border-radius: 16px;
+    height: 100%;
+    margin: 0 auto;
+    width: 2px;
+}

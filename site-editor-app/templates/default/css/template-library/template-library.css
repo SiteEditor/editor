@@ -1,0 +1,45 @@
+/*********** template-library **************/
+.preview-template{
+    display: inline;
+    float: left;
+    margin: 1.6%;
+    overflow: hidden;
+    text-align: center;
+    width: 30%
+}
+.preview-template > a{
+    background: none repeat scroll 0 0 #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #9f9f9f;
+    display: block;
+    font-size: 9pt;
+    overflow: hidden;
+    padding: 8px 8px 5px;
+    text-decoration: none;
+}
+.preview-template > a:hover  {
+    background: none repeat scroll 0 0 #00ccff;
+    color: #fff;
+    border-color: #00aaff;
+}
+.preview-template > a:hover img{
+    border-color: #00aaff;
+}
+.template-screenshot{
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    display: inline-block;
+    height: 200px;
+    overflow: hidden;
+}
+.template-screenshot img{
+    border-radius: 2px;
+    width: 100%;
+}
+.template-title{
+    display: block;
+    padding: 3px 5px 0;
+    text-align: center;
+}

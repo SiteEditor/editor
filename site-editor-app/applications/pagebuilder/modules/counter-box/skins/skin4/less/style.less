@@ -1,0 +1,57 @@
+/*#less_info#(
+"handle"    => "counter-box-skin4",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#
+*/
+.counter-box-skin4{
+    min-width: 35px;
+    display: inline-block;
+    .border-top-radius(@border-radius-large + 1%);
+    position: relative;
+    .counter-box-pr {
+        cursor: default;
+        position: absolute;
+        z-index: 999;
+        top: -13px;
+        right: -9px;
+        width: 25px;
+        height: 25px;
+        background: @body-modules-bg;
+        overflow: hidden;
+        //color: @main-color-darker;
+        color:@main-color-dark;
+        padding: 4px;
+        padding-top: 3px;
+        text-align: center;
+        font-size: @font-size-base 13px;
+        border: 1px solid @main-color;
+        border-radius: 100%;
+    }
+    > .box-info{
+        display: inline-block;
+        width: 100%;
+        padding: 6px 12px;
+        padding-right: 11px;
+        font-size: @font-size-base;
+        text-align: center;
+        background: @main-color;
+        .high-color(@main-color);
+        border: 1px solid @main-color;
+        border-radius: @border-radius-large;
+    }
+
+    //.rtl-import();
+
+}
+.rtl-body .counter-box-skin4{
+    .box {
+        right: auto;
+        left: -10px;
+    }
+    .box-info{
+        padding-right: 4px;
+        padding-left: 11px;
+    }
+}

@@ -1,0 +1,9 @@
+[sed_woocommerce_single_product force_do_shortcode="true"]
+
+    [sed_woocommerce_product parent_module="woocommerce-single-product" ][/sed_woocommerce_product]
+
+    [sed_up_sells type="carousel" parent_module="woocommerce-single-product"][/sed_up_sells]
+
+    [sed_related_products type="carousel" parent_module="woocommerce-single-product"][/sed_related_products]
+
+[/sed_woocommerce_single_product]

@@ -1,0 +1,48 @@
+/*
+#less_info#(
+"handle"  =>"blockquote-skin2",
+"deps"    => array('main-blockquote'),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/blockquote/less/variables.less" ,
+),
+)#
+*/
+@import "../../../less/variables.less";
+.module-blockquote.blockquote-skin2{
+  .sed-blockquote-skin{
+      background-color: @blockquote-base-color-b-ltr-bg;
+      border-color: @blockquote-base-border-color;
+      border-left-color:@blockquote-main-border-color;
+      border-style: solid;
+      border-width: 1px 1px 1px 5px;
+      padding-left: 60px;
+      .base-color(@blockquote-base-color-b-ltr-bg);
+      &:before{
+        background:@blockquote-main-color-bg;
+        border-radius: 1000px;
+        .high-color(@blockquote-main-color-bg);
+        font-size: 45px;
+        height: 33px;
+        left: 16px;
+        line-height: 1.2em;
+        text-align: center;
+        top: 20px;
+        width: 33px;
+      }
+  }
+}
+.rtl-body .module-blockquote.blockquote-skin2{
+  .sed-blockquote-skin{
+      border-left-color:@blockquote-base-border-color !important;
+      border-right-color:@blockquote-main-border-color;
+      border-width: 1px 5px 1px 1px !important;
+      padding-left: 20px !important;
+      padding-right: 60px !important;
+      &:before{
+        left: auto !important;
+        right: 16px;
+      }
+  }
+}

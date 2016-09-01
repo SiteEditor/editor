@@ -1,0 +1,114 @@
+/*
+#less_info#(
+"handle"  =>"main-tab-skin6",
+"deps"    => array("main-tab"),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/tab/less/main.less" 
+)
+)#
+*/
+@import "../../../less/main.less";
+.module-tab.tab-skin6{
+    @media (min-width: @screen-xs-max){
+        display: table;
+    }
+    .nav-tabs {
+        display: table-cell;
+        margin: 0 auto;
+        border: none;
+        vertical-align: top;
+        @media (max-width: @screen-xs-max) {
+            display: block;
+            width: 100%;
+        }
+        > li {
+            float: none;
+            display:block;
+            @media (max-width: @screen-xs-max) {
+                width: 100%;
+            }
+            // Actual tabs (as links)
+            > a {
+                outline: none;
+                .high-color(@nav-tabs-bg);
+                margin-top: 5px;
+                line-height: @line-height-base;
+                padding: 6px 20px;
+                .border-radius( 4px);
+                border: 1px solid @base-border-color;
+                white-space: nowrap;
+                display: inline-block;
+                width: 100%;
+                @media (max-width: @screen-xs-max) {
+                    text-align: center;
+                }
+                &:hover {
+                    background: none;
+                    color: @main-color-darker;
+                }
+            }
+            &:first-child > a {
+                margin-top: 0px;
+            }
+            // Active state, and its :hover to override normal :hover
+            &.active > a {
+                &,
+                &:hover,
+                &:focus {
+                    .high-color(@main-color);
+                    background-color: @main-color;
+                    border: 1px solid @main-color;
+                    cursor: default;
+                }
+            }
+        }
+         // pulling this in mainly for less shorthand
+      // &.nav-justified {
+      //     .nav-justified();
+      //     .nav-tabs-justified();
+      // }
+    }
+
+    .tab-content {
+        display: table-cell;
+        .base-color(@nav-tabs-bg);
+        padding: 0px 0 6px 15px ;
+        vertical-align: top;
+        width: 100%;
+        > .tab-pane {
+            display: none;
+        }
+        > .active {
+            display: block;
+        }
+        @media (max-width: @screen-xs-max) {
+            display: block;
+            width: 100%;
+        }
+    }
+
+}
+.module.module-tab.tab-skin6.tab-resize-responsive{
+    display: block;
+    .nav-tabs{
+        display: block;
+        width: 100%;
+        > li{
+            width: 100%;            
+            > a {
+                text-align: center;  
+            }
+        }   
+    }
+    .tab-content {
+        display: block;
+        width: 100%;
+    }  
+}
+.rtl-body .module.module-tab.tab-skin6{
+    .tab-content {
+        padding: 0px 15px 6px 0;
+    }
+}

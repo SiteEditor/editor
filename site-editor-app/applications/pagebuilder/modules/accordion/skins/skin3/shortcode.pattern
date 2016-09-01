@@ -1,0 +1,90 @@
+[sed_accordion override_skins="default , skin1 ,skin2 "]
+
+
+          [sed_accordion_header parent_module="accordion"]
+                [sed_text_title contextmenu_disabled = "disabled" settings_disabled = "disabled" tag="span" toolbar1="simple-text" toolbar2="simple-text" parent_module="accordion"]
+                     Maecenas id eros
+                [/sed_text_title]
+          [/sed_accordion_header]
+
+            [sed_accordion_contents parent_module="accordion"]
+              [sed_row_inner  shortcode_tag="sed_row" type="static-element"]
+                  [sed_module_inner  shortcode_tag="sed_module"]
+                      [sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="accordion"]
+                          <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
+                      [/sed_paragraph]
+                  [/sed_module_inner]
+              [/sed_row_inner]
+            [/sed_accordion_contents]
+
+          [sed_accordion_header parent_module="accordion"]
+                [sed_text_title contextmenu_disabled = "disabled" settings_disabled = "disabled" tag="span" toolbar1="simple-text" toolbar2="simple-text" parent_module="accordion"]
+                    Aenean massa
+                [/sed_text_title]
+          [/sed_accordion_header]
+            [sed_accordion_contents parent_module="accordion"]
+              [sed_row_inner  shortcode_tag="sed_row" type="static-element"]
+                  [sed_module_inner  shortcode_tag="sed_module"]
+                      [sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="accordion"]
+                          <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.</p>
+                          
+                          
+                          
+                      [/sed_paragraph]
+                  [/sed_module_inner]
+              [/sed_row_inner]
+            [/sed_accordion_contents]
+
+
+          [sed_accordion_header parent_module="accordion"]
+                [sed_text_title contextmenu_disabled = "disabled" settings_disabled = "disabled" tag="span" toolbar1="simple-text" toolbar2="simple-text" parent_module="accordion"]
+                    Duis ullamcorper id augue
+                [/sed_text_title]
+          [/sed_accordion_header]
+            [sed_accordion_contents parent_module="accordion"]
+              [sed_row_inner  shortcode_tag="sed_row" type="static-element"]
+                  [sed_module_inner  shortcode_tag="sed_module"]
+                      [sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="accordion"]
+                          <p>Nullam sagittis. Suspendisse pulvinar, augue ac venenatis condimentum, sem libero volutpat nibh, nec pellentesque velit pede quis nunc.</p>
+                      [/sed_paragraph]
+                  [/sed_module_inner]
+              [/sed_row_inner]
+            [/sed_accordion_contents]
+
+
+          [sed_accordion_header parent_module="accordion"]
+                [sed_text_title contextmenu_disabled = "disabled" settings_disabled = "disabled" tag="span" toolbar1="simple-text" toolbar2="simple-text" parent_module="accordion"]
+                    Our Company Mission
+                [/sed_text_title]
+          [/sed_accordion_header]
+            [sed_accordion_contents parent_module="accordion"]
+              [sed_row_inner  shortcode_tag="sed_row" type="static-element"]
+                  [sed_module_inner  shortcode_tag="sed_module"]
+                      [sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="accordion"]
+                          <p>Praesent placerat dui metus, vitae mattis mi lobortis aliquam. Proin risus eros, dapibus a porttitor id, eleifend a est. Sed metus leo, blandit sit amet odio id, hendrerit sollicitudin lacus.</p>
+                      [/sed_paragraph]
+                  [/sed_module_inner]
+              [/sed_row_inner]
+            [/sed_accordion_contents]
+
+
+[/sed_accordion]
+
+[sed_add_item_pattern parent_module="accordion" class="add-item-accordion" show_add_button="false"]
+
+       [sed_accordion_header parent_module="accordion"]
+            [sed_text_title contextmenu_disabled = "disabled" settings_disabled = "disabled" tag="span" toolbar1="simple-text" toolbar2="simple-text" parent_module="accordion"]
+                Lorem ipsums sit
+            [/sed_text_title]
+      [/sed_accordion_header]
+      [sed_accordion_contents parent_module="accordion"]
+        [sed_row_inner  shortcode_tag="sed_row" type="static-element"]
+            [sed_module_inner  shortcode_tag="sed_module"]
+                [sed_paragraph tag="div" toolbar1="paragraph" toolbar2="paragraph" contextmenu_disabled = "disabled" parent_module="accordion"]
+                    <p>Lorem ipsums sit This is text highlighted in black diam molestie taciti sadips ipsumes dolores.</p>
+                [/sed_paragraph]
+            [/sed_module_inner]
+        [/sed_row_inner]
+      [/sed_accordion_contents]
+
+[/sed_add_item_pattern]

@@ -1,0 +1,1 @@
+<ul {{sed_attrs}} class="{{class}} pxs_thumbnails">{{{content}}}</ul>

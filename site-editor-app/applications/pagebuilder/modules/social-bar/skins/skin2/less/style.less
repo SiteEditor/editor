@@ -1,0 +1,49 @@
+/*
+#less_info#(
+"handle" => "social-bar-skin2",
+"deps" => array('social-bar-main-less'),  
+"ver" => "1.0.0",
+"media" => "all"
+)#
+*/
+.spcial-bar.social-bar-skin2{
+@linked-in:     #0079BC;
+@tumblr:        #395976;
+@facebook:      #3E5A9B;
+@pinterest:     #C42122;
+@dribbble:      #F4498B;
+@twitter:       #28A9E0;
+@google-plus:   #DC4937;
+@behance:       #0093FB;
+@vine:          #7AC043;
+
+            li {
+                a {
+                      
+                      .base-color(@body-bg;25%);
+                      background: transparent;
+                      -webkit-border-radius: 99px;
+                      //min-width: 40px;
+                      padding: 2px;
+                      border-radius: 100%;
+                      border: 1px solid transparent;
+                      text-align: center;
+                      .transition(all 500ms);
+                      &:hover{
+                          color:#fff;
+                      }
+                }
+            }
+       .vine {a{color: @vine; border-color: @vine; } a{&:hover {background-color: @vine; border-color: @vine; }}}
+       .linked-in {a{color: @linked-in; border-color: @linked-in; } a{&:hover{ background-color:@linked-in ; border-color:@linked-in ; }}}
+       .tumblr {a{color: @tumblr; border-color: @tumblr; } a{&:hover{ background-color:@tumblr; border-color: @tumblr;  }}}
+       .facebook {a{color: @facebook; border-color: @facebook; } a{&:hover{ background-color: @facebook; border-color: @facebook; }}}
+       .pinterest {a{color: @pinterest; border-color: @pinterest; } a{&:hover{ background-color: @pinterest; border-color: @pinterest;  }}}
+       .dribbble {a{color: @dribbble; border-color: @dribbble; } a{&:hover{ background-color: @dribbble; border-color: @dribbble;  }}}
+       .twitter {a{color: @twitter; border-color: @twitter; } a{&:hover{ background-color: @twitter; border-color: @twitter;  }}}
+       .google-plus {a{color:@google-plus; border-color: @google-plus; } a{&:hover{ background-color: @google-plus; border-color: @google-plus;  }}}
+       .behance {a{color: @behance; border-color: @behance; } a{&:hover{ background-color: @behance; border-color: @behance;  }}}
+
+
+
+}

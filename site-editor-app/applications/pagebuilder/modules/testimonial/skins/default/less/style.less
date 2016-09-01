@@ -1,0 +1,105 @@
+/*#less_info#(
+"handle"	=> "testimonial-default",
+"deps"		=> array(),
+"ver"		=> "1.0.0",
+"media"		=> "all"
+)#*/
+.testimonial-deafult {
+  blockquote{
+      width: 100%;
+      font-weight: normal;
+      font-size: @font-size-base;
+      background: @base-color-b-lighter;
+      .base-color(@base-color-b-lighter);
+      .border-radius(@border-radius-base);
+      border-left: 4px solid @main-color;
+      padding:@padding-xl + 5;
+      margin: 0;
+      > p{
+            margin: 0;
+            padding: 0 0 0 25px;
+            position: relative;
+            text-align: center;
+      }
+      & > p:before,
+      & > p:after{
+        display: inline-block;
+        font: normal normal normal 28px/.5 FontAwesome;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        .low-color(@base-color-b-lighter);
+        position: relative;
+      }
+      > p::before {
+          top: 5px;
+          content: "\201C";
+          font-size: 40px;
+          font-weight: bold;
+          left: 0;
+          position: absolute;
+      }
+      > p::after {
+          bottom: -15px;
+          content: "\201D";
+          font-size: 40px;
+          font-weight: bold;
+          margin-left: 10px;
+          position: relative;
+      }
+
+
+      .author{
+        padding: @padding-lg 0 0;
+        .base-color(@base-color-b-lighter);
+  /*        li{
+            display: inline;
+            vertical-align: middle;
+            a{
+              .base-color(@base-color-b-lighter);
+              cursor: pointer;
+              &:hover{
+                  text-decoration: none;
+                  border-bottom: 1px dotted @main-color-dark;
+                  color: @main-color-dark;
+              }
+
+            }
+
+          }    */
+          .thumbnail{
+            margin-right: 5px;
+          }
+
+      }
+  }
+}
+.rtl-body .module.module-testimonial.testimonial-deafult {
+  blockquote{
+      border-left: 0px solid @main-color;
+      border-right: 4px solid @main-color;
+
+      > p{
+            margin: 0;
+            padding: 0 25px 0 0;
+            position: relative;
+      }
+
+      > p::before {
+          content: "\201D";
+          left: auto;
+          right: 0;
+      }
+      > p::after {
+          content: "\201C";
+          margin-left: 0px;
+          margin-right: 10px;
+      }
+      .author{
+          .thumbnail{
+            margin-right: 0px;
+            margin-left: 5px;
+          }
+      }
+  }
+}

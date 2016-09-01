@@ -1,0 +1,41 @@
+#design-panel-tab li.active,
+.icon-library-dialog .Tapcircle1.active,
+.library-dialog .Tapcircle1.active {
+    border-bottom: 0 none !important;
+}
+#design-panel-tab li,
+.icon-library-dialog .Tapcircle1,
+.library-dialog .Tapcircle1 {
+    background: none repeat scroll 0 0 #FFFFFF !important;
+    border: 1px solid #DDDDDD !important;
+    border-radius: 4px 4px 0 0 !important;
+    float: left !important;
+    height: 34px !important;
+    margin: 3px 0 0 3px !important;
+    padding: 3px !important;
+    position: relative;
+    width: 100px !important;
+    z-index: 10000 !important;
+}
+#design-panel-tab li span,
+.icon-library-dialog .Tapcircle1 span,
+.library-dialog .Tapcircle1 span {
+    float: none !important;
+    text-align: center;
+    display: block;
+}
+#design-panel-tab li.active .el_txt ,
+#sed-dialog-icon-library .active .el_txt {
+    color: #00CCFF !important;
+}
+#media-library-tab .active .el_txt {
+    color: #00CCFF !important;
+}
+#design-panel-tab li .el_txt,
+#icon-library-tab .el_txt,
+#media-library-tab .el_txt {
+    line-height: 2.1em !important;
+}
+#media-library-tab ul {
+    list-style-type: none !important;
+}

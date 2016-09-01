@@ -1,0 +1,131 @@
+/*
+#less_info#(
+"handle"  =>"main-tab-skin3",
+"deps"    => array("main-tab"),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/tab/less/main.less" 
+)
+)#
+*/
+@import "../../../less/main.less";
+.module-tab.tab-skin3{
+
+.skin-border-color {
+    border-color:@nav-tabs-border-color;
+}
+// Give the tabs something to sit on
+.nav-tabs {
+    border-bottom: none;
+    width:100%;
+    > li {
+        float: none;
+        display: table-cell;
+        width: 1%;
+        min-width: 80px;
+        // Make the list-items overlay the bottom border
+        margin-bottom: -1px;
+        text-align: center;
+        vertical-align: bottom;
+        @media (max-width: @screen-xs-max) {
+            display: block;
+            width: 100%;
+            margin: 0;
+        }
+        // Actual tabs (as links)
+        > a {
+            border: 1px solid @base-border-color-light;
+            .border-radius( 2px 2px 0 0);
+            margin-right: 1px;
+            line-height: @line-height-base;
+            position: relative;
+            background-color:@base-color-b-lighter;
+            .high-color(@base-color-b-lighter);
+            @media (max-width: @screen-xs-max) {
+               margin: 0;
+               .border-radius(0);
+            }
+            &:hover {
+                background-color:lighten(@base-color-b-lighter,1%);
+            }
+            .transition(all 0.1s ease-in);
+
+        }
+        &:last-child > a {
+            margin-right: 0;
+        }
+
+        // Active state, and its :hover to override normal :hover
+        &.active > a {
+            &,
+            &:hover,
+            &:focus {
+                .high-color(@main-color);
+                background: none repeat scroll 0 0 @main-color;
+                border: 1px solid @main-color;
+                cursor: default;
+                display: block;
+                cursor: default;
+            }
+        }
+    }
+    // pulling this in mainly for less shorthand
+    &.nav-justified {
+        .nav-justified();
+        .nav-tabs-justified();
+    }
+}
+
+.tab-content {
+    border-color: @main-color @base-border-color @base-border-color;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px;
+    padding: 15px;
+    width: 100%;
+    vertical-align: bottom;
+    @media (max-width: @screen-xs-max) {
+        border-color:@base-border-color;
+    }
+}
+}
+
+.module.module-tab.tab-skin3.tab-resize-responsive{
+    display: block;
+    .nav-tabs > li{
+        display: block;
+        width: 100%;
+        margin: 0;
+        .rtl-body &{
+          margin-bottom: 1px;  
+        }
+        > a {
+          margin: 0;
+          .border-radius(0);      
+        }   
+    }
+    .tab-content {
+        border-color:@base-border-color;
+    }  
+}
+
+.rtl-body .module.module-tab.tab-skin3{
+  .nav-tabs {
+      > li {
+          @media (max-width: @screen-xs-max) {
+              margin-bottom: 1px;
+          }
+          > a{
+              @media (max-width: @screen-xs-max) {
+                  margin: 0px;
+              }
+              margin-right: 0px;
+              margin-left: 1px;
+          }
+          &:last-child > a {
+              margin-left: 0;
+          }
+      }
+  }
+}

@@ -1,0 +1,46 @@
+[sed_carousel override_skins="default"]
+
+    [sed_carousel_items sed_role="media-list" sed_list_type="main" sed_list_id="sed_carousel_item" parent_module="carousel"]
+
+      [sed_carousel_item parent_module="carousel"]
+    	[sed_image   lightbox_id="sed-carousel-gallery" sed_image_group = "images_group" sed_media_role="image" sed_main_media="true" sed_skin_group="image_thumb" sed_hover_effect_group="image_thumb" parent_module="carousel" full_src="{{@sed_module_url}}/images/1.jpg" src="{{@sed_module_url}}/images/1.jpg" ][/sed_image]
+      [/sed_carousel_item]
+
+      [sed_carousel_item parent_module="carousel"]
+    	[sed_image   lightbox_id="sed-carousel-gallery" sed_image_group = "images_group" sed_media_role="image" sed_main_media="true" sed_skin_group="image_thumb" sed_hover_effect_group="image_thumb" parent_module="carousel" full_src="{{@sed_module_url}}/images/2.jpg" src="{{@sed_module_url}}/images/2.jpg" ][/sed_image]
+      [/sed_carousel_item]
+
+      [sed_carousel_item parent_module="carousel"]
+    	[sed_image   lightbox_id="sed-carousel-gallery" sed_image_group = "images_group" sed_media_role="image" sed_main_media="true" sed_skin_group="image_thumb" sed_hover_effect_group="image_thumb" parent_module="carousel" full_src="{{@sed_module_url}}/images/3.jpg" src="{{@sed_module_url}}/images/3.jpg" ][/sed_image]
+      [/sed_carousel_item]
+
+      [sed_carousel_item parent_module="carousel"]
+    	[sed_image   lightbox_id="sed-carousel-gallery" sed_image_group = "images_group" sed_media_role="image" sed_main_media="true" sed_skin_group="image_thumb" sed_hover_effect_group="image_thumb" parent_module="carousel" full_src="{{@sed_module_url}}/images/4.jpg" src="{{@sed_module_url}}/images/4.jpg" ][/sed_image]
+      [/sed_carousel_item]
+
+      [sed_carousel_item parent_module="carousel"]
+    	[sed_image   lightbox_id="sed-carousel-gallery" sed_image_group = "images_group" sed_media_role="image" sed_main_media="true" sed_skin_group="image_thumb" sed_hover_effect_group="image_thumb" parent_module="carousel" full_src="{{@sed_module_url}}/images/5.jpg" src="{{@sed_module_url}}/images/5.jpg" ][/sed_image]
+      [/sed_carousel_item]
+
+      [sed_carousel_item parent_module="carousel"]
+    	[sed_image   lightbox_id="sed-carousel-gallery" sed_image_group = "images_group" sed_media_role="image" sed_main_media="true" sed_skin_group="image_thumb" sed_hover_effect_group="image_thumb" parent_module="carousel" full_src="{{@sed_module_url}}/images/6.jpg" src="{{@sed_module_url}}/images/6.jpg" ][/sed_image]
+      [/sed_carousel_item]
+
+    [/sed_carousel_items]
+
+	[sed_thumbs_carousel parent_module="carousel" sed_role="media-list" sed_list_type="thumbnail" sed_list_id="sed_carousel_thumbs_list" ]
+		[sed_image contextmenu_disabled = "disabled" settings_disabled = "disabled" src="{{@sed_module_url}}/images/thumbs/1.jpg" sed_media_role="image" sed_main_media="true" parent_module="carousel" parent_sub_skin="thumb"][/sed_image]
+		[sed_image contextmenu_disabled = "disabled" settings_disabled = "disabled" src="{{@sed_module_url}}/images/thumbs/2.jpg" sed_media_role="image" sed_main_media="true" parent_module="carousel" parent_sub_skin="thumb"][/sed_image]
+		[sed_image contextmenu_disabled = "disabled" settings_disabled = "disabled" src="{{@sed_module_url}}/images/thumbs/3.jpg" sed_media_role="image" sed_main_media="true" parent_module="carousel" parent_sub_skin="thumb"][/sed_image]
+		[sed_image contextmenu_disabled = "disabled" settings_disabled = "disabled" src="{{@sed_module_url}}/images/thumbs/4.jpg" sed_media_role="image" sed_main_media="true" parent_module="carousel" parent_sub_skin="thumb"][/sed_image]
+		[sed_image contextmenu_disabled = "disabled" settings_disabled = "disabled" src="{{@sed_module_url}}/images/thumbs/5.jpg" sed_media_role="image" sed_main_media="true" parent_module="carousel" parent_sub_skin="thumb"][/sed_image]
+		[sed_image contextmenu_disabled = "disabled" settings_disabled = "disabled" src="{{@sed_module_url}}/images/thumbs/6.jpg" sed_media_role="image" sed_main_media="true" parent_module="carousel" parent_sub_skin="thumb"][/sed_image]
+		[sed_image contextmenu_disabled = "disabled" settings_disabled = "disabled" src="{{@sed_module_url}}/images/thumbs/7.jpg" sed_media_role="image" sed_main_media="true" parent_module="carousel" parent_sub_skin="thumb"][/sed_image]
+	[/sed_thumbs_carousel]
+
+
+    [sed_add_item_pattern sed_media_type="image" sed_rel_list="sed_carousel_item" parent_module="carousel" show_add_button="false"]
+    	[sed_image   lightbox_id="sed-carousel-gallery" sed_image_group = "images_group" sed_media_role="image" sed_main_media="true" sed_skin_group="image_thumb" sed_hover_effect_group="image_thumb" parent_module="carousel" full_src="{{@sed_module_url}}/images/3.jpg" src="{{@sed_module_url}}/images/3.jpg"][/sed_image]
+    [/sed_add_item_pattern]
+
+[/sed_carousel]

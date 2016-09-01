@@ -1,0 +1,39 @@
+/*
+#less_info#(
+"handle"  =>"checklist-skin-default",
+"deps"    => array('checklist'),
+"ver"     => "1.0.0",
+"media"   => "all",
+)#
+*/
+.module-checklist.checklist-skin-default{
+    ul{
+        li{
+            .module-icons{
+                vertical-align: baseline;
+                .hi-icon {
+                    .low-color(@body-bg);
+                }
+            }
+
+            .module-paragraph{
+                vertical-align: baseline;
+            }
+            .checklist-txt {
+              padding-left: 4px;
+            }
+
+        }
+    }
+}
+.rtl-body .module-checklist.checklist-skin-default{
+    ul{
+        li{
+            .checklist-txt {
+              padding-left: 0px;
+              padding-right: 4px;
+            }
+
+        }
+    }
+}

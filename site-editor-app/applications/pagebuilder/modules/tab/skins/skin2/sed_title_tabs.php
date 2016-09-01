@@ -1,0 +1,1 @@
+<ul <?php echo $sed_attrs; ?> class="<?php echo $class ?> nav nav-tabs" role="tablist"><?php echo $content ?></ul>

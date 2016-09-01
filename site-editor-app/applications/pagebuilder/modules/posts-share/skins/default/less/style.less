@@ -1,0 +1,67 @@
+/*#less_info#(
+"handle"    => "posts-share-default",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.posts-share-default{
+    .social-navs {
+        .social-list {
+            margin: 0;
+            display: inline-block;
+            font-size: 0;
+            li {
+                display: inline-block;
+                margin: 0 5px 5px 0 ;
+                a {
+                    border: 1px solid @base-border-color;
+                    .border-radius(4px);
+                    font-size: 18px;
+                    display: inline-block;
+                    text-align: center;
+                    .transition(500ms all);
+                    .hi-icon{
+                        color: @base-color-b-dark;
+                    }
+                    &:hover{
+                        .hi-icon{
+                            color: #FFF;
+                        }
+                    }
+                    i {
+                        min-width: 20px;
+                    }
+                }
+            }
+            .mailto { a:hover{ background-color: #9fae37; border-color: #9fae37;}}
+            .linked-in { a:hover{ background-color:#419cca ; border-color:#419cca ;}}
+            .tumblr { a:hover{ background-color: #345574; border-color: #345574; }}
+            .facebook { a:hover{ background-color: #37589b; border-color: #37589b;}}
+            .pinterest { a:hover{ background-color: #cb2027; border-color: #cb2027; }}
+            .reddit { a:hover{ background-color: #ff4500; border-color: #ff4500; }}
+            .twitter { a:hover{ background-color: #46d4fe; border-color: #46d4fe; }}
+            .google-plus { a:hover{ background-color: #de5a49; border-color: #de5a49; }}
+            .vkontakte { a:hover{ background-color: #597ba5; border-color: #597ba5; }}
+        }
+
+    }
+
+    .module.module-icons.icons-default{
+        margin-bottom: 0px;
+        .hi-icon{
+            height: 1.8em;
+            line-height: 1.8em !important;
+            width: 2.8em;
+        }
+    }
+
+}
+.rtl-body .posts-share-default{
+    .social-navs {
+        .social-list {
+            li {
+                margin: 0 0 5px 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,403 @@
+/*#less_info#(
+"handle"    => "woocommerce-account-default",
+"deps"      => "",
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+
+.woocommerce-account-default{
+
+@woo-media-width: @screen-xs-max;
+
+//borders , bg
+@woo-border-color:      @base-border-color-light;
+@woo-border-dark:       @base-border-color-b;
+@woo-bg-color-dark:     @base-border-color-light;
+@woo-bg-color-light:    @base-color-b-lighter;
+@woo-body-bg:           @body-bg;
+@woo-main-color:        @main-color;
+@woo-input-bg:          lighten(@base-color-b-lighter,2%);
+@woo-media-width:       @screen-xs-max;
+
+//titles
+@woo-title-lg:          @font-size-h4;
+@woo-line-height-lg:    @font-size-h4 + 9;
+@woo-title-md:          @font-size-h4;
+@woo-line-height-md:    @font-size-h4 + 9;
+@woo-title-sm:          @font-size-base;
+@woo-line-height-sm:    @font-size-base + 9;
+
+//price
+@woo-price-color:       @main-color;
+@woo-price-color-del:   @base-color-b-darker;
+@woo-price-size:        @font-size-base;
+@woo-price-size-del:    @font-size-base - 2;
+
+//colors
+@woo-success-color:     @success-color;
+@woo-info-color:        #9da3b1;
+@woo-warning-color:     @warning-color;
+@woo-danger-color:      @danger-color;
+
+.account-title{
+    border-bottom: 1px solid @woo-border-color;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    padding-bottom: 10px;
+    font-size: @woo-title-md;
+}  
+
+.btn_reset_password,.btn-save-changes{
+    text-align: right;
+    .btn,input[type="submit"] {
+        display: inline-block;
+    }
+}
+
+fieldset{
+    border: 1px solid @woo-border-color;
+    padding: 20px;
+    margin: 0 0 18px 0;
+    legend {
+        border: medium none;
+        .high-color(@body-bg);
+        font-size: @woo-title-md;
+        padding: 0 10px;
+        display: inline-block;
+        width: auto;
+        margin: 0;
+    }
+}
+
+
+//woocommerce sidebar account
+  .woocommerce-sidebar-account {
+      min-width: 185px;
+  }
+    .widget-side{
+        border: 1px solid @woo-border-color;
+        margin-bottom: 20px;
+        ul{
+            margin: 0;
+        }
+    }
+    .woocommerce-user-info {
+        text-align: center;
+        .woocommerce-my-avatar {
+            .border-radius(999px);
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            img{
+                height: auto;
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+        .woocommerce-user-meta{
+            text-align: left;
+            margin: 0;
+            li {
+                padding: 8px 10px;
+                border-bottom: 1px solid @woo-border-color;
+                .high-color(@body-bg);
+                overflow: hidden;
+                &:last-child{
+                    border-bottom: none;
+                }
+            }
+            i {
+                width: 2.5em;
+                height: 2.5em;
+                line-height: 2.5em;
+                margin: 0 8px 0 0;
+                text-align: center;
+                border: 1px solid;
+                font-size: 13px;
+                vertical-align: middle;
+                .border-radius(999px);  
+                color:@main-color;
+            }
+        }
+    }
+    .woocommerce-user-action {
+        li {
+            border-bottom: 1px solid @woo-border-color;
+            &.active{
+                border-left: 4px solid @main-color;
+                &,a,i{
+                    color: @main-color;
+                }
+
+            }
+
+            a{
+                display: block;
+                padding: 10px;
+                .high-color(@body-bg);
+                i{
+                    //.base-color(@body-bg;34%);
+                    color: @woo-info-color;
+                    font-size: 16px;  
+                    padding: 0 5px;
+                    vertical-align: middle;
+                    width: 1.8em;
+                    text-align: center;
+                }
+               &:hover{
+                color:@main-color;
+                i{
+                    color:@main-color;
+                }
+               }
+
+            }
+            &:last-child{
+                border-bottom: none;
+            }
+        }
+
+    }
+
+//my account
+
+.woocommerce-myaccount{
+    border: 1px solid @woo-border-color;
+    padding: 15px 40px;
+}
+.myaccount_user > a {
+    color: @main-color-darker;
+    &:hover{
+        color:@main-color;
+    }
+}
+.addresses{
+    &:after, &:before {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+.address{
+    header.title {
+        .title-box{
+            margin-bottom: 0px;
+        }
+
+        .edit {
+            border-bottom: 1px solid @woo-border-color;
+            color: @main-color-darker;
+            display: block;
+            padding: 7px 0;
+            @media (max-width: @woo-media-width) {
+              text-align: center !important;
+            }
+        }
+
+    }
+/*    &:first-child {
+        padding-left: 0;
+    }
+    &:last-child {
+        padding-right: 0;
+    }    */
+}
+
+.table.sed-simple-table.my_account_orders {
+    width: 100%;
+    tbody tr:last-child {
+        border-bottom: 0 solid;
+    }
+    tr {
+        border-bottom: 1px solid @woo-border-color;
+        line-height: 55px;
+    }
+    thead tr {
+        border-bottom: 1px solid @woo-border-color;
+    }
+    thead th{
+        line-height: 35px;
+    }
+    tbody th,
+    thead th{
+        .high-color(@body-bg);
+    }
+
+    th , td {
+        .base-color(@body-bg);
+        display: table-cell;
+        padding: 7px 0;
+        text-align: left;
+    }
+
+    .order-number > a {
+        color: @main-color;
+        font-size: @woo-title-md;
+    }
+    .amount {
+        color: @main-color;
+    }
+}
+
+
+
+.address, .myaccount_address, .my_account_orders,.myaccount_user,.woocommerce-info-box {
+    margin-bottom:40px;
+}
+
+// Sign out
+
+.account-title.customer-login-form-title{
+    //font-size: @woo-title-md; 
+    i{
+        color: @woo-info-color;
+        font-size: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 1.2em;        
+    }   
+}
+
+.login,
+.register,
+.form-login,
+.form-register{
+  max-width: 640px;
+  p{
+    margin-bottom: 20px;
+  }
+  .btn{
+    float: right;
+  }
+ .inline{
+     padding: 6px 0;
+     .base-color(@body-bg);
+     font-size: @font-size-base - 1;
+/*     > input {
+        display: inline-block;
+        margin: 4px 0;
+        vertical-align: middle;
+     }     */
+ }
+ .lost_password{
+    .base-color(@body-bg);
+    font-size: @font-size-base - 1;
+    &:hover{
+     color:@main-color;
+    }
+
+ }
+
+}
+.lost_reset_password{
+    > p.form-row {
+        max-width: 550px;
+    }
+}
+
+// table order details
+.order-info{
+mark{
+    background-color: @main-color;
+    .high-color(@main-color);
+}
+}
+.table.sed-simple-table.table-order-details{
+    .product-total {
+        text-align: right;
+    }
+    .product-quantity{
+      text-align: center;
+    }
+    tr:last-child .product-total .amount{
+        color: @main-color;
+        font-size: @woo-price-size;  
+        font-weight: normal;
+    }
+
+}
+
+.table.sed-simple-table.table-customer-details{
+    th {
+        @media (min-width: @woo-media-width) {
+            width: 50%;
+        }
+
+    }
+}
+}
+
+
+.rtl-body .woocommerce-account-default{
+
+.btn_reset_password,.btn-save-changes{
+    text-align: left;
+}
+
+//woocommerce sidebar account
+    .woocommerce-user-info {
+        .woocommerce-user-meta{
+            text-align: right;
+            i {
+                margin: 0 0 0 8px;
+            }
+        }
+    }
+    .woocommerce-user-action {
+        li {
+            &.active{
+                border-right: 4px solid @main-color;
+                border-left: 0px solid @main-color;
+            }
+        }
+
+    }
+
+//my account
+.table.sed-simple-table.my_account_orders {
+    th , td {
+        text-align:right !important;
+    }
+}
+// Sign out
+
+.login,
+.register,
+.form-login,
+.form-register{
+  .btn{
+    float: left;
+  }
+}
+
+// table order details
+.table.sed-simple-table.table-order-details{
+    .product-total {
+        text-align: left;
+    }
+}
+
+}
+.sed_mobile_version .woocommerce-account-default{
+
+@woo-title-md:          @font-size-h4 - 2;
+@woo-line-height-md:    @font-size-h4 + 7;
+
+    .account-title{
+        font-size: @woo-title-md;
+    }  
+
+    fieldset{
+        legend {
+            font-size: @woo-title-md;
+        }
+    } 
+    .table.sed-simple-table.my_account_orders {
+        .order-number > a {
+            font-size: @woo-title-md;
+        }
+    }    
+}

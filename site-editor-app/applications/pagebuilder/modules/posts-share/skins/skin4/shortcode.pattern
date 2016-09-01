@@ -1,0 +1,44 @@
+[sed_posts_share skin="skin4"]
+
+    [sed_post_share_continer skin="skin4" parent_module="posts-share"]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="general" class="linked-in" share_src="http://www.linkedin.com/shareArticle?mini=true&amp;url="]
+            [sed_icons skin="default" parent_module="posts-share" icon="fa fa-linkedin" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="facebook" class="facebook"]
+            [sed_icons skin="default" parent_module="posts-share" icon=""fa fa-facebook" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="general" class="twitter" share_src="//twitter.com/home?status="]
+            [sed_icons skin="default" parent_module="posts-share" icon="fa fa-twitter" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="general" class="google-plus" share_src="//plus.google.com/share?url="]
+            [sed_icons skin="default" parent_module="posts-share" icon="fa fa-google-plus" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="general" class="pinterest" share_src="//pinterest.com/pin/create/button/?url="]
+            [sed_icons skin="default" parent_module="posts-share" icon="fa fa-pinterest" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="general" class="tumblr" share_src="http://www.tumblr.com/share/link?url="]
+            [sed_icons skin="default" parent_module="posts-share" icon="fa fa-tumblr" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="general" class="reddit" share_src="//reddit.com/submit?url="]
+            [sed_icons skin="default" parent_module="posts-share" icon="fa fa-reddit" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="general" class="vkontakte" share_src="//vkontakte.ru/share.php?url="]
+            [sed_icons skin="default" parent_module="posts-share" icon="fa fa-vk" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+        [sed_post_share_item skin="skin4" parent_module="posts-share" type="mailto" class="mailto"]
+            [sed_icons skin="default" parent_module="posts-share" icon="fa fa-envelope" font_size="17"][/sed_icons]
+        [/sed_post_share_item]
+
+    [/sed_post_share_continer]
+
+
+[/sed_posts_share]

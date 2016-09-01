@@ -1,0 +1,5 @@
+[sed_separator override_skins="default,skin2 ,skin4 ,skin5 , skin6 ,skin7 ,skin8 ,skin9 "]
+    [sed_text_title toolbar1="normal-text" toolbar2="normal-text" tag="div" class="special-spr-center flex-nowrap flex-nowrap-text" parent_module="separator" contextmenu_disabled = "disabled" settings_disabled = "disabled"]
+        <h4>Separator Heading</h4>
+    [/sed_text_title]
+[/sed_separator]

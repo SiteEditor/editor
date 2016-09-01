@@ -1,0 +1,32 @@
+/*#less_info#(
+"handle"    => "page-404-default",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.page-404-default {
+    text-align: center;
+    .module.module-title.m-404-title > * {
+        font-weight: bold;
+        color: @base-border-color-light;
+        font-size: 130px;
+        line-height: 130px;
+        margin-bottom: 15px;
+        @media (max-width: @screen-xs-max) {
+            font-size: 85px;
+            line-height: 85px;
+        }
+    }
+    .module.module-title.m-404-desc > * {
+        margin-bottom: 15px;
+    }
+    .module.module-search {
+        margin: 0 auto;
+        max-width: 400px;
+        margin-bottom: 20px;
+    }
+    .module-button span {
+        text-transform: uppercase;
+    }
+
+}

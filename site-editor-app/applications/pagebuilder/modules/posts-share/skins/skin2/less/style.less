@@ -1,0 +1,58 @@
+/*#less_info#(
+"handle"    => "posts-share-skin2",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.posts-share-skin2{
+    .social-navs {
+        .social-list {
+            margin: 0;
+            display: inline-block;
+            font-size: 0;
+            li {
+                display: inline-block;
+                margin: 0 5px 5px 0;
+                a{
+                    background: none repeat scroll 0 0 @body-bg;
+                    border: 1px solid @base-border-color-light;
+                    .border-radius(100%);
+                    display: block;
+                    font-size: 15px;
+                    text-align: center;
+                    .transition(500ms all);
+                    &:hover{
+                    }
+                }
+            }
+            .mailto { a{ .hi-icon{color: #9fae37; }}&:hover{a{ background-color: #9fae37; border-color: #9fae37;.hi-icon{ .contrast(#9fae37);  }}}}
+            .linked-in { a{ .hi-icon{color:#419cca ; }}&:hover{a{ background-color:#419cca ; border-color:#419cca ;.hi-icon{ .contrast(#419cca);  }}}}
+            .tumblr { a{ .hi-icon{color: #345574; }}&:hover{a{ background-color: #345574; border-color: #345574; .hi-icon{ .contrast(#345574);  }}}}
+            .facebook { a{ .hi-icon{color: #37589b; }}&:hover{a{ background-color: #37589b; border-color: #37589b;.hi-icon{ .contrast(#37589b);  }}}}
+            .pinterest { a{ .hi-icon{color: #cb2027; }}&:hover{a{ background-color: #cb2027; border-color: #cb2027; .hi-icon{ .contrast(#cb2027);  }}}}
+            .reddit { a{ .hi-icon{color: #ff4500; }}&:hover{a{ background-color: #ff4500; border-color: #ff4500; .hi-icon{ .contrast(#ff4500);  }}}}
+            .twitter { a{ .hi-icon{color: #46d4fe; }}&:hover{a{ background-color: #46d4fe; border-color: #46d4fe; .hi-icon{ .contrast(#46d4fe);  }}}}
+            .google-plus { a{ .hi-icon{color: #de5a49; }}&:hover{a{ background-color: #de5a49; border-color: #de5a49; .hi-icon{ .contrast(#de5a49);  }}}}
+            .vkontakte { a{ .hi-icon{color: #597ba5; }}&:hover{a{ background-color: #597ba5; border-color: #597ba5; .hi-icon{ .contrast(#597ba5);  }}}}
+        }
+    }
+
+    .module.module-icons.icons-default{
+        margin-bottom: 0px;
+        .hi-icon{
+            height: 2.2em;
+            line-height: 2.2em !important;
+            width: 2.2em;
+        }
+    }
+
+}
+.rtl-body .posts-share-skin2{
+    .social-navs {
+        .social-list {
+            li {
+                margin: 0 0 5px 5px;
+            }
+        }
+    }
+}

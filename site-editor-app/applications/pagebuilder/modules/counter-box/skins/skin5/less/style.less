@@ -1,0 +1,55 @@
+/*#less_info#(
+"handle"    => "counter-box-skin5",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#
+*/
+.counter-box-skin5{
+    margin: 0px auto;
+    max-width: 400px;
+    .circle{
+        cursor: default;
+        width:100%;          
+        padding-bottom:100%;
+        border:2px solid @main-color;
+        border-bottom:1px solid transparent;
+        border-radius: 50%;
+        margin:0 auto;
+        position: relative;
+        text-align: center;
+        .high-color(@body-bg);
+        .transition(all .2s ease);
+        .box{
+            margin-top: -0.7em;
+            position: absolute;
+            top: 50%;
+            font-size: 32px;
+            height:1.4em;
+            .transition(all .1s ease);
+            width: 100%;
+            //overflow: hidden;
+        }
+        i{
+            overflow: hidden;
+            position: absolute;
+            bottom: -0.1em;
+            width: 100%;
+            display: block;
+            font-size: 19px;
+            .transition(all .3s ease .05s);
+        }
+    }
+        &:hover .circle{
+            border-color: @perfect-main-color;
+            border-bottom:1px solid transparent;
+            .box, i{
+                color: @main-color;
+            }
+        }
+    p{
+        text-align: center;
+        padding: 0 7px;
+        margin-top: 15px;
+    }
+}

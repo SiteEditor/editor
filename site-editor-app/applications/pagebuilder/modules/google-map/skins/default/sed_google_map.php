@@ -1,0 +1,1 @@
+<div <?php echo $sed_attrs; ?> id="<?php echo $module_html_id; ?>-gmap" class="<?php echo $class;?> sed-gmap-container" <?php echo $item_settings; ?> <?php echo $has_cover;?> style="font-size: 0;"></div>

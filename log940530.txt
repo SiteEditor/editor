@@ -1,0 +1,524 @@
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/about-author/about-author.php:27: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                               gettext("") returns the header entry with
+01:38:50:                                                                                               meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/about-author/about-author.php:173: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                                gettext("") returns the header entry with
+01:38:50:                                                                                                meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/about-author/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                                             gettext("") returns the header entry with
+01:38:50:                                                                                                             meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/about-author/sub-shortcode/sub-shortcode.php:10: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                                              gettext("") returns the header entry with
+01:38:50:                                                                                                              meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/accordion/accordion.php:207: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                          gettext("") returns the header entry with
+01:38:50:                                                                                          meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/accordion-slider/accordion-slider.php:27: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                                       gettext("") returns the header entry with
+01:38:50:                                                                                                       meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/accordion-slider/accordion-slider.php:312: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                                        gettext("") returns the header entry with
+01:38:50:                                                                                                        meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/archive/archive.php:338: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                      gettext("") returns the header entry with
+01:38:50:                                                                                      meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/archive/archive.php:500: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                      gettext("") returns the header entry with
+01:38:50:                                                                                      meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/archive/includes/sub-shortcode.php:10: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                                    gettext("") returns the header entry with
+01:38:50:                                                                                                    meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/audio/audio.php:21: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                 gettext("") returns the header entry with
+01:38:50:                                                                                 meta information, not the empty string.
+01:38:50: ./site-editor-app/applications/pagebuilder/modules/audio/audio.php:316: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:50:                                                                                  gettext("") returns the header entry with
+01:38:50:                                                                                  meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/blockquote/blockquote.php:25: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                           gettext("") returns the header entry with
+01:38:51:                                                                                           meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/blockquote/blockquote.php:88: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                           gettext("") returns the header entry with
+01:38:51:                                                                                           meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/button/button.php:28: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                   gettext("") returns the header entry with
+01:38:51:                                                                                   meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/button/button.php:212: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                    gettext("") returns the header entry with
+01:38:51:                                                                                    meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/carousel/carousel.php:24: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                       gettext("") returns the header entry with
+01:38:51:                                                                                       meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/carousel/carousel.php:180: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                        gettext("") returns the header entry with
+01:38:51:                                                                                        meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/carousel/carousel.php:421: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                        gettext("") returns the header entry with
+01:38:51:                                                                                        meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/carousel/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                                         gettext("") returns the header entry with
+01:38:51:                                                                                                         meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/carousel/sub-shortcode/sub-shortcode.php:32: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                                          gettext("") returns the header entry with
+01:38:51:                                                                                                          meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/checklist/checklist.php:26: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                         gettext("") returns the header entry with
+01:38:51:                                                                                         meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/checklist/checklist.php:163: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                          gettext("") returns the header entry with
+01:38:51:                                                                                          meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/collage-gallery/collage-gallery.php:26: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                                     gettext("") returns the header entry with
+01:38:51:                                                                                                     meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/collage-gallery/collage-gallery.php:368: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                                      gettext("") returns the header entry with
+01:38:51:                                                                                                      meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/collage-gallery/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                                                gettext("") returns the header entry with
+01:38:51:                                                                                                                meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/collage-gallery/sub-shortcode/sub-shortcode.php:30: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                                                 gettext("") returns the header entry with
+01:38:51:                                                                                                                 meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/columns/sub-shortcode/column.php:19: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                                  gettext("") returns the header entry with
+01:38:51:                                                                                                  meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/comments/comments.php:24: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                       gettext("") returns the header entry with
+01:38:51:                                                                                       meta information, not the empty string.
+01:38:51: ./site-editor-app/applications/pagebuilder/modules/comments/comments.php:289: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:51:                                                                                        gettext("") returns the header entry with
+01:38:51:                                                                                        meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/counter-box/counter-box.php:28: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                             gettext("") returns the header entry with
+01:38:52:                                                                                             meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/counter-box/counter-box.php:307: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                              gettext("") returns the header entry with
+01:38:52:                                                                                              meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/counter-circle/counter-circle.php:29: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                   gettext("") returns the header entry with
+01:38:52:                                                                                                   meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/diamond-gallery/diamond-gallery.php:24: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                     gettext("") returns the header entry with
+01:38:52:                                                                                                     meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/diamond-gallery/diamond-gallery.php:302: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                      gettext("") returns the header entry with
+01:38:52:                                                                                                      meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/diamond-gallery/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                                gettext("") returns the header entry with
+01:38:52:                                                                                                                meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/diamond-gallery/sub-shortcode/sub-shortcode.php:31: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                                 gettext("") returns the header entry with
+01:38:52:                                                                                                                 meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/elastic-slider/elastic-slider.php:302: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                    gettext("") returns the header entry with
+01:38:52:                                                                                                    meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/facebook/facebook.php:109: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                        gettext("") returns the header entry with
+01:38:52:                                                                                        meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/footer/footer.php:25: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                   gettext("") returns the header entry with
+01:38:52:                                                                                   meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/footer/footer.php:132: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                    gettext("") returns the header entry with
+01:38:52:                                                                                    meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/google-map/google-map.php:19: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                           gettext("") returns the header entry with
+01:38:52:                                                                                           meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/google-map/google-map.php:104: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                            gettext("") returns the header entry with
+01:38:52:                                                                                            meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/google-map/google-map.php:201: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                            gettext("") returns the header entry with
+01:38:52:                                                                                            meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/grid-gallery/grid-gallery.php:24: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                               gettext("") returns the header entry with
+01:38:52:                                                                                               meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/grid-gallery/grid-gallery.php:358: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                gettext("") returns the header entry with
+01:38:52:                                                                                                meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/grid-gallery/sub-shortcode/sub-shortcode.php:10: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                              gettext("") returns the header entry with
+01:38:52:                                                                                                              meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/grid-gallery/sub-shortcode/sub-shortcode.php:31: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                              gettext("") returns the header entry with
+01:38:52:                                                                                                              meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/grid-gallery/sub-shortcode/sub-shortcode.php:53: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                              gettext("") returns the header entry with
+01:38:52:                                                                                                              meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/grid-gallery/sub-shortcode/sub-shortcode.php:74: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                              gettext("") returns the header entry with
+01:38:52:                                                                                                              meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/header/header.php:29: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                   gettext("") returns the header entry with
+01:38:52:                                                                                   meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/header/header.php:159: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                    gettext("") returns the header entry with
+01:38:52:                                                                                    meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/honeycomb-gallery/honeycomb-gallery.php:24: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                         gettext("") returns the header entry with
+01:38:52:                                                                                                         meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/honeycomb-gallery/honeycomb-gallery.php:305: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                          gettext("") returns the header entry with
+01:38:52:                                                                                                          meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/honeycomb-gallery/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                                  gettext("") returns the header entry with
+01:38:52:                                                                                                                  meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/honeycomb-gallery/sub-shortcode/sub-shortcode.php:32: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                                   gettext("") returns the header entry with
+01:38:52:                                                                                                                   meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/icon-content-box/icon-content-box.php:28: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                       gettext("") returns the header entry with
+01:38:52:                                                                                                       meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/icon-content-box/icon-content-box.php:161: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                                        gettext("") returns the header entry with
+01:38:52:                                                                                                        meta information, not the empty string.
+01:38:52: ./site-editor-app/applications/pagebuilder/modules/icons/icons.php:461: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:52:                                                                                  gettext("") returns the header entry with
+01:38:52:                                                                                  meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/image-content-box/image-content-box.php:27: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                         gettext("") returns the header entry with
+01:38:53:                                                                                                         meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/image-content-box/image-content-box.php:211: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                          gettext("") returns the header entry with
+01:38:53:                                                                                                          meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/image-content-box/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                                  gettext("") returns the header entry with
+01:38:53:                                                                                                                  meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/layer-slider/layer-slider.php:22: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                               gettext("") returns the header entry with
+01:38:53:                                                                                               meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/layer-slider/layer-slider.php:85: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                               gettext("") returns the header entry with
+01:38:53:                                                                                               meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/masonry-gallery/masonry-gallery.php:25: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                     gettext("") returns the header entry with
+01:38:53:                                                                                                     meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/masonry-gallery/masonry-gallery.php:294: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                      gettext("") returns the header entry with
+01:38:53:                                                                                                      meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/masonry-gallery/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                                gettext("") returns the header entry with
+01:38:53:                                                                                                                meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/masonry-gallery/sub-shortcode/sub-shortcode.php:30: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                                 gettext("") returns the header entry with
+01:38:53:                                                                                                                 meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/menu/menu.php:27: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                               gettext("") returns the header entry with
+01:38:53:                                                                               meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/menu/menu.php:273: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                gettext("") returns the header entry with
+01:38:53:                                                                                meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/menu/menu.php:657: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                gettext("") returns the header entry with
+01:38:53:                                                                                meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/menu/sub-shortcode/sub-shortcode.php:19: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                      gettext("") returns the header entry with
+01:38:53:                                                                                                      meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/menu/sub-shortcode/sub-shortcode.php:46: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                      gettext("") returns the header entry with
+01:38:53:                                                                                                      meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/page/sub-shortcode/sub-shortcode.php:8: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                     gettext("") returns the header entry with
+01:38:53:                                                                                                     meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/page/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                     gettext("") returns the header entry with
+01:38:53:                                                                                                     meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/parallax-slider/parallax-slider.php:26: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                     gettext("") returns the header entry with
+01:38:53:                                                                                                     meta information, not the empty string.
+01:38:53: ./site-editor-app/applications/pagebuilder/modules/parallax-slider/parallax-slider.php:301: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:53:                                                                                                      gettext("") returns the header entry with
+01:38:53:                                                                                                      meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/pinterest/pinterest.php:18: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                         gettext("") returns the header entry with
+01:38:54:                                                                                         meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/pinterest/pinterest.php:98: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                         gettext("") returns the header entry with
+01:38:54:                                                                                         meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/portfolio/includes/sub-shortcode.php:10: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                      gettext("") returns the header entry with
+01:38:54:                                                                                                      meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/portfolio-single/portfolio-single.php:122: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/portfolio-single/sub-shortcode/sub-shortcode.php:8: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                                 gettext("") returns the header entry with
+01:38:54:                                                                                                                 meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/portfolio-single/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                                 gettext("") returns the header entry with
+01:38:54:                                                                                                                 meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/posts.php:207: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                  gettext("") returns the header entry with
+01:38:54:                                                                                  meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:8: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                      gettext("") returns the header entry with
+01:38:54:                                                                                                      meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                      gettext("") returns the header entry with
+01:38:54:                                                                                                      meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:29: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:30: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:50: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:51: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:71: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:72: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:92: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:93: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:113: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:114: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:134: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:135: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:155: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:156: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:176: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:177: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:197: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:198: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:218: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:219: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:239: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:240: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:260: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts/sub-shortcode/sub-shortcode.php:261: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                        gettext("") returns the header entry with
+01:38:54:                                                                                                        meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts-nav/posts-nav.php:21: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                         gettext("") returns the header entry with
+01:38:54:                                                                                         meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts-nav/posts-nav.php:125: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                          gettext("") returns the header entry with
+01:38:54:                                                                                          meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts-share/posts-share.php:28: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                             gettext("") returns the header entry with
+01:38:54:                                                                                             meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts-share/posts-share.php:179: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                              gettext("") returns the header entry with
+01:38:54:                                                                                              meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts-share/sub-shortcode/sub-shortcode.php:8: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                            gettext("") returns the header entry with
+01:38:54:                                                                                                            meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts-share/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                            gettext("") returns the header entry with
+01:38:54:                                                                                                            meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts-share/sub-shortcode/sub-shortcode.php:29: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                             gettext("") returns the header entry with
+01:38:54:                                                                                                             meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/posts-share/sub-shortcode/sub-shortcode.php:30: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                             gettext("") returns the header entry with
+01:38:54:                                                                                                             meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/pricing-table/pricing-table.php:27: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                 gettext("") returns the header entry with
+01:38:54:                                                                                                 meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/pricing-table/pricing-table.php:192: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                  gettext("") returns the header entry with
+01:38:54:                                                                                                  meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/progress-bar/progress-bar.php:26: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                               gettext("") returns the header entry with
+01:38:54:                                                                                               meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/progress-bar/progress-bar.php:191: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                gettext("") returns the header entry with
+01:38:54:                                                                                                meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/progress-bar/progress-bar.php:412: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                gettext("") returns the header entry with
+01:38:54:                                                                                                meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/recent-works/recent-works.php:191: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                gettext("") returns the header entry with
+01:38:54:                                                                                                meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/recent-works/recent-works.php:221: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                gettext("") returns the header entry with
+01:38:54:                                                                                                meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/recent-works/recent-works.php:233: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                gettext("") returns the header entry with
+01:38:54:                                                                                                meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/recent-works/recent-works.php:428: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                gettext("") returns the header entry with
+01:38:54:                                                                                                meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/related-posts/related-posts.php:23: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                 gettext("") returns the header entry with
+01:38:54:                                                                                                 meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/related-posts/related-posts.php:447: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                  gettext("") returns the header entry with
+01:38:54:                                                                                                  meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/revslider/revslider.php:19: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                         gettext("") returns the header entry with
+01:38:54:                                                                                         meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/revslider/revslider.php:85: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                         gettext("") returns the header entry with
+01:38:54:                                                                                         meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/row-container/row-container.php:227: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                  gettext("") returns the header entry with
+01:38:54:                                                                                                  meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/search/search.php:26: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                   gettext("") returns the header entry with
+01:38:54:                                                                                   meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/search/search.php:148: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                    gettext("") returns the header entry with
+01:38:54:                                                                                    meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/search/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                                       gettext("") returns the header entry with
+01:38:54:                                                                                                       meta information, not the empty string.
+01:38:54: ./site-editor-app/applications/pagebuilder/modules/separator/separator.php:326: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:54:                                                                                          gettext("") returns the header entry with
+01:38:54:                                                                                          meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/social-bar/social-bar.php:27: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                           gettext("") returns the header entry with
+01:38:55:                                                                                           meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/social-bar/social-bar.php:265: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                            gettext("") returns the header entry with
+01:38:55:                                                                                            meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/soundcloud/soundcloud.php:22: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                           gettext("") returns the header entry with
+01:38:55:                                                                                           meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/soundcloud/soundcloud.php:170: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                            gettext("") returns the header entry with
+01:38:55:                                                                                            meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/tab/tab.php:256: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                              gettext("") returns the header entry with
+01:38:55:                                                                              meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/table/table.php:28: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                 gettext("") returns the header entry with
+01:38:55:                                                                                 meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/table/table.php:124: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                  gettext("") returns the header entry with
+01:38:55:                                                                                  meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/tagline-box/tagline-box.php:26: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                             gettext("") returns the header entry with
+01:38:55:                                                                                             meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/tagline-box/tagline-box.php:199: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                              gettext("") returns the header entry with
+01:38:55:                                                                                              meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/testimonial/testimonial.php:26: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                             gettext("") returns the header entry with
+01:38:55:                                                                                             meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/testimonial/testimonial.php:158: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                              gettext("") returns the header entry with
+01:38:55:                                                                                              meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/timeline/timeline.php:26: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                       gettext("") returns the header entry with
+01:38:55:                                                                                       meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/timeline/timeline.php:216: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                        gettext("") returns the header entry with
+01:38:55:                                                                                        meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/timeline/sub-shortcode/sub-shortcode.php:9: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                         gettext("") returns the header entry with
+01:38:55:                                                                                                         meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/timeline/sub-shortcode/sub-shortcode.php:20: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                          gettext("") returns the header entry with
+01:38:55:                                                                                                          meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/timeline/sub-shortcode/sub-shortcode.php:31: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                          gettext("") returns the header entry with
+01:38:55:                                                                                                          meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/timeline/sub-shortcode/sub-shortcode.php:42: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                          gettext("") returns the header entry with
+01:38:55:                                                                                                          meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/timeline/sub-shortcode/sub-shortcode.php:53: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                          gettext("") returns the header entry with
+01:38:55:                                                                                                          meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/timeline/sub-shortcode/sub-shortcode.php:64: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                          gettext("") returns the header entry with
+01:38:55:                                                                                                          meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/twitter/twitter.php:110: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                      gettext("") returns the header entry with
+01:38:55:                                                                                      meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/video/video.php:17: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                 gettext("") returns the header entry with
+01:38:55:                                                                                 meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/video/video.php:303: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                  gettext("") returns the header entry with
+01:38:55:                                                                                  meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-account/sub-shortcode/sub-shortcode.php:7: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                    gettext("") returns the header entry with
+01:38:55:                                                                                                                    meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/sub-shortcode.php:7: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:166: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:178: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:190: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:198: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:206: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:213: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:220: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:227: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:234: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:55: ./site-editor-app/applications/pagebuilder/modules/woocommerce-archive/includes/woocommerce-shortcode.class.php:241: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:55:                                                                                                                               gettext("") returns the header entry with
+01:38:55:                                                                                                                               meta information, not the empty string.
+01:38:56: ./site-editor-app/applications/pagebuilder/modules/woocommerce-categories/woocommerce-categories.php:307: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:56:                                                                                                                    gettext("") returns the header entry with
+01:38:56:                                                                                                                    meta information, not the empty string.
+01:38:56: ./site-editor-app/applications/pagebuilder/modules/woocommerce-single-product/sub-shortcode/sub-shortcode.php:7: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:56:                                                                                                                           gettext("") returns the header entry with
+01:38:56:                                                                                                                           meta information, not the empty string.
+01:38:57: ./site-editor-app/applications/siteeditor/modules/icon-library/icon-library.php:75: invalid multibyte sequence
+01:38:57: ./site-editor-app/applications/siteeditor/modules/icon-library/icon-library.php:75: invalid multibyte sequence
+01:38:58: ./site-editor-app/ver after/1.0.php:63: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:58:                                                  gettext("") returns the header entry with
+01:38:58:                                                  meta information, not the empty string.
+01:38:58: ./site-editor-app/ver after/1.0.php:609: warning: Empty msgid.  It is reserved by GNU gettext:
+01:38:58:                                                   gettext("") returns the header entry with
+01:38:58:                                                   meta information, not the empty string.

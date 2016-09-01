@@ -1,0 +1,37 @@
+.clearfix() {
+  &:before,
+  &:after {
+    content: ""; // 1
+    display: table; // 2
+  }
+  &:after, &:before {
+    clear: both;
+  }
+}
+
+.pull-right () {
+  .pull-right {
+    float: right !important;
+  }
+}
+.pull-left () {
+  .pull-left {
+    float: left !important;
+  }
+}
+// Text overflow
+// Requires inline-block or block for proper styling
+
+.text-overflow( @overflow : hidden ) {
+  overflow: @overflow ;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+// Opacity
+
+.opacity(@opacity) {
+  opacity: @opacity;
+  // IE8 filter
+  @opacity-ie: (@opacity * 100);
+  filter: ~"alpha(opacity=@{opacity-ie})";
+}

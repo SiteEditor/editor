@@ -1,0 +1,30 @@
+/*#less_info#(
+"handle"  => "button-skin1",
+"deps"    => array('main-button'),
+"ver"     => "1.0.0",
+"media"   => "all" 
+)#
+*/
+
+.module-button.button-skin1 {
+   .btn{
+     .module-icons{
+       display: inline-block;
+       border-right-width: 0 !important;
+       padding-right: 10px;
+       vertical-align: middle;
+     }
+      > span{
+         display: inline-block;
+     }
+   }
+}
+.rtl-body .module.module-button.button-skin1{
+   .btn{
+     .module-icons{
+       padding-right: 0px;
+       padding-left: 10px;
+     }
+   }
+}
+

@@ -1,0 +1,63 @@
+/*
+#less_info#(
+"handle"    => "diamond-gallery-main",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#
+*/
+.module.module-diamond-gallery{
+.items-container {
+	width: 100%;
+	margin: 0 auto;
+	> .wrapper {
+		position: relative;
+		margin: 0 auto;
+	}
+}
+
+.debug {
+    display: table !important;
+    background-color: @main-color !important;
+    > span {
+        // this span is for debugging purposes
+        width: 100%;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+        .high-color(@main-color);
+        .rotate(-45deg);
+    }
+}
+
+.item {
+	background: transparent;
+    padding: 0;
+	position: absolute;
+	overflow: hidden;
+	border-style: solid;
+	border-color: @base-border-color;
+	.rotate(45deg);
+	.transition(all .5s ease-in);
+	> .inner {
+		width: 100%;
+		height: 100%;
+		background-size: cover;
+		background-position: 50%;
+		.rotate(-45deg);
+		> div {
+			height: 100%;
+            width: 100%;
+		}
+	}
+}
+
+.module-image{
+     img {
+      height: 100%;
+      width: 100%;
+    }
+}
+
+
+}

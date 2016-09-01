@@ -1,0 +1,1 @@
+<li {{sed_attrs}} class="{{class}}"><a href="{{href}}" role="tab" data-toggle="tab">{{{content}}}</a></li>

@@ -1,0 +1,86 @@
+/* colorselector */
+
+.sp-container .sp-palette-row-initial {
+    border: 1px solid rgba(0, 0, 0, 0.3);
+}
+.sp-container .sp-initial
+{
+    border: none;
+}
+.sp-container .sp-color,
+.sp-container .sp-hue,
+.sp-container .sp-clear
+{
+    border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.colorselector {
+    display: inline-block;
+    height: 27px;
+ /*   position: absolute;
+    right: 6px;
+    width: 62px;      */
+}
+.colorselector .sp-replacer:hover,.colorselector .sp-replacer.sp-active {
+    border-color: #d5d5d5;
+    background: #fafafa;
+}
+.colorselector .sp-replacer {
+ /*     background: linear-gradient(#FFFFFF, #FFFFFF 25%, #E6E6E6) repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6)) !important;
+      background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6) !important;
+      background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6) !important;
+      background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6) !important;
+      background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6) !important;
+      background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6) !important;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0) !important;
+*/    border-radius: 2px;
+      -moz-border-radius: 2px;
+      -webkit-border-radius:2px;
+      background: none repeat scroll 0 0 #fff;
+      border: 1px solid #ddd;
+      padding: 3px;
+}
+.colorselector .sp-preview {
+    border: medium none;
+    border-radius: 2px;
+    height: 21px;
+    margin-right: 7px;
+    width: 40px;
+}
+.colorselector .sp-preview-inner {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 2px !important;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1) inset;
+}
+
+.colorselector .sp-dd {
+    color: transparent;
+    position: relative;
+}
+.sp-dd:before {
+    background: none repeat scroll 0 0 transparent;
+    border-color: #00aaff;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    content: "";
+    height: 7px;
+    margin-top: -2px;
+    position: absolute;
+    right: 3px;
+    top: 50%;
+    transform: rotate(45deg);
+    width: 7px
+}
+.clearfix .input-colorpicker {
+    float: none !important;
+    margin: 0 !important;
+    width: 90px;
+}
+.sp-picker-container .sp-top {
+    margin-bottom: 10px;
+}
+.sp-input-container input{
+    border-radius: 0;
+    padding: 6px 5px;
+}
+

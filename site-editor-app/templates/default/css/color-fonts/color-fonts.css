@@ -1,0 +1,334 @@
+#color_pal1 .palette1 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal1 .palette2 {
+      background-color: #FDAF7E;height: 40px;width: 20%; float: right;
+}
+#color_pal1 .palette3 {
+      background-color: #666666;height: 40px;width: 20%; float: right;
+}
+#color_pal1 .palette4 {
+      background-color: #9FBCD7;height: 40px;width: 20%; float: right;
+}
+#color_pal1 .palette5 {
+      background-color: #EC9712;height: 40px;width: 20%; float: right;
+}
+#color_pal2 .palette1 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal2 .palette2 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal2 .palette3 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal2 .palette4 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal2 .palette5 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal3 .palette1 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal3 .palette2 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal3 .palette3 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal3 .palette4 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal3 .palette5 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal4 .palette1 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal4 .palette2 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal4 .palette3 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal4 .palette4 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal4 .palette5 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal5 .palette1 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal5 .palette2 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal5 .palette3 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal5 .palette4 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal5 .palette5 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal6 .palette1 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal6 .palette2 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal6 .palette3 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal6 .palette4 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal6 .palette5 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal7 .palette1 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal7 .palette2 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal7 .palette3 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal7 .palette4 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+#color_pal7 .palette5 {
+      background-color: #818181;height: 40px;width: 20%; float: right;
+}
+.color_pal ul {
+      list-style-type: none;
+}
+.color_pal ul {
+      border: 1px solid #EAEAEA;
+      border-radius: 2px;
+      -moz-border-radius: 2px;
+      -webkit-border-radius:2px;
+      box-shadow: 2px 2px 3px -2px rgba(0, 0, 0, 0.4) inset;
+      -moz-box-shadow: 2px 2px 3px -2px rgba(0, 0, 0, 0.4) inset;
+      -webkit-box-shadow: 2px 2px 3px -2px rgba(0, 0, 0, 0.4) inset;
+      display: block;
+      height: 38px !important;
+      margin: 1px !important;
+      width: 81px !important;
+      margin: 2px 7px 2px 6px;
+      overflow: hidden;
+      position: absolute;
+}
+.text_pal {
+      float: right;
+      margin: 10px 19px -32px 0;
+}
+.color_pal {
+      height: 44px;
+      left: 10px;
+      top: 50%;
+      width: 87px;
+      float: left;
+}
+.dropdown_color_palette {
+      width:215px;
+      height: 400px ;
+}
+.data-font-heading{
+   font-size: 22px
+}
+.data-font-paragraph{
+   font-size: 14px;
+}
+.dropdown_color_palette li a {
+      padding: 1px !important;
+}
+.dropdown-Font-Sets {
+      height: 400px;
+}
+.dropdown-Font-Sets p {
+  margin: 0 6px;
+}
+.dropdown-Font-Sets li a {
+    padding: 10px;
+}
+.dropdown-Font-Sets .divider {
+    box-shadow: 0 0 8px #aaa;
+    margin: 0;
+    width: 98% !important;
+}
+.dropdown-Font-Sets li a:hover {
+    background: #fff ;
+}
+.dropdown_customize_palette li a span ul {
+      list-style-type: none;
+}
+.dropdown_customize_palette {
+      min-width: 250px;
+}
+.dropdown_customize_palette > li {
+      float: left;
+
+}
+.dropdown_customize_palette li a span ul{
+      background: url(../images/down_arrow.png) no-repeat scroll 50% 5px rgba(0, 0, 0, 0);
+      padding-top: 24px;
+}
+
+.Customize_ft2{
+      line-height: 1em;
+      margin: 18px 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 150px !important;
+}
+
+.Customize_ft1 {
+      display: block;
+      height: 25px;
+      left: 10px;
+      text-align: left;
+      top: 50%;
+      width: 25px;
+      margin: 8px 5px 30px 8px;
+}
+.Customize_ft3 {
+      font-family: "Helvetica Neue Thin","HelveticaNeueW01-Thin","HelveticaNeueW02-Thin","HelveticaNeueW10-35Thin",Helvetica,Arial,sans-serif;
+      font-size: 14px;
+}
+.dropdown_Customize_font {
+      min-width: 240px;
+}
+
+.font_cl1 {
+
+      background-color: #333333;
+      display: inline-block;
+      height: 17px;
+      width: 17px;
+}
+.font_cl2{
+      font-family: open sans,sans-serif;
+      font-size: 40px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+      min-width: 0;
+}
+.font_cl3 {
+      color: #AAAAAA;
+      font-size: 11px;
+      position: relative;
+      right: 3px;
+      top: -55px;
+}
+.font_cl4 {
+      background-color: #333333;
+      display: block;
+      height: 17px;
+      width: 17px;
+}
+.font_cl5{
+       font-family: open sans,sans-serif;
+      font-size: 11px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: bold;
+      min-width: 0;
+}
+.font_cl6 {
+      color: #33ccff;
+      font-size: 11px;
+      position: relative;
+      right: 3px;
+      top: -55px;
+}
+.font_cl7 {
+      background-color: #333333;
+      display: block;
+      height: 17px;
+      width: 17px;
+}
+.font_cl8{
+      font-family: open sans,sans-serif;
+      font-size: 15px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: bold;
+      min-width: 0;
+}
+.font_cl9 {
+      color: #AAAAAA;
+      font-size: 11px;
+      position: relative;
+      right: 3px;
+      top: -55px;
+}
+.font_cl10 {
+      background-color: #333333;
+      display: block;
+      height: 17px;
+      width: 17px;
+}
+.font_cl11{
+       font-family: open sans,sans-serif;
+      font-size: 52px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+      min-width: 0;
+}
+.font_cl12 {
+      color: #AAAAAA;
+      font-size: 11px;
+      position: relative;
+      right: 3px;
+      top: -55px;
+}
+.font_cl13 {
+      background-color: #333333;
+      display: block;
+      height: 17px;
+      width: 17px;
+}
+.font_cl14{
+      font-family: open sans,sans-serif;
+      font-size: 30px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+      min-width: 0;
+}
+.font_cl15 {
+      color: #AAAAAA;
+      font-size: 11px;
+      position: relative;
+      right: 3px;
+      top: -55px;
+}
+
+.font_cl16 {
+      background-color: #333333;
+      display: block;
+      height: 17px;
+      width: 17px;
+}
+.font_cl17{
+       font-family: signika,sans-serif;
+      font-size: 22px;
+      font-style: normal;
+      font-variant: normal;
+      font-weight: normal;
+      min-width: 0;
+}
+.font_cl18 {
+      color: #AAAAAA;
+      font-size: 11px;
+      position: relative;
+      right: 3px;
+      top: -55px;
+}

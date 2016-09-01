@@ -1,0 +1,47 @@
+/*
+#less_info#(
+"handle"  =>"search-skin-default",
+"deps"    => array('main-search'),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/search/less/variables.less" ,
+)
+)#
+*/
+.module-search.search-skin-default {
+    form {
+        //padding-right: 60px;
+    }
+  .search-box{
+       //padding-right: 42px;
+       padding-right: 34px;
+       position: relative;
+  }
+  .search-button {
+      color: @main-color;
+      background: none repeat scroll 0 0 transparent;
+      border: 0 none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      .search-icon{
+        color: @main-color;
+      }
+  }
+}
+.rtl-body .module.module-search.search-skin-default {
+    form {
+        //padding-right: 0px;
+        //padding-left: 60px;
+    }
+  .search-box{
+       padding-right: 12px;
+       padding-left: 34px;
+  }
+  .search-button {
+      left: 0;
+      right: auto;
+  }
+}

@@ -1,0 +1,3 @@
+[sed_button title="button" link="#" override_skins="default, skin1, skin2, skin3 , skin4 , skin5" ]
+	[sed_text_title toolbar1="simple-text" toolbar2="simple-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="button" tag="span" class="span-padding"]Button Create[/sed_text_title]
+[/sed_button]

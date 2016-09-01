@@ -1,0 +1,44 @@
+/*#less_info#(
+"handle"  =>"main-button",
+"deps"    => array(),
+"ver"     => "1.0.0",
+"media"   => "all",
+)#*/
+.module.module-button{
+  &.button-skin2,
+  &.button-skin3,
+  &.button-skin5
+  {
+    display: inline-block;
+    font-size: 0;
+    .btn{
+      display: table;
+    }
+  }
+  .btn-none{
+    padding: 0;
+    min-width: 0;
+    background: transparent;
+    &:active,
+    &:focus{
+      .box-shadow(none);
+      background: transparent;
+    }
+
+  }
+
+}
+
+.btn-default {
+  .module-button.button-skin2 & .icon-button-pd,
+  .icon-button-pd {
+      border-right: 1px solid @btn-default-border;
+  }
+}
+.rtl-body .module.module-button.button-skin2 .btn-default,
+.rtl-body .module.module-button .btn-default {
+  .icon-button-pd {
+    border-right: 0 solid @btn-default-border;
+    border-left: 1px solid @btn-default-border;
+ }
+}

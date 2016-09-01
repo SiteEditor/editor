@@ -1,0 +1,1 @@
+<div {{sed_attrs}} class="{{class}} tab-content" > {{{content}}} </div>

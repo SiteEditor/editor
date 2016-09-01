@@ -1,0 +1,131 @@
+/*#less_info#(
+"handle"    => "woocomerce-product-categories-default",
+"deps"      => array(),
+"ver"       => "1.0.0",
+"media"     => "all"
+)#*/
+.product-categories-default{
+  .sed-products-list{
+    .clearfix();
+  }
+    .product-category{
+      	position: relative;
+      	margin: 0 auto;
+      	list-style: none;
+      	text-align: center;
+        float: left;
+        > a {
+                background: none repeat scroll 0 0 @base-color-c;
+                cursor: pointer;
+                display: block;
+                margin: 0;
+                overflow: hidden;
+                position: relative;
+                text-align: center;
+                width: 100%;
+            img {
+                display: block;
+                height: auto;
+                max-width: 100%;
+                min-width: 100%;
+                opacity:1;
+                position: relative;
+            	.transition(opacity 0.35s, transform 0.35s;);
+            	.scale(1);
+            }
+            .image-hover{
+                width: 100%;
+                height: 100%;
+                display: table;
+                table-layout: fixed;
+
+              .image-hover-inner{
+                height: 100%;
+                width: 100%;
+                display: table-cell;
+                vertical-align: middle;
+                .transition(all 0.40s);
+              }
+             }
+
+
+            figcaption {
+                background: none repeat scroll 0 0 fade(@base-color-c,20%);
+            	.high-color(@body-bg) ;
+            	text-transform: uppercase;
+            	position: absolute;
+            	top: 0;
+            	left: 0;
+            	width: 100%;
+            	height: 100%;
+            	.backface-visibility(hidden);
+                &::before {
+                	position: absolute;
+                	top: 20px;
+                	right: 20px;
+                	bottom: 20px;
+                	left: 20px;
+                	border: 2px solid @body-bg;
+                	content: '';
+                	.scale(1.1);
+                    background: none repeat scroll 0 0 fade(@base-color-c,50%);
+                    z-index: 1;
+                }
+                h4 {
+                	 margin:0;
+                    .high-color(@base-color-c) ;
+                    .transition(all 0.50s);
+                    position: relative;
+                    z-index: 3;
+                }
+                p {
+                    margin: 0 auto -200px;
+                    height: 0 ;
+                   .scale(1);
+                   .high-color(@base-color-c);
+                   .transition(all 0.60s);
+                   z-index: 3;
+                   position: relative;
+                   font-size:@font-size-small;
+                   .opacity(0); 
+                }
+
+            }    //,figcaption p
+            figcaption::before{
+            	.opacity(0);
+            	.transition(opacity 0.35s, transform 0.35s;);
+            }
+            &:hover{
+                figcaption{
+                    background: none repeat scroll 0 0 fade(@base-color-c,6%);
+                }
+                img {
+                    .opacity(1);
+                	.scale(1.1);
+                }
+                h4 {
+                    .high-color(@base-color-c);
+                }
+                p {
+                    margin: 10px auto 0;
+                    height: auto;
+                }
+                figcaption::before,
+                figcaption p {
+                    .opacity(1);
+                	.scale(1);
+                }
+                figcaption::before,
+                //figcaption h4,
+                //figcaption p,
+                img {
+                	.transition-delay( 0.15s);
+                }
+            }
+
+        }
+
+    }
+
+}
+

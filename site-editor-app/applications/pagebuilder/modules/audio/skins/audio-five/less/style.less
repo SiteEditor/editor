@@ -1,0 +1,291 @@
+.jp-audio {
+    &-full { 
+        /* styling the player in fullscreen mode
+         ======================================== */
+
+        /* Rules for IE6 (full-screen) */
+        width:480px;
+        height:270px;
+        /* Rules for IE7 (full-screen) - Otherwise the relative container causes other page items that are not position:static (default) to appear over the audio/gui. */
+        position:static !important; position:relative;
+        
+        /* The z-index rule is defined in this manner to enable Popcorn plugins that add overlays to audio area. EG. Subtitles. */
+        div div {
+            z-index:1000;
+        }
+        .jp-jplayer {
+            top: 0;
+            left: 0;
+            position: fixed !important; position: relative; /* Rules for IE6 (full-screen) */
+            overflow: hidden;
+        }
+
+        .jp-gui {
+            position: fixed !important; position: static; /* Rules for IE6 (full-screen) */
+            top: 0;
+            left: 0;
+            width:100%;
+            height:100%;
+            z-index:1001; /* 1 layer above the others. */
+        }
+
+        .jp-interface-wrapper {
+            position: absolute !important; position: relative; /* Rules for IE6 (full-screen) */
+            bottom: 0px !important;
+            padding: 50px 0 !important;
+            .jp-interface {
+                width: 640px;
+                margin: 0 auto;
+                .jp-details {display: none !important;}
+            }
+            li.progress-holder {
+                width: 100%;
+            }
+        }
+    } // .jp-audio-full
+
+    .jp-type-playlist {
+        position: relative;
+    }
+
+    .jp-jplayer {
+        border: 2px solid @skin-bg;
+        overflow: hidden;
+        background: mix(@skin-bg, #000);
+    }
+    .jp-details {
+       background: fade(@skin-bg, @skin-bg-fade);
+       .base-color(fade(@skin-bg, @skin-bg-fade));
+    }
+    .jp-gui {
+        //position: relative;
+        //top: 0;
+        //left: 0;
+        //height: 100%;
+
+        .jp-audio-play {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            > a {
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: relative;
+                > .icon {
+                    width: 80px;
+                    height: 50px;
+                    border-radius: @border-radius-large;
+                    background: fade(@skin-bg, @skin-bg-fade);
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: -25px;
+                    margin-left: -40px;
+                    display: table;
+                    text-align: center;
+                    .smart-variant(color; @skin-bg; 95%);
+                    &:hover { color: @main-color; }
+                    > i {
+                        font-size: 25px;
+                        display: table-cell;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        } //.jp-audio-play
+
+        .jp-toggle-playlist {
+            .icon {
+                border-radius: @border-radius-large;
+                //background: fade(@skin-bg, @skin-bg-fade);
+                i {
+                    .smart-variant(color; @skin-bg; 90%);
+                }
+            } //.icon
+        } //.jp-toggle-playlist
+
+        .jp-interface-wrapper {
+            width: 100%;
+        }
+
+
+        .jp-interface {
+            .transition(all .1s ease-in);
+            height: 34px;
+            padding: 3px 10px;
+            //border-radius: @border-radius-base;
+            background: fade(@skin-bg, @skin-bg-fade);
+            ul {
+                margin: 0;
+            }
+            li {
+                > .jp-current-time,
+                > .jp-duration,
+                > a {
+                    padding: 0px 3px;
+                    font-size: 13px;
+                    .smart-variant(color; @skin-bg; 95%);
+                    display: table-cell;
+                    vertical-align: middle;
+                    text-align: center;
+                    .transition(all .1s ease-in);
+                    &:hover { .smart-variant(color; @skin-bg; @fade: 85%); }
+
+                    &.jp-stop,
+                    &.jp-play,
+                    &.jp-pause {
+                        padding: 6px 0px;
+                        font-size: 17px;
+                    }
+                    &.jp-pause {
+                        font-size: 13px;
+                        padding: 8px 0;
+                    }
+                    
+                    &.jp-full-screen,                    
+                    &.jp-restore-screen,
+                    &.jp-shuffle,
+                    &.jp-shuffle-off,
+                    &.jp-repeat,
+                    &.jp-repeat-off {
+                    }
+
+                    &.jp-restore-screen,
+                    &.jp-shuffle-off,
+                    &.jp-repeat-off {
+                        color: @skin-bg;
+                        padding: 0;
+                        &:hover {
+                            color: fade(@main-color, 70%);
+                        }
+                        i:before {
+                            .smart-variant(background-color; @skin-bg; 95%);
+                            padding: 2px 4px;
+                            //border-radius: @border-radius-base;
+                        }
+                    } //.jp-*-off
+                } // tag a styling
+            }
+        } //.jp-interface
+
+        .jp-controls-holder {
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .jp-controls {
+            .progress-holder {
+                .jp-progress { padding: 12px 8px; }
+                .jp-seek-bar {
+                    height: 2px;
+                    .smart-variant(background-color; @skin-bg; @fade: 30%);
+                    .jp-play-bar {
+                        height: 100%;
+                        .smart-variant(background-color; @skin-bg; 95%);
+                        &:after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            right: 0;
+                            margin-top: -7px;
+                            margin-right: 0px;
+                            width: 2px;
+                            height: 14px;
+                            .smart-variant(background-color; @skin-bg);
+                        }
+                    }
+                }
+                .jp-duration,
+                .jp-current-time {}
+            } //.progress-holder
+
+            .volume-controls {
+                &:hover .fader {}
+                .fader {
+                    .wrapper {
+                        background: fade(@skin-bg, @skin-bg-fade);
+                        border-radius: @border-radius-base;
+                    }
+                    .jp-volume-bar {
+                        position: relative;
+                        top: 0px;
+                        left: 0px;
+                        width: 2px;
+                        height: 100%;
+                        //border-radius: @border-radius-large;
+                        //background-color: darken(@skin-bg, 30%);
+                        .smart-variant(background-color; @skin-bg; @fade: 30%);
+                        &-value {
+                            position: absolute;
+                            bottom: 0;
+                            width: 100%;
+                            .smart-variant(background-color; @skin-bg; 95%);
+                            //.box-shadow(0 0 8px fade(@main-color, 100%););
+                            //border-radius: @border-radius-large;
+                            .transition(all .1s ease-in);
+                            &:after {
+                                content: '';
+                                position: absolute;
+                                top: 0;
+                                right: 50%;
+                                margin-top: 0px;
+                                margin-right: -5px;
+                                width: 10px;
+                                height: 2px;
+                                //border-radius: 100%;
+                                .smart-variant(background-color; @skin-bg);
+                            }
+                        }
+                    }
+                } //.fader
+            } //.volume-controls
+
+            .quality-change {
+                &:hover .fader {}
+                .fader {
+                    .wrapper {
+                        background: fade(@skin-bg, @skin-bg-fade);
+                        border-radius: @border-radius-base;
+                    }
+                    a {
+                        .smart-variant(color; @skin-bg);
+                        .smart-variant(color; @skin-bg; 90%; @fade: 50%);
+                        &:hover {
+                            .smart-variant(color; @skin-bg; 90%);
+                        }
+                    }
+                } //.fader
+            } //.quality-change
+        } //.jp-controls
+    } //.jp-gui
+
+    .jp-playlist-wrapper {
+        border: 2px solid @skin-bg;
+        .jp-playlist {
+            background-color: @skin-playlist-bg;
+            ul {
+                > li {
+                    border-bottom: 1px solid @skin-playlist-bg-curr;
+                    &:hover {
+                        background: lighten(@skin-playlist-bg-curr, 3%);
+                    }
+                    p {
+                        .smart-variant(color; @skin-playlist-bg; 75%; @fade: 50%;);
+                    }
+                    a {
+                        .smart-variant(color; @skin-playlist-bg; 75%);
+                        .transition(all .1s ease-in);
+                    }
+                } // > li
+
+                > .jp-playlist-current {
+                    background: @skin-playlist-bg-curr;
+                    p { .smart-variant(color; @skin-playlist-bg-curr; 75%; @fade: 70%;); }
+                    a { color: @main-color; }
+                }
+            }
+        }
+    } //.jp-playlist
+} //.jp-audio

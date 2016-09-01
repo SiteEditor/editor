@@ -1,0 +1,33 @@
+.module-blockquote{
+ .sed-blockquote-skin{
+  padding:20px 20px 20px 50px;
+  display: block;
+  position: relative;
+  font-family: @blockquote-base-font-family ;
+  font-size:   @blockquote-font-size;
+  line-height: @blockquote-line-height;
+  box-sizing: border-box;
+   &:before{
+      content: "\201C";
+      font-family: @blockquote-quote-font-family;
+      font-size: 55px;
+      font-weight: bold;
+      color:@blockquote-quote-color;
+      position: absolute;
+   }
+   &:after{
+     content: "";
+   }
+  }
+
+}                   
+.rtl-body .module-blockquote{
+ .sed-blockquote-skin{
+  padding:20px 50px 20px 20px !important;
+   &:before{
+      content: "\201D" !important ;
+   }
+  }
+}
+
+

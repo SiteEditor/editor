@@ -1,0 +1,94 @@
+// Tables
+
+.table-row-variant(@state; @background) {
+  // Exact selectors below required to override `.table-striped` and prevent
+  // inheritance to nested tables.
+  .table > thead > tr,
+  .table > tbody > tr,
+  .table > tfoot > tr {
+    > td.@{state},
+    > th.@{state},
+    &.@{state} > td,
+    &.@{state} > th {
+      background-color: @background;
+    }
+  }
+
+  // Hover states for `.table-hover`
+  // Note: this is not available for cells or rows within `thead` or `tfoot`.
+  .table-hover > tbody > tr {
+    > td.@{state}:hover,
+    > th.@{state}:hover,
+    &.@{state}:hover > td,
+    &:hover > .@{state},
+    &.@{state}:hover > th {
+      background-color: darken(@background, 5%);
+    }
+  }
+}
+.table-bordered(@border-color) {
+  .table-bordered{
+    border: 1px solid @border-color;
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th,
+        > td {
+          border: 1px solid @border-color;
+        }
+      }
+    }
+    > thead > tr {
+      > th,
+      > td {
+        border-bottom-width: 2px;
+      }
+    }
+  }
+}
+.table-striped(@bg-accent) {
+  .table-striped {
+    > tbody > tr:nth-child(odd) {
+      > td,
+      > th {
+        background-color: @bg-accent;
+      }
+    }
+  }
+}
+.table-hover(@bg-hover) {
+  .table-hover {
+    > tbody > tr:hover {
+      > td,
+      > th {
+        background-color: @bg-hover;
+        &,& > *{
+            .base-color(@bg-hover);
+        }
+      }
+    }
+    &.table-bordered{
+      > tbody > tr:hover {
+        > td,
+        > th {
+          border-color: lighten(@main-color-dark, 5%);
+        }
+      }
+    }
+  }
+}
+.table-condensed(@condensed-cell-padding) {
+  .table-condensed {
+    > thead,
+    > tbody,
+    > tfoot {
+      > tr {
+        > th,
+        > td {
+          padding: @condensed-cell-padding;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+.contrast-al (@color) when (luma(@color) >= 50%) {
+    color:darken(@color,50%);
+}
+.contrast-al (@color) when (luma(@color) < 50%) {
+    color:#ffffff;
+}
+.alert-variant(@background; @border) {
+    background-color: @background;
+    border-color: @border;
+    .contrast-al (@background);
+
+    hr {
+      border-top-color: darken(@border, 5%);
+    }
+   .alert-title > *{
+     font-weight: bold;
+   }
+   .alert-title > *,
+   .alert-description > *{
+        .contrast-al (@background);
+    }
+
+    .alert-icons {
+      .contrast-al (@background);
+    }
+    .alert-link {
+      .contrast-al (@background);
+    }
+}

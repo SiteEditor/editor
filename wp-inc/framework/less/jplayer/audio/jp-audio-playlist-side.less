@@ -1,0 +1,66 @@
+/**
+ * playlist "side" style
+ * imported in style.less
+ */
+&.playlist-side .jp-type-playlist .jp-playlist-wrapper {
+    position: absolute;
+    width: 400px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    //border: 2px solid @skin-bg;
+    border-left: none;
+    .jp-playlist {
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        //background-color: @skin-playlist-bg;
+        //padding: 10px 20px;
+        ul {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            overflow-y: auto;
+            > li {
+                padding: 10px 10px;
+                //border-bottom: 1px solid @skin-playlist-bg-curr;
+                min-height: 77px;
+                &:last-child {border: none;}
+                .img {
+                    width: 85px;
+                    height: 56px;
+                    float: left;
+                    overflow: hidden;
+                    margin-right: 7px;
+                    img {
+                        width: auto;
+                        height: 100%;
+                    }
+                }
+                h3 {
+                    font-size: 13px;
+                    font-weight: bold;
+                    margin: 0;
+                    padding: 4px 0;
+                }
+                .jp-artist { display: none; }
+                p {
+                    font-size: 12px;
+                    margin: 0;
+                    //.smart-variant(color; @skin-playlist-bg; 75%; @fade: 50%;);
+                }
+                a {
+                    //.smart-variant(color; @skin-playlist-bg; 75%);
+                }
+            } // > li
+
+            > .jp-playlist-current {
+                //background: @skin-playlist-bg-curr;
+                //p { .smart-variant(color; @skin-playlist-bg-curr; 75%; @fade: 50%;); }
+                //a { .smart-variant(color; @skin-playlist-bg-curr; 75%); }
+            }
+        }
+    }
+} //.playlist-side

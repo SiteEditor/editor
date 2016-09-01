@@ -1,0 +1,31 @@
+/*
+#less_info#(
+"handle" => "glossy-reflection-img",
+"deps" => array('single-image-main-less'),
+"ver" => "1.0.0",
+"media" => "all"
+)#
+*/
+
+.module-single-image.single-image-glossy-reflection{
+  //.multi-box-shadow(0 0 2px rgba(0, 0, 0, 0.7) inset,0 2px 0 rgba(255, 255, 255, 0.3) inset,0 -1px 0 rgba(0, 0, 0,0.5) inset,0 1px 3px rgba(0, 0, 0, 0.4));
+  .border-radius(0);
+
+   .img{
+     .border-radius(0);
+     img{
+        .border-radius(0);
+     }
+     &:before {
+        .radial(rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.1) 100%);
+       .border-radius(0);
+        content: " ";
+        height: 50%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+     }
+   }
+
+}

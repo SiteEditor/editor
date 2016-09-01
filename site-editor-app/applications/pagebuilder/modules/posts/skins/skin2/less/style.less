@@ -1,0 +1,142 @@
+/*#less_info#(
+"handle" => "single-posts-skin2",
+"deps" => array("post-main-less"),
+"ver" => "1.0.0",
+"media" => "all"
+)#
+*/
+.module.single-posts.single-posts-skin2 {
+    .entry-header {
+        margin-bottom: 10px;
+        h1 {
+            font-size:@font-size-h4;
+            margin: 30px 0 10px;
+        }
+
+        .entry-meta {
+            margin-bottom: 0 !important;
+            display: block;
+            padding:0;
+            .post-cat {
+                  &:last-child > a:after {
+                      content: "" !important;
+                  }
+                  > a:after {
+                      content: ",";
+                  }
+            }
+            span,a {
+                .high-color(@body-bg);
+            }
+            i {
+                color: @main-color;
+            }
+            a {
+               &:hover{
+                 color:@main-color;
+               }
+            }
+        }
+    }
+
+    .entry-footer {
+        margin-top: 20px;
+        text-align: right;
+          .post-tags {
+             text-align: left;
+             .label {
+                  .high-color(@body-bg);
+                  display: block;
+                  float: none;
+                  font-size: @font-size-base + 1;
+                  margin-bottom: 10px;
+                  width: 100%;
+                  font-weight: normal;
+              }
+             .post-tag {
+                background: none repeat scroll 0 0 transparent;
+                border-color: @base-border-color-b;
+                border-radius: 2px;
+                border-style: solid solid solid none;
+                border-width: 2px 2px 2px 0;
+                display: inline-block;
+                font-size: @font-size-small;
+                line-height: 1.53em;
+                margin:0 0 0.5em 1.4em;
+                padding:0 1em 0 1.3em;
+                position: relative;
+                z-index: 1;
+                &:after {
+                    background: none repeat scroll 0 0 transparent;
+                    border-width: 0px 0px 2px 2px;
+                    border-style: solid;
+                    border-color:@base-border-color-b;
+                    content: "";
+                    height: 1.32em;
+                    left: -0.58em;
+                    position: absolute;
+                    top: 0.08em;
+                    width: 1.32em;
+                    .rotate(45deg);
+                    z-index: 9;
+                }
+                &:before {
+                    background-color:transparent;
+                    border: 2px solid @base-border-color-b;
+                    .border-radius(30px);
+                    content: "";
+                    height: 7px;
+                    left: 0.1em;
+                    line-height: 1.5em;
+                    position: absolute;
+                    top: 0.5em;
+                    width: 7px;
+                    z-index: 12;
+                }
+                &:hover,
+                &:focus,
+                &:active{
+                  &,&:after{
+                    background:@main-color;
+                    border-color: @main-color;
+                  }
+                  &:before {
+                    .high-color(@main-color;background);
+                    .high-color(@main-color;border-color);
+                  }
+                  a{
+                    .base-color(@main-color);
+                  }
+
+                }
+
+             }
+        }
+    }
+
+}
+.rtl-body .module.single-posts.single-posts-skin2 {
+    .entry-footer {
+        text-align: left;
+          .post-tags {
+              text-align: right;
+             .post-tag {
+                border-style: solid none solid solid;
+                border-width: 2px 0 2px 2px;
+                margin:0 1.4em 0.5em 0;
+                padding:0 1.3em 0 1em;
+                &:after {
+                    border-width: 2px 2px 0px 0px;
+                    right: -0.58em;
+                    left: auto;
+                }
+                &:before {
+                    right: 0.1em;
+                    left: auto;
+                }
+             }
+        }
+    }
+
+}
+

@@ -1,0 +1,23 @@
+/*#less_info#(
+"handle"	=> "separator-skin11",
+"deps"		=> array("separator-main-less"),
+"ver"		=> "1.0.0",
+"media"		=> "all"
+)#
+*/
+.module-separator.separator-skin11{
+    border-color: @main-color;
+    &::after{
+        content: "";
+        border-top: 5px solid @main-color;
+        display: inline-block;
+        .left(0);
+        margin-top: -3px !important;
+        padding: 0 22px;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        max-width: 100%;
+    }
+}
+

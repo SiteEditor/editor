@@ -1,0 +1,1 @@
+<div {{sed_attrs}} class="{{class}} collage-item">{{{content}}}</div>

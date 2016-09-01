@@ -1,0 +1,30 @@
+/*
+#less_info#(
+"handle"  =>"icon-content-box-skin4",
+"deps"    => array("main-icon-content-box"),
+"ver"     => "1.0.0",
+"media"   => "all",
+"import"  => array(
+    "@sed-modules-root/icon-content-box/less/variables.less" 
+)
+)#
+*/
+@import "../../../less/variables.less";
+.module-icon-content-box.icon-content-box-skin4 {
+  text-align: center;
+  .sed-boxed-icon{
+      background:  @body-modules-bg;
+      border: 1px solid lighten(@icon-ct-border-color,6%);
+      .border-radius( @icon-ct-border-radius + 2);
+      padding:20px;
+      .module-icons {
+        .hi-icon{
+          text-align: center;
+        }
+      }
+      .heading-box{
+        display: block;
+        text-align: center;
+      }
+  }
+}

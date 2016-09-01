@@ -1,0 +1,61 @@
+&.caption-1 {
+    .info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: @padding-base-vertical @padding-base-horizontal;
+        .transition(all .5s ease-in .4s);
+
+        .title, .description {
+            padding: @padding-small-vertical @padding-small-horizontal;
+            .border-radius(@border-radius-small);
+            position: relative;
+            .transition(all                 .2s ease-in .6s,
+                        color               .2s ease-in 0s,
+                        background-color    .2s ease-in 0s;);
+        }
+        .title {
+            left: -100%;
+            display: inline-block;
+            background: fade(@main-color, 70%);
+            margin-bottom: 10px;
+            > *{
+              .high-color(fade(@main-color, 70%));
+            }
+            &:hover {
+                .high-color(fade(@main-color, 70%);background-color);
+                > *{
+                    color: @main-color;
+                }
+            }
+        }
+        .description {
+            left: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            > *{
+                .high-color(rgba(0, 0, 0, 1));       
+            }
+            margin: 0;
+        }
+        .description:hover,
+        .title:hover + .description {
+            background: rgba(0, 0, 0, 1);
+        }
+    }
+
+    .slide {
+        &-closed .info {
+            .opacity(0);
+            .transition(all .1s ease-in 0s);
+        }
+        &-open .info {
+            .opacity(1);
+            .title, .description {
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+        }
+    }
+}

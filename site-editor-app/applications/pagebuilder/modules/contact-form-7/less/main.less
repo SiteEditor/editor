@@ -1,0 +1,252 @@
+/*
+#less_info#(
+"handle" => "contact-form-7-style",
+"deps" => array(),
+"ver" => "1.0.0",
+"media" => "all",
+)#
+*/
+.module.module-contact-form-7{
+  .wpcf7-form{
+      .row {
+        margin-left: -6px;
+        margin-right: -6px;
+        > [class*="col-"] {
+          padding-left: 6px;
+          padding-right: 6px;
+        }
+      }
+      textarea {
+        padding-top: @form-padding-base-vertical + 3px;
+        padding-bottom: @form-padding-base-vertical + 3px;
+      }
+      span.wpcf7-not-valid-tip {
+        color: #FF0505;
+        font-size: 1em;
+        display: block;
+        padding: 6px 12px;
+        background-color: rgba(247, 234, 234, 0.76);
+        border: 1px solid rgba(247, 234, 234, 0.1);
+      }
+      div.wpcf7-validation-errors {
+        border: 1px solid #F5EF9C;
+        padding: 10px 20px;
+        background-color: #FFFDE7;
+        margin-right: 0;
+        margin-left: 0;
+      }
+  }
+}
+
+.module.module-contact-form-7.contact-form-7-default{
+  .wpcf7-form{
+     /*   .wpcf7-validates-as-required,.required {
+            color: @brand-danger;
+      }
+      .comment-textarea {
+          textarea {
+              height: 172px;
+          }
+      }
+      .form-group {
+          margin-bottom: 15px;
+      }     */
+      select,
+      textarea,
+      input[type="text"],
+      input[type="password"],
+      input[type="datetime"],
+      input[type="datetime-local"],
+      input[type="date"] ,
+      input[type="month"],
+      input[type="time"],
+      input[type="week"],
+      input[type="number"],
+      input[type="email"],
+      input[type="url"],
+      input[type="search"],
+      input[type="tel"],
+      input[type="color"]{
+          background-color: @body-modules-bg;
+          .border-radius(0);
+          .box-shadow(0 1px 1px rgba(0, 0, 0, 0.075) inset);
+          .low-color(@body-modules-bg);
+          line-height: 1.5;
+          &:focus{
+            .box-shadow( 0 0 2px fade(darken(@main-color-darker,10%),60%));//@main-color-dark
+            border-color: @main-color-dark;
+            outline: 0 none;
+            background: lighten(@base-color-b-lighter,2%);
+          }
+
+      }
+      /*.comment-textarea-login{
+        width: 100% !important;
+        max-width: 100%;
+      }
+      .form-allowed-tags {
+          background: none repeat scroll 0 0 @base-color-b-lighter;
+          border: 1px solid transparent;
+          font-size:  @font-size-small - 1;
+          padding: 10px;
+          margin-bottom: 15px;
+      } */
+  }
+}
+.module.modul-contact-form-7.contact-form-7-skin1{
+  .wpcf7-form{
+      /*   .wpcf7-validates-as-required,.required {
+            color: @brand-danger;
+      }
+     .comment-textarea {
+          textarea {
+              height: 135px;
+          }
+      }
+      .form-group {
+          margin-bottom: 15px;
+      }   */
+      select,
+      textarea,
+      input[type="text"],
+      input[type="password"],
+      input[type="datetime"],
+      input[type="datetime-local"],
+      input[type="date"] ,
+      input[type="month"],
+      input[type="time"],
+      input[type="week"],
+      input[type="number"],
+      input[type="email"],
+      input[type="url"],
+      input[type="search"],
+      input[type="tel"],
+      input[type="color"]{
+          background: none repeat scroll 0 0 @body-modules-bg;
+          .border-radius(2px);
+          .low-color(@body-modules-bg);
+          line-height: 1.5;
+          &:focus{
+            .box-shadow(inset 0 0 2px rgba(0,0,0,.095));
+            background: @body-bg;
+            outline: 0 none;
+          }
+      }
+     /* .comment-textarea-login{
+        width: 100% !important;
+        max-width: 100%;
+        padding:0 !important ;
+      }
+      .form-allowed-tags {
+          background: none repeat scroll 0 0 @base-color-b-lighter;
+          border: 1px solid @base-border-color-light;
+          font-size: @font-size-small - 1;
+          padding: 10px;
+      }       */
+      .wpcf7-submit{
+        margin: 0 auto;
+      }
+  }
+}
+.module.module-contact-form-7.contact-form-7-skin2{
+  .wpcf7-form{
+
+      /*.clearfix();
+         .wpcf7-validates-as-required,.required {
+            color: @brand-danger;
+      }
+     .comment-textarea {
+          textarea {
+              height: 135px;
+          }
+      }
+      .form-group {
+          margin-bottom: 15px;
+          position: relative;
+          i {
+            background: none repeat scroll 0 0 @body-modules-bg;
+            left: 1px;
+            line-height: 1.5;
+            margin: 6px 0;
+            position: absolute;
+            text-align: center;
+            top: 1px;
+            width: 32px;
+          }
+          input,
+          textarea {
+              & + i{ .lower-color(@body-modules-bg); }
+          }
+
+      }     */
+      select,
+      textarea,
+      input[type="text"],
+      input[type="password"],
+      input[type="datetime"],
+      input[type="datetime-local"],
+      input[type="date"] ,
+      input[type="month"],
+      input[type="time"],
+      input[type="week"],
+      input[type="number"],
+      input[type="email"],
+      input[type="url"],
+      input[type="search"],
+      input[type="tel"],
+      input[type="color"],{
+          background: none repeat scroll 0 0 @body-modules-bg;
+          border-color:@base-border-color;
+          .border-radius(0);
+          box-shadow: none;
+          line-height: 1.5;
+          .low-color(@body-modules-bg);
+          &:focus{
+            outline: none;
+            .box-shadow(none);
+            border-bottom: 1px solid @main-color;
+          }
+      }
+      /*.comment-textarea-login{
+        width: 100% !important;
+        max-width: 100%;
+        padding:0 !important ;
+        display: inline-block;
+      }
+      .form-allowed-tags {
+          background: none repeat scroll 0 0 @base-color-b-lighter;
+          border: 1px solid @base-border-color-light;
+          font-size: @font-size-small - 1;
+          padding: 5px 10px;
+      }      */
+
+  }
+}
+.rtl-body .module.module-contact-form-7{
+  .wpcf7-form{
+      text-align: right;  
+      .row {
+        > [class*="col-"] {
+          text-align: right;
+        }
+      }
+      select,
+      textarea,
+      input[type="text"],
+      input[type="password"],
+      input[type="datetime"],
+      input[type="datetime-local"],
+      input[type="date"] ,
+      input[type="month"],
+      input[type="time"],
+      input[type="week"],
+      input[type="number"],
+      input[type="email"],
+      input[type="url"],
+      input[type="search"],
+      input[type="tel"],
+      input[type="color"],{
+          text-align: right;
+      }
+  }
+}

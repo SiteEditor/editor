@@ -1,0 +1,1 @@
+<li {{sed_attrs}} class="checklist-item {{class}}">{{{content}}}</li>

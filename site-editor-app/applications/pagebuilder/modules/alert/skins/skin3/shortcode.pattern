@@ -1,0 +1,6 @@
+[sed_alert override_skins="default , skin1 ,skin2 ,skin4 "]
+    [sed_text_title contextmenu_disabled = "disabled" settings_disabled = "disabled" tag="div" class="alert-title" toolbar1="normal-text" toolbar2="normal-text"  parent_module="alert"]<h5>Message!</h5> [/sed_text_title]
+    [sed_paragraph contextmenu_disabled = "disabled" settings_disabled = "disabled" tag="div" toolbar1="normal-paragraph" toolbar2="normal-paragraph" class="alert-description"  parent_module="alert"]
+       <p>Nunc lobortis dui neque, quis accumsan dolor. Aenean aliquet dignissim semper. </p>
+    [/sed_paragraph]
+[/sed_alert]
