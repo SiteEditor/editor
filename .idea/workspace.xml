@@ -25,9 +25,17 @@
       <file leaf-file-name="app-layout-module.min.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.998224">
-              <caret line="214" column="12" selection-start-line="214" selection-start-column="12" selection-end-line="214" selection-end-column="12" />
-              <folding />
+            <state vertical-scroll-proportion="-0.37655416">
+              <caret line="226" column="38" selection-start-line="226" selection-start-column="20" selection-end-line="226" selection-end-column="38" />
+              <folding>
+                <element signature="e#2284#2385#0" expanded="false" />
+                <element signature="e#2791#3102#0" expanded="false" />
+                <element signature="e#4598#4809#0" expanded="false" />
+                <element signature="e#10109#10123#0" expanded="false" />
+                <element signature="e#12431#12443#0" expanded="false" />
+                <element signature="e#13037#13174#0" expanded="false" />
+                <element signature="e#13273#14636#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -35,11 +43,57 @@
       <file leaf-file-name="app-layout-plugin.min.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.212121">
-              <caret line="94" column="48" selection-start-line="94" selection-start-column="25" selection-end-line="94" selection-end-column="48" />
+            <state vertical-scroll-proportion="1.6060606">
+              <caret line="847" column="62" selection-start-line="847" selection-start-column="62" selection-end-line="847" selection-end-column="62" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
+                <element signature="e#470#1944#0" expanded="false" />
+                <element signature="e#2051#2961#0" expanded="false" />
+                <element signature="e#3073#3185#0" expanded="false" />
+                <element signature="e#3712#3970#0" expanded="false" />
+                <element signature="e#4421#4484#0" expanded="false" />
+                <element signature="e#4496#4568#0" expanded="false" />
+                <element signature="e#5448#5786#0" expanded="false" />
+                <element signature="e#5867#16083#0" expanded="false" />
+                <element signature="e#16137#16921#0" expanded="false" />
+                <element signature="e#16991#22939#0" expanded="false" />
+                <element signature="e#23057#23183#0" expanded="false" />
+                <element signature="e#23250#23611#0" expanded="false" />
+                <element signature="e#23737#24354#0" expanded="false" />
+                <element signature="e#24411#24614#0" expanded="false" />
+                <element signature="e#24652#24809#0" expanded="false" />
+                <element signature="e#24853#28303#0" expanded="false" />
+                <element signature="e#28359#28740#0" expanded="false" />
+                <element signature="e#28797#29484#0" expanded="false" />
+                <element signature="e#29538#30218#0" expanded="false" />
+                <element signature="e#30286#30691#0" expanded="false" />
+                <element signature="e#30742#31513#0" expanded="false" />
+                <element signature="e#31563#32331#0" expanded="false" />
+                <element signature="e#32375#32554#0" expanded="false" />
+                <element signature="e#32608#32827#0" expanded="false" />
+                <element signature="e#33259#33746#0" expanded="false" />
+                <element signature="e#33795#34329#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plugin.min.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-10.0">
+              <caret line="274" column="14" selection-start-line="274" selection-start-column="14" selection-end-line="274" selection-end-column="88" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pagebuilder.min.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.242424">
+              <caret line="2090" column="40" selection-start-line="2090" selection-start-column="40" selection-end-line="2090" selection-end-column="80" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -47,8 +101,8 @@
       <file leaf-file-name="layout.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.5573771">
-              <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+            <state vertical-scroll-proportion="-1.5245901">
+              <caret line="138" column="20" selection-start-line="138" selection-start-column="20" selection-end-line="138" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -57,8 +111,8 @@
       <file leaf-file-name="pagebuilder.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.737705">
-              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+            <state vertical-scroll-proportion="-12.295082">
+              <caret line="1398" column="26" selection-start-line="1398" selection-start-column="26" selection-end-line="1398" selection-end-column="26" />
               <folding>
                 <marker date="1464714627651" expanded="true" signature="7104:7116" placeholder="..." />
               </folding>
@@ -71,8 +125,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/woocommerce-single-product/sub-shortcode/sub-shortcode.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/woocommerce-account/sub-shortcode/sub-shortcode.php" />
         <option value="$PROJECT_DIR$/site-editor-app/libraries/ajax/ajax_db.php" />
         <option value="$PROJECT_DIR$/site-editor-app/libraries/ajax/ajax_functions.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/template/template.php" />
@@ -120,8 +172,10 @@
         <option value="$USER_HOME$/Desktop/Untitled2.htm" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/front_page_displays.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js" />
       </list>
     </option>
   </component>
@@ -529,15 +583,12 @@
     <property name="js.buildTools.gulp.gulp_package_dir" value="" />
     <property name="js.buildTools.grunt.node_interpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.JavaScript" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
-    <property name="SearchEverywhereHistoryKey" value="pageBuilder&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="pagebuilder.min&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js&#10;shortcode-content&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;pageBuilder&#9;null&#9;null" />
   </component>
   <component name="RunManager" selected="PHP Script.front_page_displays.php">
-    <configuration default="false" name="front_page_displays.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/front_page_displays.php">
-      <method />
-    </configuration>
     <configuration default="true" type="AppEnginePhpConfigurationType" factoryName="App Engine for PHP">
       <method />
     </configuration>
@@ -611,14 +662,12 @@
       <envs />
       <method />
     </configuration>
+    <configuration default="false" name="front_page_displays.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/front_page_displays.php">
+      <method />
+    </configuration>
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="PHP Script.front_page_displays.php" />
     </list>
-    <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="PHP Script.front_page_displays.php" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration" myUseAcceleration="nothing" cleanupOnStartRun="true">
@@ -652,7 +701,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12780656" sideWeight="0.5150376" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6799363" sideWeight="0.4849624" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5334395" sideWeight="0.4849624" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -705,88 +754,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js</url>
-          <line>775</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/site-editor-app/admin/includes/defines.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/PIE/PIE.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.2692308">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/application/controller_base.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.769231">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/woocommerce-single-product/sub-shortcode/sub-shortcode.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/woocommerce-account/sub-shortcode/sub-shortcode.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/ajax/ajax_db.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.423077">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/ajax/ajax_functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.076923">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/template/template.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.807693">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/image-content-box/sub-shortcode/sub-shortcode.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.038462">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/ajax/site_editor_ajax.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.538462">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-app/admin/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.884615">
@@ -1055,47 +1027,161 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-main.php">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6496479">
-          <caret line="550" column="15" selection-start-line="550" selection-start-column="15" selection-end-line="550" selection-end-column="15" />
+        <state vertical-scroll-proportion="-0.21140939">
+          <caret line="899" column="0" selection-start-line="899" selection-start-column="0" selection-end-line="899" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/icons/js/icons-module.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.5573771">
-          <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
+        <state vertical-scroll-proportion="-1.6923077">
+          <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../site-editor-portfolio/modules/portfolio/js/portfolio-module.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="9.43787">
+          <caret line="243" column="8" selection-start-line="243" selection-start-column="8" selection-end-line="243" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/menu/js/menu-module.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.09731544">
+          <caret line="324" column="8" selection-start-line="324" selection-start-column="8" selection-end-line="324" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../site-editor-blog/modules/blog/js/archive-module.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5218121">
+          <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-main.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35387325">
+          <caret line="653" column="54" selection-start-line="653" selection-start-column="54" selection-end-line="653" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../site-editor-code-syntax-highlighter/modules/code-syntax-highlighter/code-syntax-highlighter.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9330986">
+          <caret line="780" column="26" selection-start-line="780" selection-start-column="26" selection-end-line="780" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.737705">
-          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+        <state vertical-scroll-proportion="-12.295082">
+          <caret line="1398" column="26" selection-start-line="1398" selection-start-column="26" selection-end-line="1398" selection-end-column="26" />
           <folding>
             <marker date="1464714627651" expanded="true" signature="7104:7116" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/modules/appTemplateClass.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.093959734">
+          <caret line="194" column="48" selection-start-line="194" selection-start-column="48" selection-end-line="194" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/subThemes/plugin.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3808725">
+          <caret line="541" column="17" selection-start-line="541" selection-start-column="17" selection-end-line="541" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.5245901">
+          <caret line="138" column="20" selection-start-line="138" selection-start-column="20" selection-end-line="138" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.242424">
+          <caret line="2090" column="40" selection-start-line="2090" selection-start-column="40" selection-end-line="2090" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.0">
+          <caret line="274" column="14" selection-start-line="274" selection-start-column="14" selection-end-line="274" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.212121">
-          <caret line="94" column="48" selection-start-line="94" selection-start-column="25" selection-end-line="94" selection-end-column="48" />
+        <state vertical-scroll-proportion="1.6060606">
+          <caret line="847" column="62" selection-start-line="847" selection-start-column="62" selection-end-line="847" selection-end-column="62" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#470#1944#0" expanded="false" />
+            <element signature="e#2051#2961#0" expanded="false" />
+            <element signature="e#3073#3185#0" expanded="false" />
+            <element signature="e#3712#3970#0" expanded="false" />
+            <element signature="e#4421#4484#0" expanded="false" />
+            <element signature="e#4496#4568#0" expanded="false" />
+            <element signature="e#5448#5786#0" expanded="false" />
+            <element signature="e#5867#16083#0" expanded="false" />
+            <element signature="e#16137#16921#0" expanded="false" />
+            <element signature="e#16991#22939#0" expanded="false" />
+            <element signature="e#23057#23183#0" expanded="false" />
+            <element signature="e#23250#23611#0" expanded="false" />
+            <element signature="e#23737#24354#0" expanded="false" />
+            <element signature="e#24411#24614#0" expanded="false" />
+            <element signature="e#24652#24809#0" expanded="false" />
+            <element signature="e#24853#28303#0" expanded="false" />
+            <element signature="e#28359#28740#0" expanded="false" />
+            <element signature="e#28797#29484#0" expanded="false" />
+            <element signature="e#29538#30218#0" expanded="false" />
+            <element signature="e#30286#30691#0" expanded="false" />
+            <element signature="e#30742#31513#0" expanded="false" />
+            <element signature="e#31563#32331#0" expanded="false" />
+            <element signature="e#32375#32554#0" expanded="false" />
+            <element signature="e#32608#32827#0" expanded="false" />
+            <element signature="e#33259#33746#0" expanded="false" />
+            <element signature="e#33795#34329#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.998224">
-          <caret line="214" column="12" selection-start-line="214" selection-start-column="12" selection-end-line="214" selection-end-column="12" />
-          <folding />
+        <state vertical-scroll-proportion="-0.37655416">
+          <caret line="226" column="38" selection-start-line="226" selection-start-column="20" selection-end-line="226" selection-end-column="38" />
+          <folding>
+            <element signature="e#2284#2385#0" expanded="false" />
+            <element signature="e#2791#3102#0" expanded="false" />
+            <element signature="e#4598#4809#0" expanded="false" />
+            <element signature="e#10109#10123#0" expanded="false" />
+            <element signature="e#12431#12443#0" expanded="false" />
+            <element signature="e#13037#13174#0" expanded="false" />
+            <element signature="e#13273#14636#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
