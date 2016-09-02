@@ -22,15 +22,86 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="app-layout-module.min.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="app-layout-module.min.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.30303">
-              <caret line="283" column="71" selection-start-line="283" selection-start-column="71" selection-end-line="283" selection-end-column="71" />
+            <state vertical-scroll-proportion="0.46003553">
+              <caret line="485" column="0" selection-start-line="485" selection-start-column="0" selection-end-line="485" selection-end-column="0" />
               <folding>
-                <element signature="e#2304#2405#0" expanded="false" />
-                <element signature="e#2811#3122#0" expanded="false" />
-                <element signature="e#4618#4829#0" expanded="false" />
+                <element signature="e#147#260#0" expanded="false" />
+                <element signature="e#290#3009#0" expanded="false" />
+                <element signature="e#3046#6946#0" expanded="false" />
+                <element signature="e#3176#3387#0" expanded="false" />
+                <element signature="e#6985#8624#0" expanded="false" />
+                <element signature="e#8678#8815#0" expanded="false" />
+                <element signature="e#8889#9624#0" expanded="false" />
+                <element signature="e#9686#10679#0" expanded="false" />
+                <element signature="e#10771#11572#0" expanded="false" />
+                <element signature="e#11649#13879#0" expanded="false" />
+                <element signature="e#13952#14462#0" expanded="false" />
+                <element signature="e#14538#15241#0" expanded="false" />
+                <element signature="e#15317#16111#0" expanded="false" />
+                <element signature="e#16203#17064#0" expanded="false" />
+                <element signature="e#17137#17606#0" expanded="false" />
+                <element signature="e#19124#19677#0" expanded="false" />
+                <element signature="e#19733#20228#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app-layout-plugin.min.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-23.90909">
+              <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#411#524#0" expanded="false" />
+                <element signature="e#749#2431#0" expanded="false" />
+                <element signature="e#2546#3592#0" expanded="false" />
+                <element signature="e#3720#3848#0" expanded="false" />
+                <element signature="e#3922#4025#0" expanded="false" />
+                <element signature="e#4116#4414#0" expanded="false" />
+                <element signature="e#4497#4848#0" expanded="false" />
+                <element signature="e#4923#5002#0" expanded="false" />
+                <element signature="e#5059#6012#0" expanded="false" />
+                <element signature="e#6072#6409#0" expanded="false" />
+                <element signature="e#6490#6918#0" expanded="false" />
+                <element signature="e#6960#7851#0" expanded="false" />
+                <element signature="e#7910#8171#0" expanded="false" />
+                <element signature="e#8252#8717#0" expanded="false" />
+                <element signature="e#12699#14951#0" expanded="false" />
+                <element signature="e#15022#15300#0" expanded="false" />
+                <element signature="e#15365#15476#0" expanded="false" />
+                <element signature="e#15536#16658#0" expanded="false" />
+                <element signature="e#16723#18163#0" expanded="false" />
+                <element signature="e#18223#18982#0" expanded="false" />
+                <element signature="e#19084#19917#0" expanded="false" />
+                <element signature="e#19980#20663#0" expanded="false" />
+                <element signature="e#20727#26984#0" expanded="false" />
+                <element signature="e#27091#27223#0" expanded="false" />
+                <element signature="e#27283#27640#0" expanded="false" />
+                <element signature="e#27756#28313#0" expanded="false" />
+                <element signature="e#28364#28542#0" expanded="false" />
+                <element signature="e#28574#28714#0" expanded="false" />
+                <element signature="e#28752#31940#0" expanded="false" />
+                <element signature="e#31991#32326#0" expanded="false" />
+                <element signature="e#32377#32999#0" expanded="false" />
+                <element signature="e#33047#33662#0" expanded="false" />
+                <element signature="e#33723#34087#0" expanded="false" />
+                <element signature="e#34133#34835#0" expanded="false" />
+                <element signature="e#34880#35579#0" expanded="false" />
+                <element signature="e#35619#35780#0" expanded="false" />
+                <element signature="e#35829#36026#0" expanded="false" />
+                <element signature="e#36081#36364#0" expanded="false" />
+                <element signature="e#36415#36846#0" expanded="false" />
+                <element signature="e#36890#37337#0" expanded="false" />
+                <element signature="e#37591#37710#0" expanded="false" />
+                <element signature="e#37765#37884#0" expanded="false" />
+                <element signature="e#37978#39302#0" expanded="false" />
+                <element signature="e#39419#39704#0" expanded="false" />
+                <element signature="e#39753#39833#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -40,41 +111,19 @@
         <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="29" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
+              <caret line="198" column="12" selection-start-line="198" selection-start-column="12" selection-end-line="198" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app-layout-plugin.min.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js">
+      <file leaf-file-name="siteEditorControls.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/siteEditorControls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7015986">
-              <caret line="848" column="39" selection-start-line="848" selection-start-column="12" selection-end-line="848" selection-end-column="39" />
+            <state vertical-scroll-proportion="80.333336">
+              <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#470#1944#0" expanded="false" />
-                <element signature="e#2051#2961#0" expanded="false" />
-                <element signature="e#3073#3185#0" expanded="false" />
-                <element signature="e#3712#3970#0" expanded="false" />
-                <element signature="e#4421#4484#0" expanded="false" />
-                <element signature="e#16146#16930#0" expanded="false" />
-                <element signature="e#23286#23412#0" expanded="false" />
-                <element signature="e#23479#23840#0" expanded="false" />
-                <element signature="e#23966#24583#0" expanded="false" />
-                <element signature="e#24640#24843#0" expanded="false" />
-                <element signature="e#24881#25038#0" expanded="false" />
-                <element signature="e#25082#28532#0" expanded="false" />
-                <element signature="e#28588#28969#0" expanded="false" />
-                <element signature="e#29026#29713#0" expanded="false" />
-                <element signature="e#29767#30447#0" expanded="false" />
-                <element signature="e#30515#30920#0" expanded="false" />
-                <element signature="e#30971#31742#0" expanded="false" />
-                <element signature="e#31792#32560#0" expanded="false" />
-                <element signature="e#32604#32783#0" expanded="false" />
-                <element signature="e#32837#33056#0" expanded="false" />
-                <element signature="e#33488#33975#0" expanded="false" />
-                <element signature="e#34024#34558#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -83,7 +132,7 @@
       <file leaf-file-name="plugin.min.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.6969695">
+            <state vertical-scroll-proportion="0.0">
               <caret line="276" column="59" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="59" />
               <folding />
             </state>
@@ -93,8 +142,18 @@
       <file leaf-file-name="shortcode-content-builder.min.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.6666665">
-              <caret line="242" column="36" selection-start-line="242" selection-start-column="8" selection-end-line="242" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="566" column="68" selection-start-line="566" selection-start-column="68" selection-end-line="566" selection-end-column="68" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pagebuilder.min.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="457" column="59" selection-start-line="457" selection-start-column="59" selection-end-line="457" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -104,37 +163,7 @@
         <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="12" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="delete.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/plugins/delete.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="98" column="12" selection-start-line="98" selection-start-column="12" selection-end-line="98" selection-end-column="70" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="layout-template.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layout-template.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.344262">
-              <caret line="115" column="160" selection-start-line="115" selection-start-column="140" selection-end-line="115" selection-end-column="160" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pagebuilder.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.939394">
-              <caret line="457" column="59" selection-start-line="457" selection-start-column="59" selection-end-line="457" selection-end-column="59" />
+              <caret line="92" column="68" selection-start-line="92" selection-start-column="68" selection-end-line="92" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -143,7 +172,7 @@
       <file leaf-file-name="layout.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.2622952">
+            <state vertical-scroll-proportion="-0.0">
               <caret line="300" column="43" selection-start-line="300" selection-start-column="43" selection-end-line="300" selection-end-column="43" />
               <folding />
             </state>
@@ -155,8 +184,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/template/template.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/admin/includes/Module_installer.class.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/image-content-box/sub-shortcode/sub-shortcode.php" />
         <option value="$PROJECT_DIR$/site-editor-app/libraries/ajax/site_editor_ajax.php" />
         <option value="$PROJECT_DIR$/site-editor-app/admin/index.php" />
@@ -203,6 +230,8 @@
         <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layout-template.php" />
         <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/plugins/delete.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/siteEditorControls.js" />
         <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js" />
@@ -265,8 +294,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
+      <pane id="Scratches">
+        <subPane />
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -362,6 +392,108 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="siteeditor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="siteeditor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -603,6 +735,20 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Changed Files" />
+        <subPane subId="Default" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -616,7 +762,7 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.JavaScript" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.." />
-    <property name="SearchEverywhereHistoryKey" value="preview-re&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js&#10;shortcode-conten&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;duplicate.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js&#10;delete.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/delete.min.js&#10;pagebuilder.min&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js&#10;shortcode-content&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;pageBuilder&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="shortcode&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;dup&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js&#10;customize&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-includes/js/customize-base.js&#10;siteEditorCo&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/siteEditorControls.js&#10;siteeditor-base&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/siteeditor-base.min.js&#10;preview-re&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js&#10;shortcode-conten&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;duplicate.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js&#10;delete.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/delete.min.js&#10;pagebuilder.min&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js&#10;shortcode-content&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;pageBuilder&#9;null&#9;null" />
   </component>
   <component name="RunManager" selected="PHP Script.front_page_displays.php">
     <configuration default="true" type="AppEnginePhpConfigurationType" factoryName="App Engine for PHP">
@@ -723,28 +869,28 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19985358" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12780656" sideWeight="0.5150376" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5334395" sideWeight="0.4849624" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5322314" sideWeight="0.4849624" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.49421486" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5057851" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3991276" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293348" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913387" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -784,39 +930,18 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js</url>
+          <line>967</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="12" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/site-editor-app/application/application.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.538462">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/includes/init.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.884615">
-          <caret line="53" column="39" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/timeline/sub-shortcode/sub-shortcode.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.538462">
-          <caret line="74" column="28" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.538462">
-          <caret line="74" column="2" selection-start-line="74" selection-start-column="2" selection-end-line="74" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-app/templates/default/functions.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.192307">
@@ -954,7 +1079,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -962,13 +1086,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="1521" column="12" selection-start-line="1521" selection-start-column="12" selection-end-line="1521" selection-end-column="12" />
-          <folding>
-            <marker date="1464351981286" expanded="true" signature="-1:-1" placeholder="/*...*/" />
-            <marker date="1464351981286" expanded="true" signature="-1:-1" placeholder="/*...*/" />
-            <marker date="1464351981286" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1464351981286" expanded="true" signature="-1:-1" placeholder="[...]" />
-            <marker date="1464351981286" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -983,9 +1101,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.82788295">
           <caret line="635" column="8" selection-start-line="635" selection-start-column="8" selection-end-line="635" selection-end-column="8" />
-          <folding>
-            <marker date="1427913388000" expanded="true" signature="-1:-1" placeholder="SELECT ID FR..wp_posts..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -993,7 +1108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.84165233">
           <caret line="248" column="15" selection-start-line="248" selection-start-column="15" selection-end-line="248" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1001,7 +1115,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18072289">
           <caret line="37" column="23" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,7 +1130,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1033,7 +1145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.6923077">
           <caret line="11" column="8" selection-start-line="11" selection-start-column="8" selection-end-line="11" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1041,7 +1152,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="9.43787">
           <caret line="243" column="8" selection-start-line="243" selection-start-column="8" selection-end-line="243" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1049,7 +1159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.09731544">
           <caret line="324" column="8" selection-start-line="324" selection-start-column="8" selection-end-line="324" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1057,7 +1166,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5218121">
           <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1081,9 +1189,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-12.295082">
           <caret line="1398" column="26" selection-start-line="1398" selection-start-column="26" selection-end-line="1398" selection-end-column="26" />
-          <folding>
-            <marker date="1464714627651" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1091,7 +1197,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.093959734">
           <caret line="194" column="48" selection-start-line="194" selection-start-column="48" selection-end-line="194" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1099,7 +1204,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3808725">
           <caret line="541" column="17" selection-start-line="541" selection-start-column="17" selection-end-line="541" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1111,18 +1215,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layout-template.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="83" column="12" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="58" />
+          <caret line="115" column="160" selection-start-line="115" selection-start-column="140" selection-end-line="115" selection-end-column="160" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layout-template.php">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.344262">
-          <caret line="115" column="160" selection-start-line="115" selection-start-column="140" selection-end-line="115" selection-end-column="160" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="276" column="59" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="300" column="43" selection-start-line="300" selection-start-column="43" selection-end-line="300" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../site-editor-code-syntax-highlighter/modules/code-syntax-highlighter/js/sed-code-syntax-highlighter-module.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78486055">
+          <caret line="34" column="16" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../wp-includes/js/customize-base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09947644">
+          <caret line="186" column="41" selection-start-line="186" selection-start-column="34" selection-end-line="186" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/siteeditor-base.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.36823735">
+          <caret line="158" column="30" selection-start-line="158" selection-start-column="25" selection-end-line="158" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="92" column="68" selection-start-line="92" selection-start-column="68" selection-end-line="92" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="566" column="68" selection-start-line="566" selection-start-column="68" selection-end-line="566" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="457" column="59" selection-start-line="457" selection-start-column="59" selection-end-line="457" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -1130,83 +1290,98 @@
     <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="29" selection-start-line="93" selection-start-column="29" selection-end-line="93" selection-end-column="29" />
+          <caret line="198" column="12" selection-start-line="198" selection-start-column="12" selection-end-line="198" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/siteEditorControls.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.2622952">
-          <caret line="300" column="43" selection-start-line="300" selection-start-column="43" selection-end-line="300" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.6666665">
-          <caret line="242" column="36" selection-start-line="242" selection-start-column="8" selection-end-line="242" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.6969695">
-          <caret line="276" column="59" selection-start-line="276" selection-start-column="33" selection-end-line="276" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.939394">
-          <caret line="457" column="59" selection-start-line="457" selection-start-column="59" selection-end-line="457" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.30303">
-          <caret line="283" column="71" selection-start-line="283" selection-start-column="71" selection-end-line="283" selection-end-column="71" />
+        <state vertical-scroll-proportion="80.333336">
+          <caret line="37" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
           <folding>
-            <element signature="e#2304#2405#0" expanded="false" />
-            <element signature="e#2811#3122#0" expanded="false" />
-            <element signature="e#4618#4829#0" expanded="false" />
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7015986">
-          <caret line="848" column="39" selection-start-line="848" selection-start-column="12" selection-end-line="848" selection-end-column="39" />
+        <state vertical-scroll-proportion="-23.90909">
+          <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#470#1944#0" expanded="false" />
-            <element signature="e#2051#2961#0" expanded="false" />
-            <element signature="e#3073#3185#0" expanded="false" />
-            <element signature="e#3712#3970#0" expanded="false" />
-            <element signature="e#4421#4484#0" expanded="false" />
-            <element signature="e#16146#16930#0" expanded="false" />
-            <element signature="e#23286#23412#0" expanded="false" />
-            <element signature="e#23479#23840#0" expanded="false" />
-            <element signature="e#23966#24583#0" expanded="false" />
-            <element signature="e#24640#24843#0" expanded="false" />
-            <element signature="e#24881#25038#0" expanded="false" />
-            <element signature="e#25082#28532#0" expanded="false" />
-            <element signature="e#28588#28969#0" expanded="false" />
-            <element signature="e#29026#29713#0" expanded="false" />
-            <element signature="e#29767#30447#0" expanded="false" />
-            <element signature="e#30515#30920#0" expanded="false" />
-            <element signature="e#30971#31742#0" expanded="false" />
-            <element signature="e#31792#32560#0" expanded="false" />
-            <element signature="e#32604#32783#0" expanded="false" />
-            <element signature="e#32837#33056#0" expanded="false" />
-            <element signature="e#33488#33975#0" expanded="false" />
-            <element signature="e#34024#34558#0" expanded="false" />
+            <element signature="e#411#524#0" expanded="false" />
+            <element signature="e#749#2431#0" expanded="false" />
+            <element signature="e#2546#3592#0" expanded="false" />
+            <element signature="e#3720#3848#0" expanded="false" />
+            <element signature="e#3922#4025#0" expanded="false" />
+            <element signature="e#4116#4414#0" expanded="false" />
+            <element signature="e#4497#4848#0" expanded="false" />
+            <element signature="e#4923#5002#0" expanded="false" />
+            <element signature="e#5059#6012#0" expanded="false" />
+            <element signature="e#6072#6409#0" expanded="false" />
+            <element signature="e#6490#6918#0" expanded="false" />
+            <element signature="e#6960#7851#0" expanded="false" />
+            <element signature="e#7910#8171#0" expanded="false" />
+            <element signature="e#8252#8717#0" expanded="false" />
+            <element signature="e#12699#14951#0" expanded="false" />
+            <element signature="e#15022#15300#0" expanded="false" />
+            <element signature="e#15365#15476#0" expanded="false" />
+            <element signature="e#15536#16658#0" expanded="false" />
+            <element signature="e#16723#18163#0" expanded="false" />
+            <element signature="e#18223#18982#0" expanded="false" />
+            <element signature="e#19084#19917#0" expanded="false" />
+            <element signature="e#19980#20663#0" expanded="false" />
+            <element signature="e#20727#26984#0" expanded="false" />
+            <element signature="e#27091#27223#0" expanded="false" />
+            <element signature="e#27283#27640#0" expanded="false" />
+            <element signature="e#27756#28313#0" expanded="false" />
+            <element signature="e#28364#28542#0" expanded="false" />
+            <element signature="e#28574#28714#0" expanded="false" />
+            <element signature="e#28752#31940#0" expanded="false" />
+            <element signature="e#31991#32326#0" expanded="false" />
+            <element signature="e#32377#32999#0" expanded="false" />
+            <element signature="e#33047#33662#0" expanded="false" />
+            <element signature="e#33723#34087#0" expanded="false" />
+            <element signature="e#34133#34835#0" expanded="false" />
+            <element signature="e#34880#35579#0" expanded="false" />
+            <element signature="e#35619#35780#0" expanded="false" />
+            <element signature="e#35829#36026#0" expanded="false" />
+            <element signature="e#36081#36364#0" expanded="false" />
+            <element signature="e#36415#36846#0" expanded="false" />
+            <element signature="e#36890#37337#0" expanded="false" />
+            <element signature="e#37591#37710#0" expanded="false" />
+            <element signature="e#37765#37884#0" expanded="false" />
+            <element signature="e#37978#39302#0" expanded="false" />
+            <element signature="e#39419#39704#0" expanded="false" />
+            <element signature="e#39753#39833#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46003553">
+          <caret line="485" column="0" selection-start-line="485" selection-start-column="0" selection-end-line="485" selection-end-column="0" />
+          <folding>
+            <element signature="e#147#260#0" expanded="false" />
+            <element signature="e#290#3009#0" expanded="false" />
+            <element signature="e#3046#6946#0" expanded="false" />
+            <element signature="e#3176#3387#0" expanded="false" />
+            <element signature="e#6985#8624#0" expanded="false" />
+            <element signature="e#8678#8815#0" expanded="false" />
+            <element signature="e#8889#9624#0" expanded="false" />
+            <element signature="e#9686#10679#0" expanded="false" />
+            <element signature="e#10771#11572#0" expanded="false" />
+            <element signature="e#11649#13879#0" expanded="false" />
+            <element signature="e#13952#14462#0" expanded="false" />
+            <element signature="e#14538#15241#0" expanded="false" />
+            <element signature="e#15317#16111#0" expanded="false" />
+            <element signature="e#16203#17064#0" expanded="false" />
+            <element signature="e#17137#17606#0" expanded="false" />
+            <element signature="e#19124#19677#0" expanded="false" />
+            <element signature="e#19733#20228#0" expanded="false" />
           </folding>
         </state>
       </provider>
