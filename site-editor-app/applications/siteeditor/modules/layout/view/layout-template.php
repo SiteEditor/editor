@@ -121,6 +121,14 @@
     </div>
 </script>
 
+
+<script type="text/html" id="destroy-sort-theme-row-confirm-tpl" >
+    <div class="sed_message_box">
+        <h3><?php echo __("Are You Sure?" , "site-editor");?></h3>
+        <p><?php echo __("if you continue this action current public module removed from all pages and lost data" , "site-editor");?></p>
+    </div>
+</script>
+
 <script type="text/html" id="tmpl-sed-layout-edit-rows" >
     <div class="layout-row-container">
         <#

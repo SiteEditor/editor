@@ -2031,10 +2031,10 @@ Class PageBuilderApplication {
             $this->sed_theme_content = $shortcodes_models["shortcodes"];
 
         }
-           var_dump( get_option( 'sed_layouts_models' ) );
+           /*var_dump( get_option( 'sed_layouts_models' ) );
            var_dump( get_option( 'sed_last_theme_id' ) );
            var_dump( get_option( 'sed_pages_layouts' ) );
-           var_dump( get_option( 'sed_layouts_settings' ) );
+           var_dump( get_option( 'sed_layouts_settings' ) );*/
         $content = str_replace( "{{content}}" , $main_content , $content );
         echo $content;
 
