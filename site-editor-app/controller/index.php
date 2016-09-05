@@ -9,7 +9,7 @@ Class indexController Extends baseController {
         do_action( 'sed_init' );                                                                                                                                                                                                                                                                                                                    
 
         //call scripts for load in siteeditor template                                                                                                              //, 'jquery-append'
-        $site_editor_script->load_scripts(array( 'jquery', 'yepnope' ,'modernizr', 'underscore' , 'ajax-queue' , 'jquery-css' , 'jquery-livequery' ,'jquery-browser' , 'jquery-ui-full',  'colorpicker', 'bootstrap' , 'jquery-scrollbar','multi-level-box', 'plupload' ,'seduploader' , 'sed-drag-drop', 'siteeditor-base' , 'siteeditor-ajax' , 'siteeditor-modules-scripts' , 'undomanager' , 'sed-undomanager' , 'siteeditor-css', 'siteeditor' , 'chosen'));
+        $site_editor_script->load_scripts(array( 'jquery', 'angularjs' , 'yepnope' ,'modernizr', 'underscore' , 'ajax-queue' , 'jquery-css' , 'jquery-livequery' ,'jquery-browser' , 'jquery-ui-full',  'colorpicker', 'bootstrap' , 'jquery-scrollbar','multi-level-box', 'plupload' ,'seduploader' , 'sed-drag-drop', 'siteeditor-base' , 'siteeditor-ajax' , 'siteeditor-modules-scripts' , 'undomanager' , 'sed-undomanager' , 'siteeditor-css', 'siteeditor' , 'chosen'));
         //$site-editor_script->ajax_load_scripts( array( 'jquery-ui-full', 'colorpicker', 'tinymce', 'bootstrap' ) , "onload");, 'mindmap' , 'tinymce'
 
          

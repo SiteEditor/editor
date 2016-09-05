@@ -1,7 +1,7 @@
 <div id="sed-app-save-new-template" class="">
-    <a href="javascript:void(0)" class="btn btn-default iconf"  title="<?php echo __("Save As New Template","site-editor");  ?>" id="save_as_new_template" role="button" >
-        <span class="fa f-sed icon-eye fa-lg "></span>
-        <span class="el_txt"><?php echo __("Save As New Template","site-editor");  ?></span>
+    <a href="javascript:void(0)" class="btn btn-default3 "  title="<?php echo __("Save As New Template","site-editor");  ?>" id="save_as_new_template" role="button" >
+        <span class="fa f-sed icon-eye fa-2x "></span>
+        <span class="el_txt"><?php echo __("Save Template","site-editor");  ?></span>
     </a>
     <div id="sed-dialog-save-new-template"  class="sed-dialog"  title="<?php echo __("Save As New Template" ,"site-editor");  ?>">
 

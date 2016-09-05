@@ -27,9 +27,11 @@ $toolbar->add_new_tab("modules" , __("Modules","site-editor") , "" , "tab" , arr
 
 $toolbar->add_new_tab("widgets" , __("Widgets","site-editor") , "" , "tab" , array( "class" => "widgets-tb" ));
 
-$toolbar->add_element_group( "layout" , "template" , __("template","site-editor") );
+$toolbar->add_element_group( "layout" , "general" , __("General","site-editor") );
 
-$toolbar->add_element_group( "layout" , "general" , __("general","site-editor") );
+$toolbar->add_element_group( "layout" , "template" , __("Template","site-editor") );
+
+$toolbar->add_element_group( "layout" , "settings" , __("Settings","site-editor") );
 
 $toolbar->add_element_group( "widgets" , "basic" , __("Basic","site-editor") );
 

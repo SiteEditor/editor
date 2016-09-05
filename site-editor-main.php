@@ -278,7 +278,7 @@ Class SiteEditorApp {
         wp_register_script( 'siteeditor-base',SED_BASE_URL.'libraries/siteeditor/siteeditor-base.min.js', array( 'jquery' ),"",1 );
 
         //plugins
-        wp_register_script( 'delete-plugin',SED_BASE_URL.'libraries/siteeditor/site-iframe/plugins/delete.min.js', array( 'siteeditor-base' ),"",1 );
+        wp_register_script( 'delete-plugin',SED_BASE_URL.'libraries/siteeditor/site-iframe/plugins/delete.min.js', array( 'siteeditor-base' , 'sed-app-preview' , 'sed-pagebuilder' ),"",1 );
         wp_register_script( 'select-plugin',SED_BASE_URL.'libraries/siteeditor/site-iframe/plugins/select.min.js', array( 'siteeditor-base' ),"",1 );
         wp_register_script( 'media-plugin',SED_BASE_URL.'libraries/siteeditor/site-iframe/plugins/media.min.js', array( 'siteeditor-base' , 'sed-app-preview' , 'sed-pagebuilder' ),"",1 );
         wp_register_script( 'preview-plugin',SED_BASE_URL.'libraries/siteeditor/site-iframe/plugins/app-preview.min.js', array( 'siteeditor-base' , 'sed-app-preview' , 'site-iframe' ),"",1 );

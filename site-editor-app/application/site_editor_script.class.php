@@ -73,6 +73,8 @@ class SiteEditorScript{
         //$this->add( 'scriptaculous', $this->base_library_url.'scriptaculous/src/scriptaculous.js', array('jquery'), '2.3' );
 
 
+        $this->add( 'angularjs', $this->base_library_url.'angularjs/angular.min.js', array(), '1.4.8' );
+
         $this->add( 'yepnope', $this->base_library_url.'yepnope/yepnope.min.js', array(), '2.5.6' );
 
         $this->add( 'modernizr', $this->base_library_url.'modernizr/modernizr.custom.min.js', array('yepnope'), '2.8.1' );

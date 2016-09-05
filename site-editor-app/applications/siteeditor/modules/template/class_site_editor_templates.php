@@ -30,7 +30,7 @@ class SiteEditorTemplates{
             "" ,                //icon
             "" ,  //$capability=
             array(),
-            array( "row" => 1 ),
+            array( "row" => 1 ,"rowspan" => 2 ),
             array('module' => 'template' , 'file' => 'save_as_new_template.php'),
             'all' ,
             array(),
@@ -46,7 +46,7 @@ class SiteEditorTemplates{
                 "" ,                //icon
                 "" ,  //$capability=
                 array(),
-                array( "row" => 1 ),
+                array( "row" => 1 ,"rowspan" => 2 ),
                 array('module' => 'template' , 'file' => 'select_template.php'),
                 'all' ,
                 array(

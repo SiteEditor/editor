@@ -1,9 +1,9 @@
 <div class="layout-sub-themes-settings">
-    <a href="javascript:void(0)" class="btn btn-default3"  title="<?php echo __("Select Sub Theme","site-editor");  ?>" id="page_layout" role="button" >
+    <a href="javascript:void(0)" class="btn btn-default3"  title="<?php echo __("Layout settings","site-editor");  ?>" id="page_layout" role="button" >
         <span class="fa f-sed icon-subtheme fa-2x "></span>
-        <span class="el_txt"><?php echo __("Sub Themes","site-editor");  ?></span>
+        <span class="el_txt"><?php echo __("Layout settings","site-editor");  ?></span>
     </a>
-    <div id="sed-dialog-sub-themes-settings"  class="sed-dialog"  title="<?php echo __("Sub Themes" ,"site-editor");  ?>">
+    <div id="sed-dialog-sub-themes-settings"  class="sed-dialog"  title="<?php echo __("Layout settings" ,"site-editor");  ?>">
 
 <?php
 $sed_sub_themes = array();

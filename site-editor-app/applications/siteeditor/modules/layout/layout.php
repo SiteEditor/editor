@@ -32,8 +32,30 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             $this->scope_control_id = "main_layout_row_scope_control";
 
+            add_action( "sed_ajax_load_options_sed_add_layout" , array( $this, "add_layout_options" ) );
+
             //add_filter( "sed_addon_settings", array($this,'icon_settings'));
 		}
+
+        function add_layout_options(){
+            global $sed_options_engine;
+            ob_start();
+            include dirname( __FILE__ ) . DS . "view" . DS . "add_layout.tpl.php";
+            $html = ob_get_clean();
+
+            $params = array(
+                'layouts_manager' => array(
+                    'type'              =>  'custom',
+                    //'in_box'            =>   true ,
+                    'html'              =>  $html ,
+                    'control_type'      => 'layouts_manager' ,
+                    'control_category'  => 'app-settings' ,
+                    'settings_type'     => "sed_layouts_settings" ,
+                )
+            );
+
+            $sed_options_engine->set_group_params( "sed_add_layout" , __("Add New Layout" , "site-editor") , $params , array() , "app-settings" );
+        }
 
         /*function icon_settings( $sed_addon_settings ){
             global $site_editor_app;
@@ -55,6 +77,11 @@ if(!class_exists('SiteEditorLayoutManager')){
             $I18n['ok_confirm']         =  __("Ok" , "site-editor");
             $I18n['cancel_confirm']     =  __("Cancel" , "site-editor");
             $I18n['no_title']           =  __("No Title" , "site-editor");
+            $I18n['private_scope']      =  __("Private" , "site-editor");
+            $I18n['public_scope']       =  __("Public" , "site-editor");
+            $I18n['customize_scope']    =  __("Customize" , "site-editor");
+            $I18n['hidden_scope']       =  __("Hidden" , "site-editor");
+
             return $I18n;
         }
 
@@ -85,8 +112,25 @@ if(!class_exists('SiteEditorLayoutManager')){
             $site_editor_app->toolbar->add_element(
                 "layout" ,
                 "general" ,
+                "add-layout" ,
+                __("Add Layout","site-editor") ,
+                "add_layout_element" ,     //$func_action
+                "" ,                //icon
+                "" ,  //$capability=
+                array( ),// "class"  => "btn_default3"
+                array( "row" => 1 ,"rowspan" => 2 ),
+                array('module' => 'layout' , 'file' => 'add_layout.php'),
+                //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
+                'all' ,
+                array(),
+                array()
+            );
+
+            $site_editor_app->toolbar->add_element(
+                "layout" ,
+                "general" ,
                 "sub-themes" ,
-                __("Sub Themes","site-editor") ,
+                __("Layout settings","site-editor") ,
                 "sub_theme_element" ,     //$func_action
                 "" ,                //icon
                 "" ,  //$capability=
@@ -116,9 +160,9 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             $site_editor_app->toolbar->add_element(
                 "layout" ,
-                "general" ,
+                "settings" ,
                 "general-options" ,
-                __("General Settings","site-editor") ,
+                __("Site Settings","site-editor") ,
                 "general_options_element" ,     //$func_action
                 "" ,                //icon
                 "" ,  //$capability=
@@ -188,6 +232,24 @@ if(!class_exists('SiteEditorLayoutManager')){
                     ),
                 )
             );
+
+            $site_editor_app->toolbar->add_element(
+                "layout" ,
+                "settings" ,
+                "page-options" ,
+                __("Page Settings","site-editor") ,
+                "page_options_element" ,     //$func_action
+                "" ,                //icon
+                "" ,  //$capability=
+                array(  ),  //"class"  => "btn_default3"
+                array( "row" => 1 ,"rowspan" => 2 ),
+                array('module' => 'layout' , 'file' => 'page_options.php'),
+                //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
+                'all' ,
+                array() ,
+                array()
+            );
+
         }
 
         function register_settings( ){

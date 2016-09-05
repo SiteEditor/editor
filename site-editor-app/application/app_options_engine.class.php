@@ -26,6 +26,8 @@ Class AppOptionsEngine {
 
     private $settings_dependencies = array();
     public $group_name = "";
+    public $controls = array();
+    public $params = array();
     /**
     * @var    icon base url for toolbar element
     * @since  1.0.0
@@ -45,11 +47,30 @@ Class AppOptionsEngine {
     */
     function __construct(  $args = array() ) {
 
-         add_filter( "sed_addon_settings", array($this,'image_settings'));
+        add_filter( "sed_addon_settings", array($this,'addon_settings'));
 
-         add_action("sed_footer" , array($this, 'print_settings_dependencies') , 10000 );
-         add_action("sed_footer" , array($this, 'print_settings_template') , 10000 );
-         add_filter( "sed_js_I18n", array($this,'js_I18n'));
+        add_action("sed_footer" , array($this, 'print_settings_dependencies') , 10000 );
+        add_action("sed_footer" , array($this, 'print_settings_template') , 10000 );
+        add_filter( "sed_js_I18n", array($this,'js_I18n'));
+
+        add_action( 'site_editor_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options
+
+    }
+
+    function sed_ajax_load_options(){
+        //$this->set_group_params( $group , $params_title , $params = array() , $panels = array() , "module-settings" );
+        //$this->add_settings( array() );
+        //global $sed_apps;
+        //$sed_apps->check_ajax_handler('sed_options_loader' , 'sed_app_options_load');
+        do_action( "sed_ajax_load_options_" . $_POST['setting_id'] );
+
+        die( wp_json_encode( array(
+            'success' => true,
+            'data'    => array(
+                'output'     => $this->params[ $_POST['setting_id'] ] ,
+                'controls'              => $this->controls
+            ),
+        ) ) );
 
     }
 
@@ -65,7 +86,7 @@ Class AppOptionsEngine {
         return $I18n;
     }
 
-    function image_settings( $sed_addon_settings ){
+    function addon_settings( $sed_addon_settings ){
 
         $sed_addon_settings["imageModule"] = array(
             "sizes"               => self::get_all_img_sizes_options() ,
@@ -73,8 +94,14 @@ Class AppOptionsEngine {
             "add_btn_title"       =>  __("Change Image","site-editor")
         );
 
-        return $sed_addon_settings;
+        global $site_editor_app;
+        $sed_addon_settings["optionsEngine"] = array(
+            'nonce'  => array(
+                'load'  =>  wp_create_nonce( 'sed_app_options_load_' . $site_editor_app->get_stylesheet() ) ,
+            )
+        );
 
+        return $sed_addon_settings;
     }
 
     public static function get_all_img_sizes_options(){
@@ -228,6 +255,7 @@ Class AppOptionsEngine {
         global $sed_apps;
         if(!empty($controls)){
             foreach($controls AS $id => $values ){
+                $this->controls[$id] = $values;
                 $sed_apps->editor_manager->add_control( $id, $values );
             }
         }

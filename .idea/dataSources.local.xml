@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - sed-docs@localhost" uuid="14463c77-aff3-42bf-bc02-24d131992b26">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>sed-docs.*</schema-pattern>
+      <default-schemas>sed-docs.*</default-schemas>
+    </data-source>
+  </component>
+</project>

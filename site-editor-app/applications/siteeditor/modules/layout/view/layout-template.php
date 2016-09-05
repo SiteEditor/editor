@@ -2,7 +2,7 @@
     <div class="row_settings">
         <div class="row_setting_inner row_setting_box">
             <div id='sed-scope-settings-<?php echo $control_id; ?>'  class="clearfix">
-                <div class="scope-mode-box"><span><?php echo __('Scope' , 'site-editor') ?> :</span><span><?php echo __('Private' , 'site-editor') ?></span></div>
+                <div class="sed-scope-mode-label"><span><?php echo __('Scope' , 'site-editor') ?> :</span><span class="scope-mode"><?php echo __('Private' , 'site-editor') ?></span></div>
                 <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title=""></span>
                 <button data-related-level-box="dialog_page_box_<?php echo $control_id; ?>" class="sed-btn-default sed_go_to_scope_settings"  name="sed_pb_<?php echo $control_id; ?>" id="sed_pb_<?php echo $control_id; ?>" >
                     <?php echo __('Go To Scope Settings' , 'site-editor') ?><span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
@@ -128,6 +128,17 @@
         <p><?php echo __("if you continue this action current public module removed from all pages and lost data" , "site-editor");?></p>
     </div>
 </script>
+
+
+
+<script type="text/html" id="sed-remove-module-confirm-tpl" >
+    <div class="sed_message_box">
+        <h3><?php echo __("Are You Sure?" , "site-editor");?></h3>
+        <p><?php echo __("Do you want to delete this element?" , "site-editor");?></p>
+        <p><span><?php echo __("Note : " , "site-editor");?></span> <span><?php echo __("if this Row is a public row it is remove from all releted layouts and pages" , "site-editor");?></span> </p>
+    </div>
+</script>
+
 
 <script type="text/html" id="tmpl-sed-layout-edit-rows" >
     <div class="layout-row-container">

@@ -1,7 +1,7 @@
 <div class="layout-general-settings">
-    <a href="javascript:void(0)" class="btn btn-default3"  title="<?php echo __("General Settings","site-editor");  ?>" id="page_general_settings" role="button" >
+    <a href="javascript:void(0)" class="btn btn-default3"  title="<?php echo __("Site Settings","site-editor");  ?>" id="page_general_settings" role="button" >
         <span class="fa f-sed icon-settings fa-2x "></span>
-        <span class="el_txt"><?php echo __("General Settings","site-editor");  ?></span>
+        <span class="el_txt"><?php echo __("Site Settings","site-editor");  ?></span>
     </a>
     <div id="sed-dialog-general-options"  class="sed-dialog"  title="<?php echo __("General Settings" ,"site-editor");  ?>">
         <div id="dialog-level-box-settings-general-container" class="dialog-level-box-settings-container content" data-title="<?php echo __('General Settings',"site-editor");?>">

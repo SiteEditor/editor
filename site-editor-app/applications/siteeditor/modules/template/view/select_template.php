@@ -1,6 +1,6 @@
 <div id="sed-app-control-select_template" class="">
-    <a href="javascript:void(0)" class="btn btn-default iconf sed-select-template"  title="<?php echo __("Select Template" ,"site-editor");  ?>" role="button" >
-        <span class="fa f-sed icon-selecttemplate fa-lg "></span>
+    <a href="javascript:void(0)" class="btn btn-default3 sed-select-template"  title="<?php echo __("Select Template" ,"site-editor");  ?>" role="button" >
+        <span class="fa f-sed icon-selecttemplate fa-2x "></span>
         <span class="el_txt"><?php echo __("Select Template" ,"site-editor");  ?></span>
     </a>
     <div id="sed-dialog-template-library"  class="sed-dialog "  title="<?php echo __("Template Library" ,"site-editor");  ?>">
