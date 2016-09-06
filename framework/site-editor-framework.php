@@ -20,18 +20,42 @@ final Class SiteEditorFramework {
     /**
      * using for all dynamic css
      *
-     * @since 0.9
-     * @var_type array
+     * @since 1.0.0
+     * @access public
+     * @var array
      */
     public $dynamic_css_data = array();
 
-    public $sed_page_id;
+    /**
+     * Page id : for posts page_id === post_id , terms page_id === "term_" . term_id
+     *
+     * @since 1.0.0
+     * @access public
+     * @var string
+     */
+    public $sed_page_id = null;
 
-    public $sed_page_type;
+    /**
+     * Page Type : "post" || "tax" || "post_type" || "general"
+     *
+     * @since 1.0.0
+     * @access public
+     * @var string
+     */
+    public $sed_page_type = null;
 
+    /**
+     * using for all dynamic css
+     *
+     * @since 1.0.0
+     * @access public
+     * @var object instance of SiteeditorTypography
+     */
     public $typography;
 
-
+    /**
+     * SiteEditorFramework constructor.
+     */
     public function __construct(){
 
         $this->init_hooks();
@@ -74,7 +98,7 @@ final Class SiteEditorFramework {
         
     }
 
-    function get_sed_page_info_uniqe(){
+    public function get_sed_page_info_uniqe(){
         $sed_page_id = null;
         $sed_page_type = null;
         if(is_category() || is_tag() || is_tax()){
@@ -124,7 +148,7 @@ final Class SiteEditorFramework {
         return apply_filters( "sed_page_info_filter" , array( "id" => $sed_page_id, "type" => $sed_page_type) );
     }
 
-    function set_page_info( ) {
+    public function set_page_info( ) {
         $info_u = $this->get_sed_page_info_uniqe();
 
         $this->sed_page_id = $info_u['id'];
@@ -141,7 +165,7 @@ final Class SiteEditorFramework {
 
     }
 
-    function template_chooser( $template ) {
+    public function template_chooser( $template ) {
 
         $upload_dir = wp_upload_dir();
 
@@ -169,7 +193,7 @@ final Class SiteEditorFramework {
         return $template;
     }
 
-    function add_rtl_body_class( $classes ) {
+    public function add_rtl_body_class( $classes ) {
         if( is_rtl() ){
             $classes[] = 'rtl-body';
         }
@@ -177,7 +201,7 @@ final Class SiteEditorFramework {
         return $classes;
     }
 
-    function sed_add_dynamic_css_file( ) {
+    public function sed_add_dynamic_css_file( ) {
 
         $sed_page_id = $this->sed_page_id;
         $sed_page_type = $this->sed_page_type;
@@ -206,6 +230,8 @@ final Class SiteEditorFramework {
         }
 
         $filename = trailingslashit($upload_dir['basedir']) . "siteeditor/" . $css_filename . '.css';
+
+        do_action( "sed_before_dynamic_css_output" );
 
         ob_start();
         include SED_INC_FRAMEWORK_DIR . DS . 'dynamic-css.php';
@@ -261,7 +287,12 @@ final Class SiteEditorFramework {
 
     }
 
-    function load_page_builder_app(){
+    /**
+     * load page builder extension in front end
+     * 
+     * @access private
+     */
+    private function load_page_builder_app(){
 
         include_once( SED_INC_DIR . DS . "modules.class.php"  );
 

@@ -93,6 +93,14 @@ class SiteEditorPageOptions {
     public $description = '';
 
     /**
+     * prefix for controls ids for prevent conflict
+     *
+     * @var string
+     * @access public
+     */
+    public $control_prefix = 'sed_page_options';
+
+    /**
      * SiteEditorPageOptions constructor.
      */
     public function __construct(){
@@ -113,7 +121,7 @@ class SiteEditorPageOptions {
 
         add_action( "sed_register_{$this->option_group}_options" , array( $this , 'register_pages_options' ) );
 
-        add_action( "sed_register_{$this->option_group}_options" , array( $this, 'register_page_options_group' ) , -9999 );
+        add_action( "sed_register_{$this->option_group}_options" , array( $this , 'register_page_options_group' ) , -9999 );
 
         add_action( 'sed_app_preview_init'          , array( $this, 'sed_app_preview_init' ) );
 
@@ -154,6 +162,11 @@ class SiteEditorPageOptions {
      * @access public
      */
     public function register_private_settings( $settings ){
+
+        $this->public_settings["page_options_scope"] = array(
+            'transport'         => 'postMessage' ,
+            'default'           => get_option( 'page_options_scope' )
+        );
 
         foreach( $this->fields AS $id => $args ){
 
@@ -215,45 +228,29 @@ class SiteEditorPageOptions {
 
     }
 
-    private function get_panel( $id, $args = array() ){
-        /**
-         * Define the array of defaults
-         */
-        $defaults = array(
-            'id'            => $id  ,
-            'title'         => ''  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
-            'description'   => '' ,
-            'priority'      => 10
-        );
+    /**
+     * @param $prefix
+     * @param $args
+     * @return mixed
+     */
+    private function replace_scope_prefix( $prefix , $args ){
 
-        /**
-         * Parse incoming $args into an array and merge it with $defaults
-         */
-        $args = wp_parse_args( $args, $defaults );
+        foreach( $args As $key => $value ){
+            $args[$key] = str_replace( '{{scope_prefix}}' , $prefix , $value );
+        }
 
         return $args;
+
     }
 
-    private function view_tab_scope( $layout = true ){
-        ob_start();
-
-        ?>
-        <div class="sed-tab-scope-options" sed-role="tab-scope">
-            <ul>
-                <li data-type="public-scope" class="tab-scope-item active"><a href="#"><span><?php echo __( "Public" , "site-editor");?></span></a></li>
-                <?php if( $layout === true ){ ?>
-                    <li data-type="layout-scope" class="tab-scope-item"><a href="#"><span><?php echo __( "Current Layout" , "site-editor");?></span></a></li>
-                <?php } ?>
-                <li data-type="page-customize-scope" class="tab-scope-item"><a href="#"><span><?php echo __( "Current Page" , "site-editor");?></span></a></li>
-            </ul>
-        </div>
-        <?php
-
-        return ob_get_clean();
-    }
-
+    /**
+     * Create private , layout , public fields & panels
+     *
+     * @param $page_id
+     * @param $page_type
+     * @param string $post_type
+     * @return array
+     */
     private function get_page_options( $page_id , $page_type , $post_type = '' ){
 
         $new_fields = array();
@@ -262,23 +259,23 @@ class SiteEditorPageOptions {
         $new_panels = array();
         $panels = $this->panels;
 
-        /*$new_fields['sed_tab_scope_options'] = array(
-            'type'              =>  'custom',
-            'custom_template'   =>  $this->view_tab_scope() ,
-            'priority'          => 0 ,
-            'has_border_box'    => false ,
-            'js_type'           => '' ,
-            'category'          => 'page-settings' ,
-            'option_group'      => $this->option_group,
-        );*/
-
         $page_option_name = ( $page_type != "post" ) ? "sed_{$page_id}_settings" : "postmeta[{$post_type}][{$page_id}]";
 
-        $new_fields['sed_page_options_scope'] = array(
+        $page_options_scope = get_option( 'page_options_scope' );
+
+        $default_value = isset( $page_options_scope[$page_id] ) ? $page_options_scope[$page_id] : 'public-scope';
+
+        $private_control_prefix = $page_id . "_" . $this->control_prefix;
+        $public_control_prefix  = "sed_public_{$page_id}_" . $this->control_prefix;
+        $layout_control_prefix  = "sed_layout_{$page_id}_" . $this->control_prefix;
+
+        $new_fields["{$private_control_prefix}_page_scope"] = array(
             'type'              => 'radio-buttonset',
             'setting_id'        => "page_options_scope",
+            'js_type'           => 'page_options_scope' ,
             'label'             => __("Select Scope", "site-editor"),
-            'default'           => 'public-scope',
+            'default'           => $page_options_scope ,
+            'default_value'     => $default_value,
             'priority'          => 0 ,
             'description'       => __("This option allows you to set a title for your image.", "site-editor"),
             'choices'       =>  array(
@@ -288,8 +285,25 @@ class SiteEditorPageOptions {
             ),
             'transport'         => 'postMessage' ,
             'category'          => 'page-settings' ,
-            'option_group'      => $this->option_group
+            'option_group'      => $this->option_group ,
+            'atts'              => array(
+                'data-page-id'      =>  $page_id ,
+                'class'             =>  'sed_page_options_scope'
+            )
         );
+
+        $private_prefix = $page_id . "_";
+        $public_prefix  = "sed_public_{$page_id}_" ;
+        $layout_prefix  = "sed_layout_{$page_id}_" ;
+
+        $private_fields = array();
+        $private_panels = array();
+
+        $public_fields = array();
+        $public_panels = array();
+
+        $layout_fields = array();
+        $layout_panels = array();
 
         foreach( $panels AS $key => $args ){
 
@@ -303,33 +317,21 @@ class SiteEditorPageOptions {
                 $org_class = "";
             }
 
-            $private_id = $page_id . "_" . $key;
-            $public_id  = "sed_public_" . $key;
-            $layout_id  = "sed_layout_" . $key;
-
             $args['option_group'] = $this->option_group;
 
             $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-            $new_panels[ $private_id ] = $this->get_panel( $private_id , $args );
+            $private_panels[ $key ] = $this->replace_scope_prefix( $private_prefix , $args );
 
             $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
-            $new_panels[ $layout_id ] = $this->get_panel( $layout_id , $args );
+            $layout_panels[ $key ] = $this->replace_scope_prefix( $layout_prefix , $args );
 
             $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
-            $new_panels[ $public_id ] = $this->get_panel( $public_id , $args );
-
-            if( isset( $args['dependency'] ) && !empty( $args['dependency'] ) && is_array( $args['dependency'] ) ){
-                $dependency_original = $args['dependency'];
-                $new_panels[$private_id]['dependency'] = $this->fix_dependency_controls_ids( $dependency_original , $page_id );
-                $new_panels[$layout_id]['dependency']  = $this->fix_dependency_controls_ids( $dependency_original , "sed_layout" );
-                $new_panels[$public_id]['dependency']  = $this->fix_dependency_controls_ids( $dependency_original , "sed_public" );
-            }
-
+            $public_panels[ $key ] = $this->replace_scope_prefix( $public_prefix , $args );
         }
 
         foreach( $fields AS $id => $args ){
 
-            $args['category']  = 'page-settings';
+            $args['category']  = isset( $args['category'] ) ? $args['category'] : 'page-settings';
 
             $args['option_group'] = $this->option_group;
 
@@ -345,69 +347,80 @@ class SiteEditorPageOptions {
                 }
             }
 
-            $private_id = $page_id . "_" . $id;
-            $public_id  = "sed_public_" . $id;
-            $layout_id  = "sed_layout_" . $id;
-
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
-            else {
-                $org_panel = $args['panel'];
-                $args['panel'] = $page_id . "_" . $org_panel;
+
+            if( isset( $args['setting_id'] ) ) {
+
+                $setting_id = $args['setting_id'];
+
+                $args['setting_id'] = $page_option_name . "[" . $setting_id . "]";
+
             }
 
-            $setting_id = $args['setting_id'];
+            if( $args['category'] == "style-editor" ){
+                $args['css_setting_type'] = "page";
+            }
 
-            $args['setting_id'] = $page_option_name . "[" . $setting_id . "]";
-
-            $new_fields[$private_id] = $args;
+            $private_fields[$id] = $this->replace_scope_prefix( $private_prefix , $args );
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
-            else
-                $args['panel'] = "sed_layout_" . $org_panel;
 
-            $args['setting_id'] = $this->layout_option_name . "[" . $setting_id . "]";
-            $new_fields[$layout_id] = $args;
+
+            if( isset( $args['setting_id'] ) ) {
+
+                $args['setting_id'] = $this->layout_option_name . "[" . $setting_id . "]";
+
+            }
+
+            if( $args['category'] == "style-editor" ){
+                $args['css_setting_type'] = "layout";
+            }
+
+            $layout_fields[$id] = $this->replace_scope_prefix( $layout_prefix , $args );
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
-            else
-                $args['panel'] = "sed_public_" . $org_panel;
 
-            $args['setting_id'] = $this->public_option_name . "[" . $setting_id . "]";
-            $new_fields[$public_id] = $args;
 
-            if( isset( $args['dependency'] ) && !empty( $args['dependency'] ) && is_array( $args['dependency'] ) ){
-                $dependency_original = $args['dependency'];
-                $new_fields[$private_id]['dependency'] = $this->fix_dependency_controls_ids( $dependency_original , $page_id );
-                $new_fields[$layout_id]['dependency']  = $this->fix_dependency_controls_ids( $dependency_original , "sed_layout" );
-                $new_fields[$public_id]['dependency']  = $this->fix_dependency_controls_ids( $dependency_original , "sed_public" );
+            if( isset( $args['setting_id'] ) ) {
+
+                $args['setting_id'] = $this->public_option_name . "[" . $setting_id . "]";
+
             }
 
+            if( $args['category'] == "style-editor" ){
+                $args['css_setting_type'] = "site";
+            }
+
+            $public_fields[$id] = $this->replace_scope_prefix( $public_prefix , $args );
+
         }
+
+        $private_options = sed_options()->fix_controls_panels_ids( $private_fields , $private_panels , $private_control_prefix );
+
+        $new_fields = array_merge( $new_fields , $private_options['fields'] );
+
+        $new_panels = array_merge( $new_panels , $private_options['panels'] );
+
+        $public_options = sed_options()->fix_controls_panels_ids( $public_fields , $public_panels , $public_control_prefix );
+
+        $new_fields = array_merge( $new_fields , $public_options['fields'] );
+
+        $new_panels = array_merge( $new_panels , $public_options['panels'] );
+
+        $layout_options = sed_options()->fix_controls_panels_ids( $layout_fields , $layout_panels , $layout_control_prefix );
+
+        $new_fields = array_merge( $new_fields , $layout_options['fields'] );
+
+        $new_panels = array_merge( $new_panels , $layout_options['panels'] );
 
         return array(
             "fields"    => $new_fields ,
             "panels"    => $new_panels
         );
 
-    }
-
-    public function fix_dependency_controls_ids( $dependency , $prefix ){
-
-        if( is_array( $dependency ) && isset( $dependency['controls'] ) ){
-            if( isset( $dependency['controls']['control'] ) ){
-                $dependency['controls']['control'] = $prefix."_".$dependency['controls']['control'];
-            }else{
-                foreach( $dependency['controls'] AS $index => $control ){
-                    if( isset( $control['control'] ) )
-                        $dependency['controls'][$index]['control'] = $prefix."_".$control['control'];
-                }
-            }
-        }
-
-        return $dependency;
     }
 
 
@@ -431,7 +444,7 @@ class SiteEditorPageOptions {
 
             $registered = $settings[ $setting_id ];
 
-            if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] ) ) {
+            if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] )  && ! sed_current_theme_supports( $registered['theme_supports'] ) ) {
                 // We don't really need this because theme_supports will already filter it out of being exported.
                 return $args;
             }
@@ -505,6 +518,13 @@ class SiteEditorPageOptions {
         $settings = array();
 
         foreach ( $this->settings as $id => $args ) {
+
+            $setting = SED()->editor->manager->get_setting( "{$page_option_name}[{$id}]" );
+
+            if( ! is_object( $setting ) || ! method_exists( $setting , 'check_capabilities' ) || ! $setting->check_capabilities() ){
+                continue;
+            }
+
             $settings[$id] = array(
                 'transport' => isset( $args['transport'] ) ? $args['transport'] : 'refresh',
                 'value'     => isset( $args['default'] ) ? $args['default'] : ''

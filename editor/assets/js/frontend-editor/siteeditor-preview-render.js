@@ -4,7 +4,11 @@
         styleIdElements = {} ,
 		rowTmpl = {} , colTmpl = {};
 
+    api.currentPageCustomCss = api.currentPageCustomCss || {};
 
+    api.currentLayoutCustomCss = api.currentLayoutCustomCss || {};
+
+    api.siteCustomCss = api.siteCustomCss || {};
 
     api.currentCssSelector = "";
 
@@ -19,23 +23,63 @@
 
         if( _.isUndefined( api.currentCssSettingType ) || !api.currentCssSettingType )
             return ;
+        
+        var sedCss = {};
+        
+        switch ( api.currentCssSettingType ){
+            
+            case "module" :
 
-        if( api.currentCssSettingType == "module" ){
+                if( _.isUndefined( api.currentSedElementId ) || !api.currentSedElementId )
+                    return ;
 
-            if( _.isUndefined( api.currentSedElementId ) || !api.currentSedElementId )
-                return ;
+                var id = api.currentSedElementId ,
+                    attrs = api.contentBuilder.getAttrs( id ) , attrValue;
 
-            var id = api.currentSedElementId ,
-                attrs = api.contentBuilder.getAttrs( id ) , sedCss , attrValue;
+                sedCss = ( !_.isUndefined( attrs ) && !_.isUndefined( attrs["sed_css"] ) && _.isObject( attrs["sed_css"] ) ) ? attrs["sed_css"] : {};
 
-            sedCss = ( !_.isUndefined( attrs ) && !_.isUndefined( attrs["sed_css"] ) && _.isObject( attrs["sed_css"] ) ) ? attrs["sed_css"] : {};
+                if( _.isUndefined( sedCss[api.currentCssSelector] ) )
+                    sedCss[api.currentCssSelector] = {};
 
-            if( _.isUndefined( sedCss[api.currentCssSelector] ) )
-                sedCss[api.currentCssSelector] = {};
+                sedCss[api.currentCssSelector][setting] = value;
 
-            sedCss[api.currentCssSelector][setting] = value;
+                api.contentBuilder.updateShortcodeAttr( "sed_css" , sedCss , id );
 
-            api.contentBuilder.updateShortcodeAttr( "sed_css" , sedCss , id );
+                break;
+
+            case "page" :
+
+                sedCss = api.currentPageCustomCss;
+
+                if( _.isUndefined( sedCss[api.currentCssSelector] ) )
+                    sedCss[api.currentCssSelector] = {};
+
+                sedCss[api.currentCssSelector][setting] = value;
+
+                break;
+
+            case "layout" :
+
+                sedCss = api.currentLayoutCustomCss;
+
+                if( _.isUndefined( sedCss[api.currentCssSelector] ) )
+                    sedCss[api.currentCssSelector] = {};
+
+                sedCss[api.currentCssSelector][setting] = value;
+
+                break;
+
+            case "site" :
+
+                sedCss = api.siteCustomCss;
+
+                if( _.isUndefined( sedCss[api.currentCssSelector] ) )
+                    sedCss[api.currentCssSelector] = {};
+
+                sedCss[api.currentCssSelector][setting] = value;
+
+                break;
+
         }
 
     };
@@ -264,53 +308,54 @@
 
 
         var _styleSettingsMap = {
-            "padding_top"           : "padding-top" ,
-            "padding_right"         : "padding-right" ,
-            "padding_left"          : "padding-left" ,
-            "padding_bottom"        : "padding-bottom" ,
-            "margin_top"            : "margin-top" ,
-            "margin_right"          : "margin-right" ,
-            "margin_left"           : "margin-left" ,
-            "margin_bottom"         : "margin-bottom" ,
-            "trancparency"          : "opacity" ,
-            "border_top_color"      : "border-top-color" ,
-            "border_top_width"      : "border-top-width"  ,
-            "border_top_style"      : "border-top-style" ,
-            "border_left_color"     : "border-left-color" ,
-            "border_left_width"     : "border-left-width"  ,
-            "border_left_style"     : "border-left-style" ,
-            "border_bottom_color"   : "border-bottom-color" ,
-            "border_bottom_width"   : "border-bottom-width"  ,
-            "border_bottom_style"   : "border-bottom-style" ,
-            "border_right_color"    : "border-right-color" ,
-            "border_right_width"    : "border-right-width"  ,
-            "border_right_style"    : "border-right-style" ,
-            "border_radius_tr"      : "border-top-right-radius" ,
-            "border_radius_tl"      : "border-top-left-radius" ,
-            "border_radius_br"      : "border-bottom-right-radius" ,
-            "border_radius_bl"      : "border-bottom-left-radius" ,
-            "font_family"           : "font-family"    ,
-            "font_size"             : "font-size"      ,
-            "font_weight"           : "font-weight"    ,
-            "font_style"            : "font-style"     ,
-            "text_decoration"       : "text-decoration",
-            "text_align"            : "text-align"     ,
-            "font_color"            : "color"          ,
-            "line_height"           : "line-height"    ,
-            "position"              : "position"       ,
-            "shadow_color"          : "box-shadow"     ,
-            "shadow"                : "box-shadow"     ,
-            "text_shadow_color"     : "text-shadow"    ,
-            "text_shadow"           : "text-shadow"    ,
+            "padding_top"               : "padding-top" ,
+            "padding_right"             : "padding-right" ,
+            "padding_left"              : "padding-left" ,
+            "padding_bottom"            : "padding-bottom" ,
+            "margin_top"                : "margin-top" ,
+            "margin_right"              : "margin-right" ,
+            "margin_left"               : "margin-left" ,
+            "margin_bottom"             : "margin-bottom" ,
+            "trancparency"              : "opacity" ,
+            "border_top_color"          : "border-top-color" ,
+            "border_top_width"          : "border-top-width"  ,
+            "border_top_style"          : "border-top-style" ,
+            "border_left_color"         : "border-left-color" ,
+            "border_left_width"         : "border-left-width"  ,
+            "border_left_style"         : "border-left-style" ,
+            "border_bottom_color"       : "border-bottom-color" ,
+            "border_bottom_width"       : "border-bottom-width"  ,
+            "border_bottom_style"       : "border-bottom-style" ,
+            "border_right_color"        : "border-right-color" ,
+            "border_right_width"        : "border-right-width"  ,
+            "border_right_style"        : "border-right-style" ,
+            "border_radius_tr"          : "border-top-right-radius" ,
+            "border_radius_tl"          : "border-top-left-radius" ,
+            "border_radius_br"          : "border-bottom-right-radius" ,
+            "border_radius_bl"          : "border-bottom-left-radius" ,
+            "font_family"               : "font-family"    ,
+            "font_size"                 : "font-size"      ,
+            "font_weight"               : "font-weight"    ,
+            "font_style"                : "font-style"     ,
+            "text_decoration"           : "text-decoration",
+            "text_align"                : "text-align"     ,
+            "font_color"                : "color"          ,
+            "line_height"               : "line-height"    ,
+            "position"                  : "position"       ,
+            "shadow_color"              : "box-shadow"     ,
+            "shadow"                    : "box-shadow"     ,
+            "text_shadow_color"         : "text-shadow"    ,
+            "text_shadow"               : "text-shadow"    ,
             "parallax_background_image" : "" ,
             "parallax_background_ratio" : "" ,
-            "background_attachment" : "background-attachment" ,
-            "background_color"      : "background-color" ,
-            "background_position"   : "background-position" ,
-            "background_image"      : "background-image" ,
+            "background_attachment"     : "background-attachment" ,
+            "background_color"          : "background-color" ,
+            "background_position"       : "background-position" ,
+            "background_image"          : "background-image" ,
             "external_background_image" : "background-image" ,
             "background_gradient"       : "background-image" ,
-            "background_image_scaling"  : ["background-repeat" , "background-size"] ,
+            "background_repeat"         : "background-repeat"  ,
+            "background_size"           : "background-size" 
         };
 
         _.each( _styleSettingsMap , function( prop , setting ){
@@ -471,8 +516,11 @@
                           return ;
 
                       break;
-                      case "background_image_scaling" :
-                          var css = api.currentCssSelector + "{" + _getImageScaling( to ) + "}";
+                      case "background_size" :
+                          var css = api.currentCssSelector + "{" + siteEditorCss.backgroundSize( to ) + "}";
+                      break;
+                      case "background_repeat" :
+                          var css = api.currentCssSelector + "{background-repeat: " + to + " !important;}";
                       break;
                       case "background_image" :
                       case "external_background_image" :
@@ -481,7 +529,7 @@
 
                           var sGradient = !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_gradient"] ) && !_.isEmpty( sedCss[api.currentCssSelector]["background_gradient"] ) && _.isObject( sedCss[api.currentCssSelector]["background_gradient"] ),
                               bgImage = _getBackgroundImage() ,
-                              isBgImage = bgImage && bgImage != "none";
+                              isBgImage = bgImage && bgImage != "none"; alert( bgImage );
 
                           var css = api.currentCssSelector + "{" + _getCssBackgroundImage( bgImage , isBgImage , sGradient ) + "}";
 
@@ -518,10 +566,41 @@
         });
 
         var _getCurrentSedCss = function(){
-            var id = api.currentSedElementId ,
-                attrs = api.contentBuilder.getAttrs( id ) , sedCss;
 
-            sedCss = ( !_.isUndefined( attrs ) && !_.isUndefined( attrs["sed_css"] ) && _.isObject( attrs["sed_css"] ) ) ? attrs["sed_css"] : {};
+            var sedCss = {};
+
+            switch ( api.currentCssSettingType ){
+
+                case "module" :
+
+                    var id = api.currentSedElementId,
+                        attrs = api.contentBuilder.getAttrs(id);
+
+                    sedCss = ( !_.isUndefined(attrs) && !_.isUndefined(attrs["sed_css"]) && _.isObject(attrs["sed_css"]) ) ? attrs["sed_css"] : {};
+
+                    break;
+
+                case "page" :
+
+                    sedCss = api.currentPageCustomCss;
+
+                    break;
+
+                case "layout" :
+
+                    sedCss = api.currentLayoutCustomCss;
+
+                    break;
+
+                case "site" :
+
+                    sedCss = api.siteCustomCss;
+
+                    break;
+
+            }
+
+
             return sedCss;
         };
 
@@ -587,45 +666,6 @@
             _refreshParallaxElements();
         });
 
-        var _getImageScaling = function( value ){
-            var bgSize = "auto",
-                bgRepeat = "no-repeat";
-
-            switch ( value ) {
-               case "fullscreen":
-                    bgSize = "100% 100%";
-               break;
-               case "fit":
-                    bgSize = "100% auto";
-                    bgRepeat = "repeat-y";
-               break;
-               case "tile":
-                    bgSize = "auto";
-                    bgRepeat = "repeat";
-               break;
-               case "tile-horizontally":
-                    bgSize = "auto";
-                    bgRepeat = "repeat-x";
-               break;
-               case "tile-vertically":
-                    bgSize = "auto";
-                    bgRepeat = "repeat-y";
-               break;
-               case "normal":
-                    bgSize = "auto";
-                    bgRepeat = "no-repeat";
-               break;
-               case "cover":
-                    bgSize = "cover";
-                    //bgRepeat = "no-repeat";
-               break;
-            }
-
-            var css = 'background-repeat: ' + bgRepeat + ' !important;';
-            css += siteEditorCss.backgroundSize( bgSize );
-
-            return css;
-        };
 
         var _getGradient = function(){
 

@@ -64,6 +64,29 @@ if ( ! class_exists( 'SiteEditorBackgroundRepeatField' ) ) {
 
         }
 
+        /**
+         * Sets the $choices.
+         *
+         * @access protected
+         */
+        protected function set_choices() {
+
+            if ( is_array( $this->choices ) && !empty( $this->choices ) ) {
+                return ;
+            }
+
+            $this->choices = array(
+                'inherit'         => __('inherit' , 'site-editor' ),
+                'no-repeat'       => __('Normal', 'site-editor'),
+                'repeat'          => __('Tile', 'site-editor'),
+                'repeat-y'        => __('Tile Vertically', 'site-editor'),
+                'repeat-x'        => __('Tile Horizontally', 'site-editor'),
+                'round'           => __('Round', 'site-editor'),
+                'space'           => __('Space', 'site-editor')
+            );
+
+        }
+
     }
 }
 

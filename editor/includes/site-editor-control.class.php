@@ -238,6 +238,15 @@ class SiteEditorOptionsControl{
     public $is_style_setting = false;
 
 	/**
+	 * is control a style setting ?
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var bool
+	 */
+	public $css_setting_type = '';
+
+	/**
 	 * Constructor.
 	 *
 	 * Supplied `$args` override class property defaults.
@@ -431,7 +440,11 @@ class SiteEditorOptionsControl{
 			$json_array['shortcode'] = $this->shortcode;
 			$json_array['attr_name'] = $this->attr_name;
 			$json_array['is_attr'] = $this->is_attr;
+		}else if( $this->category == "style-editor" && !empty( $this->css_setting_type ) ){
+			$json_array['css_setting_type'] = $this->css_setting_type;
 		}
+
+
 
 		$json_array = array_merge( $json_array , $this->json );
 

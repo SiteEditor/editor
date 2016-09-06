@@ -21,8 +21,13 @@ function sed_register_design_editor_settings(){
             'transport' => 'postMessage',
             'type' => 'style-editor'
         ),
-        'background_image_scaling' => array(
-            'value' => 'normal',
+        'background_size' => array(
+            'value' => 'auto',
+            'transport' => 'postMessage',
+            'type' => 'style-editor'
+        ),
+        'background_repeat' => array(
+            'value' => 'no-repeat',
             'transport' => 'postMessage',
             'type' => 'style-editor'
         ),

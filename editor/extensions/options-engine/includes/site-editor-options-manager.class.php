@@ -646,7 +646,7 @@ final class SiteEditorOptionsManager{
 
                 $setting_args = array_merge($primary_args, $args);
 
-                unset($setting_args['type']);
+                unset($setting_args['type']); 
 
                 /*$setting_args = array(
                     'option_type'           =>  $field->option_type ,

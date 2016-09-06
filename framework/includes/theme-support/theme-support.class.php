@@ -10,7 +10,7 @@
 /**
  * SiteEditor Theme Support class.
  *
- * Manage Themes Support
+ * Extend theme features for support in 3d-party themes
  *
  * @since 1.0.0
  */
@@ -39,6 +39,33 @@ class SiteEditorThemeSupport{
     public function __construct( ) {
 
         require_once dirname( __FILE__ ) . '/theme-feature.class.php';
+
+        $this->register_features( );
+
+        $this->register_current_theme();
+
+        add_action( "wp_footer" , array( $this , "export_features_data" ) );
+
+    }
+
+    public function register_features( ) {
+
+        $features_path = dirname( __FILE__ ) . DS . "features" . DS . "*feature.class.php" ;
+
+        foreach ( glob( $features_path ) as $php_file ) {
+            require_once $php_file;
+        }
+
+    }
+
+    public function register_current_theme(){
+
+        $theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
+
+        if( $theme->get_stylesheet() == "twentysixteen" ){
+            require_once dirname( __FILE__ ) . "/themes/twentysixteen/twentysixteen-sync.class.php" ;
+            new SiteEditorTwentysixteenThemeSync( $this );
+        }
 
     }
 
@@ -104,12 +131,23 @@ class SiteEditorThemeSupport{
      * @since 1.0.0
      * @access public
      * @param string $id ID of the feature.
+     * @return bool
      */
     public function remove_theme_feature( $id ) {
 
+        do_action( "sed_before_remove_theme_feature" , $id );
+
         if ( isset( $this->theme_features[ $id ] ) ) {
+
             unset($this->theme_features[$id]);
+
+            return true;
+
+        }else{
+
+            return false;
         }
+
     }
 
     /**
@@ -130,12 +168,26 @@ class SiteEditorThemeSupport{
         return false;
     }
 
-}
+    /**
+     * Export features data
+     *
+     * @since 1.0.0
+     * @access public
+     */
+    public function export_features_data(){
 
-$GLOBALS['sed_theme_support'] = new SiteEditorThemeSupport();
+        $settings = array();
 
-function sed_register_feature( $feature_id , $php_class ){
-    global $sed_theme_support;
+        foreach ( $this->theme_features AS $feature_id => $feature ){
+            $settings[$feature_id] = $feature->json();
+        }
 
-    $sed_theme_support->register_feature( $feature_id , $php_class );
+        ?>
+        <script type="text/javascript">
+            var _sedThemeFeaturesSettings = <?php echo wp_json_encode( $settings ); ?>;
+        </script>
+        <?php
+
+    }
+
 }

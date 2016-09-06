@@ -14,6 +14,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'SiteEditor' ) ) :
 
+/**
+ * SiteEditor Class
+ */
 final Class SiteEditor {
 
     /**
@@ -30,6 +33,42 @@ final Class SiteEditor {
      * @var string
      */
     public $version_type = 'development';
+
+    /**
+     * Handle framework in front-end
+     *
+     * @access public
+     * @var object instance of SiteEditorFramework
+     * @since 1.0.0
+     */
+    public $framework;
+
+    /**
+     * Handle & render SiteEditor one page Application
+     *
+     * @access public
+     * @var object instance of SiteEditorApp
+     * @since 1.0.0
+     */
+    public $editor;
+
+    /**
+     * Handle theme framework
+     *
+     * @access public
+     * @var object instance of SiteEditorThemeFramework
+     * @since 1.0.0
+     */
+    public $theme;
+
+    /**
+     * SiteEditor Config Params
+     *
+     * @access public
+     * @var object instance of SiteEditorThemeFramework
+     * @since 1.0.0
+     */
+    public $config;
 
     /**
      * The single instance of the class.
@@ -74,7 +113,20 @@ final Class SiteEditor {
 
     public function __construct(){
 
+        $this->config = array(
+            "page_options"  =>  array(
+                "public"        => "sed_page_options" ,
+                "layout"        => "sed_layout_options"
+            ) ,
+            "version"       =>  $this->version ,
+            "version_type"  =>  $this->version_type
+        );
+
         $this->define_constants();
+
+        require_once  SED_INC_DIR . DS . 'functions.php';
+
+        $this->config = sed_array_to_object( $this->config );
 
         $this->init_hooks();
 
@@ -212,12 +264,20 @@ final Class SiteEditor {
      */
     public function includes() {
         require_once  SED_INC_DIR . DS . 'site-editor-install.class.php' ;
-        require_once  SED_INC_DIR . DS . 'functions.php';
         require_once  SED_INC_DIR . DS . 'site-editor-initialize.class.php' ;
         require_once  SED_INC_DIR . DS . 'site-editor-assets.class.php' ;
         require_once  SED_INC_DIR . DS . 'editor-extensions.class.php';
 
         $this->module_info = sed_get_setting("module_info");
+
+        /**
+         * Load Theme Framework Base
+         * Load in ajax mode , editor , editor_frontend , frontend
+         */
+        if ( ! $this->is_request( 'admin' ) || $this->is_request( 'editor' ) ) {
+            require_once SED_INC_FRAMEWORK_DIR . DS . 'theme-framework.class.php';
+            $this->theme = new SiteEditorThemeFramework( $this );
+        }
 
         if ( $this->is_request( 'admin' ) && ! $this->is_request( 'editor' ) && ! $this->is_request("sed_wp_ajax") ) {
             require_once  SED_ADMIN_DIR . DS . 'site-editor-admin.class.php' ;
@@ -231,12 +291,6 @@ final Class SiteEditor {
             $this->load_framework();
         }
 
-        /**
-         * Load in ajax mode , editor , editor_frontend , frontend
-         */
-        if ( ! $this->is_request( 'admin' ) || $this->is_request( 'editor' ) ) {
-            require_once SED_INC_FRAMEWORK_DIR . DS . 'theme-framework.class.php';
-        }
     }
 
     /**

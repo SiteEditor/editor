@@ -1,10 +1,8 @@
 <?php
 $css = new SiteEditorCss();
 
-do_action( "sed_before_dynamic_css_output" );
-
 $css->add_settings_property(array(
-    'background_gradient' , 'background_image_scaling', 'length' ,'border_radius_tr' ,
+    'background_gradient' , 'background_size' , 'background_repeat' , 'length' ,'border_radius_tr' ,
     'border_radius_tl', 'border_radius_br', 'border_radius_bl' ,'trancparency' ,
     'shadow_color', 'shadow', 'border_side', 'margin_top' , 'margin_bottom' , 'margin_left' ,
     'margin_right' , 'padding_top' , 'padding_bottom' , 'padding_left' , 'padding_right' ,

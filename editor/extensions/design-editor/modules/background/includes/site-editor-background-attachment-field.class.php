@@ -64,6 +64,27 @@ if ( ! class_exists( 'SiteEditorBackgroundAttachmentField' ) ) {
 
         }
 
+
+        /**
+         * Sets the $choices.
+         *
+         * @access protected
+         */
+        protected function set_choices() {
+
+            if ( is_array( $this->choices ) && !empty( $this->choices ) ) {
+                return ;
+            }
+
+            $this->choices = array(
+                'inherit'       => __('inherit' , 'site-editor' ),
+                'scroll'        => __('Scroll', 'site-editor') ,
+                'fixed'         => __('Fixed ', 'site-editor') ,
+                'local'         => __('Local ', 'site-editor') ,
+            );
+
+        }
+
     }
 }
 

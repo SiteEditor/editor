@@ -854,6 +854,8 @@ class SiteEditorManager{
 			$panel = new SiteEditorOptionsPanel( $this, $id, $args );
 		}
 
+		$panel->priority = absint( $panel->priority );
+
 		$this->panels[ $panel->id ] = $panel;
 
 		return $panel;

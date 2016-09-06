@@ -323,7 +323,7 @@ class SiteEditorCss{
             $output_css .= 'background-image: none !important;';
 
 
-  		if ( $bg_image ) {
+  	  if ( $bg_image ) {
                                             
             if ( $this->chvv('background_position' , $element_properties) )
   			    $output_css .= 'background-position: ' . $element_properties['background_position'] . ';';
@@ -331,43 +331,15 @@ class SiteEditorCss{
             if ( $this->chvv('background_attachment' , $element_properties) )
                 $output_css .= 'background-attachment: ' . $element_properties['background_attachment'] . ' !important;';
 
-            if( $this->chvv('background_image_scaling' , $element_properties) ) {
-                  switch ( $element_properties['background_image_scaling'] ) {
-                       case "fullscreen":
-                            $bg_size = "100% 100%";
-                       break;
-                       case "fit":
-                            $bg_size = "100% auto";
-                            $bg_repeat = "repeat-y";
-                       break;
-                       case "tile":
-                            $bg_size = "auto";
-                            $bg_repeat = "repeat";
-                       break;
-                       case "tile-horizontally":
-                            $bg_size = "auto";
-                            $bg_repeat = "repeat-x";
-                       break;
-                       case "tile-vertically":
-                            $bg_size = "auto";
-                            $bg_repeat = "repeat-y";
-                       break;
-                       case "normal":
-                            $bg_size = "auto";
-                            $bg_repeat = "no-repeat";
-                       break;
-                       case "cover":
-                            $bg_size = "cover";
-                       break;
-                  }
+            if ( $this->chvv('background_size' , $element_properties) )
+                $output_css .= $this->background_size( $$element_properties['background_size'] );
 
-                  $output_css .= 'background-repeat: ' . $bg_repeat . ' !important;';
-                  $output_css .= $this->background_size( $bg_size );
-            }
+            if ( $this->chvv('background_repeat' , $element_properties) )
+                $output_css .= 'background-repeat: ' . $element_properties['background_repeat'] . ' !important;';
 
-  		}
+  	  }
 
-        if($this->chvv('background_gradient' , $element_properties) || $this->chvv('background_image_scaling' , $element_properties))
+        if($this->chvv('background_gradient' , $element_properties) || $this->chvv('background_size' , $element_properties))
             $output_css .= "behavior: url(" . SED_ASSETS_URL . "/js/PIE/PIE.htc" . ");";
 
         return $output_css;

@@ -98,6 +98,10 @@ if ( ! class_exists( 'SiteEditorBackgroundPositionControl' ) ) {
             if( !empty( $this->selector ) )
                 $json_array['selector'] = $this->selector;
 
+            $json_array['options_selector'] = '.background-psn-sq';
+
+            $json_array['selected_class'] = 'active_background_position';
+
             return $json_array;
 
         }

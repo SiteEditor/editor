@@ -326,7 +326,7 @@ final class SiteEditorCustomizePosts {
 				return $args;
 			}
 			$registered = $this->registered_post_meta[ $matches['post_type'] ][ $matches['meta_key'] ];
-			if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] ) ) {
+			if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] )  && ! sed_current_theme_supports( $registered['theme_supports'] ) ) {
 				// We don't really need this because theme_supports will already filter it out of being exported.
 				return $args;
 			}

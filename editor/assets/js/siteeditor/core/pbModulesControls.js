@@ -54,10 +54,10 @@
 
             if( needToUpdate === true ) {
 
-                if (!_.isUndefined(this.extraOpt) && !_.isUndefined(this.extraOpt.attrs)) {
-                    this.update(this.extraOpt.attrs);
-                } else if (!_.isUndefined(this.extraOpt)) {
-                    this.update(this.extraOpt);
+                if ( !_.isUndefined( this.extraOpt ) && !_.isUndefined( this.extraOpt.attrs ) ) {
+                    this.update( this.extraOpt.attrs );
+                } else if ( !_.isUndefined( this.extraOpt ) && !_.isEmpty( this.extraOpt ) ) {
+                    this.update( this.extraOpt );
                 } else {
                     this.update();
                 }
@@ -166,9 +166,9 @@
                 cValue = control.defaultValue;
             }
 
-            this.currentValue = cValue; //alert( cValue );
+            this.currentValue = cValue;
 
-            this._update( cValue );
+            this._update( cValue ); 
 
             if( this.isModuleControl ){
                 api.Events.trigger("moduleControlUpdate" , control.shortcode , control.attr , cValue );
@@ -771,7 +771,7 @@
 
         _update  : function( val ) {
             this.formModel.updateField( val );
-        },
+        }
 
     });
 

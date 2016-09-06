@@ -176,7 +176,7 @@ class SiteEditorOptionsGroup {
 			return false;
 		}
 
-		if ( $this->theme_supports && ! call_user_func_array( 'current_theme_supports', (array) $this->theme_supports ) ) {
+		if ( $this->theme_supports && ! call_user_func_array( 'current_theme_supports', (array) $this->theme_supports )  && ! call_user_func_array( 'sed_current_theme_supports', (array) $this->theme_supports ) ) {
 			return false;
 		}
 

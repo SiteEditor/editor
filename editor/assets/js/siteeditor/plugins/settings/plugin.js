@@ -180,6 +180,7 @@
 
                             if( isOpen && self.optionsGroup == optionsGroup ) {
                                 self._resetTmpl();
+                                self.currentSettingsId = settingId;
                                 self._switchTmpl();
                             }
                         }
@@ -609,7 +610,9 @@
 
                     });
 
-                    api.Events.trigger("after_group_settings_update", settingId);
+                    api.Events.trigger("after_app_settings_update", settingId );
+
+                    api.Events.trigger("after_group_settings_update", settingId );
                 }
             }
 
@@ -1690,6 +1693,16 @@
         getDefaultValue : function( data , selector , selectorT ){
             var defaultValue;
 
+            if( !_.isUndefined( data.default_value ) && !_.isNull( data.default_value ) ){
+
+                if( _.isUndefined( this.defaultValues[data.style_props] ) )
+                    this.defaultValues[data.style_props] =  {};
+
+                this.defaultValues[data.style_props][selectorT] = _.clone( data.default_value );
+
+                return data.default_value;
+            }
+
             if( !_.isUndefined( this.defaultValues[data.style_props] ) && !_.isUndefined( this.defaultValues[data.style_props][selectorT] ) ){
 
                 defaultValue = _.clone( this.defaultValues[data.style_props][selectorT] );
@@ -1709,14 +1722,15 @@
         getCurrentValue : function( id , data , selector ){
 
             var selectorT = ( selector && selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]',
-                extra  = $.extend({} , api.appModulesSettings.sedDialog.extra || {}) ,
+                cssSettingType = _.isUndefined( data.css_setting_type ) ? "module" : data.css_setting_type,
+                extra  = ( cssSettingType == "module" ) ? $.extend({} , api.appModulesSettings.sedDialog.extra || {}) : {} ,
                 cValue = null;
 
             if( !_.isUndefined( api.currenStyleEditorContolsValues[selectorT] ) && !_.isUndefined( api.currenStyleEditorContolsValues[selectorT][data.settings["default"]] ) ){
                 cValue = api.currenStyleEditorContolsValues[selectorT][data.settings["default"]];
             }else{
 
-                if( !_.isUndefined( extra.attrs ) && !_.isUndefined( extra.attrs.sed_css ) &&  !_.isUndefined( extra.attrs.sed_css[selectorT] ) && !_.isUndefined( data.settings ) && !_.isUndefined( data.settings["default"] ) && !_.isUndefined( extra.attrs.sed_css[selectorT][data.settings["default"]] ) ){
+                if( cssSettingType == "module" && !_.isUndefined( extra.attrs ) && !_.isUndefined( extra.attrs.sed_css ) &&  !_.isUndefined( extra.attrs.sed_css[selectorT] ) && !_.isUndefined( data.settings ) && !_.isUndefined( data.settings["default"] ) && !_.isUndefined( extra.attrs.sed_css[selectorT][data.settings["default"]] ) ){
                     cValue = extra.attrs.sed_css[selectorT][data.settings["default"]];
                 }else if( !_.isUndefined( data.style_props ) && data.settings["default"] != "external_background_image" ){
                     cValue = this.getDefaultValue( data , selector , selectorT );

@@ -120,7 +120,7 @@ abstract class SiteEditorPostmetaController {
 	public function register_meta( SiteEditorCustomizePosts $posts_component ) {
 
 		// Short-circuit if theme support is not present.
-		if ( isset( $this->theme_supports ) && ! current_theme_supports( $this->theme_supports ) ) {
+		if ( isset( $this->theme_supports ) && ! current_theme_supports( $this->theme_supports )  && ! sed_current_theme_supports( $this->theme_supports ) ) {
 			return 0;
 		}
 

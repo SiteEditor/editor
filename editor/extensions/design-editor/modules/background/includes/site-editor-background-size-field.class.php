@@ -64,6 +64,29 @@ if ( ! class_exists( 'SiteEditorBackgroundSizeField' ) ) {
 
         }
 
+
+        /**
+         * Sets the $choices.
+         *
+         * @access protected
+         */
+        protected function set_choices() {
+
+            if ( is_array( $this->choices ) && !empty( $this->choices ) ) {
+                return ;
+            }
+
+            $this->choices = array(
+                'inherit'       => __('inherit' , 'site-editor' ),
+                'auto'          => __('Auto', 'site-editor'),
+                '100% auto'     => __('Fit', 'site-editor'),
+                '100% 100%'     => __('Full Screen ', 'site-editor'),
+                'cover'         => __('Cover ', 'site-editor'),
+                'contain'       => __('Contain ', 'site-editor'),
+            );
+
+        }
+
     }
 }
 

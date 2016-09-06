@@ -636,7 +636,11 @@ function sed_is_mobile_version(){
     }
 }
 
-function si_add_mobile_class( $classes ) {
+/**
+ * @param $classes
+ * @return mixed
+ */
+function _si_add_mobile_class( $classes ) {
     $class = (sed_is_mobile_version()) ? "sed_mobile_version" : "" ;
 
     if( empty($class) )
@@ -652,7 +656,7 @@ function si_add_mobile_class( $classes ) {
     // return the $classes array
     return $classes;
 }
-add_filter( 'body_class', 'si_add_mobile_class' );
+add_filter( 'body_class', '_si_add_mobile_class' );
 
 function sed_add_settings( $settings ){
 
@@ -1126,4 +1130,133 @@ function sed_get_image_sizes(){
     return $sizes;
 }
 
+/**
+ * Get Page Setting With current scope
+ *
+ * @param $setting_id
+ * @param string $sed_page_id
+ * @param string $sed_page_type
+ * @return mixed
+ */
+function sed_get_page_setting( $setting_id , $sed_page_id = '' , $sed_page_type = '' ){
 
+    if( empty( $sed_page_id ) || empty( $sed_page_type ) ) {
+
+        $value = SED()->theme->get_current_page_setting( $setting_id );
+
+    }else{
+
+        $value = SED()->theme->get_page_setting( $setting_id , $sed_page_id , $sed_page_type );
+
+    }
+
+    return $value;
+
+}
+
+/**
+ * Gets the theme support arguments passed when registering that support
+ *
+ * @since 1.0.0
+ *
+ * @param string $feature_id the feature to check
+ * @return mixed The array of extra arguments or the value for the registered feature.
+ */
+function sed_get_theme_support( $feature_id ) {
+
+    $feature = SED()->theme->support->get_theme_feature( $feature_id );
+
+    if ( ! isset( $feature ) )
+        return false;
+
+    if ( func_num_args() == 1 ) {
+        return $feature;
+    }
+
+    $args = array_slice( func_get_args(), 1 );
+
+    return $feature->$args[0];
+
+}
+
+/**
+ * Checks a theme's support for a given feature
+ *
+ * @since 1.0.0
+ *
+ * @param string $feature_id the feature being checked
+ * @return bool
+ */
+function sed_current_theme_supports( $feature_id ) {
+
+    $feature = SED()->theme->support->get_theme_feature( $feature_id );
+
+    if ( ! isset( $feature ) )
+        return false;
+
+    // If no args passed then no extra checks need be performed
+    if ( func_num_args() <= 1 )
+        return true;
+
+    $args = array_slice( func_get_args(), 1 );
+
+    if( method_exists( $feature , 'check_support' ) )
+        return $feature->check_support( $args[0] );
+
+    return apply_filters( "sed_current_theme_supports-{$feature_id}", true, $args, $feature );
+}
+
+
+/**
+ * Allows a theme to register its support of a certain feature
+ *
+ * Must be called in the theme's functions.php file to work.
+ * If attached to a hook, it must be plugins_loaded.
+ * The init hook may be too late for some features.
+ *
+ * @since 1.0.0
+ *
+ * @param string $feature_id The feature being added.
+ */
+function sed_add_theme_support( $feature_id , $args = array() ) {
+
+    return SED()->theme->support->add_theme_feature( $feature_id , $args );
+
+}
+
+
+/**
+ * Allows a theme to de-register its support of a certain feature
+ *
+ * Should be called in the theme's functions.php file. Generally would
+ * be used for child themes to override support from the parent theme.
+ *
+ * @since 1.0.0
+ * @see sed_add_theme_support()
+ * @param string $feature the feature being added
+ * @return bool|void Whether feature was removed.
+ */
+function sed_remove_theme_support( $feature ) {
+
+    return SED()->theme->support->remove_theme_feature( $feature );
+}
+
+
+function sed_array_to_object($array){
+    foreach ($array as $key => $value){
+        if (is_array($value)){
+            $array[$key] = sed_array_to_object($value);
+        }
+    }
+    return (object) $array;
+}
+
+function sed_object_to_array($object){
+    $array = (array) $object;
+    foreach ($array as $key => $value){
+        if (is_object($value)){
+            $array[$key] = sed_object_to_array($value);
+        }
+    }
+    return $array;
+}

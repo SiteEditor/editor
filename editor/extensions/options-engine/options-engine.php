@@ -21,7 +21,11 @@ Version: 1.0.0
  * Class SedOptionsEngineExtension
  */
 class SedOptionsEngineExtension {
-    
+
+    /**
+     * SedOptionsEngineExtension constructor.
+     * @param $editor
+     */
     public function __construct( $editor ){
 
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-general-settings.class.php';

@@ -125,7 +125,7 @@ class SiteEditorGeneralSettings {
 
             $registered = $this->settings[ $matches['option_key'] ];
 
-            if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] ) ) {
+            if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] )  && ! sed_current_theme_supports( $registered['theme_supports'] ) ) {
                 // We don't really need this because theme_supports will already filter it out of being exported.
                 return $args;
             }
@@ -484,7 +484,7 @@ final class SiteEditorPostmetaOption {
     public function register_meta( SiteEditorCustomizePosts $posts_component ) {
 
         // Short-circuit if theme support is not present.
-        if ( isset( $this->theme_supports ) && ! current_theme_supports( $this->theme_supports ) ) {
+        if ( isset( $this->theme_supports ) && ! current_theme_supports( $this->theme_supports )  && ! sed_current_theme_supports( $this->theme_supports ) ) {
             return 0;
         }
 

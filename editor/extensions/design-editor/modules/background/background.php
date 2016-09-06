@@ -184,48 +184,26 @@ final class SedDesignEditorBackground{
             'background_attachment' => array(
                 "type"              => "background-attachment" ,  
                 "label"             => __("Background Attachment", "site-editor"),
-                "description"       => __("Add Background Attachment For Element", "site-editor"),
-                "choices"           => array(
-                    'scroll'        => __('Scroll', 'site-editor'),
-                    'fixed'         => __('Fixed ', 'site-editor') 
-                ),
+                "description"       => __("Add Background Attachment For Element", "site-editor")
             ), 
 
             'background_size' => array(
                 "type"              => "background-size" ,  
                 "label"             => __("Background Size", "site-editor"),
                 "description"       => __("Add Background Size For Element", "site-editor"),
-                'choices'           => array(
-                    'auto'          => __('Auto', 'site-editor'),
-                    'fit'           => __('Fit', 'site-editor'),
-                    'fullscreen'    => __('Full Screen ', 'site-editor'),
-                    'cover'         => __('Cover ', 'site-editor'),
-                    'contain'       => __('Contain ', 'site-editor'), 
-                ),
             ),
 
             'background_repeat' => array(
                 "type"              => "background-repeat" ,  
                 "label"             => __("Background Repeat", "site-editor"),
                 "description"       => __("Add Background Repeat For Element", "site-editor"),
-                'choices'           => array(
-                    'normal'                => __('Normal', 'site-editor'),
-                    'tile'                  => __('Tile ', 'site-editor'),
-                    'tile-vertically'       => __('Tile Vertically', 'site-editor'),
-                    'tile-horizontally'     => __('Tile Horizontally ', 'site-editor'), 
-                ),
             ), 
 
             'background_position' => array(
                 "type"              => "background-position" ,
                 "label"             => __('Background Position', 'site-editor'),
-                "description"       => __("Background Position", "site-editor"),  
-                'js_type'           =>  'dropdown',
-                'has_border_box'    =>   true ,  
-                'js_params'     =>  array(
-                    'options_selector'  => '.background-psn-sq',
-                    'selected_class'    => 'active_background_position'
-                ),      
+                "description"       => __("Background Position", "site-editor"),
+                'has_border_box'    =>   true ,
             ), 
 
         );

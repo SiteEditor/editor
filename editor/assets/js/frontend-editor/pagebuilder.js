@@ -2282,7 +2282,7 @@
             shortcodes = $.extend( true, {} , _mergeByProperty( modulesShortcodesCopy , shortcodes , "tag" )  );
 
             shortcodes = api.pageBuilder.setHelperShortcodes( shortcodes , mainShortcode.tag , "tag" );
-            shortcodes = api.pageBuilder.shortcodesPatternFilter( shortcodes )
+            shortcodes = api.pageBuilder.shortcodesPatternFilter( shortcodes );
  
             //if( type == "group" ){
                 newMainShortcode.attrs.skin =  currentSkin;

@@ -1,20 +1,20 @@
 <?php
 /**
- * Site Width & Site Layout Feature Class.
+ * Site Editor Custom Background Feature Class.
  *
- * Handles all features of themes
+ * Create Custom Background for pages & site
  *
  * @package SiteEditor
  * @subpackage framework
  * @since 1.0.0
  */
-class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
+class SiteEditorCustomBackgroundFeature extends SiteEditorThemeFeature{
 
     /**
      * @access public
      * @var string
      */
-    public $id = 'site_layout_feature';
+    public $id = 'sed_custom_background';
 
     /**
      * Page default Length use from "wide" or "boxed"
@@ -22,7 +22,7 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
      * @access public
      * @var string
      */
-    public $default_page_length = 'wide';
+    public $default_color = '';
 
     /**
      * Sheet default width use from valid css value
@@ -30,7 +30,40 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
      * @access public
      * @var string
      */
-    public $default_sheet_width = '1100px';
+    public $default_image = '';
+
+    /**
+     * Sheet default width use from valid css value
+     *
+     * @access public
+     * @var string
+     */
+    public $default_repeat = 'no-repeat';
+
+
+    /**
+     * Sheet default width use from valid css value
+     *
+     * @access public
+     * @var string
+     */
+    public $default_position = 'center center';
+
+    /**
+     * Sheet default width use from valid css value
+     *
+     * @access public
+     * @var string
+     */
+    public $default_size = '';
+
+    /**
+     * Sheet default width use from valid css value
+     *
+     * @access public
+     * @var string
+     */
+    public $default_attachment = 'scroll';
 
     /**
      * Selector For target element it's can change page length and sheet width
@@ -59,36 +92,7 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
      * @access public
      */
     public function feature_output(){
-        global $sed_dynamic_css_string;
 
-        $selector = $this->selector;
-
-        $sheet_width = sed_get_page_setting( 'sheet_width' ); //var_dump( $sheet_width );
-
-        $page_length = sed_get_page_setting( 'page_length' ); //var_dump( $page_length );
-
-        ob_start();
-        ?>
-        <?php
-        if( $page_length == "boxed" ) {
-            echo $selector; ?>,
-            .sed-row-boxed{
-                max-width : <?php echo $sheet_width; ?> !important;
-            }
-            <?php
-        }else{
-            echo $selector; ?>{
-                max-width : 100% !important;
-            }
-
-            .sed-row-boxed{
-                max-width : <?php echo $sheet_width; ?> !important;
-            }
-
-            <?php
-        }
-        $css = ob_get_clean();
-        $sed_dynamic_css_string .= $css;
     }
 
     /**
@@ -104,12 +108,10 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
         $json_array = parent::json();
 
         $json_array['selector']                 = $this->selector;
-        $json_array['default_page_length']      = $this->default_page_length;
-        $json_array['default_sheet_width']      = $this->default_sheet_width;
 
         return $json_array;
     }
 
 }
 
-$this->register_feature( 'site_layout_feature' , 'SiteEditorSiteLayoutWidthFeature' );
+$this->register_feature( 'sed_custom_background' , 'SiteEditorCustomBackgroundFeature' );

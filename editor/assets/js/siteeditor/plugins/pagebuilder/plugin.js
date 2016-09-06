@@ -194,7 +194,7 @@
 
         });
 
-       api.previewer.bind("resetpageInfoSettings" , function( data ){
+       api.previewer.bind("resetpageInfoSettings" , function( data ){ alert( data.pageId );
 
           if( _.isUndefined(data.pageId) || _.isUndefined(data.pageType)  )
               return ;
@@ -384,7 +384,7 @@
             _.each( data , function(index, attachment) {
                 api.previewer.trigger( 'addAttachmentSizes' , {
                     sizes : attachment.sizes,
-                    id : attachment.id,
+                    id : attachment.id
                 });    
             });
 
