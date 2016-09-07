@@ -34,6 +34,8 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             add_action( "sed_ajax_load_options_sed_add_layout" , array( $this, "add_layout_options" ) );
 
+            add_action( "sed_ajax_load_options_sed_pages_layouts" , array( $this, "pages_layouts_options" ) );
+
             //add_filter( "sed_addon_settings", array($this,'icon_settings'));
 		}
 
@@ -55,6 +57,53 @@ if(!class_exists('SiteEditorLayoutManager')){
             );
 
             $sed_options_engine->set_group_params( "sed_add_layout" , __("Add New Layout" , "site-editor") , $params , array() , "app-settings" );
+        }
+
+
+        function pages_layouts_options(){
+            global $sed_options_engine;
+            ob_start();
+            include dirname( __FILE__ ) . DS . "view" . DS . "pages_layouts.tpl.php";
+            $html = ob_get_clean();
+
+            $params = array();
+
+            $params['page_layout'] = array(
+                'type'      => 'select',
+                'value'     => 'default' ,
+                'label'     => __("Select page layout" ,"site-editor"),
+                'desc'      => '',
+                'options'   => array(
+                    ''  =>   __( "Using Default settings" , "site-editor" )
+                ),
+                'atts'      => array(
+                    "class"     =>  "sed_all_layouts_options_select"
+                ),
+                'priority'  => 15 ,
+                'control_category'  => 'app-settings' ,
+                'settings_type'     => "page_layout" ,
+            );
+
+
+            $current_pages_layouts = get_option('sed_pages_layouts');
+
+            foreach( $current_pages_layouts AS $page_group => $layout ){
+                $params["group_".$page_group] = array(
+                    'type'      => 'select',
+                    'value'     => $layout ,
+                    'label'     => $page_group,
+                    'desc'      => '',
+                    'options'   => array(),
+                    'atts'      => array(
+                        "class"     =>  "sed_all_layouts_options_select"
+                    ),
+                    'priority'  => 15 ,
+                    'control_category'  => 'app-settings' ,
+                    'settings_type'     => 'sed_pages_layouts[' . $page_group . ']' ,
+                );
+            }
+
+            $sed_options_engine->set_group_params( "sed_pages_layouts" , __("Pages Layouts Settings" , "site-editor") , $params , array() , "app-settings" );
         }
 
         /*function icon_settings( $sed_addon_settings ){
@@ -81,6 +130,16 @@ if(!class_exists('SiteEditorLayoutManager')){
             $I18n['public_scope']       =  __("Public" , "site-editor");
             $I18n['customize_scope']    =  __("Customize" , "site-editor");
             $I18n['hidden_scope']       =  __("Hidden" , "site-editor");
+
+            $I18n['empty_layout_title']         =  __("Please enter title" , "site-editor");
+            $I18n['invalid_layout_title']       =  __("Layout title not validate , only using letter , number , - , _ and space" , "site-editor");
+            $I18n['empty_layout_slug']          =  __("Please enter slug" , "site-editor");
+            $I18n['invalid_layout_slug']        =  __("Layout slug not validate , It should be English and only using letter , number , - and _" , "site-editor");
+            $I18n['layout_already_exist']       =  __("The item is already exist in your leyouts." , "site-editor");
+            $I18n['remove_default_layout']      =  __("you can not remove default layout" , "site-editor");
+            $I18n['remove_current_layout']      =  __("you can not remove current page layout" , "site-editor");
+            $I18n['layout_not_exist']           =  __("this layout not exist." , "site-editor");
+            $I18n['invalid_layout']             =  __("The item is not valid layout." , "site-editor");
 
             return $I18n;
         }
@@ -129,33 +188,18 @@ if(!class_exists('SiteEditorLayoutManager')){
             $site_editor_app->toolbar->add_element(
                 "layout" ,
                 "general" ,
-                "sub-themes" ,
+                "pages-layouts" ,
                 __("Layout settings","site-editor") ,
                 "sub_theme_element" ,     //$func_action
                 "" ,                //icon
                 "" ,  //$capability=
                 array( ),// "class"  => "btn_default3"
                 array( "row" => 1 ,"rowspan" => 2 ),
-                array('module' => 'layout' , 'file' => 'sub_themes.php'),
+                array('module' => 'layout' , 'file' => 'pages_layouts.php'),
                 //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
                  'all' ,
                  array(),
-                 array(
-                    'page_layout' => array(
-                        'settings'     => array(
-                            'default'       => 'page_layout'
-                        ),
-                        'type'    => 'sed_element'
-                    ),
-
-                    'changed_sub_theme_override' => array(
-                        'settings'     => array(
-                            'default'       => 'changed_sub_theme_override'
-                        ),
-                        'type'    => 'sed_element'
-                    ),
-
-                 )
+                 array()
             );
 
             $site_editor_app->toolbar->add_element(
@@ -252,6 +296,24 @@ if(!class_exists('SiteEditorLayoutManager')){
 
         }
 
+        function default_pages_layouts_list(){
+
+            $default_pages_layouts = array(
+                "posts_archive"     =>  "archive" ,
+                "home_blog"         =>  "default" ,
+                "front_page"        =>  "default" ,
+                "blog"              =>  "archive" ,
+                "search_results"    =>  "default" ,
+                "404_page"          =>  "default" ,
+                "single_post"       =>  "post" ,
+                "single_page"       =>  "page" ,
+                "author_page"       =>  "archive" ,
+                "date_archive"      =>  "archive" ,
+            );
+
+            return $default_pages_layouts;
+        }
+
         function register_settings( ){
             $settings = array();
 
@@ -289,34 +351,97 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'transport'      => 'postMessage'
     		);
 
+            $default_pages_layouts = $this->default_pages_layouts_list();
+
             if ( get_option( 'sed_pages_layouts' ) === false ) {
 
                 //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
                 $deprecated = null;
                 $autoload = 'yes';
 
-                $default_pages_layouts = array(
-                    "posts_archive"     =>  "archive" ,
-                    "home_blog"         =>  "default" ,
-                    "front_page"        =>  "default" ,
-                    "blog"              =>  "archive" ,
-                    "search_results"    =>  "default" ,
-                    "404_page"          =>  "default" ,
-                    "single_post"       =>  "post" ,
-                    "single_page"       =>  "page" ,
-                    "author_page"       =>  "archive" ,
-                    "date_archive"      =>  "archive" ,
-                );
+                $current_pages_layouts = $default_pages_layouts;
 
                 add_option( 'sed_pages_layouts' , $default_pages_layouts , $deprecated, $autoload );
+            }else{
+                $current_pages_layouts = get_option('sed_pages_layouts');
             }
 
-            $settings['sed_pages_layouts'] = array(
-    			'default'        => get_option( 'sed_pages_layouts' ),
-    			'capability'     => 'manage_options',
-    			'option_type'    => 'option' ,
-                'transport'      => 'postMessage'
-    		);
+            foreach( $default_pages_layouts AS $group => $layout ){
+
+                $id = 'sed_pages_layouts[' . $group.']';
+
+                $settings[$id] = array(
+                    'default'        => isset( $current_pages_layouts[$group] ) ? $current_pages_layouts[$group] : "default",
+                    'capability'     => 'manage_options',
+                    'option_type'    => 'option' ,
+                    'transport'      => 'postMessage'
+                );
+            }
+
+            $post_types = get_post_types( array( 'show_in_nav_menus' => true , 'public' => true ), 'object' );
+
+            if ( !empty( $post_types ) ) {
+                foreach ($post_types AS $post_type_name => $post_type) {
+
+                    if( in_array( $post_type_name , array( "post" , "page" ) ) )
+                        continue;
+
+                    $id = 'sed_pages_layouts[post_type_archive_' . $post_type_name .']';
+
+                    if( !isset( $current_pages_layouts['post_type_archive_' . $post_type_name] ) ){
+                        $current_pages_layouts['post_type_archive_' . $post_type_name] = "default";
+                    }
+
+                    $settings[$id] = array(
+                        'default'        =>  $current_pages_layouts['post_type_archive_' . $post_type_name] ,
+                        'capability'     => 'manage_options',
+                        'option_type'    => 'option' ,
+                        'transport'      => 'postMessage'
+                    );
+
+
+                    $id = 'sed_pages_layouts[single_' . $post_type_name .']';
+
+                    if( !isset( $current_pages_layouts['single_' . $post_type_name] ) ){
+                        $current_pages_layouts['single_' . $post_type_name] = "default";
+                    }
+
+                    $settings[$id] = array(
+                        'default'        => $current_pages_layouts['single_' . $post_type_name] ,
+                        'capability'     => 'manage_options',
+                        'option_type'    => 'option' ,
+                        'transport'      => 'postMessage'
+                    );
+
+                }
+            }
+
+            $args = array(
+                'public'   => true,
+                '_builtin' => false
+
+            );
+
+            $output = 'objects';
+            $taxonomies = get_taxonomies( $args, $output );
+            if ( $taxonomies ) {
+                foreach ( $taxonomies  as $taxonomy ) {
+
+                    $id = 'sed_pages_layouts[taxonomy_' . $taxonomy->name .']';
+
+                    if( !isset( $current_pages_layouts['taxonomy_' . $taxonomy->name] ) ){
+                        $current_pages_layouts['taxonomy_' . $taxonomy->name] = "default";
+                    }
+
+                    $settings[$id] = array(
+                        'default'        => $current_pages_layouts['taxonomy_' . $taxonomy->name] ,
+                        'capability'     => 'manage_options',
+                        'option_type'    => 'option' ,
+                        'transport'      => 'postMessage'
+                    );
+
+                }
+            }
 
             if ( get_option( 'sed_layouts_models' ) === false ) {
 
@@ -325,6 +450,8 @@ if(!class_exists('SiteEditorLayoutManager')){
                 $autoload = 'yes';
                 add_option( 'sed_layouts_models' , array() , $deprecated, $autoload );
             }
+
+            update_option( 'sed_pages_layouts' , $current_pages_layouts );
 
             $settings['sed_layouts_models'] = array(
     			'default'        => get_option( 'sed_layouts_models' ),

@@ -1,75 +1,91 @@
-<fieldset class="row_setting_box">
-    <legend><?php echo __("Layouts Manager","site-editor");?></legend>
-    <div class="row_settings">
-        <div class="row_setting_inner">
+<div id="sed-app-control-sed_add_layout_layouts_manager" class="clearfix sed-container-control-element">
+    <fieldset class="row_setting_box">
+        <legend><?php echo __("Add New Layout","site-editor");?></legend>
+        <div class="row_settings">
+            <div class="row_setting_inner">
 
-            <!--<div id="sed-app-control-layouts_manager" class="clearfix sed-container-control-element">
-                <div ng-app="layoutsManager" ng-controller="layoutCtrl">
-
-                    <div class="sed-layout-lists">
-                        <ul>
-                            <li ng-repeat="layoutTitle in layouts">
-
-                                <div class="sed-view-mode">
-                                    <span ng-click="editItem($index)">{{layoutTitle}} </span>
-                                    <span class="fa fa-delete" ng-click="removeItem($index)">   remove  </span>
-                                    <span class="fa fa-edit" ng-click="editItem($index)"> edit</span>
-                                </div>
-
-                                <div class="sed-edit-mode">
-
-                                </div>
-
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="sed-layout-edit" ng-class="editMode">
-                        <input ng-model="editLayout">
-                        <button ng-click="saveItem()">Save</button>
-                        <span ng-click="closeEditMode()">   x </span>
-                    </div>
+                <div>
 
                     <div class="sed-add-layout">
-                        <input ng-model="addLayout">
-                        <button ng-click="addItem()">Add</button>
+                        <div class="row_field">
+                            <label><?php echo __("Title" , "site-editor");?></label>
+                            <input name="add-new-layout-title">
+                        </div>
+
+                        <div class="row_field">
+                            <label><?php echo __("Slug" , "site-editor");?></label>
+                            <input name="add-new-layout-slug">
+                        </div>
+
+                        <div class="row_field">
+                            <button data-action="add" class="btn button-primary"><?php echo __("Add" , "site-editor");?></button>
+                        </div>
+                    </div>
+
+                    <div class="sed-layout-edit hide">
+                        <input data-layout="" name="edit-layout-title" value="">
+                        <button data-action="save" class="btn button-primary"><?php echo __("Save" , "site-editor");?></button>
+                        <span data-action="save-close" class="fa fa-close"> </span>
                     </div>
 
                     <div class="sed-layout-error-box sed-error">
-                        <p>{{errortext}}</p>
+                        <p></p>
                     </div>
 
                 </div>
-            </div>-->
-            <div ng-app="myShoppingList" ng-controller="myCtrl">
-                <ul>
-                    <li ng-repeat="x in products">
-                        <div>
-                            <span ng-click="editItem($index)">{{x}} </span>
-                            <span ng-click="removeItem($index)">   remove  </span>
-                            <span ng-click="editItem($index)"> edit</span>
-                        </div>
 
-                    </li>
-                </ul>
+            </div>
+        </div>
+    </fieldset>
 
-                <div ng-class="editMode">
-                    <input ng-model="editMe">
-                    <button ng-click="saveItem()">Save</button>
-                    <span ng-click="disableEditMode()">   x </span>
-                </div>
+    <div class="sed-layout-lists-container">
 
-                <input class="hide" ng-model="editIndex">
+        <div class="sed-layout-lists">
+            <ul>
 
-                <input type="text" ng-model="addMe">
-                <button ng-click="addItem()">Add</button>
-                <p>{{errortext}}</p>
+            </ul>
+        </div>
 
-                <p ng-bind="myText.user"></p>
+    </div>
+</div>
+
+<script type="text/html" id="tmpl-sed-layouts-manager" >
+    <#
+        var num = 1;
+        var layoutsSettings = data.layoutsSettings ,
+            layouts = _.keys( layoutsSettings );
+
+        layouts.reverse();
+
+        _.each( layouts , function( layout ){
+            var layoutTitle = layoutsSettings[layout].title;
+        #>
+        <li>
+
+            <div class="sed-view-mode">
+                <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}" >{{layoutTitle}} </span>
+                <# if( layout != "default" && layout != data.currentLayout ){ #>
+                <span data-action="delete" data-layout="{{layout}}" class="fa fa-close" title="<?php echo __("Remove" , "site-editor");?>"></span>
+                <# } #>
+                <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}"  class="fa fa-edit" title="<?php echo __("Edit" , "site-editor");?>"></span>
+            </div>
+
+            <div class="sed-edit-mode">
 
             </div>
 
-            <p>Try to add the same item twice, and you will get an error message.</p>
-        </div>
+        </li>
+        <#
+            num++;
+            });
+            #>
+</script>
+
+
+<script type="text/html" id="sed-remove-layout-confirm-tpl" >
+    <div class="sed_message_box">
+        <h3><?php echo __("Are You Sure?" , "site-editor");?></h3>
+        <p><?php echo __("Do you want to delete this layout?" , "site-editor");?></p>
+        <p><span><?php echo __("Note : " , "site-editor");?></span> <span><?php echo __("all this data related to layout like module that only using in this layout removed && not recovery" , "site-editor");?></span> </p>
     </div>
-</fieldset>
+</script>

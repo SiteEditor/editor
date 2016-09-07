@@ -68,7 +68,7 @@ Class AppOptionsEngine {
             'success' => true,
             'data'    => array(
                 'output'     => $this->params[ $_POST['setting_id'] ] ,
-                'controls'              => $this->controls
+                'controls'   => isset( $this->controls[ $_POST['setting_id'] ] ) ? $this->controls[ $_POST['setting_id'] ] : array()
             ),
         ) ) );
 
@@ -251,11 +251,16 @@ Class AppOptionsEngine {
         }
     }
 
-    public function add_controls( $controls = array() ){
+    public function add_controls( $controls = array() , $group = '' ){
         global $sed_apps;
         if(!empty($controls)){
             foreach($controls AS $id => $values ){
-                $this->controls[$id] = $values;
+                if( !empty( $group ) ) {
+                    $this->controls[$group][$id] = $values;
+                }else{
+                    $this->controls["without_group"][$id] = $values;
+                }
+
                 $sed_apps->editor_manager->add_control( $id, $values );
             }
         }
@@ -351,7 +356,7 @@ Class AppOptionsEngine {
         }
 
         if( !empty( $controls ) ){
-            $this->add_controls( $controls );
+            $this->add_controls( $controls , $group );
         }
 
     }

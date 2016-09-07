@@ -74,7 +74,7 @@ function( $, sedApp ) {
                     $thisValue[control.targetElement].start = startColor;
                     $thisValue[control.targetElement].end = endColor;
 
-                    api( "background_gradient" ).set( $thisValue );
+     api( "background_gradient" ).set( $thisValue );
 
                     /*    gId         =  "style_editor_gradient" ,
                         gControl = api.control.instance( gId );

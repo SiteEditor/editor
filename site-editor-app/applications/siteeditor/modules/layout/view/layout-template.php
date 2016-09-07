@@ -181,3 +181,18 @@
     });
     #>
 </script>
+
+
+
+<script type="text/html" id="tmpl-sed-layouts-select-options" >
+    <#
+        var num = 1;
+        _.each( data.layoutsSettings , function( setting , layout ){
+        var title = setting.title;
+        #>
+        <option value="{{layout}}">{{title}}</option>
+        <#
+            num++;
+            });
+            #>
+</script>

@@ -3,7 +3,10 @@
         <span class="fa f-sed icon-subtheme fa-2x "></span>
         <span class="el_txt"><?php echo __("add Layout","site-editor");  ?></span>
     </a>
-    <div id="sed-dialog-add-layout"  class="sed-dialog sed-layout-dialogs"  title="<?php echo __("add New Layout" ,"site-editor");  ?>">
 
+    <div id="sed-dialog-add-layout"  class="sed-dialog sed-layout-dialogs"  title="<?php echo __("add New Layout" ,"site-editor");  ?>">
+        <div class="content">
+
+        </div>
     </div>
 </div>

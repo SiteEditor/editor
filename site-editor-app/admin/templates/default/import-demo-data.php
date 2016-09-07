@@ -149,7 +149,7 @@ var_dump( 'sed_general_theme_options' ,  get_option( 'sed_general_theme_options'
         }
     }
 
-    $post_types = get_post_types( array( 'show_in_nav_menus' => true ), 'object' );
+    $post_types = get_post_types( array( 'show_in_nav_menus' => true , 'public' => true ), 'object' );
 
     if ( !empty( $post_types ) ) {
         foreach($post_types AS $post_type_name => $post_type){

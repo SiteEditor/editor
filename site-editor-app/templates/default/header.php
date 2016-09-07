@@ -268,7 +268,6 @@ $sed_js_I18n = $site_editor_app->js_I18n();
 
     -->
     </style>
-
     <?php do_action( 'sed_top_head' ); ?>
 
 	<?php echo $site_editor_head; ?>
