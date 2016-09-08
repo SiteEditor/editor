@@ -36,7 +36,9 @@ api	 * @param options
 
             this.previewer.trigger( this.id + "_update");
 
-			switch ( this.transport ) {
+            var transport = api.applyFilters( 'sedPreviewerTransportFilter' , this.transport , this.id );
+
+			switch ( transport ) {
 				case 'refresh':
                     api.Events.trigger("beforeRefreshPreviewer");
 					return this.previewer.refresh( );

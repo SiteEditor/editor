@@ -1,237 +1,211 @@
 <?php
-Class SiteeditorThemeFramework{
+Class SiteEditorThemeFramework{
 
 	function __construct( ){
+        $this->page_mata_key = "";
+        $this->theme_option_name = "";
 
+        add_action( "sed_site_options_framework" , array( $this , "get_site_options" ) );
+
+        add_action( "sed_theme_options_framework" , array( $this , "get_theme_options" ) );
+
+        add_action( "sed_page_options_framework" , array( $this , "get_page_options" ) );
+
+        add_action( "sed_layout_options_framework" , array( $this , "get_layout_options" ) );
+
+        add_action( "sed_page_content_options_framework" , array( $this , "get_content_options" ) , 10 , 1 );
+
+        add_action( 'sed_app_register' ,  array( $this, 'register_settings' ) );
 	}
 
-    function call_theme_options(){
+    function get_site_options(){
+
+        $params = array_merge( $this->get_default_params()['site_options'] , $this->get_params()['site_options'] );
+
+        $sed_options_engine->set_group_params( "sed_site_options" , __("Site Options" , "site-editor") , $params , $this->panels['site_options'] , "site-options" );
+    }
+
+    function get_theme_options(){
+
+        $params = array_merge( $this->default_theme_params()['theme_options'] , $this->theme_params()['theme_options'] );
+
+        $sed_options_engine->set_group_params( "sed_theme_options" , __("Theme Options" , "site-editor") , $params , $this->panels['theme_options'] , "theme-options" );
+    }
+
+
+    function get_page_options(){
+
+        $params = array_merge( $this->default_page_params()['page_options'] , $this->page_params()['page_options'] );
+
+        $sed_options_engine->set_group_params( "sed_page_options" , __("Page Options" , "site-editor") , $params , $this->panels['page_options'] , "layout-options" );
+    }
+
+
+    function get_layout_options( $layout ){
+
+        $params = array_merge( $this->default_page_params()['page_options'] , $this->page_params()['page_options'] );
+
+        $sed_options_engine->set_group_params( "sed_page_options" , __("Page Options" , "site-editor") , $params , $this->panels['page_options'] , "page-options" );
+    }
+
+    function get_content_options( $info ){
+
+        $group_options = $this->get_group_options( $info )['id'];
+
+        $params = array_merge( $this->default_page_params()[$group_options] , $this->page_params()[$group_options] );
+
+        $sed_options_engine->set_group_params( "sed_" . $group_options  , sprintf( __("%s Options" , "site-editor") , $this->get_group_options( $info )['title'] ) , $params , $this->panels[$group_options] , "content-options" );
 
     }
 
-    function less_compile(){
+    function get_group_options(){
 
     }
 
+    function add_panel( $id, $args = array() ) {
+	    if( is_array($args) )
+            $this->panels['site_options'][ $id ] = array_merge( array(
+                'id'            => $id  ,
+                'title'         => ''  ,
+                'capability'    => 'edit_theme_options' ,
+                'type'          => 'fieldset' ,
+                'description'   => '' ,
+                'priority'      => 10
+            ) , $args );
+	}
+
+    function get_default_params(){
+
+        $params = array();
+
+        return $params;
+    }
+
+    function get_params(){
+
+        $params = array();
+
+        return $params;
+    }
+
+    function register_settings(){
+
+    }
+
+    function get_settings(){
+
+        $settings = array();
+
+        return $settings;
+    }
+
+    function get_default_settings(){
+
+        $settings = array();
+
+        return $settings;
+    }
 
 }
 
-new SiteeditorThemeFramework;
+new SiteEditorThemeFramework;
 
+Class StarsIdeasTheme extends SiteEditorThemeFramework {
 
-Class SiteeditorThemeOptions{
+    function __construct( ){
+        $this->page_mata_key = "";
+        $this->theme_option_name = "";
+    }
 
-	function __construct( ){
+    function site_params(){
 
-	}
+        $params = array(
+            'layouts_manager' => array(
+                'type'              =>  'custom',
+                //'in_box'            =>   true ,
+                'html'              =>  $html ,
+                'control_type'      => 'layouts_manager' ,
+                'control_category'  => 'app-settings' ,
+                'settings_type'     => "sed_layouts_settings" ,
+            )
+        );
 
-    //general settings for site like :  per page , site title , tagline , Front page displays , site description , favicon , custom css , ...
+        return $params;
+    }
+
     function site_settings(){
 
+        $settings['sed_general_theme_options'] = array(
+            'default'        => get_option( 'sed_general_theme_options' ),
+            'capability'     => 'manage_options',
+            'option_type'    => 'option' ,
+            'transport'      => 'postMessage'
+        );
+
+        return $settings;
     }
 
-    //page sheet width , page length , backgound  ,
-    /*
-    $general_settings_presets = array(
-        "preset_default" , "preset_1" , "preset_2"
-    );
 
-    $general_page_settings = array(
-        "sheet_width"       => array(
-             "preset_default"    =>  1100 ,
-             "preset_1"          =>  1200 ,
-             "preset_2"          =>  1250 ,
-        )  ,
-        "page_length"       => array(
-             "preset_default"    =>  "wide" ,
-             "preset_1"          =>  "wide" ,
-             "preset_2"          =>  "wide" ,
-        )  ,
-        "background_color"  =>  array(
-             "preset_default"    =>  "#ccc" ,
-             "preset_1"          =>  "#ccc" ,
-             "preset_2"          =>  "#fff" ,
-        )   ,
-    )
-    */
-    function general_page_settings(){
+    function theme_params(){
 
+        $params = array(
+            'layouts_manager' => array(
+                'type'              =>  'custom',
+                //'in_box'            =>   true ,
+                'html'              =>  $html ,
+                'control_type'      => 'layouts_manager' ,
+                'control_category'  => 'app-settings' ,
+                'settings_type'     => "sed_layouts_settings" ,
+            )
+        );
+
+        return $params;
     }
 
-    // pages content settings , posts content settings , archive content settings , 404 content settings , ....
-    function page_content_settings(){
+    function theme_settings(){
 
+        $settings['sed_general_theme_options'] = array(
+            'default'        => get_option( 'sed_general_theme_options' ),
+            'capability'     => 'manage_options',
+            'option_type'    => 'option' ,
+            'transport'      => 'postMessage'
+        );
+
+        return $settings;
+    }
+
+
+    function page_params(){
+
+        $params = array(
+            'layouts_manager' => array(
+                'type'              =>  'custom',
+                //'in_box'            =>   true ,
+                'html'              =>  $html ,
+                'control_type'      => 'layouts_manager' ,
+                'control_category'  => 'app-settings' ,
+                'settings_type'     => "sed_layouts_settings" ,
+            )
+        );
+
+        return $params;
+    }
+
+    function page_settings(){
+
+        $settings['sed_general_theme_options'] = array(
+            'default'        => get_option( 'sed_general_theme_options' ),
+            'capability'     => 'manage_options',
+            'option_type'    => 'option' ,
+            'transport'      => 'postMessage'
+        );
+
+        return $settings;
     }
 
 }
 
-$site_settings = array(
 
-    "post_per_page"  => array(
-        'default'        => get_option( 'post_per_page' ),
-        'capability'     => 'manage_options',
-        'option_type'    => 'option' ,
-        'transport'      => 'postMessage'
-    ) ,
-
-    "site_description"  => array(
-        'default'        => get_option( 'site_description' ),
-        'capability'     => 'manage_options',
-        'option_type'    => 'option' ,
-        'transport'      => 'postMessage'
-    ) ,
-
-);
-
-
-$general_page_settings = array(
-
-    "sheet_width"  => array(
-        'default'        => 1100,
-        'capability'     => 'manage_options',
-        'option_type'    => 'base' ,
-        'type'           => 'general_page_settings' ,
-        'transport'      => 'postMessage'
-    ) ,
-
-    "page_length"  => array(
-        'default'        => "wide",
-        'capability'     => 'manage_options',
-        'option_type'    => 'base' ,
-        'type'           => 'general_page_settings' ,
-        'transport'      => 'postMessage'
-    ) ,
-
-);
-
-$general_settings_presets_models = array(
-
-    "default"  =>  array(
-        "sheet_width"       =>  1100 ,
-        "page_length"       =>  "wide" ,
-        "background_color"  =>  "#ccc" ,
-    ),
-
-    "preset1"  =>  array(
-        "sheet_width"       =>  1200 ,
-        "page_length"       =>  "wide" ,
-        "background_color"  =>  "#fff" ,
-    ) ,
-
-    "preset_2"  =>  array(
-        "sheet_width"       =>  1250 ,
-        "page_length"       =>  "boxed" ,
-        "background_color"  =>  "#ccc" ,
-    ) ,
-
-);
-
-
-$general_settings_sub_theme_presets = array(
-
-    "default"       =>  "default" ,
-    "archive"       =>  "preset_1" ,
-    "single_post"   =>  "preset_1" ,
-    "shop"          =>  "preset_2"
-
-);
-
-// first post meta settings
-// 2. sub theme settings
-// 3. default created settings
-
-
-$sed_layouts_models = array(
-
-    "default"       =>  array(
-
-        array(
-          'order'       => 0 ,
-          'theme_id'    => 'theme_id_1' ,
-          'module_id'   => 'module_id_1' ,
-          'preset'      => 'preset1' ,
-        ) ,
-
-        array(
-          'order'       => 2 ,
-          'theme_id'    => 'theme_id_5' ,
-          'module_id'   => 'module_id_2' ,
-          'preset'      => 'preset1' ,
-        ) ,
-
-        array(
-          'order'       => 11 ,
-          'theme_id'    => 'theme_id_9'
-          'module_id'   => 'module_id_3' ,
-          'preset'      => 'preset5' ,
-        ) ,
-    ) ,
-
-    "archive"       =>  array(
-
-        array(
-          'order'       => 0 ,
-          'theme_id'    => 'theme_id_1'
-        ) ,
-
-        array(
-          'order'       => 4 ,
-          'theme_id'    => 'theme_id_3'
-        ) ,
-
-        array(
-          'order'       => 12 ,
-          'theme_id'    => 'theme_id_8'
-        )
-    )
-
-);
-
-
-$sed_layouts_content = array(
-    'theme_id_1' = > $shortcode_models_array1 ,
-    'theme_id_2' = > $shortcode_models_array2 ,
-);
-
-$sed_theme_options = array(
-    'theme_id_1' => $base_option1 ,
-    'theme_id_2' => $base_option2 ,
-);
-
-$preset_modules = array(
-
-    'module_id_1' = > array(
-
-        "default"  =>  array(
-            "content"       =>  $shortcode_models_array1 ,
-            "options"       =>  $base_option1 ,
-        ),
-
-        "preset1"  =>  array(
-            "content"       =>  $shortcode_models_array2 ,
-            "options"       =>  $base_option2 ,
-        ) ,
-
-    ),
-
-    'module_id_2' = > array(
-
-        "default"  =>  array(
-            "content"       =>  $shortcode_models_array2 ,
-            "options"       =>  $base_option2 ,
-        ),
-
-        "preset1x"  =>  array(
-            "content"       =>  $shortcode_models_array3 ,
-            "options"       =>  $base_option3 ,
-        ) ,
-
-    ),
-
-);
-
-
-----------------------------------------
 /*
 All Settings Group for Theme Builder :
 1. site settings :

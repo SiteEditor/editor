@@ -644,12 +644,58 @@ class SiteEditorManager{
                 //var _sedAppPageBuilderModulesStyles = <?php echo wp_json_encode( $site_editor_app->pagebuilder->modules_styles ); ?>;
                 var _sedAppEditorI18n = <?php echo wp_json_encode( $sed_js_I18n )?>;
                 var _sedAppEditorAddOnSettings = <?php echo wp_json_encode( $sed_addon_settings )?>;
+                var _sedAppPageContentInfo = <?php echo wp_json_encode( $this->get_page_content_info() )?>;
 		</script>
 		<?php
 
 	}
 
+    function get_page_content_info(){
+        $info = array();
 
+        if(is_category() || is_tag() || is_tax()){
+
+            $term_id = get_queried_object()->term_id;
+
+            $info['type']     = "taxonomy";
+            $info['sub_type'] = "term";
+            $info['term_id']  =  $term_id;
+
+        } elseif( is_home() === true && is_front_page() === true ){
+            $info['type']     = "home_blog";
+        } elseif( is_home() === false && is_front_page() === true ){
+            $sed_post_id = get_queried_object()->ID;
+            $info['type']     = "home_page";
+            $info['post_id']  = $sed_post_id;
+        } elseif( is_home() === true && is_front_page() === false  ){
+            $sed_post_id        = get_queried_object()->ID;
+            $info['type']       = "index_blog";
+            $info['post_id']    = $sed_post_id;
+        } elseif ( is_search() ) {
+            $info['type']       = "search_results";
+        } elseif ( is_404() ) {
+            $info['type']       = "404_page";
+        } elseif( is_singular() ){
+            $post = get_queried_object();
+            $info['type']       = "single";
+            $info['post_id']    = $post->ID;
+            $info['post_type']    = $post->post_type;
+        } elseif ( is_post_type_archive() ) {
+            $sed_post_type = get_queried_object()->name;
+            $info['type']       = "post_type_archive";
+            $info['post_type']  = $sed_post_type;
+        } elseif ( is_author() ) {
+            $sed_page_general = "author";
+            $info['type']       = "author_archive";
+        } elseif ( is_date() || is_day() || is_month() || is_year() || is_time() ) {
+            $sed_page_general = "date_archive";
+            $info['type']       = "date_archive";
+        }
+
+        $info = apply_filters( "sed_page_content_info" , $info );
+
+        return $info;
+    }
 	/**
 	 * Print a workaround to handle HTML5 tags in IE < 9
 	 *

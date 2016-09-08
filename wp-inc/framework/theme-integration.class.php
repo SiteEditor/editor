@@ -82,7 +82,7 @@ class SiteEditorThemeIntegration {
     global $sed_static_template_output;
     global $sed_running_integration;
 
-    $this->wrap_start   = '<div class="static-template" ><div class="static-template-content">';
+    $this->wrap_start   = '<div class="static-template" ><div sed-role="static-template-content" class="static-template-content">';
     $this->wrap_end   = '</div></div>';
 
     $content = apply_filters( 'sed_static_template_output', ob_get_clean() );
