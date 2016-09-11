@@ -45,7 +45,7 @@
     position: relative;
 }
 
-.drag-sty,.drag-sty-active {
+.drag-content-sty,.drag-content-sty-active {
     /*border: 3px solid #40EEFF;
     box-shadow: 0 0 0 3px rgba(81, 221, 255, 0.16);
     box-shadow: 0px 0px 1px 4px #33FF33 inset;*/
@@ -132,16 +132,25 @@
    width: 75px !important;
 }
 
-.btn_part2 {
+.drag-content {
     border-style:solid;
     color: #F9F9F9;
     float: left;
     height: 30px;
     width: 35px;
     padding: 0 !important;
+    line-height: 28px;
+    cursor: pointer;
 
 }
-.drag_btn div.btn_part2 {
+.duplicate_pb_btn .drag-content {
+    background: none repeat scroll 0 0 #000;
+    border-color: #000 !important;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 1px;
+}
+.drag_pb_btn .drag-content {
     background: none repeat scroll 0 0 #00AEEF;
     border-color: #0096CC #8D8D8D #0096CC #B6B6B6 !important;
     border-radius: 0;
@@ -149,32 +158,37 @@
     border-width: 1px;
 }
 /*
-.sed-handle-sort-row-btm .remove_btn div.btn_part2{
+.sed-handle-sort-row-btm .remove_pb_btn div.drag-content{
     border-radius: 0 4px 0 0!important;
 }      */
 
- .remove_btn div.btn_part2 {
+ .remove_pb_btn .drag-content {
     background: none repeat scroll 0 0 #FF2986;
     border-color: #E34C8C;
     border-radius: 0 4px 4px 0 ;
     border-width: 1px 1px 1px 0px;
     border-style:solid solid solid none;
 } /* ???? ????
-.sed-handle-sort-row-btm .edit_btn div.btn_part2{
+.sed-handle-sort-row-btm .setting_btn div.drag-content{
     border-radius: 4px 0 0 !important;
 }                  */
-.drag-sty-part2 {
-    float: left;
+.drag-content-sty {
     position: absolute;
     top: -15px;
     z-index: 100000;
-}
-.remove_btn,
-.drag_btn,
-.edit_btn {
+    transform: translateX(-50%);
+    left: 50%;
+    /*right: 50%;*/ 
+    text-align: center;
     float: left;
 }
-.edit_btn div.btn_part2 {
+.remove_pb_btn,
+.duplicate_pb_btn,
+.drag_pb_btn,
+.setting_btn {
+    float: left;
+}
+.setting_btn .drag-content {
     background: none repeat scroll 0 0 #A0CE4E;
     border-color: #9DBA60;
     border-radius: 4px 0 0 4px;
@@ -182,14 +196,17 @@
     border-style:solid none solid solid;
 
 }
-.edit_btn div.btn_part2:hover {
-    background: -moz-linear-gradient(center top , #7EAC2F, #A0CE4E) repeat scroll 0 0 rgba(0, 0, 0, 0);
+.setting_btn .drag-content:hover {
+    background: linear-gradient(center top , #7EAC2F, #A0CE4E) repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
-.remove_btn div.btn_part2:hover {
-    background: -moz-linear-gradient(center top , #EB0066, #FF2986) repeat scroll 0 0 rgba(0, 0, 0, 0);
+.remove_pb_btn .drag-content:hover {
+    background: linear-gradient(center top , #EB0066, #FF2986) repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
-.drag_btn div.btn_part2:hover {
-    background: -moz-linear-gradient(center top , #0397EC, #33CCFF) repeat scroll 0 0 rgba(0, 0, 0, 0);
+.drag_pb_btn .drag-content:hover {
+    background: linear-gradient(center top , #0397EC, #33CCFF) repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+.duplicate_pb_btn .drag-content:hover {
+    background: linear-gradient(center top , #000, #000) repeat scroll 0 0 rgba(0, 0, 0, 0);
 }
 /* resizable */
 .ui-resizable-handle.ui-resizable-s{
@@ -347,7 +364,7 @@
 .helper-drag-content .btn_helper:hover{
  background: none repeat scroll 0 0 #fafafa !important;
 }
-.drag_btn,.drag_btn div.btn_part2{
+.drag_pb_btn,.drag_pb_btn div.drag-content{
   cursor: move;
 }
 .drag_content {
@@ -405,7 +422,7 @@
 .custom-col{
     width : 100px;
 }
-
+/*
 .drag-content-sty {
     position: absolute;
     z-index: 1003;
@@ -471,7 +488,7 @@
     border-color: #aa1100;
     padding: 2px;
     cursor: pointer !important;
-}
+}*/
 
 .sed-pb-handle-row-top {
     border-radius: 5px 5px 0 0;
@@ -536,7 +553,7 @@
 
 .sed-pb-row-module-special > .sed-handle-sort-row .drag_pb_btn .drag-content{
     background-color: #FF910A;
-    border-color: #C8650E;
+    border-color: #C8650E !important;
 }
 
 /*.drag-sty.drag-sty-active {
