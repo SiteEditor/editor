@@ -26,8 +26,6 @@ if(!class_exists('SiteEditorLayoutManager')){
             if( site_editor_app_on() )
                 add_action( "wp_footer" , array( $this , "print_wp_footer" ) );
 
-            add_filter( "sed_sub_themes" , array( $this, "add_sub_themes" ) , 10 , 1 );
-
             add_action( 'sed_app_register' ,  array( $this, 'register_settings' ) );
 
             $this->scope_control_id = "main_layout_row_scope_control";
@@ -35,6 +33,7 @@ if(!class_exists('SiteEditorLayoutManager')){
             add_action( "sed_ajax_load_options_sed_add_layout" , array( $this, "add_layout_options" ) );
 
             add_action( "sed_ajax_load_options_sed_pages_layouts" , array( $this, "pages_layouts_options" ) );
+
 
             //add_filter( "sed_addon_settings", array($this,'icon_settings'));
 		}
@@ -58,7 +57,6 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             $sed_options_engine->set_group_params( "sed_add_layout" , __("Add New Layout" , "site-editor") , $params , array() , "app-settings" );
         }
-
 
         function pages_layouts_options(){
             global $sed_options_engine;
@@ -345,24 +343,6 @@ if(!class_exists('SiteEditorLayoutManager')){
                  array()
             );
 
-
-            $site_editor_app->toolbar->add_element(
-                "layout" ,
-                "general" ,
-                "layouts-options" ,
-                __("Layout options","site-editor") ,
-                "sub_theme_element" ,     //$func_action
-                "" ,                //icon
-                "" ,  //$capability=
-                array( ),// "class"  => "btn_default3"
-                array( "row" => 1 ,"rowspan" => 2 ),
-                array('module' => 'layout' , 'file' => 'layouts_options.php'),
-                //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
-                'all' ,
-                array(),
-                array()
-            );
-
             $site_editor_app->toolbar->add_element(
                 "layout" ,
                 "settings" ,
@@ -376,66 +356,8 @@ if(!class_exists('SiteEditorLayoutManager')){
                 array('module' => 'layout' , 'file' => 'site_options.php'),
                 //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
                  'all' ,
-                array(
-                    'theme_synchronization' => array(
-                        'value'     => false,
-                        'transport'   => 'postMessage'
-                    ),
-                    'page_sync' => array(
-                        'value'       => false,
-                        'transport'   => 'postMessage'
-                    ),
-                    'theme_content' => array(
-                        'value'       => false,
-                        'transport'   => 'postMessage'
-                    ),
-            		'show_on_front' => array(
-            			//'value'        => get_option( 'show_on_front' ),
-            			//'capability'     => 'manage_options',
-            			'option_type'    => 'option' ,
-                        'transport'      => 'custom'
-            		),
-
-            		'page_on_front' => array(
-            			'option_type'   => 'option',
-            			//'capability'    => 'manage_options',
-                        'transport'     => 'custom'
-            		),
-
-            		'page_for_posts' => array(
-            			'option_type'    => 'option',
-            			//'capability'     => 'manage_options',
-                        'transport'      => 'custom'
-            		),
-
-                    'sheet_width' => array(
-                        'value'     => 1100,
-                        'transport'   => 'postMessage'
-                    ) ,
-
-
-                    'page_length' => array(
-                        'value'     => 'wide',
-                        'transport'   => 'postMessage'
-                    ) ,
-
-                ),
-                array(
-                    'sheet_width_page' => array(
-                        'settings'     => array(
-                            'default'       => 'sheet_width'
-                        ),
-                        'type'    => 's_spinner' ,
-                        'min'     => 900
-                    ),
-
-                    'page_length' => array(
-                        'settings'     => array(
-                            'default'       => 'page_length'
-                        ),
-                        'type'    => 'sed_element'
-                    ),
-                )
+                array(),
+                array()
             );
 
             $site_editor_app->toolbar->add_element(
@@ -725,17 +647,6 @@ if(!class_exists('SiteEditorLayoutManager')){
 
         }
 
-        //START *********** for sub_theme module -----------
-        function add_sub_themes( $sub_themes ) {
-
-            $sub_themes["default"]          = array( "title" => __("Default" , "site-editor") );
-            $sub_themes["single_post"]      = array( "title" => __("Single Post" , "site-editor") );
-            $sub_themes["page"]             = array( "title" => __("Page" , "site-editor") );
-            $sub_themes["archive"]          = array( "title" => __("Archive" , "site-editor") );
-
-            return $sub_themes;
-        }
-
         function exist_layout( $layout ){
             $layout_settings = get_option( 'sed_layouts_settings' );
 
@@ -816,6 +727,22 @@ if(!class_exists('SiteEditorLayoutManager')){
 
         }
 
+        /*
+        *@@args----
+        *-----@type : post , tax , custom
+        *-----@post_type : post , page , product , .... ---- type :  tax , post , custom
+        *-----@post_id : 10 , 2000 , ...
+        *-----@taxonomy : tag , category , .... ---- type :  tax
+        *-----@term_id : 10 , 2000 , ...
+        *-----@is_front_page( one page )     ---- type :  post , post_type : page
+        *-----@is_home_blog                  ---- type :  custom
+        *-----@is_index_blog(one page)       ---- type :  post , post_type : page
+        *-----@is_search_page                ---- type :  custom
+        *-----@is_404_page                   ---- type :  custom
+        *-----@is_post_type_archive          ---- type :  custom
+        *-----@is_author_page                ---- type :  custom
+        *-----@is_date_archive               ---- type :  custom
+        */
         function get_current_layout_group(){
 
             if( is_category() || is_tag() ){
@@ -870,62 +797,6 @@ if(!class_exists('SiteEditorLayoutManager')){
             return $layout_group;
 
         }
-
-        /*function get_default_page_layout( ) {
-
-            $args = array();
-
-            if(is_category() || is_tag() || is_tax()){
-
-                $tax = get_queried_object();
-
-                $args['type']        = "tax";
-                $args['taxonomy']    = $tax->taxonomy;
-                $args['term_id']     = $tax->term_id;
-
-            } elseif( is_home() === true && is_front_page() === true ){
-                $args['type']          = "custom";
-                $args['is_home_blog']  = true;
-            } elseif( is_home() === false && is_front_page() === true ){
-                $args['type']          = "post";
-                $args['post_type']     = "page";
-                $args['is_front_page'] = true;
-            } elseif( is_home() === true && is_front_page() === false  ){
-                $args['type']          = "post";
-                $args['post_type']     = "page";
-                $args['is_index_blog'] = true;
-            } elseif ( is_search() ) {
-                $args['type']        = "custom";
-                $args['is_search_page'] = true;
-            } elseif ( is_404() ) {
-                $args['type']        = "custom";
-                $args['is_404_page'] = true;
-            } elseif( is_singular() ){
-                global $post;
-
-                $args['type']        = "post";
-                $args['post_type']   = $post->post_type;
-                $args['post_id']     = $post->ID;
-
-            } elseif ( is_post_type_archive() ) {
-                 $sed_post_type = get_queried_object()->name;
-
-                $args['type']        = "custom";
-                $args['post_type']   = $sed_post_type;
-                $args['is_post_type_archive'] = true;
-
-            } elseif ( is_author() ) {
-                $args['type']        = "custom";
-                $args['is_author_page'] = true;
-            } elseif ( is_date() || is_day() || is_month() || is_year() || is_time() ) {
-                $args['type']        = "custom";
-                $args['is_date_archive'] = true;
-            }
-
-            $args = apply_filters( "sed_sub_theme_args" , $args );
-
-            return get_default_page_layout( $args );
-        }*/
 
         /*function add_contextmenu( $pagebuilder ){
             $context_menu = $pagebuilder->contextmenu;
@@ -999,43 +870,3 @@ function print_layout_patterns(){
     </script>
   <?php
 }
-
-/*
-
-//START  ********* ADD && EDIT for sub_theme module
-/*
-@@args----
------@type : post , tax , custom
------@post_type : post , page , product , .... ---- type :  tax , post , custom
------@post_id : 10 , 2000 , ...
------@taxonomy : tag , category , .... ---- type :  tax
------@term_id : 10 , 2000 , ...
------@is_front_page( one page )     ---- type :  post , post_type : page
------@is_home_blog                  ---- type :  custom
------@is_index_blog(one page)       ---- type :  post , post_type : page
------@is_search_page                ---- type :  custom
------@is_404_page                   ---- type :  custom
------@is_post_type_archive          ---- type :  custom
------@is_author_page                ---- type :  custom
------@is_date_archive               ---- type :  custom
-
-function get_default_page_leyout( $args ){
-    $args = array_merge(
-        array(
-            "type"                  =>  "post" ,
-            "post_type"             =>  "" ,
-            "taxonomy"              =>  "" ,
-            "is_front_page"         =>  false ,
-            "is_home_blog"          =>  false ,
-            "is_index_blog"         =>  false ,
-            "is_search_page"        =>  false ,
-            "is_404_page"           =>  false ,
-            "is_post_type_archive"  =>  false ,
-            "is_author_page"        =>  false ,
-            "is_date_archive"       =>  false ,
-        ) , $args
-    );
-
-    return apply_filters( "sed_default_page_layout" , "default" , $args ) ;
-}
-*/

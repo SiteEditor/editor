@@ -42,80 +42,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="layout.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
+      <file leaf-file-name="page_options.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/page_options.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.464286">
-              <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="84" />
-              <folding>
-                <marker date="1473305379425" expanded="true" signature="14060:14278" placeholder="..." />
-                <marker date="1473305379425" expanded="true" signature="40632:40748" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="theme-freamwork.class.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/wp-inc/framework/theme-freamwork.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.13380282">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+            <state vertical-scroll-proportion="-3.2692308">
+              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="site-editor-main.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-main.php">
+      <file leaf-file-name="theme-framework.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/wp-inc/framework/theme-framework.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.5409837">
-              <caret line="637" column="5" selection-start-line="637" selection-start-column="5" selection-end-line="637" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="site-editor-base.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-base.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.9180328">
-              <caret line="646" column="42" selection-start-line="646" selection-start-column="20" selection-end-line="646" selection-end-column="42" />
-              <folding>
-                <marker date="1473322624794" expanded="true" signature="3061:3076" placeholder="/*...*/" />
-                <marker date="1473322624794" expanded="true" signature="3089:3098" placeholder="/*...*/" />
-                <marker date="1473322624794" expanded="true" signature="20693:21003" placeholder="..." />
-                <marker date="1473322624794" expanded="true" signature="20706:20908" placeholder="[...]" />
-                <marker date="1473322624794" expanded="true" signature="20950:20992" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="theme-integration.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/wp-inc/framework/theme-integration.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.071429">
-              <caret line="82" column="36" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pb-shortcodes.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/includes/pb-shortcodes.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.428571">
-              <caret line="544" column="30" selection-start-line="544" selection-start-column="30" selection-end-line="554" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="theme_options.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/theme_options.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="12" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="29" />
+            <state vertical-scroll-proportion="-439.3846">
+              <caret line="672" column="39" selection-start-line="672" selection-start-column="39" selection-end-line="672" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -124,29 +65,88 @@
       <file leaf-file-name="site_options.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/site_options.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.464286">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.65384614">
+              <caret line="1" column="83" selection-start-line="1" selection-start-column="83" selection-end-line="1" selection-end-column="83" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="layouts_options.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layouts_options.php">
+      <file leaf-file-name="add_layout.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/add_layout.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6785714">
-              <caret line="1" column="197" selection-start-line="1" selection-start-column="197" selection-end-line="1" selection-end-column="197" />
+            <state vertical-scroll-proportion="-3.2692308">
+              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="theme_options.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/theme_options.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.65384614">
+              <caret line="1" column="83" selection-start-line="1" selection-start-column="83" selection-end-line="1" selection-end-column="83" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pages_layouts.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/pages_layouts.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.2692308">
+              <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app-layout-plugin.min.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.82222223">
+              <caret line="1394" column="41" selection-start-line="1394" selection-start-column="16" selection-end-line="1394" selection-end-column="41" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="layout.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-215.76923">
+              <caret line="367" column="34" selection-start-line="367" selection-start-column="17" selection-end-line="367" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="plugin.min.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/subThemes/plugin.min.js">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/settings/plugin.min.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.6666665">
-              <caret line="718" column="38" selection-start-line="718" selection-start-column="17" selection-end-line="718" selection-end-column="38" />
+            <state vertical-scroll-proportion="-8.030303">
+              <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app_options_engine.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/site-editor-app/application/app_options_engine.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-18.961538">
+              <caret line="175" column="66" selection-start-line="175" selection-start-column="66" selection-end-line="175" selection-end-column="66" />
+              <folding>
+                <marker date="1473661488254" expanded="true" signature="5299:5425" placeholder="..." />
+                <marker date="1473661488254" expanded="true" signature="5617:5633" placeholder="..." />
+                <marker date="1473661488254" expanded="true" signature="5701:5717" placeholder="..." />
+                <marker date="1473661488254" expanded="true" signature="5731:5820" placeholder="..." />
+                <marker date="1473661488254" expanded="true" signature="6982:6998" placeholder="..." />
+                <marker date="1473661488254" expanded="true" signature="7158:7248" placeholder="..." />
+                <marker date="1473661488254" expanded="true" signature="7212:7232" placeholder="..." />
+                <marker date="1473661488254" expanded="true" signature="41448:41480" placeholder="Select image..media..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -163,29 +163,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/wp-inc/framework/class_theme_sync.php" />
-        <option value="$PROJECT_DIR$/wp-inc/SEDAjaxLess/SEDAjaxLess-08.12.2014.php" />
-        <option value="$PROJECT_DIR$/wp-inc/framework/class_site_editor_css.php" />
-        <option value="$PROJECT_DIR$/SED_admin_runner.class.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/module_settings.class.php" />
-        <option value="$USER_HOME$/Desktop/Untitled2.htm" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/front_page_displays.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js" />
-        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js" />
-        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js" />
-        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/siteeditor-base.min.js" />
-        <option value="dbtable:/61b862e/14463c77-aff3-42bf-bc02-24d131992b26/sed-docs..wp_options" />
-        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js" />
-        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/plugins/delete.min.js" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/template/class_site_editor_templates.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/template/view/select_template.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/template/view/save_as_new_template.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/index.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/page_options.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/general_options.php" />
         <option value="$USER_HOME$/Downloads/Compressed/widget-customizer/widget-customizer/widget-customizer-preview.js" />
         <option value="$PROJECT_DIR$/site-editor-app/controller/index.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/templates/default/header.php" />
         <option value="$PROJECT_DIR$/site-editor-app/application/site_editor_script.class.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/test.js" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/test3.php" />
@@ -194,26 +176,44 @@
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/test2.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/kjhkj.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/application/app_options_engine.class.php" />
         <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/styleEditorControls.js" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/add_layout.tpl.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/sub_themes.php" />
         <option value="$PROJECT_DIR$/site-editor-app/admin/templates/default/import-demo-data.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/pages_layouts.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/add_layout.php" />
         <option value="$PROJECT_DIR$/site-editor-app/admin/templates/default/pages_edit_links.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layout-template.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/pbModulesControls.js" />
-        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/siteEditorControls.js" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/theme_options.php" />
-        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php" />
         <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layouts_options.php" />
-        <option value="$PROJECT_DIR$/site-editor-main.php" />
-        <option value="$PROJECT_DIR$/site-editor-base.php" />
         <option value="$PROJECT_DIR$/wp-inc/framework/theme-integration.class.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/pagebuilder/plugin.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/templates/default/header.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/save/plugin.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/siteEditorControls.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/api-test-module/api-test-module.php" />
         <option value="$PROJECT_DIR$/wp-inc/framework/theme-freamwork.class.php" />
+        <option value="$PROJECT_DIR$/site-editor.php" />
+        <option value="$PROJECT_DIR$/site-editor-main.php" />
+        <option value="$PROJECT_DIR$/../../themes/stars-ideas/functions.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/templates/default/js/render.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php" />
+        <option value="$PROJECT_DIR$/site-editor-base.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/site-iframe.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/site-iframe.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/drag-drop/sed-module-free-draggable.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/drag-drop/sed-module-free-draggable.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/plugins/select.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/module_settings.class.php" />
+        <option value="$PROJECT_DIR$/wp-inc/framework/theme-framework.class.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/pbModulesControls.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/settings/plugin.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/page_options.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/site_options.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/theme_options.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/pages_layouts.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/add_layout.php" />
+        <option value="$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js" />
+        <option value="$PROJECT_DIR$/site-editor-app/application/app_options_engine.class.php" />
       </list>
     </option>
   </component>
@@ -273,19 +273,8 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Problems" />
-        <subPane subId="Changed Files" />
-        <subPane subId="Default" />
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-        <subPane subId="Tests" />
+      <pane id="Scratches">
+        <subPane />
       </pane>
       <pane id="ProjectPane">
         <subPane>
@@ -542,6 +531,10 @@
               <option name="myItemId" value="plugins" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="settings" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -581,7 +574,45 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="settings" />
+              <option name="myItemId" value="save" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="siteeditor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -931,10 +962,215 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="applications" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="siteeditor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="includes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="applications" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="siteeditor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="includes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pagebuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="applications" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pagebuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="applications" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pagebuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sed-docs1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wp-content" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="plugins" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site-editor-app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="applications" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pagebuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="page" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches">
-        <subPane />
+      <pane id="Scope">
+        <subPane subId="Problems" />
+        <subPane subId="Changed Files" />
+        <subPane subId="Default" />
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="Tests" />
       </pane>
     </panes>
   </component>
@@ -946,10 +1182,10 @@
     <property name="js.buildTools.gulp.gulp_package_dir" value="" />
     <property name="js.buildTools.grunt.node_interpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../js_composer" />
-    <property name="SearchEverywhereHistoryKey" value="siteeditor-ma&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-main.php&#10;shortcode&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/includes/pb-shortcodes.class.php&#10;render.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/templates/default/js/render.min.js&#10;render&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/siteeditor-settings-render.min.js&#10;pbmo&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/pbModulesControls.js&#10;siteEditorC&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/siteEditorControls.js&#10;siteeditor-ba&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/siteeditor-base.min.js&#10;pages&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/admin/templates/default/pages_edit_links.php&#10;pbsho&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/includes/pb-shortcodes.class.php&#10;api&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/modules/api-test-module/api-test-module.php&#10;settings-r&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/siteeditor-settings-render.min.js&#10;ModulesC&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/pbModulesControls.js&#10;pages_ed&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/admin/templates/default/pages_edit_links.php&#10;import-de&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/admin/templates/default/import-demo-data.php&#10;styleed&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/styleEditorControls.js&#10;preview-re&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js&#10;mediaC&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/modules/mediaClass.js&#10;option&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/application/app_options_engine.class.php&#10;lay&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/modules/layout/layout.php&#10;pagebuilder&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php&#10;header&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/templates/default/header.php&#10;heade&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/templates/default/header.php&#10;siteeditor-main&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-main.php&#10;siteeditor-base&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-base.php&#10;api-test&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/modules/api-test-module/api-test-module.php&#10;engin&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/application/app_options_engine.class.php&#10;settings-render&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/siteeditor-settings-render.min.js&#10;layout.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/modules/layout/layout.php&#10;site-editor&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-main.php&#10;template&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/modules/layout/view/layout-template.php&#10;app&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js&#10;delete&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/delete.min.js&#10;page&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php&#10;du&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js&#10;con&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;jquery.js&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/Beaver_Builder/js/jquery.js&#10;shortcode-con&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.js&#10;dup&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js&#10;customize&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-includes/js/customize-base.js&#10;siteEditorCo&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/siteEditorControls.js&#10;shortcode-conten&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;duplicate.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js&#10;delete.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/delete.min.js&#10;pagebuilder.min&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js&#10;shortcode-content&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;pageBuilder&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="fra&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/wp-inc/framework/theme-framework.class.php&#10;engin&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/application/app_options_engine.class.php&#10;pbM&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/pbModulesControls.js&#10;render&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/templates/default/js/render.min.js&#10;plugin.min.js&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/plugins/save/plugin.min.js&#10;settings.min&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/js_composer/assets/js/dist/settings.min.js&#10;module_se&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/includes/pagebuilder/module_settings.class.php&#10;pb&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/includes/pb-shortcodes.class.php&#10;api&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/modules/api-test-module/api-test-module.php&#10;en&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/application/app_options_engine.class.php&#10;site-editor.php&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor.php&#10;site&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-main.php&#10;site-editor.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor.php&#10;engine&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/application/app_options_engine.class.php&#10;site-editor-sa&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-save.php&#10;archive.php&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/modules/archive/archive.php&#10;header&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/templates/default/header.php&#10;siteeditor-ma&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-main.php&#10;shortcode&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/includes/pb-shortcodes.class.php&#10;render.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/templates/default/js/render.min.js&#10;pbmo&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/pbModulesControls.js&#10;siteEditorC&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/siteEditorControls.js&#10;siteeditor-ba&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/siteeditor-base.min.js&#10;pages&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/admin/templates/default/pages_edit_links.php&#10;pbsho&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/includes/pb-shortcodes.class.php&#10;settings-r&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/siteeditor-settings-render.min.js&#10;ModulesC&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/pbModulesControls.js&#10;pages_ed&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/admin/templates/default/pages_edit_links.php&#10;import-de&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/admin/templates/default/import-demo-data.php&#10;styleed&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/core/styleEditorControls.js&#10;preview-re&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js&#10;mediaC&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/modules/mediaClass.js&#10;option&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/application/app_options_engine.class.php&#10;lay&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/modules/layout/layout.php&#10;pagebuilder&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php&#10;heade&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/templates/default/header.php&#10;siteeditor-main&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-main.php&#10;siteeditor-base&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-base.php&#10;api-test&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/modules/api-test-module/api-test-module.php&#10;settings-render&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/siteeditor-settings-render.min.js&#10;layout.&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/modules/layout/layout.php&#10;site-editor&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-main.php&#10;template&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/modules/layout/view/layout-template.php&#10;app&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js&#10;delete&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/delete.min.js&#10;page&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php&#10;du&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/plugins/duplicate.min.js&#10;con&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.min.js&#10;jquery.js&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/Beaver_Builder/js/jquery.js&#10;shortcode-con&#9;FILE&#9;file://E:/wamp/www/sed-docs1/wp-content/plugins/site-editor/site-editor-app/libraries/siteeditor/site-iframe/shortcode-content-builder.js" />
     <property name="dynamic.classpath" value="false" />
     <property name="Console.TableResult.DefaultCopyAction" value="Comma-separated Values (CSV)" />
   </component>
@@ -1048,7 +1284,7 @@
     </task>
     <servers />
   </component>
-  <component name="TodoView" selected-index="3">
+  <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
     </todo-panel>
@@ -1061,14 +1297,14 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19985358" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2159091" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289256" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12738854" sideWeight="0.5150376" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23206443" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.45700637" sideWeight="0.4849624" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23181818" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14380166" sideWeight="0.4849624" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3272727" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.49421486" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24924242" sideWeight="0.49421486" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289256" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5057851" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1108,446 +1344,408 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/icon-library/icon-library.php">
+    <entry file="file://$PROJECT_DIR$/../site-editor-accordion/modules/accordion/accordion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/includes/load_scripts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0035211">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Downloads/Compressed/login/login/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/includes/defines.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70246476">
-          <caret line="27" column="56" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/application/site_editor_script.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26760563">
-          <caret line="77" column="10" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/templates/default/header.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1390845">
-          <caret line="269" column="12" selection-start-line="269" selection-start-column="12" selection-end-line="269" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/controller/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30105633">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/test4.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="6" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/test3.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="77" selection-start-line="7" selection-start-column="77" selection-end-line="7" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/wqdwqd.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03362832">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="40217" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.9681416">
-          <caret line="12" column="658" selection-start-line="12" selection-start-column="658" selection-end-line="12" selection-end-column="658" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/test2.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="6454" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/kjhkj.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="18" selection-start-line="0" selection-start-column="0" selection-end-line="1713" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/application/app_options_engine.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.178572">
-          <caret line="184" column="144" selection-start-line="184" selection-start-column="144" selection-end-line="184" selection-end-column="179" />
-          <folding />
+        <state vertical-scroll-proportion="0.36641222">
+          <caret line="82" column="32" selection-start-line="82" selection-start-column="32" selection-end-line="82" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/pagebuilder.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.107142">
-          <caret line="1829" column="7" selection-start-line="1829" selection-start-column="7" selection-end-line="1829" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.1508772">
+          <caret line="1385" column="63" selection-start-line="1385" selection-start-column="63" selection-end-line="1385" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../themes/stars-ideas/archive.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2982456">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/styleEditorControls.js">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/archive/archive.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31879196">
-          <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="52" />
+        <state vertical-scroll-proportion="-4.9615383">
+          <caret line="119" column="0" selection-start-line="119" selection-start-column="0" selection-end-line="131" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js">
+    <entry file="file://$PROJECT_DIR$/site-editor-save.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.473154">
+        <state vertical-scroll-proportion="-3.6271186">
+          <caret line="324" column="45" selection-start-line="324" selection-start-column="28" selection-end-line="324" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../dms/wp-config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/modules/mediaClass.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.121212">
-          <caret line="1697" column="14" selection-start-line="1697" selection-start-column="14" selection-end-line="1697" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../js_composer/include/classes/settings/class-vc-settings.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3583815">
-          <caret line="871" column="38" selection-start-line="871" selection-start-column="38" selection-end-line="871" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../js_composer/include/templates/pages/vc-settings/tab-vc-roles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6040462">
-          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../js_composer/include/classes/settings/class-vc-roles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.8121388">
-          <caret line="120" column="22" selection-start-line="120" selection-start-column="22" selection-end-line="120" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../js_composer/config/grids/vc-grids-common.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06690141">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/admin/templates/default/import-demo-data.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5316901">
-          <caret line="156" column="31" selection-start-line="156" selection-start-column="31" selection-end-line="156" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/settings/plugin.min.js">
+    <entry file="file://$USER_HOME$/Downloads/Compressed/wp-customize-partial-refresh-master/wp-customize-partial-refresh-master/js/theme-support/twentythirteen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="1352" column="39" selection-start-line="1352" selection-start-column="39" selection-end-line="1352" selection-end-column="63" />
-          <folding />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/add_layout.php">
+    <entry file="file://$USER_HOME$/Downloads/Compressed/wp-customize-partial-refresh-master/wp-customize-partial-refresh-master/js/plugin-support/jetpack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.3886924">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/Compressed/wp-customize-partial-refresh-master/wp-customize-partial-refresh-master/php/class-wp-customize-partial.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.9185185">
+          <caret line="194" column="66" selection-start-line="194" selection-start-column="66" selection-end-line="194" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/Compressed/wp-customize-partial-refresh-master/wp-customize-partial-refresh-master/customize-partial-refresh.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
-          <folding />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layout-template.php">
+    <entry file="file://$PROJECT_DIR$/../../../../wordpress-4.5.2/wp-content/themes/twentysixteen/inc/customizer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-35.675926">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../wordpress-4.5.2/wp-content/themes/twentysixteen/js/customize-preview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.09010601">
+          <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../wordpress-4.5.2/wp-content/themes/twentysixteen/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59074074">
+          <caret line="414" column="9" selection-start-line="414" selection-start-column="9" selection-end-line="414" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="186" column="63" selection-start-line="186" selection-start-column="63" selection-end-line="186" selection-end-column="63" />
+          <caret line="1537" column="47" selection-start-line="1537" selection-start-column="41" selection-end-line="1537" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/templates/default/footer.php">
+    <entry file="file://$PROJECT_DIR$/../../../wp-admin/includes/ajax-actions.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49823943">
-          <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/admin/templates/default/pages_edit_links.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81514084">
-          <caret line="48" column="223" selection-start-line="48" selection-start-column="223" selection-end-line="48" selection-end-column="249" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/siteEditorControls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5922819">
-          <caret line="38" column="83" selection-start-line="38" selection-start-column="83" selection-end-line="38" selection-end-column="102" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/pages_layouts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6785714">
-          <caret line="1" column="169" selection-start-line="1" selection-start-column="152" selection-end-line="1" selection-end-column="169" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-module.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="54" selection-start-line="99" selection-start-column="35" selection-end-line="99" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.515152">
-          <caret line="1169" column="70" selection-start-line="1169" selection-start-column="70" selection-end-line="1169" selection-end-column="70" />
-          <folding>
-            <element signature="e#411#524#0" expanded="false" />
-            <element signature="e#2546#3592#0" expanded="false" />
-            <element signature="e#3720#3848#0" expanded="false" />
-            <element signature="e#3922#4025#0" expanded="false" />
-            <element signature="e#4116#4414#0" expanded="false" />
-            <element signature="e#6531#7484#0" expanded="false" />
-            <element signature="e#7962#8390#0" expanded="false" />
-            <element signature="e#8432#9323#0" expanded="false" />
-            <element signature="e#9382#9643#0" expanded="false" />
-            <element signature="e#9724#10189#0" expanded="false" />
-            <element signature="e#14650#16992#0" expanded="false" />
-            <element signature="e#17063#17341#0" expanded="false" />
-            <element signature="e#17406#17517#0" expanded="false" />
-            <element signature="e#17577#18699#0" expanded="false" />
-            <element signature="e#18764#20204#0" expanded="false" />
-            <element signature="e#20264#21023#0" expanded="false" />
-            <element signature="e#21125#21958#0" expanded="false" />
-            <element signature="e#22025#22313#0" expanded="false" />
-            <element signature="e#22365#23131#0" expanded="false" />
-            <element signature="e#23195#29622#0" expanded="false" />
-            <element signature="e#23553#23903#0" expanded="false" />
-            <element signature="e#24018#25454#0" expanded="false" />
-            <element signature="e#25775#26992#0" expanded="false" />
-            <element signature="e#29246#29531#0" expanded="false" />
-            <element signature="e#29729#29861#0" expanded="false" />
-            <element signature="e#29921#30278#0" expanded="false" />
-            <element signature="e#30394#30951#0" expanded="false" />
-            <element signature="e#31002#31180#0" expanded="false" />
-            <element signature="e#31390#35025#0" expanded="false" />
-            <element signature="e#35462#36084#0" expanded="false" />
-            <element signature="e#36132#36747#0" expanded="false" />
-            <element signature="e#36808#37172#0" expanded="false" />
-            <element signature="e#37218#37920#0" expanded="false" />
-            <element signature="e#37965#38664#0" expanded="false" />
-            <element signature="e#38704#38865#0" expanded="false" />
-            <element signature="e#38914#39111#0" expanded="false" />
-            <element signature="e#39166#39449#0" expanded="false" />
-            <element signature="e#39975#40422#0" expanded="false" />
-            <element signature="e#49825#49944#0" expanded="false" />
-            <element signature="e#49999#50118#0" expanded="false" />
-            <element signature="e#51987#52067#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/pbModulesControls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="27" selection-start-line="58" selection-start-column="21" selection-end-line="58" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/siteeditor-base.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29865772">
-          <caret line="658" column="42" selection-start-line="658" selection-start-column="36" selection-end-line="658" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/api-test-module/api-test-module.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-33.642857">
-          <caret line="439" column="10" selection-start-line="439" selection-start-column="10" selection-end-line="439" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/templates/default/js/render.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.4242425">
-          <caret line="622" column="52" selection-start-line="622" selection-start-column="52" selection-end-line="622" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/add_layout.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="14" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="14" />
-          <folding />
+        <state vertical-scroll-proportion="0.44424132">
+          <caret line="2353" column="19" selection-start-line="2353" selection-start-column="19" selection-end-line="2353" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/siteeditor-settings-render.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="84" />
-          <folding />
+        <state vertical-scroll-proportion="0.21465969">
+          <caret line="17" column="16" selection-start-line="17" selection-start-column="16" selection-end-line="17" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/theme_options.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="12" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/site_options.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.464286">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/subThemes/plugin.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.6666665">
-          <caret line="718" column="38" selection-start-line="718" selection-start-column="17" selection-end-line="718" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/layouts_options.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6785714">
-          <caret line="1" column="197" selection-start-line="1" selection-start-column="197" selection-end-line="1" selection-end-column="197" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.464286">
-          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="84" />
-          <folding>
-            <marker date="1473305379425" expanded="true" signature="14060:14278" placeholder="..." />
-            <marker date="1473305379425" expanded="true" signature="40632:40748" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../themes/stars-ideas/woocommerce/taxonomy-product_cat.php">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/page/page.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="57" column="35" selection-start-line="57" selection-start-column="35" selection-end-line="57" selection-end-column="48" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/includes/pb-shortcodes.class.php">
+    <entry file="file://$PROJECT_DIR$/site-editor.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.428571">
-          <caret line="544" column="30" selection-start-line="544" selection-start-column="30" selection-end-line="554" selection-end-column="5" />
+        <state vertical-scroll-proportion="-13.730769">
+          <caret line="36" column="30" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../themes/stars-ideas/taxonomy-portfolio_category.php">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/admin/includes/sed-setup.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.35231316">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.5797665">
+          <caret line="53" column="81" selection-start-line="53" selection-start-column="59" selection-end-line="53" selection-end-column="81" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-inc/framework/template.class.php">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/front_page_displays.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.13028169">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="37" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-main.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.5409837">
-          <caret line="637" column="5" selection-start-line="637" selection-start-column="5" selection-end-line="637" selection-end-column="5" />
+        <state vertical-scroll-proportion="-5.1525426">
+          <caret line="116" column="27" selection-start-line="116" selection-start-column="27" selection-end-line="116" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../themes/stars-ideas/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.5173674">
+          <caret line="87" column="1" selection-start-line="87" selection-start-column="1" selection-end-line="87" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/templates/default/css/siteeditor.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.07155323">
+          <caret line="5179" column="1" selection-start-line="5179" selection-start-column="1" selection-end-line="5179" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/site-editor-base.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.9180328">
-          <caret line="646" column="42" selection-start-line="646" selection-start-column="20" selection-end-line="646" selection-end-column="42" />
-          <folding>
-            <marker date="1473322624794" expanded="true" signature="3061:3076" placeholder="/*...*/" />
-            <marker date="1473322624794" expanded="true" signature="3089:3098" placeholder="/*...*/" />
-            <marker date="1473322624794" expanded="true" signature="20693:21003" placeholder="..." />
-            <marker date="1473322624794" expanded="true" signature="20706:20908" placeholder="[...]" />
-            <marker date="1473322624794" expanded="true" signature="20950:20992" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wp-inc/framework/theme-integration.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.071429">
-          <caret line="82" column="36" selection-start-line="82" selection-start-column="36" selection-end-line="82" selection-end-column="36" />
+        <state vertical-scroll-proportion="-0.42307693">
+          <caret line="661" column="41" selection-start-line="661" selection-start-column="41" selection-end-line="661" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/wp-inc/framework/theme-freamwork.class.php">
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/drag-drop/sed-module-free-draggable.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.13380282">
-          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.17959183">
+          <caret line="164" column="32" selection-start-line="164" selection-start-column="32" selection-end-line="164" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/site-iframe.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17959183">
+          <caret line="578" column="34" selection-start-line="578" selection-start-column="34" selection-end-line="578" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/drag-drop/sed-module-free-draggable.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11020408">
+          <caret line="162" column="20" selection-start-line="162" selection-start-column="20" selection-end-line="162" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/pagebuilder.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.60816324">
+          <caret line="1139" column="25" selection-start-line="1139" selection-start-column="25" selection-end-line="1139" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/site-iframe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17959183">
+          <caret line="578" column="34" selection-start-line="578" selection-start-column="34" selection-end-line="578" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/siteeditor.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3564899">
+          <caret line="90" column="38" selection-start-line="90" selection-start-column="38" selection-end-line="90" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../js_composer/assets/js/dist/settings.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.597786">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/save/plugin.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2547993">
+          <caret line="22" column="47" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/modules/api-test-module/api-test-module.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.8983052">
+          <caret line="383" column="0" selection-start-line="383" selection-start-column="0" selection-end-line="393" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/includes/pagebuilder/module_settings.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.881356">
+          <caret line="270" column="26" selection-start-line="270" selection-start-column="21" selection-end-line="270" selection-end-column="26" />
+          <folding>
+            <marker date="1473635304588" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1473635304588" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1473635304588" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1473635304588" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1473635304588" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1473635304588" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1473635304588" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1473635304588" expanded="true" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/pagebuilder/includes/pb-shortcodes.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.423077">
+          <caret line="552" column="16" selection-start-line="552" selection-start-column="16" selection-end-line="552" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/templates/default/js/render.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.4545455">
+          <caret line="262" column="36" selection-start-line="262" selection-start-column="36" selection-end-line="262" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/livequery/sed.livequery.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="30" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/core/pbModulesControls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1239.4546">
+          <caret line="2406" column="53" selection-start-line="2406" selection-start-column="44" selection-end-line="2406" selection-end-column="53" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/application/app_contextmenu.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.5">
+          <caret line="277" column="13" selection-start-line="277" selection-start-column="13" selection-end-line="277" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/siteeditor-contextmenu.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41358024">
+          <caret line="353" column="31" selection-start-line="353" selection-start-column="31" selection-end-line="353" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/site-iframe/plugins/select.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="77" selection-start-line="76" selection-start-column="77" selection-end-line="76" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/libraries/siteeditor/plugins/settings/plugin.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.030303">
+          <caret line="52" column="36" selection-start-line="52" selection-start-column="36" selection-end-line="52" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/page_options.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2692308">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/site_options.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="1" column="83" selection-start-line="1" selection-start-column="83" selection-end-line="1" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/theme_options.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.65384614">
+          <caret line="1" column="83" selection-start-line="1" selection-start-column="83" selection-end-line="1" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/add_layout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2692308">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/layout.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-215.76923">
+          <caret line="367" column="34" selection-start-line="367" selection-start-column="17" selection-end-line="367" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/view/pages_layouts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2692308">
+          <caret line="5" column="6" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/application/app_options_engine.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-18.961538">
+          <caret line="175" column="66" selection-start-line="175" selection-start-column="66" selection-end-line="175" selection-end-column="66" />
+          <folding>
+            <marker date="1473661488254" expanded="true" signature="5299:5425" placeholder="..." />
+            <marker date="1473661488254" expanded="true" signature="5617:5633" placeholder="..." />
+            <marker date="1473661488254" expanded="true" signature="5701:5717" placeholder="..." />
+            <marker date="1473661488254" expanded="true" signature="5731:5820" placeholder="..." />
+            <marker date="1473661488254" expanded="true" signature="6982:6998" placeholder="..." />
+            <marker date="1473661488254" expanded="true" signature="7158:7248" placeholder="..." />
+            <marker date="1473661488254" expanded="true" signature="7212:7232" placeholder="..." />
+            <marker date="1473661488254" expanded="true" signature="41448:41480" placeholder="Select image..media..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/wp-inc/framework/theme-framework.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-439.3846">
+          <caret line="672" column="39" selection-start-line="672" selection-start-column="39" selection-end-line="672" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/site-editor-app/applications/siteeditor/modules/layout/js/app-layout-plugin.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.82222223">
+          <caret line="1394" column="41" selection-start-line="1394" selection-start-column="16" selection-end-line="1394" selection-end-column="41" />
           <folding />
         </state>
       </provider>

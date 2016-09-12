@@ -173,7 +173,7 @@ class ModuleSettings
 		}
     } // sort alphabetically by name usort($data, 'compare_lastname');
 
-    public static function fieldset_panel( $panel , $content ){
+    public static function fieldset_panel( $panel , $content){
 
         $pkey = $panel['id'];
         $pkey = (!empty(self::$group_id)) ? self::$group_id . "_" . $pkey : $pkey;
@@ -184,13 +184,18 @@ class ModuleSettings
                 array(
                     'label'  =>  '',
                     'is_accordion' => false,  //accordion-panel-settings
+                    'atts'  =>  array()
                 ),$panel )
         );
+
+        $atts           = self::get_atts( $atts );
+        $atts_string    = $atts["atts"];
+        $class          = $atts["class"];
 
         $label = trim( $label );
         $label = ( !empty($label) ) ? $label : $panel['title'];
 
-        $output .= '<fieldset id="'.$pkey.'_fieldset" class="row_setting_box" >';
+        $output .= '<fieldset id="'.$pkey.'_fieldset" class="row_setting_box '. $class .'" '.$atts_string.'>';
         $output .= '<legend id="'.$pkey.'_title">'.$label.'</legend>';
 
         if( $is_accordion === true )
@@ -273,18 +278,11 @@ class ModuleSettings
                 ),$panel )
         );
 
-        $atts_string = "";
-
         $output = "";
 
-        if(is_array($atts)){
-            foreach($atts AS $nameAttr => $valueAttr){
-                $atts_string .= $nameAttr.'="'.$valueAttr.'" ';
-            }
-        }elseif(is_string($atts)){
-            $atts_string = $atts;
-        }
-
+        $atts           = self::get_atts( $atts );
+        $atts_string    = $atts["atts"];
+        $class          = $atts["class"];
 
         if( $has_help === true)
             $output .= '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>';
@@ -297,7 +295,7 @@ class ModuleSettings
 
         if( empty($custom_html) ){
 
-            $box = '<button data-related-level-box="'.$pkey.'_level_box" type="button" class="sed-btn-blue go-panel-element '.$ac_class.'" data-panel-id="'.$panel['id'].'"  name="' . $sed_field_id . '"
+            $box = '<button data-related-level-box="'.$pkey.'_level_box" type="button" class="sed-btn-blue go-panel-element '.$ac_class . ' ' . $class.'" data-panel-id="'.$panel['id'].'"  name="' . $sed_field_id . '"
                                     id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span></button>';
 
             $in_box_class = ($in_box === true) ? "row_setting_box" : '';

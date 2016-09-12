@@ -276,7 +276,7 @@ $sed_js_I18n = $site_editor_app->js_I18n();
     <script>
          sed.init({
            siteSelector : "#website",              
-           plugins:['pagebuilder', 'styleEditor' , 'themeSynchronization' , 'contextmenu' , 'settings' , 'save' ], //,'header','content','footer'
+           plugins:['pagebuilder' , 'contextmenu' , 'settings' , 'save' ], //,'header','content','footer'
            external_plugins : <?php echo wp_json_encode( $sed_apps->sed_custom_js_plugins() )?>,
            I18n:{
              GRADIENT_FIREFOX_NOT_SUPPORT: "<?php echo __("Firefox 3.5 OR lower does not support gradient.","site-editor"); ?>",

@@ -64,10 +64,19 @@ Class AppOptionsEngine {
         //$sed_apps->check_ajax_handler('sed_options_loader' , 'sed_app_options_load');
         do_action( "sed_ajax_load_options_" . $_POST['setting_id'] );
 
+        ob_start();
+        $settings = $this->params[ $_POST['setting_id'] ];
+        ?>
+        <div id="dialog-level-box-settings-<?php echo $_POST['setting_id'];?>-container" data-title="<?php echo $settings['settings_title'];?>" class="dialog-level-box-settings-container" >
+            <?php echo $settings['settings_output'];?>
+        </div>
+        <?php
+        $output = ob_get_clean();
+
         die( wp_json_encode( array(
             'success' => true,
             'data'    => array(
-                'output'     => $this->params[ $_POST['setting_id'] ] ,
+                'output'     => $output ,
                 'controls'   => isset( $this->controls[ $_POST['setting_id'] ] ) ? $this->controls[ $_POST['setting_id'] ] : array()
             ),
         ) ) );
@@ -163,6 +172,11 @@ Class AppOptionsEngine {
 
     public function print_settings_template(){
         ?>
+
+        <div id="sed-app-settings-panel" class="sed-dialog" title="<?php echo __("App Settings" , "site-editor");?>">
+
+        </div>
+
         <div id="sed-dialog-settings" class="sed-dialog" title="">
 
         </div>
@@ -307,6 +321,7 @@ Class AppOptionsEngine {
 
             $params = $this->params_type_process( $params );
 
+
             if( !empty($panels) && is_array($panels) ){
                 if( !isset( $this->panels[ $group ] ) )
                     $this->panels[ $group ] = array();
@@ -320,6 +335,7 @@ Class AppOptionsEngine {
             }else{
                 $cr_settings = ModuleSettings::create_settings($params );
             }
+
             ModuleSettings::$group_id = "";
 
             $this->params[ $group ] = array(

@@ -7,23 +7,6 @@ if(isset( $_POST['sed_page_ajax'] ) ){
 }
 
 
-/*if(isset( $_POST['sed_app_editor'] ) && $_POST['sed_app_editor'] == "save" ){
-
-    require_once SED_PLUGIN_DIR . DS . 'site-editor-save.php';
-    new SEDAppSave();
-    return false;
-} */
-
-if( site_editor_app_on() ){
-    require_once SED_BASE_DIR . DS . 'libraries' . DS . 'siteeditor' . DS . 'site-iframe' . DS . 'tmpl.php';
-}
-
-//load framework
-require_once SED_PLUGIN_DIR . DS . 'wp-inc' . DS . 'framework' . DS  . 'class_site_editor_css.php';
-//require_once SED_PLUGIN_DIR . DS . 'wp-inc' . DS . 'framework' . DS  . 'class_theme_sync.php';
-
-//load_page_builder_app();
-
 Class SiteEditorApp {
     private $_pagehooks = array();
     var $app_db_version = '1.0';
@@ -54,90 +37,84 @@ Class SiteEditorApp {
 
     function __construct($app_name,$option_settings,$domain,$lang_rel_path) {
 
-      $this->app_name = $app_name;
-      $this->option_settings = $option_settings;
-      $this->domain = $domain;
-      $this->lang_rel_path = $lang_rel_path;
+        $this->app_name = $app_name;
+        $this->option_settings = $option_settings;
+        $this->domain = $domain;
+        $this->lang_rel_path = $lang_rel_path;
 
-      $this->module_info = sed_get_setting("module_info");
+        $this->module_info = sed_get_setting("module_info");
 
-      if( is_site_editor() || site_editor_app_on() ){
-          $this->set_page_type_id();
-      }
+        if( is_site_editor() || site_editor_app_on() ){
+            $this->set_page_type_id();
+        }
 
-      // Add specific CSS class by filter
-      add_filter( 'body_class', array($this, 'add_rtl_body_class' ) );
+        if( site_editor_app_on() ){
+            require_once SED_BASE_DIR . DS . 'libraries' . DS . 'siteeditor' . DS . 'site-iframe' . DS . 'tmpl.php';
+        }
 
-      add_action( "wp_footer" , array( $this , "sed_add_dynamic_css_file" ) , 10000 );
-      add_action( "wp_footer" , array( $this , "print_parallax_data" ) );
+        if( !site_editor_app_on() ){
+            //site-editor template
+            add_filter( 'template_include', array(&$this,'template_chooser') , 1 );
+        }
 
-      if( !site_editor_app_on() ){
-          //site-editor template
-          add_filter( 'template_include', array(&$this,'template_chooser') , 1 );
-      }
+        // Add specific CSS class by filter
+        add_filter( 'body_class', array($this, 'add_rtl_body_class' ) );
 
-      /*if( !is_sed_save() && !is_site_editor() && !site_editor_app_on() ){
-          add_action( 'wp_loaded',    array( $this, 'wp_loaded' ) );
-      } */
-      require_once SED_PLUGIN_DIR . DS . 'site-editor-base.php';
-      $this->editor_manager = new SiteEditorManager();
+        add_action( "wp_footer" , array( $this , "sed_add_dynamic_css_file" ) , 10000 );
+        add_action( "wp_footer" , array( $this , "print_parallax_data" ) );
 
-      require_once SED_PLUGIN_DIR . DS . 'site-editor-save.php';
-      $this->app_save = new SEDAppSave();
 
-      add_action( 'admin_enqueue_scripts', array(&$this,'sed_load_admin_scripts') );
 
-      if(!is_admin()){
-          add_action( 'init', array(&$this,'register_scripts') );
+        require_once SED_PLUGIN_DIR . DS . 'site-editor-base.php';
+        $this->editor_manager = new SiteEditorManager();
 
-          add_action( 'init', array(&$this, 'register_styles') );
+        require_once SED_PLUGIN_DIR . DS . 'site-editor-save.php';
+        $this->app_save = new SEDAppSave();
 
-          add_action( 'init', array(&$this, 'register_theme_framework_scripts') );
+        if(!is_admin()){
+            add_action( 'init', array(&$this,'register_scripts') );
 
-          add_action( 'init', array(&$this, 'register_theme_framework_styles') );
+            add_action( 'init', array(&$this, 'register_styles') );
 
-          add_action( 'wp_enqueue_scripts', array( $this,'render_base_scripts') );
+            add_action( 'init', array(&$this, 'register_theme_framework_scripts') );
 
-          add_action( 'wp_enqueue_scripts', array( $this, 'render_base_styles') );
-      }
+            add_action( 'init', array(&$this, 'register_theme_framework_styles') );
 
-      //run page builder in siteeditor and site
-      add_action( 'init', 'load_page_builder_app' , 0 );
+            add_action( 'wp_enqueue_scripts', array( $this,'render_base_scripts') );
 
-      //$is_ajax = ( defined( 'DOING_AJAX' ) && DOING_AJAX );
+            add_action( 'wp_enqueue_scripts', array( $this, 'render_base_styles') );
+        }
 
-      if( is_site_editor() || site_editor_app_on() || is_sed_save() || isset( $_POST['sed_page_ajax']) ){
+        //run page builder in siteeditor and site
+        add_action( 'init', 'load_page_builder_app' , 0 );
 
-          add_action( 'init', array(&$this, 'load_site_editor_app') , 1 );
-      }
+        if( is_site_editor() || site_editor_app_on() || is_sed_save() || isset( $_POST['sed_page_ajax']) ){
+            add_action( 'init', array(&$this, 'load_site_editor_app') , 1 );
+        }
 
-      add_filter( "sed_posts_content_filter" , array( $this, "content_filter_for_ajax_refresh" ) , 10 , 1 );
-      add_filter( "sed_current_page_options" , array( $this, "options_filter_for_ajax_refresh" ) , 9 , 1 );
-      //add_filter( "sed_current_page_options" , array( $this, "filter_by_theme_options" ) , 10 , 1 );
-      //add_filter( "sed_current_page_options" , array( $this, "filter_by_general_options" ) , 20 , 1 );
+        add_filter( "sed_posts_content_filter" , array( $this, "content_filter_for_ajax_refresh" ) , 10 , 1 );
+        add_filter( "sed_current_page_options" , array( $this, "options_filter_for_ajax_refresh" ) , 9 , 1 );
+        //add_filter( "sed_current_page_options" , array( $this, "filter_by_theme_options" ) , 10 , 1 );
+        //add_filter( "sed_current_page_options" , array( $this, "filter_by_general_options" ) , 20 , 1 );
 
-      if( !is_admin() && !is_site_editor() )
-          add_action( 'wp',  array( $this  , 'set_page_info') , -10000  );
-
-      require_once SED_PLUGIN_DIR . DS . 'wp-inc' . DS . 'framework' . DS . 'typography.class.php';
-      $this->typography = new SiteeditorTypography();
-
-      //$this->wp_theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
-
-        //update install script if necessary
-        // edited line by siteeditor developer
-        /*if (get_option( $this->app_name.'_db_version' ) != $this->app_db_version ) {
-           $this->install();
-        }*/
+        if( !is_admin() && !is_site_editor() )
+            add_action( 'wp',  array( $this  , 'set_page_info') , -10000  );
 
         //add_action('wp_print_styles',         array($this, 'wp_print_styles_action'), -10000);
 
-        //add_action( 'init' , array( $this , 'load_framework' ) );
         $this->load_framework();
     }
 
     function load_framework(){
-        require_once SED_PLUGIN_DIR . DS . 'wp-inc' . DS . 'framework' . DS  . 'theme-integration.class.php';
+
+        require_once SED_FRAMEWORK_DIR . DS . 'typography.class.php';
+        $this->typography = new SiteeditorTypography();
+
+        require_once SED_FRAMEWORK_DIR . DS . 'theme-integration.class.php';
+
+        require_once SED_FRAMEWORK_DIR . DS . 'theme-framework.class.php';
+
+        require_once SED_FRAMEWORK_DIR . DS . 'class_site_editor_css.php';
     }
 
     function set_page_type_id(){
@@ -201,12 +178,6 @@ Class SiteEditorApp {
         return $classes;
     }
 
-
-
-    function sed_load_admin_scripts(){
-        wp_enqueue_style( "sed-admin-style" , SED_BASE_URL . 'admin/templates/default/css/style.css' , array() , '1.0.0' , 'all');
-
-    }
 
     function wp_print_styles_action(){
       global $wp_scripts;
@@ -296,13 +267,13 @@ Class SiteEditorApp {
 
         wp_register_script( 'sed-app-preview-render',SED_BASE_URL.'libraries/siteeditor/site-iframe/siteeditor-preview-render.min.js', array( 'sed-app-preview' , 'siteeditor-css' ),"",1 );
 
-        wp_register_script( 'sed-style-editor', SED_BASE_URL.'libraries/siteeditor/site-iframe/style-editor.min.js', array( 'sed-app-preview-render' ) ,"",1 );
+        //wp_register_script( 'sed-style-editor', SED_BASE_URL.'libraries/siteeditor/site-iframe/style-editor.min.js', array( 'sed-app-preview-render' ) ,"",1 );
 
-        wp_register_script( 'sed-app-synchronization',SED_BASE_URL.'libraries/siteeditor/site-iframe/siteeditor-synchronization.min.js', array( 'sed-app-preview-render' ),"",1 );
+        //wp_register_script( 'sed-app-synchronization',SED_BASE_URL.'libraries/siteeditor/site-iframe/siteeditor-synchronization.min.js', array( 'sed-app-preview-render' ),"",1 );
 
         wp_register_script( 'sed-app-shortcode-builder',SED_BASE_URL.'libraries/siteeditor/site-iframe/shortcode-content-builder.min.js', array( 'sed-app-preview-render' ),"",1 );
 
-        wp_register_script( 'site-iframe',SED_BASE_URL.'libraries/siteeditor/site-iframe/site-iframe.min.js', array( 'sed-style-editor' , 'sed-app-preview-render' , 'column-resize' , 'jquery-ui-full' , 'sed-app-shortcode-builder' ),"1.0.0" , 1 );
+        wp_register_script( 'site-iframe',SED_BASE_URL.'libraries/siteeditor/site-iframe/site-iframe.min.js', array( 'sed-app-preview-render' , 'column-resize' , 'jquery-ui-full' , 'sed-app-shortcode-builder' ),"1.0.0" , 1 );
 
         wp_register_script( 'sed-pagebuilder',SED_BASE_URL.'libraries/siteeditor/site-iframe/pagebuilder.min.js', array( 'site-iframe' , 'siteeditor-modules-scripts' , 'preview-plugin' ),"1.0.0" , 1 );
 
@@ -790,9 +761,6 @@ Class SiteEditorApp {
 
     }
 
-    /*function wp_loaded(){
-        do_action( 'sed_app_register', $this );
-    } */
 
     function set_page_info(  ) {
         $info_u = $this->get_sed_page_info_uniqe();

@@ -928,9 +928,6 @@ api	 * @param options
                     //alert("after pUrl");
                              //api.log("api.currentPreviewUrl--------:" , api.currentPreviewUrl);
                              //api.log("pUrl---------:", pUrl);
-                if( !_.isUndefined( api.currentPreviewUrl ) ){
-                    api( 'page_sync' ).set( true );
-                }
 
                 if( (_.isUndefined( api.currentPreviewUrl ) || api.currentPreviewUrl === pUrl ) && api.frontPageDisplayChange === false  ){
                     query.preview_type = "refresh";
@@ -1060,10 +1057,6 @@ api	 * @param options
 
             var query = {} ,
                 primaryQuery ;
-
-            if( !_.isUndefined( api.currentPreviewUrl ) ){
-                api( 'page_sync' ).set( true );
-            }
 
             query.preview_type = "refresh";
             //api.currentPreviewType = "refresh";

@@ -5,11 +5,11 @@ Plugin URI: http://www.siteeditor.org/
 Description: SiteEditor the First Site Editor For wordpress
 Author: Site Editor Team
 Author URI: http://www.siteeditor.org/products/site-editor
-Version: 1.0.0
+Version: 0.9.0
 */
-define( 'WPSED_VERSION', '1.0.0' );
+define( 'WPSED_VERSION', '0.9.0' );
 
-define( 'SED_APP_VERSION', '1.0.0' );
+define( 'SED_APP_VERSION', '0.9.0' );
 
 if(!defined('DS'))
     define('DS', DIRECTORY_SEPARATOR);
@@ -32,6 +32,12 @@ if ( ! defined( 'SED_BASE_DIR' ) )
 
 if ( ! defined( 'SED_BASE_URL' ) )
 	define( 'SED_BASE_URL', SED_PLUGIN_URL . '/site-editor-app/' );
+
+if ( ! defined( 'SED_FRAMEWORK_DIR' ) )
+    define( 'SED_FRAMEWORK_DIR', SED_PLUGIN_DIR . DS . 'wp-inc' . DS . 'framework' );
+
+if ( ! defined( 'SED_FRAMEWORK_URL' ) )
+    define( 'SED_FRAMEWORK_URL', SED_PLUGIN_URL . '/wp-inc/framework' );
 
 if ( ! defined( 'SED_PATH_BASE' ) )
   define ('SED_PATH_BASE', SED_BASE_DIR);

@@ -434,6 +434,9 @@ function( $, sedApp ) {
                     control.refresh( isChecked );
 
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('change');
             });
 
         },
@@ -820,6 +823,9 @@ function( $, sedApp ) {
                     });
                     //control.refresh(  );
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             /*if( control.has_remove_btn ){
@@ -876,6 +882,9 @@ function( $, sedApp ) {
                 $(this).click(function(){
                     control.refresh("");
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             options.eventKey = "video_" + control.id;
@@ -938,6 +947,9 @@ function( $, sedApp ) {
                 $(this).click(function(){
                     control.refresh("");
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             options.eventKey = "audio_" + control.id;
@@ -1001,6 +1013,9 @@ function( $, sedApp ) {
                 $(this).click(function(){
                     control.refresh("");
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             options.eventKey = "file_" + control.id;
@@ -1077,6 +1092,9 @@ function( $, sedApp ) {
                     }
 
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             api.previewer.bind( "sedChangeMedia" +  options.eventKey ,  function( attachment ) {
@@ -1222,6 +1240,9 @@ function( $, sedApp ) {
                         }
                     });
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             control.organizeBox = control.container.find(".images-organize-box");
@@ -1271,6 +1292,9 @@ function( $, sedApp ) {
                     }
 
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             api.previewer.bind( "sedChangeMedia" +  this.options.eventKey ,  function( attachments ) {
@@ -1363,6 +1387,9 @@ function( $, sedApp ) {
                 $(this).click(function(){
                     api.Events.trigger( 'element_open_dialog' , control.sedDialog );
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             control.icoDemo = control.container.find(".icon-demo");
@@ -1375,6 +1402,9 @@ function( $, sedApp ) {
                     control.refresh( "" );
 
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             api.Events.bind( sedDialog.data.eventKey ,  function( icon ) {
@@ -1440,6 +1470,9 @@ function( $, sedApp ) {
                     control.sedDialog.data.currentIcons = currentIcons;
                     api.Events.trigger( 'element_open_dialog' , control.sedDialog );
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             control.organizeBox = control.container.find(".icons-organize-box");
@@ -1485,6 +1518,9 @@ function( $, sedApp ) {
                     }
 
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
             api.Events.bind( sedDialog.data.eventKey ,  function( icons ) {
@@ -1788,6 +1824,9 @@ function( $, sedApp ) {
                     control.skinItem = $(this);
                     control.refresh( $(this).data("skinName") );
                 });
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
             });
 
         },
@@ -2401,6 +2440,9 @@ function( $, sedApp ) {
                 api.previewer.send( "openMediaLibraryEditGallery" , options );
 
           });
+      }, function() {
+          // unbind the change event
+          $(this).unbind('click');
       });
 
   });

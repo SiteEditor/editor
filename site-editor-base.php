@@ -177,7 +177,7 @@ class SiteEditorManager{
 
         wp_enqueue_script( 'siteeditor-css' );
 
-        wp_enqueue_script( 'sed-app-synchronization' );
+        //wp_enqueue_script( 'sed-app-synchronization' );
 
 		wp_enqueue_script( 'sed-app-preview' );
 
@@ -185,7 +185,7 @@ class SiteEditorManager{
 
         wp_enqueue_script( 'sed-app-preview-render' );
 
-        wp_enqueue_script('sed-style-editor');
+        //wp_enqueue_script('sed-style-editor');
 
         wp_enqueue_script("sed-tinymce");
 
@@ -655,11 +655,12 @@ class SiteEditorManager{
 
         if(is_category() || is_tag() || is_tax()){
 
-            $term_id = get_queried_object()->term_id;
+            $object = get_queried_object();
 
             $info['type']     = "taxonomy";
-            $info['sub_type'] = "term";
-            $info['term_id']  =  $term_id;
+            $info['taxonomy'] = $object->taxonomy;
+            //$info['sub_type'] = "term";
+            $info['term_id']  =  $object->term_id;
 
         } elseif( is_home() === true && is_front_page() === true ){
             $info['type']     = "home_blog";
@@ -685,10 +686,8 @@ class SiteEditorManager{
             $info['type']       = "post_type_archive";
             $info['post_type']  = $sed_post_type;
         } elseif ( is_author() ) {
-            $sed_page_general = "author";
             $info['type']       = "author_archive";
         } elseif ( is_date() || is_day() || is_month() || is_year() || is_time() ) {
-            $sed_page_general = "date_archive";
             $info['type']       = "date_archive";
         }
 
@@ -806,7 +805,12 @@ class SiteEditorManager{
             'transport'      => 'postMessage'
 		) );
 
-        //END  ********  for sub_theme module-----
+        $this->add_setting( 'theme_content' , array(
+            'default'       => false,
+            'option_type'    => 'base' ,
+            'capability'     => 'manage_options',
+            'transport'     => 'postMessage'
+        ));
 
 		/*$this->add_setting( 'show_on_front', array(
 			'default'        => get_option( 'show_on_front' ),
@@ -855,12 +859,12 @@ class SiteEditorManager{
 
 
 /**
- * Customize Setting Class.
+ * App Setting Class.
  *
  * Handles saving and sanitizing of settings.
  *
- * @package WordPress
- * @subpackage Customize
+ * @package SiteEditor
+ * @subpackage Settings
  * @since 3.4.0
  */
 class SedAppSettings{

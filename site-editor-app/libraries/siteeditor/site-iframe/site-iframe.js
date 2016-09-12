@@ -391,8 +391,8 @@
 
                 el.hover(function(e){
 
-                        if(api.styleEditor.editorState == "on")
-                            return ;
+                        /*if(api.styleEditor.editorState == "on")
+                            return ;*/
 
                         if(el.hasClass("drag-sty-active") === false){
                             dnp.show();
@@ -402,8 +402,8 @@
                         el.addClass("drag-sty");
                     },function(e){
 
-                        if(api.styleEditor.editorState == "on")
-                            return ;
+                        /*if(api.styleEditor.editorState == "on")
+                            return ;*/
 
                         if(el.hasClass("drag-sty-active") === false){
                             dnp.hide();
@@ -540,8 +540,8 @@
 
                 el.hover(function(e){
 
-                    if(api.styleEditor.editorState == "on")
-                        return ;
+                    /*if(api.styleEditor.editorState == "on")
+                        return ;*/
 
                     prev = el.prev();
                     elZIn = el.css("z-index");
@@ -575,8 +575,8 @@
                     el.addClass("drag-sty");
                 },function(e){
 
-                    if(api.styleEditor.editorState == "on")
-                        return ;
+                    /*if(api.styleEditor.editorState == "on")
+                        return ;*/
 
                     if(prev.length > 0 || next.length > 0){
                         el.css("z-index" , elZIn);
