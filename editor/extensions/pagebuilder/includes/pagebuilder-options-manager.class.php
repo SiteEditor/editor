@@ -605,6 +605,7 @@ final class SedPageBuilderOptionsManager{
             "priority"          => 10 ,
             "panel_type"        => 'inner_box' ,
             'panel_dependency'  => array() ,
+            'parent_id'         => 'root',
 
             'controls'          => array(
                 'image_source'          => 'image_source' ,
@@ -635,7 +636,7 @@ final class SedPageBuilderOptionsManager{
             'description'   => $description ,
             'capability'    => 'edit_theme_options' ,
             'type'          => $panel_type ,
-            'parent_id'     => 'root',
+            'parent_id'     => $parent_id ,
             'priority'      => $priority ,
             'dependency'    => $panel_dependency
         ) );
