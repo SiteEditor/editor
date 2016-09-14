@@ -79,12 +79,25 @@ class PBAPITestModule extends PBShortcodeClass{
 
     function shortcode_settings(){
 
-        $this->add_panel( 'text_settings_panel' , array(
-            'title'         =>  __('Text Fields',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 9 ,
+        $this->add_panel( 'text_box_panel_parent' ,  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Text Box Settings Panel', 'textdomain'),
+            'description'       => __('Text Box Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) );
+
+        $this->add_panel( 'text_settings_panel' ,  array(
+            'priority'          => 9,
+            'type'              => 'default',
+            'title'             => __('Text Box Settings', 'textdomain'),
+            'description'       => __('Text Box Settings', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'parent_id'         => "text_box_panel_parent",
+            'atts'              => array() ,
         ) );
 
         /*
@@ -96,7 +109,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "dependency"        => "param_dependencies" ,
             "panel"             => "param_panel_id" ,
             "setting_id"        => "param_settings_type" ,
-            "js_type"           => "param_control_type" ,
+            "js_type"           => "param_js_type" ,
             "js_params"         => "param_control_parameter" ,
             "is_attr"           => "param_is_shortcode_attribute" ,  //only support in module settings. if (param_name === shortcode_attribute ) is_attr = true;
             "attr_name"         => "param_shortcode_attribute_name" , //only support in module settings. should is_attr = true , if (param_name === shortcode_attribute ) attr_name = param_name;
@@ -104,7 +117,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "value"             => "param_value" , //in module settings as default , value equal to shortcode attribute value
             "priority"          => "param_priority" ,
             "custom_template"   => "param_html" , //only support if type === custom
-            "choices"           => "param_options" , //types support : select , multi-checkbox , multi-select,
+            "choices"           => "param_options" , //types support : select , multi-check , multi-select,
             "groups"            => "param_select_groups" , //only for select and multi-select type
         );
         */
@@ -120,7 +133,8 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
-            "panel"         => "text_settings_panel"
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
         );
 
         $params['attribute2'] = array(
@@ -132,7 +146,8 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
-            "panel"         => "text_settings_panel"
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
         );
 
         $params['attribute3'] = array(
@@ -144,7 +159,8 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
-            "panel"         => "text_settings_panel"
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
         );
 
         $params['attribute4'] = array(
@@ -156,7 +172,8 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
-            "panel"         => "text_settings_panel"
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
         );
 
         $params['attribute5'] = array(
@@ -168,7 +185,8 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
-            "panel"         => "text_settings_panel"
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
         );
 
         $params['attribute6'] = array(
@@ -180,7 +198,21 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
-            "panel"         => "text_settings_panel"
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
+        );
+
+        $params['dimension_section'] = array(
+            "type"          => "dimension" ,
+            "label"         => __("Dimension Control", "site-editor"),
+            "description"          => __("10px, 10%, 10em,...", "site-editor"),
+            "placeholder"   => __("10px, 10%, 10em,...", "site-editor"),
+            "atts"          => array(
+                "class"        =>    "custom-class1 custom-class2" ,
+                "data-custom"  =>    "test" ,
+            ),
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
         );
 
         $params['attribute7'] = array(
@@ -197,19 +229,8 @@ class PBAPITestModule extends PBShortcodeClass{
                 "changeMonth"       =>   true ,
                 "changeYear"        =>   true ,
             ),
-            "panel"         => "text_settings_panel"
-        );
-
-        $params['attribute8'] = array(
-            "type"          => "time" ,
-            "label"         => __("Time Field", "site-editor"),
-            "description"          => __("This option allows you to set a title for your image.", "site-editor"),
-            "placeholder"   => __("Enter Your paragraph", "site-editor"),
-            "atts"          => array(
-                "class"        =>    "custom-class1 custom-class2" ,
-                "data-custom"  =>    "test" ,
-            ),
-            "panel"         => "text_settings_panel"
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
         );
 
         $params['attribute9'] = array(
@@ -221,32 +242,22 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
-            "panel"         => "text_settings_panel"
-        );
-
-        $params['attribute10'] = array(
-            "type"          => "slider" ,
-            "label"         => __("Range Field", "site-editor"),
-            "description"          => __("This option allows you to set a title for your image.", "site-editor"),
-            "atts"          => array(
-                "class"        =>    "custom-class1 custom-class2" ,
-                "data-custom"  =>    "test"
-            ),
-            'js_params'     => array(
-                "min"          =>    0 ,
-                "max"          =>    100 ,
-            ),
-            "panel"         => "text_settings_panel"
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
         );
 
 
         $this->add_panel( 'select_settings_panel' , array(
-            'title'         =>  __('Select Fields',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 10 ,
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Select Settings Panel', 'textdomain'),
+            'description'       => __('Select Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
         ) );
+
 
         $params['attribute11'] = array(
             "type"          => "select" ,
@@ -336,6 +347,28 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "select_settings_panel" ,
         );
 
+        $this->add_panel( 'check_box_panel_parent' ,  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Check Box Settings Panel', 'textdomain'),
+            'description'       => __('Check Box Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) );
+
+        $this->add_panel( 'check_box_settings_panel' ,  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Check Box Settings', 'textdomain'),
+            'description'       => __('Check Box Settings', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'parent_id'         => "check_box_panel_parent",
+            'atts'              => array() ,
+        ) );
+
+
         $params['attribute15'] = array(
             "type"          => "checkbox" ,
             "label"         => __("Checkbox Field", "site-editor"),
@@ -344,6 +377,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
+            "panel"         => "check_box_settings_panel" ,
         );
 
         $params['attribute16'] = array(
@@ -359,8 +393,61 @@ class PBAPITestModule extends PBShortcodeClass{
             "atts"          => array(
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
-            )
+            ),
+            "panel"         => "check_box_settings_panel" ,
+        );  
+
+        $params['toggle_field_id'] = array(
+            'label'             => __('Toggle Control', 'site-editor'),
+            'type'              => 'toggle',
+            //'priority'          => 28,
+            "panel"         => "check_box_settings_panel" ,
         );
+
+        $params['sortable_field_id'] = array(
+            'label'             => __('Sortable Control', 'site-editor'),
+            'type'              => 'sortable',
+            'choices'           => array(
+                "options1_key"      =>    "One" ,
+                "options2_key"      =>    "Two" ,
+                "options3_key"      =>    "Three" ,
+                "options4_key"      =>    "Four" ,
+                "options5_key"      =>    "Five" ,
+            ),
+            "panel"         => "check_box_settings_panel" ,
+        );
+
+        $params['switch_field_id'] = array(
+            'label'             => __('Switch Control', 'site-editor'),
+            'type'              => 'switch',
+            //'priority'          => 30,
+            'choices'           => array(
+                "on"       =>    "ON" ,
+                "off"      =>    "OFF" ,
+            ),
+            "panel"         => "check_box_settings_panel" ,
+        );
+
+        $this->add_panel( 'radio_panel_parent' ,  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Radio Settings Panel', 'textdomain'),
+            'description'       => __('Radio Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) );
+
+        $this->add_panel( 'radio_settings_panel' ,  array(
+            'priority'          => 9,
+            'type'              => 'expanded',
+            'title'             => __('Radio Settings', 'textdomain'),
+            'description'       => __('Radio Settings', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'parent_id'         => "radio_panel_parent", 
+            'atts'              => array() ,
+        ) );
 
         $params['attribute17'] = array(
             "type"          => "radio" ,
@@ -376,7 +463,56 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
+            'has_border_box'    => false ,
+            "panel"         => "radio_settings_panel" ,
         );
+
+        $params['radio_buttonset_field_id'] = array(
+            "type"          => "radio-buttonset" ,
+            "label"         => __("Radio Buttonset control", "site-editor"),
+            "description"          => __("This option allows you to set a title for your image.", "site-editor"),
+            "choices"       =>  array(
+                "options1_key"      =>    "One" ,
+                "options2_key"      =>    "Two" ,
+                "options3_key"      =>    "Three" ,
+            ),
+            "atts"          => array(
+                "class"        =>    "custom-class1 custom-class2" ,
+                "data-custom"  =>    "test" ,
+            ),
+            'has_border_box'    => false ,
+            "panel"         => "radio_settings_panel" ,
+        );
+
+        $params['radio_image_field_id'] = array(
+            "type"          => "radio-image" ,
+            "label"         => __("Radio Buttonset control", "site-editor"),
+            "description"          => __("This option allows you to set a title for your image.", "site-editor"),
+            "choices"       =>  array(
+                "options1_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
+                "options2_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
+                "options3_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
+            ),
+            "atts"          => array(
+                "class"        =>    "custom-class1 custom-class2" ,
+                "data-custom"  =>    "test" ,
+            ),
+            'has_border_box'    => false ,
+            "panel"         => "radio_settings_panel" ,
+        );
+
+
+        $this->add_panel( 'color_settings_panel' ,  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Color Settings Panel', 'textdomain'),
+            'description'       => __('Color Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) );
+
 
         $params['attribute19'] = array(
             "type"          => "color" ,
@@ -386,8 +522,94 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
+            "panel"         => "color_settings_panel" ,
         );
 
+        $params['style_color'] = array(
+            "type"              => "color" ,
+            "label"             => __("Style Editor Color Field", "site-editor"),
+            "description"              => "",
+            "default"           => "#FF0033" ,
+            'js_params'     =>  array(
+                'selector' =>  '.style-color-test' ,
+                'style_props'       =>  "color" ,
+            ),
+            'category'  => "style-editor" ,
+            'setting_id'     =>  "font_color",
+            "panel"         => "color_settings_panel" ,
+        );
+
+        $params['style_bg_color'] = array(
+            "type"              => "color" ,
+            "label"             => __("background Color", "site-editor"),
+            "description"              => "",
+            "default"           => "#FFFFFF" ,
+            'js_params'     =>  array(
+                'selector' =>  'sed_current' ,
+                'style_props'       =>  "background-color" ,
+            ),
+            'category'  => "style-editor" ,
+            'setting_id'     =>  "background_color",
+            "panel"         => "color_settings_panel" ,
+        );
+
+        $params['multi_color_field_id'] = array(
+            "type"          => "multi-color" ,
+            "label"         => __("Multicolor control", "site-editor"),
+            "description"          => __("This option allows you to set a title for your image.", "site-editor"),
+            'choices'     => array(
+                'link'    => 'Color',
+                'hover'   => 'Hover',
+                'active'  => 'Active',
+            ),
+            'default'     => array(
+                'link'    => '#0088cc',
+                'hover'   => '#00aaff',
+                'active'  => '#00ffff',
+            ),
+            "atts"          => array(
+                "class"        =>    "custom-class1 custom-class2" ,
+                "data-custom"  =>    "test" ,
+            ),
+            "panel"         => "color_settings_panel" ,
+        );      
+
+        $this->add_panel( 'media_settings_panel' ,  array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Media Settings Panel', 'textdomain'),
+            'description'       => __('Media Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) );
+
+        $params['change_image_panel'] = array(
+            "priority"          => 9 ,
+            "panel_type"        => 'inner_box' ,
+            "type"              => "sed_image" ,
+            "label"             => __("Select Image Panel", "site-editor"),
+            "description"       => __("Image Panel Description", "site-editor"),
+            'parent_id'         => "media_settings_panel",
+            'controls'          => array(
+                'image_source'          =>  'image_source' ,
+                'image_url'             =>  'image_url' ,
+                'attachment_id'         =>  'attachment_id' ,
+                'default_image_size'    =>  'default_image_size' ,
+                'custom_image_size'     =>  'custom_image_size' ,
+                'external_image_size'   =>  'external_image_size'
+            ),
+            //in modules default value automatic === default attr value and not need to set
+            /*'values'        => array(
+                'image_source'          => $atts['image_source'] ,
+                'image_url'             => $atts['image_url'] ,
+                'attachment_id'         => $atts['attachment_id'] ,
+                'default_image_size'    => $atts['default_image_size'] ,
+                'custom_image_size'     => $atts['custom_image_size'] ,
+                'external_image_size'   => $atts['external_image_size']
+            )*/
+        );
 
         $params['attribute20'] = array(
             "type"          => "image" ,
@@ -401,12 +623,14 @@ class PBAPITestModule extends PBShortcodeClass{
             "js_params"     => array(
                 "rel_size_control"          => $this->control_prefix . "_attribute21"
             ),
+            "panel"         => "media_settings_panel" ,
         );
 
         $params['attribute21'] = array(
-            "type"          => "image_size" ,
+            "type"          => "image-size" ,
             "label"         => __("Image Size Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
+            "panel"         => "media_settings_panel" ,
             'dependency' => array(
                 'controls'  =>  array(
                     "control"  => "attribute20" ,
@@ -416,6 +640,13 @@ class PBAPITestModule extends PBShortcodeClass{
             )
         );
 
+        $params['attribute32'] = array(
+            "type"          => "multi-image" ,
+            "label"         => __("Select Images Field", "site-editor"),
+            "description"          => __("This option allows you to set a icon for your module.", "site-editor"),
+            "panel"         => "media_settings_panel" ,
+        );
+
         $params['attribute22'] = array(
             'type'              => 'video',
             'label'             => __('Video Field (MP4)', 'site-editor'),
@@ -423,7 +654,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "js_params"     => array(
                 "subtypes"          => array( "mp4" )
             ),
-            //"panel"   => "video_background_row_container"
+            "panel"         => "media_settings_panel" ,
         );
 
         $params['attribute23'] = array(
@@ -433,6 +664,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "js_params"     => array(
                 "subtypes"          => array( "mp3" )
             ),
+            "panel"         => "media_settings_panel" ,
         );
 
         $params['attribute24'] = array(
@@ -445,17 +677,22 @@ class PBAPITestModule extends PBShortcodeClass{
                 "lib_title"         => __( "Media Library" , "site-editor" ),
                 "btn_title"         => __( "Select File" , "site-editor" ),
                 "support_types"     => array( "archive" , "document" )  //"archive" , "document" , "spreadsheet" , "interactive" , "text" , "audio" , "video" , "image" || "all" ----- only is array
-            )
+            ),
+            "panel"         => "media_settings_panel" ,
         );
 
 
-        $this->add_panel( 'spinner_settings_panel' , array(
-            'title'         =>  __('Spinner Fields',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 10 ,
-        ) );
+        $this->add_panel( 'number_settings_panel' , array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Number Settings Panel', 'textdomain'),
+            'description'       => __('Number Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) ); 
+
 
         $params['attribute18'] = array(
             "type"          => "number" ,
@@ -465,7 +702,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 "class"        =>    "custom-class1 custom-class2" ,
                 "data-custom"  =>    "test" ,
             ),
-            "panel"         => "spinner_settings_panel"
+            "panel"         => "number_settings_panel"
         );
 
         $prefix = $this->control_prefix . "_";
@@ -491,7 +728,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 ),
                 'min'   =>  0 ,
             ),
-            "panel"         => "spinner_settings_panel"
+            "panel"         => "number_settings_panel"
         );
 
         $params['attribute26'] = array(
@@ -510,7 +747,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 ),
                 'min'   =>  0 ,
             ),
-            "panel"         => "spinner_settings_panel"
+            "panel"         => "number_settings_panel"
         );
 
         $params['attribute27'] = array(
@@ -529,7 +766,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 ),
                 'min'   =>  0 ,
             ),
-            "panel"         => "spinner_settings_panel"
+            "panel"         => "number_settings_panel"
         );
 
         $params['attribute28'] = array(
@@ -544,46 +781,76 @@ class PBAPITestModule extends PBShortcodeClass{
                 'controls' => array( "{$prefix}attribute27" , "{$prefix}attribute26" , "{$prefix}attribute25" )
             ),
             'js_type'       =>  "spinner_lock" ,
-            "panel"         => "spinner_settings_panel"
+            "panel"         => "number_settings_panel"
         );
+
+        $params['attribute10'] = array(
+            "type"          => "slider" ,
+            "label"         => __("Range Field", "site-editor"),
+            "description"          => __("This option allows you to set a title for your image.", "site-editor"),
+            "atts"          => array(
+                "class"        =>    "custom-class1 custom-class2" ,
+                "data-custom"  =>    "test"
+            ),
+            'js_params'     => array(
+                "min"          =>    0 ,
+                "max"          =>    100 ,
+            ),
+            "panel"         => "number_settings_panel",
+        );
+
+        $this->add_panel( 'icon_settings_panel' , array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Icon Settings Panel', 'textdomain'),
+            'description'       => __('Icon Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) );  
 
         $params['attribute29'] = array(
             "type"          => "icon" ,
             "label"         => __("Icon Field", "site-editor"),
             "description"          => __("This option allows you to set a icon for your module.", "site-editor"),
-            'remove_btn'    => true ,
+            'remove_action'    => true ,
+            "panel"         => "icon_settings_panel"
         );
-
+      
         $params['icon_color'] = array(
             "type"              => "color" ,
             "label"             => __("Icon Color Field", "site-editor"),
             "description"              => "",
-            "value"             => "#000000" ,
+            "default"           => "#000000" ,
             'js_params'     =>  array(
                 'selector'          =>  '.my-icon-single' ,
                 'style_props'       =>  "color" ,
             ),
             'category'      => "style-editor" ,
             'setting_id'     =>  "font_color",
+            "panel"         => "icon_settings_panel"
         );
 
         $params['icon_size'] = array(
             "type"              => "number" ,
             "label"             => __("Icon Size Field", "site-editor"),
             "description"              => "",
-            "value"             => 16 ,
+            "default"           => 16 ,
             'js_params'     =>  array(
                 'selector'          =>  '.my-icon-single' ,
                 'style_props'       =>  "font-size" ,
             ),
             'category'  => "style-editor" ,
             'setting_id'     =>  "font_size",
+            "panel"         => "icon_settings_panel"
         );
 
         $params['attribute30'] = array(
             "type"          => "multi-icon" ,
             "label"         => __("Select Icons Field", "site-editor"),
             "description"          => __("This option allows you to set a icon for your module.", "site-editor"),
+            "panel"         => "icon_settings_panel"
         );
 
 
@@ -591,33 +858,92 @@ class PBAPITestModule extends PBShortcodeClass{
             "type"              => "color" ,
             "label"             => __("Icon Color Group Field", "site-editor"),
             "description"              => "",
-            "value"             => "#000000" ,
+            "default"           => "#000000" ,
             'js_params'     =>  array(
                 'selector' =>  '.icon-group-single' ,
                 'style_props'       =>  "color" ,
             ),
             'category'  => "style-editor" ,
             'setting_id'     =>  "font_color",
+            "panel"         => "icon_settings_panel"
         );
 
         $params['icon_size_group'] = array(
             "type"              => "number" ,
             "label"             => __("Icon Size Group Field", "site-editor"),
             "description"              => "",
-            "value"             => 16 ,
+            "default"           => 16 ,
             'js_params'     =>  array(
                 'selector'          =>  '.icon-group-single' ,
                 'style_props'       =>  "font-size" ,
             ),
             'category'  => "style-editor" ,
             'setting_id'     =>  "font_size",
+            "panel"         => "icon_settings_panel"
         );
 
-        $params['attribute32'] = array(
-            "type"          => "multi-image" ,
-            "label"         => __("Select Images Field", "site-editor"),
-            "description"          => __("This option allows you to set a icon for your module.", "site-editor"),
+        $this->add_panel( 'code_editor_settings_panel' , array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Code Settings Panel', 'textdomain'),
+            'description'       => __('Code Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) );  
+
+
+        /*
+         * @Code Editor Settings
+         */
+
+        $params['html_code_field_id'] = array(
+            'type'              => 'code',
+            'label'             => __('Edit HTML Code', 'translation_domain'),
+            'priority'          => 10,
+            'default'           => "",
+            'js_params' => array(
+                "mode" => "html",
+            ),
+            'panel'             =>  'code_editor_settings_panel' ,
         );
+
+        $params['js_code_field_id'] = array(
+            'type'              => 'code',
+            'label'             => __('Javascript Code', 'translation_domain'),
+            'priority'          => 10,
+            'default'           => "",
+            'js_params' => array(
+                "mode" => "javascript",
+            ),
+            'panel'             =>  'code_editor_settings_panel' ,
+        );
+
+        $params['css_code_field_id'] = array(
+            'type'              => 'code',
+            'label'             => __('Custom Css', 'translation_domain'),
+            'priority'          => 10,
+            'default'           => "",
+            'js_params' => array(
+                "mode" => "css",
+            ),
+            'panel'             =>  'code_editor_settings_panel' ,
+        );
+
+        $params['wp_editor_field_id'] = array(
+            'type'              => 'wp-editor',
+            'label'             => __('WP Editor', 'translation_domain'), 
+            //'input_attrs'
+            "atts"              => array(
+                "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
+                "data-custom"   =>    "test" ,
+            ),
+            //panel or group
+            'panel'             =>  'code_editor_settings_panel' ,
+        );
+
+
 
         /*
         "animation"  =>  array(
@@ -648,61 +974,58 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"         => __("Change skin Control", "site-editor"),
         );
 
+
+        $params['group_skin'] = array(
+            'type'       =>  "group_skin" ,
+            'default'    =>  "default",
+            'sub_module' =>  "image",
+            'group'      =>  "image_thumb",
+            'label'      =>  __('Images Change Skin', 'site-editor'),
+            'js_params' =>  array(
+                "support"  =>  array(
+                    "type"     =>  "exclude" ,
+                    "fields"   =>  array(
+                        "tape-style"
+
+                     )
+                )
+            ),
+        );
+
+        $params['row_container'] = array(
+            "type"          => "row_container" ,
+            "label"         => __("Row Container Settings", "site-editor")
+        );
+
         /*
         "spacing"  =>  array(
             "type"          => "spacing" ,
             "label"         => __("Spacing", "site-editor"),
-            "value"         => "20 10 10 0"
+            "default"       => "20 10 10 0"
         ),
         */
         $params['spacing'] = array(
             "type"          => "spacing" ,
             "label"         => __("Spacing", "site-editor"),
-            "value"         => "20 10 10 0"
-        );
-
-        $params['style_color'] = array(
-            "type"              => "color" ,
-            "label"             => __("Style Editor Color Field", "site-editor"),
-            "description"              => "",
-            "value"             => "#FF0033" ,
-            'js_params'     =>  array(
-                'selector' =>  '.style-color-test' ,
-                'style_props'       =>  "color" ,
-            ),
-            'category'  => "style-editor" ,
-            'setting_id'     =>  "font_color",
-        );
-
-        $params['style_bg_color'] = array(
-            "type"              => "color" ,
-            "label"             => __("background Color", "site-editor"),
-            "description"              => "",
-            "value"             => "#FFFFFF" ,
-            'js_params'     =>  array(
-                'selector' =>  'sed_current' ,
-                'style_props'       =>  "background-color" ,
-            ),
-            'category'  => "style-editor" ,
-            'setting_id'     =>  "background_color",
+            "default"       => "20 10 10 0"
         );
 
         /*
         "align"  =>  array(
             "type"          => "align" ,
             "label"         => __("Align", "site-editor"),
-            "value"         => "center"
+            "default"       => "center"
         ),
         */
         $params['align'] = array(
             "type"          => "align" ,
             "label"         => __("Align", "site-editor"),
-            "value"         => "center"
+            "default"       => "center"
         );
 
-        $params['row_container'] = array(
-            "type"          => "row_container" ,
-            "label"         => __("Row Container Settings", "site-editor")
+        $params['length'] = array(
+            "type"          => "length" ,
+            "label"         => __("Length", "site-editor"),
         );
 
         /*
@@ -736,54 +1059,19 @@ class PBAPITestModule extends PBShortcodeClass{
             )
         );
 
-        $params['length'] = array(
-            "type"          => "length" ,
-            "label"         => __("Length", "site-editor"),
-        );
 
-        $params['group_skin'] = array(
-            'type'       =>  "group_skin" ,
-            'value'      =>  "default",
-            'sub_module' =>  "image",
-            'group'      =>  "image_thumb",
-            'label'      =>  __('Images Change Skin', 'site-editor'),
-            'js_params' =>  array(
-                "support"  =>  array(
-                    "type"     =>  "exclude" ,
-                    "fields"   =>  array(
-                        "tape-style"
-
-                     )
-                )
-            ),
-        );
+        $this->add_panel( 'custom_settings_panel' , array(
+            'priority'          => 9,
+            'type'              => 'inner_box',
+            'title'             => __('Custom Settings Panel', 'textdomain'),
+            'description'       => __('Custom Settings Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'btn_style'         => "black",
+            'parent_id'         => "root",
+            'atts'              => array() ,
+        ) ); 
 
         //$atts = $this->default_atts();
-
-        $params['change_image_panel'] = array(
-            "type"          => "sed_image" ,
-            "label"         => __("Select Image Panel", "site-editor"),
-            "description"   => __("Image Panel Description", "site-editor"),
-            "priority"      => 21 ,
-            "panel_type"    => 'inner_box' ,
-            'controls'      => array(
-                'image_source'          =>  'image_source' ,
-                'image_url'             =>  'image_url' ,
-                'attachment_id'         =>  'attachment_id' ,
-                'default_image_size'    =>  'default_image_size' ,
-                'custom_image_size'     =>  'custom_image_size' ,
-                'external_image_size'   =>  'external_image_size'
-            ),
-            //in modules default value automatic === default attr value and not need to set
-            /*'values'        => array(
-                'image_source'          => $atts['image_source'] ,
-                'image_url'             => $atts['image_url'] ,
-                'attachment_id'         => $atts['attachment_id'] ,
-                'default_image_size'    => $atts['default_image_size'] ,
-                'custom_image_size'     => $atts['custom_image_size'] ,
-                'external_image_size'   => $atts['external_image_size']
-            )*/
-        );
         
         $dropdown_control = "sed_api_test_attribute31";
         ob_start();
@@ -829,27 +1117,17 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'    => '.dropdown-item-selector',
                 'selected_class'      => 'selected-item'
             ),
-        );
-
-
-        $params['sortable_field_id'] = array(
-            'label'             => __('Sortable control', 'translation_domain'),
-            'type'              => 'sortable',
-            'choices'           => array(
-                "options1_key"      =>    "One" ,
-                "options2_key"      =>    "Two" ,
-                "options3_key"      =>    "Three" ,
-                "options4_key"      =>    "Four" ,
-                "options5_key"      =>    "Five" ,
-            )
+            'panel'             => 'custom_settings_panel'
         );
 
         $this->add_panel( 'design_editor_panel' , array(
-            'title'         =>  __('Design Editor Fields',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'inner_box' ,
-            'description'   => '' ,
-            'priority'      => 100000
+            'priority'          => 100000,
+            'type'              => 'inner_box',
+            'title'             => __('Design Editor Panel', 'textdomain'),
+            'description'       => __('Design Editor Panel', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'parent_id'         => "root",
+            'atts'              => array() ,
         ) );
 
         $params['background_color'] = array(
@@ -858,7 +1136,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Background Color For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '#F6F6F6' ,
+            "default"           => '#F6F6F6' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -869,7 +1147,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             "remove_action"     => true , 
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );        
 
@@ -879,7 +1157,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add External Background Image For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );    
 
@@ -889,7 +1167,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Parallax Background Image For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
@@ -902,7 +1180,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'js_params'     =>  array(
                 'step'        => 0.1
             ),
-            "value"             => 0.5 , 
+            "default"           => 0.5 , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -916,7 +1194,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'scroll'     => __('Scroll', 'site-editor'),
                 'fixed'     => __('Fixed ', 'site-editor')
             ),
-            "value"             => 'scroll' , 
+            "default"           => 'scroll' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -933,7 +1211,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'cover'         => __('Cover ', 'site-editor'),
                 'contain'       => __('Contain ', 'site-editor'), 
             ),
-            "value"             => '' , 
+            "default"           => '' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -949,7 +1227,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'tile-vertically'       => __('Tile Vertically', 'site-editor'),
                 'tile-horizontally'     => __('Tile Horizontally ', 'site-editor'),  
             ),
-            "value"             => '' , 
+            "default"           => '' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -965,7 +1243,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'  => '.background-psn-sq',
                 'selected_class'    => 'active_background_position'
             ), 
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'  
         );
  
@@ -982,7 +1260,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'  => '.border-item',
                 'selected_class'    => 'active_border' ,
             ),      
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -998,7 +1276,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'  => '.border-item',
                 'selected_class'    => 'active_border' ,
             ),      
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
@@ -1015,7 +1293,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'  => '.border-item',
                 'selected_class'    => 'active_border' ,
             ),      
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
@@ -1032,7 +1310,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'  => '.border-item',
                 'selected_class'    => 'active_border' ,
             ),      
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );  
  
@@ -1043,7 +1321,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Module Border Top Width", "site-editor"), 
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -1053,7 +1331,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Module Border Right Width", "site-editor"),  
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
@@ -1064,7 +1342,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Module Border Bottom Width", "site-editor"),  
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
@@ -1075,7 +1353,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Module Border Left Width", "site-editor"),  
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
@@ -1086,7 +1364,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Module Border Top Color", "site-editor"), 
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -1096,7 +1374,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Module Border Right Color", "site-editor"),  
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
@@ -1107,7 +1385,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Module Border Bottom Color", "site-editor"),  
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
@@ -1118,7 +1396,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Module Border Left Color", "site-editor"),  
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );     
 
@@ -1153,7 +1431,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ), 
-            "value"             => '' , 
+            "default"           => '' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -1179,7 +1457,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ), 
-            "value"             => '' , 
+            "default"           => '' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -1205,7 +1483,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ), 
-            "value"             => '' , 
+            "default"           => '' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -1231,7 +1509,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ), 
-            "value"             => '' , 
+            "default"           => '' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -1283,7 +1561,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ),       
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -1308,7 +1586,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ),      
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         );
 
@@ -1333,7 +1611,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ),      
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         );
 
@@ -1358,7 +1636,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ),      
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         );
 
@@ -1375,7 +1653,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'spinner' =>  $padding_spinner_class_selector ,
                 'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
             ),   
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         );
 
@@ -1409,7 +1687,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ),
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         ); 
 
@@ -1434,7 +1712,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ),    
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         );
 
@@ -1459,7 +1737,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ),    
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         );
 
@@ -1484,7 +1762,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 //'step'    => 2,
                 //'page'    => 5
             ),   
-            "value"             => '' , 
+            "default"             => '' , 
             'panel'             => 'design_editor_panel'
         );
 
@@ -1512,7 +1790,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Line Height For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"             => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1523,7 +1801,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Trancparency For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"             => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1540,7 +1818,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'fixed'     => __('fixed', 'site-editor'),
                 'static'     => __('static ', 'site-editor') 
             ), 
-            "value"             => '' ,
+            "default"             => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1557,7 +1835,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'right'     => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
                 'justify'   => __('justify', 'site-editor'),
             ), 
-            "value"             => '' ,
+            "default"             => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1587,7 +1865,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 "standard_fonts"   => __("Standard Fonts" , "site-editor") ,
                 "google_fonts"     => __("Google Fonts" , "site-editor") ,
             ),    
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );        
 
@@ -1597,7 +1875,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Font Size For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1607,7 +1885,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Font Color For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1633,7 +1911,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 800             => 800 ,
                 900             => 900 ,
             ),    
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1649,7 +1927,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'oblique'    => __('oblique', 'site-editor'),
                 'italic'    => __('italic', 'site-editor'),
             ),    
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1665,7 +1943,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'underline'         => __('underline', 'site-editor') ,
                 'line-through'      => __('line-through', 'site-editor')
             ),    
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );  
 
@@ -1681,7 +1959,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'  => '.text-shadow-box',
                 'selected_class'      => 'text-shadow-active' ,
             ), 
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1691,7 +1969,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Text Shadow Color For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,  
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1707,7 +1985,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'  => '.sed-gradient',
                 'selected_class'    => 'gradient_select'
             ), 
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );
 
@@ -1723,7 +2001,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 'options_selector'    => '.shadow',
                 'selected_class'      => 'shadow_select'
             ), 
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel' 
         );
 
@@ -1733,7 +2011,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Shadow Color For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,  
-            "value"             => '' ,
+            "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );
 
