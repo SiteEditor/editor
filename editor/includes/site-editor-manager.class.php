@@ -76,6 +76,15 @@ class SiteEditorManager{
 	 */
 	protected $groups = array();
 
+    /**
+	 * Registered static modules instances of SiteEditorStaticModule.
+	 *
+	 * @since 4.0.0
+	 * @access protected
+	 * @var array
+	 */
+	protected $static_modules = array();
+
 	/**
 	 * Registered instances of WP_Customize_Panel.
 	 *
@@ -736,6 +745,70 @@ class SiteEditorManager{
 	 *
 	 * @return array
 	 */
+	public function static_modules() {
+		return $this->static_modules;
+	}
+
+	/**
+	 * Add a static module.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param SiteEditorStaticModule|string $id   Customize static module object, or ID.
+	 * @param array                       $args Control arguments; passed to SiteEditorStaticModule
+	 *                                          constructor.
+	 * @return object ( instance of SiteEditorStaticModule or extends )
+	 */
+	public function add_static_module( $id, $args = array() ) {
+
+		if ( $id instanceof SiteEditorStaticModule ) {
+			$module = $id;
+		} else {
+			$module = new SiteEditorStaticModule( $this, $id, $args );
+		}
+
+		$this->static_modules[ $module->id ] = $module;
+
+		return $module;
+	}
+
+	/**
+	 * Retrieve a static module.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $id ID of the control.
+	 * @return SiteEditorStaticModule $static_module The static module object.
+	 */
+	public function get_static_module( $id ) {
+
+		if ( isset( $this->static_modules[ $id ] ) ) {
+			return $this->static_modules[$id];
+		}
+
+	}
+
+	/**
+	 * Remove a customize control.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $id ID of the control.
+	 */
+	public function remove_static_module( $id ) {
+
+		if ( isset( $this->static_modules[ $id ] ) ) {
+			unset($this->static_modules[$id]);
+		}
+	}
+
+	/**
+	 * Get the registered controls.
+	 *
+	 * @since 3.4.0
+	 *
+	 * @return array
+	 */
 	public function groups() {
 		return $this->groups;
 	}
@@ -1002,6 +1075,8 @@ class SiteEditorManager{
 
 		do_action( 'sed_module_register' );
 
+        do_action( 'sed_static_module_register', $this );
+
         do_action( 'sed_app_register', $this );
 		
 		if ( $this->is_preview() && site_editor_app_on()  )
@@ -1114,6 +1189,8 @@ class SiteEditorManager{
 		<script type="text/javascript">
 			var _sedAppEditorSettings = <?php echo wp_json_encode( $settings ); ?>;
 			_sedAppEditorSettings.values = {};
+			_sedAppEditorSettings.staticModules = {};
+
 			(function( v ) {
 				<?php
 				/*
@@ -1132,6 +1209,24 @@ class SiteEditorManager{
 				}
 				?>
 			})( _sedAppEditorSettings.values );
+            (function( sM ) {
+                <?php
+                /*
+                 * Serialize settings separately from the initial _sedAppEditorSettings
+                 * serialization in order to avoid a peak memory usage spike.
+                 * @todo We may not even need to export the values at all since the pane syncs them anyway.
+                 */
+                foreach ( $this->static_modules() as $id => $module ) {
+                    if ( $module->check_capabilities() && $module->active() ) {
+                        printf(
+                            "sM[%s] = %s;\n",
+                            wp_json_encode( $id ),
+                            wp_json_encode( $module->json() )
+                        );
+                    }
+                }
+                ?>
+            })( _sedAppEditorSettings.staticModules );
 		</script>
 		<?php
 

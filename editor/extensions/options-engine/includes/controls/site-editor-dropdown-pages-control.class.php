@@ -60,7 +60,7 @@ if ( ! class_exists( 'SiteEditorDropdownPagesControl' ) ) {
 
 			$atts_string    = $atts["atts"];
 
-			$classes        = "sed-module-element-control sed-element-control sed-bp-input sed-bp-select-input sed-control-{$this->type} {$atts['class']}";
+			$classes        = "sed-select2 sed-module-element-control sed-element-control sed-bp-input sed-bp-select-input sed-control-{$this->type} {$atts['class']}";
 
 			$pkey			= $this->id;
 
@@ -89,7 +89,7 @@ if ( ! class_exists( 'SiteEditorDropdownPagesControl' ) ) {
 				<?php } ?>
 
 			<div <?php echo $atts_string; ?>>
-				<?php echo esc_html( $dropdown ); ?>
+				<?php echo $dropdown; ?>
 			</div>
 
 			<?php

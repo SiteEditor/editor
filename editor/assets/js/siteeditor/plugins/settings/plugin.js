@@ -189,6 +189,54 @@
 
                 }
 
+                if( api.settings.page.type == "post" ) {
+                    //Post Options
+                    var baseOptionsGroup = "sed_post_options_",
+                        settingId = baseOptionsGroup + api.settings.page.id,
+                        optionsGroup = settingId,
+                        isOpen = $(self.dialogSelector).dialog("isOpen");
+
+                    if( self.currentSettingsId != settingId ) {
+
+                        $(".sed_customize_post_settings_btn").data("settingId", settingId);
+
+                        $(".sed-customize-post-settings").show();
+
+                        if (_.isUndefined(self.backgroundAjaxload[settingId]) && _.isUndefined(self.dialogsContents[settingId])) {
+
+                            if (isOpen && self.optionsGroup.indexOf(baseOptionsGroup) === 0) {
+
+                                self._resetTmpl();
+                                self.currentSettingsId = settingId;
+                                self._addLoading();
+
+                                self._sendRequest(settingId, "app", optionsGroup);
+                            } else {
+
+                                self._sendRequest(settingId, "app", optionsGroup);
+                                self.backgroundAjaxload[settingId] = 1;
+
+                            }
+
+                        } else if (!_.isUndefined(self.dialogsContents[settingId])) {
+
+                            if (isOpen && self.optionsGroup.indexOf(baseOptionsGroup) === 0) {
+                                self._resetTmpl();
+                                self.currentSettingsId = settingId;
+                                self._switchTmpl();
+                            }
+                        }
+
+                    }
+                }else{
+
+                    if( $(self.dialogSelector).dialog("isOpen") && self.optionsGroup.indexOf( "sed_post_options_" ) === 0 ) {
+                        $(self.dialogSelector).dialog('close');
+                    }
+
+                    $(".sed-customize-post-settings").hide();
+                }
+
             });
 
         },
@@ -403,7 +451,8 @@
                         settingId = responseData.settingId ,
                         settingType = responseData.settingType,
                         groups  = responseData.groups ,
-                        designTemplate = responseData.designTemplate;
+                        designTemplate = responseData.designTemplate ,
+                        partials = responseData.partials;
 
                     delete self.ajaxProcessing[settingId];
 
@@ -422,6 +471,8 @@
                     self.setPanels( panels , settingId );
 
                     self.sedDesignTemplate( designTemplate , settingId );
+
+                    self.setDynamicPartials( partials , settingId );
 
                     if( _.isUndefined( self.ajaxResetTmpls[settingId] ) && _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
 
@@ -552,6 +603,12 @@
                 });
 
             }
+
+        },
+
+        setDynamicPartials : function( partials ){
+
+            api.previewer.send( 'addDynamicPartials' , partials );
 
         },
 

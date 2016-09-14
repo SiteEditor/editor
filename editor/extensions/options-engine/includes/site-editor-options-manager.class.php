@@ -67,9 +67,19 @@ final class SiteEditorOptionsManager{
     protected $fields = array();
 
     /**
-     * SiteEditorOptionsManager constructor.
+     * Registered instances of SiteEditorPostOptions.
+     *
+     * @since 1.0.0
+     * @access protected
+     * @var array
      */
-    function __construct(  ) {
+    public $post = array();
+
+    /**
+     * SiteEditorOptionsManager constructor.
+     * @param $editor object instance of SiteEditorApp
+     */
+    function __construct( $editor ) {
 
         require_once dirname( __FILE__ ) . DS . 'site-editor-options-template.class.php';
 
@@ -78,6 +88,10 @@ final class SiteEditorOptionsManager{
         require_once dirname( __FILE__ ) . DS . 'site-editor-page-options.class.php';
 
         new SiteEditorPageOptions();
+
+        require_once dirname( __FILE__ ) . DS . 'site-editor-post-options.class.php';
+
+        $this->post = new SiteEditorPostOptions();
 
         //include sample options
         require_once dirname( __FILE__ ) . DS . 'demo' . DS . 'site-editor-sample-options.php';
@@ -102,8 +116,6 @@ final class SiteEditorOptionsManager{
 
         add_action( 'site_editor_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options
 
-        add_action( 'sed_app_register', array( $this, 'register_partials' ), 99 );
-
         add_action( 'sed_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
         add_action( 'sed_print_footer_scripts', array( $this, 'print_templates' ) );
@@ -119,6 +131,8 @@ final class SiteEditorOptionsManager{
         add_action( "sed_footer" , array($this, 'print_settings_template') , 10000 );
 
         add_action( 'wp_enqueue_media' , array( $this , 'print_media_templates' ) );
+
+        add_action( 'sed_print_styles', 'sed_site_icon', 99 );
 
     }
 
@@ -169,7 +183,8 @@ final class SiteEditorOptionsManager{
             "settingId"         =>  $_POST['setting_id'] ,
             "settingType"       =>  $group_type ,
             "groups"            =>  array() ,
-            "designTemplate"    =>  ""
+            "designTemplate"    =>  "" ,
+            "partials"          =>  array()
         );
 
         $groups = SED()->editor->manager->groups();
@@ -304,6 +319,22 @@ final class SiteEditorOptionsManager{
 
         $data['designTemplate'] = ( $allow_design ) ? $design_group->get_content() : "";
 
+        $partials = SED()->editor->manager->selective_refresh->partials();
+
+        $group_partials = array();
+
+        foreach ( $partials as $partial ) {
+
+            if ( $partial->check_capabilities() && $partial->option_group == $group_id ) {
+
+                $group_partials[ $partial->id ] = $partial->json();
+
+            }
+
+        }
+
+        $data['partials'] = $group_partials;
+        
         return $data;
     }
 
@@ -684,6 +715,28 @@ final class SiteEditorOptionsManager{
                 unset( $control_args["dependency"] );
             }
 
+            if( isset( $args['partial_refresh'] ) ) {
+
+                $partial_args = $args['partial_refresh'];
+
+                if( isset( $args['capability'] ) ){
+                    $partial_args['capability'] = $args['capability'];
+                }
+
+                if( isset( $args['option_group'] ) ){
+                    $partial_args['option_group'] = $args['option_group'];
+                }
+
+                if( ! isset( $partial_args['settings'] ) ){
+                    $partial_args['setting_id'] = $setting_id;
+                }
+
+                $partial_id = $setting_id;
+
+                $this->add_partial( $partial_id , $partial_args);
+
+            }
+
             // Create the control.
             $this->add_control( $id , $control_args );
 
@@ -789,33 +842,35 @@ final class SiteEditorOptionsManager{
     }
 
     /**
-     * Parses all fields and searches for the "partial_refresh" argument inside them.
-     * If that argument is found, then it starts parsing the array of arguments.
-     * Registers a selective_refresh in the customizer for each one of them.
+     * Adds a partial.
      *
-     * @param object $wp_customize WP_Customize_Manager.
+     * @since 1.0.0
+     * @access public
+     *
+     * @param SiteEditorPartial|string $id   Customize Partial object, or Panel ID.
+     * @param array                       $args Optional. Partial arguments. Default empty array.
+     * @return SiteEditorPartial             The instance of the panel that was added.
      */
-    public function register_partials( $manager ) {
+    public function add_partial( $id, $args = array() ) {
 
-        // Get an array of all fields.
-        $fields = $this->fields;
+        if ( $id instanceof SiteEditorPartial ) {
 
-        // Start parsing the fields.
-        foreach ( $fields as $field_id => $field ) {
-            if ( isset( $field->partial_refresh ) && ! empty( $field->partial_refresh ) ) {
-                // Start going through each item in the array of partial refreshes.
-                foreach ( $field->partial_refresh as $partial_refresh => $partial_refresh_args ) {
-                    // If we have all we need, create the selective refresh call.
-                    if ( isset( $partial_refresh_args['render_callback'] ) && isset( $partial_refresh_args['selector'] ) ) {
-                        $manager->selective_refresh->add_partial( $partial_refresh, array(
-                            'selector'        => $partial_refresh_args['selector'],
-                            'settings'        => array( $field->setting_id ),
-                            'render_callback' => $partial_refresh_args['render_callback'],
-                        ) );
-                    }
-                }
+            SED()->editor->manager->selective_refresh->add_partial( $id );
+
+        }else if ( isset( $args['render_callback'] ) && isset( $args['selector'] ) ) {
+
+            if( isset( $args['setting_id'] ) ){
+
+                $args['settings'] = array( $args['setting_id'] );
+
+                unset( $args['setting_id'] );
+
             }
+
+            SED()->editor->manager->selective_refresh->add_partial( $id, $args );
+
         }
+
     }
 
 

@@ -63,9 +63,17 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
 
         $selector = $this->selector;
 
-        $sheet_width = sed_get_page_setting( 'sheet_width' ); //var_dump( $sheet_width );
+        $sheet_width = get_theme_mod( 'sheet_width' );
 
-        $page_length = sed_get_page_setting( 'page_length' ); //var_dump( $page_length );
+        $sheet_width = ( $sheet_width === false ) ? $this->default_sheet_width : $sheet_width; var_dump( $sheet_width );
+
+        $site_length = get_theme_mod( 'site_length' );
+
+        $site_length = ( $site_length === false ) ? $this->default_page_length : $site_length;
+
+        $page_length = sed_get_page_setting( 'page_length' );
+
+        $page_length = ( $page_length === 'default' ) ? $site_length : $page_length;
 
         ob_start();
         ?>

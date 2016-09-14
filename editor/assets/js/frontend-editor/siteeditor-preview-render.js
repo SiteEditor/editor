@@ -6,8 +6,6 @@
 
     api.currentPageCustomCss = api.currentPageCustomCss || {};
 
-    api.currentLayoutCustomCss = api.currentLayoutCustomCss || {};
-
     api.siteCustomCss = api.siteCustomCss || {};
 
     api.currentCssSelector = "";
@@ -56,16 +54,7 @@
 
                 sedCss[api.currentCssSelector][setting] = value;
 
-                break;
-
-            case "layout" :
-
-                sedCss = api.currentLayoutCustomCss;
-
-                if( _.isUndefined( sedCss[api.currentCssSelector] ) )
-                    sedCss[api.currentCssSelector] = {};
-
-                sedCss[api.currentCssSelector][setting] = value;
+                api.preview.send( 'page_custom_design_settings' , sedCss );
 
                 break;
 
@@ -77,6 +66,8 @@
                     sedCss[api.currentCssSelector] = {};
 
                 sedCss[api.currentCssSelector][setting] = value;
+
+                api.preview.send( 'site_custom_design_settings' , sedCss );
 
                 break;
 
@@ -102,19 +93,6 @@
 			channel: api.settings.channel
 		});
 
-		/*api.preview.bind( 'settings', function( values ) {
-			$.each( values, function( id, value ) {
-				if ( api.has( id ) )
-					api( id ).set( value );
-				else
-					api.create( id, value ,{
-					    stype : api.settings.types[id] || "general"
-					} );
-			}); 
-		});
-
-		api.preview.trigger( 'settings', api.settings.values );*/
-
         /**
          * Create/update a setting value.
          *
@@ -123,7 +101,9 @@
          * @param {boolean} [createDirty] - Whether to create a setting as dirty. Defaults to false.
          */
         var setValue = function( id, value, createDirty ) {
+
             var setting = api( id );
+
             if ( setting ) {
                 setting.set( value );
             } else {
@@ -182,17 +162,8 @@
             api.currentCssSelector = selector;
         });
 
-		/*api.preview.bind( 'setting', function( args ) {
-			var value;
-
-			args = args.slice();
-
-			if ( value = api( args.shift() ) )
-				value.set.apply( value, args );
-		});*/
-
 		api.preview.bind( 'sync', function( events ) {
-			$.each( events, function( event, args ) { 
+			$.each( events, function( event, args ) {
 				api.preview.trigger( event, args );
 			});
 			api.preview.send( 'synced' );
@@ -208,8 +179,6 @@
             api.preview.send( 'currentPostId' , api.settings.post.id );
 
             api.preview.send( 'contextmenu-ready' );
-
-            $(document).trigger("update_sort_row");
 
         });
 
@@ -229,40 +198,6 @@
 
 		api.preview.send( 'ready' );
 
-        sedApp.editor( 'page_main_row', function( value ) {
-    		value.bind( function( to ) {
-    			//alert(to);
-    		});
-        });
-
-
-        sedApp.editor( 'sheet_width', function( value ) {
-    		value.bind( function( to ) {
-               $("#sed-sheet-width-style").remove();
-               $("<style id='sed-sheet-width-style'>.sed-row-boxed{max-width : " + to + "px !important;}</style>").appendTo($("head"));
-
-              $("#site-editor-main-part").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedSheetWidth");
-
-    		});
-        });
-
-
-        sedApp.editor( 'page_length', function( value ) {
-    		value.bind( function( to ) {
-
-                var targEl = $("#site-editor-main-part");
-
-                if(to == "boxed")
-                    targEl.addClass( "sed-row-boxed" ).removeClass("sed-row-wide");
-                else
-                    targEl.addClass( "sed-row-wide" ).removeClass("sed-row-boxed");
-
-                $("#site-editor-main-part").find(".sed-row-pb > .sed-pb-module-container").trigger("sedChangedPageLength" , [to]);
-
-    		});
-        });
-
-
         //for api.Ajax :: than user login ajax render
         api.preview.bind("user_login_done" , function(){
             if(api.currentAjax)
@@ -270,39 +205,108 @@
         });
 
         api.sedCustomStyle = {};
-        api.sedCustomStyleString = "";
+        api.sedCustomStyleString = {
+            customCssString   :   ""
+        };
+
+        api.sedPageCustomStyle = {};
+        api.sedPageCustomStyleString = {
+            customCssString   :   ""
+        };
+
+        api.sedSiteCustomStyle = {};
+        api.sedSiteCustomStyleString = {
+            customCssString   :   ""
+        };
 
         api.preview.bind( 'sedCustomStyleUpdate', function( newStyle ) {
 
             if( _.isUndefined( newStyle ) || _.isUndefined( newStyle.css ) || _.isUndefined( newStyle.setting ) || !api.currentCssSelector )
                 return ;
 
-            var css     = newStyle.css ,
-                setting = newStyle.setting ,
-                //prop    = newStyle.prop ,
-                value   = newStyle.value ,
-                needToSave = newStyle.save;
+            var css         = newStyle.css ,
+                setting     = newStyle.setting ,
+                //prop      = newStyle.prop ,
+                value       = newStyle.value ,
+                needToSave  = newStyle.save ,
+                output      = {};
 
-            if( _.isUndefined( api.sedCustomStyle[api.currentCssSelector] ) || _.isUndefined( api.sedCustomStyle[api.currentCssSelector][setting] ) ){
+            switch ( api.currentCssSettingType ){
 
-                if( _.isUndefined( api.sedCustomStyle[api.currentCssSelector] ) )
-                    api.sedCustomStyle[api.currentCssSelector] = {};
+                case "module" :
 
-                api.sedCustomStyle[api.currentCssSelector][setting] = css;
-                api.sedCustomStyleString += css;
+                    var customCss = api.sedCustomStyle;
+                    output = api.sedCustomStyleString;
+
+                    break;
+
+                case "page" :
+
+                    var customCss = api.sedPageCustomStyle;
+                    output = api.sedPageCustomStyleString;
+
+                    break;
+
+                case "site" :
+
+                    var customCss = api.sedSiteCustomStyle;
+                    output = api.sedSiteCustomStyleString;
+
+                    break;
+
+            }
+
+            if( _.isUndefined( customCss[api.currentCssSelector] ) || _.isUndefined( customCss[api.currentCssSelector][setting] ) ){
+
+                if( _.isUndefined( customCss[api.currentCssSelector] ) )
+                    customCss[api.currentCssSelector] = {};
+
+                customCss[api.currentCssSelector][setting] = css;
+                output.customCssString += css;
 
             }else{
 
-                api.sedCustomStyleString = api.sedCustomStyleString.replace( api.sedCustomStyle[api.currentCssSelector][setting] , css );
-                api.sedCustomStyle[api.currentCssSelector][setting] = css;
+                output.customCssString = output.customCssString.replace( customCss[api.currentCssSelector][setting] , css );
+                customCss[api.currentCssSelector][setting] = css;
             }
 
             if( needToSave === true )
                 _saveCustomCss( setting , value );
 
-      		// Refresh the stylesheet by removing and recreating it.
-      		$( "#sed_custom_css_editor_generate" ).remove();
-      		style = $('<style type="text/css" id="sed_custom_css_editor_generate">' + api.sedCustomStyleString + '</style>').appendTo( $('head') );
+            switch ( api.currentCssSettingType ){
+
+                case "page" :
+
+                    $( "#sed_page_css_editor_generate" ).remove();
+
+                    if( $( "#sed_custom_css_editor_generate" ).length > 0 ){
+                        $('<style type="text/css" id="sed_page_css_editor_generate">' + output.customCssString + '</style>').insertBefore( $( "#sed_custom_css_editor_generate" ) );
+                    }else{
+                        $('<style type="text/css" id="sed_page_css_editor_generate">' + output.customCssString + '</style>').appendTo( $('head') );
+                    }
+
+                    break;
+
+                case "site" :
+
+                    $( "#sed_site_css_editor_generate" ).remove();
+
+                    if( $( "#sed_page_css_editor_generate" ).length > 0 ){
+                        $('<style type="text/css" id="sed_site_css_editor_generate">' + output.customCssString + '</style>').insertBefore( $( "#sed_page_css_editor_generate" ) );
+                    }else if( $( "#sed_custom_css_editor_generate" ).length > 0 ){
+                        $('<style type="text/css" id="sed_site_css_editor_generate">' + output.customCssString + '</style>').insertBefore( $( "#sed_custom_css_editor_generate" ) );
+                    }else{
+                        $('<style type="text/css" id="sed_site_css_editor_generate">' + output.customCssString + '</style>').appendTo( $('head') );
+                    }
+
+                    break;
+                default:
+
+                    // Refresh the stylesheet by removing and recreating it.
+                    $( "#sed_custom_css_editor_generate" ).remove();
+                    $('<style type="text/css" id="sed_custom_css_editor_generate">' + output.customCssString + '</style>').appendTo( $('head') );
+
+            }
 
         });
 
@@ -583,12 +587,6 @@
                 case "page" :
 
                     sedCss = api.currentPageCustomCss;
-
-                    break;
-
-                case "layout" :
-
-                    sedCss = api.currentLayoutCustomCss;
 
                     break;
 

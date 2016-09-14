@@ -19,6 +19,14 @@
         ready : function(){
             var self = this;
 
+            $('.sed-handle-sort-row .duplicate_pb_btn').livequery( function(){
+
+                $(this).on( "click" , function(){
+                    self.duplicate( $(this).parents(".sed-bp-element:first" ) );
+                });
+
+            });
+
         },
 
         syncStyleEditorPreview : function( sed_css ){

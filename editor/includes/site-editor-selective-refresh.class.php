@@ -1,6 +1,6 @@
 <?php
 /**
- * Customize API: SiteEditorSelectiveRefresh class
+ * SiteEditorSelectiveRefresh class
  *
  * @package WordPress
  * @subpackage Customize
@@ -8,7 +8,7 @@
  */
 
 /**
- * Core Customizer class for implementing selective refresh.
+ * Core SiteEditor class for implementing selective refresh.
  *
  * @since 4.5.0
  */
@@ -196,7 +196,7 @@ final class SiteEditorSelectiveRefresh {
 	/**
 	 * Registers dynamically-created partials.
 	 *
-	 * @since 4.5.0
+	 * @since 1.0.0
 	 * @access public
 	 *
 	 * @see SiteEditorManager::add_dynamic_settings()

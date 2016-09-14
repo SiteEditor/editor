@@ -86,7 +86,8 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
             _.each( _.pluck( partial.placements(), 'container' ), function( container ) {
                 $( container ).attr( 'title', self.data.l10n.shiftClickToEdit );
             } );
-            $( document ).on( 'click', partial.params.selector, function( e ) {
+
+            /*$( document ).on( 'click', partial.params.selector, function( e ) {
                 if ( ! e.shiftKey ) {
                     return;
                 }
@@ -96,7 +97,8 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
                         partial.showControl();
                     }
                 } );
-            } );
+            } );*/
+
         },
 
         /**
@@ -174,14 +176,14 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
          * This may be overridden for inline editing.
          *
          * @since 4.5.0
-         */
+
         showControl: function() {
             var partial = this, settingId = partial.params.primarySetting;
             if ( ! settingId ) {
                 settingId = _.first( partial.settings() );
             }
             api.preview.send( 'focus-control-for-setting', settingId );
-        },
+        },*/
 
         /**
          * Prepare container for selective refresh.
@@ -191,7 +193,27 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
          * @param {Placement} placement
          */
         preparePlacement: function( placement ) {
-            $( placement.container ).addClass( 'customize-partial-refreshing' );
+            $( placement.container ).addClass( 'sed-app-partial-refreshing' );
+
+            //if( _.isUndefined( this.loading ) )
+                this.addLoading( placement );
+
+            this.loading.show();
+        },
+
+        /**
+         * Add loading to container
+         *
+         * @since 4.5.0
+         *
+         * @param {Placement} placement
+         */
+        addLoading : function( placement ){
+            var tpl = api.template("sed-ajax-loading-tpl"), html;
+
+            html = tpl({type: "medium"});
+
+            this.loading = $( html ).appendTo( $( placement.container ) );
         },
 
         /**
@@ -320,7 +342,9 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
             self.orginalDocumentWrite = null;
             /* jshint ignore:end */
 
-            placement.container.removeClass( 'customize-partial-refreshing' );
+            placement.container.removeClass( 'sed-app-partial-refreshing' );
+
+            this.loading.hide();
 
             // Prevent placement container from being being re-triggered as being rendered among nested partials.
             placement.container.data( 'customize-partial-content-rendered', true );
@@ -483,10 +507,10 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
         } );
 
         return {
-            wp_customize: 'on',
-            nonce: api.settings.nonce.preview,
-            theme: api.settings.theme.stylesheet,
-            customized: JSON.stringify( dirtyCustomized )
+            sed_app_editor          : 'on',
+            nonce                   : api.settings.nonce.preview,
+            theme                   : api.settings.theme.stylesheet,
+            sed_page_customized     : JSON.stringify( dirtyCustomized )
         };
     };
 
@@ -543,6 +567,7 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
             clearTimeout( self._debouncedTimeoutId );
             self._debouncedTimeoutId = null;
         }
+
         if ( self._currentRequest ) {
             self._currentRequest.abort();
             self._currentRequest = null;
@@ -596,7 +621,7 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
                 data.partials = JSON.stringify( partialPlacementContexts );
                 data[ self.data.renderQueryVar ] = '1';
 
-                request = self._currentRequest = wp.ajax.send( null, {
+                request = self._currentRequest = api.wpAjax.send( null, {
                     data: data,
                     url: api.settings.url.self
                 } );
@@ -750,7 +775,7 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
             document.head = $( 'head:first' )[0];
         }
 
-        _.extend( self.data, _sedAppPartialRefreshExports );
+        _.extend( self.data, window._sedAppPartialRefreshExports );
 
         // Create the partial JS models.
         _.each( self.data.partials, function( data, id ) {
@@ -859,6 +884,25 @@ sedApp.editor.selectiveRefresh = ( function( $, api ) {
                 partial.deferred.ready.resolve();
             } );
         } );
+
+        api.preview.bind( 'addDynamicPartials' , function( partials ){
+
+            if( !_.isEmpty( partials ) ) {
+
+                _.each( partials , function (data, id) {
+                    var Constructor, partial = self.partial(id);
+                    if (!partial) {
+                        Constructor = self.partialConstructor[data.type] || self.Partial;
+                        partial = new Constructor(id, {params: data});
+                        self.partial.add(id, partial);
+                    } else {
+                        _.extend(partial.params, data);
+                    }
+                });
+
+            }
+
+        });
 
     } );
 

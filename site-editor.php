@@ -115,8 +115,7 @@ final Class SiteEditor {
 
         $this->config = array(
             "page_options"  =>  array(
-                "public"        => "sed_page_options" ,
-                "layout"        => "sed_layout_options"
+                "public"        => "sed_page_options"
             ) ,
             "version"       =>  $this->version ,
             "version_type"  =>  $this->version_type

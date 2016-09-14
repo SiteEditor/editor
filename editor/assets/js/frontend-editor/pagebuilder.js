@@ -1143,54 +1143,49 @@
         modulesHandles: function(){
             var self = this;
 
-            $('[sed-role="static-template-content"]').livequery(function(){
-                if( $(this).is("[sed-disable-editing='yes']") )
-                    return ;
+            var moduleSelectors = [ '.sed-bp-element' ] ,
+                moduleHandlers = {};
 
-                var element = $(this);
-                tmpl = "#sed-static-module-handle-tmpl";
-                var dnp = $( $( tmpl ).html() ).appendTo( element );
-
-                dnp.data( "moduleStaticSelector" , '[sed-role="static-template-content"]' );
-                dnp.data( "moduleSettingId" , 'sed_content_options' );
-
-                element.hover(function(e){
-                    //api.styleEditor.editorState == "on" ||
-                    if( self.resizing === true)
-                        return ;
-
-                    e.stopPropagation();
-
-                    dnp.show();
-
-                },function(e){
-                    //api.styleEditor.editorState == "on" ||
-                    if( self.resizing === true)
-                        return ;
-
-                    dnp.hide();
-                });
-
-                dnp.find(".edit-action-item").click(function(){
-                    api.preview.send( "openAppSettings" , {
-                        settingId : "sed_content_options" ,
-                        forceOpen : true ,
-                        reset     : true
-                    });
-                });
-
+            $.each( api.settings.staticModules , function( id , module ){
+                if( !_.isUndefined( module.selector ) ){
+                    moduleSelectors.push( module.selector );
+                    $( module.selector ).data( "staticModuleId" , id );
+                    $( module.selector ).data( "sedModuleAction" , module.actions );
+                }
             });
 
-            // add controller to each element in pages include settings And Delete And Move
-            $('.sed-bp-element').livequery(function(){
+            var moduleSelectorsString = moduleSelectors.join(",");
+
+            /**
+             * add controller to each element in pages include settings And Delete And Move
+             * Modules : Dynamic || Static
+             */
+            $( moduleSelectorsString ).livequery(function(){
                 if( $(this).is("[sed-disable-editing='yes']") )
                     return ;
 
                 var element = $(this);
-                tmpl = "#sed-bp-element-handle-tmpl";
-                var dnp = $( $( tmpl ).html() ).appendTo( element );
 
-                dnp.find('.remove_pb_btn').data( "moduleRelId" , element.attr("sed_model_id") );
+                if( ! element.hasClass("clearfix") )
+                    element.addClass("clearfix");
+
+                if( ! element.hasClass("sed-bp-element") ){
+                    element.addClass("sed-static-module");
+
+                    element.on("click" , function(e){     // $(this).is(".drag_pb_btn")
+                        //api.styleEditor.editorState == "on" ||
+                        if( self.resizing === true || api.appPreview.mode == "on" || $(this).is("[sed-disable-editing='yes']") )
+                            return ;
+
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        api.hideContextmenu(e);  //api.log( $(this) );
+                        api.selectPlugin.select( $(this) , $(e.target).hasClass("sed_setting_btn_cmp") );
+
+                    });
+
+                }
 
                 element.not("[data-type-row='draggable-element']").hover(function(e){
                     //api.styleEditor.editorState == "on" ||
@@ -1198,9 +1193,62 @@
                         return ;
 
                     e.stopPropagation();
-                    $('.sed-bp-element').each(function (i,el) {
-                        $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
-                    });
+
+                    if( element.hasClass("sed-bp-element") && _.isUndefined( $(this).data( "sedModuleType" ) ) ){
+
+                        var elementId = element.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
+                            shortcode = api.contentBuilder.getShortcode( elementId ) ,
+                            ModuleActions = api.shortcodes[shortcode.tag]['actions'];
+
+                        element.data( "sedModuleAction" , ModuleActions );
+
+                    }
+
+                    var type , actions;
+
+                    if( !_.isUndefined( $(this).data( "themeId" ) ) ){
+                        type = "public";
+                        actions = $(this).data( "sedModuleAction" );
+
+                        var index = $.inArray( "move" , actions );
+
+                        if( index > -1 ){
+                            actions.splice( index , 1 );
+                        }
+
+                    }else if( $(this).hasClass( "sed-static-module" ) ){
+                        type = "static";
+                        actions = $(this).data( "sedModuleAction" ) ;
+                    }else{
+                        type = "normal";
+                        actions = $(this).data( "sedModuleAction" );
+                    }
+
+                    if( _.isUndefined( $(this).data( "sedModuleType" ) ) || $(this).data( "sedModuleType" ) != type ) {
+
+                        if( !_.isUndefined( $(this).data( "sedModuleType" ) ) ){
+                            $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").remove();
+                        }
+
+                        var template = api.template("tmpl-sed-pb-element-handle"),
+                            html = template({
+                                type: type,
+                                actions: actions
+                            });
+
+                        var dnp = $(html).appendTo($(this));
+
+                        $(this).data( "sedModuleType" , type );
+
+                    }else{
+                        var dnp = $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left");
+                    }
+
+                    if( $.inArray( 'remove' , actions ) > -1 )
+                        dnp.find('.remove_pb_btn').data( "moduleRelId" , element.attr("sed_model_id") );
+
+
+                    $('.sed-bp-element , .sed-static-module').find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
 
                     if( element.offset().top <= 11 )
                         element.addClass("sed-pb-row-top-site");
@@ -1216,14 +1264,18 @@
                         element.removeClass("sed-pb-row-full-width");
 
                     dnp.show();
+
                 },function(e){
                     //api.styleEditor.editorState == "on" ||
                     if( self.resizing === true)
                         return ;
 
                     //e.stopPropagation();
-                    $(this).parents(".sed-bp-element:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
-                    dnp.hide();
+                    if( $(this).parents(".sed-bp-element:first , .sed-static-module:first").length > 0 )
+                        $(this).parents(".sed-bp-element:first , .sed-static-module:first").eq(0).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
+
+                    $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
+
                 });
 
             });

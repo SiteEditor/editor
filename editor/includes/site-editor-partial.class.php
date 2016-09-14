@@ -89,6 +89,15 @@ class SiteEditorPartial {
 	 */
 	public $primary_setting;
 
+
+	/**
+	 * belong to option group ?
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $option_group = '';
+
 	/**
 	 * Capability required to edit this partial.
 	 *

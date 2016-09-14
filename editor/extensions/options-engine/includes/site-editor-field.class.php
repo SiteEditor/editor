@@ -305,19 +305,23 @@ class SiteEditorField{
      *
      *
      */
-    protected function set_partial_refresh() {
+    protected function set_partial_refresh() { 
+
         if ( ! is_array( $this->partial_refresh ) ) {
             $this->partial_refresh = array();
         }
-        foreach ( $this->partial_refresh as $id => $args ) {
+
+        /*foreach ( $this->partial_refresh as $id => $args ) {
             if ( ! is_array( $args ) || ! isset( $args['selector'] ) || ! isset( $args['render_callback'] ) || ! is_callable( $args['render_callback'] ) ) {
                 unset( $this->partial_refresh[ $id ] );
                 continue;
             }
-        }
+        }*/
+
         if ( ! empty( $this->partial_refresh ) ) {
             $this->transport = 'postMessage';
         }
+
     }
 
 

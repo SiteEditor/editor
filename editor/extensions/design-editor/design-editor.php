@@ -273,6 +273,11 @@ function sed_register_design_editor_settings(){
             'transport' => 'postMessage',
             'type' => 'style-editor'
         ),
+        'site_custom_design_settings' => array(
+            'value'             => get_option( 'site_custom_design_settings' ),
+            'transport'         => 'postMessage' ,
+            'option_type'       => 'option'
+        ),
         /*'transform' => array(
             'value'     => array(
                                  'default' => ''
@@ -300,6 +305,39 @@ function sed_register_design_editor_settings(){
 }
 
 add_action( "sed_app_register" , "sed_register_design_editor_settings" );
+
+function sed_register_page_custom_design_editor_setting( $settings ){
+
+    $settings['page_custom_design_settings'] = array(
+        'default'        => array(),
+        'transport'      => 'postMessage'
+    );
+
+    return $settings;
+}
+
+add_action( 'sed_app_register_general_options' , 'sed_register_page_custom_design_editor_setting' );
+
+
+function sed_custom_design_settings_output( ){
+
+    $site_design_settings = get_option( 'site_custom_design_settings' );  var_dump(  $site_design_settings );
+    
+    $css_data = ( $site_design_settings === false ) ? array() : $site_design_settings;
+
+    $page_design_settings = sed_get_page_setting( 'page_custom_design_settings' );
+
+    $page_design_settings = ( is_array( $page_design_settings ) ) ? $page_design_settings : array();
+
+    $css_data = array_merge( $css_data , $page_design_settings );
+
+    $css_data = array_merge( $css_data , SED()->framework->dynamic_css_data );
+
+    SED()->framework->dynamic_css_data = $css_data;
+}
+
+add_action( "sed_before_dynamic_css_output" , 'sed_custom_design_settings_output' , 10 );
+
 
 function sed_load_design_editor_modules(){
 

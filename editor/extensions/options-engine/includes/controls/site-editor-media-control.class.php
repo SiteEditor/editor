@@ -79,7 +79,7 @@ if ( ! class_exists( 'SiteEditorMediaControl' ) ) {
 
             $value          = $this->value();
 
-			$button_label 	= ( ! empty( $button_label ) ) ? $button_label : __("Select File" , "site-editor") ;
+			$button_label 	= ( ! empty( $this->button_label ) ) ? $this->button_label : __("Select File" , "site-editor") ;
 
 			?>
 

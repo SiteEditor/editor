@@ -36,9 +36,9 @@ class SiteEditorGeneralSettings {
         add_filter( 'sed_app_dynamic_setting_class' , array( $this , 'filter_dynamic_setting_class' ), 5, 3 );
 
         //after site editor manager loaded
-        add_action( "plugins_loaded"                , array( $this , 'register_settings' ) , 9999  );
+        add_action( "init"                          , array( $this , 'register_settings' ) , 85  );
 
-        add_action( "plugins_loaded"                , array( $this , 'create_post_meta' ) , 10000  );
+        add_action( "init"                          , array( $this , 'create_post_meta' ) , 90  );
 
         add_action( 'sed_app_preview_init'          , array( $this, 'sed_app_preview_init' ) );
 
@@ -366,7 +366,7 @@ sed_add_general_options( $sed_general_options );*/
 
 
 /**
- * Class SiteEditorPostmetaController
+ * Class SiteEditorPostmetaOption
  */
 final class SiteEditorPostmetaOption {
 
@@ -484,7 +484,7 @@ final class SiteEditorPostmetaOption {
     public function register_meta( SiteEditorCustomizePosts $posts_component ) {
 
         // Short-circuit if theme support is not present.
-        if ( isset( $this->theme_supports ) && ! current_theme_supports( $this->theme_supports )  && ! sed_current_theme_supports( $this->theme_supports ) ) {
+        if ( $this->theme_supports && ! current_theme_supports( $this->theme_supports )  && ! sed_current_theme_supports( $this->theme_supports ) ) {
             return 0;
         }
 

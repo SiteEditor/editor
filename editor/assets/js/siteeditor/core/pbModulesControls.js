@@ -1207,6 +1207,22 @@
         }
     });
 
+    api.SiteIconControl = api.ChangeImageControl.extend({
+
+        _updateImageDemo : function( attach_id ){
+            var imgUrl = this._getImageUrl( attach_id );
+            this.imgDemo.attr("src" , imgUrl );
+
+            if( attach_id > 0 && imgUrl != SEDNOPIC.url ){
+                $( 'link[sizes="32x32"]' ).attr( 'href', imgUrl );
+            }else{
+                $( 'link[sizes="32x32"]' ).attr( 'href', "" );
+            }
+
+        }
+
+    });
+
 
     api.MultiImagesControl = api.SiteEditorControls.extend({
 
@@ -2373,7 +2389,8 @@
         skins                   : api.ModuleSkins ,
         skin                    : api.ModuleSkins ,
         widget                  : api.WidgetControl ,
-        gradient                : api.GradientControl
+        gradient                : api.GradientControl ,
+        'site-icon'             : api.SiteIconControl
         //module_element          : api.ModulesElement ,
         //style_editor_element    : api.StyleEditorElements
         /**

@@ -194,7 +194,32 @@
 
         });
 
-       api.previewer.bind("resetpageInfoSettings" , function( data ){ alert( data.pageId );
+      api.previewer.bind( 'page_custom_design_settings' , function( sedCss ){
+
+          var settingId;
+
+          if( api.settings.page.type == "post" ) {
+
+              settingId = "postmeta[" + api.settings.currentPostType + "][" + api.settings.page.id + "][page_custom_design_settings]";
+
+
+          }else{
+
+              settingId = "sed_" + api.settings.page.id + "_settings[page_custom_design_settings]";
+
+          }
+
+          api( settingId ).set( sedCss );
+
+      });
+
+      api.previewer.bind( 'site_custom_design_settings' , function( sedCss ){
+
+          api( 'site_custom_design_settings' ).set( sedCss );
+
+      });
+
+       api.previewer.bind("resetpageInfoSettings" , function( data ){
 
           if( _.isUndefined(data.pageId) || _.isUndefined(data.pageType)  )
               return ;

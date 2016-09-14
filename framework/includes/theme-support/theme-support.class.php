@@ -117,7 +117,7 @@ class SiteEditorThemeSupport{
      * @param string $id ID of the feature.
      * @return SiteEditorThemeFeature $feature The feature object.
      */
-    public function get_theme_feature( $id ) {
+    public function get_theme_feature( $id ) { 
 
         if ( isset( $this->theme_features[ $id ] ) ) {
             return $this->theme_features[$id];

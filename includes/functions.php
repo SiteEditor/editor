@@ -1260,3 +1260,37 @@ function sed_object_to_array($object){
     }
     return $array;
 }
+
+/**
+ * Display site icon meta tags.
+ *
+ * @since 1.0.0
+ *
+ * @link http://www.whatwg.org/specs/web-apps/current-work/multipage/links.html#rel-icon HTML5 specification link icon.
+ */
+function sed_site_icon() {
+    if ( ! has_site_icon() && ! is_site_editor_preview() && ! is_site_editor() ) {
+        return;
+    }
+
+    $meta_tags = array(
+        sprintf( '<link rel="icon" href="%s" sizes="32x32" />', esc_url( get_site_icon_url( 32 ) ) ),
+        sprintf( '<link rel="icon" href="%s" sizes="192x192" />', esc_url( get_site_icon_url( 192 ) ) ),
+        sprintf( '<link rel="apple-touch-icon-precomposed" href="%s" />', esc_url( get_site_icon_url( 180 ) ) ),
+        sprintf( '<meta name="msapplication-TileImage" content="%s" />', esc_url( get_site_icon_url( 270 ) ) ),
+    );
+
+    /**
+     * Filter the site icon meta tags, so Plugins can add their own.
+     *
+     * @since 4.3.0
+     *
+     * @param array $meta_tags Site Icon meta elements.
+     */
+    $meta_tags = apply_filters( 'site_icon_meta_tags', $meta_tags );
+    $meta_tags = array_filter( $meta_tags );
+
+    foreach ( $meta_tags as $meta_tag ) {
+        echo "$meta_tag\n";
+    }
+}

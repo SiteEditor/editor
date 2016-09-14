@@ -1104,7 +1104,7 @@
 
 }
 .sed-loading-medium-continer .sed-loading{
-    background-image: url("images/loading.gif");
+    background-image: url("../../images/loading.gif");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 27px 27px;
@@ -1358,4 +1358,16 @@ body .megamenu-drag-area-mode  ul.cm_default, body .megamenu-drag-area-mode  ul.
     background-color: #000000;
     color: #FFFFFF;
     display: none;
+}
+
+.sed-app-partial-refreshing {
+    opacity: 0.25;
+    -webkit-transition: opacity 0.25s;
+    transition: opacity 0.25s;
+    cursor: progress;
+    position: relative;
+}
+
+.sed-static-module{
+    position: relative;
 }

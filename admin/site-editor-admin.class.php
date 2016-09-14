@@ -193,8 +193,8 @@ class SiteEditorAdminRender{
 
         if( in_array( $hook , $this->_pagehooks ) ){
 
-            wp_enqueue_script( "sed-admin-scripts" , plugins_url('editor/admin/templates/default/js/scripts.js', __FILE__ ) , array('jquery' , 'wp-color-picker') , '1.0.0' , false );
-            wp_enqueue_style( "sed-admin-style" , plugins_url('editor/admin/templates/default/css/style.css', __FILE__ ) , array() , '1.0.0' , 'all');
+            wp_enqueue_script( "sed-admin-scripts" , plugins_url('templates/default/js/scripts.js', __FILE__ ) , array('jquery' , 'wp-color-picker') , '1.0.0' , false );
+            wp_enqueue_style( "sed-admin-style" , plugins_url('templates/default/css/style.css', __FILE__ ) , array() , '1.0.0' , 'all');
         }
 
         if( !isset( $this->_pagehooks['site-editor-settings'] ) || !isset( $this->_pagehooks['site-editor'] ) )

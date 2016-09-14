@@ -235,7 +235,7 @@ class SiteEditorFeaturedImageController extends SiteEditorPostmetaController {
 	public function setup_selective_refresh() {
 		add_filter( 'post_thumbnail_html', array( $this, 'filter_post_thumbnail_html' ), 10, 5 );
 		add_action( 'wp_footer', array( $this, 'add_partials' ) );
-		add_filter( 'customize_dynamic_partial_args', array( $this, 'filter_customize_dynamic_partial_args' ), 10, 2 );
+		add_filter( 'sed_app_dynamic_partial_args', array( $this, 'filter_customize_dynamic_partial_args' ), 10, 2 );
 	}
 
 	/**

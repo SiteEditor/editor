@@ -1,20 +1,4 @@
 
-<script type="text/html" id="tmpl-hd-dpa">
-    <div id="sed-header-drop-area" class="sed-drop-area-layout"> </div>
-</script>
-<script type="text/html" id="tmpl-ft-dpa">
-    <div id="sed-footer-drop-area" class="sed-drop-area-layout"> </div>
-</script>
-<script type="text/html" id="tmpl-top-mc-dpa">
-    <div id="sed-top-mcontent-drop-area" class="sed-drop-area-layout"> </div>
-</script>
-<script type="text/html" id="tmpl-bot-mc-dpa">
-    <div id="sed-bot-mcontent-drop-area" class="sed-drop-area-layout"> </div>
-</script>
-
-<script type="text/html" id="tmpl-mid-mc-col">
-    <div id="sed-mcontent-column" class=""> </div>
-</script>
 
 <script type="text/html" id="tmpl-drag-n-drop">
   <div class="sed-handle-sort-row sed-handle-sort-row-btm " handle-dnp="sed-handle-sort-row" >
@@ -75,7 +59,7 @@
       </div>
       <div class="drag_content">
        <div><img src="<?php echo(SED_EDITOR_FOLDER_URL . 'libraries/siteeditor/site-iframe/images/browser_64px.png'); ?>" /></div>
-       <div><h5>Drop and drop Module</h5></div>
+       <div><h5><?php echo __( "Drop and drop Module" , "site-editor");?></h5></div>
       </div>
       </div>
       </div>
@@ -94,28 +78,60 @@
  </div>
  </div>
 </script>
- <script type="text/html" id="sed-bp-element-handle-tmpl">
- <div class="sed-handle-sort-row sed-handle-sort-row-btm ">
-<div class="drag-content-sty drag-content-sty-active">
-      <div class="setting_btn sed_setting_btn_cmp"><div class="sed_setting_btn_cmp drag-content" id="">
-      <span class="f-sed icon-redo link fa-lg sed_setting_btn_cmp"></span>
-      <span class="el_txt sed_setting_btn_cmp">setting</span>
-      </div></div>
-      <div class="drag_pb_btn"><div class=" drag-content" id="">
-      <span class="f-sed icon-cursor-move link fa-lg "></span>
-      <span class="el_txt">drag</span>
-      </div></div>
-      <div class="remove_pb_btn" title = "<?php echo __( "Module Remove" , "site-editor");?>"><div class="drag-content" >
-      <span class="f-sed icon-trash link fa-lg "></span>
-      <span class="el_txt">remove</span>
-      </div></div>
-      </div>
-      </div>
+
+<!-- add toolbar to Dynamic and Static Modules --->
+<script type="text/html" id="tmpl-sed-pb-element-handle">
+    <# $ = jQuery; #>
+    <div class="sed-handle-sort-row sed-handle-sort-row-btm ">
+
+        <div class="drag-content-sty drag-content-sty-active">
+
+            <# if( $.inArray( 'edit' , actions )  > -1 ) { #>
+                <div class="setting_btn sed_setting_btn_cmp">
+                    <div class="sed_setting_btn_cmp drag-content" id="">
+                        <span class="f-sed icon-redo link fa-lg sed_setting_btn_cmp"></span>
+                        <span class="el_txt sed_setting_btn_cmp"><?php echo __( "Module Setting" , "site-editor");?></span>
+                    </div>
+                </div>
+            <# } #>
+
+            <# if( $.inArray( 'duplicate' , actions )  > -1 ) { #>
+                <div class="duplicate_pb_btn">
+                    <div class=" drag-content" id="">
+                        <span class="f-sed icon-cursor-move link fa-lg "></span>
+                        <span class="el_txt"><?php echo __( "Module Duplicate" , "site-editor");?></span>
+                    </div>
+                </div>
+            <# } #>
+
+            <# if( $.inArray( 'move' , actions )  > -1 ) { #>
+                <div class="drag_pb_btn">
+                    <div class=" drag-content" id="">
+                        <span class="f-sed icon-cursor-move link fa-lg "></span>
+                        <span class="el_txt"><?php echo __( "Module Drag & Drop" , "site-editor");?></span>
+                    </div>
+                </div>
+            <# } #>
+
+            <# if( $.inArray( 'remove' , actions )  > -1 ) { #>
+                <div class="remove_pb_btn">
+                    <div class="drag-content">
+                        <span class="f-sed icon-trash link fa-lg "></span>
+                        <span class="el_txt"><?php echo __( "Module Remove" , "site-editor");?></span>
+                    </div>
+                </div>
+             <# } #>
+
+        </div>
+
+    </div>
+
     <div class="sed-pb-handle-row-top"  ></div>
-     <div class="sed-pb-handle-row-right "  ></div>
-     <div class="sed-pb-handle-row-bottom "  ></div>
-     <div class="sed-pb-handle-row-left "  > </div>
+    <div class="sed-pb-handle-row-right "  ></div>
+    <div class="sed-pb-handle-row-bottom "  ></div>
+    <div class="sed-pb-handle-row-left "  > </div>
 </script>
+<!-- end add toolbar to Dynamic and Static Modules --->
 
 <script type="text/html" id="sed-static-module-handle-tmpl">
   <div class="sed-static-module-action-bar">

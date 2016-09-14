@@ -27,6 +27,14 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 		 */
 		public $type = 'image';
 
+		/**
+		 * The select image button label
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $button_label = '';
+
         /**
          * The Remove Icon.
          *
@@ -65,12 +73,16 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 
             $value = (!empty($value)) ? $value : SED_ASSETS_URL.'/images/no_pic.png';
 
+            $button_label 	= ( ! empty( $this->button_label ) ) ? $this->button_label : __("Select Image" , "site-editor") ;
+
 			?>
 
+            <label><?php echo esc_html( $this->label ); ?></label>
 
 		    <?php if(!empty($this->description)){ ?> 
 			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
+
 	        <div class="setting-img">
 		        <div class="change-img-setting">
 			        <div class="change-img-container">
@@ -83,7 +95,7 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 		        <div class="change-img-setting">
 
 			        <button class="<?php echo esc_attr( $classes ); ?>" data-media-type="image" data-selcted-type="single" id="<?php echo esc_attr( $sed_field_id ) ;?>" <?php echo $atts_string;?>>
-						<?php echo esc_html( $this->label ); ?>
+						<?php echo esc_html( $button_label ); ?>
 					</button>
 
 		        </div>

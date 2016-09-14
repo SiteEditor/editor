@@ -739,6 +739,7 @@ Class PageBuilderApplication {
             "scripts"           => array(),      //array($handle, $src, $deps, $ver, $in_footer) ,array($handle, $src, $deps, $ver, $in_footer)
             "styles"            => array(),       //$handle, $src, $deps, $ver, $media
             "php_class"         => ""   ,
+            "actions"           => array() ,
             'object'            => $shortcode_object
         ), $options);
 

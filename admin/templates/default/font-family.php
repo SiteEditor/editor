@@ -1,5 +1,5 @@
 <?php
-require_once SED_PLUGIN_DIR . DS . 'framework' . DS . 'framework' . DS . 'typography.class.php';
+require_once SED_FRAMEWORK_DIR . DS . 'includes' . DS . 'typography.class.php';
 
 $typography = new SiteeditorTypography();
 

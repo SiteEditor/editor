@@ -27,8 +27,7 @@ Class SiteEditorThemeFramework{
 	public function __construct( $site_editor ){
 
         /*$this->post_mata_key        = "sed_post_settings";
-        $this->theme_option_name    = "sed_theme_options";
-        $this->layout_option_name   = "sed_layout_options";*/
+        $this->theme_option_name    = "sed_theme_options";*/
 
         $this->site_editor = $site_editor;
 
@@ -54,6 +53,27 @@ Class SiteEditorThemeFramework{
         $this->support = new SiteEditorThemeSupport();
 
 	}
+
+    public function set_options_config( $args ){
+
+        /**
+         * Define the array of defaults
+         */
+        $defaults = array(
+            'page'      =>  array() ,
+            'site'      =>  array() ,
+            'theme'     =>  array() ,
+            'content'   =>  array()
+        );
+
+        /**
+         * Parse incoming $args into an array and merge it with $defaults
+         */
+        $config = wp_parse_args( $args, $defaults ) ;
+
+        SED()->options_config = $config;
+
+    }
 
     public function save_default_page_options(){
 
@@ -162,7 +182,7 @@ Class SiteEditorThemeFramework{
      * @param $sed_page_type
      * @return mixed|void
      */
-    public function get_page_private_setting( $setting_id , $sed_page_id , $sed_page_type ){
+    public function get_page_setting( $setting_id , $sed_page_id , $sed_page_type ){
 
         if( $sed_page_type == "post" ){
 
@@ -182,55 +202,6 @@ Class SiteEditorThemeFramework{
             $option_values = get_option( $option_name );
 
             $value = ( is_array( $option_values ) && isset( $option_values[$setting_id] ) ) ? $option_values[$setting_id] : $default;
-
-        }
-
-        return $value;
-    }
-
-    /**
-     * @param $setting_id
-     * @param $sed_page_id
-     * @param $sed_page_type
-     * @return mixed|void
-     */
-    public function get_page_setting( $setting_id , $sed_page_id , $sed_page_type ){
-
-        $scopes = get_option( 'page_options_scope' );
-
-        $scope = ( isset( $scopes[$sed_page_id] ) ) ? $scopes[$sed_page_id] : "public-scope";
-
-        switch ( $scope ){
-
-            case "public-scope" :
-
-                $public_option_name = $this->site_editor->config->page_options->public;
-
-                $settings = get_option( $public_option_name );
-
-                $default = $this->get_default_option( 'default_page_options' , $setting_id );
-
-                $value = isset( $settings[$setting_id] ) ? $settings[$setting_id] : $default;
-
-                break;
-
-            case "layout-scope" :
-
-                $layout_option_name = $this->site_editor->config->page_options->layout;
-
-                $settings = get_option( $layout_option_name );
-
-                $default = $this->get_default_option( 'default_page_options' , $setting_id );
-
-                $value = isset( $settings[$setting_id] ) ? $settings[$setting_id] : $default;
-
-                break;
-
-            case "page-customize-scope" :
-
-                $value = $this->get_page_private_setting( $setting_id , $sed_page_id , $sed_page_type );
-
-                break;
 
         }
 
@@ -271,22 +242,13 @@ Class SiteEditorThemeFramework{
 
         $panels = array_merge( $panels , array(
 
-            'general_page_style' => array(
-                'title'         =>  __('Page General Style',"site-editor")  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'inner_box' ,
-                'description'   => '' ,
-                'priority'      => 9 ,
-            ) ,
-
             'page_background_panel' => array(
                 'title'             =>  __('Page Background',"site-editor")  ,
                 'capability'        => 'edit_theme_options' ,
                 'type'              => 'expanded' ,
-                'parent_id'         => 'general_page_style' ,
                 'theme_supports'    => 'sed_custom_background' ,
                 'description'       => '' ,
-                'priority'          => 9 ,
+                'priority'          => 6 ,
             )
 
         ));
@@ -302,32 +264,22 @@ Class SiteEditorThemeFramework{
     public function register_page_fields( $fields ){
 
         $fields = array_merge( $fields , array(
-
-            'page_sheet_width' => array(
-                'setting_id'        => 'sheet_width',
-                "type"              => "dimension" ,
-                "label"             => __("Sheet Width", "site-editor"),
-                'default'           => sed_get_theme_support( 'site_layout_feature' , 'default_sheet_width' ),
-                'theme_supports'    => 'site_layout_feature' ,
-                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
-                'transport'         => 'postMessage' ,
-                'priority'          => 11
-            ),
-
+            
             'page_length' => array(
                 'setting_id'        => "page_length" ,
                 "type"              => "radio-buttonset" ,
                 "label"             => __("Page Length", "site-editor"),
                 "description"       => __("This option allows you to set a title for your image.", "site-editor"),
-                'default'           => sed_get_theme_support( 'site_layout_feature' , 'default_page_length' ),
+                'default'           => 'default',
                 'theme_supports'    => 'site_layout_feature' ,
                 "choices"       =>  array(
+                    "default"       =>    __( "Default" , "site-editor" ) ,
                     "wide"          =>    __( "Wide" , "site-editor" ) ,
-                    "boxed"         =>    __( "Boxed" , "site-editor" ) ,
+                    "boxed"         =>    __( "Boxed" , "site-editor" )
                 ),
                 //'panel'             => 'general_page_style' ,
                 'transport'         => 'postMessage' ,
-                'priority'          => 9 ,
+                'priority'          => 5 ,
             ),
 
             'background_color' => array(

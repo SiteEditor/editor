@@ -477,4 +477,43 @@ class SEDPageBuilderModules extends SiteEditorModules{
         return $module_name;
     }
 
+
+    public static function all_less_compile ( ){
+        $modules_info = (array) sed_get_setting("module_info");
+        if( !empty($modules_info) ){
+            foreach( $modules_info AS $module => $module_info ){
+                $skins = $module_info['skins'];
+                foreach( $skins AS $skin => $skin_info ){
+
+                    if( isset( $skin_info['less'] ) && !empty( $skin_info['less'] ) )
+                        self::group_compile( $module , $skin_info['less'] );
+
+                }
+
+                if( isset( $module_info['less'] ) && !empty( $module_info['less'] ) )
+                    self::group_compile(  $module , $module_info['less']  );
+            }
+        }
+    }
+
+    public static function group_compile ( $module , $lesses ){
+        foreach( $lesses AS $handle => $less_info ){
+
+            $base_path = substr( str_replace('/' , DS , $less_info["src"] ) , 0 , -4) . ".less";
+            $file = WP_CONTENT_DIR . $base_path;
+
+            if( !class_exists( 'SEDAppLess' ) )
+                require_once SED_INC_DIR . DS . 'sed_app_less.class.php';
+
+            $abs_css_path = SEDAppLess::upload_path( $file , $module );
+
+            $result_compile = SEDAppLess::compile_file( $file , $abs_css_path );
+
+            if( $result_compile === true )
+                sed_print_message( sprintf( __("less %s is compiled.","site-editor" ) , $handle ) );
+            else
+                sed_print_message( sprintf( __("Error LESS : %1s in %2s","site-editor" ) , $result_compile , $base_path ) , "error"  );
+        }
+    }
+
 }

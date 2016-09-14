@@ -23,6 +23,13 @@ class PBShortcodeClass{
 
     public $queue = array();
 
+    /**
+     * Module Actions Support , Allowed : "remove" , "duplicate" , "edit" , "move"
+     *
+     * @var string
+     * @access public
+     */
+    public $actions = array( 'edit' , 'remove' , 'duplicate' , 'move' );
 
     /**
      * prefix for controls ids for prevent conflict
@@ -50,6 +57,7 @@ class PBShortcodeClass{
             return false;
 
         $this->module = $module;        //var_dump($args);
+
         $this->shortcode = $sed_pb_app->array2obj( $args );
 
         $this->control_prefix = $this->shortcode->name;
@@ -582,6 +590,8 @@ class PBShortcodeClass{
         }
 
         $shortcode['php_class'] = get_class( $this );
+
+        $shortcode['actions'] = $this->actions;
 
         $pagebuilder->register_shortcode( $shortcode , $this );
 

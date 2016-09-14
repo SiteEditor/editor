@@ -20,15 +20,25 @@ class SiteEditorSiteOptions {
      * All page options fields.
      *
      * @var string
+     * @access private
      */
-    public $fields = array();
+    private $fields = array();
 
     /**
      * All page options panels.
      *
      * @var string
+     * @access private
      */
-    public $panels = array();
+    private $panels = array();
+
+    /**
+     * theme settings
+     *
+     * @var string
+     * @access private
+     */
+    private $settings = array();
 
     /**
      * Capability required to edit this field.
@@ -63,6 +73,14 @@ class SiteEditorSiteOptions {
     public $description = '';
 
     /**
+     * prefix for controls ids for prevent conflict
+     *
+     * @var string
+     * @access public
+     */
+    public $control_prefix = 'sed_site_options';
+
+    /**
      * SiteEditorSiteOptions constructor.
      */
     public function __construct(){
@@ -76,6 +94,27 @@ class SiteEditorSiteOptions {
         add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_site_options' ) );
 
         add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_site_options_group' ) , -9999 );
+
+        add_action( 'sed_app_register'                              , array( $this , 'set_settings' ) );
+
+        add_filter( 'sed_app_dynamic_setting_args'                  , array( $this , 'filter_dynamic_setting_args' ), 10, 2 );
+
+        add_filter( 'sed_app_dynamic_setting_class'                 , array( $this , 'filter_dynamic_setting_class' ), 5, 3 );
+
+    }
+
+
+    public function set_config(){
+
+        $keys = array_keys( get_object_vars( $this ) );
+
+        $config_vars = array( 'title' , 'description' , 'capability' );
+
+        foreach ( $keys as $key ) {
+            if ( in_array( $key , $config_vars ) && isset( $config[ $key ] ) ) {
+                $this->$key = $config[ $key ];
+            }
+        }
 
     }
 
@@ -148,11 +187,22 @@ class SiteEditorSiteOptions {
 
             $panels[$key]['option_group'] = $this->option_group;
 
+            if( ! isset( $args['capability'] ) || empty( $args['capability'] ) )
+                $panels[$key]['capability'] = $this->capability;
         }
 
         foreach( $fields AS $key => $args ){
 
+            $fields[$key]['category']  = isset( $args['category'] ) ? $args['category'] : 'site-settings';
+
             $fields[$key]['option_group'] = $this->option_group;
+
+            if( ! isset( $args['capability'] ) || empty( $args['capability'] ) )
+                $fields[$key]['capability'] = $this->capability;
+
+            if( $fields[$key]['category'] == "style-editor" ){
+                $fields[$key]['css_setting_type'] = "site";
+            }
 
         }
 
@@ -188,13 +238,6 @@ class SiteEditorSiteOptions {
 
         );
 
-        $pages = get_pages();
-        $pages_list = array();
-        $pages_list['0'] = __( "Select Page" , "site-editor" );
-
-        foreach ( $pages as $page ) {
-            $pages_list[$page->ID] = $page->post_title;
-        }
         /**
          * desc             ----- description ,
          * settings_type    ----- setting_id ,
@@ -220,11 +263,10 @@ class SiteEditorSiteOptions {
             ),
 
             'front_page' => array(
-                "type"          => "select" ,
+                "type"          => 'dropdown-pages' ,
                 "label"         => __("Front page", "site-editor"),
                 'default'       => get_option( 'page_on_front' ),
                 "description"   => __("This option allows you to set a title for your image.", "site-editor"),
-                "choices"       => $pages_list,
                 'setting_id'    => "page_on_front" ,
                 'panel'         => "static_front_page" ,
                 'dependency' => array(
@@ -243,7 +285,6 @@ class SiteEditorSiteOptions {
                 "label"         => __("Posts page", "site-editor"),
                 'default'       => get_option( 'page_for_posts' ),
                 "description"   => __("This option allows you to set a title for your image.", "site-editor"),
-                //"choices"       =>  $pages_list,
                 'setting_id'    => "page_for_posts" ,
                 'panel'         => "static_front_page" ,
                 'dependency' => array(
@@ -265,8 +306,7 @@ class SiteEditorSiteOptions {
                 'setting_id'     => "blogname" ,
                 'panel'          => "title_tagline" ,
                 'option_type'    => 'option',
-                'capability'     => 'manage_options',
-                'transport'      => 'postMessage'
+                'capability'     => 'manage_options'
             ) ,
 
             'blogdescription' => array(
@@ -277,10 +317,25 @@ class SiteEditorSiteOptions {
                 'setting_id'        => "blogdescription" ,
                 'panel'             => "title_tagline" ,
                 'option_type'       => 'option',
+                'capability'        => 'manage_options'
+            ) ,
+
+            'site_icon' => array(
+                "type"              => "site-icon" ,
+                "label"             => __( 'Site Icon', "site-editor"),
+                //'default'           => get_option( 'blogname' ),
+                "description"       => sprintf(
+                /* translators: %s: site icon size in pixels */
+                    __( 'The Site Icon is used as a browser and app icon for your site. Icons must be square, and at least %s pixels wide and tall.' ),
+                    '<strong>512</strong>'
+                ),
+                'setting_id'        => "site_icon" ,
+                'remove_action'     => true ,
+                'panel'             => "title_tagline" ,
+                'option_type'       => 'option',
                 'capability'        => 'manage_options',
                 'transport'         => 'postMessage'
             ) ,
-
 
             'posts_per_page' => array(
                 "type"              => "text" ,
@@ -289,8 +344,7 @@ class SiteEditorSiteOptions {
                 "description"       => __("This option allows you to set a title for your image.", "site-editor"),
                 'setting_id'        => "posts_per_page" ,
                 'option_type'       => 'option',
-                'capability'        => 'manage_options',
-                'transport'         => 'postMessage'
+                'capability'        => 'manage_options'
             )
 
         );
@@ -315,6 +369,71 @@ class SiteEditorSiteOptions {
 
         $this->panels = apply_filters( 'sed_site_options_panels_filter' , $panels );
 
+    }
+
+    public function set_settings( ){
+
+        $this->register_options();
+
+        foreach( $this->fields AS $id => $args ){
+
+            if( !isset( $args['setting_id'] ) )
+                continue;
+
+            $setting_id = $args['setting_id'];
+
+            unset( $args['setting_id'] );
+
+            if( isset( $args['id'] ) )
+                unset( $args['id'] );
+
+            if( isset( $args['type'] ) )
+                unset( $args['type'] );
+
+            $this->settings[$setting_id] = $args;
+
+        }
+
+    }
+
+
+    public function filter_dynamic_setting_args( $args, $setting_id ) {
+
+        if ( array_key_exists( $setting_id , $this->settings ) ) {
+
+            $registered = $this->settings[ $setting_id ];
+
+            if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] )  && ! sed_current_theme_supports( $registered['theme_supports'] ) ) {
+                // We don't really need this because theme_supports will already filter it out of being exported.
+                return $args;
+            }
+
+            if ( false === $args ) {
+                $args = array();
+            }
+
+            $args = array_merge(
+                $args,
+                $registered
+            );
+
+        }
+
+        return $args;
+    }
+
+    public function filter_dynamic_setting_class( $class, $setting_id, $args ){
+        unset( $setting_id );
+        if ( isset( $args['option_type'] ) ) {
+
+            if ( isset( $args['setting_class'] ) ) {
+                $class = $args['setting_class'];
+            } else {
+                $class = 'SedAppSettings';
+            }
+
+        }
+        return $class;
     }
 
 

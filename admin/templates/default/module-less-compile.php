@@ -8,10 +8,10 @@
                 <li class="install-process-title"><span><?php _e('Compiling Less Files ...' , 'site-editor')?></span>
                     <ul id="install-process-module">
                         <?php
-                            if( !class_exists( 'SEDAppModule' ) )
-                                require_once SED_ADMIN_INC_PATH . DS . 'SEDAppModule.class.php';
+                            if( !class_exists( 'SEDPageBuilderModules' ) )
+                                require_once SED_INC_DIR . DS . 'app_pb_modules.class.php';
 
-                            SEDAppModule::all_less_compile();
+                        SEDPageBuilderModules::all_less_compile();
                         ?>
                     </ul>
                 </li>

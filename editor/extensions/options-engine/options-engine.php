@@ -34,7 +34,7 @@ class SedOptionsEngineExtension {
 
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-options-manager.class.php';
 
-        $editor->options = new SiteEditorOptionsManager();
+        $editor->options = new SiteEditorOptionsManager( $editor );
 
         add_action( 'wp_default_scripts'			, array( $this, 'register_scripts' ), 11 );
 

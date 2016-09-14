@@ -9,6 +9,18 @@ Version: 1.0.0
 */
 class PBContentLayoutShortcode extends PBShortcodeClass{
 
+    /**
+     * Module Actions Support , Allowed : "remove" , "duplicate" , "edit" , "move"
+     *
+     * @var string
+     * @access public
+     */
+    public $actions = array( 'edit' );
+
+    /**
+     * @var string
+     * @access public
+     */
     public static $content_layout_patterns = array();
 	/**
 	 * Register module with siteeditor.

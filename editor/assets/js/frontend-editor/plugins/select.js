@@ -58,6 +58,17 @@
             var self = this;
 
             forceOpen = _.isUndefined( forceOpen ) ? false : forceOpen;
+
+            if( element.hasClass( 'sed-static-module' ) ){
+
+                api.preview.send( "openAppSettings" , {
+                    settingId : element.data( "staticModuleId" ) ,
+                    forceOpen : forceOpen ,
+                    reset     : reset
+                });
+
+                return ;
+            }
                                 ////api.log( element.hasClass("sed-pb-module") );
             //sync module parent with first child module
             //alert( element.hasClass("sed-bp-module") );

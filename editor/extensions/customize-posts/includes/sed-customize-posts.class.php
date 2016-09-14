@@ -73,6 +73,7 @@ final class SiteEditorCustomizePosts {
 		add_action( 'sed_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
 		//add_action( 'customize_register', array( $this, 'register_constructs' ), 20 );
+
 		add_action( 'init', array( $this, 'register_meta' ), 100 );
 		add_filter( 'sed_app_dynamic_setting_args', array( $this, 'filter_customize_dynamic_setting_args' ), 10, 2 );
 		add_filter( 'sed_app_dynamic_setting_class', array( $this, 'filter_customize_dynamic_setting_class' ), 5, 3 );
@@ -190,7 +191,7 @@ final class SiteEditorCustomizePosts {
 			$this->registered_post_meta[ $post_type ] = array();
 		}
 
-		$this->registered_post_meta[ $post_type ][ $meta_key ] = $setting_args;
+		$this->registered_post_meta[ $post_type ][ $meta_key ] = $setting_args; //var_dump( $this->registered_post_meta );
 	}
 
 	/**
@@ -240,61 +241,6 @@ final class SiteEditorCustomizePosts {
 		 * @param SiteEditorCustomizePosts $this
 		 */
 		do_action( 'sed_app_posts_register_meta', $this );
-	}
-
-	/**
-	 * Register panels for post types, sections for any pre-registered settings, and any control types needed by JS.
-	 */
-	public function register_constructs() {
-		$this->manager->register_section_type( 'WP_Customize_Post_Section' );
-		$this->manager->register_control_type( 'WP_Customize_Dynamic_Control' );
-		$this->manager->register_control_type( 'WP_Customize_Post_Discussion_Fields_Control' );
-
-		$panel_priority = 900; // Before widgets.
-
-		// Note that this does not include nav_menu_item.
-		$this->set_builtin_post_type_descriptions();
-		foreach ( $this->get_post_types() as $post_type_object ) {
-			if ( empty( $post_type_object->show_in_customizer ) ) {
-				continue;
-			}
-
-			$panel_id = sprintf( 'posts[%s]', $post_type_object->name );
-
-			// @todo Should this panel be filterable so that other post types can customize which subclass is used?
-			$panel = new WP_Customize_Posts_Panel( $this->manager, $panel_id, array(
-				'title'       => $post_type_object->labels->name,
-				'description' => $post_type_object->description,
-				'priority'    => $panel_priority + $post_type_object->menu_position,
-				'capability'  => $post_type_object->cap->edit_posts,
-				'post_type'   => $post_type_object->name,
-			) );
-
-			$this->manager->add_panel( $panel );
-
-			// Note the following is an alternative to doing SiteEditorManager::register_panel_type().
-			add_action( 'customize_controls_print_footer_scripts', array( $panel, 'print_template' ) );
-		}
-
-		$i = 0;
-		foreach ( $this->manager->settings() as $setting ) {
-			$needs_section = (
-				$setting instanceof SiteEditorPostSetting
-				&&
-				! $this->manager->get_section( $setting->id )
-			);
-			if ( $needs_section ) {
-
-				// @todo Should WP_Customize_Post_Section be filterable so that sections for specific post types can be used?
-				$section = new WP_Customize_Post_Section( $this->manager, $setting->id, array(
-					'panel' => sprintf( 'posts[%s]', $setting->post_type ),
-					'post_setting' => $setting,
-					'priority' => $i,
-				) );
-				$this->manager->add_section( $section );
-				$i += 1;
-			}
-		}
 	}
 
 	/**
