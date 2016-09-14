@@ -100,13 +100,13 @@ function sed_sample_options_register(){
             'parent_id'         => "root",
             'atts'              => array() ,
             //'active_callback'   => ''
-            /*'dependency' => array(
+            'dependency' => array(
                 'controls'  =>  array(
                     "control"   => "sed_checkbox_settings_panel" ,
                     "value"     => true,
                     "is_panel"  => true
                 )
-            )*/
+            ),
         ) ,
 
         'check_box_settings_panel' =>  array(
@@ -162,13 +162,13 @@ function sed_sample_options_register(){
             'parent_id'         => "root",
             'atts'              => array() ,
             //'active_callback'   => ''
-            /*'dependency' => array(
+            'dependency' => array(
                 'controls'  =>  array(
                     "control"   => "sed_radio_settings_panel" ,
                     "value"     => true,
                     "is_panel"  => true
                 )
-            )*/
+            ),
         ) ,
 
         'radio_settings_panel' =>  array(
