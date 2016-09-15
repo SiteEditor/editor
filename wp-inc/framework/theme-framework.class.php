@@ -5,8 +5,8 @@ Class SiteEditorThemeFramework{
      * 1. add panels done
      * 2. custom settings done
      * 3. content settings done
-     * 4. add scope tab to content settings && page options
-     * 5. content settings load & tab
+     * 4. add scope tab to content settings && page options done
+     * 5. content settings load & tab done
      * 6. create all default settings
      * 7. test create all type settings
      * 8. style editor settings test
@@ -26,7 +26,7 @@ Class SiteEditorThemeFramework{
 
         add_action( "sed_ajax_load_options_sed_page_options" , array( $this , "get_page_options" ) );
 
-        add_action( "sed_page_content_options_framework" , array( $this , "get_content_options" ) , 10 , 1 );
+        add_action( "sed_ajax_load_options_sed_content_options" , array( $this , "get_content_options" ) , 10 , 1 );
 
         add_action( 'sed_app_register' ,  array( $this, 'register_settings' ) );
 	}
@@ -53,7 +53,7 @@ Class SiteEditorThemeFramework{
         ?>
             <div class="sed-tab-scope-options" sed-role="tab-scope">
                 <ul>
-                    <li data-type="public-scope" class="tab-scope-item"><a href="#"><span><?php echo __( "Public" , "site-editor");?></span></a></li>
+                    <li data-type="public-scope" class="tab-scope-item active"><a href="#"><span><?php echo __( "Public" , "site-editor");?></span></a></li>
                     <?php if( $layout === true ){ ?>
                     <li data-type="layout-scope" class="tab-scope-item"><a href="#"><span><?php echo __( "Current Layout" , "site-editor");?></span></a></li>
                     <?php } ?>
@@ -159,6 +159,8 @@ Class SiteEditorThemeFramework{
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "page-customize-scope sed-option-scope";
+            else
+                $org_panel = $args['panel'];
 
             $params[$id] = $args;
 
@@ -166,12 +168,16 @@ Class SiteEditorThemeFramework{
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "layout-scope sed-option-scope";
+            else
+                $args['panel'] = "sed_layout_" . $org_panel;
 
             $args['settings_type'] = $this->layout_option_name . "[" . $settings_type . "]";
             $params["sed_layout_" . $id] = $args;
 
             if( !isset( $args['panel'] ) )
                 $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
+            else
+                $args['panel'] = "sed_public_" . $org_panel;
 
             $args['settings_type'] = $this->theme_option_name . "[" . $settings_type . "]";
             $params["sed_public_" . $id] = $args;
@@ -181,13 +187,13 @@ Class SiteEditorThemeFramework{
     }
 
 
-    public function get_content_options( $info ){
+    public function get_content_options( ){
         global $sed_options_engine;
 
         $params = array();
         $panels = array();
 
-        $content = $this->get_content_info( $info );
+        $content = $this->get_content_info( $_POST['content_info'] );
         $content_type = $content['content_type'];
         $content_title = $content['title'];
 
@@ -241,7 +247,8 @@ Class SiteEditorThemeFramework{
                         $org_class = "";
                     }
 
-                }
+                }else
+                    $org_panel = $args['panel'];
 
                 if( isset( $setting['costomizable'] ) && $setting['costomizable'] === true ) {
                     if( !isset( $args['panel'] ) )
@@ -252,13 +259,15 @@ Class SiteEditorThemeFramework{
 
                 if( !isset( $args['panel'] ) )
                     $args['atts']['class'] = $org_class . "public-scope sed-option-scope";
+                else
+                    $args['panel'] = "sed_public_" . $org_panel;
 
                 $args['settings_type'] = $this->theme_option_name . "[" . $args['settings_type'] . "]";
                 $params["sed_public_" . $id] = $args;
             }
         }
-
-        $sed_options_engine->set_group_params( "sed_content_" . $content_type  , sprintf( __("%s Options" , "site-editor") , $content_title ) , $params , $panels , "content-settings" );
+        //"sed_content_" . $content_type
+        $sed_options_engine->set_group_params( "sed_content_options" , sprintf( __("%s Options" , "site-editor") , $content_title ) , $params , $panels , "content-settings" );
 
     }
 

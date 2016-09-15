@@ -60,6 +60,38 @@
 		}
 	});
 
+	/*var hoverBox = $("#static-module-hover-box" , window.parent.document);
+	var iframe = $("#website" , window.parent.document);
+	var ifrTop = iframe.offset().top;
+	var ifrLeft = iframe.offset().left;
+
+	$('[sed-role="static-template-content"]').hover(function(e){
+		var w = $( this ).outerWidth() , h = $( this ).outerHeight() ,
+			offset = $( this ).offset() , l = offset.left ,
+			t = offset.top;
+		////api.log(x +","+ y);
+		l = l - $( window ).scrollLeft() + ifrLeft;
+		t = t - $( window ).scrollTop() + ifrTop;
+
+		hoverBox.show();
+
+		hoverBox.css({
+			width  : w,
+			height : h,
+			left   : l,
+			top    : t ,
+			backgroundColor : "blue" ,
+			opacity : 0.4
+		});
+
+	},function(e){
+		hoverBox.css({
+			backgroundColor : "transparent" ,
+			opacity : 1
+		});
+		hoverBox.hide();
+	});*/
+
 	/**
 	 * api.template( id )
 	 *

@@ -66,8 +66,13 @@ Class AppOptionsEngine {
 
         ob_start();
         $settings = $this->params[ $_POST['setting_id'] ];
+        if( in_array( $_POST['setting_id'] , array( "sed_page_options" , "sed_content_options" ) ) ){
+            $class = "";
+        }else{
+            $class = "sed-app-settings-normal";
+        }
         ?>
-        <div id="dialog-level-box-settings-<?php echo $_POST['setting_id'];?>-container" data-title="<?php echo $settings['settings_title'];?>" class="dialog-level-box-settings-container" >
+        <div id="dialog-level-box-settings-<?php echo $_POST['setting_id'];?>-container" data-title="<?php echo $settings['settings_title'];?>" class="dialog-level-box-settings-container hide <?php echo $class;?>" >
             <?php echo $settings['settings_output'];?>
         </div>
         <?php
@@ -172,6 +177,10 @@ Class AppOptionsEngine {
 
     public function print_settings_template(){
         ?>
+
+        <div id="static-module-hover-box">
+            <span class="fa icon icon-edit">edit</span>
+        </div>
 
         <div id="sed-app-settings-panel" class="sed-dialog" title="<?php echo __("App Settings" , "site-editor");?>">
 

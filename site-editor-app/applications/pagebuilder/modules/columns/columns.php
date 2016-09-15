@@ -7,6 +7,7 @@ Author: Site Editor Team @Pakage
 Author URI: http://www.siteeditor.org
 Version: 1.0.0
 */
+
 class PBColumnsShortcode extends PBShortcodeClass{
 
 	/**

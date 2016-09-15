@@ -121,6 +121,15 @@ function load_site_iframe_tmpl(){
      <div class="sed-pb-handle-row-left "  > </div>
 </script>
 
+<script type="text/html" id="sed-static-module-handle-tmpl">
+  <div class="sed-static-module-action-bar">
+      <ul>
+          <li class="edit-action-item"><a href="#"><span class="f-sed icon-edit fa-lg "></span><span> <?php echo __("Edit Content" , "site-editor");?> </span></a> </li>
+          <li><a href="#"><span class="f-sed icon-trash fa-lg "></span><span> <?php echo __("remove" , "site-editor");?> </span></a> </li>
+      </ul>
+  </div>
+</script>
+
 <script type="text/html" id="sed-layout-main-row-tmpl">                      //sed-draggable-element = 0 || 1
 <div class="sed-main-row"  sed-layout="row" sed-type-row="dynamic" sed-row-area="" sed-draggable-element="">
 

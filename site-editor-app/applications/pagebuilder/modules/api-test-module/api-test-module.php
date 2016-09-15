@@ -742,7 +742,8 @@ class PBAPITestModule extends PBShortcodeClass{
         );
 
         $dropdown_html = "";
-        $dropdown_control = "sed_api_test_attribute31"
+        $dropdown_control = "sed_api_test_attribute31";
+        ob_start();
         ?>
             <div class="dropdown" id="sed-app-control-<?php echo $dropdown_control ;?>">
 

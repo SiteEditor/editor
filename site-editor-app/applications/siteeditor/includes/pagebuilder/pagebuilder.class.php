@@ -1903,24 +1903,13 @@ Class PageBuilderApplication {
                 update_option( 'sed_layouts_models' , $sed_newlayout_models );
             }
 
-            $default_layout = '[sed_row_outer_outer class="module_sed_columns_contextmenu_container" sed_theme_id="' . $theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" shortcode_tag="sed_row" type="static-element" length="boxed"]
-                    [sed_module_outer_outer class="module_sed_columns_contextmenu_container" shortcode_tag="sed_module"]
-                        [sed_columns_outer have_helper_id="true" pb_columns="2" shortcode_tag="sed_columns" class="" title="columns"]
-                            [sed_column_outer  width="71%" shortcode_tag="sed_column" parent_module="columns"]
-                               [sed_row_outer shortcode_tag="sed_row" type="static-element" sed_main_content = "true" ]
-                                  [sed_module_outer shortcode_tag="sed_module"]
-                                    {{content}}
-                                  [/sed_module_outer]
-                               [/sed_row_outer]
-                            [/sed_column_outer]
-                            [sed_column width="29%" parent_module="columns"]
-
-                            [/sed_column]
-                        [/sed_columns_outer]
-
-                        [sed_add_item_pattern is_helper_id="true" parent_module="columns"]
-                            [sed_column parent_module="columns"][/sed_column]
-                        [/sed_add_item_pattern]
+            $default_layout = '[sed_row_outer_outer class="module_sed_content_layout_contextmenu_container" sed_theme_id="' . $theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="boxed"]
+                    [sed_module_outer_outer class="module_sed_content_layout_contextmenu_container" shortcode_tag="sed_module"]
+                        [sed_content_layout layout="without-sidebar" title="columns"]
+                            [sed_content_layout_column width="100%" sed_main_content="yes" parent_module="content-layout"]
+                                {{content}}
+                            [/sed_content_layout_column]
+                        [/sed_content_layout]
                     [/sed_module_outer_outer]
                 [/sed_row_outer_outer]';
 

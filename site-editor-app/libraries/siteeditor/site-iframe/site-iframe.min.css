@@ -1331,3 +1331,14 @@ body .megamenu-drag-area-mode  ul.cm_default, body .megamenu-drag-area-mode  ul.
 .sed-app-editor .mce-tooltip-inner{
   box-shadow: 0 0 0px #000;
 }
+
+
+.sed-static-module-action-bar {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    background-color: #000000;
+    color: #FFFFFF;
+    display: none;
+}
