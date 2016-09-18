@@ -119,7 +119,7 @@ class SiteEditorPostOptions {
 
             $post_type = get_post_type_object( $_POST['post_type'] );;
 
-            $this->title = sprintf(__("Customize Single %s Options" , "site-editor") , $post_type->labels->singular_name );
+            $this->title = sprintf(__("Single %s Options" , "site-editor") , $post_type->labels->name );
 
             $this->description = $post_type->description;
 
@@ -512,7 +512,7 @@ function sed_add_meta_panel( $id , $args ){
 
 }
 
-function add_custom_meta_panels(){
+/*function add_custom_meta_panels(){
 
     $fields = array(
 
@@ -565,7 +565,7 @@ function add_custom_meta_panels(){
 
 }
 
-add_action( 'sed_add_meta_panels' , 'add_custom_meta_panels' );
+add_action( 'sed_add_meta_panels' , 'add_custom_meta_panels' );*/
 
  /*$fields = array(
 

@@ -74,6 +74,8 @@ final Class SiteEditorApp {
 
         require_once SED_INC_EDITOR_DIR . DS . "site-editor-save.class.php";
 
+        require_once SED_INC_EDITOR_DIR . DS . 'site-editor-options-category.class.php';
+
         $this->save = new SEDAppSave();
 
         $this->app = new SiteEditorApplication(); 

@@ -28,8 +28,6 @@ class SedStaticModuleExtension {
      */
     public function __construct( $editor ){
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-options-category.class.php';
-
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-static-module.class.php';
 
     }

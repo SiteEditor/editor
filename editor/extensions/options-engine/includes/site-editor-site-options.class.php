@@ -14,31 +14,7 @@
  * @Class SiteEditorSiteOptions
  * @description : Site settings like general settings in wp admin
  */
-class SiteEditorSiteOptions {
-
-    /**
-     * All page options fields.
-     *
-     * @var string
-     * @access private
-     */
-    private $fields = array();
-
-    /**
-     * All page options panels.
-     *
-     * @var string
-     * @access private
-     */
-    private $panels = array();
-
-    /**
-     * theme settings
-     *
-     * @var string
-     * @access private
-     */
-    private $settings = array();
+class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
 
     /**
      * Capability required to edit this field.
@@ -54,23 +30,23 @@ class SiteEditorSiteOptions {
      * @access private
      * @var array
      */
-    private $option_group = 'sed_site_options';
+    protected $option_group = 'sed_site_options';
 
     /**
-     * This group title
+     * default option type
      *
      * @access public
      * @var array
      */
-    public $title = '';
+    public $option_type  = "option";
 
     /**
-     * this group description
+     * default option type
      *
-     * @access public
+     * @access protected
      * @var array
      */
-    public $description = '';
+    protected $category  = "site-settings";
 
     /**
      * prefix for controls ids for prevent conflict
@@ -89,32 +65,13 @@ class SiteEditorSiteOptions {
 
         $this->description = __("Site Options" , "site-editor");
 
-        add_action( "sed_editor_init"                               , array( $this , 'add_toolbar_elements' ) );
+        add_filter( "{$this->option_group}_panels_filter" , array( $this , 'register_default_panels' ) );
 
-        add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_site_options' ) );
+        add_filter( "{$this->option_group}_fields_filter" , array( $this , 'register_default_fields' ) );
 
-        add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_site_options_group' ) , -9999 );
+        add_action( "sed_editor_init"                     , array( $this , 'add_toolbar_elements' ) );
 
-        add_action( 'sed_app_register'                              , array( $this , 'set_settings' ) );
-
-        add_filter( 'sed_app_dynamic_setting_args'                  , array( $this , 'filter_dynamic_setting_args' ), 10, 2 );
-
-        add_filter( 'sed_app_dynamic_setting_class'                 , array( $this , 'filter_dynamic_setting_class' ), 5, 3 );
-
-    }
-
-
-    public function set_config(){
-
-        $keys = array_keys( get_object_vars( $this ) );
-
-        $config_vars = array( 'title' , 'description' , 'capability' );
-
-        foreach ( $keys as $key ) {
-            if ( in_array( $key , $config_vars ) && isset( $config[ $key ] ) ) {
-                $this->$key = $config[ $key ];
-            }
-        }
+        parent::__construct();
 
     }
 
@@ -144,106 +101,39 @@ class SiteEditorSiteOptions {
     }
 
     /**
-     * Register Site Options Group
+     * Register Site Default Panels
      */
-    public function register_site_options_group(){
-
-        SED()->editor->manager->add_group( $this->option_group , array(
-            'capability'        => $this->capability,
-            'theme_supports'    => '',
-            'title'             => $this->title ,
-            'description'       => $this->description ,
-            'type'              => 'default'
-        ));
-
-    }
-
-    /**
-     * Register Site Options
-     */
-    public function register_site_options(){
-
-        $this->register_options();
-
-        $options = $this->get_site_options( );
-
-        $panels = $options['panels']; //var_dump( $panels );
-
-        sed_options()->add_panels( $panels );
-
-        $fields = $options['fields']; //var_dump( $fields );
-
-        sed_options()->add_fields( $fields );
-
-    }
-
-    private function get_site_options(){
-
-        $fields = $this->fields;
-
-        $panels = $this->panels;
-
-        foreach( $panels AS $key => $args ){
-
-            $panels[$key]['option_group'] = $this->option_group;
-
-            if( ! isset( $args['capability'] ) || empty( $args['capability'] ) )
-                $panels[$key]['capability'] = $this->capability;
-        }
-
-        foreach( $fields AS $key => $args ){
-
-            $fields[$key]['category']  = isset( $args['category'] ) ? $args['category'] : 'site-settings';
-
-            $fields[$key]['option_group'] = $this->option_group;
-
-            if( ! isset( $args['capability'] ) || empty( $args['capability'] ) )
-                $fields[$key]['capability'] = $this->capability;
-
-            if( $fields[$key]['category'] == "style-editor" ){
-                $fields[$key]['css_setting_type'] = "site";
-            }
-
-        }
-
-        return array(
-            "fields"    => $fields ,
-            "panels"    => $panels
-        );
-
-    }
-
-    /**
-     * Register Site Default Options
-     */
-    protected function register_options(){
+    public function register_default_panels()
+    {
 
         $panels = array(
 
             'static_front_page' => array(
-                'title'         =>  __('Static Front Page',"site-editor")  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'default' ,
-                'description'   => '' ,
-                'priority'      => 9 ,
-            ) ,
+                'title' => __('Static Front Page', "site-editor"),
+                'capability' => 'edit_theme_options',
+                'type' => 'default',
+                'description' => '',
+                'priority' => 9,
+            ),
 
-            'title_tagline'  => array(
-                'title'         => __('Site Identity',"site-editor")  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'inner_box' ,
-                'description'   => '' ,
-                'priority'      => 10 ,
+            'title_tagline' => array(
+                'title' => __('Site Identity', "site-editor"),
+                'capability' => 'edit_theme_options',
+                'type' => 'inner_box',
+                'description' => '',
+                'priority' => 10,
             )
 
         );
 
-        /**
-         * desc             ----- description ,
-         * settings_type    ----- setting_id ,
-         * options          ----- choices ,
-         * value            ----- default
-         */
+        return $panels;
+    }
+
+    /**
+     * Register Site Default Fields
+     */
+    public function register_default_fields(){
+
         $fields = array(
 
             'show_on_front' => array(
@@ -365,77 +255,9 @@ class SiteEditorSiteOptions {
 
         }
 
-        $this->fields = apply_filters( 'sed_site_options_fields_filter' , $fields );
-
-        $this->panels = apply_filters( 'sed_site_options_panels_filter' , $panels );
+        return $fields;
 
     }
-
-    public function set_settings( ){
-
-        $this->register_options();
-
-        foreach( $this->fields AS $id => $args ){
-
-            if( !isset( $args['setting_id'] ) )
-                continue;
-
-            $setting_id = $args['setting_id'];
-
-            unset( $args['setting_id'] );
-
-            if( isset( $args['id'] ) )
-                unset( $args['id'] );
-
-            if( isset( $args['type'] ) )
-                unset( $args['type'] );
-
-            $this->settings[$setting_id] = $args;
-
-        }
-
-    }
-
-
-    public function filter_dynamic_setting_args( $args, $setting_id ) {
-
-        if ( array_key_exists( $setting_id , $this->settings ) ) {
-
-            $registered = $this->settings[ $setting_id ];
-
-            if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] )  && ! sed_current_theme_supports( $registered['theme_supports'] ) ) {
-                // We don't really need this because theme_supports will already filter it out of being exported.
-                return $args;
-            }
-
-            if ( false === $args ) {
-                $args = array();
-            }
-
-            $args = array_merge(
-                $args,
-                $registered
-            );
-
-        }
-
-        return $args;
-    }
-
-    public function filter_dynamic_setting_class( $class, $setting_id, $args ){
-        unset( $setting_id );
-        if ( isset( $args['option_type'] ) ) {
-
-            if ( isset( $args['setting_class'] ) ) {
-                $class = $args['setting_class'];
-            } else {
-                $class = 'SedAppSettings';
-            }
-
-        }
-        return $class;
-    }
-
 
 }
 

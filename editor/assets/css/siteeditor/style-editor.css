@@ -60,12 +60,6 @@
   border: 1px solid #0B25CC;
 }
 
-.static-module-hover-box{
-    display: none;
-    position: absolute;
-    border: 1px solid #0B25CC;
-}
-
       /* parsa edit */
 .image_scaling_settings .check{
   width: 25px;

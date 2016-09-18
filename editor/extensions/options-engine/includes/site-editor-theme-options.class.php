@@ -14,38 +14,7 @@
  * @Class SiteEditorThemeOptions
  * @description : Create Custom Settings for wordpress themes
  */
-class SiteEditorThemeOptions {
-
-    /**
-     * All page options fields.
-     *
-     * @access private
-     * @var string
-     */
-    private $fields = array();
-
-    /**
-     * All page options panels.
-     *
-     * @access private
-     * @var string
-     */
-    private $panels = array();
-
-    /**
-     * All partials
-     *
-     * @access private
-     * @var string
-     */
-    private $partials = array();
-
-    /**
-     * theme settings
-     *
-     * @var string
-     */
-    private $settings = array();
+class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
 
     /**
      * Capability required to edit this field.
@@ -62,23 +31,7 @@ class SiteEditorThemeOptions {
      * @access private
      * @var array
      */
-    private $option_group = 'sed_theme_options';
-
-    /**
-     * This group title
-     *
-     * @access public
-     * @var array
-     */
-    public $title = '';
-
-    /**
-     * this group description
-     *
-     * @access public
-     * @var array
-     */
-    public $description = '';
+    protected $option_group = 'sed_theme_options';
 
     /**
      * default option type
@@ -89,12 +42,29 @@ class SiteEditorThemeOptions {
     public $option_type  = "theme_mod";
 
     /**
+     * default option type
+     *
+     * @access protected
+     * @var array
+     */
+    protected $category  = "theme-settings";
+
+    /**
      * prefix for controls ids for prevent conflict
      *
      * @var string
      * @access public
      */
     public $control_prefix = 'sed_theme_options';
+
+    /**
+     * Is pre load settings in current page ?
+     * As default load settings on time after load fields in editor
+     *
+     * @var string
+     * @access public
+     */
+    public $is_preload_settings = true;
 
     /**
      * SiteEditorThemeOptions constructor.
@@ -105,28 +75,20 @@ class SiteEditorThemeOptions {
 
         $this->description = __("Custom Theme Options For Wordpress Themes" , "site-editor");
 
-        add_action( "sed_editor_init"                               , array( $this , 'add_toolbar_elements' ) );
+        add_filter( "{$this->option_group}_panels_filter" , array( $this , 'register_default_panels' ) );
 
-        add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_theme_options' ) );
+        add_filter( "{$this->option_group}_fields_filter" , array( $this , 'register_default_fields' ) );
 
-        add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_theme_options_group' ) , -9999 );
+        add_action( "sed_editor_init"                     , array( $this , 'add_toolbar_elements' ) );
 
-        add_action( 'sed_app_register'                              , array( $this , 'set_settings' ) );
-
-        add_filter( 'sed_app_dynamic_setting_args'                  , array( $this , 'filter_dynamic_setting_args' ), 10, 2 );
-
-        add_filter( 'sed_app_dynamic_setting_class'                 , array( $this , 'filter_dynamic_setting_class' ), 5, 3 );
-
-        add_filter( 'sed_app_dynamic_partial_args'                  , array( $this , 'filter_dynamic_partial_args' ), 10, 2 );
-
-        add_filter( 'sed_app_dynamic_partial_class'                 , array( $this , 'filter_dynamic_partial_class' ), 5, 3 );
-
-        add_filter( 'get_custom_logo'                               , array( $this ,  'sed_custom_logo' ) , 10000 , 1 );
+        add_filter( 'get_custom_logo'                     , array( $this ,  'sed_custom_logo' ) , 10000 , 1 );
         //add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'set_config' ) , -10000 );
+
+        parent::__construct();
 
     }
 
-    public function set_config(){
+    /*public function set_config(){
 
         $keys = array_keys( get_object_vars( $this ) );
         
@@ -138,7 +100,7 @@ class SiteEditorThemeOptions {
             }
         }
 
-    }
+    }*/
 
     /**
      * add element to SiteEditor toolbar
@@ -166,90 +128,10 @@ class SiteEditorThemeOptions {
     }
 
     /**
-     * Register Site Options Group
+     * Register Site Default Panels
      */
-    public function register_theme_options_group(){
-
-        SED()->editor->manager->add_group( $this->option_group , array(
-            'capability'        => $this->capability,
-            'theme_supports'    => '',
-            'title'             => $this->title ,
-            'description'       => $this->description ,
-            'type'              => 'default'
-        ));
-
-    }
-
-    /**
-     * Register Site Options
-     */
-    public function register_theme_options(){
-
-        $this->register_options();
-
-        $options = $this->get_theme_options( );
-
-        $panels = $options['panels']; //var_dump( $panels );
-
-        sed_options()->add_panels( $panels );
-
-        $fields = $options['fields']; //var_dump( $fields );
-
-        sed_options()->add_fields( $fields );
-
-    }
-
-    private function get_theme_options(){
-
-        $fields = $this->fields;
-
-        $panels = $this->panels;
-
-        foreach( $panels AS $key => $args ){
-
-            $panels[$key]['option_group'] = $this->option_group;
-
-            if( ! isset( $args['capability'] ) || empty( $args['capability'] ) )
-                $panels[$key]['capability'] = $this->capability;
-
-        }
-
-        foreach( $fields AS $key => $args ){
-
-            $fields[$key]['category']  = isset( $args['category'] ) ? $args['category'] : 'theme-settings';
-
-            $fields[$key]['option_group'] = $this->option_group;
-
-            if( ! isset( $args['option_type'] ) || empty( $args['option_type'] ) )
-                $fields[$key]['option_type'] = $this->option_type;
-
-            if( ! isset( $args['capability'] ) || empty( $args['capability'] ) )
-                $fields[$key]['capability'] = $this->capability;
-
-            if( $fields[$key]['category'] == "style-editor" ){
-                $fields[$key]['css_setting_type'] = "site";
-            }
-
-        }
-
-        $theme_options = sed_options()->fix_controls_panels_ids( $fields , $panels , $this->control_prefix );
-
-        $new_fields = $theme_options['fields'] ;
-
-        $new_panels = $theme_options['panels'] ;
-
-
-        return array(
-            "fields"    => $new_fields ,
-            "panels"    => $new_panels
-        );
-
-    }
-
-    /**
-     * Register Site Default Options
-     */
-    protected function register_options(){
+    public function register_default_panels()
+    {
 
         $panels = array(
 
@@ -272,13 +154,14 @@ class SiteEditorThemeOptions {
 
         );
 
-        /**
-         * desc             ----- description ,
-         * settings_type    ----- setting_id ,
-         * options          ----- choices ,
-         * value            ----- default
-         */
+        return $panels;
+    }
 
+    /**
+     * Register Site Default Fields
+     */
+    public function register_default_fields(){
+        
         $fields = array(
 
             'site_length' => array(
@@ -436,112 +319,8 @@ class SiteEditorThemeOptions {
 
         );
 
-        $this->fields = apply_filters( 'sed_theme_options_fields_filter' , $fields );
+        return $fields;
 
-        $this->panels = apply_filters( 'sed_theme_options_panels_filter' , $panels );
-
-    }
-
-    public function set_settings( ){
-
-        $this->register_options();
-
-        foreach( $this->fields AS $id => $args ){
-
-            if( !isset( $args['setting_id'] ) )
-                continue;
-
-            $setting_id = $args['setting_id'];
-
-            unset( $args['setting_id'] );
-
-            if( isset( $args['id'] ) )
-                unset( $args['id'] );
-
-            if( isset( $args['type'] ) )
-                unset( $args['type'] );
-
-            if( !isset( $args['option_type'] ) )
-                $args['option_type'] = 'theme_mod';
-
-            $this->settings[$setting_id] = $args;
-
-            if( isset( $args['partial_refresh'] ) ){
-                $this->partials[$setting_id] = $args['partial_refresh'];
-            }
-
-        }
-
-    }
-
-    public function filter_dynamic_setting_args( $args, $setting_id ) {
-
-        if ( array_key_exists( $setting_id , $this->settings ) ) {
-
-            $registered = $this->settings[ $setting_id ];
-
-            if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] )  && ! sed_current_theme_supports( $registered['theme_supports'] ) ) {
-                // We don't really need this because theme_supports will already filter it out of being exported.
-                return $args;
-            }
-
-            if ( false === $args ) {
-                $args = array();
-            }
-
-            $args = array_merge(
-                $args,
-                $registered
-            );
-
-        }
-
-        return $args;
-    }
-
-    public function filter_dynamic_setting_class( $class, $setting_id, $args ){
-        unset( $setting_id );
-        if ( isset( $args['option_type'] ) ) {
-
-            if ( isset( $args['setting_class'] ) ) {
-                $class = $args['setting_class'];
-            } else {
-                $class = 'SedAppSettings';
-            }
-
-        }
-        return $class;
-    }
-
-    public function filter_dynamic_partial_args( $args, $id ){
-
-        if ( array_key_exists( $id , $this->partials ) ) {
-
-            $registered = $this->partials[ $id ];
-
-            if ( false === $args ) {
-                $args = array();
-            }
-
-            $args = array_merge(
-                $args,
-                $registered
-            );
-
-        }
-
-        return $args;
-    }
-
-    public function filter_dynamic_partial_class( $class, $id, $args ){
-
-        unset( $id );
-
-        if ( isset( $args['partial_class'] ) ) {
-            $class = $args['partial_class'];
-        }
-
-        return $class;
     }
 
     /**

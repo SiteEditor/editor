@@ -28,9 +28,11 @@ class SedOptionsEngineExtension {
      */
     public function __construct( $editor ){
 
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-postmeta-option.class.php';
+
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-general-settings.class.php';
 
-        new SiteEditorGeneralSettings();
+        $editor->general_settings = new SiteEditorGeneralSettings();
 
         require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-options-manager.class.php';
 
@@ -61,6 +63,13 @@ class SedOptionsEngineExtension {
         $handle = 'sed-options-controls-preview';
         $src = SED_EXT_URL . 'options-engine/assets/js/options-controls-preview' . $suffix ;
         $deps = array( 'sed-frontend-editor' );
+
+        $in_footer = 1;
+        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
+
+        $handle = 'sed-app-settings-manager';
+        $src = SED_EXT_URL . 'options-engine/assets/js/settings-manager-plugin' . $suffix ;
+        $deps = array( 'siteeditor' );
 
         $in_footer = 1;
         $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );

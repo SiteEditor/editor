@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopLeftControl' ) ) {
          * @access public
          * @var string
          */
-        public $sub_category = 'border-radius';
+        public $sub_category = 'border_radius';
 
         /**
          * The control is style option ?

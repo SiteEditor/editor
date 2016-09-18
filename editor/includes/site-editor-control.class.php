@@ -340,7 +340,7 @@ class SiteEditorOptionsControl{
 	 *
 	 * @return bool Whether the control is active to the current preview.
 	 */
-	final public function active() {
+	final public function active() { 
 		$control = $this;
 		$active = call_user_func( $this->active_callback, $this );
 

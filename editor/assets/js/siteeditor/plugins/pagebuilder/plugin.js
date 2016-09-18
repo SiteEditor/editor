@@ -342,6 +342,30 @@
 
       });*/
 
+      api.previewer.bind( 'syncPreLoadSettings', function( dataSettings ) {
+
+          _.each( dataSettings , function( settingArgs, id ) {
+
+              if ( ! api.has( id ) ) {
+                  setting = api.create( id, id, settingArgs.value, {
+                      transport   : settingArgs.transport || "refresh",
+                      previewer   : api.previewer,
+                      stype       : "general" ,
+                      dirty       : settingArgs.dirty
+                  } );
+
+                  api.settings.settings[id] = settingArgs;
+
+                  if ( settingArgs.dirty ) {
+                      setting.callbacks.fireWith( setting, [ setting.get(), {} ] );
+                  }
+
+              }
+
+          } );
+
+      });
+
         api.previewer.bind( 'pages_theme_content_ready', function( obj ) {
 
             if( api.settings.page.type == "post" ) {

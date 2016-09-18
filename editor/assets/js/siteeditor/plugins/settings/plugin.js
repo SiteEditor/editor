@@ -196,7 +196,7 @@
                         optionsGroup = settingId,
                         isOpen = $(self.dialogSelector).dialog("isOpen");
 
-                    if( self.currentSettingsId != settingId ) {
+                    if( _.isUndefined( api.settings.groups[optionsGroup] ) ) {
 
                         $(".sed_customize_post_settings_btn").data("settingId", settingId);
 
@@ -236,6 +236,7 @@
 
                     $(".sed-customize-post-settings").hide();
                 }
+
 
             });
 
@@ -1566,7 +1567,7 @@
 
             var self = this ,
                 shortcodeName = api.appModulesSettings.sedDialog.data.shortcodeName,
-                panelTpl = $("#style_editor_settings_" + styleId + "_tmpl" ) ,
+                panelTpl = $("#group_settings_" + styleId + "_tmpl" ) ,
                 lvlBox = "modules_styles_settings_"+ shortcodeName +"_design_group_level_box";
 
             api.currentCssSelector = ( selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]';
@@ -1610,7 +1611,7 @@
 
             //this.updateStyleNeeded = true;
 
-            _.each( api.stylesSettingsControls[styleId] , function( data ) {
+            _.each( api.stylesSettingsControls[styleId] , function( data ) { 
                 self.updateSettings( data.control_id , data , selector );
             });
         },

@@ -180,6 +180,8 @@
 
             api.preview.send( 'contextmenu-ready' );
 
+            api.preview.send( 'syncPreLoadSettings' , api.settings.preLoadSettings );
+
         });
 
         api.preview.bind( 'saved', function( response ) {

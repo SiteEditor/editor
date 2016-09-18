@@ -28,7 +28,7 @@ final class SedDesignEditorTextAlign {
      * @access private
      * @var array
      */
-    private $option_group = 'text-align';
+    public $option_group = 'text_align';
 
     /**
      * This group title
@@ -134,15 +134,7 @@ final class SedDesignEditorTextAlign {
 
         $panels = apply_filters( 'sed_text_align_options_panels_filter' , $panels );
 
-        $new_options = sed_options()->fix_controls_panels_ids( $fields , $panels , $this->control_prefix );
-
-        $new_params = $new_options['fields'];
-
-        $new_panels = $new_options['panels'];
-
-        sed_options()->add_fields( $new_params );
-
-        sed_options()->add_panels( $new_panels );
+        SED()->editor->design->register_base_options( $fields , $panels , $this );
 
     }
 

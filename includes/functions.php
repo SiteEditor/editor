@@ -474,10 +474,9 @@ function site_editor_app_on(){
  *
  * @return bool True if the site is being previewed in the Customizer, false otherwise.
  */
-function is_site_editor_preview() {
-    global $sed_apps;
+function is_site_editor_preview() { 
 
-    return ( $sed_apps->editor->manager instanceof SiteEditorManager ) && $sed_apps->editor->manager->is_preview();
+    return isset( SED()->editor ) && ( SED()->editor->manager instanceof SiteEditorManager ) && SED()->editor->manager->is_preview();
 }
 
 
@@ -1293,4 +1292,55 @@ function sed_site_icon() {
     foreach ( $meta_tags as $meta_tag ) {
         echo "$meta_tag\n";
     }
+}
+
+/**
+ * Set Animation For any element
+ *
+ * @param $animation
+ * @return array
+ */
+function sed_set_animation( $animation ){
+
+    if( !is_array($animation) && !empty($animation)  )
+        $animation = explode(",",$animation);
+    elseif(!is_array($animation) && empty($animation))
+        return array('attr' => '','class' => '');
+
+    $animation[3] = trim( $animation[3] );
+
+    if( !isset($animation[3]) || empty( $animation[3] ) )
+        return array('attr' => '','class' => '');
+
+
+    $animate_attr = array();
+
+    //isset($_REQUEST['preview_type']) && $_REQUEST['preview_type'] == "refresh" &&
+    if( ( isset( $_REQUEST['sed_page_ajax'] ) && $_REQUEST['sed_page_ajax'] == "sed_load_modules" ) || ( site_editor_app_on() ) )
+        $animate_class = "";
+    else
+        $animate_class = "wow ";
+
+
+    if( $animation[0] != "" )
+        $animate_attr[ 'data-wow-delay' ] = trim($animation[0]) . "ms";
+
+    if( $animation[1] != "" )
+        $animate_attr[ 'data-wow-iteration' ] = trim($animation[1]);
+
+    if( $animation[2] != "")
+        $animate_attr[ 'data-wow-duration' ] = trim($animation[2]) . "ms";
+
+    if( $animation[3] != ""){
+        $animate_attr[ 'data-sed-animation' ] = trim($animation[3]);
+        $animate_class .= trim($animation[3]) ;
+    }
+
+    if( $animation[4] != "")
+        $animate_attr[ 'data-wow-offset' ] = trim($animation[4]);
+
+    return array(
+        'attr'    => sed_stringify_atts( $animate_attr ) ,
+        'class'   => $animate_class
+    );
 }

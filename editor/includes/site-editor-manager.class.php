@@ -173,6 +173,18 @@ class SiteEditorManager{
 	 */
 	private $_post_values;
 
+    /**
+     * all pre load settings for current page
+     *
+     * @since 1.0.0
+     * @access public
+     * @var array
+     */
+    public $preload_settings = array();
+
+    /**
+     * SiteEditorManager constructor.
+     */
     function __construct(  ) {
 
 		require_once SED_INC_EDITOR_DIR . DS . 'site-editor-options-group.class.php';
@@ -271,6 +283,8 @@ class SiteEditorManager{
 
             //new SEDAjaxLess();
         }
+
+        add_action( "sed_footer" , array($this, 'print_options_template') , 10000 );
 
     }
 
@@ -605,6 +619,20 @@ class SiteEditorManager{
 			$new_settings[] = $setting;
 		}
 		return $new_settings;
+	}
+
+	/**
+	 * Retrieve a pre load settings for current page
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $settings.
+	 */
+	public function add_preload_settings( $settings ) {
+
+		if( is_array( $settings ) )
+			$this->preload_settings = array_merge( $this->preload_settings , $settings );
+
 	}
 
 
@@ -1190,6 +1218,7 @@ class SiteEditorManager{
 			var _sedAppEditorSettings = <?php echo wp_json_encode( $settings ); ?>;
 			_sedAppEditorSettings.values = {};
 			_sedAppEditorSettings.staticModules = {};
+            _sedAppEditorSettings.preLoadSettings = {};
 
 			(function( v ) {
 				<?php
@@ -1209,6 +1238,35 @@ class SiteEditorManager{
 				}
 				?>
 			})( _sedAppEditorSettings.values );
+
+            (function( pS ) {
+                <?php
+                /*
+                 * Serialize settings separately from the initial _sedAppEditorSettings
+                 * serialization in order to avoid a peak memory usage spike.
+                 * @todo We may not even need to export the values at all since the pane syncs them anyway.
+                 */
+                foreach ( $this->preload_settings as $id ) {
+
+                    $setting = $this->get_setting( $id );
+
+                    if ( isset( $setting ) && $setting->check_capabilities() ) {
+                        printf(
+                            "pS[%s] = %s;\n",
+                            wp_json_encode( $id ),
+                            wp_json_encode( array(
+                                'value'     	=> $setting->js_value(),
+                                'transport' 	=> $setting->transport,
+                                'dirty'     	=> $setting->dirty,
+                                'type'          => $setting->type ,
+                                'option_type'   => $setting->option_type ,
+                            ) )
+                        );
+                    }
+                }
+                ?>
+            })( _sedAppEditorSettings.preLoadSettings );
+
             (function( sM ) {
                 <?php
                 /*
@@ -1256,7 +1314,7 @@ class SiteEditorManager{
 
 	}
 
-    function get_page_content_info(){
+    public function get_page_content_info(){
         $info = array();
 
         if(is_category() || is_tag() || is_tax()){
@@ -1778,6 +1836,83 @@ class SiteEditorManager{
 		<?php
 	}
 
+    /**
+     * Print Settings Templates
+     */
+    public function print_options_template(){
+        ?>
+
+        <div id="sed-dialog-settings" class="sed-dialog" title="">
+
+        </div>
+
+        <?php
+
+        $groups = $this->groups();
+
+        foreach ( $groups AS $group_id => $group ){
+
+            if( $group->check_capabilities() ){
+
+                foreach ( $this->panels() AS $panel_id => $panel ){
+
+                    if ( $panel->check_capabilities() ) {
+
+                        if ( $panel->option_group == $group_id ) {
+
+                            $group->panels[$panel_id] = $panel;
+
+                        }
+
+                    }
+
+                }
+
+                foreach ( $this->controls() AS $control_id => $control ){
+
+                    if ( $control->check_capabilities() ) {
+
+                        if ( $control->option_group == $group_id ) {
+
+                            $group->controls[$control_id] = $control;
+
+                        }
+
+                    }
+
+                }
+
+                ?>
+                <script type="text/html"  id="group_settings_<?php echo $group_id;?>_tmpl" >
+                    <?php if( $group_id == "border") echo '<div class="accordion-panel-settings">';?>
+                    <?php echo $group->get_content();?>
+                    <?php if( $group_id == "border") echo '</div>';?>
+                </script>
+                <?php
+
+            }
+
+        }
+
+        $panels = array();
+
+        foreach ( $this->panels() AS $panel_id => $panel ){
+
+            if ( $panel->check_capabilities() ) {
+
+                $panels[$panel_id] = $panel->json();
+
+            }
+
+        }
+
+        ?>
+
+        <script>
+            var _sedAppSettingsPanels = <?php if( !empty( $panels ) ) echo wp_json_encode( $panels ); else echo "{}"; ?>;
+        </script>
+        <?php
+    }
 
 }
 

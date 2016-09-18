@@ -99,10 +99,19 @@ class SiteEditorOptionsCategory {
     /**
      * prefix for controls ids for prevent conflict
      *
-     * @var string
+     * @var mixed bool or array or string
      * @access public
      */
     public $control_prefix = '';
+
+    /**
+     * Is pre load settings in current page ?
+     * As default load settings on time after load fields in editor
+     *
+     * @var string
+     * @access public
+     */
+    public $is_preload_settings = false;
 
     /**
      * SiteEditorThemeOptions constructor.
@@ -113,7 +122,11 @@ class SiteEditorOptionsCategory {
 
         add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_options_group' ) , -9999 );
 
-        add_action( 'sed_app_register'                              , array( $this , 'set_settings' ) );
+        if( site_editor_app_on() ) {
+
+            add_action('sed_app_register'                           , array($this, 'set_settings'));
+
+        }
 
         add_filter( 'sed_app_dynamic_setting_args'                  , array( $this , 'filter_dynamic_setting_args' ), 10, 2 );
 
@@ -122,6 +135,9 @@ class SiteEditorOptionsCategory {
         add_filter( 'sed_app_dynamic_partial_args'                  , array( $this , 'filter_dynamic_partial_args' ), 10, 2 );
 
         add_filter( 'sed_app_dynamic_partial_class'                 , array( $this , 'filter_dynamic_partial_class' ), 5, 3 );
+
+        //before load sed_app_preview_settings
+        add_action( 'wp_footer'                                     , array( $this , 'add_dynamic_settings' ) );
 
     }
 
@@ -223,7 +239,8 @@ class SiteEditorOptionsCategory {
 
     public function set_settings( ){
 
-        $this->register_options();
+        //$this->register_options();
+        $this->fields = apply_filters( "{$this->option_group}_fields_filter" , $this->fields );
 
         foreach( $this->fields AS $id => $args ){
 
@@ -241,7 +258,7 @@ class SiteEditorOptionsCategory {
                 unset( $args['type'] );
 
             if( !isset( $args['option_type'] ) )
-                $args['option_type'] = 'theme_mod';
+                $args['option_type'] = $this->option_type;
 
             $this->settings[$setting_id] = $args;
 
@@ -279,17 +296,25 @@ class SiteEditorOptionsCategory {
     }
 
     public function filter_dynamic_setting_class( $class, $setting_id, $args ){
-        unset( $setting_id );
-        if ( isset( $args['option_type'] ) ) {
 
-            if ( isset( $args['setting_class'] ) ) {
+        if ( ! array_key_exists( $setting_id , $this->settings ) ) {
+
+            unset( $setting_id );
+
+            return $class;
+
+        }else {
+
+            unset($setting_id);
+
+            if ( isset( $args['option_type'] ) && isset( $args['setting_class'] ) ) {
+
                 $class = $args['setting_class'];
-            } else {
-                $class = 'SedAppSettings';
+
             }
 
+            return $class;
         }
-        return $class;
     }
 
     public function filter_dynamic_partial_args( $args, $id ){
@@ -321,6 +346,34 @@ class SiteEditorOptionsCategory {
         }
 
         return $class;
+    }
+
+    /**
+     * Create dynamic settings
+     *
+     */
+    public function add_dynamic_settings( ) {
+
+        $is_load = false;
+
+        if( is_bool( $this->is_preload_settings ) ){
+
+            $is_load = $this->is_preload_settings;
+
+        }else if( is_callable( $this->is_preload_settings ) ){
+
+            $is_load = call_user_func( $this->is_preload_settings , $this );
+
+        }
+
+        if( $is_load ) {
+
+            SED()->editor->manager->add_dynamic_settings( array_keys($this->settings) );
+
+            SED()->editor->manager->add_preload_settings( array_keys($this->settings) );
+
+        }
+
     }
 
 }

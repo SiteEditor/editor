@@ -318,11 +318,10 @@ if(!class_exists('SiteEditorLayoutManager')){
         }*/
 
         public function add_js_plugin() {
-            wp_register_script("sed-app-layout", SED_EXT_URL . 'layout/js/app-layout-plugin.min.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
-            wp_enqueue_script( 'sed-app-layout' );
 
-            wp_register_script("sed-app-settings-manager", SED_EXT_URL . 'layout/js/settings-manager-plugin.min.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
-            wp_enqueue_script( 'sed-app-settings-manager' );
+            wp_register_script("sed-app-layout", SED_EXT_URL . 'layout/js/app-layout-plugin.min.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
+
+            wp_enqueue_script( 'sed-app-layout' );
 
         }
 
@@ -355,7 +354,7 @@ if(!class_exists('SiteEditorLayoutManager')){
         }
 
         function print_wp_footer(){
-            $page_layout = self::get_default_page_layout();  var_dump( $page_layout ); var_dump( "-------------test--------------------" );
+            $page_layout = self::get_default_page_layout(); 
           ?>
             <script type="text/javascript">
                 var _sedAppDefaultPageLayout = "<?php echo $page_layout;?>";

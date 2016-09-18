@@ -63,7 +63,7 @@
             return !_.isUndefined(data.category) && data.category == 'style-editor';
         });
 
-        api.stylesSettingsControls = _.groupBy( stylesControls , function(data , id){ return data.sub_category; });
+        api.stylesSettingsControls = _.groupBy( stylesControls , function(data , id){ return data.option_group; });
 
         var startTime = new Date();
 		$.each( api.settings.controls, function( id, data ) {

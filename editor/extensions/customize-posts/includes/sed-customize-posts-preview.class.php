@@ -695,7 +695,7 @@ final class SiteEditorCustomizePostsPreview {
 		}
 
 		$setting_properties = array();
-		foreach ( $this->component->manager->settings() as $setting ) {
+		foreach ( $this->component->manager->settings() as $setting ) { 
 			if ( $setting instanceof SiteEditorPostSetting || $setting instanceof SiteEditorPostmetaSetting ) {
 				if ( ! $setting->check_capabilities() ) {
 					continue;
@@ -704,7 +704,7 @@ final class SiteEditorCustomizePostsPreview {
 				// Note that the value and dirty properties are already exported in wp.customize.settings.
 				$setting_properties[ $setting->id ] = array(
 					'transport' => $setting->transport,
-					'option_type' => $setting->type,
+					'option_type' => $setting->option_type,
 				);
 			}
 		}

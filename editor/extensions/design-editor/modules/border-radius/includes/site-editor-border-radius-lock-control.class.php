@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusLockControl' ) ) {
          * @access public
          * @var string
          */
-        public $sub_category = 'border-radius-lock';
+        public $sub_category = 'border_radius';
 
         /**
          * The control is style option ?

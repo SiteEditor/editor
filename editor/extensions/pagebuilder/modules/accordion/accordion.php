@@ -177,6 +177,13 @@ class PBAccordionShortcode extends PBShortcodeClass{
 
     }
 
+    /**
+     * Add design options for this module
+     * Arguments for each selector
+     * array( $id , $selector , $style_groups , $title)
+     *
+     * @return array
+     */
     function custom_style_settings(){
         return array(
 

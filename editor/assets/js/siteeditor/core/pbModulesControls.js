@@ -70,7 +70,7 @@
 
         },
 
-        refresh : function( val ) {
+        refresh : function( val ) { 
             var control = this ;
 
             if( this.isModuleControl ){
@@ -141,6 +141,8 @@
             if( $.isArray( val ) ){
                 val = val.join(",");
             }
+
+            val = api.applyFilters( control.setting.id + "_set" , val , control.id  );
 
             control.setting.set( val );
         },

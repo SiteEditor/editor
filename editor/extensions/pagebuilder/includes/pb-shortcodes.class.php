@@ -474,55 +474,16 @@ class PBShortcodeClass{
         }
     }
 
-	public function animation($animation){
+	public function animation( $animation ){
 
-        if( !is_array($animation) && !empty($animation)  )
-            $animation = explode(",",$animation);
-        elseif(!is_array($animation) && empty($animation))
-            return array('attr' => '','class' => '');
+        return sed_set_animation( $animation );
 
-        $animation[3] = trim( $animation[3] );
-
-        if( !isset($animation[3]) || empty( $animation[3] ) )
-            return array('attr' => '','class' => '');
-
-
-        $animate_attr = "";
-
-        //isset($_REQUEST['preview_type']) && $_REQUEST['preview_type'] == "refresh" &&
-        if( ( isset( $_REQUEST['sed_page_ajax'] ) && $_REQUEST['sed_page_ajax'] == "sed_load_modules" ) || ( site_editor_app_on() ) )
-            $animate_class = "";
-        else
-            $animate_class = "wow ";
-
-
-		if( $animation[0] != "" )
-			$animate_attr .= $this->set_attr( 'data-wow-delay', trim($animation[0]) . "ms" );
-
-		if( $animation[1] != "" )
-			$animate_attr .= $this->set_attr( 'data-wow-iteration', trim($animation[1]) );
-
-		if( $animation[2] != "")
-			$animate_attr .= $this->set_attr( 'data-wow-duration', trim($animation[2]) . "ms" );
-
-		if( $animation[3] != ""){
-		    $animate_attr .= $this->set_attr( 'data-sed-animation', trim($animation[3]) );
-			$animate_class .= trim($animation[3]) ;
-		}
-
-		if( $animation[4] != "")
-			$animate_attr .= $this->set_attr( 'data-wow-offset', trim($animation[4]) );
-
-        return array(
-            'attr'    => $animate_attr ,
-            'class'   => $animate_class
-        );
 	}
 
 	public function set_attr( $nameAttr, $valueAttr ){
 
 		if( $valueAttr != "" )
-		    return  $nameAttr.'="'.$valueAttr.'" ';
+		    return  $nameAttr.'="'. esc_attr( $valueAttr ) .'" ';
 	}
 
     function ajax_register_shortcode( $ajax_pb ){
@@ -938,6 +899,10 @@ class PBShortcodeClass{
             $controls = array();
             $option_group = $this->shortcode->name . "_design_group";
 
+            /**
+             * Arguments for each $setting
+             * array( $id , $selector , $style_group , $title)
+             */
             foreach( $this->style_editor_settings AS $setting ){
                 if( is_array( $setting ) && count( $setting ) == 4 && is_array( $setting[2] ) ){
 
@@ -959,7 +924,7 @@ class PBShortcodeClass{
 
                     if( !empty($setting[2]) ){
                         foreach( $setting[2] AS $control ){
-                            $controls[$this->shortcode->name . '_' . $setting[0] . '_' . $control ] = $site_editor_app->style_editor_controls->add_style_control( $control , $panel_id , $setting[1] , $option_group );
+                            $controls[$this->shortcode->name . '_' . $setting[0] . '_' . $control ] = SED()->editor->design->add_style_control( $control , $panel_id , $setting[1] , $option_group );
                         }
                     }
 

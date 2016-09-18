@@ -47,7 +47,7 @@ if ( ! class_exists( 'SiteEditorBorderRadiusTopRightControl' ) ) {
          * @access public
          * @var string
          */
-        public $sub_category = 'background';
+        public $sub_category = 'border_radius';
 
         /**
          * The control is style option ?

@@ -28,7 +28,7 @@ final class SedDesignEditorBorderRadius {
      * @access private
      * @var array
      */
-    private $option_group = 'border-radius';
+    public $option_group = 'border_radius';
 
     /**
      * This group title
@@ -238,9 +238,6 @@ final class SedDesignEditorBorderRadius {
                 "label"             => __('lock Corners Together', 'site-editor'), 
                 "description"       => __("Add corner For Element", "site-editor"),
                 'atts'  => array(
-                    "class" =>   $corner_spinner_class
-                ) ,  
-                'atts'  => array(
                     "class" =>   "sed-lock-spinner"
                 ) ,
                 'js_params'     =>  array(
@@ -257,15 +254,7 @@ final class SedDesignEditorBorderRadius {
 
         $panels = apply_filters( 'sed_border_radius_options_panels_filter' , $panels );
 
-        $new_options = sed_options()->fix_controls_panels_ids( $fields , $panels , $this->control_prefix );
-
-        $new_params = $new_options['fields'];
-
-        $new_panels = $new_options['panels'];
-
-        sed_options()->add_fields( $new_params );
-
-        sed_options()->add_panels( $new_panels );
+        SED()->editor->design->register_base_options( $fields , $panels , $this );
 
     }
 

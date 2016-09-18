@@ -273,10 +273,10 @@ final Class SiteEditor {
          * Load Theme Framework Base
          * Load in ajax mode , editor , editor_frontend , frontend
          */
-        if ( ! $this->is_request( 'admin' ) || $this->is_request( 'editor' ) ) {
+        //if ( ! $this->is_request( 'admin' ) || $this->is_request( 'editor' ) ) {
             require_once SED_INC_FRAMEWORK_DIR . DS . 'theme-framework.class.php';
             $this->theme = new SiteEditorThemeFramework( $this );
-        }
+        //}
 
         if ( $this->is_request( 'admin' ) && ! $this->is_request( 'editor' ) && ! $this->is_request("sed_wp_ajax") ) {
             require_once  SED_ADMIN_DIR . DS . 'site-editor-admin.class.php' ;

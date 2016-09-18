@@ -28,7 +28,7 @@ final class SedDesignEditorBackground{
      * @access private
      * @var array
      */
-    private $option_group = 'background';
+    public $option_group = 'background';
 
     /**
      * This group title
@@ -157,7 +157,7 @@ final class SedDesignEditorBackground{
                 "type"              => "background-image" ,  
                 "label"             => __("Background Image", "site-editor"),
                 "description"       => __("Add Background Image For Element", "site-editor"),
-                "remove_action"     => true , 
+                "remove_action"     => true ,
             ),
 
             'external_background_image' => array(
@@ -212,15 +212,7 @@ final class SedDesignEditorBackground{
 
         $panels = apply_filters( 'sed_background_options_panels_filter' , $panels );
 
-        $new_options = sed_options()->fix_controls_panels_ids( $fields , $panels , $this->control_prefix );
-
-        $new_params = $new_options['fields'];
-
-        $new_panels = $new_options['panels'];
-
-        sed_options()->add_fields( $new_params );
-
-        sed_options()->add_panels( $new_panels );
+        SED()->editor->design->register_base_options( $fields , $panels , $this );
 
     }
 

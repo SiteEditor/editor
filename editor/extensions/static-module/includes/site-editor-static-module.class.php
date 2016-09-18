@@ -102,7 +102,7 @@ class SiteEditorStaticModule extends SiteEditorOptionsCategory{
 
         $keys = array_keys( get_object_vars( $this ) );
 
-        $config_vars = array( 'title' , 'description' , 'active_callback' , 'selector' , 'capability' , 'fields' , 'panels' , 'actions' );
+        $config_vars = array( 'title' , 'description' , 'active_callback' , 'selector' , 'capability' , 'fields' , 'panels' , 'actions' , 'is_preload_settings' );
 
         foreach ( $keys as $key ) {
             if ( in_array( $key , $config_vars ) && isset( $config[ $key ] ) ) {

@@ -1699,6 +1699,35 @@
             }); */
         });
 
+        api.fn.getPostMetaSettingId = function( metaKey ){
+
+            if( api.currentPageInfo.type != "post" ){
+                alert( "Error : this page is not single post page" );
+                return ;
+            }
+
+            return "postmeta[" + api.currentPageInfo.post_type + "][" + api.currentPageInfo.id + "][" + metaKey + "]";
+        };
+
+        //Todo : Validation Css Class before add to html element
+        api.fn.setCssClass = function( element , to , dataName ) {
+
+            if( element.data( dataName ) ) {
+
+                element.removeClass( element.data( dataName ) ).addClass( to );
+
+            }else{
+
+                element.addClass( to );
+
+            }
+
+            element.data( dataName , to );
+
+        };
+
+
+
         //select module from top iframe
         api.preview.bind( 'go_back_to_main_module' , function( elementId ) {
             api.selectPlugin.select( $( '[sed_model_id="' + elementId + '"]' ) , false );
@@ -2481,15 +2510,15 @@
            return String(s).search (isInteger_re) != -1
         }
 
-        var _testAnim = function(x , elementId , styleId ) {
+        var _testAnim = function(x , $element , styleId ) {
 
-            var animation = $( '[sed_model_id="' + elementId + '"]' ).data("sedAnimation");
+            var animation = $element.data("sedAnimation");
 
             if( animation ){
-                $( '[sed_model_id="' + elementId + '"]' ).removeClass( animation );
-                $( '[sed_model_id="' + elementId + '"]' ).removeClass( 'animated');
-                $( '[sed_model_id="' + elementId + '"]' ).removeClass( 'wow');
-                $( '[sed_model_id="' + elementId + '"]' ).css({   //.removeClass( x + ' wow' )
+                $element.removeClass( animation );
+                $element.removeClass( 'animated');
+                $element.removeClass( 'wow');
+                $element.css({   //.removeClass( x + ' wow' )
                     "animationName" : "" ,
                     "visibility" : "" ,
                     "animationIterationCount" : "" ,
@@ -2498,7 +2527,7 @@
                 });
             }
 
-            $( '[sed_model_id="' + elementId + '"]' ).addClass( x + ' animated' ).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $element.addClass( x + ' animated' ).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 
                 $(this).removeClass( 'animated');
                 $(this).css('animation-name' , 'none');
@@ -2509,15 +2538,17 @@
 
         };
 
-        api.Events.bind( "set_animation" , function( modules , elementId ){
-            var animateSettings = modules[elementId]["animation"] ,
-            styleId = 'sed-pb-animations-'+ elementId , css = "" , count , style;
+        api.fn.setAnimation = function( animateSettings , cssSelector ){
+
+            var styleId = 'sed-pb-animations-'+ _.uniqueId( "animations_preview" ) , css = "" , count , style;
+
+            var $element = $( cssSelector );
 
             animateSettings = animateSettings.split(",");
 
             if(!animateSettings){
-                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'sedAnimation' );
-                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-sed-animation' );
+                $element.removeData( 'sedAnimation' );
+                $element.removeAttr( 'data-sed-animation' );
 
                 if($( "#" + styleId ).length > 0)
                     $( "#" + styleId ).remove();
@@ -2527,13 +2558,13 @@
 
             if( _.isUndefined( animateSettings[3] ) || !_.isString( animateSettings[3] ) || !$.trim( animateSettings[3] ) ){
 
-                var sedAnimation = $( '[sed_model_id="' + elementId + '"]' ).data( 'sedAnimation' );
+                var sedAnimation = $element.data( 'sedAnimation' );
 
-                if( sedAnimation && $( '[sed_model_id="' + elementId + '"]' ).hasClass( sedAnimation ) )
-                    $( '[sed_model_id="' + elementId + '"]' ).removeClass( sedAnimation )
+                if( sedAnimation && $element.hasClass( sedAnimation ) )
+                    $element.removeClass( sedAnimation );
 
-                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'sedAnimation' );
-                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-sed-animation' );
+                $element.removeData( 'sedAnimation' );
+                $element.removeAttr( 'data-sed-animation' );
 
                 if($( "#" + styleId ).length > 0)
                     $( "#" + styleId ).remove();
@@ -2543,54 +2574,61 @@
             }
 
             if( !_.isUndefined( animateSettings[2] ) && _isInteger( animateSettings[2] ) ){
-                $( '[sed_model_id="' + elementId + '"]' ).attr( 'data-wow-duration' , animateSettings[2] + "ms"  );
+                $element.attr( 'data-wow-duration' , animateSettings[2] + "ms"  );
                 css += '-webkit-animation-duration: ' + animateSettings[2] + 'ms;animation-duration: ' + animateSettings[2] + 'ms;';
             }else{
-                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-wow-duration' );
-                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'wowDuration' );
+                $element.removeAttr( 'data-wow-duration' );
+                $element.removeData( 'wowDuration' );
             }
 
             if( !_.isUndefined( animateSettings[0] ) && _isInteger( animateSettings[0] ) ){
-                $( '[sed_model_id="' + elementId + '"]' ).attr( 'data-wow-delay' , animateSettings[0] + "ms" );
+                $element.attr( 'data-wow-delay' , animateSettings[0] + "ms" );
                 css += '-webkit-animation-delay: ' + animateSettings[0] + 'ms;animation-delay: ' + animateSettings[0] + 'ms;';
             }else{
-                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-wow-delay' );
-                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'wowDelay' );
+                $element.removeAttr( 'data-wow-delay' );
+                $element.removeData( 'wowDelay' );
             }
 
 
             if( !_.isUndefined( animateSettings[1] ) && _isInteger( animateSettings[1] ) ){
-                $( '[sed_model_id="' + elementId + '"]' ).attr( 'data-wow-iteration' , animateSettings[1] );
+                $element.attr( 'data-wow-iteration' , animateSettings[1] );
                 count = (animateSettings[1] == -1) ?  'infinite': animateSettings[1];
                 css += '-webkit-animation-iteration-count: ' + count + ';animation-iteration-count: ' + count + ';';
             }else{
-                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-wow-iteration' );
-                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'wowIteration' );
+                $element.removeAttr( 'data-wow-iteration' );
+                $element.removeData( 'wowIteration' );
             }
 
-    		if(  !_.isUndefined( animateSettings[4] ) && _isInteger( animateSettings[4] ) )
-    			$( '[sed_model_id="' + elementId + '"]' ).attr( 'data-wow-offset' , animateSettings[4] );
+            if(  !_.isUndefined( animateSettings[4] ) && _isInteger( animateSettings[4] ) )
+                $element.attr( 'data-wow-offset' , animateSettings[4] );
             else{
-                $( '[sed_model_id="' + elementId + '"]' ).removeAttr( 'data-wow-offset' );
-                $( '[sed_model_id="' + elementId + '"]' ).removeData( 'wowOffset' );
+                $element.removeAttr( 'data-wow-offset' );
+                $element.removeData( 'wowOffset' );
             }
 
             if(!css)
-               return ;
+                return ;
 
             if($( "#" + styleId ).length > 0)
                 $( "#" + styleId ).remove();
-                                                     //[sed-role="mm-element"]
-            style = $('<style type="text/css" id="' + styleId + '"> [sed_model_id="' + elementId + '"]  { ' + css + ' }</style>').appendTo( $('head') );
+            //[sed-role="mm-element"]
+            style = $('<style type="text/css" id="' + styleId + '">' + cssSelector + '{ ' + css + ' }</style>').appendTo( $('head') );
 
 
-            _testAnim( animateSettings[3] , elementId , styleId  );  //+ " wow"
-            $( '[sed_model_id="' + elementId + '"]' ).data( 'sedAnimation' , animateSettings[3] );
-            $( '[sed_model_id="' + elementId + '"]' ).attr( 'data-sed-animation' , animateSettings[3] );
+            _testAnim( animateSettings[3] , $element , styleId  );  //+ " wow"
+            $element.data( 'sedAnimation' , animateSettings[3] );
+            $element.attr( 'data-sed-animation' , animateSettings[3] );
+            
+        };
 
+        api.Events.bind( "set_animation" , function( modules , elementId ){
+            var animateSettings = modules[elementId]["animation"],
+                $element = $( '[sed_model_id="' + elementId + '"]' ) ,
+                cssSelector = '[sed_model_id="' + elementId + '"]';
+
+            api.fn.setAnimation( animateSettings , cssSelector );
 
         });
-
 
         /*
         @params :

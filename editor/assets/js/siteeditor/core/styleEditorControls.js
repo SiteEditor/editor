@@ -22,6 +22,34 @@
 
     });
 
+    /*var controlId = 'sed_post_options_15_default_animation';
+
+    api.control( controlId , function( control ) { alert("test");
+
+        control.setting.bind( function( to ) { alert( to );
+            if( to ){
+                //var control = api.control.instance( 'style_editor_background_attachment' );
+                //control.update( "fixed" );
+                //control.refresh( "fixed" );
+            }
+        });
+
+    });
+
+    api( "postmeta[page][15][sed_content_animation]" , function( setting ) {
+        alert("test........");
+    });
+
+    api.addFilter( "postmeta[page][15][sed_content_animation]_set" , function( val , controlId ){ alert( val );
+
+        if( controlId == "sed_post_options_15_default_animation" ){
+            val = val ? "default" : api("pages_content_animation")();
+        }
+
+        return val;
+
+    } );*/
+
     /*var defaultBGColors = {};
     api.fn.gradientGetStartEndColor = function( control , color ){
 
