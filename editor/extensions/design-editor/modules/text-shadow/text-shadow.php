@@ -119,23 +119,19 @@ final class SedDesignEditorTextShadow {
 
         $fields = array(
 
+            'text_shadow_color' => array(
+                "type"              => "text-shadow-color" ,
+                "label"             => __("Text Shadow Color", "site-editor"),
+                "description"       => __("Add Text Shadow Color For Element", "site-editor")
+            ),
+
             'text_shadow' => array(
                 "type"              => "text-shadow" ,
                 "label"             => __('Text Shadow', 'site-editor'),
-                "description"       => __("Text Shadow", "site-editor"),  
-                'js_type'           =>  'dropdown',
-                'has_border_box'    =>   true ,  
-                'js_params'     =>  array(
-                    'options_selector'  => '.text-shadow-box',
-                    'selected_class'      => 'text-shadow-active' ,
-                ),      
+                "description"       => __("Text Shadow", "site-editor"),
+                'has_border_box'    =>   false ,
             ),
-            
-            'text_shadow_color' => array(
-                "type"              => "text-shadow-color" , 
-                "label"             => __("Text Shadow Color", "site-editor"),
-                "description"       => __("Add Text Shadow Color For Element", "site-editor")
-            ), 
+
         );
 
 

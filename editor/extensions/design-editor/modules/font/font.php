@@ -133,34 +133,12 @@ final class SedDesignEditorFont {
 
         $panels = array();
 
-        $fonts = array();
-
-        require_once SED_INC_FRAMEWORK_DIR . DS . 'typography.class.php';
-
-        $custom_fonts = SiteeditorTypography::get_custom_fonts();
-        if( $custom_fonts !== false ){
-            $fonts["custom_fonts"] = $custom_fonts;
-        }
-
-        $fonts["standard_fonts"] = SiteeditorTypography::get_standard_fonts();
-
-        $fonts["google_fonts"]   = SiteeditorTypography::get_google_fonts();
-
-        $this->controls['font'] = array();
-
         $fields = array(
 
             'font_family' => array(
                 "type"              => "font-family" ,
                 "label"             => __('Font Family', 'site-editor'),
-                "description"       => __("Font Family", "site-editor"),   
-                "choices"           =>    $fonts,
-                "optgroup"          => true ,
-                "groups"            => array(
-                    "custom_fonts"     => __("Custom Fonts" , "site-editor") ,
-                    "standard_fonts"   => __("Standard Fonts" , "site-editor") ,
-                    "google_fonts"     => __("Google Fonts" , "site-editor") ,
-                ),     
+                "description"       => __("Font Family", "site-editor"),
             ),
 
             'font_size' => array(
@@ -178,44 +156,19 @@ final class SedDesignEditorFont {
             'font_weight' => array(
                 "type"              => "font-weight" ,
                 "label"             => __('Font Weight', 'site-editor'),
-                "description"       => __("Font Weight", "site-editor"),   
-                'choices'           => array(
-                    'normal'        => __('normal', 'site-editor'),
-                    'bold'          => __('bold', 'site-editor') ,
-                    'bolder'        => __('bolder', 'site-editor'),
-                    'lighter'       => __('lighter', 'site-editor') ,
-                    100             => 100,
-                    200             => 200 ,
-                    300             => 300,
-                    400             => 400 ,
-                    500             => 500,
-                    600             => 600 ,
-                    700             => 700,
-                    800             => 800 ,
-                    900             => 900 ,
-                ),       
+                "description"       => __("Font Weight", "site-editor"),
             ),
 
             'font_style' => array(
                 "type"              => "font-style" ,
                 "label"             => __('Font Style', 'site-editor'),
-                "description"       => __("Font Style", "site-editor"),   
-                'choices'           => array(
-                    'normal'        => __('normal', 'site-editor'),
-                    'oblique'       => __('oblique', 'site-editor'),
-                    'italic'        => __('italic', 'site-editor'),
-                ),       
+                "description"       => __("Font Style", "site-editor")
             ),
 
             'text_decoration' => array(
                 "type"              => "text-decoration" ,
                 "label"             => __('Text Decoration', 'site-editor'),
-                "description"       => __("Text Decoration", "site-editor"),   
-                'choices'           => array(
-                    'none'              => __('none', 'site-editor'),
-                    'underline'         => __('underline', 'site-editor') ,
-                    'line-through'      => __('line-through', 'site-editor')
-                ),       
+                "description"       => __("Text Decoration", "site-editor"),
             ),
 
         );

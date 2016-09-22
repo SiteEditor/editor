@@ -14,14 +14,14 @@ if ( ! defined( 'ABSPATH' ) )  {
 
 if ( ! class_exists( 'SiteEditorTrancparencyField' ) ) {
 
-    if( ! class_exists( 'SiteEditorNumberField' ) ) {
+    if( ! class_exists( 'SiteEditorSliderField' ) ) {
         require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-number-field.class.php';
     } 
     
     /**
      * Field overrides.
      */
-    class SiteEditorTrancparencyField extends SiteEditorNumberField { 
+    class SiteEditorTrancparencyField extends SiteEditorSliderField {
 
         /**
          * Related setting id for save in db

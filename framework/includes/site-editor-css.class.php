@@ -324,9 +324,12 @@ class SiteEditorCss{
 
 
   	  if ( $bg_image ) {
-                                            
-            if ( $this->chvv('background_position' , $element_properties) )
-  			    $output_css .= 'background-position: ' . $element_properties['background_position'] . ';';
+
+          /**
+           * if true parallax_background_image prevent print background_position if exist
+           */
+            if ( $this->chvv('background_position' , $element_properties) && ( !$this->chvv('parallax_background_image' , $element_properties) || !$element_properties['parallax_background_image'] ) )
+  			    $output_css .= 'background-position: ' . $element_properties['background_position'] . ' !important;';
 
             if ( $this->chvv('background_attachment' , $element_properties) )
                 $output_css .= 'background-attachment: ' . $element_properties['background_attachment'] . ' !important;';

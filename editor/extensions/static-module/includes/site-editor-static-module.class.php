@@ -57,6 +57,14 @@ class SiteEditorStaticModule extends SiteEditorOptionsCategory{
     public $manager;
 
     /**
+     * Design Editor Options
+     *
+     * @var string
+     * @access public
+     */
+    public $design_options = array();
+
+    /**
      * instance of SiteEditorManager
      *
      * @var string
@@ -102,7 +110,7 @@ class SiteEditorStaticModule extends SiteEditorOptionsCategory{
 
         $keys = array_keys( get_object_vars( $this ) );
 
-        $config_vars = array( 'title' , 'description' , 'active_callback' , 'selector' , 'capability' , 'fields' , 'panels' , 'actions' , 'is_preload_settings' );
+        $config_vars = array( 'title' , 'description' , 'active_callback' , 'selector' , 'capability' , 'fields' , 'panels' , 'actions' , 'is_preload_settings' , 'design_options' );
 
         foreach ( $keys as $key ) {
             if ( in_array( $key , $config_vars ) && isset( $config[ $key ] ) ) {
@@ -200,6 +208,16 @@ class SiteEditorStaticModule extends SiteEditorOptionsCategory{
 
         $this->panels = apply_filters( "{$this->option_group}_panels_filter" , $this->panels );
 
+    }
+
+    /**
+     * array of style options each option is array like :
+     * array( $id , $selector , $style_group , $title)
+     *
+     * @return mixed
+     */
+    public function custom_style_options(){
+        return $this->design_options;
     }
 
     /**

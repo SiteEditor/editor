@@ -54,12 +54,12 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
         public $is_style_setting = true;
 
         /**
-         * The control js render type
+         * Css Selector for apply style
          *
          * @access public
          * @var string
          */
-        public $js_type = "dropdown";
+        public $selector = "";
 
         /**
          * Css Selector for apply style
@@ -67,7 +67,7 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
          * @access public
          * @var string
          */
-        public $selector = "";
+        public $selected_class = "gradient_select";
 
         /**
          * Css Style Property
@@ -87,13 +87,16 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
         public function json() {
 
             $json_array = parent::json();
-            $json_array['type'] = $this->js_type;
 
             if( !empty( $this->style_props ) )
                 $json_array['style_props'] = $this->style_props;
 
             if( !empty( $this->selector ) )
                 $json_array['selector'] = $this->selector;
+
+            $json_array['options_selector'] = '.sed-gradient';
+
+            $json_array['selected_class'] = $this->selected_class;
 
             return $json_array;
 
@@ -118,19 +121,17 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
 
             $value          = $this->value();
 
-            $gradient_control = $this->id . "_gradient";
-
             ?>
 
             <fieldset class="row_setting_box">
                 <legend id="sed_pb_sed_image_image_settings">
-                    <a  class="btn btn-default" title="<?php echo __("gradient" ,"site-editor");  ?>" data-toggle="dropdown" id="<?php echo $gradient_control ;?>_btn" role="button" >
+                    <a  class="btn btn-default" title="<?php echo __("gradient" ,"site-editor");  ?>" >
                     <span class="fa f-sed icon-gradient fa-lg "></span>
-                    <span class="el_txt"><?php echo __("gradient" ,"site-editor");  ?> </span>
+                    <span class="el_txt"><?php echo esc_html( $this->label );?></span>
                     </a>
                 </legend>
 
-              <div id="sed-app-control-<?php echo $gradient_control ;?>">
+              <div  id="<?php echo esc_attr($sed_field_id);?>" class="<?php echo esc_attr($classes);?>" <?php echo $atts_string;?>>
 
                 <form role="menu" class="dropdown-menu dropdown-common sed-dropdown" sed-style-element="body">
                   <div id="" class="dropdown-content content">
@@ -155,7 +156,7 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
                             </li>
                             <li>
                              <ul class="gradient">
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="vertical" href="#"><span class="gradient1"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0,1" , "0,100" , "vertical" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="vertical" href="#"><span class="gradient1"></span></a></li>
                                 <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="vertical"  href="#"><span class="gradient2"></span></a></li>
                                 <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="vertical"  href="#"><span class="gradient3"></span></a></li>
                                 <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="vertical"  href="#"><span class="gradient4"></span></a></li>
@@ -223,7 +224,51 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
 
             <?php
         }
-	}
+
+
+        /**
+         * Selected Value
+         *
+         * @since 3.4.0
+         */
+        protected function selected( $type , $opacity , $percent , $orientation ) {
+
+            $properties = array(
+                'type'          =>  $type ,
+                'opacity'       =>  $opacity ,
+                'percent'       =>  $percent ,
+                'orientation'   =>  $orientation ,
+            );
+
+            $is_equal = true;
+
+            foreach( $properties AS $property => $value ) {
+                if( $this->is_equal_property( $property , $value ) === false ){
+                    $is_equal = false;
+                    break;
+                }
+            }
+
+            if( $is_equal === true ) {
+                echo esc_attr($this->selected_class);
+            }
+
+            echo '';
+
+        }
+
+        protected function is_equal_property( $property , $value ) {
+
+            $selected_value = $this->value();
+
+            if( isset( $selected_value[$property] ) && $selected_value[$property] == $value ){
+                return true;
+            }
+
+            return false;
+        }
+
+    }
 }
 
 sed_options()->register_control_type( 'gradient' , 'SiteEditorGradientControl' );

@@ -79,25 +79,9 @@ final class SedDesignEditorMargin {
      */
     public function register_components(){
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-top-control.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-control.class.php';
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-top-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-right-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-right-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-bottom-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-bottom-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-left-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-left-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-lock-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-lock-field.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-margin-field.class.php';
 
     }
 
@@ -129,112 +113,57 @@ final class SedDesignEditorMargin {
 
         $panels = array();
 
-        $margin_lock_id = "sed_pb_".$this->control_prefix."_margin_lock";
-
-        $margin_spinner_class = 'sed-margin-spinner-' . $this->control_prefix;
-        $margin_spinner_class_selector = '.' . $margin_spinner_class;
-        $margin_sh_name = $this->control_prefix;
-        $margin_sh_name_c = $margin_sh_name. "_margin_";
-
-        $margin_controls = array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" );
-
         $fields = array(
 
             'margin_top' => array(
-                "type"              => "margin-top" ,
+                "type"              => "margin" ,
+                "prop_side"         => "top" ,
                 "label"             => __('Top', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
-                'atts'  => array(
-                    "class" =>   $margin_spinner_class
-                ) ,
+                'lock_id'           => 'margin_lock',
                 'js_params'     =>  array(
-                    'lock'    => array(
-                        'id'       => $margin_lock_id,
-                        'spinner'  => $margin_spinner_class_selector,
-                        'controls' => array( $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
-                    ),
-                    'min'   =>  0 ,
-                    
-                    //'max'     => 100,
-                    //'step'    => 2,
-                    //'page'    => 5
-                ),           
+                    'min'       =>  0
+                ),
             ),
 
             'margin_right' => array(
-                "type"              => "margin-right" ,
-                "label"             => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
+                "type"              => "margin" ,
+                "prop_side"         => "right" ,
+                "label"             => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
-                'atts'  => array(
-                    "class" =>   $margin_spinner_class
-                ) ,
+                'lock_id'           => 'margin_lock',
                 'js_params'     =>  array(
-                    'lock'    => array(
-                        'id'       => $margin_lock_id,
-                        'spinner'  => $margin_spinner_class_selector,
-                        'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
-                    ),
-                    'min'   =>  0 ,
-                    
-                    //'max'     => 100,
-                    //'step'    => 2,
-                    //'page'    => 5
-                ),           
+                    'min'       =>  0
+                ),
             ),
 
             'margin_bottom' => array(
-                "type"              => "margin-bottom" ,
+                "type"              => "margin" ,
+                "prop_side"         => "bottom" ,
                 "label"             => __('Bottom', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
-                'atts'  => array(
-                    "class" =>   $margin_spinner_class
-                ) ,
+                'lock_id'           => 'margin_lock',
                 'js_params'     =>  array(
-                    'lock'    => array(
-                        'id'       => $margin_lock_id,
-                        'spinner'  => $margin_spinner_class_selector,
-                        'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" )
-                    ),
-                    'min'   =>  0 ,
-                    
-                    //'max'     => 100,
-                    //'step'    => 2,
-                    //'page'    => 5
-                ),         
+                    'min'       =>  0
+                ),
             ),
 
             'margin_left' => array(
-                "type"              => "margin-left" ,
-                "label"             => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
+                "type"              => "margin" ,
+                "prop_side"         => "left" ,
+                "label"             => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
-                'atts'  => array(
-                    "class" =>   $margin_spinner_class
-                ) ,
+                'lock_id'           => 'margin_lock',
                 'js_params'     =>  array(
-                    'lock'    => array(
-                        'id'       => $margin_lock_id,
-                        'spinner'  => $margin_spinner_class_selector,
-                        'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "bottom" )
-                    ),
-                    'min'   =>  0 ,
-                    
-                    //'max'     => 100,  
-                    //'step'    => 2,
-                    //'page'    => 5
-                ),         
+                    'min'       =>  0
+                ),
             ),
 
             'margin_lock' => array(
-                "type"              => "margin-lock" ,
+                "type"              => "property-lock" ,
                 "label"             => __('lock Spacings Together', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
-                'atts'  => array(
-                    "class" =>   "sed-lock-spinner"
-                ) ,
-                'js_params'     =>  array(
-                    'spinner' =>  $margin_spinner_class_selector ,
-                    'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
-                ),         
+                'setting_id'        => 'margin_lock'
             ),
 
         );

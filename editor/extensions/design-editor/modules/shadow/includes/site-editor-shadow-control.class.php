@@ -95,6 +95,10 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
             if( !empty( $this->selector ) )
                 $json_array['selector'] = $this->selector;
 
+            $json_array['options_selector'] = '.shadow';
+
+            $json_array['selected_class'] = 'shadow_select';
+
             return $json_array;
 
         }
@@ -118,19 +122,21 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
 
             $value          = $this->value();
 
-            $box_shadow_control = $this->id . "_shadow";
-
             ?>
-
 
             <fieldset class="row_setting_box">
                 <legend id="sed_pb_sed_image_image_settings">
-                    <a  href="javascript:void(0)" class="btn btn-default"  title="<?php echo __("box shadow" ,"site-editor");  ?>" data-toggle="dropdown" id="<?php echo $box_shadow_control ;?>_btn" role="button">
+                    <a  href="javascript:void(0)" class="btn btn-default"  title="<?php echo __("box shadow" ,"site-editor");  ?>">
                           <span class="fa f-sed icon-boxshadow fa-lg "></span>
-                          <span class="el_txt"><?php echo __("box shadow" ,"site-editor");  ?></span>
+                          <span class="el_txt"><?php echo esc_html( $this->label );?></span>
                     </a>
                 </legend>
-                <div class="dropdown" id="sed-app-control-<?php echo $box_shadow_control ;?>">
+
+                <?php if(!empty($this->description)){ ?>
+                    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+                <?php } ?>
+
+                <div class="dropdown">
 
                     <form role="menu" class="dropdown-menu dropdown-common sed-dropdown"  sed-shadow-cp-el="#shadow-colorpicker" sed-style-element="">
                       <div class="dropdown-content sed-dropdown content">

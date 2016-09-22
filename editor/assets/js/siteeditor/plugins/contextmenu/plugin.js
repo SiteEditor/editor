@@ -12,7 +12,6 @@
   var api = sedApp.editor ,
       _directlyTransition;
 
-  api.currentCssSelector = api.currentCssSelector || "";
   //handels of all loaded scripts in siteeditor app
   api.sedAppLoadedScripts = api.sedAppLoadedScripts || [];
   //previewer = siteEditor.siteEditorControls;

@@ -63,6 +63,35 @@ if ( ! class_exists( 'SiteEditorFontWeightField' ) ) {
             $this->default = '';
 
         }
+        
+        /**
+         * Sets the $choices.
+         *
+         * @access protected
+         */
+        protected function set_choices() {
+
+            if ( is_array( $this->choices ) && !empty( $this->choices ) ) {
+                return ;
+            }
+
+            $this->choices = array(
+                'normal'        => __('normal', 'site-editor'),
+                'bold'          => __('bold', 'site-editor') ,
+                'bolder'        => __('bolder', 'site-editor'),
+                'lighter'       => __('lighter', 'site-editor') ,
+                100             => 100,
+                200             => 200 ,
+                300             => 300,
+                400             => 400 ,
+                500             => 500,
+                600             => 600 ,
+                700             => 700,
+                800             => 800 ,
+                900             => 900 ,
+            );
+
+        }
 
     }
 }

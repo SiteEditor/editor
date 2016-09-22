@@ -14,14 +14,14 @@ if ( ! defined( 'ABSPATH' ) )  {
 
 if ( ! class_exists( 'SiteEditorFontStyleField' ) ) {
 
-    if( ! class_exists( 'SiteEditorSelectField' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-select-field.class.php';
+    if( ! class_exists( 'SiteEditorRadioButtonsetField' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-radio-buttonset-field.class.php';
     } 
     
     /**
      * Field overrides.
      */
-    class SiteEditorFontStyleField extends SiteEditorSelectField { 
+    class SiteEditorFontStyleField extends SiteEditorRadioButtonsetField {
 
         /**
          * Related setting id for save in db
@@ -61,6 +61,24 @@ if ( ! class_exists( 'SiteEditorFontStyleField' ) ) {
             }
 
             $this->default = '';
+
+        }
+        /**
+         * Sets the $choices.
+         *
+         * @access protected
+         */
+        protected function set_choices() {
+
+            if ( is_array( $this->choices ) && !empty( $this->choices ) ) {
+                return ;
+            }
+
+            $this->choices = array(
+                'normal'        => __('normal', 'site-editor'),
+                'oblique'       => __('oblique', 'site-editor'),
+                'italic'        => __('italic', 'site-editor'),
+            );
 
         }
 

@@ -84,9 +84,23 @@ class SedDesignEditorManager extends SiteEditorModules{
 
         add_action( "sed_app_register" , array( $this , "register_settings" ) );
 
-        //$this->load_modules();
+        add_action( "sed_after_init_manager"    , array( $this , 'register_components' ) , 100 , 1 );
+
     }
 
+    /**
+     * Register Controls && Fields
+     *
+     * @access public
+     * @since 1.0.0
+     */
+    public function register_components(){
+
+        require_once dirname( __FILE__ ) . '/site-editor-property-lock-control.class.php';
+
+        require_once dirname( __FILE__ ) . '/site-editor-property-lock-field.class.php';
+
+    }
     /**
      * add design group button
      *
@@ -94,9 +108,10 @@ class SedDesignEditorManager extends SiteEditorModules{
      * @param $panel_id
      * @param $selector
      * @param $option_group
+     * @param $rel_group
      * @return array
      */
-    public function add_style_control( $style , $panel_id , $selector , $option_group ){
+    public function add_style_control( $style , $panel_id , $selector , $option_group , $rel_group ){
 
         $icon  = $this->icons_classes[ $style ];
         $label = $this->labels[ $style ];
@@ -112,7 +127,8 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'class'             => 'sted_element_control_btn',
                 'data-style-id'     => $style ,
                 'data-dialog-title' => $label ,
-                'data-selector'     => $selector
+                'data-selector'     => $selector ,
+                'data-option-group' => $rel_group
             )
         );
 
@@ -212,27 +228,27 @@ class SedDesignEditorManager extends SiteEditorModules{
 
         sed_add_settings(array(
             'background_position' => array(
-                'value' => 'center center',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'background_attachment' => array(
-                'value' => 'scroll',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'background_size' => array(
-                'value' => 'auto',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'background_repeat' => array(
-                'value' => 'no-repeat',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'background_color' => array(
-                'value' => '#FFFFFF',
+                'value' => 'transparent',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
@@ -252,7 +268,7 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'type' => 'style-editor'
             ),
             'parallax_background_ratio' => array(
-                'value' => '',
+                'value' => 0.5,
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
@@ -262,67 +278,67 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'type' => 'style-editor'
             ),
             'border_top_color' => array(
-                'value' => '#FFFFFF',
+                'value' => 'transparent',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_top_width' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_top_style' => array(
-                'value' => 'none',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_left_color' => array(
-                'value' => '#FFFFFF',
+                'value' => 'transparent',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_left_width' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_left_style' => array(
-                'value' => 'none',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_right_color' => array(
-                'value' => '#FFFFFF',
+                'value' => 'transparent',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_right_width' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_right_style' => array(
-                'value' => 'none',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_bottom_color' => array(
-                'value' => '#FFFFFF',
+                'value' => 'transparent',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_bottom_width' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_bottom_style' => array(
-                'value' => 'none',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'shadow_color' => array(
-                'value' => '#000000',
+                'value' => 'transparent',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
@@ -333,27 +349,22 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'type' => 'style-editor'
             ),
             'border_radius_tr' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_radius_tl' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_radius_br' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'border_radius_bl' => array(
-                'value' => 0,
-                'transport' => 'postMessage',
-                'type' => 'style-editor'
-            ),
-            'border_radius_lock' => array(
-                'value' => true,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
@@ -389,7 +400,7 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'type' => 'style-editor'
             ),
             'font_color' => array(
-                'value' => "#000000",
+                'value' => "transparent",
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
@@ -404,22 +415,42 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'type' => 'style-editor'
             ),
             'margin_top' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'margin_right' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'margin_bottom' => array(
-                'value' => 0,
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'margin_left' => array(
-                'value' => 0,
+                'value' => '',
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
+            'padding_top' => array(
+                'value' => '',
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
+            'padding_right' => array(
+                'value' => '',
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
+            'padding_bottom' => array(
+                'value' => '',
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
+            'padding_left' => array(
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
@@ -428,38 +459,38 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
-            'padding_top' => array(
-                'value' => 0,
-                'transport' => 'postMessage',
-                'type' => 'style-editor'
-            ),
-            'padding_right' => array(
-                'value' => 0,
-                'transport' => 'postMessage',
-                'type' => 'style-editor'
-            ),
-            'padding_bottom' => array(
-                'value' => 0,
-                'transport' => 'postMessage',
-                'type' => 'style-editor'
-            ),
-            'padding_left' => array(
-                'value' => 0,
-                'transport' => 'postMessage',
-                'type' => 'style-editor'
-            ),
             'padding_lock' => array(
                 'value' => true,
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
+            'border_radius_lock' => array(
+                'value' => true,
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
+            'border_style_lock' => array(
+                'value' => true,
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
+            'border_color_lock' => array(
+                'value' => true,
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
+            'border_width_lock' => array(
+                'value' => true,
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
             'position' => array(
-                'value' => 'static',
+                'value' => '',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
             'text_shadow_color' => array(
-                'value' => '#000000',
+                'value' => 'transparent',
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
@@ -469,7 +500,7 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'type' => 'style-editor'
             ),
             'trancparency' => array(
-                'value' => 0,
+                'value' => 100,
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
@@ -479,6 +510,98 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'option_type'       => 'option'
             )
         ));
+
+    }
+
+    public function add_style_options( $style_settings , $option_group , $control_prefix , $rel_group ){
+
+        if( !empty( $style_settings ) ){
+
+            $panels = array();
+            $controls = array();
+
+            /**
+             * Arguments for each $setting
+             * array( $id , $selector , $style_group , $title)
+             */
+            foreach( $style_settings AS $setting ){ 
+                if( is_array( $setting ) && count( $setting ) == 4 && is_array( $setting[2] ) ){
+
+                    $panel_id = $setting[0] . '_panel';
+
+                    $panels[$panel_id] = array(
+                        'title'         =>  $setting[3] ,
+                        'capability'    => 'edit_theme_options' ,
+                        'type'          => 'expanded' ,
+                        'description'   => '' ,
+                        'parent_id'     => 'root' ,
+                        'priority'      => 9 ,
+                        'option_group'  => $option_group  ,
+                        'atts'      =>  array(
+                            'class'             => "design_ac_header" ,
+                            'data-selector'     => $setting[1]
+                        )
+                    ); 
+
+                    if( !empty($setting[2]) ){
+                        foreach( $setting[2] AS $control ){
+                            $controls[$setting[0] . '_' . $control ] = $this->add_style_control( $control , $panel_id , $setting[1] , $option_group , $rel_group );
+                        }
+                    }
+
+                }
+            }
+
+            $new_options = sed_options()->fix_controls_panels_ids( $controls , $panels , $control_prefix );
+
+            $new_params = $new_options['fields'];
+
+            $new_panels = $new_options['panels'];
+
+            sed_options()->add_fields( $new_params );
+
+            sed_options()->add_panels( $new_panels );
+
+        }
+
+    }
+
+    /**
+     * @param $option_group
+     * @param $setting_type
+     * @return array
+     */
+    public function get_design_options_field( $option_group , $setting_type ){
+
+        ob_start();
+        ?>
+        <div class="sed_style_editor_panel_container">
+
+        </div>
+        <div id="modules_styles_settings_<?php echo $option_group;?>_design_group_level_box" data-multi-level-box="true" data-title="" class="sed-dialog content " >
+
+            <div class="styles_settings_container">
+
+            </div>
+
+        </div>
+        <?php
+        $dialog_content = ob_get_clean();
+
+        return array(
+            'type'          => 'panel-button',
+            'label'         => __('Custom Edit Style',"site-editor"),
+            'description'   => '',
+            'button_style'  => 'blue' ,
+            'atts'          => array(
+                'class'                 => 'sed_style_editor_btn' ,
+                'data-option-group'     => $option_group ,
+                'data-setting-type'     => $setting_type
+            ) ,
+            'panel_title'   => __('Custom Edit Style',"site-editor") ,
+            'panel_content' => $dialog_content ,
+            'priority'      => 2
+        );
 
     }
 

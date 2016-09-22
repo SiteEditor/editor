@@ -247,6 +247,14 @@ class SiteEditorOptionsControl{
 	public $css_setting_type = '';
 
 	/**
+	 * Lock Control Id
+	 *
+	 * @access protected
+	 * @var array
+	 */
+	public $lock_id = '';
+
+	/**
 	 * Constructor.
 	 *
 	 * Supplied `$args` override class property defaults.
@@ -444,7 +452,9 @@ class SiteEditorOptionsControl{
 			$json_array['css_setting_type'] = $this->css_setting_type;
 		}
 
-
+		if( !empty( $this->lock_id ) ){
+			$json_array['lock_id'] = $this->lock_id;
+		}
 
 		$json_array = array_merge( $json_array , $this->json );
 

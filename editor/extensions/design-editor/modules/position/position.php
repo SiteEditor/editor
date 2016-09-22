@@ -118,14 +118,8 @@ final class SedDesignEditorPosition {
             'position' => array(
                 "type"              => "position" ,
                 "label"             => __('Position', 'site-editor'),
-                "description"       => __("Position", "site-editor"),  
-                'choices' =>array(
-                    'relative'     => __('relative', 'site-editor'),
-                    'absolute'     => __('absolute ', 'site-editor'),
-                    'fixed'     => __('fixed', 'site-editor'),
-                    'static'     => __('static ', 'site-editor')
-                ),      
-            ),
+                "description"       => __("Position", "site-editor"),
+            )
 
         );
 

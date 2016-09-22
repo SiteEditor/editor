@@ -163,13 +163,34 @@ final class SedDesignEditorBackground{
             'external_background_image' => array(
                 "type"              => "external-background-image" ,  
                 "label"             => __("External Background Image", "site-editor"),
-                "description"       => __("Add External Background Image For Element", "site-editor")
+                "description"       => __("Add External Background Image For Element", "site-editor"),
+                "dependency"    => array(
+                    'controls'  =>  array(
+                        "control"  => "background_image" ,
+                        "values"   => array( 0 , '' , 'none' )
+                    ),
+                )
             ),
 
             'parallax_background_image' => array(
                 "type"              => "parallax-background-image" ,  
                 "label"             => __("Parallax Background Image", "site-editor"),
-                "description"       => __("Add Parallax Background Image For Element", "site-editor")
+                "description"       => __("Add Parallax Background Image For Element", "site-editor"),
+                "dependency"    => array(
+                    'controls'  =>  array(
+                        "relation"     =>  "OR" ,
+                        array(
+                            "control"  => "background_image" ,
+                            "values"   => array( 0 , '' , 'none' ) ,
+                            "type"     => "exclude"
+                        ),
+                        array(
+                            "control"  => "external_background_image" ,
+                            "value"    => '' ,
+                            "type"     => "exclude"
+                        )
+                    ),
+                )
             ),
 
             'parallax_background_ratio' => array(
@@ -177,33 +198,103 @@ final class SedDesignEditorBackground{
                 "label"             => __("Parallax Background Ratio", "site-editor"),
                 "description"       => __("Add Parallax Background Ratio For Element", "site-editor"),
                 'js_params'         => array(
-                    'step'          => 0.1
+                    'step'          => 0.01 ,
+                    "min"           => 0 ,
+                    "max"           => 1 ,
                 ),
+                "dependency"    => array(
+                    'controls'  =>  array(
+                        array(
+                            "control"  => "parallax_background_image" ,
+                            "value"    => true
+                        )
+                    ),
+                )
             ),
 
             'background_attachment' => array(
                 "type"              => "background-attachment" ,  
                 "label"             => __("Background Attachment", "site-editor"),
-                "description"       => __("Add Background Attachment For Element", "site-editor")
+                "description"       => __("Add Background Attachment For Element", "site-editor"),
+                "dependency"    => array(
+                    'controls'  =>  array(
+                        "relation"     =>  "OR" ,
+                        array(
+                            "control"  => "background_image" ,
+                            "values"   => array( 0 , '' , 'none' ) ,
+                            "type"     => "exclude"
+                        ),
+                        array(
+                            "control"  => "external_background_image" ,
+                            "value"    => '' ,
+                            "type"     => "exclude"
+                        )
+                    ),
+                )
             ), 
 
             'background_size' => array(
                 "type"              => "background-size" ,  
                 "label"             => __("Background Size", "site-editor"),
                 "description"       => __("Add Background Size For Element", "site-editor"),
+                "dependency"    => array(
+                    'controls'  =>  array(
+                        "relation"     =>  "OR" ,
+                        array(
+                            "control"  => "background_image" ,
+                            "values"   => array( 0 , '' , 'none' ) ,
+                            "type"     => "exclude"
+                        ),
+                        array(
+                            "control"  => "external_background_image" ,
+                            "value"    => '' ,
+                            "type"     => "exclude"
+                        )
+                    ),
+                )
             ),
 
             'background_repeat' => array(
                 "type"              => "background-repeat" ,  
                 "label"             => __("Background Repeat", "site-editor"),
                 "description"       => __("Add Background Repeat For Element", "site-editor"),
+                "dependency"    => array(
+                    'controls'  =>  array(
+                        "relation"     =>  "OR" ,
+                        array(
+                            "control"  => "background_image" ,
+                            "values"   => array( 0 , '' , 'none' ) ,
+                            "type"     => "exclude"
+                        ),
+                        array(
+                            "control"  => "external_background_image" ,
+                            "value"    => '' ,
+                            "type"     => "exclude"
+                        )
+                    ),
+                )
             ), 
 
             'background_position' => array(
                 "type"              => "background-position" ,
                 "label"             => __('Background Position', 'site-editor'),
                 "description"       => __("Background Position", "site-editor"),
-                'has_border_box'    =>   true ,
+                'has_border_box'    =>   false ,
+                "dependency"    => array(
+                    'controls'  =>  array(
+                        "relation"     =>  "OR" ,
+                        array(
+                            "control"  => "background_image" ,
+                            "values"   => array( 0 , '' , 'none' ) ,
+                            "type"     => "exclude"
+                        ),
+                        array(
+                            "control"  => "external_background_image" ,
+                            "value"    => '' ,
+                            "type"     => "exclude"
+                        )
+                    ),
+                )
             ), 
 
         );

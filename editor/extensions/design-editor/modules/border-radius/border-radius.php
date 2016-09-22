@@ -79,25 +79,9 @@ final class SedDesignEditorBorderRadius {
      */
     public function register_components(){
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-tl-control.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-control.class.php';
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-tl-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-tr-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-tr-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-bl-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-bl-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-br-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-br-field.class.php'; 
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-lock-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-lock-field.class.php'; 
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-radius-field.class.php';
 
     }
 
@@ -129,122 +113,61 @@ final class SedDesignEditorBorderRadius {
 
         $panels = array();
 
-        $corner_lock_id = "sed_pb_".$this->control_prefix."_border_radius_lock";
-
-        $corner_spinner_class = 'sed-border-radius-spinner-' . $this->control_prefix;    //shortcode_name
-        $corner_spinner_class_selector = '.' . $corner_spinner_class;
-        $corner_sh_name = $this->control_prefix;
-        $corner_sh_name_c = $corner_sh_name. "_border_radius_";
-
-        $corner_controls = array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" );
-
         $fields = array(
 
             'border_radius_tl' => array(
-                "type"              => "border-radius-tl" ,
-                "label"             => ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
+                "type"              => "border-radius" ,
+                "prop_side"         => "tl" ,
+                "label"             => ( is_rtl() ) ? __('Top right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
-                    "class" =>   $corner_spinner_class
-                ) ,
+                'lock_id'           => 'border_radius_lock',
                 'js_params'     =>  array(
-                    'lock'    => array(
-                        'id'       => $corner_lock_id,
-                        'spinner'  => $corner_spinner_class_selector,
-                        'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
-                    ),
-                    
-                    'min'   =>  0 ,
-                    //'radius_demo' => true,
-                    //'max'     => 100,
-                    //'step'    => 2,
-                    //'page'    => 5
+                    'min'       =>  0
                 ), 
             
             ),
 
             'border_radius_tr' => array(
-                "type"              => "border-radius-tr" ,
-                "label"             => ( is_rtl() ) ? __('Top Right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
+                "type"              => "border-radius" ,
+                "prop_side"         => "tr" ,
+                "label"             => ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top Right corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
-                    "class" =>   $corner_spinner_class
-                ) ,
+                'lock_id'           => 'border_radius_lock',
                 'js_params'     =>  array(
-                    'lock'    => array(
-                        'id'       => $corner_lock_id,
-                        'spinner'  => $corner_spinner_class_selector,
-                        'controls' => array( $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
-                    ),
-                    
-                    'min'   =>  0 ,
-                    //'radius_demo' => true,
-                    //'max'     => 100,
-                    //'step'    => 2,
-                    //'page'    => 5
-                ), 
-            
+                    'min'       =>  0
+                ),
             ),
 
 
             'border_radius_br' => array(
-                "type"              => "border-radius-br" ,
-                "label"             => ( is_rtl() ) ? __('Bottom Right corner', 'site-editor') : __('Bottom left corner', 'site-editor') ,
+                "type"              => "border-radius" ,
+                "prop_side"         => "br" ,
+                "label"             => ( is_rtl() ) ? __('Bottom left corner', 'site-editor') : __('Bottom Right corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
-                    "class" =>   $corner_spinner_class
-                ) ,
+                'lock_id'           => 'border_radius_lock',
                 'js_params'     =>  array(
-                    'lock'    => array(
-                        'id'       => $corner_lock_id,
-                        'spinner'  => $corner_spinner_class_selector,
-                        'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "bl" )
-                    ),
-                    
-                    'min'   =>  0 ,
-                    //'radius_demo' => true,
-                    //'max'     => 100,
-                    //'step'    => 2,
-                    //'page'    => 5
-                ), 
-            
+                    'min'       =>  0
+                ),
+
             ),
 
             'border_radius_bl' => array(
-                "type"              => "border-radius-bl" ,
-                "label"             => ( is_rtl() ) ? __('Bottom left corner', 'site-editor') : __('Bottom right corner', 'site-editor') ,
+                "type"              => "border-radius" ,
+                "prop_side"         => "bl" ,
+                "label"             => ( is_rtl() ) ? __('Bottom right corner', 'site-editor') : __('Bottom left corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
-                    "class" =>   $corner_spinner_class
-                ) ,  
+                'lock_id'           => 'border_radius_lock',
                 'js_params'     =>  array(
-                    'lock'    => array(
-                        'id'       => $corner_lock_id,
-                        'spinner'  => $corner_spinner_class_selector,
-                        'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" )
-                    ),
-                    
-                    'min'   =>  0 ,
-                    //'radius_demo' => true,
-                    //'max'     => 100,
-                    //'step'    => 2,
-                    //'page'    => 5
-                ), 
-            
+                    'min'       =>  0
+                ),
+
             ),
 
             'border_radius_lock' => array(
-                "type"              => "border-radius-lock" ,
+                "type"              => "property-lock" ,
                 "label"             => __('lock Corners Together', 'site-editor'), 
                 "description"       => __("Add corner For Element", "site-editor"),
-                'atts'  => array(
-                    "class" =>   "sed-lock-spinner"
-                ) ,
-                'js_params'     =>  array(
-                    'spinner' =>  $corner_spinner_class_selector ,
-                    'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
-                ),
-            
+                'setting_id'        => 'border_radius_lock'
             ),
 
 

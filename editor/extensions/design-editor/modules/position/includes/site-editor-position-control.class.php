@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'SiteEditorPositionControl' ) ) {
 
-    if( ! class_exists( 'SiteEditorSelectControl' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-select-control.class.php';
+    if( ! class_exists( 'SiteEditorRadioButtonsetControl' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-radio-buttonset-control.class.php';
     }   
  
 	/**
@@ -23,7 +23,7 @@ if ( ! class_exists( 'SiteEditorPositionControl' ) ) {
 	 *
 	 * Class SiteEditorPositionControl
 	 */
-	class SiteEditorPositionControl extends SiteEditorSelectControl {
+	class SiteEditorPositionControl extends SiteEditorRadioButtonsetControl {
 
 		/**
 		 * The control type.

@@ -212,7 +212,7 @@ final class SiteEditorOptionsManager{
             return new WP_Error( 'options_not_access', __( "You can not access to this group options", "site-editor" ) );
         }
 
-        $allow_design = isset( $design_group ) &&  $design_group->check_capabilities();
+        $allow_design = isset( $design_group ) &&  $design_group->check_capabilities(); 
 
         $data['groups'][$current_group->id] = $current_group->json();
 
@@ -605,6 +605,10 @@ final class SiteEditorOptionsManager{
                     $args['dependency'] = $this->fix_dependency_controls_ids( $args['dependency'] , $prefix );
                 }
 
+                if( isset( $args['lock_id'] ) && !empty( $args['lock_id'] ) ){
+                    $args['lock_id'] = "{$prefix}_{$args['lock_id']}";
+                }
+                
                 $new_fields["{$prefix}_{$field_id }"] = $args;
 
             }
@@ -675,7 +679,12 @@ final class SiteEditorOptionsManager{
 
                 $setting_args = array_merge($primary_args, $args);
 
-                unset($setting_args['type']); 
+                unset($setting_args['type']);
+
+                if( isset( $setting_args['category'] ) && $setting_args['category'] == "style-editor" ){
+                    $setting_args['type'] = "style-editor";
+                    $setting_args['option_type'] = "base";
+                }
 
                 /*$setting_args = array(
                     'option_type'           =>  $field->option_type ,
@@ -707,6 +716,10 @@ final class SiteEditorOptionsManager{
                 'option_group'      =>  $field->option_group ,
                 'active_callback'   =>  $field->active_callback
             );*/
+
+            if( isset( $control_args['category'] ) && $control_args['category'] == "style-editor" && isset( $control_args['default'] ) ){
+                $control_args['default_value'] = $control_args['default'];
+            }
 
             if( isset( $control_args["dependency"] ) && ! empty( $control_args["dependency"] ) ){
                 $this->set_group_dependencies( $control_args['option_group'] , $control_args["dependency"] , $id );

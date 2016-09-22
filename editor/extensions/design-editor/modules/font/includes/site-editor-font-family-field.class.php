@@ -64,6 +64,34 @@ if ( ! class_exists( 'SiteEditorFontFamilyField' ) ) {
 
         }
 
+        /**
+         * Sets the $choices.
+         *
+         * @access protected
+         */
+        protected function set_choices() {
+
+            if ( is_array( $this->choices ) && !empty( $this->choices ) ) {
+                return ;
+            }
+
+            $fonts = array();
+
+            require_once SED_INC_FRAMEWORK_DIR . DS . 'typography.class.php';
+
+            $custom_fonts = SiteeditorTypography::get_custom_fonts();
+            if( $custom_fonts !== false ){
+                $fonts["custom_fonts"] = $custom_fonts;
+            }
+
+            $fonts["standard_fonts"] = SiteeditorTypography::get_standard_fonts();
+
+            $fonts["google_fonts"]   = SiteeditorTypography::get_google_fonts();
+
+            $this->choices = $fonts;
+
+        }
+
     }
 }
 

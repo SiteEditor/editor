@@ -118,14 +118,9 @@ final class SedDesignEditorGradient {
             'gradient' => array(
                 "type"              => "gradient" ,
                 "label"             => __('Gradient', 'site-editor'),
-                "description"       => __("Gradient", "site-editor"),  
-                'js_type'           =>  'gradient',
-                'has_border_box'    =>   true ,  
-                'js_params'     =>  array(
-                    'options_selector'  => '.sed-gradient',
-                    'selected_class'    => 'gradient_select'
-                ),      
-            ),
+                "description"       => __("Gradient Control", "site-editor"),
+                'has_border_box'    =>   false
+            )
             
         );
 

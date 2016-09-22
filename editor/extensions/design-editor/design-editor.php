@@ -34,6 +34,31 @@ class SedDesignEditorExtension {
 
         $editor->design->load_modules();
 
+        add_action( 'wp_default_scripts'			, array( $this, 'register_scripts' ), 11 );
+
+        add_action( 'sed_enqueue_scripts'           , array( $this, 'enqueue_scripts' ) );
+
+    }
+
+    /**
+     * Register scripts for Customize Posts.
+     *
+     * @param WP_Scripts $wp_scripts Scripts.
+     */
+    public function register_scripts( WP_Scripts $wp_scripts ) {
+        $suffix = ( SCRIPT_DEBUG ? '' : '.min' ) . '.js';
+
+        $handle = 'sed-design-editor-settings';
+        $src = SED_EXT_URL . 'design-editor/assets/js/design-editor-settings' . $suffix ;
+        $deps = array( 'siteeditor' );
+
+        $in_footer = 1;
+        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
+
+    }
+
+    public function enqueue_scripts(){
+        wp_enqueue_script( 'sed-design-editor-settings' );
     }
 
 }

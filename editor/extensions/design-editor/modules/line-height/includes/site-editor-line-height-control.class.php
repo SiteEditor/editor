@@ -39,7 +39,7 @@ if ( ! class_exists( 'SiteEditorLineHeightControl' ) ) {
          * @access public
          * @var string
          */
-        public $category = 'style-editor';
+        public $category = 'style-editor'; 
 
         /**
          * The control is style option ?

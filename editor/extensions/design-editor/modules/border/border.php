@@ -79,53 +79,17 @@ final class SedDesignEditorBorder {
      */
     public function register_components(){
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-top-style-control.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-style-control.class.php';
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-top-style-field.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-style-field.class.php';
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-right-style-control.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-width-control.class.php';
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-right-style-field.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-width-field.class.php';
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-bottom-style-control.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-color-control.class.php';
 
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-bottom-style-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-left-style-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-left-style-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-top-width-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-top-width-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-right-width-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-right-width-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-bottom-width-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-bottom-width-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-left-width-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-left-width-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-top-color-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-top-color-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-right-color-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-right-color-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-bottom-color-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-bottom-color-field.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-left-color-control.class.php';
-
-        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-left-color-field.class.php';
+        require_once dirname( __FILE__ ) . DS . 'includes' . DS . 'site-editor-border-color-field.class.php';
 
     }
 
@@ -155,105 +119,205 @@ final class SedDesignEditorBorder {
      */
     public function register_options(){
 
-        $panels = array();
+        $panels = array(
+
+            'border_style_panel' =>  array(
+                'type'              => 'expanded',
+                'title'             => __('Border Style', 'site-editor'),
+                'description'       => __('Border Style Panel', 'site-editor'),
+                'priority'          => 8,
+                'capability'        => 'edit_theme_options' ,
+            ) ,
+
+            'border_top_style_panel' =>  array(
+                'type'              => 'expanded',
+                'title'             => __('Border Top Style', 'site-editor'),
+                'description'       => __('Border Top Style Panel', 'site-editor'),
+                'priority'          => 5,
+                'parent_id'         => 'border_style_panel',
+                'capability'        => 'edit_theme_options' ,
+            ) ,
+
+            'border_bottom_style_panel' =>  array(
+                'type'              => 'expanded',
+                'title'             => __('Border Bottom Style', 'site-editor'),
+                'description'       => __('Border Bottom Style Panel', 'site-editor'),
+                'priority'          => 7,
+                'parent_id'         => 'border_style_panel',
+                'capability'        => 'edit_theme_options' ,
+            ) ,
+
+            'border_right_style_panel' =>  array(
+                'type'              => 'expanded',
+                'title'             => __('Border Right Style', 'site-editor'),
+                'description'       => __('Border Right Style Panel', 'site-editor'),
+                'priority'          => 6,
+                'parent_id'         => 'border_style_panel',
+                'capability'        => 'edit_theme_options' ,
+            ) ,
+
+            'border_left_style_panel' =>  array(
+                'type'              => 'expanded',
+                'title'             => __('Border Left Style', 'site-editor'),
+                'description'       => __('Border Left Style Panel', 'site-editor'),
+                'priority'          => 8,
+                'parent_id'         => 'border_style_panel',
+                'capability'        => 'edit_theme_options' ,
+            ) ,
+
+            'border_color_panel' =>  array(
+                'type'              => 'expanded',
+                'title'             => __('Border Color', 'site-editor'),
+                'description'       => __('Border Color Panel', 'site-editor'),
+                'priority'          => 10,
+                'capability'        => 'edit_theme_options' ,
+            ) ,
+
+            'border_width_panel' =>  array(
+                'type'              => 'expanded',
+                'title'             => __('Border Width', 'site-editor'),
+                'description'       => __('Border Width Panel', 'site-editor'),
+                'priority'          => 11,
+                'capability'        => 'edit_theme_options' ,
+            ) 
+
+        );
 
         $fields = array(
 
             'border_top_style' => array( 
-                "type"              => "border-top-style" ,
-                "label"             => __('Border Top Style', 'site-editor'),
-                "description"       => __("Module Border Top Style", "site-editor"),     
-                'js_type'           =>  'dropdown',
-                'has_border_box'    =>   false ,  
-                'js_params'     =>  array(
-                    'options_selector'  => '.border-item',
-                    'selected_class'    => 'active_border' ,
-                ),          
+                "type"              => "border-style" ,
+                "label"             => __('Select Border', 'site-editor'),
+                'prop_side'         => 'top',
+                'has_border_box'    =>  false ,
+                'panel'             => 'border_top_style_panel' ,
+                'lock_id'           => 'border_style_lock'
             ),
 
-            'border_right_style' => array( 
-                "type"              => "border-right-style" ,
-                "label"             => __('Border Right Style', 'site-editor'),
-                "description"       => __("Module Border Right Style", "site-editor"),      
-                'js_type'           =>  'dropdown',
-                'has_border_box'    =>   false ,  
-                'js_params'     =>  array(
-                    'options_selector'  => '.border-item',
-                    'selected_class'    => 'active_border' ,
-                ),          
+            'border_right_style' => array(
+                "type"              => "border-style" ,
+                "label"             => __('Select Border', 'site-editor'),
+                'prop_side'         => 'right',
+                'has_border_box'    =>  false ,
+                'panel'             => 'border_right_style_panel' ,
+                'lock_id'           => 'border_style_lock'
             ),
 
-            'border_bottom_style' => array( 
-                "type"              => "border-bottom-style" ,
-                "label"             => __('Border Bottom Style', 'site-editor'),
-                "description"       => __("Module Border Bottom Style", "site-editor"),      
-                'js_type'           =>  'dropdown',
-                'has_border_box'    =>   false ,  
-                'js_params'     =>  array(
-                    'options_selector'  => '.border-item',
-                    'selected_class'    => 'active_border' ,
-                ),          
+            'border_bottom_style' => array(
+                "type"              => "border-style" ,
+                "label"             => __('Select Border', 'site-editor'),
+                'prop_side'         => 'bottom',
+                'has_border_box'    =>  false ,
+                'panel'             => 'border_bottom_style_panel',
+                'lock_id'           => 'border_style_lock'
             ),
 
-            'border_left_style' => array( 
-                "type"              => "border-left-style" ,
-                "label"             => __('Border Left Style', 'site-editor'),
-                "description"       => __("Module Border Left Style", "site-editor"),      
-                'js_type'           =>  'dropdown',
-                'has_border_box'    =>   false ,  
-                'js_params'     =>  array(
-                    'options_selector'  => '.border-item',
-                    'selected_class'    => 'active_border' ,
-                ),          
+            'border_left_style' => array(
+                "type"              => "border-style" ,
+                "label"             => __('Select Border', 'site-editor'),
+                'prop_side'         => 'left',
+                'has_border_box'    =>  false ,
+                'panel'             => 'border_left_style_panel',
+                'lock_id'           => 'border_style_lock'
+            ),
+
+            'border_style_lock' => array(
+                "type"              => "property-lock" ,
+                "label"             => __('lock borders styles Together', 'site-editor'),
+                "description"       => __("lock top , left , bottom , right borders styles Together", "site-editor"),
+                'panel'             => 'border_style_panel' ,
+                'setting_id'        => 'border_style_lock'
             ),
 
             'border_top_width' => array( 
-                "type"              => "border-top-width" ,
-                "label"             => __('Border Top Width', 'site-editor'),
-                "description"       => __("Module Border Top Width", "site-editor"),          
+                "type"              => "border-width" ,
+                "label"             => __('Top', 'site-editor'),
+                "description"       => __("Module Border Top Width", "site-editor"),
+                'prop_side'       => 'top',
+                'panel'             => 'border_width_panel' ,
+                'lock_id'           => 'border_width_lock'
             ),
 
             'border_right_width' => array( 
-                "type"              => "border-right-width" ,
-                "label"             => __('Border Right Width', 'site-editor'),
-                "description"       => __("Module Border Right Width", "site-editor"),          
+                "type"              => "border-width" ,
+                "label"             => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
+                "description"       => __("Module Border Right Width", "site-editor"),
+                'prop_side'       => 'right',
+                'panel'             => 'border_width_panel' ,
+                'lock_id'           => 'border_width_lock'
             ),
 
             'border_bottom_width' => array( 
-                "type"              => "border-bottom-width" ,
-                "label"             => __('Border Bottom Width', 'site-editor'),
-                "description"       => __("Module Border Bottom Width", "site-editor"),          
+                "type"              => "border-width" ,
+                "label"             => __('Bottom', 'site-editor'),
+                "description"       => __("Module Border Bottom Width", "site-editor"),
+                'prop_side'         => 'bottom',
+                'panel'             => 'border_width_panel' ,
+                'lock_id'           => 'border_width_lock'
             ),
 
             'border_left_width' => array( 
-                "type"              => "border-left-width" ,
-                "label"             => __('Border Left Width', 'site-editor'),
-                "description"       => __("Module Border Left Width", "site-editor"),          
+                "type"              => "border-width" ,
+                "label"             => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
+                "description"       => __("Border Left Width", "site-editor"),
+                'prop_side'         => 'left',
+                'panel'             => 'border_width_panel',
+                'lock_id'           => 'border_width_lock'
+            ),
+
+            'border_width_lock' => array(
+                "type"              => "property-lock" ,
+                "label"             => __('lock borders width Together', 'site-editor'),
+                "description"       => __("lock top , left , bottom , right borders width Together", "site-editor"),
+                'panel'             => 'border_width_panel' ,
+                'setting_id'        => 'border_width_lock'
             ),
 
             'border_top_color' => array( 
-                "type"              => "border-top-color" ,
-                "label"             => __('Border Top Color', 'site-editor'),
-                "description"       => __("Module Border Top Color", "site-editor"),          
+                "type"              => "border-color" ,
+                "label"             => __('Top', 'site-editor'),
+                "description"       => __("Module Border Top Color", "site-editor"),
+                'prop_side'         => 'top',
+                'panel'             => 'border_color_panel',
+                'lock_id'           => 'border_color_lock'
             ),
 
             'border_right_color' => array( 
-                "type"              => "border-right-color" ,
-                "label"             => __('Border Right Color', 'site-editor'),
-                "description"       => __("Module Border Right Color", "site-editor"),          
+                "type"              => "border-color" ,
+                "label"             => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
+                "description"       => __("Module Border Right Color", "site-editor"),
+                'prop_side'         => 'right',
+                'panel'             => 'border_color_panel' ,
+                'lock_id'           => 'border_color_lock'
             ),
 
             'border_bottom_color' => array( 
-                "type"              => "border-bottom-color" ,
-                "label"             => __('Border Bottom Color', 'site-editor'),
-                "description"       => __("Module Border Bottom Color", "site-editor"),          
+                "type"              => "border-color" ,
+                "label"             => __('Bottom', 'site-editor'),
+                "description"       => __("Module Border Bottom Color", "site-editor"),
+                'prop_side'         => 'bottom',
+                'panel'             => 'border_color_panel',
+                'lock_id'           => 'border_color_lock'
             ),
 
             'border_left_color' => array( 
-                "type"              => "border-left-color" ,
-                "label"             => __('Border Left Color', 'site-editor'),
-                "description"       => __("Module Border Left Color", "site-editor"),          
+                "type"              => "border-color" ,
+                "label"             => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
+                "description"       => __("Module Border Left Color", "site-editor"),
+                'prop_side'         => 'left',
+                'panel'             => 'border_color_panel' ,
+                'lock_id'           => 'border_color_lock'
             ),
+
+
+            'border_color_lock' => array(
+                "type"              => "property-lock" ,
+                "label"             => __('lock borders Color Together', 'site-editor'),
+                "description"       => __("lock top , left , bottom , right borders Color Together", "site-editor"),
+                'panel'             => 'border_color_panel' ,
+                'setting_id'        => 'border_color_lock'
+            )
+
         );
 
 

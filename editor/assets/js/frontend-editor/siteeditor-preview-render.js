@@ -414,7 +414,6 @@
                       case "border_left_style":
                       case "border_bottom_color":
                       case "border_bottom_style":
-                      case "font_family":
                       case "font_weight":
                       case "font_style":
                       case "text_decoration":
@@ -430,8 +429,22 @@
                       break;
                       case "background_position" :
 
-                		  var newVal = ( !to ) ? "initial" : to ;
-                          var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
+                          if( ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["parallax_background_image"] ) ) ){
+
+                              var isPlx = sedCss[api.currentCssSelector]["parallax_background_image"];
+
+                              if( ! isPlx ){
+                                  var newVal = ( !to ) ? "initial" : to + " !important" ; //alert( to );
+                                  var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
+                              }
+
+                          }else{
+
+                              var newVal = ( !to ) ? "initial" : to + " !important" ; //alert( to );
+                              var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
+
+                          }
+
 
                       break;
                       case "border_top_width" :
@@ -452,6 +465,11 @@
                           var newVal = ( !to && to != 0 ) ? "initial" : to + "px !important" ;
                           var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
 
+                      break;
+                      case "font_family":
+                          api.typography.loadFont( to );
+                          var newVal = ( !to ) ? "initial" : to + " !important" ;
+                          var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
                       break;
                       case "shadow" :
 
@@ -503,11 +521,26 @@
 
                           var ratioNum = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["parallax_background_ratio"] ) ) ? sedCss[api.currentCssSelector]["parallax_background_ratio"] : 0.5;
 
-                          _saveCustomCss( setting , to );
-
                           _setParallax( to , ratioNum );
 
-                          return ;
+                          if( ! to && !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_position"] )  ){
+
+                              var newVal = ( ! sedCss[api.currentCssSelector]["background_position"] ) ? "initial" : sedCss[api.currentCssSelector]["background_position"] + " !important" ;
+                              var css = api.currentCssSelector + "{background-position : " + newVal + ";}";
+
+                              styleSetting = "background_position";
+                              needToSave = false;
+
+                              _saveCustomCss( setting , to );
+
+                          }else{
+
+                              _saveCustomCss( setting , to );
+
+                              styleSetting = "background_position";
+                              needToSave = false;
+                              var css = "";
+                          }
 
                       break;
                       case "parallax_background_ratio" :
@@ -516,6 +549,31 @@
                               var ratioNum = to;
                               var isPlx = sedCss[api.currentCssSelector]["parallax_background_image"];
                               _setParallax( isPlx , to );
+
+                              if( ! isPlx && !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_position"] )  ){
+
+                                  var newVal = ( ! sedCss[api.currentCssSelector]["background_position"] ) ? "initial" : sedCss[api.currentCssSelector]["background_position"] + " !important" ;
+                                  var css = api.currentCssSelector + "{background-position : " + newVal + ";}";
+
+                                  styleSetting = "background_position";
+                                  needToSave = false;
+
+                                  _saveCustomCss( setting , to );
+
+                              }else{
+
+                                  _saveCustomCss( setting , to );
+
+                                  styleSetting = "background_position";
+                                  needToSave = false;
+                                  var css = "";
+
+                              }
+
+                          }else{
+
+                              _saveCustomCss( setting , to );
+                              return ;
                           }
 
                           _saveCustomCss( setting , to );
@@ -535,7 +593,7 @@
 
                           var sGradient = !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_gradient"] ) && !_.isEmpty( sedCss[api.currentCssSelector]["background_gradient"] ) && _.isObject( sedCss[api.currentCssSelector]["background_gradient"] ),
                               bgImage = _getBackgroundImage() ,
-                              isBgImage = bgImage && bgImage != "none"; alert( bgImage );
+                              isBgImage = bgImage && bgImage != "none";
 
                           var css = api.currentCssSelector + "{" + _getCssBackgroundImage( bgImage , isBgImage , sGradient ) + "}";
 
@@ -666,6 +724,7 @@
             _refreshParallaxElements();
         });
 
+        var _defaultBgColors = {};
 
         var _getGradient = function(){
 
@@ -673,7 +732,18 @@
                 gradient = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_gradient"] ) ) ? sedCss[api.currentCssSelector]["background_gradient"] : "";
 
             if( !_.isEmpty( gradient ) && _.isObject( gradient ) ){
-                var bgColor = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_color"] ) ) ? sedCss[api.currentCssSelector]["background_color"] : $(api.currentCssSelector).css("background-color");
+
+                var bgColor;
+
+                if(  !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_color"] ) ){
+                    bgColor = sedCss[api.currentCssSelector]["background_color"];
+                }else if( !_.isUndefined( _defaultBgColors[api.currentCssSelector] ) ){
+                    bgColor = _defaultBgColors[api.currentCssSelector];
+                }else{
+                    bgColor = $(api.currentCssSelector).css("background-color");
+                    _defaultBgColors[api.currentCssSelector] = bgColor;
+                }
+                //alert( sedCss[api.currentCssSelector]["background_color"] ); alert( $(api.currentCssSelector).css("background-color") );
 
                 bgColor = bgColor || "#000000";
 

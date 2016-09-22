@@ -41,11 +41,11 @@
 
         });
 
-        var modulesControls = _.filter( api.settings.controls , function( data , id){
+        /*var modulesControls = _.filter( api.settings.controls , function( data , id){
             return !_.isUndefined(data.category) && data.category == 'module-settings';
         });
 
-        api.modulesSettingsControls = _.groupBy( modulesControls , function(data , id){ return data.shortcode; });
+        api.modulesSettingsControls = _.groupBy( modulesControls , function(data , id){ return data.shortcode; });*/
 
         var allControls = _.map( api.settings.controls ,function( data , id ){
             var newData = _.clone( data );

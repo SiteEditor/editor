@@ -80,7 +80,39 @@ if ( ! class_exists( 'SiteEditorFontFamilyControl' ) ) {
          * @var string
          */
         public $style_props = "font-family";
-        
+
+        /**
+         * The select option group
+         *
+         * @access public
+         * @var string
+         */
+        public $optgroup = true;
+
+        /**
+         * The select groups
+         *
+         * @access public
+         * @var string
+         */
+        public $groups = array();
+
+        /**
+         * Renders the control wrapper and calls $this->render_content() for the internals.
+         *
+         * @since 3.4.0
+         */
+        protected function render_content() {
+
+            $this->groups = array(
+                "custom_fonts"     => __("Custom Fonts" , "site-editor") ,
+                "standard_fonts"   => __("Standard Fonts" , "site-editor") ,
+                "google_fonts"     => __("Google Fonts" , "site-editor") ,
+            );
+
+            parent::render_content();
+        }
+
         /**
          * Get the data to export to the client via JSON.
          *

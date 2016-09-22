@@ -17,7 +17,7 @@ if ( ! class_exists( 'SiteEditorBackgroundPositionField' ) ) {
     /**
      * Field overrides.
      */
-    class SiteEditorBackgroundPositionField extends SiteEditorField { 
+    class SiteEditorBackgroundPositionField extends SiteEditorField {
 
         /**
          * Related setting id for save in db

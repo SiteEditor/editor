@@ -128,7 +128,8 @@ class PBButtonShortcode extends PBShortcodeClass{
             "animation"  =>  array(
                 "type"          => "animation" ,
                 "label"         => __("Animation Settings", "site-editor"),
-            ),
+            )
+
         );
 
       return $params;

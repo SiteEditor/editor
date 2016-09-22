@@ -134,7 +134,7 @@ if ( ! class_exists( 'SiteEditorBackgroundPositionControl' ) ) {
                 <legend id="sed_pb_sed_image_image_settings">
                     <a href="javascript:void(0)" class=""  title="<?php echo __("background position" ,"site-editor");  ?>" id="<?php echo $bg_position_control;?>_btn" >
                         <span class="fa f-sed icon-backgroundposition fa-lg "></span>
-                        <span class="el_txt"><?php echo __("background position" ,"site-editor");  ?> </span>
+                        <span class="el_txt"><?php echo esc_html( $this->label );?> </span>
                     </a>
                 </legend>
                 <div  id="sed-app-control-<?php echo $bg_position_control;?>">
@@ -152,7 +152,7 @@ if ( ! class_exists( 'SiteEditorBackgroundPositionControl' ) ) {
                        </li>
                     </ul>
                 </div>
-            </fieldset>           
+            </fieldset>
 
             <?php
         }

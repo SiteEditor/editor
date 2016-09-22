@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'SiteEditorFontStyleControl' ) ) {
 
-    if( ! class_exists( 'SiteEditorSelectControl' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-select-control.class.php';
+    if( ! class_exists( 'SiteEditorRadioButtonsetControl' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-radio-buttonset-control.class.php';
     }    
  
 	/**
@@ -23,7 +23,7 @@ if ( ! class_exists( 'SiteEditorFontStyleControl' ) ) {
 	 *
 	 * Class SiteEditorFontStyleControl
 	 */
-	class SiteEditorFontStyleControl extends SiteEditorSelectControl {
+	class SiteEditorFontStyleControl extends SiteEditorRadioButtonsetControl {
 
 		/**
 		 * The control type.
@@ -63,7 +63,7 @@ if ( ! class_exists( 'SiteEditorFontStyleControl' ) ) {
          * @access public
          * @var string
          */
-        public $js_type = "select";
+        public $js_type = "radio-buttonset";
 
         /**
          * Css Selector for apply style

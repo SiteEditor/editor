@@ -664,34 +664,9 @@ class PBShortcodeClass{
 
         $this->add_style_settings();
 
-        ob_start();
-        ?>
-        <div class="sed_style_editor_panel_container">
-
-        </div>
-        <div id="modules_styles_settings_<?php echo $this->shortcode->name;?>_design_group_level_box" data-multi-level-box="true" data-title="" class="sed-dialog content " >
-
-            <div class="styles_settings_container">
-
-            </div>
-
-        </div>
-        <?php
-        $dialog_content = ob_get_clean();
-
         if( $this->has_styles_settings === true ){
-            $params[ 'design_panel' ] = array(
-                'type'          => 'panel-button',
-                'label'         => __('Custom Edit Style',"site-editor"),
-                'description'   => '',
-                'button_style'  => 'blue' ,
-                'atts'          => array(
-                    'class'         =>  'sed_style_editor_btn' 
-                 ) ,   
-                'panel_title'   => __('Custom Edit Style',"site-editor") ,
-                'panel_content' => $dialog_content ,
-                'priority'      => 2
-            );
+            //$option_group :: shortcode name , $css_setting_type :: "module"
+            $params[ 'design_panel' ] = SED()->editor->design->get_design_options_field( $this->shortcode->name , "module" );
         }
 
         global $sed_pb_options_engine;
@@ -883,9 +858,7 @@ class PBShortcodeClass{
         return $param;
     }
 
-    function add_style_settings(){
-
-        global $site_editor_app;
+    public function add_style_settings(){
 
         $settings = $this->custom_style_settings();
 
@@ -895,51 +868,11 @@ class PBShortcodeClass{
 
             $this->style_editor_settings = $settings;
 
-            $panels = array();
-            $controls = array();
             $option_group = $this->shortcode->name . "_design_group";
 
-            /**
-             * Arguments for each $setting
-             * array( $id , $selector , $style_group , $title)
-             */
-            foreach( $this->style_editor_settings AS $setting ){
-                if( is_array( $setting ) && count( $setting ) == 4 && is_array( $setting[2] ) ){
+            $control_prefix = $option_group;
 
-                    $panel_id = $this->shortcode->name . '_' . $setting[0] . '_panel';
-
-                    $panels[$panel_id] = array(
-                        'title'         =>  $setting[3] ,
-                        'capability'    => 'edit_theme_options' ,
-                        'type'          => 'expanded' ,
-                        'description'   => '' ,
-                        'parent_id'     => 'root' ,
-                        'priority'      => 9 ,
-                        'option_group'  => $option_group  ,
-                        'atts'      =>  array(
-                            'class'             => "design_ac_header" ,
-                            'data-selector'     => $setting[1]
-                        )
-                    );
-
-                    if( !empty($setting[2]) ){
-                        foreach( $setting[2] AS $control ){
-                            $controls[$this->shortcode->name . '_' . $setting[0] . '_' . $control ] = SED()->editor->design->add_style_control( $control , $panel_id , $setting[1] , $option_group );
-                        }
-                    }
-
-                }
-            }
-
-            $new_options = sed_options()->fix_controls_panels_ids( $controls , $panels , $option_group );
-
-            $new_params = $new_options['fields'];
-
-            $new_panels = $new_options['panels'];
-
-            sed_options()->add_fields( $new_params );
-
-            sed_options()->add_panels( $new_panels );
+            SED()->editor->design->add_style_options( $settings , $option_group , $control_prefix , $this->shortcode->name );
 
         }
 

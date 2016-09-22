@@ -118,11 +118,12 @@ final class SedDesignEditorTrancparency {
             'trancparency' => array(
                 "type"              => "trancparency" ,
                 "label"             => __('Trancparency', 'site-editor'),
-                "description"       => __("Trancparency", "site-editor"),  
-                'js_params'     =>  array(
-                    'min'   =>  0 ,
-                    'max'     => 100,
-                ),        
+                "description"       => __("Trancparency", "site-editor"),
+                'js_params'         => array(
+                    'step'          => 1 ,
+                    "min"           => 0 ,
+                    "max"           => 100 ,
+                ),
             ),
 
         );

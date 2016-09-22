@@ -14,14 +14,14 @@ if ( ! defined( 'ABSPATH' ) )  {
 
 if ( ! class_exists( 'SiteEditorTextDecorationField' ) ) {
 
-    if( ! class_exists( 'SiteEditorSelectField' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-select-field.class.php';
+    if( ! class_exists( 'SiteEditorRadioButtonsetField' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/fields/site-editor-radio-buttonset-field.class.php';
     } 
     
     /**
      * Field overrides.
      */
-    class SiteEditorTextDecorationField extends SiteEditorSelectField { 
+    class SiteEditorTextDecorationField extends SiteEditorRadioButtonsetField {
 
         /**
          * Related setting id for save in db
@@ -61,6 +61,25 @@ if ( ! class_exists( 'SiteEditorTextDecorationField' ) ) {
             }
 
             $this->default = '';
+
+        }
+
+        /**
+         * Sets the $choices.
+         *
+         * @access protected
+         */
+        protected function set_choices() {
+
+            if ( is_array( $this->choices ) && !empty( $this->choices ) ) {
+                return ;
+            }
+
+            $this->choices = array(
+                'none'              => __('none', 'site-editor'),
+                'underline'         => __('underline', 'site-editor') ,
+                'line-through'      => __('line-through', 'site-editor')
+            );
 
         }
 

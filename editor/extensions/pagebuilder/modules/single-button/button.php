@@ -122,17 +122,17 @@ class PBButtonShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 10 10 10" ,
+                "default"        => "10 10 10 10" ,
             ),
             "align"  =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             ),
             "animation"  =>  array(
                 "type"          => "animation" ,
                 "label"         => __("Animation Settings", "site-editor"),
-            ),
+            )
         );
 
       return $params;

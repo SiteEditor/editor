@@ -245,7 +245,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'text',
             'label'         => __('Url : ', 'site-editor'),
             'description'   => __('Add Link to any module elements that needs a link.', 'site-editor') ,
-            'value'         => $values['link'],
+            'default'         => $values['link'],
             'placeholder'   => 'E.g www.siteeditor.org' ,
             'panel'         => 'link_to_panel'
         );
@@ -254,7 +254,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'radio',
             'label'         => __('Link Target : ', 'site-editor'),
             'description'   => __('Add Link target : open link in new window or same window', 'site-editor') ,
-            'value'         => $values['link_target'],
+            'default'         => $values['link_target'],
             'options'       => array(
                 "_blank"        => __('Open in new window', 'site-editor')  ,
                 "_self"         => __('Open in same window', 'site-editor')  ,
@@ -283,7 +283,7 @@ final class SedPageBuilderOptionsManager{
         $panel_title = isset($args['label']) ?  $args['label'] : __('Spacing',"site-editor") ;
         $description = isset($args['description']) ?  $args['description'] : '' ;
         $priority = isset($args['priority']) ?  $args['priority'] : 100 ;
-        $value = isset($args['value']) ?  $args['value'] : "0 0 0 0";
+        $value = isset($args['default']) ?  $args['default'] : "0 0 0 0";
 
         /**
          * Parse incoming $args into an array and merge it with $defaults
@@ -308,132 +308,84 @@ final class SedPageBuilderOptionsManager{
         list( $padding_top , $padding_left , $padding_bottom , $padding_right ) = $values;
 
         $settings = array();
-        $lock_id = "sed_pb_" . $this->group_name . "_spacing_lock";
-
-        //control_prefix === $this->group_name
-
-        $spinner_class = 'sed-spacing-spinner-' . $this->group_name;
-        $spinner_class_selector = '.' . $spinner_class;
-        $control_prefix = $this->group_name;
-        $sh_name_c = $control_prefix. "_spacing_";
-
-        $controls = array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" );
 
         $settings['spacing_top'] = array(
-            'type' => 'number',
-            'after_field'  => 'px',
-            'value' => $padding_top,
-            'label' => __('Top', 'site-editor'),
-            'description' => __('Change Module Top Spacing', 'site-editor'),
-            'atts'  => array(
-                "class" =>   $spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
-                ),
-                'min'   =>  0 ,
-                'selector' =>  'sed_current' ,
-                'style_props'       =>  "padding-top" ,
+            'type'              => 'padding',
+            'after_field'       => 'px',
+            'default'           => $padding_top,
+            "prop_side"         => "top" ,
+            'label'             => __('Top', 'site-editor'),
+            'description'       => __('Change Module Top Spacing', 'site-editor'),
+            'js_params'         =>  array(
+                'min'   =>  0  ,
             ),
-            'category'  => "style-editor" ,
-            'setting_id'     =>  "padding_top" ,
-            "panel"     =>  $panel_id ,
-            'has_border_box'   => false
+            'category'          => "style-editor" ,
+            'selector'          =>  'sed_current' ,
+            "panel"             =>  $panel_id ,
+            'lock_id'           => 'spacing_lock',
+            'has_border_box'    => false
         );
 
         $settings['spacing_left'] = array(
-            'type' => 'number',
-            'after_field'  => 'px',
-            'value' => $padding_left,
-            'label' => is_rtl() ? __('Right', 'site-editor') : __('Left', 'site-editor'),
-            'description' => __('Change Module Left Spacing', 'site-editor') ,
-            'atts'  => array(
-                "class" =>   $spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "bottom" )
-                ),
+            'type'              => 'padding',
+            'after_field'       => 'px',
+            'default'           => $padding_left,
+            "prop_side"         => "left" ,
+            'label'             => is_rtl() ? __('Right', 'site-editor') : __('Left', 'site-editor'),
+            'description'       => __('Change Module Left Spacing', 'site-editor') ,
+            'js_params'         =>  array(
                 'min'   =>  0  ,
-                'selector' =>  'sed_current' ,
-                'style_props'       =>  "padding-left" ,
             ),
-            'category'  => "style-editor" ,
-            'setting_id'     =>  "padding_left" ,
-            "panel"     =>  $panel_id ,
-            'has_border_box'   => false
+            'category'          => "style-editor" ,
+            'selector'          =>  'sed_current' ,
+            "panel"             =>  $panel_id ,
+            'lock_id'           => 'spacing_lock',
+            'has_border_box'    => false
         );
 
         $settings['spacing_right'] = array(
-            'type' => 'number',
-            'after_field'  => 'px',
-            'value' => $padding_right,
-            'label' => is_rtl() ? __('Left', 'site-editor') : __('Right', 'site-editor'),
-            'description' => __('Change Module Right Spacing', 'site-editor') ,
-            'atts'  => array(
-                "class" =>   $spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "left" , $sh_name_c . "bottom" )
-                ),
-                'min'   =>  0 ,
-                'selector' =>  'sed_current' ,
-                'style_props'       =>  "padding-right" ,
+            'type'              => 'padding',
+            'after_field'       => 'px',
+            'default'           => $padding_right,
+            "prop_side"         => "right" ,
+            'label'             => is_rtl() ? __('Left', 'site-editor') : __('Right', 'site-editor'),
+            'description'       => __('Change Module Right Spacing', 'site-editor') ,
+            'js_params'         =>  array(
+                'min'   =>  0  ,
             ),
-            'category'  => "style-editor" ,
-            'setting_id'     =>  "padding_right" ,
-            "panel"     =>  $panel_id ,
-            'has_border_box'   => false
+            'category'          => "style-editor" ,
+            'selector'          =>  'sed_current' ,
+            "panel"             =>  $panel_id ,
+            'lock_id'           => 'spacing_lock',
+            'has_border_box'    => false
         );
 
         $settings['spacing_bottom'] = array(
-            'type' => 'number',
-            'after_field'  => 'px',
-            'value' => $padding_bottom,
-            'label' => __('Bottom', 'site-editor'),
-            'description' => __('Change Module Bottom Spacing', 'site-editor') ,
-            'atts'  => array(
-                "class" =>   $spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector ,
-                    'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" )
-                ),
+            "type"              => "padding" ,
+            'after_field'       => 'px',
+            'default'           => $padding_bottom,
+            "prop_side"         => "bottom" ,
+            "label"             => __('Bottom', 'site-editor'),
+            'description'       => __('Change Module Bottom Spacing', 'site-editor') ,
+            'js_params'         =>  array(
                 'min'   =>  0  ,
-                'selector' =>  'sed_current' ,
-                'style_props'       =>  "padding-bottom" ,
             ),
-            'category'  => "style-editor" ,
-            'setting_id'     =>  "padding_bottom" ,
-            "panel"     =>  $panel_id ,
-            'has_border_box'   => false
+            'category'          => "style-editor" ,
+            'selector'          => 'sed_current' ,
+            "panel"             => $panel_id ,
+            'lock_id'           => 'spacing_lock',
+            'has_border_box'    => false
         );
 
         $settings['spacing_lock'] = array(
-            'type'          => 'checkbox',
-            'value'         => false,
-            'label'         => __('lock Spacing Together', 'site-editor'),
-            'description'   => __('Change Top , bottom , left and right Spacing Together', 'site-editor') ,
-            'js_type'       =>  "spinner_lock" ,
-            'atts'          => array(
-                "class"     =>   "sed-lock-spinner"
-            ) ,
-            'js_params'     =>  array(
-                'spinner' =>  $spinner_class_selector ,
-                'controls' => array( $sh_name_c . "top" , $sh_name_c . "right" , $sh_name_c . "left" , $sh_name_c . "bottom" )
-            ),
-            "panel"     =>  $panel_id ,
-            'has_border_box'   => false
+            'type'              => 'property-lock',
+            'default'           => false,
+            'label'             => __('lock Spacing Together', 'site-editor'),
+            'description'       => __('Change Top , bottom , left and right Spacing Together', 'site-editor') ,
+            "panel"             =>  $panel_id ,
+            'category'          => "style-editor" ,
+            'setting_id'        => "spacing_lock" ,
+            'has_border_box'    => false
         );
 
         return $settings;
@@ -451,16 +403,9 @@ final class SedPageBuilderOptionsManager{
          * Define the array of defaults
          */
         $defaults = array(
-            'type'          => 'radio-buttonset',
-            'value'         => "" ,
+            'default'         => "" ,
             'label'         => __('Align', 'site-editor'),
-            'description'   => __('Module container alignment', 'site-editor'),
-            'choices' =>array(
-                'initial'       => __('Default', 'site-editor'),
-                'left'          => is_rtl() ?  __('Right', 'site-editor') : __('Left', 'site-editor'),
-                'center'        => __('Center', 'site-editor'),
-                'right'         => is_rtl() ? __('Left', 'site-editor') :  __('Right', 'site-editor'),
-            )
+            'description'   => __('Module container alignment', 'site-editor')
         );
 
         /**
@@ -469,13 +414,8 @@ final class SedPageBuilderOptionsManager{
         $param = wp_parse_args( $args, $defaults ) ;
 
         $required = array(
-            'js_params'     =>  array(
-                'selector'          =>  'sed_current' ,
-                'style_props'       =>  "text-align" ,
-            ),
-
+            "type"              => "text-align" ,
             'category'          => "style-editor" ,
-            'setting_id'        =>  "text_align" ,
             'panel'             => 'module_general_settings'
         );
 
@@ -527,7 +467,7 @@ final class SedPageBuilderOptionsManager{
          */
         $defaults = array(
             'type'          => 'radio-buttonset',
-            'value'         => 'wide' ,
+            'default'         => 'wide' ,
             'label'         => __('Length', 'site-editor'),
             'description'   => __('container Length', 'site-editor'),
             'choices'       => array(
@@ -545,7 +485,7 @@ final class SedPageBuilderOptionsManager{
 
     }
 
-    /*'value' => "1000,1,1000,,0",
+    /*'default' => "1000,1,1000,,0",
     function add_animation( $args ){}
     */
 
@@ -554,7 +494,7 @@ final class SedPageBuilderOptionsManager{
 
         return array(
             'type'          => 'skin',
-            'value'         => $value,
+            'default'         => $value,
             'label'         => __('Change Skin', 'site-editor'),
             'button_style'  => 'black',
             'priority'      => 2
@@ -568,7 +508,7 @@ final class SedPageBuilderOptionsManager{
         $label      = isset($args['label']) ?  $args['label'] : __('Items Change Skin',"site-editor") ;
         $sub_module = isset($args['sub_module']) ?  $args['sub_module'] : '' ;
         $priority   = isset($args['priority']) ?  $args['priority'] : 100 ;
-        $value      = isset($args['value']) ?  $args['value'] : "default";
+        $value      = isset($args['default']) ?  $args['default'] : "default";
 
         $setting = $this->add_skin_setting( $value );
         $setting["label"]  = $label;
@@ -649,7 +589,7 @@ final class SedPageBuilderOptionsManager{
                 "attachment"     => __('Media Library', 'site-editor')  ,
                 "external"       => __('External Link', 'site-editor')  ,
             ),
-            'value'         => $values['image_source'],
+            'default'         => $values['image_source'],
             'panel'         => 'sed_select_image_panel'
         );
 
@@ -657,7 +597,7 @@ final class SedPageBuilderOptionsManager{
             'label'         => __('External link', 'site-editor'),
             'description'   => __('Enter an external link.', 'site-editor'),
             'type'          => 'text',
-            'value'         => $values["image_url"],
+            'default'         => $values["image_url"],
             'panel'         => 'sed_select_image_panel',
             'dependency' => array(
                 'controls'  =>  array(
@@ -671,7 +611,7 @@ final class SedPageBuilderOptionsManager{
             'label'             => __('Select image', 'site-editor'),
             'description'       => __('Select image from media library.', 'site-editor'),
             'type'              => 'image',
-            'value'             => $values["attachment_id"],
+            'default'             => $values["attachment_id"],
             'panel'             => 'sed_select_image_panel' ,
             "js_params"     => array(
                 "rel_size_control"          => $this->group_name . "_default_image_size"
@@ -688,7 +628,7 @@ final class SedPageBuilderOptionsManager{
             'label'         => __('Select Image Size', 'site-editor'),
             'description'   => __('Select a Image Size Or Select Custom size for enter size in px', 'site-editor'),
             'type'          => 'image-size',
-            'value'         => $values["default_image_size"],
+            'default'         => $values["default_image_size"],
             'js_params'     =>  array(
                 "has_custom_size"   => true
             ),
@@ -713,7 +653,7 @@ final class SedPageBuilderOptionsManager{
             'label'         => __('Custom Image Size', 'site-editor'),
             'description'   => __('Enter custom size in pixels (Example: 100x300 (Width x Height)).', 'site-editor'),
             'type'          => 'text',
-            'value'         => $values["custom_image_size"],
+            'default'         => $values["custom_image_size"],
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
                 'controls'  =>  array(
@@ -734,7 +674,7 @@ final class SedPageBuilderOptionsManager{
             'label'         => __('Custom Image Size', 'site-editor'),
             'description'   => __('Enter custom size in pixels (Example: 100x300 (Width x Height)).', 'site-editor'),
             'type'          => 'text',
-            'value'         => $values["external_image_size"],
+            'default'         => $values["external_image_size"],
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
                 'controls'  =>  array(

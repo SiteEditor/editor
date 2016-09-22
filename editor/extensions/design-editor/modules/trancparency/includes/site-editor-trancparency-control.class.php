@@ -14,8 +14,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'SiteEditorTrancparencyControl' ) ) {
 
-    if( ! class_exists( 'SiteEditorNumberControl' ) ) {
-        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-number-control.class.php';
+    if( ! class_exists( 'SiteEditorSliderControl' ) ) {
+        require_once SED_EXT_PATH . '/options-engine/includes/controls/site-editor-slider-control.class.php';
     }   
  
 	/**
@@ -23,7 +23,7 @@ if ( ! class_exists( 'SiteEditorTrancparencyControl' ) ) {
 	 *
 	 * Class SiteEditorTrancparencyControl
 	 */
-	class SiteEditorTrancparencyControl extends SiteEditorNumberControl {
+	class SiteEditorTrancparencyControl extends SiteEditorSliderControl {
 
 		/**
 		 * The control type.
@@ -63,7 +63,7 @@ if ( ! class_exists( 'SiteEditorTrancparencyControl' ) ) {
          * @access public
          * @var string
          */
-        public $js_type = "number";
+        public $js_type = "slider";
 
         /**
          * Css Selector for apply style

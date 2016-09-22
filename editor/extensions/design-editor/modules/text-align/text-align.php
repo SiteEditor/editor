@@ -117,14 +117,8 @@ final class SedDesignEditorTextAlign {
 
             'text_align' => array(
                 "type"              => "text-align" ,
-                "label"             => __('line height', 'site-editor'),
-                "description"       => __("line height:", "site-editor"),  
-                'choices' =>array(
-                    'left'      => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
-                    'center'    => __('Center', 'site-editor'),
-                    'right'     => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
-                    'justify'   => __('justify', 'site-editor'),
-                ),        
+                "label"             => __('Text Align', 'site-editor'),
+                "description"       => __("Text Alignment", "site-editor"),
             ),
 
         );

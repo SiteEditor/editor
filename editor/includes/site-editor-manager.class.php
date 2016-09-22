@@ -1884,9 +1884,7 @@ class SiteEditorManager{
 
                 ?>
                 <script type="text/html"  id="group_settings_<?php echo $group_id;?>_tmpl" >
-                    <?php if( $group_id == "border") echo '<div class="accordion-panel-settings">';?>
                     <?php echo $group->get_content();?>
-                    <?php if( $group_id == "border") echo '</div>';?>
                 </script>
                 <?php
 

@@ -14,6 +14,7 @@
     api.modulesShortcodesAttrs = api.modulesShortcodesAttrs || {} ;
     api.createRelations = api.createRelations || {};
     api.currenStyleEditorContolsValues = api.currenStyleEditorContolsValues || {};
+    api.lockControlsCache = api.lockControlsCache || {};
 
     api.SiteEditorControls = api.Control.extend({
 
@@ -70,7 +71,7 @@
 
         },
 
-        refresh : function( val ) { 
+        refresh : function( val , lockMode ) {
             var control = this ;
 
             if( this.isModuleControl ){
@@ -102,10 +103,8 @@
             if( this.isStyleControl ){
                 var currentCssSelector;
 
-                if( this.cssSettingType == "module" && this.cssSelector ){
+                if( this.cssSettingType == "module" ){
                     currentCssSelector = ( this.cssSelector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + this.cssSelector : '[sed_model_id="' + api.currentTargetElementId + '"]';
-                }else if( this.cssSettingType == "module" ){
-                    currentCssSelector = api.currentCssSelector;
                 }else{
                     currentCssSelector = this.cssSelector;
                 }
@@ -118,7 +117,7 @@
                 if( _.isUndefined( api.currenStyleEditorContolsValues[currentCssSelector] ) )
                     api.currenStyleEditorContolsValues[currentCssSelector] = {};
 
-                api.currenStyleEditorContolsValues[currentCssSelector][settingId] = val; 
+                api.currenStyleEditorContolsValues[currentCssSelector][settingId] = val;
             }
 
             this.setValue( val );
@@ -132,6 +131,8 @@
             if( !_.isUndefined( control.params.sub_category ) && !_.isEmpty( control.params.sub_category ) ){
                 api.Events.trigger("afterControlValueRefresh" , control.params.sub_category , control , val );
             }
+
+            this.refreshLockControls( val , lockMode );
 
         },
 
@@ -158,6 +159,16 @@
                     cValue = elementAttrs[control.attr];
                     this.setAtts( elementAttrs  , "all");
 
+                }else{
+                    cValue = control.defaultValue;
+                }
+
+            }else if( this.isStyleControl ){
+
+                var sValue = api.appStyleEditorSettings.getCurrentValue( control.id , control.params , control.cssSelector , control.cssSettingType  );
+
+                if( !_.isNull( sValue ) ){
+                    cValue = _.clone( sValue );
                 }else{
                     cValue = control.defaultValue;
                 }
@@ -196,6 +207,57 @@
                   api.modulesShortcodesAttrs[this.shortcode] =  values;
               break;
             }
+
+        },
+
+        refreshLockControls : function( val , lockMode ){
+
+            var control = this;
+
+            if( !_.isUndefined( control.params.lock_id ) && ( _.isUndefined( lockMode ) || lockMode === false ) ){
+
+                var LockerControl = api.control.instance( control.params.lock_id );
+
+                if( LockerControl && !_.isUndefined( LockerControl.currentValue ) && LockerControl.currentValue ){
+
+                    var lockControlsParams = this.findLockControls( LockerControl.id ),
+                        lockControls = []; console.log( "-----------lockControlsParams---------" , lockControlsParams );
+
+                    _.each( lockControlsParams , function( data ){
+
+                        var controlId = data.control_id,
+                            lockControl = api.control.instance( controlId );
+
+                        lockControls.push( lockControl );//currentValue
+
+                    });
+
+                    _.each( lockControls , function( control ){
+
+                        control.refresh( val , true );
+
+                        control.update( val );
+
+                    });
+
+                }
+
+
+            }
+
+        },
+
+        findLockControls : function( id ){
+
+            if( !_.isUndefined( api.lockControlsCache[id] ) ){
+                return api.lockControlsCache[id];
+            }
+
+            var lockControls = _.where( _.values( api.settings.controls ) , { lock_id : id } );
+
+            api.lockControlsCache[id] = lockControls;
+
+            return lockControls;
 
         },
 
@@ -398,6 +460,63 @@
 
         _update: function( val ){
             this.spinner.val( val );
+        }
+
+    });
+
+    api.LockControl = api.SiteEditorControls.extend({
+
+        _ready: function() {
+
+            var control = this ,
+                lockElement = this.container.find('.sed-element-control');
+
+            this.lockElement = lockElement;
+
+            lockElement.change(function(){
+
+                var isChecked = $(this).prop('checked');
+
+                if(isChecked){
+
+                    var lockControlsParams = control.findLockControls( control.id ),
+                        lockControls = [];
+
+                    _.each( lockControlsParams , function( data ){
+
+                        var controlId = data.control_id,
+                            lockControl = api.control.instance( controlId );
+
+                        lockControls.push( lockControl );//currentValue
+
+                    });
+
+                    //var minCorner = Math.min.apply(Math, corners);
+
+                    var firstVal = lockControls[0].currentValue;
+
+                    _.each( lockControls , function( control ){
+
+                        if( control.id !== lockControls[0].id ) {
+
+                            control.refresh(firstVal);
+
+                            control.update(firstVal);
+
+                        }
+
+                    });
+
+                }
+
+                control.refresh( isChecked );
+
+            });
+
+        } ,
+
+        _update: function( val ){
+            this.lockElement.prop( 'checked', val );
         }
 
     });
@@ -691,71 +810,14 @@
 
             this.element.val( to );
 
+            this.element.trigger('change.select2');
+
   		},
   		getVal: function() {
   			return this.element.val();
   		}
   	};
 
-	/*api.StyleEditorElements = api.SiteEditorControls.extend({
-		ready: function() {
-			var control = this,
-                $thisValue = control.setting() ,
-                element = control.container.find('.sed-module-element-control');
-
-            control.defaultValue = control.params.default_value || "";
-
-            control.targetElement = api.currentCssSelector;
-                                           ////api.log( element );
-            this.formModel = new api.FormModel( element , {
-                refresh  : function( val ){
-                    if(_.isUndefined( control.targetElement )){
-                        alert("pls ad control.targetElement = api.currentTargetElementId; instade of this if condition");
-                        return ;
-                    }
-                    control.previewer.currentSelector = control.targetElement;
-                    //set value
-                    $thisValue[control.targetElement] = val;
-
-					control.currentValue = val;
-                    control.setting.set( $thisValue );
-
-					if( !_.isUndefined( control.params.shortcode ) && !_.isUndefined( control.params.attr_name ) )
-						api.Events.trigger("moduleControlRefresh" , control.params.shortcode , control.params.attr_name , val );
-                }
-            });
-
-            this.update();
-
-		},
-
-        update: function( targetElement ){
-            var control = this,$thisValue = control.setting();
-
-            control.targetElement = ( !_.isUndefined( targetElement ) && !_.isObject( targetElement ) ) ? targetElement : api.currentCssSelector;
-
-            if( control.targetElement && !_.isUndefined( $thisValue[control.targetElement] )  ){
-                attrValue = $thisValue[control.targetElement];
-            }else{
-                attrValue = control.defaultValue;
-
-				if( !_.isUndefined( control.params.force_refresh_setting ) && control.params.force_refresh_setting ){
-
-					control.previewer.currentSelector = control.targetElement;
-					//set value
-					$thisValue[control.targetElement] = _.clone( attrValue );
-					control.setting.set( $thisValue );
-
-				}
-
-            }
-
-			control.currentValue = attrValue;
-
-            this.formModel.updateField( attrValue );
-        }
-
-	});*/
     //api.ModulesElement
     api.SiteEditorElements = api.SiteEditorControls.extend({
 
@@ -1797,6 +1859,9 @@
             var animateSettings = val.split(",");
 
             this.updateField("animateType" , animateSettings[3]);
+
+            this.animateType.trigger('change.select2');
+
             this.updateField("duration" , animateSettings[2]);
             this.updateField("delay" , animateSettings[0]);
             this.updateField("offset" , animateSettings[4]);
@@ -2032,6 +2097,7 @@
         }
     }; */
 
+
     /*
         //only one control
         "dependency"    => array(
@@ -2099,8 +2165,10 @@
 
                     var control = api.control.instance( data.control_id );
 
-                   if( !_.isUndefined( control ) && !_.isUndefined( control.currentValue ) )
-                      self.set( group , control.id , control.currentValue );
+                   if( !_.isUndefined( control ) && !_.isUndefined( control.currentValue ) ) {
+                       self.set(group, control.id, control.currentValue);
+                       api.Events.trigger("after_apply_single_setting_relations_update", group, control, control.currentValue);
+                   }
 
                 });
 
@@ -2120,13 +2188,13 @@
              */
             this.group          = group;
             this.currentId      = id;
-            this.value          = value;
+            this.value          = _.isString( value ) ? $.trim( value ) : value;
 
             this.renderRelations();
         },
 
         renderRelations : function(  ){
-            var relations = this.getRelations() , self = this;
+            var relations = this.getRelations( this.currentId ) , self = this;
 
             //console.log( "group" , this.group ,"   relations" , relations , "  this.currentId  " , this.currentId , "   value   " , this.value );
 
@@ -2199,23 +2267,42 @@
                     isPanel = ( !_.isUndefined(control.is_panel) && control.is_panel ) ? true: false;
 
                 if( ($.inArray( self.value , control.relValues) != -1 && control.type == "include") ||
-                      ($.inArray( self.value , control.relValues) == -1 && control.type == "exclude")   ){
+                      ($.inArray( self.value , control.relValues) == -1 && control.type == "exclude") ){
 
                     var value ;
                     /*if( !_.isUndefined(control.value) )
                         value = control.value;*/
 
                     if( control.relation.toLowerCase()  == "and" )
-                        showField = self.multiRelations( control.control , type );
+                        showField = self.multiRelations( control.control , control.relation.toLowerCase() );
 
                     if( showField )
                         self._showItem( control.control , isPanel );  //value , control.relValues
                     else
                         self._hideItem( control.control , isPanel );  //value , control.relValues
 
-                }else
-                    self._hideItem( control.control , isPanel );  //control.value , control.relValues
+                }else {
+
+                    showField = false;
+
+                    if( control.relation.toLowerCase()  == "or" ) {
+                        showField = self.multiRelations(control.control, control.relation.toLowerCase());
+                    }
+
+                    if( showField )
+                        self._showItem( control.control , isPanel );  //value , control.relValues
+                    else
+                        self._hideItem( control.control , isPanel );  //value , control.relValues
+
+                }
+
+
             });
+
+            /*_.each( controls , function( control ){
+                var setting = api.control.instance( control.control );
+                self.set( self.group , control.control , setting.currentValue );
+            });*/
         },
 
         /*
@@ -2224,8 +2311,8 @@
         * @cType :: control type include : controls || values || panels
         * @return :: boolean
         */
-        multiRelations : function( id , cType ){
-            var self = this , showField = true ,
+        multiRelations : function( id , operator ){
+            var self = this , showField = (operator === "and") ,
                 controls;
 
             controls = api.settingsRelations[this.group][id].controls;
@@ -2257,11 +2344,20 @@
                             type        = ( !_.isUndefined(depC.type) ) ? depC.type.toLowerCase() : "include";
                                   ////api.log( currValue , " : " , relValues );
 
-                        if( ($.inArray( currValue , relValues) != -1 && type == "exclude") ||
-                              ($.inArray( currValue , relValues) == -1 && type == "include") ){
-                              //alert(showField);
+                        if(operator === "and") {
+                            if (($.inArray(currValue, relValues) != -1 && type == "exclude") ||
+                                ($.inArray(currValue, relValues) == -1 && type == "include")) {
+                                //alert(showField);
 
-                              showField = false;
+                                showField = false;
+                            }
+                        }else{
+                            if (($.inArray(currValue, relValues) != -1 && type == "include") ||
+                                ($.inArray(currValue, relValues) == -1 && type == "exclude")) {
+                                //alert(showField);
+
+                                showField = true;
+                            }
                         }
                     }//else
                         //showField = false;
@@ -2272,28 +2368,28 @@
             return showField;
         },
 
-        getRelations : function( ){
-            if( !_.isUndefined(this.relations[this.group]) && !_.isUndefined(this.relations[this.group][this.currentId]) )
-                return this.relations[this.group][this.currentId];
+        getRelations : function( currentId ){
+            if( !_.isUndefined(this.relations[this.group]) && !_.isUndefined(this.relations[this.group][currentId]) )
+                return this.relations[this.group][currentId];
             else{
                 if( _.isUndefined(this.relations[this.group]) )
                     this.relations[this.group] = {};
 
-                this.relations[this.group][this.currentId] = {
-                    controls : this.searchFromControls() ,
+                this.relations[this.group][currentId] = {
+                    controls : this.searchFromControls( currentId )
                     //values   : this.searchFromValues()
                 };
 
-                return this.relations[this.group][this.currentId];
+                return this.relations[this.group][currentId];
             }
 
         },
 
-        searchFromControls : function( ){
+        searchFromControls : function( currentId ){
             var self = this , relations = [];
 
             _.each( api.settingsRelations[this.group] , function( setting , key ){
-                var attrRelatedObj = self.findControl(key , setting.controls );
+                var attrRelatedObj = self.findControl(key , setting.controls , currentId );
 
                 if( attrRelatedObj ){
                     relations.push( attrRelatedObj );
@@ -2319,7 +2415,7 @@
             return relations;
         },*/
 
-        findControl : function (key , controls ){ //, type , value
+        findControl : function (key , controls , currentId  ){ //, type , value
             var self = this , attrRelated;
             if(!controls || _.isEmpty( controls ) )
                 return ;
@@ -2327,13 +2423,13 @@
             if( $.isArray(controls) || (_.isObject( controls ) && _.isUndefined(controls.control) ) ){
                 attrRelated = _.find(controls , function( control ){
                     if( _.isObject( control ) && !_.isUndefined(control.control) && ( !_.isUndefined(control.value) || !_.isUndefined(control.values) ) )
-                        return control.control == self.currentId ;
+                        return control.control == currentId ;
                     else                                   //&& ( ( !_.isUndefined(control.value) && control.value == self.value ) || ( !_.isUndefined(control.values) && $.inArray( self.value , control.values ) != -1 )  )
                         return false;
                 });
             }else{
                 if(_.isObject( controls ) && !_.isUndefined(controls.control) &&
-                    ( !_.isUndefined(controls.value) || !_.isUndefined(controls.values) ) && controls.control == self.currentId  )
+                    ( !_.isUndefined(controls.value) || !_.isUndefined(controls.values) ) && controls.control == currentId  )
                     attrRelated = controls;
             }
 
@@ -2355,6 +2451,76 @@
         }
 
     });
+
+    var _bgRatioDependency = function( control , value  ){
+
+        var bgCtrls = ["sed_background_background_image" , "sed_background_external_background_image" , "sed_background_parallax_background_ratio" , "sed_background_parallax_background_image"],
+            selector;
+
+        if( control.id == bgCtrls[0] ){
+
+            var extCtrl     = api.control.instance( bgCtrls[1] ),
+                extValue   = extCtrl.currentValue;
+
+            if( $.inArray( value , [0 , '' , 'none'] ) > -1 && $.trim( extValue ) == '' ){
+
+                selector = '#sed-app-control-' + bgCtrls[2];
+
+                $( selector ).parents(".row_settings:first").addClass("sed-hide-dependency").fadeOut( 200 );
+
+            }else{
+
+                var paraCtrl  = api.control.instance( bgCtrls[3] ),
+                    paraValue  = paraCtrl.currentValue;
+
+                if( paraValue ) {
+                    selector = '#sed-app-control-' + bgCtrls[2];
+
+                    $(selector).parents(".row_settings:first").removeClass("sed-hide-dependency").fadeIn("slow");
+                }
+
+            }
+
+        }else if( control.id == bgCtrls[1] ){
+
+
+            var mCtrl  = api.control.instance( bgCtrls[0] ),
+                mValue = mCtrl.currentValue;
+
+            if( $.inArray( mValue , [0 , '' , 'none'] ) > -1 && $.trim( value ) == '' ){
+
+                selector = '#sed-app-control-' + bgCtrls[2];
+
+                $( selector ).parents(".row_settings:first").addClass("sed-hide-dependency").fadeOut( 200 );
+
+            }else{
+
+                var paraCtrl  = api.control.instance( bgCtrls[3] ),
+                    paraValue  = paraCtrl.currentValue;
+
+                if( paraValue ) {
+                    selector = '#sed-app-control-' + bgCtrls[2];
+
+                    $(selector).parents(".row_settings:first").removeClass("sed-hide-dependency").fadeIn("slow");
+                }
+
+            }
+
+        }
+    };
+
+    api.Events.bind( "after_apply_settings_relations_refresh" , function( group , control , value ) {
+
+        _bgRatioDependency( control , value );
+
+    });
+
+    api.Events.bind( "after_apply_single_setting_relations_update" , function( group , control , value ) {
+
+        _bgRatioDependency( control , value );
+
+    });
+
 
     api.controlConstructor = $.extend( api.controlConstructor, {
         sed_element             : api.SiteEditorElements ,
@@ -2382,6 +2548,7 @@
         "multi-check"           : api.CheckBoxesControl,
         spinner_lock            : api.SpinnerLockControl ,
         number_lock             : api.SpinnerLockControl ,
+        lock                    : api.LockControl ,
         color                   : api.ColorControl,
         multi_icons             : api.OrganizeIconsControl,
         "multi-icon"            : api.OrganizeIconsControl,

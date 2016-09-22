@@ -179,6 +179,14 @@ class SiteEditorField{
     public $description = '';
 
     /**
+     * Lock Control Id 
+     *
+     * @access protected
+     * @var array
+     */
+    public $lock_id = '';
+
+    /**
      * Primary args when create instance
      *
      * @access public

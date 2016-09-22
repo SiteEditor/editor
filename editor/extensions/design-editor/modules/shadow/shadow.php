@@ -119,23 +119,19 @@ final class SedDesignEditorShadow {
 
         $fields = array(
 
+            'shadow_color' => array(
+                "type"              => "shadow-color" ,
+                "label"             => __("Shadow Color", "site-editor"),
+                "description"       => __("Add Shadow Color For Element", "site-editor")
+            ),
+            
             'shadow' => array(
                 "type"              => "shadow" ,
                 "label"             => __('Shadow', 'site-editor'),
-                "description"       => __("Shadow", "site-editor"),  
-                'js_type'           =>  'dropdown',
-                'has_border_box'    =>   true ,  
-                'js_params'     =>  array(
-                    'options_selector'    => '.shadow',
-                    'selected_class'      => 'shadow_select' 
-                ),      
+                "description"       => __("Shadow", "site-editor"),
+                'has_border_box'    =>   false ,
             ),
-            
-            'shadow_color' => array(
-                "type"              => "shadow-color" , 
-                "label"             => __("Shadow Color", "site-editor"),
-                "description"       => __("Add Shadow Color For Element", "site-editor")
-            ), 
+
         );
 
 

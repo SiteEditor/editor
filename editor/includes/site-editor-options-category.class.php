@@ -114,11 +114,29 @@ class SiteEditorOptionsCategory {
     public $is_preload_settings = false;
 
     /**
+     * current group has styles settings (options) ?
+     *
+     * @var string
+     * @access public
+     */
+    public $has_styles_settings = false;
+
+    /**
+     * Css Setting Type , Using "module" , "page" , "site"
+     *
+     * @var string
+     * @access public
+     */
+    public $css_setting_type = "site";
+
+    /**
      * SiteEditorThemeOptions constructor.
      */
     public function __construct(){
 
         add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_options' ) );
+
+        add_filter( "{$this->option_group}_fields_filter"           , array( $this , 'add_design_field' ) );
 
         add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_options_group' ) , -9999 );
 
@@ -147,6 +165,14 @@ class SiteEditorOptionsCategory {
     public function register_options_group(){
 
         SED()->editor->manager->add_group( $this->option_group , array(
+            'capability'        => $this->capability,
+            'theme_supports'    => '',
+            'title'             => $this->title ,
+            'description'       => $this->description ,
+            'type'              => 'default'
+        ));
+
+        SED()->editor->manager->add_group( $this->option_group . "_design_group" , array(
             'capability'        => $this->capability,
             'theme_supports'    => '',
             'title'             => $this->title ,
@@ -203,7 +229,7 @@ class SiteEditorOptionsCategory {
                 $fields[$key]['capability'] = $this->capability;
 
             if( $fields[$key]['category'] == "style-editor" && ( !isset( $args['css_setting_type'] ) || empty( $args['css_setting_type'] ) ) ){
-                $fields[$key]['css_setting_type'] = "site";
+                $fields[$key]['css_setting_type'] = ( !empty( $this->css_setting_type ) ) ? $this->css_setting_type : "site";
             }
 
         }
@@ -268,6 +294,43 @@ class SiteEditorOptionsCategory {
 
         }
 
+    }
+
+    public function add_design_field( $fields ){
+
+        $this->register_style_options();
+
+        /**
+         * please not change "design_panel" field id , it is using in js
+         */
+        if( $this->has_styles_settings === true ){
+            $fields[ 'design_panel' ] = SED()->editor->design->get_design_options_field( $this->option_group , $this->css_setting_type );
+        }
+
+        return $fields;
+
+    }
+
+    public function register_style_options(){
+
+        $options = $this->custom_style_options();
+
+        if( !empty( $options ) ){
+
+            $this->has_styles_settings = true;
+
+            $option_group = $this->option_group . "_design_group";
+
+            $control_prefix = $option_group;
+
+            SED()->editor->design->add_style_options( $options , $option_group , $control_prefix , $this->option_group );
+
+        }
+
+    }
+
+    public function custom_style_options(){
+        return array();
     }
 
     public function filter_dynamic_setting_args( $args, $setting_id ) {
