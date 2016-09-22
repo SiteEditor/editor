@@ -128,8 +128,6 @@ if ( ! class_exists( 'SiteEditorTextShadowControl' ) ) {
 
             $sed_field_id   = 'sed_pb_' . $pkey;
 
-            $value          = $this->value();
-
             ?>
 
 
@@ -141,9 +139,13 @@ if ( ! class_exists( 'SiteEditorTextShadowControl' ) ) {
                    </a>
                 </legend>
 
+                <?php if(!empty($this->description)){ ?>
+                    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+                <?php } ?>
+
                 <div id="<?php echo esc_attr($sed_field_id);?>" class="<?php echo esc_attr($classes);?> dropdown" <?php echo $atts_string;?>>
 
-                    <form role="menu" class="dropdown-menu dropdown-common sed-dropdown sed-text-shadow" sed-shadow-cp-el="#text-shadow-colorpicker-button" sed-style-element="">
+                    <form role="menu" class="dropdown-menu dropdown-common sed-dropdown sed-text-shadow">
                       <div class="dropdown-content content">
 
                           <div>

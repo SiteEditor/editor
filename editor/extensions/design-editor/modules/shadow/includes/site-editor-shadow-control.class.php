@@ -76,7 +76,15 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
          * @var string
          */
         public $style_props = "shadow";
-        
+
+        /**
+         * Selected Class For current item
+         *
+         * @access public
+         * @var string
+         */
+        public $selected_class = 'shadow_select';
+
         /**
          * Get the data to export to the client via JSON.
          *
@@ -97,7 +105,7 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
 
             $json_array['options_selector'] = '.shadow';
 
-            $json_array['selected_class'] = 'shadow_select';
+            $json_array['selected_class'] = $this->selected_class;
 
             return $json_array;
 
@@ -120,8 +128,6 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
 
             $sed_field_id   = 'sed_pb_' . $pkey;
 
-            $value          = $this->value();
-
             ?>
 
             <fieldset class="row_setting_box">
@@ -136,9 +142,9 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
                     <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
                 <?php } ?>
 
-                <div class="dropdown">
+                <div id="<?php echo esc_attr($sed_field_id);?>" class="<?php echo esc_attr($classes);?> dropdown" <?php echo $atts_string;?>>
 
-                    <form role="menu" class="dropdown-menu dropdown-common sed-dropdown"  sed-shadow-cp-el="#shadow-colorpicker" sed-style-element="">
+                    <form role="menu" class="dropdown-menu dropdown-common sed-dropdown" >
                       <div class="dropdown-content sed-dropdown content">
 
                           <div>
@@ -148,7 +154,7 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
                                 </li>
                                 <li>
                                  <ul class="itme-box-shadow">
-                                   <li class="no-box-shadow shadow no_shadow" data-value="none"><a href="#"><span  class="style-box-shadow"></span></a></li>
+                                   <li class="no-box-shadow shadow no_shadow <?php $this->selected('none') ;?>" data-value="none"><a href="#"><span  class="style-box-shadow"></span></a></li>
                                    <li class="clr"></li>
                                  </ul>
                                 </li>
@@ -161,7 +167,7 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
                                 </li>
                                 <li>
                                  <ul class="itme-box-shadow">
-                                    <li class="shadow border-box-type1" data-value="0px 0px 5px -1px" ><a  href="#"><span  class="style-box-shadow1 "></span></a></li>
+                                    <li class="shadow border-box-type1 <?php $this->selected('0px 0px 5px -1px') ;?>" data-value="0px 0px 5px -1px" ><a  href="#"><span  class="style-box-shadow1 "></span></a></li>
                                     <li class="shadow border-box-type2" data-value="0 0 14px -6px"    ><a href="#"><span  class="style-box-shadow2"></span></a></li>
                                     <li class="shadow border-box-type1" data-value="2px 2px 5px -1px" ><a  href="#"><span  class="style-box-shadow3"></span></a></li>
                                     <li class="shadow border-box-type2" data-value="2px -2px 5px -1px" ><a  href="#"><span  class="style-box-shadow4"></span></a></li>
@@ -205,6 +211,24 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
 
             <?php
         }
+
+        /**
+         * Selected Value
+         *
+         * @since 3.4.0
+         */
+        protected function selected( $value ) {
+
+            $selected_value = $this->value();
+
+            if( $value == $selected_value ){
+                echo esc_attr( $this->selected_class );
+            }
+
+            echo '';
+
+        }
+
 	}
 }
 

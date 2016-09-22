@@ -203,7 +203,7 @@
                     selectorT = "" ,
                     index;
 
-                if( self.settingType == "module" ){ 
+                if( self.settingType == "module" ){
                     selectorT = ( selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]';
                 }else{
                     selectorT = selector;
@@ -303,161 +303,162 @@
 
         //TODO : recover this feature in next versions
         /*getStyleValue : function( selector , styleProp ){
-            var selectorT = ( selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]' ,
-                index = selectorT.indexOf(":") ,
-                pseudo;
+         var selectorT = ( selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]' ,
+         index = selectorT.indexOf(":") ,
+         pseudo;
 
-            if(index > -1){
-                pseudo = selectorT.substring( index );
-                selectorT = selectorT.substring( 0 , index );
-            }
+         if(index > -1){
+         pseudo = selectorT.substring( index );
+         selectorT = selectorT.substring( 0 , index );
+         }
 
-            var $el = $("#website")[0].contentWindow.jQuery( selectorT ) ,
-                el = $el[0];
+         var $el = $("#website")[0].contentWindow.jQuery( selectorT ) ,
+         el = $el[0];
 
-            switch ( styleProp ) {
-                case "image-scaling":
-                    var bgSize = api.fn.getStyle( el , "background-size" , pseudo ),
-                        bgRepeat = api.fn.getStyle( el , "background-repeat" , pseudo ) ,
-                        imageScaling = "";
+         switch ( styleProp ) {
+         case "image-scaling":
+         var bgSize = api.fn.getStyle( el , "background-size" , pseudo ),
+         bgRepeat = api.fn.getStyle( el , "background-repeat" , pseudo ) ,
+         imageScaling = "";
 
-                    if( bgSize == "100% 100%" ){
-                        imageScaling = "fullscreen";
-                    }else if( bgSize == "cover" ){
-                        imageScaling = "cover";
-                    }else if( bgSize == "100% auto" && bgRepeat == "repeat-y" ){
-                        imageScaling = "fit";
-                    }else if( bgSize == "auto auto" && bgRepeat == "repeat" ){
-                        imageScaling = "tile";
-                    }else if( bgSize == "auto auto" && bgRepeat == "repeat-x" ){
-                        imageScaling = "tile-horizontally";
-                    }else if( bgSize == "auto auto" && bgRepeat == "repeat-y" ){
-                        imageScaling = "tile-vertically";
-                    }else if( bgSize == "auto auto" && bgRepeat == "no-repeat" ){
-                        imageScaling = "normal";
-                    }
+         if( bgSize == "100% 100%" ){
+         imageScaling = "fullscreen";
+         }else if( bgSize == "cover" ){
+         imageScaling = "cover";
+         }else if( bgSize == "100% auto" && bgRepeat == "repeat-y" ){
+         imageScaling = "fit";
+         }else if( bgSize == "auto auto" && bgRepeat == "repeat" ){
+         imageScaling = "tile";
+         }else if( bgSize == "auto auto" && bgRepeat == "repeat-x" ){
+         imageScaling = "tile-horizontally";
+         }else if( bgSize == "auto auto" && bgRepeat == "repeat-y" ){
+         imageScaling = "tile-vertically";
+         }else if( bgSize == "auto auto" && bgRepeat == "no-repeat" ){
+         imageScaling = "normal";
+         }
 
-                    return imageScaling;
-                    break;
-                case "background-image":
-                    var image = api.fn.getStyle( el , "background-image" , pseudo ) ,
-                        patt  = /^url\(.+?\);/g ;
+         return imageScaling;
+         break;
+         case "background-image":
+         var image = api.fn.getStyle( el , "background-image" , pseudo ) ,
+         patt  = /^url\(.+?\);/g ;
 
-                    image = $.trim(image);
+         image = $.trim(image);
 
-                    if( !patt.test(image) )
-                        image = "none";
+         if( !patt.test(image) )
+         image = "none";
 
-                    return image;
-                    break;
-                case "background-position":
+         return image;
+         break;
+         case "background-position":
 
-                    switch ( api.fn.getStyle( el , "background-position" , pseudo ) ) {
-                        case "0% 0%":
-                            return "left top";
-                            break;
-                        case "0% 50%":
-                            return "left center";
-                            break;
-                        case "0% 100%":
-                            return "left bottom";
-                            break;
-                        case "50% 0%":
-                            return "center top";
-                            break;
-                        case "50% 50%":
-                            return "center center";
-                            break;
-                        case "50% 100%":
-                            return "center bottom";
-                            break;
-                        case "100% 0%":
-                            return "right top";
-                            break;
-                        case "100% 50%":
-                            return "right center";
-                            break;
-                        case "100% 100%":
-                            return "right bottom";
-                            break;
-                        default:
-                            return "";
-                    }
+         switch ( api.fn.getStyle( el , "background-position" , pseudo ) ) {
+         case "0% 0%":
+         return "left top";
+         break;
+         case "0% 50%":
+         return "left center";
+         break;
+         case "0% 100%":
+         return "left bottom";
+         break;
+         case "50% 0%":
+         return "center top";
+         break;
+         case "50% 50%":
+         return "center center";
+         break;
+         case "50% 100%":
+         return "center bottom";
+         break;
+         case "100% 0%":
+         return "right top";
+         break;
+         case "100% 50%":
+         return "right center";
+         break;
+         case "100% 100%":
+         return "right bottom";
+         break;
+         default:
+         return "";
+         }
 
-                    break;
-                /*case "box-shadow-color":
-                 api.fn.getStyle( el , "box-shadow" );
-                 return "";
-                 break;
-                 case "box-shadow":
-                 return "";
-                 break;
-                 case "text-shadow-color":
-                 return "";
-                 break;
-                 case "text-shadow":
-                 alert( api.fn.getStyle( el , styleProp ) );
-                 return "";
-                 break;*//*
-                default:
+         break;
+         /*case "box-shadow-color":
+         api.fn.getStyle( el , "box-shadow" );
+         return "";
+         break;
+         case "box-shadow":
+         return "";
+         break;
+         case "text-shadow-color":
+         return "";
+         break;
+         case "text-shadow":
+         alert( api.fn.getStyle( el , styleProp ) );
+         return "";
+         break;*//*
+         default:
 
-                    var propsWithPx = [
-                        "border-top-width" ,
-                        "border-right-width" ,
-                        "border-bottom-width" ,
-                        "border-left-width" ,
-                        "padding-top",
-                        "padding-right",
-                        "padding-bottom",
-                        "padding-left",
-                        "margin-top",
-                        "margin-right",
-                        "margin-bottom",
-                        "margin-left",
-                        "border-top-left-radius" ,
-                        "border-top-right-radius" ,
-                        "border-bottom-left-radius" ,
-                        "border-bottom-right-radius" ,
-                        "font-size" ,
-                        "line-height"
-                    ];
+         var propsWithPx = [
+         "border-top-width" ,
+         "border-right-width" ,
+         "border-bottom-width" ,
+         "border-left-width" ,
+         "padding-top",
+         "padding-right",
+         "padding-bottom",
+         "padding-left",
+         "margin-top",
+         "margin-right",
+         "margin-bottom",
+         "margin-left",
+         "border-top-left-radius" ,
+         "border-top-right-radius" ,
+         "border-bottom-left-radius" ,
+         "border-bottom-right-radius" ,
+         "font-size" ,
+         "line-height"
+         ];
 
-                    if( $.inArray( styleProp , propsWithPx ) > -1 ){
-                        return parseInt( api.fn.getStyle( el , styleProp , pseudo ) );
-                    }
+         if( $.inArray( styleProp , propsWithPx ) > -1 ){
+         return parseInt( api.fn.getStyle( el , styleProp , pseudo ) );
+         }
 
-                    if( this.currentStyleId == "trancparency" ){
-                        return api.fn.getStyle( el , styleProp , pseudo ) * 100 ;
-                    }
+         if( this.currentStyleId == "trancparency" ){
+         return api.fn.getStyle( el , styleProp , pseudo ) * 100 ;
+         }
 
-                    return api.fn.getStyle( el , styleProp , pseudo );
-            }
-        },*/
+         return api.fn.getStyle( el , styleProp , pseudo );
+         }
+         },*/
 
         getDefaultValue : function( data , selector , selectorT ){
-            var defaultValue = null;
+            var defaultValue = null ,
+                settingId = data.settings["default"];
 
             if( !_.isUndefined( data.default_value ) && !_.isNull( data.default_value ) ){
 
-                if( _.isUndefined( this.defaultValues[data.style_props] ) )
-                    this.defaultValues[data.style_props] =  {};
+                if( _.isUndefined( this.defaultValues[settingId] ) )
+                    this.defaultValues[settingId] =  {};
 
-                this.defaultValues[data.style_props][selectorT] = _.clone( data.default_value );
+                this.defaultValues[settingId][selectorT] = _.clone( data.default_value );
 
                 return data.default_value;
             }
 
-            if( !_.isUndefined( this.defaultValues[data.style_props] ) && !_.isUndefined( this.defaultValues[data.style_props][selectorT] ) ){
+            if( !_.isUndefined( this.defaultValues[settingId] ) && !_.isUndefined( this.defaultValues[settingId][selectorT] ) ){
 
-                defaultValue = _.clone( this.defaultValues[data.style_props][selectorT] );
-            }/*else{
-                defaultValue = this.getStyleValue( selector , data.style_props );
+                defaultValue = _.clone( this.defaultValues[settingId][selectorT] );
+            }/*else if( $.inArray( settingId , ["external_background_image" , "margin_lock" , "padding_lock" , ... ]  ) == -1 ){
+             defaultValue = this.getStyleValue( selector , data.style_props );
 
-                if( _.isUndefined( this.defaultValues[data.style_props] ) )
-                    this.defaultValues[data.style_props] =  {};
+             if( _.isUndefined( this.defaultValues[settingId] ) )
+             this.defaultValues[settingId] =  {};
 
-                this.defaultValues[data.style_props][selectorT] = _.clone( defaultValue );
-            }*/
+             this.defaultValues[settingId][selectorT] = _.clone( defaultValue );
+             }*/
 
             return defaultValue;
 
@@ -521,7 +522,7 @@
 
                 if( !_.isUndefined( sed_css ) && !_.isUndefined( sed_css[selectorT] ) && !_.isUndefined( data.settings ) && !_.isUndefined( data.settings["default"] ) && !_.isUndefined( sed_css[selectorT][data.settings["default"]] ) ){
                     cValue = sed_css[selectorT][data.settings["default"]];
-                }else if( !_.isUndefined( data.style_props ) && data.settings["default"] != "external_background_image" ){
+                }else if( !_.isUndefined( data.style_props ) && !_.isEmpty( data.settings["default"] ) ){ //&& data.settings["default"] != "external_background_image"
                     cValue = this.getDefaultValue( data , selector , selectorT );
                 }
 
@@ -567,9 +568,9 @@
     });
 
 
-   $( function() {
+    $( function() {
 
-       api.appStyleEditorSettings  = new api.AppStyleEditorSettings({});
+        api.appStyleEditorSettings  = new api.AppStyleEditorSettings({});
 
-   });
+    });
 })( sedApp, jQuery );
