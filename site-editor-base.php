@@ -1,5 +1,19 @@
 <?php
 
+/*
+ * function _wp_customize_include() {
+	if ( ! ( ( isset( $_REQUEST['wp_customize'] ) && 'on' == $_REQUEST['wp_customize'] )
+		|| ( is_admin() && 'customize.php' == basename( $_SERVER['PHP_SELF'] ) )
+	) )
+		return;
+
+	require( ABSPATH . WPINC . '/class-wp-customize-manager.php' );
+	// Init Customize class
+	$GLOBALS['wp_customize'] = new WP_Customize_Manager;
+}
+add_action( 'plugins_loaded', '_wp_customize_include' );
+ */
+
 class SiteEditorManager{
 
     protected $previewing = false;
@@ -14,43 +28,107 @@ class SiteEditorManager{
 
     private $_post_values;
 
+    private $_base_values;
+
     private $_page_settings;
 
     function __construct(  ) {
 
-      if( is_sed_save() || is_site_editor() || site_editor_app_on() ){
-          add_action( 'wp_footer', array( $this, 'wp_styles_loaded' ) , 10000 );
-          add_action( 'wp_footer', array( $this, 'wp_scripts_loaded' ) , 10000 );
+        if( is_sed_save() || is_site_editor() || site_editor_app_on() ){
+            add_action( 'wp_footer', array( $this, 'wp_styles_loaded' ) , 10000 );
+            add_action( 'wp_footer', array( $this, 'wp_scripts_loaded' ) , 10000 );
 
-          add_action( 'setup_theme',  array( $this, 'setup_theme' ) );
-          add_action( 'wp_loaded',    array( $this, 'wp_loaded' ) );
+            add_action( 'setup_theme',  array( $this, 'setup_theme' ) );
+            add_action( 'wp_loaded',    array( $this, 'wp_loaded' ) );
 
 
 
-          add_action( 'wp_redirect_status', array( $this, 'wp_redirect_status' ), 1000 );
+            add_action( 'wp_redirect_status', array( $this, 'wp_redirect_status' ), 1000 );
 
-          // Do not spawn cron (especially the alternate cron) while running the Customizer.
-          remove_action( 'init', 'wp_cron' );
+            // Do not spawn cron (especially the alternate cron) while running the Customizer.
+            remove_action( 'init', 'wp_cron' );
 
-          //add_action('wp_print_scripts',         array( $this, 'wp_print_scripts_action'), 0);
-          //add_action('wp_print_footer_scripts',  array( $this, 'wp_print_scripts_action'), 0);
+            //add_action('wp_print_scripts',         array( $this, 'wp_print_scripts_action'), 0);
+            //add_action('wp_print_footer_scripts',  array( $this, 'wp_print_scripts_action'), 0);
 
-      }
+        }
 
-      add_action( 'sed_app_register' ,  array( $this, 'register_settings' ) );
+        add_action( 'sed_app_register' ,  array( $this, 'register_settings' ) );
 
-      //add_action( 'sed_page_builder', array( $this , 'register_settings' ) , 10 , 1 );
+        //add_action( 'sed_page_builder', array( $this , 'register_settings' ) , 10 , 1 );
 
-      if( site_editor_app_on() ){
-          if( !class_exists('SEDAjaxLess') )
-              require_once SED_PLUGIN_DIR . DS . 'wp-inc' . DS . 'SEDAjaxLess' . DS  . 'SEDAjaxLess.php';
+        if( site_editor_app_on() ){
+            if( !class_exists('SEDAjaxLess') )
+                require_once SED_PLUGIN_DIR . DS . 'wp-inc' . DS . 'SEDAjaxLess' . DS  . 'SEDAjaxLess.php';
 
-          new SEDAjaxLess();
-      }
+            new SEDAjaxLess();
+        }
 
-      $this->wp_theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
+        if( is_site_editor() ){
+            add_action( "init" , array(&$this, 'editor_init') );
+        }
+
+        $this->wp_theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
 
     }
+
+    //only for siteeditor
+    function get_page_editor_info(){
+
+        $sed_page_id    =  (isset($_REQUEST['sed_page_id']) && !empty($_REQUEST['sed_page_id'])) ? $_REQUEST['sed_page_id'] : "";
+        $sed_page_type  =  (isset($_REQUEST['sed_page_type']) && !empty($_REQUEST['sed_page_type'])) ? $_REQUEST['sed_page_type'] : "";
+
+        if( empty( $_REQUEST['sed_page_id'] ) || empty( $_REQUEST['sed_page_type'] ) ) {
+
+            $page_id = get_option( 'page_on_front' );
+
+            if( get_option( 'show_on_front' ) == "page" && $page_id !== false && $page_id > 0 ){
+                $sed_page_id = $page_id;
+                $sed_page_type = "post";
+            }else{
+                $sed_page_id = "general_home";
+                $sed_page_type = "general";
+            }
+
+        }
+
+        return array( "id" => $sed_page_id, "type" => $sed_page_type);
+    }
+
+    //for fix bug auto-draft post open in siteeditor
+    function editor_init(){
+        $info = $this->get_page_editor_info();
+
+        if( $info['type'] == "post" ) {
+            $post = get_post( $info['id'] );
+
+            if ( $post && 'auto-draft' === $post->post_status ) {
+
+                $post_data = array(
+                    'ID'            => $post->ID,
+                    'post_status'   => 'draft',
+                    'post_title'    => '',
+                );
+
+                /*add_filter('wp_insert_post_empty_content', array( $this , 'allow_insert_empty_post' ));*/
+
+                wp_update_post($post_data, true);
+
+            }
+
+        }
+    }
+
+    /**
+     * Used for wp filter 'wp_insert_post_empty_content' to allow empty post insertion.
+     *
+     * @param $allow_empty
+     *
+     * @return bool
+     */
+    /*public function allow_insert_empty_post( $allow_empty ) {
+        return false;
+    }*/
 
     function get_file($path) {
 
@@ -766,28 +844,15 @@ class SiteEditorManager{
 
 		if ( ! isset( $this->_post_values ) ) {
 
-             //&& isset($_POST['preview_type']) && in_array( $_POST['preview_type'] , array("refresh" , "new"))
-            //using in save , refresh && new url preview
             if ( isset( $_POST['sed_page_customized'] ) ){
 
                 $_post_values = json_decode( wp_unslash( $_POST['sed_page_customized'] ), true );
 
-                if( isset($_POST['preview_type']) && $_POST['preview_type'] == "new" ){
-                    foreach ( $_post_values as $id => $value ) {
-                       $curr_setting = $this->settings[ $id ];
-                       if($curr_setting->option_type == "base" || empty( $curr_setting->option_type ) )
-                           unset( $_post_values[$id] );  //$setting->id
-
-                    }
-                }
-
-                $this->_post_values = apply_filters( "sed_current_page_options" , $_post_values );
-
-             //var_dump( $this->_post_values );
+                $this->_post_values = $_post_values;
 
 			}else{
 
-				$this->_post_values = false;
+				$this->_post_values = array();
             }
 		}
 
@@ -795,6 +860,28 @@ class SiteEditorManager{
 			return $setting->sanitize( $this->_post_values[ $setting->id ] );
 
 	}
+
+    public function base_value( $setting , $sed_page_id ) {
+
+        if ( ! isset( $this->_base_values ) ) {
+
+            //set base settings like page_layout , include all settings with base option_type
+            if ( isset( $_POST['sed_page_base_settings'] ) ){
+
+                $_base_values = json_decode( wp_unslash( $_POST['sed_page_base_settings'] ), true );
+
+                $this->_base_values = apply_filters( "sed_current_page_options" , $_base_values );
+
+            }else{
+
+                $this->_base_values = array();
+            }
+        }
+
+        if ( isset( $this->_base_values[ $sed_page_id ] ) && isset( $this->_base_values[ $sed_page_id ][ $setting->id ] ) )
+            return $setting->sanitize( $this->_base_values[ $sed_page_id ][ $setting->id ] );
+
+    }
                                   //$pagebuilder
     function register_settings( ){
 
@@ -812,23 +899,6 @@ class SiteEditorManager{
             'transport'     => 'postMessage'
         ));
 
-		/*$this->add_setting( 'show_on_front', array(
-			'default'        => get_option( 'show_on_front' ),
-			'capability'     => 'manage_options',
-			'option_type'    => 'option'
-		) );
-
-		$this->add_setting( 'page_on_front', array(
-			'option_type'   => 'option',
-			'capability'    => 'manage_options',
-		//	'theme_supports' => 'static-front-page',
-		) );
-
-		$this->add_setting( 'page_for_posts', array(
-			'option_type'    => 'option',
-			'capability'     => 'manage_options'
-		) ); */
-
     }
 
 
@@ -837,16 +907,22 @@ class SiteEditorManager{
         echo in template/default/footer.php
     } */
 
-
+    //only for site editor( in top and iframe )
     function sed_page_settings(){
-        global $sed_apps;
 
         if ( ! isset( $this->_page_settings ) ) {
 
-            $sed_page_id = $sed_apps->sed_page_id;
-            $sed_page_type = $sed_apps->sed_page_type;
+            if( site_editor_app_on() ){
+                global $sed_apps;
+                $sed_page_id    = $sed_apps->sed_page_id;
+                $sed_page_type  = $sed_apps->sed_page_type;
+            }else if( is_site_editor() ){
+                $info = $this->get_page_editor_info();
+                $sed_page_id    = $info['id'];
+                $sed_page_type  = $info['type'];
+            }
                                                //var_dump( "sed_page_id ------ : " , $sed_page_id );
-            $sed_settings = sed_get_page_options($sed_page_id , $sed_page_type);
+            $sed_settings = sed_get_page_options( $sed_page_id , $sed_page_type );
 
             return $this->_page_settings = $sed_settings;
         }else
@@ -927,6 +1003,8 @@ class SedAppSettings{
 	 */
 	private $_post_value;
 
+    private $_base_value;
+
 	/**
 	 * Constructor.
 	 *
@@ -968,21 +1046,6 @@ class SedAppSettings{
 		return $this;
 	}
 
-/*
-function meta_filter_posts( $query ) {
-	if( !is_admin() )
-		return $query;
-	if( isset( $_GET['the_meta'] ) ) {
-		if( $_GET['the_meta'] > 0 ) {
-		// $query is the WP_Query object, set is simply a method of the WP_Query class that sets a query var parameter
-		$query->set( 'meta_key', '_EventStartDate' );
-		$query->set( 'meta_value', '2010-01-07 00:00:00' );
-	}
-	}
-	return $query;
-}
-add_filter( 'pre_get_posts', 'meta_filter_posts' );
-*/
 	/**
 	 * Handle previewing the setting.
 	 *
@@ -1002,6 +1065,34 @@ add_filter( 'pre_get_posts', 'meta_filter_posts' );
 					add_filter( 'default_option_' . $this->id_data[ 'base' ], array( $this, '_preview_filter' ) );
 				}
 				break;
+            case 'base' :
+
+                $_base_values = json_decode( wp_unslash( $_POST['sed_page_base_settings'] ), true );
+
+                if( !empty( $_base_values ) && is_array( $_base_values ) ) {
+                    $sed_page_ids = array_keys($_base_values);
+                    $is_once = false;
+
+                    foreach ($sed_page_ids AS $sed_page_id) {
+                        $is_post = false;
+
+                        if ( preg_match( '/(\d+)/', $sed_page_id , $matches ) && ( $post_id = (int) $matches[1] ) && !is_null( get_post( $post_id ) ) ) {
+                            $is_post = true;
+                        }
+
+                        if( $is_post === true && $is_once === false ){
+                            add_filter('get_post_metadata', array($this, '_preview_base_meta_settings'), 1, 4);
+                            $is_once = true;
+                        } else if( $is_post !== true && $sed_page_id != 0 ) {
+                            $option_name = 'sed_' . $sed_page_id . '_settings';
+                            add_filter('option_' . $option_name, array($this, '_preview_base_option_settings'));
+                            add_filter('default_option_' . $option_name, array($this, '_preview_base_option_settings'));
+                        }
+
+                    }
+                }
+
+                break;
             /*case 'post_meta' :
                 add_filter( "get_". $this->id_data[ 'base' ] ."_metadata", array( $this, '_preview_filter' ) );
                 break;
@@ -1048,6 +1139,44 @@ add_filter( 'pre_get_posts', 'meta_filter_posts' );
 	public function _preview_filter( $original ) {
 		return $this->multidimensional_replace( $original, $this->id_data[ 'keys' ], $this->post_value() );
 	}
+
+    public function _preview_base_meta_settings( $original_meta_value, $post_id, $meta_key, $single ) {
+
+        if ( isset( $meta_key ) && $meta_key == 'sed_post_settings' ) {
+
+            $value = $this->base_value( $this->default , $post_id );
+
+            if ( ! isset( $value ) ){
+                return $original_meta_value;
+            }else{
+                $meta_value = ( !empty( $original_meta_value ) && is_array( $original_meta_value ) ) ? $original_meta_value : array();
+
+                if( $single )
+                    $meta_value[0][ $this->id ] = $value;
+                else
+                    $meta_value[ $this->id ] = $value;
+
+                return $single ? $meta_value : array( $meta_value );
+            }
+        }
+
+    }
+
+    public function _preview_base_option_settings( $original ){
+
+        global $sed_apps;
+        $sed_page_id = $sed_apps->sed_page_id;
+        $value = $this->base_value( $this->default , $sed_page_id );
+
+        if ( ! isset( $value ) ){
+            return $original;
+        }else{
+            $current_page_settings = $original;
+            $current_page_settings[ $this->id ] = $value;
+            return $current_page_settings;
+        }
+
+    }
 
 	/**
 	 * Check user capabilities and theme supports, and then save
@@ -1103,6 +1232,20 @@ add_filter( 'pre_get_posts', 'meta_filter_posts' );
 			return $default;
 	}
 
+    public final function base_value( $default = null , $sed_page_id ) {
+        // Check for a cached value
+        if ( isset( $this->_base_value ) )
+            return $this->_base_value;
+
+        // Call the manager for the post value
+        $result = $this->manager->base_value( $this , $sed_page_id );
+
+        if ( isset( $result ) )
+            return $this->_base_value = $result;
+        else
+            return $default;
+    }
+
 	/**
 	 * Sanitize an input.
 	 *
@@ -1140,6 +1283,7 @@ add_filter( 'pre_get_posts', 'meta_filter_posts' );
 
 			case 'option' :
 				return $this->_update_option( $value );
+
             /*
             case 'post_meta' :
                 return $this->_update_post_meta( $value );
@@ -1215,7 +1359,7 @@ add_filter( 'pre_get_posts', 'meta_filter_posts' );
 	public function value() {
 
         //(only using on ****top iframe****) this condition using only site editor page not sed app iframes
-        if( $this->option_type == "base" || empty( $this->option_type ) ){
+        /*if( $this->option_type == "base" || empty( $this->option_type ) ){
 
 			//only using on ****sed app iframes****
 			if ( isset( $_POST['sed_page_customized'] ) && isset($_POST['preview_type']) && $_POST['preview_type'] == "refresh" ){
@@ -1234,7 +1378,7 @@ add_filter( 'pre_get_posts', 'meta_filter_posts' );
 
 			}
 
-        }
+        }*/
 
          //using for all options except base options(page options)
         //using on ****sed app iframes**** and ****top iframe****
@@ -1246,6 +1390,11 @@ add_filter( 'pre_get_posts', 'meta_filter_posts' );
 			case 'option' :
 				$function = 'get_option';
 				break;
+            case 'base' :
+                $sed_settings = $this->manager->sed_page_settings();
+                $value = ( isset( $sed_settings[ $this->id ] ) ) ? $sed_settings[ $this->id ] : $this->default;
+                return $value;
+                break;
 			/*case 'post_meta' :
 				$function = 'get_post_meta';
 				break;

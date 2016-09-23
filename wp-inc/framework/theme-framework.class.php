@@ -540,21 +540,21 @@ Class StarsIdeasTheme extends SiteEditorThemeFramework {
                 'value'          => get_option( 'show_on_front' ),
                 'capability'     => 'manage_options',
                 'option_type'    => 'option' ,
-                'transport'      => 'postMessage'
+                'transport'      => 'refresh'//'postMessage'
             ),
 
             'page_on_front' => array(
                 'value'         => get_option( 'page_on_front' ),
                 'option_type'   => 'option',
                 'capability'    => 'manage_options',
-                'transport'     => 'postMessage'
+                'transport'     => 'refresh'//'postMessage'
             ),
 
             'page_for_posts' => array(
                 'value'          => get_option( 'page_for_posts' ),
                 'option_type'    => 'option',
                 'capability'     => 'manage_options',
-                'transport'      => 'postMessage' ,
+                'transport'      => 'refresh'//'postMessage' ,
             )
 
         );

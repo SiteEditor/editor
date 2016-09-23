@@ -25,15 +25,11 @@ $toolbar->add_new_tab("layout" , __("Layout","site-editor") , "" , "tab" , array
 
 $toolbar->add_new_tab("modules" , __("Modules","site-editor") , "" , "tab" , array( "class" => "modules-tb" ));
 
-$toolbar->add_new_tab("widgets" , __("Widgets","site-editor") , "" , "tab" , array( "class" => "widgets-tb" ));
-
 $toolbar->add_element_group( "layout" , "general" , __("General","site-editor") );
 
 $toolbar->add_element_group( "layout" , "template" , __("Template","site-editor") );
 
 $toolbar->add_element_group( "layout" , "settings" , __("Settings","site-editor") );
-
-$toolbar->add_element_group( "widgets" , "basic" , __("Basic","site-editor") );
 
 do_action( 'before_site_editor_module_load', $site_editor_app );
 

@@ -87,6 +87,16 @@ class SEDAppInit
 
         add_action( "init" , array( $this , "sed_image_sizes") );
         add_filter( 'image_size_names_choose', array( $this , 'sed_custom_sizes' ) );
+
+        if( !defined( 'SED_ADMIN_INC_PATH' ) )
+            define('SED_ADMIN_INC_PATH', SED_BASE_DIR . DS . 'admin' . DS . 'includes');
+
+        if( !class_exists( 'SiteEditorSetup' ) )
+            require_once( SED_ADMIN_INC_PATH . DS . 'sed-setup.class.php' );
+
+        if( SiteEditorSetup::is_installed() ) {
+            add_action('admin_bar_menu', array(&$this, 'sed_admin_bar_link'), 1000);
+        }
     }
 
     function localization() {
@@ -96,6 +106,39 @@ class SEDAppInit
         load_plugin_textdomain( "site-editor" , false, dirname( plugin_basename( __FILE__ ) ) . "/languages" );
         //else if ($this->location == 'mu-plugins')
           //load_muplugin_textdomain( "site-editor", "/languages/" );
+
+    }
+
+    function sed_admin_bar_link() {
+        global $wp_admin_bar;
+
+        if ( ! current_user_can( 'edit_by_site_editor' ) ) {
+            return;
+        }
+
+        $editor_url = get_sed_url();
+        $title = __( 'Go To SiteEditor' , "site-editor");
+
+        if( !is_admin() ){
+            global $sed_apps;
+            $info_u = $sed_apps->get_sed_page_info_uniqe();
+
+            $sed_page_id = $info_u['id'];
+            $sed_page_type = $info_u['type'];
+
+            $current_url = ( is_ssl() ? 'https://' : 'http://' ) . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+            //$current_url = add_query_arg( 'url', urlencode( $current_url ), wp_customize_url() );
+            $editor_url = get_sed_url( $sed_page_id , $sed_page_type , $current_url );
+            $title = __( 'Edit With SiteEditor' , "site-editor");
+        }
+
+        /* Add the main siteadmin menu item */
+        $wp_admin_bar->add_menu( array(
+            'id'     => 'site_editor_edit_btn',
+            'parent' => 'top-secondary',
+            'title'  => $title,
+            'href' => $editor_url ,
+        ) );
 
     }
 

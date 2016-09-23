@@ -16,6 +16,7 @@ function( $, sedApp ) {
     api.currentControl = api.currentControl || "";
     api.frontPageDisplayChange = false;
     api.previewerActive = api.previewerActive || false;
+    api.sedPageBaseSettings  = api.sedPageBaseSettings || {};
 
 	/**
 api	 * @param options
@@ -878,13 +879,12 @@ api	 * @param options
 
   $( function() {
 		api.settings            = window._sedAppEditorSettings;
-        api.settingsPanels      = window._sedAppSettingsPanels
+        api.settingsPanels      = window._sedAppSettingsPanels ;
 		api.l10n                = window._sedAppEditorControlsL10n;
         //api.paramsSettingsValid = window._paramsSettingsValid;
         api.mediaSettings       = window._sedAppEditorMediaSettings;
         api.I18n                = window._sedAppEditorI18n;
         api.addOnSettings       = window._sedAppEditorAddOnSettings;
-
 		// Check if we can run the customizer.
 		if ( ! api.settings )
 			return;
@@ -925,9 +925,6 @@ api	 * @param options
                 var query = {} ,
                     pUrl = this.previewUrl() ,
                     primaryQuery ;
-                    //alert("after pUrl");
-                             //api.log("api.currentPreviewUrl--------:" , api.currentPreviewUrl);
-                             //api.log("pUrl---------:", pUrl);
 
                 if( (_.isUndefined( api.currentPreviewUrl ) || api.currentPreviewUrl === pUrl ) && api.frontPageDisplayChange === false  ){
                     query.preview_type = "refresh";
@@ -937,91 +934,67 @@ api	 * @param options
                     api.currentPreviewType = "new";
                 }
 
-                if( !_.isUndefined( api.postsContent ) )
-                    query.sed_posts_content = JSON.stringify( api.postsContent );
+                var customized = api.get(),
+                    mainCustomizedSettings = {};
 
-                var pageCustomizedSettings;
-                if( !_.isUndefined( api.pageCustomizedSettings ) )
-                    pageCustomizedSettings = api.pageCustomizedSettings;
-                else
-                    pageCustomizedSettings = api.get();
+                if( _.isUndefined( api.sedPageBaseSettings[api.settings.page.id] ) )
+                    api.sedPageBaseSettings[api.settings.page.id] = {};
+
+                $.each( api.settings.settings, function( id, options ) {
+
+                    if( _.isUndefined( options.option_type ) || ( options.option_type == "base" ) ){
+                        api.sedPageBaseSettings[api.settings.page.id][id] = ( _.isObject( customized[id] ) ) ? $.extend( true, {} , customized[id] ) : customized[id];
+                    }else{
+                        mainCustomizedSettings = ( _.isObject( customized[id] ) ) ? $.extend( true, {} , customized[id] ) : customized[id];
+                    }
+
+                });
 
                 _.extend( query, {
-                    sed_page_id             : api.settings.page.id ,
-                    sed_page_type           : api.settings.page.type ,
+                    //sed_page_id             : api.settings.page.id ,
+                    //sed_page_type           : api.settings.page.type ,
 					sed_app_editor          : 'on',   //wp_customize
 					theme                   : api.settings.theme.stylesheet,
-					sed_page_customized     : JSON.stringify( pageCustomizedSettings ),  //customized
+					sed_page_customized     : JSON.stringify( mainCustomizedSettings ),  //customized
+                    sed_page_base_settings  : JSON.stringify( api.sedPageBaseSettings ),
 					nonce                   : this.nonce.preview
                 });
+
+                if( _.isUndefined( api.previewerQueries ) )
+                    api.previewerQueries = {};
+
+                var appPostsContent = {} ;
+
+                $.each( api.previewerQueries , function( page_id , oQuery ){
+
+                    $.each( oQuery.sed_posts_content , function( post_id , models ){
+                        appPostsContent[post_id] = models;
+                    });
+
+                });
+
+                if( !_.isUndefined( api.postsContent ) ) {
+                    $.each(api.postsContent, function (post_id, models) {
+                        appPostsContent[post_id] = models;
+                    });
+                }
+
+                console.log( "-------------query.sed_posts_content-------------------" , appPostsContent );
+
+                query.sed_posts_content = JSON.stringify( appPostsContent );
 
                 primaryQuery = {
                     sed_posts_content       : api.postsContent || {} ,
                     sed_page_id             : api.settings.page.id ,
                     sed_page_type           : api.settings.page.type ,
-					sed_app_editor          : 'on',   //wp_customize
-					theme                   : api.settings.theme.stylesheet,
-					sed_page_customized     : pageCustomizedSettings ,  //customized
-                    //sed_query_url           : api.currentPreviewUrl
+                    theme                   : api.settings.theme.stylesheet,
                 };
 
-                if( _.isUndefined( api.previewerQueries ) )
-                    api.previewerQueries = {};
-
                 if( !_.isUndefined( api.currentPreviewUrl ) ){
-                    //api.log( "primaryQuery ------- : " , primaryQuery );
                     api.previewerQueries[ api.settings.page.id ] = primaryQuery;
                 }
 
-                if( query.preview_type == "refresh" ){
-                    return query;
-                }
-
-                var previewerQueryCache ,
-                    frontPageId = parseInt( api("page_on_front")() ) ;
-
-                if( pUrl === api.settings.url.home && frontPageId > 0 ){
-                    var frontPageQuery = api.previewerQueries[ frontPageId ];
-                    if( frontPageQuery )
-                        previewerQueryCache = frontPageQuery;
-                }else{
-
-                    if( pUrl === api.settings.url.home ){
-                        api.previewPageId = "general_home";
-                        api.previewPageType = "general";
-                    }
-
-                    if( pUrl === api.settings.url.home && parseInt( api("page_for_posts")() ) > 0 && parseInt( api("page_on_front")() ) == 0 ){
-                        api.previewPageId = "general_index_blog_page";
-                        api.previewPageType = "general";
-                    }
-
-                    previewerQueryCache = api.previewerQueries[api.previewPageId];//_.findWhere( api.previewerQueries , { sed_query_url : pUrl } );
-                }
-
-                api.log( previewerQueryCache );
-                //api.log( pageCustomizedSettings );
-                if( _.isUndefined( previewerQueryCache ) ){
-                    return query;
-                }
-
-                var oldQuery = $.extend( {} , previewerQueryCache , { sed_page_customized : {} } );
-                oldQuery.nonce = this.nonce.preview;
-                oldQuery.preview_type = "refresh";
-                oldQuery.sed_posts_content     = JSON.stringify( oldQuery.sed_posts_content ) ;
-
-                $.each( previewerQueryCache.sed_page_customized , function( id , value ){
-                    var setting = api.settings.settings[id];
-                    if(setting.option_type == "base" || _.isEmpty(setting.option_type) ){
-                        oldQuery.sed_page_customized[id]  =  value;
-                    }else{
-                        oldQuery.sed_page_customized[id]  =  pageCustomizedSettings[id];
-                    }
-                });
-
-                oldQuery.sed_page_customized  = JSON.stringify( oldQuery.sed_page_customized ) ;
-                   //api.log( "oldQuery ------- : " , oldQuery );
-				return oldQuery;
+				return query;
 			}
 		});
 

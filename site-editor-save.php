@@ -39,7 +39,7 @@ class SEDAppSave{
           case "tax":
           case "general":
           case "post_type":
-          case "author":
+          //case "author":
             return get_option( $option_name ) ;
           break;
           case "post":
@@ -105,7 +105,6 @@ class SEDAppSave{
 
        if( isset($_POST['sed_page_customized']) && isset($_POST['sed_posts_content'])){
 
-
            /*
            start save all pages base settings
            */
@@ -161,7 +160,6 @@ class SEDAppSave{
            foreach($all_posts_content_models AS $post_id => $shortcodes){
 
                $shortcodes = apply_filters("sed_content_save_pre" , $shortcodes );
-               $this->update_pb_post_content($post_id  , $shortcodes );
 
                if(!empty($shortcodes)){
                    $tree_shortcodes = $this->build_tree_shortcode( $shortcodes , "root" );
@@ -311,13 +309,6 @@ class SEDAppSave{
             return $this->generate_helper_shortcodes( $new_tag , $tree_path );
         else
             return $new_tag;
-    }
-
-    function update_pb_post_content( $id , $shortcodes){
-
-        if( !update_post_meta( $id, 'sed_post_content', $shortcodes ) )
-            add_post_meta( $id, 'sed_post_content' , $shortcodes , true );
-
     }
 
     function sed_update_settings($settings , $sed_page_id = "general_home" , $sed_page_type = "general"){

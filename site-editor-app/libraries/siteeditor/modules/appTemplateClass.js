@@ -109,6 +109,7 @@ function( $, sedApp ) {
                     mainC[api.settings.page.id] = output.main_content || [];
                     settings.theme_content = output.theme_content;
 
+                    //@deprecate
                     api.pageCustomizedSettings = settings;
 
                     api.postsContent = mainC;

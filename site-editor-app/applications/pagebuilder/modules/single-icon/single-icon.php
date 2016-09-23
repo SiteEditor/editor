@@ -79,7 +79,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
-        $this->add_link_to_panel();
+        //$this->add_link_to_panel();
 
         $this->add_panel( 'icons_settings_panel' , array(
             'title'         =>  __('Single Icon Settings',"site-editor")  ,
@@ -123,7 +123,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
       			'label' => __('Background Color', 'site-editor'),
       			'desc'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this feature cannot be used.', 'site-editor'),
             "panel"     => "icons_settings_panel",
-            "dependency" =>  => array(
+            "dependency"  => array(
                 'controls'  =>  array(
                    'relation' => 'AND',
                     array(

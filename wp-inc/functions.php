@@ -162,48 +162,169 @@ function save_sed_pages_mode($key , $value ){
 }
 
 
-//for posts && pages && home
-function get_sed_url(){
-    global $sed_apps , $post;
+/*
+ * @get_sed_url or @get_site_editor_url
+ * @params :
+ *      @$sed_page_id   : site editor page id @mixed string | init
+ *      @$sed_page_type : site editor page type @string
+ *      @$args          :
+ *      @$permalink     : site editor page type @string
+ * @return is :
+ *      @string
+ *      @site editor url
+ * only for link to Editor from xternal SiteEditor like wp site , wp admin bar & pages
+ * return new WP_Error( 'site-editor-url', __( "message", "site-editor" ) );
+ */
+function get_sed_url( $sed_page_id = '' , $sed_page_type = '' , $permalink = '' , $args = array() ){
 
-    $url = site_url("?editor=siteeditor");
+    if( empty( $sed_page_id ) || empty( $sed_page_type ) ){
 
-    if( !isset( $post->ID ) )
-        return $url;
+        $page_id = get_option( 'page_on_front' );
+
+        if( get_option( 'show_on_front' ) == "page" && $page_id !== false && $page_id > 0 ){
+            $sed_page_id = $page_id;
+            $sed_page_type = "post";
+            $permalink = get_permalink( $page_id );
+        }else{
+            $sed_page_id = "general_home";
+            $sed_page_type = "general";
+            $permalink = home_url();
+        }
+    }
+
+    if( empty( $permalink ) ) {
+
+        switch ( $sed_page_type ) {
+
+            case "tax" :
+                if( !isset( $args['term'] ) ){
+                    return new WP_Error( 'site-editor-url', __( "not exist term object", "site-editor" ) );
+                }
+                $term = $args['term'];
+                $permalink = get_term_link($term);
+                break;
+            //$sed_page_id == $post->ID
+            case "post" :
+
+                $permalink = get_permalink($sed_page_id);
+
+                if (get_option('page_for_posts') == $sed_page_id) {
+
+                    $sed_page_type = "general";
+                    $sed_page_id = "general_index_blog_page";
+
+                }
+
+                break;
+
+            case "post_type" :
+                if( !isset( $args['post_type_name'] ) ){
+                    return new WP_Error( 'site-editor-url', __( "not exist post type name", "site-editor" ) );
+                }
+                $post_type_name = $args['post_type_name'];
+                $permalink = get_post_type_archive_link($post_type_name);
+                break;
+
+            case "general" :
+
+                switch ($sed_page_id) {
+                    case "general_search" :
+                        $permalink = site_url("/?s=SiteEditor");
+                        break;
+                    case "general_error_404" :
+                        $permalink = site_url("/?page_id=55555555");
+                        break;
+                    case "general_author" :
+                        $permalink = get_year_link('');
+                        break;
+                    case "general_date_archive" :
+                        $permalink = get_author_posts_url(get_current_user_id());
+                        break;
+                    case "general_index_blog_page" :
+
+                        $page_id = get_option('page_for_posts');
+
+                        if( get_option( 'show_on_front' ) == "page" && $page_id !== false && $page_id > 0 ){
+                            $permalink = get_permalink( $page_id );
+                        }else{
+                            return new WP_Error( 'site-editor-url', __( "dose not exist index blog page", "site-editor" ) );
+                        }
+
+                        break;
+                    case "general_home" :
+                        $permalink = home_url();
+                        break;
+                }
+
+                break;
+        }
+
+    }
+
+    if( is_wp_error( $permalink ) )
+        return $permalink;
+
+    if( $permalink === false || empty( $permalink ) )
+        return new WP_Error( 'site-editor-url', __( "permalink is wrong", "site-editor" ) );
+
+    $permalink = apply_filters( "site_editor_preview_url" , $permalink , $sed_page_id , $sed_page_type , $args );
+
+    $url = site_url();
 
     $parse_url = parse_url( $url );
 
-    $args = array();
-
-    if( get_option( 'page_on_front' ) !== false && get_option( 'page_on_front' ) ==  $post->ID ){
-
-        $sed_page_type = "general" ;
-        $sed_page_id   = "general_home";
-
-        $args['is_front_page'] = true;
-
-    }elseif(get_option( 'page_for_posts' ) !== false && get_option( 'page_for_posts' ) ==  $post->ID ){
-        $sed_page_type = "general" ;
-        $sed_page_id = "general_index_blog_page";
-
-        $args['is_index_blog'] = true;
-    }else{
-        $sed_page_type = "post" ;
-        $sed_page_id = $post->ID;
+    if( isset( $parse_url['query'] ) ) {
+        $editor_url = $url . "&editor=siteeditor&preview_url=" . urlencode($permalink) . "&sed_page_id=" . $sed_page_id . "&sed_page_type={$sed_page_type}";
+    }else {
+        $editor_url = $url . "?editor=siteeditor&preview_url=" . urlencode($permalink) . "&sed_page_id=" . $sed_page_id . "&sed_page_type={$sed_page_type}";
     }
 
-    if( isset( $parse_url['query'] ) ){
-        $url_editor = $url . "&preview_url=" . urlencode(get_permalink($post->ID)) ."&sed_page_id=" . $sed_page_id . "&sed_page_type={$sed_page_type}" ;
-        $has_query = true;
-    }else{
-        $url_editor = $url . "?preview_url=" . urlencode(get_permalink($post->ID)) ."&sed_page_id=" . $sed_page_id . "&sed_page_type={$sed_page_type}";
-        $has_query = false;
-    }
-
-
-    return apply_filters( "site_editor_url" , $url_editor , $url , $has_query );;
+    return apply_filters( "site_editor_url" , $editor_url , $sed_page_id , $sed_page_type , $permalink , $args );
 }
-//END  ********* ADD && EDIT for sub_theme module
+
+function get_site_editor_url( $sed_page_id = '' , $sed_page_type = '' , $permalink = '' , $args = array() ){
+    return get_sed_url( $sed_page_id , $sed_page_type , $permalink , $args );
+}
+
+function woo_shop_fix_sed_url( $editor_url , $sed_page_id = '' , $sed_page_type = '' , $permalink = '' , $args = array() ){
+    global $post;
+
+    if( $sed_page_type != "post" || !$sed_page_id )
+        return $editor_url;
+
+    $shop_page_id = get_option('woocommerce_shop_page_id');
+
+    if( $shop_page_id == $sed_page_id && $sed_page_id > 0 ){
+
+        $url = site_url();
+
+        $parse_url = parse_url( $url );
+
+        if( isset( $parse_url['query'] ) ){
+            $editor_url = $url . "&editor=siteeditor&preview_url=" . urlencode( get_post_type_archive_link('product') ) ."&sed_page_id=post_type_product&sed_page_type=post_type" ;
+        }else{
+            $editor_url = $url . "?editor=siteeditor&preview_url=" . urlencode( get_post_type_archive_link('product') ) ."&sed_page_id=post_type_product&sed_page_type=post_type";
+        }
+
+    }
+
+    return $editor_url;
+}
+
+add_filter( 'site_editor_url' , 'woo_shop_fix_sed_url' , 10 , 4 );
+
+function woo_shop_fix_sed_page_info( $info ){
+
+    if (is_shop()) {
+        $info['type']   = "post_type";
+        $info['id']     = "post_type_product";
+    }
+
+    return $info;
+}
+
+add_filter( 'sed_page_info_filter' , 'woo_shop_fix_sed_page_info' , 10 , 1 );
+
 
 function is_sed_installed(){
     $status_install_steps = array_merge( array(

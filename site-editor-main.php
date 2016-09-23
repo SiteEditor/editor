@@ -44,10 +44,6 @@ Class SiteEditorApp {
 
         $this->module_info = sed_get_setting("module_info");
 
-        if( is_site_editor() || site_editor_app_on() ){
-            $this->set_page_type_id();
-        }
-
         if( site_editor_app_on() ){
             require_once SED_BASE_DIR . DS . 'libraries' . DS . 'siteeditor' . DS . 'site-iframe' . DS . 'tmpl.php';
         }
@@ -115,58 +111,6 @@ Class SiteEditorApp {
         require_once SED_FRAMEWORK_DIR . DS . 'theme-framework.class.php';
 
         require_once SED_FRAMEWORK_DIR . DS . 'class_site_editor_css.php';
-    }
-
-    function set_page_type_id(){
-
-        $sed_page_id    =  (isset($_REQUEST['sed_page_id']) && !empty($_REQUEST['sed_page_id'])) ? $_REQUEST['sed_page_id'] : "general_home";
-        $sed_page_type  =  (isset($_REQUEST['sed_page_type']) && !empty($_REQUEST['sed_page_type'])) ? $_REQUEST['sed_page_type'] : "general";
-
-        if( $sed_page_id === "general_home" && get_option( 'page_on_front' ) !== false && get_option( 'page_on_front' ) > 0 ){
-            $sed_page_id = get_option( 'page_on_front' );
-            $sed_page_type = "post";
-        }else if(get_option( 'page_for_posts' ) !== false && get_option( 'page_for_posts' ) ==  $sed_page_id ){
-            $sed_page_type = "general" ;
-            $sed_page_id = "general_index_blog_page";
-        }
-
-         /*elseif( is_home() === false && is_front_page() === true ){
-            $sed_post_id = get_queried_object()->ID;
-            $sed_page_id = $sed_post_id;
-            $sed_page_type = "post";
-        } elseif( is_home() === true && is_front_page() === false  ){
-            $sed_page_general = "index_blog_page";
-            $sed_page_id = "general_" . $sed_page_general;
-            $sed_page_type = "general";
-        }*/
-
-        /*if( is_home() === true && is_front_page() === true ){
-            $sed_page_general = "home";
-            $sed_page_id = "general_" . $sed_page_general;
-            $sed_page_type = "general";
-        } elseif( is_home() === false && is_front_page() === true ){
-            $sed_post_id = get_queried_object()->ID;
-            $sed_page_id = $sed_post_id;
-            $sed_page_type = "post";
-        } elseif( is_home() === true && is_front_page() === false  ){
-            $sed_page_general = "index_blog_page";
-            $sed_page_id = "general_" . $sed_page_general;
-            $sed_page_type = "general";
-        }
-
-        if(get_option( 'page_on_front' ) !== false && get_option( 'page_on_front' ) ==  $sed_page_id ){
-
-            $sed_page_type = "general" ;
-            $sed_page_id = "general_home";
-
-        }elseif(get_option( 'page_for_posts' ) !== false && get_option( 'page_for_posts' ) ==  $sed_page_id ){
-            $sed_page_type = "general" ;
-            $sed_page_id = "general_index_blog_page";
-        }*/
-
-        $this->sed_page_id = $sed_page_id;
-        $this->sed_page_type = $sed_page_type;
-
     }
 
     function add_rtl_body_class( $classes ) {
@@ -534,11 +478,11 @@ Class SiteEditorApp {
 
         $this->siteeditor_loaded = true;
 
-        if( !is_site_editor() ){
+        /*if( !is_site_editor() ){
 
             $settings = array();
 
-            /*$_post_values = json_decode( wp_unslash( $_POST['sed_page_customized'] ), true );
+            $_post_values = json_decode( wp_unslash( $_POST['sed_page_customized'] ), true );
             $sed_app_settings = $this->editor_manager->settings();
             foreach ( $_post_values as $id => $value ) {
                $setting = $sed_app_settings[$id];
@@ -547,13 +491,14 @@ Class SiteEditorApp {
                }
             }
 
-            var_export( $settings );*/
+            var_export( $settings );
 
 
 
             $settings = $this->get_page_settings();
+
             $GLOBALS['sed_data'] = $settings;
-        }
+        }*/
 
     }
 
@@ -605,7 +550,7 @@ Class SiteEditorApp {
         }
         //is_comments_popup() && is_date(archive by date And year And ...)
 
-        return array( "id" => $sed_page_id, "type" => $sed_page_type);
+        return apply_filters( "sed_page_info_filter" , array( "id" => $sed_page_id, "type" => $sed_page_type) );
     }
 
     function content_filter_for_ajax_refresh( $posts_content ){
@@ -643,7 +588,7 @@ Class SiteEditorApp {
         */
     }
 
-    function filter_by_theme_options( $page_options ) {
+    /*function filter_by_theme_options( $page_options ) {
 
         if ( isset( $_POST['sed_page_customized'] ) ){
 
@@ -729,10 +674,8 @@ Class SiteEditorApp {
 
         return $page_options;
 
-    }
+    }*/
 
-
-    //END  **************  for sub_theme module
 
     function get_page_settings(){
 
@@ -741,18 +684,8 @@ Class SiteEditorApp {
                 return $this->sed_page_settings;
             }else{
 
-                $settings = array();
-
-                $sed_app_settings = $this->editor_manager->settings();
-
-                foreach ( $sed_app_settings as $id => $setting ) {
-                   if($setting->option_type == "base" || empty( $setting->option_type ) ){
-                       $settings[$id] = $setting->value();  //$setting->id
-                   }
-                }
-
                 $this->page_settings_loaded = true;
-                $this->sed_page_settings = $settings;
+                $this->sed_page_settings = sed_get_page_options( $this->sed_page_id  , $this->sed_page_type );
 
                 return $this->sed_page_settings;
             }
@@ -764,7 +697,7 @@ Class SiteEditorApp {
 
     function set_page_info(  ) {
         $info_u = $this->get_sed_page_info_uniqe();
-                 
+
         $this->sed_page_id = $info_u['id'];
         $this->sed_page_type = $info_u['type'];
         //for sub_theme module
@@ -772,13 +705,19 @@ Class SiteEditorApp {
 
         if( !site_editor_app_on() ){
             $this->load_site_editor_app();
+        }
 
             /*if( !$settings = sed_get_page_options($this->sed_page_id , $this->sed_page_type) )
                 $settings = get_pages_default_options();
 
             $sed_data = $settings;
             $GLOBALS['sed_data'] = $settings;*/
-        }
+
+        $settings = sed_get_page_options( $this->sed_page_id  , $this->sed_page_type );
+
+        $GLOBALS['sed_data'] = $settings;
+
+        //var_dump( $settings );
 
         global $sed_data;
 

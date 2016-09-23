@@ -46,14 +46,19 @@
 
     $preview_url = isset($_GET['preview_url']) && $_GET['preview_url'] ? $_GET['preview_url'] : home_url( '/' );
 
+    $info = $sed_apps->editor_manager->get_page_editor_info();
+
+    $sed_page_id    =  $info['id'];
+    $sed_page_type  =  $info['type'];
+
  	$settings = array(
 		'theme'    => array(
 			'stylesheet' => $site_editor_app->get_stylesheet(),
 			//'active'     => $site_editor_app->is_theme_active(),
 		),
         'page'     => array(
-            'id'                    =>  $sed_apps->sed_page_id,
-            'type'                  =>  $sed_apps->sed_page_type
+            'id'                    =>  $sed_page_id , //$sed_apps->sed_page_id,
+            'type'                  =>  $sed_page_type  //$sed_apps->sed_page_type
         ),
 		'url'      => array(
 			'preview'       => esc_url_raw( $preview_url ),   //$url ? $url :

@@ -35,9 +35,6 @@ class SiteEditorAdminRender{
 
             add_action( 'admin_enqueue_scripts', array( $this, 'options_media_scripts' ));
 
-            add_action( 'admin_bar_menu', array( &$this, 'sed_admin_bar_link' ), 1000 );
-
-
             add_filter('upload_mimes', array( $this , 'filter_mime_types') );
 
             add_action( 'admin_init', array( $this , 'admin_init')  );
@@ -388,73 +385,64 @@ class SiteEditorAdminRender{
     }
 
 
-    //START  ********* ADD && EDIT for sub_theme module
+    /*
+     * @function    : add_actions_to_list
+     * @description : add editor link for pages , posts and custom post types items in wp admin > posts lists
+     */
     function add_actions_to_list($actions, $post) {
 
         if( !current_user_can( 'edit_by_site_editor' ) || !current_user_can( 'edit_post' , $post->ID ) || $post->post_status == "trash" )
             return $actions;
 
-        $url_editor = get_sed_url();
+        $editor_url = get_sed_url( $post->ID , "post" );
 
-        if($url_editor === false)
+        if($editor_url === false)
             return false;
 
-        $actions['sed_site_editor_link'] = "<a class='sed_edit_siteeditor' href='{$url_editor}'>" . __( 'Edit With SiteEditor' , "site-editor") . "</a>";
+        $actions['sed_site_editor_link'] = "<a class='sed_edit_siteeditor' href='{$editor_url}'>" . __( 'Edit With SiteEditor' , "site-editor") . "</a>";
        return $actions;
     }
 
+    /*
+     * @function    : add_button_to_editor
+     * @description : add editor button link for pages , posts and custom post types items in wp post editor page
+     */
     function add_button_to_editor($type) {
         global $post;
 
-        if( "content" != $type || $post->post_status == "auto-draft" || !current_user_can( 'edit_by_site_editor' ) )
+        if( "content" != $type || !current_user_can( 'edit_by_site_editor' ) )
             return false;
 
         $title = __("Edit With SiteEditor" , "site-editor" );
 
-        $url_editor = get_sed_url();
-        if( $url_editor === false )
+        $editor_url = get_sed_url( $post->ID , "post" );
+        if( $editor_url === false )
             return false;
 
-        $context = "<a href='{$url_editor}' class='button button-primary button-medium'  title='{$title}'>$title</a>";
+        $context = "<a href='{$editor_url}' class='button button-primary button-medium'  title='{$title}'>$title</a>";
         echo $context;
     }
 
-
+    /*
+     * @function    : sed_tag_row_actions
+     * @description : add editor button link for terms in wp admin terms page
+     */
     function sed_tag_row_actions($actions, $tag) {
 
         if( !current_user_can( 'edit_by_site_editor' ) )
             return $actions;
 
-        $url = site_url("?editor=siteeditor");
-        $parse_url = parse_url( $url );
+        $taxonomy = get_taxonomy( $tag->taxonomy );
+        if( !$taxonomy->public )
+            return $actions;
 
-        $args = array();
+        $editor_url = get_sed_url( "term_" . $tag->term_id , "tax" , '' , array( 'term' => $tag ) );
 
-        if( isset( $parse_url['query'] ) )
-            $url_editor = $url . "&preview_url=" . urlencode(get_term_link( $tag )) ."&sed_page_id=term_" . $tag->term_id . "&sed_page_type=tax" ;
-        else
-            $url_editor = $url . "?preview_url=" . urlencode(get_term_link( $tag )) ."&sed_page_id=term_" . $tag->term_id . "&sed_page_type=tax";
-
-        if($url_editor === false)
+        if($editor_url === false)
             return false;
 
-        $actions['sed_site_editor_link'] = "<a class='sed_edit_siteeditor' href='{$url_editor}'>" . __( 'Edit With SiteEditor' , "site-editor") . "</a>";
+        $actions['sed_site_editor_link'] = "<a class='sed_edit_siteeditor' href='{$editor_url}'>" . __( 'Edit With SiteEditor' , "site-editor") . "</a>";
        return $actions;
-    }
-
-
-    function sed_admin_bar_link() {
-        global $wp_admin_bar;
-
-        $url_editor = site_url("?editor=siteeditor");
-
-		/* Add the main siteadmin menu item */
-		$wp_admin_bar->add_menu( array(
-			'id'     => 'site_editor_edit_btn',
-			'parent' => 'top-secondary',
-			'title'  => __( 'Edit With SiteEditor' , "site-editor"),
-			'href' => $url_editor ,
-		) );
     }
 
 

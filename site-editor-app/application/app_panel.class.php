@@ -106,6 +106,8 @@ Class AppPanel {
                 require_once SED_TMPL_PATH . DS . $this->template . DS . "modules" . DS . $view['module'] . DS .  $view['file'];
             }elseif(file_exists(SED_APPS_PATH . DS . $this->current_app . DS . "modules" . DS . $view['module'] . DS . "view" . DS . $view['file'])){
                 require_once SED_APPS_PATH . DS . $this->current_app . DS . "modules" . DS . $view['module'] . DS . "view" . DS . $view['file'];
+            }elseif( file_exists( $view['file'] ) ){
+                require_once $view['file'];
             }
 
             $content = ob_get_contents();

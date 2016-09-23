@@ -1900,6 +1900,7 @@ background: #F7F7F7;
 .left_palette {
     position: absolute;
     top: 123px;
+    z-index: 1000000;
 }
 .height_pl .active {
       width: 52px;

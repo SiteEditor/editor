@@ -101,9 +101,12 @@ class PBShortcodeClass{
 
         $module = !empty($module) ? $module : $this->module;
 
-        if($type == "main")
-            $less_info = $sed_apps->module_info[$module]['less'][$handle];
-        else{
+        $less_info = null;
+
+        if($type == "main") {
+            if( isset( $sed_apps->module_info[$module]['less'][$handle] ) )
+                $less_info = $sed_apps->module_info[$module]['less'][$handle];
+        }else{
             if( isset( $sed_apps->module_info[$module]['skins'][$skin] ) )
                 $less_info = $sed_apps->module_info[$module]['skins'][$skin]['less'][$handle];
 
@@ -435,7 +438,8 @@ class PBShortcodeClass{
 
         $animate_attr = "";
 
-        if( ( isset( $_REQUEST['sed_page_ajax'] ) && $_REQUEST['sed_page_ajax'] == "sed_load_modules" ) || ( isset($_REQUEST['preview_type']) && $_REQUEST['preview_type'] == "refresh" && site_editor_app_on() ) )
+        //isset($_REQUEST['preview_type']) && $_REQUEST['preview_type'] == "refresh" &&
+        if( ( isset( $_REQUEST['sed_page_ajax'] ) && $_REQUEST['sed_page_ajax'] == "sed_load_modules" ) || ( site_editor_app_on() ) )
             $animate_class = "";
         else
             $animate_class = "wow ";

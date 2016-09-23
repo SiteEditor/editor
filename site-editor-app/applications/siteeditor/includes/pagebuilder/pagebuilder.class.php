@@ -71,8 +71,9 @@ Class PageBuilderApplication {
         $this->current_app = 'siteeditor';
 
         if( site_editor_app_on() ){
-            add_action( 'the_post', array( &$this , 'parse_editable_content' ), 99999 );
-            add_action("wp_footer" , array( $this, "get_pb_posts_shortcode_content") );
+            add_action( 'the_post'      , array( $this  , 'preview_setup_post_content' ) );
+            add_action( 'the_post'      , array( &$this , 'parse_editable_content' ), 99999 );
+            add_action( 'wp_footer'     , array( $this  , "get_pb_posts_shortcode_content") );
         }
 
         //remove extra p && br tag from site editor & add to default wp editor only
@@ -84,12 +85,12 @@ Class PageBuilderApplication {
             add_filter('the_content', array($this, 'sed_post_ready'), 10);
         }
 
-        add_action("sed_footer" , array($this, 'registered_shortcodes_settings') , 10000 );
+        add_action("sed_footer" , array( $this, 'registered_shortcodes_settings') , 10000 );
         add_action("sed_footer" , array( $this, "write_shortcode_settings") );
         add_action("sed_footer" , array( $this, "write_style_editor_settings") );
 
-        add_action("site_editor_ajax_load_modules", array($this, "page_builder_load_modules") );
-        add_filter( "sed_addon_settings", array($this,'load_modules_settings'));
+        add_action( "site_editor_ajax_load_modules" , array($this, "page_builder_load_modules") );
+        add_filter( "sed_addon_settings" , array($this,'load_modules_settings') );
 
         //load helper shortcodes & ready for do shortcode
         add_action( "sed_page_builder" , array( $this , "register_helper_shortcodes" ) , 9999 , 1  ); //after_sed_pb_modules_load
@@ -108,6 +109,38 @@ Class PageBuilderApplication {
     	return $css_class;
     }
 
+
+    function preview_setup_post_content( $post ){
+
+        if( !isset( $_POST['sed_posts_content']  ) ){
+            return ;
+        }
+
+        $all_posts_content_models = json_decode( wp_unslash( $_POST['sed_posts_content'] ), true );
+
+        static $prevent_setup_post_content_recursion = false;
+        if ( $prevent_setup_post_content_recursion || !isset( $all_posts_content_models[$post->ID] ) ) {
+            return;
+        }
+
+        global $sed_apps;
+
+        $shortcodes = $all_posts_content_models[$post->ID];
+
+        if(!empty($shortcodes)){
+            $tree_shortcodes = $sed_apps->app_save->build_tree_shortcode( $shortcodes , "root" );
+            $content = $sed_apps->app_save->create_shortcode_content( $tree_shortcodes , array() , $post->ID );
+        }else{
+            $content = "";
+        }
+
+        $post->post_content = $content;
+
+        $prevent_setup_post_content_recursion = true;
+        setup_postdata( $post );
+        $prevent_setup_post_content_recursion = false;
+
+    }
 
     /**
     * @save helper shortcodes --only-- after save post & theme content
@@ -238,6 +271,9 @@ Class PageBuilderApplication {
 
     function sed_post_ready($content){
         global $post , $sed_data;
+
+        if( !$post )
+            return $content;
 
         if( is_singular() && $sed_data['page_id'] == $post->ID  ){
             $id = $post->ID;
@@ -1848,6 +1884,9 @@ Class PageBuilderApplication {
         $page_layout = $site_editor_app->layout->get_page_layout();
         $sed_layout_models = get_option( 'sed_layouts_models' );
 
+        var_dump( $sed_layout_models );
+        var_dump( $page_layout );
+
         $has_main_row = false;
         $sed_last_theme_id = get_option( 'sed_last_theme_id' );
 
@@ -1927,7 +1966,7 @@ Class PageBuilderApplication {
                 $new_sed_layout_shortcodes_content = array();
             }
 
-            $new_sed_layout_shortcodes_content[$theme_id] = $sed_main_row_shortcodes_string;
+            $new_sed_layout_shortcodes_content[$theme_id] = $default_layout;
 
             if( $sed_layout_shortcodes_content === false ){
                 $deprecated = null;

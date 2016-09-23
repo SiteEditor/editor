@@ -14,7 +14,6 @@ class SiteEditorSetup
 
     function __construct()
     {
-        parent::__construct();
         if( !defined( 'SED_ADMIN_INC_PATH' ) )
             define('SED_ADMIN_INC_PATH', SED_BASE_DIR . DS . 'admin' . DS . 'includes');
 
@@ -281,6 +280,8 @@ class SiteEditorSetup
     */
    private function install_modules_base(){
         global $sed_pb_modules;
+
+        return true;
 
         $result_setup_module = array();
 
