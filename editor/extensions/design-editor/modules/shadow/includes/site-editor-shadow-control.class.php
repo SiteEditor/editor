@@ -38,14 +38,6 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
         public $category = 'style-editor';
 
         /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'shadow';
-
-        /**
          * The control is style option ?
          *
          * @access public
@@ -168,19 +160,19 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
                                 <li>
                                  <ul class="itme-box-shadow">
                                     <li class="shadow border-box-type1 <?php $this->selected('0px 0px 5px -1px') ;?>" data-value="0px 0px 5px -1px" ><a  href="#"><span  class="style-box-shadow1 "></span></a></li>
-                                    <li class="shadow border-box-type2" data-value="0 0 14px -6px"    ><a href="#"><span  class="style-box-shadow2"></span></a></li>
-                                    <li class="shadow border-box-type1" data-value="2px 2px 5px -1px" ><a  href="#"><span  class="style-box-shadow3"></span></a></li>
-                                    <li class="shadow border-box-type2" data-value="2px -2px 5px -1px" ><a  href="#"><span  class="style-box-shadow4"></span></a></li>
-                                    <li class="shadow border-box-type1" data-value="-2px 2px 5px -1px" ><a  href="#"><span  class="style-box-shadow5"></span></a></li>
-                                    <li class="shadow border-box-type2" data-value="-2px -2px 5px -1px" ><a  href="#"><span  class="style-box-shadow6"></span></a></li>
-                                    <li class="shadow border-box-type1" data-value="0px 2px 5px -1px" ><a  href="#"><span  class="style-box-shadow7"></span></a></li>
-                                    <li class="shadow border-box-type2" data-value="0px -2px 5px -1px" ><a  href="#"><span  class="style-box-shadow8"></span></a></li>
-                                    <li class="shadow border-box-type3" data-value="2px 0px 5px -1px" ><a  href="#"><span  class="style-box-shadow9"></span></a></li>
-                                    <li class="shadow border-box-type4" data-value="-2px 0px 5px -1px" ><a  href="#"><span  class="style-box-shadow10"></span></a></li>
+                                    <li class="shadow border-box-type2 <?php $this->selected('0px 0px 14px -6px') ;?>" data-value="0px 0px 14px -6px"    ><a href="#"><span  class="style-box-shadow2"></span></a></li>
+                                    <li class="shadow border-box-type1 <?php $this->selected('2px 2px 5px -1px') ;?>" data-value="2px 2px 5px -1px" ><a  href="#"><span  class="style-box-shadow3"></span></a></li>
+                                    <li class="shadow border-box-type2 <?php $this->selected('2px -2px 5px -1px') ;?>" data-value="2px -2px 5px -1px" ><a  href="#"><span  class="style-box-shadow4"></span></a></li>
+                                    <li class="shadow border-box-type1 <?php $this->selected('-2px 2px 5px -1px') ;?>" data-value="-2px 2px 5px -1px" ><a  href="#"><span  class="style-box-shadow5"></span></a></li>
+                                    <li class="shadow border-box-type2 <?php $this->selected('-2px -2px 5px -1p') ;?>" data-value="-2px -2px 5px -1px" ><a  href="#"><span  class="style-box-shadow6"></span></a></li>
+                                    <li class="shadow border-box-type1 <?php $this->selected('0px 2px 5px -1px') ;?>" data-value="0px 2px 5px -1px" ><a  href="#"><span  class="style-box-shadow7"></span></a></li>
+                                    <li class="shadow border-box-type2 <?php $this->selected('0px -2px 5px -1px') ;?>" data-value="0px -2px 5px -1px" ><a  href="#"><span  class="style-box-shadow8"></span></a></li>
+                                    <li class="shadow border-box-type3 <?php $this->selected('2px 0px 5px -1px') ;?>" data-value="2px 0px 5px -1px" ><a  href="#"><span  class="style-box-shadow9"></span></a></li>
+                                    <li class="shadow border-box-type4 <?php $this->selected('-2px 0px 5px -1px') ;?>" data-value="-2px 0px 5px -1px" ><a  href="#"><span  class="style-box-shadow10"></span></a></li>
                                     <li class="clr"></li>
                                  </ul>
                                 </li>
-                            </ul>
+                            </ul> <?php $this->selected('0px 0px 5px -1px') ;?>
                           </div>
                           <div>
                             <ul>
@@ -189,16 +181,16 @@ if ( ! class_exists( 'SiteEditorShadowControl' ) ) {
                                 </li>
                                 <li>
                                  <ul class="itme-box-shadow">
-                                    <li class="shadow border-box-type1" data-value="0px 0px 5px -1px inset"  ><a href="#"><span  class="style-box-shadow11 "></span></a></li>
-                                    <li class="shadow border-box-type2" data-value="0 0 14px -6px inset"     ><a href="#"><span  class="style-box-shadow12"></span></a></li>
-                                    <li class="shadow border-box-type1" data-value="2px 2px 5px -1px inset"  ><a href="#"><span  class="style-box-shadow13"></span></a></li>
-                                    <li class="shadow border-box-type2" data-value="2px -2px 5px -1px inset" ><a href="#"><span  class="style-box-shadow14"></span></a></li>
-                                    <li class="shadow border-box-type1" data-value="-2px 2px 5px -1px inset" ><a href="#"><span  class="style-box-shadow15"></span></a></li>
-                                    <li class="shadow border-box-type2" data-value="-2px -2px 5px -1px inset"><a  href="#"><span  class="style-box-shadow16"></span></a></li>
-                                    <li class="shadow border-box-type1" data-value="0px 2px 5px -1px inset"  ><a href="#"><span  class="style-box-shadow17"></span></a></li>
-                                    <li class="shadow border-box-type2" data-value="0px -2px 5px -1px inset" ><a href="#"><span  class="style-box-shadow18"></span></a></li>
-                                    <li class="shadow border-box-type3" data-value="2px 0px 5px -1px inset"  ><a href="#"><span  class="style-box-shadow19"></span></a></li>
-                                    <li class="shadow border-box-type4" data-value="-2px 0px 5px -1px inset" ><a href="#"><span  class="style-box-shadow20"></span></a></li>
+                                    <li class="shadow border-box-type1 <?php $this->selected('0px 0px 5px -1px inset') ;?>" data-value="0px 0px 5px -1px inset"  ><a href="#"><span  class="style-box-shadow11 "></span></a></li>
+                                    <li class="shadow border-box-type2 <?php $this->selected('0px 0px 14px -6px inset') ;?>" data-value="0 0 14px -6px inset"     ><a href="#"><span  class="style-box-shadow12"></span></a></li>
+                                    <li class="shadow border-box-type1 <?php $this->selected('2px 2px 5px -1px inset') ;?>" data-value="2px 2px 5px -1px inset"  ><a href="#"><span  class="style-box-shadow13"></span></a></li>
+                                    <li class="shadow border-box-type2 <?php $this->selected('2px -2px 5px -1px inset') ;?>" data-value="2px -2px 5px -1px inset" ><a href="#"><span  class="style-box-shadow14"></span></a></li>
+                                    <li class="shadow border-box-type1 <?php $this->selected('-2px 2px 5px -1px inset') ;?>" data-value="-2px 2px 5px -1px inset" ><a href="#"><span  class="style-box-shadow15"></span></a></li>
+                                    <li class="shadow border-box-type2 <?php $this->selected('-2px -2px 5px -1px inset') ;?>" data-value="-2px -2px 5px -1px inset"><a  href="#"><span  class="style-box-shadow16"></span></a></li>
+                                    <li class="shadow border-box-type1 <?php $this->selected('0px 2px 5px -1px inset') ;?>" data-value="0px 2px 5px -1px inset"  ><a href="#"><span  class="style-box-shadow17"></span></a></li>
+                                    <li class="shadow border-box-type2 <?php $this->selected('0px -2px 5px -1px inset') ;?>" data-value="0px -2px 5px -1px inset" ><a href="#"><span  class="style-box-shadow18"></span></a></li>
+                                    <li class="shadow border-box-type3 <?php $this->selected('2px 0px 5px -1px inset') ;?>" data-value="2px 0px 5px -1px inset"  ><a href="#"><span  class="style-box-shadow19"></span></a></li>
+                                    <li class="shadow border-box-type4 <?php $this->selected('-2px 0px 5px -1px inset') ;?>" data-value="-2px 0px 5px -1px inset" ><a href="#"><span  class="style-box-shadow20"></span></a></li>
                                     <li class="clr"></li>
                                  </ul>
                                 </li>

@@ -50,14 +50,6 @@ if ( ! class_exists( 'SiteEditorPaddingControl' ) ) {
         public $category = 'style-editor';
 
         /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'padding';
-
-        /**
          * The control is style option ?
          *
          * @access public

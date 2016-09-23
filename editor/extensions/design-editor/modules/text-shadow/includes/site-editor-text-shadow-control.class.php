@@ -38,14 +38,6 @@ if ( ! class_exists( 'SiteEditorTextShadowControl' ) ) {
         public $category = 'style-editor';
 
         /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'text-shadow';
-
-        /**
          * The control is style option ?
          *
          * @access public

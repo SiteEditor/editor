@@ -35,15 +35,7 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
          * @access public
          * @var string
          */
-        public $category = 'style-editor';
-
-        /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'gradient';
+        public $category = 'style-editor'; 
 
         /**
          * The control is style option ?
@@ -154,22 +146,22 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
                       <div>
                         <ul>
                             <li>
-                            <a class="heading-item" data-position="topLeft"  href="#"><?php echo __("Normal" ,"site-editor");  ?></a>
+                            <a class="heading-item" data-position="topLeft"  href="#"><?php echo __("Normal" ,"site-editor");  ?></a>                                                                                             
                             </li>
                             <li>
                              <ul class="gradient">
                                 <li><a class="sed-gradient <?php $this->selected( "linear" , "0,1" , "0,100" , "vertical" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="vertical" href="#"><span class="gradient1"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="vertical"  href="#"><span class="gradient2"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="vertical"  href="#"><span class="gradient3"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="vertical"  href="#"><span class="gradient4"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="vertical"  href="#"><span class="gradient5"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="horizontal"  href="#"><span class="gradient6"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="horizontal"  href="#"><span class="gradient7"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="horizontal"  href="#"><span class="gradient8"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="horizontal"  href="#"><span class="gradient9"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="horizontal"  href="#"><span class="gradient10"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="vertical"  href="#"><span class="gradient11"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="horizontal"  href="#"><span class="gradient12"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "1,0" , "0,100" , "vertical" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="vertical"  href="#"><span class="gradient2"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.5,0.5" , "0,100" , "vertical" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="vertical"  href="#"><span class="gradient3"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.25,0.75" , "0,100" , "vertical" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="vertical"  href="#"><span class="gradient4"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.75,0.25" , "0,100" , "vertical" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="vertical"  href="#"><span class="gradient5"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0,1" , "0,100" , "horizontal" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="horizontal"  href="#"><span class="gradient6"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "1,0" , "0,100" , "horizontal" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="horizontal"  href="#"><span class="gradient7"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.5,0.5" , "0,100" , "horizontal" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="horizontal"  href="#"><span class="gradient8"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.25,0.75" , "0,100" , "horizontal" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="horizontal"  href="#"><span class="gradient9"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.75,0.25" , "0,100" , "horizontal" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="horizontal"  href="#"><span class="gradient10"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "1,1" , "0,100" , "vertical" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="vertical"  href="#"><span class="gradient11"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "1,1" , "0,100" , "horizontal" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="horizontal"  href="#"><span class="gradient12"></span></a></li>
                                 <li class="clr"></li>
                              </ul>
                             </li>
@@ -181,19 +173,19 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
                             <a class="heading-item" data-position="topLeft"  href="#"><?php echo __("Diagonal" ,"site-editor");  ?></a>
                             </li>
                             <li>
-                             <ul class="gradient">
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="diagonal-rb" href="#"><span class="gradient_dg1"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg2"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg3"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg4"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg5"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg6"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg7"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg8"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg9"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg10"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg11"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg12"></span></a></li>
+                             <ul class="gradient"> 
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0,1" , "0,100" , "diagonal-rb" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="diagonal-rb" href="#"><span class="gradient_dg1"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "1,0" , "0,100" , "diagonal-rb" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg2"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.5,0.5" , "0,100" , "diagonal-rb" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg3"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.25,0.75" , "0,100" , "diagonal-rb" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg4"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.75,0.25" , "0,100" , "diagonal-rb" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg5"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0,1" , "0,100" , "diagonal-rt" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientationdiagonal-rt="diagonal-rt"  href="#"><span class="gradient_dg6"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "1,0" , "0,100" , "diagonal-rt" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg7"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.5,0.5" , "0,100" , "diagonal-rt" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg8"></span></a></li>
+                                <li><a class="sed-gradient  <?php $this->selected( "linear" , "0.25,0.75" , "0,100" , "diagonal-rt" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg9"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "0.75,0.25" , "0,100" , "diagonal-rt" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg10"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "1,1" , "0,100" , "diagonal-rt" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="diagonal-rt"  href="#"><span class="gradient_dg11"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "linear" , "1,1" , "0,100" , "diagonal-rb" ) ;?>"  data-gradient-type="linear" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="diagonal-rb"  href="#"><span class="gradient_dg12"></span></a></li>
                                 <li class="clr"></li>
                              </ul>
                             </li>
@@ -205,16 +197,16 @@ if ( ! class_exists( 'SiteEditorGradientControl' ) ) {
                             <a class="heading-item" data-position="topLeft"  href="#"><?php echo __("Radial" ,"site-editor");  ?></a>
                             </li>
                             <li>
-                             <ul class="gradient">
-                                <li><a class="sed-gradient"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="radial" href="#"><span class="gradient_elp1"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp2"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp3"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp4"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp5"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp6"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp7"></span></a></li>
-                                <li><a class="sed-gradient"  data-gradient-type="radial" data-gradient-percent="63,82"  data-gradient-opacity="0.9,1" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp8"></span></a></li>
-                                <li class="clr"></li>
+                             <ul class="gradient"> 
+                                <li><a class="sed-gradient <?php $this->selected( "radial" , "0,1" , "0,100" , "radial" ) ;?>"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="0,1" data-gradient-Orientation="radial" href="#"><span class="gradient_elp1"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "radial" , "1,0" , "0,100" , "radial" ) ;?>"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="1,0" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp2"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "radial" , "0.5,0.5" , "0,100" , "radial" ) ;?> "  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="0.5,0.5" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp3"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "radial" , "0.25,0.75" , "0,100" , "radial" ) ;?>"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="0.25,0.75" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp4"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "radial" , "0.75,0.25" , "0,100" , "radial" ) ;?>"  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="0.75,0.25" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp5"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "radial" , "1,1" , "0,100" , "radial" ) ;?> "  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp6"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "radial" , "1,1" , "0,100" , "radial" ) ;?> "  data-gradient-type="radial" data-gradient-percent="0,100"  data-gradient-opacity="1,1" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp7"></span></a></li>
+                                <li><a class="sed-gradient <?php $this->selected( "radial" , "0.9,1" , "63,82" , "radial" ) ;?>"  data-gradient-type="radial" data-gradient-percent="63,82"  data-gradient-opacity="0.9,1" data-gradient-Orientation="radial"  href="#"><span class="gradient_elp8"></span></a></li>
+                                <li class="clr"></li> 
                              </ul>
                             </li>
                         </ul>

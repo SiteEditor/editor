@@ -42,14 +42,6 @@ if ( ! class_exists( 'SiteEditorTextAlignControl' ) ) {
         public $category = 'style-editor';
 
         /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'text-align';
-
-        /**
          * The control is style option ?
          *
          * @access public

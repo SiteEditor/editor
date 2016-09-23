@@ -50,14 +50,6 @@ if ( ! class_exists( 'SiteEditorBorderRadiusControl' ) ) {
         public $category = 'style-editor';
 
         /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'border_radius';
-
-        /**
          * The control is style option ?
          *
          * @access public

@@ -47,14 +47,6 @@ if ( ! class_exists( 'SiteEditorBorderStyleControl' ) ) {
         public $category = 'style-editor';
 
         /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'border';
-
-        /**
          * The control is style option ?
          *
          * @access public

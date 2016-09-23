@@ -39,15 +39,7 @@ if ( ! class_exists( 'SiteEditorTrancparencyControl' ) ) {
          * @access public
          * @var string
          */
-        public $category = 'style-editor';
-
-        /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'trancparency';
+        public $category = 'style-editor'; 
 
         /**
          * The control is style option ?

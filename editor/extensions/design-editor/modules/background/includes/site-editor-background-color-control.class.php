@@ -42,14 +42,6 @@ if ( ! class_exists( 'SiteEditorBackgroundColorControl' ) ) {
         public $category = 'style-editor';
 
         /**
-         * The control sub category.
-         *
-         * @access public
-         * @var string
-         */
-        public $sub_category = 'background';
-
-        /**
          * The control is style option ?
          *
          * @access public
