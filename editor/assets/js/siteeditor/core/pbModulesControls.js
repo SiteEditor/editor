@@ -114,6 +114,16 @@
 
                 var settingId = this.settings["default"].id;
 
+                if( this.cssSettingType == "page" ){ 
+                    /**
+                     * if have 2 same selector in page & site type , using ##sed_current_page##
+                     * for prevent conflict
+                     *
+                     * @type {string}
+                     */
+                    currentCssSelector = "##sed_current_page##" + this.cssSelector;
+                }
+
                 if( _.isUndefined( api.currenStyleEditorContolsValues[currentCssSelector] ) )
                     api.currenStyleEditorContolsValues[currentCssSelector] = {};
 

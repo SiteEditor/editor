@@ -1047,6 +1047,16 @@
 
 /*start loading  */
 .sed-loading-continer {
+    top:0;
+    left:50%;
+    background: #000;
+}
+
+#sed_full_editor_loading {
+    display: none;
+}
+
+.sed-loading-continer {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     display: table;/* table */
     height: 100%;
@@ -1056,7 +1066,7 @@
 
 }
 .sed-loading-continer .sed-loading{
-    background-image: url("images/loading.gif");
+    background-image: url("../../images/loading.gif");
     background-position: center center;
     background-repeat: no-repeat;
     display: table-cell;
@@ -1080,7 +1090,7 @@
 
 }
 .sed-loading-small-continer .sed-loading{
-    background-image: url("images/loading.gif");
+    background-image: url("../../images/loading.gif");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 21px 21px;
@@ -1097,7 +1107,7 @@
     display: none;
     height: 100%;
     left: 0;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 2147483647;
@@ -1120,6 +1130,11 @@
     height: 100px;
     position: relative;
     width: 100%;
+}
+
+#sed_full_editor_loading .sed-loading-continer {
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.7);
+    left: 0;
 }
 
 /* end loading */

@@ -49,6 +49,8 @@
 
             this.dialogSelector = "#sed-dialog-settings";
 
+            this.rootBackBtn = {};
+
             this._dialogInit();
 
             this.ready();
@@ -111,6 +113,106 @@
          */
         ready : function(){
             var self = this;
+
+            //open new group by button in other group settings
+            $( this.dialogSelector ).find( ".open-new-group-settings" ).livequery(function(){
+
+                $(this).on( "click.openNewGroup" , function(){
+
+                    self.rootBackBtn[$(this).data("settingsId")] = {
+                        prevSettingsId      : self.currentSettingsId ,
+                        prevSettingsType    : self.settingsType
+                    };
+
+                    if( $(this).data("settingsType") == "module" ){
+
+                        var dialogData = $.extend( {} , $(this).data("sedDialog") || {} , {
+                            shortcodeName : $(this).data("settingsId")
+                        });
+
+                        var modelId;
+                        if( _.isUndefined( $(this).data( "modelId" ) ) ){
+                            modelId = $(this).data( "modelId" );
+                        }else{
+                            modelId = api.currentTargetElementId;
+                        }
+
+                        var sedDialog = {
+                            selector    : $(this).data("settingsId") ,
+                            forceOpen   : true ,
+                            reset       : true ,
+                            data        : dialogData ,
+                            extra       : {
+                                attrs       : api.sedShortcode.getAttrs( modelId , true )
+                            }
+                        };
+
+                        api.appModulesSettings.openInitDialogSettings( $(this).data("sedDialog") , true );
+
+                    }else{
+
+                        api.appSettings.openInitDialogSettings( $(this).data("settingsId") , true , true );
+
+                    }
+
+                });
+
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click.openNewGroup');
+            });
+
+            api.Events.bind("afterAppendSettingsTmpl" , function( dialog , settingsType , currentSettingsId ){
+
+                if( ! _.isUndefined( self.rootBackBtn[currentSettingsId] ) ) {
+                    
+                    var html = '<span id="sed_root_back_settings_btn" class="icon-close-level-box"><i class="icon-chevron-left"></i></span>';
+
+                    var backBtn = $(html).prependTo( $(self.dialogSelector).siblings(".ui-dialog-titlebar:first").find("[data-self-level-box='dialog-level-box-settings-" + currentSettingsId + "-container']") );
+
+                    backBtn.data( "settingsId" , self.rootBackBtn[currentSettingsId].prevSettingsId );
+
+                    backBtn.data( "settingsType" , self.rootBackBtn[currentSettingsId].prevSettingsType );
+
+                    delete self.rootBackBtn[currentSettingsId];
+
+                }
+
+            });
+
+            api.Events.bind("endInitAppendSettingsTmpl" , function( dialog , settingsType , currentSettingsId ){
+
+                if( ! _.isUndefined( self.rootBackBtn[currentSettingsId] ) ) {
+
+                    var html = '<span id="sed_root_back_settings_btn" class="icon-close-level-box"><i class="icon-chevron-left"></i></span>';
+
+                    var backBtn = $(html).prependTo( $(self.dialogSelector).siblings(".ui-dialog-titlebar:first").find("[data-self-level-box='dialog-level-box-settings-" + currentSettingsId + "-container']") );
+
+                    backBtn.data( "settingsId" , self.rootBackBtn[currentSettingsId].prevSettingsId );
+
+                    backBtn.data( "settingsType" , self.rootBackBtn[currentSettingsId].prevSettingsType );
+
+                    delete self.rootBackBtn[currentSettingsId];
+
+                }
+
+            });
+
+            $("#sed_root_back_settings_btn").livequery(function(){
+
+                $(this).click(function(){
+
+                    if( $(this).data( "settingsType" ) == "module" ) {
+                        api.previewer.send('go_back_to_main_module', api.currentTargetElementId);
+                    }else{
+                        api.appSettings.openInitDialogSettings( $(this).data("settingsId") , true , true );
+                    }
+                });
+
+            }, function() {
+                // unbind the change event
+                $(this).unbind('click');
+            });
 
             api.Events.bind( "moduleDragStartEvent" , function( moduleName ){
 
@@ -325,6 +427,8 @@
         _resetTmpl : function(){
             var self = this ,
                 selector = this.dialogSelector;
+
+            $("#sed_root_back_settings_btn").remove();
 
             if( !_.isUndefined( this.ajaxProcessing[self.currentSettingsId] ) ){
                 this.ajaxResetTmpls[self.currentSettingsId] = 'yes';
@@ -541,7 +645,7 @@
 
             if( !_.isUndefined( designTemplate ) && !_.isEmpty( designTemplate ) ){
 
-                api.designEditorTpls[settingId] = designTemplate;
+                api.designEditorTpls[settingId] = designTemplate; 
 
             }
 

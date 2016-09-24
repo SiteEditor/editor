@@ -141,12 +141,23 @@
             setValue.apply( null, args.concat( createDirty ) );
         });
 
+        /**
+         * TODO : show & hide loading in preview (Iframe) instead show in full Editor mode ( Refresh event )
+         * 1. active click links in preview mode
+         * 2. convert editor mode to preview mode if activate preview when refresh event
+         * 3. disable module when refresh
+         * 4. render dirty settings ( with post Message mode ) that change whene refresh event ( if refresh mode is not new page )
+         */
+
         // Display a loading indicator when preview is reloading, and remove on failure.
         api.preview.bind( 'loading-initiated', function () {
             //$( 'body' ).addClass( 'wp-customizer-unloading' );
+            //$("#sed_full_editor_loading").show();
         });
+
         api.preview.bind( 'loading-failed', function () {
             //$( 'body' ).removeClass( 'wp-customizer-unloading' );
+            //$("#sed_full_editor_loading").hide();
         });
 
         api.preview.bind( 'current_element', function( elementId ) {

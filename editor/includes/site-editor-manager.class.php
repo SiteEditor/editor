@@ -1310,6 +1310,15 @@ class SiteEditorManager{
                 var _sedAppEditorAddOnSettings = <?php echo wp_json_encode( $sed_addon_settings )?>;
                 var _sedAppPageContentInfo = <?php echo wp_json_encode( $this->get_page_content_info() )?>;
 		</script>
+
+		<!-- Full Iframe Loading -->
+		<div id="sed_full_editor_loading">
+			<div class="sed-loading-continer">
+				<div class="sed-loading"></div>
+			</div>
+		</div>
+		<!-- Full Iframe Loading -->
+
 		<?php
 
 	}

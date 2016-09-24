@@ -36,6 +36,8 @@ Class SiteEditorThemeFramework{
 
         add_filter( 'sed_page_options_fields_filter' , array( $this , 'register_page_fields' ) );
 
+        add_filter( 'sed_page_options_design_options' , array( $this , 'register_design_options' ) , 10 , 1 );
+
         //do_action( 'activated_plugin', $plugin, $network_wide );
         //add_action("after_switch_theme", "mytheme_do_something");
         /*register_activation_hook( __FILE__, 'my_plugin_activation' );
@@ -395,15 +397,16 @@ Class SiteEditorThemeFramework{
 
     }
 
-    public function get_theme_options(){
+    public function register_design_options( $design_options ){
 
-    }
+        $design_options[] = array(
+            'page_main' ,
+            '#sed-main-site-wrapper' ,
+            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' , 'text_shadow' , 'font' , 'text_align' , 'line_height' ) ,
+            __("Page" , "site-editor")
+        );
 
-    public function get_site_options(){
-
-    }
-
-    public function get_content_options( ){
+        return $design_options;
 
     }
 

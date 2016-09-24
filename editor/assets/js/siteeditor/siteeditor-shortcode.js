@@ -137,6 +137,46 @@
 
             Array.prototype.splice.apply( contentModel , args );
 
+        },
+
+        getShortcode: function( modelId  ){
+
+            var contentModel = this.getContentModel( modelId );
+
+            var $thisShortcode = _.findWhere( contentModel , {id : modelId} );
+
+            return $thisShortcode;
+        },
+
+        getAttrs : function( modelId , includeContent ){
+
+            includeContent = !!( !_.isUndefined( includeContent ) && includeContent === true );
+
+            var $thisShortcode = this.getShortcode( modelId );
+
+            if( !$thisShortcode ){
+                //api.log("for : " + id + " not found shortcode");
+                return ;
+            }else {
+
+                if( includeContent === false )
+                    return $thisShortcode.attrs;
+
+                var contentModel = this.getContentModel( modelId );
+
+                var shortcodeContent = _.findWhere( contentModel , { tag : "content" , parent_id : modelId } );
+
+                if( ! shortcodeContent ){
+                    return $thisShortcode.attrs;
+                }else{
+
+                    $thisShortcode.attrs.sed_shortcode_content = decodeURI( shortcodeContent.content );
+
+                }
+
+                return $.extend( true , {} , $thisShortcode.attrs );
+            }
+
         }
 
     });

@@ -203,3 +203,7 @@
     top: 50%;
     margin: -15px -15px 0;
 }
+
+#sed_root_back_settings_btn + span.ui-dialog-title {
+    padding-left: 30px !important;
+}

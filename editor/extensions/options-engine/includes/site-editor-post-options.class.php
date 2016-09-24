@@ -98,6 +98,23 @@ class SiteEditorPostOptions {
      */
     public $control_prefix = '';
 
+
+    /**
+     * current group has styles settings (options) ?
+     *
+     * @var string
+     * @access public
+     */
+    public $has_styles_settings = false;
+
+    /**
+     * Css Setting Type , Using "module" , "page" , "site"
+     *
+     * @var string
+     * @access public
+     */
+    public $css_setting_type = "page";
+
     /**
      * SiteEditorPostOptions constructor.
      */
@@ -117,7 +134,7 @@ class SiteEditorPostOptions {
 
             $this->control_prefix = $this->option_group;
 
-            $post_type = get_post_type_object( $_POST['post_type'] );;
+            $post_type = get_post_type_object( $_POST['post_type'] );
 
             $this->title = sprintf(__("Single %s Options" , "site-editor") , $post_type->labels->name );
 
@@ -126,6 +143,9 @@ class SiteEditorPostOptions {
             add_action("sed_register_{$this->option_group}_options", array($this, 'register_post_options'));
 
             add_action("sed_register_{$this->option_group}_options", array($this, 'register_post_options_group'), -9999);
+
+            add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'add_design_field' ) , 1 );
+
         }
 
         add_filter( 'sed_app_dynamic_partial_args'                  , array( $this , 'filter_dynamic_partial_args' ), 10, 2 );
@@ -171,6 +191,14 @@ class SiteEditorPostOptions {
             'description'       => $this->description ,
             'type'              => 'default' ,
             //'pages_dependency'  => true
+        ));
+
+        SED()->editor->manager->add_group( $this->option_group . "_design_group" , array(
+            'capability'        => $this->capability,
+            'theme_supports'    => '',
+            'title'             => $this->title ,
+            'description'       => $this->description ,
+            'type'              => 'default'
         ));
 
     }
@@ -249,7 +277,7 @@ class SiteEditorPostOptions {
                 $args['capability'] = $this->capability;
 
             if( $args['category'] == "style-editor" && ( !isset( $args['css_setting_type'] ) || empty( $args['css_setting_type'] ) )){
-                $args['css_setting_type'] = "page";
+                $args['css_setting_type'] = $this->css_setting_type;
             }
 
             $post_fields[ $id ] = $args ;
@@ -266,6 +294,41 @@ class SiteEditorPostOptions {
             "fields"    => $new_fields ,
             "panels"    => $new_panels
         );
+
+    }
+
+    public function add_design_field( ){
+
+        $this->register_style_options();
+
+        $fields = array();
+
+        /**
+         * please not change "design_panel" field id , it is using in js
+         */
+        if( $this->has_styles_settings === true ){
+            $fields[ 'design_panel' ] = SED()->editor->design->get_design_options_field( $this->option_group , $this->css_setting_type );
+
+            $this->add_fields( $fields , $_POST['post_type'] );
+        }
+
+    }
+
+    public function register_style_options(){
+
+        $options = apply_filters( "sed_post_design_options" , array() , $_POST['page_id'] , $_POST['post_type'] );
+
+        if( !empty( $options ) ){
+
+            $this->has_styles_settings = true;
+
+            $option_group = $this->option_group . "_design_group";
+
+            $control_prefix = $option_group;
+
+            SED()->editor->design->add_style_options( $options , $option_group , $control_prefix , $this->option_group );
+
+        }
 
     }
 

@@ -571,7 +571,7 @@ class SedDesignEditorManager extends SiteEditorModules{
      * @param $setting_type
      * @return array
      */
-    public function get_design_options_field( $option_group , $setting_type ){
+    public function get_design_options_field( $option_group , $setting_type , $control_prefix = '' ){
 
         ob_start();
         ?>
@@ -588,6 +588,10 @@ class SedDesignEditorManager extends SiteEditorModules{
         <?php
         $dialog_content = ob_get_clean();
 
+        if( empty( $control_prefix ) ){
+            $control_prefix = $option_group;
+        }
+
         return array(
             'type'          => 'panel-button',
             'label'         => __('Custom Edit Style',"site-editor"),
@@ -596,7 +600,8 @@ class SedDesignEditorManager extends SiteEditorModules{
             'atts'          => array(
                 'class'                 => 'sed_style_editor_btn' ,
                 'data-option-group'     => $option_group ,
-                'data-setting-type'     => $setting_type
+                'data-setting-type'     => $setting_type ,
+                'data-control-prefix'   => $control_prefix
             ) ,
             'panel_title'   => __('Custom Edit Style',"site-editor") ,
             'panel_content' => $dialog_content ,

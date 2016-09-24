@@ -80,6 +80,22 @@ class SiteEditorPageOptions {
     public $control_prefix = 'sed_page_options';
 
     /**
+     * current group has styles settings (options) ?
+     *
+     * @var string
+     * @access public
+     */
+    public $has_styles_settings = false;
+
+    /**
+     * Css Setting Type , Using "module" , "page" , "site"
+     *
+     * @var string
+     * @access public
+     */
+    public $css_setting_type = "page";
+
+    /**
      * SiteEditorPageOptions constructor.
      */
     public function __construct(){
@@ -88,21 +104,23 @@ class SiteEditorPageOptions {
 
         $this->description = __("Page general settings" , "site-editor");
 
-        add_action( "sed_editor_init"                  , array( $this, "add_toolbar_elements" ) );
+        add_filter( "{$this->option_group}_fields_filter"           , array( $this , 'add_design_field' ) );
 
-        add_action( "init"                             , array( $this , 'register_options' ) , 80  );
+        add_action( "sed_editor_init"                               , array( $this, "add_toolbar_elements" ) );
 
-        add_action( 'sed_app_register_general_options' , array( $this, 'register_private_settings' ) );
+        add_action( "init"                                          , array( $this , 'register_options' ) , 80  );
 
-        add_action( "sed_register_{$this->option_group}_options" , array( $this , 'register_pages_options' ) );
+        add_action( 'sed_app_register_general_options'              , array( $this, 'register_private_settings' ) );
 
-        add_action( "sed_register_{$this->option_group}_options" , array( $this , 'register_page_options_group' ) , -9999 );
+        add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_pages_options' ) );
 
-        add_action( 'sed_app_preview_init'          , array( $this, 'sed_app_preview_init' ) );
+        add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_page_options_group' ) , -9999 );
 
-        add_action( 'wp_default_scripts'			, array( $this, 'register_scripts' ), 11 );
+        add_action( 'sed_app_preview_init'                          , array( $this, 'sed_app_preview_init' ) );
 
-        add_filter( 'sed_control_sub_category'      , array( $this, 'set_sub_category' ) , 10 , 2 );
+        add_action( 'wp_default_scripts'			                , array( $this, 'register_scripts' ), 11 );
+
+        add_filter( 'sed_control_sub_category'                      , array( $this, 'set_sub_category' ) , 10 , 2 );
 
         //add_action( 'sed_enqueue_scripts'           , array( $this, 'enqueue_scripts' ), 10 );
 
@@ -192,6 +210,14 @@ class SiteEditorPageOptions {
             'pages_dependency'  => true
         ));
 
+        SED()->editor->manager->add_group( $this->option_group . "_design_group" , array(
+            'capability'        => $this->capability,
+            'theme_supports'    => '',
+            'title'             => $this->title ,
+            'description'       => $this->description ,
+            'type'              => 'default'
+        ));
+
     }
 
     public function register_pages_options(){
@@ -223,7 +249,7 @@ class SiteEditorPageOptions {
 
         $page_option_name = ( $page_type != "post" ) ? "sed_{$page_id}_settings" : "postmeta[{$post_type}][{$page_id}]";
 
-        $page_control_prefix = $page_id . "_" . $this->control_prefix;
+        $page_control_prefix = $this->control_prefix . "_" . $page_id;
 
         $page_fields = array();
         $page_panels = array();
@@ -256,7 +282,7 @@ class SiteEditorPageOptions {
                 $args['capability'] = $this->capability;
 
             if( $args['category'] == "style-editor" ){
-                $args['css_setting_type'] = "page";
+                $args['css_setting_type'] = $this->css_setting_type;
             }
 
             $page_fields[$id] = $args ;
@@ -276,6 +302,46 @@ class SiteEditorPageOptions {
 
     }
 
+    public function add_design_field( $fields ){
+
+        if( ! isset( $_POST['setting_id'] ) || ! isset( $_POST['options_group'] ) || $_POST['options_group'] != $this->option_group ){
+            return $fields;
+        }
+
+        $this->register_style_options();
+
+        /**
+         * please not change "design_panel" field id , it is using in js
+         */
+        if( $this->has_styles_settings === true ){
+            $page_control_prefix = $this->control_prefix . "_" . $_POST['page_id'];
+            $fields[ 'design_panel' ] = SED()->editor->design->get_design_options_field( $_POST['setting_id'] , $this->css_setting_type , $page_control_prefix );
+        }
+
+        return $fields;
+
+    }
+
+    public function register_style_options(){
+
+        $options = apply_filters( "{$this->option_group}_design_options" , array() );
+
+        if( !empty( $options ) ){
+
+            $this->has_styles_settings = true;
+
+            $option_group = $this->option_group . "_design_group";
+
+            $control_prefix = $option_group;
+
+            $page_control_prefix = $this->control_prefix . "_" . $_POST['page_id'];
+
+            SED()->editor->design->add_style_options( $options , $option_group , $control_prefix , $page_control_prefix );// $this->option_group );
+
+        }
+
+    }
+
 
     public function register_options(){
 
@@ -283,9 +349,9 @@ class SiteEditorPageOptions {
 
         $fields = array();
 
-        $this->fields = apply_filters( 'sed_page_options_fields_filter' , $fields );
+        $this->fields = apply_filters( "{$this->option_group}_fields_filter" , $fields );
 
-        $this->panels = apply_filters( 'sed_page_options_panels_filter' , $panels );
+        $this->panels = apply_filters( "{$this->option_group}_panels_filter" , $panels );
 
     }
 

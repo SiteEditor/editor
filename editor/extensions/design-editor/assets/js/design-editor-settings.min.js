@@ -59,6 +59,7 @@
             this.currentStyleId = "";
             this.currentSelector = false;
             this.defaultValues = {};
+            this.baseControlIds = [];
 
             /**
              * Css Setting Type include "page" , "mosule" , "site"
@@ -85,7 +86,7 @@
 
                     $(this).click(function(){
 
-                        self.openPanelSettings( $(this).data("optionGroup") , $(this).data("settingType") );
+                        self.openPanelSettings( $(this).data("optionGroup") , $(this).data("settingType") , $(this).data("controlPrefix") );
 
                         if( !_.isUndefined( self.accordionsInit[self.currentSettingsId] ) && self.accordionsInit[self.currentSettingsId] === true )
                             self.currentSuppotSelector();
@@ -126,7 +127,7 @@
 
                 api.appModulesSettings.forceUpdate = true;
 
-                self.openPanelSettings( dataElement.shortcodeName , "module" );
+                self.openPanelSettings( dataElement.shortcodeName , "module" , dataElement.shortcodeName );
 
                 if( !_.isUndefined( self.accordionsInit[self.currentSettingsId] ) && self.accordionsInit[self.currentSettingsId] === true )
                     self.currentSuppotSelector();
@@ -167,13 +168,13 @@
 
         },
 
-        openPanelSettings : function( optionGroup , settingType ){
+        openPanelSettings : function( optionGroup , settingType , controlPrefix ){
 
             this.settingType = settingType;
 
             var panelTpl = api.designEditorTpls[optionGroup];
 
-            this.dialogBoxContainer = $("#dialog_page_box_" + optionGroup + "_design_panel").find(".sed_style_editor_panel_container:first");
+            this.dialogBoxContainer = $("#dialog_page_box_" + controlPrefix + "_design_panel").find(".sed_style_editor_panel_container:first");
 
             if( this.currentSettingsId == api.sedDialogSettings.currentSettingsId ){
                 return ;
@@ -474,7 +475,8 @@
          * @returns {*}
          */
         getCurrentValue : function( id , data , selector , settingType ){
-            var selectorT = "";
+            var selectorT = "" ,
+                self = this;
 
             if( settingType == "module" ){
                 selectorT = ( selector && selector != "sed_current" ) ? '[sed_model_id="' + api.currentTargetElementId + '"] ' + selector : '[sed_model_id="' + api.currentTargetElementId + '"]';
@@ -482,12 +484,24 @@
                 selectorT = selector;
             }
 
-            var cssSettingType = _.isUndefined( data.css_setting_type ) ? self.settingType : data.css_setting_type,
+            var cssSettingType = ( _.isUndefined( data.css_setting_type ) || $.inArray( id , this.baseControlIds ) > -1 ) ? this.settingType : data.css_setting_type,
                 extra  = ( cssSettingType == "module" ) ? $.extend({} , api.appModulesSettings.sedDialog.extra || {}) : {} ,
                 cValue = null;
 
+            if( cssSettingType == "page" ){
+                /**
+                 * if have 2 same selector in page & site type , using ##sed_current_page##
+                 * for prevent conflict
+                 *
+                 * @type {string}
+                 */
+                selectorT = "##sed_current_page##" + selectorT;
+            }
+
             if( !_.isUndefined( api.currenStyleEditorContolsValues[selectorT] ) && !_.isUndefined( api.currenStyleEditorContolsValues[selectorT][data.settings["default"]] ) ){
+
                 cValue = api.currenStyleEditorContolsValues[selectorT][data.settings["default"]];
+
             }else{
 
                 var sed_css;
@@ -499,6 +513,8 @@
                     }
 
                 }else if( cssSettingType == "page" ) {
+
+                    selectorT = selectorT.replace( "##sed_current_page##" , "" );
 
                     var settingId;
 
@@ -543,6 +559,8 @@
                 data.css_setting_type = _.clone( this.settingType );
 
                 api.settings.controls[id] = data;
+
+                this.baseControlIds.push( id );
 
                 api.Events.trigger( "renderSettingsControls" , id, data );
 
