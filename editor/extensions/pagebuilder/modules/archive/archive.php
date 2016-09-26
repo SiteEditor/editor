@@ -479,7 +479,7 @@ class PBArchiveShortcode extends PBShortcodeClass{
             ),
             "time_show"         => array(
                 "type"              => "checkbox",
-                "label"             => __("Time Date","site-editor"),
+                "label"             => __("Display Time","site-editor"),
                 "desc"              => __('',"site-editor"),
                 "value"             => true,
                 'settings_type'     =>  "archive_time_show",
@@ -488,7 +488,7 @@ class PBArchiveShortcode extends PBShortcodeClass{
             ),
             "date_show"         => array(
                 "type"              => "checkbox",
-                "label"             => __("Show Date","site-editor"),
+                "label"             => __("Display Date","site-editor"),
                 "desc"              => __('This feature allows you whether or not to display the date of publication of the post.',"site-editor"),
                 "value"             => true,
                 'settings_type'     =>  "archive_date_show",
