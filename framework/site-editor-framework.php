@@ -54,6 +54,15 @@ final Class SiteEditorFramework {
     public $typography;
 
     /**
+     * Is loaded infinite scroll ?
+     *
+     * @since 1.0.0
+     * @access private
+     * @var boolean
+     */
+    private $loaded_infinite_scroll = false;
+
+    /**
      * SiteEditorFramework constructor.
      */
     public function __construct(){
@@ -74,7 +83,8 @@ final Class SiteEditorFramework {
         add_filter( 'body_class'        , array( $this , 'add_rtl_body_class' ) );
         add_filter( 'template_include'  , array( $this , 'template_chooser') , 1 );
         add_action( 'wp'                , array( $this , 'set_page_info') , -10000  );
-
+        //404 fix
+        add_action( 'wp'                , array( &$this, 'paged_404_fix' ) );
         /**
          * load page builder extension in front end
          */
@@ -336,6 +346,138 @@ final Class SiteEditorFramework {
         }else{
             $sed_pb_app->modules_activate = array();
         }
+
+    }
+
+    /**
+     * All Options For js
+     *
+     * Custom Options :
+     * type : 'load_more_button' or 'infinite_scroll'
+     * buttonSelector    : '#archive-load-more-button'
+     * callback         : js code
+     *
+     * Original Js Options
+     * ======================
+     * loading: {
+     * finished: undefined,
+     * finishedMsg: "<em>Congratulations, you've reached the end of the internet.</em>",
+     * img: null,
+     * msg: null,
+     * msgText: "<em>Loading the next set of posts...</em>",
+     * selector: null,
+     * speed: 'fast',
+     * start: undefined
+     * },
+     * state: {
+     * isDuringAjax: false,
+     * isInvalidPage: false,
+     * isDestroyed: false,
+     * isDone: false, // For when it goes all the way through the archive.
+     * isPaused: false,
+     * currPage: 1
+     * },
+     * behavior: undefined,
+     * binder: $(window), // used to cache the selector for the element that will be scrolling
+     * nextSelector: "div.navigation a:first",
+     * navSelector: "div.navigation",
+     * contentSelector: null, // rename to pageFragment
+     * extraScrollPx: 150,
+     * itemSelector: "div.post",
+     * animate: false,
+     * pathParse: undefined,
+     * dataType: 'html',
+     * appendCallback: true,
+     * bufferPx: 40,
+     * errorCallback: function () { },
+     * infid: 0, //Instance ID
+     * pixelsFromNavToBottom: undefined,
+     * path: undefined, // Can either be an array of URL parts (e.g. ["/page/", "/"]) or a function that accepts the page number and returns a URL
+     * maxPage:undefined // to manually control maximum page (when maxPage is undefined, maximum page limitation is not work)
+     * =========================
+     * $all_behaviors = array(
+     *      'twitter' ,
+     *      'local'   ,
+     *      'cufon'   ,
+     *      'masonry'
+     * );
+     */
+    public function enqueue_infinite_scroll(){
+
+        if( $this->loaded_infinite_scroll === true ){
+            return ;
+        }
+
+        $items = apply_filters( "sed_infinite_scroll_items" , array() );
+
+        // Localize the script with new data
+        $default_options = array(
+            'loading' => array(
+                'msgText'         => '<em>' . __( 'Loading...', 'site-editor' ) . '</em>',
+                'finishedMsg'     => '<em>' . __( 'No additional posts.', 'site-editor' ) . '</em>',
+                'img'             => SED_ASSETS_URL . '/images/ajax-loader.gif'
+            ),
+            'nextSelector'    => '.navigation a:first',
+            'navSelector'     => '.navigation',
+            'itemSelector'    => '.post',
+            'contentSelector' => '#main',
+            'debug'           => WP_DEBUG,
+            'behavior'		  => ''
+        );
+
+        $settings = array(
+            'items'        => $items ,
+            'defaults'     => $default_options
+        );
+
+        wp_localize_script( 'sed-infinite-scroll' , '_sedInfiniteScrollSettings', $settings );
+
+        // Enqueued script with localized data.
+        wp_enqueue_script( 'sed-infinite-scroll' );
+
+        $behaviors = array( );
+
+        foreach( $items AS $id => $item_options ){
+
+            if( isset( $item_options['behavior'] ) && !empty( $item_options['behavior'] ) ){
+                $behaviors[] = $item_options['behavior'];
+            }
+
+        }
+
+        /**
+         $all_behaviors = array( 
+            'twitter' ,
+            'local'   ,
+            'cufon'   ,
+            'masonry'
+        );
+         */
+
+        if( !empty( $behaviors ) ){
+            foreach ( $behaviors AS $behavior ){
+                wp_enqueue_script( "infinite-scroll-{$behavior}-behavior" );
+            }
+        }
+
+        $this->loaded_infinite_scroll = true;
+
+    }
+
+    /**
+     * If we go beyond the last page and request a page that doesn't exist,
+     * force WordPress to return a 404.
+     * See http://core.trac.wordpress.org/ticket/15770
+     */
+    function paged_404_fix( ) {
+        global $wp_query;
+
+        if ( is_404() || !is_paged() || 0 != count( $wp_query->posts ) )
+            return;
+
+        $wp_query->set_404();
+        status_header( 404 );
+        nocache_headers();
 
     }
 

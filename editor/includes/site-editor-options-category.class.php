@@ -134,11 +134,15 @@ class SiteEditorOptionsCategory {
      */
     public function __construct(){
 
-        add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_options' ) );
+        if( !empty( $this->option_group ) ) {
 
-        add_filter( "{$this->option_group}_fields_filter"           , array( $this , 'add_design_field' ) );
+            add_action("sed_register_{$this->option_group}_options", array($this, 'register_options'));
 
-        add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_options_group' ) , -9999 );
+            add_filter("{$this->option_group}_fields_filter", array($this, 'add_design_field'));
+
+            add_action("sed_register_{$this->option_group}_options", array($this, 'register_options_group'), -9999);
+
+        }
 
         if( site_editor_app_on() ) {
 

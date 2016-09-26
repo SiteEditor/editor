@@ -1143,7 +1143,7 @@
         modulesHandles: function(){
             var self = this;
 
-            var moduleSelectors = [ '.sed-bp-element' ] ,
+            var moduleSelectors = [ '.sed-bp-element[sed_model_id]' ] ,
                 moduleHandlers = {};
 
             $.each( api.settings.staticModules , function( id , module ){

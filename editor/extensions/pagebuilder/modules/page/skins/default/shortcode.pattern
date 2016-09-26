@@ -1,7 +1,0 @@
-[sed_page force_do_shortcode="true"]
-    [sed_page_wrapper skin="default" parent_module="page"]
-    [/sed_page_wrapper]
-
-    [sed_comments skin="default" parent_module="page"][/sed_comments]
-[/sed_page]
-

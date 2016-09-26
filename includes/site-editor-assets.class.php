@@ -43,7 +43,21 @@ if(!class_exists('SiteEditorAssetsManager'))
 
             //scrollbar
             $this->add( 'jquery-scrollbar',     SED_ASSETS_URL . '/js/scrollbar/jquery.mCustomScrollbar.concat'.$this->suffix.'.js', array('jquery'), '2.3' );
-            
+
+            $this->add( 'jquery-infinite-scroll',     SED_ASSETS_URL . '/js/infinite-scroll/jquery.infinitescroll'.$this->suffix.'.js', array('jquery'), '2.0' );
+
+            $this->add( 'sed-infinite-scroll',     SED_ASSETS_URL . '/js/infinite-scroll/sed-infinitescroll'.$this->suffix.'.js', array( 'jquery' , 'jquery-infinite-scroll' , 'underscore' ), SED_VERSION );
+
+            $behaviors = array(  //array of behaviors as key => array( label => js file ) (without extension)
+                'twitter' ,
+                'local'   ,
+                'cufon'   ,
+                'masonry' 
+            );
+
+            foreach( $behaviors As $behavior ) {
+                $this->add("infinite-scroll-{$behavior}-behavior", SED_ASSETS_URL . "/js/infinite-scroll/behaviors/{$behavior}{$this->suffix}.js", array('jquery', 'jquery-infinite-scroll', 'underscore'), '2.0' );
+            }
         }
 
         function register_bootstrap_scripts(){

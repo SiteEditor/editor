@@ -160,7 +160,7 @@
             $( this.element ).off('.sedAjaxLoadPosts').removeData( 'sedAjaxLoadPosts' );
         }
 
-    }
+    };
 
 
 
@@ -168,7 +168,6 @@
 
 
         return this.each( function( ) {
-            var $this = $(this);
 
               var $this   = $(this);
               var data    = $this.data('sedAjaxLoadPosts') ;
