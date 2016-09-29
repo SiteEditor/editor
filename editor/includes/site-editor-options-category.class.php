@@ -209,7 +209,7 @@ class SiteEditorOptionsCategory {
 
         $fields = $this->fields;
 
-        $panels = $this->panels;
+        $panels = $this->panels; 
 
         foreach( $panels AS $key => $args ){
 

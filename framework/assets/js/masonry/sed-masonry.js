@@ -6,8 +6,8 @@ jQuery( document ).ready( function ( $ ) {
             options = {} ,
             $container = $masonry.parents(".sed-pb-module-container:first");
 
-        for( property in data ){
-            if(property != "sedRole")
+        for( var property in data ){
+            if(property != "sedRole" && data.hasOwnProperty( property ) )
                 options[property] = data[property];
         }
 
@@ -28,41 +28,46 @@ jQuery( document ).ready( function ( $ ) {
 
         });
 
-        $container.on("sed.moduleResize sed.moduleResizeStop" , function(){
-            $masonry.masonry();
-        });
+        if( $container.length > 0 ) {
 
-        $container.on("sed.moduleSortableStop sedAfterRemoveColumns" , function(){
-            $masonry.masonry();
-        });
-
-        $container.parents(".sed-pb-module-container:first").on( "sedChangeModulesLength", function( e , length ){
-            $masonry.masonry();
-        });
-
-        $container.parents(".sed-pb-module-container:first").on( "sedChangedSheetWidth", function(){
-            if( $(this).parents(".sed-row-boxed").length > 0 ){
+            $container.on("sed.moduleResize sed.moduleResizeStop", function () {
                 $masonry.masonry();
-            }
-        });
+            });
 
-        $container.parents(".sed-pb-module-container:first").on( "sedChangedPageLength", function( e , length ){
-            if( ($(this).parents(".sed-row-boxed").length == 0 && length == "wide" ) || ($(this).parents(".sed-row-boxed").length == 1 && length == "boxed" ) ){
+            $container.on("sed.moduleSortableStop sedAfterRemoveColumns", function () {
                 $masonry.masonry();
-            }
-        });
+            });
 
-        $container.parents(".sed-pb-module-container:first").on( "sedFirstTimeActivatedTabs", function(){
-            $masonry.masonry();
-        });
+            $container.parents(".sed-pb-module-container:first").on("sedChangeModulesLength", function (e, length) {
+                $masonry.masonry();
+            });
 
-        $container.parents(".sed-pb-module-container:first").on( "sedFirstTimeActivatedAccordionTabs", function(){
-            $masonry.masonry();
-        });
+            $container.parents(".sed-pb-module-container:first").on("sedChangedSheetWidth", function () {
+                if ($(this).parents(".sed-row-boxed").length > 0) {
+                    $masonry.masonry();
+                }
+            });
 
-        $container.parents(".sed-pb-module-container:first").on( "sedFirstTimeMegamenuActivated", function(){
-            $masonry.masonry();
-        });
+            $container.parents(".sed-pb-module-container:first").on("sedChangedPageLength", function (e, length) {
+                if (($(this).parents(".sed-row-boxed").length == 0 && length == "wide" ) || ($(this).parents(".sed-row-boxed").length == 1 && length == "boxed" )) {
+                    $masonry.masonry();
+                }
+            });
+
+            $container.parents(".sed-pb-module-container:first").on("sedFirstTimeActivatedTabs", function () {
+                $masonry.masonry();
+            });
+
+            $container.parents(".sed-pb-module-container:first").on("sedFirstTimeActivatedAccordionTabs", function () {
+                $masonry.masonry();
+            });
+
+            $container.parents(".sed-pb-module-container:first").on("sedFirstTimeMegamenuActivated", function () {
+                $masonry.masonry();
+            });
+
+        }
+
 
     });
 

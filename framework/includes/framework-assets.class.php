@@ -40,6 +40,8 @@ if(!class_exists('SEDFrameworkAssetsManager'))
 
             $this->add( 'sed-masonry',          SED_FRAMEWORK_ASSETS_URL . '/js/masonry/sed-masonry'.$this->suffix.'.js', array('masonry','sed-livequery' , 'images-loaded') ,"1.2.4");
 
+            $this->add( 'sed-carousel',          SED_FRAMEWORK_ASSETS_URL . '/js/slick.carousel/sed-carousel'.$this->suffix.'.js', array('carousel','sed-livequery') ,"1.2.4");
+
             $this->add( 'isotope',              SED_FRAMEWORK_ASSETS_URL . '/js/isotope/isotope.pkgd'.$this->suffix.'.js', array() ,"2.2.0");
 
             $this->add( 'waypoints',            SED_FRAMEWORK_ASSETS_URL . '/js/waypoints/waypoints'.$this->suffix.'.js', array('jquery') ,"2.0.5");

@@ -1344,3 +1344,26 @@ function sed_set_animation( $animation ){
         'class'   => $animate_class
     );
 }
+
+function sed_data_atts( $attributes ) {
+
+    $atts = array();
+
+    if( is_array( $attributes ) && !empty( $attributes ) ){
+        foreach ( $attributes as $name => $value ) {
+
+            $name = str_replace("_", "-", $name );
+
+            if(is_bool($value) && $value === true){
+                $value = "true";
+            }elseif(is_bool($value) && $value === false){
+                $value = "false";
+            }
+
+            $atts[] = 'data-'. $name . '="' . esc_attr( $value ) . '"';
+
+        }
+    }
+
+    return implode( ' ', $atts );
+}
