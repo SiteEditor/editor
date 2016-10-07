@@ -17,6 +17,11 @@
 class SiteEditorPostOptions {
 
     /**
+     * pattern for post options partials
+     */
+    const PARTIAL_ID_PATTERN = '/^sed_post_partials\[(?P<post_type>[^\]]+)\]\[(?P<post_id>-?\d+)\]\[(?P<partial_key>.+)\]$/';
+
+    /**
      * pattern for post options groups
      */
     const OPTION_GROUP_PATTERN = '/^sed_post_options_(?P<post_id>.+)$/';
@@ -116,6 +121,14 @@ class SiteEditorPostOptions {
     public $css_setting_type = "page";
 
     /**
+     * If current group is a post options group
+     *
+     * @var string
+     * @access public
+     */
+    public $is_post_options_group = false;
+
+    /**
      * SiteEditorPostOptions constructor.
      */
     public function __construct(){
@@ -128,7 +141,9 @@ class SiteEditorPostOptions {
 
         add_action( "init"                          , array( $this , 'create_post_meta' ) , 90  );
 
-        if( isset( $_POST['action'] ) && $_POST['action'] == "sed_load_options" && isset( $_POST['options_group'] ) && preg_match( self::OPTION_GROUP_PATTERN , $_POST['options_group'], $matches ) ) {
+        $this->is_post_options_group = isset( $_POST['action'] ) && $_POST['action'] == "sed_load_options" && isset( $_POST['options_group'] ) && preg_match( self::OPTION_GROUP_PATTERN , $_POST['options_group'], $matches );
+
+        if( $this->is_post_options_group ) {
 
             $this->option_group = $_POST['options_group'];
 
@@ -148,9 +163,7 @@ class SiteEditorPostOptions {
 
         }
 
-        add_filter( 'sed_app_dynamic_partial_args'                  , array( $this , 'filter_dynamic_partial_args' ), 10, 2 );
-
-        add_filter( 'sed_app_dynamic_partial_class'                 , array( $this , 'filter_dynamic_partial_class' ), 5, 3 );
+        add_action( 'sed_app_register'                              , array( $this, 'setup_selective_refresh' ) );
 
     }
 
@@ -264,9 +277,10 @@ class SiteEditorPostOptions {
 
             if( $args['category'] != "style-editor" && isset( $args['setting_id'] ) ) {
 
-                $setting_id = $args['setting_id'];
+                //$primary_setting_id === meta_key
+                $primary_setting_id = $args['setting_id'];
 
-                $args['setting_id'] = $post_option_name . "[" . $setting_id . "]";
+                $args['setting_id'] = $post_option_name . "[" . $primary_setting_id . "]";
 
             }
 
@@ -278,6 +292,32 @@ class SiteEditorPostOptions {
 
             if( $args['category'] == "style-editor" && ( !isset( $args['css_setting_type'] ) || empty( $args['css_setting_type'] ) )){
                 $args['css_setting_type'] = $this->css_setting_type;
+            }
+
+            if( isset( $args['partial_refresh'] ) && $args['category'] != "style-editor" && isset( $args['setting_id'] ) ){
+
+                $partial_args = $args['partial_refresh'];
+
+                $partial_id_base = "sed_post_partials[{$post_type}][{$page_id}][##id##]";
+
+                if( is_array( $partial_args ) && isset( $partial_args['render_callback'] ) && isset( $partial_args['selector'] ) ) {
+
+                    $args['partial_refresh']['partial_id'] = str_replace( "##id##" , $primary_setting_id , $partial_id_base );
+
+                }elseif( is_array( $partial_args ) ) {
+
+                    foreach ( $partial_args AS $curr_partial_id => $curr_partial_args ) {
+
+                        if( is_array( $curr_partial_args ) && isset( $curr_partial_args['render_callback'] ) && isset( $curr_partial_args['selector'] ) ) {
+
+                            $args['partial_refresh'][$curr_partial_id]['partial_id'] = str_replace( "##id##" , $curr_partial_id , $partial_id_base );
+
+                        }
+
+                    }
+
+                }
+
             }
 
             $post_fields[ $id ] = $args ;
@@ -395,10 +435,32 @@ class SiteEditorPostOptions {
 
             $this->settings[$id] = $args;
 
-            if( isset( $args['partial_refresh'] ) ){
-                $this->partials[$setting_id] = $args['partial_refresh'];
-            }
+            if( isset( $args['partial_refresh'] ) && site_editor_app_on() ){
 
+                $partial_args = $args['partial_refresh'];
+
+                $args['option_group'] = $this->option_group;
+
+                if( is_array( $partial_args ) && isset( $partial_args['render_callback'] ) && isset( $partial_args['selector'] ) ) {
+                    $partial_args['setting_id'] = $setting_id;
+                    $this->partials[$setting_id] = sed_options()->get_partial_args( $partial_args , $setting_id , $args );
+                }elseif( is_array( $partial_args ) ) {
+
+                    foreach ( $partial_args AS $curr_partial_id => $curr_partial_args ) {
+
+                        if( is_array( $curr_partial_args ) && isset( $curr_partial_args['render_callback'] ) && isset( $curr_partial_args['selector'] ) ) {
+
+                            $curr_partial_args['setting_id'] = $setting_id;
+
+                            $this->partials[$curr_partial_id] = sed_options()->get_partial_args( $curr_partial_args , $setting_id , $args );
+
+                        }
+
+                    }
+
+                }
+
+            }
         }
 
     }
@@ -484,11 +546,24 @@ class SiteEditorPostOptions {
 
     }
 
+    public function setup_selective_refresh(){
+
+        if( site_editor_app_on() ) {
+            add_filter('sed_app_dynamic_partial_args', array($this, 'filter_dynamic_partial_args'), 10, 2);
+
+            add_filter('sed_app_dynamic_partial_class', array($this, 'filter_dynamic_partial_class'), 5, 3);
+        }
+    }
+
     public function filter_dynamic_partial_args( $args, $id ){
 
-        if ( array_key_exists( $id , $this->partials ) ) {
+        if ( preg_match( self::PARTIAL_ID_PATTERN, $id, $matches ) ) {
 
-            $registered = $this->partials[ $id ];
+            if ( ! isset( $this->partials[ $matches['partial_key'] ] ) ) {
+                return $args;
+            }
+
+            $registered = $this->partials[ $matches['partial_key'] ];
 
             if ( false === $args ) {
                 $args = array();
@@ -498,6 +573,11 @@ class SiteEditorPostOptions {
                 $args,
                 $registered
             );
+
+            if( isset( $args['setting_id'] ) ){
+                $args['settings'] = array( "postmeta[{$matches['post_type']}][{$matches['post_id']}][{$args['setting_id']}]" );
+                unset( $args['setting_id'] );
+            }
 
         }
 

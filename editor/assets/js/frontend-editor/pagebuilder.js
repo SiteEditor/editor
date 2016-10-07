@@ -1154,13 +1154,27 @@
                 }
             });
 
+            api.selectiveRefresh.bind( "partial-content-rendered" , function( data ){
+
+                $.each( api.settings.staticModules , function( id , module ){
+                    if( !_.isUndefined( module.selector ) &&  ! $( module.selector ).data( "staticModuleId" ) ){
+                        //moduleSelectors.push( module.selector );
+                        $( module.selector ).data( "staticModuleId" , id );
+                        $( module.selector ).data( "sedModuleAction" , module.actions );
+                    }
+                });
+                
+            });
+
+            console.log( "------------moduleSelectors-------------" , moduleSelectors );
+
             var moduleSelectorsString = moduleSelectors.join(",");
 
             /**
              * add controller to each element in pages include settings And Delete And Move
              * Modules : Dynamic || Static
              */
-            $( moduleSelectorsString ).livequery(function(){
+            $( moduleSelectorsString ).livequery(function(){ //alert("test 1");
                 if( $(this).is("[sed-disable-editing='yes']") )
                     return ;
 

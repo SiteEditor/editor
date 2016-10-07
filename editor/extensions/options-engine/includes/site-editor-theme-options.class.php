@@ -130,28 +130,24 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
     /**
      * Register Site Default Panels
      */
-    public function register_default_panels()
+    public function register_default_panels( $panels )
     {
 
-        $panels = array(
+        $panels['page_background_panel'] = array(
+            'title'             =>  __('Page Background',"site-editor")  ,
+            'capability'        => 'edit_theme_options' ,
+            'type'              => 'expanded' ,
+            'theme_supports'    => 'sed_custom_background' ,
+            'description'       => '' ,
+            'priority'          => 7 ,
+        );
 
-            'page_background_panel' => array(
-                'title'             =>  __('Page Background',"site-editor")  ,
-                'capability'        => 'edit_theme_options' ,
-                'type'              => 'expanded' ,
-                'theme_supports'    => 'sed_custom_background' ,
-                'description'       => '' ,
-                'priority'          => 7 ,
-            ),
-
-            'site_logo' => array(
-                'title'         =>  __('Logo Settings',"site-editor")  ,
-                'capability'    => 'edit_theme_options' ,
-                'type'          => 'inner_box' ,
-                'description'   => '' ,
-                'priority'      => 8
-            )
-
+        $panels['site_logo'] = array(
+            'title'         =>  __('Logo Settings',"site-editor")  ,
+            'capability'    => 'edit_theme_options' ,
+            'type'          => 'inner_box' ,
+            'description'   => '' ,
+            'priority'      => 8
         );
 
         return $panels;
@@ -160,9 +156,9 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
     /**
      * Register Site Default Fields
      */
-    public function register_default_fields(){
+    public function register_default_fields( $fields ){
         
-        $fields = array(
+        $new_fields = array(
 
             'site_length' => array(
                 'setting_id'        => "site_length" ,
@@ -319,7 +315,7 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
 
         );
 
-        return $fields;
+        return array_merge( $fields , $new_fields );
 
     }
 

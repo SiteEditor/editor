@@ -144,7 +144,7 @@ class SiteEditorOptionsCategory {
 
         }
 
-        if( site_editor_app_on() ) {
+        if( site_editor_app_on() || is_sed_save() ) {
 
             add_action('sed_app_register'                           , array($this, 'set_settings'));
 
@@ -293,7 +293,25 @@ class SiteEditorOptionsCategory {
             $this->settings[$setting_id] = $args;
 
             if( isset( $args['partial_refresh'] ) ){
-                $this->partials[$setting_id] = $args['partial_refresh'];
+
+                $partial_args = $args['partial_refresh'];
+
+                if( is_array( $partial_args ) && isset( $partial_args['render_callback'] ) && isset( $partial_args['selector'] ) ) {
+                    $this->partials[$setting_id] = sed_options()->get_partial_args( $partial_args , $setting_id , $args );;
+                }elseif( is_array( $partial_args ) ) {
+
+                    foreach ( $partial_args AS $curr_partial_id => $curr_partial_args ) {
+
+                        if( is_array( $curr_partial_args ) && isset( $curr_partial_args['render_callback'] ) && isset( $curr_partial_args['selector'] ) ) {
+
+                            $this->partials[$curr_partial_id] = sed_options()->get_partial_args( $curr_partial_args , $setting_id , $args );
+
+                        }
+
+                    }
+
+                }
+
             }
 
         }
@@ -339,7 +357,7 @@ class SiteEditorOptionsCategory {
 
     public function filter_dynamic_setting_args( $args, $setting_id ) {
 
-        if ( array_key_exists( $setting_id , $this->settings ) ) {
+        if ( array_key_exists( $setting_id , $this->settings ) ) { 
 
             $registered = $this->settings[ $setting_id ];
 
@@ -397,7 +415,7 @@ class SiteEditorOptionsCategory {
             $args = array_merge(
                 $args,
                 $registered
-            );
+            ); 
 
         }
 

@@ -1367,3 +1367,13 @@ function sed_data_atts( $attributes ) {
 
     return implode( ' ', $atts );
 }
+
+
+function sed_js_remove_wpautop( $content, $autop = false ) {
+
+    if ( $autop ) { // Possible to use !preg_match('('.WPBMap::getTagsRegexp().')', $content)
+        $content = wpautop( preg_replace( '/<\/?p\>/', "\n", $content ) . "\n" );
+    }
+
+    return do_shortcode( shortcode_unautop( $content ) );
+}

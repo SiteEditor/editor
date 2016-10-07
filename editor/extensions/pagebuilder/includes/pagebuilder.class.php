@@ -471,7 +471,14 @@ Class PageBuilderApplication {
 
         $ex_content = wpautop( $matches[1] );
 
-        return '[sed_row type="static-element" from_wp_editor="true"]'.$ex_content.'[/sed_row]';
+        return '[sed_row type="static-element" class="module_sed_wp_text_editor_contextmenu_container" from_wp_editor="true"]
+                    [sed_module class="module_sed_wp_text_editor_contextmenu_container" ]
+                        [sed_wp_text_editor]
+                            '.$ex_content.'
+                        [/sed_wp_text_editor]
+                    [/sed_module]    
+                [/sed_row]';
+
     }
 
     function post_content_synchronization( $content ){

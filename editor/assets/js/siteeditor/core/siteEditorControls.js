@@ -50,7 +50,16 @@ api	 * @param options
 		}
 	});
 
+
+    api.Events.bind( "after_apply_single_setting_relations_update" , function(group, control, currentValue){
+
+        control.active.set( control.params.active );
+
+    });
+
 	api.Control = api.Class.extend({
+		defaultActiveArguments: { duration: 'fast', completeCallback: $.noop },
+
 		initialize: function( id, options ) {
 			var control = this,
 				nodes, radios, settings;
@@ -62,6 +71,9 @@ api	 * @param options
 			this.selector = '#sed-app-control-' + id.replace( /\]/g, '' ).replace( /\[/g, '-' );
 			this.container = $( this.selector );
             this.container.addClass("sed-container-control-element");
+
+            control.active = new api.Value();
+            control.activeArgumentsQueue = [];
 
 			settings = $.map( this.params.settings, function( value ) {
 				return value;
@@ -78,6 +90,14 @@ api	 * @param options
 				control.setting = control.settings['default'] || null;
 				control.ready();
 			}) );
+
+            control.active.bind( function ( active ) {
+                var args = control.activeArgumentsQueue.shift();
+                args = $.extend( {}, control.defaultActiveArguments, args );
+                control.onChangeActive( active, args );
+            } );
+
+            //control.active.set( control.params.active );
 
 		   /* control.elements = [];
 
@@ -108,6 +128,41 @@ api	 * @param options
 				});
 			}); */
 		},
+
+        /**
+         * Update UI in response to a change in the control's active state.
+         * This does not change the active state, it merely handles the behavior
+         * for when it does change.
+         *
+         * @since 4.1.0
+         *
+         * @param {Boolean}  active
+         * @param {Object}   args
+         * @param {Number}   args.duration
+         * @param {Callback} args.completeCallback
+         */
+        onChangeActive: function ( active, args ) {
+            if ( args.unchanged ) {
+                if ( args.completeCallback ) {
+                    args.completeCallback();
+                }
+                return;
+            }
+
+            if ( ! $.contains( document, this.container[0] ) ) {
+                // jQuery.fn.slideUp is not hiding an element if it is not in the DOM
+                this.container.toggle( active );
+                if ( args.completeCallback ) {
+                    args.completeCallback();
+                }
+            } else if ( active ) {
+                this.container.parents(".row_settings:first").slideDown( args.duration, args.completeCallback );
+            } else {
+                this.container.parents(".row_settings:first").slideUp( args.duration, args.completeCallback );
+                //$( selector ).parents(".row_settings:first").addClass("sed-hide-dependency").fadeOut( 200 )
+            }
+        },
+
         //for disable or enable controls
 		controlMod: function(disabled) {
             var control = this, containerElement = this.container,

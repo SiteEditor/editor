@@ -730,28 +730,68 @@ final class SiteEditorOptionsManager{
 
                 $partial_args = $args['partial_refresh'];
 
-                if( isset( $args['capability'] ) ){
-                    $partial_args['capability'] = $args['capability'];
-                }
-
-                if( isset( $args['option_group'] ) ){
-                    $partial_args['option_group'] = $args['option_group'];
-                }
-
-                if( ! isset( $partial_args['settings'] ) ){
-                    $partial_args['setting_id'] = $setting_id;
-                }
-
-                $partial_id = $setting_id;
-
-                $this->add_partial( $partial_id , $partial_args);
-
+                $this->register_field_partial( $partial_args , $setting_id , $args );
             }
 
             // Create the control.
             $this->add_control( $id , $control_args );
 
         }
+
+    }
+
+    private function register_field_partial( $partial_args , $setting_id , $field_args = array() , $partial_id = '' ){
+
+
+        if ( $partial_args instanceof SiteEditorPartial ) {
+
+            $this->add_partial( $partial_args );
+
+        }else if ( is_array( $partial_args ) && isset( $partial_args['render_callback'] ) && isset( $partial_args['selector'] ) ) {
+
+            $partial_args = $this->get_partial_args( $partial_args , $setting_id , $field_args );
+
+            if( empty( $partial_id ) || ! is_string( $partial_id ) ) {
+                $partial_id = $setting_id;
+            }
+
+            $partial_id = ! isset( $partial_args['partial_id'] ) ? $partial_id : $partial_args['partial_id'];
+
+            if( isset( $partial_args['partial_id'] ) ){
+                unset( $partial_args['partial_id'] );
+            }
+
+            $this->add_partial($partial_id, $partial_args);
+
+        }elseif( is_array( $partial_args ) ) {
+
+            $partials = $partial_args;
+
+            foreach ( $partials AS $curr_partial_id => $curr_partial_args ){
+
+                $this->register_field_partial( $curr_partial_args , $setting_id , $field_args , $curr_partial_id  );
+
+            }
+
+        }
+
+    }
+
+    public function get_partial_args( $partial_args , $setting_id , $field_args ){
+
+        if (isset($field_args['capability'])) {
+            $partial_args['capability'] = $field_args['capability'];
+        }
+
+        if (isset($field_args['option_group'])) {
+            $partial_args['option_group'] = $field_args['option_group'];
+        }
+
+        if (!isset($partial_args['settings'])) {
+            $partial_args['settings'] = array( $setting_id );
+        }
+
+        return $partial_args;
 
     }
 
@@ -869,14 +909,6 @@ final class SiteEditorOptionsManager{
             SED()->editor->manager->selective_refresh->add_partial( $id );
 
         }else if ( isset( $args['render_callback'] ) && isset( $args['selector'] ) ) {
-
-            if( isset( $args['setting_id'] ) ){
-
-                $args['settings'] = array( $args['setting_id'] );
-
-                unset( $args['setting_id'] );
-
-            }
 
             SED()->editor->manager->selective_refresh->add_partial( $id, $args );
 
