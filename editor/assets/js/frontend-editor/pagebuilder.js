@@ -1913,44 +1913,10 @@
                     key_setting = key_setting.join("");
 
                     var $element = $( '[sed_model_id="' + elementId + '"]' ).find('.sed-carousel');
-                    $element.data(key_setting , attrValue );
-       
-                    //$element.slick( 'slickSetOption' , key_setting , attrValue , true );
-                    $element.slick('unslick');
 
-                    var options = $.extend({} , {
-                        slidesToShow: 4,
-                        slidesToScroll: 1,
-                        prevArrow : '<span class="slide-nav-bt slide-prev"><i class="fa fa-angle-left"></i></span>',
-                        nextArrow : '<span class="slide-nav-bt slide-next"><i class="fa fa-angle-right"></i></span>',
-                        swipe      : true ,
-                        touchMove  : true ,
-                        responsive: [
-                          {
-                            breakpoint: 1024,
-                            settings: {
-                              slidesToShow: 3,
-                              slidesToScroll: 3,
-                            }
-                          },
-                          {
-                            breakpoint: 600,
-                            settings: {
-                              slidesToShow: 2,
-                              slidesToScroll: 2
-                            }
-                          },
-                          {
-                            breakpoint: 480,
-                            settings: {
-                              slidesToShow: 1,
-                              slidesToScroll: 1
-                            }
-                          }
-                        ]
-                    } , $element.data() );
-                                       
-                    $element.slick( options );
+                    $element.data( key_setting , attrValue );
+
+                    $element.trigger( "sedChangeDataCarousel" );
 
                     return ;
                 }
