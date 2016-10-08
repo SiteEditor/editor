@@ -79,6 +79,13 @@ Class site_editor_indexController Extends baseController {
         $this->registry->template->show('import-demo-processing');
     }
 
+    private function theme_less_compile(){
+
+        $content = $this->registry->template->get_content("theme_less_compile");
+
+        return $content;
+
+    }
 
     private function pages_edit_links( $id , $value = '' ){
 

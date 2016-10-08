@@ -1,14 +1,15 @@
 <?php
 
 $tabs = array(
-    "general"           => __('General Settings' , 'site-editor' ),
-    "favicon"           => __('Favicon Options' , 'site-editor' ),
-    "colors"            => __( 'Colors' , 'site-editor' ) ,
-    "custom_font"       => __( 'Custom Font' , 'site-editor' ) ,
-    "typography"        => __( 'Typography' , 'site-editor' ) ,
-    "custom_css"        => __( 'Custom css' , 'site-editor' ) ,
-    "edit_pages"        => __( 'Pages Edit' , 'site-editor' ) ,
-    "import_export"     => __( 'import & export' , 'site-editor') ,
+    "general"                   => __('General Settings' , 'site-editor' ),
+    "favicon"                   => __('Favicon Options' , 'site-editor' ),
+    "colors"                    => __( 'Colors' , 'site-editor' ) ,
+    "custom_font"               => __( 'Custom Font' , 'site-editor' ) ,
+    "typography"                => __( 'Typography' , 'site-editor' ) ,
+    "custom_css"                => __( 'Custom css' , 'site-editor' ) ,
+    "edit_pages"                => __( 'Pages Edit' , 'site-editor' ) ,
+    "theme_less_compile"        => __( 'Theme Less Compile' , 'site-editor' ) ,
+    "import_export"             => __( 'import & export' , 'site-editor') ,
 );
 
 $items = array(
@@ -128,6 +129,14 @@ $items = array(
             "type"          => "html",
             "label"         => __('Extra Pages Edit' , 'site-editor' ) ,
             "html"          => 'pages_edit_links'//$this->pages_edit_links( )
+        ),
+    ),
+
+    "theme_less_compile"      => array(
+        "theme_less_compile"      => array(
+            "type"          => "html",
+            "label"         => __('Theme Less Compile' , 'site-editor' ) ,
+            "html"          => 'theme_less_compile'//$this->pages_edit_links( )
         ),
     ),
 
