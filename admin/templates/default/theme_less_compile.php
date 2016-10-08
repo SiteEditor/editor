@@ -63,8 +63,6 @@ if( isset( $_REQUEST['theme_less_file'] ) ) {
             ?>
         </select>
 
-        <button type="button"><?php echo __("Compile File" , "site-editor");?></button>
-
         <?php
         ?>
 
