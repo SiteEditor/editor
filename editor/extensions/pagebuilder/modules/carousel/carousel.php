@@ -101,7 +101,7 @@ class PBCarouselShortcode extends PBShortcodeClass{
         $this->add_panel( 'carousel_settings_panel' , array(
             'title'         =>  __('Carousel Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -109,7 +109,7 @@ class PBCarouselShortcode extends PBShortcodeClass{
         $this->add_panel( 'images_settings_panel' , array(
             'title'         =>  __('Images Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -121,11 +121,11 @@ class PBCarouselShortcode extends PBShortcodeClass{
             ),
 
             'items_spacing' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => 'px',
                 'label' => __('Slide Spacing', 'site-editor'),
-                'desc' => __('This feature allows you to specify the distance between the slides (images).', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('This feature allows you to specify the distance between the slides (images).', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                     "max"  =>  100,
                     "step" =>  5
@@ -134,32 +134,32 @@ class PBCarouselShortcode extends PBShortcodeClass{
             ),
 
             'setting_slides_to_show' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => '&emsp;',
                 'label' => __('Slide To Show', 'site-editor'),
-                'desc' => __('This feature allows you to specify the number of slides to show at a time.', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('This feature allows you to specify the number of slides to show at a time.', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  1
                 ),
                 'panel'    => 'carousel_settings_panel',
             ),
             'setting_slides_to_scroll'      => array(
-                'type'  => 'spinner' ,
+                'type'  => 'number' ,
                 'after_field'  => '&emsp;',
                 'label' => __( 'Slide To Scroll' , 'site-editor' ) ,
-                'desc'  => __( 'This feature allows you to specify the number of slides to scroll at a time.' , 'site-editor' ) ,
-                "control_param"  =>  array(
+                'description'  => __( 'This feature allows you to specify the number of slides to scroll at a time.' , 'site-editor' ) ,
+                "js_params"  =>  array(
                     "min"  =>  1
                 ),
                 'panel'    => 'carousel_settings_panel',
             ),
 
             'setting_autoplay_speed'       => array(
-                'type'  => 'spinner' ,
+                'type'  => 'number' ,
                 'after_field'  => ' ms',
                 'label' => __( 'Auto Play Speed' , 'site-editor' ) ,
-                'desc'  => __( 'This feature allows you to specify the auto play change interval of slides.' , 'site-editor' ) ,
-                "control_param"  =>  array(
+                'description'  => __( 'This feature allows you to specify the auto play change interval of slides.' , 'site-editor' ) ,
+                "js_params"  =>  array(
                     "min"  =>  100 ,
                     "step"  => 100
                 ),
@@ -168,20 +168,20 @@ class PBCarouselShortcode extends PBShortcodeClass{
             'setting_autoplay'            => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Auto Play' , 'site-editor' ) ,
-                'desc'  => __( 'This feature allows you to enable/disable auto play of slides.' , 'site-editor' ) ,
+                'description'  => __( 'This feature allows you to enable/disable auto play of slides.' , 'site-editor' ) ,
                 'panel'    => 'carousel_settings_panel',
             ),
             'setting_pause_on_hover'        => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Pause On Hover' , 'site-editor' ) ,
-                'desc'  => __( 'This feature allows you to choose whether or not to pause autoplay on Hover.' , 'site-editor' ) ,
+                'description'  => __( 'This feature allows you to choose whether or not to pause autoplay on Hover.' , 'site-editor' ) ,
                 'panel'    => 'carousel_settings_panel',
             ),
 
             'setting_fade'                => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Fade' , 'site-editor' ) ,
-                'desc'  => __( '' , 'site-editor' ) ,
+                'description'  => __( '' , 'site-editor' ) ,
                 'panel'    => 'carousel_settings_panel',
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -201,47 +201,47 @@ class PBCarouselShortcode extends PBShortcodeClass{
             'setting_draggable'           => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Draggable Mode' , 'site-editor' ) ,
-                'desc'  => __( 'This feature allows you to choose whether or not to enable dragging feature.' , 'site-editor' ) ,
+                'description'  => __( 'This feature allows you to choose whether or not to enable dragging feature.' , 'site-editor' ) ,
                 'panel'    => 'carousel_settings_panel',
             ),
             'setting_infinite'            => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Infinite' , 'site-editor' ) ,
-                'desc'  => __( 'This feature allows you to choose whether or not to display slides into an infinite loop. ' , 'site-editor' ) ,
+                'description'  => __( 'This feature allows you to choose whether or not to display slides into an infinite loop. ' , 'site-editor' ) ,
                 'panel'    => 'carousel_settings_panel',
             ),
             'setting_arrows'              => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Arrow' , 'site-editor' ) ,
-                'desc'  => __( 'This feature allows you to choose whether or not to enable Next / Prev arrows for carousel.' , 'site-editor' ) ,
+                'description'  => __( 'This feature allows you to choose whether or not to enable Next / Prev arrows for carousel.' , 'site-editor' ) ,
                 'panel'    => 'carousel_settings_panel',
             ),
 
             'setting_dots'                => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Dots' , 'site-editor' ) ,
-                'desc'  => __( 'This feature allows you to choose whether or not to display dots (navs) for carousel.' , 'site-editor' ) ,
+                'description'  => __( 'This feature allows you to choose whether or not to display dots (navs) for carousel.' , 'site-editor' ) ,
                 'panel'    => 'carousel_settings_panel',
             ),
              'group_images_show_title' =>  array(
                 'type' => 'checkbox',
                 'label' => __('Show Images title', 'site-editor'),
-                'desc' => __('This option allows you to show or hide the image title in hover effect.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the image title in hover effect.', 'site-editor'),
                 'panel'    => 'images_settings_panel',
             ),
 
             'group_images_show_description' =>  array(
                 'type' => 'checkbox',
                 'label' => __('Show Images Description', 'site-editor'),
-                'desc' => __('This option allows you to show or hide the image description in hover effect.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the image description in hover effect.', 'site-editor'),
                 'panel'    => 'images_settings_panel',
             ),
 
             'group_images_image_click' => array(
                 'type' => 'select',
                 'label' => __('When images are clicked', 'site-editor'),
-                'desc' => __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
+                'choices'   =>array(
                     'default'             => __('Do Nothing', 'site-editor'),
                     'link_mode'           => __('Open Link', 'site-editor'),
                     'expand_mode'         => __('Open Expand Mode', 'site-editor'),
@@ -250,11 +250,11 @@ class PBCarouselShortcode extends PBShortcodeClass{
                 'panel'    => 'images_settings_panel',
             ),
             'group_skin'     =>  array(
-                'value'      =>  "default",
+                'default'      =>  "default",
                 'sub_module' =>  "image",
                 'group'      =>  "image_thumb",
                 'label'      =>  __('Images Change Skin', 'site-editor'),
-                'control_param' =>  array(
+                'js_params' =>  array(
                     "support"  =>  array(
                         "type"     =>  "exclude" ,
                         "fields"   =>  array(
@@ -266,10 +266,10 @@ class PBCarouselShortcode extends PBShortcodeClass{
                 'panel'    => 'images_settings_panel',
             ),
             'images_size' => array(
-                "type"          => "image_size" ,
+                "type"          => "image-size" ,
                 "label"         => __("Images Size", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "control_param" => array(
+                "description"   => __("This option allows you to set a title for your image.", "site-editor"),
+                "js_params" => array(
                     "sub_shortcodes_update" => array(
                         "class"  => "carousel_thumbnail" ,
                         "attr"   => "default_image_size"  
@@ -280,7 +280,7 @@ class PBCarouselShortcode extends PBShortcodeClass{
                 "type"   => "button" ,
                 'style'  =>  'default',
                 'label'  =>  __("Gallery Managment","site-editor") ,
-                'desc'   =>  '',
+                'description' => '',
                 "atts"   =>  array(
                     "class"                 => "open-media-library-edit-gallery",
                     "support_types"         => "image" ,

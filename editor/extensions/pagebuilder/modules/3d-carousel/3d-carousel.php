@@ -91,31 +91,31 @@ class PB3DCarouselShortcode extends PBShortcodeClass{
         $params = array(
 
             'setting_container_width' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => 'px',
                 'label' => __('Container Width', 'site-editor'),
-                'desc' => __('This feature allows you to specify the distance between the slides (images).', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('This feature allows you to specify the distance between the slides (images).', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
             ),
 
             'setting_front_img_width' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => 'px',
                 'label' => __('Front Image Width', 'site-editor'),
-                'desc' => __('This feature allows you to specify the distance between the slides (images).', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('This feature allows you to specify the distance between the slides (images).', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
             ),
 
             'setting_front_img_height' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => 'px',
                 'label' => __('Front Image Height', 'site-editor'),
-                'desc' => __('This feature allows you to specify the distance between the slides (images).', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('This feature allows you to specify the distance between the slides (images).', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
 

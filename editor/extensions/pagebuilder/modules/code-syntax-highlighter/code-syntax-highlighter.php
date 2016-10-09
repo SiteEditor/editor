@@ -422,9 +422,9 @@ class PBCodeSyntaxHighlighter extends PBShortcodeClass{
             'lang' => array(
                 'type' => 'select',
                 'label' => __('Select Language', 'site-editor'),
-                'desc' =>  __('The language syntax to highlight with', 'site-editor'),
-                'options' => $langs,
-                "control_param" =>  array(
+                'description'  => __('The language syntax to highlight with', 'site-editor'),
+                'choices'   => $langs,
+                "js_params" =>  array(
                     "force_refresh"   =>   true
                 ),                
             ),
@@ -432,31 +432,31 @@ class PBCodeSyntaxHighlighter extends PBShortcodeClass{
             'autolinks'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Automatically make URLs clickable' , 'site-editor' ) ,
-                'desc'  => __( 'Toggle automatic URL linking.' , 'site-editor' ),
+                'description'  => __( 'Toggle automatic URL linking.' , 'site-editor' ),
             ),
 
             'collapse'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Collapse code boxes' , 'site-editor' ) ,
-                'desc'  => __( 'Toggle collapsing the code box by default, requiring a click to expand it. Good for large code posts.' , 'site-editor' ),
+                'description'  => __( 'Toggle collapsing the code box by default, requiring a click to expand it. Good for large code posts.' , 'site-editor' ),
             ),
 
             'firstline' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => 'px',
                 'label' => __('Starting Line Number', 'site-editor'),
-                'desc' => __('An interger specifying what number the first line should be (for the line numbering).', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('An interger specifying what number the first line should be (for the line numbering).', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
             ),
 
             /*'fontsize' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => '%',
                 'label' => __('Font Size', 'site-editor'),
-                'desc' => __('Font Size', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('Font Size', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
             ),*/
@@ -464,33 +464,33 @@ class PBCodeSyntaxHighlighter extends PBShortcodeClass{
             'gutter'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Display line numbers' , 'site-editor' ) ,
-                'desc'  => __( 'Toggle the left-side line numbering.' , 'site-editor' ),
+                'description'  => __( 'Toggle the left-side line numbering.' , 'site-editor' ),
             ),
 
             'highlight' =>  array(
                 'type'          => 'text',
                 'label'         => __('Line numbers to highlight', 'site-editor'),
-                'desc'          => __('A comma-separated list of line numbers to highlight. You can also specify a range. Example: 2,5-10,12', 'site-editor'),
+                'description'   => __('A comma-separated list of line numbers to highlight. You can also specify a range. Example: 2,5-10,12', 'site-editor'),
             ),
 
             'htmlscript'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'highlighting HTML/XML' , 'site-editor' ) ,
-                'desc'  => __( "Toggle highlighting any extra HTML/XML. Good for when you're mixing HTML/XML with another language, such as having PHP inside an HTML web page. The above preview has it enabled for example. This only works with certain languages." , 'site-editor' ),
+                'description'  => __( "Toggle highlighting any extra HTML/XML. Good for when you're mixing HTML/XML with another language, such as having PHP inside an HTML web page. The above preview has it enabled for example. This only works with certain languages." , 'site-editor' ),
             ),
 
             'light'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Use the light display mode?' , 'site-editor' ) ,
-                'desc'  => __( 'Use the light display mode, best for single lines of code. Toggle light mode which disables the gutter and toolbar all at once' , 'site-editor' ),
+                'description'  => __( 'Use the light display mode, best for single lines of code. Toggle light mode which disables the gutter and toolbar all at once' , 'site-editor' ),
             ),
 
             'padlinenumbers' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => 'px',
                 'label' => __('Line Number Padding', 'site-editor'),
-                'desc' => __('Controls line number padding. Valid values are 0 (no padding), -1 (automatic padding), or an integer (forced padding)', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('Controls line number padding. Valid values are 0 (no padding), -1 (automatic padding), or an integer (forced padding)', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
             ),
@@ -498,15 +498,15 @@ class PBCodeSyntaxHighlighter extends PBShortcodeClass{
             'smarttabs'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Use smart tabs?' , 'site-editor' ) ,
-                'desc'  => __( 'Use smart tabs allowing tabs being used for alignment' , 'site-editor' ),
+                'description'  => __( 'Use smart tabs allowing tabs being used for alignment' , 'site-editor' ),
             ),
 
             'tabsize' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => 'px',
                 'label' => __('Tab Size', 'site-editor'),
-                'desc' => __('Tab Size', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('Tab Size', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
             ),
@@ -514,26 +514,26 @@ class PBCodeSyntaxHighlighter extends PBShortcodeClass{
             'title' =>  array(
                 'type'          => 'text',
                 'label'         => __('Title', 'site-editor'),
-                'desc'          => __('Sets some text to show up before the code. Very useful when combined with the collapse parameter', 'site-editor'),
+                'description'   => __('Sets some text to show up before the code. Very useful when combined with the collapse parameter', 'site-editor'),
             ),
 
             'toolbar'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Toggle the toolbar?' , 'site-editor' ) ,
-                'desc'  => __( 'Toggle the toolbar' , 'site-editor' ),
+                'description'  => __( 'Toggle the toolbar' , 'site-editor' ),
             ),
 
             'theme' => array(
                 'type' => 'select',
                 'label' => __('Select Theme', 'site-editor'),
-                'desc' =>  __('Select Color Theme Or Skin for Codes', 'site-editor'),
-                'options' => $this->themes,
+                'description'  => __('Select Color Theme Or Skin for Codes', 'site-editor'),
+                'choices'   => $this->themes,
             ),
 
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

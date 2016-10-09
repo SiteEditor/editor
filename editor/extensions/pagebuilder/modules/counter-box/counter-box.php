@@ -100,7 +100,7 @@ class PBCounterBoxShortcode extends PBShortcodeClass{
         $this->add_panel( 'counter_box_settings_panel' , array(
             'title'         =>  __('Counter Box Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -109,7 +109,7 @@ class PBCounterBoxShortcode extends PBShortcodeClass{
             'icon' => array(
                 "type"          => "icon" ,
                 "label"         => __("Icon Field", "site-editor"),
-                "desc"          => __("This option allows you to set a icon for your module.", "site-editor"),
+                "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
             ),             
             'change_image_panel' => array(
                 "type"          => "sed_image" ,
@@ -118,74 +118,74 @@ class PBCounterBoxShortcode extends PBShortcodeClass{
             "counter_box_title"            => array(
                 "type"      => "text",
                 "label"     => __("Title","site-editor"),
-                "desc"     => __("This feature allows you to specify the counter box title.","site-editor"),
+                "description"  => __("This feature allows you to specify the counter box title.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_start_val"            => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 "label"     => __("start val","site-editor"),
-                "desc"     => __("This feature will allow you to specify the count starting number of Counter box.","site-editor"),
+                "description"  => __("This feature will allow you to specify the count starting number of Counter box.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_end_val"              => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 "label"     => __("end val","site-editor"),
-                "desc"     => __("This feature allows you to specify the count ending number of Counter box.","site-editor"),
+                "description"  => __("This feature allows you to specify the count ending number of Counter box.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_decimals"             => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 "label"     => __("decimals count","site-editor"),
-                "desc"     => __("This feature allows you to specify the number of decimal places for Counter Box.","site-editor"),
+                "description"  => __("This feature allows you to specify the number of decimal places for Counter Box.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_duration"             => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 "label"     => __("duration","site-editor"),
-                "desc"     => __("This feature allows you to determine the animation duration (counting numbers) in seconds.","site-editor"),
+                "description"  => __("This feature allows you to determine the animation duration (counting numbers) in seconds.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_use_easing"    => array(
                 "type"      => "checkbox",
                 "label"     => __("useEasing","site-editor"),
-                "desc"     => __("This feature allows you to count the number of counter box by Easing.","site-editor"),
+                "description"  => __("This feature allows you to count the number of counter box by Easing.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_use_grouping"  => array(
                 "type"      => "checkbox",
                 "label"     => __("useGrouping","site-editor"),
-                "desc"     => __("This feature allows you to choose whether or not to display 1000 separator for counter box (i.e you can choose whether or not to use number grouping);
+                "description"  => __("This feature allows you to choose whether or not to display 1000 separator for counter box (i.e you can choose whether or not to use number grouping);
                                 <br />for example 1,000,000 vs 1000000.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_prefix"       => array(
                 "type"      => "text",
                 "label"     => __("prefix","site-editor"),
-                "desc"     => __("This feature allows you to specify a prefix for the counter box number.","site-editor"),
+                "description"  => __("This feature allows you to specify a prefix for the counter box number.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_suffix"       => array(
                 "type"      => "text",
                 "label"     => __("suffix","site-editor"),
-                "desc"     => __("This feature allows you to specify a suffix for the counter box number.","site-editor"),
+                "description"  => __("This feature allows you to specify a suffix for the counter box number.","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_separator"    => array(
                 "type"      => "text",
                 "label"     => __("separator","site-editor"),
-                "desc"     => __("This feature allows you to specify separator for the counter box number. This will be applied in case that useGrouping be enabled. ","site-editor"),
+                "description"  => __("This feature allows you to specify separator for the counter box number. This will be applied in case that useGrouping be enabled. ","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             "setting_decimal"      => array(
                 "type"      => "text",
                 "label"     => __("decimal","site-editor"),
-                "desc"     => __("This feature allows you to specify the decimal separator of the counter box number. ","site-editor"),
+                "description"  => __("This feature allows you to specify the decimal separator of the counter box number. ","site-editor"),
                 "panel"     => "counter_box_settings_panel",
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "skin"  =>  array(
                 "type"          => "skin" ,

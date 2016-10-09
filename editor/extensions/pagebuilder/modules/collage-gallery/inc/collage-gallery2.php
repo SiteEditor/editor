@@ -95,7 +95,7 @@ class PBCollageGallery extends PBShortcodeClass{
         $this->add_panel( 'collage_gallery_settings_panel' , array(
             'title'         =>  __('Collage Gallery Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -103,42 +103,42 @@ class PBCollageGallery extends PBShortcodeClass{
         $this->add_panel( 'images_settings_panel' , array(
             'title'         =>  __('Images Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
 
         $params = array(
             "setting_row_height"   => array(
-                "type"  => "spinner",
+                "type"  => "number",
                 "after_field"  => "px",
                 "label" => __("Row Height","site-editor"),
-                "desc"  => __("This feature allows you to specify the approximate height of rows in pixel.","site-editor"),
+                "description"  => __("This feature allows you to specify the approximate height of rows in pixel.","site-editor"),
                 "panel"     => "collage_gallery_settings_panel",
             ),
             "setting_margins"   => array(
-                "type"  => "spinner",
+                "type"  => "number",
                 "after_field"  => "px",
                 "label" => __("Items Spacing","site-editor"),
-                "desc"  => __("This feature allows you to specify the distance between grade images.","site-editor"),
-                "control_param"  =>  array(
+                "description"  => __("This feature allows you to specify the distance between grade images.","site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  0,
                     "max"  =>  100,
                 ),
                 "panel"     => "collage_gallery_settings_panel",
             ),
             "setting_max_row_height"   => array(
-                "type"  => "spinner",
+                "type"  => "number",
                 "after_field"  => "px",
                 "label" => __("Max Row Height","site-editor"),
-                "desc"  => __("The maximum row height in pixel. Negative value to have not limits. Zero to have a limit of 1.5 * rowHeight","site-editor"),
+                "description"  => __("The maximum row height in pixel. Negative value to have not limits. Zero to have a limit of 1.5 * rowHeight","site-editor"),
                 "panel"     => "collage_gallery_settings_panel",
             ),
             "setting_last_row"   => array(
                 "type"  => "select",
                 "label" => __("Last row","site-editor"),
-                "desc"  => __("Decide if you want to justify the last row (ie 'justify') or not (ie 'nojustify'), or to hide the row if it can not be justified (ie 'hide')","site-editor"),
-                "options"   => array(
+                "description"  => __("Decide if you want to justify the last row (ie 'justify') or not (ie 'nojustify'), or to hide the row if it can not be justified (ie 'hide')","site-editor"),
+                "choices"   => array(
                     "nojustify" => __("No Justify","site-editor"),
                     "hide"      => __("Hide","site-editor"),
                     "justify"   => __("Justify","site-editor"),
@@ -148,64 +148,64 @@ class PBCollageGallery extends PBShortcodeClass{
             "setting_fixed_height"   => array(
                 "type"  => "checkbox",
                 "label" => __("Fixed Height","site-editor"),
-                "desc"  => __("Decide if you want to have a fixed height. This mean that all the rows will be exactly with the specified rowHeight.","site-editor"),
+                "description"  => __("Decide if you want to have a fixed height. This mean that all the rows will be exactly with the specified rowHeight.","site-editor"),
                 "panel"     => "collage_gallery_settings_panel",
             ),
             /*      "setting_alternate_height"   => array(
                 "type"  => "checkbox",
                 "label" => __("Alternate the height value for every row.","site-editor"),
-                "desc"  => '',// __("If true this has priority over defaults.fixedHeight","site-editor")
+                "description"  => '',// __("If true this has priority over defaults.fixedHeight","site-editor")
             ),
             "setting_fixed_height"   => array(
                 "type"  => "checkbox",
                 "label" => __("autoRedraw","site-editor"),
-                "desc"  => '',// __("If the following value is set, this will
+                "description"  => '',// __("If the following value is set, this will
                             have priority over defaults.minsize.
                             All images will have this height:","site-editor")
             ),      */
             "setting_randomize"   => array(
                 "type"  => "checkbox",
                 "label" => __("Randomize","site-editor"),
-                "desc"  => __("Automatically randomize or not the order of photos.","site-editor"),
+                "description"  => __("Automatically randomize or not the order of photos.","site-editor"),
                 "panel"     => "collage_gallery_settings_panel",
             ),
             "setting_wait_thumbnails_load"   => array(
                 "type"  => "checkbox",
                 "label" => __("Wait Thumbnails Load","site-editor"),
-                "desc"  => __("In presence of width and height attributes in thumbnails, the layout is immediately built, and the thumbnails will appear randomly while they are loaded.","site-editor"),
+                "description"  => __("In presence of width and height attributes in thumbnails, the layout is immediately built, and the thumbnails will appear randomly while they are loaded.","site-editor"),
                 "panel"     => "collage_gallery_settings_panel",
             ),
             "setting_images_animation_duration"   => array(
-                "type"  => "spinner",
+                "type"  => "number",
                 "after_field"  => "ms",
                 "label" => __("Animation duration","site-editor"),
-                "desc"  => __("Image fadeIn duration.","site-editor"),
+                "description"  => __("Image fadeIn duration.","site-editor"),
                 "panel"     => "collage_gallery_settings_panel",
             ),
             /*   "setting_css_animation"   => array(
                 "type"  => "checkbox",
                 "label" => __("CSS Animation","site-editor"),
-                "desc"  => '',// __("Use or not css animations. Using css animations you can change the behavior changing the justified gallery CSS file, or rewriting that rules.","site-editor")
+                "description"  => '',// __("Use or not css animations. Using css animations you can change the behavior changing the justified gallery CSS file, or rewriting that rules.","site-editor")
             ),      */
             'group_images_show_title' =>  array(
                 'type' => 'checkbox',
                 'label' => __('Show Images Title', 'site-editor'),
-                'desc' => __('This option allows you to show or hide the image title in hover effect.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the image title in hover effect.', 'site-editor'),
                 'panel'    => 'images_settings_panel',
             ),
 
             'group_images_show_description' =>  array(
                 'type'  => 'checkbox',
                 'label' => __('Show Images Description', 'site-editor'),
-                'desc'  => __('This option allows you to show or hide the image description in hover effect.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the image description in hover effect.', 'site-editor'),
                 'panel'    => 'images_settings_panel',
             ),
 
             'group_images_image_click' => array(
                 'type' => 'select',
                 'label' => __('When images are clicked', 'site-editor'),
-                'desc' => __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
+                'choices'   =>array(
                     'default'             => __('Do Nothing', 'site-editor'),
                     'link_mode'           => __('Open Link', 'site-editor'),
                     'expand_mode'         => __('Open Expand Mode', 'site-editor'),
@@ -214,11 +214,11 @@ class PBCollageGallery extends PBShortcodeClass{
                 'panel'    => 'images_settings_panel',
             ),
             'group_skin'     =>  array(
-                'value'      =>  "default",
+                'default'      =>  "default",
                 'sub_module' =>  "image",
                 'group'      =>  "collage-image",
                 'label'      =>  __('Images Change Skin', 'site-editor'),
-                'control_param' =>  array(
+                'js_params' =>  array(
                     "support"  =>  array(
                         "type"     =>  "exclude" ,
                         "fields"   =>  array(
@@ -232,7 +232,7 @@ class PBCollageGallery extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

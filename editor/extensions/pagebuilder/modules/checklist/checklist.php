@@ -50,19 +50,19 @@ class PBCheckListShortcode extends PBShortcodeClass{
 
         $params = array(
             'number_items'  => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
       			'label' => __('Number Items', 'site-editor'),
-      			'desc' => __('This feature allows you to specify the number of check list icons. ', 'site-editor'),
-                  'control_param'     =>  array(
+      			'description'  => __('This feature allows you to specify the number of check list icons. ', 'site-editor'),
+                  'js_params'     =>  array(
                       'min' => 1
                   )
       		),
           'icon' => array(
               "type"          => "icon" ,
               "label"         => __("Icon Field", "site-editor"),
-              "desc"          => __("This option allows you to set a icon for your module.", "site-editor"),
-              "value"             => "fa fa-angle-double-right" ,        
-              "control_param" => array(
+              "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
+              "default"       => "fa fa-angle-double-right" ,        
+              "js_params" => array(
                   "sub_shortcodes_update" => array(
                       "class"  => "checklist-item" ,  
                       "attr"   => "icon"
@@ -72,27 +72,27 @@ class PBCheckListShortcode extends PBShortcodeClass{
           'icon_color' => array(
               "type"              => "color" ,
               "label"             => __("Icon Color Field", "site-editor"),
-              "desc"              => "",
-              "value"             => "#000000" ,
-              'control_param'     =>  array(
+              "description"       => '',
+              "default"           => "#000000" ,
+              'js_params'     =>  array(
                   'selector' =>  '.checklist-icon > i' ,
                   'style_props'       =>  "color" ,
               ),
-              'control_category'  => "style-editor" ,
-              'settings_type'     =>  "font_color",
+              'category'  => "style-editor" ,
+              'setting_id'       =>  "font_color",
           ),
 
           'icon_size' => array(
-              "type"              => "spinner" ,
+              "type"              => "number" ,
               "label"             => __("Icon Size Field", "site-editor"),
-              "desc"              => "",
-              "value"             => "16px" ,
-              'control_param'     =>  array(
+              "description"       => '',
+              "default"           => "16px" ,
+              'js_params'     =>  array(
                   'selector'          =>  '.checklist-icon > i' ,
                   'style_props'       =>  "font-size" ,
               ),
-              'control_category'  => "style-editor" ,
-              'settings_type'     =>  "font_size",
+              'category'  => "style-editor" ,
+              'setting_id'       =>  "font_size",
           ),         
           "skin"  =>  array(
               "type"          => "skin" ,
@@ -101,7 +101,7 @@ class PBCheckListShortcode extends PBShortcodeClass{
           'spacing' => array(
               "type"          => "spacing" ,
               "label"         => __("Spacing", "site-editor"),
-              "value"         => "10 0 10 0" ,
+              "default"       => "10 0 10 0" ,
           ), 
           "animation"  =>  array(
               "type"          => "animation" ,

@@ -7,60 +7,65 @@
 */
 .module-accordion.accordion-skin3{
 
+    @accordion-bg:                        transparent;
+    @accordion-border-radius:             @border-radius-zero;
+    @accordion-box-shadow:                none; 
+    @accordion-title-font-size:           @font-size-base; 
+    @accordion-content-padding:           @padding-lg 0;
+    @accordion-header-padding-vertical:   @padding-base;
+    @accordion-header-padding-horizontal: 0;
+
+    //** Border color for elements within accordions
+
+    @accordion-text:                      @headings-color; 
+    @accordion-border:                    1px solid @base-border-color;
+    @accordion-header-bg:                 transparent;
+
+    @accordion-active-text:               @brand-primary;
+    @accordion-active-border:             transparent;
+    @accordion-active-header-bg:          transparent;
+
+
+
+    @accordion-icon-text:                 @base-color-c-heading-color;
+    @accordion-icon-bg:                   @base-color-c;
+
+    @accordion-active-icon-text:          @primary-heading-color;
+    @accordion-active-icon-bg:            @brand-primary;
+
+
     /* header
     ------------------------*/
     .ui-accordion-header {
         display: block;
         cursor: pointer;
-        //background-color: @body-bg;
         position: relative;
-        margin:0px;
-        padding: @padding-base 0;
+        margin: 0px;
+        padding: @accordion-header-padding-vertical @accordion-header-padding-horizontal;
         min-height: 0px;
-        font-size: @font-size-base;
+        font-size: @accordion-title-font-size; 
         font-weight: normal;
     }
     // this class apears when accordion have icons.
     .ui-accordion-icons {
-        padding-left: @padding-lg * 2;
+        .padding-left(30px;@accordion-header-padding-horizontal); 
     }
     .ui-icon{
-        background: none repeat scroll 0 0 transparent;
-        border: 1px solid transparent;
-        .low-color(@body-bg;border-color);
-        .border-radius(100%);
-        display: block;
+        background: @accordion-icon-bg;
+        color: @accordion-icon-text;
+        width: 20px;
         height: 20px;
-        left: 0;
-        top: 50%;
+        line-height: 19px;
+        font-size: 16px;
+        display: table;
+        text-align: center;
         margin-top: -10px;
         position: absolute;
-        text-align: center;
-        width: 20px;
-        line-height: 15px;
-        .transition(all 0.1s ease);
-        .low-color(@body-bg);
-        &:before{
-          content: "\203A";
-          font-size: 18px;
-          padding-left: 1px;
-        /*  background: none repeat scroll 0 0 transparent;
-          .low-color(@body-bg;border-color);
-          border-style: solid;
-          content: "";
-          display: block;
-          height: 6px;
-          margin: 6px;
-          top: 50%;
-          .rotate(45deg);
-          vertical-align: middle;
-          width: 6px;
-          .transition(all 0.1s ease);    */
-        }
-
+        .left(0px;auto);
+        top: 50%;
+        .transition(all .35s ease-in);
 
     }
-
     .module-title{
         display: block;
         padding: 0;
@@ -68,35 +73,30 @@
     .module-paragraph{
         padding: 0;    
     }
-    
-    .ui-icon-free-plus:before{/* border-width: 2px 2px 0 0; */}
-    .ui-icon-free-minus:before{/* border-width: 0 2px 2px 0;*/}
+    .ui-icon-free-plus:before{ content: "+";  }
+    .ui-icon-free-minus:before{ content: "-"; }
     .ui-icon-free-minus{
-       background:@main-color;
-       border-color:@main-color;
-       .high-color(@main-color);
-       .rotate(90deg);
-        &:before{
-         /* .high-color(@main-color;border-color);
-           margin: 5px 6px;  */
-        }
+        background: @accordion-active-icon-bg;
+        color: @accordion-active-icon-text;
     }
 
     .ui-state-default,
     .ui-widget-content .ui-state-default,
     .ui-widget-header .ui-state-default {
         border: none;
-        border-bottom: 1px solid  @base-border-color;
-        background: none;
+        border-bottom: @accordion-border;
+        background: @accordion-header-bg;
+        color: @accordion-text;    
+        text-transform: uppercase;
     }
 
     .ui-state-active,
     .ui-widget-content .ui-state-active,
     .ui-widget-header .ui-state-active {
         border: none;
-        border-bottom: none;
-        //background: @body-bg;
-        color: @main-color;
+        border-bottom-color: @accordion-active-border;
+        background: @accordion-active-header-bg;
+        color: @accordion-active-text;
     }
 
     /* Default Stated Corner radius
@@ -105,82 +105,50 @@
     .ui-state-default.ui-corner-top,
     .ui-state-default.ui-corner-left,
     .ui-state-default.ui-corner-tl {
-        border-top-left-radius: 0;
+        border-top-left-radius: @accordion-border-radius;
     }
     .ui-state-default.ui-corner-all,
     .ui-state-default.ui-corner-top,
     .ui-state-default.ui-corner-right,
     .ui-state-default.ui-corner-tr {
-        border-top-right-radius: 0;
+        border-top-right-radius: @accordion-border-radius;
     }
     .ui-state-default.ui-corner-all,
     .ui-state-default.ui-corner-bottom,
     .ui-state-default.ui-corner-left,
     .ui-state-default.ui-corner-bl {
-        border-bottom-left-radius: 0;
+        border-bottom-left-radius: @accordion-border-radius;
     }
     .ui-state-default.ui-corner-all,
     .ui-state-default.ui-corner-bottom,
     .ui-state-default.ui-corner-right,
     .ui-state-default.ui-corner-br {
-        border-bottom-right-radius: 0;
+        border-bottom-right-radius: @accordion-border-radius;
     }
 
-    /* Corner radius
+    /* End Corner radius
     ------------------------ */
     .ui-widget-content {
-        font-weight: 300;
         //background: @body-bg;
         border: none;
     }
 
     .ui-accordion-content {
-        background: @base-color-b-lighter;
-        padding: @padding-lg @padding-lg * 2;
-        border-bottom: 1px solid @base-border-color;
-        border-left: 3px solid @main-color;
-        margin-top: 0;
-        overflow: auto;
-        .base-color(@base-color-b-lighter);
+        background: @accordion-bg;
+        padding: @accordion-content-padding;
+        border-bottom: @accordion-border;
+        border-left: 3px solid @accordion-active-border;
+        margin-top: 0;  
         p{
           overflow: hidden;
-          text-align: left;
+          .textleft();
+          margin: 0px;
         }
     }
 
     .ui-widget-content a {
-        .base-color(@body-bg;25%);
+        color: @accordion-active-text;
     }
 
-
-}
-.rtl-body .module-accordion.accordion-skin3{
-
-    .ui-accordion-icons {
-        padding-left: 0 !important;
-        padding-right: @padding-lg * 2;
-    }
-    .ui-icon{
-        left: auto !important;
-        right: 0;
-    }
-    .ui-icon-free-plus::before {
-        //content: "\2039";
-        padding-right: 1px;
-        padding-left: 0px;
-      /*  border-width: 0 0 2px 2px !important;
-        margin: 6px 5px !important;  */
-    }
-    .ui-icon-free-minus{
-       .rotate(-90deg);
-    }
-    .ui-accordion-content {
-        border-left: medium none !important;
-        border-right: 3px solid @main-color;
-        p{
-          overflow: hidden;
-          text-align: right !important;
-        }
-    }
 
 }

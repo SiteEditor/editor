@@ -76,8 +76,8 @@ class PBAlertShortcode extends PBShortcodeClass{
             'type' => array(
           			'type' => 'select',
           			'label' => __('Alert Type', 'site-editor'),
-          			'desc' => __("This feature allows you to choose Alert type from options Success, warning, info, and Danger. ", "site-editor"),
-                      'options' =>array(
+          			'description'  => __("This feature allows you to choose Alert type from options Success, warning, info, and Danger. ", "site-editor"),
+                      'choices'   =>array(
                           'style-success'     => __('Success', 'site-editor'),
                           'style-info'        => __('Info', 'site-editor'),
                           'style-warning'     => __('Warning', 'site-editor'),
@@ -87,7 +87,7 @@ class PBAlertShortcode extends PBShortcodeClass{
             'icon' => array(
                 "type"          => "icon" ,
                 "label"         => __("Icon Field", "site-editor"),
-                "desc"          => __("This option allows you to set a icon for your module.", "site-editor"),
+                "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
             ),         
             'change_image_panel' => array(
                 "type"          => "sed_image" ,
@@ -96,7 +96,7 @@ class PBAlertShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "skin"  =>  array(
                 "type"          => "skin" ,

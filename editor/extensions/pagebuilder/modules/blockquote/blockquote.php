@@ -44,7 +44,7 @@ class PBBlockQuoteShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "skin"  =>  array(
                 "type"          => "skin" ,

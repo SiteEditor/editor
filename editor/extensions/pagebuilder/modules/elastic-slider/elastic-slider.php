@@ -132,7 +132,7 @@ class PBElasticSlider extends PBShortcodeClass{
         $this->add_panel( 'elastic_slider_settings_panel' , array(
             'title'         =>  __('Elastic Slider Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -140,43 +140,43 @@ class PBElasticSlider extends PBShortcodeClass{
         $params = array(
 
             'height'    => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field'  => 'px',
                 'label' => __('Height:', 'site-editor'),
-                'desc'  => __('This feature allows you to select the desired height of your slider.
+                'description'  => __('This feature allows you to select the desired height of your slider.
                         <br /> Slider Speed: This feature allows you to determine the speed of the slide transition (in ms).', 'site-editor') ,
-                'control_param'     =>  array(
+                'js_params'     =>  array(
                     'min'   =>  0
                 ),
                 'panel'    => 'elastic_slider_settings_panel',
             ),
             'setting_speed' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'ms',
                 'label' => __('Slider Speed:', 'site-editor'),
-                'desc'  => __('This feature allows you to determine the speed of the slide transition (in ms) ', 'site-editor'),
+                'description'  => __('This feature allows you to determine the speed of the slide transition (in ms) ', 'site-editor'),
                 'panel'    => 'elastic_slider_settings_panel',
             ),
             'setting_slideshow_interval' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'ms',
                 'label' => __('Slider interval:', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the interval between slides’ show (the time it takes to next slide be appeared).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the interval between slides’ show (the time it takes to next slide be appeared).', 'site-editor'),
                 'panel'    => 'elastic_slider_settings_panel',
             ),
             'setting_autoplay' => array(
                 'type'  => 'checkbox',
                 'label' => __('Autoplay Mode', 'site-editor'),
-                'desc'  => __('This feature allows you to choose whether you want to start the slide show automatically or not.', 'site-editor'),
+                'description'  => __('This feature allows you to choose whether you want to start the slide show automatically or not.', 'site-editor'),
                 'panel'    => 'elastic_slider_settings_panel',
             ),
             'setting_animation' => array(
                 'type'  => 'select',
                 'label' => __('Animation Types:', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the type of slide appearing animation; the options include: Sides (next slide will appear on the left or right) and Center (next slide will appear in the middle of slider).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the type of slide appearing animation; the options include: Sides (next slide will appear on the left or right) and Center (next slide will appear in the middle of slider).', 'site-editor'),
                 'panel'    => 'elastic_slider_settings_panel',
                 'value' => 'sides',
-                'options' => array(
+                'choices'   => array(
                         'sides'      => __('sides','site-editor'),
                         'center'     => __('center','site-editor'),
                 ),
@@ -185,42 +185,42 @@ class PBElasticSlider extends PBShortcodeClass{
             'setting_easing' => array(
                 'type'  => 'select',
                 'label' => __('Slider Easing:', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the animation type of slides’ transition.', 'site-editor'),
-                'options' => $easing,
+                'description'  => __('This feature allows you to specify the animation type of slides’ transition.', 'site-editor'),
+                'choices'   => $easing,
                 'panel'    => 'elastic_slider_settings_panel',
 
             ),
             'setting_titlesfactor' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '%',
                 'label' => __('Percentage:', 'site-editor'),
-                'desc'  => '', //__('Percentage of speed for the titles animation. Speed will be speed * titlesFactor', 'site-editor'),
-                'control_param' =>  array(
+                'description' => '', //__('Percentage of speed for the titles animation. Speed will be speed * titlesFactor', 'site-editor'),
+                'js_params' =>  array(
                     'min'   =>  1 ,
                     'max'   => 100
                 ),
                 'panel'    => 'elastic_slider_settings_panel',
             ),
             'setting_titlespeed' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'ms',
                 'label' => __('Title Speed:', 'site-editor'),
-                'desc'  => '', //__('Title animation speed', 'site-editor'),
+                'description' => '', //__('Title animation speed', 'site-editor'),
                 'panel'    => 'elastic_slider_settings_panel',
             ),
             'setting_titleeasing' => array(
                 'type'  => 'select',
                 'label' => __('Title easing:', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the type of caption’s animation.', 'site-editor'),
-                'options' => $easing ,
+                'description'  => __('This feature allows you to specify the type of caption’s animation.', 'site-editor'),
+                'choices'   => $easing ,
                 'panel'    => 'elastic_slider_settings_panel',
 
             ),
             'setting_thumbmaxwidth' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'px',
                 'label' => __('Thumbs Max width:', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the maximum width of thumbnails in each slider; the width can be achieved only times that the slider is sufficiently large (greater than or equal to this amount multiplied by the number of slides).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the maximum width of thumbnails in each slider; the width can be achieved only times that the slider is sufficiently large (greater than or equal to this amount multiplied by the number of slides).', 'site-editor'),
                 'panel'    => 'elastic_slider_settings_panel',
             ),/*
 
@@ -229,10 +229,10 @@ class PBElasticSlider extends PBShortcodeClass{
                 'type'   =>  'legend'
             ),*/
             'images_size' => array(
-                "type"          => "image_size" ,
+                "type"          => "image-size" ,
                 "label"         => __("Images Size", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "control_param" => array(
+                "description"   => __("This option allows you to set a title for your image.", "site-editor"),
+                "js_params" => array(
                     "sub_shortcodes_update" => array(
                         "class"  => "sed_elastic_slider_large_image" ,
                         "attr"   => "default_image_size"
@@ -240,10 +240,10 @@ class PBElasticSlider extends PBShortcodeClass{
                 )
             ) ,
             'thumbnail_images_size' => array(
-                "type"          => "image_size" ,
+                "type"          => "image-size" ,
                 "label"         => __("Thumbnail Size", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "control_param" => array(
+                "description"   => __("This option allows you to set a title for your image.", "site-editor"),
+                "js_params" => array(
                     "sub_shortcodes_update" => array(
                         "class"  => "sed_elastic_slider_thumbnail" ,
                         "attr"   => "default_image_size"
@@ -254,7 +254,7 @@ class PBElasticSlider extends PBShortcodeClass{
                 "type"   => "button" ,
                 'style'  =>  'default',
                 'label'  =>  __("Gallery Managment","site-editor") ,
-                'desc'   =>  '',
+                'description' => '',
                 "atts"   =>  array(
                     "class"                 => "open-media-library-edit-gallery",
                     "support_types"         => "image" ,
@@ -269,7 +269,7 @@ class PBElasticSlider extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 10 0" ,
+                "default"       => "0 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

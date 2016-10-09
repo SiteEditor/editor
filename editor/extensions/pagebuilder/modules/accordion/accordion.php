@@ -91,7 +91,7 @@ class PBAccordionShortcode extends PBShortcodeClass{
         $this->add_panel( 'accordion_settings_panel' , array(
             'title'         =>  __('Accordion Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -101,8 +101,8 @@ class PBAccordionShortcode extends PBShortcodeClass{
     			'type'  => 'select',
                // 'subtype' => 'multiple',
     			'label' => __('Event', 'site-editor'),
-    			'desc'  => __("The event that accordion headers will react to in order to activate the associated panel.", "site-editor"),
-                'options' =>array(
+    			'description'  => __("The event that accordion headers will react to in order to activate the associated panel.", "site-editor"),
+                'choices'   =>array(
                     'click' => __('Click', 'site-editor'),
                     'mouseover' => __('mouseover', 'site-editor'),
                     'click hoverintent' => __('Hoverintent', 'site-editor'),
@@ -112,8 +112,8 @@ class PBAccordionShortcode extends PBShortcodeClass{
             'setting_height_style' => array(
     			'type'  => 'select',
     			'label' => __('Height Style', 'site-editor'),
-    			'desc'  => __("Controls the height of the accordion and each panel", "site-editor"),
-                'options' =>array(
+    			'description'  => __("Controls the height of the accordion and each panel", "site-editor"),
+                'choices'   =>array(
                     'content' => __('Content', 'site-editor'),
                     'auto'    => __('Auto', 'site-editor'),
                     'fill'    => __('Fill', 'site-editor'),
@@ -123,22 +123,22 @@ class PBAccordionShortcode extends PBShortcodeClass{
             'setting_collapsible' => array(
     			'type'  => 'checkbox',
     			'label' => __('Collapsible', 'site-editor'),
-    		    'desc'  => __('Whether all the sections can be closed at once. Allows collapsing the active section.', 'site-editor'),
+    		    'description'  => __('Whether all the sections can be closed at once. Allows collapsing the active section.', 'site-editor'),
                 "panel"     => "accordion_settings_panel",
     		),
             'number_items'  => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
       			'label' => __('Number Items', 'site-editor'),
-      			'desc' => __('This feature allows you to specify the number of accordion items.', 'site-editor'),
-                'control_param'     =>  array(
+      			'description'  => __('This feature allows you to specify the number of accordion items.', 'site-editor'),
+                'js_params'     =>  array(
                     'min' => 1
                 ),
                 "panel"     => "accordion_settings_panel",
       		),
     		'setting_active' => array(
-    			'type'  => 'spinner',
+    			'type'  => 'number',
     			'label' => __('Active item', 'site-editor'),
-    		    'desc'  => __('This feature allows you to specify which item will be active for the first time, after the page be loaded.', 'site-editor'),
+    		    'description'  => __('This feature allows you to specify which item will be active for the first time, after the page be loaded.', 'site-editor'),
                 "panel"     => "accordion_settings_panel",
                 /* standard format for related fields
                 'relations' => array(
@@ -161,7 +161,7 @@ class PBAccordionShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "skin"  =>  array(
                 "type"          => "skin" ,

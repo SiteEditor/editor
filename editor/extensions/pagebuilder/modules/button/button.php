@@ -62,7 +62,7 @@ class PBButtonShortcode extends PBShortcodeClass{
         $this->add_panel( 'button_settings_panel' , array(
             'title'         =>  __('Button Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -71,16 +71,16 @@ class PBButtonShortcode extends PBShortcodeClass{
              /*  	'title' => array(
                     'type'      => 'text',
                     'label'     => __('Title', 'site-editor'),
-                    'desc'      => __('Set a title attribute for the link the button consists of', 'site-editor'),
+                    'description'  => __('Set a title attribute for the link the button consists of', 'site-editor'),
                     "panel"     => "button_settings_panel",
                 ),       */
             'size' => array(
                 'type' => 'select',
                 'label' => __('Button Size', 'site-editor'),
-                'desc' => __("This option allows you to set some predefined sizes for your buttons. The available options are extra-large, large, normal, small and extra small. It should be said that the size of the buttons are flexible and can change in the following situations:
+                'description'  => __("This option allows you to set some predefined sizes for your buttons. The available options are extra-large, large, normal, small and extra small. It should be said that the size of the buttons are flexible and can change in the following situations:
                           <br /> Change the button text with the inline text editor. Your button width will adjust to the text size and if you create new lines, the height of your button will also change.
                           <br /> You can change the width and height of your modules by using the padding settings in the design editor.", "site-editor"),
-                'options' =>array(
+                'choices'   =>array(
                     ''       => __('Normal', 'site-editor'),
                     'btn-xs' => __('Extra small', 'site-editor'),
                     'btn-sm' => __('Small', 'site-editor'),
@@ -93,9 +93,9 @@ class PBButtonShortcode extends PBShortcodeClass{
             'type' => array(
                 'type' => 'select',
                 'label' => __('Button Type', 'site-editor'),
-                'desc' => __("This option allows you to set the current button type. The options to select from are info, success, purple, default, none, flat, danger, warning and primary.
+                'description'  => __("This option allows you to set the current button type. The options to select from are info, success, purple, default, none, flat, danger, warning and primary.
                           <br />It should be mentioned that this option is not for setting color for your buttons. It helps you to create commonly used buttons. You can use the design editor to easily change the color of your buttons.", "site-editor"),
-                  'options' =>array(
+                  'choices'   =>array(
                       'btn-main'        => __('Primary', 'site-editor'),
                       'btn-default'     => __('Default', 'site-editor'),
                       'btn-purple'      => __('Purple', 'site-editor'),
@@ -118,12 +118,12 @@ class PBButtonShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 10 10 10" ,
+                "default"       => "10 10 10 10" ,
             ),
             "align"  =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             ),
             "animation"  =>  array(
                 "type"          => "animation" ,

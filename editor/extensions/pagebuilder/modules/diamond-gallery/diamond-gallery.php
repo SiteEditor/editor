@@ -92,7 +92,7 @@ class PBDiamondGallery extends PBShortcodeClass{
         $this->add_panel( 'diamond_settings_panel' , array(
             'title'         =>  __('Diamond Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -100,18 +100,18 @@ class PBDiamondGallery extends PBShortcodeClass{
         $this->add_panel( 'images_settings_panel' , array(
             'title'         =>  __('Images Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
 
         $params = array(
   			'setting_margin'       => array (
-				'type'	=> "spinner" ,
+				'type'	=> "number" ,
                 'after_field'  => 'px',
 				'label'   => __( "Items Spacing" , "site-editor" ) ,
-				'desc'	=> __('This feature allows you to specify the distance between grade images.', 'site-editor'),
-                "control_param"  =>  array(
+				'description'	=> __('This feature allows you to specify the distance between grade images.', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                     "max"  =>  100,
                     "step" =>  5
@@ -119,20 +119,20 @@ class PBDiamondGallery extends PBShortcodeClass{
                 'panel'    => 'diamond_settings_panel',
   			),
   			'setting_diamond_width'	    => array (
-                'type'	=> 'spinner',
+                'type'	=> 'number',
                 'after_field'  => 'px',
                 'label'   => __( "Items Width" , "site-editor" ),
-                'desc' 	=> __('This feature allows you to specify the width of Gallery items.', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('This feature allows you to specify the width of Gallery items.', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
                 'panel'    => 'diamond_settings_panel',
   			),
              'setting_border'	    => array (
-        		'type'	=> 'spinner',
+        		'type'	=> 'number',
         		'label'   => __( "Border" , "site-editor" ),
-        		'desc' 	=> __('This feature allows you to specify the size of the items’ board. The lowest is 0, in which case the gallery items will be without border.', 'site-editor'),
-                "control_param"  =>  array(
+        		'description'  => __('This feature allows you to specify the size of the items’ board. The lowest is 0, in which case the gallery items will be without border.', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                 ),
                 'panel'    => 'diamond_settings_panel',
@@ -140,22 +140,22 @@ class PBDiamondGallery extends PBShortcodeClass{
             'group_images_show_title' =>  array(
                 'type' => 'checkbox',
                 'label' => __('Show Images Title', 'site-editor'),
-                'desc' => __('This option allows you to show or hide the image title in hover effect.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the image title in hover effect.', 'site-editor'),
                 'panel'    => 'images_settings_panel',
             ),
 
             'group_images_show_description' =>  array(
                 'type'  => 'checkbox',
                 'label' => __('Show Images Description', 'site-editor'),
-                'desc'  => __('This option allows you to show or hide the image description in hover effect.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the image description in hover effect.', 'site-editor'),
                 'panel'    => 'images_settings_panel',
             ),
 
             'group_images_image_click' => array(
                 'type' => 'select',
                 'label' => __('When images are clicked', 'site-editor'),
-                'desc' => __('This option allows you to set what is going to happen when the image is clicked. ', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This option allows you to set what is going to happen when the image is clicked. ', 'site-editor'),
+                'choices'   =>array(
                     'default'             => __('Do Nothing', 'site-editor'),
                     'link_mode'           => __('Open Link', 'site-editor'),
                     'expand_mode'         => __('Open Expand Mode', 'site-editor'),
@@ -164,10 +164,10 @@ class PBDiamondGallery extends PBShortcodeClass{
                 'panel'    => 'images_settings_panel',
             ),
             'images_size' => array(
-                "type"          => "image_size" ,
+                "type"          => "image-size" ,
                 "label"         => __("Images Size", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "control_param" => array(
+                "description"   => __("This option allows you to set a title for your image.", "site-editor"),
+                "js_params" => array(
                     "sub_shortcodes_update" => array(
                         "class"  => "diamond_gallery_thumbnail" ,
                         "attr"   => "default_image_size"
@@ -178,7 +178,7 @@ class PBDiamondGallery extends PBShortcodeClass{
                 "type"   => "button" ,
                 'style'  =>  'default',
                 'label'  =>  __("Gallery Managment","site-editor") ,
-                'desc'   =>  '',
+                'description' => '',
                 "atts"   =>  array(
                     "class"                 => "open-media-library-edit-gallery",
                     "support_types"         => "image" ,
@@ -193,7 +193,7 @@ class PBDiamondGallery extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

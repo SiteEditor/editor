@@ -108,8 +108,8 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 'responsive_option' => array(
           			'type' => 'select',
           			'label' => __('Responsive Option', 'site-editor'),
-          			'desc' => '',// __("Select the Icon's Style", "site-editor"),
-                    'options' =>array(
+          			'description' => '',// __("Select the Icon's Style", "site-editor"),
+                    'choices'   =>array(
                         'normal-columns'         => __('Full Width Any Columns', 'site-editor'),
                         'float-columns'          => __('Auto Mode Columns', 'site-editor'),
                         'table-cell-columns'     => __('Inline Columns', 'site-editor'),
@@ -119,17 +119,17 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 /*'equal_column_width' => array(
                     'type' => 'checkbox',
                     'label' => __('Equal Column Width', 'site-editor'),
-                    'desc' => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
+                    'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
                 ),*/
                 "responsive_spacing"    => array(
                     'type'    => 'text',
                     'label'   => __('Module Responsive Spacing', 'site-editor'),
-                    'desc'    => '',// __('','site-editor'),
+                    'description'    => '',// __('','site-editor'),
                 ),
                 'spacing' => array(
                     "type"          => "spacing" ,
                     "label"         => __("Spacing", "site-editor"),
-                    "value"         => "10 0 10 0" ,
+                    "default"       => "10 0 10 0" ,
                 ), 
                 "animation"  =>  array(
                     "type"          => "animation" ,

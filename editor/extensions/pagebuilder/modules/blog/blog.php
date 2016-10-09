@@ -38,7 +38,7 @@ class PBBlogShortcode extends PBShortcodeClass{
         if( $this->atts['pagination_type'] != "pagination"){
 
             $settings = array(
-                'options'   => array(
+                'choices'   => array(
                     'current_url'       =>  set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] ) ,
                     'pagination_type'   =>  $pagination_type ,
                     'btn_more'          =>  "#sed-load-more-blog-items-btn" ,
@@ -169,28 +169,28 @@ class PBBlogShortcode extends PBShortcodeClass{
         $this->add_panel( 'blog_settings_panel' , array(
             'title'         =>  __('Blog Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
         $this->add_panel( 'general_settings_panel' , array(
             'title'         =>  __('General Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
         $this->add_panel( 'featured_image_settings_panel' , array(
             'title'         =>  __('Featured Image Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
         $this->add_panel( 'entry_meta_settings_panel' , array(
             'title'         =>  __('Entry Meta Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -213,23 +213,23 @@ class PBBlogShortcode extends PBShortcodeClass{
             "pagination_type"   => array(
                 "type"      => "select",
                 "label"     => __("Pagination Type","site-editor"),
-                "desc"      => __('This feature allows you to specify the type of Pagination and shows the way to see the other blog posts.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This feature allows you to specify the type of Pagination and shows the way to see the other blog posts.',"site-editor"),
+                "choices"   => array(
                     "nopagination"      =>__("Without Pagination","site-editor"),
                     "pagination"        =>__("Pagination","site-editor"),
                     "infinite_scroll"   =>__("Infinite Scroll","site-editor"),
                     "button"            =>__("Load More Button","site-editor"),
                 ),
-                "value"             => 'pagination' ,
+                "default"           => 'pagination' ,
                 "panel"     => "blog_settings_panel",
             ),
 
             "posts_per_page"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 "label"     => __("Posts Per Page","site-editor"),
-                "desc"      => __('This feature allows you to define the number of posts that should be displayed on each blog page. ',"site-editor"),
-                //"value"             => 10,
-                "control_param"  =>  array(
+                "description"  => __('This feature allows you to define the number of posts that should be displayed on each blog page. ',"site-editor"),
+                //"default"           => 10,
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                     //"max"  =>  80 ,
                 ),
@@ -239,26 +239,26 @@ class PBBlogShortcode extends PBShortcodeClass{
             "show_only_featured_posts"      => array(
                 "type"              => "checkbox",
                 "label"             => __("Show Only Featured Posts","site-editor"),
-                "desc"              => __('This feature allows you whether or not to display About Author module.',"site-editor"),
-                "value"             => true,
+                "description"       => __('This feature allows you whether or not to display About Author module.',"site-editor"),
+                "default"           => true,
                 "panel"             => "blog_settings_panel",
             ),
 
             "categories"      => array(
                 "type"      => "select",
                 "label"     => __("Select Categories","site-editor"),
-                "desc"      => __('',"site-editor"),
-                "options"   => $categories,
+                "description"  => __('',"site-editor"),
+                "choices"   => $categories,
                 "subtype"   => "multiple" ,
                 "panel"     => "blog_settings_panel",
             ),
 
             "title_length"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "label"             => __("Title Length","site-editor"),
-                "desc"              => __('This feature allows you to specify the number of Title characters in a post. In other words it enables you to define the number of your post title’s characters.',"site-editor"),
-                "value"             => 50 ,
-                "control_param"  =>  array(
+                "description"       => __('This feature allows you to specify the number of Title characters in a post. In other words it enables you to define the number of your post title’s characters.',"site-editor"),
+                "default"           => 50 ,
+                "js_params"  =>  array(
                     "min"  =>  10 ,
                     //"max"  =>  500 ,
                     //"step"  =>  10
@@ -269,32 +269,32 @@ class PBBlogShortcode extends PBShortcodeClass{
             "excerpt_content_show"         => array(
                 "type"              => "checkbox",
                 "label"             => __("Show excerpt or content","site-editor"),
-                "desc"              => __('This feature allows you to select if you want the posts’ content or excerpt be loaded in blog or not.',"site-editor"),
-                "value"             => true,
+                "description"       => __('This feature allows you to select if you want the posts’ content or excerpt be loaded in blog or not.',"site-editor"),
+                "default"           => true,
                 "panel"     => "blog_settings_panel",
             ),
 
             "excerpt_type"      => array(
                 "type"      => "select",
                 "label"     => __("Excerpt Type","site-editor"),
-                "desc"      => __('This feature allows you to select if you want whole content of a post be loaded or only Excerpt and a summary of the post be displayed.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This feature allows you to select if you want whole content of a post be loaded or only Excerpt and a summary of the post be displayed.',"site-editor"),
+                "choices"   => array(
                     "excerpt"           =>__("Excerpt","site-editor"),
                     "content"           =>__("Full Content","site-editor"),
                 ),
-                "value"             => 'excerpt',
-                "control_param"  =>  array(
+                "default"           => 'excerpt',
+                "js_params"  =>  array(
                     //"force_refresh"   =>   true
                 ),
                 "panel"     => "blog_settings_panel",
             ),
 
             "excerpt_length"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "label"             => __("Excerpt Length","site-editor"),
-                "desc"              => __('This feature allows you to specify the number of Excerpt characters in a post. In other words it enables you to define the number of your post summary’s characters.',"site-editor"),
-                "value"             => 50 ,
-                "control_param"  =>  array(
+                "description"       => __('This feature allows you to specify the number of Excerpt characters in a post. In other words it enables you to define the number of your post summary’s characters.',"site-editor"),
+                "default"           => 50 ,
+                "js_params"  =>  array(
                     "min"  =>  10 ,
                     //"max"  =>  500 ,
                     //"step"  =>  10
@@ -304,41 +304,41 @@ class PBBlogShortcode extends PBShortcodeClass{
             "excerpt_html"      => array(
                 "type"              => "checkbox",
                 "label"             => __("Strip HTML from Excerpt","site-editor"),
-                "desc"              => __('This feature allows to Html and Excerpt codes be overlooked for you.',"site-editor"),
-                "value"             => false,
+                "description"       => __('This feature allows to Html and Excerpt codes be overlooked for you.',"site-editor"),
+                "default"           => false,
                 "panel"     => "blog_settings_panel",
             ),
 
             /*"skin_default_style"      => array(
                 "type"      => "select",
                 "label"     => __("change style","site-editor"),
-                "desc"      => __('This feature allows you to select the location of featured images (on the right or on the left of the content, or as default on the top of the content). This feature is only for the default skin.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This feature allows you to select the location of featured images (on the right or on the left of the content, or as default on the top of the content). This feature is only for the default skin.',"site-editor"),
+                "choices"   => array(
                     "default"                   =>__("Default","site-editor"),
                     "media-side-left"           =>__("image left","site-editor"),
                     "media-side-right"          =>__("image right","site-editor"),
                 ),
-                "value"             => 'default' ,
+                "default"           => 'default' ,
                 "panel"     => "general_settings_panel",
             ), */
 
             "number_columns"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "label"             => __("Number Columns","site-editor"),
-                "desc"              => __('This feature enables you to set the number of each blog’s columns; in other words it determines that the rows of blog include how many columns.',"site-editor"),
-                "value"             => 4,
-                "control_param"  =>  array(
+                "description"       => __('This feature enables you to set the number of each blog’s columns; in other words it determines that the rows of blog include how many columns.',"site-editor"),
+                "default"           => 4,
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                     "max"  =>  6
                 ),
                 "panel"     => "general_settings_panel",
             ),
             "masonry_spacing"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "label"             => __("Items Spacing ","site-editor"),
-                "desc"              => __('This feature allows you to select how much distance to be there between blog posts (based on px). ',"site-editor"),
-                "value"             => 15,
-                "control_param"  =>  array(
+                "description"       => __('This feature allows you to select how much distance to be there between blog posts (based on px). ',"site-editor"),
+                "default"           => 15,
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                     "max"  =>  100 ,
                     //"step"  =>  5
@@ -347,11 +347,11 @@ class PBBlogShortcode extends PBShortcodeClass{
             ),
 
             "border_width"         => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "label"             => __("Border Width","site-editor"),
-                "desc"              => __('This feature allows you to define border width items (posts) of blog.',"site-editor"),
-                "value"             => 1,
-                "control_param"  =>  array(
+                "description"       => __('This feature allows you to define border width items (posts) of blog.',"site-editor"),
+                "default"           => 1,
+                "js_params"  =>  array(
                     "min"  =>  0
                 ),
                 "panel"     => "general_settings_panel",
@@ -360,16 +360,16 @@ class PBBlogShortcode extends PBShortcodeClass{
             "thumbnail"         => array(
                 "type"              => "checkbox",
                 "label"             => __("Featured Image","site-editor"),
-                "desc"              => __('This feature allows you to enable/disable the featured images of your blog posts.',"site-editor"),
-                "value"             => true,
+                "description"       => __('This feature allows you to enable/disable the featured images of your blog posts.',"site-editor"),
+                "default"           => true,
                 "panel"     => "featured_image_settings_panel",
             ),
 
             'using_size' => array(
                 'type' => 'select',
                 'label' => __('image Size', 'site-editor'),
-                'desc' => __("This feature’s function is similar to the Image Size in post module.","site-editor"),
-                'options' => array() ,
+                'description'  => __("This feature’s function is similar to the Image Size in post module.","site-editor"),
+                'choices'   => array() ,
                 'atts'          =>   array(
                     'class'         =>  "sed-all-attachments-sizes"
                 ),
@@ -379,64 +379,64 @@ class PBBlogShortcode extends PBShortcodeClass{
             "post_meta_show"         => array(
                 "type"              => "checkbox",
                 "label"             => __("Display Meta Post","site-editor"),
-                "desc"              => __('These settings are similar to the settings of post module meta-posts.',"site-editor"),
-                "value"             => true,
+                "description"       => __('These settings are similar to the settings of post module meta-posts.',"site-editor"),
+                "default"           => true,
                 "panel"     => "entry_meta_settings_panel",
             ),
             "time_show"         => array(
                 "type"              => "checkbox",
                 "label"             => __("Time Date","site-editor"),
-                "desc"              => __('',"site-editor"),
-                "value"             => true,
+                "description"       => __('',"site-editor"),
+                "default"           => true,
                 "panel"     => "entry_meta_settings_panel",
             ),
             "date_show"         => array(
                 "type"              => "checkbox",
                 "label"             => __("Show Date","site-editor"),
-                "desc"              => __('This feature allows you whether or not to display the date of publication of the post.',"site-editor"),
-                "value"             => true,
+                "description"       => __('This feature allows you whether or not to display the date of publication of the post.',"site-editor"),
+                "default"           => true,
                 "panel"     => "entry_meta_settings_panel",
             ),
             "data_format"      => array(
                 "type"              => "text",
                 "label"             => __("Blog Alternate Date Format","site-editor"),
-                "desc"              => __('This feature allows you to specify the date format displayed on the post. (This option appears only when the Display date is enabled.)',"site-editor"),
-                "value"             => 'm, Y',
+                "description"       => __('This feature allows you to specify the date format displayed on the post. (This option appears only when the Display date is enabled.)',"site-editor"),
+                "default"           => 'm, Y',
                 "panel"     => "entry_meta_settings_panel",
             ),
             "author_show"      => array(
                 "type"              => "checkbox",
                 "label"             => __("Display Author","site-editor"),
-                "desc"              => __('This feature allows you whether or not to display About Author module.',"site-editor"),
-                "value"             => true,
+                "description"       => __('This feature allows you whether or not to display About Author module.',"site-editor"),
+                "default"           => true,
                 "panel"     => "entry_meta_settings_panel",
             ),
             "comment_count_show"      => array(
                 "type"              => "checkbox",
                 "label"             => __("Display Comments Count","site-editor"),
-                "desc"              => '',// __('',"site-editor"),
-                "value"             => false,
+                "description"  => '',// __('',"site-editor"),
+                "default"           => false,
                 "panel"     => "entry_meta_settings_panel",
             ),
             "tags_show"      => array(
                 "type"              => "checkbox",
                 "label"             => __("Display Tags","site-editor"),
-                "desc"              => __('This feature allows you whether or not to display list of assigned tags to this post.',"site-editor"),
-                "value"             => false,
+                "description"       => __('This feature allows you whether or not to display list of assigned tags to this post.',"site-editor"),
+                "default"           => false,
                 "panel"     => "entry_meta_settings_panel",
             ),
             "cat_show"      => array(
                 "type"              => "checkbox",
                 "label"             => __("Display Categories","site-editor"),
-                "desc"              => __('This feature allows you to whether or not to display assigned list categories to this post.',"site-editor"),
-                "value"             => false,
+                "description"       => __('This feature allows you to whether or not to display assigned list categories to this post.',"site-editor"),
+                "default"           => false,
                 "panel"     => "entry_meta_settings_panel",
             ),
 
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

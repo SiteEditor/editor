@@ -134,7 +134,7 @@ class PBAccordionSliderShortcode extends PBShortcodeClass{
         $this->add_panel( 'accordion_slider_settings_panel' , array(
             'title'         =>  __('Accordion Slider Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -143,8 +143,8 @@ class PBAccordionSliderShortcode extends PBShortcodeClass{
             'captionType' => array(
                 'type'      => 'select',
                 'label'     => __('Caption Type', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the caption’s layout.', 'site-editor'),
-                'options'   => array(
+                'description'  => __('This feature allows you to specify the caption’s layout.', 'site-editor'),
+                'choices'   => array(
                     'caption-1'         => __('caption-1', 'site-editor'),
                     'caption-2'         => __('caption-2', 'site-editor'),
                 ),
@@ -153,96 +153,96 @@ class PBAccordionSliderShortcode extends PBShortcodeClass{
             'setting_easing' => array(
                 'type'      => 'select',
                 'label'     => __('easing', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the animation type of slide’s transition.', 'site-editor'),
-                'options'   => $easing ,
+                'description'  => __('This feature allows you to specify the animation type of slide’s transition.', 'site-editor'),
+                'choices'   => $easing ,
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             'setting_trigger' => array(
                 'type'      => 'select',
                 'label'     => __('Slide Trigger', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the type of slider tab’s event. The options are Click and Mouseover.', 'site-editor'),
-                'options'   => $trigger ,
+                'description'  => __('This feature allows you to specify the type of slider tab’s event. The options are Click and Mouseover.', 'site-editor'),
+                'choices'   => $trigger ,
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             /*'setting_width' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '%',
                 'label' => __('Slider Width', 'site-editor'),
-                'desc'  => __('Width of the container. This option is required.', 'site-editor'),
-                'control_param'  => array(
+                'description'  => __('Width of the container. This option is required.', 'site-editor'),
+                'js_params'  => array(
                     'min'   =>   51 ,
                     'max'   =>   100
                 ),
                 'panel'    => 'accordion_slider_settings_panel',
             ),   */
             'setting_height' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'px',
                 'label' => __('Slider Height', 'site-editor'),
-                'desc'  => __('This feature lets you specify the height of slider in pixel. ', 'site-editor'),
+                'description'  => __('This feature lets you specify the height of slider in pixel. ', 'site-editor'),
                 'panel'    => 'accordion_slider_settings_panel',
             ),
          /*   'setting_tab_width' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'label' => __('Tab Width', 'site-editor'),
-                'desc'  => __('Width of each slide\'s "tab" (when clicked it opens the slide) or width of each tab compared to a 100% container.', 'site-editor'),
+                'description'  => __('Width of each slide\'s "tab" (when clicked it opens the slide) or width of each tab compared to a 100% container.', 'site-editor'),
                 'panel'    => 'accordion_slider_settings_panel',
             ),       */
             'setting_slide_width' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '%',
                 'label' => __('slide width', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the percentage of the width of each slide.', 'site-editor'),
-                'control_param'  => array(
+                'description'  => __('This feature allows you to specify the percentage of the width of each slide.', 'site-editor'),
+                'js_params'  => array(
                     'min'   =>   1 ,
                     'max'   =>   100
                 ),
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             'setting_timeout' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'ms',
                 'label' => __('Timeout', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the time between slides in milliseconds.', 'site-editor'),
+                'description'  => __('This feature allows you to specify the time between slides in milliseconds.', 'site-editor'),
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             'setting_speed' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => ' ms',
                 'label' => __('Speed', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the speed of slide transition (in ms).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the speed of slide transition (in ms).', 'site-editor'),
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             'setting_starting_slide' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '&emsp;',
                 'label' => __('Starting Slide', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the first slide of the slider.', 'site-editor'),
+                'description'  => __('This feature allows you to specify the first slide of the slider.', 'site-editor'),
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             'setting_auto' => array(
                 'type'  => 'checkbox',
                 'label' => __('Auto', 'site-editor'),
-                'desc'  => __('This feature allows you to choose whether the slide show be automatically started or not. ', 'site-editor'),
+                'description'  => __('This feature allows you to choose whether the slide show be automatically started or not. ', 'site-editor'),
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             'setting_pause' => array(
                 'type'  => 'checkbox',
                 'label' => __('Pause on Hover', 'site-editor'),
-                'desc'  => __('This feature allows you to choose whether you want the slide show be stopped in Hover mod or not.', 'site-editor'),
+                'description'  => __('This feature allows you to choose whether you want the slide show be stopped in Hover mod or not.', 'site-editor'),
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             'setting_invert' => array(
                 'type'  => 'checkbox',
                 'label' => __('Invert', 'site-editor'),
-                'desc'  => __('This feature allows you to invert the position of the tabs and slide images. (Instead of that the beginning of images to be displayed within the tabs, the end of them will be displayed there.) ', 'site-editor'),
+                'description'  => __('This feature allows you to invert the position of the tabs and slide images. (Instead of that the beginning of images to be displayed within the tabs, the end of them will be displayed there.) ', 'site-editor'),
                 'panel'    => 'accordion_slider_settings_panel',
             ),
             'images_size' => array(
-                "type"          => "image_size" ,
+                "type"          => "image-size" ,
                 "label"         => __("Images Size", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "control_param" => array(
+                "description"   => __("This option allows you to set a title for your image.", "site-editor"),
+                "js_params" => array(
                     "sub_shortcodes_update" => array(
                         "class"  => "sed_accordion_slider_image" ,
                         "attr"   => "default_image_size"
@@ -253,7 +253,7 @@ class PBAccordionSliderShortcode extends PBShortcodeClass{
                 "type"   => "button" ,
                 'style'  =>  'default',
                 'label'  =>  __("Gallery Managment","site-editor") ,
-                'desc'   =>  '',
+                'description' => '',
                 'class'  =>  'open-media-library-edit-gallery',
                 "atts"   =>  array(
                     "support_types"         => "image" ,

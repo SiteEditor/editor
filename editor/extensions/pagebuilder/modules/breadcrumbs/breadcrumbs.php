@@ -67,7 +67,7 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default"
+                "default"       => "default"
             ),
             "animation"  =>  array(
                 "type"          => "animation" ,

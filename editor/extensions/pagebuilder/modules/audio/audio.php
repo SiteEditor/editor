@@ -48,7 +48,7 @@ class PBAudioShortcode extends PBShortcodeClass{
             "show_title"        => true ,
             "show_poster"        => true ,
             "setting_title"     => __("Barrio la Vina Alegrias" , "site-editor") ,
-            "desc"              => __("siteeditor audio module" , "site-editor") ,
+            "description"       => __("siteeditor audio module" , "site-editor") ,
             "artist"            => __('Unknown artist','site-editor') ,
             "setting_width"     =>  640 ,
             "setting_height"    =>  360 ,
@@ -119,7 +119,7 @@ class PBAudioShortcode extends PBShortcodeClass{
         $this->add_panel( 'audio_settings_panel' , array(
             'title'         =>  __('Audio Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -129,15 +129,15 @@ class PBAudioShortcode extends PBShortcodeClass{
             "setting_poster"    => array(
                 'type'          => 'image',
                 'label'         => __('Select Poster', 'site-editor'),
-                'desc'          => __('This feature allows you to select a poster for your video.','site-editor'),
+                'description'   => __('This feature allows you to select a poster for your video.','site-editor'),
                 'priority'      => 5
             ),
 
             "setting_mp3"     => array(
                 'type'              => 'audio',
                 'label'             => __('mp3 Format', 'site-editor'),
-                'desc'              => __('This feature lets you upload a Mp3 audio; for compatibility it is required to upload files with this format.','site-editor'),
-                "control_param"     => array(
+                'description'       => __('This feature lets you upload a Mp3 audio; for compatibility it is required to upload files with this format.','site-editor'),
+                "js_params"     => array(
                     "subtypes"          => array( "mp3" )
                 ),
                 'priority'      => 5
@@ -146,8 +146,8 @@ class PBAudioShortcode extends PBShortcodeClass{
             "setting_oga"     => array(
                 'type'              => 'audio',
                 'label'             => __('oga Format(ogg)', 'site-editor'),
-                'desc'              => __('This feature allows you upload an Ogg audio and uploading files with this format is optional.','site-editor'),
-                "control_param"     => array(
+                'description'       => __('This feature allows you upload an Ogg audio and uploading files with this format is optional.','site-editor'),
+                "js_params"     => array(
                     "subtypes"          => array( "oga" )
                 ),
                 'priority'      => 5
@@ -156,8 +156,8 @@ class PBAudioShortcode extends PBShortcodeClass{
             "setting_webma"   => array(
                 'type'              => 'audio',
                 'label'             => __('webma Format(webm)', 'site-editor'),
-                'desc'              => __('This feature allows you upload a Webm audio and uploading files with this format is optional.','site-editor'),
-                "control_param"     => array(
+                'description'       => __('This feature allows you upload a Webm audio and uploading files with this format is optional.','site-editor'),
+                "js_params"     => array(
                     "subtypes"          => array( "webma" )
                 ),
                 'priority'      => 5
@@ -166,11 +166,11 @@ class PBAudioShortcode extends PBShortcodeClass{
             "setting_preload"   => array(
                 'type'    => 'select',
                 'label'   => __('Preload', 'site-editor'),
-                'desc'    => __('This feature has 3 options:
+                'description'  => __('This feature has 3 options:
                                 <br />None: In this case there is no need to pre-load video and provides a better user experience; it also minimizes unnecessary traffic. 
                                 <br />Metadata: In this case there is no need to pre-load video, but video metadata (dimensions, first frame, track list, duration, and so on) will be received; this is also a good option.
                                 <br />Auto: The desirable state is considered as downloading the entire video.','site-editor') ,
-                'options' => array(
+                'choices'   => array(
                     'none'        =>  __('None','site-editor') ,
                     'metadata'    =>  __('Metadata','site-editor') ,
                     'auto'        =>  __('Auto','site-editor')
@@ -181,49 +181,49 @@ class PBAudioShortcode extends PBShortcodeClass{
             "setting_autoplay"   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Autoplay', 'site-editor'),
-                'desc'    => __('This feature allows you to choose whether or not you want to the video be played automatically. ','site-editor'),
+                'description'  => __('This feature allows you to choose whether or not you want to the video be played automatically. ','site-editor'),
                 'panel'    => 'audio_settings_panel',
             ),
 
             "setting_loop"   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Loop', 'site-editor'),
-                'desc'    => __('The Loop Video option allows you to loop the video or not. Enabling this option the video will be repeated.','site-editor'),
+                'description'  => __('The Loop Video option allows you to loop the video or not. Enabling this option the video will be repeated.','site-editor'),
                 'panel'    => 'audio_settings_panel',
             ),
 
             "show_poster"   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Show Poster', 'site-editor'),
-                'desc'    => __('This feature allows you to select whether or not to show poster on the player.','site-editor'),
+                'description'  => __('This feature allows you to select whether or not to show poster on the player.','site-editor'),
                 'panel'    => 'audio_settings_panel',
             ),
 
             "show_title"   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Show Title', 'site-editor'),
-                'desc'    => __('This feature allows you to choose whether or not to show the video title on top of the player.','site-editor'),
+                'description'  => __('This feature allows you to choose whether or not to show the video title on top of the player.','site-editor'),
                 'panel'    => 'audio_settings_panel',
             ),
 
             "setting_title"   => array(
                 'type'    => 'text',
                 'label'   => __('Title', 'site-editor'),
-                'desc'    => __('This feature allows you to create a video title.','site-editor'),
+                'description'  => __('This feature allows you to create a video title.','site-editor'),
                 'panel'    => 'audio_settings_panel',
             ),
 
             "desc"    => array(
                 'type'    => 'textarea',
                 'label'   => __('Description', 'site-editor'),
-                'desc'    => __('This feature allows you to create a description for the video.','site-editor'),
+                'description'  => __('This feature allows you to create a description for the video.','site-editor'),
                 'panel'    => 'audio_settings_panel',
             ),
 
             "artist"  => array(
                 'type'    => 'text',
                 'label'   => __('Artist', 'site-editor'),
-                'desc'    => __('This feature allows you to specify video Artist.','site-editor'),
+                'description'  => __('This feature allows you to specify video Artist.','site-editor'),
                 'panel'    => 'audio_settings_panel',
             ),
 
@@ -234,7 +234,7 @@ class PBAudioShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             
             "animation"  =>  array(

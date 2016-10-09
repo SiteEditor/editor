@@ -8,10 +8,15 @@
       display: inline-block;
     .counter-circle-item {
         position: relative;
+        .circle-text,
+        .circle-text-half{
+            color: @perfect-main-color;
+            .transition(all .3s ease);
+        }
         &:hover .circle-text,
         &:hover .circle-text-half{
-            color: @main-color;
-            .transition(all .3s ease);
+            //color: @main-color;
+            //.transition(all .3s ease);
         }
 
     }
@@ -31,7 +36,7 @@
         position: absolute;
         text-align: center;
         display: inline-block;
-        .contrast(@body-bg);
+        color : @text-color;
         .transition(all .3s ease);
     }
 
