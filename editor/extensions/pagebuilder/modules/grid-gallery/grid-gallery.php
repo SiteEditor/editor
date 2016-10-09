@@ -77,7 +77,7 @@ class PBGridGallery extends PBShortcodeClass{
         $this->add_panel( 'grid_gallery_settings_panel' , array(
             'title'         =>  __('Grid Gallery Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -85,7 +85,7 @@ class PBGridGallery extends PBShortcodeClass{
         $this->add_panel( 'images_settings_panel' , array(
             'title'         =>  __('Images Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -95,81 +95,81 @@ class PBGridGallery extends PBShortcodeClass{
             /*'setting_full_screen_enabled' => array(
                 'type' => 'checkbox',
                 'label' => __('Enable fullscreen', 'site-editor'),
-                'desc' => '',// __('Title Showing On The Hover Effect', 'site-editor')
+                'description' => '',// __('Title Showing On The Hover Effect', 'site-editor')
             ),*/
 
             'setting_expand_mode_enabled' => array(
                 'type' => 'checkbox',
                 'label' => __('Enable Default Expand Mode', 'site-editor'),
-                'desc' => __('This feature allows you to use the default Expand Mode. If this option is enabled, there is no possibility of putting links to the Thumbnails and the default Expand Mode is used instead of light box. Also, in this mode, the Expand Mode and link icons are not visible.', 'site-editor'),
+                'description'  => __('This feature allows you to use the default Expand Mode. If this option is enabled, there is no possibility of putting links to the Thumbnails and the default Expand Mode is used instead of light box. Also, in this mode, the Expand Mode and link icons are not visible.', 'site-editor'),
                 'panel'    => 'grid_gallery_settings_panel',
             ),
             'count_columns' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '&emsp;',
                 'label'  => __('Number of Columns:','site-editor'),
-                'desc'   => __('This feature allows you to specify the number of grade columns.', 'site-editor'),
-                "control_param"  =>  array(
+                'description'   => __('This feature allows you to specify the number of grade columns.', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  1,
                     "max"  =>  6
                 ),
                 'panel'    => 'grid_gallery_settings_panel',
              ),
             'padding' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'px',
                 'label' => __('Image Spacing:', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the distance between grade images.', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('This feature allows you to specify the distance between grade images.', 'site-editor'),
+                "js_params"  =>  array(
                     "min"  =>  0,
                     "max"  =>  100
                 ),
                 'panel'    => 'grid_gallery_settings_panel',
             ),
          /*    'setting_margin_top' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'label' => __('margin top:', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor'),
+                'description' => '',// __('', 'site-editor'),
             ),
              'setting_margin_bottom' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'label' => __('margin bottom:', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor'),
+                'description' => '',// __('', 'site-editor'),
             ),
              'setting_scroll_offset' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'label' => __('scroll offset', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor'),
+                'description' => '',// __('', 'site-editor'),
             ),
              'setting_animation_speed' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'label' => __('animation speed', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor'),
+                'description' => '',// __('', 'site-editor'),
             ),
              'setting_initial_wrapper_height' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'label' => __('initial wrapper height', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor'),
+                'description' => '',// __('', 'site-editor'),
             ),        */
             'group_images_show_title' =>  array(
                 'type' => 'checkbox',
                 'label' => __('Show Images Title', 'site-editor'),
-                'desc' => __('This option allows you to show or hide the image title in hover effect.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the image title in hover effect.', 'site-editor'),
                 'panel'    => 'images_settings_panel',
             ),
 
             'group_images_show_description' =>  array(
                 'type'  => 'checkbox',
                 'label' => __('Show Images Description', 'site-editor'),
-                'desc'  => __('This option allows you to show or hide the image description in hover effect.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the image description in hover effect.', 'site-editor'),
                 'panel'    => 'images_settings_panel',
             ),
 
             'group_images_image_click' => array(
                 'type' => 'select',
                 'label' => __('When images are clicked', 'site-editor'),
-                'desc' => __('This option allows you to set what is going to happen when the image is clicked. ', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This option allows you to set what is going to happen when the image is clicked. ', 'site-editor'),
+                'choices'   =>array(
                     'default'             => __('Do Nothing', 'site-editor'),
                     'link_mode'           => __('Open Link', 'site-editor'),
                     'expand_mode'         => __('Open Expand Mode', 'site-editor'),
@@ -195,7 +195,7 @@ class PBGridGallery extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

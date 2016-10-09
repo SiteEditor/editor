@@ -97,7 +97,7 @@ class PBGoogleMapShortcode extends PBShortcodeClass{
         $this->add_panel( 'google_map_settings_panel' , array(
             'title'         =>  __('Google Map Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -105,21 +105,21 @@ class PBGoogleMapShortcode extends PBShortcodeClass{
     		'setting_address' => array(
     			'type' => 'textarea',
     			'label' => __('Address', 'site-editor'),
-    			'desc' => __('Your physical address. To have multiple map markers, separate two addresses with a vertical line. For example, 579 Allen Road Basking Ridge, NJ 07920 | Mount Arlington, NJ 07856.', 'site-editor'),
+    			'description'  => __('Your physical address. To have multiple map markers, separate two addresses with a vertical line. For example, 579 Allen Road Basking Ridge, NJ 07920 | Mount Arlington, NJ 07856.', 'site-editor'),
                 'priority'      => 8 ,
 
     		),
     		'setting_description' => array(
     			'type' => 'textarea',
     			'label' => __('Description', 'site-editor'),
-    			'desc' => __('', 'site-editor'),
+    			'description'  => __('', 'site-editor'),
                 'priority'      => 8 ,
     		),
     		'setting_type' => array(
     			'type' => 'select',
     			'label' => __('Map Type', 'site-editor'),
-    		    'desc' => __('Can be one of these values: roadmap, terrain, hybrid, or satellite. Sets the type of Google Map to display.', 'site-editor'),
-                'options' =>array(
+    		    'description'  => __('Can be one of these values: roadmap, terrain, hybrid, or satellite. Sets the type of Google Map to display.', 'site-editor'),
+                'choices'   =>array(
                     'roadmap' => __('Roadmap', 'site-editor'),
                     'satellite' => __('Satellite', 'site-editor'),
                     'hybrid' => __('Hybrid', 'site-editor'),
@@ -130,76 +130,76 @@ class PBGoogleMapShortcode extends PBShortcodeClass{
     		'setting_zoom' => array(
     			'type' => 'select',
     			'label' => __('Zoom Level', 'site-editor'),
-    			'desc' => __('Accepts a numerical value that represents the map zoom level. The higher the number, the more it will zoom in.', 'site-editor'),
-                'options' => $options_zoom,
+    			'description'  => __('Accepts a numerical value that represents the map zoom level. The higher the number, the more it will zoom in.', 'site-editor'),
+                'choices'   => $options_zoom,
                 'panel'    => 'google_map_settings_panel',
     		),
 
             'setting_overlay_color' => array(
        			'type'  => 'color',
       			'label' => __('Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
+      			'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
                 "panel"     => "google_map_settings_panel",
             ),
 
       		'setting_width' => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
                   'after_field'  => '%',
       			'label' => __('Width', 'site-editor'),
-      			'desc' => __('Accepts a percentage value. For example 50%. Sets the map\'s width.', 'site-editor'),
+      			'description'  => __('Accepts a percentage value. For example 50%. Sets the map\'s width.', 'site-editor'),
                 'panel'    => 'google_map_settings_panel',
       		),
       		'setting_height' => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
                   'after_field'  => 'px',
       			'label' => __('Height', 'site-editor'),
-      			'desc' => __('Accepts a pixel value. For example 25px. Sets the map\'s height.', 'site-editor'),
+      			'description'  => __('Accepts a pixel value. For example 25px. Sets the map\'s height.', 'site-editor'),
                 'panel'    => 'google_map_settings_panel',
             ),
             'setting_map_type_control' => array(
     			'type' => 'checkbox',
     			'label' => __('Show Control map type', 'site-editor'),
-    			'desc' => __('This feature allows you to select whether or not to show control map type in the map. (This feature allows your users, using this control, to convert the map type (including roadmap, terrain, hybrid, or satellite) to their desired option.) ', 'site-editor'),
-                'options' =>'',
+    			'description'  => __('This feature allows you to select whether or not to show control map type in the map. (This feature allows your users, using this control, to convert the map type (including roadmap, terrain, hybrid, or satellite) to their desired option.) ', 'site-editor'),
+                'choices'   =>'',
                 'panel'    => 'google_map_settings_panel',
     		),
             'setting_pan_control' => array(
     			'type' => 'checkbox',
     			'label' => __('Show Pan Control on Map', 'site-editor'),
-    			'desc' => __('This feature allows you to select whether or not to show Pan Control in the map.', 'site-editor'),
-                'options' =>'',
+    			'description'  => __('This feature allows you to select whether or not to show Pan Control in the map.', 'site-editor'),
+                'choices'   =>'',
                 'panel'    => 'google_map_settings_panel',
     		),
             'setting_street_view_control' => array(
     			'type' => 'checkbox',
     			'label' => __('Show Street view control', 'site-editor'),
-    			'desc' => __('This feature allows you to whether or not to show street view pegman control.', 'site-editor'),
-                'options' =>'',
+    			'description'  => __('This feature allows you to whether or not to show street view pegman control.', 'site-editor'),
+                'choices'   =>'',
                 'panel'    => 'google_map_settings_panel',
     		),
             'setting_scrollwheel' => array(
     			'type' => 'checkbox',
     			'label' => __('Scrollwheel on Map', 'site-editor'),
-    			'desc' => __("Enable zooming using a mouse's scroll wheel", 'site-editor'),
-                'options' =>'',
+    			'description'  => __("Enable zooming using a mouse's scroll wheel", 'site-editor'),
+                'choices'   =>'',
                 'panel'    => 'google_map_settings_panel',
     		),
             'setting_scale_control' => array(
     			'type' => 'checkbox',
     			'label' => __('Show Scale Control on Map', 'site-editor'),
-    			'desc' => __('This feature allows you to select whether or not to show Scale Control in the map.', 'site-editor'),
-                'options' =>'',
+    			'description'  => __('This feature allows you to select whether or not to show Scale Control in the map.', 'site-editor'),
+                'choices'   =>'',
                 'panel'    => 'google_map_settings_panel',
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ),    
             "align"  =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             ),
             "animation"  =>  array(
                 "type"          => "animation" ,

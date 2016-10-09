@@ -50,8 +50,8 @@ class PBfooterShortcode extends PBShortcodeClass{
             'footer_style' => array(
                 'type' => 'select',
                 'label' => __('Style', 'site-editor'),
-                'desc' => '',// __('Action Click on this Image', 'site-editor'),
-                'options' =>array(
+                'description' => '',// __('Action Click on this Image', 'site-editor'),
+                'choices'   =>array(
                     'footer-dark-style'             => __('Style1', 'site-editor'),
                     'footer-light-style'            => __('Style2', 'site-editor'),
                 ),
@@ -60,7 +60,7 @@ class PBfooterShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

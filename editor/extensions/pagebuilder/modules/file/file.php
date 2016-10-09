@@ -45,14 +45,14 @@ class PBFileShortcode extends PBShortcodeClass{
             'title' =>  array(
                 'type'          => 'text',
                 'label'         => __('Title', 'site-editor'),
-                'desc'          => __('This option allows you to set a title for your file.', 'site-editor'),
+                'description'   => __('This option allows you to set a title for your file.', 'site-editor'),
             ),   
             'file' => array(
                 'type'              => 'file',
                 'label'             => __('File Field', 'site-editor'),
-                'desc'              => __('File For Download','site-editor'),
+                'description'       => __('File For Download','site-editor'),
                 "selcted_type"      => 'single',
-                "control_param"     => array(
+                "js_params"     => array(
                     //"subtypes"          => array( "zip" , "rar" , "pdf" ) ,
                     "lib_title"         => __( "Media Library" , "site-editor" ),
                     "btn_title"         => __( "Select File" , "site-editor" ),
@@ -62,12 +62,12 @@ class PBFileShortcode extends PBShortcodeClass{
             'align' => array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             ),  
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,
@@ -95,7 +95,7 @@ new PBFileShortcode();
 global $sed_pb_app;
 
 $sed_pb_app->register_module(array(
-    "group"       => "theme" ,
+    "group"       => "media" ,
     "name"        => "file",
     "title"       => __("File","site-editor"),
     "description" => __("File","site-editor"),

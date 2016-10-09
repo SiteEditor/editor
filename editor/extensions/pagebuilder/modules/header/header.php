@@ -67,13 +67,13 @@ class PBheaderShortcode extends PBShortcodeClass{
             /*'sticky' => array(
                 'type'      => 'checkbox',
                 'label'     => __('Enable Sticky Header', 'site-editor'),
-                'desc'      => '',//__('Enable Sticky Header', 'site-editor'),
+                'description'      => '',//__('Enable Sticky Header', 'site-editor'),
                 'panel'     => 'general_settings_panel',
             ),*/
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "skin"  =>  array(
                 "type"          => "skin" ,

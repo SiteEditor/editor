@@ -53,7 +53,7 @@ class PBIconContentBoxShortcode extends PBShortcodeClass{
             'show_button'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Show Button' , 'site-editor' ) ,
-                'desc'  => __( 'This button allows you to choose whether or not to show the button.' , 'site-editor' ),
+                'description'  => __( 'This button allows you to choose whether or not to show the button.' , 'site-editor' ),
             ),            
             "skin"  =>  array(
                 "type"          => "skin" ,
@@ -62,7 +62,7 @@ class PBIconContentBoxShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

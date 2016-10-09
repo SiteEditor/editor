@@ -53,15 +53,15 @@ class PBFacebookShortcode extends PBShortcodeClass{
             "page_url"   => array(
                 "type"      => "text",
                 "label"     => __("Facebook Page URL","site-editor"),
-                "desc"      => __('You can set the URL of the Facebook Page here.',"site-editor")
+                "description"  => __('You can set the URL of the Facebook Page here.',"site-editor")
             ),
 
 
             /*"color_scheme"   => array(
                 "type"          => "select",
                 "label"         => '',// __("Color Scheme:","site-editor"),
-                "desc"          => __('Color Scheme:',"site-editor"),
-                "options"       => array(
+                "description"   => __('Color Scheme:',"site-editor"),
+                "choices"       => array(
                     "light"          =>__("Light","site-editor"),
                     "dark"         =>__("Dark","site-editor"),
                 )
@@ -70,29 +70,29 @@ class PBFacebookShortcode extends PBShortcodeClass{
             "show_faces"       => array(
                 "type"      => "checkbox",
                 "label"     => __("Show faces","site-editor"),
-                "desc"      => __('This option sets to show profile photos when friends like this page.',"site-editor"),
+                "description"  => __('This option sets to show profile photos when friends like this page.',"site-editor"),
             ),
 
             "show_stream"       => array(
                 "type"      => "checkbox",
                 "label"     => __("Show stream","site-editor"),
-                "desc"      => __('This option show posts from the page\'s timeline.',"site-editor"),
+                "description"  => __('This option show posts from the page\'s timeline.',"site-editor"),
             ),
 
             "show_header"       => array(
                 "type"      => "checkbox",
                 "label"     => __("Show facebook header","site-editor"),
-                "desc"      => __('This option show posts from the page\'s timeline.',"site-editor"),
+                "description"  => __('This option show posts from the page\'s timeline.',"site-editor"),
             ),
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default"
+                "default"       => "default"
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,
