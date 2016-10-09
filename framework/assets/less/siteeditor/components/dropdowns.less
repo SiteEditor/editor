@@ -1,0 +1,101 @@
+//
+// Dropdown menus
+// --------------------------------------------------
+.sed-css-component{
+  
+@import "../variables/dropdowns.less"; 
+@import "../bootstrap/dropdowns.less";
+
+// Dropdown arrow/caret
+.caret {
+  .margin-left(2px;0);
+}
+
+
+// The dropdown menu (ul)
+.dropdown-menu {
+  .left(0;auto);
+  min-width: @dropdown-min-width;
+  padding: @dropdown-padding;
+  font-size: @dropdown-font-size;     
+  .textleft(); // Ensures proper alignment if parent has it changed (e.g., modal footer)
+  .border-radius(@dropdown-border-radius);
+  .box-shadow(@dropdown-box-shadow);
+
+  // Aligns the dropdown menu to right
+  //
+  // Deprecated as of 3.1.0 in favor of `.dropdown-menu-[dir]`
+  &.pull-right{
+    .rtl-body & {
+        left: auto; // Reset the default from `.dropdown-menu`
+        right: 0;
+    }
+    &.rtl-reverse {
+      .right(0;auto);
+    }
+  }
+  &.pull-left{
+    left: 0;
+    right: auto;
+    .rtl-body & {
+        left: 0;
+        right: auto;
+    }
+    &.rtl-reverse {
+      .left(0;auto);
+    }
+  }
+
+  // Links within the dropdown menu
+  > li > a {
+    line-height: @dropdown-line-height;
+  }
+}
+
+// Menu positioning
+//
+// Add extra class to `.dropdown-menu` to flip the alignment of the dropdown
+// menu with the parent.
+.dropdown-menu-right{
+    .rtl-body & {
+        left: auto; // Reset the default from `.dropdown-menu`
+        right: 0;
+    }
+    &.rtl-reverse {
+      .right(0;auto);
+    }
+}
+// With v3, we enabled auto-flipping if you have a dropdown within a right
+// aligned nav component. To enable the undoing of that, we provide an override
+// to restore the default dropdown menu alignment.
+//
+// This is only for left-aligning a dropdown menu within a `.navbar-right` or
+// `.pull-right` nav component.
+.dropdown-menu-left{
+    .rtl-body & {
+        left: 0;
+        right: auto;
+    }
+    &.rtl-reverse {
+      .left(0;auto);
+    }
+}
+
+// Component alignment
+//
+// Reiterate per navbar.less and the modified component alignment there.
+
+@media (min-width: @grid-float-breakpoint) {
+  .navbar-right {
+    .dropdown-menu  ,.dropdown-menu-right{
+      .dropdown-menu-right();
+    }
+    // Necessary for overrides of the default right aligned menu.
+    // Will remove come v4 in all likelihood.
+    .dropdown-menu-left{
+      .dropdown-menu-left();
+    }
+  }
+}
+
+}

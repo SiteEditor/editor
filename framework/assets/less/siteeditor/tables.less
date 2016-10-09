@@ -1,0 +1,119 @@
+//
+// Tables
+// --------------------------------------------------
+
+@import "bootstrap/mixins/table-row.less"; 
+@import "bootstrap/tables.less"; 
+
+
+caption {
+  .textleft();
+}
+
+th {
+  .textleft();
+}
+// Zebra-striping
+//
+
+.table-striped {
+  > tbody > tr:nth-of-type(odd) {
+    color: @table-color-accent; 
+  }
+}
+
+
+// Hover effect
+//
+
+.table-hover {
+  > tbody > tr:hover {
+    color: @table-color-hover;
+  }
+}
+
+
+// Table backgrounds
+//
+// Exact selectors below required to override `.table-striped` and prevent
+// inheritance to nested tables.
+
+// Generate the contextual variants
+
+.table-row-variant(success; @table-success-bg);
+.table-row-variant(info; @table-info-bg);
+.table-row-variant(warning; @table-warning-bg);
+.table-row-variant(danger; @table-danger-bg);
+
+.table > thead > tr,
+.table > tbody > tr, 
+.table > tfoot > tr {
+    > td.active,
+    > th.active,
+    &.active > td,
+    &.active > th {
+      color: @table-color-active;
+    } 
+    > td.success,
+    > th.success,
+    &.success > td,
+    &.success > th {
+      color: @table-success-text;   
+    }
+    > td.info,
+    > th.info,  
+    &.info > td,
+    &.info > th {
+      color: @table-info-text;
+    }
+    > td.warning,
+    > th.warning,
+    &.warning > td,
+    &.warning > th {
+      color: @table-warning-text;
+    }
+    > td.danger,
+    > th.danger,
+    &.danger > td,
+    &.danger > th {
+      color: @table-danger-text;
+    }
+}
+
+// Responsive tables
+//
+// Wrap your tables in `.table-responsive` and we'll make them mobile friendly
+// by enabling horizontal scrolling. Only applies <768px. Everything above that
+// will display normally.
+
+.rtl-body {
+.table-responsive {
+  @media screen and (max-width: @screen-xs-max) {
+
+    // Special overrides for the bordered tables
+    > .table-bordered {
+      border: 0;
+
+      // Nuke the appropriate borders so that the parent can handle them
+      > thead,
+      > tbody,
+      > tfoot {
+        > tr {
+          > th:first-child,
+          > td:first-child {
+            border-right: 0;
+            border-left: initial;
+          }
+          > th:last-child,
+          > td:last-child {
+            border-left: 0;
+            border-right: initial;
+          }
+        }
+      }
+
+    }
+  }
+}
+
+}

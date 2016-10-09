@@ -1,0 +1,51 @@
+//
+// Pager pagination
+// --------------------------------------------------
+.sed-css-component{
+  
+    @import "../variables/pagination.less"; 
+    @import "../variables/pager.less"; 
+    @import "../bootstrap/pager.less";
+
+    .pager {
+      .padding-left(0);      
+      li {
+        > a,
+        > span {
+            color:        @pager-color;     
+            font-size:    @pager-font-size;  
+            padding:      @pager-padding;      
+            border-width: @pager-border-width;
+        }
+        > a:hover,
+        > a:focus {
+          background-color: @pager-hover-bg;
+          border-color: @pager-hover-border;
+          color: @pager-hover-color;
+        }
+      } 
+      .next {
+        > a,
+        > span {
+          .alignright();  
+        }
+      }
+
+      .previous {
+        > a,
+        > span {
+          .alignleft();
+        }
+      }  
+    }
+
+    li.disabled {
+      > a,
+      > a:hover,
+      > a:focus,
+      > span {
+        border-color: @pager-border;
+      }
+    }
+
+}

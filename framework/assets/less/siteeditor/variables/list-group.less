@@ -1,0 +1,47 @@
+//== List group
+//
+//##
+
+//** Background color on `.list-group-item`
+@list-group-bg:                 @body-bg;
+//** `.list-group-item` border color
+@list-group-border:             @base-border-color;
+//** List group border radius
+@list-group-border-radius:      @border-radius-base;
+
+//** Background color of single list items on hover
+@list-group-hover-bg:           @component-bg;
+//** Text color of active list items
+@list-group-active-color:       @component-active-color;
+//** Background color of active list items
+@list-group-active-bg:          @component-active-bg;
+//** Border color of active list elements
+@list-group-active-border:      @list-group-active-bg;
+//** Text color for content within active list items
+@list-group-active-text-color:  lighten(@list-group-active-bg, 40%);
+
+//** Text color of disabled list items
+@list-group-disabled-color:      @text-color-light;
+//** Background color of disabled list items
+@list-group-disabled-bg:         darken(@component-bg, 3%);
+//** Text color for content within disabled list items
+@list-group-disabled-text-color: @list-group-disabled-color;
+
+@list-group-link-color:         @text-color;
+@list-group-link-hover-color:   @list-group-link-color; 
+@list-group-link-heading-color: @headings-color;
+
+
+// Contextual variants
+
+@list-group-success-text:       @success-text-color;
+@list-group-success-bg:    		@brand-success;
+
+@list-group-info-text:          @info-text-color;
+@list-group-info-bg:            @brand-info;
+
+@list-group-warning-text:       @warning-text-color;
+@list-group-warning-bg:         @brand-warning;
+
+@list-group-danger-text:        @danger-text-color;
+@list-group-danger-bg:          @brand-danger;

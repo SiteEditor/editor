@@ -1,0 +1,154 @@
+//
+// Navbars
+// --------------------------------------------------
+
+.sed-css-component{
+  
+	@import "../variables/navbar.less"; 
+	@import "../bootstrap/mixins/nav-vertical-align.less";
+	@import "../bootstrap/navbar.less";
+
+	// Navbar heading
+
+	.navbar-header {
+	  @media (min-width: @grid-float-breakpoint) {
+	    .alignleft();
+	  }
+	}
+	// Both navbar header and collapse
+	//
+	// When a container is present, change the behavior of the header and collapse.
+
+	.sed-row-boxed,
+	.sed-row-wide {
+	  > .navbar-header,
+	  > .navbar-collapse {
+	    margin-right: -@navbar-padding-horizontal;
+	    margin-left:  -@navbar-padding-horizontal;
+
+	    @media (min-width: @grid-float-breakpoint) {
+	      margin-right: 0;
+	      margin-left:  0;
+	    }
+	  }
+	}
+
+	// Brand/project name
+
+	.navbar-brand {
+	  .alignleft();
+
+	  @media (min-width: @grid-float-breakpoint) {
+	    .navbar > .sed-row-boxed &,  
+	    .navbar > .sed-row-wide & {
+	      .margin-left(-@navbar-padding-horizontal;auto);
+	    }
+	  }
+	}
+
+
+	// Navbar toggle
+
+	.navbar-toggle {
+	  .alignright();
+	  .margin-right(@navbar-padding-horizontal;auto);
+	}
+
+
+	// Navbar nav links
+
+	.navbar-nav {
+
+	  @media (max-width: @grid-float-breakpoint-max) {
+	    // Dropdowns get custom display when collapsed
+	    .open .dropdown-menu {
+	      > li > a,
+	      .dropdown-header {
+	        .padding-left(15px;25px);
+	      }
+	    }
+	  }
+
+	  // Uncollapse the nav
+	  @media (min-width: @grid-float-breakpoint) {
+	    .alignleft();
+
+	    > li {
+	      .alignleft();
+	    }
+
+	  }
+	}
+
+	/*@media (min-width: @grid-float-breakpoint) {
+	  .navbar-left {
+
+	    &.rtl-reverse {
+	      //.alignleft() !important;
+	    }
+	  }
+
+	  .navbar-right {
+
+	    &:last-child {
+	      .margin-right(-@navbar-padding-horizontal;auto);
+	    }
+
+	    &.rtl-reverse {
+	      //.alignright() !important;
+	      .margin-right(-@navbar-padding-horizontal;auto);
+	    }
+
+	    .dropdown-menu {
+	      .right(0;auto);
+	    }
+	  }
+	}*/
+
+
+	// Component alignment
+
+	@media (min-width: @grid-float-breakpoint) {
+	  .navbar-left  {
+	    &.rtl-reverse {
+	      float: left !important;  
+	      .rtl-body &{float: right !important;} 
+	    }
+	  }
+	  .navbar-right {
+
+	    &.rtl-reverse {
+			float: right !important;   
+			.rtl-body &{float: left !important;}  
+			.margin-right(-@navbar-padding-horizontal;auto);
+
+			.dropdown-menu {
+			  .right(0;auto);
+			}
+	    }
+
+	    ~ .navbar-right {
+		    &.rtl-reverse {
+		      .margin-right(0;auto); 
+		    }
+	    }
+	    
+	  }
+	}
+
+	// Text in navbars
+
+	.navbar-text {
+
+	  @media (min-width: @grid-float-breakpoint) {
+	    .alignleft();
+
+	    // Outdent the form if last child to line up with content down the page
+	    &.navbar-right:last-child {
+	      .margin-right(0;auto);
+	    }
+	  }
+	}
+
+
+}

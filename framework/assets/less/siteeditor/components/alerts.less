@@ -1,0 +1,72 @@
+//
+// Alerts
+// --------------------------------------------------
+
+.sed-css-component{
+  
+@import "../variables/alerts.less"; 
+@import "../bootstrap/mixins/alerts.less";
+@import "../bootstrap/alerts.less";
+
+// Base styles
+// -------------------------
+
+.alert {
+  margin-bottom: 0;
+  border-style: solid;
+  border-width: @alert-border-width;  
+  padding: @alert-padding-vertical @alert-padding-horizontal;   
+}
+
+.alert-primary{
+  .alert-variant(@alert-primary-bg; @alert-primary-border; @alert-primary-text);
+}
+
+// Dismissible alerts
+//
+// Expand the right padding and account for the close button's positioning.
+
+.alert-dismissable, // The misspelled .alert-dismissable was deprecated in 3.2.0.
+.alert-dismissible {
+    .padding-right(@alert-padding-horizontal + 20;@alert-padding-horizontal);    
+    .close{
+        .right(-21px;auto);
+        top: 0px;
+    }      
+
+} 
+
+.alert .close{
+    .right(-21px;auto);
+    color: @text-color-light;  
+    .opacity(.6);
+    &:hover,
+    &:focus {
+      .opacity(.8);
+    }
+}      
+.alert-success {   
+    .close{
+        color: @alert-success-text;
+    }  
+}
+
+.alert-info {
+    .close{
+        color: @alert-info-text;
+    }  
+}
+
+.alert-warning {
+    .close{
+        color: @alert-warning-text;
+    }  
+}
+
+.alert-danger {
+    .close{
+        color: @alert-danger-text;
+    }  
+}
+
+}

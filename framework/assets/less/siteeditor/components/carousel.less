@@ -1,0 +1,108 @@
+//
+// Carousel
+// --------------------------------------------------
+.sed-css-component{
+  
+    @import "../variables/carousel.less"; 
+    @import "../bootstrap/carousel.less";
+    .carousel-inner {
+
+      > .item {
+        > img,
+        > a > img {
+            width: auto;
+            margin: 0 auto;
+        }
+      } 
+      
+    } 
+   
+
+    // Left/right controls for nav
+    // ---------------------------
+
+    .carousel-control {
+
+      .left(0;auto);
+
+      // Set gradients for backgrounds
+      &.left {
+        .left(0;auto);
+        .rtl-body & {
+            #gradient > .horizontal(@start-color: rgba(0,0,0,.0001); @end-color: rgba(0,0,0,.5));
+        }
+      }
+      &.right {
+        .right(0;auto);
+        .rtl-body & {
+            #gradient > .horizontal(@start-color: rgba(0,0,0,.5); @end-color: rgba(0,0,0,.0001));
+        }
+      }    
+
+      // Toggles
+      .icon-prev,
+      .glyphicon-chevron-left {
+        .left(50%;auto);
+        .margin-left(-10px;auto);
+      }
+      .icon-next,
+      .glyphicon-chevron-right {
+        .right(50%;auto); 
+        .margin-right(-10px;auto);
+      }
+
+      .icon-prev {
+        &:before {
+          content: "\f104";
+          font-family: FontAwesome;
+          .rtl-body & {
+              content: "\f105";
+          }
+        }
+      }
+      .icon-next {
+        &:before {
+          content: "\f105";
+          font-family: FontAwesome;
+          .rtl-body & {
+              content: "\f104";
+          }
+        }
+      }
+    }
+
+    // Optional indicator pips
+
+    .carousel-indicators {
+      .left(50%;auto);
+      .margin-left(-30%;auto);    
+      .padding-left(0);
+    }
+
+    // Optional captions
+    // -----------------------------
+    // Hidden by default for smaller viewports
+    .carousel-caption {
+      a,h1,h2,h3,h4,h5,h6 {  
+        color: @carousel-caption-color;
+      }
+    }
+
+    // Scale up controls for tablets and up
+    @media screen and (min-width: @screen-sm-min) {
+
+      // Scale up the controls a smidge
+      .carousel-control {
+        .glyphicon-chevron-left,
+        .icon-prev {
+          .margin-left((@carousel-control-font-size / -2);auto);
+        }
+        .glyphicon-chevron-right,
+        .icon-next {
+          .margin-right((@carousel-control-font-size / -2);auto);
+        }
+      }
+    }
+
+
+}

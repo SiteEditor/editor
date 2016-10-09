@@ -1,0 +1,36 @@
+//
+// Breadcrumbs
+// --------------------------------------------------
+.sed-css-component{
+  
+    @import "../variables/breadcrumbs.less"; 
+    @import "../bootstrap/breadcrumbs.less";
+
+    .breadcrumb {
+      margin-bottom: 0;
+      .border-radius(@breadcrumb-border-radius);
+
+      > li {
+        > a{
+          color: @breadcrumb-color;
+          font-size: @breadcrumb-font-size;
+          &:hover{
+            color: @breadcrumb-hover-color;
+          }
+        }
+
+        + li:before {
+          color: @breadcrumb-separator-color;
+          font-size: @breadcrumb-separator-font-size;
+          line-height: @breadcrumb-separator-font-size;
+        }
+      }
+
+      > .active {
+        > a{
+          color: @breadcrumb-active-color;
+        }
+      }
+    }
+
+}

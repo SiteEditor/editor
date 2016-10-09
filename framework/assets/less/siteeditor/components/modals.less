@@ -1,0 +1,53 @@
+
+//
+// Modals
+// --------------------------------------------------
+
+@import "../variables/modals.less"; 
+
+.sed-css-component{
+  
+    @import "../bootstrap/modals.less";
+
+    .modal-content {
+      .border-radius(@modal-border-radius);                  
+      .box-shadow(@modal-box-shadow);
+    }
+    // Footer (for actions)
+    .modal-footer {
+      .textright();
+
+      // Properly space out buttons  
+      .btn + .btn {
+        .margin-left(5px;0);
+      }
+      // but override that for button groups
+      .btn-group .btn + .btn {
+        .margin-left(-1px;0);
+      }
+      // and override it for block buttons as well
+      .btn-block + .btn-block {
+        .margin-left(0;0);
+      }
+    }
+
+    // Scale up the modal
+    @media (min-width: @screen-sm-min) {
+      .modal-content {
+        .box-shadow(@modal-box-shadow);
+      }
+    }
+}
+// Modal background
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: @zindex-modal-background;
+  background-color: @modal-backdrop-bg;
+  // Fade for backdrop
+  &.fade { .opacity(0); }
+  &.in { .opacity(@modal-backdrop-opacity); }
+}

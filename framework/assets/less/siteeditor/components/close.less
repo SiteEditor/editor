@@ -1,0 +1,18 @@
+//
+// Close icons
+// --------------------------------------------------
+
+@import "../variables/close.less"; 
+@import "../bootstrap/close.less";
+
+.close {
+  .alignright();   
+  font-size: @close-font-size;
+  .opacity(@close-opacity);
+  font-weight: normal;
+
+  &:hover,
+  &:focus {
+    .opacity(@close-active-opacity);
+  }
+}    

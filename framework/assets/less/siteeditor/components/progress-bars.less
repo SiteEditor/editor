@@ -1,0 +1,45 @@
+
+//
+// Progress bars
+// --------------------------------------------------
+
+.sed-css-component{
+  
+    @import "../variables/progress-bars.less"; 
+    @import "../bootstrap/progress-bars.less";
+
+    // Outer container
+    .progress {
+      .box-shadow(@progress-box-shadow);
+      height: @progress-height;
+      margin-bottom: @progress-height;
+    }
+
+    // Bar of progress
+    .progress-bar {
+      .box-shadow(@progress-bar-box-shadow);
+      line-height: @progress-height;
+      //float: left;
+      font-size: @progress-bar-font-size;
+    }
+
+    // Variations
+    // -------------------------
+
+    .progress-bar-success {
+      color: @progress-bar-success-color;
+    }
+
+    .progress-bar-info {
+      color: @progress-bar-info-color;
+    }
+
+    .progress-bar-warning {
+      color: @progress-bar-warning-color;
+    }
+
+    .progress-bar-danger {
+      color: @progress-bar-danger-color;
+    }
+
+}

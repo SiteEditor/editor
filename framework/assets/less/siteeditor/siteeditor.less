@@ -1,43 +1,73 @@
-/*siteeditor less framework path */
+/*SiteEditor less framework */
+/*!
+ * Bootstrap v3.3.6 (http://getbootstrap.com)
+ */
 
-@font-face {
-    font-family: 'Simple-Line-Icons';
-    src: url('font/Simple-Line-Icons-Webfont/fonts/Simple-Line-Icons.eot');
-    src: url('font/Simple-Line-Icons-Webfont/fonts/Simple-Line-Icons.eot?#iefix') format('embedded-opentype'),
-         url('font/Simple-Line-Icons-Webfont/fonts/Simple-Line-Icons.woff') format('woff'),
-         url('font/Simple-Line-Icons-Webfont/fonts/Simple-Line-Icons.ttf') format('truetype'),
-         url('font/Simple-Line-Icons-Webfont/fonts/Simple-Line-Icons.svg#Simple-Line-Icons') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
+	
 
-
+// Core variables and mixins
+@import "variables/variables.less";
+//@import "bootstrap/variables.less";
 @import "mixins.less";
-@import "colors.less";
-@import "variables.less";
+//@import "module-base.less";
+//@import "s/variables.less";  
+//@import "s/gradients.less";
+//@import "s/vendor-prefixes.less";
+//@import "s/colors.less";
+//@import "s/color.less";
 
-                                                    
-// Reset  
-@import "reset.less";
+//modules
+//@import "modules/accordion.less"; 
+
+// Reset and dependencies
+@import "normalize.less";
 @import "print.less";
 
-// Core Css
-@import "core.less";
+// Core CSS
+//@import "glyphicons.less";
+@import "scaffolding.less";
+@import "type.less";
+@import "code.less";
 @import "grid.less";
-@import "navs.less";
-@import "typography.less";
-@import "table.less";
-@import "button.less";
+@import "tables.less";
 @import "forms.less";
-
-// Wordpress Css
-@import "wordpress.less";
+@import "buttons.less";
 
 // Components
-@import "responsive-embed.less";
+@import "components/component-animations.less";
+@import "components/dropdowns.less";
+@import "components/button-groups.less";
+@import "components/input-groups.less";
+@import "components/navs.less";
+@import "components/navbar.less";
+@import "components/breadcrumbs.less";
+@import "components/pagination.less";
+@import "components/pager.less";
+@import "components/labels.less";
+@import "components/badges.less";
+@import "components/jumbotron.less";
+@import "components/thumbnails.less";
+@import "components/alerts.less";
+@import "components/progress-bars.less";
+@import "components/media.less";
+@import "components/list-group.less";
+@import "components/panels.less";
+@import "components/responsive-embed.less";
+@import "components/wells.less";
+@import "components/close.less";
+
+// Components w/ JavaScript
+@import "components/modals.less";
+@import "components/tooltip.less";
+@import "components/popovers.less";
+@import "components/carousel.less";
 
 // Utility classes
-
-
 @import "utilities.less";
 @import "responsive-utilities.less";
+
+
+
+// wordpress
+@import "sed-wordpress.less";
+//@import "bootstrap-rtl/bootstrap-rtl.less";

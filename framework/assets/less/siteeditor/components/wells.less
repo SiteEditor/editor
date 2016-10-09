@@ -1,0 +1,27 @@
+//
+// Wells
+// --------------------------------------------------
+
+.sed-css-component{
+  
+  @import "../variables/wells.less"; 
+  @import "../bootstrap/wells.less";
+  // Base class
+  .well {  
+    padding: @well-padding;
+    margin-bottom: 0; 
+    .border-radius(@well-border-radius);
+    .box-shadow(@well-box-shadow);  
+  }
+
+  // Sizes
+  .well-lg {
+    padding: @well-padding-large;
+    .border-radius(@well-border-radius-large);
+  }
+  .well-sm {
+    padding: @well-padding-small;
+    .border-radius(@well-border-radius-small);
+  }
+
+}

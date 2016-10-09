@@ -1,0 +1,60 @@
+//
+// Code (inline and block)
+// --------------------------------------------------
+
+
+@import "bootstrap/code.less";  
+
+
+// Inline and block code styles
+
+dfn,
+cite,
+em,
+i , 
+var, 
+address {
+    font-style: italic; 
+}
+
+code,
+kbd,
+tt,
+var,
+samp,
+pre {
+    font-family: @font-family-monospace;
+}
+
+big {
+    font-size: 125%;
+}
+
+
+// Inline code
+code {
+  padding: @code-padding;
+  font-size: @code-font-size;
+  border-radius: @code-border-radius;
+}
+
+// User input typically entered via keyboard
+kbd {
+  padding: @kbd-padding;
+  font-size: @kbd-font-size;
+  border-radius: @kbd-border-radius;
+  .box-shadow(@kbd-box-shadow);
+}
+
+// Blocks of code
+pre {
+  //margin: 0;
+  direction: ltr;
+  padding: @pre-padding;  
+  font-size: @pre-font-size; // 14px to 13px
+  line-height: @pre-line-height;
+  border-radius: @pre-border-radius;  
+}
+
+
+

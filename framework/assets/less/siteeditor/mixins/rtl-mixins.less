@@ -1,0 +1,72 @@
+// RTL Mixins
+
+/*The second argument by default on all functions automatically,
+but if the amount awarded to the arguments you give it a second insert*/
+
+
+.alignleft(){float: left;  .rtl-body &{float: right;} }
+
+.alignright() {float: right;  .rtl-body &{float: left;} }
+
+
+.left(@left:0;@right:auto) {
+  left: @left;
+  right: @right;
+    .rtl-body &{
+        left: @right;
+        right: @left;
+    }
+}
+
+.right(@right:0;@left:auto) {
+  left: @left;
+  right: @right;
+    .rtl-body &{
+        left: @right;
+        right: @left;
+    }
+}
+
+
+.textleft() {text-align: left; .rtl-body &{text-align: right;}}
+
+.textright() {text-align: right; .rtl-body &{text-align: left;}}
+
+
+.margin-left(@left:0;@right:auto){
+    margin-left:@left;
+    margin-right: @right;
+    .rtl-body &{
+        margin-left: @right;
+        margin-right: @left;
+    }
+}
+
+.margin-right(@right:0;@left:auto){
+    margin-left:@left;
+    margin-right: @right;
+    .rtl-body &{
+        margin-left: @right;
+        margin-right: @left;
+    }
+}
+
+
+
+.padding-left(@left:0;@right:initial){
+    padding-left:@left;
+    padding-right: @right;
+    .rtl-body &{
+        padding-left: @right;
+        padding-right: @left;
+    }
+}
+
+.padding-right(@right:0;@left:initial){
+    padding-left:@left;
+    padding-right: @right;
+    .rtl-body &{
+        padding-left: @right;
+        padding-right: @left;
+    }
+}

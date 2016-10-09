@@ -1,0 +1,263 @@
+//
+// Buttons
+// --------------------------------------------------
+
+@import "bootstrap/buttons.less"; 
+
+// Base styles
+// --------------------------------------------------
+
+.btn {
+  margin: 0; 
+  .button-size(@btn-padding-base-vertical; @btn-padding-base-horizontal; @btn-font-size-base; @btn-line-height-base; @btn-border-radius-base);
+  min-width: @btn-base-min-width;  
+  .transition( all 0.35s ease);
+}
+
+
+// Alternate buttons
+// --------------------------------------------------
+
+.btn-default {
+  &-outline{
+    .button-variant(@btn-default-color; transparent; @btn-default-border);
+    .btn-outline-hover(@btn-default-color; @btn-default-bg; @btn-default-border);
+  }
+}
+.btn-primary {
+  &-outline{
+    .button-variant(@btn-primary-border; transparent; @btn-primary-border);
+    .btn-outline-hover(@btn-primary-color; @btn-primary-bg; @btn-primary-border);
+  }
+}
+// Success appears as green
+.btn-success {
+  &-outline{
+    .button-variant(@btn-success-border; transparent; @btn-success-border);
+    .btn-outline-hover(@btn-success-color; @btn-success-bg; @btn-success-border);
+  }
+}
+// Info appears as blue-green
+.btn-info {
+  &-outline{
+    .button-variant(@btn-info-border; transparent; @btn-info-border);
+    .btn-outline-hover(@btn-info-color; @btn-info-bg; @btn-info-border);
+  }
+}
+// Warning appears as orange
+.btn-warning {
+  &-outline{
+    .button-variant(@btn-warning-border; transparent; @btn-warning-border);
+    .btn-outline-hover(@btn-warning-color; @btn-warning-bg; @btn-warning-border);
+  }
+}
+// Danger and error appear as red
+.btn-danger {
+  &-outline{
+    .button-variant(@btn-danger-border; transparent; @btn-danger-border);
+    .btn-outline-hover(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
+  }
+}
+// Perfect main color
+.btn-perfect {
+  .button-variant(@btn-perfect-color; @btn-perfect-bg; @btn-perfect-border);
+  &-outline{
+    .button-variant(@btn-perfect-border; transparent; @btn-perfect-border);
+    .btn-outline-hover(@btn-perfect-color; @btn-perfect-bg; @btn-perfect-border);
+  }
+}
+// Gray
+.btn-gray {
+  .button-variant(@btn-gray-color; @btn-gray-bg; @btn-gray-border);
+  &-outline{
+    .button-variant(@btn-gray-border; transparent; @btn-gray-border);
+    .btn-outline-hover(@btn-gray-color; @btn-gray-bg; @btn-gray-border);
+  }
+}
+// Black
+.btn-black {
+  .button-variant(@btn-black-color; @btn-black-bg; @btn-black-border);
+  &-outline{
+    .button-variant(@btn-black-border; transparent; @btn-black-border);
+    .btn-outline-hover(@btn-black-color; @btn-black-bg; @btn-black-border);
+  }
+}
+// White
+.btn-white {
+  .button-variant(@btn-white-color; @btn-white-bg; @btn-white-border);
+  &-outline{ 
+    .button-variant(@btn-white-border; transparent; @btn-white-border); 
+    .btn-outline-hover(@btn-white-color; @btn-white-bg; @btn-white-border); 
+  }
+}
+
+
+
+// Button Sizes
+// --------------------------------------------------
+
+.btn-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  .button-size(@btn-padding-lg-vertical; @btn-padding-lg-horizontal; @btn-font-size-lg; @btn-line-height-lg; @btn-border-radius-large);
+  min-width: @btn-lg-min-width;  
+}
+.btn-sm {
+  // line-height: ensure proper height of button next to small input
+  .button-size(@btn-padding-sm-vertical; @btn-padding-sm-horizontal; @btn-font-size-sm; @btn-line-height-sm; @btn-border-radius-small);
+  min-width: @btn-sm-min-width;  
+}
+.btn-xs {
+  .button-size(@btn-padding-xs-vertical; @btn-padding-xs-horizontal; @btn-font-size-xs; @btn-line-height-xs; @btn-border-radius-xs);  
+  min-width: @btn-xs-min-width;      
+}
+    
+
+
+
+
+
+
+
+
+
+
+
+/*
+.button-variant(@background; @border) {
+ .icon-button-df{
+ color: @background;
+ }
+
+}
+.button-flat(@color){
+  color:@color;
+  background-color: transparent;
+  border-color: @color;
+
+  &:hover,
+  &:focus,
+  &:active,
+  &.active{
+    background-color: fade(@color,3%);
+    color: lighten(@color, 2%);
+    border-color: lighten(@color, 2%);
+  }
+  .module-button.button-skin6 &,
+  .module-button.button-skin2 &{
+    .sed-icons.icon-button-pd {
+      border-color:@color;
+    }
+  }
+}
+.button-size(@padding-vertical; @padding-horizontal; @font-size; @line-height; @border-radius) {
+  padding: @padding-vertical @padding-horizontal;
+  font-size: @font-size;
+  line-height: @line-height;
+  min-width: 4 * @padding-horizontal;
+  .border-radius(@border-radius);
+  div .hi-icon{
+    font-size: @font-size + 4;
+
+  }
+
+  .icon-button-pd,.icon-button-df {
+    padding: 0 @padding-horizontal/2 - 2;
+    .module-button.button-skin1 &{
+        padding: 0 @padding-horizontal/2 + 5;
+    }
+    .module-button.button-skin4 &{
+        padding: @padding-vertical - 1 @padding-horizontal/2 + 5;
+    }
+  }
+   .span-padding{
+     padding: @padding-vertical @padding-horizontal/2 + 5;
+     min-width: 4 * @padding-horizontal;
+     display: block;
+   }
+}
+
+
+
+
+
+
+
+
+
+.btn {
+  .transition( all 0.35s ease);
+}  
+
+.btn.btn-none{
+  background: transparent;
+  .base-color(@body-bg);
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    .high-color(@body-bg);
+    .box-shadow(none);
+  }
+  &,
+  &:active,
+  &.active {
+    &:focus , & {
+      outline: 0;
+      background-image: none;
+      .box-shadow(none);
+    }
+  }
+}
+
+.btn-default {
+  .button-variant(@btn-default-bg; @btn-default-border);
+  border-width: 1px !important;
+  border-style: solid !important;
+}
+.btn.btn-black {
+  .button-variant(@btn-black-bg; @btn-black-border);
+  .high-color(@btn-black-bg);
+  &:hover,
+  &:focus,
+  &:active,
+  &.active,
+  .open > .dropdown-toggle& {
+    .high-color(@main-color);
+    background-color: @main-color;
+    border-color: darken(@main-color, 8%);
+    .icon-button-df{
+        color: darken(@main-color, 7%);
+    }
+  }
+}
+.btn-perfect {
+  .button-variant(@btn-perfect-bg; @btn-perfect-border);
+}
+.btn-purple {
+  .button-variant(@btn-purple-bg; @btn-purple-border);
+}
+.btn-main {
+  .button-variant(@btn-main-bg; @btn-main-border) ;
+}
+.btn-flat{
+.button-flat(@main-color);
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+
+.btn-xl{
+  .button-size(@padding-xl-vertical; @padding-xl-horizontal; @font-size-large; @line-height-large; @border-radius-small - 1);
+}
+
+.btn-lg {
+  // line-height: ensure even-numbered height of button next to large input
+  .button-size(@padding-large-vertical; @padding-large-horizontal; @font-size-large - 2; @line-height-large - 0.2; @border-radius-small - 1);
+}
+.btn-sm {
+  // line-height: ensure proper height of button next to small input
+  .button-size(@padding-small-vertical; @padding-small-horizontal; @font-size-small + 1; @line-height-small - 0.4; @border-radius-small - 1);
+}
+.btn-xs {
+  .button-size(@padding-xs-vertical; @padding-xs-horizontal; @font-size-small; @line-height-small; @border-radius-small - 1);
+}
+*/

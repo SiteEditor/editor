@@ -1,0 +1,35 @@
+//
+// Popovers
+// --------------------------------------------------
+.sed-css-component{
+  
+    @import "../variables/popovers.less"; 
+    @import "../bootstrap/popovers.less";
+    
+    .popover {    
+        .box-shadow(@popover-box-shadow);
+        border-width: @popover-border-width;
+        border-radius: @popover-border-radius;
+    }  
+    .popover-title {
+      padding: @popover-title-padding;
+      font-size: @popover-title-font-size;
+      color: @popover-title-color;
+      border-width: @popover-title-border-width;
+    }
+
+    .popover-content {
+      padding: @popover-content-padding;
+      font-size: @popover-content-font-size;
+      color: @popover-content-color;  
+    }  
+
+    .popover {
+      &.bottom > .arrow,
+      &.top > .arrow {
+        &:after {
+          .margin-left(-@popover-arrow-width;0);
+        }
+      }
+    }
+}

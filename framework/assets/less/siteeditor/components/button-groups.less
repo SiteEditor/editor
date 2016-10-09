@@ -1,0 +1,216 @@
+//
+// Button groups
+// --------------------------------------------------
+
+
+@import "../variables/button-groups.less"; 
+@import "../bootstrap/button-groups.less";
+
+
+
+// Make the div behave like a button
+.btn-toolbar,
+.btn-group,
+.btn-group-vertical{
+  .btn {
+    min-width: 0 !important;
+    padding-left: @btn-group-padding-base-horizontal; 
+    padding-right: @btn-group-padding-base-horizontal;
+  }
+}
+
+
+// Sizing
+//
+
+.btn-group-xs > .btn { &:extend(.btn-xs); padding-left: @btn-group-padding-xs-horizontal; padding-right: @btn-group-padding-xs-horizontal; }
+.btn-group-sm > .btn { &:extend(.btn-sm); padding-left: @btn-group-padding-sm-horizontal; padding-right: @btn-group-padding-sm-horizontal; }
+.btn-group-lg > .btn { &:extend(.btn-lg); padding-left: @btn-group-padding-lg-horizontal; padding-right: @btn-group-padding-lg-horizontal; }
+
+
+// Checkbox and radio options
+//
+
+[data-toggle="buttons"] {
+  > .btn,
+  > .btn-group > .btn {
+    input[type="radio"],
+    input[type="checkbox"] {
+        min-width: 0 !important;
+        padding-left: @btn-group-padding-base-horizontal; 
+        padding-right: @btn-group-padding-base-horizontal;
+    }
+  }
+}
+
+
+//
+// RTL Button groups
+// --------------------------------------------------
+
+.rtl-body{
+
+    // Make the div behave like a button
+    .btn-group,
+    .btn-group-vertical {
+      > .btn {
+        float: right;
+      }
+    }
+
+    // Prevent double borders when buttons are next to each other
+    .btn-group {
+      .btn + .btn,
+      .btn + .btn-group,
+      .btn-group + .btn,
+      .btn-group + .btn-group {
+        margin-right: -1px;
+        margin-left: 0px;
+      }
+    }
+
+    // Optional: Group multiple button groups together for a toolbar
+    .btn-toolbar {
+      margin-right: -5px; // Offset the first child's margin
+      margin-left: 0px;
+      
+      .btn, 
+      .btn-group,
+      .input-group {
+        float: right;
+      }
+      > .btn,
+      > .btn-group,
+      > .input-group {
+        margin-right: 5px;
+        margin-left: 0px;
+      }
+    }
+
+    // Set corners individual because sometimes a single button can be in a .btn-group and we need :first-child and :last-child to both match
+    .btn-group > .btn:first-child {
+      margin-right: 0;
+      &:not(:last-child):not(.dropdown-toggle) {
+        border-top-right-radius: @btn-border-radius-base;
+        border-bottom-right-radius: @btn-border-radius-base;
+        .border-left-radius(0);
+      }
+    }
+    .btn-group-lg > .btn:first-child:not(:last-child):not(.dropdown-toggle){
+        border-top-right-radius: @btn-border-radius-large;
+        border-bottom-right-radius: @btn-border-radius-large;
+    }
+    .btn-group-sm > .btn:first-child:not(:last-child):not(.dropdown-toggle){
+        border-top-right-radius: @btn-border-radius-small;
+        border-bottom-right-radius: @btn-border-radius-small;
+    }
+    .btn-group-xs > .btn:first-child:not(:last-child):not(.dropdown-toggle){
+        border-top-right-radius: @btn-border-radius-xs;
+        border-bottom-right-radius: @btn-border-radius-xs;
+    }
+
+    // Need .dropdown-toggle since :last-child doesn't apply given a .dropdown-menu immediately after it
+    .btn-group > .btn:last-child:not(:first-child),
+    .btn-group > .dropdown-toggle:not(:first-child) {
+        border-top-left-radius: @btn-border-radius-base;
+        border-bottom-left-radius: @btn-border-radius-base;
+      .border-right-radius(0);
+    }
+    .btn-group-lg > .btn:last-child:not(:first-child),
+    .btn-group-lg > .dropdown-toggle:not(:first-child){
+        border-top-left-radius: @btn-border-radius-large;
+        border-bottom-left-radius: @btn-border-radius-large;
+    }
+    .btn-group-sm > .btn:last-child:not(:first-child),
+    .btn-group-sm  > .dropdown-toggle:not(:first-child){
+        border-top-left-radius: @btn-border-radius-small;
+        border-bottom-left-radius: @btn-border-radius-small;
+    }
+    .btn-group-xs > .btn:last-child:not(:first-child),
+    .btn-group-xs > .dropdown-toggle:not(:first-child){ 
+        border-top-left-radius: @btn-border-radius-xs;
+        border-bottom-left-radius: @btn-border-radius-xs;
+    }
+
+    // Custom edits for including btn-groups within btn-groups (useful for including dropdown buttons within a btn-group)
+    .btn-group > .btn-group {
+      float: right;
+    }
+ 
+    .btn-group.btn-group-justified > .btn,
+    .btn-group.btn-group-justified > .btn-group {
+      float: none;
+    }
+
+    .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+      border-radius: 0;
+    }
+    .btn-group > .btn-group:first-child {
+      > .btn:last-child,
+      > .dropdown-toggle {
+        border-top-right-radius: @btn-border-radius-base;
+        border-bottom-right-radius: @btn-border-radius-base;
+        .border-left-radius(0);
+      }
+    }
+    .btn-group > .btn-group-lg:first-child > .btn:last-child,
+    .btn-group > .btn-group-lg:first-child > .dropdown-toggle{
+        border-top-right-radius: @btn-border-radius-large;
+        border-bottom-right-radius: @btn-border-radius-large;
+    }
+    .btn-group > .btn-group-sm:first-child > .btn:last-child,
+    .btn-group > .btn-group-sm:first-child  > .dropdown-toggle{
+        border-top-right-radius: @btn-border-radius-small;
+        border-bottom-right-radius: @btn-border-radius-small;
+    }
+    .btn-group > .btn-group-xs:first-child > .btn:last-child,
+    .btn-group > .btn-group-xs:first-child > .dropdown-toggle{ 
+        border-top-right-radius: @btn-border-radius-xs;
+        border-bottom-right-radius: @btn-border-radius-xs;
+    }
+
+    .btn-group > .btn-group:last-child > .btn:first-child {
+        border-top-left-radius: @btn-border-radius-base;
+        border-bottom-left-radius: @btn-border-radius-base;
+      .border-right-radius(0);
+    }
+    .btn-group > .btn-group-lg:last-child > .btn:first-child{
+        border-top-left-radius: @btn-border-radius-large;
+        border-bottom-left-radius: @btn-border-radius-large;
+    }
+    .btn-group > .btn-group-sm:last-child > .btn:first-child{
+        border-top-left-radius: @btn-border-radius-small;
+        border-bottom-left-radius: @btn-border-radius-small;
+    }
+    .btn-group > .btn-group-xs:last-child > .btn:first-child{ 
+        border-top-left-radius: @btn-border-radius-xs;
+        border-bottom-left-radius: @btn-border-radius-xs;
+    }
+
+    // Reposition the caret
+    .btn .caret {
+      margin-right: 0;
+    }
+
+    // Vertical button groups
+    // ----------------------
+
+    .btn-group-vertical {
+
+      > .btn + .btn,
+      > .btn + .btn-group,
+      > .btn-group + .btn,
+      > .btn-group + .btn-group {
+        margin-top: -1px;
+        margin-right: 0;
+      }
+    }
+
+    .btn-group-vertical > .btn, 
+    .btn-group-vertical > .btn-group, 
+    .btn-group-vertical > .btn-group > .btn {
+        float: none;
+    }
+
+  
+}

@@ -1,0 +1,42 @@
+//
+// Labels
+// --------------------------------------------------
+  
+@import "../variables/labels.less"; 
+@import "../bootstrap/mixins/labels.less";
+@import "../bootstrap/labels.less";
+
+.label {
+  padding: @label-padding;
+  font-size: @label-font-size;
+  font-weight: @label-font-weight;
+  line-height: @label-line-height;
+  .border-radius(@label-border-radius);  
+}
+
+// Colors
+// Contextual variations (linked labels get darker on :hover)
+
+.label-default {
+    color: @label-default-color;
+}
+
+.label-primary {
+    color: @label-primary-color;  
+}  
+
+.label-success {
+    color: @label-success-color;  
+}
+
+.label-info {
+    color: @label-info-color;  
+}
+
+.label-warning {
+    color: @label-warning-color;  
+}
+
+.label-danger {
+    color: @label-danger-color;  
+}

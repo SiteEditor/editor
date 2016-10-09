@@ -1,0 +1,27 @@
+//
+// List groups
+// --------------------------------------------------
+
+.sed-css-component{
+  
+    @import "../variables/list-group.less"; 
+    @import "../bootstrap/mixins/list-group.less";
+    @import "../bootstrap/list-group.less";
+
+	.list-group {
+	  .padding-left(0); // reset padding because ul and ol 
+
+	    [class*="list-group-item-"].list-group-item {
+	        border-color: transparent;
+	    }
+
+		// Contextual variants
+
+		.list-group-item-variant(success; @list-group-success-bg; @list-group-success-text);
+		.list-group-item-variant(info; @list-group-info-bg; @list-group-info-text);
+		.list-group-item-variant(warning; @list-group-warning-bg; @list-group-warning-text);
+		.list-group-item-variant(danger; @list-group-danger-bg; @list-group-danger-text);  
+
+	}
+}
+     

@@ -1,0 +1,360 @@
+// Buttons Sit
+// --------------------------------------------------
+.siteeditor-app .btn{
+  .user-select(auto);
+}
+
+.button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+.wpcf7-submit, 
+.post-password-form input[type="submit"],
+.widget_shopping_cart_content .button.wc-forward,
+.woocommerce-info .button,
+.form-submit input {
+    .btn();
+    .button-variant(@btn-primary-color;@btn-primary-bg; @btn-primary-border);
+
+    &:active,
+    &.active {
+      outline: 0;
+      background-image: none;
+      .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+    }
+}
+
+.woocommerce-message .button{
+    .btn();
+    .button-variant(@btn-success-color;@btn-success-bg; @btn-success-border);
+    &:active,
+    &.active {
+      outline: 0;
+      background-image: none;
+      .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+    }
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"] ,
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"]{
+	&:extend(.form-control);
+	&.input-lg{
+		&:extend(.input-lg);
+	}  
+	&.input-sm{
+		&:extend(.input-sm);  
+	}
+}
+select:focus ,
+textarea:focus ,
+input[type="text"]:focus ,
+input[type="password"]:focus ,
+input[type="datetime"]:focus ,
+input[type="datetime-local"]:focus ,
+input[type="date"]:focus ,
+input[type="month"]:focus ,
+input[type="time"]:focus ,
+input[type="week"]:focus ,
+input[type="number"]:focus ,
+input[type="email"]:focus ,
+input[type="url"]:focus ,
+input[type="search"]:focus ,
+input[type="tel"]:focus ,
+input[type="color"]:focus { 
+	&:extend(.form-control:focus);	
+}
+body textarea {
+    height: auto !important;
+}
+//.module.module-comments .comment-body .comment-text table,
+//.sed-wp-editor-content table
+table {
+ 	.table();
+}
+.fullwidth {
+    width: 100%;
+}
+a {
+    text-decoration: none;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+a:hover,
+a:focus {
+    color: #443f3f;
+    text-decoration: none;
+    outline: 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.img-left {
+    margin: 0 33px 0 0 !important;
+    float: left;
+}
+.img-right {
+    margin: 0 0 0 33px !important;
+    float: right;
+}
+.text-white { color: #fff !important; }
+.text-dark { color: #443f3f !important;}
+.text-color { color: #c9166f;}
+
+input[type="checkbox"] {
+    display: inline;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+}
+@media only screen and (max-width: 780px) {
+    h1 { font-size: 32px;}
+    h2 { font-size: 28px;}
+    h3 { font-size: 22px;}
+    h4 { font-size: 18px;}
+    h5 { font-size: 16px;}
+    h6 { font-size: 14px;}
+}
+
+
+
+
+/*--------------------------------------------------------------
+Preloader
+--------------------------------------------------------------*/
+.preloader {
+    background: none repeat scroll 0 0 #fff;
+    height: 100%;
+    opacity: 1;
+    position: fixed;
+    text-align: center;
+    transition: all 0.2s ease 0s;
+    width: 100%;
+    z-index: 9999;
+}
+.preloader .spinner {
+    height: 40px;
+    left: 50%;
+    margin-left: -20px;
+    margin-top: -20px;
+    position: relative;
+    top: 50%;
+    width: 40px;
+}
+.sk-cube-grid {
+  width: 40px;
+  height: 40px;
+}
+
+.sk-cube-grid .sk-cube {
+  width: 33%;
+  height: 33%;
+  background-color: #c9166f;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+          animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; 
+}
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s; }
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s; }
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1); 
+  }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1);
+  } 
+}
+/*--------------------------------------------------------------
+Go to top button
+--------------------------------------------------------------*/
+.go-top {
+    position: fixed !important;
+    right: 20px;
+    bottom: -45px;
+    color: #fff;
+    display: block;
+    font-size: 22px;
+    line-height: 35px;
+    text-align: center;
+    width: 40px;
+    height: 40px;
+    visibility: hidden;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    z-index: 9999;
+    cursor: pointer;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+	background-color: #c9166f;
+}
+.go-top:hover {
+    background-color: #fff;
+	color: #c9166f;
+}
+.go-top.show {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+    visibility: visible;
+    bottom : 11px;
+}
+
+
+
+
+// Wordpress Css
+
+/*== post content image ==*/
+
+.wp-caption {
+    max-width: 100%;
+
+}
+.sed-wp-editor-content{
+    .clearfix();
+}
+
+.sed-wp-editor-content img {
+    vertical-align: middle;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/*
+.post-password-form label{
+    @media (min-width: 600px){
+        display: inline-block;
+        vertical-align: bottom;
+        min-width: 40%;
+        margin-right: 5px;
+        .rtl-body &{
+            margin-right: 0px;
+            margin-left: 5px;
+        }
+    }
+}
+.post-password-form input[type="password"]{
+    background-color: @body-modules-bg;
+    border: 1px solid @base-border-color;
+    .contrast(@body-bg);
+    .border-radius(4px);
+    box-shadow: 0 0 2px rgba(0,0,0,0.15) inset;
+    padding: @padding-sm @padding-base;
+    &:focus{
+      border: 1px solid @main-color;
+      box-shadow: none;
+    }
+}
+
+.post-password-form input[type="submit"]{
+    @media (min-width: 600px){
+      display: inline-block;
+      vertical-align: bottom;
+    }
+    background-image: none;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: normal;
+    border-radius: 3px;
+    font-size: @font-size-small;
+    line-height: 1.5;
+    padding: @padding-sm @padding-base;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: @main-color;
+    border: 1px solid @main-color;
+    .contrast(@main-color);
+    &:hover{
+      background: none repeat scroll 0 0 @main-color-dark;
+      border: 1px solid @main-color-dark;
+      .contrast(@main-color-dark);
+        a{
+          .contrast(@main-color-dark);
+        }
+    }
+}
+*/
+
+
+
+
+
+

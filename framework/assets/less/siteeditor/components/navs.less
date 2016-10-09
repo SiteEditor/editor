@@ -1,0 +1,103 @@
+//
+// Navs
+// --------------------------------------------------
+.sed-css-component{
+  
+    @import "../variables/navs.less"; 
+    @import "../bootstrap/mixins/nav-divider.less";
+    @import "../bootstrap/navs.less";
+
+
+    // Base class
+    // ------------------------
+    .nav {
+      .padding-left(0); // Override default ul/ol
+      // Open dropdowns
+      .open > a {
+        &,
+        &:hover,
+        &:focus {
+          border-color: @nav-link-hover-bg;
+        }
+      }
+
+    }
+
+    // Tabs
+    // -------------------------
+    .nav-tabs {
+      background-color: @nav-tabs-bg;
+      > li {
+        .alignleft();
+        > a {
+          .margin-right(@nav-tabs-margin-right;auto);
+          color: @nav-tabs-color;
+          border-radius: @nav-tabs-border-radius;
+        }
+      }
+    }
+
+    // Pills
+    // -------------------------
+    .nav-pills {
+      > li {
+        .alignleft();
+        + li {
+          .margin-right(@nav-pills-margin-right;auto);
+        }
+      }
+    }    
+
+    // Stacked pills
+    .nav-stacked {
+      > li {
+        float: none;
+        .rtl-body &{
+            float: none;   
+        }
+        + li {
+          .margin-right(0;auto);
+        }
+      }
+    }
+
+    // Nav variations
+    // ------------------------
+    .nav-justified {
+
+      > .dropdown .dropdown-menu {
+        right: auto;
+      } 
+      &.nav-tabs > li ,
+      &.nav-pills > li {
+        float: none;
+        .rtl-body &{
+            float: none;   
+        }
+      } 
+
+    }  
+      
+    .nav-tabs-justified {   
+        
+      > li > a {
+        border-radius: @nav-tabs-border-radius;
+        .margin-right(0;auto); 
+      }
+
+      @media (min-width: @screen-sm-min) {
+        > li > a {
+          border-radius: @nav-tabs-border-radius;
+        }
+      }
+    }
+
+    .tab-content{
+      background-color: @tab-content-bg;
+      border: @tab-content-border;      
+      border-top: 0px none;
+      padding: @tab-content-padding;
+    }
+
+
+}

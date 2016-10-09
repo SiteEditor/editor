@@ -1,0 +1,137 @@
+//== Forms
+//
+//##
+//** `<input>` background color and box shadow  
+@input-bg:                           @component-bg;
+@input-box-shadow:                   none;
+//** `<input disabled>` background color and placeholder text color
+@input-bg-disabled:                  darken(@input-bg,3%);  
+@input-color-placeholder-disabled:    @text-color-light;   
+
+//** Text color for `<input>`s
+@input-color:                        @headings-color;
+//** `<input>` border color , border width and border style
+@input-border:                       @base-border-color;   
+@input-border-width:                 1px;
+@input-border-style:                 solid;
+
+
+// TODO: Rename `@input-border-radius` to `@input-border-radius-base` in v4
+//** Default `.form-control` border radius
+// This has no effect on `<select>`s in some browsers, due to the limited stylability of `<select>`s in CSS.
+@input-border-radius:                @border-radius-base;  
+//** Large `.form-control` border radius
+@input-border-radius-large:          @border-radius-large;
+//** Small `.form-control` border radius
+@input-border-radius-small:          @border-radius-small; 
+
+//** `.form-control` padding
+@input-padding-base-vertical:        @padding-base-vertical;
+@input-padding-base-horizontal:      @padding-base-horizontal;
+//** Large `.form-control` padding
+@input-padding-large-vertical:       @padding-large-vertical;
+@input-padding-large-horizontal:     @padding-large-horizontal; 
+//** Small `.form-control` padding
+@input-padding-small-vertical:       @padding-small-vertical; 
+@input-padding-small-horizontal:     @padding-small-horizontal; 
+
+//** `.form-control` font size
+@input-font-size-base:               @font-size-base; 
+//** Large `.form-control` font size
+@input-font-size-large:              @font-size-large;
+//** Small `.form-control` font size 
+@input-font-size-small:              @font-size-small; 
+
+//** `.form-control` line height
+@input-line-height-base:             @line-height-base; 
+//** Large `.form-control` line height
+@input-line-height-large:            @line-height-large; 
+//** Small `.form-control` line height
+@input-line-height-small:            @line-height-small; 
+
+
+//** background color , Border color and box shadow for inputs on focus
+@input-bg-focus:                     @body-bg;
+@input-border-focus:                 @input-border;
+@input-box-shadow-focus:             none;
+
+//** Placeholder text color
+@input-color-placeholder:            mix(contrast(@input-bg),@input-bg,55%); 
+
+//** Default `.form-control` height
+@input-height-base:                  (@line-height-computed + (@input-padding-base-vertical * 2) + 2);
+//** Large `.form-control` height
+@input-height-large:                 (ceil(@input-font-size-large * @input-line-height-large) + (@input-padding-large-vertical * 2) + 2);
+//** Small `.form-control` height
+@input-height-small:                 (floor(@input-font-size-small * @input-line-height-small) + (@input-padding-small-vertical * 2) + 2);
+
+//** `.form-group` margin
+@form-group-margin-bottom:           15px;
+
+@legend-color:                       @headings-color;
+@legend-border-color:                @base-border-color;  
+@legend-border:                      1px solid @legend-border-color; 
+
+//** Disabled cursor for form controls and buttons.
+@cursor-disabled:                    not-allowed; 
+//** Help text color                       
+@help-block-color:                   @text-color-light;
+
+
+
+// input groups
+//
+//##
+
+//** Background color for textual input addons
+@input-group-addon-bg:               @component-bg-b;
+//** Border color for textual input addons
+@input-group-addon-border-color:     @input-border;
+@input-group-addon-border:           1px solid @input-group-addon-border-color;
+
+@input-addon-padding-base-vertical:      @padding-base-vertical;
+@input-addon-padding-base-horizontal:    @padding-base-horizontal;
+
+
+@input-addon-padding-large-vertical:     @padding-large-vertical;
+@input-addon-padding-large-horizontal:   @padding-large-horizontal;
+
+
+@input-addon-padding-small-vertical:     @padding-small-vertical;
+@input-addon-padding-small-horizontal:   @padding-small-horizontal;
+
+
+@input-addon-font-size-base:             @font-size-base;
+@input-addon-font-size-small:            @font-size-small;
+@input-addon-font-size-large:            @font-size-large;    
+
+
+
+@input-btn-padding-base-vertical:        @padding-base-vertical;
+@input-btn-padding-base-horizontal:      @padding-base-horizontal;
+
+
+@input-btn-padding-large-vertical:       @padding-large-vertical;
+@input-btn-padding-large-horizontal:     @padding-large-horizontal;
+
+
+@input-btn-padding-small-vertical:       @padding-small-vertical;
+@input-btn-padding-small-horizontal:     @padding-small-horizontal;
+
+
+// Feedback states            
+                
+@input-success-text:                     @success-text-color;    
+@input-success-bg:                       @brand-success;   
+@input-success-border:                   @brand-success;                
+@input-success-color:                    @brand-success;    
+                
+@input-warning-text:                     @warning-text-color;    
+@input-warning-bg:                       @brand-warning; 
+@input-warning-border:                   @brand-warning;                
+@input-warning-color:                    @brand-warning;      
+                
+@input-danger-text:                      @danger-text-color;    
+@input-danger-bg:                        @brand-danger;   
+@input-danger-border:                    @brand-danger;                 
+@input-danger-color:                     @brand-danger;   

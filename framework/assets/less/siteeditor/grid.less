@@ -1,29 +1,19 @@
-@import "mixins/grid-framework.less";
-@import "mixins/grid.less";
-
 //
 // Grid system
 // --------------------------------------------------
 
+@import "bootstrap/grid.less"; 
 
 // Container widths
 //
 // Set the container width, and override it for fixed navbars in media queries.
 
 .container {
-  .container-fixed();
-
-  @media (min-width: @screen-sm-min) {
-    width: @container-sm;
-  }
-  @media (min-width: @screen-md-min) {
-    width: @container-md;
-  }
-  @media (min-width: @screen-lg-min) {
-    width: @container-lg;
-  }
+    //max-width: 100%;
+    //margin: 0 auto;
+    //padding: 0;
 }
-
+   
 
 // Fluid container
 //
@@ -31,24 +21,21 @@
 // width for fluid, full width layouts.
 
 .container-fluid {
-  .container-fixed();
+    //max-width: 100%;
+    //margin: 0 auto;
+    //padding: 0;
 }
 
-
-// Row
 //
-// Rows contain and clear the floats of your columns.
-
-.row {
-  .make-row();
-}
+// RTL Grid system
+// --------------------------------------------------
 
 
 // Columns
 //
 // Common styles for small and large grid columns
 
-.make-grid-columns();
+.make-rtl-grid-columns();
 
 
 // Extra small grid
@@ -56,7 +43,7 @@
 // Columns, offsets, pushes, and pulls for extra small devices like
 // smartphones.
 
-.make-grid(xs);
+.make-rtl-grid(xs);
 
 
 // Small grid
@@ -65,7 +52,7 @@
 // to tablets.
 
 @media (min-width: @screen-sm-min) {
-  .make-grid(sm);
+  .make-rtl-grid(sm);
 }
 
 
@@ -74,7 +61,7 @@
 // Columns, offsets, pushes, and pulls for the desktop device range.
 
 @media (min-width: @screen-md-min) {
-  .make-grid(md);
+  .make-rtl-grid(md);
 }
 
 
@@ -83,9 +70,6 @@
 // Columns, offsets, pushes, and pulls for the large desktop device range.
 
 @media (min-width: @screen-lg-min) {
-  .make-grid(lg);
+  .make-rtl-grid(lg);
 }
-
-
-
 

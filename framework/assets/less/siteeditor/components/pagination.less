@@ -1,0 +1,117 @@
+//
+// Pagination (multiple pages)
+// --------------------------------------------------
+
+
+.sed-css-component{
+  
+    @import "../variables/pagination.less"; 
+    @import "../bootstrap/mixins/pagination.less";
+    @import "../bootstrap/pagination.less";
+
+
+    .pagination{
+        margin: 0;
+        > li{ 
+            > a, 
+            > span {
+                font-size: @pagination-font-size;
+                border-width: @pagination-border-width;
+                .alignleft();
+                .border-radius(@pagination-li-border-radius);
+            }
+            &:first-child {
+              > a,
+              > span {
+                .border-left-radius(@pagination-border-radius);
+                .rtl-body &{
+                    .border-left-radius(@pagination-li-border-radius);
+                    .border-right-radius(@pagination-border-radius);                    
+                }
+              }
+            }
+            &:last-child {
+              > a,
+              > span {
+                .border-right-radius(@pagination-border-radius);
+                .rtl-body &{
+                    .border-left-radius(@pagination-border-radius);
+                    .border-right-radius(@pagination-li-border-radius);                   
+                }
+              }
+            } 
+        }      
+    }
+    // Large
+    .pagination-lg {
+        .pagination-size(@padding-large-vertical; @padding-large-horizontal; @pagination-font-size-large; @line-height-large; @pagination-border-radius-large);
+        > li{
+            > a, 
+            > span {
+                .border-radius(@pagination-li-border-radius-small); 
+            }
+            &:first-child {
+              > a,
+              > span {
+                .rtl-body &{
+                    .border-left-radius(@pagination-li-border-radius-small);
+                    .border-right-radius(@pagination-border-radius-small);                    
+                }
+              }
+            }
+            &:last-child {
+              > a,
+              > span {
+                .rtl-body &{
+                    .border-left-radius(@pagination-border-radius-small);
+                    .border-right-radius(@pagination-li-border-radius-small);                   
+                }
+              }
+            } 
+        }  
+    }
+
+    // Small
+    .pagination-sm {
+        .pagination-size(@padding-small-vertical; @padding-small-horizontal; @pagination-font-size-small; @line-height-small; @pagination-border-radius-small);
+        > li{
+            > a, 
+            > span {
+                .border-radius(@pagination-li-border-radius-large); 
+            }
+            &:first-child {
+              > a,
+              > span {
+                .rtl-body &{
+                    .border-left-radius(@pagination-li-border-radius-large);
+                    .border-right-radius(@pagination-border-radius-large);                    
+                }
+              }
+            }
+            &:last-child {
+              > a,
+              > span {
+                .rtl-body &{
+                    .border-left-radius(@pagination-border-radius-large);
+                    .border-right-radius(@pagination-li-border-radius-large);                   
+                }
+              }
+            } 
+        } 
+    }
+    .pagination.pagination-lg ,  
+    .pagination.pagination-sm ,  
+    .pagination{
+        > li > a, 
+        > li > span {
+            margin-left: 0;
+            margin: 0 2px;
+            padding: 0;
+            height: 2.2em;
+            width: 2.2em;
+            line-height: 2.1em;
+            text-align: center;
+        }
+    }
+
+}
