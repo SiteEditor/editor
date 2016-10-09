@@ -42,6 +42,12 @@
     vertical-align: top;
     box-sizing: border-box;
     margin: 0 !important;
+    text-align: initial;
+}
+table.sed-cols-table, 
+table.sed-cols-table > tbody > tr > th, 
+table.sed-cols-table > tbody > tr > td {
+    border: 0 none;
 }
 
 .sed-app-editor .sed-column-pb,
