@@ -105,11 +105,11 @@ class PBWoocommerceBestSellingShortcode extends PBShortcodeClass{
 
         $settings = array(
             "per_page"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("number","site-editor"),
-                "desc"      => __('This option allows you to set the maximum number of products to show.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option allows you to set the maximum number of products to show.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                     //"max"  =>  50
                 ),
@@ -118,11 +118,11 @@ class PBWoocommerceBestSellingShortcode extends PBShortcodeClass{
             ),
 
             "woo_number_columns"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("columns","site-editor"),
-                "desc"      => __('This option is only available when the type is set to grid or masonry. It is used to set the number of columns.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option is only available when the type is set to grid or masonry. It is used to set the number of columns.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                     //"max"  =>  8
                 ),

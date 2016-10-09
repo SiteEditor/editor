@@ -128,7 +128,7 @@ class PBWoocommerceProductModuleShortcode extends PBShortcodeClass{
         $this->add_panel( 'product_settings_panel' , array(
             'title'         =>  __('Product Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -137,15 +137,15 @@ class PBWoocommerceProductModuleShortcode extends PBShortcodeClass{
             "field_value"    => array(
                 "type"      => "text",
                 "label"     => __("Id or sku","site-editor"),
-                "desc"      => __('This option allows you to set the product id or sku.',"site-editor"),  
+                "description"  => __('This option allows you to set the product id or sku.',"site-editor"),  
                 "panel"     => "product_settings_panel",
             ),
 
             "field_key"   => array(
                 "type"      => "select",
                 "label"     => __("field","site-editor"),
-                "desc"      => __('This option allows you to set if you are using id or sku of the product.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This option allows you to set if you are using id or sku of the product.',"site-editor"),
+                "choices"   => array(
                     "id"         =>__("Id","site-editor"),
                     "sku"          =>__("Sku","site-editor")
                 ),
@@ -155,8 +155,8 @@ class PBWoocommerceProductModuleShortcode extends PBShortcodeClass{
             "product_skin"      => array(
                 "type"      => "select",
                 "label"     => __("product skin","site-editor"),
-                "desc"      => __('This option allows you to set the skin for your products. There are 3 skins available.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This option allows you to set the skin for your products. There are 3 skins available.',"site-editor"),
+                "choices"   => array(
                     "default"         =>__("default","site-editor"),
                     "skin1"           =>__("skin1","site-editor"),
                     "skin2"           =>__("skin2","site-editor"),
@@ -167,8 +167,8 @@ class PBWoocommerceProductModuleShortcode extends PBShortcodeClass{
             "woo_product_boundary"         => array(
                 "type"              => "checkbox",
                 "label"             => __("product boundary","site-editor"),
-                "desc"              => __('This option allows you to set if your products should have borders or not.',"site-editor"),
-                "control_param"  =>  array(
+                "description"       => __('This option allows you to set if your products should have borders or not.',"site-editor"),
+                "js_params"  =>  array(
                     "force_refresh"   =>   true
                 ),
                 "panel"     => "product_settings_panel",
@@ -184,8 +184,8 @@ class PBWoocommerceProductModuleShortcode extends PBShortcodeClass{
             'using_size' => array(
                 'type' => 'select',
                 'label' => __('image Size', 'site-editor'),
-                'desc' => __('you may choose a good size for you image from available sizes. For each image, depending to the original size of image, all sizes or number of them are available, and you can choose a size which is suitable for image’s location.', 'site-editor'),
-                'options' => array() ,
+                'description'  => __('you may choose a good size for you image from available sizes. For each image, depending to the original size of image, all sizes or number of them are available, and you can choose a size which is suitable for image’s location.', 'site-editor'),
+                'choices'   => array() ,
                 'atts'          =>   array(
                     'class'         =>  "sed-all-attachments-sizes"
                 ),
@@ -193,12 +193,12 @@ class PBWoocommerceProductModuleShortcode extends PBShortcodeClass{
              'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ),    
             "align"  =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             ),
             "animation"  =>  array(
                 "type"          => "animation" ,

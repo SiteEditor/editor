@@ -201,7 +201,7 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
         $this->add_panel( 'categories_settings_panel' , array(
             'title'         =>  __('Categories Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -209,7 +209,7 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
         $this->add_panel( 'carousel_settings_panel' , array(
             'title'         =>  __('Carousel Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 10 ,
         ) );
@@ -219,13 +219,13 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             "type"      => array(
                 "type"      => "select",
                 "label"     => __("type","site-editor"),
-                "desc"      => __('This option allows you to set the module layout. The options to choose from are grid and masonry.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This option allows you to set the module layout. The options to choose from are grid and masonry.',"site-editor"),
+                "choices"   => array(
                     "grid"             =>__("grid","site-editor"),
                     "carousel"         =>__("carousel","site-editor"),
                     "masonry"          =>__("masonry","site-editor")
                 ),
-                "control_param"  =>  array(
+                "js_params"  =>  array(
                     "force_refresh"   =>   true
                 ),
                 "panel"     => "categories_settings_panel",
@@ -234,8 +234,8 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             "orderby"   => array(
                 "type"      => "select",
                 "label"     => __("order by","site-editor"),
-                "desc"      => __('This option allows you to set how the products are sorted. The available options are random, date and title.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This option allows you to set how the products are sorted. The available options are random, date and title.',"site-editor"),
+                "choices"   => array(
                     "title"         =>__("Title","site-editor"),
                     "date"          =>__("Date","site-editor"),
                     "rand"          =>__("Random","site-editor"),
@@ -246,30 +246,30 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             "order"   => array(
                 "type"      => "select",
                 "label"     => __("order","site-editor"),
-                "desc"      => __('This option allows you to set if the list should be sorted ascending or descending.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This option allows you to set if the list should be sorted ascending or descending.',"site-editor"),
+                "choices"   => array(
                     "ASC"         =>__("ASC","site-editor"),
                     "DESC"        =>__("DESC","site-editor")
                 ),
                 "panel"     => "categories_settings_panel",
             ),
             "number"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("number","site-editor"),
-                "desc"      => __('This option allows you to set the maximum number of products to show.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option allows you to set the maximum number of products to show.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                 ),
                 "panel"     => "categories_settings_panel",
             ),
 
             "columns"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("columns","site-editor"),
-                "desc"      => __('This option is only available when the type is set to grid or masonry. It is used to set the number of columns.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option is only available when the type is set to grid or masonry. It is used to set the number of columns.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                     //"max"  =>  8
                 ),
@@ -286,11 +286,11 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             ),
 
             "woo_category_spacing"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 'after_field'       => 'px',
                 "label"             => __("Spacing ","site-editor"),
-                "desc"              => __('This option allows you to set the space between products in pixels.',"site-editor"),
-                "control_param"  =>  array(
+                "description"       => __('This option allows you to set the space between products in pixels.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                     "max"  =>  100 ,
                     "step"  =>  5
@@ -299,28 +299,28 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             ),
 
             'carousel_slides_to_show' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field' => '&emsp;',
                 'label' => __('Slide To Show', 'site-editor'),
-                'desc' => __('', 'site-editor'),
+                'description'  => __('', 'site-editor'),
                 "panel"     => "carousel_settings_panel",                
                 "dependency"  => $carousel_dependency,
             ),
 
             'carousel_slides_to_scroll' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'after_field' => '&emsp;',
                 'label' => __('Slide To Scroll', 'site-editor'),
-                'desc' => __('', 'site-editor'),
+                'description'  => __('', 'site-editor'),
                 "panel"     => "carousel_settings_panel",                        
                 "dependency"  => $carousel_dependency,
             ),
 
             'carousel_autoplay_speed'       => array(
-                'type'  => 'spinner' ,
+                'type'  => 'number' ,
                 'after_field'       => 'ms',
                 'label' => __( 'Auto Play Speed' , 'site-editor' ) ,
-                'desc'  => __( '' , 'site-editor' ) ,
+                'description'  => __( '' , 'site-editor' ) ,
                 "panel"     => "carousel_settings_panel",                 
                 "dependency"  => $carousel_dependency,
             ),
@@ -328,7 +328,7 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             'carousel_infinite'            => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Infinite' , 'site-editor' ) ,
-                'desc'  => __( '' , 'site-editor' ) ,
+                'description'  => __( '' , 'site-editor' ) ,
                 "panel"     => "carousel_settings_panel",                
                 "dependency"  => $carousel_dependency,
             ),
@@ -336,7 +336,7 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             'carousel_dots'          => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Show Dots Nav' , 'site-editor' ) ,
-                'desc'  => __( '' , 'site-editor' ) ,
+                'description'  => __( '' , 'site-editor' ) ,
                 "panel"     => "carousel_settings_panel",                 
                 "dependency"  => $carousel_dependency,
             ),
@@ -344,7 +344,7 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             'carousel_autoplay'            => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Auto Play' , 'site-editor' ) ,
-                'desc'  => __( '' , 'site-editor' ) ,
+                'description'  => __( '' , 'site-editor' ) ,
                 "panel"     => "carousel_settings_panel",               
                 "dependency"  => $carousel_dependency,
             ),
@@ -352,7 +352,7 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             'carousel_pause_on_hover'        => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Pause On Hover' , 'site-editor' ) ,
-                'desc'  => __( '' , 'site-editor' ) ,
+                'description'  => __( '' , 'site-editor' ) ,
                 "panel"     => "carousel_settings_panel",                 
                 "dependency"  => $carousel_dependency,
             ),
@@ -360,15 +360,15 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             'carousel_draggable'           => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Draggable Mode' , 'site-editor' ) ,
-                'desc'  => __( '' , 'site-editor' ) ,
+                'description'  => __( '' , 'site-editor' ) ,
                 "panel"     => "carousel_settings_panel",               
                 "dependency"  => $carousel_dependency,
             ),
             'using_size' => array(
                 'type' => 'select',
                 'label' => __('Image Size', 'site-editor'),
-                'desc' => __('you may choose a good size for you image from available sizes. For each image, depending to the original size of image, all sizes or number of them are available, and you can choose a size which is suitable for image’s location.', 'site-editor'),
-                'options' => array(),
+                'description'  => __('you may choose a good size for you image from available sizes. For each image, depending to the original size of image, all sizes or number of them are available, and you can choose a size which is suitable for image’s location.', 'site-editor'),
+                'choices'   => array(),
                 'atts'          =>   array(
                     'class'         =>  "sed-all-attachments-sizes"
                 )
@@ -376,7 +376,7 @@ class PBWoocommerceCategoriesShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "skin"          => 'skin_refresh',
             "animation"  =>  array(

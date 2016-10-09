@@ -124,7 +124,7 @@ class PBWoocommerceproductAttributeShortcode extends PBShortcodeClass{
             "attribute"      => array(
                 "type"              => "text",
                 "label"             => __("Attribute","site-editor"),
-                "desc"              => __('This option allows you to set which attribute of a product to use for listing products. Color is an example you can use here.',"site-editor"),
+                "description"       => __('This option allows you to set which attribute of a product to use for listing products. Color is an example you can use here.',"site-editor"),
                 "panel"     => "products_settings_panel",
                 'priority'      => 10 ,
             ),
@@ -132,17 +132,17 @@ class PBWoocommerceproductAttributeShortcode extends PBShortcodeClass{
             "filter"      => array(
                 "type"              => "text",
                 "label"             => __("Filter","site-editor"),
-                "desc"              => __('This option allows you to filter products based on a specific attribute. Imagine you would like to show all products with color set to green.
+                "description"       => __('This option allows you to filter products based on a specific attribute. Imagine you would like to show all products with color set to green.
                                     <br /> Please note that you should add the name of the attribute in the previous field and the filter value in this field. For our example, you should use color in attribute and green in filter.',"site-editor"),
                 "panel"     => "products_settings_panel",
                 'priority'      => 11 ,
             ),
             "per_page"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("number","site-editor"),
-                "desc"      => __('This option allows you to set the maximum number of products to show.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option allows you to set the maximum number of products to show.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                     //"max"  =>  50
                 ),
@@ -151,11 +151,11 @@ class PBWoocommerceproductAttributeShortcode extends PBShortcodeClass{
             ),
 
             "woo_number_columns"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("columns","site-editor"),
-                "desc"      => __('This option is only available when the type is set to grid or masonry. It is used to set the number of columns.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option is only available when the type is set to grid or masonry. It is used to set the number of columns.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                     //"max"  =>  8
                 ),
@@ -175,8 +175,8 @@ class PBWoocommerceproductAttributeShortcode extends PBShortcodeClass{
             "orderby"   => array(
                 "type"      => "select",
                 "label"     => __("order by","site-editor"),
-                "desc"      => __('This option allows you to set how the products are sorted. The available options are random, date and title.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This option allows you to set how the products are sorted. The available options are random, date and title.',"site-editor"),
+                "choices"   => array(
                     "title"         =>__("Title","site-editor"),
                     "date"          =>__("Date","site-editor"),
                     "rand"          =>__("Random","site-editor"),
@@ -187,8 +187,8 @@ class PBWoocommerceproductAttributeShortcode extends PBShortcodeClass{
             "order"   => array(
                 "type"      => "select",
                 "label"     => __("order","site-editor"),
-                "desc"      => __('This option allows you to set if the list should be sorted ascending or descending.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This option allows you to set if the list should be sorted ascending or descending.',"site-editor"),
+                "choices"   => array(
                     "asc"         =>__("ASC","site-editor"),
                     "desc"        =>'',//__("DESC","site-editor")
                 ),
