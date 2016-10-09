@@ -452,7 +452,6 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
     function shortcode_settings(){
 
         $this->add_panel( 'banner_settings_panel' , array(
-            'label'         =>  __('Banner Settings',"site-editor") ,
             'title'         =>  __('Banner Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
             'type'          => 'inner_box' ,
@@ -461,7 +460,6 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
         ) );
 
         $this->add_panel( 'tab_items_settings_panel' , array(
-            'label'         =>  __('Tab Items Settings',"site-editor")  ,
             'title'         =>  __('Tab Items Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
             'type'          => 'inner_box' ,
@@ -508,7 +506,7 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
             'title' =>  array(
                 'type'          => 'text',
                 'label'         => __('Title', 'site-editor'),
-                'desc'          => __('This option allows you to set a title for your Module.', 'site-editor'),
+                'description'   => __('This option allows you to set a title for your Module.', 'site-editor'),
             ),
 
             'title_icon' =>  array(
@@ -521,14 +519,14 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
             'color' => array(
        			'type'  => 'color',
       			'label' => __('Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set whatever color you would like for the tab style.', 'site-editor'),
+      			'description'  => __('This option allows you to set whatever color you would like for the tab style.', 'site-editor'),
             ),
 
             'style' => array(
       			'type'  => 'select',
       			'label' => __('Tab Style', 'site-editor'),
-      			'desc'  => __("This option allows you to have tab in two diffrent style", "site-editor"),
-                'options' =>array(
+      			'description'  => __("This option allows you to have tab in two diffrent style", "site-editor"),
+                'choices'   =>array(
                     'one_row'     => __('One Row', 'site-editor'),
                     'two_row'     => __('TWo Row', 'site-editor'),
                 ),
@@ -537,8 +535,8 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
             'category' => array(
       			'type'  => 'select',
       			'label' => __('Select Category', 'site-editor'),
-      			'desc'  => __("Select Product Category or shop", "site-editor"),
-                'options' => array(
+      			'description'  => __("Select Product Category or shop", "site-editor"),
+                'choices'   => array(
                     ""  =>  __("Select Categories" , "site-editor")
                 ),//$categories,
                 'panel'         => 'tab_items_settings_panel',
@@ -547,33 +545,33 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
             /*"tab_items"  => array(
                 'type' => 'select',//'checkbox',
                 'label' => __('Manage Tab Items', 'site-editor'),
-                'desc' => __('Manage add , remove and sort Tab Items', 'site-editor'),
-                'options' => $default_tab_items,
+                'description'  => __('Manage add , remove and sort Tab Items', 'site-editor'),
+                'choices'   => $default_tab_items,
                 "subtype"           => "multiple" ,//'subtype' =>  'multi',
                 'panel'         => 'tab_items_settings_panel',
                 /*'atts' => array(
                     "class"  =>  "custom-select"
                 ) */
                 //'priority'      => 4
-                /*"control_param" => array(
+                /*"js_params" => array(
                     "options_selector"   =>  ".sed-bp-checkbox-input"
                 )*/
             /*),
 
             "tab_items_order"  => array(
                 'type' => 'custom',//'checkbox',
-                'in_box' => true ,
-                'html'  => $tab_items_order_html,
-                'control_type'  => 'woo_tab_order',
+                'has_border_box' => true ,
+                'custom_template'  => $tab_items_order_html,
+                'js_type'       => 'woo_tab_order',
                 'panel'         => 'tab_items_settings_panel',
             ), */
 
 
             "tab_items"  => array(
                 'type' => 'custom',//'checkbox',
-                'in_box' => true ,
-                'html'  => $tab_items_order_html,
-                'control_type'  => 'woo_tab_order',
+                'has_border_box' => true ,
+                'custom_template'  => $tab_items_order_html,
+                'js_type'       => 'woo_tab_order',
                 'panel'         => 'tab_items_settings_panel',
             ),
 
@@ -588,15 +586,15 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
                 'type'          => 'text',
                 'placeholder'   => 'E.g www.site-editor.com' ,
                 'label'         => __('Banner Link : ', 'site-editor'),
-                'desc'          => __('Add Link to Banner, if it is empty , return category or shop link', 'site-editor') ,
+                'description'   => __('Add Link to Banner, if it is empty , return category or shop link', 'site-editor') ,
                 'panel'         => 'banner_settings_panel',
             ),
             "banner_width"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 'after_field'       => 'px',
                 "label"             => __("Banner Width ","site-editor"),
-                "desc"              => __('',"site-editor"),
-                "control_param"  =>  array(
+                "description"       => __('',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                 ),
                 "panel"     => "banner_settings_panel",
@@ -604,39 +602,39 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
             /*'banner_title1' =>  array(
                 'type'          => 'text',
                 'label'         => __('Banner Title1', 'site-editor'),
-                'desc'          => __('This option allows you to set a title for your Banner.', 'site-editor'),
+                'description'   => __('This option allows you to set a title for your Banner.', 'site-editor'),
                 'panel'         => 'banner_settings_panel',
             ),
             'banner_title2' =>  array(
                 'type'          => 'text',
                 'label'         => __('Banner Title2', 'site-editor'),
-                'desc'          => __('This option allows you to set a title for your Banner.', 'site-editor'),
+                'description'   => __('This option allows you to set a title for your Banner.', 'site-editor'),
                 'panel'         => 'banner_settings_panel',
             ),
             'banner_button_show' => array(
                 'type' => 'checkbox',
                 'label' => __('Show Button', 'site-editor'),
-                'desc' => __('This option allows you to show or hide the button in banner.', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the button in banner.', 'site-editor'),
                 'panel'    => 'banner_settings_panel',
             ),
             'banner_button_text' =>  array(
                 'type'          => 'Button Text',
                 'label'         => __('Title', 'site-editor'),
-                'desc'          => __('This option allows you to set a text for banner.', 'site-editor'),
+                'description'   => __('This option allows you to set a text for banner.', 'site-editor'),
                 'panel'         => 'banner_settings_panel',
             ),  */
             'using_size' => array(
                 'type'  => 'select',
                 'label' => __('Banner Using Size', 'site-editor'),
-                'desc'  => __('When you upload an image, it will be automatically resized to some predefined sizes. This option will load the best available image size based on its position on the page. Using this option will increase your website�s performance.', 'site-editor'),
-                'options' => array() ,
+                'description'  => __('When you upload an image, it will be automatically resized to some predefined sizes. This option will load the best available image size based on its position on the page. Using this option will increase your website�s performance.', 'site-editor'),
+                'choices'   => array() ,
                 'panel'    => 'banner_settings_panel',
             ),
             'product_style' => array(
       			'type'  => 'select',
       			'label' => __('Product Style', 'site-editor'),
-      			'desc'  => __("This option allows you to have product in two diffrent style", "site-editor"),
-                'options' =>array(
+      			'description'  => __("This option allows you to have product in two diffrent style", "site-editor"),
+                'choices'   =>array(
                     ''                    => __('Default', 'site-editor'),
                     'product-style-2'     => __('Style 1', 'site-editor'),
                 ),
@@ -644,14 +642,14 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
             'using_carousel' => array(
                 'type' => 'checkbox',
                 'label' => __('Using Carousel', 'site-editor'),
-                'desc' => __('This option allows you to show or hide the using carousel for One Row Style Only', 'site-editor'),
+                'description'  => __('This option allows you to show or hide the using carousel for One Row Style Only', 'site-editor'),
             ),
             "per_page"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("number","site-editor"),
-                "desc"      => __('This option allows you to set the maximum number of products to show.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option allows you to set the maximum number of products to show.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  4 ,
                     //"max"  =>  50
                 ),
@@ -661,8 +659,8 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
             "columns"    => array(
       			'type'  => 'select',
       			'label' => __('Select Columns', 'site-editor'),
-      			'desc'  => __("This option allows you to have tab in two diffrent style", "site-editor"),
-                'options' =>array(
+      			'description'  => __("This option allows you to have tab in two diffrent style", "site-editor"),
+                'choices'   =>array(
                     3     => 3,
                     4     => 4,
                 ),
@@ -670,7 +668,7 @@ class PBWoocommerceProductsTabShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
 
         );

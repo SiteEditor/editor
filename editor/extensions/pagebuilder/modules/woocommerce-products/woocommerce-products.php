@@ -128,23 +128,23 @@ class PBWooProductsShortcode extends PBShortcodeClass{
             "ids"      => array(
                 "type"      => "text",
                 "label"     => __("ids","site-editor"),
-                "desc"      => __('This option allows you to show more products on your page using their ids. The ids should be comma separated like 1,2,3,4,5.',"site-editor"),
+                "description"  => __('This option allows you to show more products on your page using their ids. The ids should be comma separated like 1,2,3,4,5.',"site-editor"),
                 "panel"     => "products_settings_panel",
             ),
 
             "skus"      => array(
                 "type"      => "text",
                 "label"     => __("skus","site-editor"),
-                "desc"      => __('This option allows you to show more products on your page using their skus. The skus should be comma separated like foo,bar,baz.',"site-editor"),
+                "description"  => __('This option allows you to show more products on your page using their skus. The skus should be comma separated like foo,bar,baz.',"site-editor"),
                 "panel"     => "products_settings_panel",
             ),
 
             "per_page"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("Number","site-editor"),
-                "desc"      => __('This option allows you to set the maximum number of products to show.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option allows you to set the maximum number of products to show.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                     //"max"  =>  50
                 ),
@@ -153,11 +153,11 @@ class PBWooProductsShortcode extends PBShortcodeClass{
             ),
 
             "woo_number_columns"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 'after_field' => '&emsp;',
                 "label"     => __("columns","site-editor"),
-                "desc"      => __('This option is only available when the type is set to grid or masonry. It is used to set the number of columns.',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('This option is only available when the type is set to grid or masonry. It is used to set the number of columns.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                     //"max"  =>  8
                 ),
@@ -177,8 +177,8 @@ class PBWooProductsShortcode extends PBShortcodeClass{
             "orderby"   => array(
                 "type"      => "select",
                 "label"     => __("order by","site-editor"),
-                "desc"      => __('This option allows you to set how the products are sorted. The available options are random, date and title.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This option allows you to set how the products are sorted. The available options are random, date and title.',"site-editor"),
+                "choices"   => array(
                     "title"         =>__("Title","site-editor"),
                     "date"          =>__("Date","site-editor"),
                     "rand"          =>__("Random","site-editor"),
@@ -189,8 +189,8 @@ class PBWooProductsShortcode extends PBShortcodeClass{
             "order"   => array(
                 "type"      => "select",
                 "label"     => __("order","site-editor"),
-                "desc"      =>__('This option allows you to set if the list should be sorted ascending or descending.',"site-editor"),
-                "options"   => array(
+                "description"  =>__('This option allows you to set if the list should be sorted ascending or descending.',"site-editor"),
+                "choices"   => array(
                     "asc"         =>__("ASC","site-editor"),
                     "desc"        => '',// __("DESC","site-editor")
                 ),
