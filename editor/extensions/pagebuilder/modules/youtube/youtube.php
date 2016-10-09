@@ -78,7 +78,7 @@ class PBYoutubeShortcode extends PBShortcodeClass{
         $this->add_panel( 'youtube_settings_panel' , array(
             'title'         =>  __('Youtube Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -88,42 +88,42 @@ class PBYoutubeShortcode extends PBShortcodeClass{
     		'video_id' => array(
     			'type' => 'text',
     			'label' => __('Video Id', 'site-editor'),
-    			'desc' => __('The id of the video you want to insert. For example, the Video ID for http://www.youtube.com/LOfeCR7KqUs is LOfeCR7KqUs.', 'site-editor'),
+    			'description'  => __('The id of the video you want to insert. For example, the Video ID for http://www.youtube.com/LOfeCR7KqUs is LOfeCR7KqUs.', 'site-editor'),
                 'panel'    => 'youtube_settings_panel',
     		),
 
     		'autoplay' => array(
     			'type' => 'checkbox',
     			'label' => __('Autoplay', 'site-editor'),
-    			'desc' => __('This feature allows you to choose whether or not you want to the video be played automatically.', 'site-editor'),
+    			'description'  => __('This feature allows you to choose whether or not you want to the video be played automatically.', 'site-editor'),
                 'panel'    => 'youtube_settings_panel',
     		),
 
     		'loop' => array(
     			'type' => 'checkbox',
     			'label' => __('Loop', 'site-editor'),
-    			'desc' => __('The Loop Video option allows you to loop the video or not.', 'site-editor'),
+    			'description'  => __('The Loop Video option allows you to loop the video or not.', 'site-editor'),
                 'panel'    => 'youtube_settings_panel',
     		),
 
     		'light_theme' => array(
     			'type' => 'checkbox',
     			'label' => __('Light control bar', 'site-editor'),
-    			'desc' => __('If this feature is enabled, you can have bright colored video bar control player.', 'site-editor'),
+    			'description'  => __('If this feature is enabled, you can have bright colored video bar control player.', 'site-editor'),
                 'panel'    => 'youtube_settings_panel',
     		),
 
     		'api_params' => array(
     			'type' => 'text',
     			'label' => __('Additional API Parameter', 'site-editor'),
-    			'desc' => __('An additonal youtube video paramter option. To view the parameters Youtube offers, follow this link.', 'site-editor'),
+    			'description'  => __('An additonal youtube video paramter option. To view the parameters Youtube offers, follow this link.', 'site-editor'),
                 'panel'    => 'youtube_settings_panel',
     		),
 
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,
