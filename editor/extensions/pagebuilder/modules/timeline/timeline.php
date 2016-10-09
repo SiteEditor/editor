@@ -47,17 +47,17 @@ class PBTimelineShortcode extends PBShortcodeClass{
 
         return array(
                 'number_items'  => array(
-        			'type' => 'spinner',
+        			'type' => 'number',
         			'label' => __('Number Items', 'site-editor'),
-        			'desc' => __('This feature allows you to specify the number of items you want to appear in the Timeline. ', 'site-editor'),
-                    'control_param'     =>  array(
+        			'description'  => __('This feature allows you to specify the number of items you want to appear in the Timeline. ', 'site-editor'),
+                    'js_params'     =>  array(
                         'min' => 1
                     )
       		    ),
                 'spacing' => array(
                     "type"          => "spacing" ,
                     "label"         => __("Spacing", "site-editor"),
-                    "value"         => "20 20 20 20" ,
+                    "default"       => "20 20 20 20" ,
                 ), 
                 "skin"  =>  array(
                     "type"          => "skin" ,

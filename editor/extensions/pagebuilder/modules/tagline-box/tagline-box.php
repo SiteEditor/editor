@@ -54,7 +54,7 @@ class PBTaglineBoxShortcode extends PBShortcodeClass{
         $this->add_panel( 'tagline_box_settings_panel' , array(
             'title'         =>  __('Tagline Box Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -64,8 +64,8 @@ class PBTaglineBoxShortcode extends PBShortcodeClass{
             'highlight_border' => array(
     			'type' => 'select',
     			'label' => __('Highlight Border', 'site-editor'),
-    			'desc' => __('This feature allows you to choose the position of prominent tagline box border(s). ', 'site-editor'),
-                'options' =>array(
+    			'description'  => __('This feature allows you to choose the position of prominent tagline box border(s). ', 'site-editor'),
+                'choices'   =>array(
                     'highlight-top'          => __('Top', 'site-editor'),
                     'highlight-right'        => __('Right', 'site-editor'),
                     'highlight-bottom'       => __('Bottom', 'site-editor'),
@@ -80,8 +80,8 @@ class PBTaglineBoxShortcode extends PBShortcodeClass{
             'button_position' => array(
     			'type' => 'select',
     			'label' => __('Button Position', 'site-editor'),
-    			'desc' => __('This feature allows you to define the position of button on the right side or bottom of tagline box. You can also choose the “hidden Button” option and avoid putting Button in the tagline box. ', 'site-editor'),
-                'options' =>array(
+    			'description'  => __('This feature allows you to define the position of button on the right side or bottom of tagline box. You can also choose the “hidden Button” option and avoid putting Button in the tagline box. ', 'site-editor'),
+                'choices'   =>array(
                         'item-side-right'    => __('Item Side Right', 'site-editor'),
                         'item-bottom'        => __('Item bottom', 'site-editor'),
                         'item-hidden'        => __('Button Hidden', 'site-editor'),
@@ -91,8 +91,8 @@ class PBTaglineBoxShortcode extends PBShortcodeClass{
             'button_align' => array(
     			'type' => 'select',
     			'label' => __('Button Align', 'site-editor'),
-    			'desc' => __('You can use this to set module\'s to be left aligned, right aligned or centered. ', 'site-editor'),
-                'options' =>array(
+    			'description'  => __('You can use this to set module\'s to be left aligned, right aligned or centered. ', 'site-editor'),
+                'choices'   =>array(
                         ''                         => __('Default', 'site-editor'),
                         't-btn-left'               => __('Left', 'site-editor'),
                         't-btn-center'             => __('Center', 'site-editor'),
@@ -110,13 +110,13 @@ class PBTaglineBoxShortcode extends PBShortcodeClass{
             'show_paragraph' => array(
     			'type'  => 'checkbox',
     			'label' => __('Show Paragraph', 'site-editor'),
-    			'desc'  => '',// __('', 'site-editor'),
+    			'description' => '',// __('', 'site-editor'),
                 "panel"     => "tagline_box_settings_panel",
             ),
             'shadow' => array(            
     			'type'  => 'checkbox',
     			'label' => __('Shadow', 'site-editor'),
-    			'desc'  => __('This feature allows you to enable/disable Shadow for the tagline box.', 'site-editor'),
+    			'description'  => __('This feature allows you to enable/disable Shadow for the tagline box.', 'site-editor'),
                 "panel"     => "tagline_box_settings_panel",
             ),
             "skin"  =>  array(
@@ -126,7 +126,7 @@ class PBTaglineBoxShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

@@ -61,7 +61,7 @@ class PBTestimonialShortcode extends PBShortcodeClass{
             'change_image_panel'=> array(
                 "type"          => "sed_image" ,
                 "label"         => __("Select Image Panel", "site-editor"),
-                "panel_type"    => "fieldset" ,
+                "panel_type"    => "default" ,
                 'priority'      => 1 ,
             ),   
             "skin"  =>  array(
@@ -71,7 +71,7 @@ class PBTestimonialShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

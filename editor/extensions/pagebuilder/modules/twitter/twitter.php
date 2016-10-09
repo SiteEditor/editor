@@ -61,48 +61,48 @@ class PBTwitterShortcode extends PBShortcodeClass{
             "consumer_key"   => array(
                 "type"      => "text",
                 "label"     => __("Consumer Key:","site-editor"),
-                "desc"      => __('Consumer Key',"site-editor")
+                "description"  => __('Consumer Key',"site-editor")
             ),
 
             "consumer_secret"   => array(
                 "type"      => "text",
                 "label"     => __("Consumer Secret:","site-editor"),
-                "desc"      => __('Consumer Secret',"site-editor")
+                "description"  => __('Consumer Secret',"site-editor")
             ),
 
             "access_token"   => array(
                 "type"      => "text",
                 "label"     => __("Access Token:","site-editor"),
-                "desc"      => __('Access Token',"site-editor")
+                "description"  => __('Access Token',"site-editor")
             ),
 
             "access_token_secret"   => array(
                 "type"      => "text",
                 "label"     => __("Access Token Secret:","site-editor"),
-                "desc"      => __('Access Token Secret',"site-editor")
+                "description"  => __('Access Token Secret',"site-editor")
             ),
 
             "twitter_id"   => array(
                 "type"      => "text",
                 "label"     => __("Twitter Username:","site-editor"),
-                "desc"      => __('Twitter Username',"site-editor")
+                "description"  => __('Twitter Username',"site-editor")
             ),
 
             'count' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'px',
                 'label' => __('Number of Tweets:', 'site-editor'),
-                "desc"  => __('This option allows you to set the number of tweets that is going to show in this module.', 'site-editor'),
+                "description"  => __('This option allows you to set the number of tweets that is going to show in this module.', 'site-editor'),
             ),
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default"
+                "default"       => "default"
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

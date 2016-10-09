@@ -58,27 +58,27 @@ class PBTableShortcode extends PBShortcodeClass{
         $this->add_panel( 'table_settings_panel' , array(
             'title'         =>  __('Table Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
 
         $params = array(
             'number_columns' => array(
-    			'type' => 'spinner',
+    			'type' => 'number',
     			'label' => __('Number of Columns', 'site-editor'),
-    			'desc' => __('This feature allows you to specify the number of the tables’ columns.', 'site-editor'),
-                'control_param'     =>  array(
+    			'description'  => __('This feature allows you to specify the number of the tables’ columns.', 'site-editor'),
+                'js_params'     =>  array(
                     'min' => 1,
                     'max' =>12,
                 ),
                 "panel"     => "table_settings_panel",
     		),
             'number_rows' => array(
-    			'type' => 'spinner',
+    			'type' => 'number',
     			'label' => __('Number of Rows', 'site-editor'),
-    			'desc' => __('This feature allows you to specify the number of rows in the table.', 'site-editor'),
-                'control_param'     =>  array(
+    			'description'  => __('This feature allows you to specify the number of rows in the table.', 'site-editor'),
+                'js_params'     =>  array(
                     'min' => 1
                 ),
                 "panel"     => "table_settings_panel",
@@ -86,13 +86,13 @@ class PBTableShortcode extends PBShortcodeClass{
             'table_bordered' => array(
                 'type' => 'checkbox',
                 'label' => __('Table Bordered', 'site-editor'),
-                'desc' => __('', 'site-editor'),
+                'description'  => __('', 'site-editor'),
                 "panel"     => "table_settings_panel",
             ),
             'table_striped' => array(
                 'type' => 'checkbox',
                 'label' => __('Table Striped', 'site-editor'),
-                'desc' => __('', 'site-editor'),
+                'description'  => __('', 'site-editor'),
                 "panel"     => "table_settings_panel",
             ),
             "skin"  =>  array(
@@ -102,7 +102,7 @@ class PBTableShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

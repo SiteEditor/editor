@@ -36,7 +36,7 @@ class PBVideoShortcode extends PBShortcodeClass{
             "setting_loop"      => false ,
             "show_title"        => true ,
             "setting_title"     => __("video" , "site-editor") ,
-            "desc"              => __("siteeditor video module" , "site-editor") ,
+            "description"       => __("siteeditor video module" , "site-editor") ,
             "artist"            => __('Unknown artist','site-editor') ,
             "setting_width"     =>  1280 ,
             "setting_height"    =>  720 ,
@@ -107,7 +107,7 @@ class PBVideoShortcode extends PBShortcodeClass{
         $this->add_panel( 'video_settings_panel' , array(
             'title'         =>  __('Video Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -123,8 +123,8 @@ class PBVideoShortcode extends PBShortcodeClass{
             "setting_m4v"     => array(
                 'type'              => 'video',
                 'label'             => __('m4v Format(mp4)', 'site-editor'),
-                'desc'              => __('the Video MP4 Upload option allows you to upload a .MP4 format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.','site-editor'),
-                "control_param"     => array(
+                'description'       => __('the Video MP4 Upload option allows you to upload a .MP4 format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.','site-editor'),
+                "js_params"     => array(
                     "subtypes"          => array( "m4v" , "mp4" )
                 ),
                 'priority'      => 5
@@ -133,8 +133,8 @@ class PBVideoShortcode extends PBShortcodeClass{
             "setting_ogv"     => array(
                 'type'              => 'video',
                 'label'             => __('ogv Format(ogg)', 'site-editor'),
-                'desc'              => __('The Video OGV Upload option allows you to upload a .OGV format of your video file. .OGV files are optional.','site-editor'),
-                "control_param"     => array(
+                'description'       => __('The Video OGV Upload option allows you to upload a .OGV format of your video file. .OGV files are optional.','site-editor'),
+                "js_params"     => array(
                     "subtypes"          => array( "ogv" , "ogg" )
                 ),
                 'priority'      => 5
@@ -143,8 +143,8 @@ class PBVideoShortcode extends PBShortcodeClass{
             "setting_webmv"   => array(
                 'type'              => 'video',
                 'label'             => __('webmv Format(webm)', 'site-editor'),
-                'desc'              => __('The Video WebM Upload option allows you to upload a WebM format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video. ','site-editor'),
-                "control_param"     => array(
+                'description'       => __('The Video WebM Upload option allows you to upload a WebM format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video. ','site-editor'),
+                "js_params"     => array(
                     "subtypes"          => array( "webm" , "webmv" )
                 ),
                 'priority'      => 5
@@ -153,8 +153,8 @@ class PBVideoShortcode extends PBShortcodeClass{
             "setting_flv"     => array(
                 'type'              => 'video',
                 'label'             => __('flv Format', 'site-editor'),
-                'desc'              => __('This feature lets you to upload Flv Format video.','site-editor'),
-                "control_param"     => array(
+                'description'       => __('This feature lets you to upload Flv Format video.','site-editor'),
+                "js_params"     => array(
                     "subtypes"          => array( "flv" )
                 ),
                 'priority'      => 5
@@ -163,8 +163,8 @@ class PBVideoShortcode extends PBShortcodeClass{
             "setting_preload"   => array(
                 'type'    => 'select',
                 'label'   => __('Preload', 'site-editor'),
-                'desc'    => '',// __(' Valid values are "none", "metadata" and "auto", which matches the HTML5 draft standard. Use "auto" to preload the file','site-editor') ,
-                'options' => array(
+                'description'    => '',// __(' Valid values are "none", "metadata" and "auto", which matches the HTML5 draft standard. Use "auto" to preload the file','site-editor') ,
+                'choices'   => array(
                     'none'        =>  __('None','site-editor') ,
                     'metadata'    =>  __('Metadata','site-editor') ,
                     'auto'        =>  __('Auto','site-editor')
@@ -175,42 +175,42 @@ class PBVideoShortcode extends PBShortcodeClass{
             "setting_autoplay"   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Autoplay', 'site-editor'),
-                'desc'    => __('This feature allows you to choose whether or not you want to the video be played automatically. ','site-editor'),
+                'description'  => __('This feature allows you to choose whether or not you want to the video be played automatically. ','site-editor'),
                 'panel'   => 'video_settings_panel',
             ),
 
             "setting_loop"   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Loop', 'site-editor'),
-                'desc'    => __('The Loop Video option allows you to loop the video or not. Enabling this option the video will be repeated.','site-editor'),
+                'description'  => __('The Loop Video option allows you to loop the video or not. Enabling this option the video will be repeated.','site-editor'),
                 'panel'   => 'video_settings_panel',
             ),
 
             "show_title"   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Show Title', 'site-editor'),
-                'desc'    => __('This feature allows you to choose whether or not to show the video title on top of the player. ','site-editor'),
+                'description'  => __('This feature allows you to choose whether or not to show the video title on top of the player. ','site-editor'),
                 'panel'   => 'video_settings_panel',
             ),
 
             "setting_title"   => array(
                 'type'    => 'text',
                 'label'   => __('Title', 'site-editor'),
-                'desc'    => __('This feature allows you to create a video title.','site-editor'),
+                'description'  => __('This feature allows you to create a video title.','site-editor'),
                 'panel'   => 'video_settings_panel',
             ),
 
             "desc"    => array(
                 'type'    => 'textarea',
                 'label'   => __('Description', 'site-editor'),
-                'desc'    => __('This feature allows you to create a description for the video.','site-editor'),
+                'description'  => __('This feature allows you to create a description for the video.','site-editor'),
                 'panel'   => 'video_settings_panel',
             ),
 
             "artist"  => array(
                 'type'    => 'text',
                 'label'   => __('Artist', 'site-editor'),
-                'desc'    => __('This feature allows you to specify video Artist.','site-editor'),
+                'description'  => __('This feature allows you to specify video Artist.','site-editor'),
                 'panel'   => 'video_settings_panel',
             ),
 
@@ -221,12 +221,12 @@ class PBVideoShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ),    
             "align"  =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             ),
             "animation"  =>  array(
                 "type"          => "animation" ,

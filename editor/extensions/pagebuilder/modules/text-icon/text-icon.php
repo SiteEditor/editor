@@ -49,7 +49,7 @@ class PBTextIconShortcode extends PBShortcodeClass{
             'icon' => array(
                 "type"          => "icon" ,
                 "label"         => __("Icon Field", "site-editor"),
-                "desc"          => __("This option allows you to set a icon for your module.", "site-editor"),
+                "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
             ),         
             'change_image_panel' => array(
                 "type"          => "sed_image" ,
@@ -58,7 +58,7 @@ class PBTextIconShortcode extends PBShortcodeClass{
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default"
+                "default"       => "default"
             ),
             "skin"  =>  array(
                 "type"          => "skin" ,
@@ -67,7 +67,7 @@ class PBTextIconShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,
@@ -96,7 +96,7 @@ include SED_PB_MODULES_PATH . '/text-icon/sub-shortcode/sub-shortcode.php';
 global $sed_pb_app;
 
 $sed_pb_app->register_module(array(
-    "group"       => "basic" ,
+    "group"       => "content" ,
     "name"        => "text-icon",
     "title"       => __("Text & Icon","site-editor"),
     "description" => __("Add Full Customize Text & Icon","site-editor"),

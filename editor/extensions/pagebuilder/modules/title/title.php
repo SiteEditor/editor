@@ -61,8 +61,8 @@ class PBTitleShortcode extends PBShortcodeClass{
             /*'toolbar1' => array(
       			'type' => 'select',
       			'label' => __('toolbar1', 'site-editor'),
-      			'desc' => '',// __("Select the Icon's type", "site-editor"),
-                'options' =>array(
+      			'description' => '',// __("Select the Icon's type", "site-editor"),
+                'choices'   =>array(
                     'title'           => __('title', 'site-editor'),
                     'normal-text'     => __('normal-text', 'site-editor'),
                     'simple-text'     => __('simple-text', 'site-editor'),
@@ -71,8 +71,8 @@ class PBTitleShortcode extends PBShortcodeClass{
             'toolbar2' => array(
       			'type' => 'select',
       			'label' => __('toolbar2', 'site-editor'),
-      			'desc' => '',// __("Select the Icon's type", "site-editor"),
-                'options' =>array(
+      			'description' => '',// __("Select the Icon's type", "site-editor"),
+                'choices'   =>array(
                     'title'           => __('title', 'site-editor'),
                     'normal-text'     => __('normal-text', 'site-editor'),
                     'simple-text'     => __('simple-text', 'site-editor'),
@@ -81,12 +81,12 @@ class PBTitleShortcode extends PBShortcodeClass{
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default"
+                "default"       => "default"
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

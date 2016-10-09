@@ -78,26 +78,26 @@ class PBTabsShortcode extends PBShortcodeClass{
         $this->add_panel( 'tab_settings_panel' , array(
             'title'         =>  __('Tab Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
 
         $params = array(
             'number_tabs'  => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
       			'label' => __('Number of Tabs', 'site-editor'),
-      			'desc' => __('This feature allows you to specify the number of tabs.', 'site-editor'),
-                'control_param'     =>  array(
+      			'description'  => __('This feature allows you to specify the number of tabs.', 'site-editor'),
+                'js_params'     =>  array(
                     'min' => 1
                 ),
                 "panel"     => "tab_settings_panel",
         	),
             'active_item' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'label' => __('Active item', 'site-editor'),
-                'desc'  => __('This feature allows you to specify which item will be active for the first time, after the page be loaded.', 'site-editor'),
-                'control_param'     =>  array(
+                'description'  => __('This feature allows you to specify which item will be active for the first time, after the page be loaded.', 'site-editor'),
+                'js_params'     =>  array(
                     'min' => 0
                 ),
                 "panel"     => "tab_settings_panel",
@@ -109,7 +109,7 @@ class PBTabsShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

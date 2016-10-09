@@ -161,7 +161,6 @@ class PBWidgetShortcode extends PBShortcodeClass{
 
         /*$this->add_panel( 'widget_settings_panel' , array(
             'title'         =>  __('Widget Settings',"site-editor")  ,
-            'label'         =>  __('Go To Widget Settings',"site-editor") ,
             'capability'    => 'edit_theme_options' ,
             'type'          => 'inner_box' ,
             'description'   => '' ,
@@ -174,17 +173,17 @@ class PBWidgetShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default"
+                "default"       => "default"
             ),      
             "widget_settings"   => array(
                 'type'          => 'widget_button',
                 'label'         => __('Go To Widget Settings', 'site-editor'),
-                'desc'          => __('You will see the widget settings panel by clicking on this option. Each widget has its own settings. (These are the same settings you had in WordPress admin area for each widget) You can modify these settings live. ', 'site-editor'),
+                'description'   => __('You will see the widget settings panel by clicking on this option. Each widget has its own settings. (These are the same settings you had in WordPress admin area for each widget) You can modify these settings live. ', 'site-editor'),
                 'style'         => 'blue',
                 'class'         =>  '',
                 /*'atts'  => array(
@@ -195,8 +194,8 @@ class PBWidgetShortcode extends PBShortcodeClass{
             'widget_skin' => array(
                 'type' => 'select',
                 'label' => __('Widget Skin', 'site-editor'),
-                'desc' => __('This option allows you to set general skins for your widgets. The available options are default, skin 1 and skin 2.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This option allows you to set general skins for your widgets. The available options are default, skin 1 and skin 2.', 'site-editor'),
+                'choices'   =>array(
                     'widget-default'    => __('default', 'site-editor'),
                     'widget-skin1'      => __('skin1', 'site-editor'),
                     //'widget-skin2'      => __('skin2', 'site-editor'),
