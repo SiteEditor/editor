@@ -71,7 +71,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
         $this->add_panel( 'social_bar_settings_panel' , array(
             'title'         =>  __('Social Bar Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -80,8 +80,8 @@ class PBSocialBarShortcode extends PBShortcodeClass{
             /*"align_icon"   => array(
                 "type"  => "select",
                 "label" => __("Align Icons","site-editor"),
-                "desc"  => __("","site-editor"),
-                "options"   => array(
+                "description"  => __("","site-editor"),
+                "choices"   => array(
                     "left"       => __("Left","site-editor"),
                     "right"      => __("Right","site-editor"),
                     "center"     => __("Center","site-editor"),
@@ -91,8 +91,8 @@ class PBSocialBarShortcode extends PBShortcodeClass{
             "layout_mode"   => array(
                 "type"  => "select",
                 "label" => __("Layout Mode","site-editor"),
-                "desc"  => __("This option allows you to set if the module is vertical or horizontal.","site-editor"),
-                "options"   => array(
+                "description"  => __("This option allows you to set if the module is vertical or horizontal.","site-editor"),
+                "choices"   => array(
                     "horzintal"      => __("Horzintal","site-editor"),
                     "vertical"       => __("Vertical","site-editor"),
                 ),
@@ -100,42 +100,42 @@ class PBSocialBarShortcode extends PBShortcodeClass{
 
             ),
             'number_items'  => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
                 "after_field"       => "&emsp;",
       			'label' => __('Number Items', 'site-editor'),
-      			'desc' =>  __('This option allows you to set the number of social bar icons.', 'site-editor'),
-                'control_param'     =>  array(
+      			'description'  => __('This option allows you to set the number of social bar icons.', 'site-editor'),
+                'js_params'     =>  array(
                     'min' => 1
                 ),
                 "panel"     => "social_bar_settings_panel",
       		),
             /*"size"   => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
                 "after_field"       => "px",
                 "label" => __("Icons Size","site-editor"),
-                "desc"  => __("","site-editor"),
-                'control_param'     =>  array(
+                "description"  => __("","site-editor"),
+                'js_params'     =>  array(
                     'min' => 0
                 ),
                 "panel"     => "social_bar_settings_panel",
             ),*/
             "margin"   => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
                 "after_field"       => "px",
                 "label" => __("margin icons","site-editor"),
-                "desc"  => __("This option allows you to set the spacing between social bar icons.","site-editor"),
-                'control_param'     =>  array(
+                "description"  => __("This option allows you to set the spacing between social bar icons.","site-editor"),
+                'js_params'     =>  array(
                     'min' => 0
                 ),
                 "panel"     => "social_bar_settings_panel",
 
             ),
       		'group_icon_size' => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
                 "after_field"  => "px",
       			'label' => __('Icons Size', 'site-editor'),
-      			'desc' => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
-                'control_param' => array(
+      			'description'  => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
+                'js_params' => array(
                     'min'     => 0
                 ),
                 //"panel"     => "icons_settings_panel",
@@ -143,18 +143,18 @@ class PBSocialBarShortcode extends PBShortcodeClass{
             'group_icon_color' => array(
        			'type'  => 'color',
       			'label' => __('Icons Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
+      			'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
                 //"panel"     => "icons_settings_panel",
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ),    
             "align"  =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             ),
             "skin"  =>  array(
                 "type"          => "skin" ,

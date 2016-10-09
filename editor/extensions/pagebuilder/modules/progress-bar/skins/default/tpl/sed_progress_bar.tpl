@@ -1,4 +1,4 @@
-<div {{sed_attrs}} class="{{class}} s-tb-sm module module-progress-bar progress-bar-default">
+<div {{sed_attrs}} class="{{class}} sed-css-component s-tb-sm module module-progress-bar progress-bar-default">
 	<div class="progress {{#ifCond type_text "==" "title-progress-bar" }} title-progress-bar {{/ifCond}} {{type}} {{#ifCond type "==" "vertical" }}{{direction_v}}{{/ifCond}} {{#ifCond type "==" "" }}{{direction_h}}{{/ifCond}}
         {{#if striped}} progress-striped {{/if}}
         {{#if active}} active {{/if}} "

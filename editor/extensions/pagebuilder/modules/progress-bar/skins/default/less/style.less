@@ -6,14 +6,14 @@
 )#*/
 
 .module-progress-bar.progress-bar-default{
-
+@progress-br-bg-text:            #fff;
     .progress{
        .progressbar-text {
               padding: 0 10px;
               top: 50%;
               line-height: 26px;
               margin: -13px 5px 0;
-              .high-color(@base-color-c);
+              color: @progress-br-bg-text;
               .border-radius(4px);
               background-color: fade(@base-color-c,30%);
               font-size: 12px;

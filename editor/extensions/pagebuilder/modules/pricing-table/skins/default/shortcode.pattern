@@ -2,16 +2,14 @@
 
 	[sed_pricing_table_column parent_module="pricing-table"]
 
-		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>gold pack</h4>[/sed_text_title]
-
 		[sed_pricing_table_price_column parent_module="pricing-table"]
 
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="currency"]<span>$</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>19</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="decimal-part"]<span>99</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>mount</span>[/sed_text_title]
+			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>$200</span>[/sed_text_title]
+			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>per mount</span>[/sed_text_title]
 
 		[/sed_pricing_table_price_column]
+
+		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>Basic Pack</h4>[/sed_text_title]
 
 		[sed_pricing_table_list_column list_group_features="true" list_group_features="true" class="list-group-features" parent_module="pricing-table"]
 
@@ -44,16 +42,14 @@
 
 	[sed_pricing_table_column parent_module="pricing-table"]
 
-		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>gold pack</h4>[/sed_text_title]
-
 		[sed_pricing_table_price_column parent_module="pricing-table"]
 
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="currency"]<span>$</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>19</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="decimal-part"]<span>99</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>mount</span>[/sed_text_title]
+			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>$200</span>[/sed_text_title]
+			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>per mount</span>[/sed_text_title]
 
 		[/sed_pricing_table_price_column]
+
+		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>Gold Pack</h4>[/sed_text_title]
 
 		[sed_pricing_table_list_column list_group_features="true" class="list-group-features" parent_module="pricing-table"]
 
@@ -85,16 +81,14 @@
 
 	[sed_pricing_table_column parent_module="pricing-table" featured="true"]
 
-		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>gold pack</h4>[/sed_text_title]
-
 		[sed_pricing_table_price_column parent_module="pricing-table"]
 
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="currency"]<span>$</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>19</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="decimal-part"]<span>99</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>mount</span>[/sed_text_title]
+			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>$200</span>[/sed_text_title]
+			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>per mount</span>[/sed_text_title]
 
 		[/sed_pricing_table_price_column]
+
+		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>Advance Pack</h4>[/sed_text_title]
 
 		[sed_pricing_table_list_column list_group_features="true" class="list-group-features" parent_module="pricing-table"]
 
@@ -126,89 +120,6 @@
 
 	[/sed_pricing_table_column]
 
-	[sed_pricing_table_column parent_module="pricing-table"]
-
-		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>gold pack</h4>[/sed_text_title]
-
-		[sed_pricing_table_price_column parent_module="pricing-table"]
-
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="currency"]<span>$</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>19</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="decimal-part"]<span>99</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>mount</span>[/sed_text_title]
-
-		[/sed_pricing_table_price_column]
-
-		[sed_pricing_table_list_column list_group_features="true" class="list-group-features" parent_module="pricing-table"]
-
-
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>100 MB host</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>2 database</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>email Unlimited</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>ftp Unlimited</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>Cpanel</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>2GB RAM</h5>[/sed_text_title]
-            [/sed_pt_features_list_item]
-		[/sed_pricing_table_list_column]
-
-
-        [sed_footer_table_column]
-		  [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="foot-text"]<h5>Register</h5>[/sed_text_title]
-        [/sed_footer_table_column]
-
-	[/sed_pricing_table_column]
-
-	[sed_pricing_table_column parent_module="pricing-table"]
-
-		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>gold pack</h4>[/sed_text_title]
-
-		[sed_pricing_table_price_column parent_module="pricing-table"]
-
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="currency"]<span>$</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>19</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="decimal-part"]<span>99</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>mount</span>[/sed_text_title]
-
-		[/sed_pricing_table_price_column]
-
-		[sed_pricing_table_list_column list_group_features="true" class="list-group-features" parent_module="pricing-table"]
-
-
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>100 MB host</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>2 database</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>email Unlimited</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>ftp Unlimited</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>Cpanel</h5>[/sed_text_title]
-			[/sed_pt_features_list_item]
-            [sed_pt_features_list_item parent_module="pricing-table" class="list-group-item normal-row"]
-                [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div"]<h5>2GB RAM</h5>[/sed_text_title]
-            [/sed_pt_features_list_item]
-		[/sed_pricing_table_list_column]
-
-        [sed_footer_table_column]
-		  [sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="foot-text"]<h5>Register</h5>[/sed_text_title]
-        [/sed_footer_table_column]
-	[/sed_pricing_table_column]
 
 [/sed_pricing_table]
 
@@ -221,17 +132,15 @@
 
 [sed_add_item_pattern parent_module="pricing-table" class = "add-column-pricing-table" show_add_button="false"]
 	[sed_pricing_table_column parent_module="pricing-table"]
-
-		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>gold pack</h4>[/sed_text_title]
-
+	
 		[sed_pricing_table_price_column parent_module="pricing-table"]
 
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="currency"]<span>$</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>19</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="decimal-part"]<span>99</span>[/sed_text_title]
-			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>mount</span>[/sed_text_title]
+			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="integer-part"]<span>$200</span>[/sed_text_title]
+			[sed_text_title toolbar1="normal-text" toolbar2="normal-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" tag="div" class="time"]<span>per mount</span>[/sed_text_title]
 
 		[/sed_pricing_table_price_column]
+
+		[sed_text_title toolbar1="title" toolbar2="title" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="pricing-table" class="panel-heading" tag="div"]<h4>Advance Pack</h4>[/sed_text_title]
 
 		[sed_pricing_table_list_column list_group_features="true" class="list-group-features" parent_module="pricing-table"]
 

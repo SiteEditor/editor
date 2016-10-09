@@ -56,20 +56,20 @@ class PBImageContentBox extends PBShortcodeClass{
 
         $params = array(
             'item_bodered' => array(
-              'type' => 'spinner',
+              'type' => 'number',
               'label' => __('Border Width', 'site-editor'),
-              'desc' => __('This feature allows you to specify the size of the border box; 0 is the lowest and in this case, the box doesn’t have border.', 'site-editor')
+              'description'  => __('This feature allows you to specify the size of the border box; 0 is the lowest and in this case, the box doesn’t have border.', 'site-editor')
             ),
             'item_img' => array(
-              'type' => 'spinner',
+              'type' => 'number',
               'label' => __('Image Spacing', 'site-editor'),
-              'desc' => __('This feature allows you to specify the distance between image and box, and its content.', 'site-editor')
+              'description'  => __('This feature allows you to specify the distance between image and box, and its content.', 'site-editor')
             ),
             'arrow' => array(
               'type' => 'select',
               'label' => __('Image Arrow', 'site-editor'),
-              'desc' => __('This feature allows an arrow image to be in the middle or on the default side, or without arrow.', 'site-editor'),
-              'options' =>array(
+              'description'  => __('This feature allows an arrow image to be in the middle or on the default side, or without arrow.', 'site-editor'),
+              'choices'   =>array(
                   ''                        => __('Do Nothing', 'site-editor'),
                   'item_arrow'              => __('Arrow', 'site-editor'),
                   'item_center_arrow'       => __('center Arrow', 'site-editor'),
@@ -78,7 +78,7 @@ class PBImageContentBox extends PBShortcodeClass{
             'show_button' => array(
                 'type' => 'checkbox',
                 'label' => __('Show Button', 'site-editor'),
-                'desc' => __('This button allows you to choose whether or not to show the button.', 'site-editor'),
+                'description'  => __('This button allows you to choose whether or not to show the button.', 'site-editor'),
             ),
             "skin"  =>  array(
                 "type"          => "skin" ,
@@ -87,7 +87,7 @@ class PBImageContentBox extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

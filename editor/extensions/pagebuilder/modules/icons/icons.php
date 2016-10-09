@@ -107,18 +107,18 @@ class PBIconsShortcode extends PBShortcodeClass{
         $this->add_panel( 'icons_settings_panel' , array(
             'title'         =>  __('Icons Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
 
         $params = array(
       		'font_size' => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
                 "after_field"  => "px",
       			'label' => __('Size', 'site-editor'),
-      			'desc' => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
-                'control_param' => array(
+      			'description'  => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
+                'js_params' => array(
                     'min'     => 0
                 ),
                 "panel"     => "icons_settings_panel",
@@ -126,8 +126,8 @@ class PBIconsShortcode extends PBShortcodeClass{
             'type' => array(
       			'type' => 'select',
       			'label' => __('Icon Type', 'site-editor'),
-      			'desc' => __("This option allows you to have icons in three different types; default, flat and ring. This option is only available in the skins 1, 2 and 3.", "site-editor"),
-                'options' =>array(
+      			'description'  => __("This option allows you to have icons in three different types; default, flat and ring. This option is only available in the skins 1, 2 and 3.", "site-editor"),
+                'choices'   =>array(
                     'icon-default'     => __('Default', 'site-editor'),
                     'icon-flat'        => __('Flat', 'site-editor'),
                     'icon-ring'        => __('Ring', 'site-editor'),
@@ -137,8 +137,8 @@ class PBIconsShortcode extends PBShortcodeClass{
             'style' => array(
       			'type' => 'select',
       			'label' => __('Icon Style', 'site-editor'),
-      			'desc' => __("This option allows you to set predefined styles such as black, white, main and none. This option is available in all skins except the default one.", "site-editor"),
-                  'options' =>array(
+      			'description'  => __("This option allows you to set predefined styles such as black, white, main and none. This option is available in all skins except the default one.", "site-editor"),
+                  'choices'   =>array(
                       ''                   => __('None', 'site-editor'),
                       'icon-main'          => __('Main', 'site-editor'),
                       'icon-white'         => __('White', 'site-editor'),
@@ -149,28 +149,28 @@ class PBIconsShortcode extends PBShortcodeClass{
             'hover_effect' => array(
       			'type' => 'select',
       			'label' => __('Hover Effect', 'site-editor'),
-      			'desc' => __("This option allows you to select different hover effects for your icons. There are currently 20 hover effects available. This option is available in all skins except the default one.
+      			'description'  => __("This option allows you to select different hover effects for your icons. There are currently 20 hover effects available. This option is available in all skins except the default one.
                     <br />You should know that all these 20 effects are not available in all skins and each skin only supports some of these 20 effects. There are different hover effects based on the icon types and some icon types cannot show all the hover effects available in a skin.
                     <br />If you set your icon style to none, you will not be able to have any hover effects for that icon.", "site-editor"),
-                'options' => $hi_icon_effect ,
+                'choices'   => $hi_icon_effect ,
                 "panel"     => "icons_settings_panel",
       		),
             'background_color' => array(
        			'type'  => 'color',
       			'label' => __('Background Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this feature cannot be used.', 'site-editor'),
+      			'description'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this feature cannot be used.', 'site-editor'),
                 "panel"     => "icons_settings_panel",
             ),
             'border_color' => array(
        			'type'  => 'color',
       			'label' => __('Border Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set the border color for your icons with the color picker. This is one of the few options that is not available in the design editor. It is only available in skins 1, 2 and 3.', 'site-editor'),
+      			'description'  => __('This option allows you to set the border color for your icons with the color picker. This is one of the few options that is not available in the design editor. It is only available in skins 1, 2 and 3.', 'site-editor'),
                 "panel"     => "icons_settings_panel",
             ),
             'color' => array(
        			'type'  => 'color',
       			'label' => __('Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
+      			'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
                 "panel"     => "icons_settings_panel",
             ),
 
@@ -183,12 +183,12 @@ class PBIconsShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ),    
             "align"  =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             ),
             "animation"  =>  array(
                 "type"          => "animation" ,
@@ -474,6 +474,7 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-icons",
     "shortcode"   => "sed_icons",
     "tpl_type"    => "underscore" ,
+    "show_ui_in_toolbar"    =>  false ,
     //"js_plugin"   => '',
     "js_module"   => array( 'sed_icons_module_script', 'icons/js/icons-module.min.js', array('sed-frontend-editor'))
 ));

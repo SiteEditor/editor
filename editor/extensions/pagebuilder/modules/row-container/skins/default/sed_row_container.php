@@ -59,14 +59,14 @@ if( $bg_type == 'video' ) {
 
 
 if(!empty($content)){?>
-       <div class="s-tb-sm row-container-module <?php echo $class.' '. $arrow.' '.$responsive_option;?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?> <?php echo $length_class;?>" <?php echo $sed_attrs; ?> length_element>
+       <div class="s-tb-sm row-container-module <?php echo $class.' '.$responsive_option;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?> <?php echo $length_class;?>" <?php echo $sed_attrs; ?> length_element>
             <div class="sed-pb-component" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?>>
                 <?php echo $content; ?>
             </div>
             <?php echo $outer_html; ?>  
        </div>
 <?php }else{  ?>
-      <div class="s-tb-sm row-container-module <?php echo $class.' '. $arrow.' '.$responsive_option;?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?> <?php echo $length_class;?>" <?php echo $sed_attrs; ?> length_element>
+      <div class="s-tb-sm row-container-module <?php echo $class.' '.$responsive_option;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?> <?php echo $length_class;?>" <?php echo $sed_attrs; ?> length_element>
           <div class="sed-pb-component" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>">
 
           </div>
@@ -88,31 +88,33 @@ if(!empty($content)){?>
           }
         <?php  
         }
-        if($arrow == "row-arrow-bottom"){
-        ?>
-        <?php echo $selector; ?>.row-arrow-bottom::after{
-            border-bottom: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
-            border-left: <?php echo $arrow_size; ?>px solid transparent;
-            border-right: <?php echo $arrow_size; ?>px solid transparent;
-            /*margin-bottom: -<?php echo $arrow_size; ?>px;*/
-            margin-left: -<?php echo $arrow_size; ?>px;
-        }
-        <?php
-        }
-        if($arrow == "row-arrow-top"){
-        ?>
-        <?php echo $selector; ?>.row-arrow-top::after {
-            border-top: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
-            border-left: <?php echo $arrow_size; ?>px solid transparent;
-            border-right: <?php echo $arrow_size; ?>px solid transparent;
-            /*margin-top: -<?php echo $arrow_size; ?>px;*/
-            margin-left: -<?php echo $arrow_size; ?>px;
-        }
-        <?php
+        if($is_arrow){
+            if($arrow == "row-arrow-bottom"){
+            ?>
+            <?php echo $selector; ?>.row-arrow-bottom::after{
+                border-bottom: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
+                border-left: <?php echo $arrow_size; ?>px solid transparent;
+                border-right: <?php echo $arrow_size; ?>px solid transparent;
+                /*margin-bottom: -<?php echo $arrow_size; ?>px;*/
+                margin-left: -<?php echo $arrow_size; ?>px;
+            }
+            <?php
+            }
+            if($arrow == "row-arrow-top"){
+            ?>
+            <?php echo $selector; ?>.row-arrow-top::after {
+                border-top: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
+                border-left: <?php echo $arrow_size; ?>px solid transparent;
+                border-right: <?php echo $arrow_size; ?>px solid transparent;
+                /*margin-top: -<?php echo $arrow_size; ?>px;*/
+                margin-left: -<?php echo $arrow_size; ?>px;
+            }
+            <?php
+            }
         }
         if($overlay){
         ?>
-        <?php echo $selector; ?>.row-overlay::before{
+        <?php echo $selector; ?>.row-overlay.row-container-module::before{
             background-color: <?php echo $overlay_color; ?>;
             opacity: <?php echo $overlay_opacity/100; ?>;
         }

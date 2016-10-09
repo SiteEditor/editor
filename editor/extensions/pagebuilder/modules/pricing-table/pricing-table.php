@@ -36,8 +36,8 @@ class PBPricingTable extends PBShortcodeClass{
             'type'             => 'pt_without_spacing',
             'column_spacing'   => 6,
             'number_features'  => 6,
-            'number_column'    => 5,
-            'featured_column'  => 3,
+            'number_column'    => 3,
+            'featured_column'  => 2,
         );
 
         return $atts;
@@ -48,7 +48,7 @@ class PBPricingTable extends PBShortcodeClass{
         $this->add_panel( 'pricing_table_settings_panel' , array(
             'title'         =>  __('Pricing Table Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -57,19 +57,19 @@ class PBPricingTable extends PBShortcodeClass{
             'type' => array(
       			'type' => 'select',
       			'label' => __('Pricing Table Type', 'site-editor'),
-      			'desc' => __('This feature allows you to use the option "With Spacing" and create distances between Pricing Table columns, and by the option "Without Spacing" you can have not separated columns.', "site-editor"),
-                'options' =>array(
+      			'description'  => __('This feature allows you to use the option "With Spacing" and create distances between Pricing Table columns, and by the option "Without Spacing" you can have not separated columns.', "site-editor"),
+                'choices'   =>array(
                     'pt_without_spacing'        => __('without spacing', 'site-editor'),
                     'pt_with_spacing'           => __('with spacing', 'site-editor'),
                 ),
                 "panel"     => "pricing_table_settings_panel",
       		),
             'column_spacing'  => array(
-    			'type' => 'spinner',
+    			'type' => 'number',
                 "after_field"       => "px",
     			'label' => __('Spacing Pricing Table', 'site-editor'),
-    			'desc' => __('If the type of your Pricing Table is "With Spacing", you can specify the distance between columns (in pixels). The minimum value is 1 pixel. ', 'site-editor') ,
-                'control_param'     =>  array(
+    			'description'  => __('If the type of your Pricing Table is "With Spacing", you can specify the distance between columns (in pixels). The minimum value is 1 pixel. ', 'site-editor') ,
+                'js_params'     =>  array(
                     'min' => 1
                 ),
                 "panel"     => "pricing_table_settings_panel",
@@ -81,31 +81,31 @@ class PBPricingTable extends PBShortcodeClass{
                 ),    
         	),
             'number_features'  => array(
-    			'type' => 'spinner',
+    			'type' => 'number',
                 "after_field"       => "&emsp;",
     			'label' => __('Number Features', 'site-editor'),
-    			'desc' => __('This feature allows you to define the number of features in columns.', 'site-editor') ,
-                'control_param'     =>  array(
+    			'description'  => __('This feature allows you to define the number of features in columns.', 'site-editor') ,
+                'js_params'     =>  array(
                     'min' => 1
                 ),
                 "panel"     => "pricing_table_settings_panel",
         	),
             'number_column'    => array(
-    			'type' => 'spinner',
+    			'type' => 'number',
                 "after_field"       => "&emsp;",
     			'label' => __('Number Column', 'site-editor'),
-    			'desc' => __('This feature allows you to specify the number of columns for Pricing Table.', 'site-editor') ,
-                'control_param'     =>  array(
+    			'description'  => __('This feature allows you to specify the number of columns for Pricing Table.', 'site-editor') ,
+                'js_params'     =>  array(
                     'min' => 1
                 ),
                 "panel"     => "pricing_table_settings_panel",
         	),
             'featured_column'  => array(
-    			'type' => 'spinner',
+    			'type' => 'number',
                 "after_field"       => "&emsp;",
     			'label' => __('Featured Column', 'site-editor'),
-    			'desc' => __('This feature allows you to specify the Featured Column of Pricing Table.', 'site-editor') ,
-                'control_param'     =>  array(
+    			'description'  => __('This feature allows you to specify the Featured Column of Pricing Table.', 'site-editor') ,
+                'js_params'     =>  array(
                     'min' => 1
                 ),
                 "panel"     => "pricing_table_settings_panel",
@@ -113,7 +113,7 @@ class PBPricingTable extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "25 0 10 0" ,
+                "default"       => "25 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

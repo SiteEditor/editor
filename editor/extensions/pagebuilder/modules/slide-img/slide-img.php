@@ -83,7 +83,7 @@ class PBSlideImageShortcode extends PBShortcodeClass{
           $this->add_panel( 'slide_img_settings_panel' , array(
               'title'         =>  __('Slide Image Settings',"site-editor")  ,
               'capability'    => 'edit_theme_options' ,
-              'type'          => 'fieldset' ,
+              'type'          => 'default' ,
               'description'   => '' ,
               'priority'      => 9 ,
           ) );
@@ -97,19 +97,19 @@ class PBSlideImageShortcode extends PBShortcodeClass{
               'title' =>  array(
                   'type'          => 'text',
                   'label'         => __('Title', 'site-editor'),
-                  'desc'          => __('This option allows you to set a title for your image.', 'site-editor'),
+                  'description'   => __('This option allows you to set a title for your image.', 'site-editor'),
                   'panel'    => 'slide_img_settings_panel',
               ),
               'description' =>  array(
                   'type'          => 'textarea',
                   'label'         => __('Description', 'site-editor'),
-                  'desc'          => __('This option allows you to add a description for your image.', 'site-editor'),
+                  'description'   => __('This option allows you to add a description for your image.', 'site-editor'),
                   'panel'    => 'slide_img_settings_panel',
               ),
               'alt' => array(
                   'type' => 'text',
                   'label' => __('Alt Text', 'site-editor'),
-                  'desc' => __('This option allows you to show a text for your images which will be shown if the image could not be loaded. This also helps your site’s SEO.', 'site-editor'),
+                  'description'  => __('This option allows you to show a text for your images which will be shown if the image could not be loaded. This also helps your site’s SEO.', 'site-editor'),
                   'panel'    => 'slide_img_settings_panel',
               ),
               'link_to' => array(
@@ -119,7 +119,7 @@ class PBSlideImageShortcode extends PBShortcodeClass{
               "align"  =>  array(
                   "type"          => "align" ,
                   "label"         => __("Align", "site-editor"),
-                  "value"         => "default"
+                  "default"       => "default"
               ), 
 
           );
@@ -174,6 +174,7 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-image",
     "shortcode"   => "sed_slide_img",
     "tpl_type"    => "underscore" ,
+    "show_ui_in_toolbar"    =>  false ,
     "js_module"   => array( 'sed_slide_img_module_script', 'slide-img/js/slide-img-module.min.js', array('sed-frontend-editor') )
 ));
                  

@@ -141,7 +141,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
           $this->add_panel( 'single_image_settings_panel' , array(
               'title'         =>  __('Single Image Settings',"site-editor")  ,
               'capability'    => 'edit_theme_options' ,
-              'type'          => 'fieldset' ,
+              'type'          => 'default' ,
               'description'   => '' ,
               'priority'      => 9 ,
           ) );
@@ -154,7 +154,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               ),      
               'full_src'    => array(
                   'label'         => __('Image For Light Box', 'site-editor'),
-                  'desc'          => __('Big Image Url', 'site-editor'),
+                  'description'   => __('Big Image Url', 'site-editor'),
                   'type'          => 'text',
                   'panel'         => 'sed_select_image_panel' ,
                   'dependency' => array(
@@ -167,8 +167,8 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               'image_click' => array(
                   'type' => 'select',
                   'label' => __('When image is clicked', 'site-editor'),
-                  'desc' =>  __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
-                  'options' =>array(
+                  'description'  => __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
+                  'choices'   =>array(
                       'default'             => __('Do Nothing', 'site-editor'),
                       'link_mode'           => __('Open Link', 'site-editor'),
                       'expand_mode'         => __('Open Expand Mode', 'site-editor'),
@@ -179,19 +179,19 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               'title' =>  array(
                   'type'          => 'text',
                   'label'         => __('Title', 'site-editor'),
-                  'desc'          => __('This option allows you to set a title for your image.', 'site-editor'),
+                  'description'   => __('This option allows you to set a title for your image.', 'site-editor'),
                   'panel'    => 'single_image_settings_panel',
               ),
               'description' =>  array(
                   'type'          => 'textarea',
                   'label'         => __('Description', 'site-editor'),
-                  'desc'          => __('This option allows you to add a description for your image.', 'site-editor'),
+                  'description'   => __('This option allows you to add a description for your image.', 'site-editor'),
                   'panel'    => 'single_image_settings_panel',
               ),
               'alt' => array(
                   'type' => 'text',
                   'label' => __('Alt Text', 'site-editor'),
-                  'desc' => __('This option allows you to show a text for your images which will be shown if the image could not be loaded. This also helps your site’s SEO.', 'site-editor'),
+                  'description'  => __('This option allows you to show a text for your images which will be shown if the image could not be loaded. This also helps your site’s SEO.', 'site-editor'),
                   'panel'    => 'single_image_settings_panel',
               ),
               "link" => array(
@@ -205,12 +205,12 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               'spacing' => array(
                   "type"          => "spacing" ,
                   "label"         => __("Spacing", "site-editor"),
-                  "value"         => "10 0 10 0" ,
+                  "default"       => "10 0 10 0" ,
               ),    
               "align"  =>  array(
                   "type"          => "align" ,
                   "label"         => __("Align", "site-editor"),
-                  "value"         => "center"
+                  "default"       => "center"
               ),
               "animation"  =>  array(
                   "type"          => "animation" ,

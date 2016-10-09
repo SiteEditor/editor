@@ -64,14 +64,14 @@ if( bg_type == 'video' ) {
 
 
 if(content) { #>
-       <div class="s-tb-sm row-container-module {{responsive_option}} {{className}}  {{arrow}} <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
+       <div class="s-tb-sm row-container-module {{responsive_option}} {{className}} <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
             <div class="sed-pb-component" data-parent-id="{{sed_model_id}}">
                 {{{content}}}
             </div>
             {{{outer_html}}}
        </div>
 <# }else{ #>
-      <div class="s-tb-sm row-container-module {{responsive_option}} {{className}}  {{arrow}} <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
+      <div class="s-tb-sm row-container-module {{responsive_option}} {{className}}  <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
           <div class="sed-pb-component" data-parent-id="{{sed_model_id}}" drop-placeholder="Drop A Module Here">
 
           </div>
@@ -81,33 +81,40 @@ if(content) { #>
 
 <style type="text/css">
 <# if(responsive_spacing){ #>
-  @media (max-width: 768px){
+    @media (max-width: 768px){
 
-  [sed_model_id="{{sed_model_id}}"] > .sed-pb-component > .sed-row-pb > .sed-pb-module-container{
-      padding : {{responsive_spacing}} !important;
-  }
+    [sed_model_id="{{sed_model_id}}"] > .sed-pb-component > .sed-row-pb > .sed-pb-module-container{
+        padding : {{responsive_spacing}} !important;
+    }
 
-  }
+    }
 <# } #>
-
-[sed_model_id="{{sed_model_id}}"].row-arrow-bottom::after{
-    border-bottom: {{arrow_size}}px solid {{arrow_color}};
-    border-left: {{arrow_size}}px solid transparent;
-    border-right: {{arrow_size}}px solid transparent;
-    /*margin-bottom: -{{arrow_size}}px;*/
-    margin-left: -{{arrow_size}}px;
-}
-[sed_model_id="{{sed_model_id}}"].row-arrow-top::after {
-    border-top: {{arrow_size}}px solid {{arrow_color}};
-    border-left: {{arrow_size}}px solid transparent;
-    border-right: {{arrow_size}}px solid transparent;
-    /*margin-top: -{{arrow_size}}px;*/
-    margin-left: -{{arrow_size}}px;
-}
-[sed_model_id="{{sed_model_id}}"].row-overlay::before{
-    background-color: {{overlay_color}};
-    opacity: {{overlay_opacity/100}};
-}
+<# if(is_arrow){ #>
+    <# if(arrow == 'row-arrow-bottom' ){ #>
+    [sed_model_id="{{sed_model_id}}"].row-arrow-bottom::after{
+        border-bottom: {{arrow_size}}px solid {{arrow_color}};
+        border-left: {{arrow_size}}px solid transparent;
+        border-right: {{arrow_size}}px solid transparent;
+        /*margin-bottom: -{{arrow_size}}px;*/
+        margin-left: -{{arrow_size}}px;
+    }
+    <# } #>
+    <# if(arrow == 'row-arrow-top' ){ #>
+    [sed_model_id="{{sed_model_id}}"].row-arrow-top::after {
+        border-top: {{arrow_size}}px solid {{arrow_color}};
+        border-left: {{arrow_size}}px solid transparent;
+        border-right: {{arrow_size}}px solid transparent;
+        /*margin-top: -{{arrow_size}}px;*/
+        margin-left: -{{arrow_size}}px;
+    }
+    <# } #>
+<# } #>
+<# if(overlay){ #>
+    [sed_model_id="{{sed_model_id}}"].row-overlay.row-container-module::before{
+        background-color: {{overlay_color}};
+        opacity: {{overlay_opacity/100}};
+    }
+<# } #>
 
 </style>
 

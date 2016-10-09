@@ -65,14 +65,14 @@ class PBrevsliderShortcode extends PBShortcodeClass{
             'slider' => array(
                 'type'                  => 'select',
                 'label'                 => __(' Select Slider ', 'site-editor'),
-                'desc'                  => '',// __('', 'site-editor'),
-                'options'               => $revsliders ,
+                'description'           => '',// __('', 'site-editor'),
+                'choices'               => $revsliders ,
 
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

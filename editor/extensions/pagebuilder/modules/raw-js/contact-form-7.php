@@ -81,22 +81,22 @@ class PBContactForm7Shortcode extends PBShortcodeClass{
             'form_title'  => array(
                 'type'  => 'text',
                 'label' => __('Form Title', 'site-editor'),
-                'desc'  => __('This feature allows you to specify a form title.', 'site-editor')
+                'description'  => __('This feature allows you to specify a form title.', 'site-editor')
             ),
 
             'form_id' => array(
                 'type'      => 'select',
                 'label'     => __('Form Id', 'site-editor'),
-                'desc'      => __('Contact Form 7 Id', 'site-editor'),
-                'options'   => $options_forms,
+                'description'  => __('Contact Form 7 Id', 'site-editor'),
+                'choices'   => $options_forms,
                 'panel'     => 'image_settings_panel',
             ),
 
             'style' => array(
                 'type' => 'select',
                 'label' => __('Select Style', 'site-editor'),
-                'desc' => __('This feature allows you to select a style for your form.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This feature allows you to select a style for your form.', 'site-editor'),
+                'choices'   =>array(
                     "contact-form-7-default"      =>  "Default",
                     "contact-form-7-skin1"        =>  "Skin1",
                     "contact-form-7-skin2"        =>  "Skin2"
@@ -106,7 +106,7 @@ class PBContactForm7Shortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

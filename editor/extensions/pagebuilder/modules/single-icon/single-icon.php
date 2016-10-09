@@ -84,18 +84,18 @@ class PBSingleIconShortcode extends PBShortcodeClass{
         $this->add_panel( 'icons_settings_panel' , array(
             'title'         =>  __('Single Icon Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
 
         $params = array(
       		'font_size' => array(
-      			'type' => 'spinner',
+      			'type' => 'number',
                 "after_field"  => "px",
       			'label' => __('Size', 'site-editor'),
-      			'desc' => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
-                'control_param' => array(
+      			'description'  => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
+                'js_params' => array(
                     'min'     => 0
                 ),
                 "panel"     => "icons_settings_panel",
@@ -103,8 +103,8 @@ class PBSingleIconShortcode extends PBShortcodeClass{
           'type' => array(
       			'type' => 'select',
       			'label' => __('Icon Type', 'site-editor'),
-      			'desc' => __("This option allows you to have icons in three different types; default, flat and ring. This option is only available in the skins 1, 2 and 3.", "site-editor"),
-            'options' =>array(
+      			'description'  => __("This option allows you to have icons in three different types; default, flat and ring. This option is only available in the skins 1, 2 and 3.", "site-editor"),
+            'choices'   =>array(
                 'icon-default'     => __('Default', 'site-editor'),
                 'icon-flat'        => __('Flat', 'site-editor'),
                 'icon-ring'        => __('Ring', 'site-editor'),
@@ -121,7 +121,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
           'background_color' => array(
        			'type'  => 'color',
       			'label' => __('Background Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this feature cannot be used.', 'site-editor'),
+      			'description'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this feature cannot be used.', 'site-editor'),
             "panel"     => "icons_settings_panel",
             "dependency"  => array(
                 'controls'  =>  array(
@@ -142,7 +142,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
           'border_color' => array(
        			'type'  => 'color',
       			'label' => __('Border Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set the border color for your icons with the color picker. This is one of the few options that is not available in the design editor. It is only available in skins 1, 2 and 3.', 'site-editor'),
+      			'description'  => __('This option allows you to set the border color for your icons with the color picker. This is one of the few options that is not available in the design editor. It is only available in skins 1, 2 and 3.', 'site-editor'),
             "panel"     => "icons_settings_panel",
             "dependency" => array(
                 'controls'  =>  array(
@@ -155,7 +155,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
           'color' => array(
        			'type'  => 'color',
       			'label' => __('Color', 'site-editor'),
-      			'desc'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
+      			'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
             "panel"     => "icons_settings_panel",
           ),
 
@@ -168,12 +168,12 @@ class PBSingleIconShortcode extends PBShortcodeClass{
           'spacing' => array(
             "type"          => "spacing" ,
             "label"         => __("Spacing", "site-editor"),
-            "value"         => "10 0 10 0" ,
+            "default"       => "10 0 10 0" ,
           ),    
           "align"  =>  array(
             "type"          => "align" ,
             "label"         => __("Align", "site-editor"),
-            "value"         => "center"
+            "default"       => "center"
           ),
           "animation"  =>  array(
             "type"          => "animation" ,

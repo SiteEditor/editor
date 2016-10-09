@@ -134,86 +134,86 @@ class PBParallaxSlider extends PBShortcodeClass{
         $this->add_panel( 'parallax_slider_settings_panel' , array(
             'title'         =>  __('Parallax Slider Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
 
          $params = array(
             'parallax_height'       => array(
-                'type'      => 'spinner',
+                'type'      => 'number',
                 'after_field'  => 'px',
                 'label'     => __('Parallax Slider Height', 'site-editor'),
-                'desc'      => __('This feature allows you to select the desired height of your slider.', 'site-editor'),
+                'description'  => __('This feature allows you to select the desired height of your slider.', 'site-editor'),
                 "panel"     => "parallax_slider_settings_panel",
             ),
             'parallax_item_width'       => array(
-                'type'      => 'spinner',
+                'type'      => 'number',
                 'after_field'  => '%',
                 'label'     => __('Parallax Item Width ', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the width of slides according to the slider width (in percent).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the width of slides according to the slider width (in percent).', 'site-editor'),
                 "panel"     => "parallax_slider_settings_panel",
             ),
             'parallax_item_top'       => array(
-                'type'      => 'spinner',
+                'type'      => 'number',
                 'after_field'  => 'px',
                 'label'     => __(' Parallax Item top ', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the space between slides according to the slider top (in pixels).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the space between slides according to the slider top (in pixels).', 'site-editor'),
                 "panel"     => "parallax_slider_settings_panel",
             ),
             'parallax_item_bottom'       => array(
-                'type'      => 'spinner',
+                'type'      => 'number',
                 'after_field'  => 'px',
                 'label'     => __(' Parallax Item Bottom ', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the space between slides according to the slider bottom (in pixels).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the space between slides according to the slider bottom (in pixels).', 'site-editor'),
                 "panel"     => "parallax_slider_settings_panel",
             ),
             // BEGIN SETTINGS FOR SKIN DEFAULT
        /*     'setting_auto'       => array(
                 'type'      => 'text',
                 'label'     => __('Auto Play Time', 'site-editor'),
-                'desc'      => '',// __('how many seconds to periodically slide the content.If set to 0 then autoplay is turned off.', 'site-editor')
+                'description'      => '',// __('how many seconds to periodically slide the content.If set to 0 then autoplay is turned off.', 'site-editor')
             ),   */
             'setting_speed'      => array(
-                'type'      => 'spinner',
+                'type'      => 'number',
                 'after_field'  => 'ms',
                 'label'     => __('animation speed', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the speed of the slide transition (in ms).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the speed of the slide transition (in ms).', 'site-editor'),
                 "panel"     => "parallax_slider_settings_panel",
 
             ),
             'setting_circular'    => array(
                 'type'      => 'checkbox',
                 'label'     => __('circular slider', 'site-editor'),
-                'desc'      => __('This feature allows you to specify, when the slider is in the firs or the last slide, what will happen after clicking the Next (for the latter) and Previous button (for the first).
+                'description'  => __('This feature allows you to specify, when the slider is in the firs or the last slide, what will happen after clicking the Next (for the latter) and Previous button (for the first).
                             <br />If this option is checked, then slider will be go to the beginning or end of slide, otherwise nothing will happen (i.e will not be a circle). ', 'site-editor'),
                 "panel"     => "parallax_slider_settings_panel",
             ),
             'setting_thumb_rotation'      => array(
                 'type'      => 'checkbox',
                 'label'     => __('Thumb Rotation', 'site-editor'),
-                'desc'      => __('If this option is enabled, thumbnails will be side by side with a slight rotation, otherwise they will be side by side on a regular basis.', 'site-editor'),
+                'description'  => __('If this option is enabled, thumbnails will be side by side with a slight rotation, otherwise they will be side by side on a regular basis.', 'site-editor'),
                 "panel"     => "parallax_slider_settings_panel",
             ),
             'setting_easing'     => array(
                 'type'      => 'select',
                 'label'     => __('easing animation', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the animation type of slides’ transition.', 'site-editor'),
-                'options'   => $easing,
+                'description'  => __('This feature allows you to specify the animation type of slides’ transition.', 'site-editor'),
+                'choices'   => $easing,
                 "panel"     => "parallax_slider_settings_panel",
             ),
             'setting_easing_bg'    => array(
                 'type'      => 'select',
                 'label'     => __('easing background animation', 'site-editor'),
-                'desc'      => __('This feature allows you to specify the type of animated transition of slider backgrounds.', 'site-editor'),
-                'options'   => $easing,
+                'description'  => __('This feature allows you to specify the type of animated transition of slider backgrounds.', 'site-editor'),
+                'choices'   => $easing,
                 "panel"     => "parallax_slider_settings_panel",
             ),
             'images_size' => array(
-                "type"          => "image_size" ,
+                "type"          => "image-size" ,
                 "label"         => __("Images Size", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "control_param" => array(
+                "description"   => __("This option allows you to set a title for your image.", "site-editor"),
+                "js_params" => array(
                     "sub_shortcodes_update" => array(
                         "class"  => "sed_parallax_slider_large_image" ,
                         "attr"   => "default_image_size"
@@ -221,10 +221,10 @@ class PBParallaxSlider extends PBShortcodeClass{
                 )
             ) ,
             'thumbnail_images_size' => array(
-                "type"          => "image_size" ,
+                "type"          => "image-size" ,
                 "label"         => __("Thumbnail Size", "site-editor"),
-                "desc"          => __("This option allows you to set a title for your image.", "site-editor"),
-                "control_param" => array(
+                "description"   => __("This option allows you to set a title for your image.", "site-editor"),
+                "js_params" => array(
                     "sub_shortcodes_update" => array(
                         "class"  => "sed_parallax_slider_thumbnail" ,
                         "attr"   => "default_image_size"
@@ -235,7 +235,7 @@ class PBParallaxSlider extends PBShortcodeClass{
                 "type"   => "button" ,
                 'style'  =>  'default',
                 'label'  =>  __("Gallery Managment","site-editor") ,
-                'desc'   =>  '',
+                'description' => '',
                 "atts"   =>  array(
                     "class"                 => "open-media-library-edit-gallery",
                     "support_types"         => "image" ,
@@ -250,7 +250,7 @@ class PBParallaxSlider extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

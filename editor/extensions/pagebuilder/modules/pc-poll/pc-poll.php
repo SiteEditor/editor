@@ -44,15 +44,15 @@ class PBPcPollShortcode extends PBShortcodeClass{
             'description' =>  array(
                 'type'          => 'textarea',
                 'label'         => __('Description', 'site-editor'),
-                'desc'          => __('This option allows you to add a description for your poll.', 'site-editor'),
+                'description'   => __('This option allows you to add a description for your poll.', 'site-editor'),
             ),
 
             "form_file"     => array(
                 'type'              => 'file',
                 'label'             => __('Select File', 'site-editor'),
-                'desc'              => __('Poll File For Download','site-editor'),
+                'description'       => __('Poll File For Download','site-editor'),
                 "selcted_type"      => 'single',
-                "control_param"     => array(
+                "js_params"     => array(
                     "subtypes"          => array( "zip" , "rar" , "pdf" )
                 ),
                 'priority'      => 5
@@ -61,7 +61,7 @@ class PBPcPollShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

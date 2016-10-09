@@ -53,35 +53,35 @@ class PBPinterestAPIShortcode extends PBShortcodeClass{
             'profile_url' => array(
                 'type'  => 'text',
                 'label' => __('Pinterest User URL', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor')
+                'description' => '',// __('', 'site-editor')
             ),
 
             /*'board_width' => array(
                 'type'  => 'text',
                 'label' => __('Board Width', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor')
+                'description' => '',// __('', 'site-editor')
             ),*/
 
             'board_height' => array(
                 'type'  => 'text',
                 'label' => __('Board Height', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor')
+                'description' => '',// __('', 'site-editor')
             ),
 
             'image_width' => array(
                 'type'  => 'text',
                 'label' => __('Image Width', 'site-editor'),
-                'desc'  => '',// __('', 'site-editor')
+                'description' => '',// __('', 'site-editor')
             ),
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default"
+                "default"       => "default"
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

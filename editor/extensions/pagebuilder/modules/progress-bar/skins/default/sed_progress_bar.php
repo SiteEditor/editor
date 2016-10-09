@@ -1,4 +1,4 @@
-<div <?php echo $sed_attrs; ?> class="<?php echo $class ?> s-tb-sm module module-progress-bar progress-bar-default">
+<div <?php echo $sed_attrs; ?> class="<?php echo $class ?> sed-css-component s-tb-sm module module-progress-bar progress-bar-default">
 	<div class="progress <?php if( $type_text == "title-progress-bar" ){ ?>title-progress-bar<?php } ?> <?php echo $type ?> <?php if( $type == "vertical"){  echo $direction_v;  }else{ echo $direction_h; }?>
         <?php if($striped){ ?> progress-striped <?php } ?>
         <?php if($active){ ?> active <?php } ?>"

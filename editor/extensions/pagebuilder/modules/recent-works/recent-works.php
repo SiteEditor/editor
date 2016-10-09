@@ -149,14 +149,14 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
         $this->add_panel( 'portfolio_settings_panel' , array(
             'title'         =>  __('Portfolio Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
         $this->add_panel( 'general_settings_panel' , array(
             'title'         =>  __('General Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -164,7 +164,7 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
         $this->add_panel( 'text_layout_settings_panel' , array(
             'title'         =>  __('Text Layout Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -174,13 +174,13 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "portfolio_layout_type"      => array(
                 "type"      => "select",
                 "label"     => __("Portfolio Type","site-editor"),
-                "desc"      => __('This feature will allow you to choose the type of portfolio among the Grid, Masonry, Text Layout options and create all kinds of different layouts using these options.',"site-editor"),
-                "options"   => array(
+                "description"  => __('This feature will allow you to choose the type of portfolio among the Grid, Masonry, Text Layout options and create all kinds of different layouts using these options.',"site-editor"),
+                "choices"   => array(
                     "grid"         =>__("grid","site-editor"),
                     "masonry"      =>__("masonry","site-editor"),
                     "text-layout"  =>__("Text Layout","site-editor"),
                 ),
-                "control_param" =>  array(
+                "js_params" =>  array(
                     "force_refresh"   =>   true
                 ),
                 'priority'      => 8 ,
@@ -189,8 +189,8 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "show_portfolio_filters"         => array(
                 "type"              => "checkbox",
                 "label"             => __("Show Portfolio Filters","site-editor"),
-                "desc"              => __('',"site-editor"),
-                "value"             => true,
+                "description"       => __('',"site-editor"),
+                "default"             => true,
                 "panel"     => "portfolio_settings_panel",
             ),
 
@@ -198,8 +198,8 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "tab_skins"    => array(
                 "type"              => "select",
                 "label"             => __("Tab Skin","site-editor"),
-                "desc"              => __('This feature allows you to choose various layouts for portfolio filters. Options include: Default, Skin1, Skin2 and Skin3. ',"site-editor"),
-                "options"   => array(
+                "description"       => __('This feature allows you to choose various layouts for portfolio filters. Options include: Default, Skin1, Skin2 and Skin3. ',"site-editor"),
+                "choices"   => array(
                     "tab-default"           =>__("Default","site-editor"),
                     "tab-skin1"           =>__("Skin1","site-editor"),
                     "tab-skin2"           =>__("Skin2","site-editor"),
@@ -211,16 +211,16 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "show_portfolio_filters"         => array(
                 "type"              => "checkbox",
                 "label"             => __("Show Portfolio Filters","site-editor"),
-                "desc"              => __('This feature allows you whether or not to hide your portfolio filter parts. ',"site-editor"),
-                "value"             => true,
+                "description"       => __('This feature allows you whether or not to hide your portfolio filter parts. ',"site-editor"),
+                "default"             => true,
                 "panel"     => "portfolio_settings_panel",
             ),
 
             "filter_by"    => array(
                 "type"              => "select",
                 "label"             => __("Filter By","site-editor"),
-                "desc"              => __('',"site-editor"),
-                "options"   => array(
+                "description"       => __('',"site-editor"),
+                "choices"   => array(
                     "portfolio_category"    =>__("category","site-editor"),
                     "portfolio_tag"         =>__("tag","site-editor"),
                     "portfolio_skill"       =>__("skill","site-editor"),
@@ -229,10 +229,10 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             ),
 
             "number"    => array(
-                "type"      => "spinner",
+                "type"      => "number",
                 "label"     => __("Number","site-editor"),
-                "desc"      => __('',"site-editor"),
-                "control_param"  =>  array(
+                "description"  => __('',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  1 ,
                 ),
                 "panel"     => "portfolio_settings_panel",
@@ -241,22 +241,22 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "excerpt_type"      => array(
                 "type"      => "select",
                 "label"     => __("Excerpt Type","site-editor"),
-                "desc"      => __('This feature allows you to select if you want whole content of a post be loaded or only Excerpt and a summary of the post be displayed. ',"site-editor"),
-                "options"   => array(
+                "description"  => __('This feature allows you to select if you want whole content of a post be loaded or only Excerpt and a summary of the post be displayed. ',"site-editor"),
+                "choices"   => array(
                     "excerpt"           =>__("Excerpt","site-editor"),
                     "content"           =>__("Full Content","site-editor"),
                 ),
-                "control_param"  =>  array(
+                "js_params"  =>  array(
                     "force_refresh"   =>   true
                 ),
                 "panel"     => "portfolio_settings_panel",
             ),
 
             "excerpt_length"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "label"             => __("Excerpt Length","site-editor"),
-                "desc"              => __('This feature allows you to specify the number of Excerpt characters in a post. In other words it enables you to define the number of your post summary’s characters.',"site-editor"),
-                "control_param"  =>  array(
+                "description"       => __('This feature allows you to specify the number of Excerpt characters in a post. In other words it enables you to define the number of your post summary’s characters.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  10 ,
                     //"max"  =>  500 ,
                     "step"  =>  10
@@ -267,16 +267,16 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "excerpt_html"      => array(
                 "type"              => "checkbox",
                 "label"             => __("Strip HTML from Excerpt","site-editor"),
-                "desc"              => __('With this feature you can overlook Html, Excerpt codes. ',"site-editor"),
+                "description"       => __('With this feature you can overlook Html, Excerpt codes. ',"site-editor"),
                 "panel"     => "portfolio_settings_panel",
             ),
 
             "number_columns"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "label"             => __("Number Columns","site-editor"),
-                "desc"              => __('This feature enables you to choose the number of portfolio columns and rows. You can choose from 1 to 6 columns.',"site-editor"),
-                "value"             => 1,
-                "control_param"  =>  array(
+                "description"       => __('This feature enables you to choose the number of portfolio columns and rows. You can choose from 1 to 6 columns.',"site-editor"),
+                "default"             => 1,
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                     "max"  =>  6
                 ),
@@ -284,10 +284,10 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             ),
 
             "column_spacing"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "label"             => __("Items Spacing ","site-editor"),
-                "desc"              => __('This feature enables you to choose the spacing between portfolio items (posts). ',"site-editor"),
-                "control_param"  =>  array(
+                "description"       => __('This feature enables you to choose the spacing between portfolio items (posts). ',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                     "max"  =>  100
                 ),
@@ -297,8 +297,8 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "image_skin"    => array(
                 "type"              => "select",
                 "label"             => __("Image Skin","site-editor"),
-                "desc"              => __('This feature allows you to choose your desired skin for portfolio images.',"site-editor"),
-                "options"   => array(
+                "description"       => __('This feature allows you to choose your desired skin for portfolio images.',"site-editor"),
+                "choices"   => array(
                     "default"               =>__("Default","site-editor"),
                     "glossy-reflection"     =>__("Glossy Reflection","site-editor"),
                     "simple-square"         =>__("Simple Square","site-editor"),
@@ -309,7 +309,7 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
                     "sepia-toning"          =>__("Sepia Toning","site-editor"),
                 ),
 
-                "control_param" =>  array(
+                "js_params" =>  array(
                     "force_refresh"   =>   true
                 ),
 
@@ -319,10 +319,10 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "image_hover_effect"    => array(
                 "type"              => "select",
                 "label"             => __("Image Hover Effect","site-editor"),
-                "desc"              => __('This feature allows you to choose your desired havre-effect for portfolio images. ',"site-editor"),
-                "options"           => $img_hover_effect,
+                "description"       => __('This feature allows you to choose your desired havre-effect for portfolio images. ',"site-editor"),
+                "choices"           => $img_hover_effect,
 
-                "control_param" =>  array(
+                "js_params" =>  array(
                     "force_refresh"   =>   true
                 ),
 
@@ -332,8 +332,8 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "text_layout_type"    => array(
                 "type"              => "select",
                 "label"             => __("Text layout Type","site-editor"),
-                "desc"              => __('This feature allows you to use one of the Masonry and Grid types for you portfolio item layout.',"site-editor"),
-                "options"   => array(
+                "description"       => __('This feature allows you to use one of the Masonry and Grid types for you portfolio item layout.',"site-editor"),
+                "choices"   => array(
                     "grid"         =>__("Grid","site-editor"),
                     "masonry"      =>__("Masonry","site-editor"),
                 ),
@@ -343,15 +343,15 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             "content_box_type"    => array(
                 "type"              => "select",
                 "label"             => __("Image Skin","site-editor"),
-                "desc"              => __('This feature allows you to choose your desired skin for portfolio images.',"site-editor"),
-                "options"   => array(
+                "description"       => __('This feature allows you to choose your desired skin for portfolio images.',"site-editor"),
+                "choices"   => array(
                     "default"               =>__("Top Image","site-editor"),
                     //"skin3"                 =>__("Bottom Image","site-editor"),
                     "skin1"                 =>__("Left Image","site-editor"),
                     "skin2"                 =>__("Right Image","site-editor"),
                 ),
 
-                "control_param" =>  array(
+                "js_params" =>  array(
                     "force_refresh"   =>   true
                 ),
 
@@ -361,8 +361,8 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             'button_size' => array(
     			'type' => 'select',
     			'label' => __('Button Size', 'site-editor'),
-    			'desc' => __("This feature allows you to specify the size of buttons in portfolio text Layout (like size feature in button module).", "site-editor"),
-                'options' =>array(
+    			'description'  => __("This feature allows you to specify the size of buttons in portfolio text Layout (like size feature in button module).", "site-editor"),
+                'choices'   =>array(
                     ''       => __('Normal', 'site-editor'),
                     'btn-xs' => __('Extra small', 'site-editor'),
                     'btn-sm' => __('Small', 'site-editor'),
@@ -375,8 +375,8 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             'button_type' => array(
       			'type' => 'select',
       			'label' => __('Button Type', 'site-editor'),
-      			'desc' => __("This feature allows you to specify the type of buttons portfolio text Layout (like type feature in button module).", "site-editor"),
-                'options' =>array(
+      			'description'  => __("This feature allows you to specify the type of buttons portfolio text Layout (like type feature in button module).", "site-editor"),
+                'choices'   =>array(
                       'btn-main'        => __('Primary', 'site-editor'),
                       'btn-default'     => __('Default', 'site-editor'),
                       'btn-purple'      => __('Purple', 'site-editor'),
@@ -393,7 +393,7 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             'content_box_img_arrow' => array(
               'type' => 'select',
               'label' => __('Image Arrow', 'site-editor'),
-              'options' =>array(
+              'choices'   =>array(
                   ''                        => __('Do Nothing', 'site-editor'),
                   'item_arrow'              => __('Arrow', 'site-editor'),
                   'item_center_arrow'       => __('center Arrow', 'site-editor'),
@@ -402,10 +402,10 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             ),
 
             'content_box_border_width' => array(
-              'type' => 'spinner',
+              'type' => 'number',
               'label' => __('Border Width', 'site-editor'),
-              'desc' => __('This feature allows you to select a border for portfolio items. 0 is the lowest and that means no border. ', 'site-editor') ,
-              "control_param"  =>  array(
+              'description'  => __('This feature allows you to select a border for portfolio items. 0 is the lowest and that means no border. ', 'site-editor') ,
+              "js_params"  =>  array(
                   "min"  =>  0 ,
                   "max"  =>  100
               ),
@@ -413,10 +413,10 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             ),
 
             'content_box_img_spacing' => array(
-              'type' => 'spinner',
+              'type' => 'number',
               'label' => __('Image Spacing', 'site-editor'),
-              'desc' => __('This feature allows you to specify the distance between borders and portfolio items’ text for portfolio images. The minimum value of zero means not having any distance. ', 'site-editor') ,
-              "control_param"  =>  array(
+              'description'  => __('This feature allows you to specify the distance between borders and portfolio items’ text for portfolio images. The minimum value of zero means not having any distance. ', 'site-editor') ,
+              "js_params"  =>  array(
                   "min"  =>  0 ,
                   "max"  =>  100
               ),
@@ -426,19 +426,19 @@ class PBRecentWorksModuleShortcode extends PBShortcodeClass{
             'using_size' => array(
                 'type' => 'select',
                 'label' => __('image Size', 'site-editor'),
-                'desc' => __('', 'site-editor'),
-                'options' => array() ,
+                'description'  => __('', 'site-editor'),
+                'choices'   => array() ,
                 'atts'          =>   array(
                     'class'         =>  "sed-all-attachments-sizes"
                 ),
-                //'control_category'  =>  "woo-portfolio-settings",
+                //'category'  =>  "woo-portfolio-settings",
             ),
 
 
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

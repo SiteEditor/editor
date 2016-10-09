@@ -71,12 +71,12 @@ class PBSearchShortcode extends PBShortcodeClass{
             'placeholder' => array(
               'type' => 'text',
               'label' => __('Place Holder', 'site-editor'),
-              'desc' => __('This feature allows you to specify the text of Place Holder, text box of search.  ', 'site-editor')
+              'description'  => __('This feature allows you to specify the text of Place Holder, text box of search.  ', 'site-editor')
             ),
             'icon' => array(
                 "type"          => "icon" ,
                 "label"         => __("Icon Field", "site-editor"),
-                "desc"          => __("This option allows you to set a icon for your module.", "site-editor"),
+                "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
             ),  
             "skin"  =>  array(
                 "type"          => "skin" ,
@@ -85,7 +85,7 @@ class PBSearchShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

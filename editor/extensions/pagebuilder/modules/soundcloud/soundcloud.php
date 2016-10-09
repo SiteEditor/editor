@@ -56,24 +56,24 @@ class PBSoundCloudShortcode extends PBShortcodeClass{
         $this->add_panel( 'soundcloud_settings_panel' , array(
             'title'         =>  __('SoundCloud Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
 
         $params = array(
             'url' => array(
-            	'value' => 'https://api.soundcloud.com/tracks/163548754',
+            	'default' => 'https://api.soundcloud.com/tracks/163548754',
             	'type' => 'text',
             	'label' => __('SoundCloud Url', 'site-editor'),
-            	'desc' => __("The URL path of the soundcloud track you want to embed. For example, http://api.soundcloud.com/tracks/110813479.", "site-editor"),
+            	'description'  => __("The URL path of the soundcloud track you want to embed. For example, http://api.soundcloud.com/tracks/110813479.", "site-editor"),
                   'panel'    => 'soundcloud_settings_panel',
             ),
             'color' => array(
          			'type'  => 'color',
         			'label' => __('Color', 'site-editor'),
-        			'desc'  => __('This feature allows you to specify the color of the Player controls; it appears in case the option Visual be disabled.', 'site-editor'),
-              'control_param' => array(
+        			'description'  => __('This feature allows you to specify the color of the Player controls; it appears in case the option Visual be disabled.', 'site-editor'),
+              'js_params' => array(
                   'show_input' => false
               ),
               'panel'    => 'soundcloud_settings_panel',
@@ -85,10 +85,10 @@ class PBSoundCloudShortcode extends PBShortcodeClass{
               ),
             ),
             'height' => array(
-        			'type' => 'spinner',
+        			'type' => 'number',
               'after_field'  => 'px',
         			'label' => __('Height', 'site-editor'),
-        			'desc' => __('This feature allows you to specify the Player height in pixels.', 'site-editor'),
+        			'description'  => __('This feature allows you to specify the Player height in pixels.', 'site-editor'),
               'panel'    => 'soundcloud_settings_panel',
               "dependency"  => array(
                 'controls'  =>  array(
@@ -100,43 +100,43 @@ class PBSoundCloudShortcode extends PBShortcodeClass{
             'comments' => array(
             	'type' => 'checkbox',
             	'label' => __('Show Comments', 'site-editor'),
-            	'desc' => __('This feature allows you to display comments on the player or not.', 'site-editor'),
+            	'description'  => __('This feature allows you to display comments on the player or not.', 'site-editor'),
                   'panel'    => 'soundcloud_settings_panel',
             ),
             'visual' => array(
             	'type' => 'checkbox',
             	'label' => __('Visual', 'site-editor'),
-            	'desc' => __('This feature allows you to use the Visual Player or not.', 'site-editor'),
+            	'description'  => __('This feature allows you to use the Visual Player or not.', 'site-editor'),
                   'panel'    => 'soundcloud_settings_panel',
             ),
             'auto_play' => array(
             	'type' => 'checkbox',
             	'label' => __('Auto Play', 'site-editor'),
-            	'desc' => __('This feature allows you to choose whether or not you want to the audio be played automatically.', 'site-editor'),
+            	'description'  => __('This feature allows you to choose whether or not you want to the audio be played automatically.', 'site-editor'),
                   'panel'    => 'soundcloud_settings_panel',
             ),
              /* 'hide_related' => array(
-            	'value' => '' ,
+            	'default' => '' ,
             	'type' => 'checkbox',
             	'label' => __('Hide Related', 'site-editor'),
-            	'desc' => '',// __('Choose to display comments', 'site-editor')
+            	'description' => '',// __('Choose to display comments', 'site-editor')
             ),
             'show_user' => array(
-            	'value' => '' ,
+            	'default' => '' ,
             	'type' => 'checkbox',
             	'label' => __('Show User', 'site-editor'),
-            	'desc' => '',// __('', 'site-editor')
+            	'description' => '',// __('', 'site-editor')
             ),
             'show_reposts' => array(
-            	'value' => '' ,
+            	'default' => '' ,
             	'type' => 'checkbox',
             	'label' => __('Show Reposts', 'site-editor'),
-            	'desc' => '',// __('Choose to display comments', 'site-editor')
+            	'description' => '',// __('Choose to display comments', 'site-editor')
             )    */
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

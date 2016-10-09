@@ -112,7 +112,7 @@ class PBProgressBarShortcode extends PBShortcodeClass{
         $this->add_panel( 'progress_bar_settings_panel' , array(
             'title'         =>  __('Progress Bar Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -122,7 +122,7 @@ class PBProgressBarShortcode extends PBShortcodeClass{
             'type'       => array(
                 'type'    => 'select',
                 'label'   => __('Type Progress Bar', 'site-editor'),
-                'options' =>array(
+                'choices'   =>array(
                     ''                      => __('Horizontal', 'site-editor'),
                     'vertical'              => __('Vertical', 'site-editor'),
                 ),
@@ -131,7 +131,7 @@ class PBProgressBarShortcode extends PBShortcodeClass{
             'direction_h'       => array(
                 'type'    => 'select',
                 'label'   => __('Type Progress Bar', 'site-editor'),
-                'options' =>array(
+                'choices'   =>array(
                     ''                     => __('Left', 'site-editor'),
                     'right'                => __('Right', 'site-editor'),
                 ),
@@ -147,7 +147,7 @@ class PBProgressBarShortcode extends PBShortcodeClass{
             'direction_v'       => array(
                 'type'    => 'select',
                 'label'   => __('Type Progress Bar', 'site-editor'),
-                'options' =>array(
+                'choices'   =>array(
                     ''                     => __('Top', 'site-editor'),
                     'bottom'               => __('Bottom', 'site-editor'),
                 ),
@@ -163,7 +163,7 @@ class PBProgressBarShortcode extends PBShortcodeClass{
             'style'       => array(
                 'type'    => 'select',
                 'label'   => __('Style Progress Bar', 'site-editor'),
-                'options' =>array(
+                'choices'   =>array(
                     ''                     => __('default', 'site-editor'),
                     'progress-bar-success' => __('Success', 'site-editor'),
                     'progress-bar-danger'  => __('Danger', 'site-editor'),
@@ -175,7 +175,7 @@ class PBProgressBarShortcode extends PBShortcodeClass{
             'type_text' => array(
                 'type'    => 'select',
                 'label' => __('type text', 'site-editor'),
-                'options' =>array(
+                'choices'   =>array(
                     'none'                                  => __('None', 'site-editor'),
                     'title-progress-bar'                    => __('Title', 'site-editor'),
                     'percent-progress-bar'                  => __('Counter Percent', 'site-editor'),
@@ -185,7 +185,7 @@ class PBProgressBarShortcode extends PBShortcodeClass{
             'setting_display_text' => array(
                 'type'    => 'select',
                 'label' => __('display text', 'site-editor'),
-                'options' =>array(
+                'choices'   =>array(
                     'fill'                  => __('Fill', 'site-editor'),
                     'center'                => __('Center', 'site-editor'),
                 ),
@@ -201,7 +201,7 @@ class PBProgressBarShortcode extends PBShortcodeClass{
             'setting_use_percentage'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'use percentage' , 'site-editor' ) ,
-                'desc'  => __( 'If this feature is enabled, the number shown on the Progress Bar will be a percentage; and if it is disabled, the number will be as a fraction (value now / value max) of above values. ' , 'site-editor' ),
+                'description'  => __( 'If this feature is enabled, the number shown on the Progress Bar will be a percentage; and if it is disabled, the number will be as a fraction (value now / value max) of above values. ' , 'site-editor' ),
                 "panel"     => "progress_bar_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -214,19 +214,19 @@ class PBProgressBarShortcode extends PBShortcodeClass{
             'animation_pbar'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Animation' , 'site-editor' ) ,
-                'desc'  => __( 'If enabled, this feature will allow you to have an animated filling (progress) of Progress Bar; otherwise it will be done without animation and as default.' , 'site-editor' ),
+                'description'  => __( 'If enabled, this feature will allow you to have an animated filling (progress) of Progress Bar; otherwise it will be done without animation and as default.' , 'site-editor' ),
                 "panel"     => "progress_bar_settings_panel",
             ),
             'striped'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Striped' , 'site-editor' ) ,
-                'desc'  => __( 'Uses a gradient to create a striped effect. Not available in IE9.' , 'site-editor' ),
+                'description'  => __( 'Uses a gradient to create a striped effect. Not available in IE9.' , 'site-editor' ),
                 "panel"     => "progress_bar_settings_panel",
             ),
             'active'    => array(
                 'type'  => 'checkbox' ,
                 'label' => __( 'Active' , 'site-editor' ) ,
-                'desc'  => __( '' , 'site-editor' ),
+                'description'  => __( '' , 'site-editor' ),
                 "panel"     => "progress_bar_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -237,10 +237,10 @@ class PBProgressBarShortcode extends PBShortcodeClass{
                 ),    
             ),
             'width' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'px',
                 'label' => __('Width', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the width of Progress Bar in portrait mode. This option will appear only when the Progress Bar is vertical.', 'site-editor'),
+                'description'  => __('This feature allows you to specify the width of Progress Bar in portrait mode. This option will appear only when the Progress Bar is vertical.', 'site-editor'),
                 "panel"     => "progress_bar_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -250,10 +250,10 @@ class PBProgressBarShortcode extends PBShortcodeClass{
                 ),    
             ),
             'height' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'px',
                 'label' => __('Height', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the Progress Bar height in both vertical and horizontal modes. ', 'site-editor'),
+                'description'  => __('This feature allows you to specify the Progress Bar height in both vertical and horizontal modes. ', 'site-editor'),
                 "panel"     => "progress_bar_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -263,10 +263,10 @@ class PBProgressBarShortcode extends PBShortcodeClass{
                 ),    
             ),
             'height_h' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'px',
                 'label' => __('Height', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the Progress Bar height in both vertical and horizontal modes.', 'site-editor'),
+                'description'  => __('This feature allows you to specify the Progress Bar height in both vertical and horizontal modes.', 'site-editor'),
                 "panel"     => "progress_bar_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -277,49 +277,49 @@ class PBProgressBarShortcode extends PBShortcodeClass{
                 ),    
             ),
             'setting_transitiongoal' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '&emsp;',
                 'label' => __('value now', 'site-editor'),
-                'desc'  =>__('This feature allows you to determine the progress of Progress bar (the current value of Filled Bar). ', 'site-editor'),
+                'description'  =>__('This feature allows you to determine the progress of Progress bar (the current value of Filled Bar). ', 'site-editor'),
                 "panel"     => "progress_bar_settings_panel",
             ),
             'valuemax' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '&emsp;',
                 'label' => __('value max', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the maximum amount of Progress Bar’s progress.', 'site-editor'),
+                'description'  => __('This feature allows you to specify the maximum amount of Progress Bar’s progress.', 'site-editor'),
                 "panel"     => "progress_bar_settings_panel",
             ),
             'valuemin' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '&emsp;',
                 'label' => __('value min', 'site-editor'),
-                'desc'  => __('This feature allows you to specify the starting value of Progress Bar (it’s minimum value). ', 'site-editor'),
+                'description'  => __('This feature allows you to specify the starting value of Progress Bar (it’s minimum value). ', 'site-editor'),
                 "panel"     => "progress_bar_settings_panel",
             ),
             'setting_transition_delay' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'ms',
                 'label' => __('transition delay', 'site-editor'),
-                'desc'  => __('Is the time in milliseconds until the animation starts.', 'site-editor'),
+                'description'  => __('Is the time in milliseconds until the animation starts.', 'site-editor'),
                 "panel"     => "progress_bar_settings_panel",
             ),
             'setting_refresh_speed' => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => 'ms',
                 'label' => __('refresh speed', 'site-editor'),
-                'desc'  => __('Is the time in milliseconds which will elapse between every text refresh.', 'site-editor'),
+                'description'  => __('Is the time in milliseconds which will elapse between every text refresh.', 'site-editor'),
                 "panel"     => "progress_bar_settings_panel",
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default",
+                "default"       => "default",
                 "dependency"  => array(
                     'controls'  =>  array(  
                         "control"  =>  "type" ,

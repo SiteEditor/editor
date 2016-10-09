@@ -6,14 +6,37 @@
 )#*/
 
 .pricing-table-default{
-@skin-border-outer:             6px solid @base-color-b-lighter;
-@skin-border-outer-featured:    4px solid @main-color;
-@skin-border-inner:             1px solid @base-border-color-light;
-@skin-border-inner-featured:    1px solid @main-color;
 
-@skin-panel-bg:                 @body-bg;
-@skin-panel-bg-accent:          @base-color-b-lighter;
-border-radius: @border-radius-base;
+
+@pricing-tb-bg:                        @body-bg;
+@pricing-tb-border-radius:             @border-radius-base;
+@pricing-tb-box-shadow:                none; 
+@pricing-tb-title-font-size:           @font-size-base; 
+@pricing-tb-content-padding:           @padding-lg 0;
+@pricing-tb-header-padding-vertical:   @padding-base;
+@pricing-tb-header-padding-horizontal: @padding-lg;
+
+//** Border color for elements within accordions
+
+@pricing-tb-text:                      @component-heading-color;
+@pricing-tb-border:                    1px solid @base-border-color;
+@pricing-tb-bg:                        @component-bg;
+
+@pricing-tb-active-text:               @primary-heading-color;
+@pricing-tb-active-border:             @brand-primary;
+@pricing-tb-active-bg:                 @brand-primary;
+
+ 
+@pricing-tb-border-outer:             6px solid @component-bg;
+@pricing-tb-border-outer-featured:    4px solid @pricing-tb-active-bg;
+@pricing-tb-border-inner:             1px solid @base-border-color;
+@pricing-tb-border-inner-featured:    1px solid @pricing-tb-active-bg;
+
+@pricing-tb-panel-bg:                 @body-bg;
+@pricing-tb-panel-bg-accent:          @component-bg;
+
+
+border-radius: @pricing-tb-border-radius;
 .row{
     margin: 0px 0px 20px;
     & > .column{
@@ -39,13 +62,22 @@ border-radius: @border-radius-base;
                 min-width: 100%;
                 &.panel-wrapper-outer{
                     .panel-wrapper{
-                      border: @skin-border-outer !important;
+                      border: @pricing-tb-border-outer !important;
                         .panel-container{
                             .panel{
-                                border: @skin-border-inner !important;
+                                border: @pricing-tb-border-inner !important;
                             }
                         }
                     }
+                    &.featured{
+                      .panel-wrapper{
+                        .panel-container{
+                            .panel{
+                                border-color: @pricing-tb-active-bg !important;
+                            }//.panel
+                        }
+                      }
+                    } 
                 }
             }
         }
@@ -53,90 +85,120 @@ border-radius: @border-radius-base;
     &.pt_without_spacing.columns-1{
         .panel-wrapper-outer{
             .panel-wrapper{
-              border: @skin-border-outer !important;
+              border: @pricing-tb-border-outer !important;
                 .panel-container{
                     .panel{
-                        border: @skin-border-inner !important;
+                        border: @pricing-tb-border-inner !important;
                     }
                 }
             }
         }
+        &.featured{
+          .panel-wrapper{
+            .panel-container{
+                .panel{
+                    border-color: @pricing-tb-active-bg !important;
+                }//.panel
+            }
+          }
+        } 
     }
 
     &.pt_with_spacing .panel-wrapper-outer{
         .panel-wrapper{
-          border: @skin-border-outer !important;
+          border: @pricing-tb-border-outer !important;
             .panel-container{
                 .panel{
-                    border: @skin-border-inner !important;
+                    border: @pricing-tb-border-inner !important;
                 }
             }
         }
+        &.featured{
+          .panel-wrapper{
+            .panel-container{
+                .panel{
+                    border-color: @pricing-tb-active-bg !important;
+                }//.panel
+            }
+          }
+        }        
     }
     &.pt_without_spacing .panel-wrapper-outer{
         padding:0;
         &:first-child > .panel-wrapper{
-            border-left: @skin-border-outer;
+            border-left: @pricing-tb-border-outer;
             .panel-container .panel{
-                .border-left-radius(@border-radius-base);
+                .border-left-radius(@pricing-tb-border-radius);
             }
         }
         &:last-child > .panel-wrapper{
-            border-right: @skin-border-outer;
+            border-right: @pricing-tb-border-outer;
             .panel-container .panel{
-                .border-right-radius(@border-radius-base);
-                border-right: @skin-border-inner;
+                .border-right-radius(@pricing-tb-border-radius);
+                border-right: @pricing-tb-border-inner;
             }
         }
     }
 
-
-     .panel-wrapper{
+    .sed-title.module.module-title {
+        padding: 0;
+    }
+    .panel-wrapper{
         padding: 0;
         cursor: default;
         //background: @base-color-b-lighter;
-        border: @skin-border-outer;
+        border: @pricing-tb-border-outer;
         border-left: none;
         border-right: none;
         .panel-container{
             padding: 0px 0px;
             //background-color: @base-color-b-lighter;
             .panel{
-                border: @skin-border-inner;
+                border: @pricing-tb-border-inner;
                 .border-radius(0);
                 border-right: none;
                 overflow: hidden;
                 margin: 0;
                 background-clip: padding-box;
                 text-align: center;
-                background: @skin-panel-bg;
+                background: @pricing-tb-panel-bg;
 
                 .panel-heading{
                     padding: 15px;
-                    border-bottom: @skin-border-inner;
+                    border-top: @pricing-tb-border-inner;
+                    border-bottom: @pricing-tb-border-inner;
+                    background-color: @pricing-tb-panel-bg-accent;
                 }
                 &:hover{
-                    background-color: @skin-panel-bg-accent;
+                    background-color: @pricing-tb-panel-bg-accent;
+                    .panel-heading{
+                        color: @pricing-tb-active-text;
+                        background-color: @pricing-tb-active-bg;
+                        border-color: @pricing-tb-active-bg;
+                        *{
+                            color: @pricing-tb-active-text;    
+                        } 
+                    }
                 }
                 .panel-body{
-                    padding: 15px;
-                    background-color: @skin-panel-bg-accent;
+                    padding: 25px 15px;
                     .price{
                         position: relative;
                         .currency{
                             position: relative;
                             top: -20px;
                             font-size: 21px;
-                            .base-color(@skin-panel-bg-accent;58%);
+                            //.base-color(@pricing-tb-panel-bg-accent;58%);
                         }
                         .integer-part{
-                            color: @main-color;
+                            color: @pricing-tb-active-bg;
                             font-size: 55px;
-                            display: inline;
-                            font-weight: bold;
+                            line-height: 1em;
+                            display: block;
+                            font-weight: 400;
                         }
                         .decimal-part{
-                            color: @main-color;
+                            color: @pricing-tb-active-bg;
                             top: -20px;
                             font-size: 17px;
                             font-weight: bold;
@@ -144,48 +206,51 @@ border-radius: @border-radius-base;
                         }
                         .time{
                             font-size: 11px;
-                            font-style: italic;
-                            .base-color(@skin-panel-bg-accent;34%);
-                            margin-left: -14px;
+                            display: block;
+                            text-transform: uppercase;
                         }
                     }
                 }
                 .list-group{
-                    .base-color( @skin-panel-bg);
-                    margin: 0;
+                    //.base-color( @pricing-tb-panel-bg);
+                    margin: 0;    
+                    list-style-type: none;
+                    padding: 0;
+                    padding: 15px 0px;
 
                     .list-group-item{
-                        padding: 15px;
-                        border-bottom: @skin-border-inner;
+                        padding: 10px 15px;
+                        //border-bottom: @pricing-tb-border-inner;
                         border-right: none;
                         border-left: none;
                         &:first-child{
-                          border-top: @skin-border-inner;
+                          //border-top: @pricing-tb-border-inner;
                         }
 
                     }
                 }
                 .panel-footer{
                     padding: 0;
-                    background-color: @skin-panel-bg-accent;
+                    background-color: @pricing-tb-panel-bg-accent;
+                    border-top: @pricing-tb-border-inner;
                     border-radius: 0;
                     //.border-top-radius(0);
-                    font-weight: bold;
+                    //font-weight: bold;
                     .foot-text{
-                        color: @main-color;
+                        color: @pricing-tb-active-bg;
                         display: inline-block;
                         width: 100%;
                         padding: 15px;
                         line-height: 1em;
                         text-decoration: none;
                         > *{
-                            color: @main-color;
+                            color: @pricing-tb-active-bg;
                         }
                         &:hover{
-                            .high-color(@main-color);
-                            background-color: @main-color;
+                            color: @pricing-tb-active-text;
+                            background-color: @pricing-tb-active-bg;
                             > * {
-                                .high-color(@main-color);
+                                color: @pricing-tb-active-text;
                             }
                         }
                     }
@@ -200,38 +265,43 @@ border-radius: @border-radius-base;
           .panel-wrapper{
             border: none;
             .panel-container{
-                border: @skin-border-outer-featured;
+                border: @pricing-tb-border-outer-featured;
                 position: relative;
                 box-sizing: content-box;
                 margin: -10px -9px;
                 .box-shadow(0px 0px 6px 6px rgba(0, 0, 0, 0.1));
                 z-index: 2;
                 .panel{
-                    border-right: @skin-border-inner-featured !important;
-                    border-left: @skin-border-inner-featured !important;
-                    border-color: @main-color;
+                    border-color: @pricing-tb-active-bg !important;
                     .panel-heading,
                     .panel-footer a{
-                        padding: 20px;
+                        //padding: 20px;
                     }
                     .panel-heading{
-                        color: @main-color;
+                        color: @pricing-tb-active-text;
+                        background-color: @pricing-tb-active-bg;
+                        border-color: @pricing-tb-active-bg;
+                        *{
+                            color: @pricing-tb-active-text;    
+                        }
                     }
                     .panel-body{
-                        background-color: @main-color;
-                        border-color: @main-color ;
+                        padding: 30px 15px;  
                         .price{
-                            .currency{
-                                .low-color(@main-color);
-                            }
                             .integer-part{
-                                .high-color(@main-color);
+                                color: @pricing-tb-active-bg;
                             }
-                            .decimal-part{
-                                .high-color(@main-color);
-                            }
-                            .time{
-                                .low-color(@main-color);
+                        }
+                    }
+                    .list-group{
+                        padding: 20px 0px; 
+                    }
+                    .panel-footer{
+                        .foot-text{
+                            color: @pricing-tb-active-text;
+                            background-color: @pricing-tb-active-bg;
+                            > * {
+                                color: @pricing-tb-active-text;
                             }
                         }
                     }
@@ -243,38 +313,57 @@ border-radius: @border-radius-base;
 
 }
 .rtl-body .module.module-pricing-table.pricing-table-default{
-@skin-border-outer:             6px solid @base-color-b-lighter;
-@skin-border-outer-featured:    4px solid @main-color;
-@skin-border-inner:             1px solid @base-border-color-light;
-@skin-border-inner-featured:    1px solid @main-color;
+@pricing-tb-bg:                        @body-bg;
+@pricing-tb-border-radius:             @border-radius-base;
+@pricing-tb-box-shadow:                none; 
+@pricing-tb-title-font-size:           @font-size-base; 
+@pricing-tb-content-padding:           @padding-lg 0;
+@pricing-tb-header-padding-vertical:   @padding-base;
+@pricing-tb-header-padding-horizontal: @padding-lg;
 
-@skin-panel-bg:                 @body-bg;
-@skin-panel-bg-accent:          @base-color-b-lighter;
+//** Border color for elements within accordions
+
+@pricing-tb-text:                      @component-heading-color;
+@pricing-tb-border:                    1px solid @base-border-color;
+@pricing-tb-bg:                        @component-bg;
+
+@pricing-tb-active-text:               @primary-heading-color;
+@pricing-tb-active-border:             @brand-primary;
+@pricing-tb-active-bg:                 @brand-primary;
+
+    
+@pricing-tb-border-outer:             6px solid @component-bg;
+@pricing-tb-border-outer-featured:    4px solid @pricing-tb-active-bg;
+@pricing-tb-border-inner:             1px solid @base-border-color;
+@pricing-tb-border-inner-featured:    1px solid @pricing-tb-active-bg;
+
+@pricing-tb-panel-bg:                 @body-bg;
+@pricing-tb-panel-bg-accent:          @component-bg;
 .row{
     &.pt_without_spacing .panel-wrapper-outer{
         padding:0;
         &:first-child > .panel-wrapper{
             border-left: none;
-            border-right: @skin-border-outer;
+            border-right: @pricing-tb-border-outer;
             .panel-container .panel{
                 .border-left-radius(0);
-                .border-right-radius(@border-radius-base);
+                .border-right-radius(@pricing-tb-border-radius);
             }
         }
         &:last-child > .panel-wrapper{
             border-right: none;
-            border-left: @skin-border-outer;
+            border-left: @pricing-tb-border-outer;
             .panel-container .panel{
-                .border-left-radius(@border-radius-base);
+                .border-left-radius(@pricing-tb-border-radius);
                 .border-right-radius(0);
-                border-left: @skin-border-inner;
+                border-left: @pricing-tb-border-inner;
             }
         }
     }
      .panel-wrapper{
         .panel-container{
             .panel{
-                border-right: @skin-border-inner;
+                border-right: @pricing-tb-border-inner;
                 border-left: none;
                 .panel-body{
                         .time{

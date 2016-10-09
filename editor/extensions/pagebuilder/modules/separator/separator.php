@@ -67,7 +67,7 @@ class PBSeparatorShortcode extends PBShortcodeClass{
         $this->add_panel( 'separator_settings_panel' , array(
             'title'         =>  __('Separator Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -76,8 +76,8 @@ class PBSeparatorShortcode extends PBShortcodeClass{
       		'type' => array(
       			'type' => 'select',
       			'label' => __('Type', 'site-editor'),
-      		    'desc' => __('This option allows you to use separators in horizontal or vertical modes. It should be mentioned that this feature is only available for the default skin and is only shown when you are working with the default skin of this module.', 'site-editor'),
-                'options' =>array(
+      		    'description'  => __('This option allows you to use separators in horizontal or vertical modes. It should be mentioned that this feature is only available for the default skin and is only shown when you are working with the default skin of this module.', 'site-editor'),
+                'choices'   =>array(
                     'spr-horizontal' => __('Horizontal', 'site-editor'),
                     'spr-vertical'   => __('Vertical', 'site-editor'),
                 ),
@@ -93,8 +93,8 @@ class PBSeparatorShortcode extends PBShortcodeClass{
             'border_style' => array(
       			'type' => 'select',
       			'label' => __('Border Style', 'site-editor'),
-      		    'desc' => __('This option allows you to set the style of the separator border. ', 'site-editor'),
-                'options' =>array(
+      		    'description'  => __('This option allows you to set the style of the separator border. ', 'site-editor'),
+                'choices'   =>array(
                     'spr-solid'           => __('solid', 'site-editor'),
                     'spr-double'          => __('double', 'site-editor'),
                     'spr-gradient'        => __('gradient', 'site-editor'),
@@ -104,11 +104,11 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 "panel"     => "separator_settings_panel",
       		),
             "vertical_height"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "after_field"       => "px",
                 "label"             => __("Separator Height ","site-editor"),
-                "desc"              => __('This option allows you to set the vertical separator heights. This only appears when the separator is vertical.',"site-editor"),
-                "control_param"  =>  array(
+                "description"       => __('This option allows you to set the vertical separator heights. This only appears when the separator is vertical.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                 ),
                 "panel"     => "separator_settings_panel",
@@ -121,11 +121,11 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 ),    
             ),
             "max_width"    => array(
-                "type"              => "spinner",
+                "type"              => "number",
                 "after_field"       => "px",
                 "label"             => __("Separator Max Width ","site-editor"),
-                "desc"              => __('This option allows you to set the maximum width of the separator.',"site-editor"),
-                "control_param"  =>  array(
+                "description"       => __('This option allows you to set the maximum width of the separator.',"site-editor"),
+                "js_params"  =>  array(
                     "min"  =>  0 ,
                 ),
                 "panel"     => "separator_settings_panel",
@@ -137,12 +137,12 @@ class PBSeparatorShortcode extends PBShortcodeClass{
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default"
+                "default"       => "default"
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

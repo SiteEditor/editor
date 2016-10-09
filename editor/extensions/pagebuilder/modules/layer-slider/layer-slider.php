@@ -59,14 +59,14 @@ class PBlayer_sliderShortcode extends PBShortcodeClass{
             'layer_slider_id' => array(
                 'type'                  => 'select',
                 'label'                 => __(' Select Slider ', 'site-editor'),
-                'desc'                  => __('This feature allows you choose a previously created layer slider to display.', 'site-editor'),
-                'options'               => $sliders_options ,
+                'description'           => __('This feature allows you choose a previously created layer slider to display.', 'site-editor'),
+                'choices'               => $sliders_options ,
 
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,

@@ -69,7 +69,7 @@ class PBRowShortcode extends PBShortcodeClass{
             "align"    =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "center"
+                "default"       => "center"
             )
         );
 

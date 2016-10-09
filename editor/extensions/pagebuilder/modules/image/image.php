@@ -108,7 +108,7 @@ class PBImageShortcode extends PBShortcodeClass{
           $this->add_panel( 'image_settings_panel' , array(
               'title'         =>  __('Image Settings',"site-editor")  ,
               'capability'    => 'edit_theme_options' ,
-              'type'          => 'fieldset' ,
+              'type'          => 'default' ,
               'description'   => '' ,
               'priority'      => 9 ,
           ) );
@@ -117,12 +117,12 @@ class PBImageShortcode extends PBShortcodeClass{
               'change_image_panel' => array(
                   "type"          => "sed_image" ,
                   "label"         => __("Select Image", "site-editor"),
-                  "panel_type"    => "fieldset" ,
+                  "panel_type"    => "default" ,
                   'priority'      => 1 ,
               ),
               'full_src'    => array(
                   'label'         => __('Image For Light Box', 'site-editor'),
-                  'desc'          => __('Big Image Url', 'site-editor'),
+                  'description'   => __('Big Image Url', 'site-editor'),
                   'type'          => 'text',
                   'panel'         => 'sed_select_image_panel' ,
                   'dependency' => array(
@@ -135,8 +135,8 @@ class PBImageShortcode extends PBShortcodeClass{
               'image_click' => array(
                   'type' => 'select',
                   'label' => __('When image is clicked', 'site-editor'),
-                  'desc' =>  __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
-                  'options' =>array(
+                  'description'  => __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
+                  'choices'   =>array(
                       'default'             => __('Do Nothing', 'site-editor'),
                       'link_mode'           => __('Open Link', 'site-editor'),
                       'expand_mode'         => __('Open Expand Mode', 'site-editor'),
@@ -147,19 +147,19 @@ class PBImageShortcode extends PBShortcodeClass{
               'title' =>  array(
                   'type'          => 'text',
                   'label'         => __('Title', 'site-editor'),
-                  'desc'          => __('This option allows you to set a title for your image.', 'site-editor'),
+                  'description'   => __('This option allows you to set a title for your image.', 'site-editor'),
                   'panel'    => 'image_settings_panel',
               ),
               'description' =>  array(
                   'type'          => 'textarea',
                   'label'         => __('Description', 'site-editor'),
-                  'desc'          => __('This option allows you to add a description for your image.', 'site-editor'),
+                  'description'   => __('This option allows you to add a description for your image.', 'site-editor'),
                   'panel'    => 'image_settings_panel',
               ),
               'alt' => array(
                   'type' => 'text',
                   'label' => __('Alt Text', 'site-editor'),
-                  'desc' => __('This option allows you to show a text for your images which will be shown if the image could not be loaded. This also helps your site’s SEO.', 'site-editor'),
+                  'description'  => __('This option allows you to show a text for your images which will be shown if the image could not be loaded. This also helps your site’s SEO.', 'site-editor'),
                   'panel'    => 'image_settings_panel',
               ),
               'link_to' => array(
@@ -169,12 +169,12 @@ class PBImageShortcode extends PBShortcodeClass{
               'spacing' => array(
                   "type"          => "spacing" ,
                   "label"         => __("Spacing", "site-editor"),
-                  "value"         => "10 0 10 0" ,
+                  "default"       => "10 0 10 0" ,
               ),
               "align"  =>  array(
                   "type"          => "align" ,
                   "label"         => __("Align", "site-editor"),
-                  "value"         => "center"
+                  "default"       => "center"
               ),
               "animation"  =>  array(
                   "type"          => "animation" ,
@@ -245,6 +245,7 @@ $sed_pb_app->register_module(array(
     "icon"        => "icon-image",
     "shortcode"   => "sed_image",
     "tpl_type"    => "underscore" ,
+    "show_ui_in_toolbar"    =>  false ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',
     "js_module"   => array( 'sed_image_module_script', 'image/js/image-module.min.js', array('sed-frontend-editor') )
 ));

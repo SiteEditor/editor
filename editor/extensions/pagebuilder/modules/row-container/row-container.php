@@ -45,6 +45,7 @@ class PBRowContainerShortcode extends PBShortcodeClass{
             'overlay'               => false,
             'overlay_color'         => '#000',
             'overlay_opacity'       => 50,
+            'is_arrow'              => false,
             'arrow'                 => '',
             'arrow_size'            => 20,
             'arrow_color'           => '#000',
@@ -82,40 +83,49 @@ class PBRowContainerShortcode extends PBShortcodeClass{
     function shortcode_settings(){
 
         $this->add_panel( 'row_container_settings_panel' , array(
-            'label'         =>  __('Row Container Settings',"site-editor")  ,
+            'title'         =>  __('Row Container Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 10 ,
         ) );
 
+        $this->add_panel( 'row_container_responsive_panel' , array(
+            'title'         =>  __('Responsive Settings',"site-editor")  ,
+            'capability'    => 'edit_theme_options' ,
+            'type'          => 'default' ,
+            'description'   => '' ,
+            'priority'      => 11 ,
+        ) );
+
         $this->add_panel( 'video_background_row_container' , array(
-            'label'         =>  __('Video Background',"site-editor")  ,
+            'title'         =>  __('Video Background',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
             'type'          => 'inner_box' ,
-            'desc'   => '',// '' ,
-            'priority'      => 11 ,
+            'description'   => '',
+            'priority'      => 12 ,
             'parent_id'     => 'root' ,
-            'in_box'        => true
+            'has_border_box'        => true
         ) );
 
         $params = array(
-            'full_height'   => array(
+            /*'full_height'   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Full Height', 'site-editor'),
-                'desc'    => __('','site-editor'),
+                'description'  => __('','site-editor'),
                 "panel"   => "row_container_settings_panel"
-            ),
+            ),*/
             'overlay'   => array(
                 'type'    => 'checkbox',
                 'label'   => __('Overlay', 'site-editor'),
-                'desc'    => __('If you set image background for your rows, using overlays would make your modules and elements on the image background to pop.','site-editor'),
-                "panel"   => "row_container_settings_panel"
+                'description'  => __('If you set image background for your rows, using overlays would make your modules and elements on the image background to pop.','site-editor'),
+                "panel"   => "row_container_settings_panel",
+                'has_border_box' => false
             ),
             'overlay_color'   => array(
                 'type'    => 'color',
                 'label'   => __('Overlay Color', 'site-editor'),
-                'desc'    => __('You can set a color for the overlay using the color picker.','site-editor'),
+                'description'  => __('You can set a color for the overlay using the color picker.','site-editor'),
                 "panel"   => "row_container_settings_panel" ,
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -124,12 +134,13 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                         "type"     =>  "exclude"
                     )
                 ),
+                'has_border_box' => false
             ),
             'overlay_opacity'   => array(
-                'type'  => 'spinner',
+                'type'  => 'number',
                 'after_field'  => '%',
                 'label'   => __('Overlay Opacity', 'site-editor'),
-                'desc'    => __('You can set the opacity of the overlay with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
+                'description'  => __('You can set the opacity of the overlay with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
                 "panel"   => "row_container_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -138,51 +149,68 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                         "type"     =>  "exclude"
                     )
                 ),
+                'has_border_box' => false
+            ),
+            'is_arrow'   => array(
+                'type'    => 'checkbox',
+                'label'   => __('Arrow', 'site-editor'),
+                'description'  => __('This option allows you to use arrows on the top or bottom of your pages.','site-editor'),
+                "panel"   => "row_container_settings_panel",
+                'has_border_box' => false
             ),
             'arrow'     => array(
       			'type' => 'select',
-      			'label' => __('Arrow', 'site-editor'),
-      			'desc' => __("This option allows you to use arrows on the top or bottom of your pages. If you want to relate the current row with the one on the top of it, use top and if you want to relate it with the one below it, use bottom. You can create other modes for consecutive rows. ", "site-editor"),
-                'options' =>array(
-                    ''                 => __('None', 'site-editor'),
+      			'label' => __('Type Arrow', 'site-editor'),
+      			'description'  => __("This option allows you to use arrows on the top or bottom of your pages. If you want to relate the current row with the one on the top of it, use top and if you want to relate it with the one below it, use bottom. You can create other modes for consecutive rows. ", "site-editor"),
+                'choices'   =>array(
                     'row-arrow-top'        => __('Top', 'site-editor'),
                     'row-arrow-bottom'     => __('Bottom', 'site-editor'),
                 ),
                 "panel"     => "row_container_settings_panel",
-      		),
-            'arrow_size'   => array(
-                'type' => 'spinner',
-                "after_field"  => "px",
-                'label'   => __('Arrow Size', 'site-editor'),
-                'desc'    => __('You can set the size of the arrow with this option','site-editor'),
-                "panel"   => "row_container_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
-                        "control"  =>  "arrow" ,
-                        "value"    =>  "" ,
+                        "control"  =>  "is_arrow" ,
+                        "value"    =>  false ,
                         "type"     =>  "exclude"
                     )
                 ),
+                'has_border_box' => false
+      		),
+            'arrow_size'   => array(
+                'type' => 'number',
+                "after_field"  => "px",
+                'label'   => __('Arrow Size', 'site-editor'),
+                'description'  => __('You can set the size of the arrow with this option','site-editor'),
+                "panel"   => "row_container_settings_panel",
+                "dependency"  => array(
+                    'controls'  =>  array(
+                        "control"  =>  "is_arrow" ,
+                        "value"    =>  false ,
+                        "type"     =>  "exclude"
+                    )
+                ),
+                'has_border_box' => false
             ),
             'arrow_color'   => array(
                 'type'    => 'color',
                 'label'   => __('Arrow Color', 'site-editor'),
-                'desc'    => __('You can set the color of the arrow using color picker','site-editor'),
+                'description'  => __('You can set the color of the arrow using color picker','site-editor'),
                 "panel"   => "row_container_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
-                        "control"  =>  "arrow" ,
-                        "value"    =>  "" ,
+                        "control"  =>  "is_arrow" ,
+                        "value"    =>  false ,
                         "type"     =>  "exclude"
                     )
                 ),
+                'has_border_box' => false
             ),
             "video_mp4"     => array(
                 'type'              => 'video',
                 'label'             => __('mp4 Format', 'site-editor'),
-                'desc'              => __('the Video MP4 Format option allows you to upload a .MP4 format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.
+                'description'       => __('the Video MP4 Format option allows you to upload a .MP4 format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.
                                     <br /> Make sure your video is in a 16:9 aspect ratio. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
-                "control_param"     => array(
+                "js_params"     => array(
                     "subtypes"          => array( "m4v" , "mp4" )
                 ),
                 "panel"   => "video_background_row_container"
@@ -191,8 +219,8 @@ class PBRowContainerShortcode extends PBShortcodeClass{
             "video_ogg"     => array(
                 'type'              => 'video',
                 'label'             => __('ogg Format', 'site-editor'),
-                'desc'              => __('the Video OGV Upload option allows you to upload a .OGV format of your video file. .OGV files are optional. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
-                "control_param"     => array(
+                'description'       => __('the Video OGV Upload option allows you to upload a .OGV format of your video file. .OGV files are optional. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
+                "js_params"     => array(
                     "subtypes"          => array( "ogv" , "ogg" )
                 ),
                 "panel"   => "video_background_row_container"
@@ -201,9 +229,9 @@ class PBRowContainerShortcode extends PBShortcodeClass{
             "video_webm"   => array(
                 'type'              => 'video',
                 'label'             => __('webm Format', 'site-editor'),
-                'desc'              => __('the Video WebM Format option allows you to upload a .WebM format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.
+                'description'       => __('the Video WebM Format option allows you to upload a .WebM format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.
                                     <br /> Make sure your video is in a 16:9 aspect ratio. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
-                "control_param"     => array(
+                "js_params"     => array(
                     "subtypes"          => array( "webm" , "webmv" )
                 ),
                 "panel"   => "video_background_row_container"
@@ -212,52 +240,56 @@ class PBRowContainerShortcode extends PBShortcodeClass{
             "video_mute"    => array(
                 'type'    => 'checkbox',
                 'label'   => __('Mute Video', 'site-editor'),
-                'desc'    => __('The Mute Video option allows you to mute the video’s audio or not. Choose yes to enable the option, or no to disable it.','site-editor'),
+                'description'  => __('The Mute Video option allows you to mute the video’s audio or not. Choose yes to enable the option, or no to disable it.','site-editor'),
                 "panel"   => "video_background_row_container"
             ),
 
             "video_loop"    => array(
                 'type'    => 'checkbox',
                 'label'   => __('Loop Video', 'site-editor'),
-                'desc'    => __('The Loop Video option allows you to loop the video or not. Choose yes to enable the option, or no to disable it.','site-editor'),
+                'description'  => __('The Loop Video option allows you to loop the video or not. Choose yes to enable the option, or no to disable it.','site-editor'),
                 "panel"   => "video_background_row_container"
             ),
             "video_preview_image"    => array(
                 'type'    => 'image',
                 'label'   => __('Video Preview Image', 'site-editor'),
-                'desc'    => __('The Video Preview Image option allows you to upload a preview image that would be displayed in the event that your video does not display correctly. You can choose a video with this format from the library by clicking on the button in this section.', 'site-editor'),
+                'description'  => __('The Video Preview Image option allows you to upload a preview image that would be displayed in the event that your video does not display correctly. You can choose a video with this format from the library by clicking on the button in this section.', 'site-editor'),
                 "panel"   => "video_background_row_container"
             ),
             "video_overlay_color"    => array(
                 'type'    => 'color',
                 'label'   => __('Video Overlay Color', 'site-editor'),
-                'desc'    => __('You can set an overlay color for your video using the color picker. If you want to remove the overlay, you should click on the cross icon in color picker.','site-editor'),
+                'description'  => __('You can set an overlay color for your video using the color picker. If you want to remove the overlay, you should click on the cross icon in color picker.','site-editor'),
                 "panel"   => "video_background_row_container"
             ),
             "video_overlay_opacity"    => array(
-                'type'    => 'spinner',
+                'type'    => 'number',
                 'label'   => __('Video Overlay Opacity', 'site-editor'),
-                'desc'    => __('You can set the video overlay opacity with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
+                'description'  => __('You can set the video overlay opacity with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
                 "panel"   => "video_background_row_container"
             ),
             'responsive_option' => array(
       			'type' => 'select',
       			'label' => __('Responsive Option', 'site-editor'),
-      			'desc' => __("This option allows you to set predefined styles such as black, white, main and none. This option is available in all skins except the default one.", "site-editor"),
-                'options' =>array(
+      			'description'  => __("This option allows you to set predefined styles such as black, white, main and none. This option is available in all skins except the default one.", "site-editor"),
+                'choices'   =>array(
                     ''                             => __('Full Width Row Container', 'site-editor'),
                     'hidden-row-container'         => __('Hidden Row Container', 'site-editor'),
                 ),
+                "panel"   => "row_container_responsive_panel",
+                'has_border_box' => false
       		),
             "responsive_spacing"    => array(
                 'type'    => 'text',
                 'label'   => __('Module Responsive Spacing', 'site-editor'),
-                'desc'    => __('','site-editor'),
+                'description'  => __('','site-editor'),
+                "panel"   => "row_container_responsive_panel",
+                'has_border_box' => false
             ),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ),
             'length'   =>  array(
                 "type"          => "length" ,

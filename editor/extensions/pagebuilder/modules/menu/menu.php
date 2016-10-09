@@ -222,7 +222,7 @@ class PBMenuShortcode extends PBShortcodeClass{
         $this->add_panel( 'general_settings_panel' , array(
             'title'         =>  __('General Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -230,7 +230,7 @@ class PBMenuShortcode extends PBShortcodeClass{
         $this->add_panel( 'advance_settings_panel' , array(
             'title'         =>  __('Advance Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -238,7 +238,7 @@ class PBMenuShortcode extends PBShortcodeClass{
         $this->add_panel( 'image_icon_settings_panel' , array(
             'title'         =>  __('Image & Icon Settings',"site-editor")  ,
             'capability'    => 'edit_theme_options' ,
-            'type'          => 'fieldset' ,
+            'type'          => 'default' ,
             'description'   => '' ,
             'priority'      => 9 ,
         ) );
@@ -248,30 +248,30 @@ class PBMenuShortcode extends PBShortcodeClass{
             'menu' => array(
                 'type'                  => 'select',
                 'label'                 => __(' Select Menu ', 'site-editor'),
-                'desc'                  => __('This feature allows you to select your desired pre-made menu – in WordPress admin, Appearance> Menus section – to be loaded in the current place of the module.', 'site-editor'),
-                'options'               => $menu_options ,
+                'description'           => __('This feature allows you to select your desired pre-made menu – in WordPress admin, Appearance> Menus section – to be loaded in the current place of the module.', 'site-editor'),
+                'choices'               => $menu_options ,
                 'panel'    => 'general_settings_panel',
-                /*'control_param'         =>  array(
+                /*'js_params'         =>  array(
                     "force_refresh"         =>   true
                 ),*/
             ),
             'orientation' => array(
                 'type' => 'radio',
                 'label' => __('Orientation ', 'site-editor'),
-                'desc' => __('This feature allows you to specify the type and direction of menu; the options are vertical and horizontal.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This feature allows you to specify the type and direction of menu; the options are vertical and horizontal.', 'site-editor'),
+                'choices'   =>array(
                     'horizontal' => __('Horizontal', 'site-editor'),
                     'vertical'   => __(' Vertical ', 'site-editor'),
                 ),
                 'panel'    => 'general_settings_panel',
-                'in_box'   => true,
+                'has_border_box'   => true,
 
             ),
 
             'vertical_menu_width' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'label' => __('Vertical Menu width', 'site-editor'),
-                'desc' => __('', 'site-editor'),
+                'description'  => __('', 'site-editor'),
                 'panel'    => 'general_settings_panel',
                 "dependency" => array(
                     'controls'  =>  array(
@@ -284,7 +284,7 @@ class PBMenuShortcode extends PBShortcodeClass{
             'sticky' => array(
                 'type' => 'checkbox',
                 'label' => __('Is Sticky menu ?', 'site-editor'),
-                'desc' => __('This feature allows you to activate Sticky feature for your menu.', 'site-editor'),
+                'description'  => __('This feature allows you to activate Sticky feature for your menu.', 'site-editor'),
                 'panel'    => 'general_settings_panel',
                 "dependency" => array(
                     'controls'  =>  array(
@@ -297,8 +297,8 @@ class PBMenuShortcode extends PBShortcodeClass{
             'sticky_styles' => array(
                 'type' => 'select',
                 'label' => __('Sticky Styles', 'site-editor'),
-                'desc' => __('Style For Sticky', 'site-editor'),
-                'options' =>array(
+                'description'  => __('Style For Sticky', 'site-editor'),
+                'choices'   =>array(
                     'sticky-menu-default'   => __('Default', 'site-editor'),
                     'sticky-menu-style1'    => __('Style1 ', 'site-editor'),
                     'sticky-menu-style2'    => __('Style2 ', 'site-editor'),
@@ -316,8 +316,8 @@ class PBMenuShortcode extends PBShortcodeClass{
             'navbar_align' => array(
                 'type' => 'select',
                 'label' => __('Navbar Align ', 'site-editor'),
-                'desc' => __('This feature allows you to specify the location of menu items with respect to the main menu container - on the left, right or the center of that.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This feature allows you to specify the location of menu items with respect to the main menu container - on the left, right or the center of that.', 'site-editor'),
+                'choices'   =>array(
                     'center'     => __('Center', 'site-editor'),
                     'right'     => __('Right ', 'site-editor'),
                     'left'     => __('Left ', 'site-editor'),
@@ -327,28 +327,28 @@ class PBMenuShortcode extends PBShortcodeClass{
             'show_cart' => array(
                 'type' => 'checkbox',
                 'label' => __('Show Cart', 'site-editor'),
-                'desc' => __('This feature allows you to add your shopping card (woocommerce) to your menu. (The shopping cart icon will be added to the menu.)', 'site-editor'),
+                'description'  => __('This feature allows you to add your shopping card (woocommerce) to your menu. (The shopping cart icon will be added to the menu.)', 'site-editor'),
                 'panel'    => 'advance_settings_panel',
             ),
             'show_search' => array(
                 'type' => 'checkbox',
                 'label' => __('Show Search', 'site-editor'),
-                'desc' => __('This feature allows you to add icon search to your menu.', 'site-editor'),
+                'description'  => __('This feature allows you to add icon search to your menu.', 'site-editor'),
                 'panel'    => 'advance_settings_panel',
             ),
 
             'display_description' => array(
                 'type' => 'checkbox',
                 'label' => __('Display Description', 'site-editor'),
-                'desc' => __('This feature allows you to display the item menu descriptions in mega menus; you have inserted the descriptions in WordPress Admin.', 'site-editor'),
+                'description'  => __('This feature allows you to display the item menu descriptions in mega menus; you have inserted the descriptions in WordPress Admin.', 'site-editor'),
                 'panel'    => 'advance_settings_panel',
             ),
 
             'trigger' => array(
                 'type' => 'select',
                 'label' => __('Trigger ', 'site-editor'),
-                'desc' => __('This feature allows you to specify the event of sub-menus and megamenus; the options are: Click and Hover. Clicking the items, sub-menus and megamenus will be opened for the former; and for the latter, this will happen when the mouse cursor be on the items. ', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This feature allows you to specify the event of sub-menus and megamenus; the options are: Click and Hover. Clicking the items, sub-menus and megamenus will be opened for the former; and for the latter, this will happen when the mouse cursor be on the items. ', 'site-editor'),
+                'choices'   =>array(
                     'hover'     => __('Hover', 'site-editor'),
                     'click'     => __('Click ', 'site-editor'),
                 ),
@@ -357,9 +357,9 @@ class PBMenuShortcode extends PBShortcodeClass{
             ),
 
             'delay_hover' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'label' => __('Delay Hover', 'site-editor'),
-                'desc' => __('This feature allows you to specify the time delay to sub-menus and megamenus be hidden.', 'site-editor'),
+                'description'  => __('This feature allows you to specify the time delay to sub-menus and megamenus be hidden.', 'site-editor'),
                 'panel'    => 'advance_settings_panel',
                 "dependency" => array(
                     'controls'  =>  array(
@@ -373,8 +373,8 @@ class PBMenuShortcode extends PBShortcodeClass{
             'scroll_animate_anchor' => array(
                 'type' => 'select',
                 'label' => __('Scroll Animate For Anchor : ', 'site-editor'),
-                'desc' => __('This feature allows you to specify the type of animation for scrolls. (The type of scroll animation when Anchor is clicked.) ', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This feature allows you to specify the type of animation for scrolls. (The type of scroll animation when Anchor is clicked.) ', 'site-editor'),
+                'choices'   =>array(
                     ''                      => __('without using animate', 'site-editor'),
                     'easeInOutQuint'        => __('easeInOutQuint ', 'site-editor'),
                     'easeOutQuad'           => __('easeOutQuad', 'site-editor'),
@@ -414,10 +414,10 @@ class PBMenuShortcode extends PBShortcodeClass{
             ),
 
             'scroll_animate_duration' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'label' => __('scroll Animate Duration', 'site-editor'),
-                'desc' => __('This feature allows you to specify the time it takes to, after clicking the Anchors, scroll move as animated to reach the target.', 'site-editor'),
-                "control_param"  =>  array(
+                'description'  => __('This feature allows you to specify the time it takes to, after clicking the Anchors, scroll move as animated to reach the target.', 'site-editor'),
+                "js_params"  =>  array(
                     'min' => 1 ,
                     'step'  => 100
                 ),
@@ -427,15 +427,15 @@ class PBMenuShortcode extends PBShortcodeClass{
             'enable_draggable_area' => array(
                 'type' => 'checkbox',
                 'label' => __('Enable Draggable Area', 'site-editor'),
-                'desc' => __('This feature allows you disable/enable the draggable area on the left or right of the menu. Enabling this area, you can drag and drop the modules such as Image, Social bar, Icon, Button, and Search here and create attractive menus.', 'site-editor'),
+                'description'  => __('This feature allows you disable/enable the draggable area on the left or right of the menu. Enabling this area, you can drag and drop the modules such as Image, Social bar, Icon, Button, and Search here and create attractive menus.', 'site-editor'),
                 'panel'    => 'advance_settings_panel',
             ),
 
             'draggable_area_direction' => array(
                 'type' => 'select',
                 'label' => __('Draggable Area Direction', 'site-editor'),
-                'desc' => __('This feature allows you to select that the draggable area be on the right or the left side of menu. ', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This feature allows you to select that the draggable area be on the right or the left side of menu. ', 'site-editor'),
+                'choices'   =>array(
                     'left'     => __('Left', 'site-editor'),
                     'right'     => __('Right ', 'site-editor'),
                 ),
@@ -450,9 +450,9 @@ class PBMenuShortcode extends PBShortcodeClass{
             ),
 
             'draggable_area_width' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'label' => __('Draggable Area Width', 'site-editor'),
-                'desc' =>__('This feature allows you to specify the draggable area width. ', 'site-editor'),
+                'description' => __('This feature allows you to specify the draggable area width. ', 'site-editor'),
                 'panel'    => 'advance_settings_panel',
                 "dependency" => array(
                     'controls'  =>  array(
@@ -463,28 +463,28 @@ class PBMenuShortcode extends PBShortcodeClass{
             ),
 
             'image_width' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'label' => __('Image Width', 'site-editor'),
-                'desc' =>__('This feature allows you to specify the Image Thumbnail width, which are created in the WordPress admin for menu items. (The maximum size is 64Px).', 'site-editor'),
+                'description' => __('This feature allows you to specify the Image Thumbnail width, which are created in the WordPress admin for menu items. (The maximum size is 64Px).', 'site-editor'),
                 'panel'    => 'image_icon_settings_panel',
             ),
             'image_height' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'label' => __('Image Height', 'site-editor'),
-                'desc' => __('This feature allows you to specify the Image Thumbnail height, which are created in the WordPress admin for menu items. (The maximum size is 64Px).', 'site-editor'),
+                'description'  => __('This feature allows you to specify the Image Thumbnail height, which are created in the WordPress admin for menu items. (The maximum size is 64Px).', 'site-editor'),
                 'panel'    => 'image_icon_settings_panel',
             ),
             'icon_font_size' => array(
-                'type' => 'spinner',
+                'type' => 'number',
                 'label' => __('Icon Font Size', 'site-editor'),
-                'desc' => __('This feature allows you to specify the size of Font Icons, which are created in the WordPress admin for menu items.', 'site-editor'),
+                'description'  => __('This feature allows you to specify the size of Font Icons, which are created in the WordPress admin for menu items.', 'site-editor'),
                 'panel'    => 'image_icon_settings_panel',
             ),
             'img_align' => array(
                 'type' => 'select',
                 'label' => __('Image Align ', 'site-editor'),
-                'desc' => __('This feature allows you to align the Image Thumbnails with respect to the menu items and specify that the images must be on which side of menu items; the options are: Top, left, Right, and Bottom.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This feature allows you to align the Image Thumbnails with respect to the menu items and specify that the images must be on which side of menu items; the options are: Top, left, Right, and Bottom.', 'site-editor'),
+                'choices'   =>array(
                     'top'     => __('Top', 'site-editor'),
                     'right'     => __('Right ', 'site-editor'),
                     'bottom'     => __('Bottom ', 'site-editor'),
@@ -495,8 +495,8 @@ class PBMenuShortcode extends PBShortcodeClass{
             'icon_align' => array(
                 'type' => 'select',
                 'label' => __('Icon Align ', 'site-editor'),
-                'desc' => __('This feature allows you to align the Font Icons with respect to the menu items and specify that the images must be on which side of menu items; the options are: Top, left, Right, and Bottom.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('This feature allows you to align the Font Icons with respect to the menu items and specify that the images must be on which side of menu items; the options are: Top, left, Right, and Bottom.', 'site-editor'),
+                'choices'   =>array(
                     'top'     => __('Top', 'site-editor'),
                     'right'     => __('Right ', 'site-editor'),
                     'bottom'     => __('Bottom ', 'site-editor'),
@@ -507,8 +507,8 @@ class PBMenuShortcode extends PBShortcodeClass{
             'image_icon_preference' => array(
                 'type' => 'select',
                 'label' => __('preference Icons Or Image : ', 'site-editor'),
-                'desc' => __('If you have created both of the Font Icon and Image Thumbnail for one item, then you must specify that in general, when there are two options for the items which one is the priority.', 'site-editor'),
-                'options' =>array(
+                'description'  => __('If you have created both of the Font Icon and Image Thumbnail for one item, then you must specify that in general, when there are two options for the items which one is the priority.', 'site-editor'),
+                'choices'   =>array(
                     'icon'     => __('icon', 'site-editor'),
                     'image'     => __('image ', 'site-editor')
                 ),
@@ -521,12 +521,12 @@ class PBMenuShortcode extends PBShortcodeClass{
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "0 0 0 0" ,
+                "default"       => "0 0 0 0" ,
             ), 
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
-                "value"         => "default",
+                "default"       => "default",
                 "dependency" => array(
                     'controls'  =>  array(
                         "control"  =>  "orientation" ,

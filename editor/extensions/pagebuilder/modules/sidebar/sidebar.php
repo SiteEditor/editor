@@ -63,13 +63,13 @@ class PBSidebarShortcode extends PBShortcodeClass{
             'sidebar' => array(
       			'type' => 'select',
       			'label' => __('Select Sidebar', 'site-editor'),
-      			'desc' => __("This feature allows you to choose Sidebar  type from options Success, warning, info, and Danger. ", "site-editor"),
-                  'options' => $sidebars
+      			'description'  => __("This feature allows you to choose Sidebar  type from options Success, warning, info, and Danger. ", "site-editor"),
+                  'choices'   => $sidebars
           	),
             'spacing' => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "value"         => "10 0 10 0" ,
+                "default"       => "10 0 10 0" ,
             ), 
             "animation"  =>  array(
                 "type"          => "animation" ,
@@ -89,7 +89,7 @@ new PBSidebarShortcode();
 global $sed_pb_app;
 
 $sed_pb_app->register_module(array(
-    "group"       => "basic" ,
+    "group"       => "theme" ,
     "name"        => "sidebar",
     "title"       => __("Sidebar","site-editor"),
     "description" => __("Add Full Customize Sidebar","site-editor"),
