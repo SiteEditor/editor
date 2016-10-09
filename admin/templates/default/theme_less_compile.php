@@ -18,7 +18,7 @@ if( isset( $_REQUEST['theme_less_file'] ) ) {
 
     if( $result_compile === true ){
         sed_print_message( sprintf( __("less %s is compiled.","site-editor" ) , $less_file_base ) );
-    }
+    } 
 
     if( $result_compile !== true ) {
         sed_print_message(sprintf(__("Error LESS : %s", "site-editor"), $result_compile), 'error');
