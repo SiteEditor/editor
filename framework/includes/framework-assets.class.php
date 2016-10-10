@@ -56,6 +56,8 @@ if(!class_exists('SEDFrameworkAssetsManager'))
 
             $this->add( 'jplayer-playlist',     SED_FRAMEWORK_ASSETS_URL . '/js/jplayer/jplayer.playlist'.$this->suffix.'.js', array('jquery','jplayer-plugin') ,"2.4.0");
 
+            $this->add( 'jquery-elevatezoom',   SED_FRAMEWORK_ASSETS_URL . '/js/image-zoom/jquery.elevatezoom'.$this->suffix.'.js', array('jquery') ,"3.0.8");
+
         }
 
         function enqueue_scripts(){

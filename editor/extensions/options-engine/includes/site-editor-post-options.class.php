@@ -149,11 +149,7 @@ class SiteEditorPostOptions {
 
             $this->control_prefix = $this->option_group;
 
-            $post_type = get_post_type_object( $_POST['post_type'] );
-
-            $this->title = sprintf(__("Single %s Options" , "site-editor") , $post_type->labels->name );
-
-            $this->description = $post_type->description;
+            add_action( "init", array( $this, 'set_post_settings_info' ) );
 
             add_action("sed_register_{$this->option_group}_options", array($this, 'register_post_options'));
 
@@ -167,7 +163,16 @@ class SiteEditorPostOptions {
 
     }
 
-    function add_toolbar_elements(){
+    public function set_post_settings_info(){
+
+        $post_type = get_post_type_object( $_POST['post_type'] );
+
+        $this->title = sprintf(__("Single %s Options" , "site-editor") , $post_type->labels->name );
+
+        $this->description = $post_type->description;
+    }
+
+    public function add_toolbar_elements(){
         global $site_editor_app;
 
         $site_editor_app->toolbar->add_element(
