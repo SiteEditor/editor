@@ -53,7 +53,9 @@ api	 * @param options
 
     api.Events.bind( "after_apply_single_setting_relations_update" , function(group, control, currentValue){
 
-        control.active.set( control.params.active );
+        if( control.params.active === false ) {
+            control.active.set(control.params.active);
+        }
 
     });
 
