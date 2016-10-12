@@ -58,6 +58,8 @@ if(!class_exists('SEDFrameworkAssetsManager'))
 
             $this->add( 'jquery-elevatezoom',   SED_FRAMEWORK_ASSETS_URL . '/js/image-zoom/jquery.elevatezoom'.$this->suffix.'.js', array('jquery') ,"3.0.8");
 
+            $this->add( 'sed-image-zoom',   SED_FRAMEWORK_ASSETS_URL . '/js/image-zoom/sed-elevatezoom'.$this->suffix.'.js', array('jquery' , 'jquery-elevatezoom' , 'sed-livequery' ) , SED_APP_VERSION);
+
         }
 
         function enqueue_scripts(){
