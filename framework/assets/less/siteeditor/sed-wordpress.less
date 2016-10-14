@@ -35,6 +35,24 @@ input[type="submit"],
     }
 }
 
+.woocommerce-message ,
+.woocommerce-error ,
+.woocommerce-info {
+    .sed-css-component .alert();
+    list-style-type: none;
+    margin: 0 0 20px;
+}
+.woocommerce-info {
+    .sed-css-component .alert-primary();  
+}
+
+.woocommerce-error {
+    .sed-css-component .alert-danger(); 
+}
+.woocommerce-message {
+    .sed-css-component .alert-success();
+}
+
 select,
 textarea,
 input[type="text"],
