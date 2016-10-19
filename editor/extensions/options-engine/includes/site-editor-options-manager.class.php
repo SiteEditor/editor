@@ -67,6 +67,15 @@ final class SiteEditorOptionsManager{
     protected $fields = array();
 
     /**
+     * Registered Preview Params
+     *
+     * @since 1.0.0
+     * @access protected
+     * @var array
+     */
+    protected $preview_params = array();
+
+    /**
      * Registered instances of SiteEditorPostOptions.
      *
      * @since 1.0.0
@@ -182,7 +191,8 @@ final class SiteEditorOptionsManager{
             "settingType"       =>  $group_type ,
             "groups"            =>  array() ,
             "designTemplate"    =>  "" ,
-            "partials"          =>  array()
+            "partials"          =>  array() ,
+            "previewParams"     =>  array()
         );
 
         $groups = SED()->editor->manager->groups();
@@ -332,6 +342,20 @@ final class SiteEditorOptionsManager{
         }
 
         $data['partials'] = $group_partials;
+
+        $group_preview_params = array(); 
+
+        foreach ( $this->preview_params as $preview_param_id => $preview_param_args  ) {
+
+            if ( isset( $preview_param_args['option_group'] ) &&  $preview_param_args['option_group'] == $group_id ) {
+
+                $group_preview_params[ $preview_param_id ] = $preview_param_args;
+
+            }
+
+        }
+
+        $data['previewParams'] = $group_preview_params;
         
         return $data;
     }
@@ -664,13 +688,13 @@ final class SiteEditorOptionsManager{
             unset( $args['setting_id'] );
 
             if( isset( $primary_args['setting_id'] ) ){
-                unset( $args['setting_id'] );
+                unset( $primary_args['setting_id'] );
             }
 
             unset( $args['id'] );
 
             if( isset( $primary_args['id'] ) ){
-                unset( $args['id'] );
+                unset( $primary_args['id'] );
             }
 
             $setting = SED()->editor->manager->get_setting( $setting_id );
@@ -731,6 +755,21 @@ final class SiteEditorOptionsManager{
                 $partial_args = $args['partial_refresh'];
 
                 $this->register_field_partial( $partial_args , $setting_id , $args );
+            }
+
+
+            if( isset( $args['preview_params'] ) && isset( $args['preview_params']['type'] ) ) {
+
+                $preview_args = $args['preview_params'];
+                $preview_args['settingId'] = $setting_id;
+
+                if ( isset($args['option_group']) ) {
+                    $preview_args['option_group'] = $args['option_group'];
+                }
+
+                $this->preview_params[$id] = $preview_args;
+
+
             }
 
             // Create the control.

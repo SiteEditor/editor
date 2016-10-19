@@ -539,7 +539,8 @@
                         settingType = responseData.settingType,
                         groups  = responseData.groups ,
                         designTemplate = responseData.designTemplate ,
-                        partials = responseData.partials;
+                        partials = responseData.partials,
+                        previewParams = responseData.previewParams;
 
                     delete self.ajaxProcessing[settingId];
 
@@ -560,6 +561,8 @@
                     self.sedDesignTemplate( designTemplate , settingId );
 
                     self.setDynamicPartials( partials , settingId );
+
+                    self.setPreviewParams( previewParams , settingId );
 
                     if( _.isUndefined( self.ajaxResetTmpls[settingId] ) && _.isUndefined( self.backgroundAjaxload[settingId] ) ) {
 
@@ -696,6 +699,12 @@
         setDynamicPartials : function( partials ){
 
             api.previewer.send( 'addDynamicPartials' , partials );
+
+        },
+
+        setPreviewParams : function( previewParams , settingId ){
+
+            api.previewer.send( 'addDynamicPreviewParams' , previewParams );
 
         },
 

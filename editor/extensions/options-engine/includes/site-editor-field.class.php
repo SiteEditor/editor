@@ -195,6 +195,15 @@ class SiteEditorField{
     public $primary_args = array();
 
     /**
+     * Preview Params for a field
+     *
+     * @since 1.0.0
+     * @access protected
+     * @var array
+     */
+    public $preview_params = array();
+
+    /**
      * SiteEditorField constructor.
      *
      * @param $id

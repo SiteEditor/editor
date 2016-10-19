@@ -22,7 +22,9 @@ class SEDPageBuilderModules extends SiteEditorModules{
 
         self::$modules_base_rel = 'plugins/' . SED_PLUGIN_NAME . '/editor/extensions/pagebuilder/modules/';
 
-        add_action("admin_init" , array( $this , "check_exist_modules" ) );
+        if( ! is_site_editor() ){
+            add_action("admin_init" , array( $this , "check_exist_modules" ) );
+        }
 
 	}
 
@@ -141,7 +143,7 @@ class SEDPageBuilderModules extends SiteEditorModules{
         foreach( (array) $sed_modules AS $module_file => $module_data ){
             $module_file = self::$modules_base_rel . $module_file;
             $modules[ $module_file ] = $module_data;
-        }
+        } 
 
         return apply_filters( 'sed_modules', $modules );
     }

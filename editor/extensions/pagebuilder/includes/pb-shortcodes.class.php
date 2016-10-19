@@ -679,9 +679,26 @@ class PBShortcodeClass{
 
             if( $key != "content" ){
 
-                $params[$key] = $this->add_control_param( $this->shortcode->name , $key , $param );
+                $param = $this->add_control_param( $this->shortcode->name , $key , $param );
 
             }
+
+            if( isset( $param["preview_params"] ) && $param['is_attr'] ){
+
+                $preview_params = $param["preview_params"];
+
+                $preview_params['settingId'] = 'sed_pb_modules';
+
+                $preview_params['shortcode'] = $this->shortcode->name;
+
+                $preview_params['attr'] = $param['attr_name'];
+
+                $param["preview_params"] = $preview_params;
+
+            }
+
+            $params[$key] = $param;
+
         }
 
         $panels = $this->panels();

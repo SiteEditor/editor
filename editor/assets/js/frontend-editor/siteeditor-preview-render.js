@@ -1560,6 +1560,225 @@
 
         api.trigger( 'preview-ready' );
 
+        var _filterFloat = function (value) {
+            if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
+                    .test(value))
+                return Number(value);
+            return false;
+        };
+
+        var _previewAutoUpdate = function( to , previewArgs , previewType , settingId ){
+            to = ( _filterFloat(to) === false ) ? to : _filterFloat(to);
+
+            switch ( previewType ){
+
+                case "text" :
+
+                    var $element = $( previewArgs['selector'] );
+                    $element.text( to );
+
+                    break;
+
+
+                case "html" :
+
+                    var $element = $( previewArgs['selector'] );
+                    $element.html( to );
+
+                    break;
+
+                case "carousel" : 
+
+                    var $element = $( previewArgs['selector'] ) ,
+                        attr = previewArgs['option'];
+
+                    $element.data( attr , to );
+
+                    $element.trigger( "sedChangeDataCarousel" );
+
+                    break;
+
+                case "inline-css" :
+
+                    var cssTemplate = previewArgs['style'],
+                        templateId = settingId + "_css_tpl",
+                        styleId = settingId + "_style",
+                        template ,
+                        css = "";
+
+                    if( $( "#" + templateId ).length == 0 ){
+                        var script = '<script id="' + templateId + '" type="text/html">' + cssTemplate + '</script>';
+                        $( script ).appendTo( $('body') );
+                    }
+
+                    template = api.template( templateId );
+
+                    $( "#" + styleId ).remove();
+
+                    css = template({
+                        "to"    : to
+                    });
+
+                    var style = '<style id="' + styleId + '">' + css + '</style>';
+
+                    $( style ).appendTo( $('head') );
+
+                    break;
+
+                /*case "inline-style" :
+
+                 var $element = $( previewArgs['selector'] ) ,
+                 stylesObj = previewArgs['styles'];
+
+                 $element.css( stylesObj );
+
+                 break;*/
+
+                case "toggle-class" :
+
+                    var $element = $( previewArgs['selector'] ),
+                        cssClass = previewArgs['class'];
+
+                    $element.toggleClass( cssClass , to );
+
+                    break;
+
+
+                case "woo-loop-columns" :
+
+                    var $container = $( previewArgs['selector'] ),
+                        type = api( previewArgs['settingTypeId'] )();
+
+                    if( type == "grid" || type == "default" ) {
+
+                        $.each([ 2, 3, 4, 5, 6], function (i, val) {
+
+                            val = parseInt( 12/val );//parseFloat()
+
+                            if ( $container.find('.product').hasClass('col-sm-' + val) ) {
+                                $container.find('.product').removeClass('col-sm-' + val);
+                            }
+                        });
+
+                        to = parseInt( to );
+
+                        if (to > 6) {
+                            to = 6;
+                        } else if (to < 2) {
+                            to = 2;
+                        }
+
+                        var col = parseInt( 12/to );//parseFloat()
+
+                        var column_class = 'col-sm-' + col;
+
+                        $container.find('.product').addClass(column_class);
+
+                    }
+
+                    if( type == "default" ) {
+
+                        if( ! $container.hasClass("reset-clr") ) {
+                            $container.addClass("reset-clr");
+                        }
+
+                        var styleId =  settingId + "_col_style";
+
+                        $( "#" + styleId ).remove();
+
+                        var css = '#content .woocommerce-module.woocommerce-up-sells-module .sedf-products-default > .product:nth-of-type(' + to +'n+1){clear: both !important;}';
+
+                        var style = '<style id="' + styleId + '">' + css + '</style>';
+
+                        $( style ).appendTo( $('head') );
+
+                    }else if( type == "grid" ) {
+                        $container.masonry();
+                    }
+
+                    break;
+
+                case "toggle" :
+
+                    var $element = $( previewArgs['selector'] );
+
+                    if( to ) {
+                        $element.removeClass("hide");
+                    }else {
+                        $element.addClass("hide");
+                    }
+
+                    break;
+
+                case "add-class" :
+
+                    break;
+
+                case "sed-animation" :
+
+                    break;
+
+                case "media" :
+
+                    break;
+
+            }
+
+            if( !_.isUndefined( previewArgs['callback'] ) ) { //alert("test");
+                eval( previewArgs['callback'] );
+            }
+
+        };
+
+        api.preview.bind("addDynamicPreviewParams" , function( previewParamsSettings ){
+
+            $.each( previewParamsSettings , function( id , previewArgs ){
+
+                if( _.isUndefined( previewArgs['settingId'] ) || _.isUndefined( previewArgs['type'] ) ){
+                    return true;
+                }
+
+                var settingId = previewArgs['settingId'] ,
+                    previewType = previewArgs['type'];
+
+                if( settingId != "sed_pb_modules" ) {
+
+                    api(settingId, function (value) {
+                        value.bind(function (to) {
+
+                            _previewAutoUpdate(to, previewArgs, previewType, settingId);
+
+                        });
+                    });
+
+                }else{
+
+                    if( !_.isUndefined( previewArgs['shortcode'] ) && !_.isUndefined( previewArgs['attr'] ) ){
+
+                        if( _.isUndefined( api.shortcodeAutoUpdate[ previewArgs['shortcode'] ] ) ){
+                            api.shortcodeAutoUpdate[ previewArgs['shortcode'] ] = {};
+                        }
+
+                        api.shortcodeAutoUpdate[ previewArgs['shortcode'] ][ previewArgs['attr'] ] = function( elementId , attrValue ){
+
+                            var _uniqeId = previewArgs['shortcode'] + "_" + previewArgs['attr'];
+
+                            if( !_.isUndefined( previewArgs['selector'] ) ){
+                                previewArgs['selector'] = previewArgs['selector'].replace( "##current##" , '[sed_model_id="' + elementId + '"]' );
+                            }
+
+                            _previewAutoUpdate( attrValue , previewArgs, previewType, _uniqeId);
+
+                        };
+
+                    }
+
+                }
+
+            });
+
+        });
+
 	});
 
 })( sedApp, jQuery );

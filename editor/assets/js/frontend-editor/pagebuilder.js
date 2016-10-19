@@ -2,6 +2,7 @@
 
     var api = sedApp.editor ;
     api.shortcodeUpdate = api.shortcodeUpdate || {};
+    api.shortcodeAutoUpdate = api.shortcodeAutoUpdate || {};
     api.moduleAttrUpdate = api.moduleAttrUpdate || {};
     api.sedModulesAttrsValues = api.sedModulesAttrsValues || {};
     api.fn = api.fn || {};
@@ -1830,6 +1831,11 @@
                 var attrValue = modules[elementId][api.currentAttr];
 
                 attrValue = ( _filterFloat(attrValue) === false ) ? attrValue : _filterFloat(attrValue);
+
+                if( !_.isUndefined( api.shortcodeAutoUpdate[api.currentShortcode] ) && !_.isUndefined( api.shortcodeAutoUpdate[api.currentShortcode][api.currentAttr] ) ){
+                    api.shortcodeAutoUpdate[api.currentShortcode][api.currentAttr]( elementId , attrValue );
+                    return ;
+                }
 
                 if( api.currentAttr != "skin" &&  api.currentAttr != "sed_shortcode_content" )
                     api.contentBuilder.updateShortcodeAttr( api.currentAttr  , attrValue , elementId );
