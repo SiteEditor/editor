@@ -23,6 +23,30 @@ input[type="submit"],
       .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
     }
 }
+.woocommerce{
+    a.button,
+    button.button,
+    input.button,
+    #respond input#submit{
+        .btn();
+        .button-variant(@btn-primary-color;@btn-primary-bg; @btn-primary-border);
+
+        &:active,
+        &.active {
+          outline: 0;
+          background-image: none;
+          .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+        }      
+    }
+}
+.woocommerce table.my_account_orders .order-actions .button,
+.module-woocommerce-cart .checkout-button.button,
+.module-woocommerce-cart .button.update-cart{
+  .button-variant(@btn-black-color; @btn-black-bg; @btn-black-border);
+}
+.woocommerce table.my_account_orders .order-actions .button {
+    .btn-sm();
+}
 
 .woocommerce-message .button{
     .btn();

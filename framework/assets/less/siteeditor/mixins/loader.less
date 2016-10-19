@@ -19,3 +19,39 @@
 		color: rgba(#000,0.75);
 	}
 }
+.icon( @glyph: "\f065" ) {
+	font-family: 'FontAwesome';
+	content: @glyph;
+    font-size: 16px;
+}
+
+.iconbefore( @glyph: "\f065" ) {
+	font-family: 'FontAwesome';
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	margin-right: .618em;
+	content: @glyph;
+	text-decoration: none;
+}
+
+.iconafter( @glyph: "\f065" ) {
+	font-family: 'FontAwesome';
+	speak: none;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	margin-left: .618em;
+	content: @glyph;
+	text-decoration: none;
+}
+/*@include keyframes( spin ) {
+	100% {
+		@include transform( rotate(360deg) );
+	}
+}*/
