@@ -41,40 +41,41 @@ class PBSidebarShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        global $wp_registered_sidebars;
+
         $sidebars = array();
 
-        $sidebars_widgets = wp_get_sidebars_widgets();
-
-        if( isset( $sidebars_widgets['wp_inactive_widgets'] ) ){
-            unset( $sidebars_widgets['wp_inactive_widgets'] );
-        }
-
-        if( isset( $sidebars_widgets['sed-sidebar-not-support'] ) ){
-            unset( $sidebars_widgets['sed-sidebar-not-support'] );
-        }
+        $sidebars_widgets = $wp_registered_sidebars;
 
         if( !empty( $sidebars_widgets ) ){
-            foreach( $sidebars_widgets AS $sidebar_id => $widgets ){
-                $sidebars[ $sidebar_id ] = $sidebar_id;
+            foreach( $sidebars_widgets AS $sidebar ){
+                $sidebars[ $sidebar['id'] ] = ucwords( $sidebar['name'] );
             }
         }
 
         $params = array(
+
             'sidebar' => array(
-      			'type' => 'select',
-      			'label' => __('Select Sidebar', 'site-editor'),
-      			'description'  => __("This feature allows you to choose Sidebar  type from options Success, warning, info, and Danger. ", "site-editor"),
-                  'choices'   => $sidebars
+      			'type'              => 'select',
+      			'label'             => __('Select Sidebar', 'site-editor'),
+      			'description'       => __("This feature allows you to choose Sidebar  type from options Success, warning, info, and Danger. ", "site-editor"),
+                'choices'           => $sidebars ,
+                'js_params'         => array(
+                    'force_refresh'     => true
+                )
           	),
+
             'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
-            ), 
-            "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
+                "type"              => "spacing" ,
+                "label"             => __("Spacing", "site-editor"),
+                "default"           => "10 0 10 0" ,
             ),
+
+            "animation"  =>  array(
+                "type"              => "animation" ,
+                "label"             => __("Animation Settings", "site-editor"),
+            ),
+
         );
 
         return $params;
@@ -93,7 +94,7 @@ $sed_pb_app->register_module(array(
     "name"        => "sidebar",
     "title"       => __("Sidebar","site-editor"),
     "description" => __("Add Full Customize Sidebar","site-editor"),
-    "icon"        => "icon-sidebar",
+    "icon"        => "icon-wedget",
     "type_icon"   => "font",
     "shortcode"   => "sed_sidebar",
     //"sub_modules"   => array('title', 'paragraph', 'image', 'icons' , 'separator'),

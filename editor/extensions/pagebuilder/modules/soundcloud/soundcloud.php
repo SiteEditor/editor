@@ -78,9 +78,12 @@ class PBSoundCloudShortcode extends PBShortcodeClass{
               ),
               'panel'    => 'soundcloud_settings_panel',
               "dependency"  => array(
-                'controls'  =>  array(
-                        "control"  => "visual" ,
-                        "value"    => false
+                'queries'  =>  array(
+                    array(
+                        "key"       => "visual" ,
+                        "value"     => true ,
+                        "compare"   => "==="
+                    )
                 )
               ),
             ),
@@ -91,9 +94,12 @@ class PBSoundCloudShortcode extends PBShortcodeClass{
         			'description'  => __('This feature allows you to specify the Player height in pixels.', 'site-editor'),
               'panel'    => 'soundcloud_settings_panel',
               "dependency"  => array(
-                'controls'  =>  array(
-                        "control"  => "visual" ,
-                        "value"    => true
+                'queries'  =>  array(
+                    array(
+                        "key"       => "visual" ,
+                        "value"     => true ,
+                        "compare"   => "==="
+                    )
                 )
               ),
             ),

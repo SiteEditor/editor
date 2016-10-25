@@ -27,6 +27,15 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 		 */
 		public $type = 'button';
 
+
+		/**
+		 * button icon
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $icon = "";
+
         /**
          * The Button Style : "black" Or "blue" Or "default"
          *
@@ -61,16 +70,9 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 
 			$sed_field_id   = 'sed_pb_' . $pkey;
 
-            switch ( $this->style ) {
-                case "black":
-                    $classes .= " sed-btn-black";
-                    break;
-                case "blue":
-                    $classes .= " sed-btn-blue";
-                    break;
-                default:
-                    $classes .= " sed-btn-default";
-            }
+            $this->style = empty( $this->style ) ? "default" : $this->style;
+
+            $classes .= " sed-btn-{$this->style}";
 
 			?>
 
@@ -80,8 +82,15 @@ if ( ! class_exists( 'SiteEditorButtonControl' ) ) {
 			<?php } ?>
 
 			<button type="button" class="<?php echo esc_attr( $classes ); ?>"  name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string; ?>>
-				<?php echo esc_html( $this->label );?>
+
+                <?php if( ! empty( $this->icon ) ){ ?>
+                    <span class="f-sed fa-lg <?php echo esc_attr( $this->icon );?>"></span>
+                <?php } ?>
+
+                <?php echo esc_html( $this->label );?>
+
 				<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
+
 			</button>
 
 			<!--<div id="<?php //echo esc_attr( $sed_field_id );?>_dialog" class="sed-dialog content <?php //echo $dialog_class; ?>" <?php //echo $dialog_attrs; ?>></div> -->

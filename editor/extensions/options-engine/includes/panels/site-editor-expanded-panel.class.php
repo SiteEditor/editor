@@ -44,6 +44,12 @@ if ( ! class_exists( 'SiteEditorExpandedOptionsPanel' ) ) {
 
 			$pkey			= $this->id;
 
+			$spacing_class  = "";
+
+			if( ! empty( $this->field_spacing ) ){
+				$spacing_class = "spacing_{$this->field_spacing}";
+			}
+
 			/**
 			 * @id : sed-app-panel-<?php echo esc_attr( $this->id ); ?> * required for panel main or container
 			 *  element because needed for dependency in js.
@@ -53,7 +59,7 @@ if ( ! class_exists( 'SiteEditorExpandedOptionsPanel' ) ) {
 			<!-- * required for panel & control container because needed for dependency in js. -->
 			<div class="row_settings">
 
-				<div id="sed-app-panel-<?php echo esc_attr( $this->id ); ?>" class="accordion-panel-settings row_setting_inner sed-app-container-panel sed-app-container-panel-<?php echo  esc_attr( $this->type );?>">
+				<div id="sed-app-panel-<?php echo esc_attr( $this->id ); ?>" class="accordion-panel-settings row_setting_inner sed-app-container-panel <?php echo esc_attr( $spacing_class );?> sed-app-container-panel-<?php echo  esc_attr( $this->type );?>">
 
 					<div class="<?php echo $classes;?>" data-panel-id="<?php echo $pkey; ?>" id="sed_pb_<?php echo $pkey; ?>" <?php echo $atts_string;?>>
 						<?php echo $this->title;?>

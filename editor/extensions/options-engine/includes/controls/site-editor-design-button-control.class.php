@@ -82,16 +82,9 @@ if ( ! class_exists( 'SiteEditorDesignButtonControl' ) ) {
 
             $level_box_id   = "modules_styles_settings_{$this->option_group}_level_box";
 
-            switch ( $this->style ) {
-                case "black":
-                    $classes .= " sed-btn-black";
-                    break;
-                case "blue":
-                    $classes .= " sed-btn-blue";
-                    break;
-                default:
-                    $classes .= " sed-btn-default";
-            }
+			$this->style = empty( $this->style ) ? "default" : $this->style;
+
+			$classes .= " sed-btn-{$this->style}";
 
 			?>
 
@@ -102,7 +95,9 @@ if ( ! class_exists( 'SiteEditorDesignButtonControl' ) ) {
 
 			<button type="button" data-related-level-box="<?php echo esc_attr( $level_box_id );?>" data-panel-id="<?php echo esc_attr( $this->id );?>" class="<?php echo esc_attr( $classes ); ?>"  name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string; ?>>
 
-                <span class="<?php echo esc_attr( $this->icon );?>"></span>
+				<?php if( ! empty( $this->icon ) ){ ?>
+					<span class="<?php echo esc_attr( $this->icon );?>"></span>
+				<?php } ?>
                 <span class="sed-btn-label"><?php echo esc_html( $this->label );?></span>
                 <span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
 

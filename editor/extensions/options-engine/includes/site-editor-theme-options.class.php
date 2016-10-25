@@ -127,6 +127,13 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
 
     }
 
+    public function custom_style_options(){
+
+        $options = apply_filters( "sed_theme_design_options" , array() );
+
+        return $options;
+    }
+
     /**
      * Register Site Default Panels
      */
@@ -143,11 +150,12 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
         );
 
         $panels['site_logo'] = array(
-            'title'         =>  __('Logo Settings',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'inner_box' ,
-            'description'   => '' ,
-            'priority'      => 8
+            'title'             =>  __('Logo Settings',"site-editor")  ,
+            'capability'        => 'edit_theme_options' ,
+            'type'              => 'inner_box' ,
+            'theme_supports'    => 'custom-logo',
+            'description'       => '' ,
+            'priority'          => 8
         );
 
         return $panels;

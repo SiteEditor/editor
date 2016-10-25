@@ -50,12 +50,12 @@ final class SiteEditorOptionsManager{
     private $field_types = array();
 
     /**
-     * An array of our fields dependencies.
+     * Instance of SiteEditorOptionsDependencyManager
      *
      * @access private
      * @var array
      */
-    private $settings_dependencies = array();
+    private $dependency_manager;
 
     /**
      * Registered instances of SiteEditorField.
@@ -93,6 +93,10 @@ final class SiteEditorOptionsManager{
         require_once dirname( __FILE__ ) . DS . 'site-editor-options-template.class.php';
 
         require_once dirname( __FILE__ ) . DS . 'site-editor-field.class.php';
+
+        require_once dirname( __FILE__ ) . DS . 'site-editor-dependency-manager.class.php';
+
+        $this->dependency_manager = new SiteEditorOptionsDependencyManager();
 
         require_once dirname( __FILE__ ) . DS . 'site-editor-page-options.class.php';
 
@@ -134,8 +138,6 @@ final class SiteEditorOptionsManager{
         add_action( 'sed_app_controls_init', array( $this, 'enqueue_wp_editor' ) );
 
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_preview_scripts' ) );
-
-        add_action( 'sed_print_footer_scripts' , array($this, 'print_settings_dependencies') , 10000 );
 
         add_action( 'wp_enqueue_media' , array( $this , 'print_media_templates' ) );
 
@@ -321,7 +323,9 @@ final class SiteEditorOptionsManager{
         if( $allow_design )
             $design_group->settings = array();
 
-        $data['relations'] = isset( $this->settings_dependencies[ $group_id ] ) ? $this->settings_dependencies[ $group_id ] : array();
+        $dependencies = $this->dependency_manager->dependencies( true );
+
+        $data['relations'] = isset( $dependencies[ $group_id ] ) ? $dependencies[ $group_id ] : array();
 
         $data['output'] = $current_group->get_content();
 
@@ -548,7 +552,7 @@ final class SiteEditorOptionsManager{
          */
 
         if( !empty( $panel->dependency ) && is_array( $panel->dependency ) ){
-            $this->set_group_dependencies( $panel->option_group , $panel->dependency , $panel->id );
+            $this->dependency_manager->add( $panel->option_group , $panel->id , $panel->dependency );
         }
 
         SED()->editor->manager->add_panel( $panel );
@@ -604,7 +608,7 @@ final class SiteEditorOptionsManager{
                 }
 
                 if( isset( $args['dependency'] ) && !empty( $args['dependency'] ) ) {
-                    $args['dependency'] = $this->fix_dependency_controls_ids( $args['dependency'] , $prefix );
+                    $args['dependency'] = $this->dependency_manager->fix_dependency_controls_ids( $args['dependency'] , $prefix );
                 }
 
                 $new_panels["{$prefix}_{$panel_id }"] = $args;
@@ -626,7 +630,7 @@ final class SiteEditorOptionsManager{
                 }
 
                 if( isset( $args['dependency'] ) && !empty( $args['dependency'] ) ) {
-                    $args['dependency'] = $this->fix_dependency_controls_ids( $args['dependency'] , $prefix );
+                    $args['dependency'] = $this->dependency_manager->fix_dependency_controls_ids( $args['dependency'] , $prefix );
                 }
 
                 if( isset( $args['lock_id'] ) && !empty( $args['lock_id'] ) ){
@@ -644,22 +648,6 @@ final class SiteEditorOptionsManager{
             'panels'    => $new_panels
         );
 
-    }
-
-    public function fix_dependency_controls_ids( $dependency , $prefix ){
-
-        if( is_array( $dependency ) && isset( $dependency['controls'] ) ){
-            if( isset( $dependency['controls']['control'] ) ){
-                $dependency['controls']['control'] = $prefix."_".$dependency['controls']['control'];
-            }else{
-                foreach( $dependency['controls'] AS $index => $control ){
-                    if( isset( $control['control'] ) )
-                        $dependency['controls'][$index]['control'] = $prefix."_".$control['control'];
-                }
-            }
-        }
-
-        return $dependency;
     }
 
     /**
@@ -746,8 +734,11 @@ final class SiteEditorOptionsManager{
             }
 
             if( isset( $control_args["dependency"] ) && ! empty( $control_args["dependency"] ) ){
-                $this->set_group_dependencies( $control_args['option_group'] , $control_args["dependency"] , $id );
+
+                $this->dependency_manager->add( $control_args['option_group'] , $id , $control_args["dependency"] );
+
                 unset( $control_args["dependency"] );
+
             }
 
             if( isset( $args['partial_refresh'] ) ) {
@@ -953,41 +944,6 @@ final class SiteEditorOptionsManager{
 
         }
 
-    }
-
-
-    /**
-     * set field dependencies for each group
-     *
-     * @param $group
-     * @param $dependency
-     * @param $id
-     */
-    public function set_group_dependencies( $group , $dependency , $id ){
-        if( !isset( $this->settings_dependencies[$group] ) ){
-            $this->settings_dependencies[$group] = array();
-        }
-
-        /*if( isset( $dependency['controls'] ) ){
-            if( isset( $dependency['controls']['control'] ) ){
-                $dependency['controls']['control'] = $group."_".$dependency['controls']['control'];
-            }else{
-                foreach( $dependency['controls'] AS $index => $control ){
-                    if( isset( $control['control'] ) )
-                        $dependency['controls'][$index]['control'] = $group."_".$control['control'];
-                }
-            }
-        }*/
-        $this->settings_dependencies[$group][$id] = $dependency;
-    }
-
-    public function print_settings_dependencies(){
-        ?>
-        <script type="text/javascript">
-            var _sedAppModulesSettingsRelations = <?php echo wp_json_encode( $this->settings_dependencies ); ?>;
-
-        </script>
-        <?php
     }
 
 

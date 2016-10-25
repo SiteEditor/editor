@@ -7,9 +7,37 @@
     padding: 8px 12px;
   /*  width: 92%; */
 }
+
 .row_setting_box .row_setting_box {
-  margin: 12px 0px;
+    margin: 8px 0px;
+    border: none;
+    border-bottom: 1px solid #E6E6E6;
 }
+
+.row_setting_inner{
+    margin: 15px 12px;
+}
+
+.row_setting_inner.spacing_md{
+    margin: 8px 12px;
+}
+
+.row_setting_inner.spacing_sm{
+    margin: 3px 12px;
+}
+
+.row_setting_inner.spacing_xs{
+    margin: 1px 12px;
+}
+
+.row_settings:first-child {
+    margin-top: 10px;
+}
+
+.row_settings:last-child {
+    margin-bottom: 10px;
+}
+
 .row_setting_box .row_settings {
     margin-bottom: 12px;
 }

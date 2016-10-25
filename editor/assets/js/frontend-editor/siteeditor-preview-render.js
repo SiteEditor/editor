@@ -1601,7 +1601,7 @@
                 case "inline-css" :
 
                     var cssTemplate = previewArgs['style'],
-                        templateId = settingId + "_css_tpl",
+                        templateId = settingId + "_css_tpl",//settingId.replace( /\[/g, '-' ).replace( /\]/g, '' )
                         styleId = settingId + "_style",
                         template ,
                         css = "";

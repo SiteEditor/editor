@@ -50,15 +50,6 @@ api	 * @param options
 		}
 	});
 
-
-    api.Events.bind( "after_apply_single_setting_relations_update" , function(group, control, currentValue){
-
-        if( control.params.active === false ) {
-            control.active.set(control.params.active);
-        }
-
-    });
-
 	api.Control = api.Class.extend({
 		defaultActiveArguments: { duration: 'fast', completeCallback: $.noop },
 
@@ -1136,7 +1127,7 @@ api	 * @param options
         });
 
         // Change previewed URL to the homepage when changing the page_on_front.
-        /*api( 'show_on_front', 'page_on_front', function( showOnFront, pageOnFront ) {
+        api( 'show_on_front', 'page_on_front', function( showOnFront, pageOnFront ) {
             var updatePreviewUrl = function() {
                 if ( showOnFront() === 'page' && parseInt( pageOnFront(), 10 ) > 0 ) {
                     api.previewer.previewUrl.set( api.settings.url.home );
@@ -1154,7 +1145,7 @@ api	 * @param options
                     api.previewer.previewUrl.set( api.settings.url.home + '?page_id=' + pageId );
                 }
             });
-        });*/
+        });
 
         //for api.Ajax check user is logged out
         api.previewer.bind( "check_user_logged_out" , function(){

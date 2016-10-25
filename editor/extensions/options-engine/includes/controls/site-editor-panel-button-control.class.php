@@ -52,6 +52,14 @@ if ( ! class_exists( 'SiteEditorPanelButtonControl' ) ) {
 		public $panel_content = '';
 
 		/**
+		 * Go to panel button icon
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $icon = "";
+
+		/**
 		 * Enqueue control related scripts/styles.
 		 *
 		 * @access public
@@ -79,16 +87,9 @@ if ( ! class_exists( 'SiteEditorPanelButtonControl' ) ) {
 
             $level_box_id   = 'dialog_page_box_' . $pkey;
 
-            switch ( $this->button_style ) {
-                case "black":
-                    $classes .= " sed-btn-black";
-                    break;
-                case "blue":
-                    $classes .= " sed-btn-blue";
-                    break;
-                default:
-                    $classes .= " sed-btn-default";
-            }
+			$this->button_style = empty( $this->button_style ) ? "default" : $this->button_style;
+
+            $classes .= " sed-btn-{$this->button_style}";
 
 			?>
 
@@ -97,7 +98,12 @@ if ( ! class_exists( 'SiteEditorPanelButtonControl' ) ) {
             <?php } ?>
 
             <button type="button" data-related-level-box="<?php echo esc_attr( $level_box_id );?>" class="<?php echo esc_attr( $classes ); ?>"  name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string; ?>>
-                <?php echo esc_html( $this->label );?>
+
+				<?php if( ! empty( $this->icon ) ){ ?>
+					<span class="f-sed fa-lg <?php echo esc_attr( $this->icon );?>"></span>
+				<?php } ?>
+
+				<?php echo esc_html( $this->label );?>
                 <span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
             </button>
 

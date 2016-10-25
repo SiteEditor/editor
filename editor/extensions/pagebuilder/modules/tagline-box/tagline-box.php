@@ -100,10 +100,12 @@ class PBTaglineBoxShortcode extends PBShortcodeClass{
                 ),
                 "panel"     => "tagline_box_settings_panel",
                 "dependency"  => array(
-                    'controls'  =>  array(
-                        "control"  =>  "button_position" ,
-                        "values"    => array( "item-side-right" , "item-hidden" ),
-                        "type"     =>  "exclude"
+                    'queries'  =>  array(
+                        array(
+                            "key"           =>  "button_position" ,
+                            "value"         => array( "item-side-right" , "item-hidden" ),
+                            "compare"       =>  "NOT IN"
+                        )
                     )
                 ),
             ),

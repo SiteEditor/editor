@@ -202,6 +202,15 @@ class SiteEditorOptionsControl{
     public $default_value;
 
     /**
+     * Panel container spacing , "sm" , "md" , "xs"
+     *
+     * @since 1.0.0
+     * @access public
+     * @var string
+     */
+    public $field_spacing = "";
+
+    /**
      * Control shortcode for modules controls
      *
      * @since 1.0.0
@@ -566,6 +575,10 @@ class SiteEditorOptionsControl{
 		$class = 'row_setting_inner sed-app-container-control sed-app-container-control-' . $this->type;
 
 		$class .= ( $this->has_border_box ) ? ' row_setting_box' : '';
+
+		if( ! empty( $this->field_spacing ) ){
+			$class .= " spacing_{$this->field_spacing}";
+		}
 
 		?>
 

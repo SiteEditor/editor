@@ -205,7 +205,7 @@
                     if( $(this).data( "settingsType" ) == "module" ) {
                         api.previewer.send('go_back_to_main_module', api.currentTargetElementId);
                     }else{
-                        api.appSettings.openInitDialogSettings( $(this).data("settingsId") , true , true );
+                        api.appSettings.openInitDialogSettings( $(this).data("settingsId") , true , false );
                     }
                 });
 
@@ -397,9 +397,9 @@
 
                 api.Events.trigger( "afterAppendSettingsTmpl" , $currentElDialog , this.settingsType , this.currentSettingsId );
 
-                if( reset === true )
-                    $( selector ).data('sed.multiLevelBoxPlugin')._reset();
-
+                if( reset === true ) { 
+                    $(selector).data('sed.multiLevelBoxPlugin')._reset();
+                }
             }else{
 
                 if( this.templateType == "ajax" ) {

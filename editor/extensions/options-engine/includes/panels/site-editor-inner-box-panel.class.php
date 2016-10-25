@@ -28,7 +28,7 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
          * @access public
          * @var bool
          */
-        public $in_box = true;
+        public $has_border_box = true;
 
         /**
          * Go to panel button style
@@ -37,6 +37,14 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
          * @var string
          */
         public $btn_style = "default";
+
+		/**
+		 * Go to panel button icon
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $icon = "";
 
 		/**
 		 * Render the panel container, and then its contents (via `this->render_content()`) in a subclass.
@@ -62,6 +70,12 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
 
             $sed_field_id   = 'sed_pb_' . $pkey;
 
+            $spacing_class  = "";
+
+            if( ! empty( $this->field_spacing ) ){
+                $spacing_class = "spacing_{$this->field_spacing}";
+            }
+
 			/**
 			 * @id : sed-app-panel-<?php echo esc_attr( $this->id ); ?> * required for panel main or container
 			 *  element because needed for dependency in js.
@@ -70,12 +84,16 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
 			<!-- * required for panel & control container because needed for dependency in js -->
 			<div class="row_settings">
 
-				<div id="sed-app-panel-<?php echo esc_attr( $this->id ); ?>" class="row_setting_inner sed-app-container-panel sed-app-container-panel-<?php echo  esc_attr( $this->type );?> <?php if( $this->in_box === true ) echo "row_setting_box";?>">
+				<div id="sed-app-panel-<?php echo esc_attr( $this->id ); ?>" class="row_setting_inner sed-app-container-panel <?php echo esc_attr( $spacing_class );?> sed-app-container-panel-<?php echo  esc_attr( $this->type );?> <?php if( $this->has_border_box === true ) echo "row_setting_box";?>">
 
 					<div class="clearfix">
 
 						<button data-related-level-box="<?php echo esc_attr( $pkey ); ?>_level_box" type="button" class="<?php echo esc_attr( $classes );?>" data-panel-id="<?php echo esc_attr( $this->id );?>"  name="<?php echo esc_attr( $sed_field_id );?>"
 								id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
+
+							<?php if( ! empty( $this->icon ) ){ ?>
+								<span class="f-sed fa-lg <?php echo esc_attr( $this->icon );?>"></span>
+							<?php } ?>
 
 							<?php echo $this->title;?>
 

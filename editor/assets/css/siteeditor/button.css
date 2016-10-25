@@ -124,11 +124,7 @@
     position: relative;
     text-align: center;
 }
-.sed-btn-default:hover,
-.sed-btn-default:focus,
-.sed-btn-default:active{
-    background: none repeat scroll 0 0 #00A0F0;
-}
+
 .sed-btn-default{
     background: none repeat scroll 0 0 #fff;
     border: 1px solid #ddd;
@@ -149,6 +145,7 @@
     line-height: 1.8em !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
+
 .ui-dialog-buttons .ui-dialog-buttonset button,
 .sed-btn-blue,
 .sp-container button,
@@ -220,7 +217,8 @@
 .sed-btn-red,
 .sed-btn-black,
 .sed-btn-blue,
-.sed-btn-default {
+.sed-btn-default ,
+.sed-btn-menu{
     cursor: pointer;
     margin: 5px 0;
     overflow: hidden;
@@ -251,7 +249,7 @@
 .sed-btn-blue .sed-arrow-right {
     color:#fff;
 }
-.sed-btn-default .sed-arrow-right{
+.sed-btn-default .sed-arrow-right ,.sed-btn-menu .sed-arrow-right{
     color:#00aaff;
 }
 
@@ -270,3 +268,24 @@ button.sted_element_control_btn span.sed-btn-label{
   vertical-align: middle;
 }
 
+.sed-btn-menu{
+    background: none repeat scroll 0 0 #fff;
+    border: 1px solid #ddd;
+    border-radius: 0px;
+    color: #333;
+    font-size: 12px;
+    line-height: 1;
+    padding: 10px 10px;
+    text-align: left;
+    margin: 2px 0;
+}
+
+.sed-btn-menu:hover,
+.sed-btn-menu:focus,
+.sed-btn-menu:active{
+    background: none repeat scroll 0 0 #f0f0f0;
+}
+
+.sed-btn-menu > span.f-sed.fa-lg {
+    margin-right: 4px;
+}

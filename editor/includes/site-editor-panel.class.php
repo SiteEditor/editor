@@ -161,6 +161,15 @@ class SiteEditorOptionsPanel{
 	public $atts = '';
 
 	/**
+	 * Panel container spacing , "sm" , "md" , "xs"
+	 *
+	 * @since 1.0.0
+	 * @access public
+	 * @var string
+	 */
+	public $field_spacing = "";
+
+	/**
 	 * Active callback.
 	 *
 	 * @since 1.0.0
@@ -348,6 +357,12 @@ class SiteEditorOptionsPanel{
 
 		$pkey			= $this->id;
 
+        $spacing_class  = "";
+
+        if( ! empty( $this->field_spacing ) ){
+            $spacing_class = "spacing_{$this->field_spacing}";
+        }
+
 		/**
 		 * @id : sed-app-panel-<?php echo esc_attr( $this->id ); ?> * required for panel main or container
 		 *  element because needed for dependency in js.
@@ -356,7 +371,7 @@ class SiteEditorOptionsPanel{
 		<!-- * required for panel & control container because needed for dependency in js -->
 		<div class="row_settings">
 
-			<div id="sed-app-panel-<?php echo esc_attr( $this->id ); ?>" class="row_setting_inner sed-app-container-panel sed-app-container-panel-<?php echo  esc_attr( $this->type );?>">
+			<div id="sed-app-panel-<?php echo esc_attr( $this->id ); ?>" class="row_setting_inner sed-app-container-panel sed-app-container-panel-<?php echo  esc_attr( $this->type );?>  <?php echo esc_attr( $spacing_class ); ?>">
 
 				<fieldset id="<?php echo  esc_attr( $pkey ); ?>_fieldset" class="<?php echo  esc_attr( $classes );?>" <?php echo $atts_string;?>>
 

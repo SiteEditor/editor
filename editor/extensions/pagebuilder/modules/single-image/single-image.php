@@ -158,9 +158,11 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                   'type'          => 'text',
                   'panel'         => 'sed_select_image_panel' ,
                   'dependency' => array(
-                      'controls'  =>  array(
-                          "control"  => "image_source" ,
-                          "value"    => "external" ,
+                      'queries'  =>  array(
+                          array(
+                              "key"       => "image_source" ,
+                              "value"     => "external" ,
+                          )
                       )
                   )
               ),              

@@ -592,7 +592,7 @@ class SedDesignEditorManager extends SiteEditorModules{
             $control_prefix = $option_group;
         }
 
-        return array(
+        $design_button_field = apply_filters( 'sed_custom_edit_style_button_field' , array(
             'type'          => 'panel-button',
             'label'         => __('Custom Edit Style',"site-editor"),
             'description'   => '',
@@ -606,7 +606,9 @@ class SedDesignEditorManager extends SiteEditorModules{
             'panel_title'   => __('Custom Edit Style',"site-editor") ,
             'panel_content' => $dialog_content ,
             'priority'      => 2
-        );
+        ) , $option_group );
+
+        return $design_button_field;
 
     }
 

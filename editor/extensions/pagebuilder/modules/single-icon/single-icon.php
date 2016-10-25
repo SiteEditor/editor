@@ -111,10 +111,12 @@ class PBSingleIconShortcode extends PBShortcodeClass{
             ),
             "panel"     => "icons_settings_panel",
             "dependency" => array(
-                'controls'  =>  array(
-                    "control"  =>  "skin" ,
-                    "value"   => "default" ,
-                    "type"     =>  "exclude"
+                'queries'  =>  array(
+                    array(
+                        "key"           =>  "skin" ,
+                        "value"         =>  "default" ,
+                        "compare"       =>  "!="
+                    )
                 )              
             ), 
       		),
@@ -124,17 +126,11 @@ class PBSingleIconShortcode extends PBShortcodeClass{
       			'description'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this feature cannot be used.', 'site-editor'),
             "panel"     => "icons_settings_panel",
             "dependency"  => array(
-                'controls'  =>  array(
-                   'relation' => 'AND',
+                'queries'  =>  array(
                     array(
-                        "control"  =>  "skin" ,
-                        "value"   => "default" ,
-                        "type"     =>  "exclude"
-                    ),
-                    array(
-                        "control"  =>  "type" ,
-                        "value"    =>  "icon-flat",
-                        "type"     =>  "exclude"
+                        "key"         => "skin" ,
+                        "value"       => array( "default" , "icon-flat" ) ,
+                        "compare"     => "NOT IN"
                     ),
                 )
             ),
@@ -145,10 +141,12 @@ class PBSingleIconShortcode extends PBShortcodeClass{
       			'description'  => __('This option allows you to set the border color for your icons with the color picker. This is one of the few options that is not available in the design editor. It is only available in skins 1, 2 and 3.', 'site-editor'),
             "panel"     => "icons_settings_panel",
             "dependency" => array(
-                'controls'  =>  array(
-                    "control"  =>  "skin" ,
-                    "value"    =>  "default",
-                    "type"     =>  "exclude"
+                'queries'  =>  array(
+                    array(
+                      "key"           =>  "skin" ,
+                      "value"         =>  "default",
+                      "compare"       =>  "!="
+                    )
                 )
             ), 
           ),

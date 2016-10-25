@@ -160,9 +160,11 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
                 'setting_id'    => "page_on_front" ,
                 'panel'         => "static_front_page" ,
                 'dependency' => array(
-                    'controls'  =>  array(
-                        "control"  => "show_on_front" ,
-                        "value"    => "page",
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "show_on_front" ,
+                            "value"     => "page",
+                        )
                     )
                 ),
                 'option_type'   => 'option',
@@ -178,9 +180,11 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
                 'setting_id'    => "page_for_posts" ,
                 'panel'         => "static_front_page" ,
                 'dependency' => array(
-                    'controls'  =>  array(
-                        "control"  => "show_on_front" ,
-                        "value"    => "page",
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "show_on_front" ,
+                            "value"     => "page",
+                        )
                     )
                 ),
                 'option_type'    => 'option',
