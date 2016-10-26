@@ -5,7 +5,7 @@ if(length == "boxed")
 else
     length_class = "sed-row-wide";
 #>
-<div {{sed_attrs}} class="s-tb-sm module module-page-title page-title-skin2 {{className}}">
+<div {{sed_attrs}} sed_role="page-title-bar" class="s-tb-sm module module-page-title page-title-skin2 {{className}}">
     <div class="page-title-inner {{length_class}}" length_element>
         {{{content}}}
     </div>

@@ -68,10 +68,12 @@ function sed_sample_options_register(){
             'atts'              => array() ,
             //'active_callback'   => ''
             'dependency' => array(
-                'controls'  =>  array(
-                    "control"   => "sed_text_settings_panel" ,
-                    "value"     => true,
-                    "is_panel"  => true
+                'queries'  =>  array(
+                    array(
+                        "key"       => "sed_text_settings_panel" ,
+                        "value"     => true ,
+                        "compare"   => "==="
+                    )
                 )
             )
         ) ,

@@ -299,7 +299,7 @@ class SiteEditorOptionsDependencyManager{
      */
     public function register_scripts( WP_Scripts $wp_scripts ){
 
-        $suffix     = (!SCRIPT_DEBUG ? '' : '.min') . '.js';
+        $suffix     = (SCRIPT_DEBUG ? '' : '.min') . '.js';
 
         $handle     = 'sed-dependency-plugin';
         $src        = SED_EXT_URL . 'options-engine/assets/js/dependency-plugin' . $suffix;

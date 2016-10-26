@@ -131,10 +131,10 @@
                         });
 
                         var modelId;
-                        if( _.isUndefined( $(this).data( "modelId" ) ) ){
+                        if( !_.isUndefined( $(this).data( "modelId" ) ) ){
                             modelId = $(this).data( "modelId" );
                         }else{
-                            modelId = api.currentTargetElementId;
+                            return ;
                         }
 
                         var sedDialog = {
@@ -147,7 +147,11 @@
                             }
                         };
 
-                        api.appModulesSettings.openInitDialogSettings( $(this).data("sedDialog") , true );
+                        api.currentTargetElementId = modelId;
+
+                        api.previewer.send('current_element' , api.currentTargetElementId  );
+
+                        api.appModulesSettings.openInitDialogSettings( sedDialog , true );
 
                     }else{
 

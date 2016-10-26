@@ -1,4 +1,4 @@
-<header {{sed_attrs}} class="s-tb-sm module module-header header-default {{className}}">
+<header {{sed_attrs}} sed_role="site-header" class="s-tb-sm module module-header header-default {{className}}">
       <div class="sed-navbar-header">
           <div class="navbar-header-inner">
               <button class="sed-navbar-toggle-">

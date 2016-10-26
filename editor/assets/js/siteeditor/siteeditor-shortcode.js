@@ -115,9 +115,10 @@
          */
         getContentModel : function( modelId ){
 
-            var parentC = $( '[sed_model_id="' + modelId + '"]' ).parents(".sed-pb-post-container:first"),
+            var element = $('body').hasClass("siteeditor-app") ? $( '[sed_model_id="' + modelId + '"]' ) : $("#website")[0].contentWindow.jQuery( '[sed_model_id="' + modelId + '"]' ),
+                parentC = element.parents(".sed-pb-post-container:first"),
                 type = parentC.data("contentType") ,
-                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + modelId + '"]' ) );
+                postId = parentC.data("postId");
 
             if(type == "theme")
                 var contentModel = api.pagesThemeContent[postId];

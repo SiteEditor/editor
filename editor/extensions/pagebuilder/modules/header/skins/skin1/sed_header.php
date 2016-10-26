@@ -1,4 +1,4 @@
-<header <?php echo $sed_attrs; ?>  class="s-tb-sm module module-header header-skin1  <?php echo $class;?>">
+<header <?php echo $sed_attrs; ?> sed_role="site-header" class="s-tb-sm module module-header header-skin1  <?php echo $class;?>">
       <div class="sed-navbar-header">
           <div class="navbar-header-inner">
               <button class="sed-navbar-toggle">

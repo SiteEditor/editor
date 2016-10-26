@@ -165,9 +165,12 @@ final class SedDesignEditorBackground{
                 "label"             => __("External Background Image", "site-editor"),
                 "description"       => __("Add External Background Image For Element", "site-editor"),
                 "dependency"    => array(
-                    'controls'  =>  array(
-                        "control"  => "background_image" ,
-                        "values"   => array( 0 , '' , 'none' )
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "IN"
+                        )
                     ),
                 )
             ),
@@ -177,17 +180,17 @@ final class SedDesignEditorBackground{
                 "label"             => __("Parallax Background Image", "site-editor"),
                 "description"       => __("Add Parallax Background Image For Element", "site-editor"),
                 "dependency"    => array(
-                    'controls'  =>  array(
+                    'queries'  =>  array(
                         "relation"     =>  "OR" ,
                         array(
-                            "control"  => "background_image" ,
-                            "values"   => array( 0 , '' , 'none' ) ,
-                            "type"     => "exclude"
+                            "key"       => "background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         ),
                         array(
-                            "control"  => "external_background_image" ,
-                            "value"    => '' ,
-                            "type"     => "exclude"
+                            "key"       => "external_background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         )
                     ),
                 )
@@ -203,10 +206,25 @@ final class SedDesignEditorBackground{
                     "max"           => 1 ,
                 ),
                 "dependency"    => array(
-                    'controls'  =>  array(
+                    'queries'  =>  array(
+                        "relation"     =>  "AND" ,
                         array(
-                            "control"  => "parallax_background_image" ,
-                            "value"    => true
+                            "key"       => "parallax_background_image" ,
+                            "value"     => true ,
+                            "compare"   => "==="
+                        ),
+                        array(
+                            "relation"     =>  "OR" ,
+                            array(
+                                "key"       => "background_image" ,
+                                "value"     => array( 0 , '' , 'none' , '0' ) ,
+                                "compare"   => "NOT IN"
+                            ),
+                            array(
+                                "key"       => "external_background_image" ,
+                                "value"     => array( 0 , '' , 'none' , '0' ) ,
+                                "compare"   => "NOT IN"
+                            )
                         )
                     ),
                 )
@@ -217,17 +235,17 @@ final class SedDesignEditorBackground{
                 "label"             => __("Background Attachment", "site-editor"),
                 "description"       => __("Add Background Attachment For Element", "site-editor"),
                 "dependency"    => array(
-                    'controls'  =>  array(
+                    'queries'  =>  array(
                         "relation"     =>  "OR" ,
                         array(
-                            "control"  => "background_image" ,
-                            "values"   => array( 0 , '' , 'none' ) ,
-                            "type"     => "exclude"
+                            "key"       => "background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         ),
                         array(
-                            "control"  => "external_background_image" ,
-                            "value"    => '' ,
-                            "type"     => "exclude"
+                            "key"       => "external_background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         )
                     ),
                 )
@@ -238,17 +256,17 @@ final class SedDesignEditorBackground{
                 "label"             => __("Background Size", "site-editor"),
                 "description"       => __("Add Background Size For Element", "site-editor"),
                 "dependency"    => array(
-                    'controls'  =>  array(
+                    'queries'  =>  array(
                         "relation"     =>  "OR" ,
                         array(
-                            "control"  => "background_image" ,
-                            "values"   => array( 0 , '' , 'none' ) ,
-                            "type"     => "exclude"
+                            "key"       => "background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         ),
                         array(
-                            "control"  => "external_background_image" ,
-                            "value"    => '' ,
-                            "type"     => "exclude"
+                            "key"       => "external_background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         )
                     ),
                 )
@@ -259,17 +277,17 @@ final class SedDesignEditorBackground{
                 "label"             => __("Background Repeat", "site-editor"),
                 "description"       => __("Add Background Repeat For Element", "site-editor"),
                 "dependency"    => array(
-                    'controls'  =>  array(
+                    'queries'  =>  array(
                         "relation"     =>  "OR" ,
                         array(
-                            "control"  => "background_image" ,
-                            "values"   => array( 0 , '' , 'none' ) ,
-                            "type"     => "exclude"
+                            "key"       => "background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         ),
                         array(
-                            "control"  => "external_background_image" ,
-                            "value"    => '' ,
-                            "type"     => "exclude"
+                            "key"       => "external_background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         )
                     ),
                 )
@@ -281,17 +299,17 @@ final class SedDesignEditorBackground{
                 "description"       => __("Background Position", "site-editor"),
                 'has_border_box'    =>   false ,
                 "dependency"    => array(
-                    'controls'  =>  array(
+                    'queries'  =>  array(
                         "relation"     =>  "OR" ,
                         array(
-                            "control"  => "background_image" ,
-                            "values"   => array( 0 , '' , 'none' ) ,
-                            "type"     => "exclude"
+                            "key"       => "background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         ),
                         array(
-                            "control"  => "external_background_image" ,
-                            "value"    => '' ,
-                            "type"     => "exclude"
+                            "key"       => "external_background_image" ,
+                            "value"     => array( 0 , '' , 'none' , '0' ) ,
+                            "compare"   => "NOT IN"
                         )
                     ),
                 )

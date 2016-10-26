@@ -132,9 +132,9 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
     /**
      * Register Site Default Fields
      */
-    public function register_default_fields(){
+    public function register_default_fields( $fields ){
 
-        $fields = array(
+        $new_fields = array(
 
             'show_on_front' => array(
                 "type"          => "radio" ,
@@ -246,7 +246,7 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
         // Add a setting to hide header text if the theme doesn't support custom headers.
         if ( ! current_theme_supports( 'custom-header', 'header-text' ) ) {
 
-            $fields['header_text'] = array(
+            $new_fields['header_text'] = array(
                 'type'              => 'checkbox',
                 'label'             => __( 'Display Site Title and Tagline' ),
                 'setting_id'        => "header_text" ,
@@ -259,7 +259,7 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
 
         }
 
-        return $fields;
+        return array_merge( $fields , $new_fields );
 
     }
 

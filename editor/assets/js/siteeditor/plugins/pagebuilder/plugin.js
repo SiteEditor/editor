@@ -11,6 +11,15 @@
 
   var api = sedApp.editor;
 
+    api.fn.pageBuilderModuleExist = function ( role ) {
+
+        var selectorT = '[sed_role="' + role + '"]',
+            moduleElement = $("#website")[0].contentWindow.jQuery( selectorT ); 
+
+        return moduleElement.length;
+
+    };
+
   $( function() {
       api.settings = window._sedAppEditorSettings;
       api.l10n = window._sedAppEditorControlsL10n;

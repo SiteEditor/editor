@@ -385,7 +385,7 @@
 
             this.updatedGroups = [];
 
-            this.updatedResetGroups = [];
+            //this.updatedResetGroups = [];
 
             this.ready();
 
@@ -401,7 +401,7 @@
 
                 api.pageConditions = conditions;
 
-                self.updatedResetGroups = [];
+                //self.updatedResetGroups = [];
 
                 api.Events.trigger( "afterResetPageConditions" );
 
@@ -417,7 +417,7 @@
 
                     self.update( optionsGroup );
 
-                    self.updatedResetGroups.push( optionsGroup );
+                    //self.updatedResetGroups.push( optionsGroup );
 
                 }
 
@@ -440,7 +440,7 @@
 
                     self.updatedGroups.push( group );
 
-                    self.updatedResetGroups.push( group );
+                    //self.updatedResetGroups.push( group );
 
                 }
 
@@ -448,11 +448,11 @@
 
             api.Events.bind( 'afterOpenInitDialogAppSettings' , function( optionsGroup ){
 
-                if( $.inArray( optionsGroup , self.updatedGroups ) > -1 && $.inArray( optionsGroup , self.updatedResetGroups ) == -1 ) {
+                if( $.inArray( optionsGroup , self.updatedGroups ) > -1 ) { //&& $.inArray( optionsGroup , self.updatedResetGroups ) == -1
 
                     self.update( optionsGroup );
 
-                    self.updatedResetGroups.push( optionsGroup );
+                    //self.updatedResetGroups.push( optionsGroup );
 
                 }
 
@@ -663,86 +663,6 @@
         }
 
     });
-
-    var _bgRatioDependency = function( control , value  ){
-
-        var bgCtrls = ["sed_background_background_image" , "sed_background_external_background_image" , "sed_background_parallax_background_ratio" , "sed_background_parallax_background_image"],
-            selector ,
-            paraCtrl ,
-            paraValue;
-
-        if( control.id == bgCtrls[0] ){
-
-            var extCtrl     = api.control.instance( bgCtrls[1] ),
-                extValue   = extCtrl.currentValue;
-
-            if( $.inArray( value , [0 , '' , 'none'] ) > -1 && $.trim( extValue ) == '' ){
-
-                selector = '#sed-app-control-' + bgCtrls[2];
-
-                $( selector ).parents(".row_settings:first").addClass("sed-hide-dependency").fadeOut( 200 );
-
-            }else{
-
-                paraCtrl  = api.control.instance( bgCtrls[3] );
-                paraValue  = paraCtrl.currentValue;
-
-                if( paraValue ) {
-                    selector = '#sed-app-control-' + bgCtrls[2];
-
-                    $(selector).parents(".row_settings:first").removeClass("sed-hide-dependency").fadeIn("slow");
-                }
-
-            }
-
-        }else if( control.id == bgCtrls[1] ){
-
-
-            var mCtrl  = api.control.instance( bgCtrls[0] ),
-                mValue = mCtrl.currentValue;
-
-            if( $.inArray( mValue , [0 , '' , 'none'] ) > -1 && $.trim( value ) == '' ){
-
-                selector = '#sed-app-control-' + bgCtrls[2];
-
-                $( selector ).parents(".row_settings:first").addClass("sed-hide-dependency").fadeOut( 200 );
-
-            }else{
-
-                paraCtrl  = api.control.instance( bgCtrls[3] );
-                paraValue  = paraCtrl.currentValue;
-
-                if( paraValue ) {
-
-                    selector = '#sed-app-panel-' + bgCtrls[2];
-
-                    $(selector).parents(".row_settings:first").removeClass("sed-hide-dependency").fadeIn("slow");
-
-                }
-
-            }
-
-        }
-    };
-
-    api.Events.bind( "after_apply_settings_relations_refresh" , function( group , control , value ) {
-
-        _bgRatioDependency( control , value );
-
-    });
-
-    api.Events.bind( "after_apply_single_control_relations_update" , function( group , control , value ) {
-
-        _bgRatioDependency( control , value );
-
-    });
-
-    /*api.fn.test = function( arg1, arg2 ){
-        alert( arg1 );
-        alert( arg2 );
-
-        return false;
-    };*/
 
    $( function() {
 
