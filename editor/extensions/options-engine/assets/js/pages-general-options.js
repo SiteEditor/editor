@@ -13,13 +13,52 @@
 
     var api = sedApp.editor;
 
-    api.SiteEditorPosts = api.Class.extend({
+    api.SedPageGeneralOptions = api.Class.extend({
         /*
          @pageType : post || term ( || general || authors || post_type )
          */
-        initialize: function (options) {
+        initialize: function ( options ) {
+
+            var self = this;
 
             $.extend( this, options || {} );
+
+            api.previewer.bind( 'syncGeneralOptionsData', function( data ){//ready
+                self.addSettings( data );
+            });
+
+        } ,
+
+        addSettings : function ( data ) {
+
+            if( api.settings.page.type == "post" )
+                return ;
+
+            var setting;
+
+            var dataSettings = api.applyFilters( "GeneralOptionsDataSettings" , data.settings  );
+
+            _.each( dataSettings , function( settingArgs, id ) {
+
+                //var settingId = "sed_" + api.settings.page.id + "_settings[" + id + "]";
+
+                if ( ! api.has( id ) ) {
+                    setting = api.create( id , id , settingArgs.value, {
+                        transport   : settingArgs.transport || "refresh",
+                        previewer   : api.previewer,
+                        stype       : "general"
+                        //dirty: settingArgs.dirty
+                    } );
+
+                    api.settings.settings[id] = settingArgs;
+
+                    /*if ( settingArgs.dirty ) {
+                     setting.callbacks.fireWith( setting, [ setting.get(), {} ] );
+                     }*/
+
+                }
+
+            });
 
         }
 
@@ -27,7 +66,7 @@
 
     $( function() {
 
-
+        api.pagesGeneralOptions = new api.SedPageGeneralOptions({});
 
     });
 

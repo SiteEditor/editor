@@ -1003,7 +1003,7 @@ final class SiteEditorOptionsManager{
             //wp_enqueue_script( 'codemirror-language-' . $this->choices['language'], SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/' . $this->choices['language'] . '/' . $this->choices['language'] . '.js', array( 'jquery', 'codemirror' ) );
         //}
 
-        wp_enqueue_style( 'codemirror-theme-default' , SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/default.css' );
+        //wp_enqueue_style( 'codemirror-theme-default' , SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/default.css' );
 
         wp_enqueue_style( 'codemirror-theme-abcdef' , SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/abcdef.css' );
 

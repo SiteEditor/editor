@@ -194,7 +194,7 @@ class SiteEditorGeneralSettings {
         return $value;
     }
 
-    public static function get_page_options( $sed_page_id , $sed_page_type ){
+    /*public static function get_page_options( $sed_page_id , $sed_page_type ){
 
         $options = array();
 
@@ -214,7 +214,7 @@ class SiteEditorGeneralSettings {
 
         return $options;
 
-    }
+    }*/
 
     public function add_dynamic_settings(){
 
