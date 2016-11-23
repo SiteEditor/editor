@@ -17,7 +17,7 @@
 }
 .navigator-loading,
 .uploader-loading{
-   background: url(../images/loading.gif) no-repeat;
+   background: url(../../images/loading.gif) no-repeat;
     display: block;
     height: 48px;
     position: absolute;

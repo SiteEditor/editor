@@ -1391,7 +1391,7 @@ class SiteEditorManager{
 			$this->sed_die( -1 );
 
 		if( !check_ajax_referer( $nonce . '_' . $this->get_stylesheet(), 'nonce' , false ) ){
-			$this->sed_die( -2 );
+			$this->sed_die( -1 );
 		}
 		if( !isset($_POST['sed_page_ajax']) || $_POST['sed_page_ajax'] !=  $ajax){
 			$this->sed_die( -2 );

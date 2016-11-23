@@ -160,8 +160,8 @@
                 pattern         :  JSON.stringify( pattern ) ,
                 parent_id       :  mRowSh.parent_id ,
                 action          :  "load_modules" ,
-                nonce           : api.addOnSettings.pb_modules.nonce.load ,
-                sed_page_ajax   : 'sed_load_modules',
+                nonce           :  api.settings.nonce.module.load ,
+                sed_page_ajax   :  'sed_load_modules',
             };
                                              // alert( postId );
            // if( api.shortcodeCurrentPlace == "post" ){

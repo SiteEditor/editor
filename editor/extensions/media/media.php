@@ -30,6 +30,8 @@ if(!class_exists('SiteEditorMediaManager'))
             add_filter( 'sed_enqueue_scripts'           , array( $this , 'add_js_plugin') );
 
             add_action( 'sed_print_footer_scripts'      , array( $this , 'print_media_settings') );
+
+            add_action( 'sed_app_refresh_nonces'        , array( $this , 'set_nonces') , 10 , 2 );
 		}
 
         function default_scripts(){
@@ -278,7 +280,6 @@ if(!class_exists('SiteEditorMediaManager'))
                     'empty_lib'    =>  __("There are no any media items" , "site-editor"),
                     'invalid_data' =>  __('Sent Data, Invalid' , "site-editor")
                 ),
-                'nonce'  => wp_create_nonce( 'sed_app_media_load_' . $site_editor_app->get_stylesheet() ),
                 'params'  =>  array(
                     'max_upload_size' => self::sed_max_upload_size()
                 )
@@ -289,6 +290,15 @@ if(!class_exists('SiteEditorMediaManager'))
                 var _sedAppEditorMediaSettings = <?php echo wp_json_encode( $media_settings )?>;
             </script>
             <?php
+        }
+
+        public function set_nonces( $nonces , $manager ){
+
+            $nonces['media'] = array(
+                'load'                  =>  wp_create_nonce( 'sed_app_media_load_' . $manager->get_stylesheet() ) 
+            );
+
+            return $nonces;
         }
 
     }

@@ -143,6 +143,17 @@ final class SiteEditorOptionsManager{
 
         add_action( 'sed_print_styles', 'sed_site_icon', 99 );
 
+        add_filter( "sed_app_refresh_nonces" , array( $this, 'set_nonces' ) , 10 , 2 );
+
+    }
+
+    public function set_nonces( $nonces , $manager ){
+
+        $nonces['options'] = array(
+            'load'                  =>  wp_create_nonce( 'sed_app_options_load_' . $manager->get_stylesheet() )
+        );
+
+        return $nonces;
     }
 
     public function sed_ajax_load_options(){

@@ -22,7 +22,7 @@ class SEDPageBuilderModules extends SiteEditorModules{
 
         self::$modules_base_rel = 'plugins/' . SED_PLUGIN_NAME . '/editor/extensions/pagebuilder/modules/';
 
-        if( ! is_site_editor() ){
+        if( ! is_site_editor() && ! defined( 'DOING_AJAX' ) ){
             add_action("admin_init" , array( $this , "check_exist_modules" ) );
         }
 

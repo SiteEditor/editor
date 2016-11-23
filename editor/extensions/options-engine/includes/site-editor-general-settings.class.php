@@ -169,10 +169,11 @@ class SiteEditorGeneralSettings {
     }
 
     public function sed_app_preview_init(){
-        //add_action( 'wp_footer', array( $this, 'export_preview_data' ), 10 );
-        add_action( 'wp_enqueue_scripts'           , array( $this, 'preview_enqueue_scripts' ), 10 );
+      
+        add_action( 'wp_enqueue_scripts'            , array( $this, 'preview_enqueue_scripts' ), 10 );
 
-        add_action( 'wp'                , array( $this , 'add_dynamic_settings') );
+        add_action( 'wp'                            , array( $this , 'add_dynamic_settings') );
+
     }
 
     public static function value( $setting_id , $sed_page_id , $sed_page_type ){
@@ -194,28 +195,6 @@ class SiteEditorGeneralSettings {
         return $value;
     }
 
-    /*public static function get_page_options( $sed_page_id , $sed_page_type ){
-
-        $options = array();
-
-        if( $sed_page_type == "post" ){
-
-            foreach( $this->settings AS $setting_id => $args ){
-                $options[$setting_id] = get_post_meta( $sed_page_id, $setting_id , true );
-            }
-
-        }else{
-
-            $option_name = "sed_" . $sed_page_id . "_settings";
-
-            $options = get_option( $option_name );
-
-        }
-
-        return $options;
-
-    }*/
-
     public function add_dynamic_settings(){
 
         if( SED()->framework->sed_page_type != "post" ) {
@@ -235,7 +214,29 @@ class SiteEditorGeneralSettings {
 
     }
 
+
+    public function register_scripts( WP_Scripts $wp_scripts ){
+
+        $suffix = ( SCRIPT_DEBUG ? '' : '.min' ) . '.js';
+
+        $handle = 'sed-pages-general-options';
+        $src = SED_EXT_URL . 'options-engine/assets/js/pages-general-options' . $suffix ;
+        $deps = array( 'siteeditor' );
+
+        $in_footer = 1;
+        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
+
+        $handle = 'sed-pages-general-options-preview';
+        $src = SED_EXT_URL . 'options-engine/assets/js/pages-general-options-preview' . $suffix ;
+        $deps = array( 'sed-frontend-editor' );
+
+        $in_footer = 1;
+        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
+
+    }
+
     public function preview_enqueue_scripts(){
+
         wp_enqueue_script( 'sed-pages-general-options-preview' );
 
         $general_settings = array();
@@ -286,87 +287,32 @@ class SiteEditorGeneralSettings {
         wp_scripts()->add_data( 'sed-pages-general-options-preview' , 'data', sprintf( 'var _sedAppPreviewPagesGeneralSettings = %s;', wp_json_encode( $exports ) ) );
     }
 
-
-    public function register_scripts( WP_Scripts $wp_scripts ){
-
-        $suffix = ( SCRIPT_DEBUG ? '' : '.min' ) . '.js';
-
-        $handle = 'sed-pages-general-options';
-        $src = SED_EXT_URL . 'options-engine/assets/js/pages-general-options' . $suffix ;
-        $deps = array( 'siteeditor' );
-
-        $in_footer = 1;
-        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
-
-        $handle = 'sed-pages-general-options-preview';
-        $src = SED_EXT_URL . 'options-engine/assets/js/pages-general-options-preview' . $suffix ;
-        $deps = array( 'sed-frontend-editor' );
-
-        $in_footer = 1;
-        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
-
-    }
-
     public function enqueue_scripts(){
 
         wp_enqueue_script( 'sed-pages-general-options' );
 
-        /*$exports = array(
-            'settings'      => $general_settings ,
-            'l10n'          => array(
-                'fieldTitleLabel' => __( 'Title', 'site-editor' ),
+    }
 
-            ),
-        );
+    /*public static function get_page_options( $sed_page_id , $sed_page_type ){
 
-        wp_scripts()->add_data( 'sed-pages-general-options' , 'data', sprintf( 'var _sedAppPagesGeneralSettings = %s;', wp_json_encode( $exports ) ) );*/
+    $options = array();
+
+    if( $sed_page_type == "post" ){
+
+        foreach( $this->settings AS $setting_id => $args ){
+            $options[$setting_id] = get_post_meta( $sed_page_id, $setting_id , true );
+        }
+
+    }else{
+
+        $option_name = "sed_" . $sed_page_id . "_settings";
+
+        $options = get_option( $option_name );
 
     }
 
+    return $options;
+
+}*/
+
 }
-
-
-/*function sed_add_general_options(){
-
-}
-
-$sed_general_options = array(
-
-    'theme_content'   =>  array(
-        'type'	            =>  '' ,
-        'choices'	        =>  '' ,
-        'default'	        =>  '' ,
-        'settings'          =>  '' ,
-        'section'	        =>  '' ,
-        'label'	            =>  '' ,
-        'description'	    =>  '' ,
-        'priority'	        =>  '' ,
-        'variables'	        =>  '' ,
-        'tooltip'	        =>  '' ,
-        'active_callback'	=>  '' ,
-        'sanitize_callback' =>  '' ,
-        'transport'	        =>  '' ,
-        'required'	        =>  '' ,
-        'capability'	    =>  '' ,
-        'option_type'	    =>  '' ,
-        'option_name'	    =>  '' ,
-        'output'		    =>  '' ,
-        'js_vars'	        =>  '' ,
-    ),
-
-    'page_layout'     =>  array(
-
-    ),
-
-    'page_length'     =>  array(
-
-    ),
-
-    'sheet_width'     =>  array(
-
-    ),
-
-);
-
-
-sed_add_general_options( $sed_general_options );*/

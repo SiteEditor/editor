@@ -106,23 +106,21 @@ class SiteEditorPageOptions {
 
         add_filter( "{$this->option_group}_fields_filter"           , array( $this , 'add_design_field' ) );
 
-        add_action( "sed_editor_init"                               , array( $this, "add_toolbar_elements" ) );
+        add_action( "sed_editor_init"                               , array( $this , 'add_toolbar_elements' ) );
 
         add_action( "init"                                          , array( $this , 'register_options' ) , 80  );
 
-        add_action( 'sed_app_register_general_options'              , array( $this, 'register_private_settings' ) );
+        add_action( 'sed_app_register_general_options'              , array( $this , 'register_private_settings' ) );
 
         add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_pages_options' ) );
 
         add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'register_page_options_group' ) , -9999 );
 
-        add_action( 'sed_app_preview_init'                          , array( $this, 'sed_app_preview_init' ) );
+        add_action( 'sed_app_preview_init'                          , array( $this , 'sed_app_preview_init' ) );
 
-        add_action( 'wp_default_scripts'			                , array( $this, 'register_scripts' ), 11 );
+        add_action( 'wp_default_scripts'			                , array( $this , 'register_scripts' ), 11 );
 
-        add_filter( 'sed_control_sub_category'                      , array( $this, 'set_sub_category' ) , 10 , 2 );
-
-        //add_action( 'sed_enqueue_scripts'           , array( $this, 'enqueue_scripts' ), 10 );
+        add_filter( 'sed_control_sub_category'                      , array( $this , 'set_sub_category' ) , 10 , 2 );
 
     }
 
@@ -420,13 +418,6 @@ class SiteEditorPageOptions {
 
         $suffix = ( SCRIPT_DEBUG ? '' : '.min' ) . '.js';
 
-        /*$handle = 'sed-pages-general-options';
-        $src = SED_EXT_URL . 'options-engine/assets/js/pages-general-options' . $suffix ;
-        $deps = array( 'siteeditor' );
-
-        $in_footer = 1;
-        $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );*/
-
         $handle = 'sed-pages-options-preview';
         $src = SED_EXT_URL . 'options-engine/assets/js/pages-options-preview' . $suffix ;
         $deps = array( 'sed-frontend-editor' );
@@ -435,22 +426,6 @@ class SiteEditorPageOptions {
         $wp_scripts->add( $handle, $src, $deps, SED_VERSION, $in_footer );
 
     }
-
-    /*public function enqueue_scripts(){
-
-        wp_enqueue_script( 'sed-pages-general-options' );
-
-        /*$exports = array(
-            'settings'      => $general_settings ,
-            'l10n'          => array(
-                'fieldTitleLabel' => __( 'Title', 'site-editor' ),
-
-            ),
-        );
-
-        wp_scripts()->add_data( 'sed-pages-general-options' , 'data', sprintf( 'var _sedAppPagesGeneralSettings = %s;', wp_json_encode( $exports ) ) );
-
-    }*/
 
 }
 

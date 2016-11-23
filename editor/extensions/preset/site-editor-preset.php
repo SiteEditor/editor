@@ -39,23 +39,25 @@ class SiteEditorPreset{
 
         add_action( "site_editor_ajax_sed_module_presets" , array( __CLASS__ , "get_module_presets" ) );
 
-        add_filter( "sed_addon_settings", array($this,'preset_settings'));
+        //add_filter( "sed_addon_settings", array($this,'preset_settings'));
+
+        add_filter( "sed_app_refresh_nonces", array($this,'preset_nonces') , 10 , 2);
 
         //add_filter( "sed_default_shortcode_pattern" , array( $this , 'set_as_default_pattern' ) , 10 , 2 );
 
         add_action( "sed_print_footer_scripts" , array( $this , 'print_default_presets' ) , 10  );
     }
 
-    function preset_settings( $sed_addon_settings ){
-        $sed_addon_settings['presetSettings'] = array(
-            'nonce'  => array(
-                'create'            =>  wp_create_nonce( 'sed-create-preset' ) ,
-                'get'               =>  wp_create_nonce( 'sed-get-preset' ) ,
-                'collection'        =>  wp_create_nonce( 'sed-get-collection-presets' ) ,
-                'saveCollection'    =>  wp_create_nonce( 'sed-save-collection-presets' )
-            )
+    public function preset_nonces( $nonces , $manager ){
+
+        $nonces['preset'] = array(
+            'create'            =>  wp_create_nonce( 'sed-create-preset' ) ,
+            'get'               =>  wp_create_nonce( 'sed-get-preset' ) ,
+            'collection'        =>  wp_create_nonce( 'sed-get-collection-presets' ) ,
+            'saveCollection'    =>  wp_create_nonce( 'sed-save-collection-presets' )
         );
-        return $sed_addon_settings;
+
+        return $nonces;
     }
 
     public function add_js_plugin() {

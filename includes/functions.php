@@ -323,6 +323,8 @@ if( !function_exists( "is_woocommerce_active" ) ):
 
         $is_active = is_plugin_active( "woocommerce/woocommerce.php" );
 
+        //$is_active = class_exists('WooCommerce');
+
         if( $is_active )
             $cache_woocommerce_active = "yes";
         else
@@ -425,18 +427,19 @@ function sed_delete_setting( $key ) {
     return update_option('site-editor-settings', $settings);
 }
 
-function load_page_builder_app(){
-    global $sed_pb_modules;
-    include_once( SED_EDITOR_DIR . DS . 'application' . DS . "modules.class.php"  );
-    include_once( SED_EDITOR_DIR . DS . 'application' . DS . "app_pb_modules.class.php"  );
-    $pb_modules = new SEDPageBuilderModules( );
-    $pb_modules->app_modules_dir = SED_EDITOR_DIR . DS . 'applications' . DS . 'pagebuilder' . DS . 'modules';
-    $sed_pb_modules = $pb_modules;
-    require_once SED_EDITOR_DIR . DS . 'applications' . DS . 'pagebuilder' . DS . 'index.php';
+
+if( !function_exists( 'getmicrotime' ) ) {
+
+    function getmicrotime(){
+
+        list($usec, $sec) = explode(" ", microtime());
+
+        return ((float)$usec + (float)$sec);
+    }
+
 }
 
 function is_site_editor(){
-    global $sed_apps;
 
     if ( $cache_site_editor = wp_cache_get( 'is_site_editor' ) ){
         if( $cache_site_editor == "yes" )
@@ -454,15 +457,20 @@ function is_site_editor(){
 
     wp_cache_set('is_site_editor', $cache_site_editor );
 
-    if( $is_site_editor ){
-        return true;
-    }else
-        return false;
+    return $is_site_editor;
 
 }
 
 function site_editor_app_on(){
     return isset( $_POST['sed_app_editor'] ) && $_POST['sed_app_editor'] == "on" && sed_doing_ajax();
+}
+
+function sed_doing_ajax(){
+    return isset( $_POST['sed_page_customized'] ) || ( defined( 'DOING_SITE_EDITOR_AJAX' ) && DOING_SITE_EDITOR_AJAX );
+}
+
+function is_sed_save(){
+    return isset( $_POST['sed_app_editor'] ) && $_POST['sed_app_editor'] == "save" && sed_doing_ajax();
 }
 
 /**
@@ -474,11 +482,24 @@ function site_editor_app_on(){
  *
  * @return bool True if the site is being previewed in the Customizer, false otherwise.
  */
-function is_site_editor_preview() { 
+function is_site_editor_preview() {
 
-    return isset( SED()->editor ) && ( SED()->editor->manager instanceof SiteEditorManager ) && SED()->editor->manager->is_preview();
+    if ( $cache_is_preview = wp_cache_get( 'is_site_editor_preview' ) ){
+        if( $cache_is_preview == "yes" )
+            return true;
+        else
+            return false;
+    }
+
+    $is_preview = is_object( SED() ) && isset( SED()->editor ) && isset( SED()->editor->manager ) && ( SED()->editor->manager instanceof SiteEditorManager ) && SED()->editor->manager->is_preview();
+
+    $cache_is_preview = ( $is_preview ) ? "yes" : "no";
+
+    wp_cache_set('is_site_editor_preview', $cache_is_preview );
+
+    return $is_preview;
+
 }
-
 
 /* array_replace_recursive only exists in PHP 5.3 */
 // this function is from the comments here: http://php.net/manual/en/function.array-replace-recursive.php
@@ -519,16 +540,8 @@ if ( ! function_exists( 'array_replace_recursive' ) ) {
 }
 
 
-function sed_doing_ajax(){
-    return isset( $_POST['sed_page_customized'] ) || ( defined( 'DOING_SITE_EDITOR_AJAX' ) && DOING_SITE_EDITOR_AJAX );
-}
-
-function is_sed_save(){
-    return isset( $_POST['sed_app_editor'] ) && $_POST['sed_app_editor'] == "save" && sed_doing_ajax();
-}
-
 function sed_placeholder_img_src(){
-    return apply_filters( 'sed_placeholder_img_src', SED_PLUGIN_URL . '/framework/images/no_pic.png' );
+    return apply_filters( 'sed_placeholder_img_src', SED_ASSETS_URL . '/images/no_pic.png' );
 }
 
 function sed_get_the_post_thumbnail($post = null, $size = 'post-thumbnail', $attr = '' , $using_placeholder = false ){
@@ -659,8 +672,6 @@ add_filter( 'body_class', '_si_add_mobile_class' );
 
 function sed_add_settings( $settings ){
 
-    global $sed_apps;
-
     if( !empty( $settings ) && is_array( $settings ) ){
         foreach( $settings AS $id => $values ){
             /*if($this->sed_settings !== false && isset( $this->sed_settings[$id] )){
@@ -672,7 +683,7 @@ function sed_add_settings( $settings ){
                 unset( $values['value'] );
             }
 
-            $sed_apps->editor->manager->add_setting( $id, $values );
+            SED()->editor->manager->add_setting( $id, $values );
         }
     }
 
@@ -1040,43 +1051,6 @@ function get_sed_external_image_html( $image_url , $external_image_size = "" , $
     return $img;
 }
 
-
-/**
- * get general page options
- * @param string $sed_page_id
- * @param string $sed_page_type
- * @return mixed|void
- */
-function sed_get_page_options( $sed_page_id = "general_home" , $sed_page_type = "general" ){
-
-    $options = array();
-
-    $default_settings = array(
-
-        'page_layout'       => '',
-
-        'theme_content'     => array()
-
-    );
-
-    if( $sed_page_type == "post" ){
-
-        foreach( $default_settings AS $setting_id => $args ){
-            $options[$setting_id] = get_post_meta( $sed_page_id, $setting_id , true );
-        }
-
-    }else{
-
-        $option_name = "sed_" . $sed_page_id . "_settings";
-
-        $options = get_option( $option_name , $default_settings );
-
-    }
-
-    return apply_filters( "sed_current_page_options" , $options );
-
-}
-
 /**
  * Get All WP Image Sizes
  *
@@ -1260,6 +1234,17 @@ function sed_object_to_array($object){
     return $array;
 }
 
+function sed_site_icon_filter( $url, $size, $blog_id ){
+
+    if( empty( $url ) && is_site_editor() ){
+        $url = sed_placeholder_img_src();
+    }
+
+    return $url;
+
+}
+
+add_filter( 'get_site_icon_url' , 'sed_site_icon_filter' , 1000 , 3 );
 /**
  * Display site icon meta tags.
  *
@@ -1376,4 +1361,40 @@ function sed_js_remove_wpautop( $content, $autop = false ) {
     }
 
     return do_shortcode( shortcode_unautop( $content ) );
+}
+
+/**
+ * get general page options
+ * @param string $sed_page_id
+ * @param string $sed_page_type
+ * @return mixed|void
+ */
+function sed_get_page_options( $sed_page_id = "general_home" , $sed_page_type = "general" ){
+
+    $options = array();
+
+    $default_settings = array(
+
+        'page_layout'       => '',
+
+        'theme_content'     => array()
+
+    );
+
+    if( $sed_page_type == "post" ){
+
+        foreach( $default_settings AS $setting_id => $args ){
+            $options[$setting_id] = get_post_meta( $sed_page_id, $setting_id , true );
+        }
+
+    }else{
+
+        $option_name = "sed_" . $sed_page_id . "_settings";
+
+        $options = get_option( $option_name , $default_settings );
+
+    }
+
+    return apply_filters( "sed_current_page_options" , $options );
+
 }

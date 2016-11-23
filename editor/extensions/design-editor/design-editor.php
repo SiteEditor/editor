@@ -64,3 +64,4 @@ class SedDesignEditorExtension {
 }
 
 new SedDesignEditorExtension( $this );
+

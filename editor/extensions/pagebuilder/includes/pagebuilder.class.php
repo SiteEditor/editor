@@ -86,7 +86,9 @@ Class PageBuilderApplication {
         //add_action("sed_footer" , array( $this, "write_style_editor_settings") );
 
         add_action( "site_editor_ajax_load_modules" , array($this, "page_builder_load_modules") );
-        add_filter( "sed_addon_settings" , array($this,'load_modules_settings') );
+        //add_filter( "sed_addon_settings" , array($this,'load_modules_settings') );
+
+        add_filter( "sed_app_refresh_nonces" , array( $this, 'set_nonces' ) , 10 , 2 );
 
         /*======================================================
             new system for theme content load hooks
@@ -1021,24 +1023,18 @@ Class PageBuilderApplication {
             );
         }
 
-    }
+    }//pb_modules , load_patterns , load_modules_settings
 
-    function load_modules_settings( $sed_addon_settings ){
-        global $site_editor_app;
-        $sed_addon_settings['pb_modules'] = array(
-            'nonce'  => array(
-                'load'      =>  wp_create_nonce( 'sed_app_modules_load_' . $site_editor_app->get_stylesheet() ) ,
-                'update'    =>  wp_create_nonce( 'sed_app_modules_update_' . $site_editor_app->get_stylesheet() )
-            )
+
+    public function set_nonces( $nonces , $manager ){
+
+        $nonces['module'] = array(
+            'load'                  =>  wp_create_nonce( 'sed_app_modules_load_' . $manager->get_stylesheet() ) ,
+            //'update'                =>  wp_create_nonce( 'sed_app_modules_update_' . $manager->get_stylesheet() ) ,
+            //'load_patterns'         =>  wp_create_nonce( 'sed_app_default_patterns_' . $manager->get_stylesheet() )
         );
 
-        $sed_addon_settings['load_patterns'] = array(
-            'nonce'  => array(
-                'load'      =>  wp_create_nonce( 'sed_app_default_patterns_' . $site_editor_app->get_stylesheet() )
-            )
-        );
-
-        return $sed_addon_settings;
+        return $nonces;
     }
 
 

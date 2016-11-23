@@ -521,7 +521,7 @@
                 setting_id      : settingIdReq ,
                 setting_type    : settingsTypeReq ,
                 options_group   : optionsGroup ,
-                nonce           : api.addOnSettings.optionsEngine.nonce.load,
+                nonce           : api.settings.nonce.options.load,
                 sed_page_ajax   : 'sed_options_loader'
             };
 

@@ -71,13 +71,6 @@ final class SedPageBuilderOptionsManager{
             "add_btn_title"       =>  __("Change Image","site-editor")
         );
 
-        global $site_editor_app;
-        $sed_addon_settings["optionsEngine"] = array(
-            'nonce'  => array(
-                'load'  =>  wp_create_nonce( 'sed_app_options_load_' . $site_editor_app->get_stylesheet() ) ,
-            )
-        );
-
         return $sed_addon_settings;
     }
 

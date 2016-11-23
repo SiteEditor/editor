@@ -7,7 +7,7 @@ class SEDAjaxLess
 
     function __construct()
     {
-        add_filter( "sed_addon_settings", array($this,'set_settings'));
+        add_filter( "sed_app_refresh_nonces", array($this,'set_nonces') , 10 , 2);
         add_action( 'wp_enqueue_scripts', array($this, 'script') );
 
     }
@@ -74,14 +74,13 @@ class SEDAjaxLess
 
     }
 
-    public function set_settings( $sed_addon_settings ){
-        global $site_editor_app;
-        $sed_addon_settings['SEDLess'] = array(
-            'nonce'  => array(
-                'compile'    =>  wp_create_nonce( 'sed_app_compile_' . $site_editor_app->get_stylesheet() ) ,
-            )
+    public function set_nonces( $nonces , $manager ){
+
+        $nonces['SEDLess'] = array(
+            'compile'    =>  wp_create_nonce( 'sed_app_compile_' . $manager->get_stylesheet() ) ,
         );
-        return $sed_addon_settings;
+
+        return $nonces;
     }
 
 }

@@ -23,7 +23,7 @@ class PBSkinLoaderClass{
 
         add_action( 'site_editor_ajax_load_skins' , array($this,'pb_module_load_skins') );
         add_action( 'sed_footer' , array($this,'add_tmpls_modules_skins') );
-        add_filter( "sed_addon_settings", array($this,'skins_settings'));
+        add_filter( "sed_app_refresh_nonces", array($this,'set_nonces') , 10 , 2);
 
         if( site_editor_app_on() ){
             add_action( 'wp_footer', array( $this, 'shortcode_skin_js_tpl' ), 25 );
@@ -62,12 +62,13 @@ class PBSkinLoaderClass{
 
     }
 
-    function skins_settings( $sed_addon_settings ){
-        global $site_editor_app;
-        $sed_addon_settings['moduleSkins'] = array(
-            'nonce'  => wp_create_nonce( 'sed_app_module_load_skins_' . $site_editor_app->get_stylesheet() )
+    public function set_nonces( $nonces , $manager ){
+
+        $nonces['pbSkins'] = array(
+            'load'    =>  wp_create_nonce( 'sed_app_module_load_skins_' . $manager->get_stylesheet() )
         );
-        return $sed_addon_settings;
+
+        return $nonces;
     }
 
     function add_tmpls_modules_skins(){
@@ -75,8 +76,8 @@ class PBSkinLoaderClass{
     }
 
     public function pb_module_load_skins(){
-        global $sed_apps;
-        $sed_apps->editor->manager->check_ajax_handler('module_load_skins' , 'sed_app_module_load_skins');
+      
+        SED()->editor->manager->check_ajax_handler('module_load_skins' , 'sed_app_module_load_skins');
 
         do_action( 'sed_shortcode_register' );
         

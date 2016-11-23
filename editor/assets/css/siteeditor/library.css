@@ -159,7 +159,7 @@ select.attachment-filters {
     clear: both;
 }
 .media-loading.new-item-lib-loading {
-    background: url(../images/loading.gif) no-repeat;
+    background: url(../../images/loading.gif) no-repeat;
     display: none;
     height: 40px;
     margin: 5px auto;

@@ -188,7 +188,9 @@ Class SiteEditorThemeFramework{
 
         if( $sed_page_type == "post" ){
 
-            if( ! in_array( $setting_id , get_post_custom_keys( $sed_page_id ) ) ) {
+            $post_custom_keys = get_post_custom_keys( $sed_page_id );
+
+            if( ! is_array( $post_custom_keys ) || ! in_array( $setting_id , $post_custom_keys ) ) {
                 $default = $this->get_default_option( 'default_page_options' , $setting_id );
                 $value = $default;
             }else {

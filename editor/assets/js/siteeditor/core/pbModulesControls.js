@@ -1980,7 +1980,7 @@
                     module                          :  control.moduleName,
                     shortcode                       :  control.shortcode ,
                     default_helper_shortcodes       :  api.defaultHelperShortcodes ,
-                    nonce                           :  api.addOnSettings.moduleSkins.nonce ,
+                    nonce                           :  api.settings.nonce.pbSkins.load ,
                     sed_page_ajax                   :  'module_load_skins'
                 },
                 error: function(){

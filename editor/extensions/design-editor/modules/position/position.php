@@ -63,9 +63,13 @@ final class SedDesignEditorPosition {
 
         $this->description = __("Add position To each dom element" , "site-editor");
 
-        add_action( "sed_app_register"          , array( $this , 'register_group' ) , -9999 );
+        if( is_site_editor() ){
 
-        add_action( "sed_app_register"          , array( $this , 'register_options' ) );
+            add_action( "sed_app_register"          , array( $this , 'register_group' ) , -9999 );
+
+            add_action( "sed_app_register"          , array( $this , 'register_options' ) );
+
+        }
 
         add_action( "sed_after_init_manager"    , array( $this , 'register_components' ) , 100 , 1 );
 

@@ -79,7 +79,7 @@
             //dataType : "jsonp" ,
             data : {
                 action        : 'shortcodes_default_pattern',
-                nonce         : api.addOnSettings.load_patterns.nonce.load ,
+                //nonce         : api.settings.nonce.module.load_patterns ,
                 sed_page_ajax : 'sed_ajax_default_patterns'
             },
             loadingType : "small" ,
@@ -110,7 +110,7 @@
             //dataType : "jsonp" ,
             data : {
                 action        : 'shortcodes_default_pattern2',
-                nonce         : api.addOnSettings.load_patterns.nonce.load ,
+                nonce         :  api.settings.nonce.module.load_patterns ,
                 sed_page_ajax : 'sed_ajax_default_patterns2'
             },
             loadingType : "small" ,

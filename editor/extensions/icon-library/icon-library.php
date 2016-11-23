@@ -53,18 +53,19 @@ if(!class_exists('SiteEditorIconManager'))
 
             add_filter( "sed_js_I18n", array($this,'js_I18n'));
 
-            add_filter( "sed_addon_settings", array($this,'icon_settings'));
+            //add_filter( "sed_addon_settings", array($this,'icon_settings'));
+
+            add_action( 'sed_app_refresh_nonces'        , array( $this , 'set_nonces') , 10 , 2 );
 		}
 
-        function icon_settings( $sed_addon_settings ){
-            global $site_editor_app;
-            $sed_addon_settings['iconLibrary'] = array(
-                'nonce'  => array(
-                    'load'  =>  wp_create_nonce( 'sed_app_icon_font_load_' . $site_editor_app->get_stylesheet() ) ,
-                    'remove'  =>  wp_create_nonce( 'sed_app_icon_font_remove_' . $site_editor_app->get_stylesheet() )
-                )
+        public function set_nonces( $nonces , $manager ){
+
+            $nonces['iconLibrary'] = array(
+                'load'  			=>  wp_create_nonce( 'sed_app_icon_font_load_' . $manager->get_stylesheet() ) ,
+                'remove'  			=>  wp_create_nonce( 'sed_app_icon_font_remove_' . $manager->get_stylesheet() )
             );
-            return $sed_addon_settings;
+
+            return $nonces;
         }
 
         function js_I18n( $I18n ){

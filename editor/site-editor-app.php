@@ -109,7 +109,13 @@ final Class SiteEditorApp {
         require_once SED_INC_EDITOR_DIR . DS . 'site-editor-module-provider.class.php';
         $this->manager = new SiteEditorManager();
 
-        do_action( "sed_after_init_manager" );
+        if( site_editor_app_on() ){
+            do_action( "sed_preview_after_init_manager" );
+        }else if( is_sed_save() ){
+            do_action( "sed_save_after_init_manager" );    
+        }else{
+            do_action( "sed_after_init_manager" );
+        }
 
     }
 
