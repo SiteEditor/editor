@@ -380,7 +380,6 @@ class PBMenuShortcode extends PBShortcodeClass{
                     'easeOutQuad'           => __('easeOutQuad', 'site-editor'),
                     'swing'                 => __('swing ', 'site-editor'),
                     'easeInQuad'            => __('easeInQuad', 'site-editor'),
-                    'easeOutQuad'           => __('easeOutQuad', 'site-editor'),
                     'easeInOutQuad'         => __('easeInOutQuad', 'site-editor'),
                     'easeInCubic'           => __('easeInCubic', 'site-editor'),
                     'easeOutCubic'          => __('easeOutCubic', 'site-editor'),
