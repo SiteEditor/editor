@@ -47,7 +47,19 @@ class SiteEditorThemeIntegration {
 
     global $wp_filter;
 
-    $wp_filter['sed_footer_area'] = $wp_filter['wp_footer'];
+    /**
+     * WordPress 4.7 introduces new class WP_Hook to handle filters and actions.
+     */
+    if( class_exists( 'WP_Hook' ) ) {
+      $wp_filter['sed_footer_area'] = new WP_Hook;
+      $wp_filter['sed_footer_area']->callbacks = $wp_filter['wp_footer']->callbacks;
+
+      /**
+       * Pre WordPress 4.7
+       */
+    } else {
+      $wp_filter['sed_footer_area'] = $wp_filter['wp_footer'];
+    }
 
     remove_all_actions( 'wp_footer' );
 

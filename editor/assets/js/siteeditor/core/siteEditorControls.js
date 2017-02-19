@@ -911,7 +911,7 @@ api	 * @param options
                     }
 
                     self.deferred.active.resolve();
-					self.send( 'active' );
+					self.send( 'active' ); 
 
                     api.previewer.trigger( 'previewerActive'  );
                     api.previewerActive = true;

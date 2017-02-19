@@ -909,7 +909,7 @@
 
     }); */
 
-    $( function() {
+    $( function() { 
         api.postsContent        = window._sedAppPostsContent ;
 
 
