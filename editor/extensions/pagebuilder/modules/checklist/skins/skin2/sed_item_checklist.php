@@ -1,1 +1,0 @@
-<li <?php echo $sed_attrs; ?> class="checklist-item <?php echo $class?>"><?php echo $content ?></li>

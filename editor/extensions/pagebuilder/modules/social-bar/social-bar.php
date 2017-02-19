@@ -12,10 +12,10 @@
 * @author siteeditor
 */
 
-if(!is_pb_module_active( "icons" )){
+/*if(!is_pb_module_active( "icons" )){
     sed_admin_notice( __("<b>Social Bar Module</b> needed to <b>Icons Module</b><br /> please first install and activate it ") );
     return ;
-}
+}*/
 
 class PBSocialBarShortcode extends PBShortcodeClass{
     private $settingsFild = array();

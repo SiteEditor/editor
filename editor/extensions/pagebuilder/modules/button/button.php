@@ -11,7 +11,8 @@
 * @author siteeditor
 */
 
-if( !is_pb_module_active( "icons" ) || !is_pb_module_active( "title" )){
+//!is_pb_module_active( "icons" ) ||
+if( !is_pb_module_active( "title" ) ){
     sed_admin_notice( __("<b>Button Module</b> needs <b>Icons module</b> , <b>Title module</b><br /> please install and activate it first.") );
     return ;
 }

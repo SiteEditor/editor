@@ -1,1 +1,0 @@
-<tbody {{sed_attrs}} class="{{class}}">{{{content}}}</tbody> 

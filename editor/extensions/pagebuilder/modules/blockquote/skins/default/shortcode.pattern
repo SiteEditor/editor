@@ -1,7 +1,0 @@
-[sed_blockquote]
-  [sed_paragraph tag="div" toolbar1="normal-paragraph" toolbar2="normal-paragraph" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="blockquote"]
-      <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
-      tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-      semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.<cite>Somebody famous</cite></p>
-  [/sed_paragraph]
-[/sed_blockquote]

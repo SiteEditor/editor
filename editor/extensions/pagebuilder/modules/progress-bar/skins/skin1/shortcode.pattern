@@ -1,3 +1,0 @@
-[sed_progress_bar]
-[sed_text_title sed_support_id="title-progress-bar" parent_module="progress-bar" tag="span" toolbar1="fontselect fontsizeselect" toolbar2="normal-text" class="title progressbar-text"]Progress Title 80%[/sed_text_title]   
-[/sed_progress_bar]

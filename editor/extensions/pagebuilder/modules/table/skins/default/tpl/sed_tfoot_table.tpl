@@ -1,1 +1,0 @@
-<tfoot {{sed_attrs}}>{{{content}}}</tfoot> 

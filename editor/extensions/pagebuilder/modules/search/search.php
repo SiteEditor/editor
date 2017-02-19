@@ -11,7 +11,8 @@
 * @author siteeditor
 */
 
-if( !is_pb_module_active( "icons" ) || !is_pb_module_active( "title" )){
+//!is_pb_module_active( "icons" ) ||
+if( !is_pb_module_active( "title" )){
     sed_admin_notice( __("<b>Search Module</b> needed to <b>Icons Module</b> and <b>Title Module</b> and <br /> please first install and activate its ") );
     return ;
 }

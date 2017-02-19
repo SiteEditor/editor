@@ -1,1 +1,0 @@
-<thead {{sed_attrs}} class="{{class}}">{{{content}}}</thead> 

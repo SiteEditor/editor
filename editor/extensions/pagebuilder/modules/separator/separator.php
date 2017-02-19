@@ -12,7 +12,8 @@
 * @author siteeditor
 */
 
-if( !is_pb_module_active( "button" ) || !is_pb_module_active( "icons" ) || !is_pb_module_active( "title" )){
+// || !is_pb_module_active( "icons" )
+if( !is_pb_module_active( "button" ) || !is_pb_module_active( "title" )){
     sed_admin_notice( __("<b>Separator Module</b> needed to <b>Icons Module</b> , <b>Title Module</b> and <b>Button module</b><br /> please first install and activate its ") );
     return ;
 }
