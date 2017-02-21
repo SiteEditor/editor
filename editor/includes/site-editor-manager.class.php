@@ -1564,21 +1564,6 @@ class SiteEditorManager{
      */
     function register_settings( ){
 
-        //for typography
-        $this->add_setting( 'page_mce_used_fonts', array(
-			'default'        => array() ,
-			'option_type'    => 'base' ,
-            'transport'      => 'postMessage'
-		) );
-
-		//not load in site editor in first time
-		//dynamic load after site page load
-		if( site_editor_app_on() ) {
-
-			/*sed_app_dynamic_setting_args
-			);*/
-		}
-
     }
 
 	/**

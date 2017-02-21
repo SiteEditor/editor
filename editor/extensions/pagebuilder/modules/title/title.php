@@ -13,6 +13,7 @@ class PBTitleShortcode extends PBShortcodeClass{
 	 * Register module with siteeditor.
 	 */
 	function __construct() {
+
 		parent::__construct( array(
                 "name"        => "sed_text_title",                        //*require
                 "title"       => __("Title","site-editor"),               //*require for toolbar
@@ -21,10 +22,38 @@ class PBTitleShortcode extends PBShortcodeClass{
                 "module"      =>  "title"                                  //*require
             ) // Args
 		);
+
+
+
 	}
 
+    function get_atts(){
+
+        $atts = array(
+            'tag'               => 'h2',
+            /*'toolbar1'        => '',
+            'toolbar2'          => '',*/
+            'default_width'     => "200px" ,
+            'default_height'    => "40px" ,
+            'fonts'             => ''
+        );
+
+        return $atts;
+    }
 
     function add_shortcode( $atts , $content = null ){
+
+        add_filter( "sed_page_mce_used_fonts" , array( $this , 'add_fonts' ) , 10 , 1 );
+
+    }
+
+    function add_fonts( $fonts ){
+
+        $new_fonts = ( !empty( $this->atts['fonts'] ) ) ? explode( "," , $this->atts['fonts']  ) : array();
+
+        $fonts = array_merge( $fonts , $new_fonts );
+
+        return $fonts;
 
     }
 
@@ -41,18 +70,6 @@ class PBTitleShortcode extends PBShortcodeClass{
         return array(
             array('title-main-less')
         );
-    }
-
-    function get_atts(){
-        $atts = array(
-        'tag'          => 'h2',
-        /*'toolbar1' =>'',
-        'toolbar2' =>'',*/
-        'default_width' => "200px" ,
-        'default_height' => "40px"
-        );
-
-        return $atts;
     }
 
     function shortcode_settings(){

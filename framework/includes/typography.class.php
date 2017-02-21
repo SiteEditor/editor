@@ -35,19 +35,17 @@ Class SiteeditorTypography{
     }
 
     function load_mce_fonts(){
-        global $sed_data;
 
-        if( isset($sed_data['page_mce_used_fonts']) && !empty( $sed_data['page_mce_used_fonts'] ) && is_array($sed_data['page_mce_used_fonts']) ){
-            $all_fonts = array( );
-            foreach( $sed_data['page_mce_used_fonts'] AS  $editor_id => $fonts ){
-                $all_fonts = array_merge( $all_fonts , $fonts );
-            }
+        $all_fonts = apply_filters( "sed_page_mce_used_fonts" , array() , $this );
 
-            $all_fonts = array_unique( $all_fonts );  
+        if( is_array( $all_fonts ) && !empty( $all_fonts ) ) {
 
-            $this->load_custom_fonts( $all_fonts );
+            $all_fonts = array_unique($all_fonts);
 
-        	$this->load_google_fonts( $all_fonts );
+            $this->load_custom_fonts($all_fonts);
+
+            $this->load_google_fonts($all_fonts);
+
         }
 
     }

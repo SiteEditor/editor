@@ -24,18 +24,34 @@ class PBParagraphShortcode extends PBShortcodeClass{
 	}
 
     function get_atts(){
+
         $atts = array(
-        'tag'          => 'p',
-        /*'toolbar1' =>'',
-        'toolbar2' =>'',*/
-        'default_width' => "350px" ,
-        'default_height' => "300px"
+            'tag'               => 'p',
+            /*'toolbar1'        => '',
+            'toolbar2'          => '',*/
+            'default_width'     => "350px" ,
+            'default_height'    => "300px" ,
+            'fonts'             => ''
         );
 
         return $atts;
+
     }
 
     function add_shortcode( $atts , $content = null ){
+
+        add_filter( "sed_page_mce_used_fonts" , array( $this , 'add_fonts' ) , 10 , 1 );
+
+    }
+
+    function add_fonts( $fonts ){
+
+        $new_fonts = ( !empty( $this->atts['fonts'] ) ) ? explode( "," , $this->atts['fonts']  ) : array();
+
+        $fonts = array_merge( $fonts , $new_fonts );
+
+        return $fonts;
+
     }
 
     function less(){
