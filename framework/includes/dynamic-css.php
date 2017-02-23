@@ -85,9 +85,6 @@ if(!empty($elements)){
     }
 }
 
-global $sed_data , $sed_dynamic_css_string;
-
-if(!empty($sed_data) && isset($sed_data['sheet_width']))
-    $output_css .= ".sed-row-boxed{max-width : " . $sed_data['sheet_width'] . "px !important;}";
+global $sed_dynamic_css_string; 
 
 echo $output_css.$sed_dynamic_css_string.$retina_css;

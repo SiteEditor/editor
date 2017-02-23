@@ -15,20 +15,40 @@
 
             $.extend( this, options || {} );
 
+            this.previewMode = "off";
+
             this.ready();
         },
 
         ready : function(){
             var self = this;
+
+            //TODO : fix loaded pages inlclude video && Embeded(exist delay for enable preview mode)
+            api.previewer.bind( 'previewerActive', function( ) {
+
+                if( self.previewMode == "on" ){
+
+                    api.previewer.send("previewMode" , self.previewMode );
+
+                }
+
+            });
+
             $("#app-preview-mode-btn").on("click" , function(){
+
+                self.previewMode = "on";
+
                 $("body").addClass("sed-app-preview");
-                api.previewer.send("previewMode" , "on");
+                api.previewer.send("previewMode" , self.previewMode );
                 self.dialogsClosed();
             });
 
             $("#back-to-editor-btn").on("click" , function(){
+
+                self.previewMode = "off";
+
                 $("body").removeClass("sed-app-preview");
-                api.previewer.send("previewMode" , "off");
+                api.previewer.send("previewMode" , self.previewMode );
                 $("#website").css("width" , "100%" ); 
                 self.dialogsOpened();
             });

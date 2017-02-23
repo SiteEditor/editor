@@ -150,9 +150,7 @@
 
         keyboardShortcutDisable : function( element ){
 
-        },
-
-
+        }
 
     });
 

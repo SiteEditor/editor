@@ -169,13 +169,13 @@
 
                 if( ! shortcodeContent ){
                     return $thisShortcode.attrs;
-                }else{
-
-                    $thisShortcode.attrs.sed_shortcode_content = decodeURI( shortcodeContent.content );
-
                 }
 
-                return $.extend( true , {} , $thisShortcode.attrs );
+                var newAttrs = $.extend( true , {} , $thisShortcode.attrs );
+
+                newAttrs.sed_shortcode_content = shortcodeContent.content;//api.rawurldecode() 
+
+                return newAttrs;
             }
 
         }

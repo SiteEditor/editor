@@ -50,7 +50,7 @@
 
         },
 
-        select : function( element , forceOpen , reset ){
+        select : function( element , forceOpen , reset ){ 
 
             if(api.appPreview.mode == "on")
                 return false;

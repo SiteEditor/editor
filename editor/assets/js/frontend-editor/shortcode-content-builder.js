@@ -326,13 +326,14 @@
 
                 if( ! shortcodeContent ){
                     return $thisShortcode.attrs;
-                }else{
-
-                    $thisShortcode.attrs.sed_shortcode_content = decodeURI( shortcodeContent.content );
-
                 }
 
-                return $.extend( true , {} , $thisShortcode.attrs );
+                var newAttrs = $.extend( true , {} , $thisShortcode.attrs );
+
+                newAttrs.sed_shortcode_content = shortcodeContent.content;//api.rawurldecode() 
+
+                return newAttrs;
+
             }
         },
 
@@ -457,7 +458,7 @@
 
             var $thisShortcode = this.getShortcode( id );
 
-            if( !$thisShortcode ){
+            if( !$thisShortcode || attr == "sed_shortcode_content" ){
                 //api.log("for : " + id + " not found shortcode");
                 return ;
             }
@@ -482,7 +483,7 @@
                 return ;
             }
 
-            $thisShortcode.content = encodeURI( value );
+            $thisShortcode.content = value;//api.rawurlencode()
 
             this.updateShortcode( $thisShortcode );
         },

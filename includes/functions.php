@@ -1356,7 +1356,7 @@ function sed_data_atts( $attributes ) {
 
 function sed_js_remove_wpautop( $content, $autop = false ) {
 
-    if ( $autop ) { // Possible to use !preg_match('('.WPBMap::getTagsRegexp().')', $content)
+    if ( $autop ) { 
         $content = wpautop( preg_replace( '/<\/?p\>/', "\n", $content ) . "\n" );
     }
 

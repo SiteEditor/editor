@@ -1,6 +1,31 @@
 (function( exports, $ ){
-	var api = sedApp.editor,debounce;
+	var api = sedApp.editor,
+		debounce;
 
+	api.urldecode = function(str){
+		return decodeURIComponent((str+'').replace(/\+/g,'%20'));
+	};
+
+	api.urlencode = function (str){
+		str=(str+'').toString();
+		return encodeURIComponent(str).replace(/!/g,'%21').replace(/'/g,'%27').replace(/\(/g,'%28').replace(/\)/g,'%29').replace(/\*/g,'%2A').replace(/%20/g,'+');
+	};
+
+	api.rawurldecode = function(str){
+		return decodeURIComponent(str+'');
+	};
+	
+	api.rawurlencode = function(str){
+		str=(str+'').toString();
+		return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A');
+	};
+
+
+	/**
+	 * Returns a debounced version of the function.
+	 *
+	 * @todo Require Underscore.js for this file and retire this.
+	 */
 	debounce = function( fn, delay, context ) {
 		var timeout;
 		return function() {
@@ -16,31 +41,45 @@
 		};
 	};
 
+	/**
+	 * @constructor
+	 * @augments sedApp.editor.customize.Messenger
+	 * @augments sedApp.editor.customize.Class
+	 * @mixes sedApp.editor.customize.Events
+	 */
 	api.Preview = api.Messenger.extend({
 		/**
-		 * Requires params:
-		 *  - url    - the URL of preview frame
+		 * @param {object} params  - Parameters to configure the messenger.
+		 * @param {object} options - Extend any instance parameter or method with this object.
 		 */
 		initialize: function( params, options ) {
 			var self = this;
 
 			api.Messenger.prototype.initialize.call( this, params, options );
 
-			this.body = $( document.body ); //, a *
-			/*this.body.find("a").livequery(function(){
-    			$(this).on( 'click.preview', function( event ) {
-    				event.preventDefault();
-    				self.send( 'scroll', 0 );
-    				//self.send( 'url', $(this).prop('href') );
-    			});
-                $(this).attr('data-href' , $(this).prop('href') );
-                $(this).removeAttr('href');
-            });*/
-
-			this.body.on( 'click.preview', 'a', function( event ) { 
+			this.body = $( document.body );
+			this.body.on( 'click.preview', 'a', function( event ) {
+				var link, isInternalJumpLink;
+				link = $( this );
+				isInternalJumpLink = ( '#' === link.attr( 'href' ).substr( 0, 1 ) );
 				event.preventDefault();
-				//self.send( 'scroll', 0 );
-				//self.send( 'url', $(this).prop('href') );
+
+				if ( isInternalJumpLink && '#' !== link.attr( 'href' ) ) {
+					$( link.attr( 'href' ) ).each( function() {
+						this.scrollIntoView();
+					} );
+				}
+
+				/*
+				 * Note the shift key is checked so shift+click on widgets or
+				 * nav menu items can just result on focusing on the corresponding
+				 * control instead of also navigating to the URL linked to.
+				 */
+				if ( event.shiftKey || isInternalJumpLink ) {
+					return;
+				}
+				self.send( 'scroll', 0 );
+				self.send( 'url', link.prop( 'href' ) );
 			});
 
 			// You cannot submit forms.

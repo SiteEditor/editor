@@ -1639,7 +1639,7 @@
                 selector        :  "sed_row" ,
                 data            :  rowDialogData,
                 extra :  {
-                    attrs : api.contentBuilder.getAttrs( rowElement.attr("sed_model_id") , true ) || {}
+                    attrs : api.contentBuilder.getAttrs( rowElement.attr("sed_model_id") ) || {}
                 },
                 rowId : rowElement.attr("sed_model_id")
             });
@@ -1806,6 +1806,8 @@
             api.isOpenDialogSettings = state;
         } );
 
+        var _lazyAjaxLoad = null;
+
         api( 'sed_pb_modules', function( value ) {
     		value.bind( function( currentAttrValue ) {
     		    var elementId = api.currentSedElementId;
@@ -1863,12 +1865,23 @@
                         ajaxInfo = api.pageBuilder.modulesAjaxRequests[shortcode.parent_id];
 
                     if( !_.isUndefined( ajaxInfo ) && ajaxInfo.processing === true ){
+
                         var _success = function( response ){
                             $( '[sed_model_id="' + shortcode.parent_id + '"]' ).replaceWith( response.data );
                         };
 
-                        ajaxInfo.request.abort();
-                        api.pageBuilder.ajaxLoadModules( shortcode.parent_id , _success );
+                        if (_lazyAjaxLoad)//if there is already such event this cancels the setTimeout()
+                            clearTimeout(_lazyAjaxLoad);
+
+
+                        //ajaxInfo.request.abort();
+
+                        _lazyAjaxLoad = setTimeout(function () //executes a code some time in the future
+                        {
+                            //if (mode == "remove")
+                            api.pageBuilder.ajaxLoadModules( shortcode.parent_id , _success );
+
+                        }, 1000 );
 
                         return ;
                     }

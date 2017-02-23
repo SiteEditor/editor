@@ -54,10 +54,10 @@ Class SiteeditorTypography{
         global $sed_general_data , $sed_data;
 
         $fonts = array();
-        if( isset($sed_data['font_family']) && !empty( $sed_data['font_family'] ) && is_array($sed_data['font_family']) ){
+        /*if( isset($sed_data['font_family']) && !empty( $sed_data['font_family'] ) && is_array($sed_data['font_family']) ){
             $fonts = array_values( $sed_data['font_family'] );
             $fonts = array_unique( $fonts );
-        }
+        }*/
 
         $fonts[] = $sed_general_data['font-family-base'] ;
         $fonts[] = $sed_general_data['headings-font-family'];

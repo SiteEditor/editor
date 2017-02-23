@@ -57,13 +57,12 @@ Class PageBuilderApplication {
     * @since   1.0.0
     */
     function __construct(  $args = array() ) {
-        global $site_editor_app;
 
         $this->template = 'default';
         $this->current_app = 'siteeditor';
 
         //remove extra p && br tag from site editor & add to default wp editor only
-        remove_filter( 'the_content', 'wpautop' );
+        //remove_filter( 'the_content', 'wpautop' );
 
         add_filter('the_excerpt', array($this, 'sed_excerpt_filter') );
 
@@ -1321,7 +1320,7 @@ Class PageBuilderApplication {
 
         $shortcodes_models = self::get_pattern_shortcodes( $shortcodes_pattern_string );
 
-        $content = do_shortcode( $shortcodes_models["string"] );
+        $content = do_shortcode( $shortcodes_models["string"] );//apply_filters( 'the_content' , $shortcodes_models["string"] );
 
         //set current page content shortcodes models in @$this->sed_theme_content for js
         $this->sed_theme_content = $shortcodes_models["shortcodes"];

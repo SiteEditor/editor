@@ -3,7 +3,7 @@
 Module Name: Paragraph
 Module URI: http://www.siteeditor.org/modules/text
 Description: Module Paragraph For Page Builder Application
-Author: Site Editor Team @Pakage
+Author: Site Editor Team
 Author URI: http://www.siteeditor.org
 Version: 1.0.0
 */

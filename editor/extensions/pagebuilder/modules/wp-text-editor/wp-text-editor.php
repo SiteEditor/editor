@@ -41,7 +41,6 @@ class PBWPTextEditorShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
-
         return array(
 
             'sed_shortcode_content' => array(

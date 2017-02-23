@@ -45,11 +45,10 @@ class PBRawHTMLShortcode extends PBShortcodeClass{
 
     public function shortcode_settings(){
 
-
         return array(
 
             'sed_shortcode_content' => array(
-                'label'             => __('Edit HTML Code', 'translation_domain'),
+                'label'             => __('Edit HTML Code', 'site-editor'),
                 'type'              => 'code',
                 'priority'          => 10,
                 'default'           => "",
@@ -70,6 +69,7 @@ class PBRawHTMLShortcode extends PBShortcodeClass{
             )
 
         );
+
 
     }
 
