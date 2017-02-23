@@ -55,7 +55,13 @@ class PBPageTitleShortcode extends PBShortcodeClass{
 
     function add_shortcode( $atts , $content = null ){
 
-    }
+    }            
+
+    function styles(){
+        return array(
+            array('page-title-style', SED_PB_MODULES_URL.'page-title/css/style.css' ,'1.0.0' ) ,
+        );
+    } 
 
 
     static function get_title(){

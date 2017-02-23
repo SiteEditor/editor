@@ -7,20 +7,21 @@ if(length == "boxed")
     length_class = "sed-row-boxed";
 else
     length_class = "sed-row-wide";
+
 #>
-<nav {{sed_attrs}} class="{{className}} module module-breadcrumbs breadcrumbs-skin1">
-    <ul class="{{length_class}}" length_element>
+<nav {{sed_attrs}} class="{{className}} module module-breadcrumbs breadcrumbs-skin4 {{length_class}}" length_element>
+    <ul>
        <# if( !_.isEmpty( breadcrumbs ) ){ #>
         <# _.each( breadcrumbs , function( item , index ){ #>
             <li <# if ( _.isEmpty( item.href ) ){ #> class="current" <# } #> >
             <# if ( !_.isEmpty( item.href ) ){ #>
-                <a href="{{item.href}}" class="<# if( !_.isUndefined( item.type ) && item.type == 'home' ){ #> home-breadcrumb <# } #>">
+                <a href="{{item.href}}" <# if( !_.isUndefined( item.type ) && item.type == 'home' ){ #> class="home-breadcrumb" <# } #>>
                     <# if( !_.isUndefined( item.type ) && item.type == 'home' ){ #>
                         <i class="fa fa-home" ></i>
                     <# }else{ #> {{{item.text}}}<# } #>
                 </a>
             <# }else{ #>
-                <span class="<# if( index == 'home' ){ #> home-breadcrumb <# } #>">
+                <span <# if( !_.isUndefined( item.type ) && item.type == 'home' ){ #> class="home-breadcrumb" <# } #>>
                     <# if( !_.isUndefined( item.type ) && item.type == 'home' ){ #>
                         <i class="fa fa-home" ></i>
                     <# }else{ #> {{{item.text}}} <# } #>

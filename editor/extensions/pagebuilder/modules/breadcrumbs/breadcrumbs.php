@@ -51,7 +51,13 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
         $this->atts["breadcrumbs"] = $this->get_breadcrumbs();
 
 
-    }                        
+    }             
+
+    function styles(){
+        return array(
+            array('breadcrumbs-style', SED_PB_MODULES_URL.'breadcrumbs/css/style.css' ,'1.0.0' ) ,
+        );
+    }           
 
     function shortcode_settings(){
 

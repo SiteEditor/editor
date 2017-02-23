@@ -53,7 +53,13 @@ class PBSearchShortcode extends PBShortcodeClass{
         "module_html_id"     => $module_html_id ,   
       ));
 
-  }
+  }        
+
+    function styles(){
+        return array(
+            array('search-style', SED_PB_MODULES_URL.'search/css/style.css' ,'1.0.0' ) ,
+        );
+    } 
 
     function scripts(){
         return array(

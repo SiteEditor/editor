@@ -42,7 +42,7 @@ class SiteEditorSetup
 
         $this->steps = array_merge( array(
             "configuration"         => false,
-            "less_framework"        => false,
+            //"less_framework"        => false,
             "install_theme"         => false,
             "install_modules_base"  => false,
             "install_sample_data"   => false
@@ -134,7 +134,7 @@ class SiteEditorSetup
     static function is_installed(){
         $status_install_steps = array_merge( array(
             "configuration"         => false,
-            "less_framework"        => false,
+            //"less_framework"        => false,
             "install_theme"         => false,
             "install_modules_base"  => false
         ), (array) sed_get_setting("status_install_steps") );

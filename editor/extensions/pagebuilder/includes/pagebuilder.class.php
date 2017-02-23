@@ -1271,7 +1271,7 @@ Class PageBuilderApplication {
         $page_layout = SiteEditorLayoutManager::get_page_layout();
 
         //Current Page Layout Models
-        $curr_sub_themes_models = $sub_themes_models[ $page_layout ];
+        $curr_sub_themes_models = $sub_themes_models[ $page_layout ]; 
 
         //Current Page Layout Content
         $sed_layouts_content = get_option("sed_layouts_content");

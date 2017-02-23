@@ -1,16 +1,15 @@
 /*#less_info#(
-"handle"    => "breadcrumbs-skin1",
+"handle"    => "breadcrumbs-skin4",
 "deps"      => array(),
 "ver"       => "1.0.0",
 "media"     => "all"
 )#*/
-.breadcrumbs-skin1 {
+.breadcrumbs-skin4 {
     position: relative;
-    background-color: transparent;
-    border:1px solid @base-border-color-light;
     ul{
-        line-height: 30px;
-        margin: 0 auto;
+        display: inline-block;
+        line-height: 1em;
+        margin: 0;
         .clearfix();
         li{
             display: inline-block;
@@ -19,49 +18,47 @@
                 display: block;
                 font-size: @font-size-small;
                 padding: @padding-xs ;
-                padding-right: @padding-lg + 1;
+                padding-right: @padding-base + 4;
                 position: relative;
                 &:after {
                     .lower-color(@body-bg);
-                    content: "\00bb";
+                    content: "\203A";
                     position: absolute;
                     right: 2px;
                     font-size:13px;
+                    line-height: 13px;
                     height: 1em;
-                    line-height: 30px;
                     top: 50%;
-                    line-height: 1em;
-                    margin-top: -0.55em;
+                    margin-top: -0.5em;
                 }
+            }
+            i{
+                font-size: @font-size-base + 2;
+                vertical-align: middle;
             }
             a:hover{
                 color:@main-color;
             }
             &.current span {
                 .lower-color(@body-bg);
-                font-size: @font-size-small;
             }
             &:last-child a:after {
               content: "" !important;
             }
-            i {
-              font-size: 16px;
-              padding: 0 4px;
-              vertical-align: middle;
-            }
         }
+
     }
   @media (max-width: @screen-sm-max) {
     display: none !important;
   }
 
 }
-.rtl-body .module.module-breadcrumbs.breadcrumbs-skin1{
+.rtl-body .module.module-breadcrumbs.breadcrumbs-skin4 {
     ul{
         li{
             a{
                 padding-right: @padding-xs;
-                padding-left: @padding-lg + 1;
+                padding-left: @padding-base + 4;
                 &:after {
                     left: 2px;
                     right: auto;
@@ -72,3 +69,4 @@
 
     }
 }
+

@@ -39,7 +39,7 @@ class PBButtonShortcode extends PBShortcodeClass{
                 'link'              => '',
                 'link_target'       => '_self',
                 'size'           => '',
-                'type'           => 'btn-main',
+                'type'           => 'btn-primary',
                 'default_width'  => "126px" ,
                 'default_height' => "44px",
       );
@@ -50,7 +50,13 @@ class PBButtonShortcode extends PBShortcodeClass{
   function add_shortcode( $atts , $content = null ){
       extract($atts);
 
-  }
+  }            
+
+  function styles(){
+      return array(
+          array('button-style', SED_PB_MODULES_URL.'button/css/style.css' ,'1.0.0' ) ,
+      );
+  } 
 
   function less(){
       return array(
@@ -97,7 +103,7 @@ class PBButtonShortcode extends PBShortcodeClass{
                 'description'  => __("This option allows you to set the current button type. The options to select from are info, success, purple, default, none, flat, danger, warning and primary.
                           <br />It should be mentioned that this option is not for setting color for your buttons. It helps you to create commonly used buttons. You can use the design editor to easily change the color of your buttons.", "site-editor"),
                   'choices'   =>array(
-                      'btn-main'        => __('Primary', 'site-editor'),
+                      'btn-primary'     => __('Primary', 'site-editor'),
                       'btn-default'     => __('Default', 'site-editor'),
                       'btn-purple'      => __('Purple', 'site-editor'),
                       'btn-success'     => __('Success', 'site-editor'),
