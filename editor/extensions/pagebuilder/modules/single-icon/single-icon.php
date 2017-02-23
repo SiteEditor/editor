@@ -25,13 +25,13 @@ class PBSingleIconShortcode extends PBShortcodeClass{
             ) // Args
 		);
 
-        add_action( 'wp_enqueue_scripts', array( $this , 'load_default_font_icon' ) );
+        //add_action( 'wp_enqueue_scripts', array( $this , 'load_default_font_icon' ) );
 	}
 
     //loaded FontAwesome allways
-    function load_default_font_icon(){
+    /*function load_default_font_icon(){
         wp_enqueue_style('sed-FontAwesome' , SED_EDITOR_FOLDER_URL.'applications/siteeditor/modules/icon-library/fonts/FontAwesome/FontAwesome.css' , array() , "4.3");
-    }
+    }*/
 
     function get_atts(){
         $atts = array(
@@ -66,7 +66,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 
     function styles(){
         $styles = array();
-        $fonts = get_option('sed_single_icon_fonts');
+        $fonts = get_option('sed_icons_fonts');
 
         if( is_array( $fonts ) && !empty( $fonts ) ){
             foreach( $fonts as $font => $info){

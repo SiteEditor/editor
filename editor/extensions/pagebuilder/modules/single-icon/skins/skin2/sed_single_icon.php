@@ -1,13 +1,13 @@
 <?php if(!empty($link)){ ?>                              
 
-    <a href="<?php echo $link;?>" target="<?php echo $link_target;?>"  <?php echo $sed_attrs; ?> class="s-tb-sm ta-c sed-single-icon module module-single-icon single-icon-skin2 <?php if( $style ){ echo $hover_effect; } ?> <?php echo $class;?>" style="font-size:<?php echo $font_size; ?>px;" >
+    <a href="<?php echo $link;?>" target="<?php echo $link_target;?>"  <?php echo $sed_attrs; ?> class="s-tb-sm ta-c sed-icons module module-single-icon single-icon-skin2 <?php if( $style ){ echo $hover_effect; } ?> <?php echo $class;?>" style="font-size:<?php echo $font_size; ?>px;" >
       <span class="hi-icon <?php echo $icon; ?> <?php echo $type;?>  <?php echo $style;?>" sed-icon="<?php echo $icon; ?>" style="font-size:<?php echo $font_size; ?>px;color:<?php echo $color; ?>">
       </span>
     </a>
 
 <?php }else{ ?>
 
-    <div  <?php echo $sed_attrs; ?> class="s-tb-sm ta-c sed-single-icon module module-single-icon single-icon-skin2 <?php if( $style ){ echo $hover_effect; } ?> <?php echo $class;?>" style="font-size:<?php echo $font_size; ?>px;" >
+    <div  <?php echo $sed_attrs; ?> class="s-tb-sm ta-c sed-icons module module-single-icon single-icon-skin2 <?php if( $style ){ echo $hover_effect; } ?> <?php echo $class;?>" style="font-size:<?php echo $font_size; ?>px;" >
       <span class="hi-icon <?php echo $icon; ?> <?php echo $type;?>  <?php echo $style;?>" sed-icon="<?php echo $icon; ?>" style="font-size:<?php echo $font_size; ?>px;color:<?php echo $color; ?>">
       </span>
     </div>
