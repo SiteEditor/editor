@@ -38,13 +38,19 @@ input[type="submit"],
           .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
         }      
     }
-}
+body #yith-woocompare-table .product_info .button,
+body #yith-woocompare-table .add-to-cart .button, #yith-woocompare-table .added_to_cart,
+body .yith-quick-view-content.woocommerce div.summary .yith-wcqv-view-details ,
+.woocommerce .ask-an-estimate-button.button ,
+.woocommerce .remove_from_wishlist.button ,
 .woocommerce table.my_account_orders .order-actions .button,
+.woocommerce table.woocommerce-MyAccount-downloads .download-actions .button ,
 .module-woocommerce-cart .checkout-button.button,
 .module-woocommerce-cart .button.update-cart{
   .button-variant(@btn-black-color; @btn-black-bg; @btn-black-border);
 }
-.woocommerce table.my_account_orders .order-actions .button {
+.woocommerce table.my_account_orders .order-actions .button ,
+.woocommerce table.woocommerce-MyAccount-downloads .download-actions .button {
     .btn-sm();
 }
 
