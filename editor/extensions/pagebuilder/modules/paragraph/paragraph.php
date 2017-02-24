@@ -52,6 +52,12 @@ class PBParagraphShortcode extends PBShortcodeClass{
 
         return $fonts;
 
+    }     
+
+    function styles(){
+        return array(
+            array('paragraph-style', SED_PB_MODULES_URL.'paragraph/css/style.css' ,'1.0.0' ) ,
+        );
     }
 
     function less(){

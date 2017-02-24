@@ -56,7 +56,8 @@ class PBSingleIconShortcode extends PBShortcodeClass{
         extract($atts);
 
 
-    }
+    }     
+
 
     function less(){
         return array(
@@ -65,7 +66,10 @@ class PBSingleIconShortcode extends PBShortcodeClass{
     }
 
     function styles(){
-        $styles = array();
+        $styles = array(
+            array('single-icon-style', SED_PB_MODULES_URL.'single-icon/css/style.css' ,'1.0.0' ) ,
+        );
+
         $fonts = get_option('sed_icons_fonts');
 
         if( is_array( $fonts ) && !empty( $fonts ) ){

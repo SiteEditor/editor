@@ -55,6 +55,12 @@ class PBTitleShortcode extends PBShortcodeClass{
 
         return $fonts;
 
+    }     
+
+    function styles(){
+        return array(
+            array('title-style', SED_PB_MODULES_URL.'title/css/style.css' ,'1.0.0' ) ,
+        );
     }
 
     function scripts(){

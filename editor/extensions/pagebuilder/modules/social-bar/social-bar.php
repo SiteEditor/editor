@@ -58,6 +58,12 @@ class PBSocialBarShortcode extends PBShortcodeClass{
         $this->set_vars( $atts );
         */  
 
+    }     
+
+    function styles(){
+        return array(
+            array('social-bar-style', SED_PB_MODULES_URL.'social-bar/css/style.css' ,'1.0.0' ) ,
+        );
     }
 
     function less(){
