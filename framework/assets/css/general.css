@@ -42,12 +42,35 @@
     vertical-align: top;
     box-sizing: border-box;
     margin: 0 !important;
-    text-align: initial;
+    text-align: initial; 
 }
+
 table.sed-cols-table, 
 table.sed-cols-table > tbody > tr > th, 
 table.sed-cols-table > tbody > tr > td {
+    position: relative;
+    vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+    margin: 0;
+    padding: 0; 
     border: 0 none;
+    text-align: initial;  
+    overflow: visible;
+    background: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0; 
+  -o-border-radius: 0;
+  border-radius: 0;
+  pointer-events: auto;
+  clip: auto;
 }
 
 .sed-app-editor .sed-column-pb,
