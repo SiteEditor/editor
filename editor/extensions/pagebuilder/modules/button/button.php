@@ -123,7 +123,7 @@ class PBButtonShortcode extends PBShortcodeClass{
             'link'          =>  'link_to' ,
             'link_target'   =>  'link_target' ,
             'spacing' => array(
-                "type"          => "spacing" ,
+                "type"          => "margin" ,
                 "label"         => __("Spacing", "site-editor"),
                 "default"       => "10 10 10 10" ,
             ),

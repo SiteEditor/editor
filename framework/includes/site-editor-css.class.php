@@ -335,7 +335,7 @@ class SiteEditorCss{
                 $output_css .= 'background-attachment: ' . $element_properties['background_attachment'] . ' !important;';
 
             if ( $this->chvv('background_size' , $element_properties) )
-                $output_css .= $this->background_size( $$element_properties['background_size'] );
+                $output_css .= $this->background_size( $element_properties['background_size'] );
 
             if ( $this->chvv('background_repeat' , $element_properties) )
                 $output_css .= 'background-repeat: ' . $element_properties['background_repeat'] . ' !important;';

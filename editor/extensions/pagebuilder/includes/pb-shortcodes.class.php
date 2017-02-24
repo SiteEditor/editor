@@ -293,20 +293,29 @@ class PBShortcodeClass{
         }
 
         if( !site_editor_app_on() && ( !isset( $_POST['action'] ) || $_POST['action'] != "load_modules" ) ){
-            $new_custom_class = $sed_pb_app->generate_custom_css_class();
 
-            if( isset( $atts['sed_css'] ) && !empty( $atts['sed_css'] ) ){
-                global $sed_apps;
-                $css_data = rawurldecode( $atts['sed_css'] );
-                $css_data = json_decode( $css_data , true );
-                if( !empty( $css_data ) && is_array( $css_data ) ){
-                    $new_css_data = array();
-                    foreach( $css_data AS $selector => $data ){
-                        $selector = str_replace("##sed_custom_class##" , "." . $new_custom_class , $selector );
-                        $new_css_data[$selector] = $data;
+            if( isset( $atts['sed_css_class'] ) ) {
+
+                $new_custom_class = $atts['sed_css_class'];
+
+                if (isset($atts['sed_css']) && !empty($atts['sed_css'])) {
+                    global $sed_apps;
+                    $css_data = rawurldecode($atts['sed_css']);
+                    $css_data = json_decode($css_data, true);
+                    if (!empty($css_data) && is_array($css_data)) {
+                        $new_css_data = array();
+                        foreach ($css_data AS $selector => $data) {
+                            $selector = str_replace("##sed_custom_class##", "." . $new_custom_class, $selector);
+                            $new_css_data[$selector] = $data;
+                        }
+                        $sed_apps->framework->dynamic_css_data = array_merge($sed_apps->framework->dynamic_css_data, $new_css_data);
                     }
-                    $sed_apps->framework->dynamic_css_data = array_merge( $sed_apps->framework->dynamic_css_data , $new_css_data );
                 }
+
+            }else{
+
+                $new_custom_class = $sed_pb_app->generate_custom_css_class();
+
             }
 
 

@@ -176,6 +176,18 @@ class SEDAppSave{
 
                 }
 
+                global $sed_pb_app;
+
+                foreach($shortcode['attrs'] AS $attr => $value) {
+
+                    if ( $attr == "sed_css" && !empty($value) && !isset( $shortcode['attrs']['sed_css_class'] ) ) {
+
+                        $shortcode['attrs']['sed_css_class'] = $sed_pb_app->generate_custom_css_class();
+
+                    }
+
+                }
+
                 foreach($shortcode['attrs'] AS $attr => $value){
                     if( $attr == "sed_css" && !empty( $value ) ){
 

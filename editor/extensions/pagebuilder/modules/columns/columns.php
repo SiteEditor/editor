@@ -42,45 +42,54 @@ class PBColumnsShortcode extends PBShortcodeClass{
     function shortcode_settings(){
 
         $params = array(
-        		'pb_columns' => array(
-        			'type' => 'number',
-        			'label' => __('Number Column', 'site-editor'),
-        			'description'  => __('Add Custom Columns to page', 'site-editor')
-        		),
-                'responsive_option' => array(
-          			'type' => 'select',
-          			'label' => __('Responsive Option', 'site-editor'),
-          			'description' => '',// __("Select the Icon's Style", "site-editor"),
-                    'choices'   =>array(
-                        'normal-columns'         => __('Full Width Any Columns', 'site-editor'),
-                        'float-columns'          => __('Auto Mode Columns', 'site-editor'),
-                        'table-cell-columns'     => __('Inline Columns', 'site-editor'),
-                        'hidden-columns'         => __('Hidden Columns', 'site-editor'),
-                    ),
-          		),
-                /*'equal_column_width' => array(
-                    'type' => 'checkbox',
-                    'label' => __('Equal Column Width', 'site-editor'),
-                    'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
-                ),*/
-                "responsive_spacing"    => array(
-                    'type'    => 'text',
-                    'label'   => __('Module Responsive Spacing', 'site-editor'),
-                    'description'    => '',// __('','site-editor'),
+
+            'pb_columns' => array(
+                'type' => 'number',
+                'label' => __('Number Column', 'site-editor'),
+                'description'  => __('Add Custom Columns to page', 'site-editor')
+            ),
+
+            'responsive_option' => array(
+                'type' => 'select',
+                'label' => __('Responsive Option', 'site-editor'),
+                'description' => '',// __("Select the Icon's Style", "site-editor"),
+                'choices'   =>array(
+                    'normal-columns'         => __('Full Width Any Columns', 'site-editor'),
+                    'float-columns'          => __('Auto Mode Columns', 'site-editor'),
+                    'table-cell-columns'     => __('Inline Columns', 'site-editor'),
+                    'hidden-columns'         => __('Hidden Columns', 'site-editor'),
                 ),
-                'spacing' => array(
-                    "type"          => "spacing" ,
-                    "label"         => __("Spacing", "site-editor"),
-                    "default"       => "10 0 10 0" ,
-                ), 
-                "animation"  =>  array(
-                    "type"          => "animation" ,
-                    "label"         => __("Animation Settings", "site-editor"),
-                ),
-                'row_container' => array(
-                    'type'          => 'row_container',
-                    'label'         => __('Go To Row Settings', 'site-editor')
-                )
+            ),
+
+            /*'equal_column_width' => array(
+                'type' => 'checkbox',
+                'label' => __('Equal Column Width', 'site-editor'),
+                'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
+            ),*/
+
+            "responsive_spacing"    => array(
+                'type'    => 'text',
+                'label'   => __('Module Responsive Spacing', 'site-editor'),
+                'description'    => '',// __('','site-editor'),
+            ),
+
+            //module_general_settings
+            /*'spacing' => array(
+                "type"          => "spacing" ,
+                "label"         => __("Spacing", "site-editor"),
+                "default"       => "10 0 10 0" ,
+            ),*/
+
+            "animation"  =>  array(
+                "type"          => "animation" ,
+                "label"         => __("Animation Settings", "site-editor"),
+            ),
+
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Go To Row Settings', 'site-editor')
+            )
+
         );
 
         return $params;
@@ -116,15 +125,15 @@ include SED_PB_MODULES_PATH . '/columns/sub-shortcode/column.php';
 global $sed_pb_app;
 
 $sed_pb_app->register_module(array(
-    "group"       => "basic" ,
-    "name"        => "columns",
-    "title"       => __("Columns","site-editor"),
-    "description" => __("Add Full Customize Columns","site-editor"),
-    "icon"        => "icon-column",
-    "type_icon"   => "font",
-    "is_special"  => true ,
-    "has_extra_spacing"   =>  true ,
-    "shortcode"   => "sed_columns",
-    "priority"    => 10
+    "group"                 => "basic" ,
+    "name"                  => "columns",
+    "title"                 => __("Columns","site-editor"),
+    "description"           => __("Add Full Customize Columns","site-editor"),
+    "icon"                  => "icon-column",
+    "type_icon"             => "font",
+    "is_special"            => true ,
+    "has_extra_spacing"     =>  true ,
+    "shortcode"             => "sed_columns",
+    "priority"              => 10
 ));
 

@@ -197,9 +197,6 @@ final Class SiteEditorFramework {
 
         //$this->sed_add_dynamic_css_file( $this->sed_page_id , $this->sed_page_type , $sed_data );
 
-        if(  !empty( $css_filename ) && file_exists( $upload_dir['basedir'] . DS . 'siteeditor' . DS . $css_filename . '.css' ) )
-            wp_enqueue_style( $this->sed_page_id .'_css' ,  $upload_dir['baseurl'] . '/siteeditor/' . $css_filename . '.css');
-
         return $template;
     }
 
@@ -260,6 +257,33 @@ final Class SiteEditorFramework {
                 $dynamic_css,
                 FS_CHMOD_FILE // predefined mode settings for WP files
             );
+        }
+
+        if(  !empty( $css_filename ) && file_exists( $upload_dir['basedir'] . DS . 'siteeditor' . DS . $css_filename . '.css' ) ) {
+            //wp_enqueue_style( $this->sed_page_id .'_css' ,  $upload_dir['baseurl'] . '/siteeditor/' . $css_filename . '.css');
+
+            ?>
+            <script type="text/javascript">
+                (function ($) {
+
+                    var $style_sheet = "<link rel='stylesheet' id='<?php echo $this->sed_page_id . '_css';?>-css'  href='<?php echo $upload_dir['baseurl'] . '/siteeditor/' . $css_filename . '.css';?>' type='text/css' media='all' />";
+
+                    $($style_sheet).appendTo("head");
+
+                }(jQuery));
+            </script>
+            <?php
+
+        }else{
+
+            ?>
+            <style type="text/css">
+
+                <?php echo $dynamic_css;?>
+
+            </style>
+            <?php
+
         }
 
     }
