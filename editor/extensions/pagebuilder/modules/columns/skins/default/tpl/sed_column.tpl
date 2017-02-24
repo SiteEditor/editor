@@ -3,11 +3,11 @@
       {{{content}}}
   </div>
   <style type="text/css">
-  <!--
+  
   [sed_model_id="{{sed_model_id}}"]{
     width : {{width}};
   }
-  -->
+  
   </style>
 </td>
 

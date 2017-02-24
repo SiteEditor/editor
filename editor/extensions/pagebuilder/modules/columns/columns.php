@@ -97,14 +97,14 @@ class PBColumnsShortcode extends PBShortcodeClass{
     }
 
     function custom_style_settings(){
-        return array(                                                                      // , 'padding'
+        return array(                                                                     
             array(
                 'columns' , 'sed_current' ,
-                array( 'background','gradient','border','border_radius' ,'padding','margin','trancparency','shadow' ) , __("Tr Columns" , "site-editor") ) ,
+                array( 'background','gradient','border','trancparency' ) , __("Tr Columns" , "site-editor") ) ,
 
             array(
                 'column' , '>td.sed-column-pb' ,
-                array( 'background','gradient','border','border_radius' ,'padding','margin','trancparency','shadow' ) , __("Td Column" , "site-editor") ) ,
+                array( 'background','gradient' ) , __("Td Column" , "site-editor") ) ,
 
         );
     }

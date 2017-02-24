@@ -28,6 +28,15 @@ class PBTextIconShortcode extends PBShortcodeClass{
 
     }
 
+    function styles(){
+        return array(
+            array('text-icon-style-default', SED_PB_MODULES_URL.'text-icon/skins/default/css/style.css' ,'1.0.0' ) ,
+            array('text-icon-style-skin1', SED_PB_MODULES_URL.'text-icon/skins/skin1/css/style.css' ,'1.0.0' ) ,
+            array('text-icon-style-skin2', SED_PB_MODULES_URL.'text-icon/skins/skin2/css/style.css' ,'1.0.0' ) ,
+            array('text-icon-style-skin3', SED_PB_MODULES_URL.'text-icon/skins/skin3/css/style.css' ,'1.0.0' ) ,
+        );
+    }
+
 
     function get_atts(){
         $atts = array(

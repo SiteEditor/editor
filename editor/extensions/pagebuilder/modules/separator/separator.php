@@ -49,6 +49,16 @@ class PBSeparatorShortcode extends PBShortcodeClass{
 
     function add_shortcode( $atts , $content = null ){
 
+    }     
+
+    function styles(){
+        return array(
+            array('separator-style', SED_PB_MODULES_URL.'separator/css/style.css' ,'1.0.0' ) ,
+            array('separator-style-skin2', SED_PB_MODULES_URL.'separator/skins/skin2/css/style.css' ,'1.0.0' ) ,
+            array('separator-style-skin3', SED_PB_MODULES_URL.'separator/skins/skin3/css/style.css' ,'1.0.0' ) ,
+            array('separator-style-skin4', SED_PB_MODULES_URL.'separator/skins/skin4/css/style.css' ,'1.0.0' ) ,
+            array('separator-style-skin5', SED_PB_MODULES_URL.'separator/skins/skin5/css/style.css' ,'1.0.0' ) ,
+        );
     }
 
     function scripts(){
