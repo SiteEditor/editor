@@ -147,11 +147,12 @@ class PBSingleImageShortcode extends PBShortcodeClass{
           ) );
 
           $params = array(
-              'change_image_panel'=> array(
+              'change_image_panel' => array(
                   "type"          => "sed_image" ,
-                  "label"         => __("Select Image Panel", "site-editor"),
+                  "label"         => __("Select Image", "site-editor"),
+                  "panel_type"    => "inner_box" ,
                   'priority'      => 1 ,
-              ),      
+              ),
               'full_src'    => array(
                   'label'         => __('Image For Light Box', 'site-editor'),
                   'description'   => __('Big Image Url', 'site-editor'),
