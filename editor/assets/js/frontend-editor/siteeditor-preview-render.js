@@ -389,7 +389,7 @@
                     switch ( setting ) {
                       case "trancparency":
 
-                          var newVal = ( !to ) ? "initial" : to ;
+                          var newVal = ( !to && to != 0 ) ? "initial" : to ;
                           var css =  api.currentCssSelector + "{" + siteEditorCss.transparency( newVal ) + "}";
 
                       break;

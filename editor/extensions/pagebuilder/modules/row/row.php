@@ -62,15 +62,24 @@ class PBRowShortcode extends PBShortcodeClass{
 
 
         $params = array(
+
             'length'   =>  array(
                 "type"          => "length" ,
                 "label"         => __("Length", "site-editor"),
             ),
+
             "align"    =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
                 "default"       => "center"
-            )
+            ),
+
+            'spacing' => array(
+                "type"          => "spacing" ,
+                "label"         => __("Spacing", "site-editor"),
+                "default"       => "10 0 10 0" ,
+            ),
+
         );
 
         return $params;
@@ -81,7 +90,7 @@ class PBRowShortcode extends PBShortcodeClass{
         return array(                                                                      // , 'padding'
             array(
                 'row_container' , 'sed_current' ,
-                array( 'background','gradient','border','border_radius' ,'padding','margin','trancparency','shadow' ) , __("Row Container" , "site-editor") ) ,
+                array( 'background','gradient','border','border_radius' ,'margin','trancparency','shadow' ) , __("Row Container" , "site-editor") ) ,
 
         );
     }
