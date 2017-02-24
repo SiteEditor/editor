@@ -228,6 +228,7 @@ class PBShortcodeClass{
         $atts = $this->get_atts();
         $atts = ( !empty($atts) && is_array($atts) ) ? $atts: array();
         $default_atts = array_merge( array(
+            'id'                => "",
             'title'             => "",
             'skin'              => 'default' ,
             'sub_skin'          => '',
@@ -272,11 +273,11 @@ class PBShortcodeClass{
         $hidden_in_mobile = ( !isset( $atts['hidden_in_mobile'] ) || $atts['hidden_in_mobile'] === "false" || !$atts['hidden_in_mobile'] ) ? false : true;
         $show_mobile_only = ( !isset( $atts['show_mobile_only'] ) || $atts['show_mobile_only'] === "false" || !$atts['show_mobile_only'] ) ? false : true;
 
-        if( $hidden_in_mobile && sed_is_mobile_version() ){
+        if( $hidden_in_mobile && ( sed_is_mobile_version() || wp_is_mobile() ) ){
             return '';
         }
 
-        if( $show_mobile_only && !sed_is_mobile_version() ){
+        if( $show_mobile_only && !sed_is_mobile_version() && !wp_is_mobile() && !site_editor_app_on() ){
             return '';
         }
 
@@ -400,6 +401,12 @@ class PBShortcodeClass{
 
         if( site_editor_app_on() || ( isset( $_POST['action'] )  &&  $_POST['action'] == "load_modules" ) ){ 
             $sed_attrs .= $this->set_attr( 'sed_model_id', trim($this->atts['sed_model_id']) ) . " ";
+        }
+
+        if( isset( $this->atts['id'] ) && !empty( trim( $this->atts['id'] ) ) ){
+
+            $sed_attrs .= $this->set_attr( 'id', trim($this->atts['id']) );
+
         }
 
         $sed_attrs .= $animate["attr"];
@@ -629,9 +636,6 @@ class PBShortcodeClass{
             'type'          => 'text',
             'label'         => __('Module Id', 'site-editor'),
             'description'   => __('Module Id For Anchor And ...', 'site-editor') ,
-            'atts'          => array(
-                "disabled"      =>      "disabled"
-            ),
             'priority'      => 1001 ,
             'panel'         => 'module_general_settings'
         );

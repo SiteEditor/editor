@@ -2028,6 +2028,16 @@
                         currEl.css("color" , attrValue);
 
                     break;
+                    case "id" :
+
+                        $( '[sed_model_id="' + elementId + '"]' ).attr("id" , $.trim( attrValue ) );
+
+                    break;
+                    /*case "class" :
+
+                        $( '[sed_model_id="' + elementId + '"]' ).attr("id" , $.trim( attrValue ) );
+
+                    break;*/
                     case "group_images_show_title" :
                         api.Events.trigger( "setImageGroupAttrs" , modules , elementId , "images_group" , "show_title" );
                     break;
