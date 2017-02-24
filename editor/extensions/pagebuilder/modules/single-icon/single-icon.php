@@ -104,7 +104,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
                 ),
                 "panel"     => "icons_settings_panel",
         	),
-          'type' => array(
+          /*'type' => array(
       			'type' => 'select',
       			'label' => __('Icon Type', 'site-editor'),
       			'description'  => __("This option allows you to have icons in three different types; default, flat and ring. This option is only available in the skins 1, 2 and 3.", "site-editor"),
@@ -123,7 +123,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
                     )
                 )              
             ), 
-      		),
+      		),*/
           'background_color' => array(
        			'type'  => 'color',
       			'label' => __('Background Color', 'site-editor'),

@@ -1,1 +1,60 @@
-.breadcrumbs-skin4{position: relative}.breadcrumbs-skin4 ul{display: inline-block;line-height: 1em;margin: 0}.breadcrumbs-skin4 ul:before,.breadcrumbs-skin4 ul:after{content: "";display: table}.breadcrumbs-skin4 ul:after,.breadcrumbs-skin4 ul:before{clear: both}.breadcrumbs-skin4 ul li{display: inline-block}.breadcrumbs-skin4 ul li a{color: #333;display: block;font-size: 13px;padding: 2px;padding-right: 14px;position: relative}.breadcrumbs-skin4 ul li a:after{color: #cfcfcf;content: "\203A";position: absolute;right: 2px;font-size: 13px;line-height: 13px;height: 1em;top: 50%;margin-top: -0.5em}.breadcrumbs-skin4 ul li i{font-size: 17px;vertical-align: middle}.breadcrumbs-skin4 ul li a:hover{color: #e61a33}.breadcrumbs-skin4 ul li.current span{color: #cfcfcf}.breadcrumbs-skin4 ul li:last-child a:after{content: "" !important}@media (max-width: 991px){.breadcrumbs-skin4{display: none !important}}.rtl-body .module.module-breadcrumbs.breadcrumbs-skin4 ul li a{padding-right: 2px;padding-left: 14px}.rtl-body .module.module-breadcrumbs.breadcrumbs-skin4 ul li a:after{left: 2px;right: auto}
+.breadcrumbs-default {
+    position: relative
+}
+
+.breadcrumbs-default ul {
+    display: inline-block;
+    line-height: 1em;
+    margin: 0
+}
+
+.breadcrumbs-default ul:before,
+.breadcrumbs-default ul:after {
+    content: "";
+    display: table
+}
+
+.breadcrumbs-default ul:after,
+.breadcrumbs-default ul:before {
+    clear: both
+}
+
+.breadcrumbs-default ul li {
+    display: inline-block
+}
+
+.breadcrumbs-default ul li a {
+    display: block;
+    padding: 2px;
+    padding-right: 14px;
+    position: relative
+}
+
+.breadcrumbs-default ul li a:after {
+    content: "\203A";
+    position: absolute;
+    right: 2px;
+    line-height: 1em;
+    height: 1em;
+    top: 50%;
+    margin-top: -0.5em
+}
+
+.breadcrumbs-default ul li.current span ,
+.breadcrumbs-default ul li a:hover {
+    color: #e61a33
+}
+
+.breadcrumbs-default ul li:last-child a:after {
+    content: "" !important
+}
+
+.rtl-body .module.module-breadcrumbs.breadcrumbs-default ul li a {
+    padding-right: 2px;
+    padding-left: 14px
+}
+
+.rtl-body .module.module-breadcrumbs.breadcrumbs-default ul li a:after {
+    left: 2px;
+    right: auto
+}

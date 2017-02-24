@@ -1,1 +1,17 @@
-.module-page-title.page-title-skin4{padding: 15px 0;width: 100%}.module-page-title.page-title-skin4 .page-title-inner{display: block;height: 100%;margin: 0 auto;overflow: hidden;position: relative;width: 100%}
+.module-page-title.page-title-default {
+    background: none repeat scroll 0 0 #f7f7f7;
+    border-color: #f1f1f1;
+    border-style: solid none;
+    border-width: 1px medium;
+    padding: 15px 0;
+    width: 100%;
+}
+
+.module-page-title.page-title-default .page-title-inner {
+    display: block;
+    height: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    width: 100%
+}

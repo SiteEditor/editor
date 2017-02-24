@@ -1,1 +1,42 @@
-.module.module-search.search-skin5 .search-box{position: relative;padding-right: 36px}.module.module-search.search-skin5 .search-button{background-color: #e61a33;-webkit-border-radius: 0px 4px 4px 0px;-moz-border-radius: 0px 4px 4px 0px;border-radius: 0px 4px 4px 0px;border-width: 0;position: absolute;right: 0;top: 0;bottom: 0}.module.module-search.search-skin5 .search-button .module-icons{color: #fff}.rtl-body .module.module-search.search-skin5 .search-box{padding-left: 36px;padding-right: 12px}.rtl-body .module.module-search.search-skin5 .search-button{right: auto;left: 0;-webkit-border-radius: 4px 0px 0px 4px;-moz-border-radius: 4px 0px 0px 4px;border-radius: 4px 0px 0px 4px}
+
+.module.module-search.search-default form {
+    display: block;
+    position: relative;
+    width: 100%
+}
+
+.module.module-search.search-default .search-icon {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+    color: #fff;
+}
+
+.module.module-search.search-default .search-box {
+    position: relative;
+    padding-right: 40px;
+}
+
+.module.module-search.search-default .search-button {
+    text-align: center;
+    font-size: 16px;
+    line-height: 1em;
+    padding: 0 12px;
+    cursor: pointer;
+    background-color: #e61a33;
+    border-width: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0
+}
+
+.rtl-body .module.module-search.search-default .search-box {
+    padding-left: 40px;
+    padding-right: 12px;
+}
+
+.rtl-body .module.module-search.search-default .search-button {
+    right: auto;
+    left: 0;
+}

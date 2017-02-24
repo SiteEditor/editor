@@ -63,6 +63,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
     function styles(){
         return array(
             array('social-bar-style', SED_PB_MODULES_URL.'social-bar/css/style.css' ,'1.0.0' ) ,
+            array('social-bar-style-skin2', SED_PB_MODULES_URL.'social-bar/skins/skin2/css/style.css' ,'1.0.0' ) ,  
         );
     }
 
