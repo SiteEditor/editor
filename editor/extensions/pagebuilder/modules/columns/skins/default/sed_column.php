@@ -8,11 +8,11 @@
     $selector = ( site_editor_app_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
     ob_start();
     ?>
-        <!--  
+          
         <?php echo $selector; ?> {  
           width : <?php echo  $width;?>;
         }
-        -->
+        
     <?php
     $css = ob_get_clean();
     $sed_dynamic_css_string .= $css;
