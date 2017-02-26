@@ -333,7 +333,7 @@ span.select2-selection.select2-selection--single {
 /* Code Mirror */ 
 
 .ui-dialog {
-    transition: all 0.3s ease;
+    /*transition: all 0.3s ease;*/ 
 }
 
 .sed-dialog-code-editor-expanded ,
@@ -390,3 +390,103 @@ span.select2-selection.select2-selection--single {
     top: -30px;
     right: 36px; 
 }
+
+
+
+/* Wp Text Editor */ 
+
+#sed-wp-editor-dragbar:after {
+    content: "";
+    display: table;
+}
+
+.sed-close-wp-editor {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    text-shadow: 0 1px 0 #fff;
+    color: #000;
+    float: right;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    opacity: 0.2;
+    border: 0 none;
+    cursor: pointer;
+    padding: 0;
+}
+.sed-close-wp-editor:hover{
+    opacity: 0.4;
+}
+.sed-close-wp-editor:active,
+.sed-close-wp-editor:focus{
+    opacity: 0.6;
+}
+.sed-close-wp-editor .ui-button-text {
+    border: 0 none;
+    clip: rect(0px, 0px, 0px, 0px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+div#sed-wp-editor-dragbar {
+    padding: 8px 10px;
+    font-size: 18px;
+    line-height: 18px;
+}
+div#sed-wp-text-editor-pane {
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 0px;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.06);
+}
+div#wp-sed-wp-tinymce-text-editor-wrap {
+    border: 0 none;
+    padding: 6px 15px;
+    position: relative;
+    background-color: #f9f9f9;
+}
+
+
+div#wp-sed-wp-tinymce-text-editor-editor-container {
+    border: 1px solid #e5e5e5;
+    /*max-height: 448px;*/
+}
+
+div#wp-sed-wp-tinymce-text-editor-editor-container .wp-editor-area {
+    font-family: Consolas,Monaco,monospace;
+    font-size: 13px;
+    padding: 10px;
+    margin: 1px 0 0;
+    line-height: 150%;
+    border: 0;
+    outline: 0;
+    display: block;
+    resize: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+.screen-reader-text, 
+.screen-reader-text span, 
+.ui-helper-hidden-accessible {
+    position: absolute;
+    margin: -1px;
+    padding: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    border: 0;
+    word-wrap: normal!important;
+}
+
+.media-modal .media-toolbar {
+    position: absolute;
+}
+    
