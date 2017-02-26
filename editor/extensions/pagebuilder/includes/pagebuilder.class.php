@@ -106,6 +106,48 @@ Class PageBuilderApplication {
 
         add_filter( "sed_end_page_customize_rows"  , array( $this, "get_end_page_rows" ) , 10 , 1 );
 
+        add_filter( 'sed_pb_builder_module_content', 'wptexturize');
+
+        add_filter( 'sed_pb_builder_module_content', 'convert_smilies');
+
+        add_filter( 'sed_pb_builder_module_content', 'convert_chars');
+
+        add_filter( 'sed_pb_builder_module_content', array($this, 'the_module_content'));
+
+        /**
+         * WordPress 4.4 Responsive Images support */
+        global $wp_version;
+        if (version_compare($wp_version, '4.4', '>=')) {
+            add_filter('sed_pb_builder_module_content', 'wp_make_content_images_responsive');
+        }
+
+    }
+
+    /**
+     * Add filter to module content
+     * @param string $content
+     * @return string
+     */
+    function the_module_content($content) {
+        global $wp_embed;
+        $content = $wp_embed->run_shortcode($content);
+        $content = do_shortcode(shortcode_unautop($content));
+        $content = $this->autoembed_adjustments($content);
+        $content = $wp_embed->autoembed($content);
+        $content = htmlspecialchars_decode($content);
+        return $content;
+    }
+
+    /**
+     * Adjust autoembed filter
+     * @param string $content
+     * @return string
+     */
+    function autoembed_adjustments($content) {
+        $pattern = '|<p>\s*(https?://[^\s"]+)\s*</p>|im'; // pattern to check embed url
+        $to = '<p>' . PHP_EOL . '$1' . PHP_EOL . '</p>'; // add line break
+        $content = preg_replace($pattern, $to, $content);
+        return $content;
     }
 
 
