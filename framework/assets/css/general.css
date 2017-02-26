@@ -202,3 +202,65 @@ table.sed-cols-table > tbody > tr > td {
 }
 
 
+
+//  Spacing top and bottom
+
+.sed-stb-sm{  
+    padding-top: 10px;
+    padding-bottom: 10px;    
+}
+.sed-stb-md{
+    padding-top: 30px;
+    padding-bottom: 30px;    
+}
+.sed-stb-lg{
+    padding-top: 70px;
+    padding-bottom: 70px;    
+}
+
+
+//  Spacing left and right
+
+.sed-slr-sm{  
+    padding-left: 10px;
+    padding-right: 10px;    
+}
+.sed-slr-md{
+    padding-left: 30px;
+    padding-right: 30px;   
+}
+.sed-slr-lg{
+    padding-left: 70px;
+    padding-right: 70px;   
+}
+
+
+//  Spacing all side
+
+.sed-sas-sm{  
+    padding: 10px; 
+}
+.sed-sas-md{
+    padding: 30px; 
+}
+.sed-sas-lg{
+    padding: 70px;   
+}
+
+//  align
+
+.sed-ta-l { 
+  text-align: left; 
+}
+
+.sed-ta-r { 
+  text-align: right; 
+}
+
+.sed-ta-c { 
+  text-align: center; 
+}
+
+.sed-ta-j { 
+  text-align: justify; 
+}
