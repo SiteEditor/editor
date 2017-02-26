@@ -349,6 +349,7 @@ span.select2-selection.select2-selection--single {
 
 .sed-code-editor-wrapper {
     margin-top: 8px;
+    border: 1px solid #d5d5d5;
 }
 
 .sed-code-editor-expanded > .sed-code-editor-wrapper {
@@ -364,6 +365,7 @@ span.select2-selection.select2-selection--single {
     padding: 0px;
     margin: 0;
     z-index: 1000;
+    border: 0 none; 
 }
 
 .sed-code-editor-expanded > .sed-code-editor-wrapper .CodeMirror {
