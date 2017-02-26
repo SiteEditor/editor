@@ -50,7 +50,6 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
 
         $this->atts["breadcrumbs"] = $this->get_breadcrumbs();
 
-
     }             
 
     function styles(){
@@ -70,6 +69,11 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
                 "type"          => "length" ,
                 "label"         => __("Length", "site-editor"),
             ),
+            'spacing' => array(
+                "type"          => "spacing" ,
+                "label"         => __("Spacing", "site-editor"),
+                "default"       => "10 0 10 0" ,
+            ),
             "align"     =>  array(
                 "type"          => "align" ,
                 "label"         => __("Align", "site-editor"),
@@ -84,6 +88,7 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
         return $params;
 
     }
+
     private function get_category_parents( $id , $taxonomy = 'category' , $visited = array() ){
         $cat    = array();
         $parent = get_term( $id , $taxonomy );
@@ -104,6 +109,7 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
 
         return $cat;
     }
+
     private function get_breadcrumbs(){
         /* === OPTIONS === */
         $text['home']     = __('Home','site-editor'); // text for the 'Home' link
@@ -388,27 +394,15 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
 
             array(
             'breadcrumb-item' , 'ul li a ' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Breadcrumb Item" , "site-editor") ) ,
+            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Breadcrumb Items" , "site-editor") ) ,
 
             array(
             'breadcrumb-item-after' , 'ul li a:after ' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Breadcrumb Item After" , "site-editor") ) ,
-
-            array(
-            'breadcrumb-item-before' , 'ul li a:before ' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Breadcrumb Item Before" , "site-editor") ) ,
+            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Breadcrumb Arrows" , "site-editor") ) ,
 
             array(
             'breadcrumb-item-current' , 'ul li.current span ' ,
             array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Breadcrumb Item Current" , "site-editor") ) ,
-
-            array(
-            'breadcrumb-item-current-after' , 'ul li.current span:after ' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Breadcrumb Item Current After" , "site-editor") ) ,
-
-            array(
-            'breadcrumb-item-current-before' , 'ul li.current span:before ' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Breadcrumb Item Current Before" , "site-editor") ) ,
 
         );
     }
@@ -433,11 +427,9 @@ $sed_pb_app->register_module(array(
     "description" => __("Edit Breadcrumbs in Front End","site-editor"),
     "icon"        => "icon-breadcrumb",
     "type_icon"   => "font",
-    "shortcode"         => "sed_breadcrumbs",
-    //"show_ui_in_toolbar"    => false ,
-    "priority"          => 12 ,
+    "shortcode"   => "sed_breadcrumbs",
+    "priority"    => 12 ,
     "tpl_type"    => "underscore" ,
-    //"js_plugin"   => 'image/js/image-plugin.min.js',
     "js_module"   => array( 'sed_breadcrumbs_module_script', 'breadcrumbs/js/breadcrumbs-module.min.js', array('sed-frontend-editor') )
 ));
 

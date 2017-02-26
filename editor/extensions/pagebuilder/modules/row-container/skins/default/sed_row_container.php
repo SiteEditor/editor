@@ -59,14 +59,14 @@ if( $bg_type == 'video' ) {
 
 
 if(!empty($content)){?>
-       <div class="s-tb-sm row-container-module <?php echo $class.' '.$responsive_option;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?> <?php echo $length_class;?>" <?php echo $sed_attrs; ?> length_element>
+       <div class="sed-stb-sm row-container-module <?php echo $class.' '.$responsive_option;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?> <?php echo $length_class;?>" <?php echo $sed_attrs; ?> length_element>
             <div class="sed-pb-component" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?>>
                 <?php echo $content; ?>
             </div>
             <?php echo $outer_html; ?>  
        </div>
 <?php }else{  ?>
-      <div class="s-tb-sm row-container-module <?php echo $class.' '.$responsive_option;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?> <?php echo $length_class;?>" <?php echo $sed_attrs; ?> length_element>
+      <div class="sed-stb-sm row-container-module <?php echo $class.' '.$responsive_option;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?> <?php echo $length_class;?>" <?php echo $sed_attrs; ?> length_element>
           <div class="sed-pb-component" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>">
 
           </div>

@@ -5,7 +5,7 @@ if( !$lightbox_id ){
 }
 
 ?>
-<div <?php echo $sed_attrs; ?> class="s-tb-sm ta-c module module-single-image single-image-default <?php echo $class;?>">   
+<div <?php echo $sed_attrs; ?> class="sed-stb-sm sed-ta-c module module-single-image single-image-default <?php echo $class;?>">   
 
     <?php if($image_click == "expand_mode"){ ?>
     <a class="img" href="<?php echo $full_src;?>" data-lightbox="<?php if(!empty($lightbox_id)) echo $lightbox_id;else echo $id;?>" data-title="<?php echo $title;?>" title="<?php echo $title;?>">

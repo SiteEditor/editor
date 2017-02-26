@@ -1,4 +1,4 @@
-<div <?php echo $sed_attrs; ?>  class="s-tb-sm module module-separator separator-skin2 <?php echo $class;?> " >
+<div <?php echo $sed_attrs; ?>  class="sed-stb-sm module module-separator separator-skin2 <?php echo $class;?> " >
   <div class="separator-inner">
       <?php echo $content;?>
       <div class="spr-container">

@@ -64,14 +64,14 @@ if( bg_type == 'video' ) {
 
 
 if(content) { #>
-       <div class="s-tb-sm row-container-module {{responsive_option}} {{className}} <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
+       <div class="sed-stb-sm row-container-module {{responsive_option}} {{className}} <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
             <div class="sed-pb-component" data-parent-id="{{sed_model_id}}">
                 {{{content}}}
             </div>
             {{{outer_html}}}
        </div>
 <# }else{ #>
-      <div class="s-tb-sm row-container-module {{responsive_option}} {{className}}  <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
+      <div class="sed-stb-sm row-container-module {{responsive_option}} {{className}}  <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #> {{lengthClass}}" {{sed_attrs}} length_element>
           <div class="sed-pb-component" data-parent-id="{{sed_model_id}}" drop-placeholder="Drop A Module Here">
 
           </div>

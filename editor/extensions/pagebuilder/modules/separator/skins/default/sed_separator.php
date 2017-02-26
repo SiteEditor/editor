@@ -1,4 +1,4 @@
-<div <?php echo $sed_attrs; ?>  class="s-tb-sm module module-separator separator-skin-default <?php echo $class;?> <?php echo $border_style;?>  <?php echo $type; ?>" ></div>
+<div <?php echo $sed_attrs; ?>  class="sed-stb-sm module module-separator separator-skin-default <?php echo $class;?> <?php echo $border_style;?>  <?php echo $type; ?>" ></div>
 <?php
 	global $sed_dynamic_css_string;
 	$selector = ( site_editor_app_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;

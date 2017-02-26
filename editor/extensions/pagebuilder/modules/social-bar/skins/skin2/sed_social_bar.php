@@ -1,4 +1,4 @@
-<div <?php echo $sed_attrs; ?>  class="<?php echo $class ?> s-tb-sm ta-c module spcial-bar social-bar-skin2">
+<div <?php echo $sed_attrs; ?>  class="<?php echo $class ?> sed-stb-sm sed-ta-c module spcial-bar social-bar-skin2">
 	<ul class="social-bar-<?php echo $layout_mode ?>">
 		<?php echo $content ?>
 	</ul>

@@ -1,4 +1,4 @@
-<div {{sed_attrs}} class="s-tb-sm module module-separator separator-skin2 {{class}}">
+<div {{sed_attrs}} class="sed-stb-sm module module-separator separator-skin2 {{class}}">
   <div class="separator-inner">
       {{{content}}}
       <div class="spr-container">

@@ -13,7 +13,7 @@ if( image_source == "attachment" ){
     full_src = api.fn.getAttachmentImageFullSrc( attachment_id );
 }
 #>
-<div {{sed_attrs}} class="s-tb-sm ta-c module module-single-image single-image-sepia-toning {{className}}">
+<div {{sed_attrs}} class="sed-stb-sm sed-ta-c module module-single-image single-image-sepia-toning {{className}}">
       <# if(image_click == "expand_mode"){ #>
       <a class="img" href="{{full_src}}" data-lightbox="{{lightbox_id}}" data-title="{{title}}" title="{{title}}">
         {{{sedImageHtml}}}

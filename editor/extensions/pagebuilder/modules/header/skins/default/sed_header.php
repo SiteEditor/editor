@@ -1,4 +1,4 @@
-<header <?php echo $sed_attrs; ?> sed_role="site-header" class="s-tb-sm module module-header header-default  <?php echo $class;?>">
+<header <?php echo $sed_attrs; ?> sed_role="site-header" class="sed-stb-sm module module-header header-default  <?php echo $class;?>">
       <?php echo $content ?>
     <?php if( $sticky ){ ?>
     <div class="init-sticky-header"></div>

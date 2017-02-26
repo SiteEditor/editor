@@ -18,7 +18,7 @@ if ( ! $img ) {
 }
   
 ?>
-<div  class="s-tb-sm module text-icon-module text-icon-module-skin3 <?php echo $class; ?>" <?php echo $sed_attrs; ?>>
+<div  class="sed-stb-sm module text-icon-module text-icon-module-skin3 <?php echo $class; ?>" <?php echo $sed_attrs; ?>>
 	<div class="text-icon"><?php echo $img['thumbnail']; ?></div>  
     <?php echo $content; ?>  
 </div>
