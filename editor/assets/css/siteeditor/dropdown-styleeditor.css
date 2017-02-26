@@ -80,7 +80,7 @@
 
 /* Dropdown box shadow  */
 .itme-box-shadow li {
-    background: none repeat scroll 0 0 #FFFFFF;
+    background: none repeat scroll 0 0 transparent;
     border-radius: 0px;
     -moz-border-radius:0px;
     -webkit-border-radius: 0px;
@@ -93,7 +93,7 @@
     width: 50%;
 }
 .itme-box-shadow li span {
-    background: none repeat scroll 0 0 #f5f5f5;
+    background: none repeat scroll 0 0 #fff;
     border: 1px solid #ddd;
     border-radius: 0px;
     display: block;

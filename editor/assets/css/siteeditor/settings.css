@@ -18,6 +18,52 @@
     margin: 15px 12px;
 }
 
+.row_setting_inner > .sed-accordion-header , 
+.row_setting_inner > .sed-accordion-content ,
+.row_setting_inner > .sed-container-control-element > .row_setting_box ,
+.row_setting_inner > .sed-container-control-element > .settings-uploader ,
+.row_setting_inner > .row_setting_box ,
+.row_setting_inner > .settings-uploader {
+    margin: 0 !important;
+    width: 100%;
+}
+.sed-accordion-content > .row_settings > .row_setting_inner ,
+.sed-accordion-content > .row_settings > .row_setting_inner > .row_setting_box ,
+.sed-accordion-content > .row_settings > .row_setting_inner > .settings-uploader ,
+.sed-accordion-content > .row_settings > .row_setting_inner > .sed-container-control-element > .row_setting_box ,
+.sed-accordion-content > .row_settings > .row_setting_inner > .sed-container-control-element > .settings-uploader ,
+.sed-accordion-content > .row_settings > .row_setting_box ,
+.sed-accordion-content > .row_settings > .settings-uploader {
+    margin: 0 0 8px !important;
+    width: 100%;
+    border-width: 0 0 1px ;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.sed-accordion-content > .row_settings:last-child > .row_setting_inner > .row_setting_box,
+.sed-accordion-content > .row_settings:last-child > .row_setting_inner > .settings-uploader ,
+.sed-accordion-content > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .row_setting_box ,
+.sed-accordion-content > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .settings-uploader ,
+.sed-accordion-content > .row_settings:last-child > .row_setting_box,
+.sed-accordion-content > .row_settings:last-child > .settings-uploader {
+    margin: 0 !important;
+    border-width: 0;
+} 
+
+.sed-accordion-content > .row_settings > .row_setting_inner > .row_setting_box > legend ,
+.sed-accordion-content > .row_settings > .row_setting_inner > .settings-uploader > legend ,
+.sed-accordion-content > .row_settings > .row_setting_box > legend ,
+.sed-accordion-content > .row_settings > .settings-uploader > legend {
+    padding: 0;
+} 
+
+.row_setting_box > .row_settings > .row_setting_inner ,
+.settings-uploader > .row_settings > .row_setting_inner ,
+.sed-panel-default > .row_settings > .row_setting_inner {
+    margin: 0;
+}
+
 .row_setting_inner.spacing_md{
     margin: 8px 12px;
 }
@@ -270,3 +316,16 @@ input.media-url-field {
     border: 1px solid #999;
 }
 
+/* select2 */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #00aaff;
+    color: white;
+}
+.select2-container--default .select2-dropdown,
+.select2-container--default .select2-search--dropdown .select2-search__field ,
+span.select2-selection.select2-selection--single {
+    background-color: #fff !important;
+    border: 1px solid #d5d5d5;
+    border-radius: 0px;
+    box-shadow: none;
+} 

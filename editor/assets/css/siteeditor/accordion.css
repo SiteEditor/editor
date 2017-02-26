@@ -13,7 +13,7 @@
     padding: 8px;
     width: 92%;
 }
-.accordion-panel-settings .ui-icon {
+.accordion-panel-settings > .ui-accordion-header > .ui-icon {
     line-height: 20px;
 }
 .ui-accordion-header-active{
