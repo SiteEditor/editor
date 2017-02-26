@@ -73,9 +73,9 @@
                 "width"     : 295,
                 "height"    : 600 ,
                 "position"  : {
-                    "my"    : "right-20",
-                    "at"    : "right" ,
-                    "of"    : "#sed-site-preview"
+                    "my"        : "right-20",
+                    "at"        : "right" ,
+                    "of"        : "#sed-site-preview"
                 },
                 open: function () {
                     self._switchTmpl();
