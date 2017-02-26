@@ -331,21 +331,60 @@ span.select2-selection.select2-selection--single {
 } 
 
 /* Code Mirror */ 
+
+.ui-dialog {
+    transition: all 0.3s ease;
+}
+
+.sed-dialog-code-editor-expanded ,
+.sed-dialog-code-editor-expanded > .mCustomScrollbar ,
+.sed-dialog-code-editor-expanded > .mCustomScrollbar > .mCustomScrollBox ,
+.sed-dialog-code-editor-expanded > .mCustomScrollbar > .mCustomScrollBox > .mCSB_container {
+    overflow: visible !important;
+}
+
+.sed-dialog-code-editor-expanded  .row_setting_inner {
+    margin: 0;
+}
+
+.sed-code-editor-wrapper {
+    margin-top: 8px;
+}
+
 .sed-code-editor-expanded > .sed-code-editor-wrapper {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
-    width: 100%;
-    height: 100%;  
+    /*bottom: 0;
+    height: 100%;*/  
+    width: 100%;  
     display: block;
     background-color: #fff;
-    padding: 20px;
+    padding: 0px;
+    margin: 0;
     z-index: 1000;
+}
+
+.sed-code-editor-expanded > .sed-code-editor-wrapper .CodeMirror {
+    background: #f9f9f9;
 }
 
 .sed-code-editor-expanded.sed-container-control-element, 
 .sed-code-editor-expanded.sed-style-editor-element {
     position: static;   
+}
+
+.sed-resize-code-editor-toggle {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    right: 0;
+    width: auto;
+    margin: 0;
+}
+
+.sed-resize-code-editor-toggle.sed-expanded-toggle {
+    top: -30px;
+    right: 36px; 
 }
