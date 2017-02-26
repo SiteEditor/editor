@@ -329,3 +329,23 @@ span.select2-selection.select2-selection--single {
     border-radius: 0px;
     box-shadow: none;
 } 
+
+/* Code Mirror */ 
+.sed-code-editor-expanded > .sed-code-editor-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;  
+    display: block;
+    background-color: #fff;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.sed-code-editor-expanded.sed-container-control-element, 
+.sed-code-editor-expanded.sed-style-editor-element {
+    position: static;   
+}

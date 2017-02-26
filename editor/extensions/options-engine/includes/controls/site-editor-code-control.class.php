@@ -136,20 +136,22 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 				<?php if(!empty($this->description)){ ?> 
 				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
-				<button type="button" class="sed-resize-code-editor-toggle sed-btn-default"><?php echo esc_html__( "Expand" , "site-editor" );?></button>
-				<!--<a href="#" class="sed-btn-blue">code</a>-->
-				<textarea class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
-					<?php echo esc_textarea( $value ); ?>
-				</textarea>
+                <div class="sed-code-editor-wrapper">
+    				<button type="button" class="sed-resize-code-editor-toggle sed-btn-default"><?php echo esc_html__( "Expand" , "site-editor" );?></button>
+    				<!--<a href="#" class="sed-btn-blue">code</a>-->
+    				<textarea class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
+    					<?php echo esc_textarea( $value ); ?>
+    				</textarea>
 
-                <?php if( $this->update_type == "button" ) : ?>
-                <!--<button value="Saved" class="btn button-primary save" id="save" name="save" disabled="">
-                    <span class="fa f-sed icon-spin f-sed-spin fa-lg "></span>
-                    <span class="fa f-sed icon-savepublish  fa-lg "></span>
-                    <span class="el_txt">Saved</span>
-                </button> -->
-                <a href="#" class="sed-save-code-changes sed-btn-default"><?php echo esc_html__( "Save Changes" , "site-editor" );?></a>
-                <?php endif;?>
+                    <?php if( $this->update_type == "button" ) : ?>
+                    <!--<button value="Saved" class="btn button-primary save" id="save" name="save" disabled="">
+                        <span class="fa f-sed icon-spin f-sed-spin fa-lg "></span>
+                        <span class="fa f-sed icon-savepublish  fa-lg "></span>
+                        <span class="el_txt">Saved</span>
+                    </button> -->
+                    <a href="#" class="sed-save-code-changes sed-btn-default"><?php echo esc_html__( "Save Changes" , "site-editor" );?></a>
+                    <?php endif;?>
+                </div>
 
 			<?php
 		}
