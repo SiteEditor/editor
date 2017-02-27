@@ -111,12 +111,13 @@
     display: none;
     height: 0;
     left: 0;
-    margin: 0 auto;
+    margin: 0 auto;  
     position: absolute;
     top: 0;
     width: 100%;
      display: none;
     z-index:1002;
+    font-size: 13px;
 }
 
 /*
@@ -144,15 +145,15 @@
 
 }
 .duplicate_pb_btn .drag-content {
-    background: none repeat scroll 0 0 #000;
-    border-color: #000 !important;
+    background: none repeat scroll 0 0 #607D8B;
+    border-color: #607D8B !important;
     border-radius: 0;
     border-style: solid;
     border-width: 1px;
 }
 .drag_pb_btn .drag-content {
     background: none repeat scroll 0 0 #00AEEF;
-    border-color: #0096CC #8D8D8D #0096CC #B6B6B6 !important;
+    border-color: #00AEEF !important;
     border-radius: 0;
     border-style: solid;
     border-width: 1px;
@@ -163,9 +164,9 @@
 }      */
 
  .remove_pb_btn .drag-content {
-    background: none repeat scroll 0 0 #FF2986;
-    border-color: #E34C8C;
-    border-radius: 0 4px 4px 0 ;
+    background: none repeat scroll 0 0 #f71c7b;
+    border-color: #f71c7b;
+    /*border-radius: 0 4px 4px 0 ;*/
     border-width: 1px 1px 1px 0px;
     border-style:solid solid solid none;
 } /* ???? ????
@@ -189,9 +190,9 @@
     float: left;
 }
 .setting_btn .drag-content {
-    background: none repeat scroll 0 0 #A0CE4E;
-    border-color: #9DBA60;
-    border-radius: 4px 0 0 4px;
+    background: none repeat scroll 0 0 #85b927;
+    border-color: #85b927;
+    /*border-radius: 4px 0 0 4px;*/
     border-width: 1px 0px 1px 1px;
     border-style:solid none solid solid;
 
@@ -553,7 +554,7 @@
 
 .sed-pb-row-module-special > .sed-handle-sort-row .drag_pb_btn .drag-content{
     background-color: #FF910A;
-    border-color: #C8650E !important;
+    border-color: #FF910A !important;
 }
 
 /*.drag-sty.drag-sty-active {

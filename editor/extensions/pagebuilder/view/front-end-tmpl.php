@@ -98,7 +98,7 @@
             <# if( $.inArray( 'duplicate' , actions )  > -1 ) { #>
                 <div class="duplicate_pb_btn">
                     <div class=" drag-content" id="">
-                        <span class="f-sed icon-cursor-move link fa-lg "></span>
+                        <span class="f-sed icon-pages link fa-lg "></span>
                         <span class="el_txt"><?php echo __( "Module Duplicate" , "site-editor");?></span>
                     </div>
                 </div>
