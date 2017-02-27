@@ -14,7 +14,7 @@
  * @Class SiteEditorThemeOptions
  * @description : Create Custom Settings for wordpress themes
  */
-class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
+class SiteEditorSiteCustomCss extends SiteEditorOptionsCategory{
 
     /**
      * Capability required to edit this field.
@@ -31,7 +31,7 @@ class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
      * @access private
      * @var array
      */
-    protected $option_group = 'custom_code';
+    protected $option_group = 'site_custom_css';
 
     /**
      * default option type
@@ -55,7 +55,7 @@ class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
      * @var string
      * @access public
      */
-    public $control_prefix = 'custom_code';
+    public $control_prefix = 'site_custom_css';
 
     /**
      * Is pre load settings in current page ?
@@ -71,9 +71,9 @@ class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
      */
     public function __construct(){
 
-        $this->title = __("Custom Code" , "site-editor");
+        $this->title = __("Site Custom Css" , "site-editor");
 
-        $this->description = __("Customize code for before head & body tags" , "site-editor");
+        $this->description = __("Customize css for site" , "site-editor");
 
         add_filter( "{$this->option_group}_fields_filter" , array( $this , 'register_default_fields' ) );
 
@@ -89,19 +89,19 @@ class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
     public function add_toolbar_elements(){
         global $site_editor_app;
 
-        $site_editor_app->toolbar->add_element_group( "layout" , "code" , __("Code","site-editor") );
+        //$site_editor_app->toolbar->add_element_group( "layout" , "code" , __("Code","site-editor") );
 
         $site_editor_app->toolbar->add_element(
             "layout" ,
             "code" ,
-            "custom-code" ,
+            "site-custom-css" ,
             $this->title ,
-            "custom_code_element" ,     //$func_action
+            "site_custom_css_element" ,     //$func_action
             "" ,                //icon
             "" ,  //$capability=
             array(  ),  //"class"  => "btn_default3"
             array( "row" => 1 ,"rowspan" => 2 ),
-            array('module' => 'options-engine' , 'file' => 'custom_code.php'),
+            array('module' => 'options-engine' , 'file' => 'site_custom_css.php'),
             //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
             'all' ,
             array(),
@@ -117,46 +117,17 @@ class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
         
         $new_fields = array(
 
-            'tracking_code' => array(
-                'setting_id'        => 'sed_tracking_code',
-                'label'             => __('Tracking Code', 'site-editor'),
-                'description'       => __('Paste your Google Analytics (or other) tracking code here. This will be added into the header template of your theme. Please put code inside script tags.', 'site-editor'),
+            'site_custom_css_code' => array(
+                'setting_id'        => 'site_custom_css',
+                'label'             => __('Enter Custom Css Code', 'site-editor'),
+                'description'       => __('Customize css for site', 'site-editor') ,
                 'type'              => 'code',
                 'priority'          => 32,
                 'default'           => "",
                 'transport'         => 'postMessage' ,
                 'js_params'         => array(
-                    "mode" => "html",
-                ) ,
-                'update_type'       => 'button'
-            ) ,
-
-            'before_head_tag_code' => array(
-                'setting_id'        => 'sed_before_head_tag_code',
-                'label'             => __('Space before &lt;/head&gt;', 'site-editor') ,
-                'description'       => __('Add code before the &lt;/head&gt; tag.', 'site-editor') ,
-                'type'              => 'code',
-                'priority'          => 32,
-                'default'           => "",
-                'transport'         => 'postMessage' ,
-                'js_params'         => array(
-                    "mode" => "html",
-                ) ,
-                'update_type'       => 'button'
-            ) ,
-
-            'before_body_tag_code' => array(
-                'setting_id'        => 'sed_before_body_tag_code',
-                'label'             => __('Space before &lt;/body&gt;', 'site-editor'),
-                'description'       => __('Add code before the &lt;/body&gt; tag.', 'site-editor') ,
-                'type'              => 'code',
-                'priority'          => 32,
-                'default'           => "",
-                'transport'         => 'postMessage' ,
-                'js_params'         => array(
-                    "mode" => "html",
-                ) ,
-                'update_type'       => 'button'
+                    "mode" => "css",
+                )
             )
 
         );

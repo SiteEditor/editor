@@ -416,7 +416,7 @@ class PBShortcodeClass{
         array_push( $this->queue , self::$shortcode_counter_id );
 
         if(!empty( $content )){
-            if( in_array( $this->shortcode->name , array("sed_paragraph" , "sed_text_title" , "sed_code_syntax_highlighter" ) ) && site_editor_app_on() ){
+            if( in_array( $this->shortcode->name , array("sed_paragraph" , "sed_text_title" , "sed_raw_js" , "sed_code_syntax_highlighter" ) ) && site_editor_app_on() ){
                 $content = $content;
             }else{
                 $content = do_shortcode($content);

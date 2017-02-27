@@ -10,8 +10,6 @@ Version: 1.0.0
 
 class PBRawJavascriptCodeShortcode extends PBShortcodeClass{
 
-    public $contact_forms;
-
     function __construct(){
 
         parent::__construct( array(
@@ -43,13 +41,24 @@ class PBRawJavascriptCodeShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
-
-        $this->contact_forms = WPCF7_ContactForm::find( $args );
-
         return array(
+
+            'sed_shortcode_content' => array(
+                'label'             => __('Edit HTML Code', 'site-editor'),
+                'type'              => 'code',
+                'priority'          => 10,
+                'default'           => "",
+                'update_type'       => "button" ,
+                'encoded'           => "yes",
+                'js_params' => array(
+                    "mode" => "javascript",
+                ),
+            ) ,
+
         );
 
     }
+
     function contextmenu( $context_menu ){
         $contact_form_7 = $context_menu->create_menu( "raw-js" , __("Raw Javascript Code","site-editor") , 'icon-raw-js' , 'class' , 'element' , '' , "sed_raw_js" , array(
             "change_skin"   => false,  
@@ -60,6 +69,7 @@ class PBRawJavascriptCodeShortcode extends PBShortcodeClass{
     }
 
 }
+
 new PBRawJavascriptCodeShortcode; 
 
 global $sed_pb_app;

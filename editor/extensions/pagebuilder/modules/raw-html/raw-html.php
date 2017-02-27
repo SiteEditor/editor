@@ -51,7 +51,7 @@ class PBRawHTMLShortcode extends PBShortcodeClass{
                 'label'             => __('Edit HTML Code', 'site-editor'),
                 'type'              => 'code',
                 'priority'          => 10,
-                'default'           => "",
+                'default'           => "", 
                 'js_params' => array(
                     "mode" => "html",
                 ),
@@ -96,5 +96,5 @@ $sed_pb_app->register_module(array(
     "description"   => __("site editor module for Raw HTML plugin","site-editor"),
     "icon"          => "icon-customhtml",
     "shortcode"     => "sed_raw_html",
-    "tpl_type"      => "underscore" ,
+    "transport"     => "ajax"
 ));

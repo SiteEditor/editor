@@ -2,24 +2,6 @@
 	var api = sedApp.editor,
 		debounce;
 
-	api.urldecode = function(str){
-		return decodeURIComponent((str+'').replace(/\+/g,'%20'));
-	};
-
-	api.urlencode = function (str){
-		str=(str+'').toString();
-		return encodeURIComponent(str).replace(/!/g,'%21').replace(/'/g,'%27').replace(/\(/g,'%28').replace(/\)/g,'%29').replace(/\*/g,'%2A').replace(/%20/g,'+');
-	};
-
-	api.rawurldecode = function(str){
-		return decodeURIComponent(str+'');
-	};
-	
-	api.rawurlencode = function(str){
-		str=(str+'').toString();
-		return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A');
-	};
-
 
 	/**
 	 * Returns a debounced version of the function.

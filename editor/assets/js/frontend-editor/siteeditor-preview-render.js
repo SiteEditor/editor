@@ -93,6 +93,16 @@
 			channel: api.settings.channel
 		});
 
+        $('<style type="text/css" id="sed_site_css_editor_generate"></style>').appendTo( $('head') );
+
+        $('<style type="text/css" id="sed_page_css_editor_generate"></style>').appendTo( $('head') );
+
+        $('<style type="text/css" id="sed_custom_css_editor_generate"></style>').appendTo( $('head') );
+
+        $('<style type="text/css" id="sed_site_custom_css_code"></style>').appendTo( $('head') );
+
+        $('<style type="text/css" id="sed_page_custom_css_code"></style>').appendTo( $('head') );
+
         /**
          * Create/update a setting value.
          *
@@ -127,7 +137,6 @@
         console.log( "--------------api.settings.values----------------" , api.settings.values );
 
         api.preview.trigger( 'settings', api.settings.values );
-
 
         $.each( api.settings._dirty, function( i, id ) {
             var setting = api( id );
@@ -290,34 +299,18 @@
 
                 case "page" :
 
-                    $( "#sed_page_css_editor_generate" ).remove();
-
-                    if( $( "#sed_custom_css_editor_generate" ).length > 0 ){
-                        $('<style type="text/css" id="sed_page_css_editor_generate">' + output.customCssString + '</style>').insertBefore( $( "#sed_custom_css_editor_generate" ) );
-                    }else{
-                        $('<style type="text/css" id="sed_page_css_editor_generate">' + output.customCssString + '</style>').appendTo( $('head') );
-                    }
+                    $("#sed_page_css_editor_generate").html( output.customCssString );
 
                     break;
 
                 case "site" :
 
-                    $( "#sed_site_css_editor_generate" ).remove();
-
-                    if( $( "#sed_page_css_editor_generate" ).length > 0 ){
-                        $('<style type="text/css" id="sed_site_css_editor_generate">' + output.customCssString + '</style>').insertBefore( $( "#sed_page_css_editor_generate" ) );
-                    }else if( $( "#sed_custom_css_editor_generate" ).length > 0 ){
-                        $('<style type="text/css" id="sed_site_css_editor_generate">' + output.customCssString + '</style>').insertBefore( $( "#sed_custom_css_editor_generate" ) );
-                    }else{
-                        $('<style type="text/css" id="sed_site_css_editor_generate">' + output.customCssString + '</style>').appendTo( $('head') );
-                    }
+                    $("#sed_site_css_editor_generate").html( output.customCssString );
 
                     break;
                 default:
 
-                    // Refresh the stylesheet by removing and recreating it.
-                    $( "#sed_custom_css_editor_generate" ).remove();
-                    $('<style type="text/css" id="sed_custom_css_editor_generate">' + output.customCssString + '</style>').appendTo( $('head') );
+                    $("#sed_custom_css_editor_generate").html( output.customCssString );
 
             }
 

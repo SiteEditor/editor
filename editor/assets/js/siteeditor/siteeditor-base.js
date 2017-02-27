@@ -738,6 +738,24 @@ window.sedApp = window.sedApp || {};
         return f + str.substr(1);
     };
 
+	api.fn.urldecode = function(str){
+		return decodeURIComponent((str+'').replace(/\+/g,'%20'));
+	};
+
+	api.fn.urlencode = function (str){
+		str=(str+'').toString();
+		return encodeURIComponent(str).replace(/!/g,'%21').replace(/'/g,'%27').replace(/\(/g,'%28').replace(/\)/g,'%29').replace(/\*/g,'%2A').replace(/%20/g,'+');
+	};
+
+	api.fn.rawurldecode = function(str){
+		return decodeURIComponent(str+'');
+	};
+
+	api.fn.rawurlencode = function(str){
+		str=(str+'').toString();
+		return encodeURIComponent(str).replace(/!/g, '%21').replace(/'/g, '%27').replace(/\(/g, '%28').replace(/\)/g, '%29').replace(/\*/g, '%2A');
+	};
+
 
 	// Expose the API to the world.
 	exports.editor = api;

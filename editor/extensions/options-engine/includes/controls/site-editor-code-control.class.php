@@ -35,6 +35,14 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
          */
         public $update_type = 'auto-change';
 
+		/**
+		 * The type of update data for previewer. using "auto-change" or "button"
+		 *
+		 * @access public
+		 * @var string
+		 */
+		public $encoded = 'no';
+
         /*
          * Refresh the parameters passed to the JavaScript via JSON.
          *
@@ -97,6 +105,8 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
             }
 
             $json_array['code'] = $js_params;
+
+			$json_array['encoded'] = $this->encoded;
 
             return $json_array;
         }

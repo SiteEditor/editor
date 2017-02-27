@@ -78,13 +78,26 @@ final Class SiteEditorFramework {
      * @since  0.9
      */
     private function init_hooks() {
+
         add_action( 'wp_footer'         , array( $this , 'print_parallax_data' ) );
+
         add_action( 'wp_footer'         , array( $this , 'sed_add_dynamic_css_file' ) , 10000 );
+
         add_filter( 'body_class'        , array( $this , 'add_rtl_body_class' ) );
+
         add_filter( 'template_include'  , array( $this , 'template_chooser') , 1 );
+
         add_action( 'wp'                , array( $this , 'set_page_info') , -10000  );
+
         //404 fix
         add_action( 'wp'                , array( &$this, 'paged_404_fix' ) );
+
+        add_action( "wp_head"           , array( $this , "add_tracking_code" ) , 100000 );
+
+        add_action( "wp_head"           , array( $this , "add_custom_code_before_head" ) , 100001 );
+
+        add_action( "wp_footer"         , array( $this , "add_custom_code_before_body" ) , 100000 );
+
         /**
          * load page builder extension in front end
          */
@@ -92,6 +105,18 @@ final Class SiteEditorFramework {
             $this->load_page_builder_app();
         }
 
+    }
+
+    public function add_tracking_code() {
+        echo wp_unslash( get_option( 'sed_tracking_code' , '' ) );
+    }
+
+    public function add_custom_code_before_head() {
+        echo wp_unslash( get_option( 'sed_before_head_tag_code' , '' ) );
+    }
+
+    public function add_custom_code_before_body() {
+        echo wp_unslash( get_option( 'sed_before_body_tag_code' , '' ) );
     }
 
     /**
