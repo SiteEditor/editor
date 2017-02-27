@@ -151,8 +151,8 @@
 <script type="text/html" id="sed-remove-module-confirm-tpl" >
     <div class="sed_message_box">
         <h3><?php echo __("Are You Sure?" , "site-editor");?></h3>
-        <p><?php echo __("Do you want to delete this element?" , "site-editor");?></p>
-        <p><span><?php echo __("Note : " , "site-editor");?></span> <span><?php echo __("if this Row is a public row it is remove from all releted layouts and pages" , "site-editor");?></span> </p>
+        <p class="text-danger"><?php echo __("Do you want to delete this element?" , "site-editor");?></p>
+        <p><strong><?php echo __("Note : " , "site-editor");?></strong> <span><?php echo __("if this Row is a public row it is remove from all releted layouts and pages" , "site-editor");?></span> </p>
     </div>
 </script>
 

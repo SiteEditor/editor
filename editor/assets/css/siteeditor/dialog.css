@@ -207,3 +207,13 @@
 #sed_root_back_settings_btn + span.ui-dialog-title {
     padding-left: 30px !important;
 }
+
+
+
+/* Confirm Message */ 
+
+div#sed-confirm-message-dialog {
+    height: 165px !important;
+    padding: 15px 30px !important;
+    min-height: 165px !important;
+}

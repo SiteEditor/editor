@@ -317,6 +317,11 @@ input.media-url-field {
 }
 
 /* select2 */
+.select2-container {
+    display: block;
+    width: 100% !important;
+}
+
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
     background-color: #00aaff;
     color: white;
@@ -489,4 +494,137 @@ div#wp-sed-wp-tinymce-text-editor-editor-container .wp-editor-area {
 .media-modal .media-toolbar {
     position: absolute;
 }
-    
+
+.sed-bp-form-wp-editor {
+    float: right;
+    padding: 4px 0;
+}    
+
+
+
+.text-left {
+    text-align: left
+}
+
+.text-right {
+    text-align: right
+}
+
+.text-center {
+    text-align: center
+}
+
+.text-justify {
+    text-align: justify
+}
+
+.text-nowrap {
+    white-space: nowrap
+}
+
+.text-lowercase {
+    text-transform: lowercase
+}
+
+.text-uppercase {
+    text-transform: uppercase
+}
+
+.text-capitalize {
+    text-transform: capitalize
+}
+
+.text-muted {
+    color: #999
+}
+
+.text-primary {
+    color: #fa8900
+}
+
+a.text-primary:hover,
+a.text-primary:focus {
+    color: #c76d00
+}
+
+.text-success {
+    color: #91e619
+}
+
+a.text-success:hover,
+a.text-success:focus {
+    color: #74b814
+}
+
+.text-info {
+    color: #3aabdf
+}
+
+a.text-info:hover,
+a.text-info:focus {
+    color: #2092c6
+}
+
+.text-warning {
+    color: #febe22
+}
+
+a.text-warning:hover,
+a.text-warning:focus {
+    color: #eca801
+}
+
+.text-danger {
+    color: #fe8289
+}
+
+a.text-danger:hover,
+a.text-danger:focus {
+    color: #fe4f59
+}
+
+.bg-primary {
+    color: #fff;
+    background-color: #fa8900
+}
+
+a.bg-primary:hover,
+a.bg-primary:focus {
+    background-color: #c76d00
+}
+
+.bg-success {
+    background-color: #f0fbdf
+}
+
+a.bg-success:hover,
+a.bg-success:focus {
+    background-color: #dbf5b2
+}
+
+.bg-info {
+    background-color: #e0f2fa
+}
+
+a.bg-info:hover,
+a.bg-info:focus {
+    background-color: #b4e0f3
+}
+
+.bg-warning {
+    background-color: #fffcdb
+}
+
+a.bg-warning:hover,
+a.bg-warning:focus {
+    background-color: #fff8a8
+}
+
+.bg-danger {
+    background-color: #feeaeb
+}
+
+a.bg-danger:hover,
+a.bg-danger:focus {
+    background-color: #fcb9bd
+}
