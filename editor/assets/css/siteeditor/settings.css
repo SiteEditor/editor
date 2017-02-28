@@ -63,6 +63,10 @@
 .sed-panel-default > .row_settings > .row_setting_inner {
     margin: 0;
 }
+/*.sed-app-container-control-panel-button {
+    padding: 0 !important;
+    border: 0 !important;
+}*/
 
 .row_setting_inner.spacing_md{
     margin: 8px 12px;
@@ -627,4 +631,10 @@ a.bg-warning:focus {
 a.bg-danger:hover,
 a.bg-danger:focus {
     background-color: #fcb9bd
+}
+
+
+
+.main_layout_row_scope_control_settings_container .sed-container-control-element ul ul {
+    padding-left: 20px;
 }

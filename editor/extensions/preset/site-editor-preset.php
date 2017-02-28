@@ -543,6 +543,10 @@ class SiteEditorPreset{
             'label'             => __('Preset Settings', 'site-editor'),
             'description'       => __('Preset settings for save module as custom layouts', 'site-editor') ,
             'button_style'      => 'default' ,
+            'has_border_box'    => false ,
+            'icon'              => 'fa icon-settings' ,
+            'btn_style'         => 'menu' ,
+            'field_spacing'     => 'sm',
             'panel_title'       => __('Preset Settings', 'site-editor') ,
             'panel_content'     => $html ,
             'atts'              => array(

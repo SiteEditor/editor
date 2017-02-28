@@ -69,7 +69,7 @@
                 "autoOpen"  : false,
                 "modal"     : false,
                 //draggable: false,
-                resizable   : true,
+                resizable   : false,
                 "width"     : 295,
                 "height"    : 600 ,
                 "position"  : {

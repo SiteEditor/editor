@@ -9,7 +9,7 @@
 	font-style: normal;
 }
 
-[class^="icon-"],.f-sed {
+[class^="icon-"] , .f-sed { 
 	font-family: 'siteeditor';                 
 	speak: none;
 	font-style: normal;
