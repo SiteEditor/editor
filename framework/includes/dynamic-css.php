@@ -87,6 +87,6 @@ if(!empty($elements)){
 
 global $sed_dynamic_css_string;
 
-$site_custom_css = get_option( 'site_custom_css' , '' );
+$site_custom_css = get_option( 'sed_site_custom_css' , '' );
 
 echo $output_css.$sed_dynamic_css_string.$site_custom_css.$retina_css;

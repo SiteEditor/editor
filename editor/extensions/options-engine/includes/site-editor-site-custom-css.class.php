@@ -118,7 +118,7 @@ class SiteEditorSiteCustomCss extends SiteEditorOptionsCategory{
         $new_fields = array(
 
             'site_custom_css_code' => array(
-                'setting_id'        => 'site_custom_css',
+                'setting_id'        => 'sed_site_custom_css',
                 'label'             => __('Enter Custom Css Code', 'site-editor'),
                 'description'       => __('Customize css for site', 'site-editor') ,
                 'type'              => 'code',

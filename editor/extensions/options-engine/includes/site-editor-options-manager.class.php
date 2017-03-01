@@ -125,6 +125,10 @@ final class SiteEditorOptionsManager{
 
         new SiteEditorSiteCustomCss();
 
+        require_once dirname( __FILE__ ) . DS . 'site-editor-color-options.class.php';
+
+        new SiteEditorColorOptions();
+
         require_once dirname( __FILE__ ) . DS . 'site-editor-sanitize-settings.class.php';
         
         add_action( 'sed_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );

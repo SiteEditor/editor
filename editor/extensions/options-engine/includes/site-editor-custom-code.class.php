@@ -124,7 +124,6 @@ class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
                 'type'              => 'code',
                 'priority'          => 32,
                 'default'           => "",
-                'transport'         => 'postMessage' ,
                 'js_params'         => array(
                     "mode" => "html",
                 ) ,
@@ -138,7 +137,6 @@ class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
                 'type'              => 'code',
                 'priority'          => 32,
                 'default'           => "",
-                'transport'         => 'postMessage' ,
                 'js_params'         => array(
                     "mode" => "html",
                 ) ,
@@ -152,7 +150,6 @@ class SiteEditorCustomCodeOptions extends SiteEditorOptionsCategory{
                 'type'              => 'code',
                 'priority'          => 32,
                 'default'           => "",
-                'transport'         => 'postMessage' ,
                 'js_params'         => array(
                     "mode" => "html",
                 ) ,

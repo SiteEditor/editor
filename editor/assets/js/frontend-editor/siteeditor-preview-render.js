@@ -99,6 +99,8 @@
 
         $('<style type="text/css" id="sed_custom_css_editor_generate"></style>').appendTo( $('head') );
 
+        $('<style type="text/css" id="sed_color_scheme_css_code"></style>').appendTo( $('head') );
+
         $('<style type="text/css" id="sed_site_custom_css_code"></style>').appendTo( $('head') );
 
         $('<style type="text/css" id="sed_page_custom_css_code"></style>').appendTo( $('head') );
