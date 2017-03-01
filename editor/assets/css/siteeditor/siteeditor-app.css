@@ -565,26 +565,88 @@ a {
 
 /* Common Between All buttons software */
 .btn {
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 0px;
-    cursor: pointer;
     display: inline-block;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    font-weight: normal;
-    line-height: 1.5;
     margin-bottom: 0;
-    margin-top: 5px;
-    padding: 2px 4px;
+    font-weight: normal;
     text-align: center;
     vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
     white-space: nowrap;
+    padding: 5px 12px;
+    font-size: 13px;
+    line-height: 1.1 !important;
+    border-radius: 0px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    margin-bottom: 0;
+    margin-top: 5px;
 }
+
+.button-primary {
+    color: #fff;
+    background-color: #0099E6;
+    border-color: #0099E6
+}
+
+.button-primary:focus,
+.button-primary.focus {
+    color: #fff;
+    background-color: #008dd4;
+    border-color: #008dd4
+}
+
+.button-primary:hover {
+    color: #fff;
+    background-color: #008dd4;
+    border-color: #008dd4
+}
+
+.button-primary:active,
+.button-primary.active,
+.open > .dropdown-toggle.button-primary {
+    color: #fff;
+    background-color: #008dd4;
+    border-color: #008dd4
+}
+
+.button-primary:active:hover,
+.button-primary.active:hover,
+.open > .dropdown-toggle.button-primary:hover,
+.button-primary:active:focus,
+.button-primary.active:focus,
+.open > .dropdown-toggle.button-primary:focus,
+.button-primary:active.focus,
+.button-primary.active.focus,
+.open > .dropdown-toggle.button-primary.focus {
+    color: #fff;
+    background-color: #008dd4;
+    border-color: #008dd4
+}
+
+.button-primary:active,
+.button-primary.active,
+.open > .dropdown-toggle.button-primary {
+    background-image: none
+}
+
+.button-primary.disabled:hover,
+.button-primary[disabled]:hover,
+fieldset[disabled] .button-primary:hover,
+.button-primary.disabled:focus,
+.button-primary[disabled]:focus,
+fieldset[disabled] .button-primary:focus,
+.button-primary.disabled.focus,
+.button-primary[disabled].focus,
+fieldset[disabled] .button-primary.focus {
+    background-color: #0099E6;
+    border-color: #0099E6
+}
+
 .fa{
     color: #00A9E8;        /* #24a9f1 #00aaff*/
     display: inline-block;

@@ -39,6 +39,7 @@
       z-index: 3000 !important;
       display: none;
 }
+.sed-error ,
 .error {
   background-color: #F2DEDE;
   border-color: #EBCCD1;
@@ -49,6 +50,12 @@
   padding: 6px 10px;
   position: relative;
 }
+.sed-error {
+  display: none;
+  margin: 0px 0px 5px;   
+}
+
+.sed-error .sed_message_box ,
 .error-box {
       position: relative;
       z-index: 1000;
@@ -81,8 +88,10 @@
     padding: 5px 20px !important;
     text-align: center;
 }
+
+.sed-success ,
 .success-font-icon-remove,
-.success-font-icon-load{
+.success-font-icon-load {  
     background: none repeat scroll 0 0 #C4F9A9;
     border: 1px solid #7AC659;
     border-radius: 0;
@@ -93,6 +102,11 @@
     text-align: center;
 }
 
-#sed-load-options-errors-box .error-box{
-    padding-top: 20px;
+.sed-success {
+  display: none;
+  margin: 5px 0px !important;   
 }
+
+#sed-load-options-errors-box .error-box {
+    padding-top: 20px;
+} 

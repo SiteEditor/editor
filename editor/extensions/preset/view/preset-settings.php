@@ -16,23 +16,20 @@
                             <input class="sed-new-preset" type="text" placeholder="Save As New Preset...">
                             <button data-action="add" class="btn button-primary">Add Preset</button>
                             <div class="sed-add-preset-loading sed-loading-small-continer" >
-                                <div class="sed-loading" >
-
-                                </div>
+                                <div class="sed-loading"></div>
                             </div>
                         </div>
 
                         <div class="row_field">
+                        <br>
                             <label>Save As Exist Preset</label>
                             <select class="sed-presets-list-select">
                                 <option value="">Select Preset</option>
                             </select>
                             <button data-action="override" class="btn button-primary">Save Preset</button>
                             <div class="sed-override-preset-loading sed-loading-small-continer" >
-                                <div class="sed-loading" >
-
-                                </div>
-                            </div>
+                                <div class="sed-loading"></div>  
+                            </div> 
                         </div>
 
                     </div>

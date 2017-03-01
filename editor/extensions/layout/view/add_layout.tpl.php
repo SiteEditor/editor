@@ -25,7 +25,7 @@
                     <div class="sed-layout-edit hide">
                         <input data-layout="" name="edit-layout-title" value="">
                         <button data-action="save" class="btn button-primary"><?php echo __("Save" , "site-editor");?></button>
-                        <span data-action="save-close" class="fa fa-close"> </span>
+                        <span data-action="save-close" class="fa fa-close sed-layout-edit-close"> </span>
                     </div>
 
                     <div class="sed-layout-error-box sed-error">
@@ -70,13 +70,16 @@
         <li>
 
             <div class="sed-view-mode">
-                <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}" >{{layoutTitle}} </span>
-                <# if( layout != "default" && layout != data.currentLayout ){ #>
-                <span data-action="delete" data-layout="{{layout}}" class="fa fa-close" title="<?php echo __("Remove" , "site-editor");?>"></span>
-                <# } #>
-                <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}"  class="fa fa-edit" title="<?php echo __("Edit" , "site-editor");?>"></span>
+                <span class="sed-view-mode-title" data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}" >{{layoutTitle}} </span>
 
-                <span data-action="manage" data-layout="{{layout}}" data-related-level-box="dialog_page_box_<?php echo $action_page_box_id; ?>" class="fa fa-trash sed_go_to_manage_layout_rows"  title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>" ></span>
+                <div class="sed-view-mode-actions">
+                    <# if( layout != "default" && layout != data.currentLayout ){ #>
+                    <span data-action="delete" data-layout="{{layout}}" class="fa fa-trash" title="<?php echo __("Remove" , "site-editor");?>"></span>
+                    <# } #>
+                    <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}"  class="fa fa-edit" title="<?php echo __("Edit" , "site-editor");?>"></span>
+
+                    <span data-action="manage" data-layout="{{layout}}" data-related-level-box="dialog_page_box_<?php echo $action_page_box_id; ?>" class="fa fa-share sed_go_to_manage_layout_rows"  title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>" ></span>
+                </div>
             </div>
 
             <div class="sed-edit-mode">

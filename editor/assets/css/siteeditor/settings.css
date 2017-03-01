@@ -22,16 +22,30 @@
 .row_setting_inner > .sed-accordion-content ,
 .row_setting_inner > .sed-container-control-element > .row_setting_box ,
 .row_setting_inner > .sed-container-control-element > .settings-uploader ,
+.row_setting_inner > .sed-container-control-element > .sed-container-control-element > .row_setting_box ,
+.row_setting_inner > .sed-container-control-element > .sed-container-control-element > .settings-uploader ,
 .row_setting_inner > .row_setting_box ,
 .row_setting_inner > .settings-uploader {
     margin: 0 !important;
     width: 100%;
 }
+
+.sed-panel-default > .row_settings > .row_setting_inner ,
+.sed-panel-default > .row_settings > .row_setting_inner > .row_setting_box ,
+.sed-panel-default > .row_settings > .row_setting_inner > .settings-uploader ,
+.sed-panel-default > .row_settings > .row_setting_inner > .sed-container-control-element > .row_setting_box ,
+.sed-panel-default > .row_settings > .row_setting_inner > .sed-container-control-element > .settings-uploader ,
+.sed-panel-default > .row_settings > .row_setting_inner > .sed-container-control-element > .sed-container-control-element > .row_setting_box ,
+.sed-panel-default > .row_settings > .row_setting_inner > .sed-container-control-element > .sed-container-control-element > .settings-uploader ,
+.sed-panel-default > .row_settings > .row_setting_box ,
+.sed-panel-default > .row_settings > .settings-uploader ,
 .sed-accordion-content > .row_settings > .row_setting_inner ,
 .sed-accordion-content > .row_settings > .row_setting_inner > .row_setting_box ,
 .sed-accordion-content > .row_settings > .row_setting_inner > .settings-uploader ,
 .sed-accordion-content > .row_settings > .row_setting_inner > .sed-container-control-element > .row_setting_box ,
 .sed-accordion-content > .row_settings > .row_setting_inner > .sed-container-control-element > .settings-uploader ,
+.sed-accordion-content > .row_settings > .row_setting_inner > .sed-container-control-element > .sed-container-control-element > .row_setting_box ,
+.sed-accordion-content > .row_settings > .row_setting_inner > .sed-container-control-element > .sed-container-control-element > .settings-uploader ,
 .sed-accordion-content > .row_settings > .row_setting_box ,
 .sed-accordion-content > .row_settings > .settings-uploader {
     margin: 0 0 8px !important;
@@ -41,10 +55,20 @@
     padding-right: 0;
 }
 
+.sed-panel-default > .row_settings:last-child > .row_setting_inner > .row_setting_box,
+.sed-panel-default > .row_settings:last-child > .row_setting_inner > .settings-uploader ,
+.sed-panel-default > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .row_setting_box ,
+.sed-panel-default > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .settings-uploader ,
+.sed-panel-default > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .sed-container-control-element > .row_setting_box ,
+.sed-panel-default > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .sed-container-control-element > .settings-uploader ,
+.sed-panel-default > .row_settings:last-child > .row_setting_box,
+.sed-panel-default > .row_settings:last-child > .settings-uploader ,
 .sed-accordion-content > .row_settings:last-child > .row_setting_inner > .row_setting_box,
 .sed-accordion-content > .row_settings:last-child > .row_setting_inner > .settings-uploader ,
 .sed-accordion-content > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .row_setting_box ,
 .sed-accordion-content > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .settings-uploader ,
+.sed-accordion-content > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .sed-container-control-element > .row_setting_box ,
+.sed-accordion-content > .row_settings:last-child > .row_setting_inner > .sed-container-control-element > .sed-container-control-element > .settings-uploader ,
 .sed-accordion-content > .row_settings:last-child > .row_setting_box,
 .sed-accordion-content > .row_settings:last-child > .settings-uploader {
     margin: 0 !important;
@@ -147,9 +171,12 @@
 #sed-dialog-front_page_displays select ,
 .add-new-template select ,
 .add-new-template input,
-.row_setting_box   select ,
-.row_setting_box   textarea ,
-.row_setting_box   input{
+.row_setting_box select ,
+.row_setting_box textarea ,
+.row_setting_box input ,
+.row_settings select ,
+.row_settings textarea ,
+.row_settings input {
     background-color: #fff !important; 
     border: 1px solid #d5d5d5;
     border-radius: 0px;
@@ -330,7 +357,9 @@ input.media-url-field {
     background-color: #00aaff;
     color: white;
 }
-.select2-container--default .select2-dropdown,
+.select2-container--default.select2-container--focus .select2-selection--multiple ,
+.select2-container--default .select2-selection--multiple ,
+.select2-container--default .select2-dropdown ,
 .select2-container--default .select2-search--dropdown .select2-search__field ,
 span.select2-selection.select2-selection--single {
     background-color: #fff !important;
@@ -338,6 +367,12 @@ span.select2-selection.select2-selection--single {
     border-radius: 0px;
     box-shadow: none;
 } 
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #f7f7f7;
+    border: 1px solid #eee;
+    border-radius: 0;
+}    
+
 
 /* Code Mirror */ 
 
@@ -634,7 +669,259 @@ a.bg-danger:focus {
 }
 
 
+/* Scope */  
 
 .main_layout_row_scope_control_settings_container .sed-container-control-element ul ul {
     padding-left: 20px;
+}
+
+ 
+
+
+/* Layout Lists */  
+
+.sed-layout-lists-container {
+    margin: 10px 0;
+}
+
+.sed-layout-lists-container ul li {
+    /* background-color: #fafafa !important; */
+    border: 1px solid #d5d5d5;
+    border-radius: 2px;
+    box-shadow: none;
+    color: #666;
+    font-size: 12px;
+    margin: 0 0 5px;
+    padding: 5px 10px;
+    width: 100%;
+}
+.sed-layout-lists-container ul li:after {
+    clear: both;
+}
+.sed-layout-lists-container ul li:after, 
+.sed-layout-lists-container ul li:before {
+    display: table;
+    content: "";
+}
+.sed-layout-lists-container ul li .sed-view-mode-actions {
+    float: right;
+}
+.sed-layout-lists-container ul li .sed-view-mode-title {
+    line-height: 20px;
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: top;
+}
+
+.sed-layout-lists-container ul li .sed-view-mode-actions > span  {
+    display: inline-block;
+    margin: 0 2px;
+    color: #888;
+    font-size: 1.15em;
+    cursor: pointer;
+} 
+
+.sed-layout-lists-container ul li .sed-view-mode-actions > span:hover {
+    color: #00A9E8;
+}
+
+
+
+
+/* Layout Row Container */
+.layout-row-container{
+    margin: 20px;
+}
+
+input.layout-row-title-edit {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0 10px;
+    border: 0 none;
+    background-color: #fff !important;
+}
+
+.editing input.layout-row-title-edit {
+    display: block;
+}
+
+span.action{
+    display: block;
+}
+
+.layout-row-container > li {
+    position: relative;
+}
+.sed-layout-row-box {
+    /*background-color: #fafafa !important;*/
+    border: 1px solid #d5d5d5;
+    border-radius: 2px;
+    box-shadow: none;
+    color: #666;
+    font-size: 12px;
+    margin: 0 0 5px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.sed-layout-row-box > label {
+    line-height: 20px;
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+    vertical-align: top;
+}
+.sed-layout-row-box:after,
+.sed-layout-row-box:before {
+    display: table;
+    content: "";
+}
+.sed-layout-row-box:after {
+    clear: both;
+}
+.layout-row-actions {
+    float: right;
+}
+.layout-row-actions > span.action {
+    display: inline-block;
+    margin: 0 2px;
+}
+
+.layout-row-actions > span.action .fa {
+    color: #888;
+    font-size: 1.15em;
+    cursor: pointer;
+}
+.layout-row-actions > span.action:hover .fa {
+    color: #00A9E8;
+}
+.layout-row-actions > span.sort .fa {
+    cursor: move;
+}
+
+.sed-layout-edit > *, .sed-layout-edit > input {
+    display: inline-block;
+    width: auto;
+    vertical-align: top;
+    margin: 0;
+}
+
+.sed-edit-mode .sed-layout-edit-close {
+    color: #888;
+    border: 1px solid #888;
+    border-radius: 1000px;
+    margin-left: 3px;
+    font-size: 15px;
+    padding: 0;
+    width: 1.32em;
+    height: 1.32em;
+    line-height: 1.2em !important;
+    text-align: center;
+    cursor: pointer;
+}
+.sed-edit-mode .sed-layout-edit-close:hover {
+    color: #333;
+    border: 1px solid #777;
+}
+
+
+/* preset */
+
+input.preset-edit {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.editing input.preset-edit {
+    display: block;
+}
+
+span.action{
+    display: block;
+}
+
+span.sed-default.action{
+    color: #f52e16;
+    display: block;
+}
+.sed-presets-list-container {
+    margin: 15px 0 5px;
+}
+.sed-add-preset {
+    position: relative;
+}
+.sed-presets-list > li {
+    position: relative;
+}
+.sed-preset-item {
+    /*background-color: #fafafa !important;*/
+    border: 1px solid #d5d5d5;
+    border-radius: 2px;
+    box-shadow: none;
+    color: #666;
+    font-size: 12px;
+    margin: 0 0 5px;
+    padding: 5px 10px;
+    width: 100%;
+}
+.sed-preset-item > label {
+    line-height: 20px;
+    max-width: 50%;
+    width: 50%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+}
+.sed-preset-item:after,
+.sed-preset-item:before {
+    display: table;
+    content: "";
+}
+.sed-preset-item:after {
+    clear: both;
+}
+.preset-actions {
+    float: right;
+}
+.preset-actions > span.action {
+    display: inline-block;
+    margin: 0 2px;
+}
+.preset-actions > span.set-default.action > span:last-child {
+    display: none;
+}
+.preset-actions > span.sed-default.set-default.action > span:first-child {
+    display: none;
+}
+.preset-actions > span.sed-default.set-default.action > span:last-child {
+    display: block;
+}
+.preset-actions > span.action .fa {
+    color: #888;
+    font-size: 1.15em;
+    cursor: pointer;
+}
+.preset-actions > span.action:hover .fa {
+    color: #00A9E8;
+}
+.preset-actions > span.sort .fa {
+    cursor: move;
 }

@@ -146,7 +146,7 @@ a:hover .caret2{
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     display: block;
     margin: 0 auto !important;
-    max-width: 90px !important;
+    max-width: 120px !important;
 }
 .uploader-inline-content .btn-default .el_txt {
     display: block;

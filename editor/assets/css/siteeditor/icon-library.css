@@ -36,6 +36,7 @@
     background: none repeat scroll 0 0 #FFFFFF;
     border: 2px solid transparent;
     border-radius: 0px;
+    cursor: pointer;
 }
 .sed-font-icon-box label {
     display: block;
