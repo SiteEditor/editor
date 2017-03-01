@@ -1,6 +1,6 @@
-<div class="sed-color-palettes">
+<div class="sed-color-palettes" id="<?php echo $control_id ;?>">
 
-    <ul>
+    <ul class="sed-dropdown">
 
         <?php
         $selected_class = ( "default" == $color_scheme ) ? "selected-palette" : "";

@@ -127,7 +127,16 @@ class SiteEditorColorOptions extends SiteEditorOptionsCategory{
             'capability'        => 'edit_theme_options' ,
             'type'              => 'default' ,
             'description'       => '' ,
-            'priority'          => 8
+            'priority'          => 8 ,
+            'dependency' => array(
+                'queries'  =>  array(
+                    array(
+                        "key"       => "color_scheme_type" ,
+                        "value"     => 'customize' ,
+                        "compare"   => "==="
+                    )
+                )
+            )
         );
 
         return $panels;
@@ -167,7 +176,16 @@ class SiteEditorColorOptions extends SiteEditorOptionsCategory{
                     'selected_class'      => 'selected-palette'
                 ),
                 'transport'         => 'postMessage' ,
-                'priority'          => 6
+                'priority'          => 6 ,
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "color_scheme_type" ,
+                            "value"     => 'skin' ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
             ),
 
         );
@@ -265,6 +283,8 @@ class SiteEditorColorOptions extends SiteEditorOptionsCategory{
         $color_schemes       = $this->get_color_schemes();
 
         $color_scheme        = "default";//get_theme_mod( 'color_scheme', 'default' );
+        
+        $control_id          = $this->control_prefix . "_sed_color_scheme_skin";
 
         ob_start();
 
