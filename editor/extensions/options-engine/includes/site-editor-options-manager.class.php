@@ -129,6 +129,10 @@ final class SiteEditorOptionsManager{
 
         new SiteEditorColorOptions();
 
+        require_once dirname( __FILE__ ) . DS . 'site-editor-font-options.class.php';
+
+        new SiteEditorFontOptions();
+
         require_once dirname( __FILE__ ) . DS . 'site-editor-sanitize-settings.class.php';
         
         add_action( 'sed_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );

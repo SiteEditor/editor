@@ -11,8 +11,7 @@
 
 /**
  *
- * @Class SiteEditorThemeOptions
- * @description : Create Custom Settings for wordpress themes
+ * @Class SiteEditorColorOptions
  *
  * @override :
  * 1. for override Customize Color Settings using the 'sed_customize_color_settings' filter.
@@ -107,7 +106,7 @@ class SiteEditorColorOptions extends SiteEditorOptionsCategory{
             "" ,  //$capability=
             array(  ),  //"class"  => "btn_default3"
             array( "row" => 1 ,"rowspan" => 2 ),
-            array('module' => 'options-engine' , 'file' => 'color_font.php'),
+            array('module' => 'options-engine' , 'file' => 'color_options.php'),
             //array( "pages" , "blog" , "woocammece" , "search" , "single_post" , "archive" )
             'all' ,
             array(),
