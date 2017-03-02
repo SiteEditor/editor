@@ -31,7 +31,7 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
      * @access private
      * @var array
      */
-    protected $option_group = 'sed_font_options';
+    protected $option_group = 'sed_typography_options';
 
     /**
      * default option type
@@ -55,7 +55,7 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
      * @var string
      * @access public
      */
-    public $control_prefix = 'sed_font_options';
+    public $control_prefix = 'sed_typography_options';
 
     /**
      * Is pre load settings in current page ?
@@ -80,6 +80,8 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
         add_filter( "{$this->option_group}_fields_filter" , array( $this , 'register_default_fields' ) );
 
         add_action( "sed_editor_init"                     , array( $this , 'add_toolbar_elements' ) );
+
+        add_action( 'sed_footer'                          , array($this, 'print_custom_font_js_template') );
 
         parent::__construct();
 
@@ -142,7 +144,7 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
                 'setting_id'        => "sed_custom_fonts" ,
                 'type'              => 'custom',
                 'js_type'           => 'custom_font',
-                'default'           => array(),
+                'default'           => get_theme_mod( 'sed_custom_fonts' , array() ),
                 'has_border_box'    => false ,
                 'custom_template'   => $this->custom_fonts_template() ,
                 'transport'         => 'postMessage' ,
@@ -161,7 +163,7 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
 
         $control_id = $this->control_prefix . "_sed_custom_fonts";
 
-        $custom_font_tpl = $this->custom_font_js_template();
+        $custom_fonts = get_theme_mod( 'sed_custom_fonts' , array() );
 
         ob_start();
 
@@ -173,7 +175,21 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
 
     }
 
-    public function custom_font_js_template(){
+    public function custom_font_template( $font ){
+
+        $default_font = array(
+            'id'                    => '' ,
+            'font_title'            => '' ,
+            'font_family'           => '' ,
+            'font_woff'             => '' ,
+            'font_ttf'              => '' ,
+            'font_svg'              => '' ,
+            'font_eot'              => ''
+        );
+
+        $font = wp_parse_args( $font , $default_font );
+
+        extract( $font );
 
         ob_start();
 
@@ -183,6 +199,25 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
 
         return $template;
 
+    }
+
+    public function print_custom_font_js_template() {
+
+        $font = array(
+            'id'                    => "{{ data.id }}" ,
+            'font_title'            => "{{ data.font_title }}" ,
+            'font_family'           => "{{ data.font_family }}" ,
+            'font_woff'             => "{{ data.font_woff }}" ,
+            'font_ttf'              => "{{ data.font_ttf }}" ,
+            'font_svg'              => "{{ data.font_svg }}" ,
+            'font_eot'              => "{{ data.font_eot }}"
+        );
+
+        ?>
+        <script type="text/template" id="tmpl-sed-add-custom-font">
+            <?php echo $this->custom_font_template( $font ); ?>
+        </script>
+        <?php
     }
 
 }

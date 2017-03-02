@@ -1843,7 +1843,13 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $custom_fonts = SiteeditorTypography::get_custom_fonts();
         if( $custom_fonts !== false ){
-           $fonts["custom_fonts"] = $custom_fonts;
+            $new_custom_fonts = array();
+
+            foreach( $custom_fonts AS $family => $font_data ) {
+                $new_custom_fonts[$family] = $font_data['font_title'];
+            }
+
+            $fonts["custom_fonts"] = $new_custom_fonts;
         }
 
         $fonts["standard_fonts"] = SiteeditorTypography::get_standard_fonts();

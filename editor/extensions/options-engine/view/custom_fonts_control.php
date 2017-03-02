@@ -2,10 +2,18 @@
 
     <div class="sed-custom-fonts-accordion">
 
-        <?php echo $custom_font_tpl;?>
+        <?php
+
+        foreach ( $custom_fonts AS $font ){
+
+            echo $this->custom_font_template( $font );
+
+        }
+
+        ?>
 
     </div>
 
-    <button class="btn button-primary"><?php echo __("Add New Font","site-editor");?></button>
+    <button class="btn button-primary sed-new-custom-font-btn"><?php echo __("Add New Font","site-editor");?></button>
 
 </div>

@@ -70,12 +70,12 @@ Class SiteeditorTypography{
     }
 
     function load_custom_fonts( $fonts){
-        global $sed_general_data;
+
         $cfonts = array();
 
         foreach( $fonts AS $font ){
             if( in_array( $font , array_keys( $this->custom_fonts ) ) ){
-                array_push( $cfonts , $font );
+                $cfonts[$font] = $this->custom_fonts[$font];
             }
         }
 
@@ -86,19 +86,19 @@ Class SiteeditorTypography{
             <!--
             <?php
 
-            	foreach( $cfonts as $font ) {
+            	foreach( $cfonts as $font => $font_data ) {
             	    if( !in_array( $font , $this->base_loaded_fonts )  ){
 
                     ?>
 
                     @font-face {
-                    	font-family: <?php echo $sed_general_data['custom_font_name']; ?>;
-                    	src: url('<?php echo $sed_general_data['custom_font_eot']; ?>');
+                    	font-family: <?php echo $font_data['font_family']; ?>;
+                    	src: url('<?php echo $font_data['font_eot']; ?>');
                     	src:
-                    		url('<?php echo $sed_general_data['custom_font_eot']; ?>?#iefix') format('eot'),
-                    		url('<?php echo $sed_general_data['custom_font_woff']; ?>') format('woff'),
-                    		url('<?php echo $sed_general_data['custom_font_ttf']; ?>') format('truetype'),
-                    		url('<?php echo $sed_general_data['custom_font_svg']; ?>#<?php echo $sed_general_data['custom_font_name']; ?>') format('svg');
+                    		url('<?php echo $font_data['font_eot']; ?>?#iefix') format('eot'),
+                    		url('<?php echo $font_data['font_woff']; ?>') format('woff'),
+                    		url('<?php echo $font_data['font_ttf']; ?>') format('truetype'),
+                    		url('<?php echo $font_data['font_svg']; ?>#<?php echo $font_data['font_family']; ?>') format('svg');
                     	font-weight: 400;
                     	font-style: normal;
                     }
@@ -135,16 +135,17 @@ Class SiteeditorTypography{
         $custom_font_settings = array();
 
         if( !empty( $this->custom_fonts ) ){
-            $font_groups['custom_fonts'] = $this->custom_fonts;
-            foreach( $this->custom_fonts AS $family => $title ){
+            $font_groups['custom_fonts'] = array();
+            foreach( $this->custom_fonts AS $family => $font_data ){
+                $font_groups['custom_fonts'][$family] = $font_data['font_title'];
                 $custom_font_settings[$family] = array(
                     "name"  => $family ,
-                    "title" => $title ,
+                    "title" => $font_data['font_title'] ,
                     "src"   =>  array(
-                        "eot"   => $sed_general_data['custom_font_eot'] ,
-                        "ttf"   => $sed_general_data['custom_font_ttf'] ,
-                        "woff"  => $sed_general_data['custom_font_woff'] ,
-                        "svg"   => $sed_general_data['custom_font_svg']
+                        "eot"   => $font_data['font_eot'] ,
+                        "ttf"   => $font_data['font_ttf'] ,
+                        "woff"  => $font_data['font_woff'] ,
+                        "svg"   => $font_data['font_svg']
                     )
                 );
             }
@@ -176,7 +177,14 @@ Class SiteeditorTypography{
         $fonts = array_merge( $this->standard_fonts , $this->google_fonts );
 
         if( !empty( $this->custom_fonts ) ){
-            $fonts = array_merge( $this->custom_fonts , $fonts );
+
+            $custom_fonts = array();
+
+            foreach( $this->custom_fonts AS $family => $font_data ) {
+                $custom_fonts[$family] = $font_data['font_title'];
+            }
+
+            $fonts = array_merge( $custom_fonts , $fonts );
         }
         return $fonts;
     }
@@ -238,16 +246,29 @@ Class SiteeditorTypography{
     }
 
     public static function get_custom_fonts(){
-        global $sed_general_data;
-        if( !empty( $sed_general_data['custom_font_title'] ) && !empty( $sed_general_data['custom_font_name'] ) &&
-            substr( $sed_general_data['custom_font_woff'] , -5) == ".woff" &&
-            substr( $sed_general_data['custom_font_ttf'] , -4) == ".ttf" &&
-            substr( $sed_general_data['custom_font_svg'] , -4) == ".svg" &&
-            substr( $sed_general_data['custom_font_eot'] , -4) == ".eot" ){
 
-            return array( $sed_general_data['custom_font_name'] => $sed_general_data['custom_font_title'] );
-        }else
+        $custom_fonts = get_theme_mod( 'sed_custom_fonts' , array() );
+
+        $valid_fonts = array();
+
+        foreach( $custom_fonts AS $font ) {
+            if (!empty($font['font_title']) && !empty($font['font_family']) &&
+                substr($font['font_woff'], -5) == ".woff" &&
+                substr($font['font_ttf'], -4) == ".ttf" &&
+                substr($font['font_svg'], -4) == ".svg" &&
+                substr($font['font_eot'], -4) == ".eot"
+            ) {
+
+                $valid_fonts[$font['font_family']] = $font;
+            }
+        }
+
+        if( !empty( $valid_fonts ) ){
+            return $valid_fonts;
+        }else{
             return false;
+        }
+
     }
 
 }

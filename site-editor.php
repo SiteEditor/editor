@@ -140,6 +140,18 @@ final Class SiteEditor {
     private function init_hooks() {
         register_activation_hook( __FILE__, array( 'SiteEditorInstall', 'install' ) );
         add_action( 'init', array( $this, 'init' ), 0 );
+
+        add_filter('upload_mimes', array( $this , 'filter_mime_types') );
+    }
+
+    public function filter_mime_types($mimes){
+
+        $mimes['ttf']  = 'font/ttf';
+        $mimes['woff'] = 'font/woff';
+        $mimes['svg']  = 'font/svg';
+        $mimes['eot']  = 'font/eot';
+
+        return $mimes;
     }
 
     /**
