@@ -2,6 +2,8 @@
 
     <?php echo __("Custom Font","site-editor");?>
 
+    <div class="sed-custom-font-accordion-delete"><span class="icon-delete"></span></div> 
+  
 </div>
 
 <div class="sed-accordion-content" >

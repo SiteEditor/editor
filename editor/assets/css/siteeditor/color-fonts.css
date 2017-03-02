@@ -261,3 +261,34 @@
       margin: 0;
       display: block !important;
 }
+
+
+
+/* Custom Fonts */  
+.sed-custom-fonts-accordion input.media-url-field {
+    width: 100%;
+}
+
+.sed-custom-fonts-accordion .sed-custom-font-accordion-delete {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #ff0000;
+    opacity: 0.6;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.sed-custom-fonts-accordion .sed-custom-font-accordion-delete:hover {
+    opacity: 1;
+}
+
+.sed-custom-fonts-accordion .sed-accordion-header {
+    padding-right: 30px;
+}
+
+.sed-custom-fonts-accordion > .sed-accordion-header , 
+.sed-custom-fonts-accordion > .sed-accordion-content {
+    margin: 0 !important;
+    width: 100%;
+}
