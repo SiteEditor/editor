@@ -159,7 +159,9 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
                         <span class="fa f-sed icon-savepublish  fa-lg "></span>
                         <span class="el_txt">Saved</span>
                     </button> -->
-                    <a href="#" class="sed-save-code-changes sed-btn-default"><?php echo esc_html__( "Save Changes" , "site-editor" );?></a>
+                    <div class="sed-save-code-changes-wrap">
+                        <a href="#" class="sed-save-code-changes btn button-primary"><?php echo esc_html__( "Save Changes" , "site-editor" );?></a>
+                    </div> 
                     <?php endif;?>
                 </div>
 

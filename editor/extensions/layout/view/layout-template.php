@@ -2,7 +2,7 @@
     <div class="row_settings">
         <div class="row_setting_inner row_setting_box">
             <div id='sed-scope-settings-<?php echo $control_id; ?>'  class="clearfix">
-                <div class="sed-scope-mode-label"><span><?php echo __('Scope' , 'site-editor') ?> :</span><span class="scope-mode"><?php echo __('Private' , 'site-editor') ?></span></div>
+                <div class="sed-scope-mode-label bg-primary"><span><?php echo __('Scope' , 'site-editor') ?>: </span><span class="scope-mode"><?php echo __('Private' , 'site-editor') ?></span></div>
                 <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title=""></span>
                 <button data-related-level-box="dialog_page_box_<?php echo $control_id; ?>" class="sed-btn-default sed_go_to_scope_settings"  name="sed_pb_<?php echo $control_id; ?>" id="sed_pb_<?php echo $control_id; ?>" >
                     <?php echo __('Go To Scope Settings' , 'site-editor') ?><span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>

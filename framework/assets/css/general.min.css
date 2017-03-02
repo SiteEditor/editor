@@ -264,3 +264,21 @@ table.sed-cols-table > tbody > tr > td {
 .sed-ta-j { 
   text-align: justify; 
 }
+
+
+/*   Hidden Theme Row  */  
+
+.sed-app-editor .sed-hidden-theme-row {
+    background-color: rgba(0,0,0,0.05);  
+}
+
+.sed-app-editor .sed-hidden-theme-row > .sed-bp-module {
+    display: none !important;
+} 
+
+.sed-app-editor .sed-hidden-theme-row:after {
+    content: "Hidden Module";
+    text-align: center;
+    display: block;
+    padding: 25px 10px;
+}

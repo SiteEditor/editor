@@ -376,6 +376,12 @@ span.select2-selection.select2-selection--single {
 
 /* Code Mirror */ 
 
+.sed-dialog-code-editor-expanded .row_settings {
+    height: 0;
+    margin: 0;
+    width: 0;
+}
+
 .ui-dialog {
     /*transition: all 0.3s ease;*/ 
 }
@@ -393,7 +399,10 @@ span.select2-selection.select2-selection--single {
 
 .sed-code-editor-wrapper {
     margin-top: 8px;
-    border: 1px solid #d5d5d5;
+}
+
+.sed-code-editor-wrapper > .CodeMirror {
+    border: 1px solid #d5d5d5; 
 }
 
 .sed-code-editor-expanded > .sed-code-editor-wrapper {
@@ -407,9 +416,13 @@ span.select2-selection.select2-selection--single {
     display: block;
     background-color: #fff;
     padding: 0px;
-    margin: 0;
+    margin: 0;  
     z-index: 1000;
-    border: 0 none; 
+    border: 0 none;  
+}
+
+.sed-code-editor-expanded > .sed-code-editor-wrapper > .CodeMirror {
+    border: 0 none;  
 }
 
 .sed-code-editor-expanded > .sed-code-editor-wrapper .CodeMirror {
@@ -433,9 +446,24 @@ span.select2-selection.select2-selection--single {
 .sed-resize-code-editor-toggle.sed-expanded-toggle {
     top: -30px;
     right: 36px; 
+    padding: 4px 12px;
 }
 
+.sed-code-editor-expanded .sed-save-code-changes-wrap {
+    position: absolute;
+    top: -30px;
+    right: 110px;
+}
 
+.sed-code-editor-expanded .sed-save-code-changes-wrap .sed-save-code-changes {
+    padding: 4px 12px;
+    margin: 0;
+}
+
+.CodeMirror-gutters {
+    /*min-width: 30px;
+    margin-left: -30px;*/
+}
 
 /* Wp Text Editor */ 
 
@@ -578,7 +606,7 @@ div#wp-sed-wp-tinymce-text-editor-editor-container .wp-editor-area {
 }
 
 .text-primary {
-    color: #fa8900
+    color: #00aaff
 }
 
 a.text-primary:hover,
@@ -624,7 +652,7 @@ a.text-danger:focus {
 
 .bg-primary {
     color: #fff;
-    background-color: #fa8900
+    background-color: #00aaff
 }
 
 a.bg-primary:hover,
@@ -668,6 +696,25 @@ a.bg-danger:focus {
     background-color: #fcb9bd
 }
 
+.bg-black {
+    background-color: #333
+}
+
+a.bg-black:hover ,
+a.bg-black:focus {
+    background-color: #111
+}
+
+.bg-gray {
+    background-color: #eee
+}
+
+a.bg-gray:hover ,
+a.bg-gray:focus {
+    background-color: #e5e5e5
+}
+
+
 
 /* Scope */  
 
@@ -675,6 +722,13 @@ a.bg-danger:focus {
     padding-left: 20px;
 }
 
+.sed-scope-mode-label {
+    color: #fff;
+    padding: 4px 15px;
+    display: inline-block;
+    margin-bottom: 3px;
+    font-weight: normal;
+}
  
 
 
