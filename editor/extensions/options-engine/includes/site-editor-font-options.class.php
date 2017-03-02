@@ -143,7 +143,7 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
                 'type'              => 'custom',
                 'js_type'           => 'custom_font',
                 'default'           => array(),
-                'has_border_box'    => true ,
+                'has_border_box'    => false ,
                 'custom_template'   => $this->custom_fonts_template() ,
                 'transport'         => 'postMessage' ,
                 'priority'          => 6 ,
