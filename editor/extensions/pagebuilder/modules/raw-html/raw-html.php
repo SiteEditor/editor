@@ -96,5 +96,5 @@ $sed_pb_app->register_module(array(
     "description"   => __("site editor module for Raw HTML plugin","site-editor"),
     "icon"          => "icon-customhtml",
     "shortcode"     => "sed_raw_html",
-    "transport"     => "ajax"
+    "tpl_type"      => "underscore"
 ));

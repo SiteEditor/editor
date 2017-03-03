@@ -534,13 +534,37 @@
                     return $( '[sed_model_id="' + id + '"]' )[0].outerHTML;
             }
 
-            //moduleSkin = ( _.isUndefined( moduleSkin ) || !$.trim(moduleSkin) ) ?  "default" : moduleSkin;
-
             if( typeof id === 'undefined'){
                 var message = "SED_ERROR : id is not defined for shortcode " + shortcode_name;
-                api.log( message );
-            }else
-                data = this.loadShortcodeParam( id );
+                console.error( message );
+                return ;
+            }
+
+            //moduleSkin = ( _.isUndefined( moduleSkin ) || !$.trim(moduleSkin) ) ?  "default" : moduleSkin;
+
+            var currShortcodeInfo = api.shortcodes[shortcode_name],
+                transport,
+                loadingC = '<div class="module-loading-container" >test.....</div>';
+
+            if( currShortcodeInfo.asModule ){
+                transport = api.pageBuilder.getModuleTransport( currShortcodeInfo.moduleName  , "module" );
+            }else{
+                transport = api.pageBuilder.getModuleTransport( shortcode_name  , "shortcode" );
+            }
+
+            if( transport == "ajax" ){
+
+                var ajaxShortcode = this.getShortcode( id ),
+                    _success = function( response ){
+                    $( '[sed_model_id="' + ajaxShortcode.parent_id + '"]' ).replaceWith( response.data );
+                };
+
+                api.pageBuilder.ajaxLoadModules( ajaxShortcode.parent_id , _success );
+
+                return loadingC;
+            }
+
+            data = this.loadShortcodeParam( id );
 
             if(!_.isObject(data) || _.isUndefined( data.param ) || _.isUndefined( data.module ) )
                 return ;

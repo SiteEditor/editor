@@ -1584,7 +1584,7 @@
             var moduleName = name;
 
             if(field == "shortcode"){
-                var shModel = api.shortcodes[ api.currentShortcode ];
+                var shModel = api.shortcodes[ name ];
                 moduleName = shModel.moduleLocation;
             }
 

@@ -67,6 +67,47 @@
                 moduleSh = api.contentBuilder.getShortcode( parentId ) ,
                 rowSh = api.contentBuilder.getShortcode( moduleSh.parent_id ),
                 rowIdx = api.contentBuilder.getShortcodeIndex( rowSh.id ),
+                index;
+
+            //add row && module shortcode To models
+            modulesShortcodes.unshift( rowSh , moduleSh );
+
+            var newPattern = api.sedShortcode.clone( modulesShortcodes );
+
+            newPattern = this.modifyModels( newPattern );
+
+            //create new pattern
+            //newPattern = api.pageBuilder.loadPattern( newPattern , parentId );
+
+            //set helper id for add shortcode pattern id
+            newPattern = api.pageBuilder.setHelperShortcodes( newPattern , mainShortcode.tag , "tag" );
+
+            //shortcode pattern filter
+            newPattern = api.pageBuilder.shortcodesPatternFilter( newPattern );
+
+            this.newElementId = newPattern[2].id;
+
+            index = newPattern.length + rowIdx;
+
+            api.contentBuilder.addShortcodesToParent( rowSh.id , newPattern , postId , index );
+
+            //apply design editor css in preview
+            api.pageBuilder.syncStyleEditorPreview( newPattern ); console.log( "------------newPattern--------" , newPattern );
+
+            html = api.contentBuilder.do_shortcode( "sed_row" , newPattern[0].id , newPattern[0].id );
+
+            var newItem = $(html).insertAfter( $( '[sed_model_id="' + rowSh.id + '"]'  ) );
+
+            api.selectPlugin.select( $( '[sed_model_id="' + this.newElementId + '"]' ) , false );
+
+            /*var elementId = this.elementId,
+                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) ,
+                mainShortcode = api.contentBuilder.getShortcode(elementId) ,
+                parentId = mainShortcode.parent_id ,
+                modulesShortcodes = api.contentBuilder.findAllTreeChildrenShortcode( parentId , postId ),
+                moduleSh = api.contentBuilder.getShortcode( parentId ) ,
+                rowSh = api.contentBuilder.getShortcode( moduleSh.parent_id ),
+                rowIdx = api.contentBuilder.getShortcodeIndex( rowSh.id ),
                 modulesShortcodesCopy, index;
 
             //add row && module shortcode To models
@@ -100,9 +141,9 @@
                 ids            : this.Ids
             });*/
 
-            if( !_.isUndefined( sedCssCopy ) && !_.isEmpty( sedCssCopy ) && _.isObject( sedCssCopy ) ){
+            /*if( !_.isUndefined( sedCssCopy ) && !_.isEmpty( sedCssCopy ) && _.isObject( sedCssCopy ) ){
                 this.syncStyleEditorPreview( sedCssCopy );
-            }
+            }*/
 
             api.Events.trigger( "sedAfterDuplicate" , elementId , newItem );
             api.Events.trigger( "after-duplicate-" + elementId );
