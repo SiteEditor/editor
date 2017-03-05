@@ -685,7 +685,7 @@ class SiteEditorCss{
         }
 
         if( $this->chvv( 'position' , $element_properties) ){
-            $output_css .= 'position : ' .$element_properties['position'] . ' !important' ;
+            $output_css .= 'position : ' .$element_properties['position'] . ' !important;' ;
         }
 
         if( $this->chvv( 'font_color' , $element_properties) ){
