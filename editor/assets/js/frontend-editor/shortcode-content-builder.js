@@ -542,7 +542,7 @@
 
             //moduleSkin = ( _.isUndefined( moduleSkin ) || !$.trim(moduleSkin) ) ?  "default" : moduleSkin;
 
-            var currShortcodeInfo = api.shortcodes[shortcode_name],
+            /*var currShortcodeInfo = api.shortcodes[shortcode_name],
                 transport,
                 loadingC = '<div class="module-loading-container" >test.....</div>';
 
@@ -562,7 +562,7 @@
                 api.pageBuilder.ajaxLoadModules( ajaxShortcode.parent_id , _success );
 
                 return loadingC;
-            }
+            }*/
 
             data = this.loadShortcodeParam( id );
 

@@ -1249,78 +1249,63 @@ class PBAPITestModule extends PBShortcodeClass{
  
 
         $params['border_top_style'] = array( 
-            "type"              => "border-top-style" , 
+            "type"              => "border-style" ,
             "label"             => __('Border Top Style', 'site-editor'),
             "description"       => __("Module Border Top Style", "site-editor"), 
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' ,    
-            'js_type'           =>  'dropdown',
-            'has_border_box'    =>   false ,  
-            'js_params'     =>  array(
-                'options_selector'  => '.border-item',
-                'selected_class'    => 'active_border' ,
-            ),      
+            "selector"          => 'sed_current' ,
+            'prop_side'         => 'top',
+            'has_border_box'    =>   false ,
             "default"           => '' ,
             'panel'             => 'design_editor_panel'
         ); 
 
         $params['border_right_style'] = array( 
-            "type"              => "border-right-style" ,
+            "type"              => "border-style" ,
             "label"             => __('Border Right Style', 'site-editor'),
             "description"       => __("Module Border Right Style", "site-editor"),  
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' ,   
-            'js_type'           =>  'dropdown',
-            'has_border_box'    =>   false ,  
-            'js_params'     =>  array(
-                'options_selector'  => '.border-item',
-                'selected_class'    => 'active_border' ,
-            ),      
+            "selector"          => 'sed_current' ,
+            'prop_side'         => 'right',
+            'has_border_box'    =>   false ,
             "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
 
         $params['border_bottom_style'] = array( 
-            "type"              => "border-bottom-style" ,
+            "type"              => "border-style" ,
             "label"             => __('Border Bottom Style', 'site-editor'),
             "description"       => __("Module Border Bottom Style", "site-editor"),  
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'js_type'           =>  'dropdown',
-            'has_border_box'    =>   false ,  
-            'js_params'     =>  array(
-                'options_selector'  => '.border-item',
-                'selected_class'    => 'active_border' ,
-            ),      
+            'prop_side'         => 'bottom',
+            'has_border_box'    =>   false ,
             "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );   
 
 
         $params['border_left_style'] = array( 
-            "type"              => "border-left-style" ,
+            "type"              => "border-style" ,
             "label"             => __('Border Left Style', 'site-editor'),
             "description"       => __("Module Border Left Style", "site-editor"),  
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'js_type'           =>  'dropdown',
-            'has_border_box'    =>   false ,  
-            'js_params'     =>  array(
-                'options_selector'  => '.border-item',
-                'selected_class'    => 'active_border' ,
-            ),      
+            'prop_side'         => 'left',
+            'has_border_box'    =>   false ,
             "default"           => '' ,
             'panel'             => 'design_editor_panel'
         );  
  
 
         $params['border_top_width'] = array( 
-            "type"              => "border-top-width" , 
+            "type"              => "border-width" ,
             "label"             => __('Border Top Width', 'site-editor'),
             "description"       => __("Module Border Top Width", "site-editor"), 
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
+            'prop_side'         => 'top',
             "default"           => '' ,
             'panel'             => 'design_editor_panel'
         ); 

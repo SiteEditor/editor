@@ -178,7 +178,92 @@
                 return newAttrs;
             }
 
+        },
+
+        getPatternScripts : function( shortcodesModels ){
+
+            var _scripts = [];
+
+            _.each( shortcodesModels , function( shortcode ){
+
+                if( !_.isUndefined( api.shortcodes[shortcode.tag] ) ) {
+
+                    _scripts = $.merge(_scripts, api.shortcodesScripts[shortcode.tag] || []);
+
+                }
+
+
+            });
+
+            return _scripts;
+
+        },
+
+        getPatternModulesScripts : function( shortcodesModels ){
+
+            var _scripts = [];
+
+            _.each( shortcodesModels , function( shortcode ){
+
+                if( !_.isUndefined( api.shortcodes[shortcode.tag] ) ) {
+
+                    var currShortcodeInfo = api.shortcodes[shortcode.tag];
+
+                    if (!_.isUndefined(currShortcodeInfo.asModule) && currShortcodeInfo.asModule) {
+                        if (!_.isUndefined(api.ModulesEditorJs[currShortcodeInfo.moduleName])) {
+                            _scripts.push(api.ModulesEditorJs[currShortcodeInfo.moduleName]);
+                        }
+                    }
+
+                }
+
+            });
+
+            return _scripts;
+
+        },
+
+        getPatternStyles : function( shortcodesModels ){
+
+            var _styles = [];
+
+            _.each( shortcodesModels , function( shortcode ){
+
+                if( !_.isUndefined( api.shortcodes[shortcode.tag] ) ) {
+
+                    _styles = $.merge(_styles, api.shortcodesStyles[shortcode.tag] || []);
+
+                }
+
+            });
+
+            return _styles;
+
+        },
+
+        getPatternTransport : function( shortcodesModels ){
+
+            var transport = 'default';
+
+            $.each( shortcodesModels , function( index , shortcode ){
+
+                if( !_.isUndefined( api.shortcodes[shortcode.tag] ) ) {
+
+                    var _transport = api.pageBuilder.getModuleTransport( shortcode.tag  , "shortcode");
+
+                    if( _transport == "ajax" ){
+                        transport = "ajax";
+                        return false;
+                    }
+
+                }
+
+            });
+
+            return transport;
+
         }
+
 
     });
 

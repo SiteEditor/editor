@@ -48,6 +48,8 @@
 
         duplicate : function( element , callback ){
 
+            var self = this;
+
             if( element.hasClass("sed-bp-module") ){
                 element = element.find(".sed-pb-module-container:first");
             }else if( element.hasClass("sed-row-pb") ){
@@ -94,11 +96,39 @@
             //apply design editor css in preview
             api.pageBuilder.syncStyleEditorPreview( newPattern ); console.log( "------------newPattern--------" , newPattern );
 
-            html = api.contentBuilder.do_shortcode( "sed_row" , newPattern[0].id , newPattern[0].id );
+            var _completePatternLoad = function( html ){
 
-            var newItem = $(html).insertAfter( $( '[sed_model_id="' + rowSh.id + '"]'  ) );
+                var newItem = $( html ).insertAfter( $( '[sed_model_id="' + rowSh.id + '"]'  ) );
 
-            api.selectPlugin.select( $( '[sed_model_id="' + this.newElementId + '"]' ) , false );
+                api.selectPlugin.select( $( '[sed_model_id="' + self.newElementId + '"]' ) , false );
+
+                api.Events.trigger( "sedAfterDuplicate" , elementId , newItem );
+                api.Events.trigger( "after-duplicate-" + elementId );
+
+                if( typeof callback == "function" )
+                    callback();
+
+            };
+
+            var transport = api.sedShortcode.getPatternTransport( newPattern );
+
+            if( transport == "ajax" ){
+
+                var _success = function( response ){
+
+                    _completePatternLoad( response.data );
+
+                };
+
+                api.pageBuilder.ajaxLoadModules( newPattern[0].id , _success );
+
+            }else{
+
+                var html = api.contentBuilder.do_shortcode( "sed_row" , newPattern[0].id , newPattern[0].id );
+
+                _completePatternLoad( html );
+
+            }
 
             /*var elementId = this.elementId,
                 postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) ,
@@ -144,12 +174,6 @@
             /*if( !_.isUndefined( sedCssCopy ) && !_.isEmpty( sedCssCopy ) && _.isObject( sedCssCopy ) ){
                 this.syncStyleEditorPreview( sedCssCopy );
             }*/
-
-            api.Events.trigger( "sedAfterDuplicate" , elementId , newItem );
-            api.Events.trigger( "after-duplicate-" + elementId );
-
-            if( typeof callback == "function" )
-                callback();
 
         },
 

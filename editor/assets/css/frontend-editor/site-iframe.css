@@ -1056,7 +1056,7 @@
 
 }
 .sed-loading-continer .sed-loading{
-    background-image: url("images/loading.gif");
+    background-image: url("../../images/loading.gif");
     background-position: center center;
     background-repeat: no-repeat;
     display: table-cell;
@@ -1080,7 +1080,7 @@
 
 }
 .sed-loading-small-continer .sed-loading{
-    background-image: url("images/loading.gif");
+    background-image: url("../../images/loading.gif");
     background-position: center center;
     background-repeat: no-repeat;
     background-size: 21px 21px;

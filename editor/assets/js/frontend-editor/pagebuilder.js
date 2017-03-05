@@ -49,15 +49,25 @@
 
         },
 
-
         modulesDrag: function( option , args ){
             var pagebuilder = this;
                                         //sed-pb-empty-sortable-area
+
+            var ui = args.ui ,
+                $element = args.element ,
+                name = $element.attrs["sed-module-name"] ,
+                $this;
+
+            var pattern = this.getPatternByModuleName(name),
+                modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
+                rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
+                newPattern = $.merge( $.merge( $.merge( [], rowPattern ), modulePattern ) , pattern );
+
+            var transport = api.sedShortcode.getPatternTransport( newPattern );
+
             if( option == "sortStop" ){
-                var ui = args.ui ,
-                    $element = args.element ,
-                    name = $element.attrs["sed-module-name"] ,
-                    $this = $('[current-sortable-item="yes"]');
+
+                $this = $('[current-sortable-item="yes"]');
 
                 $this.removeAttr("current-sortable-item");
 
@@ -84,20 +94,17 @@
                         _callback();
 
                 }else{
-                    /*var dropItem = ( $this.attr("sed_model_id") ) ? $this : $this.parents(".sed-pb-component:first") ,
-                        direction =  ( $this.attr("sed_model_id") ) ? ui.direction : "none";*/
 
-                    if( !_.isUndefined( api.modulesSettings[name] ) && !_.isUndefined( api.modulesSettings[name].transport ) && api.modulesSettings[name].transport == "ajax" ){
+                    if( transport == "ajax" ){
                         pagebuilder.ajaxHandlerModules(name, $this, ui.direction );
                     }else{
                         pagebuilder.directlyHandlerModules(name, $this , ui.direction );
                     }
+
                 }
             }else if( option == "drop" ){
-                var ui = args.ui ,
-                    $element = args.element ,
-                    name = $element.attrs["sed-module-name"] ,
-                    $this = $('[current-droppable-item="yes"]');
+
+                $this = $('[current-droppable-item="yes"]');
 
                 $this.removeAttr("current-droppable-item");
 
@@ -123,11 +130,13 @@
                         _callback();
 
                 }else{
-                    if(   !_.isUndefined( api.modulesSettings[name] ) && !_.isUndefined( api.modulesSettings[name].transport ) && api.modulesSettings[name].transport == "ajax"  ){
+
+                    if( transport == "ajax"  ){
                         pagebuilder.ajaxHandlerModules(name, $this, "none" );
                     }else{
                         pagebuilder.directlyHandlerModules(name, $this, "none" );
                     }
+
                 }
             }
 
@@ -216,8 +225,6 @@
                 loadingC ,
                 newItem;
 
-           // loadingC = '<div class="module-loading-container"></div>';
-
             loadingC = '<div class="module-loading-container" ></div>';
 
             if(direction == "down"){
@@ -234,7 +241,7 @@
 
             self.ajaxModuleStyles[name] = [];
 
-            var skinInfo = api.modulesInfo[name]['skins']['default'];
+            /*var skinInfo = api.modulesInfo[name]['skins']['default'];
             if( !_.isUndefined( skinInfo ) ){
                 var scripts = skinInfo['scripts'];
 
@@ -246,7 +253,7 @@
                 if( $.isArray( styles ) && styles.length > 0 )
                     self.ajaxModuleStyles[self.currentAjaxModule] = $.merge( self.ajaxModuleStyles[self.currentAjaxModule] , styles);
 
-            }
+            }*/
 
             module_id = this.createNewModule( name , dropItem , direction );
 
@@ -254,13 +261,30 @@
 
             var _success = function( response ){
 
+                var pattern = self.getPatternByModuleName(name),
+                    modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
+                    rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
+                    newPattern = $.merge( $.merge( $.merge( [], rowPattern ), modulePattern ) , pattern );
+
                 var _callback = function(){
                     newItem.remove();
                     self.addModuleToPost( name , dropItem , direction , response.data );
+
+                    var patternScripts = api.sedShortcode.getPatternScripts( newPattern );
+
+                    var patternStyles = api.sedShortcode.getPatternStyles( newPattern );
+
+                    if( $.isArray( patternScripts ) && patternScripts.length > 0 )
+                        api.pageBuilder.moduleScriptsLoad( patternScripts );
+
+                    if( $.isArray( patternStyles ) && patternStyles.length > 0 )
+                        api.pageBuilder.moduleStylesLoad( patternStyles );
                 };
 
-                if( !_.isUndefined( api.ModulesEditorJs[name] ) ){
-                    var scripts = self._checkLoadedScript( [api.ModulesEditorJs[name]] , self.wpScripts );
+                var modulesEditorJs = api.sedShortcode.getPatternModulesScripts( newPattern );
+
+                if( !_.isUndefined( modulesEditorJs ) ){
+                    var scripts = self._checkLoadedScript( modulesEditorJs , self.wpScripts );
                     if($.isArray( scripts )  && scripts.length > 0 )
                         self.moduleScriptsLoad( scripts , _callback );
                     else
@@ -270,11 +294,11 @@
 
             };
 
-            if( $.isArray( self.ajaxModuleScripts[name] ) && self.ajaxModuleScripts[name].length > 0 )
+            /*if( $.isArray( self.ajaxModuleScripts[name] ) && self.ajaxModuleScripts[name].length > 0 )
                 api.pageBuilder.moduleScriptsLoad( self.ajaxModuleScripts[name] );
 
             if( $.isArray( self.ajaxModuleStyles[name] ) && self.ajaxModuleStyles[name].length > 0 )
-                api.pageBuilder.moduleStylesLoad( self.ajaxModuleStyles[name] );
+                api.pageBuilder.moduleStylesLoad( self.ajaxModuleStyles[name] );*/
 
             this.ajaxLoadModules( module_id , _success , '' , newItem );
 
@@ -710,42 +734,49 @@
         //name :: module name
         moduleScriptsLoad: function( scripts , callback  ) {
             var pagebuilder = this ,
-                scripts = scripts || [],
                 wpScripts = pagebuilder.wpScripts || [];
-                if(scripts.length == 0)
-                    return ;
-                              //alert( scripts.length + 1 );
-                var scriptLoader = new api.ModulesScriptsLoader();
-                scriptLoader.moduleScStLoad( scripts , wpScripts , function(){
-                    $.each( scripts , function(i , script){
-                        if($.inArray(script[0] , pagebuilder.wpScripts) == -1)
-                            pagebuilder.wpScripts.push(script[0]);
-                    });
-                    //api.Events.trigger("scriptsLoadedComplate");
-                    if( callback )
-                        callback();
+
+            scripts = scripts || [];
+
+            if(scripts.length == 0)
+                return ;
+
+            //alert( scripts.length + 1 );
+            var scriptLoader = new api.ModulesScriptsLoader();
+            scriptLoader.moduleScStLoad( scripts , wpScripts , function(){
+                $.each( scripts , function(i , script){
+                    if($.inArray(script[0] , pagebuilder.wpScripts) == -1)
+                        pagebuilder.wpScripts.push(script[0]);
                 });
+                //api.Events.trigger("scriptsLoadedComplate");
+                if( callback )
+                    callback();
+            });
+
         },
 
         //name :: module name
         moduleStylesLoad: function( styles , callback ) {
             var pagebuilder = this ,
-                styles = styles || [],
                 wpStyles = pagebuilder.wpStyles || [];
-                if(styles.length == 0)
-                    return ;
 
-                var styleLoader = new api.ModulesScriptsLoader();
-                styleLoader.moduleScStLoad( styles , wpStyles , function(){
-                    $.each( styles , function(i , style){
-                        //alert(i);
-                        if($.inArray(style[0] , pagebuilder.wpStyles) == -1)
-                            pagebuilder.wpStyles.push(style[0]);
-                            //alert( style[0] );
-                    });
-                    if( callback )
-                        callback();
-                } , "css");
+            styles = styles || [];
+
+            if(styles.length == 0)
+                return ;
+
+            var styleLoader = new api.ModulesScriptsLoader();
+            styleLoader.moduleScStLoad( styles , wpStyles , function(){
+                $.each( styles , function(i , style){
+                    //alert(i);
+                    if($.inArray(style[0] , pagebuilder.wpStyles) == -1)
+                        pagebuilder.wpStyles.push(style[0]);
+                        //alert( style[0] );
+                });
+                if( callback )
+                    callback();
+            } , "css");
+
         },
 
         _checkLoadedScript : function( scripts , wpScripts ){
@@ -769,7 +800,7 @@
             //var html = $("#sed-shortcode-module-" + name + "-tmpl").html() ,
             var inline_js , inline_css , newItem , self = this;
 
-            var _callback = function(){
+            /*var _callback = function(){
                 self.addModuleToPost( name , dropItem , direction );
             };
 
@@ -791,7 +822,40 @@
                 else
                     _callback();
             }else
+                _callback();*/
+
+
+            var pattern = self.getPatternByModuleName(name),
+                modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
+                rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
+                newPattern = $.merge( $.merge( $.merge( [], rowPattern ), modulePattern ) , pattern );
+
+            var _callback = function(){
+
+                self.addModuleToPost( name , dropItem , direction );
+
+                var patternScripts = api.sedShortcode.getPatternScripts( newPattern );
+
+                var patternStyles = api.sedShortcode.getPatternStyles( newPattern );
+
+                if( $.isArray( patternScripts ) && patternScripts.length > 0 )
+                    api.pageBuilder.moduleScriptsLoad( patternScripts );
+
+                if( $.isArray( patternStyles ) && patternStyles.length > 0 )
+                    api.pageBuilder.moduleStylesLoad( patternStyles );
+            };
+
+            var modulesEditorJs = api.sedShortcode.getPatternModulesScripts( newPattern );
+
+            if( !_.isUndefined( modulesEditorJs ) ){
+                var scripts = self._checkLoadedScript( modulesEditorJs , self.wpScripts );
+                if($.isArray( scripts )  && scripts.length > 0 )
+                    self.moduleScriptsLoad( scripts , _callback );
+                else
+                    _callback();
+            }else
                 _callback();
+
 
         },
 
@@ -2244,11 +2308,12 @@
         */
         api.Events.bind( "loadModuleskin" , function( modules , elementId , shortcode_name , currentSkin , type , refresh ){
             var shortcode_info = api.shortcodes[shortcode_name] ,
-                refresh = !_.isUndefined( refresh ) ? refresh : false ,
                 module , dataSkins , scripts , styles , pattern, shortcodes ,
                 postId = ( $( '[sed_model_id="' + elementId + '"]' ).length > 0 ) ? api.pageBuilder.getPostId( $( '[sed_model_id="' + elementId + '"]' ) ) : api.pageBuilder.currentPostId ,
                 mainShortcode = api.contentBuilder.getShortcode(elementId) ,
                 parentId , newMainShortcode;
+
+            refresh = !_.isUndefined( refresh ) ? refresh : false ;
                                             //api.log( api.dataModulesSkins , "----" , mainShortcode , "----" , shortcode_info.asModule  );
             if( !shortcode_info.asModule || !api.dataModulesSkins || !mainShortcode )
                 return ;
@@ -2399,87 +2464,81 @@
             scripts = dataSkin.js;
             styles = dataSkin.css;
 
-            var _callback = function(){
-                                         ////api.log( api.contentBuilder.getShortcodeChildren( newMainShortcode.parent_id ) );
-                api.contentBuilder.updateShortcodeAttr( "skin"  , currentSkin , newMainShortcode.id ); 
+            var _completePatternLoad = function(){
 
-                /*//using in save page As one template
-                api.pageModulesUsing = _.map(api.pageModuleUsing , function( module ){
-                    if(module.id == newMainShortcode.id)
-                        module.skin = currentSkin;
+                var patternScripts = api.sedShortcode.getPatternScripts( shortcodes );
 
-                    return module;
-                });*/
+                var patternStyles = api.sedShortcode.getPatternStyles( shortcodes );
+
+                if( $.isArray( patternScripts ) && patternScripts.length > 0 )
+                    api.pageBuilder.moduleScriptsLoad( patternScripts );
+
+                if( $.isArray( patternStyles ) && patternStyles.length > 0 )
+                    api.pageBuilder.moduleStylesLoad( patternStyles );
 
 
                 //not needed in group skins
+                newMainShortcode.attrs.sed_model_id = newMainShortcode.id;
+
+                var module_container = $( '[sed_model_id="' + newMainShortcode.id + '"]'  ).parents(".sed-pb-module-container:first");
+
+                //not needed in group skins
+                api.preview.send( 'changeCurrentElementBySkinChange', {
+                    elementId       : newMainShortcode.id ,
+                    shortcode_name  : shortcode_name ,
+                    attrs           : newMainShortcode.attrs
+                });
+
+                /*api.selectPlugin.select( $( "#" + newMainShortcode.id ) , false , false );*/
+
+            };
+
+            var _callback = function(){
+
+                api.contentBuilder.updateShortcodeAttr( "skin"  , currentSkin , newMainShortcode.id );
+
+                //not needed in group skins
                 if( type != "group" ){
+
                     api.currentSedElementId = newMainShortcode.id;
-                }
 
-                /*var html = api.contentBuilder.do_shortcode( "sed_items_elastic_slider" , parentId );
-                                //alert( html );
-                if( _.isUndefined(html) ){
-                    api.contentBuilder.deleteModule( parentId , postId );
-                    api.contentBuilder.addShortcodesToParent( parentId , modulesShortcodesCopy , postId );
-                    alert("skin is invalid");
-                    return ;
-                }*/
+                    if( refresh === false ) {
 
+                        api.contentBuilder.refreshModule(parentId);
 
-                if( type != "group" ){
-                    //$( '[sed_model_id="' + parentId + '"]' )[0].outerHTML = html;
-                    if( refresh === false )
-                        api.contentBuilder.refreshModule( parentId );
+                        _completePatternLoad();
 
-                    //not needed in group skins
-                    newMainShortcode.attrs.sed_model_id = newMainShortcode.id;
+                    }else if( refresh === true ){
 
-        			var module_container = $( '[sed_model_id="' + newMainShortcode.id + '"]'  ).parents(".sed-pb-module-container:first");
+                        api.preview.send( 'moduleForceRefresh' );
 
-                    //api.Events.trigger("openUpdateModuleSettings" , newMainShortcode , newMainShortcode.id);
+                    }else if( refresh == "ajax" ){
 
-                   //not needed in group skins
-                    api.preview.send( 'changeCurrentElementBySkinChange', {
-                        elementId       : newMainShortcode.id ,
-                        shortcode_name  : shortcode_name ,
-                        attrs           : newMainShortcode.attrs
-                    });
+                        var _success = function( response ){
 
-                    /*api.selectPlugin.select( $( "#" + newMainShortcode.id ) , false , false );*/
+                            $( '[sed_model_id="' + newMainShortcode.parent_id + '"]'  ).replaceWith( response.data );
+
+                            _completePatternLoad();
+                        };
+
+                        api.pageBuilder.ajaxLoadModules( newMainShortcode.parent_id , _success );
+
+                    }
 
                 }
 
             };
 
-            if( refresh === true ){
+            var modulesEditorJs = api.sedShortcode.getPatternModulesScripts( shortcodes );
+
+            if( !_.isUndefined( modulesEditorJs ) ){
+                var moduleScripts = api.pageBuilder._checkLoadedScript( modulesEditorJs , api.pageBuilder.wpScripts );
+                if($.isArray( moduleScripts )  && moduleScripts.length > 0 )
+                    api.pageBuilder.moduleScriptsLoad( moduleScripts , _callback );
+                else
+                    _callback();
+            }else
                 _callback();
-                api.preview.send( 'moduleForceRefresh' );
-                return ;
-            }else if( refresh == "ajax" ){
-                _callback();
-                var _success = function( response ){
-                        $( '[sed_model_id="' + newMainShortcode.parent_id + '"]'  ).replaceWith( response.data );
-                    };
-
-                api.pageBuilder.ajaxLoadModules( newMainShortcode.parent_id , _success );
-            }
-
-
-            /*if($.isArray( scripts )  && scripts.length > 0 ){
-
-                if($.isArray( styles )  && styles.length > 0 )
-                    api.pageBuilder.moduleStylesLoad( styles );
-
-                api.pageBuilder.moduleScriptsLoad( scripts , _callback );
-
-            }else if($.isArray( styles )  && styles.length > 0 ){
-
-                api.pageBuilder.moduleStylesLoad( styles , _callback );
-            }else{ */
-                _callback();
-           // }
-
 
         });
 

@@ -96,10 +96,10 @@
         },
 
         textEditorsDisable : function( ){
-          if( _.isUndefined( tinymce ) || _.isNull( tinymce.activeEditor ) )
+          if( _.isUndefined( tinymce ) || _.isUndefined( tinymce.activeEditor ) ||  _.isNull( tinymce.activeEditor ) )
             return ;
 
-                 //api.log( tinymce.activeEditor );
+                 console.log( "tinymce.activeEditor-------------" , tinymce.activeEditor );
 
             if( $("#" + tinymce.activeEditor.id).hasClass("mce-edit-focus") )
                 this.activeEditorId = tinymce.activeEditor.id;

@@ -529,7 +529,7 @@ class SiteEditorPreset{
 
     public function add_preset_settings( $settings , $shortcode_obj ){
 
-        if ( ! current_user_can( 'manage_site_editor_preset' ) )
+        if ( ! current_user_can( 'manage_site_editor_preset' ) || $shortcode_obj->shortcode->name == "sed_row" )
             return $settings;
 
         ob_start();
