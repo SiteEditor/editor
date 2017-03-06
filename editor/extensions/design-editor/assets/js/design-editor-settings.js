@@ -554,7 +554,7 @@
 
             if( $.inArray( id , _.keys( api.settings.controls ) ) == -1 || ! control ){  //&& $el.length > 0
 
-                data.selector = selector;
+                data.selector = selector; 
 
                 data.css_setting_type = _.clone( this.settingType );
 
