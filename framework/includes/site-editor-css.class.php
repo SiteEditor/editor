@@ -307,7 +307,7 @@ class SiteEditorCss{
 
         $bg_image = "";
 
-        if( !$this->chvv('background_image' , $element_properties , 0) || $element_properties['background_image'] == "none" ) {
+        if( $this->chvv('background_image' , $element_properties) ) {
             $bg_image = $element_properties['background_image'];
         }
 
@@ -315,7 +315,7 @@ class SiteEditorCss{
             $bg_image = $element_properties['external_background_image'];
         }
 
-        $is_bg_image = $bg_image && $bg_image != "none";
+        $is_bg_image = $bg_image && $bg_image != "none"; 
 
         $gradient = $this->chvv('background_gradient' , $element_properties) && $element_properties['background_gradient'];
 
@@ -326,13 +326,10 @@ class SiteEditorCss{
         }else if ( $is_bg_image && $gradient ){
             $output_css .= $this->gradient( $element_properties['background_gradient'] , $bg_image );
         }else{
-            if( $bg_image == "none" )
-                $output_css .= 'background-image: none !important;';
-            else
-                $output_css .= 'background-image: url("' . $bg_image . '") !important;';
+            $output_css .= 'background-image: url("' . $bg_image . '") !important;';
         }
 
-        if ( $bg_image ) {
+        if ( $is_bg_image ) {
 
           /**
            * if true parallax_background_image prevent print background_position if exist
