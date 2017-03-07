@@ -1524,16 +1524,6 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'border_radius_design_panel'
         );   
 
-
-        $padding_lock_id = "sed_pb_".$this->control_prefix."_padding_lock";
-
-        $padding_spinner_class = 'sed-padding-spinner-' . $this->control_prefix;
-        $padding_spinner_class_selector = '.' . $padding_spinner_class;
-        $padding_sh_name = $this->control_prefix;
-        $padding_sh_name_c = $padding_sh_name. "_padding_";
-
-        $padding_controls = array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" );
-
         $params['padding_top'] = array( 
             "type"              => "padding" , 
             "label"             => __('Padding Top', 'site-editor'),
@@ -1541,21 +1531,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'top',
-            'atts'  => array(
-                "class" =>   $padding_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $padding_lock_id,
-                    'spinner'  => $padding_spinner_class_selector,
-                    'controls' => array( $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
-                ),
-                'min'   =>  0 ,
-                
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ),       
+            'lock_id'           => 'padding_lock',     
             "default"             => '' , 
             'panel'             => 'padding_design_panel'
         ); 
@@ -1567,21 +1543,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'right',
-            'atts'  => array(
-                "class" =>   $padding_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $padding_lock_id,
-                    'spinner'  => $padding_spinner_class_selector,
-                    'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
-                ),
-                'min'   =>  0 ,
-                
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ),      
+            'lock_id'           => 'padding_lock',  
             "default"             => '' , 
             'panel'             => 'padding_design_panel'
         );
@@ -1593,21 +1555,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'bottom',
-            'atts'  => array(
-                "class" =>   $padding_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $padding_lock_id,
-                    'spinner'  => $padding_spinner_class_selector,
-                    'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" )
-                ),
-                'min'   =>  0 ,
-                
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ),      
+            'lock_id'           => 'padding_lock',      
             "default"             => '' , 
             'panel'             => 'padding_design_panel'
         );
@@ -1619,51 +1567,20 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'left',
-            'atts'  => array(
-                "class" =>   $padding_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $padding_lock_id,
-                    'spinner'  => $padding_spinner_class_selector,
-                    'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "bottom" )
-                ),
-                'min'   =>  0 ,
-                
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ),      
+            'lock_id'           => 'padding_lock',     
             "default"             => '' , 
             'panel'             => 'padding_design_panel'
         );
 
         $params['padding_lock'] = array( 
-            "type"              => "padding" ,
+            "type"              => "property-lock" , 
             "label"             => __('lock Spacings Together', 'site-editor'),
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'prop_side'         => 'lock',
-            'atts'  => array(
-                "class" =>   "sed-lock-spinner"
-            ) ,
-            'js_params'     =>  array(
-                'spinner' =>  $padding_spinner_class_selector ,
-                'controls' => array( $padding_sh_name_c . "top" , $padding_sh_name_c . "right" , $padding_sh_name_c . "left" , $padding_sh_name_c . "bottom" )
-            ),   
-            "default"             => '' , 
+            'default'           => true , 
             'panel'             => 'padding_design_panel'
         );
-
-        $margin_lock_id = "sed_pb_".$this->control_prefix."_margin_lock";
-
-        $margin_spinner_class = 'sed-margin-spinner-' . $this->control_prefix;
-        $margin_spinner_class_selector = '.' . $margin_spinner_class;
-        $margin_sh_name = $this->control_prefix;
-        $margin_sh_name_c = $margin_sh_name. "_margin_";
-
-        $margin_controls = array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" );
 
         $params['margin_top'] = array( 
             "type"              => "margin" , 
@@ -1672,21 +1589,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'top',
-            'atts'  => array(
-                "class" =>   $margin_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $margin_lock_id,
-                    'spinner'  => $margin_spinner_class_selector,
-                    'controls' => array( $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
-                ),
-                'min'   =>  0 ,
-                
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ),
+            'lock_id'           => 'margin_lock',    
             "default"             => '' , 
             'panel'             => 'margin_design_panel'
         ); 
@@ -1698,21 +1601,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'right',
-            'atts'  => array(
-                "class" =>   $margin_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $margin_lock_id,
-                    'spinner'  => $margin_spinner_class_selector,
-                    'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
-                ),
-                'min'   =>  0 ,
-                
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ),    
+            'lock_id'           => 'margin_lock',     
             "default"             => '' , 
             'panel'             => 'margin_design_panel'
         );
@@ -1724,21 +1613,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'bottom',
-            'atts'  => array(
-                "class" =>   $margin_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $margin_lock_id,
-                    'spinner'  => $margin_spinner_class_selector,
-                    'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" )
-                ),
-                'min'   =>  0 ,
-                
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ),    
+            'lock_id'           => 'margin_lock',      
             "default"             => '' , 
             'panel'             => 'margin_design_panel'
         );
@@ -1750,40 +1625,18 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'left',
-            'atts'  => array(
-                "class" =>   $margin_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $margin_lock_id,
-                    'spinner'  => $margin_spinner_class_selector,
-                    'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "bottom" )
-                ),
-                'min'   =>  0 ,
-                
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ),   
+            'lock_id'           => 'margin_lock',    
             "default"             => '' , 
             'panel'             => 'margin_design_panel'
         );
 
         $params['margin_lock'] = array(  
-            "type"              => "margin" ,
+            "type"              => "property-lock" ,
             "label"             => __('lock Spacings Together', 'site-editor'),
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'prop_side'         => 'lock',
-            'atts'  => array(
-                "class" =>   "sed-lock-spinner"
-            ) ,
-            'js_params'     =>  array(
-                'spinner' =>  $margin_spinner_class_selector ,
-                'controls' => array( $margin_sh_name_c . "top" , $margin_sh_name_c . "right" , $margin_sh_name_c . "left" , $margin_sh_name_c . "bottom" )
-            ),   
-            "value"             => '' , 
+            'default'           => true ,   
             'panel'             => 'margin_design_panel'
         );
 

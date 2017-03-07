@@ -88,7 +88,7 @@
             <div class="images-group">
                 <#
                     if( !_.isEmpty( multi_image_field_attr ) && _.isString( multi_image_field_attr ) ){
-                        var imagesGroup = multi_image_field_attr.spdivt(","); 
+                        var imagesGroup = multi_image_field_attr.split(","); 
                         _.each( imagesGroup , function( img_id ){
                             var gImgHtml = api.fn.getAttachmentImageHtml( img_id , "thumbnail" );
                 #>
@@ -119,7 +119,7 @@
             <div class="icons-group">
                 <#
                     if( !_.isEmpty( multi_icon_field_attr ) && _.isString( multi_icon_field_attr ) ){
-                        var iconsGroup = multi_icon_field_attr.spdivt(",");
+                        var iconsGroup = multi_icon_field_attr.split(",");
                         _.each( iconsGroup , function( gIcon ){
                 #>
                         <div><span class="icon-group-single {{gIcon}}"></span></div>
