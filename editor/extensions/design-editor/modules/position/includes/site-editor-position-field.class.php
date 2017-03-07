@@ -76,7 +76,7 @@ if ( ! class_exists( 'SiteEditorPositionField' ) ) {
             }
 
             $this->choices = array(
-                ''              => __('Select Position', 'site-editor'),
+                //''              => __('Select Position', 'site-editor'),
                 'relative'      => __('relative', 'site-editor'),
                 'absolute'      => __('absolute ', 'site-editor'),
                 'fixed'         => __('fixed', 'site-editor'),
