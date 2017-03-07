@@ -36,7 +36,6 @@ class PBAPITestModule extends PBShortcodeClass{
             "date_field_attr"    =>  "07/05/2016" ,
             "dimension_field_attr"    =>  "" ,
             "textarea_field_attr"    =>  "Test text in textarea" ,
-            "range_field_attr"   =>  19 ,
             "single_select_field_attr"   =>  "" ,
             "multi_select_field_attr"   =>  "options1_key" ,
             "og_single_select_field_attr"   =>  "" ,
@@ -49,10 +48,9 @@ class PBAPITestModule extends PBShortcodeClass{
             "radio_field_attr"   =>  "options3_key" ,
             "radio_buttonset_field_id"   =>  "options3_key" ,
             "radio_image_field_id"   =>  "options3_key" ,
-            "spinner_field_attr"   =>  "" ,
             "color_field_attr"   =>  "" ,
-            "style_color"   =>  "" ,
-            "style_bg_color"   =>  "" ,
+            "style_color"   =>  "#FF0033" ,
+            "style_bg_color"   =>  "#FFFFFF" ,
             "color_field_attr"   =>  "" ,
             "multi_color_field_id"   =>  "" ,
             "image_field_attr"   =>  "" ,
@@ -60,10 +58,12 @@ class PBAPITestModule extends PBShortcodeClass{
             "video_field_attr"   =>  "" ,
             "audio_field_attr"   =>  "" ,
             "file_field_attr"   =>  "" ,
+            "spinner_field_attr"   =>  0 ,
             "spinner1_with_lock_attr"   =>  0 ,
             "spinner2_with_lock_attr"   =>  0 ,
             "spinner3_with_lock_attr"   =>  0 ,
             "spinner_lock_attr"   =>  true ,
+            "range_field_attr"   =>  19 ,
             "icon_field_attr"   =>  "" ,
             "multi_icon_field_attr"   =>  "" ,
             "custom_attr"   =>  "" ,
@@ -715,29 +715,11 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "number_settings_panel"
         );
 
-        $prefix = $this->control_prefix . "_";
-
-        $lock_id = "{$prefix}spinner_lock_attr";
-
-        $spinner_class = 'sed-spinner-api-test-module';
-        $spinner_class_selector = '.' . $spinner_class;
-
         $params['spinner1_with_lock_attr'] = array(
             "type"          => "number" ,
             "label"         => __("Spinner1 with lock", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
-            "atts"          => array(
-                "class"        =>    "custom-class1 custom-class2 " . $spinner_class ,
-                "data-custom"  =>    "test" ,
-            ),
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( "{$prefix}spinner3_with_lock_attr" , "{$prefix}spinner2_with_lock_attr" )
-                ),
-                'min'   =>  0 ,
-            ),
+            'lock_id'       => 'spinner_lock_attr',
             "panel"         => "number_settings_panel"
         );
 
@@ -745,18 +727,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "type"          => "number" ,
             "label"         => __("Spinner2 with lock", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
-            "atts"          => array(
-                "class"        =>    "custom-class1 custom-class2 " . $spinner_class ,
-                "data-custom"  =>    "test" ,
-            ),
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( "{$prefix}spinner3_with_lock_attr" , "{$prefix}spinner1_with_lock_attr" )
-                ),
-                'min'   =>  0 ,
-            ),
+            'lock_id'       => 'spinner_lock_attr',
             "panel"         => "number_settings_panel"
         );
 
@@ -764,32 +735,14 @@ class PBAPITestModule extends PBShortcodeClass{
             "type"          => "number" ,
             "label"         => __("Spinner3 with lock", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
-            "atts"          => array(
-                "class"        =>    "custom-class1 custom-class2 " . $spinner_class,
-                "data-custom"  =>    "test"  ,
-            ),
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $lock_id,
-                    'spinner'  => $spinner_class_selector,
-                    'controls' => array( "{$prefix}spinner2_with_lock_attr" , "{$prefix}spinner1_with_lock_attr" )
-                ),
-                'min'   =>  0 ,
-            ),
+            'lock_id'       => 'spinner_lock_attr',
             "panel"         => "number_settings_panel"
         );
 
         $params['spinner_lock_attr'] = array(
-            "type"          => "checkbox" ,
+            "type"          => "lock" ,
             "label"         => __("Spinner Lock Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
-            'atts'  => array(
-                "class" =>   "sed-lock-spinner"
-            ) ,
-            'js_params'     =>  array(
-                'spinner'  => $spinner_class_selector ,
-                'controls' => array( "{$prefix}spinner3_with_lock_attr" , "{$prefix}spinner2_with_lock_attr" , "{$prefix}spinner1_with_lock_attr" )
-            ),
             'js_type'       =>  "spinner_lock" ,
             "panel"         => "number_settings_panel"
         );
