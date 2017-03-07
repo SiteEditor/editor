@@ -122,7 +122,8 @@ final class SedDesignEditorLineHeight {
             'line_height' => array(
                 "type"              => "line-height" ,
                 "label"             => __('line height', 'site-editor'),
-                "description"       => __("line height:", "site-editor"),          
+                "description"       => __("line height:", "site-editor"), 
+                'default_value'     => '' ,         
             ),
 
         );

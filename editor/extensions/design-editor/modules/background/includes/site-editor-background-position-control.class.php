@@ -127,13 +127,13 @@ if ( ! class_exists( 'SiteEditorBackgroundPositionControl' ) ) {
             <fieldset class="row_setting_box">
                 <legend id="sed_pb_sed_image_image_settings">
                     <a href="javascript:void(0)" class=""  title="<?php echo __("background position" ,"site-editor");  ?>" >
-                        <span class="fa f-sed icon-backgroundposition fa-lg "></span>
-                        <span class="el_txt"><?php echo esc_html( $this->label );?> </span>
+                        <span class="sedico sedico-background-position sedico-lg "></span>
+                        <span class="el_txt"><?php echo esc_html( $this->label );?> </span> 
                     </a>
-                </legend>
+                </legend> 
 
                 <?php if(!empty($this->description)){ ?>
-                    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+                    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span>
                 <?php } ?>
 
                 <div id="<?php echo esc_attr($sed_field_id);?>" class="<?php echo esc_attr($classes);?> dropdown" <?php echo $atts_string;?>>

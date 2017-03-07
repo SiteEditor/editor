@@ -123,6 +123,7 @@ final class SedDesignEditorTextAlign {
                 "type"              => "text-align" ,
                 "label"             => __('Text Align', 'site-editor'),
                 "description"       => __("Text Alignment", "site-editor"),
+                'default_value'     => '' ,
             ),
 
         );

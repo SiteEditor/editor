@@ -126,7 +126,8 @@ final class SedDesignEditorTextShadow {
             'text_shadow_color' => array(
                 "type"              => "text-shadow-color" ,
                 "label"             => __("Text Shadow Color", "site-editor"),
-                "description"       => __("Add Text Shadow Color For Element", "site-editor")
+                "description"       => __("Add Text Shadow Color For Element", "site-editor"),
+                'default_value'     => '' ,
             ),
 
             'text_shadow' => array(
@@ -134,6 +135,7 @@ final class SedDesignEditorTextShadow {
                 "label"             => __('Text Shadow', 'site-editor'),
                 "description"       => __("Text Shadow", "site-editor"),
                 'has_border_box'    =>   false ,
+                'default_value'     => '' ,
             ),
 
         );

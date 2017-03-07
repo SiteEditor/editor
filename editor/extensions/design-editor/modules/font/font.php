@@ -143,36 +143,42 @@ final class SedDesignEditorFont {
                 "type"              => "font-family" ,
                 "label"             => __('Font Family', 'site-editor'),
                 "description"       => __("Font Family", "site-editor"),
+                'default_value'     => '' ,
             ),
 
             'font_size' => array(
                 "type"              => "font-size" ,
                 "label"             => __('Font Size', 'site-editor'),
-                "description"       => __("Font Size", "site-editor"),          
+                "description"       => __("Font Size", "site-editor"),  
+                'default_value'     => '' ,        
             ),
 
             'font_color' => array(
                 "type"              => "font-color" ,
                 "label"             => __('Font Color', 'site-editor'),
-                "description"       => __("Font Color", "site-editor"),          
+                "description"       => __("Font Color", "site-editor"),  
+                'default_value'     => 'transparent' ,        
             ),
 
             'font_weight' => array(
                 "type"              => "font-weight" ,
                 "label"             => __('Font Weight', 'site-editor'),
                 "description"       => __("Font Weight", "site-editor"),
+                'default_value'     => '' ,
             ),
 
             'font_style' => array(
                 "type"              => "font-style" ,
                 "label"             => __('Font Style', 'site-editor'),
-                "description"       => __("Font Style", "site-editor")
+                "description"       => __("Font Style", "site-editor"),
+                'default_value'     => '' ,
             ),
 
             'text_decoration' => array(
                 "type"              => "text-decoration" ,
                 "label"             => __('Text Decoration', 'site-editor'),
                 "description"       => __("Text Decoration", "site-editor"),
+                'default_value'     => '' ,
             ),
 
         );

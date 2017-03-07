@@ -123,7 +123,8 @@ final class SedDesignEditorGradient {
                 "type"              => "gradient" ,
                 "label"             => __('Gradient', 'site-editor'),
                 "description"       => __("Gradient Control", "site-editor"),
-                'has_border_box'    =>   false
+                'has_border_box'    =>   false,
+                'default_value'     => '' ,
             )
             
         );

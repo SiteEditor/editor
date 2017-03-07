@@ -128,6 +128,7 @@ final class SedDesignEditorTrancparency {
                     "min"           => 0 ,
                     "max"           => 100 ,
                 ),
+                'default_value'     => 100 ,
             ),
 
         );
