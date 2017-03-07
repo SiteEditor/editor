@@ -14,7 +14,7 @@ $css->add_settings_property(array(
     'border_bottom_style' , 'border_left_color' , 'border_left_width' , 'border_left_style' ,
     'background_image' , 'background_attachment' , 'background_position' , 'font_color' ,
     'font_family','font_size','font_weight','font_style','text_decoration' ,'text_align' ,
-    'line_height' , 'text_shadow_color' , 'text_shadow' , 'parallax_background_image'
+    'line_height' , 'text_shadow_color' , 'text_shadow' , 'parallax_background_image' , 'external_background_image'
 ));
 
 

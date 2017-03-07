@@ -305,31 +305,40 @@ class SiteEditorCss{
         if ( $this->chvv('background_color' , $element_properties) )
             $output_css .= 'background-color: ' . $element_properties['background_color'] . ' !important;';
 
-        $bg_image = $this->chvv('background_image' , $element_properties) && $element_properties['background_image'] != "none";
-        $gradient = $this->chvv('background_gradient' , $element_properties);
+        $bg_image = "";
 
-  		if ( $this->chvv('background_image' , $element_properties , 0) && !$gradient ){
+        if( !$this->chvv('background_image' , $element_properties , 0) || $element_properties['background_image'] == "none" ) {
+            $bg_image = $element_properties['background_image'];
+        }
 
-            if( empty( $element_properties['background_image'] ) || $element_properties['background_image'] == "none" )
-  			    $output_css .= 'background-image: none !important;';
-            else
-                $output_css .= 'background-image: url("' . $element_properties['background_image'] . '") !important;';
+        if( !$bg_image || $bg_image == "none" ){
+            $bg_image = $element_properties['external_background_image'];
+        }
 
-        }else if( !$bg_image && $gradient )
-            $output_css .= $this->gradient( $element_properties['background_gradient'] );
-        else if( $bg_image && $gradient  )
-            $output_css .= $this->gradient( $element_properties['background_gradient'] , $element_properties['background_image'] );
-        else if( !$this->chvv('background_image' , $element_properties , 0) && $this->chvv('background_gradient' , $element_properties , 0) && !$element_properties['background_gradient'] )
+        $is_bg_image = $bg_image && $bg_image != "none";
+
+        $gradient = $this->chvv('background_gradient' , $element_properties) && $element_properties['background_gradient'];
+
+        if ( !$is_bg_image && !$gradient ){
             $output_css .= 'background-image: none !important;';
+        }else if ( !$is_bg_image && $gradient ){
+            $output_css .= $this->gradient( $element_properties['background_gradient'] );
+        }else if ( $is_bg_image && $gradient ){
+            $output_css .= $this->gradient( $element_properties['background_gradient'] , $bg_image );
+        }else{
+            if( $bg_image == "none" )
+                $output_css .= 'background-image: none !important;';
+            else
+                $output_css .= 'background-image: url("' . $bg_image . '") !important;';
+        }
 
-
-  	  if ( $bg_image ) {
+        if ( $bg_image ) {
 
           /**
            * if true parallax_background_image prevent print background_position if exist
            */
             if ( $this->chvv('background_position' , $element_properties) && ( !$this->chvv('parallax_background_image' , $element_properties) || !$element_properties['parallax_background_image'] ) )
-  			    $output_css .= 'background-position: ' . $element_properties['background_position'] . ' !important;';
+                $output_css .= 'background-position: ' . $element_properties['background_position'] . ' !important;';
 
             if ( $this->chvv('background_attachment' , $element_properties) )
                 $output_css .= 'background-attachment: ' . $element_properties['background_attachment'] . ' !important;';
@@ -340,7 +349,7 @@ class SiteEditorCss{
             if ( $this->chvv('background_repeat' , $element_properties) )
                 $output_css .= 'background-repeat: ' . $element_properties['background_repeat'] . ' !important;';
 
-  	  }
+        }
 
         if($this->chvv('background_gradient' , $element_properties) || $this->chvv('background_size' , $element_properties))
             $output_css .= "behavior: url(" . SED_ASSETS_URL . "/js/PIE/PIE.htc" . ");";
@@ -604,16 +613,30 @@ class SiteEditorCss{
         $output_css = '';
 
         if( $this->chvv( 'shadow' , $element_properties , 0) ){
-            if( !isset( $element_properties['shadow']['values'] ) || empty($element_properties['shadow']['values']) || $element_properties['shadow']['values'] == "none" ){
+            if( !isset( $element_properties['shadow'] ) || empty($element_properties['shadow']) || $element_properties['shadow'] == "none" ){
                 $shadow = "none";
             }else{
-                $shadow = $element_properties['shadow']['values'];
+
+                $shadow = $element_properties['shadow'];
+
+                $inset = false;
+
+                if( strpos( $shadow , "inset" ) !== false ){
+
+                    $inset = true;
+
+                    $shadow = str_replace( "inset" , "" , $shadow );
+
+                }
+
                 if( array_key_exists( 'shadow_color' , $element_properties) ){
                     $shadow .= " ". $element_properties['shadow_color'];
                 }
-                if( $element_properties['shadow']['inset'] ){
+
+                if( $inset === true ){
                     $shadow .= " inset";
                 }
+
             }
             $output_css .= $this->box_shadow( $shadow );
         }

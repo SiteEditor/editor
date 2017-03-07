@@ -426,7 +426,6 @@
                       case "text_align":
                       case "font_color":
                       case "position":
-                      case "background_color" :
                       case "background_attachment" :
 
                 		  var newVal = ( !to ) ? "initial" : to + " !important" ;
@@ -613,12 +612,29 @@
                               bgImage = _getBackgroundImage() ,
                               isBgImage = bgImage && bgImage != "none";
 
-                          _saveCustomCss( setting , to );
+                          var _gradient = sGradient ? _.clone( _getGradient(to) ) : to;
+
+                          _saveCustomCss( setting , _gradient );
 
                           var css = api.currentCssSelector + "{" + _getCssBackgroundImage( bgImage , isBgImage , sGradient ) + "}";
 
                           styleSetting = "background_image";
                           needToSave = false;
+                      break;
+
+                      case "background_color" :
+
+                          _saveCustomCss( setting , to );
+
+                          var sGradient = !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_gradient"] ) && !_.isEmpty( sedCss[api.currentCssSelector]["background_gradient"] ) && _.isObject( sedCss[api.currentCssSelector]["background_gradient"] ),
+                              bgImage = _getBackgroundImage() ,
+                              isBgImage = bgImage && bgImage != "none";
+
+                          css = api.currentCssSelector + "{" + _getCssBackgroundImage( bgImage , isBgImage , sGradient ) + "}";
+
+                          styleSetting = "background_image";
+                          needToSave = false;
+
                       break;
 
                     }
@@ -732,10 +748,13 @@
 
         var _defaultBgColors = {};
 
-        var _getGradient = function(){
+        var _getGradient = function( gradient ){
 
-            var sedCss = _getCurrentSedCss(),
-                gradient = ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_gradient"] ) ) ? sedCss[api.currentCssSelector]["background_gradient"] : "";
+            var sedCss = _getCurrentSedCss();
+
+            if( _.isUndefined( gradient ) ) {
+                gradient = ( !_.isUndefined(sedCss[api.currentCssSelector]) && !_.isUndefined(sedCss[api.currentCssSelector]["background_gradient"]) ) ? sedCss[api.currentCssSelector]["background_gradient"] : "";
+            }
 
             if( !_.isEmpty( gradient ) && _.isObject( gradient ) ){
 
@@ -782,6 +801,13 @@
                     src = !_.isUndefined( img ) && !_.isUndefined( img.src ) ? img.src : "" ; */
 
                 var css = 'background-image: url("' + bgImg + '") !important;';
+            }
+
+            var sedCss = _getCurrentSedCss(),
+                bgColor =  ( !_.isUndefined( sedCss[api.currentCssSelector] ) && !_.isUndefined( sedCss[api.currentCssSelector]["background_color"] ) ) ? sedCss[api.currentCssSelector]["background_color"] : "";
+
+            if( !isGradient && bgColor ){
+                css += 'background-color: ' + bgColor + ' !important;';;
             }
 
             return css;
