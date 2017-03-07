@@ -464,6 +464,11 @@ class SedDesignEditorManager extends SiteEditorModules{
                 'transport' => 'postMessage',
                 'type' => 'style-editor'
             ),
+            'spacing_lock' => array(
+                'value' => true,
+                'transport' => 'postMessage',
+                'type' => 'style-editor'
+            ),
             'border_radius_lock' => array(
                 'value' => true,
                 'transport' => 'postMessage',

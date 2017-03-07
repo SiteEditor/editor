@@ -377,6 +377,7 @@ final class SedPageBuilderOptionsManager{
             'description'       => __('Change Top , bottom , left and right Spacing Together', 'site-editor') ,
             "panel"             =>  $panel_id ,
             'category'          => "style-editor" ,
+            'selector'          => 'sed_current' ,
             'setting_id'        => "spacing_lock" ,
             'has_border_box'    => false
         );

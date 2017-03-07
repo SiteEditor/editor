@@ -88,6 +88,9 @@ if ( ! class_exists( 'SiteEditorPropertyLockControl' ) ) {
             if( !empty( $this->style_props ) )
                 $json_array['style_props'] = $this->style_props;
 
+            if( !empty( $this->selector ) )
+                $json_array['selector'] = $this->selector;
+
             return $json_array;
 
         }

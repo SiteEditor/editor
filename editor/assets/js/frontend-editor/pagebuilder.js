@@ -579,7 +579,7 @@
 
             attrs.class = className;
 
-            attrs = this.addAlignSpacingAttrToModule( name , attrs );
+            //attrs = this.addAlignSpacingAttrToModule( name , attrs );
 
             if( self.currentDragType == "regular" ){
                 rowPattern[0].attrs.type = 'static-element';
