@@ -27,38 +27,47 @@ class PBAPITestModule extends PBShortcodeClass{
 
     function get_atts(){
         $atts = array(
-            "attribute1"    =>  "Test Value" ,
-            "attribute2"    =>  "" ,
-            "attribute3"    =>  "" ,
-            "attribute4"    =>  "" ,
-            "attribute5"    =>  "" ,
-            "attribute6"    =>  "" ,
-            "attribute7"    =>  "07/05/2016" ,
-            "attribute8"    =>  "" ,
-            "attribute9"    =>  "Test text in textarea" ,
-            "attribute10"   =>  19 ,
-            "attribute11"   =>  "" ,
-            "attribute12"   =>  "options1_key" ,
-            "attribute13"   =>  "" ,
-            "attribute14"   =>  "" ,
-            "attribute15"   =>  true ,
-            "attribute16"   =>  "options2_key,options4_key" ,
-            "attribute17"   =>  "options3_key" ,
-            "attribute18"   =>  "" ,
-            "attribute19"   =>  "" ,
-            "attribute20"   =>  "" ,
-            "attribute21"   =>  "thumbnail" ,
-            "attribute22"   =>  "" ,
-            "attribute23"   =>  "" ,
-            "attribute24"   =>  "" ,
-            "attribute25"   =>  0 ,
-            "attribute26"   =>  0 ,
-            "attribute27"   =>  0 ,
-            "attribute28"   =>  true ,
-            "attribute29"   =>  "" ,
-            "attribute30"   =>  "" ,
-            "attribute31"   =>  "" ,
-            "attribute32"   =>  "" ,
+            "text_field_attr"    =>  "Test Value" ,
+            "tel_field_attr"    =>  "" ,
+            "pass_field_attr"    =>  "" ,
+            "search_field_attr"    =>  "" ,
+            "url_field_attr"    =>  "" ,
+            "email_field_attr"    =>  "" ,
+            "date_field_attr"    =>  "07/05/2016" ,
+            "dimension_field_attr"    =>  "" ,
+            "textarea_field_attr"    =>  "Test text in textarea" ,
+            "range_field_attr"   =>  19 ,
+            "single_select_field_attr"   =>  "" ,
+            "multi_select_field_attr"   =>  "options1_key" ,
+            "og_single_select_field_attr"   =>  "" ,
+            "og_multi_select_field_attr"   =>  "" ,
+            "checkbox_field_attr"   =>  true ,
+            "multi_check_field_attr"   =>  "options2_key,options4_key" ,
+            "toggle_field_id"   =>  true ,
+            "sortable_field_id"   => 'options3_key,options5_key',
+            "switch_field_id"   =>  true ,
+            "radio_field_attr"   =>  "options3_key" ,
+            "radio_buttonset_field_id"   =>  "options3_key" ,
+            "radio_image_field_id"   =>  "options3_key" ,
+            "spinner_field_attr"   =>  "" ,
+            "color_field_attr"   =>  "" ,
+            "style_color"   =>  "" ,
+            "style_bg_color"   =>  "" ,
+            "color_field_attr"   =>  "" ,
+            "multi_color_field_id"   =>  "" ,
+            "image_field_attr"   =>  "" ,
+            "image_size_field_attr"   =>  "thumbnail" ,
+            "video_field_attr"   =>  "" ,
+            "audio_field_attr"   =>  "" ,
+            "file_field_attr"   =>  "" ,
+            "spinner1_with_lock_attr"   =>  0 ,
+            "spinner2_with_lock_attr"   =>  0 ,
+            "spinner3_with_lock_attr"   =>  0 ,
+            "spinner_lock_attr"   =>  true ,
+            "icon_field_attr"   =>  "" ,
+            "multi_icon_field_attr"   =>  "" ,
+            "custom_attr"   =>  "" ,
+            "multi_image_field_attr"   =>  "" ,
             "link"          => "" ,
             "link_target"   => "" ,
             "length"        => "boxed" ,
@@ -68,7 +77,6 @@ class PBAPITestModule extends PBShortcodeClass{
             "default_image_size"  => "thumbnail" ,
             "custom_image_size"   => "" ,
             "external_image_size" => "" ,
-            "sortable_field_id"   => 'options3_key,options5_key'
         );
         return $atts;
     }
@@ -121,10 +129,10 @@ class PBAPITestModule extends PBShortcodeClass{
             "groups"            => "param_select_groups" , //only for select and multi-select type
         );
         */
-
+  
         $params = array();
 
-        $params['attribute1'] = array(
+        $params['text_field_attr'] = array(
             "type"          => "text" ,
             "label"         => __("Text Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -137,7 +145,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'has_border_box'    => false
         );
 
-        $params['attribute2'] = array(
+        $params['tel_field_attr'] = array(
             "type"          => "tel" ,
             "label"         => __("Tel Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -150,7 +158,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'has_border_box'    => false
         );
 
-        $params['attribute3'] = array(
+        $params['pass_field_attr'] = array(
             "type"          => "password" ,
             "label"         => __("Password Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -163,7 +171,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'has_border_box'    => false
         );
 
-        $params['attribute4'] = array(
+        $params['search_field_attr'] = array(
             "type"          => "search" ,
             "label"         => __("Search Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -176,7 +184,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'has_border_box'    => false
         );
 
-        $params['attribute5'] = array(
+        $params['url_field_attr'] = array(
             "type"          => "url" ,
             "label"         => __("Url Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -189,7 +197,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'has_border_box'    => false
         );
 
-        $params['attribute6'] = array(
+        $params['email_field_attr'] = array(
             "type"          => "email" ,
             "label"         => __("Email Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -202,20 +210,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'has_border_box'    => false
         );
 
-        $params['dimension_section'] = array(
-            "type"          => "dimension" ,
-            "label"         => __("Dimension Control", "site-editor"),
-            "description"          => __("10px, 10%, 10em,...", "site-editor"),
-            "placeholder"   => __("10px, 10%, 10em,...", "site-editor"),
-            "atts"          => array(
-                "class"        =>    "custom-class1 custom-class2" ,
-                "data-custom"  =>    "test" ,
-            ),
-            "panel"         => "text_settings_panel",
-            'has_border_box'    => false
-        );
-
-        $params['attribute7'] = array(
+        $params['date_field_attr'] = array(
             "type"          => "date" ,
             "label"         => __("Date Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -233,7 +228,20 @@ class PBAPITestModule extends PBShortcodeClass{
             'has_border_box'    => false
         );
 
-        $params['attribute9'] = array(
+        $params['dimension_field_attr'] = array(
+            "type"          => "dimension" ,
+            "label"         => __("Dimension Control", "site-editor"),
+            "description"          => __("10px, 10%, 10em,...", "site-editor"),
+            "placeholder"   => __("10px, 10%, 10em,...", "site-editor"),
+            "atts"          => array(
+                "class"        =>    "custom-class1 custom-class2" ,
+                "data-custom"  =>    "test" ,
+            ),
+            "panel"         => "text_settings_panel",
+            'has_border_box'    => false
+        );
+
+        $params['textarea_field_attr'] = array(
             "type"          => "textarea" ,
             "label"         => __("Textarea Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -259,7 +267,7 @@ class PBAPITestModule extends PBShortcodeClass{
         ) );
 
 
-        $params['attribute11'] = array(
+        $params['single_select_field_attr'] = array(
             "type"          => "select" ,
             "label"         => __("Single Select Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -276,9 +284,9 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "select_settings_panel" ,
         );
 
-        $params['attribute12'] = array(
+        $params['multi_select_field_attr'] = array(
             "type"          => "multi-select" ,
-            "label"         => __("Multiple Select Field", "site-editor"),
+            "label"         => __(" Select Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
             "choices"       =>  array(
                 "options1_key"      =>    "options1_value" ,
@@ -293,7 +301,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "select_settings_panel" ,
         );
 
-        $params['attribute13'] = array(
+        $params['og_single_select_field_attr'] = array(
             "type"          => "select" ,
             "label"         => __("optgroup Single Select Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -320,7 +328,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "select_settings_panel" ,
         );
 
-        $params['attribute14'] = array(
+        $params['og_multi_select_field_attr'] = array(
             "type"          => "multi-select" ,
             "label"         => __("optgroup multi Select Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -369,7 +377,7 @@ class PBAPITestModule extends PBShortcodeClass{
         ) );
 
 
-        $params['attribute15'] = array(
+        $params['checkbox_field_attr'] = array(
             "type"          => "checkbox" ,
             "label"         => __("Checkbox Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -380,7 +388,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "check_box_settings_panel" ,
         );
 
-        $params['attribute16'] = array(
+        $params['multi_check_field_attr'] = array(
             "type"          => "multi-check" ,
             "label"         => __("Multi Checkbox Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -449,7 +457,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'atts'              => array() ,
         ) );
 
-        $params['attribute17'] = array(
+        $params['radio_field_attr'] = array(
             "type"          => "radio" ,
             "label"         => __("Radio Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -475,6 +483,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 "options1_key"      =>    "One" ,
                 "options2_key"      =>    "Two" ,
                 "options3_key"      =>    "Three" ,
+                "options4_key"      =>    "Four" , 
             ),
             "atts"          => array(
                 "class"        =>    "custom-class1 custom-class2" ,
@@ -486,12 +495,13 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $params['radio_image_field_id'] = array(
             "type"          => "radio-image" ,
-            "label"         => __("Radio Buttonset control", "site-editor"),
+            "label"         => __("Radio Image control", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
             "choices"       =>  array(
                 "options1_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
                 "options2_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
                 "options3_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
+                "options4_key"      =>   SED_ASSETS_URL.'/images/no_pic-110x83.png',
             ),
             "atts"          => array(
                 "class"        =>    "custom-class1 custom-class2" ,
@@ -514,7 +524,7 @@ class PBAPITestModule extends PBShortcodeClass{
         ) );
 
 
-        $params['attribute19'] = array(
+        $params['color_field_attr'] = array(
             "type"          => "color" ,
             "label"         => __("Color Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -611,7 +621,7 @@ class PBAPITestModule extends PBShortcodeClass{
             )*/
         );
 
-        $params['attribute20'] = array(
+        $params['image_field_attr'] = array(
             "type"          => "image" ,
             "label"         => __("Single Image Field", "site-editor"),
             "description"   => __("This option allows you to set a title for your image.", "site-editor"),
@@ -621,33 +631,33 @@ class PBAPITestModule extends PBShortcodeClass{
             ),
             'remove_action' => true ,
             "js_params"     => array(
-                "rel_size_control"          => $this->control_prefix . "_attribute21"
+                "rel_size_control"          => $this->control_prefix . "_image_size_field_attr"
             ),
             "panel"         => "media_settings_panel" ,
         );
 
-        $params['attribute21'] = array(
+        $params['image_size_field_attr'] = array(
             "type"          => "image-size" ,
             "label"         => __("Image Size Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
             "panel"         => "media_settings_panel" ,
             'dependency' => array(
                 'controls'  =>  array(
-                    "control"  => "attribute20" ,
+                    "control"  => "image_field_attr" ,
                     "values"   => array( "" , 0 ),
                     "type"     => "exclude"
                 )
             )
         );
 
-        $params['attribute32'] = array(
+        $params['multi_image_field_attr'] = array(
             "type"          => "multi-image" ,
             "label"         => __("Select Images Field", "site-editor"),
             "description"          => __("This option allows you to set a icon for your module.", "site-editor"),
             "panel"         => "media_settings_panel" ,
         );
 
-        $params['attribute22'] = array(
+        $params['video_field_attr'] = array(
             'type'              => 'video',
             'label'             => __('Video Field (MP4)', 'site-editor'),
             'description'       => __('the Video OGV Upload option allows you to upload a .OGV format of your video file. .OGV files are optional. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
@@ -657,7 +667,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "media_settings_panel" ,
         );
 
-        $params['attribute23'] = array(
+        $params['audio_field_attr'] = array(
             'type'              => 'audio',
             'label'             => __('Audio Field', 'site-editor'),
             'description'       => __('This feature lets you upload a Mp3 audio; for compatibility it is required to upload files with this format.','site-editor'),
@@ -667,7 +677,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "media_settings_panel" ,
         );
 
-        $params['attribute24'] = array(
+        $params['file_field_attr'] = array(
             'type'              => 'file',
             'label'             => __('File Field', 'site-editor'),
             'description'       => __('Poll File For Download','site-editor'),
@@ -694,7 +704,7 @@ class PBAPITestModule extends PBShortcodeClass{
         ) ); 
 
 
-        $params['attribute18'] = array(
+        $params['spinner_field_attr'] = array(
             "type"          => "number" ,
             "label"         => __("Spinner Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -707,12 +717,12 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $prefix = $this->control_prefix . "_";
 
-        $lock_id = "{$prefix}attribute28";
+        $lock_id = "{$prefix}spinner_lock_attr";
 
         $spinner_class = 'sed-spinner-api-test-module';
         $spinner_class_selector = '.' . $spinner_class;
 
-        $params['attribute25'] = array(
+        $params['spinner1_with_lock_attr'] = array(
             "type"          => "number" ,
             "label"         => __("Spinner1 with lock", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -724,14 +734,14 @@ class PBAPITestModule extends PBShortcodeClass{
                 'lock'    => array(
                     'id'       => $lock_id,
                     'spinner'  => $spinner_class_selector,
-                    'controls' => array( "{$prefix}attribute27" , "{$prefix}attribute26" )
+                    'controls' => array( "{$prefix}spinner3_with_lock_attr" , "{$prefix}spinner2_with_lock_attr" )
                 ),
                 'min'   =>  0 ,
             ),
             "panel"         => "number_settings_panel"
         );
 
-        $params['attribute26'] = array(
+        $params['spinner2_with_lock_attr'] = array(
             "type"          => "number" ,
             "label"         => __("Spinner2 with lock", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -743,14 +753,14 @@ class PBAPITestModule extends PBShortcodeClass{
                 'lock'    => array(
                     'id'       => $lock_id,
                     'spinner'  => $spinner_class_selector,
-                    'controls' => array( "{$prefix}attribute27" , "{$prefix}attribute25" )
+                    'controls' => array( "{$prefix}spinner3_with_lock_attr" , "{$prefix}spinner1_with_lock_attr" )
                 ),
                 'min'   =>  0 ,
             ),
             "panel"         => "number_settings_panel"
         );
 
-        $params['attribute27'] = array(
+        $params['spinner3_with_lock_attr'] = array(
             "type"          => "number" ,
             "label"         => __("Spinner3 with lock", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -762,14 +772,14 @@ class PBAPITestModule extends PBShortcodeClass{
                 'lock'    => array(
                     'id'       => $lock_id,
                     'spinner'  => $spinner_class_selector,
-                    'controls' => array( "{$prefix}attribute26" , "{$prefix}attribute25" )
+                    'controls' => array( "{$prefix}spinner2_with_lock_attr" , "{$prefix}spinner1_with_lock_attr" )
                 ),
                 'min'   =>  0 ,
             ),
             "panel"         => "number_settings_panel"
         );
 
-        $params['attribute28'] = array(
+        $params['spinner_lock_attr'] = array(
             "type"          => "checkbox" ,
             "label"         => __("Spinner Lock Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -778,13 +788,13 @@ class PBAPITestModule extends PBShortcodeClass{
             ) ,
             'js_params'     =>  array(
                 'spinner'  => $spinner_class_selector ,
-                'controls' => array( "{$prefix}attribute27" , "{$prefix}attribute26" , "{$prefix}attribute25" )
+                'controls' => array( "{$prefix}spinner3_with_lock_attr" , "{$prefix}spinner2_with_lock_attr" , "{$prefix}spinner1_with_lock_attr" )
             ),
             'js_type'       =>  "spinner_lock" ,
             "panel"         => "number_settings_panel"
         );
 
-        $params['attribute10'] = array(
+        $params['range_field_attr'] = array(
             "type"          => "slider" ,
             "label"         => __("Range Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -810,7 +820,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'atts'              => array() ,
         ) );  
 
-        $params['attribute29'] = array(
+        $params['icon_field_attr'] = array(
             "type"          => "icon" ,
             "label"         => __("Icon Field", "site-editor"),
             "description"          => __("This option allows you to set a icon for your module.", "site-editor"),
@@ -846,7 +856,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "icon_settings_panel"
         );
 
-        $params['attribute30'] = array(
+        $params['multi_icon_field_attr'] = array(
             "type"          => "multi-icon" ,
             "label"         => __("Select Icons Field", "site-editor"),
             "description"          => __("This option allows you to set a icon for your module.", "site-editor"),
@@ -1073,7 +1083,7 @@ class PBAPITestModule extends PBShortcodeClass{
 
         //$atts = $this->default_atts();
         
-        $dropdown_control = "sed_api_test_attribute31";
+        $dropdown_control = "sed_api_test_custom_attr";
         ob_start();
         ?>
             <div class="dropdown" id="sed-app-control-<?php echo $dropdown_control ;?>">
@@ -1108,7 +1118,7 @@ class PBAPITestModule extends PBShortcodeClass{
         $dropdown_html = ob_get_contents();
         ob_end_clean();
 
-        $params['attribute31'] = array(
+        $params['custom_attr'] = array(
             'type'              =>  'custom',
             'js_type'           =>  'dropdown',
             'has_border_box'    =>   true ,
