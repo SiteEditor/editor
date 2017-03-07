@@ -154,13 +154,15 @@ final class SedDesignEditorBackground{
             'background_color' => array(
                 "type"              => "background-color" ,
                 "label"             => __("Background Color", "site-editor"),
-                "description"       => __("Add Background Color For Element", "site-editor")
+                "description"       => __("Add Background Color For Element", "site-editor"),
+                'default_value'     => 'transparent' ,
             ),
 
             'background_image' => array(
                 "type"              => "background-image" ,  
                 "label"             => __("Background Image", "site-editor"),
                 "description"       => __("Add Background Image For Element", "site-editor"),
+                'default_value'     => '' ,
                 "remove_action"     => true ,
             ),
 
@@ -168,6 +170,7 @@ final class SedDesignEditorBackground{
                 "type"              => "external-background-image" ,  
                 "label"             => __("External Background Image", "site-editor"),
                 "description"       => __("Add External Background Image For Element", "site-editor"),
+                'default_value'     => '' ,
                 "dependency"    => array(
                     'queries'  =>  array(
                         array(
@@ -183,6 +186,7 @@ final class SedDesignEditorBackground{
                 "type"              => "parallax-background-image" ,  
                 "label"             => __("Parallax Background Image", "site-editor"),
                 "description"       => __("Add Parallax Background Image For Element", "site-editor"),
+                'default_value'     => false ,
                 "dependency"    => array(
                     'queries'  =>  array(
                         "relation"     =>  "OR" ,
@@ -209,6 +213,7 @@ final class SedDesignEditorBackground{
                     "min"           => 0 ,
                     "max"           => 1 ,
                 ),
+                'default_value'     => 0.5 ,
                 "dependency"    => array(
                     'queries'  =>  array(
                         "relation"     =>  "AND" ,
@@ -238,6 +243,7 @@ final class SedDesignEditorBackground{
                 "type"              => "background-attachment" ,  
                 "label"             => __("Background Attachment", "site-editor"),
                 "description"       => __("Add Background Attachment For Element", "site-editor"),
+                'default_value'     => 'scroll' ,
                 "dependency"    => array(
                     'queries'  =>  array(
                         "relation"     =>  "OR" ,
@@ -259,6 +265,7 @@ final class SedDesignEditorBackground{
                 "type"              => "background-size" ,  
                 "label"             => __("Background Size", "site-editor"),
                 "description"       => __("Add Background Size For Element", "site-editor"),
+                'default_value'     => 'inherit' ,
                 "dependency"    => array(
                     'queries'  =>  array(
                         "relation"     =>  "OR" ,
@@ -280,6 +287,7 @@ final class SedDesignEditorBackground{
                 "type"              => "background-repeat" ,  
                 "label"             => __("Background Repeat", "site-editor"),
                 "description"       => __("Add Background Repeat For Element", "site-editor"),
+                'default_value'     => 'inherit' ,
                 "dependency"    => array(
                     'queries'  =>  array(
                         "relation"     =>  "OR" ,
@@ -301,6 +309,7 @@ final class SedDesignEditorBackground{
                 "type"              => "background-position" ,
                 "label"             => __('Background Position', 'site-editor'),
                 "description"       => __("Background Position", "site-editor"),
+                'default_value'     => 'left top' ,
                 'has_border_box'    =>   false ,
                 "dependency"    => array(
                     'queries'  =>  array(

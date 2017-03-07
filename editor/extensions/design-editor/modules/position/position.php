@@ -123,6 +123,7 @@ final class SedDesignEditorPosition {
                 "type"              => "position" ,
                 "label"             => __('Position', 'site-editor'),
                 "description"       => __("Position", "site-editor"),
+                'default_value'     => '' 
             )
 
         );

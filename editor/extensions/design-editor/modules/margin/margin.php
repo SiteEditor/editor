@@ -125,6 +125,7 @@ final class SedDesignEditorMargin {
                 "label"             => __('Top', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
                 'lock_id'           => 'margin_lock',
+                'default_value'     => '' ,
                 'js_params'     =>  array(
                     'min'       =>  0
                 ),
@@ -136,6 +137,7 @@ final class SedDesignEditorMargin {
                 "label"             => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
                 'lock_id'           => 'margin_lock',
+                'default_value'     => '' ,
                 'js_params'     =>  array(
                     'min'       =>  0
                 ),
@@ -147,6 +149,7 @@ final class SedDesignEditorMargin {
                 "label"             => __('Bottom', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
                 'lock_id'           => 'margin_lock',
+                'default_value'     => '' ,
                 'js_params'     =>  array(
                     'min'       =>  0
                 ),
@@ -158,6 +161,7 @@ final class SedDesignEditorMargin {
                 "label"             => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
                 'lock_id'           => 'margin_lock',
+                'default_value'     => '' ,
                 'js_params'     =>  array(
                     'min'       =>  0
                 ),
@@ -167,7 +171,8 @@ final class SedDesignEditorMargin {
                 "type"              => "property-lock" ,
                 "label"             => __('lock Spacings Together', 'site-editor'),
                 "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
-                'setting_id'        => 'margin_lock'
+                'setting_id'        => 'margin_lock' ,
+                'default_value'     => true ,
             ),
 
         );

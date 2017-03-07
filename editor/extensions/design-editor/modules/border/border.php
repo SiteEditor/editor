@@ -195,7 +195,8 @@ final class SedDesignEditorBorder {
                 'prop_side'         => 'top',
                 'has_border_box'    =>  false ,
                 'panel'             => 'border_top_style_panel' ,
-                'lock_id'           => 'border_style_lock'
+                'lock_id'           => 'border_style_lock',
+                'default_value'     => 'none' ,
             ),
 
             'border_right_style' => array(
@@ -204,7 +205,8 @@ final class SedDesignEditorBorder {
                 'prop_side'         => 'right',
                 'has_border_box'    =>  false ,
                 'panel'             => 'border_right_style_panel' ,
-                'lock_id'           => 'border_style_lock'
+                'lock_id'           => 'border_style_lock' ,
+                'default_value'     => 'none' ,
             ),
 
             'border_bottom_style' => array(
@@ -213,7 +215,8 @@ final class SedDesignEditorBorder {
                 'prop_side'         => 'bottom',
                 'has_border_box'    =>  false ,
                 'panel'             => 'border_bottom_style_panel',
-                'lock_id'           => 'border_style_lock'
+                'lock_id'           => 'border_style_lock',
+                'default_value'     => 'none' ,
             ),
 
             'border_left_style' => array(
@@ -222,7 +225,8 @@ final class SedDesignEditorBorder {
                 'prop_side'         => 'left',
                 'has_border_box'    =>  false ,
                 'panel'             => 'border_left_style_panel',
-                'lock_id'           => 'border_style_lock'
+                'lock_id'           => 'border_style_lock',
+                'default_value'     => 'none' ,
             ),
 
             'border_style_lock' => array(
@@ -230,7 +234,8 @@ final class SedDesignEditorBorder {
                 "label"             => __('lock borders styles Together', 'site-editor'),
                 "description"       => __("lock top , left , bottom , right borders styles Together", "site-editor"),
                 'panel'             => 'border_style_panel' ,
-                'setting_id'        => 'border_style_lock'
+                'setting_id'        => 'border_style_lock' ,
+                'default_value'     => true ,
             ),
 
             'border_top_width' => array( 
@@ -239,7 +244,8 @@ final class SedDesignEditorBorder {
                 "description"       => __("Module Border Top Width", "site-editor"),
                 'prop_side'       => 'top',
                 'panel'             => 'border_width_panel' ,
-                'lock_id'           => 'border_width_lock'
+                'lock_id'           => 'border_width_lock' ,
+                'default_value'     => '' ,
             ),
 
             'border_right_width' => array( 
@@ -248,7 +254,8 @@ final class SedDesignEditorBorder {
                 "description"       => __("Module Border Right Width", "site-editor"),
                 'prop_side'       => 'right',
                 'panel'             => 'border_width_panel' ,
-                'lock_id'           => 'border_width_lock'
+                'lock_id'           => 'border_width_lock' ,
+                'default_value'     => '' ,
             ),
 
             'border_bottom_width' => array( 
@@ -257,7 +264,8 @@ final class SedDesignEditorBorder {
                 "description"       => __("Module Border Bottom Width", "site-editor"),
                 'prop_side'         => 'bottom',
                 'panel'             => 'border_width_panel' ,
-                'lock_id'           => 'border_width_lock'
+                'lock_id'           => 'border_width_lock' ,
+                'default_value'     => '' ,
             ),
 
             'border_left_width' => array( 
@@ -266,7 +274,8 @@ final class SedDesignEditorBorder {
                 "description"       => __("Border Left Width", "site-editor"),
                 'prop_side'         => 'left',
                 'panel'             => 'border_width_panel',
-                'lock_id'           => 'border_width_lock'
+                'lock_id'           => 'border_width_lock' ,
+                'default_value'     => '' ,
             ),
 
             'border_width_lock' => array(
@@ -274,7 +283,8 @@ final class SedDesignEditorBorder {
                 "label"             => __('lock borders width Together', 'site-editor'),
                 "description"       => __("lock top , left , bottom , right borders width Together", "site-editor"),
                 'panel'             => 'border_width_panel' ,
-                'setting_id'        => 'border_width_lock'
+                'setting_id'        => 'border_width_lock' ,
+                'default_value'     => true ,
             ),
 
             'border_top_color' => array( 
@@ -283,7 +293,8 @@ final class SedDesignEditorBorder {
                 "description"       => __("Module Border Top Color", "site-editor"),
                 'prop_side'         => 'top',
                 'panel'             => 'border_color_panel',
-                'lock_id'           => 'border_color_lock'
+                'lock_id'           => 'border_color_lock' ,
+                'default_value'     => 'transparent' ,
             ),
 
             'border_right_color' => array( 
@@ -292,7 +303,8 @@ final class SedDesignEditorBorder {
                 "description"       => __("Module Border Right Color", "site-editor"),
                 'prop_side'         => 'right',
                 'panel'             => 'border_color_panel' ,
-                'lock_id'           => 'border_color_lock'
+                'lock_id'           => 'border_color_lock' ,
+                'default_value'     => 'transparent' ,
             ),
 
             'border_bottom_color' => array( 
@@ -301,7 +313,8 @@ final class SedDesignEditorBorder {
                 "description"       => __("Module Border Bottom Color", "site-editor"),
                 'prop_side'         => 'bottom',
                 'panel'             => 'border_color_panel',
-                'lock_id'           => 'border_color_lock'
+                'lock_id'           => 'border_color_lock' ,
+                'default_value'     => 'transparent' ,
             ),
 
             'border_left_color' => array( 
@@ -310,7 +323,8 @@ final class SedDesignEditorBorder {
                 "description"       => __("Module Border Left Color", "site-editor"),
                 'prop_side'         => 'left',
                 'panel'             => 'border_color_panel' ,
-                'lock_id'           => 'border_color_lock'
+                'lock_id'           => 'border_color_lock' ,
+                'default_value'     => 'transparent' ,
             ),
 
 
@@ -319,7 +333,8 @@ final class SedDesignEditorBorder {
                 "label"             => __('lock borders Color Together', 'site-editor'),
                 "description"       => __("lock top , left , bottom , right borders Color Together", "site-editor"),
                 'panel'             => 'border_color_panel' ,
-                'setting_id'        => 'border_color_lock'
+                'setting_id'        => 'border_color_lock' ,
+                'default_value'     => true
             )
 
         );

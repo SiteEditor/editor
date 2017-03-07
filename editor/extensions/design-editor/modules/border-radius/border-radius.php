@@ -125,6 +125,7 @@ final class SedDesignEditorBorderRadius {
                 "label"             => ( is_rtl() ) ? __('Top right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
                 'lock_id'           => 'border_radius_lock',
+                'default_value'     => '' ,
                 'js_params'     =>  array(
                     'min'       =>  0
                 ), 
@@ -137,6 +138,7 @@ final class SedDesignEditorBorderRadius {
                 "label"             => ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top Right corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
                 'lock_id'           => 'border_radius_lock',
+                'default_value'     => '' ,
                 'js_params'     =>  array(
                     'min'       =>  0
                 ),
@@ -149,6 +151,7 @@ final class SedDesignEditorBorderRadius {
                 "label"             => ( is_rtl() ) ? __('Bottom left corner', 'site-editor') : __('Bottom Right corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
                 'lock_id'           => 'border_radius_lock',
+                'default_value'     => '' ,
                 'js_params'     =>  array(
                     'min'       =>  0
                 ),
@@ -161,6 +164,7 @@ final class SedDesignEditorBorderRadius {
                 "label"             => ( is_rtl() ) ? __('Bottom right corner', 'site-editor') : __('Bottom left corner', 'site-editor') ,
                 "description"       => __("Add corner For Element", "site-editor"),
                 'lock_id'           => 'border_radius_lock',
+                'default_value'     => '' ,
                 'js_params'     =>  array(
                     'min'       =>  0
                 ),
@@ -171,10 +175,10 @@ final class SedDesignEditorBorderRadius {
                 "type"              => "property-lock" ,
                 "label"             => __('lock Corners Together', 'site-editor'), 
                 "description"       => __("Add corner For Element", "site-editor"),
-                'setting_id'        => 'border_radius_lock'
-            ),
-
-
+                'setting_id'        => 'border_radius_lock' ,
+                'default_value'     => true ,
+            )
+            
         );
 
         $fields = apply_filters( 'sed_border_radius_options_fields_filter' , $fields );

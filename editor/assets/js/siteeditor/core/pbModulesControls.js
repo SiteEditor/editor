@@ -1210,7 +1210,7 @@
         _update  : function( value ) {
             var attach_id = 0;
             if( _.isString( value ) && value.indexOf("?attachment_id=") > -1 ){
-                attach_id = parseInt( value.substring( value.indexOf("?attachment_id=") + 15 ) ); 
+                attach_id = parseInt( value.substring( value.indexOf("?attachment_id=") + 15 ) );
             }else{
                 attach_id = parseInt( value );
             }
