@@ -2185,6 +2185,10 @@ class PBAPITestModule extends PBShortcodeClass{
             array(
             'h3' , 'h3' ,
             array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' , 'position' , 'trancparency' ) , __("H3" , "site-editor") ) ,
+            array(
+            'h4' , 'h4' ,
+            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' , 'position' , 'trancparency' ) , __("H4" , "site-editor") ) ,
+
         );
     }
 
