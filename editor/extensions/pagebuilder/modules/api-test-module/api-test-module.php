@@ -917,10 +917,12 @@ class PBAPITestModule extends PBShortcodeClass{
             "type"          => "animation" ,
             "label"         => __("Animation Settings", "site-editor"),
             'dependency' => array(
-                'controls'  =>  array(
-                    "control"  => "length" ,
-                    "value"    => "boxed" ,
-                    "type"     => "include"
+                'queries'  =>  array(
+                    array(
+                        "key"       => "length" ,
+                        "value"     => 'boxed' ,
+                        "compare"   => "=="
+                    )
                 )
             )
         );
@@ -959,43 +961,27 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"         => __("Row Container Settings", "site-editor")
         );
 
-        /*
-        "spacing"  =>  array(
-            "type"          => "spacing" ,
-            "label"         => __("Spacing", "site-editor"),
-            "default"       => "20 10 10 0"
-        ),
-        */
+
         $params['spacing'] = array(
             "type"          => "spacing" ,
             "label"         => __("Spacing", "site-editor"),
             "default"       => "30 30 30 30"
         );
 
-        /*
-        "align"  =>  array(
-            "type"          => "align" ,
-            "label"         => __("Align", "site-editor"),
-            "default"       => "center"
-        ),
-        */
+
         $params['align'] = array(
             "type"          => "align" ,
             "label"         => __("Align", "site-editor"),
             "default"       => "center"
         );
 
+
         $params['length'] = array(
             "type"          => "length" ,
             "label"         => __("Length", "site-editor"),
         );
 
-        /*
-        "link" => array(
-            "type"          => "link" ,
-            "label"         => __("Link Panel Settings", "site-editor"),
-        ),
-        */
+
         $params['link'] = array(
             "type"          => "link" ,
             "label"         => __("Link Panel Settings", "site-editor"),
@@ -1309,13 +1295,8 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"             => __("Background Position", "site-editor"),
             "description"       => __("Add Background Position For Element", "site-editor") ,
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' , 
-            'js_type'           =>  'dropdown', 
-            'has_border_box'    =>   true ,  
-            'js_params'     =>  array(
-                'options_selector'  => '.background-psn-sq',
-                'selected_class'    => 'active_background_position'
-            ), 
+            "selector"          => 'sed_current' ,
+            'has_border_box'    =>   true ,
             "default"           => '' ,
             'panel'             => 'background_design_panel'  
         );
@@ -1696,23 +1677,6 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'text_align_design_panel'
         );
 
-        $fonts = array();
-
-        $custom_fonts = SiteeditorTypography::get_custom_fonts();
-        if( $custom_fonts !== false ){
-            $new_custom_fonts = array();
-
-            foreach( $custom_fonts AS $family => $font_data ) {
-                $new_custom_fonts[$family] = $font_data['font_title'];
-            }
-
-            $fonts["custom_fonts"] = $new_custom_fonts;
-        }
-
-        $fonts["standard_fonts"] = SiteeditorTypography::get_standard_fonts();
-
-        $fonts["google_fonts"]   = SiteeditorTypography::get_google_fonts();
-
         $this->controls['font'] = array();
        
         $params['font_family'] = array(
@@ -1720,14 +1684,13 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"             => __('Font Family', 'site-editor'),  
             "description"       => __("Add Font Family For Element", "site-editor") ,
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' ,  
-            "choices"           =>    $fonts,
-            "optgroup"          => true ,
+            "selector"          => 'sed_current' ,
+            /*"optgroup"          => true ,
             "groups"            => array(
                 "custom_fonts"     => __("Custom Fonts" , "site-editor") ,
                 "standard_fonts"   => __("Standard Fonts" , "site-editor") ,
                 "google_fonts"     => __("Google Fonts" , "site-editor") ,
-            ),    
+            ),*/
             "default"           => '' ,
             'panel'             => 'font_design_panel'
         );        
@@ -1758,22 +1721,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"             => __("Font Weight", "site-editor"),
             "description"       => __("Add Font Weight For Element", "site-editor") ,
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' ,  
-            'choices' =>array(
-                'normal'        => __('normal', 'site-editor'),
-                'bold'          => __('bold', 'site-editor') ,
-                'bolder'        => __('bolder', 'site-editor'),
-                'lighter'       => __('lighter', 'site-editor') ,
-                100             => 100,
-                200             => 200 ,
-                300             => 300,
-                400             => 400 ,
-                500             => 500,
-                600             => 600 ,
-                700             => 700,
-                800             => 800 ,
-                900             => 900 ,
-            ),    
+            "selector"          => 'sed_current' ,
             "default"           => '' ,
             'panel'             => 'font_design_panel'
         );
@@ -1784,12 +1732,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"             => __('Font Style', 'site-editor'),  
             "description"       => __("Add Font Style For Element", "site-editor") ,
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' ,  
-            'choices' =>array(
-                'normal'      => __('normal', 'site-editor'),
-                'oblique'    => __('oblique', 'site-editor'),
-                'italic'    => __('italic', 'site-editor'),
-            ),    
+            "selector"          => 'sed_current' ,
             "default"           => '' ,
             'panel'             => 'font_design_panel'
         );
@@ -1800,12 +1743,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"             => __("Text Decoration", "site-editor"),
             "description"       => __("Add Text Decoration For Element", "site-editor") ,
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' ,  
-            'choices' =>array(
-                'none'              => __('none', 'site-editor'),
-                'underline'         => __('underline', 'site-editor') ,
-                'line-through'      => __('line-through', 'site-editor')
-            ),    
+            "selector"          => 'sed_current' ,
             "default"           => '' ,
             'panel'             => 'font_design_panel'
         );  
@@ -1825,13 +1763,8 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"             => __("Text Shadow", "site-editor"),
             "description"       => __("Add Text Shadow For Element", "site-editor") ,
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' , 
-            'js_type'           =>  'dropdown',
-            'has_border_box'    =>   true ,  
-            'js_params'     =>  array(
-                'options_selector'  => '.text-shadow-box',
-                'selected_class'      => 'text-shadow-active' ,
-            ), 
+            "selector"          => 'sed_current' ,
+            'has_border_box'    =>   true ,
             "default"           => '' ,
             'panel'             => 'text_shadow_design_panel'
         );
@@ -1841,13 +1774,8 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"             => __("Gradient", "site-editor"),
             "description"       => __("Add Gradient For Element", "site-editor") ,
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' , 
-            'js_type'           =>  'gradient',
-            'has_border_box'    =>   true ,  
-            'js_params'     =>  array(
-                'options_selector'  => '.sed-gradient',
-                'selected_class'    => 'gradient_select'
-            ), 
+            "selector"          => 'sed_current' ,
+            'has_border_box'    =>   true ,
             "default"           => '' ,
             'panel'             => 'gradient_design_panel'
         );
@@ -1867,13 +1795,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "label"             => __("Shadow", "site-editor"),
             "description"       => __("Add Shadow For Element", "site-editor") ,
             "category"          => 'style-editor' ,
-            "selector"          => 'sed_current' , 
-            'js_type'           =>  'dropdown',
-            'has_border_box'    =>   true ,  
-            'js_params'     =>  array(
-                'options_selector'    => '.shadow',
-                'selected_class'      => 'shadow_select'
-            ), 
+            "selector"          => 'sed_current' ,
             "default"           => '' ,
             'panel'             => 'shadow_design_panel' 
         );
