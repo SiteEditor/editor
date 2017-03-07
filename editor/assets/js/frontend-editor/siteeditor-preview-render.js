@@ -489,8 +489,8 @@
                               var shColor = to;
                               _saveCustomCss( setting , to );
 
-                              var strSh = sedCss[api.currentCssSelector]["shadow"];
-                              var css = _getShadow( strSh , shColor );
+                              var strSh = sedCss[api.currentCssSelector]["shadow"]; console.log( "---------box shadow-----" , strSh );
+                              var css = api.currentCssSelector + "{" + _getShadow( strSh , shColor ) + "}";
                               styleSetting = "shadow";
                               needToSave = false;
                           }else{
@@ -685,13 +685,22 @@
         };
 
         var _getShadow = function( strSh , shColor ){
-            if( strSh.indexOf( "inset" ) > -1 ){
-                strSh = strSh.replace( "inset" , "" );
-                strSh = $.trim( strSh );
-                strSh += " " + shColor;
-                strSh += " inset";
+
+            if( !strSh || strSh == "none" ) {
+
+                strSh = "none";
+
             }else{
-                strSh += " " + shColor;
+
+                if (strSh.indexOf("inset") > -1) {
+                    strSh = strSh.replace("inset", "");
+                    strSh = $.trim(strSh);
+                    strSh += " " + shColor;
+                    strSh += " inset";
+                } else {
+                    strSh += " " + shColor;
+                }
+
             }
 
             var css = siteEditorCss.boxShadow( strSh );
