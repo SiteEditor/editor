@@ -1520,7 +1520,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'setting_id'        => 'border_radius_lock' , 
-            'default_value'     => true ,
+            'default'           => true ,
             'panel'             => 'border_radius_design_panel'
         );   
 
