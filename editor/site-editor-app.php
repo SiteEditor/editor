@@ -18,7 +18,7 @@ if ( ! class_exists( 'SiteEditorApp' ) ) :
 final Class SiteEditorApp {
 
 
-    public $attachments_loaded;
+    public $attachments_loaded = array();
 
     public function __construct(){
 

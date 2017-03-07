@@ -39,7 +39,17 @@ if(!empty($css_data)){
                 $pos = strpos( $src , "?attachment_id=" );
 
                 if( $pos > -1 ){
+
+                    if( site_editor_app_on() ) {
+
+                        $attachment_id = substr($src, $pos + 15);
+
+                        array_push(SED()->editor->attachments_loaded, $attachment_id);
+
+                    }
+
                     $src = substr( $src , 0 , $pos );
+
                 }
 
                 if( substr($src, -5) == '.jpeg' ){

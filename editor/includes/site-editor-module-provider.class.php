@@ -7,7 +7,7 @@ class SEDPBModuleProvider{
 
     function __construct(  ) {
         if( site_editor_app_on() ){
-            add_action( 'wp_footer', array( $this, 'sed_app_pagebuilder_modules' ), 20 );
+            add_action( 'wp_footer', array( $this, 'sed_app_pagebuilder_modules' ), 1000000 );
             add_action( 'wp_footer', array( &$this, 'siteeditor_check_less_compailer' ), 10 );
         }
     }
@@ -99,8 +99,8 @@ class SEDPBModuleProvider{
 
         global $sed_apps;
 
-        if( is_array( $sed_apps->editor->attachments_loaded) && !empty( $sed_apps->editor->attachments_loaded ) ) {
-            $attachments = array_map('wp_prepare_attachment_for_js', $sed_apps->attachments_loaded);
+        if( is_array( SED()->editor->attachments_loaded ) && !empty( SED()->editor->attachments_loaded ) ) {
+            $attachments = array_map('wp_prepare_attachment_for_js', SED()->editor->attachments_loaded );
             $attachments = array_filter($attachments);
         }else
             $attachments = array();
@@ -150,13 +150,17 @@ class SEDPBModuleProvider{
 
  
         }
+
+
                 /*var _sedAppPageBuilderModulesScripts = <?php echo wp_json_encode( $site_editor_app->pagebuilder->modules_scripts ); ?>;
                 //var _sedAppPageBuilderModulesStyles = <?php echo wp_json_encode( $site_editor_app->pagebuilder->modules_styles ); ?>; */
         ?>
 
+
+
 		<script type="text/javascript">
                 var _sedAppPageBuilderModulesInfo = <?php echo wp_json_encode( $modules_info ); ?>;
-                var _sedAppPBAttachmentsSettings = <?php if( !empty( $attachments ) ) echo wp_json_encode( $attachments ); echo "{}"; ?>;
+                var _sedAppPBAttachmentsSettings = <?php if( !empty( $attachments ) ) echo wp_json_encode( $attachments ); else echo "{}"; ?>;
 		</script>
 
         <?php

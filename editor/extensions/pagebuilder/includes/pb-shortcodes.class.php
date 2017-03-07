@@ -926,8 +926,8 @@ class PBShortcodeClass{
 
     //@mixin attachment ID or object
     function set_media( $attachment ){
-        global $sed_apps;
-        array_push( $sed_apps->editor->attachments_loaded , $attachment );
+     
+        array_push( SED()->editor->attachments_loaded , $attachment );
 
     }
 

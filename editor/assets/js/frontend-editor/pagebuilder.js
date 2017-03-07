@@ -1722,7 +1722,7 @@
 
               ////api.log( window._sedAppPageBuilderModulesStyles );
         api.currentPageInfo = window._sedAppCurrentPageInfo;
-        api.attachmentsSettings = window._sedAppPBAttachmentsSettings;
+        api.attachmentsSettings = window._sedAppPBAttachmentsSettings; 
         //api.mainContentShortcode = window._sedAppMainContentShortcode;
 
         api.contextMenuSettings = window._sedAppEditorContextMenuSettings;
@@ -1761,7 +1761,7 @@
                 //previewUrl  : api.currentPageInfo.preview_url
             } );
 
-            api.preview.send( 'checkModuleDragSync' );
+            api.preview.send( 'checkModuleDragSync' ); 
 
             //api.preview.send( 'mainContentShortcodeUpdate' , api.mainContentShortcode);
             
