@@ -743,7 +743,6 @@ class PBAPITestModule extends PBShortcodeClass{
             "type"          => "lock" ,
             "label"         => __("Spinner Lock Field", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
-            'js_type'       =>  "spinner_lock" ,
             "panel"         => "number_settings_panel"
         );
 
