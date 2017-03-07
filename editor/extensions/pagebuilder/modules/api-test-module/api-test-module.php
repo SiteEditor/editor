@@ -1017,7 +1017,7 @@ class PBAPITestModule extends PBShortcodeClass{
         $params['spacing'] = array(
             "type"          => "spacing" ,
             "label"         => __("Spacing", "site-editor"),
-            "default"       => "20 10 10 0"
+            "default"       => "30 30 30 30"
         );
 
         /*
