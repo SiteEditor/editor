@@ -1465,15 +1465,6 @@ class PBAPITestModule extends PBShortcodeClass{
             'panel'             => 'border_design_panel'
         );     
 
-        $corner_lock_id = "sed_pb_".$this->control_prefix."_border_radius_lock";
-
-        $corner_spinner_class = 'sed-border-radius-spinner-' . $this->control_prefix;    //shortcode_name
-        $corner_spinner_class_selector = '.' . $corner_spinner_class;
-        $corner_sh_name = $this->control_prefix;
-        $corner_sh_name_c = $corner_sh_name. "_border_radius_";
-
-        $corner_controls = array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" );
-
         $params['border_radius_tl'] = array( 
             "type"              => "border-radius" , 
             "label"             =>  ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
@@ -1481,22 +1472,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'tl',
-            'atts'  => array(
-                "class" =>   $corner_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $corner_lock_id,
-                    'spinner'  => $corner_spinner_class_selector,
-                    'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
-                ),
-                
-                'min'   =>  0 ,
-                //'radius_demo' => true,
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ), 
+            'lock_id'           => 'border_radius_lock',
             "default"           => '' , 
             'panel'             => 'border_radius_design_panel'
         ); 
@@ -1508,22 +1484,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'tr',
-            'atts'  => array(
-                "class" =>   $corner_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $corner_lock_id,
-                    'spinner'  => $corner_spinner_class_selector,
-                    'controls' => array( $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
-                ),
-                
-                'min'   =>  0 ,
-                //'radius_demo' => true,
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ), 
+            'lock_id'           => 'border_radius_lock',
             "default"           => '' , 
             'panel'             => 'border_radius_design_panel'
         ); 
@@ -1535,22 +1496,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'br',
-            'atts'  => array(
-                "class" =>   $corner_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $corner_lock_id,
-                    'spinner'  => $corner_spinner_class_selector,
-                    'controls' => array( $corner_sh_name_c . "tl" , $corner_sh_name_c . "tr" , $corner_sh_name_c . "bl" )
-                ),
-                
-                'min'   =>  0 ,
-                //'radius_demo' => true,
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ), 
+            'lock_id'           => 'border_radius_lock',
             "default"           => '' , 
             'panel'             => 'border_radius_design_panel'
         ); 
@@ -1562,43 +1508,21 @@ class PBAPITestModule extends PBShortcodeClass{
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'bl',
-            'atts'  => array(
-                "class" =>   $corner_spinner_class
-            ) ,
-            'js_params'     =>  array(
-                'lock'    => array(
-                    'id'       => $corner_lock_id,
-                    'spinner'  => $corner_spinner_class_selector,
-                    'controls' => array( $corner_sh_name_c . "tl" , $corner_sh_name_c . "tr" , $corner_sh_name_c . "br" )
-                ),
-                
-                'min'   =>  0 ,
-                //'radius_demo' => true,
-                //'max'     => 100,
-                //'step'    => 2,
-                //'page'    => 5
-            ), 
+            'lock_id'           => 'border_radius_lock',
             "default"           => '' , 
             'panel'             => 'border_radius_design_panel'
         ); 
 
         $params['border_radius_lock'] = array( 
-            "type"              => "border-radius" , 
+            "type"              => "property-lock" , 
             "label"             => __('lock Corners Together', 'site-editor'), 
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'prop_side'         => 'lock',
-            'atts'  => array(
-                "class" =>   "sed-lock-spinner"
-            ) ,
-            'js_params'     =>  array(
-                'spinner' =>  $corner_spinner_class_selector ,
-                'controls' => array( $corner_sh_name_c . "tr" , $corner_sh_name_c . "tl" , $corner_sh_name_c . "br" , $corner_sh_name_c . "bl" )
-            ),
-            "value"             => '' , 
+            'setting_id'        => 'border_radius_lock' , 
+            'default_value'     => true ,
             'panel'             => 'border_radius_design_panel'
-        ); 
+        );   
 
 
         $padding_lock_id = "sed_pb_".$this->control_prefix."_padding_lock";
