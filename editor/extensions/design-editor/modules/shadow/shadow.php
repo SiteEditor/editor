@@ -127,7 +127,7 @@ final class SedDesignEditorShadow {
                 "type"              => "shadow-color" ,
                 "label"             => __("Shadow Color", "site-editor"),
                 "description"       => __("Add Shadow Color For Element", "site-editor"),
-                'default_value'     => '' ,
+                'default_value'     => 'transparent' ,
             ),
             
             'shadow' => array(
