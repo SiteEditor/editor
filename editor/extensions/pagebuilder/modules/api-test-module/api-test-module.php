@@ -1105,6 +1105,33 @@ class PBAPITestModule extends PBShortcodeClass{
             'atts'              => array() ,
         ) );
 
+        $this->add_panel( 'border_style_design_panel' , array(
+            'priority'          => 11,
+            'type'              => 'inner_box',
+            'title'             => __('Border Style', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'parent_id'         => "border_design_panel",
+            'atts'              => array() ,
+        ) );
+
+        $this->add_panel( 'border_color_design_panel' , array(
+            'priority'          => 12,
+            'type'              => 'inner_box',
+            'title'             => __('Border Color', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'parent_id'         => "border_design_panel",
+            'atts'              => array() ,
+        ) );
+
+        $this->add_panel( 'border_width_design_panel' , array(
+            'priority'          => 13,
+            'type'              => 'inner_box',
+            'title'             => __('Border Width', 'textdomain'),
+            'capability'        => 'edit_theme_options' ,
+            'parent_id'         => "border_design_panel",
+            'atts'              => array() , 
+        ) );
+
         $this->add_panel( 'border_radius_design_panel' , array(
             'priority'          => 12,
             'type'              => 'inner_box',
@@ -1311,7 +1338,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'prop_side'         => 'top',
             'has_border_box'    =>   false ,
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_style_design_panel'
         ); 
 
         $params['border_right_style'] = array( 
@@ -1323,7 +1350,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'prop_side'         => 'right',
             'has_border_box'    =>   false ,
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_style_design_panel'
         );   
 
 
@@ -1336,7 +1363,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'prop_side'         => 'bottom',
             'has_border_box'    =>   false ,
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_style_design_panel'
         );   
 
 
@@ -1349,7 +1376,7 @@ class PBAPITestModule extends PBShortcodeClass{
             'prop_side'         => 'left',
             'has_border_box'    =>   false ,
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_style_design_panel'
         );  
  
 
@@ -1361,7 +1388,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "selector"          => 'sed_current' ,
             'prop_side'         => 'top',
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_width_design_panel'
         ); 
 
         $params['border_right_width'] = array( 
@@ -1372,7 +1399,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "selector"          => 'sed_current' ,
             'prop_side'         => 'right',
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_width_design_panel'
         );   
 
 
@@ -1384,7 +1411,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "selector"          => 'sed_current' ,
             'prop_side'         => 'bottom',
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_width_design_panel'
         );   
 
 
@@ -1396,7 +1423,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "selector"          => 'sed_current' ,
             'prop_side'         => 'left',
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_width_design_panel'
         );   
 
 
@@ -1408,7 +1435,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "selector"          => 'sed_current' ,
             'prop_side'         => 'top',
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_color_design_panel'
         ); 
 
         $params['border_right_color'] = array( 
@@ -1419,7 +1446,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "selector"          => 'sed_current' ,
             'prop_side'         => 'right',
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_color_design_panel'
         );   
 
 
@@ -1431,8 +1458,8 @@ class PBAPITestModule extends PBShortcodeClass{
             "selector"          => 'sed_current' ,
             'prop_side'         => 'bottom',
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
-        );   
+            'panel'             => 'border_color_design_panel'
+        );    
 
 
         $params['border_left_color'] = array( 
@@ -1443,24 +1470,24 @@ class PBAPITestModule extends PBShortcodeClass{
             "selector"          => 'sed_current' ,
             'prop_side'         => 'left',
             "default"           => '' ,
-            'panel'             => 'border_design_panel'
+            'panel'             => 'border_color_design_panel'
         );     
 
         $params['border_radius_tl'] = array( 
             "type"              => "border-radius" , 
-            "label"             =>  ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
+            "label"             =>  ( is_rtl() ) ? __('Top right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
             'prop_side'         => 'tl',
             'lock_id'           => 'border_radius_lock',
             "default"           => '' , 
-            'panel'             => 'border_radius_design_panel'
+            'panel'             => 'border_radius_design_panel' 
         ); 
 
         $params['border_radius_tr'] = array( 
             "type"              => "border-radius" , 
-            "label"             =>  ( is_rtl() ) ? __('Top right corner', 'site-editor') : __('Top left corner', 'site-editor') ,
+            "label"             =>  ( is_rtl() ) ? __('Top left corner', 'site-editor') : __('Top right corner', 'site-editor') ,
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
@@ -1472,7 +1499,7 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $params['border_radius_br'] = array( 
             "type"              => "border-radius" , 
-            "label"             =>  ( is_rtl() ) ? __('Bottom right corner', 'site-editor') : __('Bottom left corner', 'site-editor') ,
+            "label"             =>  ( is_rtl() ) ? __('Bottom left corner', 'site-editor') : __('Bottom right corner', 'site-editor') ,
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
@@ -1484,7 +1511,7 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $params['border_radius_bl'] = array( 
             "type"              => "border-radius" , 
-            "label"             =>  ( is_rtl() ) ? __('Bottom left corner', 'site-editor') : __('Bottom right corner', 'site-editor') ,
+            "label"             =>  ( is_rtl() ) ? __('Bottom right corner', 'site-editor') : __('Bottom left corner', 'site-editor') ,
             "description"       => __("Add corner For Element", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
@@ -1519,7 +1546,7 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $params['padding_right'] = array( 
             "type"              => "padding" , 
-            "label"             => ( is_rtl() ) ? __('Padding Right', 'site-editor') : __('Padding Left', 'site-editor'),
+            "label"             => ( is_rtl() ) ? __('Padding Left', 'site-editor') : __('Padding Right', 'site-editor'),
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
@@ -1543,7 +1570,7 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $params['padding_left'] = array( 
             "type"              => "padding" , 
-            "label"             => ( is_rtl() ) ? __('Padding Left', 'site-editor') : __('Padding Right', 'site-editor'),
+            "label"             => ( is_rtl() ) ? __('Padding Right', 'site-editor') : __('Padding Left', 'site-editor'),
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
@@ -1559,6 +1586,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
+            'setting_id'        => 'padding_lock',
             'default'           => true , 
             'panel'             => 'padding_design_panel'
         );
@@ -1577,7 +1605,7 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $params['margin_right'] = array( 
             "type"              => "margin" , 
-            "label"             => ( is_rtl() ) ? __('Margin Right', 'site-editor') : __('Margin Left', 'site-editor'),
+            "label"             => ( is_rtl() ) ? __('Margin Left', 'site-editor') : __('Margin Right', 'site-editor'),
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
@@ -1601,7 +1629,7 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $params['margin_left'] = array( 
             "type"              => "margin" , 
-            "label"             => ( is_rtl() ) ? __('Margin Left', 'site-editor') : __('Margin Right', 'site-editor'),
+            "label"             => ( is_rtl() ) ? __('Margin Right', 'site-editor') : __('Margin Left', 'site-editor'),
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
@@ -1617,6 +1645,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Spacing: Module Spacing from top , left , bottom , right.", "site-editor"),
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
+            'setting_id'        => 'margin_lock',
             'default'           => true ,   
             'panel'             => 'margin_design_panel'
         );
