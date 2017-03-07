@@ -1303,8 +1303,10 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Parallax Background Ratio For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' , 
-            'js_params'     =>  array(
-                'step'        => 0.1
+            "js_params"     =>  array(
+                "step"          => 0.01 ,
+                "min"           => 0 ,
+                "max"           => 1 , 
             ),
             "default"           => 0.5 , 
             'panel'             => 'background_design_panel'
@@ -1316,10 +1318,6 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Background Attachment For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'choices' =>array(
-                'scroll'     => __('Scroll', 'site-editor'),
-                'fixed'     => __('Fixed ', 'site-editor')
-            ),
             "default"           => 'scroll' , 
             'panel'             => 'background_design_panel'
         ); 
@@ -1330,13 +1328,6 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Background Size For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'choices'           =>array(
-                'auto'          => __('Auto', 'site-editor'),
-                'fit'           => __('Fit', 'site-editor'),
-                'fullscreen'    => __('Full Screen ', 'site-editor'),
-                'cover'         => __('Cover ', 'site-editor'),
-                'contain'       => __('Contain ', 'site-editor'), 
-            ),
             "default"           => '' , 
             'panel'             => 'background_design_panel'
         ); 
@@ -1347,12 +1338,6 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"       => __("Add Background Repeat For Element", "site-editor") ,
             "category"          => 'style-editor' ,
             "selector"          => 'sed_current' ,
-            'choices'           =>array(
-                'normal'                => __('Normal', 'site-editor'),
-                'tile'                  => __('Tile ', 'site-editor'),
-                'tile-vertically'       => __('Tile Vertically', 'site-editor'),
-                'tile-horizontally'     => __('Tile Horizontally ', 'site-editor'),  
-            ),
             "default"           => '' , 
             'panel'             => 'background_design_panel'
         ); 
@@ -1928,7 +1913,7 @@ class PBAPITestModule extends PBShortcodeClass{
         );
 
 
-        $params['trancparency'] = array(
+        $params['trancparency'] = array(  
             "type"              => "trancparency" , 
             "label"             => __("Trancparency", "site-editor"),
             "description"       => __("Add Trancparency For Element", "site-editor") ,
@@ -2184,6 +2169,14 @@ class PBAPITestModule extends PBShortcodeClass{
       ),
 
     */
+    function custom_style_settings(){
+        return array(
+
+            array(
+            'h3' , 'h3' ,
+            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' , 'position' , 'trancparency' ) , __("H3" , "site-editor") ) ,
+        );
+    }
 
     function contextmenu( $context_menu ){
         $api_test_menu = $context_menu->create_menu("api-test-module" , __("API Test Module","site-editor") , 'api-test-module' , 'class' , 'element' , '' , "sed_api_test" , array() );
