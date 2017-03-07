@@ -367,7 +367,14 @@
             "external_background_image" : "background-image" ,
             "background_gradient"       : "background-image" ,
             "background_repeat"         : "background-repeat"  ,
-            "background_size"           : "background-size" 
+            "background_size"           : "background-size" ,
+            "padding_lock"              : "",
+            "margin_lock"               : "",
+            "border_radius_lock"        : "",
+            "border_style_lock"         : "",
+            "border_color_lock"         : "",
+            "border_width_lock"         : "",
+            "spacing_lock"              : ""
         };
 
         _.each( _styleSettingsMap , function( prop , setting ){
@@ -634,6 +641,20 @@
 
                           styleSetting = "background_image";
                           needToSave = false;
+
+                      break;
+
+                      case "padding_lock" :
+                      case "margin_lock"  :
+                      case "spacing_lock"  :
+                      case "border_radius_lock" :
+                      case "border_style_lock" :
+                      case "border_color_lock" :
+                      case "border_width_lock" :
+
+                          _saveCustomCss( setting , to );
+
+                          return ;
 
                       break;
 
