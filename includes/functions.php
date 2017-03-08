@@ -1037,8 +1037,8 @@ function get_sed_attachment_image_html( $attachment_id , $default_image_size = "
 
 function get_sed_external_image_html( $image_url , $external_image_size = "" , $custom_exernal_src = "" , $attrs = array()  ){
 
-    $dimensions = sed_extract_dimensions( $external_image_size );
-    $hwstring = $dimensions ? image_hwstring( $dimensions[0], $dimensions[1] ) : '';
+    $dimensions = sed_extract_dimensions( strtolower( $external_image_size ) );
+    $hwstring = $dimensions ? image_hwstring( $dimensions[0], $dimensions[1] ) : ''; 
 
     $custom_src = !empty( $image_url ) ? esc_attr( $image_url ) : sed_placeholder_img_src();
     $custom_exernal_src =  !empty( $custom_exernal_src ) ? esc_attr( $custom_exernal_src ) : sed_placeholder_img_src();

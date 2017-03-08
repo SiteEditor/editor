@@ -93,11 +93,11 @@ class PBAPITestModule extends PBShortcodeClass{
 
         $attachments = is_array( $attachments ) ? $attachments : array();
         
-        foreach( $attachments AS $attachment_id ){
+        foreach( $attachments AS $attach_id ){
 
-            if( $attachment_id > 0 ){
-                if( get_post( $attachment_id ) )
-                    $this->set_media( $attachment_id );
+            if( $attach_id > 0 ){
+                if( get_post( $attach_id ) )
+                    $this->set_media( $attach_id );
             }
             
         }

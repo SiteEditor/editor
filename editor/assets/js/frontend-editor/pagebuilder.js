@@ -3056,7 +3056,7 @@
             return html;
         };
 
-        api.fn.getSedAttachmentImageHtml = function( image_source , attachment_id , image_url , default_image_size , external_image_size, attrs ){
+        api.fn.getSedAttachmentImageHtml = function( image_source , attachment_id , image_url , default_image_size , custom_image_size, attrs ){
             var sedImageHtml = "";
 
             if( image_source == "attachment" ){
@@ -3071,8 +3071,8 @@
                     var _width = "auto" ,
                         _height = "auto";
 
-                    if( _.isString( external_image_size ) ){
-                        var size = external_image_size.toLowerCase();
+                    if( _.isString( custom_image_size ) ){
+                        var size = custom_image_size.toLowerCase();
                         var sizes = size.split("x");
                         if( sizes.length == 2 ){
                             _width = parseInt(sizes[0]);

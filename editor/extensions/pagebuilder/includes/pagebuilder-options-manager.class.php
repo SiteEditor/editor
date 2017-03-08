@@ -594,9 +594,12 @@ final class SedPageBuilderOptionsManager{
             'default'         => $values["image_url"],
             'panel'         => 'sed_select_image_panel',
             'dependency' => array(
-                'controls'  =>  array(
-                    "control"  => $controls["image_source"] ,
-                    "value"    => "external" ,
+                'queries'  =>  array(
+                    array(
+                        "key"       => $controls["image_source"] ,
+                        "value"     => "external" ,
+                        "compare"   => "=="
+                    )
                 )
             )
         );
@@ -611,9 +614,12 @@ final class SedPageBuilderOptionsManager{
                 "rel_size_control"          => $this->group_name . "_default_image_size"
             ),
             'dependency' => array(
-                'controls'  =>  array(
-                    "control"  => $controls["image_source"] ,
-                    "value"    => "attachment" ,
+                'queries'  =>  array(
+                    array(
+                        "key"       => $controls["image_source"] ,
+                        "value"     => "attachment" ,
+                        "compare"   => "=="
+                    )
                 )
             )
         );
@@ -628,16 +634,17 @@ final class SedPageBuilderOptionsManager{
             ),
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
-                'controls'  =>  array(
+                'queries'  =>  array(
                     "relation"     =>  "and" ,
                     array(
-                        "control"  => $controls["attachment_id"] ,
-                        "values"    => array( "" , 0 ) ,
-                        "type"     => "exclude"
+                        "key"       => $controls["attachment_id"] ,
+                        "value"     => array( "" , 0 ) ,
+                        "compare"   => "NOT IN"
                     ),
                     array(
-                        "control"  => $controls["image_source"] ,
-                        "value"    => "attachment" ,
+                        "key"       => $controls["image_source"] ,
+                        "value"     => "attachment" ,
+                        "compare"   => "=="
                     )
                 )
             )
@@ -650,15 +657,17 @@ final class SedPageBuilderOptionsManager{
             'default'         => $values["custom_image_size"],
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
-                'controls'  =>  array(
+                'queries'  =>  array(
                     "relation"     =>  "and" ,
                     array(
-                        "control"  => $controls["default_image_size"] ,
-                        "value"    => "" ,
+                        "key"       => $controls["default_image_size"] ,
+                        "value"     => "" ,
+                        "compare"   => "=="
                     ),
                     array(
-                        "control"  => $controls["image_source"] ,
-                        "value"    => "attachment" ,
+                        "key"       => $controls["image_source"] ,
+                        "value"     => "attachment" ,
+                        "compare"   => "=="
                     )
                 )
             )
@@ -671,9 +680,12 @@ final class SedPageBuilderOptionsManager{
             'default'         => $values["external_image_size"],
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
-                'controls'  =>  array(
-                    "control"  => $controls["image_source"] ,
-                    "value"    => "external" ,
+                'queries'  =>  array(
+                    array(
+                        "key"       => $controls["image_source"] ,
+                        "value"     => "external" ,
+                        "compare"   => "=="
+                    )
                 )
             )
         );

@@ -86,7 +86,8 @@
         <br>
         <div><h4 class="attr">Media Settings</h4></div>
         <#
-            var sedImageHtml = api.fn.getSedAttachmentImageHtml( image_source , attachment_id , image_url , default_image_size , external_image_size );
+            var CustomImgSize = ( image_source == "external" ) ? external_image_size : custom_image_size;
+            var sedImageHtml = api.fn.getSedAttachmentImageHtml( image_source , attachment_id , image_url , default_image_size , CustomImgSize );
         #>  
         <div>
             <div><span class="attr">SED Image Field:</span></div>
