@@ -203,13 +203,18 @@
             <div><span class="attr">Select Icons Field</span></div>
             <br>
             <div class="icons-group">
-                <?php 
-                    /*if( !_.isEmpty( multi_icon_field_attr ) && _.isString( multi_icon_field_attr ) ){
-                        var iconsGroup = multi_icon_field_attr.split(",");
-                        _.each( iconsGroup , function( gIcon ){*/
-                ?><span><span class="icon-group-single <?php //echo $gIcon; ?>"></span></span><?php
-                        //});
-                    //}
+                <?php
+
+                $iconsGroup = is_string( $multi_icon_field_attr ) ? explode( "," , $multi_icon_field_attr ) : $multi_icon_field_attr;
+
+                $iconsGroup = is_array( $iconsGroup ) ? $iconsGroup : array();
+
+                foreach( $iconsGroup AS $gIcon ){
+
+                    ?><span><span class="icon-group-single <?php echo $gIcon; ?>"></span></span><?php
+
+                }
+
                 ?>
             </div>
             <br>
