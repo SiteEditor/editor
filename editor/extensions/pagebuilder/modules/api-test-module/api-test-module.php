@@ -51,7 +51,6 @@ class PBAPITestModule extends PBShortcodeClass{
             "color_field_attr"   =>  "" ,
             "style_color"   =>  "#FF0033" ,
             "style_bg_color"   =>  "#FFFFFF" ,
-            "color_field_attr"   =>  "" ,
             "multi_color_field_id"   =>  "" ,
             "image_field_attr"   =>  "" ,
             "image_size_field_attr"   =>  "thumbnail" ,
@@ -83,6 +82,30 @@ class PBAPITestModule extends PBShortcodeClass{
 
     function add_shortcode( $atts , $content = null ){
 
+        extract( $atts );
+
+        if( $image_field_attr > 0 ){
+            if( get_post( $image_field_attr ) )
+                $this->set_media( $image_field_attr );
+        }
+
+        $attachments = is_string( $multi_image_field_attr ) ? explode( "," , $multi_image_field_attr ) : $multi_image_field_attr;
+
+        $attachments = is_array( $attachments ) ? $attachments : array();
+        
+        foreach( $attachments AS $attachment_id ){
+
+            if( $attachment_id > 0 ){
+                if( get_post( $attachment_id ) )
+                    $this->set_media( $attachment_id );
+            }
+            
+        }
+
+        $this->set_vars( array(
+            "gallery"     => $attachments ,
+        ));
+        
     }
 
     function shortcode_settings(){
@@ -642,10 +665,12 @@ class PBAPITestModule extends PBShortcodeClass{
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
             "panel"         => "media_settings_panel" ,
             'dependency' => array(
-                'controls'  =>  array(
-                    "control"  => "image_field_attr" ,
-                    "values"   => array( "" , 0 ),
-                    "type"     => "exclude"
+                'queries'  =>  array(
+                    array(
+                        "key"       => "image_field_attr" ,
+                        "value"     => array( "" , 0 ) ,
+                        "compare"   => "NOT IN"
+                    )
                 )
             )
         );

@@ -1722,7 +1722,7 @@
 
               ////api.log( window._sedAppPageBuilderModulesStyles );
         api.currentPageInfo = window._sedAppCurrentPageInfo;
-        api.attachmentsSettings = window._sedAppPBAttachmentsSettings; 
+        api.attachmentsSettings = window._sedAppPBAttachmentsSettings;  console.log( "api.attachmentsSettings---" , api.attachmentsSettings );
         //api.mainContentShortcode = window._sedAppMainContentShortcode;
 
         api.contextMenuSettings = window._sedAppEditorContextMenuSettings;

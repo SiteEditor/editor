@@ -80,30 +80,81 @@
 
         <br>
         <div><h4 class="attr">Media Settings</h4></div>
-        <?php
-            /*var sedImageHtml = api.fn.getSedAttachmentImageHtml( image_source , attachment_id , image_url , default_image_size , external_image_size );*/
-        ?>  
+
         <div><span class="attr">SED Image Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php //echo $sedImageHtml; ?></span></div>
+
         <div>
             <span class="attr">Select Images Field</span><br>
             <div class="images-group">
-                <?php
-                    /*if( !_.isEmpty( multi_image_field_attr ) && _.isString( multi_image_field_attr ) ){
-                        var imagesGroup = multi_image_field_attr.split(","); 
-                        _.each( imagesGroup , function( img_id ){
-                            var gImgHtml = api.fn.getAttachmentImageHtml( img_id , "thumbnail" );*/
+            <?php
+
+            foreach( $gallery AS $attachment_id ){
+
                 ?>
-                        <div><?php //echo $gImgHtml; ?></div>
+                    <div>
+                        <?php
+                        $img = get_sed_attachment_image_html( $attachment_id , 'thumbnail' );
+                        echo $img['thumbnail'];
+                        ?>
+                    </div>
                 <?php
-                         //});
-                    //}
+
+            }
+            ?>
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <span class="attr">Single Image Field</span><br>
+                <?php
+                $img = get_sed_attachment_image_html( $image_field_attr , $image_size_field_attr );
+                echo $img['thumbnail'];
                 ?>
             </div>
         </div>
-        <div><span class="attr">Single Image Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $imageHtml; ?></span></div>
-        <div><span class="attr">Video Field (MP4):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : <?php echo $video_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;<span class="value">Url : <?php echo $image_size_field_attr; ?></span></div>
-        <div><span class="attr">Audio Field (MP3):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : <?php echo $audio_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;<span class="value">Url : <?php echo $audioUrl; ?></span></div>
-        <div><span class="attr">File Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : <?php echo $audio_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;<span class="value">Url : <?php echo $file_field_attr; ?></span></div>
+
+        <div>
+            <span class="attr">Video Field (MP4):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span class="value">ID : <?php echo $video_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;<span class="value">Url :
+                <?php
+
+                if( $video_field_attr > 0 ){
+                    if( get_post( $video_field_attr ) ) {
+                        echo wp_get_attachment_url( $video_field_attr );
+                    }
+                }
+
+                ?>
+            </span>
+        </div>
+
+        <div><span class="attr">Audio Field (MP3):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : <?php echo $audio_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;<span class="value">Url :
+                <?php
+
+                if( $audio_field_attr > 0 ){
+                    if( get_post( $audio_field_attr ) ) {
+                        echo wp_get_attachment_url( $audio_field_attr );
+                    }
+                }
+
+                ?>
+            </span>
+        </div>
+        <div><span class="attr">File Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : <?php echo $file_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;
+            <span class="value">
+                Url :
+                <?php
+
+                if( $file_field_attr > 0 ){
+                    if( get_post( $file_field_attr ) ) {
+                        echo wp_get_attachment_url( $file_field_attr );
+                    }
+                }
+
+                ?>
+            </span>
+        </div>
 
         <br>
         <div><h4 class="attr">Number Settings</h4></div>

@@ -925,9 +925,11 @@ class PBShortcodeClass{
     }
 
     //@mixin attachment ID or object
-    function set_media( $attachment ){
-     
-        array_push( SED()->editor->attachments_loaded , $attachment );
+    function set_media( $attachment ){ 
+
+        if( site_editor_app_on() ) {
+            array_push(SED()->editor->attachments_loaded, $attachment);
+        }
 
     }
 

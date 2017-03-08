@@ -1437,7 +1437,7 @@
                 var images_html = "";
                 _.each( currValue , function( attach_id ){
 
-                    var attachment = _.findWhere( api.attachmentsSettings , { id : attach_id}  );
+                    var attachment = _.findWhere( api.attachmentsSettings , { id : parseInt( attach_id) }  ); 
 
                     if( attach_id && attach_id > 0 && !_.isUndefined( attachment ) ){
                         var imgUrl = ( attachment.sizes && attachment.sizes.thumbnail ) ? attachment.sizes.thumbnail.url  : attachment.url;
