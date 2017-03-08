@@ -75,7 +75,7 @@
         <div><h4 class="attr">Color Settings</h4></div>
         <div><span class="attr">Color Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $color_field_attr; ?></span></div>
         <div><span class="attr">Style Editor Color Box:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="style-color-test">this is style editor settings</span></div>
-        <div><span class="attr">Multicolor control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php var_dump($multi_color_field_id); ?></span></div>
+        <!--<div><span class="attr">Multicolor control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php //var_dump($multi_color_field_id); ?></span></div> -->
 
 
         <br>

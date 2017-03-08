@@ -51,7 +51,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "color_field_attr"   =>  "" ,
             "style_color"   =>  "#FF0033" ,
             "style_bg_color"   =>  "#FFFFFF" ,
-            "multi_color_field_id"   =>  "" ,
+            //"multi_color_field_id"   =>  "" ,
             "image_field_attr"   =>  "" ,
             "image_size_field_attr"   =>  "thumbnail" ,
             "video_field_attr"   =>  "" ,
@@ -606,7 +606,8 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "color_settings_panel" ,
         );
 
-        $params['multi_color_field_id'] = array(
+        //not support object Attribute for shortcodes
+        /*$params['multi_color_field_id'] = array(
             "type"          => "multi-color" ,
             "label"         => __("Multicolor control", "site-editor"),
             "description"          => __("This option allows you to set a title for your image.", "site-editor"),
@@ -625,7 +626,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 "data-custom"  =>    "test" ,
             ),
             "panel"         => "color_settings_panel" ,
-        );      
+        );*/
 
         $this->add_panel( 'media_settings_panel' ,  array(
             'priority'          => 9,
