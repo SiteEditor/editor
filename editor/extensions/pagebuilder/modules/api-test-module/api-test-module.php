@@ -89,6 +89,26 @@ class PBAPITestModule extends PBShortcodeClass{
                 $this->set_media( $image_field_attr );
         }
 
+        if( $video_field_attr > 0 ){
+            if( get_post( $video_field_attr ) )
+                $this->set_media( $video_field_attr );
+        }
+
+        if( $audio_field_attr > 0 ){
+            if( get_post( $audio_field_attr ) )
+                $this->set_media( $audio_field_attr );
+        }
+
+        if( $file_field_attr > 0 ){
+            if( get_post( $file_field_attr ) )
+                $this->set_media( $file_field_attr );
+        }
+
+        if( $attachment_id > 0 ){
+            if( get_post( $attachment_id ) )
+                $this->set_media( $attachment_id );
+        }
+
         $attachments = is_string( $multi_image_field_attr ) ? explode( "," , $multi_image_field_attr ) : $multi_image_field_attr;
 
         $attachments = is_array( $attachments ) ? $attachments : array();

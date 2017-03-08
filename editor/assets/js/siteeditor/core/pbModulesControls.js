@@ -994,7 +994,7 @@
         },
 
         _updateUrlField : function( attach_id ){
-            var attachment = _.findWhere( api.attachmentsSettings , { id : attach_id}  );
+            var attachment = _.findWhere( api.attachmentsSettings , { id : parseInt( attach_id )}  );
 
             if( attach_id && attach_id > 0 && !_.isUndefined( attachment ) && !_.isUndefined( attachment.url ) ){
                 this.fieldUrl.val( attachment.url );
@@ -1059,14 +1059,14 @@
         },
 
         _updateUrlField : function( attach_id ){
-            var attachment = _.findWhere( api.attachmentsSettings , { id : attach_id}  );
+            var attachment = _.findWhere( api.attachmentsSettings , { id : parseInt( attach_id )}  );
 
             if( attach_id && attach_id > 0 && !_.isUndefined( attachment ) && !_.isUndefined( attachment.url ) ){
                 this.fieldUrl.val( attachment.url );
             }else{
                 this.fieldUrl.val( "" );
             }
-        },
+        }
 
     });
 
@@ -1125,7 +1125,7 @@
         },
 
         _updateUrlField : function( attach_id ){
-            var attachment = _.findWhere( api.attachmentsSettings , { id : attach_id}  );
+            var attachment = _.findWhere( api.attachmentsSettings , { id : parseInt( attach_id ) }  ); 
 
             if( attach_id && attach_id > 0 && !_.isUndefined( attachment ) && !_.isUndefined( attachment.url ) ){
                 this.fieldUrl.val( attachment.url );
@@ -1227,7 +1227,7 @@
         },
 
         _getImageUrl : function( attach_id , size ){
-            var attachment = _.findWhere( api.attachmentsSettings , { id : attach_id}  );
+            var attachment = _.findWhere( api.attachmentsSettings , { id : parseInt( attach_id )}  );
 
             if( attach_id && attach_id > 0 && !_.isUndefined( attachment ) ){
                 if( !_.isUndefined( size ) && !_.isUndefined( attachment.sizes ) && !_.isUndefined( attachment.sizes[size] ) ){
