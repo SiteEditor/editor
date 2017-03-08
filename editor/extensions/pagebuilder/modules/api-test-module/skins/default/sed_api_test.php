@@ -81,37 +81,44 @@
         <br>
         <div><h4 class="attr">Media Settings</h4></div>
 
-        <div><span class="attr">SED Image Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php //echo $sedImageHtml; ?></span></div>
-
         <div>
-            <span class="attr">Select Images Field</span><br>
-            <div class="images-group">
-            <?php
-
-            foreach( $gallery AS $attachment_id ){
-
-                ?>
-                    <div>
-                        <?php
-                        $img = get_sed_attachment_image_html( $attachment_id , 'thumbnail' );
-                        echo $img['thumbnail'];
-                        ?>
-                    </div>
-                <?php
-
-            }
-            ?>
-            </div>
+	        <div><span class="attr">SED Image Field:</span></div>
+	        <br>
+	        <div><span class="value"><?php //echo $sedImageHtml; ?></span></div>
+	        <br>
         </div>
 
         <div>
             <div>
-                <span class="attr">Single Image Field</span><br>
+                <div><span class="attr">Single Image Field:</span></div>
+                <br>
                 <?php
                 $img = get_sed_attachment_image_html( $image_field_attr , $image_size_field_attr );
                 echo $img['thumbnail'];
                 ?>
             </div>
+            <br>
+        </div>
+
+        <div>
+            <div><span class="attr">Select Images Field:</span></div>
+            <br>
+            <div class="images-group">
+            <?php
+
+            foreach( $gallery AS $attachment_id ){
+
+                    ?><span>
+                        <?php
+                        $img = get_sed_attachment_image_html( $attachment_id , 'thumbnail' );
+                        echo $img['thumbnail'];
+                        ?>
+                    </span><?php
+
+            }
+            ?>
+            </div>
+            <br>
         </div>
 
         <div>
@@ -169,19 +176,19 @@
         <div><h4 class="attr">Icon Settings</h4></div>
         <div><span class="attr">Icon Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><span class="my-icon-single <?php echo $icon_field_attr; ?>"></span></span></div>
         <div>
-            <span class="attr">Select Icons Field</span><br>
+            <div><span class="attr">Select Icons Field</span></div>
+            <br>
             <div class="icons-group">
                 <?php 
                     /*if( !_.isEmpty( multi_icon_field_attr ) && _.isString( multi_icon_field_attr ) ){
                         var iconsGroup = multi_icon_field_attr.split(",");
                         _.each( iconsGroup , function( gIcon ){*/
-                ?>
-                        <div><span class="icon-group-single <?php //echo $gIcon; ?>"></span></div>
-                <?php
+                ?><span><span class="icon-group-single <?php //echo $gIcon; ?>"></span></span><?php
                         //});
                     //}
                 ?>
             </div>
+            <br>
         </div>
 
         <br>
