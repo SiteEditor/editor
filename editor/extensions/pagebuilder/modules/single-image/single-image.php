@@ -22,7 +22,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               "name"          => "sed_single_image",                        //*require
               "title"         => __("Single Image","site-editor"),          //*require for toolbar
               "description"   => __("Add Image To Page","site-editor"),
-              "icon"          => "icon-image",                              //*require for icon toolbar
+              "icon"          => "sedico-image",                              //*require for icon toolbar
               "module"        =>  "single-image" ,                          //*require
               "retain_attrs"  =>  array("src" , "full_src"),                //not change this attrs after change skin (sample if exist src in new skin pattern not effect and retain current src )
             )  
@@ -266,7 +266,7 @@ $sed_pb_app->register_module(array(
     "name"        => "single-image",
     "title"       => __("Single Image","site-editor"),
     "description" => '',//__("Add Full Customize Image","site-editor"),
-    "icon"        => "icon-image",
+    "icon"        => "sedico-image",
     "shortcode"   => "sed_single_image",
     "tpl_type"    => "underscore" ,
     //"js_plugin"   => 'image/js/image-plugin.min.js',

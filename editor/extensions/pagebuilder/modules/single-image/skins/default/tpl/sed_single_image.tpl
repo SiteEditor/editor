@@ -1,4 +1,5 @@
 <#
+
 if( !lightbox_id ){
     lightbox_id = sed_model_id;
 }
@@ -8,6 +9,7 @@ var imgAttrs = {
     "class" : "sed-img" ,
     "alt"   : alt ,
 };
+
 var sedImageHtml = api.fn.getSedAttachmentImageHtml( image_source , attachment_id , image_url , default_image_size , external_image_size , imgAttrs );
 if( image_source == "attachment" ){
     full_src = api.fn.getAttachmentImageFullSrc( attachment_id );
