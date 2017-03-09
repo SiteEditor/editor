@@ -802,7 +802,7 @@
   	};
 
   	api.MSElement.synchronizer.radio = {
-  		updateField: function( to ) {
+  		updateField: function( to ) { 
   			this.element.filter( function() {
   				return this.value === to;
   			}).prop( 'checked', true );

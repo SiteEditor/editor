@@ -63,12 +63,15 @@ class PBAddShortcode extends PBShortcodeClass{
 
 
     function get_atts(){
+
         $atts = array(
-          'tag'          => 'h2',
-          'show_add_button'  => "true",
+            'tag'          => 'h2',
+            'show_add_button'  => "true",
+            'sed_contextmenu_class' => ''
         );
 
         return $atts;
+
     }
 
 }

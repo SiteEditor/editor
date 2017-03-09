@@ -420,6 +420,7 @@ Class PageBuilderApplication {
 
                     $attrs_query = $matches[3][ $index ];
 
+                    //For fix Checkboxes or options with false && true 
                     if( is_array( $shortcode['attrs'] ) && !empty( $shortcode['attrs'] ) ) {
 
                         $shortcode['attrs'] = array_map(array(__CLASS__, "sanitize_control_value"), $shortcode['attrs']);

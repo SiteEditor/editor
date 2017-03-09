@@ -574,19 +574,16 @@
                 modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
                 rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
                 moduleShortcode = api.modulesSettings[name].shortcode ,
-                className = self.setModuleContextmenuClass( modulePattern[0]  , moduleShortcode  ) ,
                 attrs = {} , newPattern;
 
-            attrs.class = className;
+            attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
 
             //attrs = this.addAlignSpacingAttrToModule( name , attrs );
 
             if( self.currentDragType == "regular" ){
                 rowPattern[0].attrs.type = 'static-element';
 
-                var rowClassName = self.setModuleContextmenuClass( rowPattern[0]  , moduleShortcode  );
-
-                rowPattern[0].attrs.class = rowClassName;
+                rowPattern[0].attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
 
                 if(name == "row-container"){
                     rowPattern[0].attrs.length = "boxed";
@@ -723,17 +720,10 @@
             return shortcodes;
         },
 
-        setModuleContextmenuClass: function( module , moduleShortcode  ) {
-            var className , attrs = _.clone( module.attrs );
-            if(!_.isUndefined( attrs ) && !_.isUndefined( attrs['class'] ))
-                className = "module_" + moduleShortcode + "_contextmenu_container " + attrs['class'];
-            else if( !_.isUndefined( attrs ) )
-                className = "module_" + moduleShortcode + "_contextmenu_container ";
-            else {
-                className = "module_" + moduleShortcode + "_contextmenu_container ";
-            }
+        getModuleContextmenuClass: function( moduleShortcode  ) {
 
-            return className;
+            return "module_" + moduleShortcode + "_contextmenu_container ";
+
         },
 
         //name :: module name

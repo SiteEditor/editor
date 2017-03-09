@@ -1165,7 +1165,7 @@
 
                     var panel = api.settingsPanels[dataElement.shortcodeName][data.panel];
 
-                    return $.inArray( panel.type , [ 'inner_box' , 'expanded' ] ) == -1; //, 'expanded'
+                    return $.inArray( panel.type , [ 'inner_box' ] ) == -1; //, 'expanded'
 
                 });
             }
