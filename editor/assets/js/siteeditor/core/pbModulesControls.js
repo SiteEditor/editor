@@ -231,7 +231,7 @@
                 if( LockerControl && !_.isUndefined( LockerControl.currentValue ) && LockerControl.currentValue ){
 
                     var lockControlsParams = this.findLockControls( LockerControl.id ),
-                        lockControls = []; console.log( "-----------lockControlsParams---------" , lockControlsParams );
+                        lockControls = [];
 
                     _.each( lockControlsParams , function( data ){
 
@@ -802,7 +802,7 @@
   	};
 
   	api.MSElement.synchronizer.radio = {
-  		updateField: function( to ) { 
+  		updateField: function( to ) {
   			this.element.filter( function() {
   				return this.value === to;
   			}).prop( 'checked', true );
@@ -985,7 +985,7 @@
 
         },
 
-        _update : function( val ) {
+        _update : function( val ) { 
             this._updateUrlField( val );
         },
 
@@ -1451,7 +1451,7 @@
 
                 control.sortableImages.html( images_html );
             }
-        },
+        }
 
     });
 
