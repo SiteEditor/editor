@@ -39,8 +39,16 @@
         fileUrl = "No file";
     }
 
+    var length_class;
+
+    if(length == "boxed"){
+        length_class = "sed-row-boxed";
+    }else{
+        length_class = "sed-row-wide";
+    }
+
 #>
-<div {{sed_attrs}} class="sed-api-test module module-api-test-module api-test-module-skin-default sed-sas-md {{className}}" length_element="sed-row-wide" >
+<div {{sed_attrs}} class="sed-api-test module module-api-test-module api-test-module-skin-default sed-sas-md {{className}} {{length_class}}" length_element="sed-row-wide" >
     <div> 
     <h3>Attribute test</h3>
     <div>

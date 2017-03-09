@@ -496,7 +496,7 @@
                               var shColor = to;
                               _saveCustomCss( setting , to );
 
-                              var strSh = sedCss[api.currentCssSelector]["shadow"]; console.log( "---------box shadow-----" , strSh );
+                              var strSh = sedCss[api.currentCssSelector]["shadow"];
                               var css = api.currentCssSelector + "{" + _getShadow( strSh , shColor ) + "}";
                               styleSetting = "shadow";
                               needToSave = false;
@@ -821,7 +821,7 @@
             if( !isBgImg && !isGradient ){
                 var css = 'background-image: none !important;';
             }else if( !isBgImg && isGradient ){
-                var gradient = _getGradient();    
+                var gradient = _getGradient(); 
                 var css = siteEditorCss.gradient( gradient.start , gradient.end , gradient );
             }else if( isBgImg && isGradient ){
                 var gradient = _getGradient();

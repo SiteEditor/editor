@@ -97,7 +97,7 @@ class SEDPBModuleProvider{
 
     public function sed_app_pagebuilder_modules(){
 
-        global $sed_apps; var_dump( SED()->editor->attachments_loaded );
+        global $sed_apps; 
 
         if( is_array( SED()->editor->attachments_loaded ) && !empty( SED()->editor->attachments_loaded ) ) {
             $attachments = array_map('wp_prepare_attachment_for_js', SED()->editor->attachments_loaded );

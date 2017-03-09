@@ -1180,7 +1180,7 @@ class SiteEditorManager{
 	 *
 	 * @since 3.4.0
 	 */
-	public function sed_app_preview_settings() { var_dump("sed_app_preview_settings");
+	public function sed_app_preview_settings() { 
         global $site_editor_app;
 
 	  	$settings = array(

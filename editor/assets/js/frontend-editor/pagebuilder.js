@@ -629,20 +629,25 @@
             shortcodes = this.setHelperShortcodes( shortcodes , name );
             shortcodes = this.shortcodesPatternFilter( shortcodes );
 
-            this.syncStyleEditorPreview( shortcodes );
-
             if(direction == "down"){
-              typeS = 0;
+                typeS = 0;
             }else if(direction == "up"){
-              typeS = 1;
+                typeS = 1;
             }else if(direction == "none"){
-              this.contentBuilder.addShortcodesToParent(  parentId , shortcodes , postId );
-              return id;
+
+                this.contentBuilder.addShortcodesToParent(  parentId , shortcodes , postId );
+
+                this.syncStyleEditorPreview( shortcodes );
+
+                return id;
             }
                                      
             var nextPreId = (nextPre) ? elementId: "";
 
             this.contentBuilder.addShortcodeModule( shortcodes , postId, nextPreId , typeS);
+
+            this.syncStyleEditorPreview( shortcodes );
+
             return id;
         },
 
