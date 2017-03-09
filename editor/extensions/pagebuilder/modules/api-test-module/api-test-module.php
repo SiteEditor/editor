@@ -68,7 +68,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "custom_attr"   =>  "" ,
             "multi_image_field_attr"   =>  "" ,
             "link"          => "" ,
-            "link_target"   => "" ,
+            "link_target"   => "_self" ,
             "length"        => "boxed" ,
             "image_source"  => "attachment" ,
             "image_url"     => '' ,

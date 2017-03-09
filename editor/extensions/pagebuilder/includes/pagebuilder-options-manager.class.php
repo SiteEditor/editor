@@ -248,7 +248,7 @@ final class SedPageBuilderOptionsManager{
             'label'         => __('Link Target : ', 'site-editor'),
             'description'   => __('Add Link target : open link in new window or same window', 'site-editor') ,
             'default'         => $values['link_target'],
-            'options'       => array(
+            'choices'       => array(
                 "_blank"        => __('Open in new window', 'site-editor')  ,
                 "_self"         => __('Open in same window', 'site-editor')  ,
             ),
