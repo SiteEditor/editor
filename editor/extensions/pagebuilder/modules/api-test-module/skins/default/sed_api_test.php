@@ -109,12 +109,12 @@
 
             foreach( $gallery AS $attachment_id ){
 
-                    ?><span>
+                    ?> <span>
                         <?php
                         $img = get_sed_attachment_image_html( $attachment_id , 'thumbnail' );
                         echo $img['thumbnail'];
                         ?>
-                    </span><?php
+                    </span> <?php
 
             }
             ?>
@@ -188,7 +188,7 @@
 
                 foreach( $iconsGroup AS $gIcon ){
 
-                    ?><span><span class="icon-group-single <?php echo $gIcon; ?>"></span></span><?php
+                    ?><span><span class="icon-group-single <?php echo $gIcon; ?>"></span></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php
 
                 }
 

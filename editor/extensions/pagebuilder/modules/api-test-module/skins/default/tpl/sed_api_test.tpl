@@ -111,7 +111,7 @@
                         _.each( imagesGroup , function( img_id ){
                             var gImgHtml = api.fn.getAttachmentImageHtml( img_id , "thumbnail" );
 
-                #><span>{{{gImgHtml}}}</span><#
+                #> <span>{{{gImgHtml}}}</span> <#
 
                         });
                     }
@@ -143,7 +143,7 @@
                     if( !_.isEmpty( multi_icon_field_attr ) && _.isString( multi_icon_field_attr ) ){
                         var iconsGroup = multi_icon_field_attr.split(",");
                         _.each( iconsGroup , function( gIcon ){
-                #><span><span class="icon-group-single {{gIcon}}"></span></span><#
+                #><span><span class="icon-group-single {{gIcon}}"></span></span>&nbsp;&nbsp;&nbsp;&nbsp;<#
                         });
                     }
                 #>
