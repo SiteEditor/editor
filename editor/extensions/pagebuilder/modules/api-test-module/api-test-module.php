@@ -122,8 +122,14 @@ class PBAPITestModule extends PBShortcodeClass{
             
         }
 
+        if($length == "boxed")
+            $length_class = "sed-row-boxed";
+        else
+            $length_class = "sed-row-wide";
+
         $this->set_vars( array(
             "gallery"     => $attachments ,
+            "length_class"     => $length_class
         ));
         
     }
@@ -890,6 +896,12 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "icon_settings_panel"
         );
 
+        /*
+         * @Code Editor Panel && Settings
+         * In Modules Should Using "sed_shortcode_content" only for code key because the
+         * code Should save as a shortcode content and it can not save as attribute
+         * So you can using the code field only one time for each module
+
         $this->add_panel( 'code_editor_settings_panel' , array(
             'priority'          => 9,
             'type'              => 'inner_box',
@@ -899,14 +911,10 @@ class PBAPITestModule extends PBShortcodeClass{
             'btn_style'         => "black",
             'parent_id'         => "root",
             'atts'              => array() ,
-        ) );  
+        ) );
 
-
-        /*
-         * @Code Editor Settings
-         */
-
-        $params['html_code_field_id'] = array(
+        //html_code_field_id
+        $params['sed_shortcode_content'] = array(
             'type'              => 'code',
             'label'             => __('Edit HTML Code', 'translation_domain'),
             'priority'          => 10,
@@ -940,25 +948,15 @@ class PBAPITestModule extends PBShortcodeClass{
         );
 
         $params['wp_editor_field_id'] = array(
+            'label'             => __('Edit Text Block', 'translation_domain'),
             'type'              => 'wp-editor',
-            'label'             => __('WP Editor', 'translation_domain'), 
-            //'input_attrs'
-            "atts"              => array(
-                "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
-                "data-custom"   =>    "test" ,
-            ),
+            'priority'          => 10,
+            'default'           => "",
             //panel or group
             'panel'             =>  'code_editor_settings_panel' ,
-        );
+        ); */
 
 
-
-        /*
-        "animation"  =>  array(
-            "type"          => "animation" ,
-            "label"         => __("Animation Settings", "site-editor"),
-        ),
-        */
         $params['animation'] = array(
             "type"          => "animation" ,
             "label"         => __("Animation Settings", "site-editor"),
@@ -973,19 +971,13 @@ class PBAPITestModule extends PBShortcodeClass{
             )
         );
 
-        /*
-        "skin"  =>  array(
-            "type"          => "skin" ,
-            "label"         => __("Change skin", "site-editor"),
-        ),
-        */
         $params['skin'] = array(
             "type"          => "skin" ,
             "label"         => __("Change skin Control", "site-editor"),
         );
 
 
-        $params['group_skin'] = array(
+        /*$params['group_skin'] = array(
             'type'       =>  "group_skin" ,
             'default'    =>  "default",
             'sub_module' =>  "image",
@@ -1000,7 +992,7 @@ class PBAPITestModule extends PBShortcodeClass{
                      )
                 )
             ),
-        );
+        );*/
 
         $params['row_container'] = array(
             "type"          => "row_container" ,
@@ -1025,6 +1017,7 @@ class PBAPITestModule extends PBShortcodeClass{
         $params['length'] = array(
             "type"          => "length" ,
             "label"         => __("Length", "site-editor"),
+            "default"       => "wide"
         );
 
 

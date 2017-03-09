@@ -1,4 +1,4 @@
-<div <?php echo $sed_attrs; ?> class="sed-api-test module module-api-test-module api-test-module-skin-default sed-sas-md <?php echo $class; ?>" length_element="sed-row-wide" >
+<div <?php echo $sed_attrs; ?> class="sed-api-test module module-api-test-module api-test-module-skin-default sed-sas-md <?php echo esc_attr( $class ); ?> <?php echo esc_attr( $length_class );?>" length_element="sed-row-wide" >
     <div>
     <h3>Attribute test</h3>
     <div>
