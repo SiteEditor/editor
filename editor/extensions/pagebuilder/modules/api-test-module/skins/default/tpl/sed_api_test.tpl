@@ -50,7 +50,9 @@
 #>
 <div {{sed_attrs}} class="sed-api-test module module-api-test-module api-test-module-skin-default sed-sas-md {{className}} {{length_class}}" length_element="sed-row-wide" >
     <div> 
-    <h3>Attribute test</h3>
+    <div><h3>Attribute test</h3></div>
+    <div><span class="attr">Link To:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{link}}" target="{{link_target}}" class="value">{{link}}</a></div>
+
     <div>
         <br>
         <div><h4 class="attr">Text Box Settings</h4></div>

@@ -1,6 +1,8 @@
 <div <?php echo $sed_attrs; ?> class="sed-api-test module module-api-test-module api-test-module-skin-default sed-sas-md <?php echo esc_attr( $class ); ?> <?php echo esc_attr( $length_class );?>" length_element="sed-row-wide" >
     <div>
-    <h3>Attribute test</h3>
+    <div><h3>Attribute test</h3></div>
+    <div><span class="attr">Link To:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?php echo $link; ?>" target="<?php echo $link_target; ?>" class="value"><?php echo $link; ?></a></div>
+
     <div>
         <br>
         <div><h4 class="attr">Text Box Settings</h4></div>
@@ -23,11 +25,11 @@
 
         <br>
         <div><h4 class="attr">Check Box Settings</h4></div>
-        <div><span class="attr">Checkbox Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $checkbox_field_attr; ?></span></div>
+        <div><span class="attr">Checkbox Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php if( $checkbox_field_attr === true ) echo "true"; else echo "false"; ?></span></div>
         <div><span class="attr">Multi Checkbox Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $multi_check_field_attr; ?></span></div>
-        <div><span class="attr">Toggle Control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $toggle_field_id; ?></span></div>
+        <div><span class="attr">Toggle Control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php if( $toggle_field_id === true ) echo "true"; else echo "false"; ?></span></div>
         <div><span class="attr">Sortable Control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $sortable_field_id; ?></span></div>
-        <div><span class="attr">Switch Control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $switch_field_id; ?></span></div> 
+        <div><span class="attr">Switch Control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php if( $switch_field_id === true ) echo "true"; else echo "false"; ?></span></div> 
 
         <br>
         <div><h4 class="attr">Radio Settings</h4></div>
@@ -170,7 +172,7 @@
         <div><span class="attr">Spinner1 with lock:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $spinner1_with_lock_attr; ?></span></div>
         <div><span class="attr">Spinner2 with lock:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $spinner2_with_lock_attr; ?></span></div>
         <div><span class="attr">Spinner3 with lock:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $spinner3_with_lock_attr; ?></span></div>
-        <div><span class="attr">Spinner Lock Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $spinner_lock_attr; ?></span></div>
+        <div><span class="attr">Spinner Lock Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php if( $spinner_lock_attr === true ) echo "true"; else echo "false"; ?></span></div>
         <div><span class="attr">Range Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo $range_field_attr; ?></span></div>
 
         <br>
