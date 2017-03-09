@@ -1,39 +1,3 @@
-<?php
-    /*var api = sedApp.editor ;
-
-    $imageHtml = api.fn.getAttachmentImageHtml( image_field_attr , image_size_field_attr );
-
-    if( $video_field_attr > 0 ){
-        $videoAttachment = _.findWhere( api.attachmentsSettings , { id : video_field_attr}  );
-    }
-
-    if( !_.isUndefined( videoAttachment ) && videoAttachment && !_.isUndefined( videoAttachment.url ) ){
-        $videoUrl = videoAttachment.url;
-    }else{
-        $videoUrl = "No Video";
-    }
-
-    if( $audio_field_attr > 0 ){
-        $audioAttachment = _.findWhere( api.attachmentsSettings , { id : audio_field_attr}  );
-    }
-
-    if( !_.isUndefined( audioAttachment ) && audioAttachment && !_.isUndefined( audioAttachment.url ) ){
-        $audioUrl = audioAttachment.url;
-    }else{
-        $audioUrl = "No audio";
-    }
-
-    if( $file_field_attr > 0 ){
-        $fileAttachment = _.findWhere( api.attachmentsSettings , { id : file_field_attr}  );
-    }
-
-    if( !_.isUndefined( fileAttachment ) && fileAttachment && !_.isUndefined( fileAttachment.url ) ){
-        $fileUrl = fileAttachment.url;
-    }else{
-        $fileUrl = "No file";
-    }*/
-
-?>
 <div <?php echo $sed_attrs; ?> class="sed-api-test module module-api-test-module api-test-module-skin-default sed-sas-md <?php echo $class; ?>" length_element="sed-row-wide" >
     <div>
     <h3>Attribute test</h3>

@@ -6,7 +6,7 @@
     var videoAttachment , videoUrl;
 
     if( video_field_attr > 0 ){
-        videoAttachment = _.findWhere( api.attachmentsSettings , { id : video_field_attr}  );
+        videoAttachment = _.findWhere( api.attachmentsSettings , { id : parseInt( video_field_attr ) }  );
     }
 
     if( !_.isUndefined( videoAttachment ) && videoAttachment && !_.isUndefined( videoAttachment.url ) ){
@@ -18,7 +18,7 @@
     var audioAttachment , audioUrl;
 
     if( audio_field_attr > 0 ){
-        audioAttachment = _.findWhere( api.attachmentsSettings , { id : audio_field_attr}  );
+        audioAttachment = _.findWhere( api.attachmentsSettings , { id : parseInt( audio_field_attr ) }  );
     }
 
     if( !_.isUndefined( audioAttachment ) && audioAttachment && !_.isUndefined( audioAttachment.url ) ){
@@ -30,7 +30,7 @@
     var fileAttachment , fileUrl;
 
     if( file_field_attr > 0 ){
-        fileAttachment = _.findWhere( api.attachmentsSettings , { id : file_field_attr}  );
+        fileAttachment = _.findWhere( api.attachmentsSettings , { id : parseInt( file_field_attr ) }  );
     }
 
     if( !_.isUndefined( fileAttachment ) && fileAttachment && !_.isUndefined( fileAttachment.url ) ){
@@ -121,7 +121,7 @@
         </div>
         <div><span class="attr">Video Field (MP4):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : {{video_field_attr}} </span>&nbsp;&nbsp;&nbsp;<span class="value">Url : {{videoUrl}}</span></div>
         <div><span class="attr">Audio Field (MP3):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : {{audio_field_attr}} </span>&nbsp;&nbsp;&nbsp;<span class="value">Url : {{audioUrl}}</span></div>
-        <div><span class="attr">File Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : {{audio_field_attr}} </span>&nbsp;&nbsp;&nbsp;<span class="value">Url : {{fileUrl}}</span></div>
+        <div><span class="attr">File Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : {{file_field_attr}} </span>&nbsp;&nbsp;&nbsp;<span class="value">Url : {{fileUrl}}</span></div>
 
         <br>
         <div><h4 class="attr">Number Settings</h4></div>
