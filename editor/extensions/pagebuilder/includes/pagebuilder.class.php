@@ -420,6 +420,11 @@ Class PageBuilderApplication {
 
                     $attrs_query = $matches[3][ $index ];
 
+                    if( is_array( $shortcode['attrs'] ) && !empty( $shortcode['attrs'] ) ) {
+
+                        $shortcode['attrs'] = array_map(array(__CLASS__, "sanitize_control_value"), $shortcode['attrs']);
+                    }
+
                     $shortcode['attrs']['sed_model_id'] = $id;
 
                     $string_shortcode_tag = $shortcode['tag'];
@@ -870,6 +875,16 @@ Class PageBuilderApplication {
     public static function sanitize_attr_value( $value ){
         if( is_bool( $value ) )
             $value = ($value === true) ? "true" : "false";
+
+        return $value;
+    }
+
+    public static function sanitize_control_value( $value ){
+
+        if( $value === "true" )
+            $value = true;
+        else if( $value === "false" )
+            $value = false;
 
         return $value;
     }
