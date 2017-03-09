@@ -1,19 +1,21 @@
 <?php
 
-if( !$lightbox_id ){
+/*if( !$lightbox_id ){
     $lightbox_id = $id;
-}
+}*/
 
 $img = false;
 
 switch ( $image_source ) {
     case "attachment":
         $img = get_sed_attachment_image_html( $attachment_id , $default_image_size , $custom_image_size );
+        $attachment_full_src = wp_get_attachment_image_src( $attachment_id, 'full' ); 
+        $attachment_full_src = $attachment_full_src[0];
     break;
-    case "external":
+    case "external":  
         $img = get_sed_external_image_html( $image_url , $external_image_size , $full_src );
+        $attachment_full_src =  $full_src;
     break;
-
 }
 
 if ( ! $img ) {
@@ -27,7 +29,7 @@ if ( ! $img ) {
 <div <?php echo $sed_attrs; ?> class="sed-stb-sm sed-ta-c module module-single-image single-image-default <?php echo $class;?>">  
 
     <?php if($image_click == "expand_mode"){ ?>
-    <a class="img" href="<?php echo $img['large_img'];?>" data-lightbox="<?php if(!empty($lightbox_id)) echo $lightbox_id;else echo $id;?>" data-title="<?php echo $title;?>" title="<?php echo $title;?>">
+    <a class="img" href="<?php echo $attachment_full_src;?>" data-lightbox="<?php if(!empty($lightbox_id)) echo $lightbox_id;else echo $id;?>" data-title="<?php echo $title;?>" title="<?php echo $title;?>">
        <?php echo $img['thumbnail'];?>
     </a>
     <?php } ?>

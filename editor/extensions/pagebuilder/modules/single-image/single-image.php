@@ -176,7 +176,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                       'default'             => __('Do Nothing', 'site-editor'),
                       'link_mode'           => __('Open Link', 'site-editor'),
                       'expand_mode'         => __('Open Expand Mode', 'site-editor'),
-                      'link_expand_mode'    => __('Both Link & Expand Mode', 'site-editor'),
+                      //'link_expand_mode'    => __('Both Link & Expand Mode', 'site-editor'),
                   ),  
                   'panel'    => 'single_image_settings_panel',
               ),
