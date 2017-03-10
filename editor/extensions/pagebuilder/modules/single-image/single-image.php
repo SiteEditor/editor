@@ -287,6 +287,6 @@ $sed_pb_app->register_module(array(
     "description" => '',//__("Add Full Customize Image","site-editor"),
     "icon"        => "sedico-image",
     "shortcode"   => "sed_single_image",
-    "tpl_type"    => "underscore" 
+    "tpl_type"    => "underscore"
 ));
                  
