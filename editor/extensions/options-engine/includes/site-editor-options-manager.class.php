@@ -1013,6 +1013,7 @@ final class SiteEditorOptionsManager{
         // If we're using html mode, we'll also need to include the multiplex addon
         // as well as dependencies for XML, JS, CSS languages.
         //if ( in_array( $this->choices['language'], array( 'html', 'htmlmixed' ) ) ) {
+            wp_enqueue_script( 'codemirror-selection', SED_EDITOR_ASSETS_URL . '/libs/codemirror/addon/selection/selection-pointer.js', array( 'jquery', 'codemirror' ) );
             wp_enqueue_script( 'codemirror-multiplex', SED_EDITOR_ASSETS_URL . '/libs/codemirror/addon/mode/multiplex.js', array( 'jquery', 'codemirror' ) );
             wp_enqueue_script( 'codemirror-language-xml', SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/xml/xml.js', array( 'jquery', 'codemirror' ) );
             wp_enqueue_script( 'codemirror-language-javascript', SED_EDITOR_ASSETS_URL . '/libs/codemirror/mode/javascript/javascript.js', array( 'jquery', 'codemirror' ) );

@@ -70,7 +70,7 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 
             $js_params = wp_parse_args( array(
                     'language'	=>  'html' ,
-                    'theme'		=>	'default' ,
+                    'theme'		=>	'abcdef' ,
                     'height'	=>	'250px'
                 ), $this->js_params
             );
