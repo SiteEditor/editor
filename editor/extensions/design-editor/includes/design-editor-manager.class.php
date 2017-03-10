@@ -601,7 +601,7 @@ class SedDesignEditorManager extends SiteEditorModules{
             'type'          => 'panel-button',
             'label'         => __('Custom Edit Style',"site-editor"),
             'description'   => '',
-            'button_style'  => 'blue' ,
+            'button_style'  => 'menu' ,
             'has_border_box'    => false ,
             'atts'          => array(
                 'class'                 => 'sed_style_editor_btn' ,
@@ -611,7 +611,9 @@ class SedDesignEditorManager extends SiteEditorModules{
             ) ,
             'panel_title'   => __('Custom Edit Style',"site-editor") ,
             'panel_content' => $dialog_content ,
-            'priority'      => 1010
+            'priority'      => 1010 ,
+            'icon'              => 'sedico-change-style' ,
+            'field_spacing'     => 'sm'
         ) , $option_group );
 
         return $design_button_field;

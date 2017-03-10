@@ -198,6 +198,8 @@ final class SedPageBuilderOptionsManager{
 
         $values         = isset($args['values']) ?  $args['values'] : array();
 
+        $parent_id      = isset($args['parent_id']) ?  $args['parent_id'] : 'root';
+
         $values         = array_merge( array(
             "link"          => '' ,
             "link_target"   => '_self'
@@ -217,13 +219,16 @@ final class SedPageBuilderOptionsManager{
         $capability     = isset($args['capability']) ?  $args['capability'] : 'edit_theme_options';
 
         $panel = array(
-            'title'         => $panel_title ,
-            'description'   => $description ,
-            'capability'    => $capability ,
-            'type'          => $panel_type ,
-            'parent_id'     => 'root',
-            'has_border_box'=> false ,
-            'priority'      => $priority
+            'title'             => $panel_title ,
+            'description'       => $description ,
+            'capability'        => $capability ,
+            'type'              => $panel_type ,
+            'parent_id'         => $parent_id,
+            'has_border_box'    => false ,
+            'priority'          => $priority ,
+            'btn_style'         => 'menu' ,
+            'icon'              => 'sedico-link' ,
+            'field_spacing'     => 'sm'
         );
 
         if( isset( $args['panel_dependency'] ) ){
@@ -430,12 +435,14 @@ final class SedPageBuilderOptionsManager{
          * Define the array of defaults
          */
         $defaults = array(
-            'type'          => 'button',
-            'label'         => __('Go To Row Settings', 'site-editor'),
-            'description'   => __('Row Container Settings', 'site-editor'),
-            'style'         => 'blue',
-            'has_border_box'=> false ,
-            'priority'      => 1030
+            'type'                  => 'panel-button',
+            'label'                 => __('Module Wrapper Settings', 'site-editor'),
+            //'description'           => __('Row Container Settings', 'site-editor'),
+            'button_style'          => 'menu',
+            'has_border_box'        => false ,
+            'priority'              => 1030 ,
+            'icon'                  => 'sedico-coding' ,
+            'field_spacing'         => 'sm'
         );
 
         /**
@@ -539,7 +546,7 @@ final class SedPageBuilderOptionsManager{
         $defaults = array(
             "label"             => __('Change Panel',"site-editor"),
             "description"       => '',
-            "priority"          => 10 ,
+            "priority"          => 515 ,
             "panel_type"        => 'inner_box' ,
             'panel_dependency'  => array() ,
             'parent_id'         => 'root',
@@ -569,13 +576,17 @@ final class SedPageBuilderOptionsManager{
         extract( $param );
 
         $this->group->add_panel( 'sed_select_image_panel' , array(
-            'title'         => $label ,
-            'description'   => $description ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => $panel_type ,
-            'parent_id'     => $parent_id ,
-            'priority'      => $priority ,
-            'dependency'    => $panel_dependency
+            'title'                 => $label ,
+            'description'           => $description ,
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => $panel_type ,
+            'parent_id'             => $parent_id ,
+            'priority'              => $priority ,
+            'dependency'            => $panel_dependency ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-image' ,
+            'field_spacing'         => 'sm'
         ) );
 
         $params[$controls["image_source"]] = array(

@@ -147,21 +147,17 @@ class PBSingleImageShortcode extends PBShortcodeClass{
       function shortcode_settings(){
 
           $this->add_panel( 'single_image_settings_panel' , array(
-              'title'         =>  __('Single Image Settings',"site-editor")  ,
-              'capability'    => 'edit_theme_options' ,
-              'type'          => 'default' ,
-              'description'   => '' ,
-              'priority'      => 9 ,
+              'title'                   =>  __('Single Image Settings',"site-editor")  ,
+              'capability'              => 'edit_theme_options' ,
+              'type'                    => 'inner_box' ,
+              'priority'                => 9 ,
+              'btn_style'               => 'menu' ,
+              'has_border_box'          => false ,
+              'icon'                    => 'sedico-image' ,
+              'field_spacing'           => 'sm'
           ) );
 
           $params = array(
-
-              'change_image_panel' => array(
-                  "type"          => "sed_image" ,
-                  "label"         => __("Select Image", "site-editor"),
-                  "panel_type"    => "inner_box" ,
-                  'priority'      => 1 ,
-              ),
 
               'full_src'    => array(
                   'label'         => __('Image For Light Box', 'site-editor'),
@@ -216,26 +212,50 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               ),
 
               'title' =>  array(
-                  'type'          => 'text',
-                  'label'         => __('Title', 'site-editor'),
-                  'description'   => __('This option allows you to set a title for your image.', 'site-editor'),
-                  'panel'    => 'single_image_settings_panel',
+                  'type'                => 'text',
+                  'label'               => __('Title', 'site-editor'),
+                  'description'         => __('This option allows you to set a title for your image.', 'site-editor'),
+                  'panel'               => 'single_image_settings_panel',
+              ),
+
+              'change_image_panel' => array(
+                  "type"                => "sed_image" ,
+                  "label"               => __("Select Image", "site-editor"),
+                  "panel_type"          => "default" ,
+                  'priority'            => 515 ,
+                  'parent_id'           => 'single_image_settings_panel'
               ),
 
               "link" => array(
-                  "type"          => "link" ,
-                  "label"         => __("Link Panel Settings", "site-editor"),
+                  "type"                => "link" ,
+                  "label"               => __("Link Panel Settings", "site-editor"),
+                  'parent_id'           => 'single_image_settings_panel'
+              ),
+
+              'row_container' => array(
+                  'type'          => 'row_container',
+                  'label'         => __('Go To Row Settings', 'site-editor')
               ),
 
               "skin"  =>  array(
-                  "type"          => "skin" ,
-                  "label"         => __("Change skin", "site-editor"),
+                  "type"                => "skin" ,
+                  "label"               => __("Change skin", "site-editor"),
+                  'button_style'        => 'menu' ,
+                  'has_border_box'      => false ,
+                  'icon'                => 'sedico-change-skin' ,
+                  'field_spacing'       => 'sm' ,
+                  'priority'            => 540
               ),
 
               "animation"  =>  array(
-                  "type"          => "animation" ,
-                  "label"         => __("Animation Settings", "site-editor"),
-              ),
+                  "type"                => "animation" ,
+                  "label"               => __("Animation Settings", "site-editor"),
+                  'button_style'        => 'menu' ,
+                  'has_border_box'      => false ,
+                  'icon'                => 'sedico-animation' ,
+                  'field_spacing'       => 'sm' ,
+                  'priority'            => 530 ,
+              )
 
           );
 
