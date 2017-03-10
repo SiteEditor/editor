@@ -1029,7 +1029,7 @@ final class SiteEditorOptionsManager{
 
         //wp_enqueue_style( 'codemirror-theme-default' , SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/default.css' );
 
-        wp_enqueue_style( 'codemirror-theme-abcdef' , SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/abcdef.css' );
+        //wp_enqueue_style( 'codemirror-theme-abcdef' , SED_EDITOR_ASSETS_URL . '/libs/codemirror/theme/abcdef.css' );
 
     }
 
