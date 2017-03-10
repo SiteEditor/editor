@@ -3,9 +3,11 @@
 $img = false;
 
 switch ( $image_source ) {
+
     case "attachment":
         $img = get_sed_attachment_image_html( $attachment_id , $default_image_size , $custom_image_size );
     break;
+
     case "external":
   		$img = get_sed_external_image_html( $image_url , $external_image_size , $full_src );
     break;

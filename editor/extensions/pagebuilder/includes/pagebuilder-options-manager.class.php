@@ -635,7 +635,7 @@ final class SedPageBuilderOptionsManager{
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
                 'queries'  =>  array(
-                    "relation"     =>  "and" ,
+                    "relation"     =>  "AND" ,
                     array(
                         "key"       => $controls["attachment_id"] ,
                         "value"     => array( "" , 0 ) ,
@@ -658,7 +658,7 @@ final class SedPageBuilderOptionsManager{
             'panel'         => 'sed_select_image_panel' ,
             'dependency' => array(
                 'queries'  =>  array(
-                    "relation"     =>  "and" ,
+                    "relation"     =>  "AND" ,
                     array(
                         "key"       => $controls["default_image_size"] ,
                         "value"     => "" ,

@@ -1,9 +1,4 @@
 <?php
-
-/*if( !$lightbox_id ){
-    $lightbox_id = $id;
-}*/
-
 $img = false;
 
 switch ( $image_source ) {
@@ -21,7 +16,10 @@ switch ( $image_source ) {
 if ( ! $img ) {
     $img = array();
     $img['thumbnail'] = '<img class="sed-image-placeholder sed-image" src="' . sed_placeholder_img_src() . '" />';
-    $img['large_img'] = '<img class="sed-image-placeholder sed-image" src="' . sed_placeholder_img_src() . '" />';
+}
+
+if ( ! $attachment_full_src ) {
+    $attachment_full_src = sed_placeholder_img_src();
 }
 
 ?>
@@ -29,19 +27,21 @@ if ( ! $img ) {
 <div <?php echo $sed_attrs; ?> class="sed-stb-sm sed-ta-c module module-single-image single-image-default <?php echo $class;?>">  
 
     <?php if($image_click == "expand_mode"){ ?>
-    <a class="img" href="<?php echo $attachment_full_src;?>" data-lightbox="<?php if(!empty($lightbox_id)) echo $lightbox_id;else echo $id;?>" data-title="<?php echo $title;?>" title="<?php echo $title;?>">
-       <?php echo $img['thumbnail'];?>
-    </a>
+        <a class="img" href="<?php echo $attachment_full_src;?>" data-lightbox="<?php if( !empty($lightbox_id) ) echo $lightbox_id;else echo "sed-lightbox";?>" data-title="<?php echo $title;?>" title="<?php echo $title;?>">
+           <?php echo $img['thumbnail'];?>
+        </a>
     <?php } ?>
+
     <?php if($image_click == "link_mode" || $image_click == "link_expand_mode" ){ ?>
-    <a class="img"  href="<?php echo $link;?>" target="<?php echo $link_target;?>" title="<?php echo $title;?>">
-        <?php echo $img['thumbnail'];?>   
-    </a>
+        <a class="img"  href="<?php echo $link;?>" target="<?php echo $link_target;?>" title="<?php echo $title;?>">
+            <?php echo $img['thumbnail'];?>
+        </a>
     <?php } ?>
+
     <?php if($image_click == "default" ){ ?>
-    <div class="img">
-        <?php echo $img['thumbnail'];?>  
-    </div>
+        <div class="img">
+            <?php echo $img['thumbnail'];?>
+        </div>
     <?php }?>
 
 </div>

@@ -2941,7 +2941,7 @@
         api.fn.getAttachmentImageFullSrc = function( attach_id ){
             var attachment;
             if( attach_id > 0 ){
-                attachment = _.findWhere( api.attachmentsSettings , { id : attach_id }  );
+                attachment = _.findWhere( api.attachmentsSettings , { id : parseInt( attach_id ) }  );
             }
 
             var imgUrl = SEDNOPIC.url;
@@ -2960,7 +2960,7 @@
             var attachment , imgUrl , _height , _width , _caption , _description , _title;
             attach_id = parseInt( attach_id );
             if( attach_id > 0 ){
-                attachment = _.findWhere( api.attachmentsSettings , { id : attach_id }  );
+                attachment = _.findWhere( api.attachmentsSettings , { id : parseInt( attach_id ) }  );
             }
 
             if( !_.isUndefined( attachment ) && attachment && !_.isUndefined( attachment.url ) ){

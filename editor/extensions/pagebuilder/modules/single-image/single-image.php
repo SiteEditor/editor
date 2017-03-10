@@ -9,29 +9,35 @@
 * @package SiteEditor
 * @category Core
 * @author siteeditor
-*/  
+*/
 
-
+/**
+ * Class PBSingleImageShortcode
+ */
 class PBSingleImageShortcode extends PBShortcodeClass{
+
       static $lightbox_id_counter = 0;
+
       /**
-      * Register module with siteeditor.
-      */
+       * PBSingleImageShortcode constructor.
+       */
       function __construct() {
-          parent::__construct( array(  
+          parent::__construct( array(
               "name"          => "sed_single_image",                        //*require
               "title"         => __("Single Image","site-editor"),          //*require for toolbar
               "description"   => __("Add Image To Page","site-editor"),
               "icon"          => "sedico-image",                              //*require for icon toolbar
               "module"        =>  "single-image" ,                          //*require
               "retain_attrs"  =>  array("src" , "full_src"),                //not change this attrs after change skin (sample if exist src in new skin pattern not effect and retain current src )
-            )  
+            )
           );
 
-          if( site_editor_app_on()  )
-              add_action( "wp_footer" , array( $this , "add_image_svg") );
+          if( site_editor_app_on() ) {
+              add_action("wp_footer", array($this, "add_image_svg"));
+          }
 
           add_filter( "sed_js_I18n", array($this,'js_I18n'));
+
       }
 
       function add_image_svg(){
@@ -77,7 +83,6 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               "external_image_size" => "" ,
               "full_src"            => "" ,
               'title'               => __("Heading Here","site-editor"),
-              'alt'                 => __("No Pic","site-editor"),
               'description'         => __("Description Goes Here","site-editor"),
               'image_click'         => 'default',  // default || link_mode || expand_mode  ||  link_expand_mode
               'link'                => 'http://www.siteeditor.org',
@@ -101,7 +106,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
 
           if( empty( $lightbox_id ) ){
               self::$lightbox_id_counter++;
-              $this->atts["lightbox_id"] = "sed_image_lightbox_" + self::$lightbox_id_counter;
+              $this->atts["lightbox_id"] = "sed_image_lightbox_" . self::$lightbox_id_counter;
           }
 
           if( $image_source == "attachment" && $attachment_id > 0 ){
@@ -114,11 +119,13 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               $this->add_style("lightbox");
           }
 
-          if( $skin == 'sepia-toning' || $skin == 'greyscale' || $skin == 'image-blur' )
-            add_action( "wp_footer" , array( $this , "add_image_svg") );
+          if( $skin == 'sepia-toning' || $skin == 'greyscale' || $skin == 'image-blur' ) {
+              add_action("wp_footer", array($this, "add_image_svg"));
+          }
+
       }
 
-      function scripts(){    
+      function scripts(){
           return array(
             array("lightbox")
           );
@@ -148,12 +155,14 @@ class PBSingleImageShortcode extends PBShortcodeClass{
           ) );
 
           $params = array(
+
               'change_image_panel' => array(
                   "type"          => "sed_image" ,
                   "label"         => __("Select Image", "site-editor"),
                   "panel_type"    => "inner_box" ,
                   'priority'      => 1 ,
               ),
+
               'full_src'    => array(
                   'label'         => __('Image For Light Box', 'site-editor'),
                   'description'   => __('Big Image Url', 'site-editor'),
@@ -161,13 +170,22 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                   'panel'         => 'sed_select_image_panel' ,
                   'dependency' => array(
                       'queries'  =>  array(
+                          "relation"     =>  "AND" ,
                           array(
                               "key"       => "image_source" ,
                               "value"     => "external" ,
+                              "compare"   => "=="
+                          ),
+                          array(
+                              "key"       => "image_click" ,
+                              "value"     => "expand_mode" ,
+                              "compare"   => "=="
                           )
-                      )
+                      ),
+
                   )
-              ),              
+              ),
+
               'image_click' => array(
                   'type' => 'select',
                   'label' => __('When image is clicked', 'site-editor'),
@@ -177,49 +195,60 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                       'link_mode'           => __('Open Link', 'site-editor'),
                       'expand_mode'         => __('Open Expand Mode', 'site-editor'),
                       //'link_expand_mode'    => __('Both Link & Expand Mode', 'site-editor'),
-                  ),  
+                  ),
                   'panel'    => 'single_image_settings_panel',
               ),
+
+              'lightbox_id' =>  array(
+                  'type'            => 'text',
+                  'label'           => __('Lightbox ID', 'site-editor'),
+                  'description'     => __('Set group light box for images', 'site-editor'),
+                  'panel'           => 'single_image_settings_panel',
+                  'dependency' => array(
+                      'queries'  =>  array(
+                          array(
+                              "key"       => "image_click" ,
+                              "value"     => "expand_mode" ,
+                              "compare"   => "=="
+                          )
+                      )
+                  )
+              ),
+
               'title' =>  array(
                   'type'          => 'text',
                   'label'         => __('Title', 'site-editor'),
                   'description'   => __('This option allows you to set a title for your image.', 'site-editor'),
                   'panel'    => 'single_image_settings_panel',
               ),
-              'description' =>  array(
-                  'type'          => 'textarea',
-                  'label'         => __('Description', 'site-editor'),
-                  'description'   => __('This option allows you to add a description for your image.', 'site-editor'),
-                  'panel'    => 'single_image_settings_panel',
-              ),
-              'alt' => array(
-                  'type' => 'text',
-                  'label' => __('Alt Text', 'site-editor'),
-                  'description'  => __('This option allows you to show a text for your images which will be shown if the image could not be loaded. This also helps your site’s SEO.', 'site-editor'),
-                  'panel'    => 'single_image_settings_panel',
-              ),
+
               "link" => array(
                   "type"          => "link" ,
                   "label"         => __("Link Panel Settings", "site-editor"),
               ),
+
               "skin"  =>  array(
                   "type"          => "skin" ,
                   "label"         => __("Change skin", "site-editor"),
               ),
+
               'spacing' => array(
                   "type"          => "spacing" ,
                   "label"         => __("Spacing", "site-editor"),
                   "default"       => "10 0 10 0" ,
-              ),    
+              ),
+
               "align"  =>  array(
                   "type"          => "align" ,
                   "label"         => __("Align", "site-editor"),
                   "default"       => "center"
               ),
+
               "animation"  =>  array(
                   "type"          => "animation" ,
                   "label"         => __("Animation Settings", "site-editor"),
               ),
+
           );
 
           return $params;
@@ -244,11 +273,13 @@ class PBSingleImageShortcode extends PBShortcodeClass{
       }
 
       function contextmenu( $context_menu ){
+
           $image_menu = $context_menu->create_menu( "single-image" , __("Single Image","site-editor") , "single-image" , 'class' , 'element' , '' , "sed_single_image" , array(
               "change_image" => true ,
               "link_to"      => true ,
-              "seperator"    => array(45 , 75)     
+              "seperator"    => array(45 , 75)
           ) );
+
           //$context_menu->add_title_bar_item( $image_menu , __("Image","site-editor") );
 
       }
@@ -268,8 +299,6 @@ $sed_pb_app->register_module(array(
     "description" => '',//__("Add Full Customize Image","site-editor"),
     "icon"        => "sedico-image",
     "shortcode"   => "sed_single_image",
-    "tpl_type"    => "underscore" ,
-    //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'sed_single_image_module_script', 'image/js/image-module.min.js', array('sed-frontend-editor') )
+    "tpl_type"    => "underscore" 
 ));
                  
