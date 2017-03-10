@@ -81,7 +81,7 @@ class PBColumnsShortcode extends PBShortcodeClass{
 
             'row_container' => array(
                 'type'          => 'row_container',
-                'label'         => __('Go To Row Settings', 'site-editor')
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             )
 
         );

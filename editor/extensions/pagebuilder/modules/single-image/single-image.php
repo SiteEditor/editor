@@ -146,7 +146,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
 
       function shortcode_settings(){
 
-          $this->add_panel( 'single_image_settings_panel' , array(
+          $this->add_panel( 'single_image_settings_panel_outer' , array(
               'title'                   =>  __('Single Image Settings',"site-editor")  ,
               'capability'              => 'edit_theme_options' ,
               'type'                    => 'inner_box' ,
@@ -157,6 +157,14 @@ class PBSingleImageShortcode extends PBShortcodeClass{
               'field_spacing'           => 'sm'
           ) );
 
+          $this->add_panel( 'single_image_settings_panel' , array(
+              'title'                   =>  __('Single Image Settings',"site-editor")  ,
+              'capability'              => 'edit_theme_options' ,
+              'type'                    => 'default' ,
+              'parent_id'               => "single_image_settings_panel_outer",
+              'priority'                => 1 ,
+          ) );
+
           $params = array(
 
               'full_src'    => array(
@@ -164,6 +172,8 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                   'description'   => __('Big Image Url', 'site-editor'),
                   'type'          => 'text',
                   'panel'         => 'sed_select_image_panel' ,
+                  'has_border_box'      => false ,
+                  'priority'            => 100 ,
                   'dependency' => array(
                       'queries'  =>  array(
                           "relation"     =>  "AND" ,
@@ -186,6 +196,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                   'type' => 'select',
                   'label' => __('When image is clicked', 'site-editor'),
                   'description'  => __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
+                  'has_border_box'      => false ,
                   'choices'   =>array(
                       'default'             => __('Do Nothing', 'site-editor'),
                       'link_mode'           => __('Open Link', 'site-editor'),
@@ -199,6 +210,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                   'type'            => 'text',
                   'label'           => __('Lightbox ID', 'site-editor'),
                   'description'     => __('Set group light box for images', 'site-editor'),
+                  'has_border_box'      => false ,
                   'panel'           => 'single_image_settings_panel',
                   'dependency' => array(
                       'queries'  =>  array(
@@ -215,6 +227,7 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                   'type'                => 'text',
                   'label'               => __('Title', 'site-editor'),
                   'description'         => __('This option allows you to set a title for your image.', 'site-editor'),
+                  'has_border_box'      => false ,
                   'panel'               => 'single_image_settings_panel',
               ),
 
@@ -222,20 +235,29 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                   "type"                => "sed_image" ,
                   "label"               => __("Select Image", "site-editor"),
                   "panel_type"          => "default" ,
-                  'priority'            => 515 ,
-                  'parent_id'           => 'single_image_settings_panel'
+                  'parent_id'           => 'single_image_settings_panel_outer'
               ),
 
               "link" => array(
                   "type"                => "link" ,
                   "label"               => __("Link Panel Settings", "site-editor"),
-                  'parent_id'           => 'single_image_settings_panel'
+                  "panel_type"          => "default" ,
+                  'parent_id'           => 'single_image_settings_panel_outer',
+                  'panel_dependency'    => array(
+                      'queries'  =>  array(
+                          array(
+                              "key"       => "image_click" ,
+                              "value"     => "link_mode" ,
+                              "compare"   => "=="
+                          )
+                      )
+                  )
               ),
 
               'row_container' => array(
                   'type'          => 'row_container',
-                  'label'         => __('Go To Row Settings', 'site-editor')
-              ),
+                  'label'         => __('Module Wrapper Settings', 'site-editor')
+              ), 
 
               "skin"  =>  array(
                   "type"                => "skin" ,

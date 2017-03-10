@@ -626,7 +626,7 @@ class PBShortcodeClass{
 
         if( $this->shortcode->name != "sed_row" ) {
 
-            $this->add_panel( 'module_general_settings' , array(
+            $this->add_panel( 'module_general_settings_outer' , array(
                 'title'                 =>  __("General Settings" , "site-editor") ,
                 'capability'            => 'edit_theme_options' ,
                 'type'                  => 'inner_box' ,
@@ -636,6 +636,13 @@ class PBShortcodeClass{
                 'has_border_box'        => false ,
                 'icon'                  => 'sedico-setting-item' ,
                 'field_spacing'         => 'sm'
+            ));
+
+            $this->add_panel( 'module_general_settings' , array(
+                'title'                 =>  __("General Settings" , "site-editor") ,
+                'capability'            => 'edit_theme_options' ,
+                'type'                  => 'default' ,
+                'parent_id'             => "module_general_settings_outer",
             ));
 
             $params[ 'id' ] = array(

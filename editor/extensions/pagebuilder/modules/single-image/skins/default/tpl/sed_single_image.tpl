@@ -24,7 +24,7 @@
     }
 #>
 
-<div {{sed_attrs}} class="sed-stb-sm sed-ta-c module module-single-image single-image-default {{className}}">
+<div {{sed_attrs}} class="module module-single-image single-image-default {{className}}">
 
     <# if(image_click == "expand_mode"){ #>
         <a class="img" href="{{full_src}}" data-lightbox="{{lightbox_id}}" data-title="{{title}}" title="{{title}}">

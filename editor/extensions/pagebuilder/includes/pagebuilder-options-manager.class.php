@@ -228,7 +228,6 @@ final class SedPageBuilderOptionsManager{
             'priority'          => $priority ,
             'btn_style'         => 'menu' ,
             'icon'              => 'sedico-link' ,
-            'field_spacing'     => 'sm'
         );
 
         if( isset( $args['panel_dependency'] ) ){
@@ -244,6 +243,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'text',
             'label'         => __('Url : ', 'site-editor'),
             'description'   => __('Add Link to any module elements that needs a link.', 'site-editor') ,
+            'has_border_box'=> false ,
             'default'         => $values['link'],
             'placeholder'   => 'E.g www.siteeditor.org' ,
             'panel'         => 'link_to_panel'
@@ -253,6 +253,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'radio',
             'label'         => __('Link Target : ', 'site-editor'),
             'description'   => __('Add Link target : open link in new window or same window', 'site-editor') ,
+            'has_border_box'=> false ,
             'default'         => $values['link_target'],
             'choices'       => array(
                 "_blank"        => __('Open in new window', 'site-editor')  ,
@@ -405,7 +406,13 @@ final class SedPageBuilderOptionsManager{
         $defaults = array(
             'default'         => "" ,
             'label'         => __('Align', 'site-editor'),
-            'description'   => __('Module container alignment', 'site-editor')
+            'description'   => __('Module container alignment', 'site-editor'),
+            'choices'       => array(
+                'left'      => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
+                'center'    => __('Center', 'site-editor'),
+                'right'     => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
+                'justify'   => __('initial', 'site-editor'), 
+            )
         );
 
         /**
@@ -586,7 +593,6 @@ final class SedPageBuilderOptionsManager{
             'btn_style'             => 'menu' ,
             'has_border_box'        => false ,
             'icon'                  => 'sedico-image' ,
-            'field_spacing'         => 'sm'
         ) );
 
         $params[$controls["image_source"]] = array(
@@ -598,6 +604,7 @@ final class SedPageBuilderOptionsManager{
                 "external"       => __('External Link', 'site-editor')  ,
             ),
             'default'         => $values['image_source'],
+            'has_border_box'    => false ,
             'panel'         => 'sed_select_image_panel'
         );
 
@@ -607,6 +614,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'text',
             'default'         => $values["image_url"],
             'panel'         => 'sed_select_image_panel',
+            'has_border_box'=> false ,
             'dependency' => array(
                 'queries'  =>  array(
                     array(
@@ -624,6 +632,7 @@ final class SedPageBuilderOptionsManager{
             'type'              => 'image',
             'default'             => $values["attachment_id"],
             'panel'             => 'sed_select_image_panel' ,
+            'has_border_box'    => false ,
             "js_params"     => array(
                 "rel_size_control"          => $this->group_name . "_default_image_size"
             ),
@@ -647,6 +656,7 @@ final class SedPageBuilderOptionsManager{
                 "has_custom_size"   => true
             ),
             'panel'         => 'sed_select_image_panel' ,
+            'has_border_box'    => false ,
             'dependency' => array(
                 'queries'  =>  array(
                     "relation"     =>  "AND" ,
@@ -670,6 +680,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'text',
             'default'         => $values["custom_image_size"],
             'panel'         => 'sed_select_image_panel' ,
+            'has_border_box'    => false ,
             'dependency' => array(
                 'queries'  =>  array(
                     "relation"     =>  "AND" ,
@@ -693,6 +704,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'text',
             'default'         => $values["external_image_size"],
             'panel'         => 'sed_select_image_panel' ,
+            'has_border_box'    => false ,
             'dependency' => array(
                 'queries'  =>  array(
                     array(
