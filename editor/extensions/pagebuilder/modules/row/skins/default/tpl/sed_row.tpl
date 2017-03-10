@@ -5,6 +5,10 @@ if(length == "boxed")
 else
     lengthClass = "sed-row-wide";
 
+if( _.isUndefined( sed_contextmenu_class ) ){
+    sed_contextmenu_class = "module_sed_row_contextmenu_container";
+}
+
 if(content) { #>
        <div sed-layout-role="pb-module" class="sed-row-pb sed-bp-element {{className}} {{lengthClass}} {{sed_contextmenu_class}}" {{sed_attrs}} data-type-row="{{type}}" length_element sed-role="row-pb">{{{content}}}</div>
 <# }else{ #>

@@ -1,10 +1,9 @@
 <script type="text/html" id="layouts-scope-settings-button-tpl" >
     <div class="row_settings">
-        <div class="row_setting_inner row_setting_box">
+        <div class="row_setting_inner sed-app-container-control sed-app-container-control-panel-button spacing_sm">
             <div id='sed-scope-settings-<?php echo $control_id; ?>'  class="clearfix">
-                <div class="sed-scope-mode-label bg-primary"><span><?php echo __('Scope' , 'site-editor') ?>: </span><span class="scope-mode"><?php echo __('Private' , 'site-editor') ?></span></div>
-                <span class="field_desc flt-help sedico sedico-question sedico-lg " title=""></span>
-                <button data-related-level-box="dialog_page_box_<?php echo $control_id; ?>" class="sed-btn-default sed_go_to_scope_settings"  name="sed_pb_<?php echo $control_id; ?>" id="sed_pb_<?php echo $control_id; ?>" >
+                <button data-related-level-box="dialog_page_box_<?php echo $control_id; ?>" class="sed-btn-menu sed-btn-default sed_go_to_scope_settings"  name="sed_pb_<?php echo $control_id; ?>" id="sed_pb_<?php echo $control_id; ?>" >
+                    <span class="sedico fa-lg sedico-site-custom-css"></span>
                     <?php echo __('Go To Scope Settings' , 'site-editor') ?><span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span>
                 </button>
                 <div id="dialog_page_box_<?php echo $control_id; ?>" class=""  data-title="<?php echo __('Scope Settings' , 'site-editor') ?>" data-multi-level-box="true">
@@ -18,6 +17,8 @@
 <script type="text/html" id="layouts-scope-settings-content-tpl" >
     <div class="<?php echo $control_id; ?>_settings_container">
 
+       <div class="sed-scope-mode-label bg-primary"><span><?php echo __('Scope' , 'site-editor') ?>: </span><span class="scope-mode"><?php echo __('Private' , 'site-editor') ?></span></div>
+       <span class="field_desc flt-help sedico sedico-question sedico-lg " title=""></span>
        <fieldset class="row_setting_box">
        <legend id="sed_layout_scope_settings_panel_title"><?php echo __("Select Scope","site-editor");?></legend>
         <div class="row_settings">
