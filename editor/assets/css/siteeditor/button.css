@@ -239,10 +239,13 @@
 }
 .sed-arrow-right {
     margin-top: -7px;
-    padding: 0 2px;
+    padding: 0 4px;
     position: absolute !important;
     right: 0;
     top: 50% !important;
+    font-size: 10px !important;
+    font-weight: bold !important;
+    line-height: 17px !important;
 }
 .sed-btn-red .sed-arrow-right ,
 .sed-btn-black .sed-arrow-right ,
@@ -286,6 +289,6 @@ button.sted_element_control_btn span.sed-btn-label{
     background: none repeat scroll 0 0 #f0f0f0;
 }
 
-.sed-btn-menu > span.f-sed.fa-lg {
+.sed-btn-menu > span.sedico.sedico-lg {
     margin-right: 4px;
 }

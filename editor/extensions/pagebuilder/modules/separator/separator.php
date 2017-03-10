@@ -28,7 +28,7 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 "name"        => "sed_separator",                                   //*require
                 "title"       => __("Separator","site-editor"),
                 "description" => __("Add Separator To Page","site-editor"),         //*require for toolbar
-                "icon"        => "icon-separator",                                  //*require for icon toolbar
+                "icon"        => "sedico-separator",                                  //*require for icon toolbar
                 "module"      =>  "separator"                                           //*require
                 //"is_child"    =>  "false"       //for childe shortcodes like sed_tr , sed_td for table module
             ) // Args
@@ -208,7 +208,7 @@ $sed_pb_app->register_module(array(
     "name"        => "separator",
     "title"       => __("Separator","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-separator",
+    "icon"        => "sedico-separator",
     "shortcode"   => "sed_separator",
     "has_extra_spacing"   =>  true ,
     "sub_modules"   => array('title', 'icons' , 'button'),

@@ -27,7 +27,7 @@ class PBheaderShortcode extends PBShortcodeClass{
                 "name"        => "sed_header",                          //*require
                 "title"       => __("Header","site-editor"),            //*require for toolbar
                 "description" => __("","site-editor"),
-                "icon"        => "icon-header",                         //*require for icon toolbar
+                "icon"        => "sedico-header",                         //*require for icon toolbar
                 "module"      =>  "header"                              //*require
             ) // Args
 		);
@@ -154,7 +154,7 @@ $sed_pb_app->register_module(array(
     "name"        => "header",
     "title"       => __("Header","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-header",
+    "icon"        => "sedico-header",
     "shortcode"   => "sed_header",
     "tpl_type"    => "underscore" ,
     "is_special"  => true ,

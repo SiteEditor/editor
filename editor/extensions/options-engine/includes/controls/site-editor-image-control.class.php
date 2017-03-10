@@ -80,7 +80,7 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
             <label><?php echo esc_html( $this->label ); ?></label>
 
 		    <?php if(!empty($this->description)){ ?> 
-			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			    <span class="field_desc flt-help fa sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
 
 	        <div class="setting-img">
@@ -88,7 +88,7 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 			        <div class="change-img-container">
 			        	<img class="change_img" src="<?php echo esc_attr( $value );?>"/>
 				        <?php if($this->remove_action === true){ ?>
-				            <a class="remove-img-btn" href="#"><span class="remove-img-action icon-delete f-sed"></span></a>
+				            <a class="remove-img-btn" href="#"><span class="remove-img-action sedico-delete sedico"></span></a>
 	                    <?php } ?>
 			        </div>
 		        </div>

@@ -239,7 +239,7 @@ class ModuleSettings
 
 
         if( $has_help === true)
-            $output .= '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>';
+            $output .= '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>';
 
         $custom_html = trim( $custom_html );
 
@@ -285,7 +285,7 @@ class ModuleSettings
         $class          = $atts["class"];
 
         if( $has_help === true)
-            $output .= '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>';
+            $output .= '<span class="field_desc flt-help sedico sedico-question  sedico-lg " title="'.$desc.'"></span>';
 
         $custom_html = trim( $custom_html );
 
@@ -296,7 +296,7 @@ class ModuleSettings
         if( empty($custom_html) ){
 
             $box = '<button data-related-level-box="'.$pkey.'_level_box" type="button" class="sed-btn-blue go-panel-element '.$ac_class . ' ' . $class.'" data-panel-id="'.$panel['id'].'"  name="' . $sed_field_id . '"
-                                    id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span></button>';
+                                    id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span></button>';
 
             $in_box_class = ($in_box === true) ? "row_setting_box" : '';
 
@@ -370,9 +370,9 @@ class ModuleSettings
         else
             $relation = '';
 
-        return self::row_box( '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+        return self::row_box( '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <button data-related-level-box="dialog-page-box-posts-edit-settings" class="'.$class.' sed_post_edit_button"  name="' . $sed_field_id . '"
-                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span></button>'
+                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span></button>'  
                                 , $in_box , $pkey , $relation );
     }
 
@@ -408,7 +408,7 @@ class ModuleSettings
             $relation = '';
                //self::row_box(
         return '<button data-related-level-box="modules_styles_settings_'.self::$group_id.'_level_box" type="button" class="sed-btn-half sed-btn-default go-panel-element '.$class.'" data-panel-id="'.$pkey.'"  name="' . $sed_field_id . '"
-                                    id="' . $sed_field_id . '" '.$atts_string.'><span class="'.$icon.'"></span><span class="sed-btn-label">'.$label.'</span><span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span> </button>'; //, $in_box , $pkey , $relation )
+                                    id="' . $sed_field_id . '" '.$atts_string.'><span class="'.$icon.'"></span><span class="sed-btn-label">'.$label.'</span><span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span> </button>'; //, $in_box , $pkey , $relation )
     }
 
     public static function row_settings_button_field(  $pkey , $param , $in_box = true  ){
@@ -455,9 +455,9 @@ class ModuleSettings
         else
             $relation = '';
 
-        return self::row_box( '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+        return self::row_box( '<span class="field_desc flt-help sedico sedico-question  sedico-lg " title="'.$desc.'"></span>
                                 <button class="'.$class.' go-row-container-settings"  name="' . $sed_field_id . '"
-                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span></button>'
+                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span></button>'
                                 , $in_box , $pkey , $relation );
     }
 
@@ -505,9 +505,9 @@ class ModuleSettings
         else
             $relation = '';
 
-        return self::row_box( '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+        return self::row_box( '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <button data-related-level-box="dialog-page-box-widgets-settings" class="'.$class.' sed_widget_button"  name="' . $sed_field_id . '"
-                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span></button>'
+                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span></button>'
                                 , $in_box , $pkey , $relation );
     }
 
@@ -576,9 +576,9 @@ class ModuleSettings
         if( $is_accordion === true )
             $content .= '</div>' ;
 
-        return self::row_box( '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+        return self::row_box( '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <button data-related-level-box="'.$level_box_id.'" class="'.$class.' "  name="' . $sed_field_id . '"
-                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span></button>
+                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span></button>
                                 <div id="'.$level_box_id.'" class=""  data-title="'.$dialog_title.'" data-multi-level-box="true">'.$content. '</div>'
                                 , $in_box , $pkey , $relation );
     }
@@ -666,7 +666,7 @@ class ModuleSettings
             $relation = '';
 
         return self::row_box( '<label>'.$label.'</label>
-                                <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+                                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <input type="'.$subtype.'"  class="sed-module-element-control sed-element-control sed-bp-form-text sed-bp-input" name="' . $sed_field_id . '"
                                 id="' . $sed_field_id . '" value="' . $value . '" '. $att .' />' , $in_box , $pkey , $relation );
     }
@@ -719,7 +719,7 @@ class ModuleSettings
             $relation = '';
 
         return self::row_box( '<label>'.$label.'</label>
-                                <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+                                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <input type="'.$subtype.'"  class="sed-module-element-control sed-element-control sed-bp-form-text sed-bp-input ' . $class . '" name="' . $sed_field_id . '"
                                 id="' . $sed_field_id . '" value="' . $value . '" '. $atts_string .' />' , $in_box , $pkey , $relation );
 
@@ -745,7 +745,7 @@ class ModuleSettings
             $relation = '';
 
         return self::row_box( '<label>'.$label.'</label>
-                                <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+                                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <textarea rows="5" cols="30" name="' . $sed_field_id . '"
                                 id="' . $sed_field_id . '" class="sed-module-element-control sed-element-control sed-bp-form-textarea sed-bp-input">' . $value . '</textarea>', $in_box , $pkey , $relation  );
     }
@@ -790,7 +790,7 @@ class ModuleSettings
 
         $output  = '<div class="sed-bp-form-select-field-container">';
         $output .= '<label>'.$label.'</label>';
-        $output .= '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span> ';
+        $output .= '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span> ';
 
         $output .= '<select  name="' . $sed_field_id . '" id="' . $sed_field_id . '" class="sed-module-element-control sed-element-control '.$class.' sed-bp-input" '.$atts_string.'>';
 
@@ -870,7 +870,7 @@ class ModuleSettings
         else
             $relation = '';
 
-        $output = '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>';
+        $output = '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>';
         if($subtype == "single"){
                 $output .= '<label for="' . $sed_field_id .'" class="sed-bp-form-checkbox">';
             	$checked = ( "true" == $value ) ? 'checked="checked"' : '';
@@ -922,7 +922,7 @@ class ModuleSettings
         else
             $relation = '';
 
-        return self::row_box( '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+        return self::row_box( '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <label for="' . $sed_field_id .'" >'.$label.'</label>
                                 <span class="after_field">'.$after_field.'</span><input  type="text" class="sed-module-element-control sed-element-control sed-spinner spinner sed-bp-spinner sed-bp-input ' . $class . '" name="' . $sed_field_id . '" id="' . $sed_field_id . '" value="' . $value . '" ' . $atts_string . ' /> '
                                 , $in_box , $pkey , $relation );
@@ -946,13 +946,13 @@ class ModuleSettings
         $value = (!empty($value)) ? $value : SED_EDITOR_FOLDER_URL.'images/no-image.jpg';
 
         $output  = '<div class="setting-img"><div class="change-img-setting">';
-        $output .= '<div class="change-img-container"><img class="change_img" src="'.$value.'"/></div></div><span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>';
+        $output .= '<div class="change-img-container"><img class="change_img" src="'.$value.'"/></div></div><span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>';
         $output .= '<div class="change-img-setting">';
 
         $output .= '<button class="change_image sed-change-media-button sed-btn-blue" data-media-type="image" data-selcted-type="single">'. $label.'</button>';
 
         if($remove_btn === true)
-            $output .= '<a class="remove-img-btn" href="#"><span class="fa f-sed fa-lg icon-delete"></span></a>';
+            $output .= '<a class="remove-img-btn" href="#"><span class="sedico sedico-delete sedico-lg"></span></a>';
 
         $output .= '</div><div class="clr"></div></div>';
 
@@ -1059,9 +1059,9 @@ class ModuleSettings
         //$atts_string    = $atts["atts"];
         //$class          = $atts["class"];
 
-        $output  = '<div class=""><label>'. __("Url" ,"site-editor").'</label><span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>';
+        $output  = '<div class=""><label>'. __("Url" ,"site-editor").'</label><span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>';
 
-        $output .= '<input type="text"  class="sed-bp-form-text sed-bp-input media-url-field" name="' . $sed_field_id . '" id="' . $sed_field_id . '" value="" disabled="disabled" /><a class="remove-media-src-btn" href="#"><span class="fa f-sed fa-lg icon-delete"></span></a></div>';
+        $output .= '<input type="text"  class="sed-bp-form-text sed-bp-input media-url-field" name="' . $sed_field_id . '" id="' . $sed_field_id . '" value="" disabled="disabled" /><a class="remove-media-src-btn" href="#"><span class="sedico sedico-delete sedico-lg"></span></a></div>';
 
         $output .= '<button class="change_media sed-change-media-button sed-btn-blue" data-media-type="'.$media_type.'" data-selcted-type="'.$selcted_type.'">'. $label.'</button>';
 
@@ -1103,7 +1103,7 @@ class ModuleSettings
             $relation = '';
 
         return self::row_box( '<label>'.$label.'</label>
-                                <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+                                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <input type="date"  class="sed-module-element-control sed-element-control sed-bp-form-datepicker sed-bp-input ' . $class . '" name="' . $sed_field_id . '"
                                 id="' . $sed_field_id . '" value="' . $value . '" '. $atts_string .' />' , $in_box , $pkey , $relation );
 
@@ -1136,7 +1136,7 @@ class ModuleSettings
             $relation = '';
 
         $output = '<label class="">'.$label.'</label>';
-        $output .= '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>';
+        $output .= '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>';
         $output .= '<div class="sed-bp-form-radio">';
         $i = 1;
 
@@ -1211,9 +1211,9 @@ class ModuleSettings
         else
             $relation = '';
 
-        return self::row_box( '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>
+        return self::row_box( '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>
                                 <button type="button" class="'.$class.'"  name="' . $sed_field_id . '"
-                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span></button><div id="'.$sed_field_id.'_dialog" class="sed-dialog content '.$dialog_class.'" '.$dialog_attrs.'></div>'
+                                id="' . $sed_field_id . '" '.$atts_string.'>'.$label.'<span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span></button><div id="'.$sed_field_id.'_dialog" class="sed-dialog content '.$dialog_class.'" '.$dialog_attrs.'></div>'
                                 , $in_box , $pkey , $relation );
     }
 
@@ -1252,7 +1252,7 @@ class ModuleSettings
         else
             $relation = '';
 
-        $output = '<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="'.$desc.'"></span>';
+        $output = '<span class="field_desc flt-help sedico sedico-question sedico-lg " title="'.$desc.'"></span>';
         $output .= '<div class="colorpicker " ><label>'.$label.'</label> ';
         $output .= '<span class="colorselector"><input type="text" class="input-colorpicker sed-colorpicker" id="' . $sed_field_id . '" name="' . $sed_field_id . '" value='.$value.'>&nbsp;&nbsp;</span> ';
         $output .= '</div>';

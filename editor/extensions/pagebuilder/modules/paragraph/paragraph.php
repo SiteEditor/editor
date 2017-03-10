@@ -17,7 +17,7 @@ class PBParagraphShortcode extends PBShortcodeClass{
                 "name"        => "sed_paragraph",                        //*require
                 "title"       => __("Paragraph","site-editor"),               //*require for toolbar
                 "description" => __("Add Paragraph To Page","site-editor"),
-                "icon"        => "icon-paragraph",                            //*require for icon toolbar
+                "icon"        => "sedico-paragraph",                            //*require for icon toolbar
                 "module"      =>  "paragraph"                                  //*require
             ) // Args
 		);
@@ -129,7 +129,7 @@ $sed_pb_app->register_module(array(
     "name"        => "paragraph",
     "title"       => __("Paragraph","site-editor"),
     "description" => __("Add Full Customize Paragraph","site-editor"),
-    "icon"        => "icon-paragraph",
+    "icon"        => "sedico-paragraph",
     "type_icon"   => "font",
     "shortcode"   => "sed_paragraph",
     "priority"    => 25 ,

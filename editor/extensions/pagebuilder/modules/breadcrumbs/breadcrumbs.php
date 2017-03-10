@@ -20,7 +20,7 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
                 "name"        => "sed_breadcrumbs",                               //*require
                 "title"       => __("Breadcrumbs","site-editor"),                 //*require for toolbar
                 "description" => __("Edit Breadcrumbs in Front End","site-editor"),
-                "icon"        => "icon-breadcrumb",                               //*require for icon toolbar
+                "icon"        => "sedico-breadcrumb",                               //*require for icon toolbar
                 "module"      =>  "breadcrumbs"         //*require
             ) // Args
         );
@@ -425,7 +425,7 @@ $sed_pb_app->register_module(array(
     "name"        => "breadcrumbs",
     "title"       => __("Breadcrumbs","site-editor"),
     "description" => __("Edit Breadcrumbs in Front End","site-editor"),
-    "icon"        => "icon-breadcrumb",
+    "icon"        => "sedico-breadcrumb",
     "type_icon"   => "font",
     "shortcode"   => "sed_breadcrumbs",
     "priority"    => 12 ,

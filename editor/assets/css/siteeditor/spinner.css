@@ -31,17 +31,24 @@
     clip: rect(0px, 16px, 16px, 0px);
     overflow: visible !important;
 }
+
 .ui-spinner .ui-icon {
     color: #aaa;
     cursor: pointer;
     display: block;
-    font-size: 14px;
-    margin: -3px 0 0;
+    font-size: 8px;
+    margin: 0px 0 0;
     overflow: visible !important;
-    padding: 1px 0;
+    padding: 2px 0;
     position: absolute;
-    text-align: center;
+    text-align: center; 
+    font-weight: bold;
 }
+
+.ui-spinner .ui-icon:before {
+    padding: 0 3px ; 
+}
+
 .ui-spinner a.ui-spinner-button {
     border-bottom: medium none;
     border-right: medium none;

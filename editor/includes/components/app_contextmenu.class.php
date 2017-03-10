@@ -269,7 +269,7 @@ Class AppContextmenu{
             $menu ,
             "settings" ,
             __("Settings","site-editor") ,
-            "icon-settingitem" ,
+            "sedico-setting-item" ,
             "class" ,
             $attr,
             array( 'dialog_options'  => self::$dialog_settings_otions ),
@@ -294,7 +294,7 @@ Class AppContextmenu{
             $menu ,
             "widget_settings" ,
             __("Widget Settings","site-editor") ,
-            "icon-settingitem" ,
+            "sedico-setting-item" ,
             "class" ,
             $attr,
             array( 'dialog_options'  => self::$dialog_settings_otions  ),
@@ -317,7 +317,7 @@ Class AppContextmenu{
             $menu ,
             "add-animation" ,
             __("Add Animation","site-editor") ,
-            "icon-addanimation" ,
+            "sedico-animation" ,
             "class" ,
             $attr ,
             array( 'dialog_options'  => self::$dialog_settings_otions  ),
@@ -342,7 +342,7 @@ Class AppContextmenu{
             $menu ,
             "change-skin" ,
             __("Change Skin","site-editor") ,
-            "icon-changeskin" ,
+            "sedico-change-skin" ,
             "class" ,
             $attr ,
             array( 'dialog_options'  => self::$dialog_settings_otions  ),
@@ -367,7 +367,7 @@ Class AppContextmenu{
             $menu ,
             "change-style" ,
             __("Change Style","site-editor") ,
-            "icon-changestyle" ,
+            "sedico-change-style" ,
             "class" ,
             $attr ,
             array( 'dialog_options'  => self::$dialog_settings_otions  ),
@@ -406,7 +406,7 @@ Class AppContextmenu{
             $menu ,
             "duplicate" ,
             __("Duplicate","site-editor") ,
-            "icon-duplicate" ,
+            "sedico-duplicate" ,
             "class" ,
             $attr ,
             array( ),
@@ -462,7 +462,7 @@ Class AppContextmenu{
             $menu ,
             "change_image" ,
             __("Change Image","site-editor") ,
-            "icon-changeimageitem" ,
+            "sedico-change-image-item" ,
             "class" ,
             array(
                 "class"                 => "change-img",
@@ -504,7 +504,7 @@ Class AppContextmenu{
             $menu ,
             "change_video" ,
             __("Change Video","site-editor") ,
-            "icon-video1" ,
+            "sedico-video" ,
             "class" ,
             array(
                 "class"                 => "change-video",
@@ -546,7 +546,7 @@ Class AppContextmenu{
             $menu ,
             "change_audio" ,
             __("Change Audio","site-editor") ,
-            "icon-earphones" ,
+            "sedico-earphones" ,
             "class" ,
             array(
                 "class"                 => "change-audio",
@@ -649,7 +649,7 @@ Class AppContextmenu{
             $menu ,
             "change_icon" ,
             __("Change Icon","site-editor") ,
-            "icon-icons" ,
+            "sedico-icons" ,
             "class" ,
             array(
                 "sed-dialog-tmpl-id"    => "tmpl-dialog-icon-library" ,
@@ -754,7 +754,7 @@ Class AppContextmenu{
             $menu ,
             "link_to" ,
             __("Link To","site-editor") ,
-            "icon-linktoitem" ,
+            "sedico-link" ,
             "class",
             $attr,
             array( 'dialog_options'  => self::$dialog_settings_otions  ),
@@ -1002,7 +1002,7 @@ Class AppContextmenu{
     }
 
     public function add_title_bar_item( $menu , $title , $priority = 0 )
-    {                                                                                        // <span class="menu_item_icon icon-question"></span>
+    {                                                                                        // <span class="menu_item_icon sedico-question"></span>
         $html = '<div class="custom-row"><strong skinpart="label" class="editor-skins-label">'.$title.'</strong></div>';
         $this->add_item( $menu ,"title-bar" , __("Title Bar","site-editor") , $icon = "title-bar" , "class" , array() , array() , $html , $priority);
     }
@@ -1011,11 +1011,11 @@ Class AppContextmenu{
     /*public function add_footer_bar_item( $menu , $priority = 100 )
     {
         $html = '<div class="contextmenu-footer-bar contextmenu-icon-bar">
-        <a><span class="el_txt" >'.__("Help","site-editor").'</span><span class="fa icon-question" ></span></a>
-        <a><span class="el_txt">'.__("lock","site-editor").'</span><span class="fa icon-lock" ></span></a>
-        <a><span class="el_txt">'.__("copy","site-editor").'</span><span class="fa icon-docs" ></span></a>
-        <a><span class="el_txt">'.__("paste","site-editor").'</span><span class="fa icon-bag" ></span></a>
-        <a><span class="el_txt">'.__("delete","site-editor").'</span><span class="fa icon-trash " ></span></a>
+        <a><span class="el_txt" >'.__("Help","site-editor").'</span><span class="fa sedico-question" ></span></a>
+        <a><span class="el_txt">'.__("lock","site-editor").'</span><span class="fa sedico-lock" ></span></a>
+        <a><span class="el_txt">'.__("copy","site-editor").'</span><span class="fa sedico-docs" ></span></a>
+        <a><span class="el_txt">'.__("paste","site-editor").'</span><span class="fa sedico-bag" ></span></a>
+        <a><span class="el_txt">'.__("delete","site-editor").'</span><span class="fa sedico-trash " ></span></a>
         </div>';
         $this->add_item( $menu ,"footer-bar" , __("Footer Bar","site-editor") , $icon = "footer-bar" , "class" , array() , array() , $html , $priority);
     }*/
@@ -1031,7 +1031,7 @@ Class AppContextmenu{
 
     public function add_show_on_sub_themes_item( $menu , $priority = 90 )
     {
-        $submenu = $this->create_submenu( $menu ,"show_on_sub_themes" , __("Show On Sub Themes","site-editor") , "icon-subtheme" , "class"  , array( "class" => "show-on-sub-themes" ) , array() , "" , $priority );
+        $submenu = $this->create_submenu( $menu ,"show_on_sub_themes" , __("Show On Sub Themes","site-editor") , "sedico-sub-theme" , "class"  , array( "class" => "show-on-sub-themes" ) , array() , "" , $priority );
         $html = '<input type="radio" name="sed-row-theme-type" class="sed-row-theme-type" value="public"><span>'.__( "Show On Sub Themes" , "site-editor" ) .'</span>';
         $this->add_item( $submenu ,"show_on_sub_themes_type" , __( "Show On Sub Themes" , "site-editor" ) , "" , "class" , array( "class" => "customize-row-action" ) , array() , $html , 10 , "formElement");
 

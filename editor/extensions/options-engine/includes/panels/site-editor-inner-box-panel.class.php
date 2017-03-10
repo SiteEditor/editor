@@ -92,17 +92,17 @@ if ( ! class_exists( 'SiteEditorInnerBoxOptionsPanel' ) ) {
 								id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
 
 							<?php if( ! empty( $this->icon ) ){ ?>
-								<span class="f-sed fa-lg <?php echo esc_attr( $this->icon );?>"></span>
+								<span class="sedico fa-lg <?php echo esc_attr( $this->icon );?>"></span>
 							<?php } ?>
 
 							<?php echo $this->title;?>
 
-							<span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
+							<span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span>
 
 						</button>
 
                         <?php if( !empty( $this->description ) ): ?>
-                            <span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo $this->description;?>"></span>
+                            <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo $this->description;?>"></span>
                         <?php endif; ?>
 
 					</div>

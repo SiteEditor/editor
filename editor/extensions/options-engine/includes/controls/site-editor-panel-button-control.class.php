@@ -94,17 +94,17 @@ if ( ! class_exists( 'SiteEditorPanelButtonControl' ) ) {
 			?>
 
             <?php if(!empty($this->description)){ ?>
-                <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span>
+                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span>
             <?php } ?>
 
             <button type="button" data-related-level-box="<?php echo esc_attr( $level_box_id );?>" class="<?php echo esc_attr( $classes ); ?>"  name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string; ?>>
 
 				<?php if( ! empty( $this->icon ) ){ ?>
-					<span class="f-sed fa-lg <?php echo esc_attr( $this->icon );?>"></span>
+					<span class="sedico sedico-lg <?php echo esc_attr( $this->icon );?>"></span>
 				<?php } ?>
 
 				<?php echo esc_html( $this->label );?>
-                <span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
+                <span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span>
             </button>
 
             <div id="<?php echo esc_attr( $level_box_id );?>" data-title="<?php echo esc_attr( $this->panel_title );?>" data-multi-level-box="true">

@@ -27,7 +27,7 @@ class PBButtonShortcode extends PBShortcodeClass{
                   "name"        => "sed_button",                     //*require
                   "title"       => __("Button","site-editor"),       //*require for toolbar
                   "description" => __(""),
-                  "icon"        => "icon-buttons",                    //*require for icon toolbar
+                  "icon"        => "sedico-buttons",                    //*require for icon toolbar
                   "module"      =>  "button"                         //*require
             ) // Args
 		);
@@ -195,7 +195,7 @@ $sed_pb_app->register_module(array(
     "name"        => "button",
     "title"       => __("Button","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-buttons",
+    "icon"        => "sedico-buttons",
     "shortcode"   => "sed_button",
     "sub_modules"   => array('title', 'icons'),
     //"js_plugin"   => '',

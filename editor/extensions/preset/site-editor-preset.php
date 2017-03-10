@@ -553,7 +553,7 @@ class SiteEditorPreset{
                 'data-shortcode-name'       =>  $shortcode_obj->shortcode->name ,
                 'class'                     =>  'sed_preset_settings_button'
             ),
-            'priority'          => 1
+            'priority'          => 1000
         );
 
         return $settings;

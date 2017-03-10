@@ -16,7 +16,7 @@ class PBRawJavascriptCodeShortcode extends PBShortcodeClass{
           "name"        => "sed_raw_js",                 //*require
           "title"       => __("Raw Javascript Code","site-editor"),   //*require for toolbar
           "description" => __("Raw Javascript Code","site-editor"),
-          "icon"        => "icon-raw-js",                       //*require for icon toolbar
+          "icon"        => "sedico-javascript",                       //*require for icon toolbar
           "module"      => "raw-js"                     //*require
           //"is_child"    =>  "false"                         //for childe shortcodes like sed_tr , sed_td for table module
         ));
@@ -79,7 +79,7 @@ $sed_pb_app->register_module(array(
     "name"          => "raw-js",
     "title"         => __("Raw Javascript Code","site-editor"),
     "description"   => __("site editor module for Raw Javascript Code plugin","site-editor"),
-    "icon"          => "icon-contactform",
+    "icon"          => "sedico-javascript",
     //"tpl_type"    => "underscore" ,
     "shortcode"     => "sed_raw_js",
     "transport"     => "ajax"

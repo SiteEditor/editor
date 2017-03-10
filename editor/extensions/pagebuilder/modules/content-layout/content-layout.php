@@ -327,7 +327,7 @@ $sed_pb_app->register_module(array(
     "name"                  => "content-layout",
     "title"                 => __("Content Layout","site-editor"),
     "description"           => __("Add Full Customize Content Layout","site-editor"),
-    "icon"                  => "icon-content-layout",
+    "icon"                  => "sedico-content-layout",
     "type_icon"             => "font",
     "is_special"            => true ,
     "has_extra_spacing"     => true ,

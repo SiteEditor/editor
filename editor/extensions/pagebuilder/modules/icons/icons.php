@@ -20,7 +20,7 @@ class PBIconsShortcode extends PBShortcodeClass{
                 "name"        => "sed_icons",                                      //*require
                 "title"       => __("Icons","site-editor"),                        //*require for toolbar
                 "description" => __("Add Icons Bar To Page","site-editor"),
-                "icon"        => "icon-icons",                                     //*require for icon toolbar
+                "icon"        => "sedico-icons",                                     //*require for icon toolbar
                 "module"      =>  "icons"                                           //*require
             ) // Args
 		);
@@ -471,7 +471,7 @@ $sed_pb_app->register_module(array(
     "name"        => "icons",
     "title"       => __("Icons","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-icons",
+    "icon"        => "sedico-icons",
     "shortcode"   => "sed_icons",
     "tpl_type"    => "underscore" ,
     "show_ui_in_toolbar"    =>  false ,

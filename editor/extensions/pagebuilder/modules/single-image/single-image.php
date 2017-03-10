@@ -232,18 +232,6 @@ class PBSingleImageShortcode extends PBShortcodeClass{
                   "label"         => __("Change skin", "site-editor"),
               ),
 
-              'spacing' => array(
-                  "type"          => "spacing" ,
-                  "label"         => __("Spacing", "site-editor"),
-                  "default"       => "10 0 10 0" ,
-              ),
-
-              "align"  =>  array(
-                  "type"          => "align" ,
-                  "label"         => __("Align", "site-editor"),
-                  "default"       => "center"
-              ),
-
               "animation"  =>  array(
                   "type"          => "animation" ,
                   "label"         => __("Animation Settings", "site-editor"),

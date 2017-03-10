@@ -20,7 +20,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
                 "name"        => "sed_single_icon",                                      //*require
                 "title"       => __("Single Icon","site-editor"),                        //*require for toolbar
                 "description" => __("Add Single Icon Bar To Page","site-editor"),
-                "icon"        => "icon-icons",                                     //*require for icon toolbar
+                "icon"        => "sedico-icons",                                     //*require for icon toolbar
                 "module"      =>  "single-icon"                                           //*require
             ) // Args
 		);
@@ -241,7 +241,7 @@ $sed_pb_app->register_module(array(
     "name"        => "single-icon",
     "title"       => __("Single Icon","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-icons",
+    "icon"        => "sedico-icons",
     "shortcode"   => "sed_single_icon",
     "tpl_type"    => "underscore" ,
     //"js_plugin"   => '',

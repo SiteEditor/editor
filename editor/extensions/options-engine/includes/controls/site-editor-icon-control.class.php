@@ -57,19 +57,19 @@ if ( ! class_exists( 'SiteEditorIconControl' ) ) {
 
             $value          = $this->value();
 
-			$value     		= ( ! empty( $value ) ) ?  $value : 'fa f-sed icon-icons sed-bp-icon-empty';
+			$value     		= ( ! empty( $value ) ) ?  $value : 'sedico sedico-icons sed-bp-icon-empty';
 
 			?>
 
-            <?php if(!empty($this->description)){ ?> 
-			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+            <?php if(!empty($this->description)){ ?>  
+			    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
 	        <div class="setting-icon">
 		        <div class="change-icon-setting">
 			        <div class="change-icon-container">
 			        	<span sed-icon="<?php echo esc_attr( $value );?>" class="sed-bp-icon-demo <?php echo esc_attr( $value );?>"></span>
 				        <?php if($this->remove_btn === true){ ?>
-				            <a class="remove-icon-btn" href="#"><span class="remove-icon-action icon-delete f-sed"></span></a>
+				            <a class="remove-icon-btn" href="#"><span class="remove-icon-action sedico-delete sedico"></span></a>
 	                    <?php } ?>
 			        </div>
 		        </div>

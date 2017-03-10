@@ -23,7 +23,7 @@ class PBfooterShortcode extends PBShortcodeClass{
                 "name"        => "sed_footer",                          //*require
                 "title"       => __("Footer","site-editor"),            //*require for toolbar
                 "description" => __("","site-editor"),
-                "icon"        => "icon-footer",                         //*require for icon toolbar
+                "icon"        => "sedico-footer",                         //*require for icon toolbar
                 "module"      =>  "footer"                              //*require
             ) // Args
 		);
@@ -111,7 +111,7 @@ $sed_pb_app->register_module(array(
     "name"        => "footer",
     "title"       => __("Footer","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-footer",
+    "icon"        => "sedico-footer",
     "shortcode"   => "sed_footer",
     "tpl_type"    => "underscore" ,
     "is_special"  => true ,

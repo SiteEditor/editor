@@ -624,31 +624,37 @@ class PBShortcodeClass{
 
         $params = apply_filters( "sed_shortcode_settings" , $this->shortcode_settings() , $this );
 
-        $this->add_panel( 'module_general_settings' , array(
-            'title'         =>  __("General Settings" , "site-editor") ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'expanded' ,
-            'description'   => __("Module General Settings" , "site-editor") ,
-            'priority'      => 1000 ,
-        ));
+        if( $this->shortcode->name != "sed_row" ) {
 
-        $params[ 'id' ] = array(
-            'type'          => 'text',
-            'label'         => __('Module Id', 'site-editor'),
-            'description'   => __('Module Id For Anchor And ...', 'site-editor') ,
-            'priority'      => 1001 ,
-            'panel'         => 'module_general_settings'
-        );
+            $this->add_panel( 'module_general_settings' , array(
+                'title'           =>  __("General Settings" , "site-editor") ,
+                'capability'      => 'edit_theme_options' ,
+                'type'            => 'default' ,
+                'description'     => __("Module General Settings" , "site-editor") ,
+                'priority'        => 510 ,
+            ));
 
-        $params[ 'class' ] = array(
-            'type'          => 'text',
-            'label'         => __('Extra class name', 'site-editor'),
-            'description'   => __('Style particular content element differently - add a class name and refer to it in custom CSS.', 'site-editor') ,
-            'priority'      => 1000 ,
-            'panel'         => 'module_general_settings'
-        );
+            $params[ 'id' ] = array(
+                'type'            => 'text',
+                'label'           => __('Module Id', 'site-editor'),
+                'description'     => __('Module Id For Anchor And ...', 'site-editor') ,
+                'has_border_box'  => false,
+                'priority'        => 1001 ,
+                'panel'           => 'module_general_settings'
+            );
 
-        $this->add_panel( 'module_mobile_settings' , array(
+            $params[ 'class' ] = array(
+                'type'            => 'text',
+                'label'           => __('Extra class name', 'site-editor'),
+                'description'     => __('Style particular content element differently - add a class name and refer to it in custom CSS.', 'site-editor') , 
+                'has_border_box'  => false,
+                'priority'        => 1000 ,
+                'panel'           => 'module_general_settings'
+            ); 
+
+        }
+
+        /*$this->add_panel( 'module_mobile_settings' , array(
             'title'         =>  __("Mobile Settings" , "site-editor") ,
             'capability'    => 'edit_theme_options' ,
             'type'          => 'default' ,
@@ -672,7 +678,7 @@ class PBShortcodeClass{
             'priority'          => 999 ,
             'has_border_box'    => false ,
             'panel'             => 'module_mobile_settings'
-        );
+        );*/
 
 
         $this->add_style_settings();

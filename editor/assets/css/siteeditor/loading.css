@@ -156,18 +156,18 @@
     display: inline-block;
 }
 .save-publish button[disabled] {
-    background-color: #2AA7E0;
+    background-color: #2AA7E0;  
     border: 1px solid #2AA7E0;
 }
-.f-sed-spin {
-  -webkit-animation: f-sed-spin 2s infinite linear;
-  animation:f-sed-spin 2s infinite linear;
+.sedico-spin {
+  -webkit-animation: sedico-spin 2s infinite linear;
+  animation:sedico-spin 2s infinite linear;
 }
-.f-sed-pulse {
-  -webkit-animation: f-sed-spin 1s infinite steps(8);
-  animation: f-sed-spin 1s infinite steps(8);
+.sedico-pulse {
+  -webkit-animation: sedico-spin 1s infinite steps(8);
+  animation: sedico-spin 1s infinite steps(8);
 }
-@-webkit-keyframes f-sed-spin {
+@-webkit-keyframes sedico-spin {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
@@ -177,7 +177,7 @@
     transform: rotate(359deg);
   }
 }
-@keyframes f-sed-spin {
+@keyframes sedico-spin {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg);

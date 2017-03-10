@@ -21,7 +21,7 @@ class PBSidebarShortcode extends PBShortcodeClass{
                 "name"        => "sed_sidebar",                               //*require
                 "title"       => __("Sidebar","site-editor"),                 //*require for toolbar
                 "description" => __("Add Sidebar To Page","site-editor"),
-                "icon"        => "icon-sidebar",                              //*require for icon toolbar
+                "icon"        => "sedico-sidebar",                              //*require for icon toolbar
                 "module"      =>  "sidebar"         //*require
             ) // Args
 		);
@@ -94,7 +94,7 @@ $sed_pb_app->register_module(array(
     "name"        => "sidebar",
     "title"       => __("Sidebar","site-editor"),
     "description" => __("Add Full Customize Sidebar","site-editor"),
-    "icon"        => "icon-wedget",
+    "icon"        => "sedico-sidebar",
     "type_icon"   => "font",
     "shortcode"   => "sed_sidebar",
     //"sub_modules"   => array('title', 'paragraph', 'image', 'icons' , 'separator'),

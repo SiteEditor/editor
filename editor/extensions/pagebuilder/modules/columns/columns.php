@@ -18,7 +18,7 @@ class PBColumnsShortcode extends PBShortcodeClass{
                 "name"        => "sed_columns",                               //*require
                 "title"       => __("Columns","site-editor"),                 //*require for toolbar
                 "description" => __("Add Columns to page","site-editor"),
-                "icon"        => "icon-column",                               //*require for icon toolbar
+                "icon"        => "sedico-column",                               //*require for icon toolbar
                 "module"      =>  "columns",         //*require
             ) // Args
 		);
@@ -61,24 +61,18 @@ class PBColumnsShortcode extends PBShortcodeClass{
                 ),
             ),
 
-            /*'equal_column_width' => array(
-                'type' => 'checkbox',
-                'label' => __('Equal Column Width', 'site-editor'),
-                'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
-            ),*/
-
             "responsive_spacing"    => array(
                 'type'    => 'text',
                 'label'   => __('Module Responsive Spacing', 'site-editor'),
                 'description'    => '',// __('','site-editor'),
             ),
 
-            //module_general_settings
-            /*'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
+            /*'equal_column_width' => array(
+                'type' => 'checkbox',
+                'label' => __('Equal Column Width', 'site-editor'),
+                'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
             ),*/
+
 
             "animation"  =>  array(
                 "type"          => "animation" ,
@@ -129,7 +123,7 @@ $sed_pb_app->register_module(array(
     "name"                  => "columns",
     "title"                 => __("Columns","site-editor"),
     "description"           => __("Add Full Customize Columns","site-editor"),
-    "icon"                  => "icon-column",
+    "icon"                  => "sedico-column",
     "type_icon"             => "font",
     "is_special"            => true ,
     "has_extra_spacing"     =>  true ,

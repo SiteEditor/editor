@@ -77,7 +77,7 @@ if ( ! class_exists( 'SiteEditorDateControl' ) ) {
 
 				<label><?php echo esc_html( $this->label );?></label>
 				<?php if(!empty($this->description)){ ?> 
-				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
 				<div class="sed-bp-form-datepicker">
 					<input type="text" class="<?php echo esc_attr( $classes ); ?>" id="<?php echo esc_attr( $sed_field_id );?>" name="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo esc_attr( $value ); ?>" <?php echo $atts_string;?> />

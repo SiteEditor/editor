@@ -378,7 +378,7 @@ class SiteEditorOptionsPanel{
 					<legend id="<?php echo  esc_attr( $pkey ); ?>_title"><?php echo $this->title;?></legend>
 
 					<?php if( !empty( $this->description ) ): ?>
-						<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo $this->description;?>"></span>
+						<span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo $this->description;?>"></span>
 					<?php endif; ?>
 
 					<?php $this->render_content(); ?>

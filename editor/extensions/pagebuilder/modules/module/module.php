@@ -17,7 +17,7 @@ class PBModuleShortcode extends PBShortcodeClass{
                 "name"        => "sed_module",                                         //*require
                 "title"       => __("Module","site-editor"),                           //*require for toolbar
                 "description" => __("Module","site-editor"),
-                "icon"        => "icon-modules",                                       //*require for icon toolbar
+                "icon"        => "sedico-modules",                                       //*require for icon toolbar
                 "module"      => "module"//,         //*require
             ) // Args
 		);
@@ -87,7 +87,7 @@ $sed_pb_app->register_module(array(
     "name"                  => "module",
     "title"                 => __("module","site-editor"),
     "description"           => __("Add Full Customize Button","site-editor"),
-    "icon"                  => "icon-modules",
+    "icon"                  => "sedico-modules",
     "shortcode"             => "sed_module",
     "show_ui_in_toolbar"    => false ,
     "tpl_type"              => "underscore" ,

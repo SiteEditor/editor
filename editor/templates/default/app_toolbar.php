@@ -10,33 +10,33 @@ $tabs = current_type_elemans($current_type , $tabs);
     <ul class="preview-mode-toolbar">
         <li class="back-to-editor">
             <button value="<?php echo __("Back To Editor" ,"site-editor");  ?>" class="btn button-primary save" id="back-to-editor-btn" name="back-to-editor-btn">
-            <span class="fa f-sed icon-chevron-left icon-back-to-editor fa-lg "></span>
+            <span class="sedico sedico-chevron-left icon-back-to-editor sedico-lg "></span>
             <span class="el_txt"><?php echo __("Back To Editor" ,"site-editor");  ?></span>
             </button>
         </li>
         <li class="preview-mode" data-preview-mode="desktop-mode">
           <a  href="#">
-          <span class="fa f-sed icon-desktop  fa-lg "></span>
+          <span class="sedico sedico-desktop sedico-lg "></span>
           </a>
         </li>
         <li class="preview-mode" data-preview-mode="tablets-landscape-mode">
           <a  href="#">
-          <span class="fa f-sed icon-tablet2  fa-lg "></span>
+          <span class="sedico sedico-tablet-hr sedico-lg "></span>
           </a>
         </li>
         <li class="preview-mode" data-preview-mode="tablets-portrait-mode">
           <a  href="#">
-          <span class="fa f-sed icon-tablet  fa-lg "></span>
+          <span class="sedico sedico-tablet sedico-lg "></span>
           </a>
         </li>
         <li class="preview-mode" data-preview-mode="smartphones-landscape-mode">
           <a  href="#">
-          <span class="fa f-sed icon-smartphone  fa-lg "></span>
+          <span class="sedico sedico-smartphone-hr sedico-lg "></span>
           </a>
         </li>
         <li class="preview-mode" data-preview-mode="smartphones-portrait-mode">
           <a  href="#">
-          <span class="fa f-sed icon-smartphone2  fa-lg "></span>
+          <span class="sedico sedico-smartphone sedico-lg "></span>
           </a>
         </li>
     </ul>
@@ -44,30 +44,30 @@ $tabs = current_type_elemans($current_type , $tabs);
     <ul class="site-editor-app-tools-button">
         <li class="preview">
             <button value="<?php echo __("Preview" ,"site-editor");  ?>" class="btn button-primary" id="app-preview-mode-btn" name="app-preview-mode-btn">
-            <span class="fa f-sed icon-eye  fa-lg "></span>
+            <span class="sedico sedico-eye sedico-lg "></span>
             <span class="el_txt"><?php echo __("Preview" ,"site-editor");  ?></span>
             </button>
         </li>
         <li class="save-publish">
             <button value="<?php echo __("Saved" ,"site-editor");  ?>" class="btn button-primary save" id="save" name="save">
-            <span class="fa f-sed icon-spin f-sed-spin fa-lg "></span>
-            <span class="fa f-sed icon-savepublish  fa-lg "></span>
+            <span class="sedico sedico-spiner sedico-spin sedico-lg "></span>
+            <span class="sedico sedico-savepublish sedico-lg "></span>
             <span class="el_txt"><?php echo __("Saved & Publish" ,"site-editor");  ?></span>
             </button>
         </li>
         <li class="sed-module-gideline">
           <a  href="#">
-          <span class="fa f-sed icon-gideline  fa-lg "></span>
+          <span class="sedico sedico-gideline sedico-lg "></span>
           </a>
         </li>
         <li class=" help-editor">
           <a  href="#">
-          <span class="fa f-sed icon-question  fa-lg "></span>
+          <span class="sedico sedico-question sedico-lg "></span>
           </a>
         </li>
         <!--<li class="settings-site-editor">
           <a  href="#">
-          <span class="fa f-sed icon-settings fa-lg "></span>
+          <span class="sedico sedico-settings sedico-lg "></span>
           </a>
         </li>  -->
         <li class="sed-logo">
@@ -83,12 +83,12 @@ $tabs = current_type_elemans($current_type , $tabs);
         <!--
         <li class=" redo-site-editor">
           <a  href="#">
-          <span class="fa f-sed icon-action-redo  fa-lg "></span>
+          <span class="sedico sedico-redo sedico-lg "></span>
           </a>
         </li>
         <li class=" undo-site-editor">
           <a href="#" >
-          <span class="fa f-sed icon-action-undo  fa-lg "></span>
+          <span class="sedico sedico-undo sedico-lg "></span>
           </a>
         </li>  -->
     </ul>
@@ -121,7 +121,7 @@ $tabs = current_type_elemans($current_type , $tabs);
                 }
               ?>
               <span class="el_txt"><?php echo $tab->title;?></span>
-              <span class="fa f-sed icon-settings2  fa-lg "></span>
+              <span class="sedico sedico-settings sedico-lg "></span>
               </a>
           </li>
     <?php
@@ -171,10 +171,10 @@ $tabs = current_type_elemans($current_type , $tabs);
                                         }
                                     }
                               ?>
-                              <li role="presentation" class="">  <a role="menuitem" class="<?php echo $link_classes;?> " tabindex="-1" href="#"><span class="fa f-sed <?php echo $classes;?> fa-lg "></span><span><?php echo $element->title;?></span>  </a>
+                              <li role="presentation" class="">  <a role="menuitem" class="<?php echo $link_classes;?> " tabindex="-1" href="#"><span class="sedico <?php echo $classes;?> fa-lg "></span><span><?php echo $element->title;?></span>  </a>
                               <?php
                                 /*if(function_exists($element->def_content)){
-                                    $function = $element->def_content;
+                                    $function = $element->def_content; 
                                     $function($site_editor);
                                 } */
                               ?>

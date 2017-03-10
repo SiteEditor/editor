@@ -60,7 +60,7 @@ if ( ! class_exists( 'SiteEditorNumberControl' ) ) {
 			?>
 
 			<?php if(!empty($this->description)){ ?> 
-				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
             <label for="<?php echo esc_attr( $sed_field_id );?>" ><?php echo esc_html( $this->label ); ?></label>
             <span class="after_field"><?php echo esc_html( $this->after_field ); ?></span>

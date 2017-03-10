@@ -88,12 +88,12 @@ if ( ! class_exists( 'SiteEditorMediaControl' ) ) {
 	            <label><?php echo esc_html( $this->label ); ?></label>
 	          
 	            <?php if(!empty($this->description)){ ?> 
-				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
 
 	            <input type="text" class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo esc_attr( $value );?>" disabled="disabled" <?php echo $atts_string;?> />
 	            <a class="remove-media-src-btn" href="#">
-	            	<span class="fa f-sed fa-lg icon-delete"></span>
+	            	<span class="sedico sedico-delete sedico-lg"></span>
 	            </a>
             </div>
 

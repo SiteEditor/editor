@@ -194,7 +194,7 @@ final class SedPageBuilderOptionsManager{
 
         $description    = isset($args['description']) ?  $args['description'] : '' ;
 
-        $priority       = isset($args['priority']) ?  $args['priority'] : 70 ;
+        $priority       = isset($args['priority']) ?  $args['priority'] : 520 ;
 
         $values         = isset($args['values']) ?  $args['values'] : array();
 
@@ -222,6 +222,7 @@ final class SedPageBuilderOptionsManager{
             'capability'    => $capability ,
             'type'          => $panel_type ,
             'parent_id'     => 'root',
+            'has_border_box'=> false ,
             'priority'      => $priority
         );
 
@@ -289,7 +290,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'default' ,
             'description'   => $description ,
             'priority'      => $priority ,
-            'parent_id'     => 'module_general_settings'
+            'parent_id'     => 'root'
         ));
 
         $values = explode(" ", trim($value) );
@@ -410,7 +411,7 @@ final class SedPageBuilderOptionsManager{
         $required = array(
             "type"              => "text-align" ,
             'category'          => "style-editor" ,
-            'panel'             => 'module_general_settings'
+            'panel'             => 'root'
         );
 
         $param = wp_parse_args( $required, $param ) ;
@@ -433,7 +434,8 @@ final class SedPageBuilderOptionsManager{
             'label'         => __('Go To Row Settings', 'site-editor'),
             'description'   => __('Row Container Settings', 'site-editor'),
             'style'         => 'blue',
-            'priority'      => 20
+            'has_border_box'=> false ,
+            'priority'      => 1030
         );
 
         /**
@@ -468,7 +470,7 @@ final class SedPageBuilderOptionsManager{
                 'wide'          => __('Wide', 'site-editor'),
                 'boxed'         => __('Boxed', 'site-editor')
             ),
-            'priority'      => 15
+            'priority'      => 500
         );
 
         /**
@@ -491,7 +493,8 @@ final class SedPageBuilderOptionsManager{
             'default'         => $value,
             'label'         => __('Change Skin', 'site-editor'),
             'button_style'  => 'black',
-            'priority'      => 2
+            'has_border_box'    => false ,
+            'priority'      => 1020
         );
 
     }

@@ -16,7 +16,7 @@ class PBWPTextEditorShortcode extends PBShortcodeClass{
           "name"        => "sed_wp_text_editor",                 //*require
           "title"       => __("WP Text Editor","site-editor"),   //*require for toolbar
           "description" => __("WP Text Editor","site-editor"),
-          "icon"        => "icon-wp-text-editor",                       //*require for icon toolbar
+          "icon"        => "sedico-wp-text-editor",                       //*require for icon toolbar
           "module"      => "wp-text-editor"                     //*require
           //"is_child"    =>  "false"                         //for childe shortcodes like sed_tr , sed_td for table module
         ));
@@ -84,7 +84,7 @@ $sed_pb_app->register_module(array(
     "name"          => "wp-text-editor",
     "title"         => __("WP Text Editor","site-editor"),
     "description"   => __("site editor module for WP Text Editor plugin","site-editor"),
-    "icon"          => "icon-customhtml",
+    "icon"          => "sedico-wp-text-editor",
     "shortcode"     => "sed_wp_text_editor",
     "transport"     => "ajax"
     //"js_plugin"   => 'wp-text-editor/js/wp-text-editor-plugin.min.js',

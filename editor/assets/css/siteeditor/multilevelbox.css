@@ -48,7 +48,9 @@ div[data-self-level-box="dialog-level-box-settings-sed_row-container"] {
 .icon-close-level-box i{
     color: #00ccff;
     display: table-cell;
-    font-size: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 4px;
     vertical-align: middle;
 }
 .multi-level-box-next{

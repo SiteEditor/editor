@@ -58,7 +58,7 @@ if ( ! class_exists( 'SiteEditorColorControl' ) ) {
 			?>
 
             <?php if(!empty($this->description)){ ?> 
-			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
             <div class="colorpicker">
 	            <label><?php echo esc_html( $this->label );?></label>

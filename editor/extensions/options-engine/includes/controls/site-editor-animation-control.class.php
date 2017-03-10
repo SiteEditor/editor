@@ -47,6 +47,12 @@ if ( ! class_exists( 'SiteEditorAnimationControl' ) ) {
 		 */
 		public $panel_title = '';
 
+        /**
+         * @access public
+         * @var int
+         */
+        public $priority = 10000;
+
 		/**
 		 * Enqueue control related scripts/styles.
 		 *
@@ -193,7 +199,7 @@ if ( ! class_exists( 'SiteEditorAnimationControl' ) ) {
                         <div class="row_setting_inner">
                             <div class="clearfix">
                                 <div class="sed-bp-form-select-field">
-                                    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php esc_attr__("Choose an Animation" , "site-editor");?>"></span>
+                                    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php esc_attr__("Choose an Animation" , "site-editor");?>"></span>
                                     <label><?php echo esc_attr__("Choose an Animation" , "site-editor");?></label>
                                     <select name="sed_pb_animation_type_class" class="sed-custom-select sed-module-element-control sed-bp-form-select sed-bp-input sed_pb_animation_type_class"  data-placeholder="Choose a animation...">
 
@@ -281,7 +287,7 @@ if ( ! class_exists( 'SiteEditorAnimationControl' ) ) {
                     <div class="row_settings">
                         <div class="row_setting_inner">
                             <div class="clearfix">
-                                <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr__("Change the animation duration" ,"site-editor");?>"></span>
+                                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr__("Change the animation duration" ,"site-editor");?>"></span>
                                 <label><?php echo esc_attr__("Duration" ,"site-editor");  ?></label>
                                 <input  type="text" class="sed-module-element-control ui-spinner-input spinner sed-bp-spinner sed-bp-input sed_pb_animation_duration" name="sed_pb_animation_duration" value="<?php echo esc_attr($duration);?>" />
                             </div>
@@ -291,7 +297,7 @@ if ( ! class_exists( 'SiteEditorAnimationControl' ) ) {
                     <div class="row_settings">
                         <div class="row_setting_inner">
                             <div class="clearfix">
-                                <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr__("Delay before the animation starts" ,"site-editor");?>"></span>
+                                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr__("Delay before the animation starts" ,"site-editor");?>"></span>
                                 <label><?php echo esc_attr__("Delay" ,"site-editor");  ?></label>
                                 <input  type="text" class="sed-module-element-control ui-spinner-input spinner sed-bp-spinner sed-bp-input sed_pb_animation_delay" name="sed_pb_animation_delay" value="<?php echo esc_attr($delay);?>" />
                             </div>
@@ -301,7 +307,7 @@ if ( ! class_exists( 'SiteEditorAnimationControl' ) ) {
                     <div class="row_settings">
                         <div class="row_setting_inner">
                             <div class="clearfix">
-                                <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr__("Distance to start the animation (related to the browser bottom)" ,"site-editor");?>"></span>
+                                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr__("Distance to start the animation (related to the browser bottom)" ,"site-editor");?>"></span>
                                 <label><?php echo esc_attr__("Offset" ,"site-editor");  ?></label>
                                 <input  type="text" class="sed_pb_animation_offset sed-module-element-control ui-spinner-input spinner sed-bp-spinner sed-bp-input" name="sed_pb_animation_offset" value="<?php echo esc_attr($offset);?>" />
                             </div>
@@ -310,8 +316,8 @@ if ( ! class_exists( 'SiteEditorAnimationControl' ) ) {
 
                     <div class="row_settings">
                         <div class="row_setting_inner">
-                            <div class="clearfix">
-                                <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr__("Number of times animation repeated" ,"site-editor");?>"></span>
+                            <div class="clearfix">  
+                                <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr__("Number of times animation repeated" ,"site-editor");?>"></span>
                                 <label><?php echo esc_attr__("Iteration" ,"site-editor");  ?></label>
                                 <input  type="text" class="sed_pb_animation_iteration  sed-module-element-control ui-spinner-input spinner sed-bp-spinner sed-bp-input" name="sed_pb_animation_iteration" value="<?php echo esc_attr($iteration);?>" />
                             </div>

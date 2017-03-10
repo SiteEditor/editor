@@ -26,7 +26,7 @@ class PBSearchShortcode extends PBShortcodeClass{
       "name"        => "sed_search",                 //*require
       "title"       => __("Search","site-editor"),   //*require for toolbar
       "description" => __("","site-editor"),
-      "icon"        => "icon-search",                 //*require for icon toolbar
+      "icon"        => "sedico-search",                 //*require for icon toolbar
       "module"      => "search"                     //*require
     ));
   }
@@ -150,7 +150,7 @@ $sed_pb_app->register_module(array(
     "name"        => "search",
     "title"       => __("Search","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-search",
+    "icon"        => "sedico-search",
     "shortcode"   => "sed_search",
     "sub_modules"   => array('title'),
 ));

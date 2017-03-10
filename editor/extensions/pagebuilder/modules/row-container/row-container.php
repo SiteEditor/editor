@@ -18,7 +18,7 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 "name"        => "sed_row_container",                                  //*require
                 "title"       => __("row","site-editor"),
                 "description" => __("Add rows to page","site-editor"),       //*require for toolbar
-                "icon"        => "icon-row",                                  //*require for icon toolbar
+                "icon"        => "sedico-row",                                  //*require for icon toolbar
                 "module"      =>  "row-container"         //*require
                 //"is_child"    =>  "false"       //for childe shortcodes like sed_tr , sed_td for table module
             ) // Args
@@ -286,11 +286,6 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 "panel"   => "row_container_responsive_panel",
                 'has_border_box' => false
             ),
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
-            ),
             'length'   =>  array(
                 "type"          => "length" ,
                 "label"         => __("Length", "site-editor"),
@@ -338,7 +333,7 @@ $sed_pb_app->register_module(array(
     "name"        => "row-container",
     "title"       => __("row","site-editor"),
     "description" => __("Add Full Customize Button","site-editor"),
-    "icon"        => "icon-row",
+    "icon"        => "sedico-row",
     "shortcode"   => "sed_row_container",
     "tpl_type"    => "underscore" ,
     "is_special"  => true ,

@@ -12,9 +12,12 @@
     line-height: 20px;
     padding: 8px;
     width: 92%;
+    cursor: pointer;
 }
 .accordion-panel-settings > .ui-accordion-header > .ui-icon {
     line-height: 20px;
+    font-size: 10px;
+    font-weight: bold;
 }
 .ui-accordion-header-active{
     border-radius: 0;

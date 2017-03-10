@@ -40,21 +40,21 @@ class SedDesignEditorManager extends SiteEditorModules{
 
         $this->icons_classes = array(
 
-            'background'        => 'fa f-sed icon-background fa-lg',
-            'border'            => 'fa f-sed icon-border fa-lg',
-            'border_radius'     => 'fa f-sed icon-cornersizes fa-lg',
-            'padding'           => 'fa f-sed icon-padding fa-lg',
-            'margin'            => 'fa f-sed icon-margin fa-lg',
-            'shadow'            => 'fa f-sed icon-boxshadow fa-lg',
-            'gradient'          => 'fa f-sed icon-gradient fa-lg',
-            'position'          => 'fa f-sed icon-position fa-lg',
-            'text_shadow'       => 'fa f-sed icon-textshadow fa-lg',
-            'trancparency'      => 'fa f-sed icon-transparency fa-lg',
-            'font'              => 'fa f-sed icon-font fa-lg',
-            'text_align'        => 'fa f-sed icon-justify fa-lg',
-            'line_height'       => 'fa f-sed icon-textheight fa-lg',
-            //'transform'         => 'fa f-sed icon-transform fa-lg',
-            //'transition'        => 'fa f-sed icon-transition fa-lg',
+            'background'        => 'sedico sedico-background sedico-lg',
+            'border'            => 'sedico sedico-border sedico-lg',
+            'border_radius'     => 'sedico sedico-corner-sizes sedico-lg',
+            'padding'           => 'sedico sedico-padding sedico-lg',
+            'margin'            => 'sedico sedico-margin sedico-lg',
+            'shadow'            => 'sedico sedico-box-shadow sedico-lg',
+            'gradient'          => 'sedico sedico-gradient sedico-lg',
+            'position'          => 'sedico sedico-position sedico-lg',
+            'text_shadow'       => 'sedico sedico-text-shadow sedico-lg',
+            'trancparency'      => 'sedico sedico-transparency sedico-lg',
+            'font'              => 'sedico sedico-font sedico-lg',
+            'text_align'        => 'sedico sedico-text-align sedico-lg',
+            'line_height'       => 'sedico sedico-line-height sedico-lg',
+            //'transform'         => 'sedico sedico-transform sedico-lg',
+            //'transition'        => 'sedico sedico-transition sedico-lg',
 
         );
 
@@ -602,6 +602,7 @@ class SedDesignEditorManager extends SiteEditorModules{
             'label'         => __('Custom Edit Style',"site-editor"),
             'description'   => '',
             'button_style'  => 'blue' ,
+            'has_border_box'    => false ,
             'atts'          => array(
                 'class'                 => 'sed_style_editor_btn' ,
                 'data-option-group'     => $option_group ,
@@ -610,7 +611,7 @@ class SedDesignEditorManager extends SiteEditorModules{
             ) ,
             'panel_title'   => __('Custom Edit Style',"site-editor") ,
             'panel_content' => $dialog_content ,
-            'priority'      => 2
+            'priority'      => 1010
         ) , $option_group );
 
         return $design_button_field;

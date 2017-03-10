@@ -17,7 +17,7 @@ class PBTextIconShortcode extends PBShortcodeClass{
                 "name"        => "sed_text_icon",                        //*require
                 "title"       => __("Text & Icon","site-editor"),               //*require for toolbar
                 "description" => __("Add Text & Icon To Page","site-editor"),
-                "icon"        => "icon-title",                            //*require for icon toolbar
+                "icon"        => "sedico-text-icon",                            //*require for icon toolbar
                 "module"      =>  "text-icon"                                  //*require
             ) // Args
 		);
@@ -109,7 +109,7 @@ $sed_pb_app->register_module(array(
     "name"        => "text-icon",
     "title"       => __("Text & Icon","site-editor"),
     "description" => __("Add Full Customize Text & Icon","site-editor"),
-    "icon"        => "icon-title",
+    "icon"        => "sedico-text-icon",
     "type_icon"   => "font",
     "shortcode"   => "sed_text_icon",
     "tpl_type"    => "underscore" ,

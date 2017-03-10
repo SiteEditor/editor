@@ -122,7 +122,7 @@ class SEDContextmenuProvider{
                 if(!empty($item->custom_html))
                     $output .= '<li class="contextmenu-item-container contextmenu-custom '. $classes .'" data-name="'.$name.'" data-action="'.$item->action.'" id="'. $top_menu_name . "_" . $parent_name . "_" . $name .'" tabindex="-1" role="menuitem" '. $attr_string .'>'.$item->custom_html;
                 else
-                    $output .= '<li class="contextmenu-item-container '. $classes .'" data-name="'.$name.'" data-action="'.$item->action.'" id="'. $top_menu_name . "_" . $parent_name . "_" . $name .'" tabindex="-1" role="menuitem" '. $attr_string .'><a><span class="menu_item_icon '. $icon_class .'">'.$icon_img.'</span><span class="menu_item_txt">'.$item->title.'</span></a>';
+                    $output .= '<li class="contextmenu-item-container '. $classes .'" data-name="'.$name.'" data-action="'.$item->action.'" id="'. $top_menu_name . "_" . $parent_name . "_" . $name .'" tabindex="-1" role="menuitem" '. $attr_string .'><a><span class="menu_item_icon sedico '. $icon_class .'">'.$icon_img.'</span><span class="menu_item_txt">'.$item->title.'</span></a>';
 
                 if($item->is_submenu === true){
                     $output .= '<ul>'. $this->context_menu_output($item->items , $top_menu_name , $name) .'</ul>';

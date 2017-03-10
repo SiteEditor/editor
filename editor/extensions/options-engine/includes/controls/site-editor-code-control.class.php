@@ -144,7 +144,7 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 
 				<label><?php echo esc_html( $this->label );?></label>
 				<?php if(!empty($this->description)){ ?> 
-				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
                 <div class="sed-code-editor-wrapper">
     				<button type="button" class="sed-resize-code-editor-toggle sed-btn-default"><?php echo esc_html__( "Expand" , "site-editor" );?></button>
@@ -155,8 +155,8 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 
                     <?php if( $this->update_type == "button" ) : ?>
                     <!--<button value="Saved" class="btn button-primary save" id="save" name="save" disabled="">
-                        <span class="fa f-sed icon-spin f-sed-spin fa-lg "></span>
-                        <span class="fa f-sed icon-savepublish  fa-lg "></span>
+                        <span class="sedico sedico-spiner sedico-spin sedico-lg "></span>
+                        <span class="sedico sedico-savepublish sedico-lg "></span>
                         <span class="el_txt">Saved</span>
                     </button> -->
                     <div class="sed-save-code-changes-wrap">

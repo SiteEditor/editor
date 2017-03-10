@@ -89,7 +89,7 @@
     <li tabindex="0" role="checkbox" aria-label="{{ data.title }}" aria-checked="false" data-id="{{ data.id }}" class="attachment">
         <a data-media-type="image" data-post-id="{{ data.id }}" class="sed-media-item" href="#">
         <span class="sed-media-item-selected-icon"></span>
-        <span class="sed-media-item-remove-icon"><i class="fa f-sed icon-trash fa-lg"></i></span>
+        <span class="sed-media-item-remove-icon"><i class="sedico sedico-trash sedico-lg"></i></span>
 
         <# if ( jQuery.inArray( data.type, [ 'audio', 'video' ] ) > -1 ) { #>
         <span class="sed-media-item-filename">

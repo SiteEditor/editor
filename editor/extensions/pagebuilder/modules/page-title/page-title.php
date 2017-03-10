@@ -26,7 +26,7 @@ class PBPageTitleShortcode extends PBShortcodeClass{
                 "name"        => "sed_page_title",                               //*require
                 "title"       => __("Page Title","site-editor"),                 //*require for toolbar
                 "description" => __("Edit Page Title in Front End","site-editor"),
-                "icon"        => "icon-pagetitle",                               //*require for icon toolbar
+                "icon"        => "sedico-page-title",                               //*require for icon toolbar
                 "module"      =>  "page-title"         //*require
                 //"is_child"    =>  "false"       //for childe shortcodes like sed_tr , sed_td for table module
             ) // Args
@@ -270,7 +270,7 @@ $sed_pb_app->register_module(array(
     "name"        => "page-title",
     "title"       => __("Page Title","site-editor"),
     "description" => __("Edit Page Title in Front End","site-editor"),
-    "icon"        => "icon-pagetitle",
+    "icon"        => "sedico-page-title",
     "type_icon"   => "font",
     "shortcode"         => "sed_page_title",
     //"show_ui_in_toolbar"    => false ,

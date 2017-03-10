@@ -66,7 +66,7 @@ if ( ! class_exists( 'SiteEditorCheckboxControl' ) ) {
 
 
 	        <?php if(!empty($this->description)){ ?> 
-			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
 	        <?php $checked = ( "1" == $value ) ? 'checked="checked"' : ''; ?>
 

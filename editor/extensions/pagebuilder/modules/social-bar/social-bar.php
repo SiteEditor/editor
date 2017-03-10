@@ -25,7 +25,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
 			"name"        => "sed_social_bar",  //*require Shortcode Name
 			"title"       => __("Social Bar","site-editor"),   //*require for toolbar
 			"description" => __("","site-editor"),
-			"icon"        =>  "icon-socialbar",        //*require for icon toolbar
+			"icon"        =>  "sedico-social-bar",        //*require for icon toolbar
 			"module"      =>  "social-bar"  //*require Module Name
 		));
 
@@ -217,7 +217,7 @@ $sed_pb_app->register_module(array(
     "name"        => "social-bar",
     "title"       => __("Social Bar","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-socialbar",
+    "icon"        => "sedico-social-bar",
     "shortcode"   => "sed_social_bar",
     "tpl_type"    => "underscore" ,
     "has_extra_spacing"   =>  true ,

@@ -1446,7 +1446,7 @@
                         attach_id = 0;
                     }
 
-                    images_html += '<li sed-attachment-id="' + attach_id + '" class="item-image"><img class="gallery-img" src="' + imgUrl + '" width="100" height="100"><span class="remove-img-action icon-delete f-sed"></span></li>';
+                    images_html += '<li sed-attachment-id="' + attach_id + '" class="item-image"><img class="gallery-img" src="' + imgUrl + '" width="100" height="100"><span class="remove-img-action sedico-delete sedico"></span></li>';
                 });
 
                 control.sortableImages.html( images_html );
@@ -1530,7 +1530,7 @@
         _updateIconDemo : function( icon ){
 
             if( _.isEmpty( icon ) ) {
-                icon = 'fa f-sed icon-icons sed-bp-icon-empty'; 
+                icon = 'sedico sedico-icons sed-bp-icon-empty'; 
             }
 
             this.icoDemo.removeClass( this.icoDemo.attr("sed-icon") ).addClass( icon );
@@ -1661,7 +1661,7 @@
 
                 var icons_html = "";
                 _.each( currValue , function( icon ){
-                    icons_html += '<li sed-icon="' + icon + '" class="item-icon"><span class="' + icon + '"></span><span class="remove-icon-action icon-delete f-sed"></span></li>';
+                    icons_html += '<li sed-icon="' + icon + '" class="item-icon"><span class="' + icon + '"></span><span class="remove-icon-action sedico-delete sedico"></span></li>';
                 });
                 control.sortableIcons.html( icons_html );
 

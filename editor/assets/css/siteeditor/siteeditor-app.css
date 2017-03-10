@@ -334,7 +334,7 @@ body {
     border-bottom-width: 4px;
     color: #33ccff;
 }
-#myTab li a .fa {
+#myTab li a .sedico {
    display: none;
 }
 
@@ -468,9 +468,9 @@ body {
     font-family: Arial,Helvetica,sans-serif;
     line-height: 1.25em !important;
 }
-.site-editor-app-tools-button .style-editor .fa,
-.site-editor-app-tools-button .preview .fa,
-.site-editor-app-tools-button .save-publish .fa {
+.site-editor-app-tools-button .style-editor .sedico,
+.site-editor-app-tools-button .preview .sedico,
+.site-editor-app-tools-button .save-publish .sedico {
   display: none;
 }
 
@@ -647,7 +647,7 @@ fieldset[disabled] .button-primary.focus {
     border-color: #0099E6
 }
 
-.fa{
+.sedico{
     color: #00A9E8;        /* #24a9f1 #00aaff*/
     display: inline-block;
     font-style: normal;
@@ -656,7 +656,7 @@ fieldset[disabled] .button-primary.focus {
     position: relative;
     top: 2px;
 }
-.fa-lg {
+.sedico-lg {
     font-size: 1.3em;
 }
 .el_txt {
@@ -702,8 +702,8 @@ fieldset[disabled] .button-primary.focus {
     float: left;
     width: 48%;
 }
-.fa-2x {
-      font-size: 24px;
+.sedico-2x {
+      font-size: 26px;
 }
 .el_txt2{
     font-size: 12px;
@@ -737,8 +737,8 @@ fieldset[disabled] .button-primary.focus {
     box-shadow: none;
     color: #33ccff;
 }
-.btn-default3 .fa-lg,
-.module-menu .btn-default3 .fa-lg {
+.btn-default3 .sedico-lg,
+.module-menu .btn-default3 .sedico-lg {
     font-size: 18px;
     margin: 0 auto !important;
 }
@@ -749,8 +749,8 @@ fieldset[disabled] .button-primary.focus {
     margin: 4px auto 0;
     overflow: hidden;
 }
-.btn-default3 .fa,
-.module-menu  .btn-default3 .fa{
+.btn-default3 .sedico,
+.module-menu  .btn-default3 .sedico{
     display: block;
     margin: 0 auto 6px;
 }
@@ -883,7 +883,7 @@ fieldset[disabled] .button-primary.focus {
 }
 @media screen and (max-width: 294px) {
 
-/*  #myTab li a .fa {
+/*  #myTab li a .sedico {
    display: block;
 }
 #site-editor-header #myTab .el_txt{
@@ -933,7 +933,7 @@ fieldset[disabled] .button-primary.focus {
     height: 26px;
     padding: 0 7px 2px !important;
 }
-#myTab li a .fa {
+#myTab li a .sedico {
     display: block;
     font-size: 17px;
 }
@@ -949,8 +949,8 @@ fieldset[disabled] .button-primary.focus {
     background-color: #fff;
     border: 0 solid rgba(0, 0, 0, 0.1);
 }
-.site-editor-app-tools-button .preview .fa,
-.site-editor-app-tools-button .save-publish .fa{
+.site-editor-app-tools-button .preview .sedico ,
+.site-editor-app-tools-button .save-publish .sedico {
   display: block;
 }      */
 }
@@ -1022,9 +1022,9 @@ fieldset[disabled] .button-primary.focus {
     padding: 0 !important;
     top: 0;
 }
-.site-editor-app-tools-button .style-editor .fa,
-.site-editor-app-tools-button .preview .fa,
-.site-editor-app-tools-button .save-publish .fa {
+.site-editor-app-tools-button .style-editor .sedico,
+.site-editor-app-tools-button .preview .sedico,
+.site-editor-app-tools-button .save-publish .sedico {
     display: block;
     height: 17px;
     top: 0;

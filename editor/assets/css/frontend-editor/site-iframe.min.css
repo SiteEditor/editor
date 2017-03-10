@@ -117,7 +117,7 @@
     width: 100%;
      display: none;
     z-index:1002;
-    font-size: 13px;
+    font-size: 18px;
 }
 
 /*
@@ -140,7 +140,7 @@
     height: 30px;
     width: 40px;
     padding: 0 !important;
-    line-height: 28px;
+    line-height: 30px;
     cursor: pointer;
 
 }
@@ -450,7 +450,7 @@
     z-index: 1004;
 }
 
-.remove_pb_btn.disabled span.f-sed.icon-trash.link.fa-lg {
+.remove_pb_btn.disabled span.sedico.sedico-trash.link.sedico-lg {
     color: #ccc;
 }
 
@@ -909,8 +909,8 @@
 }
 
 .sed-app-editor .sed-pb-row-extra-spacing {
-    padding-bottom: 10px !important;
-    padding-top: 10px !important;
+    /*padding-bottom: 10px !important;
+    padding-top: 10px !important;*/
 }
 
 .module-dragging-mode .sed-pb-component{

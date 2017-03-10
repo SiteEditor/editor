@@ -6,11 +6,11 @@
         <div class="sed-preset-item">
             <label title="{{data.title}}">{{data.title}}</label>
             <div class="preset-actions">
-                <span data-action="load" class="load-preset action"><span class="fa fa-eye fa-lg"></span></span>
-                <span data-action="edit" class="edit action"><span class="fa fa-pencil fa-lg"></span></span>
+                <span data-action="load" class="load-preset action"><span class="sedico sedico-eye sedico-lg"></span></span>
+                <span data-action="edit" class="edit action"><span class="sedico sedico-edit sedico-lg"></span></span>
                 <span data-action="default" class="set-default action <# if(data.isDefault){ #>sed-default<# } #>"><span class="fa fa-star-o fa-lg"></span><span class="fa fa-star fa-lg"></span></span>
-                <span data-action="remove" class="trash destroy action"><span class="fa fa-trash-o fa-lg"></span></span>
-                <span data-action="sort" class="sort action"><span class="fa fa-arrows fa-lg"></span></span>
+                <span data-action="remove" class="trash destroy action"><span class="sedico sedico-trash sedico-lg"></span></span>
+                <span data-action="sort" class="sort action"><span class="sedico sedico-cursor-move sedico-lg"></span></span>
             </div>
         </div>
         <input class="preset-edit" type="text" value="{{data.title}}" />

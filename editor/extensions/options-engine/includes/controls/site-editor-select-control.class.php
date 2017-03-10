@@ -94,7 +94,7 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 
 		        <label><?php echo esc_html( $this->label );?></label>
 		        <?php if(!empty($this->description)){ ?> 
-				    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+				    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
 
 		        <select  name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" class="<?php echo esc_attr( $classes ); ?>" <?php echo $atts_string;?>>

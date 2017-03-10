@@ -65,7 +65,7 @@ if ( ! class_exists( 'SiteEditorExpandedOptionsPanel' ) ) {
 						<?php echo $this->title;?>
 
 						<?php if( !empty( $this->description ) ): ?>
-							<span class="field_desc flt-help fa f-sed icon-question  fa-lg " title="<?php echo $this->description;?>"></span>
+							<span class="field_desc flt-help sedico sedico-question  sedico-lg " title="<?php echo $this->description;?>"></span>
 						<?php endif; ?>
 
 					</div>

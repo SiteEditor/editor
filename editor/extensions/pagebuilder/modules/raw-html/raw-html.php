@@ -22,7 +22,7 @@ class PBRawHTMLShortcode extends PBShortcodeClass{
           "name"        => "sed_raw_html",                 //*require
           "title"       => __("Raw HTML","site-editor"),   //*require for toolbar
           "description" => __("Raw HTML","site-editor"),
-          "icon"        => "icon-raw-html",                       //*require for icon toolbar
+          "icon"        => "sedico-html",                       //*require for icon toolbar
           "module"      => "raw-html"                     //*require
           //"is_child"    =>  "false"                         //for childe shortcodes like sed_tr , sed_td for table module
         ));
@@ -94,7 +94,7 @@ $sed_pb_app->register_module(array(
     "name"          => "raw-html",
     "title"         => __("Raw HTML","site-editor"),
     "description"   => __("site editor module for Raw HTML plugin","site-editor"),
-    "icon"          => "icon-customhtml",
+    "icon"          => "sedico-html",
     "shortcode"     => "sed_raw_html",
     "tpl_type"      => "underscore"
 ));

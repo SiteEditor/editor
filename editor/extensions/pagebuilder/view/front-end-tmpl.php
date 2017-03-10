@@ -5,15 +5,15 @@
      <div class="sed-handle-sort-row-inner">
       <div class="drag-sty-part2 drag-sty-part2-active">
       <div class="edit_btn"><div class=" btn_part2" id="">
-      <span class="f-sed link fa-lg "></span>
+      <span class="sedico link sedico-lg "></span>
       <span class="el_txt">edit</span>
       </div></div>
       <div class="drag_btn"><div class=" btn_part2" id="">
-      <span class="f-sed link fa-lg "></span>
+      <span class="sedico link sedico-lg "></span>
       <span class="el_txt">drag</span>
       </div></div>
       <div class="remove_btn"><div class=" btn_part2" id="">
-      <span class="f-sed link fa-lg "></span>
+      <span class="sedico link sedico-lg "></span>
       <span class="el_txt">remove</span>
       </div></div>
       </div>
@@ -32,11 +32,11 @@
      <div class="sed-handle-sort-row-inner sed-handle-woutdnp-row-inner">
       <div class="drag-sty-part2 drag-sty-part2-active">
       <div class="edit_btn"><div class=" btn_part2" id="">
-      <span class="f-sed link fa-lg "></span>
+      <span class="sedico link sedico-lg "></span>
       <span class="el_txt">edit</span>
       </div></div>
       <div class="remove_btn"><div class=" btn_part2" id="">
-      <span class="f-sed link fa-lg "></span>
+      <span class="sedico link sedico-lg "></span>
       <span class="el_txt">remove</span>
       </div></div>
       </div>
@@ -53,7 +53,7 @@
     <div class="helper-drag-content">
     <div class="drag_btn_crt">
     <button class="btn_helper" id="">
-      <span class="f-sed icon-cursor-move link"></span>
+      <span class="sedico sedico-cursor-move link"></span>
       <span class="el_txt">drag</span>
       </button>
       </div>
@@ -74,7 +74,7 @@
 <script type="text/html" id="tmpl-row-resizable-handle">
 <div class="resizable-handle-spci">
  <div class="resizable-btm resizable-btn">
-  <span class="f-sed link fa_lg2"></span>
+  <span class="sedico link fa_lg2"></span>
  </div>
  </div>
 </script>
@@ -89,7 +89,7 @@
             <# if( $.inArray( 'edit' , actions )  > -1 ) { #>
                 <div class="setting_btn sed_setting_btn_cmp">
                     <div class="sed_setting_btn_cmp drag-content" id="">
-                        <span class="f-sed icon-redo link fa-lg sed_setting_btn_cmp"></span>
+                        <span class="sedico sedico-redo link sedico-lg sed_setting_btn_cmp"></span>
                         <span class="el_txt sed_setting_btn_cmp"><?php echo __( "Module Setting" , "site-editor");?></span>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
             <# if( $.inArray( 'duplicate' , actions )  > -1 ) { #>
                 <div class="duplicate_pb_btn">
                     <div class=" drag-content" id="">
-                        <span class="f-sed icon-pages link fa-lg "></span>
+                        <span class="sedico sedico-pages link sedico-lg "></span>
                         <span class="el_txt"><?php echo __( "Module Duplicate" , "site-editor");?></span>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
             <# if( $.inArray( 'move' , actions )  > -1 ) { #>
                 <div class="drag_pb_btn">
                     <div class=" drag-content" id="">
-                        <span class="f-sed icon-cursor-move link fa-lg "></span>
+                        <span class="sedico sedico-cursor-move link sedico-lg "></span>
                         <span class="el_txt"><?php echo __( "Module Drag & Drop" , "site-editor");?></span>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
             <# if( $.inArray( 'remove' , actions )  > -1 ) { #>
                 <div class="remove_pb_btn">
                     <div class="drag-content">
-                        <span class="f-sed icon-trash link fa-lg "></span>
+                        <span class="sedico sedico-trash link sedico-lg "></span>
                         <span class="el_txt"><?php echo __( "Module Remove" , "site-editor");?></span>
                     </div>
                 </div>
@@ -136,8 +136,8 @@
 <script type="text/html" id="sed-static-module-handle-tmpl">
   <div class="sed-static-module-action-bar">
       <ul>
-          <li class="edit-action-item"><a href="#"><span class="f-sed icon-edit fa-lg "></span><span> <?php echo __("Edit Content" , "site-editor");?> </span></a> </li>
-          <li><a href="#"><span class="f-sed icon-trash fa-lg "></span><span> <?php echo __("remove" , "site-editor");?> </span></a> </li>
+          <li class="edit-action-item"><a href="#"><span class="sedico sedico-edit sedico-lg "></span><span> <?php echo __("Edit Content" , "site-editor");?> </span></a> </li>
+          <li><a href="#"><span class="sedico sedico-trash sedico-lg "></span><span> <?php echo __("remove" , "site-editor");?> </span></a> </li>
       </ul>
   </div>
 </script>

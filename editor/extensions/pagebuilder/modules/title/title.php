@@ -18,7 +18,7 @@ class PBTitleShortcode extends PBShortcodeClass{
                 "name"        => "sed_text_title",                        //*require
                 "title"       => __("Title","site-editor"),               //*require for toolbar
                 "description" => __("Add Title To Page","site-editor"),
-                "icon"        => "icon-title",                            //*require for icon toolbar
+                "icon"        => "sedico-title",                            //*require for icon toolbar
                 "module"      =>  "title"                                  //*require
             ) // Args
 		);
@@ -132,7 +132,7 @@ $sed_pb_app->register_module(array(
     "name"        => "title",
     "title"       => __("Title","site-editor"),
     "description" => __("Add Full Customize Title","site-editor"),
-    "icon"        => "icon-title",
+    "icon"        => "sedico-title",
     "type_icon"   => "font",
     "shortcode"   => "sed_text_title",
     "priority"    => 20 ,

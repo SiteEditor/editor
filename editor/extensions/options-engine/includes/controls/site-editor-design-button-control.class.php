@@ -90,7 +90,7 @@ if ( ! class_exists( 'SiteEditorDesignButtonControl' ) ) {
 
 			
             <?php if(!empty($this->description)){ ?> 
-			    <span class="field_desc flt-help fa f-sed icon-question fa-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+			    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 			<?php } ?>
 
 			<button type="button" data-related-level-box="<?php echo esc_attr( $level_box_id );?>" data-panel-id="<?php echo esc_attr( $this->id );?>" class="<?php echo esc_attr( $classes ); ?>"  name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string; ?>>
@@ -99,7 +99,7 @@ if ( ! class_exists( 'SiteEditorDesignButtonControl' ) ) {
 					<span class="<?php echo esc_attr( $this->icon );?>"></span>
 				<?php } ?>
                 <span class="sed-btn-label"><?php echo esc_html( $this->label );?></span>
-                <span class="fa f-sed icon-chevron-right sed-arrow-right fa-lg"></span>
+                <span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span>
 
 			</button>
 
