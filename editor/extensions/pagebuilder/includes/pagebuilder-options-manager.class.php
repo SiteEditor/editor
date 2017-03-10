@@ -404,14 +404,14 @@ final class SedPageBuilderOptionsManager{
          * Define the array of defaults
          */
         $defaults = array(
-            'default'         => "" ,
+            'default'       => "initial" ,
             'label'         => __('Align', 'site-editor'),
             'description'   => __('Module container alignment', 'site-editor'),
             'choices'       => array(
                 'left'      => ( is_rtl() ) ? __('Right', 'site-editor') : __('Left', 'site-editor'),
                 'center'    => __('Center', 'site-editor'),
                 'right'     => ( is_rtl() ) ? __('Left', 'site-editor') : __('Right', 'site-editor'),
-                'justify'   => __('initial', 'site-editor'), 
+                'initial'   => __('initial', 'site-editor'),
             )
         );
 
@@ -423,6 +423,7 @@ final class SedPageBuilderOptionsManager{
         $required = array(
             "type"              => "text-align" ,
             'category'          => "style-editor" ,
+            'selector'          => 'sed_current' ,
             'panel'             => 'root'
         );
 

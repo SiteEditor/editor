@@ -882,7 +882,7 @@
 
                 api.doShortcodeMode = "normal";
 
-                if(shortcode.tag == "sed_module"){
+                if(shortcode.tag == "sed_module" || shortcode.tag == "sed_row" ){
                     html = this.do_shortcode( shortcode.tag , elementId , elementId );
                     $( '[sed_model_id="' + elementId + '"]' ).replaceWith( html );
                 }else{
