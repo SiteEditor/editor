@@ -1,4 +1,4 @@
-<table class="sed-stb-sm sed-cols-table">
+<table class="sed-cols-table">
 <tr {{sed_attrs}} class="sed-columns-pb {{responsive_option}} {{className}}" sed-role="column-pb">
     {{{content}}}
 </tr>

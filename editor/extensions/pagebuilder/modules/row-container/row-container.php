@@ -15,12 +15,12 @@ class PBRowContainerShortcode extends PBShortcodeClass{
 	 */
 	function __construct() {
 		parent::__construct( array(
-                "name"        => "sed_row_container",                                  //*require
-                "title"       => __("Row","site-editor"),
-                "description" => __("Add Rows to page","site-editor"),       //*require for toolbar
-                "icon"        => "sedico-row",                                  //*require for icon toolbar
-                "module"      =>  "row-container"         //*require
-                //"is_child"    =>  "false"       //for childe shortcodes like sed_tr , sed_td for table module
+                "name"                  => "sed_row_container",                                  //*require
+                "title"                 => __("Row","site-editor"),
+                "description"           => __("Add Rows to page","site-editor"),       //*require for toolbar
+                "icon"                  => "sedico-row",                                  //*require for icon toolbar
+                "module"                =>  "row-container"         //*require
+                //"is_child"            =>  "false"       //for childe shortcodes like sed_tr , sed_td for table module
             ) // Args
 		);
 
@@ -29,26 +29,26 @@ class PBRowContainerShortcode extends PBShortcodeClass{
     function get_atts(){
 
         $atts = array(
-            'responsive_spacing'   =>  "",
-            'responsive_option'     => '',
-           	'type'                  => 'static-element', //draggable-element | static-element
-            'length'                => 'boxed' ,
-            'video_mp4'             =>  '' ,
-            "video_ogg"             =>  '' ,
-            "video_webm"            =>  '' ,
-            "video_mute"            =>  true ,
-            "video_loop"            =>  true ,
-            "video_preview_image"   =>  SED_PB_MODULES_URL . 'image/images/pic.jpg' ,
-            "video_overlay_color"   =>  '' ,
-            "video_overlay_opacity" =>  50 ,
-            'full_height'           => false,
-            'overlay'               => false,
-            'overlay_color'         => '#000',
-            'overlay_opacity'       => 50,
-            'is_arrow'              => false,
-            'arrow'                 => '',
-            'arrow_size'            => 20,
-            'arrow_color'           => '#000',
+            'responsive_spacing'        =>  "",
+            'responsive_option'         => '',
+           	'type'                      => 'static-element', //draggable-element | static-element
+            'length'                    => 'boxed' ,
+            'video_mp4'                 =>  '' ,
+            "video_ogg"                 =>  '' ,
+            "video_webm"                =>  '' ,
+            "video_mute"                =>  true ,
+            "video_loop"                =>  true ,
+            "video_preview_image"       =>  SED_PB_MODULES_URL . 'image/images/pic.jpg' ,
+            "video_overlay_color"       =>  '' ,
+            "video_overlay_opacity"     =>  50 ,
+            'full_height'               => false,
+            'overlay'                   => false,
+            'overlay_color'             => '#000',
+            'overlay_opacity'           => 50,
+            'is_arrow'                  => false,
+            'arrow'                     => '',
+            'arrow_size'                => 20,
+            'arrow_color'               => '#000',
         );
 
         return $atts;
@@ -83,247 +83,258 @@ class PBRowContainerShortcode extends PBShortcodeClass{
     function shortcode_settings(){
 
         $this->add_panel( 'row_container_settings_panel_outer' , array(
-            'title'                   =>  __('Row Container Settings',"site-editor")  ,
-            'capability'              => 'edit_theme_options' ,
-            'type'                    => 'inner_box' ,
-            'priority'                => 9 ,
-            'btn_style'               => 'menu' ,
-            'has_border_box'          => false ,
-            'icon'                    => 'sedico-row' ,
-            'field_spacing'           => 'sm'
+            'title'                     =>  __('Row Container Settings',"site-editor")  ,
+            'capability'                => 'edit_theme_options' ,
+            'type'                      => 'inner_box' ,
+            'priority'                  => 9 ,
+            'btn_style'                 => 'menu' ,
+            'has_border_box'            => false ,
+            'icon'                      => 'sedico-row' ,
+            'field_spacing'             => 'sm'
         ) );
 
         $this->add_panel( 'row_container_settings_panel' , array(
-            'title'                   =>  __('Row Container Settings',"site-editor")  ,
-            'capability'              => 'edit_theme_options' ,
-            'type'                    => 'default' ,
-            'parent_id'               => "row_container_settings_panel_outer",
-            'priority'                => 10 ,
+            'title'                     =>  __('Row Container Settings',"site-editor")  ,
+            'capability'                => 'edit_theme_options' ,
+            'type'                      => 'default' ,
+            'parent_id'                 => "row_container_settings_panel_outer",
+            'priority'                  => 10 ,
         ) );
 
         $this->add_panel( 'row_container_responsive_panel' , array(
-            'title'                   =>  __('Responsive Settings',"site-editor")  ,
-            'capability'              => 'edit_theme_options' ,
-            'type'                    => 'default' ,
-            'parent_id'               => "row_container_settings_panel_outer",
-            'priority'                => 11 , 
+            'title'                     =>  __('Responsive Settings',"site-editor")  ,
+            'capability'                => 'edit_theme_options' ,
+            'type'                      => 'default' ,
+            'parent_id'                 => "row_container_settings_panel_outer",
+            'priority'                  => 11 , 
         ) );
 
         $this->add_panel( 'video_background_row_container' , array(
-            'title'                   =>  __('Video Background',"site-editor")  ,
-            'capability'              => 'edit_theme_options' ,
-            'type'                    => 'inner_box' ,
-            'description'             => '',
-            'priority'                => 12 ,
-            'parent_id'               => 'root' ,
-            'btn_style'               => 'menu' ,
-            'has_border_box'          => false , 
-            'icon'                    => 'sedico-video' ,
-            'field_spacing'           => 'sm'
+            'title'                     =>  __('Video Background',"site-editor")  ,
+            'capability'                => 'edit_theme_options' ,
+            'type'                      => 'inner_box' ,
+            'description'               => '',
+            'priority'                  => 12 ,
+            'parent_id'                 => 'root' ,
+            'btn_style'                 => 'menu' ,
+            'has_border_box'            => false , 
+            'icon'                      => 'sedico-video' ,
+            'field_spacing'             => 'sm'
         ) );
 
         $params = array(
-            /*'full_height'   => array(
-                'type'    => 'checkbox',
-                'label'   => __('Full Height', 'site-editor'),
-                'description'  => __('','site-editor'),
-                "panel"   => "row_container_settings_panel"
+            /*'full_height'           => array(
+                'type'                  => 'checkbox',
+                'label'                 => __('Full Height', 'site-editor'),
+                'description'           => __('','site-editor'),
+                "panel"                 => "row_container_settings_panel"
             ),*/
-            'overlay'   => array(
-                'type'    => 'checkbox',
-                'label'   => __('Overlay', 'site-editor'),
-                'description'  => __('If you set image background for your rows, using overlays would make your modules and elements on the image background to pop.','site-editor'),
-                "panel"   => "row_container_settings_panel",
-                'has_border_box' => false
+            'overlay'               => array(
+                'type'                  => 'checkbox',
+                'label'                 => __('Overlay', 'site-editor'),
+                'description'           => __('If you set image background for your rows, using overlays would make your modules and elements on the image background to pop.','site-editor'),
+                "panel"                 => "row_container_settings_panel",
+                'has_border_box'        => false
             ),
-            'overlay_color'   => array(
-                'type'    => 'color',
-                'label'   => __('Overlay Color', 'site-editor'),
-                'description'  => __('You can set a color for the overlay using the color picker.','site-editor'),
-                "panel"   => "row_container_settings_panel" ,
-                "dependency"  => array(
-                    'queries'  =>  array(
+            'overlay_color'         => array(
+                'type'                  => 'color',
+                'label'                 => __('Overlay Color', 'site-editor'),
+                'description'           => __('You can set a color for the overlay using the color picker.','site-editor'),
+                "panel"                 => "row_container_settings_panel" ,
+                "dependency"        => array(
+                    'queries'         =>  array(
                         array(
-                            "key"      =>  "overlay" ,
-                            "value"    =>  true ,
-                            "compare"  =>  "===" 
+                            "key"       =>  "overlay" ,
+                            "value"     =>  true ,
+                            "compare"   =>  "===" 
                         )
                     )
                 ),
-                'has_border_box' => false
+                'has_border_box'        => false
             ),
-            'overlay_opacity'   => array(
-                'type'  => 'number',
-                'after_field'  => '%',
-                'label'   => __('Overlay Opacity', 'site-editor'),
-                'description'  => __('You can set the opacity of the overlay with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
-                "panel"   => "row_container_settings_panel",
-                "dependency"  => array(
-                    'queries'  =>  array(
+            'overlay_opacity'       => array(
+                'type'                  => 'number',
+                'after_field'           => '%',
+                'label'                 => __('Overlay Opacity', 'site-editor'),
+                'description'           => __('You can set the opacity of the overlay with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
+                "panel"                 => "row_container_settings_panel",
+                "dependency"        => array(
+                    'queries'         =>  array(
                         array(
-                            "key"      =>  "overlay" ,
-                            "value"    =>  true ,
-                            "compare"  =>  "==="
+                            "key"       =>  "overlay" ,
+                            "value"     =>  true ,
+                            "compare"   =>  "==="
                         )
                     )
                 ),
-                'has_border_box' => false
+                'has_border_box'        => false
             ),
-            'is_arrow'   => array(
-                'type'    => 'checkbox',
-                'label'   => __('Arrow', 'site-editor'),
-                'description'  => __('This option allows you to use arrows on the top or bottom of your pages.','site-editor'),
-                "panel"   => "row_container_settings_panel",
-                'has_border_box' => false
+            'is_arrow'              => array(
+                'type'                  => 'checkbox',
+                'label'                 => __('Arrow', 'site-editor'),
+                'description'           => __('This option allows you to use arrows on the top or bottom of your pages.','site-editor'),
+                "panel"                 => "row_container_settings_panel",
+                'has_border_box'        => false
             ),
-            'arrow'     => array(
-      			'type' => 'select',
-      			'label' => __('Type Arrow', 'site-editor'),
-      			'description'  => __("This option allows you to use arrows on the top or bottom of your pages. If you want to relate the current row with the one on the top of it, use top and if you want to relate it with the one below it, use bottom. You can create other modes for consecutive rows. ", "site-editor"),
-                'choices'   =>array(
-                    'row-arrow-top'        => __('Top', 'site-editor'),
-                    'row-arrow-bottom'     => __('Bottom', 'site-editor'),
+            'arrow'                 => array(
+      			'type'                  => 'select',
+      			'label'                 => __('Type Arrow', 'site-editor'),
+      			'description'           => __("This option allows you to use arrows on the top or bottom of your pages. If you want to relate the current row with the one on the top of it, use top and if you want to relate it with the one below it, use bottom. You can create other modes for consecutive rows. ", "site-editor"),
+                'choices'             => array(
+                    'row-arrow-top'     => __('Top', 'site-editor'),
+                    'row-arrow-bottom'  => __('Bottom', 'site-editor'),
                 ),
-                "panel"     => "row_container_settings_panel",
-                "dependency"  => array(
-                    'queries'  =>  array(
+                "panel"                 => "row_container_settings_panel",
+                "dependency"        => array(
+                    'queries'         =>  array(
                         array(
-                            "key"      =>  "is_arrow" ,
-                            "value"    =>  true ,
-                            "compare"  =>  "==="
+                            "key"       =>  "is_arrow" ,
+                            "value"     =>  true ,
+                            "compare"   =>  "==="
                         )
                     )
                 ),
-                'has_border_box' => false
+                'has_border_box'        => false
       		),
-            'arrow_size'   => array(
-                'type' => 'number',
-                "after_field"  => "px",
-                'label'   => __('Arrow Size', 'site-editor'),
-                'description'  => __('You can set the size of the arrow with this option','site-editor'),
-                "panel"   => "row_container_settings_panel",
-                "dependency"  => array(
-                    'queries'  =>  array( 
+            'arrow_size'            => array(
+                'type'                  => 'number',
+                "after_field"           => "px",
+                'label'                 => __('Arrow Size', 'site-editor'),
+                'description'           => __('You can set the size of the arrow with this option','site-editor'),
+                "panel"                 => "row_container_settings_panel",
+                "dependency"        => array(
+                    'queries'         =>  array( 
                         array(  
-                            "key"      =>  "is_arrow" , 
-                            "value"    =>  true , 
-                            "compare"  =>  "===" 
+                            "key"       =>  "is_arrow" , 
+                            "value"     =>  true , 
+                            "compare"   =>  "===" 
                         )
                     )
                 ),
-                'has_border_box' => false
+                'has_border_box'        => false
             ),
-            'arrow_color'   => array(
-                'type'    => 'color',
-                'label'   => __('Arrow Color', 'site-editor'),
-                'description'  => __('You can set the color of the arrow using color picker','site-editor'),
-                "panel"   => "row_container_settings_panel",
-                "dependency"  => array(
-                    'queries'  =>  array( 
+            'arrow_color'           => array(
+                'type'                  => 'color',
+                'label'                 => __('Arrow Color', 'site-editor'),
+                'description'           => __('You can set the color of the arrow using color picker','site-editor'),
+                "panel"                 => "row_container_settings_panel",
+                "dependency"        => array(
+                    'queries'         =>  array( 
                         array(  
-                            "key"      =>  "is_arrow" , 
-                            "value"    =>  true ,  
-                            "compare"  =>  "==="   
+                            "key"       =>  "is_arrow" , 
+                            "value"     =>  true ,  
+                            "compare"   =>  "==="   
                         )
                     )
                 ),
-                'has_border_box' => false
+                'has_border_box'        => false
             ),
-            "video_mp4"     => array(
-                'type'              => 'video',
-                'label'             => __('mp4 Format', 'site-editor'),
-                'description'       => __('the Video MP4 Format option allows you to upload a .MP4 format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.
+            "video_mp4"             => array(
+                'type'                  => 'video',
+                'label'                 => __('mp4 Format', 'site-editor'),
+                'description'           => __('the Video MP4 Format option allows you to upload a .MP4 format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.
                                     <br /> Make sure your video is in a 16:9 aspect ratio. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
-                "js_params"     => array(
+                "js_params"         => array(
                     "subtypes"          => array( "m4v" , "mp4" )
                 ),
-                "panel"   => "video_background_row_container"
+                "panel"                 => "video_background_row_container"
             ),
 
-            "video_ogg"     => array(
-                'type'              => 'video',
-                'label'             => __('ogg Format', 'site-editor'),
-                'description'       => __('the Video OGV Upload option allows you to upload a .OGV format of your video file. .OGV files are optional. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
-                "js_params"     => array(
+            "video_ogg"             => array(
+                'type'                  => 'video',
+                'label'                 => __('ogg Format', 'site-editor'),
+                'description'           => __('the Video OGV Upload option allows you to upload a .OGV format of your video file. .OGV files are optional. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
+                "js_params"         => array(
                     "subtypes"          => array( "ogv" , "ogg" )
                 ),
-                "panel"   => "video_background_row_container"
+                "panel"                 => "video_background_row_container"
             ),
 
-            "video_webm"   => array(
-                'type'              => 'video',
-                'label'             => __('webm Format', 'site-editor'),
-                'description'       => __('the Video WebM Format option allows you to upload a .WebM format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.
+            "video_webm"            => array(
+                'type'                  => 'video',
+                'label'                 => __('webm Format', 'site-editor'),
+                'description'           => __('the Video WebM Format option allows you to upload a .WebM format of your video file. For your video to render with cross browser compatibility, you must upload both .WebM and .MP4 files of your video.
                                     <br /> Make sure your video is in a 16:9 aspect ratio. You can choose a video with this format from the library by clicking on the button in this section.','site-editor'),
-                "js_params"     => array(
+                "js_params"         => array(
                     "subtypes"          => array( "webm" , "webmv" )
                 ),
-                "panel"   => "video_background_row_container"
+                "panel"                 => "video_background_row_container"
             ),
 
-            "video_mute"    => array(
-                'type'    => 'checkbox',
-                'label'   => __('Mute Video', 'site-editor'),
-                'description'  => __('The Mute Video option allows you to mute the video’s audio or not. Choose yes to enable the option, or no to disable it.','site-editor'),
-                "panel"   => "video_background_row_container"
+            "video_mute"            => array(
+                'type'                  => 'checkbox',
+                'label'                 => __('Mute Video', 'site-editor'),
+                'description'           => __('The Mute Video option allows you to mute the video’s audio or not. Choose yes to enable the option, or no to disable it.','site-editor'),
+                "panel"                 => "video_background_row_container"
             ),
 
-            "video_loop"    => array(
-                'type'    => 'checkbox',
-                'label'   => __('Loop Video', 'site-editor'),
-                'description'  => __('The Loop Video option allows you to loop the video or not. Choose yes to enable the option, or no to disable it.','site-editor'),
-                "panel"   => "video_background_row_container"
+            "video_loop"            => array(
+                'type'                  => 'checkbox',
+                'label'                 => __('Loop Video', 'site-editor'),
+                'description'           => __('The Loop Video option allows you to loop the video or not. Choose yes to enable the option, or no to disable it.','site-editor'),
+                "panel"                 => "video_background_row_container"
             ),
-            "video_preview_image"    => array(
-                'type'    => 'image',
-                'label'   => __('Video Preview Image', 'site-editor'),
-                'description'  => __('The Video Preview Image option allows you to upload a preview image that would be displayed in the event that your video does not display correctly. You can choose a video with this format from the library by clicking on the button in this section.', 'site-editor'),
-                "panel"   => "video_background_row_container"
+            "video_preview_image"   => array(
+                'type'                  => 'image',
+                'label'                 => __('Video Preview Image', 'site-editor'),
+                'description'           => __('The Video Preview Image option allows you to upload a preview image that would be displayed in the event that your video does not display correctly. You can choose a video with this format from the library by clicking on the button in this section.', 'site-editor'),
+                "panel"                 => "video_background_row_container"
             ),
-            "video_overlay_color"    => array(
-                'type'    => 'color',
-                'label'   => __('Video Overlay Color', 'site-editor'),
-                'description'  => __('You can set an overlay color for your video using the color picker. If you want to remove the overlay, you should click on the cross icon in color picker.','site-editor'),
-                "panel"   => "video_background_row_container"
+            "video_overlay_color"   => array(
+                'type'                  => 'color',
+                'label'                 => __('Video Overlay Color', 'site-editor'),
+                'description'           => __('You can set an overlay color for your video using the color picker. If you want to remove the overlay, you should click on the cross icon in color picker.','site-editor'),
+                "panel"                 => "video_background_row_container"
             ),
-            "video_overlay_opacity"    => array(
-                'type'    => 'number',
-                'label'   => __('Video Overlay Opacity', 'site-editor'),
-                'description'  => __('You can set the video overlay opacity with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
-                "panel"   => "video_background_row_container"
+
+            "video_overlay_opacity" => array(
+                'type'                  => 'number',
+                'label'                 => __('Video Overlay Opacity', 'site-editor'),
+                'description'           => __('You can set the video overlay opacity with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
+                "panel"                 => "video_background_row_container"
             ),
-            'responsive_option' => array(
-      			'type' => 'select',
-      			'label' => __('Responsive Option', 'site-editor'),
-      			'description'  => __("This option allows you to set predefined styles such as black, white, main and none. This option is available in all skins except the default one.", "site-editor"),
-                'choices'   =>array(
-                    ''                             => __('Full Width Row Container', 'site-editor'),
-                    'hidden-row-container'         => __('Hidden Row Container', 'site-editor'),
+
+            'responsive_option'     => array(
+      			'type'                  => 'select',
+      			'label'                 => __('Responsive Option', 'site-editor'),
+      			'description'           => __("This option allows you to set predefined styles such as black, white, main and none. This option is available in all skins except the default one.", "site-editor"),
+                'choices'               => array(
+                    ''                      => __('Full Width Row Container', 'site-editor'),
+                    'hidden-row-container'  => __('Hidden Row Container', 'site-editor'),
                 ),
-                "panel"   => "row_container_responsive_panel",
-                'has_border_box' => false
+                "panel"                 => "row_container_responsive_panel",
+                'has_border_box'        => false
       		),
+
             "responsive_spacing"    => array(
-                'type'    => 'text',
-                'label'   => __('Module Responsive Spacing', 'site-editor'),
-                'description'  => __('','site-editor'),
-                "panel"   => "row_container_responsive_panel",
-                'has_border_box' => false
+                'type'                  => 'text',
+                'label'                 => __('Module Responsive Spacing', 'site-editor'),
+                'description'           => __('','site-editor'),
+                "panel"                 => "row_container_responsive_panel",
+                'has_border_box'        => false
             ),
 
-            'row_container' => array(
-                'type'          => 'row_container',
-                'label'         => __('Module Wrapper Settings', 'site-editor')
+            'length'                => array(
+                "type"                  => "length" ,
+                "label"                 => __("Length", "site-editor"),
+                "default"               => "boxed",
+                'priority'              => 1 ,
+                "panel"                 => "row_container_settings_panel_outer", 
             ),
 
-            "animation"  =>  array(
-                "type"                => "animation" ,
-                "label"               => __("Animation Settings", "site-editor"),
-                'button_style'        => 'menu' ,
-                'has_border_box'      => false ,
-                'icon'                => 'sedico-animation' ,
-                'field_spacing'       => 'sm' ,
-                'priority'            => 530 ,
+            'row_container'         => array(
+                'type'                  => 'row_container',
+                'label'                 => __('Module Wrapper Settings', 'site-editor')
+            ),
+
+            "animation"             =>  array(
+                "type"                  => "animation" ,
+                "label"                 => __("Animation Settings", "site-editor"),
+                'button_style'          => 'menu' ,
+                'has_border_box'        => false ,
+                'icon'                  => 'sedico-animation' ,
+                'field_spacing'         => 'sm' ,
+                'priority'              => 530 ,
             )
             //'row_style'
         );
@@ -336,22 +347,18 @@ class PBRowContainerShortcode extends PBShortcodeClass{
         return array(                                                                      // , 'padding'
             array(
                 'row_container' , 'sed_current' ,
-                array( 'background','gradient','border','border_radius' ,'padding','margin','trancparency','shadow' ) , __("Row Container" , "site-editor") ) ,
-            /*array(
-                'row_container_before' , '::before' ,
-                array( 'background') , __("Overlay" , "site-editor") ) ,
-            array(
-                'row_container_after' , '::after' ,
-                array('border','margin') , __("Arrow" , "site-editor") ) ,*/
+                array( 'background','gradient','border','border_radius' ,'padding','margin','trancparency','shadow' ) , __("Row Container" , "site-editor") 
+            ) ,
         );
     }
 
     function contextmenu( $context_menu ){
-      $columns_menu = $context_menu->create_menu( "row-container" , __("Row Container","site-editor") , 'icon-row' , 'class' , 'element' , '' , "sed_row_container" , array(
-            //"seperator"        => array(45 , 75) ,
-            "change_skin"       =>  false ,
-        ));
-      //$context_menu->add_change_column_item( $columns_menu );
+        $columns_menu = $context_menu->create_menu( "row-container" , __("Row Container","site-editor") , 'icon-row' , 'class' , 'element' , '' , "sed_row_container" , array(
+                //"seperator"        => array(45 , 75) ,
+                "change_skin"       =>  false ,
+            )
+        );
+        //$context_menu->add_change_column_item( $columns_menu );
     }
 
 }

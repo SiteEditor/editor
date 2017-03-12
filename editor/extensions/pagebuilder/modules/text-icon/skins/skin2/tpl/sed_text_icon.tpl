@@ -1,4 +1,4 @@
-<div {{sed_attrs}} class="sed-stb-sm module text-icon-module text-icon-module-skin2 {{className}}">
+<div {{sed_attrs}} class="module text-icon-module text-icon-module-skin2 {{className}}">
 	<#
 		var api = sedApp.editor ;
 	    var sedImageHtml = api.fn.getSedAttachmentImageHtml( image_source , attachment_id , image_url , default_image_size , external_image_size );

@@ -7,6 +7,7 @@ Author: Site Editor Team
 Author URI: http://www.siteeditor.org
 Version: 1.0.0
 */
+
 class PBColumnShortcode extends PBShortcodeClass{
 
 	/**
@@ -14,11 +15,11 @@ class PBColumnShortcode extends PBShortcodeClass{
 	 */
 	function __construct() {
 		parent::__construct( array(
-                "name"        => "sed_column",                                //*require
-                "title"       => __("Column","site-editor"),
-                "description" => __("","site-editor"),      //*require for toolbar
-                "module"      =>  "columns",                                    //*require
-                "is_child"    =>  true       //for childe shortcodes like sed_tr , sed_td for table module
+                "name"          => "sed_column",                                //*require
+                "title"         => __("Column","site-editor"),
+                "description"   => __("","site-editor"),      //*require for toolbar
+                "module"        =>  "columns",                                    //*require
+                "is_child"      =>  true       //for childe shortcodes like sed_tr , sed_td for table module
             ) // Args
 		);
 	}

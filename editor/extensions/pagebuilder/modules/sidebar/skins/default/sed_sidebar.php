@@ -1,4 +1,4 @@
-<div <?php echo $sed_attrs; ?> class="sed-stb-sm sed-sidebar module module-sidebar sidebar-skin-default <?php echo $class ;?>"  >
+<div <?php echo $sed_attrs; ?> class="sed-sidebar module module-sidebar sidebar-skin-default <?php echo $class ;?>"  >
 
     <?php
 

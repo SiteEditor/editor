@@ -1,4 +1,4 @@
-<header {{sed_attrs}} sed_role="site-header" class="sed-stb-sm module module-header header-default {{className}}">
+<header {{sed_attrs}} sed_role="site-header" class="module module-header header-default {{className}}">
       {{{content}}}
     <# if( sticky ){ #>
     <div class="init-sticky-header"></div>

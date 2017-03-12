@@ -1,4 +1,4 @@
-<table class="sed-stb-sm sed-cols-table">
+<table class="sed-cols-table">
   <tr <?php echo $sed_attrs; ?> class="sed-columns-pb <?php echo  $class.' '.$responsive_option; ?>"  sed-role="column-pb">
       <?php echo $content; ?>
   </tr>

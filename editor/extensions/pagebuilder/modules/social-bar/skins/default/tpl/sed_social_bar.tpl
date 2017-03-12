@@ -1,4 +1,4 @@
-<div {{sed_attrs}} class="{{className}} sed-stb-sm sed-ta-c module spcial-bar social-bar-default">
+<div {{sed_attrs}} class="{{className}}  module spcial-bar social-bar-default">
 	<ul class="social-bar-default social-bar-{{layout_mode}}">
 		{{{content}}}
 	</ul>

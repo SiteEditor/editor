@@ -1,4 +1,4 @@
-<div {{sed_attrs}} class="sed-stb-sm module text-icon-module text-icon-module-skin3 {{className}}">
+<div {{sed_attrs}} class="module text-icon-module text-icon-module-skin3 {{className}}">
     {{{content}}}
 	<#
 		var api = sedApp.editor ;
