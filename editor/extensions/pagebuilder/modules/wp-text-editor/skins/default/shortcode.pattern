@@ -1,3 +1,3 @@
 [sed_wp_text_editor]
-    <p> Wp Text Editor Content </p>
+    <div> Wp Text Editor Content </div>
 [/sed_wp_text_editor]

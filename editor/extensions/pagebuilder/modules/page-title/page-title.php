@@ -204,57 +204,24 @@ class PBPageTitleShortcode extends PBShortcodeClass{
         return array(
 
             array(
-            'page-title-container' , 'sed_current' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ) , __("Page Title Container" , "site-editor") ) ,
+                'page-title-container' , 'sed_current' ,
+                array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ) , __("Page Title Container" , "site-editor") 
+            ) ,
 
             array(
-            'item-page-title' , '.item-page-title' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align' ) , __("Inner  Container" , "site-editor") ) ,
-
-            array(
-            'title' , '.module-title > h3' ,
-            array('text_shadow' , 'font' ,'line_height','text_align' ) , __("Title" , "site-editor") ) ,
-
-            array(
-            'description' , '.module-title > h5' ,
-            array('text_shadow' , 'font' ,'line_height','text_align' ) , __("Description" , "site-editor") ) ,
-
-            array(
-            'text' , '.module-title > *' ,
-            array('text_shadow' , 'font' ,'line_height','text_align' ) , __("Text" , "site-editor") ) ,
+                'text' , '.module-title > *' ,
+                array('text_shadow' , 'font' ,'line_height','text_align' ) , __("Text" , "site-editor") 
+            ) ,
 
         );
-    }
-
-    function supports(){
-        $supports = array(
-            "subShortcode"  => array(
-                "title-page-title"  =>  array(
-
-                    "settings"  =>  array(
-                        "type"     =>  "include" ,
-                        "fields"   =>  array( 'animation' )
-                    ) ,
-
-                ),
-                "breadcrumbs-page-title"  =>  array(
-
-                    "settings"  =>  array(
-                        "type"     =>  "include" ,
-                        "fields"   =>  array('skin', 'length','animation' )
-                    ) ,
-
-                ),
-            )
-        );
-        return $supports;
     }
 
     function contextmenu( $context_menu ){
-      $page_title_menu = $context_menu->create_menu( "page-title" , __("Page Title","site-editor") , 'page-title' , 'class' , 'element' , '' , "sed_page_title" , array(
-            "seperator"        => array(45 , 75) ,
-            "duplicate"        => false
-        ));
+        $page_title_menu = $context_menu->create_menu( "page-title" , __("Page Title","site-editor") , 'page-title' , 'class' , 'element' , '' , "sed_page_title" , array(
+                "seperator"        => array(45 , 75) ,
+                "duplicate"        => false
+            )
+        );
       //$context_menu->add_change_column_item( $page-title_menu );
     }
 
@@ -274,12 +241,9 @@ $sed_pb_app->register_module(array(
     "icon"        => "sedico-page-title",
     "type_icon"   => "font",
     "shortcode"         => "sed_page_title",
-    //"show_ui_in_toolbar"    => false ,
     "priority"          => 10 ,
     "tpl_type"    => "underscore" ,
-    //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "sub_modules"   => array('breadcrumbs', 'title'),
-    //"js_module"   => array( 'sed_page_title_module_script', 'page-title/js/page-title-module.min.js', array('sed-frontend-editor') )
+    "sub_modules"   => array('title'),
 ));
 
 

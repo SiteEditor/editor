@@ -74,7 +74,7 @@ class PBTitleShortcode extends PBShortcodeClass{
 
     function less(){
         return array(
-            array('title-main-less')
+            //array('title-main-less')
         );
     }
 

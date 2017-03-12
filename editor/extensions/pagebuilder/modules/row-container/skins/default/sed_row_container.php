@@ -95,7 +95,7 @@ if(!empty($content)){?>
                 border-bottom: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
                 border-left: <?php echo $arrow_size; ?>px solid transparent;
                 border-right: <?php echo $arrow_size; ?>px solid transparent;
-                /*margin-bottom: -<?php echo $arrow_size; ?>px;*/
+                /*margin-bottom: -<?php //echo $arrow_size; ?>px;*/
                 margin-left: -<?php echo $arrow_size; ?>px;
             }
             <?php
@@ -106,7 +106,7 @@ if(!empty($content)){?>
                 border-top: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
                 border-left: <?php echo $arrow_size; ?>px solid transparent;
                 border-right: <?php echo $arrow_size; ?>px solid transparent;
-                /*margin-top: -<?php echo $arrow_size; ?>px;*/
+                /*margin-top: -<?php //echo $arrow_size; ?>px;*/
                 margin-left: -<?php echo $arrow_size; ?>px;
             }
             <?php

@@ -69,7 +69,7 @@ class PBSearchShortcode extends PBShortcodeClass{
 
     function less(){
         return array(
-            array('main-search')
+            //array('main-search')
         );
     }
 

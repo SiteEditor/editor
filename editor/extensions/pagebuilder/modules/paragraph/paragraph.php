@@ -62,7 +62,7 @@ class PBParagraphShortcode extends PBShortcodeClass{
 
     function less(){
         return array(
-            array('paragraph-main-less')
+            //array('paragraph-main-less')
         );
     }
 
@@ -116,6 +116,6 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_paragraph",
     "priority"    => 25 ,
     "tpl_type"    => "underscore" ,
-     "js_module"   => array( 'sed_paragraph_module_script', 'paragraph/js/paragraph-module.min.js', array('sed-frontend-editor') )
+    "js_module"   => array( 'sed_paragraph_module_script', 'paragraph/js/paragraph-module.min.js', array('sed-frontend-editor') )
 ));
 

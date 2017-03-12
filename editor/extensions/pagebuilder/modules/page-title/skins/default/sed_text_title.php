@@ -3,7 +3,6 @@
 
    if( $content == "@@@" ){
       echo "<h3>" . PBPageTitleShortcode::get_title() . "</h3>";
-      //echo "<h5>" . get_bloginfo('description') . "</h5>";
    }else
       echo $content;
 

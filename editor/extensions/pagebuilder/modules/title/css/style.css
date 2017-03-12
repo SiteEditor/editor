@@ -21,6 +21,7 @@ h6.module.module-title,
 .module.module-title.h3,
 .module.module-title.h4,
 .module.module-title.h5,
-.module.module-title.h6 {
+.module.module-title.h6,
+p.module.module-title {
     margin: 0px
 }

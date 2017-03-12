@@ -73,25 +73,25 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
 
         $params = array(
 
-            'length'            => array(
-                "type"          => "length" ,
-                "label"         => __("Length", "site-editor"),
-                'panel'         => 'breadcrumbs_settings_panel',
+            'length'                => array(
+                "type"                  => "length" ,
+                "label"                 => __("Length", "site-editor"),
+                'panel'                 => 'breadcrumbs_settings_panel',
             ),
 
-            'row_container'     => array(
-                'type'          => 'row_container',
-                'label'         => __('Module Wrapper Settings', 'site-editor')
+            'row_container'         => array(
+                'type'                  => 'row_container',
+                'label'                 => __('Module Wrapper Settings', 'site-editor')
             ), 
 
-            "animation"         =>  array(
-                "type"                => "animation" ,
-                "label"               => __("Animation Settings", "site-editor"),
-                'button_style'        => 'menu' ,
-                'has_border_box'      => false ,
-                'icon'                => 'sedico-animation' ,
-                'field_spacing'       => 'sm' ,
-                'priority'            => 530 ,
+            "animation"             =>  array(
+                "type"                  => "animation" ,
+                "label"                 => __("Animation Settings", "site-editor"),
+                'button_style'          => 'menu' ,
+                'has_border_box'        => false ,
+                'icon'                  => 'sedico-animation' ,
+                'field_spacing'         => 'sm' ,
+                'priority'              => 530 ,
             )
 
         );
