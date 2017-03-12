@@ -9,7 +9,7 @@ else
     length_class = "sed-row-wide";
 
 #>
-<nav {{sed_attrs}} class="{{className}} module module-breadcrumbs breadcrumbs-default sed-stb-sm">
+<nav {{sed_attrs}} class="{{className}} module module-breadcrumbs breadcrumbs-default">
     <div class="{{length_class}}" length_element>
         <ul>
            <# if( !_.isEmpty( breadcrumbs ) ){ #>

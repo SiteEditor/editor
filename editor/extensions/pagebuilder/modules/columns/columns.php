@@ -41,12 +41,33 @@ class PBColumnsShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        $this->add_panel( 'columns_settings_panel_outer' , array(
+            'title'                   =>  __('Columns Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-column' ,
+            'field_spacing'           => 'sm'
+        ) );
+
+        $this->add_panel( 'columns_settings_panel' , array(
+            'title'                   =>  __('Columns Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "columns_settings_panel_outer",
+            'priority'                => 1 ,
+        ) );
+
         $params = array(
 
             'pb_columns' => array(
                 'type' => 'number',
                 'label' => __('Number Column', 'site-editor'),
-                'description'  => __('Add Custom Columns to page', 'site-editor')
+                'description'  => __('Add Custom Columns to page', 'site-editor'),
+                'has_border_box'      => false ,
+                'panel'               => 'columns_settings_panel',
             ),
 
             'responsive_option' => array(
@@ -59,12 +80,16 @@ class PBColumnsShortcode extends PBShortcodeClass{
                     'table-cell-columns'     => __('Inline Columns', 'site-editor'),
                     'hidden-columns'         => __('Hidden Columns', 'site-editor'),
                 ),
+                'has_border_box'      => false ,
+                'panel'               => 'columns_settings_panel',
             ),
 
             "responsive_spacing"    => array(
                 'type'    => 'text',
                 'label'   => __('Module Responsive Spacing', 'site-editor'),
                 'description'    => '',// __('','site-editor'),
+                'has_border_box'      => false ,
+                'panel'               => 'columns_settings_panel',
             ),
 
             /*'equal_column_width' => array(
@@ -73,15 +98,19 @@ class PBColumnsShortcode extends PBShortcodeClass{
                 'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
             ),*/
 
-
-            "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
-            ),
-
             'row_container' => array(
                 'type'          => 'row_container',
                 'label'         => __('Module Wrapper Settings', 'site-editor')
+            ),
+
+            "animation"  =>  array(
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
             )
 
         );

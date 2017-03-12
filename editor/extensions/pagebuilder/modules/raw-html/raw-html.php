@@ -45,6 +45,17 @@ class PBRawHTMLShortcode extends PBShortcodeClass{
 
     public function shortcode_settings(){
 
+        $this->add_panel( 'raw_html_settings_panel' , array(
+            'title'                   =>  __('Raw HTML Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,  
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-html' ,
+            'field_spacing'           => 'sm'
+        ) );
+
         return array(
 
             'sed_shortcode_content' => array(
@@ -55,17 +66,22 @@ class PBRawHTMLShortcode extends PBShortcodeClass{
                 'js_params' => array(
                     "mode" => "html",
                 ),
+                'panel'               => 'raw_html_settings_panel',
             ) ,
 
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             ),
 
             "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
             )
 
         );

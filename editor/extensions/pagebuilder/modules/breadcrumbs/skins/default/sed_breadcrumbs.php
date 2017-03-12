@@ -7,7 +7,7 @@ else
     $length_class = "sed-row-wide";
 
 ?>
-<nav <?php echo $sed_attrs; ?> class="<?php echo $class ?> module module-breadcrumbs breadcrumbs-default sed-stb-sm">
+<nav <?php echo $sed_attrs; ?> class="<?php echo $class ?> module module-breadcrumbs breadcrumbs-default">
     <div class="<?php echo $length_class;?>"  length_element> 
         <ul> 
            <?php if( !empty( $breadcrumbs ) ): ?>

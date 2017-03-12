@@ -74,30 +74,59 @@ class PBSearchShortcode extends PBShortcodeClass{
     }
 
   function shortcode_settings(){
+
+        $this->add_panel( 'search_settings_panel_outer' , array(
+            'title'                   =>  __('Search Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-search' ,
+            'field_spacing'           => 'sm'
+        ) );
+
+        $this->add_panel( 'search_settings_panel' , array(
+            'title'                   =>  __('Search Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "search_settings_panel_outer",
+            'priority'                => 1 ,
+        ) );
+
         $params = array(
+
             'placeholder' => array(
-              'type' => 'text',
-              'label' => __('Place Holder', 'site-editor'),
-              'description'  => __('This feature allows you to specify the text of Place Holder, text box of search.  ', 'site-editor')
+                'type' => 'text',
+                'label' => __('Place Holder', 'site-editor'),
+                'description'  => __('This feature allows you to specify the text of Place Holder, text box of search.  ', 'site-editor'),
+                'has_border_box'      => false ,
+                'panel'               => 'search_settings_panel',
             ),
+
             'icon' => array(
                 "type"          => "icon" ,
                 "label"         => __("Icon Field", "site-editor"),
                 "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
+                'has_border_box'      => false ,
+                'panel'               => 'search_settings_panel',
             ),  
-            "skin"  =>  array(
-                "type"          => "skin" ,
-                "label"         => __("Change skin", "site-editor"),
+
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             ),
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
-            ), 
+
             "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
-            ),
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
+
         );
         return $params;
     }

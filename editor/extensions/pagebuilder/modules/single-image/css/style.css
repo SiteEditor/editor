@@ -1,232 +1,58 @@
-.ih-item {
+
+.module-single-image {
     display: inline-block;
     position: relative;
     max-height: 100%;
     max-width: 100%
 }
 
-.ih-item,
-.ih-item* {
+.module-single-image,
+.module-single-image* {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box
 }
 
-.ih-item .img {
-    display: block
+.module-single-image .img {
+    display: block;
 }
 
-.ih-item .info {
-    z-index: 1;
-    background: rgba(230, 26, 51, 0.7)
-}
-
-.ih-item .info .image-hover {
-    z-index: 1
-}
-
-.ih-item .info .image-hover .image-hover-inner {
-    z-index: 2
-}
-
-.ih-item .info .image-hover .image-hover-inner h3 {
-    color: #fff
-}
-
-.ih-item .info .image-hover .image-hover-inner p {
-    color: #fdebed;
-    border-color: #fbdbdf
-}
-
-.ih-item .info .image-hover .image-hover-inner a {
-    color: #fff
-}
-
-.ih-item .info .image-hover .image-hover-inner a span {
-    width: 2.5em;
-    height: 2.5em;
-    line-height: 2.35em;
-    font-size: 18px;
-    border-color: #fff;
-    color: #fff;
-    border: 2px solid;
-    background: transparent;
-    -webkit-border-radius: 1000px;
-    -moz-border-radius: 1000px;
-    border-radius: 1000px;
-    margin: 0 2px
-}
-
-.ih-item.square.effect9 .info,
-.ih-item.circle.effect20 .info,
-.ih-item.circle.effect18 .info,
-.ih-item.circle.effect5 .info {
-    background: transparent
-}
-
-.ih-item.square.effect9 .info .info-back,
-.ih-item.circle.effect20 .info .info-back,
-.ih-item.circle.effect18 .info .info-back,
-.ih-item.circle.effect5 .info .info-back {
-    background: rgba(230, 26, 51, 0.7)
-}
-
-.ih-item.square.effect3 .info h3,
-.ih-item.square.effect1 .info h3 {
-    background: transparent
-}
-
-.ih-item img {
+.module-single-image img {
     border: 0px solid;
     display: block;
     width: 100% \9;
     max-width: 100%;
-    height: auto;
-    -webkit-transition: all .35s ease-in-out;
-    -moz-transition: all .35s ease-in-out;
-    -ms-transition: all .35s ease-in-out;
-    -o-transition: all .35s ease-in-out;
-    transition: all .35s ease-in-out
+    height: auto
 }
 
-.ih-item .info {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    height: 100%;
-    width: 100%;
-    display: block;
-    position: absolute;
-    text-align: center;
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden
-}
-
-.ih-item .info .image-hover {
-    width: 100%;
-    height: 100%;
-    display: table;
-    table-layout: fixed
-}
-
-.ih-item .info .image-hover .image-hover-inner {
-    height: 100%;
-    width: 100%;
-    display: table-cell;
-    vertical-align: middle
-}
-
-.ih-item .info .image-hover .image-hover-inner h3 {
-    font-size: 19px;
-    letter-spacing: 1px;
-    margin: 0 auto;
-    padding: 0 5%;
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    line-height: 1.5
-}
-
-.ih-item .info .image-hover .image-hover-inner p {
-    font-size: 15px;
-    margin: 0 5%;
-    padding: 0;
-    text-align: center
-}
-
-.ih-item .info .image-hover .image-hover-inner a {
-    display: inline-block;
-    height: auto;
-    width: auto
-}
-
-.ih-item.circle {
+.module-single-image.circle {
     border-radius: 50%
 }
 
-.ih-item.circle .img {
+.module-single-image.circle .img {
     position: relative;
     border-radius: 50%
 }
 
-.ih-item.circle .img:before {
-    position: absolute;
-    display: block;
-    content: '';
-    width: 100%;
-    height: 100%;
-    -webkit-transition: all .35s ease-in-out;
-    -moz-transition: all .35s ease-in-out;
-    -ms-transition: all .35s ease-in-out;
-    -o-transition: all .35s ease-in-out;
-    transition: all .35s ease-in-out
+.module-single-image.circle .img img {
+    border-radius: 50% 
 }
 
-.ih-item.circle .img img {
-    border-radius: 50%
-}
-
-.ih-item.circle .info {
-    letter-spacing: 1px;
-    border-radius: 50%
-}
-
-.ih-item.circle .info .image-hover .image-hover-inner h3 {
-    padding: 0 13%
-}
-
-.ih-item.circle .info .image-hover .image-hover-inner p {
-    margin: 0 10%;
-    padding: 10px 3% 0
-}
-
-.ih-item .roma {
+.module-single-image .roma > img {
     filter: grayscale(100%);
-    filter: url("http://localhost/baga/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/modules/image/skins/greyscale/svg/greyscale.svg#greyscale");
+    filter: url("http://localhost/site-editor-v1.0.0/wp-content/plugins/site-editor/editor/extensions/pagebuilder/modules/single-image/skins/greyscale/svg/sed-image.svg#greyscale");
     filter: gray;
     -webkit-filter: grayscale(1);
-    -webkit-transition: all .35s 1s ease-in-out;
-    -moz-transition: all .35s 1s ease-in-out;
-    -ms-transition: all .35s 1s ease-in-out;
-    -o-transition: all .35s 1s ease-in-out;
-    transition: all .35s 1s ease-in-out
 }
 
-.ih-item .blur {
-    width: 100%;
-    height: auto;
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
-    -moz-filter: blur(2px);
-    -o-filter: blur(2px);
-    -ms-filter: blur(2px);
-    filter: url("http://localhost/baga/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/modules/image/skins/image-blur/svg/blur.svg#blur");
-    filter: progid: DXImageTransform.Microsoft.Blur(PixelRadius='2');
-    -webkit-transition: all .35s 1s ease-in-out;
-    -moz-transition: all .35s 1s ease-in-out;
-    -ms-transition: all .35s 1s ease-in-out;
-    -o-transition: all .35s 1s ease-in-out;
-    transition: all .35s 1s ease-in-out
-}
-
-.ih-item .sepia {
+.module-single-image .sepia > img {
     -webkit-filter: sepia(1);
     -webkit-filter: sepia(100%);
     -moz-filter: sepia(100%);
     -ms-filter: sepia(100%);
     -o-filter: sepia(100%);
-    filter: url("http://localhost/baga/wp-content/plugins/site-editor/site-editor-app/applications/pagebuilder/modules/image/skins/sepia-toning/svg/sepia.svg#old-timey");
+    filter: url("http://localhost/site-editor-v1.0.0/wp-content/plugins/site-editor/editor/extensions/pagebuilder/modules/single-image/skins/sepia-toning/svg/sed-image.svg#old-timey");
     filter: sepia(100%);
     background-color: #5E2612;
     zoom: 1;
-    -webkit-transition: all .35s 1s ease-in-out;
-    -moz-transition: all .35s 1s ease-in-out;
-    -ms-transition: all .35s 1s ease-in-out;
-    -o-transition: all .35s 1s ease-in-out;
-    transition: all .35s 1s ease-in-out
 }

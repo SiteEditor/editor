@@ -79,40 +79,22 @@ class PBParagraphShortcode extends PBShortcodeClass{
     function shortcode_settings(){
 
         $params = array(
-            /*'toolbar1' => array(
-      			'type' => 'select',
-      			'label' => __('toolbar1', 'site-editor'),
-      			'description' => '',// __("Select the Icon's type", "site-editor"),
-                'choices'   =>array(
-                    'paragraph'             => __('paragraph', 'site-editor'),
-                    'normal-paragraph'      => __('normal-paragraph', 'site-editor'),
-                    'simple-paragraph'      => __('simple-paragraph', 'site-editor'),
-                ),
-      		),
-            'toolbar2' => array(
-      			'type' => 'select',
-      			'label' => __('toolbar2', 'site-editor'),
-      			'description' => '',// __("Select the Icon's type", "site-editor"),
-                'choices'   =>array(
-                    'paragraph'             => __('paragraph', 'site-editor'),
-                    'normal-paragraph'      => __('normal-paragraph', 'site-editor'),
-                    'simple-paragraph'      => __('simple-paragraph', 'site-editor'),
-                ),
-      		),*/
-            "align"     =>  array(
-                "type"          => "align" ,
-                "label"         => __("Align", "site-editor"),
-                "default"       => "default"
+
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             ),
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
-            ), 
+
             "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
-            ),
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
+            
         );
 
         return $params;

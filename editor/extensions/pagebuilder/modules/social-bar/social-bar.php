@@ -75,12 +75,23 @@ class PBSocialBarShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        $this->add_panel( 'social_bar_settings_panel_outer' , array(
+            'title'                   =>  __('Social Bar Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-social-bar' ,
+            'field_spacing'           => 'sm'
+        ) );
+
         $this->add_panel( 'social_bar_settings_panel' , array(
-            'title'         =>  __('Social Bar Settings',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 9 ,
+            'title'                   =>  __('Social Bar Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "social_bar_settings_panel_outer",
+            'priority'                => 9 ,
         ) );
 
         $params = array(
@@ -103,6 +114,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
                     "horzintal"      => __("Horzintal","site-editor"),
                     "vertical"       => __("Vertical","site-editor"),
                 ),
+                'has_border_box'          => false ,
                 "panel"     => "social_bar_settings_panel",
 
             ),
@@ -114,6 +126,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
                 'js_params'     =>  array(
                     'min' => 1
                 ),
+                'has_border_box'          => false ,
                 "panel"     => "social_bar_settings_panel",
       		),
             /*"size"   => array(
@@ -134,6 +147,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
                 'js_params'     =>  array(
                     'min' => 0
                 ),
+                'has_border_box'          => false ,
                 "panel"     => "social_bar_settings_panel",
 
             ),
@@ -145,36 +159,41 @@ class PBSocialBarShortcode extends PBShortcodeClass{
                 'js_params' => array(
                     'min'     => 0
                 ),
-                //"panel"     => "icons_settings_panel",
+                'has_border_box'          => false ,
+                "panel"     => "social_bar_settings_panel",
         	),
             'group_icon_color' => array(
        			'type'  => 'color',
       			'label' => __('Icons Color', 'site-editor'),
       			'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
-                //"panel"     => "icons_settings_panel",
+                'has_border_box'          => false ,
+                "panel"     => "social_bar_settings_panel",
             ),
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
-            ),    
-            "align"  =>  array(
-                "type"          => "align" ,
-                "label"         => __("Align", "site-editor"),
-                "default"       => "center"
-            ),
+
             "skin"  =>  array(
-                "type"          => "skin" ,
-                "label"         => __("Change skin", "site-editor"),
+                "type"                => "skin" ,
+                "label"               => __("Change skin", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-change-skin' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 540
             ),
+
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
+            ),
+
             "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
-            ),
-            "row_container"  =>  array(
-            "type"          => "row_container" ,
-            "label"         => __("Row Container Settings", "site-editor")
-        )
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
         );
 
         return $params;

@@ -16,8 +16,8 @@ class PBRowContainerShortcode extends PBShortcodeClass{
 	function __construct() {
 		parent::__construct( array(
                 "name"        => "sed_row_container",                                  //*require
-                "title"       => __("row","site-editor"),
-                "description" => __("Add rows to page","site-editor"),       //*require for toolbar
+                "title"       => __("Row","site-editor"),
+                "description" => __("Add Rows to page","site-editor"),       //*require for toolbar
                 "icon"        => "sedico-row",                                  //*require for icon toolbar
                 "module"      =>  "row-container"         //*require
                 //"is_child"    =>  "false"       //for childe shortcodes like sed_tr , sed_td for table module
@@ -82,30 +82,44 @@ class PBRowContainerShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        $this->add_panel( 'row_container_settings_panel_outer' , array(
+            'title'                   =>  __('Row Container Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-row' ,
+            'field_spacing'           => 'sm'
+        ) );
+
         $this->add_panel( 'row_container_settings_panel' , array(
-            'title'         =>  __('Row Container Settings',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 10 ,
+            'title'                   =>  __('Row Container Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "row_container_settings_panel_outer",
+            'priority'                => 10 ,
         ) );
 
         $this->add_panel( 'row_container_responsive_panel' , array(
-            'title'         =>  __('Responsive Settings',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 11 ,
+            'title'                   =>  __('Responsive Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "row_container_settings_panel_outer",
+            'priority'                => 11 , 
         ) );
 
         $this->add_panel( 'video_background_row_container' , array(
-            'title'         =>  __('Video Background',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'inner_box' ,
-            'description'   => '',
-            'priority'      => 12 ,
-            'parent_id'     => 'root' ,
-            'has_border_box'        => true
+            'title'                   =>  __('Video Background',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'description'             => '',
+            'priority'                => 12 ,
+            'parent_id'               => 'root' ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false , 
+            'icon'                    => 'sedico-video' ,
+            'field_spacing'           => 'sm'
         ) );
 
         $params = array(
@@ -286,14 +300,21 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 "panel"   => "row_container_responsive_panel",
                 'has_border_box' => false
             ),
-            'length'   =>  array(
-                "type"          => "length" ,
-                "label"         => __("Length", "site-editor"),
+
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             ),
+
             "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
-            ),
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
             //'row_style'
         );
 
@@ -331,8 +352,8 @@ global $sed_pb_app;
 $sed_pb_app->register_module(array(
     "group"       => "basic" ,
     "name"        => "row-container",
-    "title"       => __("row","site-editor"),
-    "description" => __("Add Full Customize Button","site-editor"),
+    "title"       => __("Row","site-editor"),
+    "description" => __("Add Full Customize Rows","site-editor"),
     "icon"        => "sedico-row",
     "shortcode"   => "sed_row_container",
     "tpl_type"    => "underscore" ,

@@ -64,25 +64,22 @@ class PBheaderShortcode extends PBShortcodeClass{
     function shortcode_settings(){
 
         $params = array(
-            /*'sticky' => array(
-                'type'      => 'checkbox',
-                'label'     => __('Enable Sticky Header', 'site-editor'),
-                'description'      => '',//__('Enable Sticky Header', 'site-editor'),
-                'panel'     => 'general_settings_panel',
-            ),*/
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
+
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             ), 
-            "skin"  =>  array(
-                "type"          => "skin" ,
-                "label"         => __("Change skin", "site-editor"),
-            ),
+
             "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
-            ),
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
+            
         );
 
         return $params;

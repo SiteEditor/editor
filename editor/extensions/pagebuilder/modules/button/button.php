@@ -66,12 +66,23 @@ class PBButtonShortcode extends PBShortcodeClass{
 
   function shortcode_settings(){
 
+        $this->add_panel( 'button_settings_panel_outer' , array(
+            'title'                   =>  __('Single Image Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-buttons' ,
+            'field_spacing'           => 'sm'
+        ) );
+
         $this->add_panel( 'button_settings_panel' , array(
-            'title'         =>  __('Button Settings',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 9 ,
+            'title'                   =>  __('Button Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "button_settings_panel_outer",
+            'priority'                => 9 ,
         ) );
 
         $params = array(
@@ -81,6 +92,7 @@ class PBButtonShortcode extends PBShortcodeClass{
                     'description'  => __('Set a title attribute for the link the button consists of', 'site-editor'),
                     "panel"     => "button_settings_panel",
                 ),       */
+                
             'size' => array(
                 'type' => 'select',
                 'label' => __('Button Size', 'site-editor'),
@@ -96,6 +108,7 @@ class PBButtonShortcode extends PBShortcodeClass{
                 "has_border_box"    => false ,
                 "panel"     => "button_settings_panel",
             ),
+
             'type' => array(
                 'type' => 'select',
                 'label' => __('Button Type', 'site-editor'),
@@ -117,25 +130,46 @@ class PBButtonShortcode extends PBShortcodeClass{
                 "has_border_box"    => false ,
                 "panel"     => "button_settings_panel",
             ),
+
+            "link" => array(
+                "type"                => "link" ,
+                "label"               => __("Link Panel Settings", "site-editor"),
+                "panel_type"          => "default" ,
+                'parent_id'           => 'single_image_settings_panel_outer',
+                'panel_dependency'    => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "image_click" ,
+                            "value"     => "link_mode" ,
+                            "compare"   => "=="
+                        )
+                    )
+                )
+            ),
+
+            'row_container' => array(
+                'type'                => 'row_container',
+                'label'               => __('Module Wrapper Settings', 'site-editor')
+            ), 
+
             "skin"  =>  array(
-                "type"          => "skin" ,
-                "label"         => __("Change skin", "site-editor"),
+                "type"                => "skin" ,
+                "label"               => __("Change skin", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-change-skin' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 540
             ),
-            'link'          =>  'link_to' ,
-            'link_target'   =>  'link_target' ,
-            'spacing' => array(
-                "type"          => "margin" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 10 10 10" ,
-            ),
-            "align"  =>  array(
-                "type"          => "align" ,
-                "label"         => __("Align", "site-editor"),
-                "default"       => "center"
-            ),
+
             "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
             )
 
         );

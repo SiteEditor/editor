@@ -54,34 +54,58 @@ class PBTextIconShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        $this->add_panel( 'text_icon_settings_panel' , array(
+            'title'                   =>  __('Text & Icon Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-text-icon' ,
+            'field_spacing'           => 'sm'
+        ) );
+
         $params = array(
+
             'icon' => array(
-                "type"          => "icon" ,
-                "label"         => __("Icon Field", "site-editor"),
-                "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
-            ),         
+                "type"                => "icon" ,
+                "label"               => __("Select Icon", "site-editor"),
+                "description"         => __("This option allows you to set a icon for your module.", "site-editor"),
+                'panel'               => 'text_icon_settings_panel' 
+            ),     
+
             'change_image_panel' => array(
-                "type"          => "sed_image" ,
-                "label"         => __("Select Image Panel", "site-editor"),
-            ),    
-            "align"     =>  array(
-                "type"          => "align" ,
-                "label"         => __("Align", "site-editor"),
-                "default"       => "default"
+                "type"                => "sed_image" ,
+                "label"               => __("Select Image", "site-editor"),
+                "panel_type"          => "default" ,
+                'parent_id'           => 'text_icon_settings_panel' 
             ),
-            "skin"  =>  array(
-                "type"          => "skin" ,
-                "label"         => __("Change skin", "site-editor"),
-            ),
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
+
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             ), 
-            "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
+
+            "skin"  =>  array(
+                "type"                => "skin" ,
+                "label"               => __("Change skin", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-change-skin' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 540
             ),
+
+            "animation"  =>  array(
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
+
         );
 
         return $params;

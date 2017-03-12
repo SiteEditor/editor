@@ -83,104 +83,143 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
-        //$this->add_link_to_panel();
+        $this->add_panel( 'single_icon_settings_panel_outer' , array(
+            'title'                   =>  __('Single Image Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-icons' ,
+            'field_spacing'           => 'sm'
+        ) );
 
-        $this->add_panel( 'icons_settings_panel' , array(
-            'title'         =>  __('Single Icon Settings',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 9 ,
+        $this->add_panel( 'single_icon_settings_panel' , array(
+            'title'                   =>  __('Single Image Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "single_icon_settings_panel_outer",
+            'priority'                => 9 ,
         ) );
 
         $params = array(
-      		'font_size' => array(
-      			'type' => 'number',
+
+            'font_size' => array(
+            	  'type' => 'number',
                 "after_field"  => "px",
-      			'label' => __('Size', 'site-editor'),
-      			'description'  => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
+            	  'label' => __('Size', 'site-editor'),
+            	  'description'  => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
                 'js_params' => array(
                     'min'     => 0
                 ),
-                "panel"     => "icons_settings_panel",
-        	),
-          /*'type' => array(
-      			'type' => 'select',
-      			'label' => __('Icon Type', 'site-editor'),
-      			'description'  => __("This option allows you to have icons in three different types; default, flat and ring. This option is only available in the skins 1, 2 and 3.", "site-editor"),
-            'choices'   =>array(
-                'icon-default'     => __('Default', 'site-editor'),
-                'icon-flat'        => __('Flat', 'site-editor'),
-                'icon-ring'        => __('Ring', 'site-editor'),
+                'has_border_box'      => false ,
+                "panel"     => "single_icon_settings_panel",
             ),
-            "panel"     => "icons_settings_panel",
-            "dependency" => array(
-                'queries'  =>  array(
-                    array(
-                        "key"           =>  "skin" ,
-                        "value"         =>  "default" ,
-                        "compare"       =>  "!="
-                    )
-                )              
-            ), 
-      		),*/
-          'background_color' => array(
-       			'type'  => 'color',
-      			'label' => __('Background Color', 'site-editor'),
-      			'description'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this feature cannot be used.', 'site-editor'),
-            "panel"     => "icons_settings_panel",
-            "dependency"  => array(
-                'queries'  =>  array(
-                    array(
-                        "key"         => "skin" ,
-                        "value"       => array( "default" , "icon-flat" ) ,
-                        "compare"     => "NOT IN"
-                    ),
-                )
-            ),
-          ),
-          'border_color' => array(
-       			'type'  => 'color',
-      			'label' => __('Border Color', 'site-editor'),
-      			'description'  => __('This option allows you to set the border color for your icons with the color picker. This is one of the few options that is not available in the design editor. It is only available in skins 1, 2 and 3.', 'site-editor'),
-            "panel"     => "icons_settings_panel",
-            "dependency" => array(
-                'queries'  =>  array(
-                    array(
-                      "key"           =>  "skin" ,
-                      "value"         =>  "default",
-                      "compare"       =>  "!="
-                    )
-                )
-            ), 
-          ),
-          'color' => array(
-       			'type'  => 'color',
-      			'label' => __('Color', 'site-editor'),
-      			'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
-            "panel"     => "icons_settings_panel",
-          ),
 
-          "skin"  =>  array(
-            "type"          => "skin" ,
-            "label"         => __("Change skin", "site-editor"),
-          ),
-          'link'          =>  'link_to' ,
-          'link_target'   =>  'link_target' ,
-          'spacing' => array(
-            "type"          => "spacing" ,
-            "label"         => __("Spacing", "site-editor"),
-            "default"       => "10 0 10 0" ,
-          ),    
-          "align"  =>  array(
-            "type"          => "align" ,
-            "label"         => __("Align", "site-editor"),
-            "default"       => "center"
-          ),
-          "animation"  =>  array(
-            "type"          => "animation" ,
-            "label"         => __("Animation Settings", "site-editor"),
-          ),
+            /*'type' => array(
+            	'type' => 'select',
+            	'label' => __('Icon Type', 'site-editor'),
+            	'description'  => __("This option allows you to have icons in three different types; default, flat and ring. This option is only available in the skins 1, 2 and 3.", "site-editor"),
+              'choices'   =>array(
+                  'icon-default'     => __('Default', 'site-editor'),
+                  'icon-flat'        => __('Flat', 'site-editor'),
+                  'icon-ring'        => __('Ring', 'site-editor'),
+              ),
+              "panel"     => "single_icon_settings_panel",
+              "dependency" => array(
+                  'queries'  =>  array(
+                      array(
+                          "key"           =>  "skin" ,
+                          "value"         =>  "default" ,
+                          "compare"       =>  "!="
+                      )
+                  )              
+              ), 
+            ),*/
+
+            'background_color' => array(
+            	  'type'  => 'color',
+            	  'label' => __('Background Color', 'site-editor'),
+            	  'description'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is   not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this   feature cannot be used.', 'site-editor'),
+                'has_border_box'      => false ,
+                "panel"     => "single_icon_settings_panel",
+                "dependency"  => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"         => "skin" ,
+                            "value"       => array( "default" , "icon-flat" ) ,
+                            "compare"     => "NOT IN"
+                        ),
+                    )
+                ),
+            ),
+
+            'border_color' => array(
+            	  'type'  => 'color',
+            	  'label' => __('Border Color', 'site-editor'),
+            	  'description'  => __('This option allows you to set the border color for your icons with the color picker. This is one of the few options that is not available in the design editor. It is only available in skins 1, 2 and 3.', 'site-editor'),
+                'has_border_box'      => false ,
+                "panel"     => "single_icon_settings_panel",
+                "dependency" => array(
+                    'queries'  =>  array(
+                        array(
+                          "key"           =>  "skin" ,
+                          "value"         =>  "default",
+                          "compare"       =>  "!="
+                        )
+                    )
+                ), 
+            ),
+
+            'color' => array(
+            	  'type'  => 'color',
+            	  'label' => __('Color', 'site-editor'),
+            	  'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
+                'has_border_box'      => false ,
+                "panel"     => "single_icon_settings_panel",
+            ),
+
+            "link" => array(
+                "type"                => "link" ,
+                "label"               => __("Link Panel Settings", "site-editor"),
+                "panel_type"          => "default" ,
+                'parent_id'           => 'single_image_settings_panel_outer',
+                'panel_dependency'    => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "image_click" ,
+                            "value"     => "link_mode" ,
+                            "compare"   => "=="
+                        )
+                    )
+                )
+            ),
+
+            'row_container' => array(
+                'type'                => 'row_container',
+                'label'               => __('Module Wrapper Settings', 'site-editor')
+            ), 
+
+            "skin"  =>  array(
+                "type"                => "skin" ,
+                "label"               => __("Change skin", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-change-skin' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 540
+            ),
+
+            "animation"  =>  array(
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
+
         );
 
 

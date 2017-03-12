@@ -60,29 +60,40 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        $this->add_panel( 'breadcrumbs_settings_panel' , array(
+            'title'                   =>  __('Breadcrumbs Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-breadcrumb' ,
+            'field_spacing'           => 'sm'
+        ) );
+
         $params = array(
-            "skin"  =>  array(
-                "type"          => "skin" ,
-                "label"         => __("Change skin", "site-editor"),
-            ), 
-            'length' => array(
+
+            'length'            => array(
                 "type"          => "length" ,
                 "label"         => __("Length", "site-editor"),
+                'panel'         => 'breadcrumbs_settings_panel',
             ),
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
-            ),
-            "align"     =>  array(
-                "type"          => "align" ,
-                "label"         => __("Align", "site-editor"),
-                "default"       => "default"
-            ),
-            "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
-            ),
+
+            'row_container'     => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
+            ), 
+
+            "animation"         =>  array(
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
+
         );
 
         return $params;

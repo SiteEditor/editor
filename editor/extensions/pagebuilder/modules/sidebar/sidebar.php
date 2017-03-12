@@ -53,6 +53,17 @@ class PBSidebarShortcode extends PBShortcodeClass{
             }
         }
 
+        $this->add_panel( 'sidebar_settings_panel' , array(
+            'title'                   =>  __('Sidebar Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' , 
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-sidebar' ,
+            'field_spacing'           => 'sm'
+        ) );
+
         $params = array(
 
             'sidebar' => array(
@@ -62,19 +73,24 @@ class PBSidebarShortcode extends PBShortcodeClass{
                 'choices'           => $sidebars ,
                 'js_params'         => array(
                     'force_refresh'     => true
-                )
+                ),
+                'panel'               => 'sidebar_settings_panel',
           	),
 
-            'spacing' => array(
-                "type"              => "spacing" ,
-                "label"             => __("Spacing", "site-editor"),
-                "default"           => "10 0 10 0" ,
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             ),
 
             "animation"  =>  array(
-                "type"              => "animation" ,
-                "label"             => __("Animation Settings", "site-editor"),
-            ),
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
 
         );
 

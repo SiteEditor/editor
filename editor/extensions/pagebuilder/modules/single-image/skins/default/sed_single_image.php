@@ -45,9 +45,3 @@ if ( ! $attachment_full_src ) {
     <?php }?>
 
 </div>
-
-
-
-
-
-

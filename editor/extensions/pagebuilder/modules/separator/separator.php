@@ -75,12 +75,23 @@ class PBSeparatorShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        $this->add_panel( 'separator_settings_panel_outer' , array(
+            'title'                   =>  __('Separator Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-separator' ,
+            'field_spacing'           => 'sm'
+        ) );
+
         $this->add_panel( 'separator_settings_panel' , array(
-            'title'         =>  __('Separator Settings',"site-editor")  ,
-            'capability'    => 'edit_theme_options' ,
-            'type'          => 'default' ,
-            'description'   => '' ,
-            'priority'      => 9 ,
+            'title'                   =>  __('Separator Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "separator_settings_panel_outer",
+            'priority'                => 9 ,
         ) );
 
         $params = array(
@@ -92,6 +103,7 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                     'spr-horizontal' => __('Horizontal', 'site-editor'),
                     'spr-vertical'   => __('Vertical', 'site-editor'),
                 ),
+                'has_border_box'          => false ,
                 "panel"     => "separator_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -112,6 +124,7 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                     'spr-dashed'          => __('dashed', 'site-editor'),
                     'spr-dotted'          => __('dotted', 'site-editor'),
                 ),
+                'has_border_box'          => false ,
                 "panel"     => "separator_settings_panel",
       		),
             "vertical_height"    => array(
@@ -122,6 +135,7 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 "js_params"  =>  array(
                     "min"  =>  0 ,
                 ),
+                'has_border_box'          => false ,
                 "panel"     => "separator_settings_panel",
                 "dependency"  => array(
                     'controls'  =>  array(
@@ -139,26 +153,34 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 "js_params"  =>  array(
                     "min"  =>  0 ,
                 ),
+                'has_border_box'          => false ,
                 "panel"     => "separator_settings_panel",
             ),
+
             "skin"  =>  array(
-                "type"          => "skin" ,
-                "label"         => __("Change skin", "site-editor"),
+                "type"                => "skin" ,
+                "label"               => __("Change skin", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-change-skin' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 540
             ),
-            "align"     =>  array(
-                "type"          => "align" ,
-                "label"         => __("Align", "site-editor"),
-                "default"       => "default"
+
+            'row_container' => array(
+                'type'          => 'row_container',
+                'label'         => __('Module Wrapper Settings', 'site-editor')
             ),
-            'spacing' => array(
-                "type"          => "spacing" ,
-                "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
-            ), 
+
             "animation"  =>  array(
-                "type"          => "animation" ,
-                "label"         => __("Animation Settings", "site-editor"),
-            ),
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
         );
 
         return $params;
