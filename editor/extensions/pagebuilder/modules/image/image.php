@@ -126,10 +126,20 @@ class PBImageShortcode extends PBShortcodeClass{
                   'type'          => 'text',
                   'panel'         => 'sed_select_image_panel' ,
                   'dependency' => array(
-                      'controls'  =>  array(
-                          "control"  => "image_source" ,
-                          "value"    => "external" ,
-                      )
+                      'queries'  =>  array(
+                          "relation"     =>  "AND" ,
+                          array(
+                              "key"       => "image_source" ,
+                              "value"     => "external" ,
+                              "compare"   => "=="
+                          ),
+                          array(
+                              "key"       => "image_click" ,
+                              "value"     => "expand_mode" ,
+                              "compare"   => "=="
+                          )
+                      ),
+
                   )
               ),
               'image_click' => array(

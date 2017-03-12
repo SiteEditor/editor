@@ -106,10 +106,12 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 'has_border_box'          => false ,
                 "panel"     => "separator_settings_panel",
                 "dependency"  => array(
-                    'controls'  =>  array(
-                        "control"  =>  "skin" ,
-                        "value"    =>  "default" ,
-                        "type"     =>  "include"
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "skin" ,
+                            "value"    =>  "default" ,
+                            "compare"  =>  "=="
+                        )
                     )
                 ),    
       		),
@@ -138,10 +140,18 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 'has_border_box'          => false ,
                 "panel"     => "separator_settings_panel",
                 "dependency"  => array(
-                    'controls'  =>  array(
-                        "control"  =>  "type" ,
-                        "value"    =>  "spr-horizontal",
-                        "type"     =>  "exclude"
+                    'queries'  =>  array(
+                        'relation'      => 'AND',
+                        array(
+                            "key"      =>  "skin" ,
+                            "value"    =>  "default" ,
+                            "compare"  =>  "=="
+                        ),
+                        array(
+                            "key"      =>  "type" ,
+                            "value"    =>  "spr-vertical" ,
+                            "compare"  =>  "=="
+                        )
                     )
                 ),    
             ),
@@ -155,6 +165,15 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 ),
                 'has_border_box'          => false ,
                 "panel"     => "separator_settings_panel",
+                "dependency"  => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "type" ,
+                            "value"    =>  "spr-horizontal" , 
+                            "compare"  =>  "=="
+                        )
+                    )
+                ),  
             ),
 
             "skin"  =>  array(

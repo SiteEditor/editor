@@ -142,10 +142,12 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 'description'  => __('You can set a color for the overlay using the color picker.','site-editor'),
                 "panel"   => "row_container_settings_panel" ,
                 "dependency"  => array(
-                    'controls'  =>  array(
-                        "control"  =>  "overlay" ,
-                        "value"    =>  false ,
-                        "type"     =>  "exclude"
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "overlay" ,
+                            "value"    =>  true ,
+                            "compare"  =>  "===" 
+                        )
                     )
                 ),
                 'has_border_box' => false
@@ -157,10 +159,12 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 'description'  => __('You can set the opacity of the overlay with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
                 "panel"   => "row_container_settings_panel",
                 "dependency"  => array(
-                    'controls'  =>  array(
-                        "control"  =>  "overlay" ,
-                        "value"    =>  false ,
-                        "type"     =>  "exclude"
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "overlay" ,
+                            "value"    =>  true ,
+                            "compare"  =>  "==="
+                        )
                     )
                 ),
                 'has_border_box' => false
@@ -182,10 +186,12 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 ),
                 "panel"     => "row_container_settings_panel",
                 "dependency"  => array(
-                    'controls'  =>  array(
-                        "control"  =>  "is_arrow" ,
-                        "value"    =>  false ,
-                        "type"     =>  "exclude"
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "is_arrow" ,
+                            "value"    =>  true ,
+                            "compare"  =>  "==="
+                        )
                     )
                 ),
                 'has_border_box' => false
@@ -197,10 +203,12 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 'description'  => __('You can set the size of the arrow with this option','site-editor'),
                 "panel"   => "row_container_settings_panel",
                 "dependency"  => array(
-                    'controls'  =>  array(
-                        "control"  =>  "is_arrow" ,
-                        "value"    =>  false ,
-                        "type"     =>  "exclude"
+                    'queries'  =>  array( 
+                        array(  
+                            "key"      =>  "is_arrow" , 
+                            "value"    =>  true , 
+                            "compare"  =>  "===" 
+                        )
                     )
                 ),
                 'has_border_box' => false
@@ -211,10 +219,12 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 'description'  => __('You can set the color of the arrow using color picker','site-editor'),
                 "panel"   => "row_container_settings_panel",
                 "dependency"  => array(
-                    'controls'  =>  array(
-                        "control"  =>  "is_arrow" ,
-                        "value"    =>  false ,
-                        "type"     =>  "exclude"
+                    'queries'  =>  array( 
+                        array(  
+                            "key"      =>  "is_arrow" , 
+                            "value"    =>  true ,  
+                            "compare"  =>  "==="   
+                        )
                     )
                 ),
                 'has_border_box' => false

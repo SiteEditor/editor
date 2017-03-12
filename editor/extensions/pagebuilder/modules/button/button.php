@@ -136,15 +136,6 @@ class PBButtonShortcode extends PBShortcodeClass{
                 "label"               => __("Link Panel Settings", "site-editor"),
                 "panel_type"          => "default" ,
                 'parent_id'           => 'single_image_settings_panel_outer',
-                'panel_dependency'    => array(
-                    'queries'  =>  array(
-                        array(
-                            "key"       => "image_click" ,
-                            "value"     => "link_mode" ,
-                            "compare"   => "=="
-                        )
-                    )
-                )
             ),
 
             'row_container' => array(
