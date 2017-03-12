@@ -106,7 +106,7 @@ class SiteEditorPageOptions {
 
         add_filter( "{$this->option_group}_fields_filter"           , array( $this , 'add_design_field' ) );
 
-        add_action( "sed_editor_init"                               , array( $this , 'add_toolbar_elements' ) );
+        add_action( "sed_editor_init"                               , array( $this , 'add_toolbar_elements' ) , 100 );
 
         add_action( "init"                                          , array( $this , 'register_options' ) , 80  );
 

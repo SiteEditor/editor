@@ -69,7 +69,7 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
 
         add_filter( "{$this->option_group}_fields_filter" , array( $this , 'register_default_fields' ) );
 
-        add_action( "sed_editor_init"                     , array( $this , 'add_toolbar_elements' ) );
+        add_action( "sed_editor_init"                     , array( $this , 'add_toolbar_elements' ) , 80 );
 
         parent::__construct();
 
@@ -109,19 +109,39 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
         $panels = array(
 
             'static_front_page' => array(
-                'title' => __('Static Front Page', "site-editor"),
-                'capability' => 'edit_theme_options',
-                'type' => 'default',
-                'description' => '',
-                'priority' => 9,
+                'title'                 => __('Static Front Page', "site-editor"),
+                'capability'            => 'edit_theme_options',
+                'type'                  => 'inner_box',
+                'description'           => '',
+                'priority'              => 10,
+                'btn_style'             => 'menu' ,
+                'has_border_box'        => false ,
+                'icon'                  => 'sedico-setting-item' ,
+                'field_spacing'         => 'sm'
             ),
 
             'title_tagline' => array(
-                'title' => __('Site Identity', "site-editor"),
-                'capability' => 'edit_theme_options',
-                'type' => 'inner_box',
-                'description' => '',
-                'priority' => 10,
+                'title'                 => __('Site Identity', "site-editor"),
+                'capability'            => 'edit_theme_options',
+                'type'                  => 'inner_box',
+                'description'           => '',
+                'priority'              => 9,
+                'btn_style'             => 'menu' ,
+                'has_border_box'        => false ,
+                'icon'                  => 'sedico-settings' ,
+                'field_spacing'         => 'sm'
+            ),
+
+            'blog_settings' => array(
+                'title'                 => __('Blog Settings', "site-editor"),
+                'capability'            => 'edit_theme_options',
+                'type'                  => 'inner_box',
+                'description'           => '',
+                'priority'              => 11,
+                'btn_style'             => 'menu' ,
+                'has_border_box'        => false ,
+                'icon'                  => 'sedico-post' ,
+                'field_spacing'         => 'sm'
             )
 
         );
@@ -238,7 +258,8 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
                 "description"       => __("This option allows you to set a title for your image.", "site-editor"),
                 'setting_id'        => "posts_per_page" ,
                 'option_type'       => 'option',
-                'capability'        => 'manage_options'
+                'capability'        => 'manage_options' ,
+                'panel'             => 'blog_settings'
             )
 
         );

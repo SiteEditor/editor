@@ -3,9 +3,11 @@
 function sed_add_sample_toolbar_elements(){
     global $site_editor_app;
 
+    $site_editor_app->toolbar->add_element_group( "layout" , "developer" , __("Developer","site-editor") );
+
     $site_editor_app->toolbar->add_element(
         "layout" ,
-        "settings" ,
+        "developer" ,
         "sample-options" ,
         __("Sample Options","site-editor") ,
         "sample_options_element" ,     //$func_action
@@ -22,7 +24,7 @@ function sed_add_sample_toolbar_elements(){
 
 }
 
-add_action( "sed_editor_init" , "sed_add_sample_toolbar_elements" );
+add_action( "sed_editor_init" , "sed_add_sample_toolbar_elements" , 110 );
 
 function sed_register_sample_group(){
 

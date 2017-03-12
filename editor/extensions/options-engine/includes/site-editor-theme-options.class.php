@@ -79,7 +79,7 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
 
         add_filter( "{$this->option_group}_fields_filter" , array( $this , 'register_default_fields' ) );
 
-        add_action( "sed_editor_init"                     , array( $this , 'add_toolbar_elements' ) );
+        add_action( "sed_editor_init"                     , array( $this , 'add_toolbar_elements' ) , 90 );
 
         add_filter( 'get_custom_logo'                     , array( $this ,  'sed_custom_logo' ) , 10000 , 1 );
         //add_action( "sed_register_{$this->option_group}_options"    , array( $this , 'set_config' ) , -10000 );
@@ -140,22 +140,43 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
     public function register_default_panels( $panels )
     {
 
+        $panels['general_settings'] = array(
+            'title'                 =>  __('General Settings',"site-editor")  ,
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'theme_supports'        => 'site_layout_feature' ,
+            'description'           => '' ,
+            'priority'              => 7 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-setting-item' ,
+            'field_spacing'         => 'sm'
+        );
+
         $panels['page_background_panel'] = array(
-            'title'             =>  __('Page Background',"site-editor")  ,
-            'capability'        => 'edit_theme_options' ,
-            'type'              => 'expanded' ,
-            'theme_supports'    => 'sed_custom_background' ,
-            'description'       => '' ,
-            'priority'          => 7 ,
+            'title'                 =>  __('Background Image',"site-editor")  ,
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'theme_supports'        => 'sed_custom_background' ,
+            'description'           => '' ,
+            'priority'              => 7 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-background' ,
+            'field_spacing'         => 'sm'
         );
 
         $panels['site_logo'] = array(
-            'title'             =>  __('Logo Settings',"site-editor")  ,
-            'capability'        => 'edit_theme_options' ,
-            'type'              => 'inner_box' ,
-            'theme_supports'    => 'custom-logo',
-            'description'       => '' ,
-            'priority'          => 8
+            'title'                 =>  __('Logo Settings',"site-editor")  ,
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'theme_supports'        => 'custom-logo',
+            'description'           => '' ,
+            'priority'              => 8 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-settings' ,
+            'field_spacing'         => 'sm'
         );
 
         return $panels;
@@ -179,7 +200,7 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
                     "wide"          =>    __( "Wide" , "site-editor" ) ,
                     "boxed"         =>    __( "Boxed" , "site-editor" )
                 ),
-                //'panel'             => 'general_page_style' ,
+                'panel'             => 'general_settings' ,
                 'transport'         => 'postMessage' ,
                 'priority'          => 5
             ),
@@ -191,6 +212,7 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
                 'default'           => sed_get_theme_support( 'site_layout_feature' , 'default_sheet_width' ),
                 'theme_supports'    => 'site_layout_feature' ,
                 "description"       => __("This option allows you to set a title for your image.", "site-editor"),
+                'panel'             => 'general_settings' ,
                 'transport'         => 'postMessage' ,
                 'priority'          => 6
             ),

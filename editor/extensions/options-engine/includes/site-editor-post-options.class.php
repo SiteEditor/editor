@@ -133,7 +133,7 @@ class SiteEditorPostOptions {
      */
     public function __construct(){
 
-        add_action( "sed_editor_init"               , array( $this, "add_toolbar_elements" ) );
+        //add_action( "sed_editor_init"               , array( $this, "add_toolbar_elements" ) );
 
         add_action( "init"                          , array( $this , 'register_options' ) , 80  );
 
