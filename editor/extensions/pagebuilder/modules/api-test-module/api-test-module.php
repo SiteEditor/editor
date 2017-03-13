@@ -461,7 +461,7 @@ class PBAPITestModule extends PBShortcodeClass{
             "panel"         => "check_box_settings_panel" ,
         );
 
-        $params['sortable_field_id'] = array(
+        /*$params['sortable_field_id'] = array(
             'label'             => __('Sortable Control', 'site-editor'),
             'type'              => 'sortable',
             'choices'           => array(
@@ -472,7 +472,7 @@ class PBAPITestModule extends PBShortcodeClass{
                 "options5_key"      =>    "Five" ,
             ),
             "panel"         => "check_box_settings_panel" ,
-        );
+        );*/
 
         $params['switch_field_id'] = array(
             'label'             => __('Switch Control', 'site-editor'),

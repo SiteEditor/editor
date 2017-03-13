@@ -158,7 +158,7 @@
             control.setting.set( val );
         },
 
-        update  : function( value ) {
+        update  : function( value ) { 
             var control = this , cValue ;
 
             if( this.isModuleControl && !_.isUndefined( value ) && _.isObject( value ) ){

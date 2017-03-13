@@ -79,6 +79,12 @@ if ( ! class_exists( 'SiteEditorMediaControl' ) ) {
 
             $value          = $this->value();
 
+			if( !empty($value) && get_post( $value ) ){
+				$value = wp_get_attachment_url( $value );
+			}else{
+                $value = '';
+            }
+
 			$button_label 	= ( ! empty( $this->button_label ) ) ? $this->button_label : __("Select File" , "site-editor") ;
 
 			?>

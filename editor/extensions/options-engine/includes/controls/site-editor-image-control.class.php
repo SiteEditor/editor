@@ -71,7 +71,12 @@ if ( ! class_exists( 'SiteEditorImageControl' ) ) {
 
             $value          = $this->value();
 
-            $value = (!empty($value)) ? $value : SED_ASSETS_URL.'/images/no_pic.png';
+			if( !empty($value) && get_post( $value ) ){
+				$image_attributes = wp_get_attachment_image_src( $value );
+				$value = $image_attributes[0];
+			}else{
+				$value = SED_ASSETS_URL.'/images/no_pic.png';
+			}
 
             $button_label 	= ( ! empty( $this->button_label ) ) ? $this->button_label : __("Select Image" , "site-editor") ;
 

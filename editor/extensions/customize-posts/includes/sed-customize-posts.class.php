@@ -63,7 +63,7 @@ final class SiteEditorCustomizePosts {
 	 *
 	 * @param SiteEditorManager $manager Customize manager bootstrap instance.
 	 */
-	public function __construct( SiteEditorManager $manager ) {
+	public function __construct( SiteEditorManager $manager ) { 
 		$this->manager = $manager;
 
 		require_once dirname( __FILE__ ) . '/sed-customize-posts-preview.class.php';

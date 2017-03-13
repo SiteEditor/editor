@@ -375,9 +375,9 @@
 
       });
 
-        api.previewer.bind( 'pages_theme_content_ready', function( obj ) {
+        api.previewer.bind( 'pages_theme_content_ready', function( obj ) { //alert("test....");
 
-            if( api.settings.page.type == "post" ) {
+            if( api.settings.page.type == "post" ) { //alert( obj.postType );
 
                 api.currentPageThemeContentSettingId = "postmeta[" + obj.postType + "][" + api.settings.page.id + "][theme_content]";
 

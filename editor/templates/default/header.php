@@ -106,6 +106,7 @@ do_action( 'sed_enqueue_scripts' );
         var loadUploader = false;
         var SEDUploader = false;
         var loadLazyLoader = false;
+
          //colorpicker
         var colorPickerOption = {
             showInput: true,
@@ -153,7 +154,6 @@ do_action( 'sed_enqueue_scripts' );
               "rgb(204, 0, 153)", "rgb(204, 51, 153)", "rgb(204, 102, 153)", "rgb(204, 153, 153)","rgb(204, 204, 153)", "rgb(204, 255, 153)",
                "rgb(204, 255, 0)", "rgb(204, 204, 0)", "rgb(204, 153, 0)", "rgb(204, 102, 0)", "rgb(204, 51, 0)", "rgb(204, 0, 0)",
               "rgb(102, 0, 153)", "rgb(102, 51, 153)", "rgb(102, 102, 153)", "rgb(102, 153, 153)", "rgb(102, 204, 153)", "rgb(102, 255, 153)",
-               "rgb(102, 255, 0)", "rgb(102, 204, 0)","rgb(102, 153, 0)", "rgb(102, 102, 0)", "rgb(102, 51, 0)", "rgb(102, 0, 0)",
                "rgb(0, 0, 153)", "rgb(0, 51, 153)", "rgb(0, 102, 153)", "rgb(0, 153, 153)","rgb(0, 204, 153)", "rgb(0, 255, 153)",
               "rgb(0, 255, 0)", "rgb(0, 204, 0)", "rgb(0, 153, 0)", "rgb(0, 102, 0)", "rgb(0, 51, 0)", "rgb(0, 0, 0)"]
             ]

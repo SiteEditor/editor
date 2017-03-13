@@ -247,12 +247,23 @@ Class SiteEditorThemeFramework{
         $panels = array_merge( $panels , array(
 
             'page_background_panel' => array(
-                'title'             =>  __('Page Background',"site-editor")  ,
-                'capability'        => 'edit_theme_options' ,
-                'type'              => 'expanded' ,
-                'theme_supports'    => 'sed_custom_background' ,
-                'description'       => '' ,
-                'priority'          => 6 ,
+                'title'                 =>  __('Page Background',"site-editor")  ,
+                'capability'            => 'edit_theme_options' ,
+                'type'                  => 'expanded' ,
+                'theme_supports'        => 'sed_custom_background' ,
+                'description'           => '' ,
+                'priority'              => 6 ,
+            ),
+
+            'custom_css_code' => array(
+                'title'                 =>  __('Custom Css',"site-editor")  ,
+                'capability'            => 'edit_theme_options' ,
+                'type'                  => 'inner_box' ,
+                'priority'              => 6 ,
+                'btn_style'             => 'menu' ,
+                'has_border_box'        => false ,
+                'icon'                  => 'sedico-site-custom-css' ,
+                'field_spacing'         => 'sm'
             )
 
         ));
@@ -391,6 +402,20 @@ Class SiteEditorThemeFramework{
                         "type"     => "exclude"
                     ),
                 )
+            ),
+
+            'custom_css_code' => array(
+                'setting_id'        => 'custom_css_code',
+                'label'             => __('Enter Custom Css Code', 'site-editor'),
+                'description'       => __('Customize css for site', 'site-editor') ,
+                'type'              => 'code',
+                'priority'          => 32,
+                'default'           => "",//sed_get_page_setting( 'custom_css_code' , $_POST['page_id'] , $_POST['page_type'] ),
+                'transport'         => 'postMessage' ,
+                'panel'             => 'custom_css_code' ,
+                'js_params'         => array(
+                    "mode" => "css",
+                )
             )
 
         ));
@@ -401,12 +426,13 @@ Class SiteEditorThemeFramework{
 
     public function register_design_options( $design_options ){
 
-        $design_options[] = array(
+        //! call_user_func_array( 'current_theme_supports', (array) $this->theme_supports )  && ! call_user_func_array( 'sed_current_theme_supports', (array) $this->theme_supports )    
+        /*$design_options[] = array(
             'page_main' ,
             '#sed-main-site-wrapper' ,
             array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' , 'text_shadow' , 'font' , 'text_align' , 'line_height' ) ,
             __("Page" , "site-editor")
-        );
+        );*/
 
         return $design_options;
 

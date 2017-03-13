@@ -55,6 +55,12 @@ if ( ! class_exists( 'SiteEditorMultiIconsControl' ) ) {
 
             $value          = $this->value();
 
+			$value 			= is_string( $value ) ? explode( "," , $value ) : $value;
+
+			$value			= (array)$value;
+
+			$value			= array_filter( $value );
+
 			?>
 
             <?php if(!empty($this->description)){ ?> 
@@ -67,7 +73,13 @@ if ( ! class_exists( 'SiteEditorMultiIconsControl' ) ) {
                     /**
                      * Render With Underscore JS Template
                      */
-                    ?>
+					foreach ( $value AS $icon ) {
+						?>
+						<li sed-icon="<?php echo $icon;?>" class="item-icon"><span class="<?php echo $icon;?>"></span><span
+								class="remove-icon-action sedico-delete sedico"></span></li>
+					<?php
+					}
+					?>
 					</ul>
 	        	</div>
 	        	<div class="select-icon-btns">

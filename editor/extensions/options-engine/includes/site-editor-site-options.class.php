@@ -234,23 +234,6 @@ class SiteEditorSiteOptions extends SiteEditorOptionsCategory{
                 'capability'        => 'manage_options'
             ) ,
 
-            'site_icon' => array(
-                "type"              => "site-icon" ,
-                "label"             => __( 'Site Icon', "site-editor"),
-                //'default'           => get_option( 'blogname' ),
-                "description"       => sprintf(
-                /* translators: %s: site icon size in pixels */
-                    __( 'The Site Icon is used as a browser and app icon for your site. Icons must be square, and at least %s pixels wide and tall.' ),
-                    '<strong>512</strong>'
-                ),
-                'setting_id'        => "site_icon" ,
-                'remove_action'     => true ,
-                'panel'             => "title_tagline" ,
-                'option_type'       => 'option',
-                'capability'        => 'manage_options',
-                'transport'         => 'postMessage'
-            ) ,
-
             'posts_per_page' => array(
                 "type"              => "text" ,
                 "label"             => __("Posts Per Page", "site-editor"),

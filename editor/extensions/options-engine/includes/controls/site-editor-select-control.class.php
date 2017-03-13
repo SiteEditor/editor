@@ -83,10 +83,18 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 	        if(!empty($this->subtype) && $this->subtype == "multiple"){
 	            $classes .= " multiple-select";
 	            $atts_string .= ' multiple="multiple"';
+
+				$values = is_string( $value ) ? explode( "," , $value ) : $value;
+
+				$values	= (array)$values;
+
+				$values	= array_filter( $values );
+
 	        }else{
 	            $classes .= " select";
-	        }
 
+				$values = array( $value );
+	        }
 
 			?>
 
@@ -104,7 +112,7 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 
 		            foreach( $this->choices as $key_val => $choice )
 		            {
-		                $selected = ($value == $key_val) ? 'selected="selected"' : '';
+		                $selected = ( in_array( $key_val , $values ) ) ? 'selected="selected"' : '';
 	            ?>
 		                <option value="<?php echo esc_attr( $key_val );?>" <?php echo $selected ;?>> <?php echo esc_html( $choice );?></option>
 
@@ -121,7 +129,7 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 		                <?php
 		                foreach( $group_options as $key_val => $choice ){
 
-		                    $selected = ($value == esc_attr( $key_val )) ? 'selected="selected"' : '';
+		                    $selected = ( in_array( $key_val , $values ) ) ? 'selected="selected"' : '';
 	                    ?> 
 
 		                    <option value="<?php echo esc_attr( $key_val );?>" <?php echo $selected ;?>>

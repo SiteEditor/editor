@@ -55,6 +55,12 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
 
             $value          = $this->value();
 
+			$value 			= is_string( $value ) ? explode( "," , $value ) : $value;
+
+			$value			= (array)$value;
+
+			$value			= array_filter( $value );
+
 			?>
 
 
@@ -64,6 +70,22 @@ if ( ! class_exists( 'SiteEditorMultiImagesControl' ) ) {
         	<div class="setting-image">
 	        	<div class="images-organize-box">
 	        		<ul class="images-sortable">
+
+						<?php
+						foreach ( $value AS $attach_id ) {
+							if( !empty($attach_id) && get_post( $attach_id ) ){
+								$image_attributes = wp_get_attachment_image_src( $attach_id );
+								$src = $image_attributes[0];
+							}else{
+								$src = SED_ASSETS_URL.'/images/no_pic.png';
+								$attach_id = 0;
+							}
+							?>
+							<li sed-attachment-id="<?php echo $attach_id;?>" class="item-image">
+								<img class="gallery-img mCS_img_loaded" src="<?php echo $src;?>" width="100" height="100"><span class="remove-img-action sedico-delete sedico"></span></li>
+							<?php
+						}
+						?>
 
 					</ul>
 	        	</div>

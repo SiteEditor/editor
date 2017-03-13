@@ -110,7 +110,7 @@ class SedCustomizePostsExtension {
 	 * @param SiteEditorManager $wp_customize Manager.
 	 * @return array Components.
 	 */
-	function filter_customize_loaded_components( $components, $manager ) {
+	function filter_customize_loaded_components( $components, $manager ) { 
 		require_once dirname( __FILE__ ) . '/includes/sed-customize-posts.class.php';
 		$manager->posts = new SiteEditorCustomizePosts( $manager );
 

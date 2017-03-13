@@ -73,7 +73,7 @@ class SiteEditorPostmetaSetting extends SedAppSettings {
 	 * @param array                $args    Setting args.
 	 * @throws Exception If the ID is in an invalid format.
 	 */
-	public function __construct( SiteEditorManager $manager, $id, $args = array() ) {
+	public function __construct( SiteEditorManager $manager, $id, $args = array() ) { 
 		if ( ! preg_match( self::SETTING_ID_PATTERN, $id, $matches ) ) {
 			throw new Exception( 'Illegal setting id: ' . $id );
 		}
@@ -130,10 +130,10 @@ class SiteEditorPostmetaSetting extends SedAppSettings {
 	 * @return mixed Meta value.
 	 */
 	public function value() {
-		$meta_key = $this->meta_key;
-		$object_id = $this->post_id;
+		$meta_key = $this->meta_key;  //var_dump( $meta_key );
+		$object_id = $this->post_id;  //var_dump( $object_id );
 		$single = false;
-		$values = get_post_meta( $object_id, $meta_key, $single );
+		$values = get_post_meta( $object_id, $meta_key, $single );  //var_dump($values);
 		$value = array_shift( $values );
 
 		if ( ! isset( $value ) ) {

@@ -170,7 +170,7 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
             'title'                 =>  __('Logo Settings',"site-editor")  ,
             'capability'            => 'edit_theme_options' ,
             'type'                  => 'inner_box' ,
-            'theme_supports'        => 'custom-logo',
+            //'theme_supports'        => 'custom-logo',
             'description'           => '' ,
             'priority'              => 8 ,
             'btn_style'             => 'menu' ,
@@ -332,7 +332,7 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
                 'remove_action'     => true ,
                 'panel'             => 'site_logo',
                 'priority'          => 60,
-                //'default'           => '',
+                'default'           => '',//get_theme_mod( 'custom_logo' , '' ),
                 'theme_supports'    => 'custom-logo',
                 'option_type'       => 'theme_mod',
                 'transport'         => 'postMessage' ,
@@ -341,7 +341,24 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
                     'render_callback'     => array( $this, '_render_custom_logo_partial' ),
                     'container_inclusive' => true,
                 )
-            )
+            ),
+
+            'site_icon' => array(
+                "type"              => "site-icon" ,
+                "label"             => __( 'Site Icon (Favicon)', "site-editor"),
+                'default'           => '',//get_theme_mod( 'site_icon' , '' ),
+                "description"       => sprintf(
+                /* translators: %s: site icon size in pixels */
+                    __( 'The Site Icon is used as a browser and app icon for your site. Icons must be square, and at least %s pixels wide and tall.' ),
+                    '<strong>512</strong>'
+                ),
+                'setting_id'        => "site_icon" ,
+                'remove_action'     => true ,
+                'panel'             => "site_logo" ,
+                'option_type'       => 'option',
+                'capability'        => 'manage_options',
+                'transport'         => 'postMessage'
+            ),
 
         );
 

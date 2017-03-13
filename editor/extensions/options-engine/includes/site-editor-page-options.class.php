@@ -283,6 +283,12 @@ class SiteEditorPageOptions {
                 $args['css_setting_type'] = $this->css_setting_type;
             }
 
+            $args['option_type'] = ( $page_type != "post" ) ? "option" : "postmeta";
+
+            if( $page_type == "post" ){
+                $args['setting_class'] = 'SiteEditorPostmetaSetting';
+            }
+
             $page_fields[$id] = $args ;
 
         }

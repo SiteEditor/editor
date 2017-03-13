@@ -31,9 +31,9 @@ class SiteEditorTwentyseventeenThemeSync{
 
         $this->theme_support = $theme_support;
         
-        //add_action( "plugins_loaded" , array( $this , 'add_features' ) , 9000  );
+        add_action( "plugins_loaded" , array( $this , 'add_features' ) , 9000  );
 
-        //add_action( "sed_static_module_register" , array( $this , 'register_static_modules' ) , 10 , 1 );
+        add_action( "sed_static_module_register" , array( $this , 'register_static_modules' ) , 10 , 1 );
 
     }
 
@@ -46,13 +46,13 @@ class SiteEditorTwentyseventeenThemeSync{
     public function add_features(){
 
         sed_add_theme_support( "site_layout_feature" , array(
-            "default_page_length"   =>  'boxed' ,
-            "default_sheet_width"   =>  '1320px' ,
-            'selector'              =>  '.site-inner'
+            "default_page_length"   =>  'wide' ,
+            "default_sheet_width"   =>  '1100px' ,
+            'selector'              =>  '.site-content-contain'
         ) );
 
         sed_add_theme_support( 'sed_custom_background' , array(
-            "default_color "        =>  '#1a1a1a' ,
+            "default_color "        =>  '#ffffff' ,
             'selector'              =>  'body'
         ) );
 
@@ -66,60 +66,19 @@ class SiteEditorTwentyseventeenThemeSync{
      */
     public function register_static_modules( $manager ){
 
-        $manager->add_static_module( "twenty_sixteen_header" , array(
-            'title'         => __("Twentyseventeen Header" , "site-editor") ,
-            'description'   => __("Twentyseventeen Header Module" , "site-editor") ,
-            'selector'      => '#masthead' ,
-            'capability'    => 'edit_theme_options' ,
-            'panels'        => array(
+        require_once dirname( __FILE__ ) . "/modules/header.php";
 
-                'site_logo' => array(
-                    'title'         =>  __('Logo Settings',"site-editor")  ,
-                    'capability'    => 'edit_theme_options' ,
-                    'type'          => 'inner_box' ,
-                    'description'   => '' ,
-                    'priority'      => 8
-                )
-
-            ),
-            'fields'        => array(
-
-                'default_logo' => array(
-                    "type"              => "image" ,
-                    'label'             => __( 'Default Logo' , 'site-editor' ),
-                    'description'       => __( 'Select an image file for your logo.' , 'site-editor' ),
-                    'setting_id'        => "custom_logo" ,
-                    'remove_action'     => true ,
-                    'panel'             => 'site_logo',
-                    'priority'          => 60,
-                    //'default'           => '',
-                    'theme_supports'    => 'custom-logo',
-                    'option_type'       => 'theme_mod',
-                    'transport'         => 'postMessage' ,
-                    /*'partial_refresh'   => array(
-                        'selector'            => '.custom-logo-link',
-                        'render_callback'     => array( $this, '_render_custom_logo_partial' ),
-                        'container_inclusive' => true,
-                    )*/
-                )
-
-            )
-        ) );
-
-        require_once dirname( __FILE__ ) . "/static-modules/archive.php";
-
-        $manager->add_static_module( new TwentyseventeenArchiveStaticModule( $manager , 'twenty_sixteen_archive' , array(
-                'title'         => __("Twentyseventeen Archive" , "site-editor") ,
-                'description'   => __("Twentyseventeen Archive Module" , "site-editor") ,
+        $manager->add_static_module( new TwentyseventeenHeaderStaticModule( $manager , 'twenty_seventeen_header' , array(
+                'title'         => __("Twentyseventeen Header" , "site-editor") ,
+                'description'   => __("Twentyseventeen Header Module" , "site-editor") ,
             )
         ));
 
-        require_once dirname( __FILE__ ) . "/static-modules/page.php";
+        require_once dirname( __FILE__ ) . "/modules/footer.php";
 
-        $manager->add_static_module( new TwentyseventeenSinglePageStaticModule( $manager , 'twenty_sixteen_single_page' , array(
-                'title'             => __("Single Page Content" , "site-editor") ,
-                'description'       => __("Twentyseventeen Single Page Content Module" , "site-editor") ,
-                'active_callback'   => array( $this , 'is_page' )
+        $manager->add_static_module( new TwentyseventeenFooterStaticModule( $manager , 'twenty_seventeen_footer' , array(
+                'title'         => __("Twentyseventeen Footer" , "site-editor") ,
+                'description'   => __("Twentyseventeen Footer Module" , "site-editor") ,
             )
         ));
 
