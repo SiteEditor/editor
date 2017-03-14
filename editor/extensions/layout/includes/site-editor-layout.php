@@ -46,13 +46,17 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             add_action( 'sed-app-save-data' , array( $this , 'save_check_main_content' ) , 10 , 2 );
 
-            add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
+            //add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
 
-            add_action( "sed_register_sed_add_layout_options" , array( $this, 'register_add_layout_group' ) , -9999 );
+            add_action( "sed_app_register" , array( $this, 'register_add_layout_group' ) , -9999 );
 
             add_action( "sed_register_sed_pages_layouts_options" , array( $this , 'pages_layouts_options' ) );
 
             add_action( "sed_register_sed_pages_layouts_options" , array( $this, 'register_pages_layouts_group' ) , -9999 );
+
+            add_action( 'sed_app_register' , array($this, 'add_layout_options'));
+
+            //add_action( 'wp_footer'  , array( $this , 'add_dynamic_settings' ) );
 
 		}
 
@@ -90,6 +94,13 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'option_type'       => 'option' ,
                 'transport'         => 'postMessage'
             ));
+
+        }
+
+
+        public function add_dynamic_settings(){
+
+            SED()->editor->manager->add_dynamic_settings( array( 'sed_layouts_settings' ) );
 
         }
 
