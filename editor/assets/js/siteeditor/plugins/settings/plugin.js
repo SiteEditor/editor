@@ -472,13 +472,13 @@
                 $(selector).data('sed.multiLevelBoxPlugin').options.innerContainer = $(selector).find(".dialog-level-box-settings-container");
                 $(selector).data('sed.multiLevelBoxPlugin')._render();
 
-                api.Events.trigger("endInitAppendSettingsTmpl", $currentElDialog, self.settingsType, self.currentSettingsId);
-
                 delete self.ajaxCachTmpls[self.currentSettingsId];
 
                 var controls = $.extend( true , {} , self.ajaxCachControls[self.currentSettingsId]);
 
                 self.setControls( controls , self.currentSettingsId , self.settingsType );
+
+                api.Events.trigger("endInitAppendSettingsTmpl", $currentElDialog, self.settingsType, self.currentSettingsId);
 
                 delete self.ajaxCachControls[self.currentSettingsId];
 
@@ -577,9 +577,9 @@
                         $( selector ).data('sed.multiLevelBoxPlugin').options.innerContainer = $( selector ).find(".dialog-level-box-settings-container");
                         $( selector ).data('sed.multiLevelBoxPlugin')._render();
 
-                        api.Events.trigger( "endInitAppendSettingsTmpl" , $currentElDialog , settingType , settingId );
-
                         self.setControls( controls , settingId , settingType );
+
+                        api.Events.trigger( "endInitAppendSettingsTmpl" , $currentElDialog , settingType , settingId );
 
                     }else{
 

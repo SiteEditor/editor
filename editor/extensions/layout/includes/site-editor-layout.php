@@ -46,7 +46,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             add_action( 'sed-app-save-data' , array( $this , 'save_check_main_content' ) , 10 , 2 );
 
-            //add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
+            add_action( "sed_register_sed_add_layout_options" , array( $this , 'add_layout_options' ) );
 
             add_action( "sed_app_register" , array( $this, 'register_add_layout_group' ) , -9999 );
 
@@ -54,9 +54,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             add_action( "sed_register_sed_pages_layouts_options" , array( $this, 'register_pages_layouts_group' ) , -9999 );
 
-            add_action( 'sed_app_register' , array($this, 'add_layout_options'));
-
-            //add_action( 'wp_footer'  , array( $this , 'add_dynamic_settings' ) );
+            add_action( 'sed_app_register' ,  array( $this, 'register_settings' ) );
 
 		}
 
@@ -72,14 +70,12 @@ if(!class_exists('SiteEditorLayoutManager')){
             ));
 
         }
-        
-        
+
         function add_layout_options(){
 
             ob_start();
             include dirname( dirname( __FILE__ ) ) . DS . "view" . DS . "add_layout.tpl.php";
             $html = ob_get_clean();
-
 
             sed_options()->add_field( 'layouts_manager' , array(
                 'type'              => 'custom',
@@ -94,13 +90,6 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'option_type'       => 'option' ,
                 'transport'         => 'postMessage'
             ));
-
-        }
-
-
-        public function add_dynamic_settings(){
-
-            SED()->editor->manager->add_dynamic_settings( array( 'sed_layouts_settings' ) );
 
         }
 
@@ -126,7 +115,7 @@ if(!class_exists('SiteEditorLayoutManager')){
             $fields = array();
             $panels = array();
 
-            $panels['current_page_layout_panel'] = array(
+            /*$panels['current_page_layout_panel'] = array(
                 'id'            => 'current_page_layout_panel'  ,
                 'title'         =>  __('Current Page Layout Settings',"site-editor")  ,
                 'capability'    => 'edit_theme_options' ,
@@ -152,7 +141,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'setting_id'        => "page_layout" ,
                 "panel"             => 'current_page_layout_panel' ,
                 'option_group'      => 'sed_pages_layouts'
-            );
+            );*/
 
             $default_pages_layouts = $this->default_pages_layouts_list();
 
@@ -181,6 +170,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'option_group'  => 'sed_pages_layouts'
             );
 
+
             foreach( $default_pages_layouts AS $page_group => $layout ){
 
                 $id = 'sed_pages_layouts[' . $page_group . ']';
@@ -198,24 +188,18 @@ if(!class_exists('SiteEditorLayoutManager')){
                     'priority'          => 15 ,
                     'category'          => 'app-settings' ,
                     'setting_id'        => $id ,
-                    "panel"             => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "default_pages_layouts" ,
-                    'option_group'      => 'sed_pages_layouts'
+                    "panel"             => "default_pages_layouts" , //( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" :
+                    'option_group'      => 'sed_pages_layouts',
+                    'option_type'       => 'option'
                 );
+
             }
 
             $post_types = get_post_types( array( 'show_in_nav_menus' => true , 'public' => true ), 'object' );
 
             if ( !empty( $post_types ) ) {
 
-                $panels['custom_post_types_layouts'] = array(
-                    'id'            => 'custom_post_types_layouts' ,
-                    'title'         =>  __('Custom Post Types Layouts',"site-editor")  ,
-                    'capability'    => 'edit_theme_options' ,
-                    'type'          => 'default' ,
-                    'description'   => '' ,
-                    'priority'      => 10 ,
-                    'option_group'  => 'sed_pages_layouts'
-                );
+                $custom_post_types_num = 0;
 
                 foreach ($post_types AS $post_type_name => $post_type) {
 
@@ -238,7 +222,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                         'priority'          => 15 ,
                         'category'          => 'app-settings' ,
                         'setting_id'        => $id ,
-                        "panel"             => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_post_types_layouts" ,
+                        "panel"             => "custom_post_types_layouts" ,
                         'option_group'      => 'sed_pages_layouts'
                     );
 
@@ -259,11 +243,28 @@ if(!class_exists('SiteEditorLayoutManager')){
                         'priority'          => 15 ,
                         'category'          => 'app-settings' ,
                         'setting_id'        => $id ,
-                        "panel"             => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_post_types_layouts" ,
+                        "panel"             => "custom_post_types_layouts" ,
                         'option_group'      => 'sed_pages_layouts'
                     );
 
+                    $custom_post_types_num++;
+
                 }
+
+                if( $custom_post_types_num > 0 ){
+
+                    $panels['custom_post_types_layouts'] = array(
+                        'id'            => 'custom_post_types_layouts' ,
+                        'title'         =>  __('Custom Post Types Layouts',"site-editor")  ,
+                        'capability'    => 'edit_theme_options' ,
+                        'type'          => 'default' ,
+                        'description'   => '' ,
+                        'priority'      => 10 ,
+                        'option_group'  => 'sed_pages_layouts'
+                    );
+
+                }
+
             }
 
             $args = array(
@@ -304,7 +305,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                         'priority'          => 15 ,
                         'category'          => 'app-settings' ,
                         'setting_id'        => $id ,
-                        "panel"             => ( $_POST['current_layout_group'] == $page_group ) ?  "current_page_layout_panel" : "custom_taxonomies_layouts" ,
+                        "panel"             => "custom_taxonomies_layouts" ,
                         'option_group'      => 'sed_pages_layouts'
                     );
 
@@ -601,12 +602,12 @@ if(!class_exists('SiteEditorLayoutManager')){
                 }
             }
 
-            /*$settings['sed_layouts_settings'] = array(
+            $settings['sed_layouts_settings'] = array(
     			'default'        => get_option( 'sed_layouts_settings' ),
     			'capability'     => 'manage_options',
     			'option_type'    => 'option' ,
                 'transport'      => 'postMessage'
-    		);*/
+    		);
 
             $default_pages_layouts = $this->default_pages_layouts_list();
 
@@ -631,7 +632,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                     'default'        => isset( $current_pages_layouts[$group] ) ? $current_pages_layouts[$group] : "default",
                     'capability'     => 'manage_options',
                     'option_type'    => 'option' ,
-                    'transport'      => 'postMessage'
+                    'transport'      => 'refresh'
                 );
             }
 

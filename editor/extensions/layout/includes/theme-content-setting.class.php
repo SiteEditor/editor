@@ -44,6 +44,8 @@ class SedThemeContentSetting {
 
         if (preg_match(self::SETTING_OPTION_ID_PATTERN, $setting_id, $option_matches) || preg_match(self::SETTING_META_ID_PATTERN, $setting_id, $meta_matches)) {
 
+			var_dump( $value );
+
             if (!empty($value) ) { //&& is_array($value)
 
                 $value = json_decode( urldecode( $value ) , true );
