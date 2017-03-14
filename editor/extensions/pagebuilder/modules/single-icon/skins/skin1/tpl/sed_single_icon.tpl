@@ -1,34 +1,22 @@
 <# if( link ){ #>
 
-    <a href="{{link}}" target="{{link_target}}" {{sed_attrs}} class=" sed-icons module module-single-icon single-icon-skin1  {{className}} <# if( style ){ #> {{hover_effect}} <# } #> " style="font-size:{{font_size}}px;">
-        <span class="hi-icon {{icon}} {{type}} {{style}}" sed-icon="{{icon}}" style="font-size:{{font_size}}px;color:{{color}}">
-        </span>
+    <a href="{{link}}" target="{{link_target}}" {{sed_attrs}} class=" sed-icons module module-single-icon single-icon-skin1  {{className}} ">
+        <div class="hi-icon {{icon}}" sed-icon="{{icon}}">
+        </div>
     </a>
 
 <# }else{ #>
 
-    <div {{sed_attrs}} class=" sed-icons module module-single-icon single-icon-skin1 {{className}} <# if( style ){ #> {{hover_effect}} <# } #>" style="font-size:{{font_size}}px;">
-        <span class="hi-icon {{icon}} {{type}} {{style}}" sed-icon="{{icon}}" style="font-size:{{font_size}}px;color:{{color}}">
-        </span>
+    <div {{sed_attrs}} class=" sed-icons module module-single-icon single-icon-skin1 {{className}}">
+        <div class="hi-icon {{icon}}" sed-icon="{{icon}}">
+        </div>
     </div>
 
 <# } #>
 
 <style type="text/css">
-<# if( background_color && !style ){ #>
-[sed_model_id="{{sed_model_id}}"] .hex-icon:before,
-[sed_model_id="{{sed_model_id}}"] .icon-ring,
-[sed_model_id="{{sed_model_id}}"] .icon-default {
-    background-color: {{background_color}};
-}
-
-<# } #>
-<# if( border_color && !style ){ #>
-    [sed_model_id="{{sed_model_id}}"] .icon-default,
-    [sed_model_id="{{sed_model_id}}"] .icon-flat,
-    [sed_model_id="{{sed_model_id}}"] .icon-ring:after {
-        box-shadow:0 0 0 0.07em {{border_color}};
+    [sed_model_id="{{sed_model_id}}"].module.module-single-icon .hi-icon {
+        border: {{border_size}}px solid {{border_color}};
     }
-<# } #>
 </style>
 

@@ -17,11 +17,11 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 	 */
 	function __construct() {
 		parent::__construct( array(
-                "name"        => "sed_single_icon",                                      //*require
-                "title"       => __("Single Icon","site-editor"),                        //*require for toolbar
-                "description" => __("Add Single Icon Bar To Page","site-editor"),
-                "icon"        => "sedico-icons",                                     //*require for icon toolbar
-                "module"      =>  "single-icon"                                           //*require
+                "name"                => "sed_single_icon",                                      //*require
+                "title"               => __("Single Icon","site-editor"),                        //*require for toolbar
+                "description"         => __("Add Single Icon Bar To Page","site-editor"),
+                "icon"                => "sedico-icons",                                     //*require for icon toolbar
+                "module"              =>  "single-icon"                                           //*require
             ) // Args
 		);
 
@@ -35,18 +35,11 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 
     function get_atts(){
         $atts = array(
-              'font_size'       => '30',
-              'type'            => 'icon-default',
-              'style'           => 'icon-main',
-              'hover_effect'    => '',
-              'icon'            => 'fa fa-star-half-full',
-              'link'            => '',
-              'link_target'     => '_self'  ,
-              'color'           =>  '' ,
-              'border_color'    =>  '#ff9900' ,
-              'background_color'=>  '#ff9900' ,
-              'default_width'   => "19px" ,
-              'default_height'  => "21px",
+              'icon'                  =>  'fa fa-camera-retro' ,
+              'border_color'          =>  '#ccc' ,
+              'border_size'           =>  2  , 
+              'link'                  =>  '' ,
+              'link_target'           =>  '_self' , 
         );
 
         return $atts;
@@ -61,9 +54,9 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 
     function less(){
         return array(
-            array( 'icon-main-less' )
+           // array( 'icon-main-less' )
         );
-    }
+    }  
 
     function styles(){
         $styles = array(
@@ -81,10 +74,10 @@ class PBSingleIconShortcode extends PBShortcodeClass{
         return $styles;
     }
 
-    function shortcode_settings(){
+    function shortcode_settings(){  
 
         $this->add_panel( 'single_icon_settings_panel_outer' , array(
-            'title'                   =>  __('Single Image Settings',"site-editor")  ,
+            'title'                   =>  __('Single Icon Settings',"site-editor")  ,
             'capability'              => 'edit_theme_options' ,
             'type'                    => 'inner_box' ,
             'priority'                => 9 ,
@@ -95,7 +88,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
         ) );
 
         $this->add_panel( 'single_icon_settings_panel' , array(
-            'title'                   =>  __('Single Image Settings',"site-editor")  ,
+            'title'                   =>  __('Single Icon Settings',"site-editor")  ,
             'capability'              => 'edit_theme_options' ,
             'type'                    => 'default' ,
             'parent_id'               => "single_icon_settings_panel_outer",
@@ -104,95 +97,98 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 
         $params = array(
 
-            'font_size' => array(
-            	  'type' => 'number',
-                "after_field"  => "px",
-            	  'label' => __('Size', 'site-editor'),
-            	  'description'  => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
-                'js_params' => array(
-                    'min'     => 0
-                ),
+            'icon' => array(
+                "type"                => "icon" , 
+                "label"               => __("Icon Field", "site-editor"),
+                "description"         => __("This option allows you to set a icon for your module.", "site-editor"),
                 'has_border_box'      => false ,
-                "panel"     => "single_icon_settings_panel",
+                'panel'               => 'single_icon_settings_panel',   
+            ), 
+
+            'font_size' => array(
+                "type"                => "font-size" , 
+                "label"               => __("Font Size", "site-editor"),
+                "description"         => __("Add Font Size For Element", "site-editor") ,
+                "category"            => 'style-editor' ,
+                "selector"            => '.hi-icon' ,
+                "default"             => '' ,
+                'has_border_box'      => false , 
+                'panel'               => 'single_icon_settings_panel'
+            ),  
+
+            'font_color' => array(
+                "type"                => "font-color" , 
+                "label"               => __("Font Color", "site-editor"),
+                "description"         => __("Add Font Color For Element", "site-editor") ,
+                "category"            => 'style-editor' ,
+                "selector"            => '.hi-icon' ,
+                "default"             => '#ccc' ,
+                'has_border_box'      => false , 
+                'panel'               => 'single_icon_settings_panel'
             ),
 
-            /*'type' => array(
-            	'type' => 'select',
-            	'label' => __('Icon Type', 'site-editor'),
-            	'description'  => __("This option allows you to have icons in three different types; default, flat and ring. This option is only available in the skins 1, 2 and 3.", "site-editor"),
-              'choices'   =>array(
-                  'icon-default'     => __('Default', 'site-editor'),
-                  'icon-flat'        => __('Flat', 'site-editor'),
-                  'icon-ring'        => __('Ring', 'site-editor'),
-              ),
-              "panel"     => "single_icon_settings_panel",
-              "dependency" => array(
-                  'queries'  =>  array(
-                      array(
-                          "key"           =>  "skin" ,
-                          "value"         =>  "default" ,
-                          "compare"       =>  "!="
-                      )
-                  )              
-              ), 
-            ),*/
-
             'background_color' => array(
-            	  'type'  => 'color',
-            	  'label' => __('Background Color', 'site-editor'),
-            	  'description'  => __('This option allows you to set the background color with the color picker. This is one of the few options that is   not available in the design editor. It is available in all skins except the default one. If you are using flat icon types, this   feature cannot be used.', 'site-editor'),
-                'has_border_box'      => false ,
-                "panel"     => "single_icon_settings_panel",
+                "type"                => "background-color" ,
+                "label"               => __("Background Color", "site-editor"),
+                "description"         => __("Add Background Color For Element", "site-editor") ,
+                "category"            => 'style-editor' ,
+                "selector"            => '.hi-icon' ,
+                "default"             => 'transparent' ,
+                'has_border_box'      => false , 
+                'panel'               => 'single_icon_settings_panel',
                 "dependency"  => array(
                     'queries'  =>  array(
                         array(
-                            "key"         => "skin" ,
-                            "value"       => array( "default" , "icon-flat" ) ,
-                            "compare"     => "NOT IN"
-                        ),
-                    )
-                ),
-            ),
-
-            'border_color' => array(
-            	  'type'  => 'color',
-            	  'label' => __('Border Color', 'site-editor'),
-            	  'description'  => __('This option allows you to set the border color for your icons with the color picker. This is one of the few options that is not available in the design editor. It is only available in skins 1, 2 and 3.', 'site-editor'),
-                'has_border_box'      => false ,
-                "panel"     => "single_icon_settings_panel",
-                "dependency" => array(
-                    'queries'  =>  array(
-                        array(
-                          "key"           =>  "skin" ,
-                          "value"         =>  "default",
-                          "compare"       =>  "!="
+                            "key"      =>  "skin" ,
+                            "value"    =>  "default" ,
+                            "compare"  =>  "!="
                         )
                     )
                 ), 
-            ),
+            ),    
 
-            'color' => array(
-            	  'type'  => 'color',
-            	  'label' => __('Color', 'site-editor'),
-            	  'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
-                'has_border_box'      => false ,
-                "panel"     => "single_icon_settings_panel",
-            ),
+            'border_color' => array( 
+                "type"                => "color" , 
+                "label"               => __("Border Color", "site-editor"),
+                "description"         => __("Add Border Color For Element", "site-editor") ,
+                'has_border_box'      => false , 
+                'panel'               => 'single_icon_settings_panel',
+                "dependency"  => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "skin" ,
+                            "value"    =>  "default" ,
+                            "compare"  =>  "!="
+                        )
+                    )
+                ), 
+            ),      
+
+            'border_size' => array(                 
+                "type"                => "number",
+                "after_field"         => "px",
+                "label"               => __('Border Size', 'site-editor'),
+                "js_params"           =>  array(
+                    "min"             =>  0 ,
+                ),  
+                'has_border_box'      => false , 
+                'panel'               => 'single_icon_settings_panel',
+                "dependency"  => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "skin" ,
+                            "value"    =>  "default" ,
+                            "compare"  =>  "!="
+                        )
+                    )
+                ), 
+            ),  
 
             "link" => array(
                 "type"                => "link" ,
                 "label"               => __("Link Panel Settings", "site-editor"),
                 "panel_type"          => "default" ,
-                'parent_id'           => 'single_image_settings_panel_outer',
-                'panel_dependency'    => array(
-                    'queries'  =>  array(
-                        array(
-                            "key"       => "image_click" ,
-                            "value"     => "link_mode" ,
-                            "compare"   => "=="
-                        )
-                    )
-                )
+                'parent_id'           => 'single_icon_settings_panel_outer',
             ),
 
             'row_container' => array(
@@ -227,39 +223,19 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 
     }
 
-      function custom_style_settings(){
-          return array(
+    function custom_style_settings(){
+        return array(
 
-              array(
-              'module-single-icon' , 'sed_current' ,
-              array( 'background','gradient','border','border_radius','margin','shadow' ) , __("Single Icon Module Container" , "site-editor") ) ,
+           array(
+            'social-icon' , '.hi-icon' ,
+            array('border_radius' ,'padding') , __("Icon Container" , "site-editor") ) ,
 
-             array(
-              'social-icon' , '.social-icon' ,
-              array( 'background','gradient','border','border_radius' ,'padding', 'font') , __("Icon Container" , "site-editor") ) ,
+            array(
+            'social-icon-hover' , '.hi-icon:hover' ,
+            array( 'background','gradient','border','border_radius', 'font') , __("Icon Hover" , "site-editor") ) ,
 
-              array(
-              'social-icon-hover' , '.social-icon:hover' ,
-              array( 'background','gradient','border','border_radius', 'font') , __("Icon Hover" , "site-editor") ) ,
-
-          /*     array(
-              'hex-icon-before' , '.hex-icon:before' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin') , __("Single Icon Inner Container Before" , "site-editor") ) ,
-
-              array(
-              'hi-icon' , '.hi-icon' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow', 'font') , __("Icon" , "site-editor") ) ,
-
-              array(
-              'hi-icon-after' , '.hi-icon:after' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow') , __("Icon After" , "site-editor") ) ,
-
-              array(
-              'hi-icon-before' , '.hi-icon:before' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Icon Before" , "site-editor") ) ,
-               */
-          );
-      }
+        );
+    }
 
 
     function contextmenu( $context_menu ){
@@ -283,7 +259,6 @@ $sed_pb_app->register_module(array(
     "icon"        => "sedico-icons",
     "shortcode"   => "sed_single_icon",
     "tpl_type"    => "underscore" ,
-    //"js_plugin"   => '',
     "js_module"   => array( 'sed_single_icon_module_script', 'single-icon/js/icons-module.min.js', array('sed-frontend-editor'))
 ));
 

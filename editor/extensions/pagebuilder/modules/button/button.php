@@ -19,52 +19,47 @@ if( !is_pb_module_active( "title" ) ){
 
 class PBButtonShortcode extends PBShortcodeClass{
 
-	/**
-	 * Register module with siteeditor.
-	 */
-	function __construct() {
-		parent::__construct( array(
-                  "name"        => "sed_button",                     //*require
-                  "title"       => __("Button","site-editor"),       //*require for toolbar
-                  "description" => __(""),
-                  "icon"        => "sedico-buttons",                    //*require for icon toolbar
-                  "module"      =>  "button"                         //*require
-            ) // Args
-		);
-	}
-
-  function get_atts(){
-      $atts = array(
-               /* 'title'          => __('My Button', 'site-editor'), */
-                'link'              => '',
-                'link_target'       => '_self',
-                'size'           => '',
-                'type'           => 'btn-primary',
-                'default_width'  => "126px" ,
-                'default_height' => "44px",
-      );
-
-      return $atts;
-  }
-
-  function add_shortcode( $atts , $content = null ){
-      extract($atts);
-
-  }            
-
-  function styles(){
-      return array(
-          array('button-style', SED_PB_MODULES_URL.'button/css/style.css' ,'1.0.0' ) ,
-      );
-  } 
-
-  function less(){
-      return array(
-          array('main-button')
-      );
-  }
-
-  function shortcode_settings(){
+	  /**
+	   * Register module with siteeditor.
+	   */
+	  function __construct() {
+	  	parent::__construct( array(
+              "name"        => "sed_button",                     //*require
+              "title"       => __("Button","site-editor"),       //*require for toolbar
+              "description" => __(""),
+              "icon"        => "sedico-buttons",                    //*require for icon toolbar
+              "module"      =>  "button"                         //*require
+          ) // Args
+	  	);
+	  }
+  
+    function get_atts(){
+        $atts = array(
+            'link'              => '',
+            'link_target'       => '_self',
+            'size'              => '',
+            'type'              => 'btn-primary',
+            'default_width'     => "126px" ,
+            'default_height'    => "44px", 
+            'outline'           => false, 
+            'full_width'        => false,
+        );
+  
+        return $atts;
+    }
+  
+    function add_shortcode( $atts , $content = null ){
+        extract($atts);
+  
+    }            
+  
+    function styles(){
+        return array(
+            array('button-style', SED_PB_MODULES_URL.'button/css/style.css' ,'1.0.0' ) ,
+        );
+    } 
+  
+    function shortcode_settings(){
 
         $this->add_panel( 'button_settings_panel_outer' , array(
             'title'                   =>  __('Single Image Settings',"site-editor")  ,
@@ -86,12 +81,6 @@ class PBButtonShortcode extends PBShortcodeClass{
         ) );
 
         $params = array(
-             /*  	'title' => array(
-                    'type'      => 'text',
-                    'label'     => __('Title', 'site-editor'),
-                    'description'  => __('Set a title attribute for the link the button consists of', 'site-editor'),
-                    "panel"     => "button_settings_panel",
-                ),       */
                 
             'size' => array(
                 'type' => 'select',
@@ -114,44 +103,48 @@ class PBButtonShortcode extends PBShortcodeClass{
                 'label' => __('Button Type', 'site-editor'),
                 'description'  => __("This option allows you to set the current button type. The options to select from are info, success, purple, default, none, flat, danger, warning and primary.
                           <br />It should be mentioned that this option is not for setting color for your buttons. It helps you to create commonly used buttons. You can use the design editor to easily change the color of your buttons.", "site-editor"),
-                  'choices'   =>array(
-                      'btn-primary'     => __('Primary', 'site-editor'),
-                      'btn-default'     => __('Default', 'site-editor'),
-                      'btn-perfect'     => __('Perfect', 'site-editor'),
-                      'btn-success'     => __('Success', 'site-editor'),
-                      'btn-info'        => __('Info', 'site-editor'),
-                      'btn-warning'     => __('Warning', 'site-editor'),
-                      'btn-danger'      => __('Danger', 'site-editor'),
-                      'btn-gray'        => __('Gray', 'site-editor'),
-                      'btn-black'       => __('Black', 'site-editor'),
-                      'btn-white'       => __('White', 'site-editor'),
-                      'btn-link'        => __('Link', 'site-editor'),
-                  ),
+                'choices'   =>array(
+                    'btn-primary'     => __('Primary', 'site-editor'),
+                    'btn-default'     => __('Default', 'site-editor'),
+                    'btn-perfect'     => __('Perfect', 'site-editor'),
+                    'btn-success'     => __('Success', 'site-editor'),
+                    'btn-info'        => __('Info', 'site-editor'),
+                    'btn-warning'     => __('Warning', 'site-editor'),
+                    'btn-danger'      => __('Danger', 'site-editor'),
+                    'btn-gray'        => __('Gray', 'site-editor'),
+                    'btn-black'       => __('Black', 'site-editor'),
+                    'btn-white'       => __('White', 'site-editor'),
+                    'btn-link'        => __('Link', 'site-editor'),
+                ),
                 "has_border_box"    => false ,
                 "panel"     => "button_settings_panel",
+            ),
+
+            'outline' => array(
+                "type"          => "checkbox" ,
+                "label"         => __("Outline", "site-editor"),
+                "has_border_box"    => false ,
+                "panel"         => "button_settings_panel" ,
+            ),
+
+            'full_width' => array(
+                "type"          => "checkbox" ,
+                "label"         => __("Full Width", "site-editor"),
+                "has_border_box"    => false ,
+                "panel"         => "button_settings_panel" ,
             ),
 
             "link" => array(
                 "type"                => "link" ,
                 "label"               => __("Link Panel Settings", "site-editor"),
                 "panel_type"          => "default" ,
-                'parent_id'           => 'single_image_settings_panel_outer',
+                'parent_id'           => 'button_settings_panel_outer', 
             ),
 
             'row_container' => array(
                 'type'                => 'row_container',
                 'label'               => __('Module Wrapper Settings', 'site-editor')
             ), 
-
-            "skin"  =>  array(
-                "type"                => "skin" ,
-                "label"               => __("Change skin", "site-editor"),
-                'button_style'        => 'menu' ,
-                'has_border_box'      => false ,
-                'icon'                => 'sedico-change-skin' ,
-                'field_spacing'       => 'sm' ,
-                'priority'            => 540
-            ),
 
             "animation"  =>  array(
                 "type"                => "animation" ,
@@ -172,33 +165,20 @@ class PBButtonShortcode extends PBShortcodeClass{
     function custom_style_settings(){
         return array(
 
-          /*array(
-          'module-button' , 'sed_current' ,
-          array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Button Module Container" , "site-editor") ) ,
-          */
           array(
-          'button-container' , '.btn' ,
-          array( 'background','gradient','border','border_radius' ,'padding','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Button Container" , "site-editor") ) ,
+              'button-container' , '.btn' ,
+              array( 'background','gradient','border','border_radius' ,'padding' ,'margin' ,'shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Button Container" , "site-editor") 
+          ) ,
 
-          array(
-          'button-hover' , '.btn:hover' ,
-          array( 'background','gradient','border','shadow' ,'text_shadow' , 'font' ) , __("Button Hover" , "site-editor") ) ,
+          array( 
+              'button-hover' , '.btn:hover' ,
+              array( 'background','gradient','border','shadow' ,'text_shadow' , 'font' ) , __("Button Hover" , "site-editor") 
+          ) ,
 
-          array(
-          'button-active' , '.btn:active' ,
-          array( 'background','gradient','border','shadow' ,'text_shadow' , 'font' ) , __("Button Active" , "site-editor") ) ,
-
-          array(
-          'module-icons' , '.module-icons' ,
-          array( 'background','gradient','border','border_radius' ,'padding' ,'text_shadow' , 'font' ,'line_height' ) , __("Icons Container" , "site-editor") ) ,
-
-          array(
-          'arrow' , '.sed-button-item .icon-button-df:after' ,
-          array( 'background','gradient','border','border_radius' ,'padding','margin' ) , __("Arrow" , "site-editor") ) ,
-
-          array(
-          'item-skin6' , '.sed-button-item-skin6 .hi-icon' ,
-          array( 'background','gradient','border','border_radius','margin','shadow' ) , __("Icons" , "site-editor") ) ,
+          array( 
+              'button-active' , '.btn:active' ,
+              array( 'background','gradient','border','shadow' ,'text_shadow' , 'font' ) , __("Button Active" , "site-editor") 
+          ) ,
 
         );
     }
@@ -222,9 +202,8 @@ $sed_pb_app->register_module(array(
     "description" => __("","site-editor"),
     "icon"        => "sedico-buttons",
     "shortcode"   => "sed_button",
-    "sub_modules"   => array('title', 'icons'),
-    //"js_plugin"   => '',
-    //"js_module"   => '',
+    "sub_modules"   => array('title'),
+    "tpl_type"    => "underscore"
 ));
 
 

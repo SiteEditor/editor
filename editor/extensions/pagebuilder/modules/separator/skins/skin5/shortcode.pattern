@@ -1,3 +1,0 @@
-[sed_separator override_skins="default,skin2, skin3 ,skin4 , skin6 ,skin7 ,skin8 ,skin9 "]
-	[sed_icons sed_support_id="icons-separator" class="special-spr-center" parent_module="separator"  font_size="20"][/sed_icons]
-[/sed_separator]

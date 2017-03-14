@@ -124,8 +124,6 @@ class PBTextIconShortcode extends PBShortcodeClass{
 
 new PBTextIconShortcode();
 
-include SED_PB_MODULES_PATH . '/text-icon/sub-shortcode/sub-shortcode.php';
-
 global $sed_pb_app;
 
 $sed_pb_app->register_module(array(

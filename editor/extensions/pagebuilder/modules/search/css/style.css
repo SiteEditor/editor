@@ -9,7 +9,6 @@
     display: inline-block;
     margin-bottom: 0;
     vertical-align: middle;
-    color: #fff;
 }
 
 .module.module-search.search-default .search-box {
@@ -24,6 +23,7 @@
     padding: 0 12px;
     cursor: pointer;
     background-color: #e61a33;
+    color: #fff;
     border-width: 0;
     position: absolute;
     right: 0;
@@ -39,4 +39,25 @@
 .rtl-body .module.module-search.search-default .search-button {
     right: auto;
     left: 0;
+}
+
+/* Placeholder text color */
+.module.module-search.search-default .search-box::-webkit-input-placeholder {
+    color: inherit;
+    opacity: 0.9;
+}
+
+.module.module-search.search-default .search-box:-moz-placeholder {  
+    color: inherit;
+    opacity: 0.9;
+}
+
+.module.module-search.search-default .search-box::-moz-placeholder {
+    color: inherit;
+    opacity: 0.9;
+}
+
+.module.module-search.search-default .search-box:-ms-input-placeholder {
+    color: inherit;
+    opacity: 0.9;
 }

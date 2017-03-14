@@ -37,10 +37,13 @@ class PBSeparatorShortcode extends PBShortcodeClass{
 
     function get_atts(){
         $atts = array(
-              'type'            => 'spr-horizontal',
-              'border_style'    => 'spr-solid',
-              'vertical_height' => 100,
-              'max_width'       => 2000,
+              'type'                => 'spr-horizontal',
+              'border_style'        => 'spr-solid',
+              'vertical_height'     => 100, 
+              'max_width'           => 2000,
+              'separator_color'     => '#eee', 
+              'separator_width'     => 1, 
+              "icon"                => "fa fa-star" , 
 
         );
 
@@ -69,7 +72,7 @@ class PBSeparatorShortcode extends PBShortcodeClass{
 
     function less(){
         return array(
-            array('separator-main-less')
+            //array('separator-main-less')
         );
     }
 
@@ -95,6 +98,24 @@ class PBSeparatorShortcode extends PBShortcodeClass{
         ) );
 
         $params = array(
+
+            'icon' => array(
+                "type"          => "icon" , 
+                "label"         => __("Icon Field", "site-editor"),
+                "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
+                'has_border_box'      => false ,
+                'panel'               => 'separator_settings_panel',
+                "dependency"  => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "skin" ,
+                            "value"    =>  "skin5" ,
+                            "compare"  =>  "=="
+                        )
+                    )
+                ),   
+            ), 
+
       		'type' => array(
       			'type' => 'select',
       			'label' => __('Type', 'site-editor'),
@@ -122,7 +143,6 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 'choices'   =>array(
                     'spr-solid'           => __('solid', 'site-editor'),
                     'spr-double'          => __('double', 'site-editor'),
-                    'spr-gradient'        => __('gradient', 'site-editor'),
                     'spr-dashed'          => __('dashed', 'site-editor'),
                     'spr-dotted'          => __('dotted', 'site-editor'),
                 ),
@@ -135,7 +155,7 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 "label"             => __("Separator Height ","site-editor"),
                 "description"       => __('This option allows you to set the vertical separator heights. This only appears when the separator is vertical.',"site-editor"),
                 "js_params"  =>  array(
-                    "min"  =>  0 ,
+                    "min"  =>  1 ,
                 ),
                 'has_border_box'          => false ,
                 "panel"     => "separator_settings_panel",
@@ -176,6 +196,24 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 ),  
             ),
 
+            'separator_color' => array( 
+                "type"              => "color" , 
+                "label"             => __('Separator Color', 'site-editor'),
+                'has_border_box'    => false , 
+                'panel'             => 'separator_settings_panel'
+            ),   
+
+            'separator_width' => array(                 
+                "type"              => "number",
+                "after_field"       => "px",
+                "label"             => __('Separator Thickness', 'site-editor'),
+                "js_params"  =>  array(
+                    "min"  =>  0 ,
+                ),
+                'has_border_box'          => false , 
+                'panel'             => 'separator_settings_panel'
+            ),           
+
             "skin"  =>  array(
                 "type"                => "skin" ,
                 "label"               => __("Change skin", "site-editor"),
@@ -205,32 +243,21 @@ class PBSeparatorShortcode extends PBShortcodeClass{
         return $params;
 
     }
+
     function custom_style_settings(){
         return array(
 
             array(
-            'separator' , 'sed_current' ,
-            array('border','border_radius', 'margin','trancparency' ) , __("Separator Container" , "site-editor") ) ,
+            'separator' , 'sed_current' , 
+            array('padding','margin' ) , __("Separator Container" , "site-editor") ) ,            
 
             array(
             'spr-container' , '.spr-container' ,
             array('padding') , __("Separator Outer" , "site-editor") ) ,
 
             array(
-            'special-spr' , '.spr-container .separator' ,
-            array('border','border_radius' ,'padding' ,'margin') , __("Separator" , "site-editor") ) ,
-
-            array(
-            'special-spr-left' , '.special-spr-left' ,
-            array( 'background','gradient','border','border_radius' ,'padding','shadow') , __("Separator Item Container" , "site-editor") ) ,
-
-            array(
-            'special-spr-center' , '.special-spr-center' ,
-            array( 'background','gradient','border','border_radius' ,'padding','shadow') , __("Separator Item Container" , "site-editor") ) ,
-
-            array(
-            'separator-item' , '.separator-item' ,
-            array( 'background','border','border_radius' ,'padding' ,'margin','shadow' ) , __("Separator Item" , "site-editor") ) ,
+            'separator-icon' , '.separator-icon' ,
+            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align'  ) , __("Icon" , "site-editor") ) ,
 
         );
     }

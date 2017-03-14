@@ -4,6 +4,6 @@
 <# }else{ #> 
     <a class="social-icon" href="javascript:void(0);">   
 <# } #>  
-		<span class="hi-icon {{icon}}" sed-icon="{{icon}}" style="font-size:{{font_size}}px;color:{{color}}"></span>
+		<span class="hi-icon {{icon}}" sed-icon="{{icon}}"></span>
 	</a>
 </li>

@@ -3,15 +3,29 @@
     <div class="spr-container spr-left">
       <div class="{{border_style}} spr-horizontal separator"></div>
     </div>
-      {{{content}}}
+      <div class="separator-icon special-spr-center"><i class="{{icon}}"></i></div>
     <div class="spr-container spr-right">
-      <div class="{{border_style}} spr-horizontal separator"></div>
+      <div class="{{border_style}} spr-horizontal separator"></div> 
     </div>
   </div>
 </div>
 
 <style type="text/css">
-  [sed_model_id="{{sed_model_id}}"].module-separator {
+
+    [sed_model_id="{{sed_model_id}}"].module-separator .separator {
+        border-color: {{separator_color}}; 
+    }
+  
+    [sed_model_id="{{sed_model_id}}"] .spr-horizontal {
       max-width: {{max_width}}px;
-  }
+    }
+  
+    [sed_model_id="{{sed_model_id}}"] .separator.spr-horizontal  {
+        border-width: {{separator_width}}px 0 0 0; 
+    }
+  
+    [sed_model_id="{{sed_model_id}}"] .separator.spr-horizontal.spr-double {
+        border-width: {{separator_width}}px 0 {{separator_width}}px 0 ;
+    }
+
 </style>

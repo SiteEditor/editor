@@ -34,13 +34,12 @@ class PBSocialBarShortcode extends PBShortcodeClass{
 
      function get_atts(){
         $atts = array(
-              'number_items'         => 9,
-              //"align_icon"           => 'center',
-              //"size"                 => 32,
-              "layout_mode"          => "horzintal",
-              "margin"               => 5,
-              'group_icon_color'             => '' ,
-              'group_icon_size'              => 20              
+              'number_items'                => 9,
+              //"size"                        => 32,
+              "layout_mode"                 => "horzintal",
+              "margin"                      => 5,
+              'group_icon_color'            => '' ,
+              'group_icon_size'             => 20              
         );
         return $atts;
     }
@@ -151,6 +150,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
                 "panel"     => "social_bar_settings_panel",
 
             ),
+
       		'group_icon_size' => array(
       			'type' => 'number',
                 "after_field"  => "px",

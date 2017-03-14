@@ -1,39 +1,39 @@
 
-.module.module-single-icon .hi-icon {
+.module-single-icon .hi-icon {
     cursor: pointer;
-    display: block;
-    height: 2.5em;
-    line-height: 2.5em !important;
+    height: 2em;
+    line-height: 2em;
     text-align: center;
-    width: 2.5em;
+    width: 2em; 
+    font-size: 30px;
+    color: #ccc;
+    -webkit-transition: all .35s ease;
+    -o-transition: all .35s ease;
+    transition: all .35s ease
 }
 
-.module.module-single-icon.single-icon-default {
-    display: inline-block
+.single-icon-default .hi-icon {
+    height: 1em;
+    line-height: 1em;
+    width: 1em
 }
 
-.module.module-single-icon.single-icon-default .hi-icon {
-    height: 1.2em;
-    line-height: 1.2em !important;
-    width: 1.2em
-}
-
-.module.module-single-icon.single-icon-skin1 .hi-icon {
+.single-icon-skin1 .hi-icon {
 	background-color: transparent;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-    border: 1px solid;
-    border-color: #e61a33;
-    color: #e61a33;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
 }
 
-.module.module-single-icon.single-icon-skin2 .hi-icon {
+.single-icon-skin2 .hi-icon {
 	background-color: transparent;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    border-radius: 3px;
-    border: 1px solid;
-    border-color: #e61a33;
-    color: #e61a33;
+    border-radius: 3px; 
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
 }

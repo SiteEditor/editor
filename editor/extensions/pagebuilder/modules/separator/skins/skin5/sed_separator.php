@@ -3,20 +3,34 @@
     <div class="spr-container spr-left">
       <div class="<?php echo $border_style;?> spr-horizontal separator"></div>
     </div>
-    <?php echo $content;?>
+    <div class="separator-icon special-spr-center"><i class="<?php echo $icon; ?>"></i></div>
     <div class="spr-container spr-right">
       <div class="<?php echo $border_style;?> spr-horizontal separator"></div>
     </div>
   </div>
 </div>
 <?php
-  global $sed_dynamic_css_string;
-  $selector = ( site_editor_app_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
-  ob_start();
-  ?>
-      <?php echo $selector; ?>.module-separator {
+    global $sed_dynamic_css_string;
+    $selector = ( site_editor_app_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
+    ob_start();
+    ?>
+
+        <?php echo $selector; ?>.module-separator .separator {
+            border-color: <?php echo $separator_color;?>; 
+        }
+    
+        <?php echo $selector; ?> .spr-horizontal {
           max-width: <?php echo $max_width;?>px;
-      }
-  <?php
-  $css = ob_get_clean();
-  $sed_dynamic_css_string .= $css;
+        }
+
+        <?php echo $selector; ?> .separator.spr-horizontal  {
+            border-width: <?php echo $separator_width;?>px 0 0 0; 
+        }
+
+        <?php echo $selector; ?> .separator.spr-horizontal.spr-double {
+            border-width: <?php echo $separator_width;?>px 0 <?php echo $separator_width;?>px 0 ;
+        }
+
+    <?php
+    $css = ob_get_clean();
+    $sed_dynamic_css_string .= $css;

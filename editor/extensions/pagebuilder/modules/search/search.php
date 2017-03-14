@@ -11,49 +11,47 @@
 * @author siteeditor
 */
 
-//!is_pb_module_active( "icons" ) ||
-if( !is_pb_module_active( "title" )){
-    sed_admin_notice( __("<b>Search Module</b> needed to <b>Icons Module</b> and <b>Title Module</b> and <br /> please first install and activate its ") );
-    return ;
-}
-
 class PBSearchShortcode extends PBShortcodeClass{
-  static $sed_counter_id = 0;
+    static $sed_counter_id = 0;
+  
+    function __construct(){
+  
+        parent::__construct( array(
+          "name"        => "sed_search",                 //*require
+          "title"       => __("Search","site-editor"),   //*require for toolbar
+          "description" => __("","site-editor"),
+          "icon"        => "sedico-search",                 //*require for icon toolbar
+          "module"      => "search"                     //*require
+        ));
 
-  function __construct(){
+    }
 
-    parent::__construct( array(
-      "name"        => "sed_search",                 //*require
-      "title"       => __("Search","site-editor"),   //*require for toolbar
-      "description" => __("","site-editor"),
-      "icon"        => "sedico-search",                 //*require for icon toolbar
-      "module"      => "search"                     //*require
-    ));
-  }
-  function get_atts(){
-      $atts = array(
-                'title'              => __('My Button', 'site-editor'),
-                'action'             => site_url() ,
-                'placeholder'        => __('Search...','site-editor'),
-                "icon"                => "fa fa-search" ,  
-      );
-      return $atts;
-  }
-  function add_shortcode( $atts , $content = null ){
-   /*   extract($atts);
-      $skins_search = array('default','skin2','skin5');
-      if( in_array($skin, $skins_search) || site_editor_app_on() ){
-          $this->add_script('main-search' , SED_PB_MODULES_URL.'search/js/search.js');
-      }   */
+    function get_atts(){
+        $atts = array(
+              'title'              => __('My Button', 'site-editor'),
+              'action'             => site_url() ,
+              'placeholder'        => __('Search...','site-editor'),
+              "icon"               => "fa fa-search" ,  
+        );
+        return $atts;
+    }
 
-      self::$sed_counter_id++;
-      $module_html_id = "sed_search_module_html_id_" . self::$sed_counter_id;
+    function add_shortcode( $atts , $content = null ){
 
-      $this->set_vars( array(
-        "module_html_id"     => $module_html_id ,   
-      ));
+        /*   extract($atts);
+        $skins_search = array('default','skin2','skin5');
+        if( in_array($skin, $skins_search) || site_editor_app_on() ){
+            $this->add_script('main-search' , SED_PB_MODULES_URL.'search/js/search.js');
+        }   */
 
-  }        
+        self::$sed_counter_id++;
+        $module_html_id = "sed_search_module_html_id_" . self::$sed_counter_id;
+
+        $this->set_vars( array(
+          "module_html_id"     => $module_html_id ,   
+        ));
+
+    }        
 
     function styles(){
         return array(
@@ -73,7 +71,7 @@ class PBSearchShortcode extends PBShortcodeClass{
         );
     }
 
-  function shortcode_settings(){
+    function shortcode_settings(){
 
         $this->add_panel( 'search_settings_panel_outer' , array(
             'title'                   =>  __('Search Settings',"site-editor")  ,
@@ -110,7 +108,7 @@ class PBSearchShortcode extends PBShortcodeClass{
                 "description"   => __("This option allows you to set a icon for your module.", "site-editor"),
                 'has_border_box'      => false ,
                 'panel'               => 'search_settings_panel',
-            ),  
+            ),   
 
             'row_container' => array(
                 'type'          => 'row_container',
@@ -134,33 +132,15 @@ class PBSearchShortcode extends PBShortcodeClass{
     function custom_style_settings(){
         return array(
 
-            array(
-            'search' , 'sed_current' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow','text_shadow' ) , __("Search" , "site-editor") ) ,
-
-            array(
-            'form' , 'form' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow','text_shadow' , 'font' ,'line_height','text_align'  ) , __("Form" , "site-editor") ) ,
 
             array(
             'search-box' , '.search-box' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow','text_shadow' , 'font' ,'line_height','text_align'  ) , __("Input" , "site-editor") ) ,
+            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align'  ) , __("Input" , "site-editor") ) ,
 
-            /*array(
-            'search-box-placeholderf' , '.search-box:-moz-placeholder ' ,
-            array('font') , __("Placeholder for Firefox" , "site-editor") ) ,
-
-            array(
-            'search-box-placeholderw' , '.search-box:-webkit-input-placeholder ' ,
-            array('font') , __("Placeholder for Chrome" , "site-editor") ) ,
-             */
             array(
             'search-button' , '.search-button' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow','text_shadow' , 'font' ,'line_height','text_align'  ) , __("Button" , "site-editor") ) ,
+            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_shadow' , 'font' ,'line_height','text_align'  ) , __("Button" , "site-editor") ) ,
 
-            array(
-            'search-icon' , '.search-icon' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow','text_shadow' , 'font' ) , __("Search Icon" , "site-editor") ) ,
 
         );
     }
@@ -181,7 +161,6 @@ $sed_pb_app->register_module(array(
     "description" => __("","site-editor"),
     "icon"        => "sedico-search",
     "shortcode"   => "sed_search",
-    "sub_modules"   => array('title'),
 ));
 
 
