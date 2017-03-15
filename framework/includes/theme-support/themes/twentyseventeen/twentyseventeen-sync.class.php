@@ -37,6 +37,8 @@ class SiteEditorTwentyseventeenThemeSync{
 
         //add_filter( 'template_include', array(&$this,'template_chooser') , 99 );
 
+        add_filter( 'sed_header_wrapping_template', array( $this , 'get_header' ) , 100 , 1 );
+
         add_filter( 'sed_theme_color_css' , array( $this , 'theme_color_css' ) , 100 , 3 );
 
         //add_filter( 'sed_color_schemes' , array( $this , 'color_schemes' ) );
@@ -106,9 +108,19 @@ class SiteEditorTwentyseventeenThemeSync{
 
     }
 
-    public function template_chooser( $template ) { var_dump( $template );
+    public function template_chooser( $template ) {
+
+        $overridden_template = locate_template( 'header.php' );
+
+        var_dump( $overridden_template );
 
         return $template;
+
+    }
+
+    public function get_header( $template ) {
+
+        return dirname( __FILE__ ) . '/header.php';
 
     }
 

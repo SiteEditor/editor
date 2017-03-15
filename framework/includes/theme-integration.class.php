@@ -145,6 +145,8 @@ class SiteEditorWrapping {
   //
   public function __toString() {
 
+    $this->templates = apply_filters( 'sed_templates_wrapping' , $this->templates , $this->slug );
+
     $this->templates = apply_filters( 'sed_wrapping_' . $this->slug, $this->templates );
 
     $path = locate_template( $this->templates );
@@ -196,37 +198,68 @@ function sed_template_base() {
 /** Add information to the header */
 function sed_get_header() {
 
+  $template = apply_filters( 'sed_header_wrapping_template' , '' );
+
+  $template_name = "header.php";
+
   ob_start();
 
-  get_header();
+  if ( !empty( $template ) && file_exists( $template ) && ( !is_child_theme() || ( is_child_theme() && !file_exists(STYLESHEETPATH . '/' . $template_name) ) ) ){
+
+    load_template( $template , true );
+
+  }else {
+
+    get_header();
+
+  }
 
   $header = ob_get_clean();
 
   $header = str_replace( '<head>', sprintf( '<head>%1$s %2$s %1$s', "\n", '<!-- Built With SiteEditor | http://www.siteeditor.org -->' ), $header );
 
   echo $header;
+
 }
 
 function sed_get_footer() {
 
   global $get_footer_output;
 
-  echo sed_remove_closing_tags( $get_footer_output );
+  $template = apply_filters( 'sed_footer_wrapping_template' , '' );
 
-  /** Run WP Footer action again for any shortcodes, etc.. that may have placed new actions there. */
-  do_action( 'wp_footer' );
+  $template_name = "footer.php";
 
-  /** Takes all original wp_footer actions (see above) */
-  do_action( 'sed_footer_area' );
+  ob_start();
 
-  if( defined( 'SED_ALTERNATIVE_FOOTER_SCRIPTS' ) ) {
-    do_action( 'wp_print_footer_scripts' );
+  if ( !empty( $template ) && file_exists( $template ) && ( !is_child_theme() || ( is_child_theme() && !file_exists(STYLESHEETPATH . '/' . $template_name) ) ) ){
+
+    load_template( $template , true );
+
+  }else {
+
+    echo sed_remove_closing_tags($get_footer_output);
+
+    /** Run WP Footer action again for any shortcodes, etc.. that may have placed new actions there. */
+    do_action('wp_footer');
+
+    /** Takes all original wp_footer actions (see above) */
+    do_action('sed_footer_area');
+
+    if (defined('SED_ALTERNATIVE_FOOTER_SCRIPTS')) {
+      do_action('wp_print_footer_scripts');
+    }
+
+    /** All JSON data from PL */
+    do_action('pl_json_data');
+
+    printf('</body></html><!-- Thanks for stopping by. Have an amazing day! -->');
+
   }
 
-  /** All JSON data from PL */
-  do_action( 'pl_json_data' );
+  $footer = ob_get_clean();
 
-  printf( '</body></html><!-- Thanks for stopping by. Have an amazing day! -->' );
+  echo $footer;
 
 }
 

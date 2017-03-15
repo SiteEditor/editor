@@ -64,12 +64,12 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
 
         $fields = array(
 
-            'desable_header' => array(
-                'setting_id'        => 'sed_desable_header',
-                'label'             => __('Desable Header', 'site-editor'),
+            'disable_header' => array(
+                'setting_id'        => 'sed_disable_header',
+                'label'             => __('Disable Header', 'site-editor'),
                 'type'              => 'checkbox',
                 'default'           => false,
-                'option_type'       => 'option',
+                'option_type'       => 'theme_mod',
                 'transport'         => 'postMessage' ,
             ),
 
