@@ -216,7 +216,7 @@ Class PageBuilderApplication {
 
             self::$shortcodes_tagnames = array_merge( self::$shortcodes_tagnames , array_keys( $sed_helper_shortcodes ) );
 
-            self::$shortcodes_tagnames = array_unique( self::$shortcodes_tagnames );
+            self::$shortcodes_tagnames = array_unique( self::$shortcodes_tagnames ); //var_dump( $sed_helper_shortcodes );
 
             foreach( $sed_helper_shortcodes AS $shortcode => $main_shortcode_name ){
                 if( shortcode_exists( $main_shortcode_name ) ){ //var_dump( $shortcode_tags[$main_shortcode_name] );

@@ -174,7 +174,7 @@
 
                 api.settings.settings[id] = data;
 
-            }else{
+            }else{ 
 
                 api( id ).set( pagesThemeContent );
 
@@ -373,7 +373,7 @@
 
     });
 
-    api.AppLayouts = api.Class.extend({
+        api.AppLayouts = api.Class.extend({
 
         initialize: function (params, options) {
             var self = this;
@@ -773,13 +773,13 @@
     //8.public to hidden -------------  add is_hidden to main shortcode model
 
     /*
-     confirm alert
-     1. after convert public to private (customize or hidden or normal to private )
-     2. after customize to hidden
-     3. after customize to public
-     4. after remove public row (customize or hidden or normal)
-     5. after drag & drop public row to inner other modules
-     */
+      confirm alert
+      1. after convert public to private (customize or hidden or normal to private )
+      2. after customize to hidden
+      3. after customize to public
+      4. after remove public row (customize or hidden or normal)
+      5. after drag & drop public row to inner other modules
+    */
 
     api.LayoutScopeControl = api.Control.extend({
 
@@ -952,7 +952,7 @@
                         var layout = $(this).val();
 
                         //if (layout != control.currentLayout)
-                        $(this).parents(".sub-theme-item:first").find(".edit-layout-rows").removeClass("hide");
+                            $(this).parents(".sub-theme-item:first").find(".edit-layout-rows").removeClass("hide");
 
                         if (!control.existThemeIdInLayout(layout)) {
 
@@ -1498,7 +1498,7 @@
 
             themeId = ( _.isUndefined(themeId) || !themeId ) ? this.themeId : themeId;
 
-            layout = ( _.isUndefined(layout) || !layout ) ? this.currentLayout : layout;
+            layout = ( _.isUndefined(layout) || !layout ) ? this.currentLayout : layout; 
 
             if( attr == "themeId" )
                 return themeId;
@@ -1688,11 +1688,11 @@
 
             $( api.sedDialogSettings.dialogSelector ).find(".sed_go_to_manage_layout_rows").livequery(function(){
                 //if( _.isUndefined( self.panelsContents[self.currentSettingsId] ) ){
-                $(this).click(function(){
+                    $(this).click(function(){
 
-                    api.appLayouts.manageLayoutRows( this );
+                        api.appLayouts.manageLayoutRows( this );
 
-                });
+                    });
                 //}
             },function(){
                 $(this).unbind("click");
@@ -1796,7 +1796,7 @@
 
                 this.refresh();
                 this.UI._ErrorBox.hide();
-
+                
                 //add main_row(content) model to sed_layouts_models
                 var layoutModels = $.extend( true, {} , api('sed_layouts_models')() );
 
@@ -1981,28 +1981,28 @@
     });
 
 
-    $( function() {
+   $( function() {
 
-        api.layoutsRowsContent = new api.LayoutsRowsContent({});
+       api.layoutsRowsContent = new api.LayoutsRowsContent({});
 
-        api.appLayouts = new api.AppLayouts({});
+       api.appLayouts = new api.AppLayouts({});
 
-        /*$( "#page_layout" ).click(function() {
-         $( "#sed-dialog-sub-themes-settings" ).dialog( "open" );
-         });
+       /*$( "#page_layout" ).click(function() {
+           $( "#sed-dialog-sub-themes-settings" ).dialog( "open" );
+       });
 
-         $( "#sed-dialog-sub-themes-settings" ).dialog({
-         autoOpen: false,
-         width: 295,
-         height: 295 ,
-         resizable: false
-         });*/
+        $( "#sed-dialog-sub-themes-settings" ).dialog({
+            autoOpen: false,
+            width: 295,
+            height: 295 ,
+            resizable: false
+        });*/
 
         var confirmActionType = "cancel";
         $("#sed-confirm-message-dialog").dialog({
             autoOpen      : false,
             modal         : true,
-            width         : 350,
+            width         : 350,  
             height        : 150 ,   //default is "auto"
             resizable     : false ,
             close         : function(){
@@ -2037,36 +2037,36 @@
 
         /*$("#sed-app-control-main_layout_row_scope_control").find("ul.select-layouts-custom").livequery(function(){
 
-         var template = api.template( "sed-all-layouts-checkbox-scope" ),
-         content = template( { layoutsSettings : api('sed_layouts_settings')() } );
+            var template = api.template( "sed-all-layouts-checkbox-scope" ),
+                content = template( { layoutsSettings : api('sed_layouts_settings')() } );
 
-         $(this).find(">li.sub-theme-item").remove();
-         $( content ).appendTo( $(this) );
+            $(this).find(">li.sub-theme-item").remove();
+            $( content ).appendTo( $(this) );
 
-         });*/
+        });*/
 
-        api.previewer.bind('pageStaticContentInfo' , function( info ){
-            api.pageStaticContentInfo = info;
-        });
+       api.previewer.bind('pageStaticContentInfo' , function( info ){
+           api.pageStaticContentInfo = info;
+       });
 
-        /*
-         $(".content").mCustomScrollbar({
-         //autoHideScrollbar:true ,
-         advanced:{
-         updateOnBrowserResize:true, //update scrollbars on browser resize (for layouts based on percentages): boolean
-         updateOnContentResize:true,
-         },
-         callbacks:{
-         onOverflowY:function(){
-         $(this).find(".mCSB_container").addClass("mCSB_ctn_margin");
-         },
+       /*
+        $(".content").mCustomScrollbar({
+        //autoHideScrollbar:true ,
+        advanced:{
+        updateOnBrowserResize:true, //update scrollbars on browser resize (for layouts based on percentages): boolean
+           updateOnContentResize:true,
+       },
+       callbacks:{
+        onOverflowY:function(){
+            $(this).find(".mCSB_container").addClass("mCSB_ctn_margin");
+        },
 
-         onOverflowYNone:function(){
-         $(this).find(".mCSB_container").removeClass("mCSB_ctn_margin");
-         }
-         }
-         });
-         */
+        onOverflowYNone:function(){
+            $(this).find(".mCSB_container").removeClass("mCSB_ctn_margin");
+        }
+    }
+});
+        */
 
-    });
+   });
 })( sedApp, jQuery );

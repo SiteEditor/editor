@@ -235,7 +235,7 @@ class SEDAppSave{
                         if( !in_array( $new_tag , array_keys( $post_helper_shortcodes ) ) ){
                             $post_helper_shortcodes[$new_tag] = $shortcode['tag'];
                             $site_editor_app->pagebuilder->update_post_helper_shortcodes( $post_id , $post_helper_shortcodes );
-                        }
+                        } 
                     }
 
                     $shortcode_tag = $new_tag;

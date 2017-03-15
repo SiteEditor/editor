@@ -439,6 +439,8 @@ final class SiteEditorCustomizePostsPreview {
 			( '' !== $meta_key && ! isset( $this->previewed_postmeta_settings[ $object_id ][ $meta_key ] ) )
 		);
 
+		//var_dump( $meta_key ); var_dump( $object_id ); var_dump( $should_short_circuit );
+
 		if ( $should_short_circuit ) {
 			if ( is_null( $value ) ) {
 				return null;
@@ -466,14 +468,15 @@ final class SiteEditorCustomizePostsPreview {
 			);
 			if ( $can_preview ) {
 				$value = $postmeta_setting->post_value();
+			} else {
+				return null;
 			}
 
-            //for fixed bug support array meta value in single mode
-            if( is_array( $value ) && $single ){
-                $value = array( $value );
-            }
-
-			return $single ? $value : array( $value );
+			if ( $postmeta_setting->single ) {
+				return $single ? $value : array( $value );
+			} else {
+				return $single ? $value[0] : $value;
+			}
 		} else {
 
 			$is_recursing = true;
@@ -484,14 +487,22 @@ final class SiteEditorCustomizePostsPreview {
 				if ( ! array_key_exists( $postmeta_setting->id, $post_values ) ) {
 					continue;
 				}
-				$meta_value = $postmeta_setting->post_value();
-				$meta_value = maybe_serialize( $meta_value );
 
-				// Note that $single has no effect when $meta_key is ''.
-				$meta_values[ $postmeta_setting->meta_key ] = array( $meta_value );
+				if ( $postmeta_setting->single ) {
+					$meta_value = $postmeta_setting->post_value();
+					$meta_value = maybe_serialize( $meta_value );
+
+					// Note that $single has no effect when $meta_key is ''.
+					$meta_values[ $postmeta_setting->meta_key ] = array( $meta_value );
+				} else {
+					$meta_value = $postmeta_setting->post_value();
+					$meta_value = maybe_serialize( $meta_value );
+					$meta_values[ $postmeta_setting->meta_key ] = $meta_value;
+				}
 			}
 			return $meta_values;
 		}
+
 	}
 
 	/**
