@@ -67,41 +67,17 @@ final class SiteEditorCustomizePosts {
 		$this->manager = $manager;
 
 		require_once dirname( __FILE__ ) . '/sed-customize-posts-preview.class.php';
-		require_once dirname( __FILE__ ) . '/sed-customize-post-setting.class.php';
 		require_once dirname( __FILE__ ) . '/sed-customize-postmeta-setting.class.php';
 
 		add_action( 'sed_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
-		//add_action( 'customize_register', array( $this, 'register_constructs' ), 20 );
-
 		add_action( 'init', array( $this, 'register_meta' ), 100 );
-		add_filter( 'sed_app_dynamic_setting_args', array( $this, 'filter_customize_dynamic_setting_args' ), 10, 2 );
-		add_filter( 'sed_app_dynamic_setting_class', array( $this, 'filter_customize_dynamic_setting_class' ), 5, 3 );
-		//add_filter( 'customize_save_response', array( $this, 'filter_customize_save_response_for_conflicts' ), 10, 2 );
-		//add_filter( 'customize_save_response', array( $this, 'filter_customize_save_response_to_export_saved_values' ), 10, 2 );
+		add_filter( 'sed_app_dynamic_setting_args', array( $this, 'filter_dynamic_setting_args' ), 10, 2 );
+		add_filter( 'sed_app_dynamic_setting_class', array( $this, 'filter_dynamic_setting_class' ), 5, 3 );
 
+		add_filter( 'map_meta_cap', array( $this, 'filter_map_meta_cap' ), 10, 4 );
+		
 		$this->preview = new SiteEditorCustomizePostsPreview( $this );
-	}
-
-	/**
-	 * Instantiate a Customize Posts support class.
-	 *
-	 * The support class must extend `Customize_Posts_Support` or one of it's subclasses.
-	 *
-	 * @param string|Customize_Posts_Support $support The support class name or object.
-	 */
-	function add_support( $support ) {
-		if ( is_string( $support ) && class_exists( $support, false ) ) {
-			$support = new $support( $this );
-		}
-
-		if ( $support instanceof SiteEditorCustomizePostsSupport ) {
-			$class_name = get_class( $support );
-			if ( ! isset( $this->supports[ $class_name ] ) ) {
-				$this->supports[ $class_name ] = $support;
-				$support->init();
-			}
-		}
 	}
 
 	/**
@@ -191,7 +167,7 @@ final class SiteEditorCustomizePosts {
 			$this->registered_post_meta[ $post_type ] = array();
 		}
 
-		$this->registered_post_meta[ $post_type ][ $meta_key ] = $setting_args; //var_dump( $this->registered_post_meta );
+		$this->registered_post_meta[ $post_type ][ $meta_key ] = $setting_args;
 	}
 
 	/**
@@ -252,38 +228,36 @@ final class SiteEditorCustomizePosts {
 	 * @param string      $setting_id ID for dynamic setting, usually coming from `$_POST['customized']`.
 	 * @return false|array Setting arguments, false otherwise.
 	 */
-	public function filter_customize_dynamic_setting_args( $args, $setting_id ) {
+	public function filter_dynamic_setting_args( $args, $setting_id ) {
 
-		if ( preg_match( SiteEditorPostSetting::SETTING_ID_PATTERN, $setting_id, $matches ) ) {
-			$post_type = get_post_type_object( $matches['post_type'] );
-			if ( ! $post_type ) {
-				return $args;
-			}
-			if ( false === $args ) {
-				$args = array();
-			}
-			$args['option_type'] = 'post';
-			$args['transport'] = 'postMessage';
-		} elseif ( preg_match( SiteEditorPostmetaSetting::SETTING_ID_PATTERN, $setting_id, $matches ) ) {
+		if ( preg_match( SiteEditorPostmetaSetting::SETTING_ID_PATTERN, $setting_id, $matches ) ) {
+			
 			if ( ! post_type_exists( $matches['post_type'] ) ) {
 				return $args;
 			}
+			
 			if ( ! isset( $this->registered_post_meta[ $matches['post_type'] ][ $matches['meta_key'] ] ) ) {
 				return $args;
 			}
+			
 			$registered = $this->registered_post_meta[ $matches['post_type'] ][ $matches['meta_key'] ];
+			
 			if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] )  && ! sed_current_theme_supports( $registered['theme_supports'] ) ) {
 				// We don't really need this because theme_supports will already filter it out of being exported.
 				return $args;
 			}
+			
 			if ( false === $args ) {
 				$args = array();
 			}
+			
 			$args = array_merge(
 				$args,
 				$registered
 			);
+			
 			$args['option_type'] = 'postmeta';
+			
 		}
 
 		return $args;
@@ -298,19 +272,22 @@ final class SiteEditorCustomizePosts {
 	 *
 	 * @return string
 	 */
-	public function filter_customize_dynamic_setting_class( $class, $setting_id, $args ) {
+	public function filter_dynamic_setting_class( $class, $setting_id, $args ) {
+
 		unset( $setting_id );
+
 		if ( isset( $args['option_type'] ) ) {
-			if ( 'post' === $args['option_type'] ) {
-				$class = 'SiteEditorPostSetting';
-			} elseif ( 'postmeta' === $args['option_type'] ) {
+
+			if ( 'postmeta' === $args['option_type'] ) {
 				if ( isset( $args['setting_class'] ) ) {
 					$class = $args['setting_class'];
 				} else {
 					$class = 'SiteEditorPostmetaSetting';
 				}
 			}
+
 		}
+
 		return $class;
 	}
 
@@ -321,13 +298,17 @@ final class SiteEditorCustomizePosts {
 	 * @return array
 	 */
 	public function register_post_type_meta_settings( $post_id ) {
+
 		$post = get_post( $post_id );
+
 		$setting_ids = array();
+
 		if ( ! empty( $post ) && isset( $this->registered_post_meta[ $post->post_type ] ) ) {
 			foreach ( array_keys( $this->registered_post_meta[ $post->post_type ] ) as $key ) {
 				$setting_ids[] = SiteEditorPostmetaSetting::get_post_meta_setting_id( $post, $key );
 			}
 		}
+
 		$this->manager->add_dynamic_settings( $setting_ids );
 
 		return $setting_ids;
@@ -427,47 +408,6 @@ final class SiteEditorCustomizePosts {
 	}
 
 	/**
-	 * Return the latest setting data for conflicted posts.
-	 *
-	 * Note that this uses `SedAppSettings::value()` in a way that assumes
-	 * that the `SedAppSettings::preview()` has not been called, as it not
-	 * called when `SiteEditorManager::save()` happens.
-	 *
-	 * @param array $response Response.
-	 * @return array
-	 */
-	public function filter_customize_save_response_for_conflicts( $response ) {
-		if ( ! empty( $this->update_conflicted_settings ) ) {
-			$response['update_conflicted_setting_values'] = array();
-			foreach ( $this->update_conflicted_settings as $setting_id => $setting ) {
-				$response['update_conflicted_setting_values'][ $setting_id ] = $setting->js_value();
-			}
-		}
-		return $response;
-	}
-
-	/**
-	 * Return the saved sanitized values for posts and postmeta to update in the client.
-	 *
-	 * This was originally in the Customize Setting Validation plugin.
-	 *
-	 * @link https://github.com/xwp/wp-customize-setting-validation/blob/2e5ddc66a870ad7b1aee5f8e414bad4b78e120d2/php/class-plugin.php#L283-L317
-	 *
-	 * @param array $response Response.
-	 * @return array
-	 */
-	public function filter_customize_save_response_to_export_saved_values( $response ) {
-		$response['saved_post_setting_values'] = array();
-		foreach ( array_keys( $this->manager->unsanitized_post_values() ) as $setting_id ) {
-			$setting = $this->manager->get_setting( $setting_id );
-			if ( $setting instanceof SiteEditorPostSetting || $setting instanceof SiteEditorPostmetaSetting ) {
-				$response['saved_post_setting_values'][ $setting->id ] = $setting->js_value();
-			}
-		}
-		return $response;
-	}
-
-	/**
 	 * Enqueue scripts and styles for Customize Posts.
 	 */
 	public function enqueue_scripts() {
@@ -536,6 +476,28 @@ final class SiteEditorCustomizePosts {
 	public function sanitize_post_id( $value ) {
 		$value = intval( $value );
 		return $value;
+	}
+
+	/**
+	 * Map dynamic post/postmeta capabilities to static capabilities.
+	 *
+	 * @param array  $caps    Returns the user's actual capabilities.
+	 * @param string $cap     Capability name.
+	 * @param int    $user_id The user ID.
+	 * @return array Caps.
+	 */
+	public function filter_map_meta_cap( $caps, $cap, $user_id ) {
+		if ( preg_match( '/^(?:edit_post|edit_post_meta)\[\d+/', $cap ) ) {
+			$keys = explode( '[', str_replace( ']', '', $cap ) );
+			$map_meta_cap_args = array(
+				array_shift( $keys ),
+				$user_id,
+				intval( array_shift( $keys ) ),
+				array_shift( $keys ),
+			);
+			$caps = call_user_func_array( 'map_meta_cap', $map_meta_cap_args );
+		}
+		return $caps;
 	}
 
 }
