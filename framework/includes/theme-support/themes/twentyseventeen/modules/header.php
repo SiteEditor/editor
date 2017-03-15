@@ -93,7 +93,6 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                 'description'       => __( 'Select an image file for your logo.' , 'site-editor' ),
                 'setting_id'        => "custom_logo" ,
                 'remove_action'     => true ,
-                'panel'             => 'site_logo',
                 //'default'           => '',
                 'theme_supports'    => 'custom-logo',
                 'option_type'       => 'theme_mod',
@@ -102,7 +101,7 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                     'selector'            => '.custom-logo-link',
                     'render_callback'     => array( $this, '_render_custom_logo_partial' ),
                     'container_inclusive' => true,
-                )*/
+                ),*/
                 'panel'             => 'header_branding_settings_panel',
             ),
 

@@ -177,7 +177,7 @@ final class SiteEditorPostmetaOption {
 
     }
 
-    function add_post_meta( array $posts ){
+    /*function add_post_meta( array $posts ){
 
         foreach ( $posts as &$post ) {
 
@@ -191,7 +191,7 @@ final class SiteEditorPostmetaOption {
 
         return $posts;
 
-    }
+    }*/
 
     /**
      * Enqueue scripts for the Customizer preview.
