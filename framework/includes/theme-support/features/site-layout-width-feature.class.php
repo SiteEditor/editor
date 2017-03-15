@@ -65,7 +65,7 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
 
         $sheet_width = get_theme_mod( 'sheet_width' );
 
-        $sheet_width = ( $sheet_width === false ) ? $this->default_sheet_width : $sheet_width; var_dump( $sheet_width );
+        $sheet_width = ( $sheet_width === false ) ? $this->default_sheet_width : $sheet_width; 
 
         $site_length = get_theme_mod( 'site_length' );
 

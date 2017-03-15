@@ -89,7 +89,7 @@ class SiteEditorGeneralSettings {
 
     public function create_post_meta(){
 
-        if( !empty( $this->settings ) && is_array( $this->settings ) ) {
+        if( !empty( $this->settings ) && is_array( $this->settings ) ) { 
 
             foreach ( $this->settings AS $id => $args ) {
 

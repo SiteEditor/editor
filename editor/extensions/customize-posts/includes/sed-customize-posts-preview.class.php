@@ -167,7 +167,7 @@ final class SiteEditorCustomizePostsPreview {
 
 		$post_values = $this->component->manager->unsanitized_post_values();
 
-		if ( '' !== $meta_key ) { var_dump( $meta_key );
+		if ( '' !== $meta_key ) {
 			$postmeta_setting = $this->previewed_postmeta_settings[ $object_id ][ $meta_key ];
 			$can_preview = (
 				$postmeta_setting
@@ -180,7 +180,12 @@ final class SiteEditorCustomizePostsPreview {
 				return null;
 			}
 
-			if ( $postmeta_setting->single ) { var_dump($single);var_dump( $value );
+			//for fixed bug support array meta value in single mode
+			if( is_array( $value ) && $single ){
+				$value = array( $value );
+			}
+
+			if ( $postmeta_setting->single ) {
 				return $single ? $value : array( $value );
 			} else {
 				return $single ? $value[0] : $value;

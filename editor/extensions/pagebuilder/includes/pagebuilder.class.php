@@ -1326,7 +1326,7 @@ Class PageBuilderApplication {
         $sub_themes_models = get_option("sed_layouts_models");
 
         require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
-        $page_layout = SiteEditorLayoutManager::get_page_layout(); var_dump( $page_layout );
+        $page_layout = SiteEditorLayoutManager::get_page_layout(); //var_dump( $page_layout );
 
         //Current Page Layout Models
         $curr_sub_themes_models = $sub_themes_models[ $page_layout ]; 
