@@ -29,8 +29,18 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
      */
     public function register_settings(){
 
-        $panels = array(
+        $menus = wp_get_nav_menus();
+        $menu_options = array(
+            "" => __('Select Menu' , 'site-editor')
+        );
 
+        if( !empty($menus) ){
+            foreach ( $menus as $menu ) {
+                $menu_options[$menu->term_id] = esc_html( $menu->name );
+            }
+        }
+
+        $panels = array(
 
             'header_branding_settings_panel' =>  array(
                 'type'              => 'inner_box',
@@ -73,18 +83,14 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                 'transport'         => 'postMessage' ,
             ),
 
-            'select_menu' => array(
-                'setting_id'        => 'sed_select_menu',
+            'top_nav_menu' => array(
+                'setting_id'        => 'nav_menu_locations[top]',
                 'label'             => __('Select Menu', 'site-editor'),
                 'type'              => 'select',
-                'default'           => 'options3_key',
-                'transport'         => 'postMessage' ,
-                'choices'           => array(
-                    "options1_key"      =>    "options1_value" ,
-                    "options2_key"      =>    "options2_value" ,
-                    "options3_key"      =>    "options3_value" ,
-                    "options4_key"      =>    "options4_value" ,
-                ) ,
+                'default'           => '',
+                'transport'         => 'refresh' ,
+                'option_type'       => 'theme_mod',
+                'choices'           => $menu_options ,
             ),
 
             'default_logo' => array(
@@ -110,11 +116,12 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                 'label'             => __('Select Header Type', 'site-editor'),
                 'type'              => 'radio-buttonset',
                 'default'           => 'image',
-                'transport'         => 'postMessage' ,
+                'transport'         => 'refresh' ,
                 'choices'           => array(
                     "image"      =>    __('Image', 'site-editor'),
                     "video"      =>    __('Video', 'site-editor'),
                 ) ,
+                'option_type'       => 'option',
                 'panel'             => 'header_media_settings_panel',
                 //'has_border_box'    => false
             ),

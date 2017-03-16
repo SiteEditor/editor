@@ -46,7 +46,7 @@
 
 		</header><!-- #masthead -->
 
-		<?php
+		<?php var_dump( get_option( 'sed_select_header_type' ) );	//var_dump( get_nav_menu_locations());
 	}
 	// If a regular post or page, and not the front page, show the featured image.
 	if ( has_post_thumbnail() && ( is_single() || ( is_page() && ! twentyseventeen_is_frontpage() ) ) ) :

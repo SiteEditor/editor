@@ -37,7 +37,7 @@ class SiteEditorTwentyseventeenThemeSync{
 
         //add_filter( 'template_include', array(&$this,'template_chooser') , 99 );
 
-        add_filter( 'sed_header_wrapping_template', array( $this , 'get_header' ) , 100 , 1 );
+        //add_filter( 'sed_header_wrapping_template', array( $this , 'get_header' ) , 100 , 1 );
 
         add_filter( 'sed_theme_color_css' , array( $this , 'theme_color_css' ) , 100 , 3 );
 
@@ -81,8 +81,8 @@ class SiteEditorTwentyseventeenThemeSync{
         require_once dirname( __FILE__ ) . "/modules/header.php";
 
         $manager->add_static_module( new TwentyseventeenHeaderStaticModule( $manager , 'twenty_seventeen_header' , array(
-                'title'         => __("Twentyseventeen Header" , "site-editor") ,
-                'description'   => __("Twentyseventeen Header Module" , "site-editor") ,
+                'title'                 => __("Twentyseventeen Header" , "site-editor") ,
+                'description'           => __("Twentyseventeen Header Module" , "site-editor")
             )
         ));
 
