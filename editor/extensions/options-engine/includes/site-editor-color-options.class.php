@@ -237,6 +237,13 @@ class SiteEditorColorOptions extends SiteEditorOptionsCategory{
                     'default'           => '#1a1a1a',
                 ),
 
+                'page_background_color' => array(
+                    'setting_id'        => 'sed_page_background_color',
+                    'label'             => __('Page Background Color', 'site-editor'),
+                    "description"       => __("Background Color for body", "site-editor"),
+                    'default'           => '#ffffff',
+                ),
+
                 'base_color' => array(
                     'setting_id'        => 'sed_base_color',
                     'label'             => __('Base Color', 'site-editor'),
@@ -251,18 +258,18 @@ class SiteEditorColorOptions extends SiteEditorOptionsCategory{
                     'default'           => '#1a1a1a',
                 ),
 
-                'page_background_color' => array(
-                    'setting_id'        => 'sed_page_background_color',
-                    'label'             => __('Page Background Color', 'site-editor'),
-                    "description"       => __("Background Color for body", "site-editor"),
-                    'default'           => '#ffffff',
-                ),
-
                 'secondary_text_color' => array(
                     'setting_id'        => 'sed_secondary_text_color',
                     'label'             => __('Secondary Text Color', 'site-editor'),
                     "description"       => __("Choose the second most dominant theme text color", "site-editor"),
                     'default'           => '#686868',
+                ),
+
+                'third_text_color' => array( 
+                    'setting_id'        => 'sed_third_text_color',
+                    'label'             => __('Third Text Color', 'site-editor'),
+                    "description"       => __("Choose the second most dominant theme text color", "site-editor"),
+                    'default'           => '#999',
                 ),
 
                 'link_color' => array(

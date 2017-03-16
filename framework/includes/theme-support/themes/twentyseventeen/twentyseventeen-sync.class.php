@@ -179,6 +179,615 @@ class SiteEditorTwentyseventeenThemeSync{
         
 /* Color Scheme */
 
+
+
+
+.color-scheme button,
+.color-scheme input[type="button"],
+.color-scheme input[type="submit"],
+.color-scheme .entry-footer .edit-link a.post-edit-link {
+    background-color: {$colors['first_main_color']};
+}
+
+.color-scheme a:hover,
+.color-scheme a:active,
+.color-scheme .entry-content a:focus,
+.color-scheme .entry-content a:hover,
+.color-scheme .entry-summary a:focus,
+.color-scheme .entry-summary a:hover,
+.color-scheme .widget a:focus,
+.color-scheme .widget a:hover,
+.color-scheme .site-footer .widget-area a:focus,
+.color-scheme .site-footer .widget-area a:hover,
+.color-scheme .posts-navigation a:focus,
+.color-scheme .posts-navigation a:hover,
+.color-scheme .comment-metadata a:focus,
+.color-scheme .comment-metadata a:hover,
+.color-scheme .comment-metadata a.comment-edit-link:focus,
+.color-scheme .comment-metadata a.comment-edit-link:hover,
+.color-scheme .comment-reply-link:focus,
+.color-scheme .comment-reply-link:hover,
+.color-scheme .widget_authors a:focus strong,
+.color-scheme .widget_authors a:hover strong,
+.color-scheme .entry-title a:focus,
+.color-scheme .entry-title a:hover,
+.color-scheme .entry-meta a:focus,
+.color-scheme .entry-meta a:hover,
+.color-scheme.blog .entry-meta a.post-edit-link:focus,
+.color-scheme.blog .entry-meta a.post-edit-link:hover,
+.color-scheme.archive .entry-meta a.post-edit-link:focus,
+.color-scheme.archive .entry-meta a.post-edit-link:hover,
+.color-scheme.search .entry-meta a.post-edit-link:focus,
+.color-scheme.search .entry-meta a.post-edit-link:hover,
+.color-scheme .page-links a:focus .page-number,
+.color-scheme .page-links a:hover .page-number,
+.color-scheme .entry-footer .cat-links a:focus,
+.color-scheme .entry-footer .cat-links a:hover,
+.color-scheme .entry-footer .tags-links a:focus,
+.color-scheme .entry-footer .tags-links a:hover,
+.color-scheme .post-navigation a:focus,
+.color-scheme .post-navigation a:hover,
+.color-scheme .pagination a:not(.prev):not(.next):focus,
+.color-scheme .pagination a:not(.prev):not(.next):hover,
+.color-scheme .comments-pagination a:not(.prev):not(.next):focus,
+.color-scheme .comments-pagination a:not(.prev):not(.next):hover,
+.color-scheme .logged-in-as a:focus,
+.color-scheme .logged-in-as a:hover,
+.color-scheme a:focus .nav-title,
+.color-scheme a:hover .nav-title,
+.color-scheme .edit-link a:focus,
+.color-scheme .edit-link a:hover,
+.color-scheme .site-info a:focus,
+.color-scheme .site-info a:hover,
+.color-scheme .widget .widget-title a:focus,
+.color-scheme .widget .widget-title a:hover,
+.color-scheme .widget ul li a:focus,
+.color-scheme .widget ul li a:hover {
+    color: {$colors['main_text_color']};
+}
+
+.color-scheme .entry-content a:focus,
+.color-scheme .entry-content a:hover,
+.color-scheme .entry-summary a:focus,
+.color-scheme .entry-summary a:hover,
+.color-scheme .widget a:focus,
+.color-scheme .widget a:hover,
+.color-scheme .site-footer .widget-area a:focus,
+.color-scheme .site-footer .widget-area a:hover,
+.color-scheme .posts-navigation a:focus,
+.color-scheme .posts-navigation a:hover,
+.color-scheme .comment-metadata a:focus,
+.color-scheme .comment-metadata a:hover,
+.color-scheme .comment-metadata a.comment-edit-link:focus,
+.color-scheme .comment-metadata a.comment-edit-link:hover,
+.color-scheme .comment-reply-link:focus,
+.color-scheme .comment-reply-link:hover,
+.color-scheme .widget_authors a:focus strong,
+.color-scheme .widget_authors a:hover strong,
+.color-scheme .entry-title a:focus,
+.color-scheme .entry-title a:hover,
+.color-scheme .entry-meta a:focus,
+.color-scheme .entry-meta a:hover,
+.color-scheme.blog .entry-meta a.post-edit-link:focus,
+.color-scheme.blog .entry-meta a.post-edit-link:hover,
+.color-scheme.archive .entry-meta a.post-edit-link:focus,
+.color-scheme.archive .entry-meta a.post-edit-link:hover,
+.color-scheme.search .entry-meta a.post-edit-link:focus,
+.color-scheme.search .entry-meta a.post-edit-link:hover,
+.color-scheme .page-links a:focus .page-number,
+.color-scheme .page-links a:hover .page-number,
+.color-scheme .entry-footer .cat-links a:focus,
+.color-scheme .entry-footer .cat-links a:hover,
+.color-scheme .entry-footer .tags-links a:focus,
+.color-scheme .entry-footer .tags-links a:hover,
+.color-scheme .post-navigation a:focus,
+.color-scheme .post-navigation a:hover,
+.color-scheme .pagination a:not(.prev):not(.next):focus,
+.color-scheme .pagination a:not(.prev):not(.next):hover,
+.color-scheme .comments-pagination a:not(.prev):not(.next):focus,
+.color-scheme .comments-pagination a:not(.prev):not(.next):hover,
+.color-scheme .logged-in-as a:focus,
+.color-scheme .logged-in-as a:hover,
+.color-scheme a:focus .nav-title,
+.color-scheme a:hover .nav-title,
+.color-scheme .edit-link a:focus,
+.color-scheme .edit-link a:hover,
+.color-scheme .site-info a:focus,
+.color-scheme .site-info a:hover,
+.color-scheme .widget .widget-title a:focus,
+.color-scheme .widget .widget-title a:hover,
+.color-scheme .widget ul li a:focus,
+.color-scheme .widget ul li a:hover {
+    -webkit-box-shadow: inset 0 0 0 rgba(255, 255, 255, 0), 0 3px 0 rgba(255, 255, 255, 1); /* Equivalant to #fff */
+    box-shadow: inset 0 0 0 rgba(255, 255, 255, 0), 0 3px 0 rgba(255, 255, 255, 1); /* Equivalant to #fff */
+}
+
+.color-scheme .entry-content a,
+.color-scheme .entry-summary a,
+.color-scheme .widget a,
+.color-scheme .site-footer .widget-area a,
+.color-scheme .posts-navigation a,
+.color-scheme .widget_authors a strong {
+    -webkit-box-shadow: inset 0 -1px 0 rgba(240, 240, 240, 1); /* Equivalant to #f0f0f0 */
+    box-shadow: inset 0 -1px 0 rgba(240, 240, 240, 1); /* Equivalant to #f0f0f0 */
+}
+
+body.color-scheme,
+.color-scheme button,
+.color-scheme input,
+.color-scheme select,
+.color-scheme textarea,
+.color-scheme h3,
+.color-scheme h4,
+.color-scheme h6,
+.color-scheme label,
+.color-scheme .entry-title a,
+.color-scheme.twentyseventeen-front-page .panel-content .recent-posts article,
+.color-scheme .entry-footer .cat-links a,
+.color-scheme .entry-footer .tags-links a,
+.color-scheme .format-quote blockquote,
+.color-scheme .nav-title,
+.color-scheme .comment-body {
+    color: {$colors['secondary_text_color']};
+}
+
+/* Placeholder text color -- selectors need to be separate to work. */
+.color-scheme ::-webkit-input-placeholder {
+    color: {$colors['third_text_color']};
+}
+
+.color-scheme :-moz-placeholder {
+    color: {$colors['third_text_color']};
+}
+
+.color-scheme ::-moz-placeholder {
+    color: {$colors['third_text_color']};
+}
+
+.color-scheme :-ms-input-placeholder {
+    color: {$colors['third_text_color']};
+}
+
+.color-scheme input[type="text"]:focus,
+.color-scheme input[type="email"]:focus,
+.color-scheme input[type="url"]:focus,
+.color-scheme input[type="password"]:focus,
+.color-scheme input[type="search"]:focus,
+.color-scheme input[type="number"]:focus,
+.color-scheme input[type="tel"]:focus,
+.color-scheme input[type="range"]:focus,
+.color-scheme input[type="date"]:focus,
+.color-scheme input[type="month"]:focus,
+.color-scheme input[type="week"]:focus,
+.color-scheme input[type="time"]:focus,
+.color-scheme input[type="datetime"]:focus,
+.color-scheme input[type="datetime-local"]:focus,
+.color-scheme input[type="color"]:focus,
+.color-scheme textarea:focus,
+.bypostauthor > .comment-body > .comment-meta > .comment-author .avatar {
+    border-color: {$colors['secondary_text_color']};
+}
+
+.color-scheme input[type="text"]:focus,
+.color-scheme input[type="email"]:focus,
+.color-scheme input[type="url"]:focus,
+.color-scheme input[type="password"]:focus,
+.color-scheme input[type="search"]:focus,
+.color-scheme input[type="number"]:focus,
+.color-scheme input[type="tel"]:focus,
+.color-scheme input[type="range"]:focus,
+.color-scheme input[type="date"]:focus,
+.color-scheme input[type="month"]:focus,
+.color-scheme input[type="week"]:focus,
+.color-scheme input[type="time"]:focus,
+.color-scheme input[type="datetime"]:focus,
+.color-scheme input[type="datetime-local"]:focus,
+.color-scheme input[type="color"]:focus,
+.color-scheme textarea:focus,
+.color-scheme button.secondary,
+.color-scheme input[type="reset"],
+.color-scheme input[type="button"].secondary,
+.color-scheme input[type="reset"].secondary,
+.color-scheme input[type="submit"].secondary,
+.color-scheme a,
+.color-scheme .site-title,
+.color-scheme .site-title a,
+.color-scheme .navigation-top a,
+.color-scheme .dropdown-toggle,
+.color-scheme .menu-toggle,
+.color-scheme .page .panel-content .entry-title,
+.color-scheme .page-title,
+.color-scheme.page:not(.twentyseventeen-front-page) .entry-title,
+.color-scheme .page-links a .page-number,
+.color-scheme .comment-metadata a.comment-edit-link,
+.color-scheme .comment-reply-link .icon,
+.color-scheme h2.widget-title,
+.color-scheme mark,
+.color-scheme .post-navigation a:focus .icon,
+.color-scheme .post-navigation a:hover .icon,
+.color-scheme.blog .entry-meta a.post-edit-link,
+.color-scheme.archive .entry-meta a.post-edit-link,
+.color-scheme.search .entry-meta a.post-edit-link,
+.colors-custom .twentyseventeen-panel .recent-posts .entry-header .edit-link {
+    color: {$colors['third_text_color']};
+}
+
+.color-scheme h2,
+.color-scheme blockquote,
+.color-scheme input[type="text"],
+.color-scheme input[type="email"],
+.color-scheme input[type="url"],
+.color-scheme input[type="password"],
+.color-scheme input[type="search"],
+.color-scheme input[type="number"],
+.color-scheme input[type="tel"],
+.color-scheme input[type="range"],
+.color-scheme input[type="date"],
+.color-scheme input[type="month"],
+.color-scheme input[type="week"],
+.color-scheme input[type="time"],
+.color-scheme input[type="datetime"],
+.color-scheme input[type="datetime-local"],
+.color-scheme input[type="color"],
+.color-scheme textarea,
+.color-scheme .navigation-top .current-menu-item > a,
+.color-scheme .navigation-top .current_page_item > a,
+.color-scheme .entry-content blockquote.alignleft,
+.color-scheme .entry-content blockquote.alignright,
+.color-scheme .taxonomy-description,
+.color-scheme .site-info a,
+.color-scheme .wp-caption {
+    color: {$colors['secondary_text_color']};
+}
+
+.color-scheme abbr,
+.color-scheme acronym {
+    border-bottom-color: #ccc;
+}
+
+.color-scheme h5,
+.main-navigation a:hover,
+.color-scheme .entry-meta,
+.color-scheme .entry-meta a,
+.color-scheme .nav-subtitle,
+.color-scheme .comment-metadata,
+.color-scheme .comment-metadata a,
+.color-scheme .no-comments,
+.color-scheme .comment-awaiting-moderation,
+.color-scheme .page-numbers.current,
+.color-scheme .page-links .page-number,
+.color-scheme .site-description {
+    color: {$colors['third_text_color']};
+}
+
+.color-scheme button:hover,
+.color-scheme button:focus,
+.color-scheme input[type="button"]:hover,
+.color-scheme input[type="button"]:focus,
+.color-scheme input[type="submit"]:hover,
+.color-scheme input[type="submit"]:focus,
+.color-scheme .prev.page-numbers:focus,
+.color-scheme .prev.page-numbers:hover,
+.color-scheme .next.page-numbers:focus,
+.color-scheme .next.page-numbers:hover,
+.color-scheme .entry-footer .edit-link a.post-edit-link:focus,
+.color-scheme .entry-footer .edit-link a.post-edit-link:hover {
+    background: #bbb;
+}
+
+.color-scheme .social-navigation a:hover,
+.color-scheme .social-navigation a:focus {
+    background: #999;
+    color: {$colors['background_color']};
+}
+
+.color-scheme .entry-footer .cat-links .icon,
+.color-scheme .entry-footer .tags-links .icon {
+    color: #666;
+}
+
+.color-scheme button.secondary:hover,
+.color-scheme button.secondary:focus,
+.color-scheme input[type="reset"]:hover,
+.color-scheme input[type="reset"]:focus,
+.color-scheme input[type="button"].secondary:hover,
+.color-scheme input[type="button"].secondary:focus,
+.color-scheme input[type="reset"].secondary:hover,
+.color-scheme input[type="reset"].secondary:focus,
+.color-scheme input[type="submit"].secondary:hover,
+.color-scheme input[type="submit"].secondary:focus,
+.color-scheme .social-navigation a,
+.color-scheme hr {
+    background: #555;
+}
+
+.color-scheme input[type="text"],
+.color-scheme input[type="email"],
+.color-scheme input[type="url"],
+.color-scheme input[type="password"],
+.color-scheme input[type="search"],
+.color-scheme input[type="number"],
+.color-scheme input[type="tel"],
+.color-scheme input[type="range"],
+.color-scheme input[type="date"],
+.color-scheme input[type="month"],
+.color-scheme input[type="week"],
+.color-scheme input[type="time"],
+.color-scheme input[type="datetime"],
+.color-scheme input[type="datetime-local"],
+.color-scheme input[type="color"],
+.color-scheme textarea,
+.color-scheme select,
+.color-scheme fieldset,
+.color-scheme .widget .tagcloud a:hover,
+.color-scheme .widget .tagcloud a:focus,
+.color-scheme .widget.widget_tag_cloud a:hover,
+.color-scheme .widget.widget_tag_cloud a:focus,
+.color-scheme .wp_widget_tag_cloud a:hover,
+.color-scheme .wp_widget_tag_cloud a:focus {
+    border-color: #555;
+}
+
+.color-scheme button.secondary,
+.color-scheme input[type="reset"],
+.color-scheme input[type="button"].secondary,
+.color-scheme input[type="reset"].secondary,
+.color-scheme input[type="submit"].secondary,
+.color-scheme .prev.page-numbers,
+.color-scheme .next.page-numbers {
+    background-color: #444;
+}
+
+.color-scheme .widget .tagcloud a,
+.color-scheme .widget.widget_tag_cloud a,
+.color-scheme .wp_widget_tag_cloud a {
+    border-color: #444;
+}
+
+.color-scheme.twentyseventeen-front-page article:not(.has-post-thumbnail):not(:first-child),
+.color-scheme .widget ul li {
+    border-top-color: #444;
+}
+
+.color-scheme .widget ul li {
+    border-bottom-color: #444;
+}
+
+.color-scheme pre,
+.color-scheme mark,
+.color-scheme ins,
+.color-scheme input[type="text"],
+.color-scheme input[type="email"],
+.color-scheme input[type="url"],
+.color-scheme input[type="password"],
+.color-scheme input[type="search"],
+.color-scheme input[type="number"],
+.color-scheme input[type="tel"],
+.color-scheme input[type="range"],
+.color-scheme input[type="date"],
+.color-scheme input[type="month"],
+.color-scheme input[type="week"],
+.color-scheme input[type="time"],
+.color-scheme input[type="datetime"],
+.color-scheme input[type="datetime-local"],
+.color-scheme input[type="color"],
+.color-scheme textarea,
+.color-scheme select,
+.color-scheme fieldset {
+    background: #333;
+}
+
+.color-scheme tr,
+.color-scheme thead th {
+    border-color: #333;
+}
+
+.color-scheme .navigation-top,
+.color-scheme .main-navigation > div > ul,
+.color-scheme .pagination,
+.color-scheme .comment-navigation,
+.color-scheme .entry-footer,
+.color-scheme .site-footer {
+    border-top-color: #333;
+}
+
+.color-scheme .single-featured-image-header,
+.color-scheme .navigation-top,
+.color-scheme .main-navigation li,
+.color-scheme .entry-footer,
+.color-scheme #comments {
+    border-bottom-color: #333;
+}
+
+.color-scheme .site-header,
+.color-scheme .single-featured-image-header {
+    background-color: #262626;
+}
+
+.color-scheme button,
+.color-scheme input[type="button"],
+.color-scheme input[type="submit"],
+.color-scheme .prev.page-numbers:focus,
+.color-scheme .prev.page-numbers:hover,
+.color-scheme .next.page-numbers:focus,
+.color-scheme .next.page-numbers:hover {
+    color: {$colors['background_color']};
+}
+
+body.color-scheme,
+.color-scheme .site-content-contain,
+.color-scheme .navigation-top,
+.color-scheme .main-navigation ul {
+    background: {$colors['background_color']};
+}
+
+.color-scheme .entry-title a,
+.color-scheme .entry-meta a,
+.color-scheme.blog .entry-meta a.post-edit-link,
+.color-scheme.archive .entry-meta a.post-edit-link,
+.color-scheme.search .entry-meta a.post-edit-link,
+.color-scheme .page-links a,
+.color-scheme .page-links a .page-number,
+.color-scheme .entry-footer a,
+.color-scheme .entry-footer .cat-links a,
+.color-scheme .entry-footer .tags-links a,
+.color-scheme .edit-link a,
+.color-scheme .post-navigation a,
+.color-scheme .logged-in-as a,
+.color-scheme .comment-navigation a,
+.color-scheme .comment-metadata a,
+.color-scheme .comment-metadata a.comment-edit-link,
+.color-scheme .comment-reply-link,
+.color-scheme a .nav-title,
+.color-scheme .pagination a,
+.color-scheme .comments-pagination a,
+.color-scheme .widget .widget-title a,
+.color-scheme .widget ul li a,
+.color-scheme .site-footer .widget-area ul li a,
+.color-scheme .site-info a {
+    -webkit-box-shadow: inset 0 -1px 0 rgba(34, 34, 34, 1); /* Equivalant to #222 */
+    box-shadow: inset 0 -1px 0 rgba(34, 34, 34, 1); /* Equivalant to #222 */
+}
+
+/* Fixes linked images */
+.color-scheme .entry-content a img,
+.color-scheme .widget a img {
+    -webkit-box-shadow: 0 0 0 8px {$colors['background_color']};
+    box-shadow: 0 0 0 8px {$colors['background_color']};
+}
+
+.color-scheme .entry-footer .edit-link a.post-edit-link {
+    color: #000;
+}
+
+.color-scheme .menu-toggle,
+.color-scheme .menu-toggle:hover,
+.color-scheme .menu-toggle:focus,
+.color-scheme .dropdown-toggle,
+.color-scheme .dropdown-toggle:hover,
+.color-scheme .dropdown-toggle:focus,
+.color-scheme .menu-scroll-down,
+.color-scheme .menu-scroll-down:hover,
+.color-scheme .menu-scroll-down:focus {
+    background-color: transparent;
+}
+
+.color-scheme .gallery-item a,
+.color-scheme .gallery-item a:hover,
+.color-scheme .gallery-item a:focus,
+.color-scheme .widget .tagcloud a,
+.color-scheme .widget .tagcloud a:focus,
+.color-scheme .widget .tagcloud a:hover,
+.color-scheme .widget.widget_tag_cloud a,
+.color-scheme .widget.widget_tag_cloud a:focus,
+.color-scheme .widget.widget_tag_cloud a:hover,
+.color-scheme .wp_widget_tag_cloud a,
+.color-scheme .wp_widget_tag_cloud a:focus,
+.color-scheme .wp_widget_tag_cloud a:hover,
+.color-scheme .entry-footer .edit-link a.post-edit-link:focus,
+.color-scheme .entry-footer .edit-link a.post-edit-link:hover {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+@media screen and (min-width: 48em) {
+
+    .color-scheme .nav-links .nav-previous .nav-title .icon,
+    .color-scheme .nav-links .nav-next .nav-title .icon {
+        color: {$colors['secondary_text_color']};
+    }
+
+    .color-scheme .main-navigation li li:hover,
+    .color-scheme .main-navigation li li.focus {
+        background: #999;
+    }
+
+    .color-scheme .menu-scroll-down {
+        color: #999;
+    }
+
+    .color-scheme .main-navigation ul ul {
+        border-color: #333;
+        background: {$colors['background_color']};
+    }
+
+    .color-scheme .main-navigation ul li.menu-item-has-children:before,
+    .color-scheme .main-navigation ul li.page_item_has_children:before {
+        border-bottom-color: #333;
+    }
+
+    .main-navigation ul li.menu-item-has-children:after,
+    .main-navigation ul li.page_item_has_children:after {
+        border-bottom-color: {$colors['background_color']};
+    }
+
+    .color-scheme .main-navigation li li.focus > a,
+    .color-scheme .main-navigation li li:focus > a,
+    .color-scheme .main-navigation li li:hover > a,
+    .color-scheme .main-navigation li li a:hover,
+    .color-scheme .main-navigation li li a:focus,
+    .color-scheme .main-navigation li li.current_page_item a:hover,
+    .color-scheme .main-navigation li li.current-menu-item a:hover,
+    .color-scheme .main-navigation li li.current_page_item a:focus,
+    .color-scheme .main-navigation li li.current-menu-item a:focus {
+        color: {$colors['background_color']};
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/* Background Color */
 	body {
 		background-color: {$colors['background_color']};

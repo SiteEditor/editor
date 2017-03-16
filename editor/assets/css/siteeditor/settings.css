@@ -376,6 +376,10 @@ span.select2-selection.select2-selection--single {
     border-radius: 0;
 }    
 
+.select2-dropdown {
+    z-index: 1090;
+}
+
 
 /* Code Mirror */ 
 
