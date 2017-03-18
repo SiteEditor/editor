@@ -67,7 +67,7 @@
 
         } ,
 
-        set : function ( to ) {
+        set : function ( to ) { 
 
             var from = this.get();
 
@@ -76,6 +76,8 @@
                 this.value = to;
 
                 api.previewer.send( "syncSedLayoutsContent" , to );
+
+                console.log("-----------layoutsRowsContent--------------", to );
 
             }
 
@@ -110,8 +112,6 @@
             });
 
             this.set( layoutsContent );
-
-            //console.log("-----------layoutsRowsContent--------------", layoutsContent );
 
         },
 

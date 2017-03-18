@@ -337,4 +337,3 @@ $sed_pb_app->register_module(array(
     "priority"              => 10 ,
     "js_module"             => array( 'sed-content-layout-module', 'content-layout/js/sed-content-layout-module.min.js', array('sed-frontend-editor') )
 ));
-

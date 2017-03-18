@@ -5,7 +5,7 @@
         {{{content}}}
     </div>
   <# }else{ #>
-    <div class="sed-column-contents-pb">
+    <div class="sed-column-contents-pb sed-main-content-column">
       {{{content}}}
     </div>
   <# } #>

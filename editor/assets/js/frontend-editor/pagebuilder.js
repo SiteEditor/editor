@@ -886,7 +886,7 @@
             if(!$.isArray(pattern) || pattern.length == 0)
                 return ;
 
-            pattern[0].parent_id = parent_id;
+            //pattern[0].parent_id = parent_id;
 
             var shortcodes = [] ,
                 self = this ,
@@ -919,6 +919,13 @@
                 patternIds[shortcode.id] = id;
 
                 shortcode.id = id;
+
+                if( shortcode.parent_id == pattern[0].parent_id ){
+
+                    shortcode.parent_id = parent_id;
+
+                }
+
 
                 if( _.isUndefined( shortcode.attrs ) ){
                     shortcode.attrs = {};

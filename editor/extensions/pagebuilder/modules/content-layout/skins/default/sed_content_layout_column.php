@@ -8,7 +8,7 @@
         <?php
     }else {
         ?>
-        <div class="sed-column-contents-pb">
+        <div class="sed-column-contents-pb sed-main-content-column">
             <?php echo $content; ?>
         </div>
         <?php

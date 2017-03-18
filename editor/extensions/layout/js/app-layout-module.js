@@ -649,6 +649,8 @@
             //create new pattern
             newPattern = api.pageBuilder.loadPattern( newPattern , rowShortcode.parent_id );
 
+            console.log( "-----------newPattern-----------" , newPattern );
+
             //set helper id for add shortcode pattern id
             newPattern = api.pageBuilder.setHelperShortcodes( newPattern , rowContent[2].tag , "tag" );
 
@@ -712,9 +714,9 @@
 
                     _completePatternLoad();
 
-                    var shortcode = api.contentBuilder.getShortcode( elementId );
+                    var shortcode = api.contentBuilder.getShortcode( newPattern[2].id );
 
-                    api.Events.trigger( "sedAfterRefreshModule" , elementId , shortcode , response.data );
+                    api.Events.trigger( "sedAfterRefreshModule" , newPattern[2].id , shortcode , response.data );
 
                 };
 
@@ -727,6 +729,10 @@
                 rowElement.replaceWith( html );
 
                 _completePatternLoad();
+
+                var shortcode = api.contentBuilder.getShortcode( newPattern[2].id );
+
+                api.Events.trigger( "sedAfterRefreshModule" , newPattern[2].id , shortcode , html );
 
             }
 
