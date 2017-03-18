@@ -40,12 +40,17 @@
 
         ready: function(){
 
-            var firstC = $("body").find(".sed-pb-post-container:first");
+            var firstC = $("body").find(".sed-pb-post-container:first"),
+                self = this;
 
             //this.currentPostId = firstC.data("postId");
             this.disablePostsFullContentEditing();
 
-            this.modulesHandles();
+            api.preview.bind( 'active', function() {
+
+                self.modulesHandles();
+
+            });
 
         },
 
