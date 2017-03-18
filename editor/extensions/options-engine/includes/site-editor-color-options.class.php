@@ -216,67 +216,97 @@ class SiteEditorColorOptions extends SiteEditorOptionsCategory{
 
         return apply_filters( 'sed_customize_color_settings' , array(
 
-                'first_main_color' => array(
-                    'setting_id'        => 'sed_first_main_color',
-                    'label'             => __('First Main Color', 'site-editor'),
-                    "description"       => __("Choose the most dominant theme color", "site-editor"),
-                    'default'           => '#1a1a1a',
-                ),
-
-                'second_main_color' => array(
-                    'setting_id'        => 'sed_second_main_color',
-                    'label'             => __('Second Main Color', 'site-editor'),
-                    "description"       => __("Choose the second most dominant theme color", "site-editor"),
-                    'default'           => '#626262',
-                ),
 
                 'background_color' => array(
                     'setting_id'        => 'sed_body_background_color',
                     'label'             => __('Background Color', 'site-editor'),
                     "description"       => __("Background Color for body", "site-editor"),
-                    'default'           => '#1a1a1a',
+                    'default'           => '',
+                ),
+
+                'secondary_background_color' => array(
+                    'setting_id'        => 'sed_secondary_background_color',
+                    'label'             => __('Secondary Background Color', 'site-editor'),
+                    "description"       => __("Secondary Background Color for elements body", "site-editor"),
+                    'default'           => '',
                 ),
 
                 'page_background_color' => array(
                     'setting_id'        => 'sed_page_background_color',
                     'label'             => __('Page Background Color', 'site-editor'),
                     "description"       => __("Background Color for body", "site-editor"),
-                    'default'           => '#ffffff',
-                ),
-
-                'base_color' => array(
-                    'setting_id'        => 'sed_base_color',
-                    'label'             => __('Base Color', 'site-editor'),
-                    "description"       => __("using for border color, gradients, heading background color and ...", "site-editor"),
-                    'default'           => '#cccccc',
+                    'default'           => '',
                 ),
 
                 'main_text_color' => array(
                     'setting_id'        => 'sed_main_text_color',
                     'label'             => __('Main Text Color', 'site-editor'),
                     "description"       => __("Choose the most dominant theme text color", "site-editor"),
-                    'default'           => '#1a1a1a',
+                    'default'           => '',
                 ),
 
                 'secondary_text_color' => array(
                     'setting_id'        => 'sed_secondary_text_color',
                     'label'             => __('Secondary Text Color', 'site-editor'),
                     "description"       => __("Choose the second most dominant theme text color", "site-editor"),
-                    'default'           => '#686868',
+                    'default'           => '',
                 ),
 
-                'third_text_color' => array( 
-                    'setting_id'        => 'sed_third_text_color',
-                    'label'             => __('Third Text Color', 'site-editor'),
-                    "description"       => __("Choose the second most dominant theme text color", "site-editor"),
-                    'default'           => '#999',
+                'first_main_color' => array(
+                    'setting_id'        => 'sed_first_main_color',
+                    'label'             => __('First Main Color', 'site-editor'),
+                    "description"       => __("Choose the most dominant theme color", "site-editor"),
+                    'default'           => '',
                 ),
 
-                'link_color' => array(
-                    'setting_id'        => 'sed_link_color',
-                    'label'             => __('Link Color', 'site-editor'),
-                    "description"       => __("Choose the theme Links color", "site-editor"),
-                    'default'           => '#007acc',
+                'first_main_active_color' => array(
+                    'setting_id'        => 'sed_first_main_active_color',
+                    'label'             => __('First Main Active Color', 'site-editor'),
+                    "description"       => __("Choose the most dominant theme color", "site-editor"),
+                    'default'           => '',
+                ),
+
+
+                'second_main_color' => array(
+                    'setting_id'        => 'sed_second_main_color',
+                    'label'             => __('Second Main Color', 'site-editor'),
+                    "description"       => __("Choose the second most dominant theme color", "site-editor"),
+                    'default'           => '',
+                ),
+
+                'second_main_active_color' => array(
+                    'setting_id'        => 'sed_second_main_active_color',  
+                    'label'             => __('Second Main Active Color', 'site-editor'),
+                    "description"       => __("Choose the second most dominant theme color", "site-editor"),
+                    'default'           => '',
+                ),
+
+                'main_bg_text_color' => array(
+                    'setting_id'        => 'sed_second_main_active_color',  
+                    'label'             => __('Main Background Text Color', 'site-editor'),
+                    "description"       => __("Choose the second most dominant theme color", "site-editor"),
+                    'default'           => '',
+                ), 
+
+                'second_main_bg_text_color' => array(
+                    'setting_id'        => 'sed_second_main_bg_text_color',  
+                    'label'             => __('Second Main Background Text Color', 'site-editor'),
+                    "description"       => __("Choose the second most dominant theme color", "site-editor"),
+                    'default'           => '',
+                ), 
+
+                'border_color' => array(
+                    'setting_id'        => 'sed_border_color',
+                    'label'             => __('Border Color', 'site-editor'),
+                    "description"       => __("", "site-editor"),
+                    'default'           => '',
+                ),
+
+                'secondary_border_color' => array(
+                    'setting_id'        => 'sed_secondary_border_color',
+                    'label'             => __('Secondary Border Color', 'site-editor'),
+                    "description"       => __("", "site-editor"),
+                    'default'           => '',
                 ),
 
             )
