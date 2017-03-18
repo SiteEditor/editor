@@ -18,11 +18,14 @@
             this.ready();
         },
 
+
         initThemeRows : function(){
             var layoutModels = api('sed_layouts_models')(),
                 self = this;
 
             this.currentLayout = !_.isEmpty(api('page_layout')()) ? api('page_layout')() : api.defaultPageLayout;
+
+            console.log( "####api.contentBuilder.pagesThemeContent[this.postId]#####" , api.contentBuilder.pagesThemeContent[this.postId] );
 
             _.map( api.contentBuilder.pagesThemeContent[this.postId], function(shortcode){
                 if( !_.isUndefined( shortcode.theme_id )  ){
@@ -31,6 +34,9 @@
                     rowElement.data( "themeId" , shortcode.theme_id );
                     rowElement.addClass( "sed-public-theme-row" );
 
+                    if( $.inArray( shortcode.theme_id , api.hiddenPublicRows ) > -1 ){
+                        rowElement.addClass("sed-hidden-theme-row");
+                    }
 
                     _.each(layoutModels[self.currentLayout], function (layoutModel) {
                         if (layoutModel.theme_id == shortcode.theme_id) {
@@ -41,9 +47,7 @@
                         }
                     });
 
-                    if( !_.isUndefined( shortcode.is_hidden ) && shortcode.is_hidden === true ){
-                        rowElement.addClass("sed-hidden-theme-row");
-                    }else if( !_.isUndefined( shortcode.is_customize ) && shortcode.is_customize === true ){
+                    if( !_.isUndefined( shortcode.is_customize ) && shortcode.is_customize === true ){
                         rowElement.data( "isCustomize" , "yes" );
                     }
 
@@ -73,28 +77,28 @@
                 switch( type ){
                     case "privateToPublic" :
                         self.privateToPublic( rowElement , themeId , elementId );
-                    break;
+                        break;
                     case "publicToPrivate" :
                         self.publicToPrivate( rowElement , themeId , elementId );
-                    break;
+                        break;
                     case "customizeToPublic" :
                         self.customizeToPublic( rowElement , themeId , elementId , obj.usingDataMode );
-                    break;
+                        break;
                     case "hiddenToPublic" :
                         self.hiddenToPublic( rowElement , themeId , elementId );
-                    break;
+                        break;
                     case "publicToCustomize" :
                         self.publicToCustomize( rowElement , themeId , elementId );
-                    break;
+                        break;
                     case "hiddenToCustomize" :
                         self.hiddenToCustomize( rowElement , themeId , elementId );
-                    break;
+                        break;
                     case "customizeToHidden" :
                         self.customizeToHidden( rowElement , themeId , elementId , obj.usingDataMode );
-                    break;
+                        break;
                     case "publicToHidden" :
                         self.publicToHidden( rowElement , themeId , elementId );
-                    break;
+                        break;
                 }
 
             });
@@ -167,7 +171,7 @@
                             newModelId = $(this).attr("sed_model_id");
                             newThemeId = $(this).data("themeId");
                         }
-                        
+
                     }
                 });
 
@@ -323,9 +327,6 @@
 
                                 if (!_.isUndefined(shortcode.is_customize))
                                     delete shortcode.is_customize;
-
-                                if (!_.isUndefined(shortcode.is_hidden))
-                                    delete shortcode.is_hidden;
 
                                 shortcode.rel_theme_id = rowEl.data("themeId");
                                 shortcode.row_type = "after";
@@ -580,9 +581,6 @@
                     if( !_.isUndefined( shortcode.is_customize ) )
                         delete shortcode.is_customize;
 
-                    if( !_.isUndefined( shortcode.is_hidden ) )
-                        delete shortcode.is_hidden;
-
                     var info = self.getCustomRowInfo( shortcode.id , "before" );
 
                     shortcode.rel_theme_id  = _.clone( info.themeId );
@@ -638,21 +636,18 @@
 
             var rowId = rowElement.attr("sed_model_id"),
                 layoutsContent = api.layoutsRowsContent ,
-                rowContent = $.extend( true , {} , layoutsContent[themeId] ),
-                order = parseInt( $( '[sed_model_id="' + rowId + '"]').data( "themeOrder" ) );
+                rowContent = !_.isUndefined( layoutsContent[themeId] ) ? layoutsContent[themeId] : api.originalCustomizedRows[themeId],
+                order = parseInt( $( '[sed_model_id="' + rowId + '"]').data( "themeOrder" ) ),
+                rowShortcode = api.contentBuilder.getShortcode(rowId);
 
             hide = !_.isUndefined( hide ) ? hide : false;
 
-            if( hide === true ){
-                rowContent[0].is_hidden = true;
-            }
+            console.log( "-----------rowContent-----------" , rowContent );
 
             var newPattern = api.sedShortcode.clone( rowContent );
 
-            newPattern.splice( 0 , 2);
-
             //create new pattern
-            newPattern = api.pageBuilder.loadPattern( newPattern , rowContent[1].id );
+            newPattern = api.pageBuilder.loadPattern( newPattern , rowShortcode.parent_id );
 
             //set helper id for add shortcode pattern id
             newPattern = api.pageBuilder.setHelperShortcodes( newPattern , rowContent[2].tag , "tag" );
@@ -665,8 +660,6 @@
              *@insert public data instade customize data
              */
 
-            newPattern.unshift( rowContent[0] , rowContent[1] );
-
             api.sedShortcode.replaceModel( rowId , newPattern );
 
             api.contentBuilder.sendData( "theme" );
@@ -677,46 +670,73 @@
             //Current Element Id refresh
             api.currentSedElementId = newPattern[2].id;
 
-            //refresh module in @DOM
-            api.contentBuilder.refreshModule( rowContent[1].id );
+            var _completePatternLoad = function(){
 
-            api.preview.send( 'changeCurrentElementByCustomizeRevert', {
-                elementId       : newPattern[2].id ,
-                shortcode_name  : newPattern[2].tag ,
-                attrs           : newPattern[2].attrs
-            });
+                var patternScripts = api.sedShortcode.getPatternScripts( newPattern );
 
-            var rowElement = $( '[sed_model_id="' + rowContent[0].id + '"]');
+                var patternStyles = api.sedShortcode.getPatternStyles( newPattern );
 
-            rowElement.data( "themeId" , themeId );
-            rowElement.data( "themeOrder" , order );
+                if( $.isArray( patternScripts ) && patternScripts.length > 0 )
+                    api.pageBuilder.moduleScriptsLoad( patternScripts );
 
-            if( ! rowElement.hasClass( "sed-public-theme-row" ) )
-                rowElement.addClass( "sed-public-theme-row" );
+                if( $.isArray( patternStyles ) && patternStyles.length > 0 )
+                    api.pageBuilder.moduleStylesLoad( patternStyles );
 
-            if( hide === true && ! rowElement.hasClass( "sed-hidden-theme-row" ) ){
-                rowElement.addClass("sed-hidden-theme-row");
+                api.preview.send( 'changeCurrentElementByCustomizeRevert', {
+                    elementId       : newPattern[2].id ,
+                    shortcode_name  : newPattern[2].tag ,
+                    attrs           : newPattern[2].attrs
+                });
+
+                var newRowElement = $( '[sed_model_id="' + newPattern[0].id + '"]');
+
+                newRowElement.data( "themeId" , themeId );
+                newRowElement.data( "themeOrder" , order );
+
+                if( ! newRowElement.hasClass( "sed-public-theme-row" ) )
+                    newRowElement.addClass( "sed-public-theme-row" );
+
+                if( hide === true && ! newRowElement.hasClass( "sed-hidden-theme-row" ) ){
+                    newRowElement.addClass("sed-hidden-theme-row");
+                }
+
+            };
+
+            var transport = api.sedShortcode.getPatternTransport( newPattern );
+
+            if( transport == "ajax" ){
+
+                var _success = function( response ){
+
+                    rowElement.replaceWith( response.data );
+
+                    _completePatternLoad();
+
+                    var shortcode = api.contentBuilder.getShortcode( elementId );
+
+                    api.Events.trigger( "sedAfterRefreshModule" , elementId , shortcode , response.data );
+
+                };
+
+                api.pageBuilder.ajaxLoadModules( newPattern[0].id , _success );
+
+            }else {
+
+                var html = api.contentBuilder.do_shortcode( "sed_row" , newPattern[0].id , newPattern[0].id );
+
+                rowElement.replaceWith( html );
+
+                _completePatternLoad();
+
             }
-
-
 
         },
 
 
         hiddenToPublic : function( rowElement , themeId , elementId ){
-            var self= this;
 
             rowElement.removeClass("sed-hidden-theme-row");
 
-            api.contentBuilder.pagesThemeContent[this.postId] = _.map( api.contentBuilder.pagesThemeContent[this.postId], function(shortcode){
-                if( shortcode.id == rowElement.attr("sed_model_id") && !_.isUndefined( shortcode.is_hidden ) ){
-                    delete shortcode.is_hidden;
-                    return shortcode;
-                }else
-                    return shortcode;
-            });
-
-            api.contentBuilder.sendData( "theme" );
         },
 
 
@@ -745,10 +765,9 @@
             rowElement.removeClass("sed-hidden-theme-row");
 
             api.contentBuilder.pagesThemeContent[this.postId] = _.map( api.contentBuilder.pagesThemeContent[this.postId], function(shortcode){
-                if( shortcode.id == rowElement.attr("sed_model_id") && !_.isUndefined( shortcode.theme_id ) && !_.isUndefined( shortcode.is_hidden ) ){
+                if( shortcode.id == rowElement.attr("sed_model_id") && !_.isUndefined( shortcode.theme_id ) ){
 
                     shortcode.is_customize = true;
-                    delete shortcode.is_hidden;
 
                     return shortcode;
                 }else
@@ -761,18 +780,18 @@
 
         customizeToHidden : function( rowElement , themeId , elementId , usingDataMode ){
 
+            var rowId = rowElement.attr("sed_model_id");
+            rowElement.addClass("sed-hidden-theme-row");
+
             if( usingDataMode == "using_public_data" ){
 
                 this.revertCustomizeToPublic( rowElement , themeId , true );
 
             }else if( usingDataMode == "using_customize_data" ){
-                var rowId = rowElement.attr("sed_model_id");
-                rowElement.addClass("sed-hidden-theme-row");
 
                 api.contentBuilder.pagesThemeContent[this.postId] = _.map( api.contentBuilder.pagesThemeContent[this.postId], function(shortcode){
                     if( shortcode.id == rowId && !_.isUndefined( shortcode.is_customize ) ){
                         delete shortcode.is_customize;
-                        shortcode.is_hidden = true;
                         return shortcode;
                     }else
                         return shortcode;
@@ -786,18 +805,9 @@
 
 
         publicToHidden : function( rowElement , themeId , elementId ){
-            var self= this;
+
             rowElement.addClass("sed-hidden-theme-row");
 
-            api.contentBuilder.pagesThemeContent[this.postId] = _.map( api.contentBuilder.pagesThemeContent[this.postId], function(shortcode){
-                if( shortcode.id == rowElement.attr("sed_model_id") ){
-                    shortcode.is_hidden = true;
-                    return shortcode;
-                }else
-                    return shortcode;
-            });
-
-            api.contentBuilder.sendData( "theme" );
         },
 
         //refresh orders in subthemes row and current page row
@@ -850,6 +860,7 @@
             return themeId;
         },
 
+
         getPrevClosestThemeRowId : function( element ){
 
             if( !element.parent().hasClass("sed-site-main-part") ){
@@ -869,11 +880,13 @@
             return themeId;
         },
 
+
         isPublicRow : function( id ){
             var shortcode = api.contentBuilder.getShortcode( id );
 
             return !_.isUndefined( shortcode ) && !_.isUndefined( shortcode.theme_id ) && shortcode.theme_id;
         },
+
 
         getCustomRowInfoAfterCreate : function( element , dropItem , direction ){
 
@@ -905,6 +918,7 @@
             };
 
         },
+
 
         getCustomRowInfoAfterSort : function( element ){
 
@@ -981,6 +995,7 @@
 
         },
 
+
         getCustomRowInfo : function( id , type ){
 
             var row_type , rel_theme_id;
@@ -1021,6 +1036,8 @@
 
         api.defaultPageLayout       = window._sedAppDefaultPageLayout;
         api.currentLayoutGroup      = window._sedAppCurrentLayoutGroup;
+        api.originalCustomizedRows  = window._sedAppOriginalCustomizedRows;
+        api.hiddenPublicRows        = window._sedAppHiddenPublicRows || [];
 
         api.appLayouts = new api.AppLayouts({});
 

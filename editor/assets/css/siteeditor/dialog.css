@@ -213,7 +213,7 @@
 /* Confirm Message */ 
 
 div#sed-confirm-message-dialog {
-    height: 165px !important;
+    height: 230px !important;
     padding: 15px 30px !important;
     min-height: 165px !important;
 }

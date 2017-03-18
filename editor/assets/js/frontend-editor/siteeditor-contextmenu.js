@@ -246,7 +246,7 @@
     api.contextmenuConstructor = {
         row : api.RowContextmenu ,
         element : api.ElementContextmenu
-    }
+    };
 
     $( function() {
         var sedContextmenu ;

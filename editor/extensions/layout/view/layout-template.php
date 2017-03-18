@@ -139,6 +139,25 @@
     </div>
 </script>
 
+<script type="text/html" id="change-customize-to-hidden-confirm-tpl" >
+    <div class="sed_message_box">
+        <h3><?php echo __("Are You Sure?" , "site-editor");?></h3>
+        <p><?php echo __("if you continue this action with first option, current row(module) back to public data mode and lost your customize data , but by select second option current customize data apply on all page include this row and lost allredy public data " , "site-editor");?></p>
+        <div class="select-customize-to-public-data-mode">
+            <label for="change-customize-to-public-using-public-data-mode">
+                <input type="radio" name="change-customize-to-public-mode" id="change-customize-to-public-using-public-data-mode" value="using_public_data" checked="checked">
+                <?php echo __("back current row(module) to public data mode" , "site-editor");?>
+            </label>
+
+            <label for="change-customize-to-public-using-customize-data-mode">
+                <input type="radio" name="change-customize-to-public-mode" id="change-customize-to-public-using-customize-data-mode" value="using_customize_data">
+                <?php echo __("using customize data as public data mode" , "site-editor");?>
+            </label>
+
+        </div>
+    </div>
+</script>
+
 
 <script type="text/html" id="destroy-sort-theme-row-confirm-tpl" >
     <div class="sed_message_box">
@@ -204,7 +223,7 @@
         </label>
         <?php $action_page_box_id = "manage_layout_theme_rows"; ?>
         <a href="javascript:void(0);" data-layout="{{layout}}" data-related-level-box="dialog_page_box_<?php echo $action_page_box_id; ?>" class="edit-layout-rows hide field_desc"  title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>">
-            <span class="icon icon-edit"></span>
+            <span class="icon icon-edit fa fa-edit"></span>
         </a>
     </li>
     <#

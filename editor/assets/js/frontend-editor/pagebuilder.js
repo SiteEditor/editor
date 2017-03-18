@@ -576,14 +576,14 @@
                 moduleShortcode = api.modulesSettings[name].shortcode ,
                 attrs = {} , newPattern;
 
-            attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
+            //attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
 
             //attrs = this.addAlignSpacingAttrToModule( name , attrs );
 
             if( self.currentDragType == "regular" ){
                 rowPattern[0].attrs.type = 'static-element';
 
-                rowPattern[0].attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
+                //rowPattern[0].attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
 
                 if(name == "row-container"){
                     rowPattern[0].attrs.length = "boxed";
@@ -1254,7 +1254,7 @@
                         e.preventDefault();
                         e.stopPropagation();
 
-                        api.hideContextmenu(e);  //api.log( $(this) );
+                        //api.hideContextmenu(e);  //api.log( $(this) );
                         api.selectPlugin.select( $(this) , $(e.target).hasClass("sed_setting_btn_cmp") );
 
                     });
@@ -1720,8 +1720,8 @@
         api.attachmentsSettings = window._sedAppPBAttachmentsSettings;  console.log( "api.attachmentsSettings---" , api.attachmentsSettings );
         //api.mainContentShortcode = window._sedAppMainContentShortcode;
 
-        api.contextMenuSettings = window._sedAppEditorContextMenuSettings;
-        api.itemContextMenuSettings = window._sedAppEditorItemContextMenuSettings;
+        api.contextMenuSettings = !_.isUndefined( window._sedAppEditorContextMenuSettings ) ? window._sedAppEditorContextMenuSettings : {};
+        api.itemContextMenuSettings = !_.isUndefined( window._sedAppEditorItemContextMenuSettings ) ? window._sedAppEditorItemContextMenuSettings : {};
 
         api.pageStaticContentInfo = window._sedAppPageContentInfo;
 

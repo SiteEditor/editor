@@ -136,7 +136,7 @@
         },
 
         contextmenuDisable : function( ){
-            api.hideContextmenu();
+            //api.hideContextmenu();
         },
 
         //modify select.min.js , not need func here

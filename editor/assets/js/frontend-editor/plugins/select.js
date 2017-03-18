@@ -30,7 +30,7 @@
                     e.preventDefault();
                     e.stopPropagation();
 
-                    api.hideContextmenu(e);  //api.log( $(this) );
+                    //api.hideContextmenu(e);  //api.log( $(this) );
                     self.select( $(this) , $(e.target).hasClass("sed_setting_btn_cmp") );
 
                 });

@@ -45,6 +45,16 @@ Class PageBuilderApplication {
 
     public $sed_theme_content = array();
 
+    //All Hidden Public theme Rows In Current Page
+    public $sed_hidden_theme_rows = array();
+
+    /**
+     * Add Original Format From a Customized theme Row
+     * For Revert Customized Row to Original format ( in Site Editor )
+     * @var array
+     */
+    public $original_customized_shortcodes = array();
+
     /**
     * Class constructor.
     *
@@ -482,11 +492,6 @@ Class PageBuilderApplication {
                         unset( $shortcode['attrs']['sed_is_customize'] );
                     }
 
-                    if( isset( $shortcode['attrs']['sed_is_hidden'] ) ){
-                        $shortcode['is_hidden'] = $shortcode['attrs']['sed_is_hidden'];
-                        unset( $shortcode['attrs']['sed_is_hidden'] );
-                    }
-
                     $shortcodes[] = $shortcode ;
 
                     $children = self::get_pattern_shortcodes( $matches[5][$index] , $id , $module , $module_shortcode , $tagnames );
@@ -520,8 +525,8 @@ Class PageBuilderApplication {
 
         $ex_content = wpautop( $matches[1] );
 
-        return '[sed_row type="static-element" class="module_sed_wp_text_editor_contextmenu_container" from_wp_editor="true"]
-                    [sed_module class="module_sed_wp_text_editor_contextmenu_container" ]
+        return '[sed_row type="static-element" from_wp_editor="true"]
+                    [sed_module]
                         [sed_wp_text_editor]
                             '.$ex_content.'
                         [/sed_wp_text_editor]
@@ -1268,9 +1273,13 @@ Class PageBuilderApplication {
 
         $sed_pages_theme_content[$sed_page_id] = $theme_shortcode;
 
+        $original_customized_shortcodes = empty( $this->original_customized_shortcodes ) ? "{}" : wp_json_encode( $this->original_customized_shortcodes );
+
         $output = "<script>";
         $output .= "var _sedAppPagesThemeContent = " .wp_json_encode( $sed_pages_theme_content).";";
         $output .= "var _sedAppPostsContent = " . wp_json_encode( $sed_posts_content ) . ";";
+        $output .= "var _sedAppOriginalCustomizedRows = " . $original_customized_shortcodes . ";";
+        $output .= "var _sedAppHiddenPublicRows = " . wp_json_encode( $this->sed_hidden_theme_rows ) . ";";
         $output .= "</script>";
         $output .= $this->sed_post_content_tpl;
         echo $output;
@@ -1326,10 +1335,10 @@ Class PageBuilderApplication {
         $sub_themes_models = get_option("sed_layouts_models");
 
         require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
-        $page_layout = SiteEditorLayoutManager::get_page_layout(); //var_dump( $page_layout );
+        $page_layout = SiteEditorLayoutManager::get_page_layout();
 
         //Current Page Layout Models
-        $curr_sub_themes_models = $sub_themes_models[ $page_layout ]; 
+        $curr_sub_themes_models = $sub_themes_models[ $page_layout ];
 
         //Current Page Layout Content
         $sed_layouts_content = get_option("sed_layouts_content");
@@ -1342,6 +1351,12 @@ Class PageBuilderApplication {
             if( !isset( $model['hidden'] ) || !in_array( $sed_data['page_id'] , $model['hidden'] ) || site_editor_app_on() ){
                 $curr_sub_themes_models[$key]['instance_number'] = $i;
                 $i++;
+
+                //Collect Hidden public Theme rows in a array
+                if( in_array( $sed_data['page_id'] , $model['hidden'] ) && site_editor_app_on() ){
+                    $this->sed_hidden_theme_rows [] = $model['theme_id'];
+                }
+
             }else
                 unset( $curr_sub_themes_models[$key] );
 
@@ -1350,6 +1365,8 @@ Class PageBuilderApplication {
         uasort( $curr_sub_themes_models , array( __CLASS__ , 'theme_row_order' ) );
 
         self::fix_page_theme_content( $curr_sub_themes_models );
+
+        //var_dump( $curr_sub_themes_models );
 
         //Create current page content
         $shortcodes_pattern_string = "";
@@ -1361,9 +1378,14 @@ Class PageBuilderApplication {
             $shortcodes_pattern_string = apply_filters( "sed_before_layout_row"  , $shortcodes_pattern_string , $model['theme_id'] );
 
             if( !in_array( $sed_data['page_id'] , $model['exclude'] ) ) {
-                $shortcodes_pattern_string .= $sed_layouts_content[$model['theme_id']];
+                $shortcodes_pattern_string .= $sed_layouts_content[$model['theme_id']]; //var_dump( $sed_layouts_content[$model['theme_id']] );
             }else{
                 $shortcodes_pattern_string .= $this->get_row_customized_content( $model['theme_id'] );
+
+                $original_customized_shortcodes = self::get_pattern_shortcodes( $sed_layouts_content[$model['theme_id']] );
+
+                $this->original_customized_shortcodes[ $model['theme_id'] ] = $original_customized_shortcodes["shortcodes"];
+
             }
 
             $shortcodes_pattern_string = apply_filters( "sed_after_layout_row"  , $shortcodes_pattern_string , $model['theme_id'] );
@@ -1541,6 +1563,22 @@ Class PageBuilderApplication {
 
             foreach( $sed_data['theme_content'] AS $index => $row ){
 
+                if( isset( $row['theme_id'] ) ) {
+
+                    foreach ( $curr_sub_themes_models AS $row_model ){
+
+                        if( $row_model['theme_id'] == $row['theme_id'] ){
+
+                            $curr_row_model = $row_model;
+
+                            break;
+
+                        }
+
+                    }
+
+                }
+
                 if( isset( $row['rel_theme_id'] ) && !empty( $row['rel_theme_id']  ) && ! in_array( $row['rel_theme_id']  , $theme_ids ) ){
 
                     $info = self::find_valid_public_row( $theme_ids , $row['rel_theme_id'] , $row['row_type'] );
@@ -1551,7 +1589,7 @@ Class PageBuilderApplication {
 
                     $changed = true;
 
-                }else if( isset( $row['theme_id'] ) && isset( $row['is_customize'] ) && $row['is_customize'] && ! in_array( $row['theme_id']  , $theme_ids ) ){
+                }else if( isset( $row['theme_id'] ) && isset( $row['is_customize'] ) && $row['is_customize'] && ( ! in_array( $row['theme_id']  , $theme_ids ) || !in_array( $sed_data['page_id'] , $curr_row_model['exclude'] ) ) ){
 
                     unset( $sed_data['theme_content'][$index] );
 

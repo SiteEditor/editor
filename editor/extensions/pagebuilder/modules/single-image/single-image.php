@@ -68,9 +68,12 @@ class PBSingleImageShortcode extends PBShortcodeClass{
 
 
     function js_I18n( $I18n ){
+
         $I18n['change_img_library']  =  __("Image Library","site-editor") ;
+
         $I18n['change_img_btn']      =  __("Change Image","site-editor");
-        //return $I18n;
+        
+        return $I18n;
     }
 
     function get_atts(){

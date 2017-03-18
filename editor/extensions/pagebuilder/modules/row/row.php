@@ -32,7 +32,7 @@ class PBRowShortcode extends PBShortcodeClass{
            	'type'                  => 'draggable-element', //draggable-element | static-element
             'length'                => 'wide' ,
             'from_wp_editor'        => false ,
-            'sed_contextmenu_class' => ''
+            //'sed_contextmenu_class' => ''
         );
 
         return $atts;

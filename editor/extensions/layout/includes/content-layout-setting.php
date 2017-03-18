@@ -28,9 +28,9 @@ if(!class_exists('SedLayoutContentSetting')){
             $this->id = 'sed_layouts_content';
 
             add_action( "sed-app-save-data"     , array( $this , "save" ) , 10 , 2 );
-            
-            add_action( "sed_app_preview_init"  , array( $this , "preview" ) , 10 , 1  );
 
+            add_action( "sed_app_preview_init"  , array( $this , "preview" ) , 10 , 1  );
+  
         }
 
         public function preview( $manager ) {
@@ -82,7 +82,7 @@ if(!class_exists('SedLayoutContentSetting')){
                 return $this->_post_value;
 
             }
-            
+
         }
 
         public function _preview_filter( $original ){

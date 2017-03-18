@@ -170,10 +170,6 @@ class SEDAppSave{
                         $shortcode['attrs']['sed_is_customize'] = $shortcode['is_customize'];
                     }
 
-                    if (isset($shortcode['is_hidden'])) {
-                        $shortcode['attrs']['sed_is_hidden'] = $shortcode['is_hidden'];
-                    }
-
                 }
 
                 global $sed_pb_app;

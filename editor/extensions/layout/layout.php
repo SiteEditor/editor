@@ -19,8 +19,8 @@ $site_editor_app->layout = $layout;
 $site_editor_app->layout_patterns = array(
 
     //sed_main_content_row && sed_main_content attr for sub_theme module
-    "default" => '[sed_row_outer_outer class="module_sed_columns_contextmenu_container" sed_main_content_row="true" shortcode_tag="sed_row" shortcode_tag="sed_row" type="static-element" length="boxed"]
-            [sed_module_outer_outer class="module_sed_columns_contextmenu_container" shortcode_tag="sed_module"]
+    "default" => '[sed_row_outer_outer sed_main_content_row="true" shortcode_tag="sed_row" shortcode_tag="sed_row" type="static-element" length="boxed"]
+            [sed_module_outer_outer shortcode_tag="sed_module"]
                 [sed_columns_outer have_helper_id="true" pb_columns="2" shortcode_tag="sed_columns" class="" title="columns"]
                     [sed_column_outer  width="71%" shortcode_tag="sed_column" parent_module="columns"]
                        [sed_row_outer shortcode_tag="sed_row" type="static-element" sed_main_content = "true" ]

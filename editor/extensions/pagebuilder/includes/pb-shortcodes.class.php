@@ -71,7 +71,8 @@ class PBShortcodeClass{
 
         //add_action( 'sed_ajax_pb', array( $this , 'ajax_register_shortcode' ), 10 , 1  );
 
-        add_action( 'sed_contextmenu_init', array( $this , 'add_contextmenu' ) , 10 );
+        //TODO: recovery contextmenu in later versions
+        //add_action( 'sed_contextmenu_init', array( $this , 'add_contextmenu' ) , 10 );
 
         add_filter( "sed_shortcode_scripts_{$this->shortcode->name}" , array( $this , 'call_scripts' ) , 10 , 1 );
 
@@ -342,12 +343,12 @@ class PBShortcodeClass{
         $atts = $this->attrs_filter( $atts );
 
         //add class to shortcodes for contextmenu
-        if( !in_array( $this->shortcode->name , array("sed_module" , "sed_row") ) && !isset( $input_atts["contextmenu_disabled"] ) ){
+        /*if( !in_array( $this->shortcode->name , array("sed_module" , "sed_row") ) && !isset( $input_atts["contextmenu_disabled"] ) ){
             if(empty($atts['class']) || !$atts['class'])
                 $atts['class'] = "module_" .$this->shortcode->name."_contextmenu";
             else
                 $atts['class'] = trim( $atts['class'] ) . " module_" .$this->shortcode->name."_contextmenu";
-        }
+        }*/
 
         if( $this->shortcode->is_child === false  && !isset( $input_atts["settings_disabled"] ) ){
             $atts['class'] .= " sed-pb-module-container";

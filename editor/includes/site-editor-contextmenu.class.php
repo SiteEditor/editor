@@ -3,9 +3,9 @@ class SEDContextmenuProvider{
 
     function __construct(  ) {
         if( site_editor_app_on() ){
-            add_action( 'wp_footer', array( $this , 'render_app_contextmenu' ), 0 );
-            add_action( 'wp_footer', array( $this , 'sed_app_contextmenu' ), 20 );
-            add_action( 'wp_footer', array( $this , 'sed_app_contextmenu_settings' ), 20 );
+            //add_action( 'wp_footer', array( $this , 'render_app_contextmenu' ), 0 );
+            //add_action( 'wp_footer', array( $this , 'sed_app_contextmenu' ), 20 );
+            //add_action( 'wp_footer', array( $this , 'sed_app_contextmenu_settings' ), 20 );
         }
     }
 

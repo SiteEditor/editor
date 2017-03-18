@@ -331,9 +331,18 @@ if(!class_exists('SiteEditorLayoutManager')){
 
         public function add_js_plugin() {
 
-            wp_register_script("sed-app-layout", SED_EXT_URL . 'layout/js/app-layout-plugin.min.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
+            //wp_register_script("sed-app-layout", SED_EXT_URL . 'layout/js/app-layout-plugin.min.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
+            //wp_enqueue_script("sed-app-layout");
 
-            wp_enqueue_script( 'sed-app-layout' );
+            wp_enqueue_script("sed-layouts-content", SED_EXT_URL . 'layout/js/layouts-content-plugin.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
+
+            wp_enqueue_script("sed-layouts-remove-row", SED_EXT_URL . 'layout/js/layouts-remove-row-plugin.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
+
+            wp_enqueue_script("sed-app-layout", SED_EXT_URL . 'layout/js/layouts-main-plugin.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
+
+            wp_enqueue_script("sed-layout-scope-control", SED_EXT_URL . 'layout/js/layout-scope-control-plugin.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
+
+            wp_enqueue_script("layouts-manager-control", SED_EXT_URL . 'layout/js/layouts-manager-control-plugin.js' , array( 'siteeditor' ) , SED_APP_VERSION ,1 );
 
         }
 
@@ -362,7 +371,9 @@ if(!class_exists('SiteEditorLayoutManager')){
         }
 
         public function render_scripts(){
-            wp_enqueue_script( 'app-layout-module', SED_EXT_URL . 'layout/js/app-layout-module.min.js', array( 'sed-frontend-editor' ) , SED_APP_VERSION , 1);
+
+            wp_enqueue_script( 'app-layout-module', SED_EXT_URL . 'layout/js/app-layout-module.js', array( 'sed-frontend-editor' ) , SED_APP_VERSION , 1);
+
         }
 
         function print_wp_footer(){
@@ -513,8 +524,8 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             if( !is_array( $sed_layouts_content ) || ! isset( $sed_layouts_content[ $main_row_theme_id ] ) ){
 
-                $default_layout = '[sed_row_outer_outer class="module_sed_content_layout_contextmenu_container" sed_theme_id="' . $main_row_theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="boxed"]
-                    [sed_module_outer_outer class="module_sed_content_layout_contextmenu_container" shortcode_tag="sed_module"]
+                $default_layout = '[sed_row_outer_outer sed_theme_id="' . $main_row_theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="boxed"]
+                    [sed_module_outer_outer shortcode_tag="sed_module"]
                         [sed_content_layout layout="without-sidebar" title="columns"]
                             [sed_content_layout_column width="100%" sed_main_content="yes" parent_module="content-layout"]
                                 {{content}}
@@ -761,6 +772,13 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             }
 
+            /*$settings['sed_layouts_content'] = array(
+                'default'        => get_option( 'sed_layouts_content' ),
+                'capability'     => 'manage_options',
+                'option_type'    => 'option' ,
+                'transport'      => 'postMessage'
+            );*/
+
             //register sed layouts content settings
             require_once dirname( __FILE__ ) . '/content-layout-setting.php';
 
@@ -772,7 +790,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'transport'      => 'refresh'
     		);
 
-            if ( get_option( 'sed_theme_options' ) === false ) {
+            /*if ( get_option( 'sed_theme_options' ) === false ) {
 
                 //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
                 $deprecated = null;
@@ -801,7 +819,7 @@ if(!class_exists('SiteEditorLayoutManager')){
     			'capability'     => 'manage_options',
     			'option_type'    => 'option' ,
                 'transport'      => 'postMessage'
-    		);
+    		);*/
 
             sed_add_settings( $settings );
 

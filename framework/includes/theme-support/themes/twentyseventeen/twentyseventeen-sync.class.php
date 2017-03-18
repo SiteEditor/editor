@@ -37,7 +37,7 @@ class SiteEditorTwentyseventeenThemeSync{
 
         //add_filter( 'template_include', array(&$this,'template_chooser') , 99 );
 
-        //add_filter( 'sed_header_wrapping_template', array( $this , 'get_header' ) , 100 , 1 );
+        //add_filter( 'sed_header_wrapping_template', array( $this , 'get_header' ) , 100 , 1 ); //locate_template , load_template , get_template_part
 
         add_filter( 'sed_theme_color_css' , array( $this , 'theme_color_css' ) , 100 , 3 );
 

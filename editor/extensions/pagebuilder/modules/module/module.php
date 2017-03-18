@@ -67,7 +67,7 @@ class PBAddShortcode extends PBShortcodeClass{
         $atts = array(
             'tag'          => 'h2',
             'show_add_button'  => "true",
-            'sed_contextmenu_class' => ''
+            //'sed_contextmenu_class' => ''
         );
 
         return $atts;
