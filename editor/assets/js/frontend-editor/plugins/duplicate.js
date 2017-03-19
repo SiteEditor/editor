@@ -85,7 +85,7 @@
             newPattern = api.pageBuilder.setHelperShortcodes( newPattern , mainShortcode.tag , "tag" );
 
             //shortcode pattern filter
-            newPattern = api.pageBuilder.shortcodesPatternFilter( newPattern );
+            newPattern = api.pageBuilder.shortcodesPatternFilter( newPattern ); console.log( "----------------newPattern------------" , newPattern );
 
             this.newElementId = newPattern[2].id;
 

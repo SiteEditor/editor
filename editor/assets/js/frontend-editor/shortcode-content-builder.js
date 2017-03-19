@@ -816,7 +816,7 @@
                 shortcodeParent = this.getShortcode( shortcode.attrs.module_helper_id );
 
                 if( shortcodeParent ){
-                    shortcodeParentInfo = api.shortcodes[shortcodeParent.tag] ;
+                    shortcodeParentInfo = api.shortcodes[shortcodeParent.tag] ; 
                     if(shortcodeParentInfo.asModule && shortcodeParentInfo.moduleName == parentModule )
                         return shortcodeParent;
                 }

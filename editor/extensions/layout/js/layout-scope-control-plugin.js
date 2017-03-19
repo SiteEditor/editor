@@ -865,7 +865,7 @@
 
         },
 
-        removeRowFromAllLayouts: function (themeId) {
+        /*removeRowFromAllLayouts: function (themeId) {
 
             var control = this;
 
@@ -875,7 +875,9 @@
                 });
             });
 
-        },
+            control.refresh(); console.log( "----------this.models------------" , this.models );
+
+        },*/
 
         existThemeIdInLayout: function (leyout) {
             var control = this;

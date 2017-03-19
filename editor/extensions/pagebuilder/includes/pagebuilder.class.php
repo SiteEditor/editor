@@ -1362,11 +1362,11 @@ Class PageBuilderApplication {
 
         }
 
-        uasort( $curr_sub_themes_models , array( __CLASS__ , 'theme_row_order' ) );
+        uasort( $curr_sub_themes_models , array( __CLASS__ , 'theme_row_order' ) ); //var_dump( $sed_data['theme_content'] );
 
         self::fix_page_theme_content( $curr_sub_themes_models );
 
-        //var_dump( $curr_sub_themes_models );
+        //var_dump( $sed_data['theme_content'] );
 
         //Create current page content
         $shortcodes_pattern_string = "";

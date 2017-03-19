@@ -1294,7 +1294,7 @@
 
                     if( !_.isUndefined( $(this).data( "themeId" ) ) ){
                         type = "public";
-                        actions = $(this).data( "sedModuleAction" );
+                        actions = $(this).data( "sedModuleAction" ).slice();
 
                         var index = $.inArray( "move" , actions );
 
@@ -1304,10 +1304,10 @@
 
                     }else if( $(this).hasClass( "sed-static-module" ) ){
                         type = "static";
-                        actions = $(this).data( "sedModuleAction" ) ;
+                        actions = $(this).data( "sedModuleAction" ).slice() ;
                     }else{
                         type = "normal";
-                        actions = $(this).data( "sedModuleAction" );
+                        actions = $(this).data( "sedModuleAction" ).slice();
                     }
 
                     if( _.isUndefined( $(this).data( "sedModuleType" ) ) || $(this).data( "sedModuleType" ) != type ) {

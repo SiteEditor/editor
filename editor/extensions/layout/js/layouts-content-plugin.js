@@ -31,12 +31,15 @@
 
                 api.Events.trigger( "beforeRemovedThemePublicRow" , themeId );
 
-                var control = api.control.instance("main_layout_row_scope_control");
-                if (!_.isUndefined(control) && typeof control.removeRowFromAllLayouts == "function") {
+                /*var control = api.control.instance("main_layout_row_scope_control");
+                if (!_.isUndefined(control) && typeof control.removeRowFromAllLayouts == "function") { alert("test...");
                     control.removeRowFromAllLayouts(themeId);
-                }
+                }else{}*/
 
-                self.removeRowFromLayoutsContent(themeId);
+                self.removeRowFromAllLayouts( themeId );
+
+                self.removeRowFromLayoutsContent( themeId );
+                
             });
 
             api.Events.bind("sedAfterThemeContentReady", function () {
@@ -191,7 +194,23 @@
 
             this.set( layoutsContent );
 
-            //console.log("-----------layoutsRowsContent--------------", layoutsContent );
+            console.log("-----------layoutsRowsContent AFTER REMOVE--------------", layoutsContent );
+
+        },
+
+        removeRowFromAllLayouts: function (themeId) {
+
+            var models = $.extend( true , {} , api( 'sed_layouts_models' )() || {} );
+
+            _.each( models , function (rows, leyout) {
+
+                models[leyout] = _.filter( models[leyout] , function (row) {
+                    return row.theme_id != themeId;
+                });
+
+            });
+
+            api( 'sed_layouts_models' ).set( $.extend( true , {} , models ) );
 
         }
 
