@@ -30,8 +30,8 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 "name"        => "sed_content_layout",                               //*require
                 "title"       => __("Content Layout","site-editor"),                 //*require for toolbar
                 "description" => __("Add Content Layout to page","site-editor"),
-                "icon"        => "icon-content-layout",                               //*require for icon toolbar
-                "module"      =>  "content-layout",         //*require
+                "icon"        => "sedico-content-layout",                               //*require for icon toolbar
+                "module"      => "content-layout",         //*require
             ) // Args
 		);
 
@@ -94,51 +94,89 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
         $dropdown_html = ob_get_contents();
         ob_end_clean();
 
+
+        $this->add_panel( 'content_layout_settings_panel_outer' , array(
+            'title'                   =>  __('Content Layout Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-content-layou' ,
+            'field_spacing'           => 'sm'
+        ) );
+
+        $this->add_panel( 'content_layout_settings_panel' , array(
+            'title'                   =>  __('Content Layout Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "content_layout_settings_panel_outer",
+            'priority'                => 1 ,
+        ) );        
+
         $params = array(
-        		'layout' => array(
-                    'type'              =>  'custom',
-                    'js_type'           =>  'dropdown',
-                    'has_border_box'    =>   true ,
-                    'custom_template'   =>  $dropdown_html ,
-                    'js_params'     =>  array(
-                        'options_selector'    => '.content-leyout-item',
-                        'selected_class'      => 'selected-layout'
-                    ),
-        		),
-                'responsive_option' => array(
-          			'type' => 'select',
-          			'label' => __('Responsive Option', 'site-editor'),
-          			'description' => '',// __("Select the Icon's Style", "site-editor"),
-                    'choices'   =>array(
-                        'normal-columns'         => __('Full Width Any Columns', 'site-editor'),
-                        'float-columns'          => __('Auto Mode Columns', 'site-editor'),
-                        'table-cell-columns'     => __('Inline Columns', 'site-editor'),
-                        'hidden-columns'         => __('Hidden Columns', 'site-editor'),
-                    ),
-          		),
-                /*'equal_column_width' => array(
-                    'type' => 'checkbox',
-                    'label' => __('Equal Column Width', 'site-editor'),
-                    'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
-                ),*/
-                "responsive_spacing"    => array(
-                    'type'    => 'text',
-                    'label'   => __('Module Responsive Spacing', 'site-editor'),
-                    'description'    => '',// __('','site-editor'),
+    		'layout' => array(
+                'type'              =>  'custom',
+                'js_type'           =>  'dropdown',
+                //'has_border_box'    =>   true ,
+                'custom_template'   =>  $dropdown_html ,
+                'js_params'     =>  array(
+                    'options_selector'    => '.content-leyout-item',
+                    'selected_class'      => 'selected-layout'
                 ),
-                'spacing' => array(
-                    "type"          => "spacing" ,
-                    "label"         => __("Spacing", "site-editor"),
-                    "default"       => "10 0 10 0" ,
-                ), 
-                "animation"  =>  array(
-                    "type"          => "animation" ,
-                    "label"         => __("Animation Settings", "site-editor"),
+                'has_border_box'      => false ,
+                'panel'    => 'content_layout_settings_panel',
+    		),
+            'responsive_option' => array(
+      			'type' => 'select',
+      			'label' => __('Responsive Option', 'site-editor'),
+      			'description' => '',// __("Select the Icon's Style", "site-editor"),
+                'choices'   =>array(
+                    'normal-columns'         => __('Full Width Any Columns', 'site-editor'),
+                    'float-columns'          => __('Auto Mode Columns', 'site-editor'),
+                    'table-cell-columns'     => __('Inline Columns', 'site-editor'),
+                    'hidden-columns'         => __('Hidden Columns', 'site-editor'),
                 ),
-                'row_container' => array(
-                    'type'          => 'row_container',
-                    'label'         => __('Go To Row Settings', 'site-editor')
-                )
+                'has_border_box'      => false ,
+                'panel'    => 'content_layout_settings_panel',
+      		),
+            /*'equal_column_width' => array(
+                'type' => 'checkbox',
+                'label' => __('Equal Column Width', 'site-editor'),
+                'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
+            ),*/
+            "responsive_spacing"    => array(
+                'type'    => 'text',
+                'label'   => __('Module Responsive Spacing', 'site-editor'),
+                'description'    => '',// __('','site-editor'),
+                'has_border_box'      => false ,
+                'panel'    => 'content_layout_settings_panel',
+            ),
+
+            'row_container' => array(
+                'type'                => 'row_container',
+                'label'               => __('Module Wrapper Settings', 'site-editor')
+            ), 
+
+            "skin"  =>  array(
+                "type"                => "skin" ,
+                "label"               => __("Change skin", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-change-skin' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 540
+            ),
+
+            "animation"  =>  array(
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
         );
 
         return $params;
