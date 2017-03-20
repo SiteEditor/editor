@@ -14,8 +14,7 @@
     api.LayoutsRowsContent = api.Class.extend({
 
         initialize: function (params, options) {
-            var self = this;
-
+            
             this.value = {};
 
             $.extend(this, options || {});
@@ -52,6 +51,22 @@
                 self.createThemeContent();
             });
 
+            api.previewer.bind( "sedOriginalCustomizedRows", function( data ){
+
+                var layoutsContent = self.getClone();
+
+                $.each( data.rows , function( themeId , shortcodes ){
+
+                    if( _.isUndefined( layoutsContent[themeId] ) ){
+                        layoutsContent[themeId] = api.sedShortcode.clone( shortcodes );
+                    }
+
+                });
+
+                self.set( layoutsContent );
+
+            });
+
             //when refresh previewer
             api.addFilter( "sedPreviewerQueryFilter" , function( query ){
 
@@ -74,7 +89,7 @@
 
             var from = this.get();
 
-            if( !_.isEqual( from , to  ) ){
+            if( !_.isEqual( from , to  ) ){ 
 
                 this.value = to;
 
@@ -98,11 +113,10 @@
         },
 
         updateLayoutsContent: function () {
-            var control = this;
 
             var layoutsContent = this.getClone();
 
-            _.each(api.pagesThemeContent[api.settings.page.id], function (shortcode, index) {
+            _.each(api.pagesThemeContent[api.settings.page.id], function( shortcode ) {
 
                 if (!_.isUndefined(shortcode.theme_id) && _.isUndefined(shortcode.is_customize)) {
 
@@ -120,12 +134,11 @@
 
 
         createThemeContent: function () {
-            var control = this,
-                pagesThemeContent = [];
+            var pagesThemeContent = [];
 
             //console.log("----------------pagesThemeContent NEW NEW -------------", api.pagesThemeContent[api.settings.page.id]);
 
-            _.each(api.pagesThemeContent[api.settings.page.id], function (shortcode, index) {
+            _.each(api.pagesThemeContent[api.settings.page.id], function( shortcode ) {
                 if (_.isUndefined(shortcode) || !_.isObject(shortcode))
                     return true;
 
@@ -221,6 +234,6 @@
 
         api.layoutsRowsContent = new api.LayoutsRowsContent({});
 
-
     });
+    
 })( sedApp, jQuery );

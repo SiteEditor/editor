@@ -14,7 +14,6 @@
     api.RemovedRowsCollection = api.Class.extend({
 
         initialize: function (params, options) {
-            var self = this;
 
             this.value = {};
 
@@ -41,11 +40,11 @@
             api.Events.bind( "beforeChangePublicRowLayout" , function( themeId , layout , isAdded ){
 
                 if( ! isAdded ){
-                    var nextModel = self.getNextPublicRow( leyout , themeId );
+                    var nextModel = self.getNextPublicRow( layout , themeId );
 
-                    var prevModel = self.getPrevPublicRow( leyout , themeId );
+                    var prevModel = self.getPrevPublicRow( layout , themeId );
 
-                    self.refresh( themeId , leyout , prevModel , nextModel );
+                    self.refresh( themeId , layout , prevModel , nextModel );
                 }else{
                     self.removeModel( themeId , layout );
                 }

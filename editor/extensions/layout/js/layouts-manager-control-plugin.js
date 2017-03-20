@@ -17,7 +17,7 @@
             var control = this;
             this.model = $.extend( true, {} , control.setting() );
 
-            this.currentLayout = !_.isEmpty( api('page_layout')() ) ? api('page_layout')() : api.defaultPageLayout;
+            this.currentLayout = !_.isEmpty( api( api.currentPageLayoutSettingId )() ) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
 
             this.view();
             this.updateView();

@@ -21,9 +21,20 @@
 
         initThemeRows : function(){
             var layoutModels = api('sed_layouts_models')(),
-                self = this;
+                self = this,
+                settingId;
 
-            this.currentLayout = !_.isEmpty(api('page_layout')()) ? api('page_layout')() : api.defaultPageLayout;
+            if( api.currentPageInfo.type == "post" ) { //alert( obj.postType );
+
+                settingId = "postmeta[" + api.currentPageInfo.post_type + "][" + api.currentPageInfo.id + "][page_layout]";
+
+            }else{
+
+                settingId = "sed_" + api.currentPageInfo.id + "_settings[page_layout]";
+
+            }
+
+            this.currentLayout = !_.isEmpty(api( settingId )()) ? api( settingId )() : api.defaultPageLayout;
 
             console.log( "####api.contentBuilder.pagesThemeContent[this.postId]#####" , api.contentBuilder.pagesThemeContent[this.postId] );
 
@@ -103,11 +114,15 @@
 
             });
 
-            api.preview.bind( 'active', function() {
+            api.Events.bind( 'afterSyncPostsData', function() {
 
                 api.preview.send( "sedPagesLayoutsInfo" , {
                     defaultPageLayout    : api.defaultPageLayout ,
                     currentLayoutGroup   : api.currentLayoutGroup
+                });
+
+                api.preview.send( "sedOriginalCustomizedRows" , {
+                    rows : api.originalCustomizedRows
                 });
 
             });

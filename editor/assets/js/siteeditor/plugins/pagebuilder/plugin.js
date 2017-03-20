@@ -356,7 +356,7 @@
           _.each( dataSettings , function( settingArgs, id ) {
 
               if ( ! api.has( id ) ) {
-                  setting = api.create( id, id, settingArgs.value, {
+                  var setting = api.create( id, id, settingArgs.value, {
                       transport   : settingArgs.transport || "refresh",
                       previewer   : api.previewer,
                       stype       : "general" ,
@@ -381,11 +381,15 @@
 
                 api.currentPageThemeContentSettingId = "postmeta[" + obj.postType + "][" + api.settings.page.id + "][theme_content]";
 
+                api.currentPageLayoutSettingId = "postmeta[" + obj.postType + "][" + api.settings.page.id + "][page_layout]";
+
                 api.settings.currentPostType = obj.postType;
 
             }else{
 
                 api.currentPageThemeContentSettingId = "sed_" + api.settings.page.id + "_settings[theme_content]";
+
+                api.currentPageLayoutSettingId = "sed_" + api.settings.page.id + "_settings[page_layout]";
 
             }
 

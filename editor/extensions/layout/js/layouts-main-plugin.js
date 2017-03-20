@@ -96,18 +96,18 @@
                 api.defaultPageLayout = info.defaultPageLayout;
                 api.currentLayoutGroup = info.currentLayoutGroup;
 
-                self.currentLayout = !_.isEmpty(api('page_layout')()) ? api('page_layout')() : api.defaultPageLayout;
+                self.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
 
                 var scopeControl = api.control.instance("main_layout_row_scope_control");
 
                 if (!_.isUndefined(scopeControl)) {
-                    scopeControl.currentLayout = !_.isEmpty(api('page_layout')()) ? api('page_layout')() : api.defaultPageLayout;
+                    scopeControl.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
                 }
 
-                var layoutsManagerControl = api.control.instance("sed_add_layout_layouts_manager")
+                var layoutsManagerControl = api.control.instance("sed_add_layout_layouts_manager");
 
                 if (!_.isUndefined(layoutsManagerControl)) {
-                    layoutsManagerControl.currentLayout = !_.isEmpty(api('page_layout')()) ? api('page_layout')() : api.defaultPageLayout;
+                    layoutsManagerControl.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
                 }
 
             });
@@ -186,7 +186,7 @@
 
                 var currGroupId = "sed_pages_layouts[" + api.currentLayoutGroup + "]";
 
-                if( id == "page_layout" || currGroupId == id ) {
+                if( id ==  api.currentPageLayoutSettingId || currGroupId == id ) {
                     //self.beforeUpdatePageLayout();
                 }
 
@@ -232,13 +232,13 @@
 
                 var currGroupId = "sed_pages_layouts[" + api.currentLayoutGroup + "]";
 
-                if (_.isEmpty(api("page_layout")()) && id == currGroupId) {
+                if (_.isEmpty(api( api.currentPageLayoutSettingId )()) && id == currGroupId) {
 
                     transport = "refresh";
 
-                }else if( id == "page_layout" ) {
+                }else if( id ==  api.currentPageLayoutSettingId ) {
 
-                    var newLayout = !_.isEmpty(api('page_layout')()) ? api('page_layout')() : api( currGroupId )();
+                    var newLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api( currGroupId )();
 
                     if( newLayout == self.currentLayout ) {
 
@@ -257,7 +257,7 @@
 
             var currGroupId = "sed_pages_layouts[" + api.currentLayoutGroup + "]";
 
-            var newLayout = !_.isEmpty(api('page_layout')()) ? api('page_layout')() : api( currGroupId )() ,
+            var newLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api( currGroupId )() ,
                 curLayout = this.currentLayout;
 
             if( _.isUndefined( this.cacheChangeLayoutThemeContent ) )

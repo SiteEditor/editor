@@ -36,7 +36,7 @@
 
             this.lastThemeId = parseInt(api.instance('sed_last_theme_id').get());
 
-            this.currentLayout = !_.isEmpty(api('page_layout')()) ? api('page_layout')() : api.defaultPageLayout;
+            this.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
 
             this.models = $.extend( true, {} , control.setting() );
 
@@ -262,14 +262,13 @@
                     },
 
                     update: function (e, ui) {
-                        var currValue = [],
-                            order = 0,
+                        var order = 0,
                             themeRows = {};
 
                         $( RowsPageBoxSelector ).find(".layout-row-container > .sed-layout-row-box").each(function () {
                             var themeId = $(this).data("rowId");
                             themeRows[themeId] = {
-                                order: order,
+                                order: order
                             };
                             order++;
                         });
@@ -622,7 +621,6 @@
                 return $(this).prop("value") == "hidden";
             }).prop("disabled", false);
 
-
             if (_.isEmpty(layouts)) {
                 $(".sed-scope-mode-label .scope-mode").text( api.I18n.private_scope );
 
@@ -640,7 +638,7 @@
                 $(control.selector).find('.select-layouts-custom .edit-layout-rows').addClass("hide");
 
                 this.themeId = themeId;
-                _.each(leyouts, function (leyout) {
+                _.each(layouts, function (leyout) {
                     control.removeRowFromModel(leyout);
                 });
 

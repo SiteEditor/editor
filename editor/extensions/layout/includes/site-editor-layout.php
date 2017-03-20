@@ -784,13 +784,13 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             new SedLayoutContentSetting();
 
-            $settings['page_layout'] = array(
+            /*$settings['page_layout'] = array(
     			'default'        => '' ,
     			'option_type'    => 'base' ,
                 'transport'      => 'refresh'
     		);
 
-            /*if ( get_option( 'sed_theme_options' ) === false ) {
+            if ( get_option( 'sed_theme_options' ) === false ) {
 
                 //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
                 $deprecated = null;
