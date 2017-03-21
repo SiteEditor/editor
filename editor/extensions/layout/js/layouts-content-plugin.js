@@ -17,6 +17,10 @@
             
             this.value = {};
 
+            this.removedThemeRows = [];
+
+            this.newLayoutsWithoutMainContent = [];
+
             $.extend(this, options || {});
 
             this.ready();
@@ -72,6 +76,14 @@
 
                 query.sed_layouts_content = JSON.stringify( self.get() );
 
+                query.sed_removed_theme_rows = self.removedThemeRows;
+                
+                /**
+                 * Set Main Content for new layouts
+                 * @type {Array}
+                 */
+                query.sed_new_layouts_without_main_content = self.newLayoutsWithoutMainContent;
+
                 return query;
             });
 
@@ -79,6 +91,14 @@
             api.addFilter( "sedSaveQueryFilter" , function( query ){
 
                 query.sed_layouts_content = JSON.stringify( self.get() );
+
+                query.sed_removed_theme_rows = self.removedThemeRows;
+
+                /**
+                 * Set Main Content for new layouts
+                 * @type {Array}
+                 */
+                query.sed_new_layouts_without_main_content = self.newLayoutsWithoutMainContent;
 
                 return query;
             });
@@ -136,7 +156,7 @@
         createThemeContent: function () {
             var pagesThemeContent = [];
 
-            //console.log("----------------pagesThemeContent NEW NEW -------------", api.pagesThemeContent[api.settings.page.id]);
+            console.log("----------------pagesThemeContent NEW NEW -------------", api.pagesThemeContent[api.settings.page.id]);
 
             _.each(api.pagesThemeContent[api.settings.page.id], function( shortcode ) {
                 if (_.isUndefined(shortcode) || !_.isObject(shortcode))
@@ -167,9 +187,9 @@
 
             });
 
-            pagesThemeContent = encodeURI( JSON.stringify( pagesThemeContent ) );
+            console.log("---------------- pagesThemeContent After Modify -------------", pagesThemeContent);
 
-            //console.log("---------------- pagesThemeContent After Modify -------------", pagesThemeContent);
+            pagesThemeContent = encodeURI( JSON.stringify( pagesThemeContent ) );
 
             var id = api.currentPageThemeContentSettingId;
 
@@ -202,8 +222,13 @@
 
             var layoutsContent = this.getClone();
 
-            if( !_.isUndefined( layoutsContent[themeId] ) )
+            if( !_.isUndefined( layoutsContent[themeId] ) ) {
+
                 delete layoutsContent[themeId];
+
+                this.removedThemeRows.push( themeId );
+
+            }
 
             this.set( layoutsContent );
 
@@ -215,9 +240,9 @@
 
             var models = $.extend( true , {} , api( 'sed_layouts_models' )() || {} );
 
-            _.each( models , function (rows, leyout) {
+            _.each( models , function (rows, layout) {
 
-                models[leyout] = _.filter( models[leyout] , function (row) {
+                models[layout] = _.filter( models[layout] , function (row) {
                     return row.theme_id != themeId;
                 });
 

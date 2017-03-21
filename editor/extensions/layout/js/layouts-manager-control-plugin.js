@@ -55,8 +55,36 @@
                 _Add              : this.container.find('.sed-add-layout') ,
                 _AddTitleInput    : this.container.find('.sed-add-layout [name="add-new-layout-title"]') ,
                 _AddSlugInput     : this.container.find('.sed-add-layout [name="add-new-layout-slug"]') ,
-                _ErrorBox         : this.container.find(".sed-layout-error-box p")
+                _ErrorBox         : this.container.find(".sed-layout-error-box")
             };
+
+            //Add Layout with enter key
+            this.container.find(".add-layout-input").on("keypress" , function(e){
+
+                if (e.keyCode == 13) {
+
+                    control.addItem();
+
+                }
+
+            });
+
+            this.container.find('.edit-title-input').livequery(function(){
+
+                $(this).on("keypress" , function(e){
+
+                    if (e.keyCode == 13) {
+
+                        control.saveItem();
+
+                    }
+
+                });
+
+            }, function() {
+                // unbind the change event
+                $(this).unbind('keypress');
+            });
 
             actionElement.livequery(function(){
                 $(this).on("click" , function(){
@@ -92,8 +120,8 @@
         },
 
         printAlert : function ( ) {
-            this.UI._ErrorBox.html( this.errortext );
-            this.UI._ErrorBox.slideDown( 300 ).delay( 5000 ).fadeOut( 400 );
+            this.UI._ErrorBox.find("p").html( this.errortext );
+            this.UI._ErrorBox.slideDown( 900 ).delay(4000).slideUp(900);
         },
 
         updateView : function(){
@@ -103,7 +131,7 @@
             this.container.find(".sed-layout-lists > ul").html( content );
         },
 
-        addItem : function ( title , slug ) {
+        addItem : function ( ) {
             var title = this.UI._AddTitleInput.val(),
                 slug = this.UI._AddSlugInput.val();
 
@@ -164,13 +192,9 @@
                     main_row    : true
                 });
 
-                var control = api.control.instance("main_layout_row_scope_control");
+                api.layoutsRowsContent.newLayoutsWithoutMainContent.push( themeId );
 
-                if (!_.isUndefined(control)) {
-                    control.models = layoutModels;
-                }
-
-                api('sed_layouts_models').set( layoutModels );
+                api('sed_layouts_models').set( $.extend( true , {} , layoutModels ) );
 
             } else {
                 this.errortext = api.I18n.layout_already_exist;
@@ -228,15 +252,11 @@
                 });
 
                 if( !_.isUndefined( layoutModels[slug] ) ){
+
                     delete layoutModels[slug];
 
-                    var control = api.control.instance("main_layout_row_scope_control");
+                    api('sed_layouts_models').set( $.extend( true , {} , layoutModels ) );
 
-                    if (!_.isUndefined(control)) {
-                        control.models = layoutModels;
-                    }
-
-                    api('sed_layouts_models').set( layoutModels );
                 }
 
 

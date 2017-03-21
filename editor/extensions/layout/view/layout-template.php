@@ -236,13 +236,19 @@
 
 <script type="text/html" id="tmpl-sed-layouts-select-options" >
     <#
+        if( data.hasEmpty === true ){ 
+        #>
+            <option value=""><?php echo __( "Using Default settings" , "site-editor" );?></option>
+        <#
+        }
+
         var num = 1;
         _.each( data.layoutsSettings , function( setting , layout ){
         var title = setting.title;
         #>
-        <option value="{{layout}}">{{title}}</option>
+            <option value="{{layout}}">{{title}}</option>
         <#
-            num++;
-            });
-            #>
+        num++;
+        });
+    #>
 </script>

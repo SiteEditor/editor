@@ -1339,7 +1339,7 @@ class SiteEditorManager{
             $info['type']     = "home_blog";
         } elseif( is_home() === false && is_front_page() === true ){
             $sed_post_id = get_queried_object()->ID;
-            $info['type']     = "home_page";
+            $info['type']     = "front_page";
             $info['post_id']  = $sed_post_id;
         } elseif( is_home() === true && is_front_page() === false  ){
             $sed_post_id        = get_option( 'page_for_posts' );

@@ -203,8 +203,13 @@
 
                             if( $( "#sed-app-control-" + data.control_id ).find(".sed_all_layouts_options_select").length > 0 ) {
 
+                                var hasEmpty = $( "#sed-app-control-" + data.control_id ).find(".sed_all_layouts_options_select").hasClass("has-empty");    
+
                                 var template = api.template("sed-layouts-select-options"),
-                                    content = template({layoutsSettings: api('sed_layouts_settings')()});
+                                    content = template({
+                                        layoutsSettings: api('sed_layouts_settings')() ,
+                                        hasEmpty       : hasEmpty
+                                    });
 
                                 $("#sed-app-control-" + data.control_id).find(".sed_all_layouts_options_select").html( content );
 

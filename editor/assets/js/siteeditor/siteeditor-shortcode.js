@@ -132,9 +132,10 @@
 
             var contentModel = this.getContentModel( oldModelId ) ,
                 oldIndex = this.index( oldModelId , contentModel ) ,
-                newModelLength = newModel.length;
+                oldModel = this.findModelsById( contentModel , oldModelId ),
+                oldModelLength = oldModel.length;
 
-            var args = $.merge([ oldIndex , newModelLength ] , newModel);
+            var args = $.merge([ oldIndex , oldModelLength ] , newModel);
 
             Array.prototype.splice.apply( contentModel , args );
 

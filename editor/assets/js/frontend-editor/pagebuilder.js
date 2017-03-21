@@ -722,6 +722,16 @@
 
             });
 
+            //remove sed_css_class from pattern
+            shortcodes = _.map( shortcodes  , function(shortcode){
+
+                if( !_.isUndefined( shortcode.attrs ) && !_.isUndefined( shortcode.attrs.sed_css_class ) ){
+                    delete shortcode.attrs.sed_css_class;
+                }
+
+                return shortcode;
+            });
+
             return shortcodes;
         },
 

@@ -423,11 +423,9 @@ Class SiteEditorThemeFramework{
                 'default'           => '' ,
                 'label'             => __("Select page layout" ,"site-editor"),
                 //'description'       => '',
-                'choices'           => array(
-                    ''                  =>   __( "Using Default settings" , "site-editor" )
-                ),
+                'choices'           => array(),
                 'atts'              => array(
-                    "class"             =>  "sed_all_layouts_options_select"
+                    "class"             =>  "sed_all_layouts_options_select has-empty"
                 ),
                 'priority'          => 9 ,
                 'setting_id'        => "page_layout" ,

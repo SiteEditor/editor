@@ -79,6 +79,23 @@ if(!class_exists('SedLayoutContentSetting')){
 
             } else {
 
+                /**
+                 * delete removed public theme rows
+                 */
+                if ( isset( $_POST['sed_removed_theme_rows'] ) && is_array( $_POST['sed_removed_theme_rows']  ) && !empty( $_POST['sed_removed_theme_rows']  ) && is_array( $this->_post_value ) ) {
+
+                    foreach ( $_POST['sed_removed_theme_rows'] AS $theme_id ){
+
+                        if( isset( $this->_post_value[$theme_id] ) ){
+
+                            unset( $this->_post_value[$theme_id] );
+
+                        }
+
+                    }
+
+                }
+
                 return $this->_post_value;
 
             }
@@ -88,7 +105,29 @@ if(!class_exists('SedLayoutContentSetting')){
         public function _preview_filter( $original ){
 
             $value = $this->post_value( $original );
-            return $this->get_content_layout( $original , $value );
+
+            $value = $this->get_content_layout( $original , $value );
+
+            /**
+             * Set Main Content for new layouts
+             */
+            if ( isset( $_POST['sed_new_layouts_without_main_content'] ) && is_array( $_POST['sed_new_layouts_without_main_content']  ) && !empty( $_POST['sed_new_layouts_without_main_content']  ) ) {
+
+                $value = is_array( $value ) ? $value : array();
+
+                foreach ( $_POST['sed_new_layouts_without_main_content'] AS $theme_id ){
+
+                    if( !isset( $value[$theme_id] ) ){
+
+                        $value[$theme_id] = SiteEditorLayoutManager::get_main_content_pattern( $theme_id );
+
+                    }
+
+                }
+
+            }
+
+            return $value;
 
         }
 

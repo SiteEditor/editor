@@ -147,9 +147,8 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             $default_pages_layouts_labels = array(
                 "posts_archive"     =>  __('Post Archive Pages Layout',"site-editor"),
-                "home_blog"         =>  __('Home Blog Page Layout',"site-editor") ,
+                "index_blog"        =>  __('Blog Page Layout',"site-editor") ,
                 "front_page"        =>  __('Front Page Layout',"site-editor") ,
-                "blog"              =>  __('Blog Page Layout',"site-editor") ,
                 "search_results"    =>  __('Search Results Page Layout',"site-editor") ,
                 "404_page"          =>  __('404 Page Layout',"site-editor") ,
                 "single_post"       =>  __('Single Posts Layout',"site-editor") ,
@@ -436,9 +435,8 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             $default_pages_layouts = array(
                 "posts_archive"     =>  "archive" ,
-                "home_blog"         =>  "default" ,
+                "index_blog"        =>  "default" ,
                 "front_page"        =>  "default" ,
-                "blog"              =>  "archive" ,
                 "search_results"    =>  "default" ,
                 "404_page"          =>  "default" ,
                 "single_post"       =>  "post" ,
@@ -524,15 +522,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             if( !is_array( $sed_layouts_content ) || ! isset( $sed_layouts_content[ $main_row_theme_id ] ) ){
 
-                $default_layout = '[sed_row_outer_outer sed_theme_id="' . $main_row_theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="boxed"]
-                    [sed_module_outer_outer shortcode_tag="sed_module"]
-                        [sed_content_layout layout="without-sidebar" title="columns"]
-                            [sed_content_layout_column width="100%" sed_main_content="yes" parent_module="content-layout"]
-                                {{content}}
-                            [/sed_content_layout_column]
-                        [/sed_content_layout]
-                    [/sed_module_outer_outer]
-                [/sed_row_outer_outer]';
+                $default_layout = self::get_main_content_pattern( $main_row_theme_id );
 
                 $new_sed_layouts_content = $sed_layouts_content;
 
@@ -558,7 +548,23 @@ if(!class_exists('SiteEditorLayoutManager')){
 
         }
 
-        function save_check_main_content( $sed_page_customized , $all_posts_content ){
+        public static function get_main_content_pattern( $main_row_theme_id ){
+
+            $default_layout = '[sed_row_outer_outer sed_theme_id="' . $main_row_theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="boxed"]
+                    [sed_module_outer_outer shortcode_tag="sed_module"]
+                        [sed_content_layout layout="without-sidebar" title="columns"]
+                            [sed_content_layout_column width="100%" sed_main_content="yes" parent_module="content-layout"]
+                                {{content}}
+                            [/sed_content_layout_column]
+                        [/sed_content_layout]
+                    [/sed_module_outer_outer]
+                [/sed_row_outer_outer]';
+
+            return $default_layout;
+
+        }
+
+        public function save_check_main_content( $sed_page_customized , $all_posts_content ){
 
             if( isset( $sed_page_customized['sed_layouts_models'] ) ) {
 
@@ -643,7 +649,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                     'default'        => isset( $current_pages_layouts[$group] ) ? $current_pages_layouts[$group] : "default",
                     'capability'     => 'manage_options',
                     'option_type'    => 'option' ,
-                    'transport'      => 'refresh'
+                    'transport'      => 'postMessage'
                 );
             }
 
@@ -877,7 +883,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             } elseif( is_home() === true && is_front_page() === true ){
 
-                $page_layout = $sed_pages_layouts[ "home_blog" ];
+                $page_layout = $sed_pages_layouts[ "index_blog" ];
 
             } elseif( is_home() === false && is_front_page() === true ){
 
@@ -885,7 +891,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             } elseif( is_home() === true && is_front_page() === false  ){
 
-                $page_layout = $sed_pages_layouts[ "blog" ];
+                $page_layout = $sed_pages_layouts[ "index_blog" ];
 
             } elseif ( is_search() ) {
 
@@ -948,7 +954,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             } elseif( is_home() === true && is_front_page() === true ){
 
-                $layout_group = "home_blog";
+                $layout_group = "index_blog";
 
             } elseif( is_home() === false && is_front_page() === true ){
 
@@ -956,7 +962,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
             } elseif( is_home() === true && is_front_page() === false  ){
 
-                $layout_group = "blog" ;
+                $layout_group = "index_blog" ;
 
             } elseif ( is_search() ) {
 

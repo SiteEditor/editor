@@ -283,3 +283,7 @@ table.sed-cols-table > tbody > tr > td {
     display: block;
     padding: 25px 10px;
 }
+
+.sed-app-preview .sed-hidden-theme-row {
+    display: none !important;
+}

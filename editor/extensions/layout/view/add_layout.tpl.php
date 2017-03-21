@@ -9,12 +9,12 @@
                     <div class="sed-add-layout">
                         <div class="row_field">
                             <label><?php echo __("Title" , "site-editor");?></label>
-                            <input name="add-new-layout-title">
+                            <input name="add-new-layout-title" class="add-layout-input">
                         </div>
 
                         <div class="row_field">
                             <label><?php echo __("Slug" , "site-editor");?></label>
-                            <input name="add-new-layout-slug">
+                            <input name="add-new-layout-slug" class="add-layout-input">
                         </div>
 
                         <div class="row_field">
@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="sed-layout-edit hide">
-                        <input data-layout="" name="edit-layout-title" value="">
+                        <input data-layout="" class="edit-title-input" name="edit-layout-title" value="">
                         <button data-action="save" class="btn button-primary"><?php echo __("Save" , "site-editor");?></button>
                         <span data-action="save-close" class="fa fa-close sed-layout-edit-close"> </span>
                     </div>

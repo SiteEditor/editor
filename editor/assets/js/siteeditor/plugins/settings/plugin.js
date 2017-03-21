@@ -47,6 +47,8 @@
 
             this.currentSettingsId = "";
 
+            this.pageOptionsLoaded = [];
+
             this.dialogSelector = "#sed-dialog-settings";
 
             this.rootBackBtn = {};
@@ -239,16 +241,29 @@
 
             });
 
+            /**
+             * Only For Page Options in this version
+             */
             api.Events.bind( "afterResetpageInfoSettings" , function(){
 
                 if( !_.isEmpty( self.needToRefreshGroups ) ){
 
+                    console.log( "----------self.needToRefreshGroups------------" , self.needToRefreshGroups );
+
                     _.each( self.needToRefreshGroups , function( optionsGroup ){
 
                         var settingId = optionsGroup + "_" + api.settings.page.id ,
-                            isOpen = $( self.dialogSelector ).dialog( "isOpen" );
+                            isOpen = $( self.dialogSelector ).dialog( "isOpen" ),
+                            isLoaded = optionsGroup == "sed_page_options" && $.inArray( settingId , self.pageOptionsLoaded ) > -1;
 
-                        if( _.isUndefined( self.backgroundAjaxload[settingId] ) && _.isUndefined( self.dialogsContents[settingId] ) ) {
+
+                        console.log( "----------self.backgroundAjaxload[settingId]------------" , self.backgroundAjaxload[settingId] );
+
+                        console.log( "----------self.dialogsContents[settingId]------------" , self.dialogsContents[settingId] );
+
+                        console.log( "----------needToRefreshGroups ## settingId------------" , settingId );
+
+                        if( _.isUndefined( self.backgroundAjaxload[settingId] ) && _.isUndefined( self.dialogsContents[settingId] ) && !isLoaded ) {
 
                             if( isOpen && self.optionsGroup == optionsGroup ){
 
@@ -781,6 +796,12 @@
             if( !_.isEmpty( groups ) ){
 
                 _.each( groups , function( data , id ){
+
+                    if( id == "sed_page_options" && $.inArray( settingId , self.pageOptionsLoaded ) == -1 ){
+
+                        self.pageOptionsLoaded.push( settingId );
+
+                    }
 
                     if( $.inArray( id , _.keys( api.settings.groups ) ) == -1  ){
 

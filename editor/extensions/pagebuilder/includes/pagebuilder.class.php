@@ -1324,7 +1324,7 @@ Class PageBuilderApplication {
         return $helper_shortcodes;
     }
 
-    function sed_process_template(){
+    public function sed_process_template(){
 
         //get wp page content
         $main_content = $this->main_content_template();
@@ -1336,6 +1336,42 @@ Class PageBuilderApplication {
 
         require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
         $page_layout = SiteEditorLayoutManager::get_page_layout();
+
+        if( ! site_editor_app_on() ) {
+
+            ini_set('xdebug.var_display_max_children',1000 );
+            ini_set('xdebug.var_display_max_depth',20 );
+            ini_set('xdebug.var_display_max_data' , 100000 );
+
+            echo "<h2 style='color:red;'>page_layout: </h2>";
+
+            var_dump($page_layout);
+
+            echo "<h2 style='color:red;'>sed_layouts_content: </h2>";
+
+            var_dump(get_option("sed_layouts_content"));
+
+            echo "<h2 style='color:red;'>sed_layouts_models: </h2>";
+
+            var_dump(get_option("sed_layouts_models"));
+
+            echo "<h2 style='color:red;'>sed_layouts_settings: </h2>";
+
+            var_dump(get_option("sed_layouts_settings"));
+
+            echo "<h2 style='color:red;'>sed_pages_layouts: </h2>";
+
+            var_dump(get_option("sed_pages_layouts"));
+
+            echo "<h2 style='color:red;'>sed_last_theme_id: </h2>";
+
+            var_dump(get_option("sed_last_theme_id"));
+
+            echo "<h2 style='color:red;'>Custom Theme Content: </h2>";
+
+            var_dump( $sed_data['theme_content'] );
+
+        }
 
         //Current Page Layout Models
         $curr_sub_themes_models = $sub_themes_models[ $page_layout ];
@@ -1354,7 +1390,7 @@ Class PageBuilderApplication {
 
                 //Collect Hidden public Theme rows in a array
                 if( in_array( $sed_data['page_id'] , $model['hidden'] ) && site_editor_app_on() ){
-                    $this->sed_hidden_theme_rows [] = $model['theme_id'];
+                    $this->sed_hidden_theme_rows[] = $model['theme_id'];
                 }
 
             }else

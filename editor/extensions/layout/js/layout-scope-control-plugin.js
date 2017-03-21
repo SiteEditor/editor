@@ -38,8 +38,6 @@
 
             this.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
 
-            this.models = $.extend( true, {} , control.setting() );
-
             control.publicScopeEl = control.container.find('[name="sed_layout_scope_public"]');
 
             control.sedScopeLayoutEl = control.container.find('[name="sed_scope_layout"]');
@@ -135,7 +133,6 @@
                         'themeId': control.themeId
                     });
 
-                    control.refresh();
                 } else {
 
                     if( control._get("main_row") )
@@ -182,7 +179,6 @@
                         $(this).parents(".sub-theme-item:first").find(".edit-layout-rows").addClass("hide");
                     }
 
-                    control.refresh();
                 });
             }, function() {
                 // unbind the change event
@@ -237,7 +233,6 @@
 
                 }
 
-                control.refresh();
             });
 
             this.editLayoutRowsEl.livequery(function () {
@@ -382,7 +377,6 @@
                 'themeId': control.themeId
             });
 
-            control.refresh();
         },
 
         changeScopePublicTypes: function (type, showConfirm) {
@@ -533,7 +527,6 @@
                     break;
             }
 
-            control.refresh();
             control.lastLayoutPublicType = type;
         },
 
@@ -566,7 +559,9 @@
 
             if (!_.isEmpty(themeRows)) {
 
-                control.models[layout] = _.map(control.models[layout], function (options) {
+                var models = this.getClone();
+
+                models[layout] = _.map(models[layout], function (options) {
 
                     if ($.inArray(options.theme_id, _.keys(themeRows)) != -1) {
                         options.order = themeRows[options.theme_id].order;
@@ -575,7 +570,8 @@
                     return options;
                 });
 
-                control.refresh();
+                control.refresh( models );
+
             }
 
         },
@@ -590,12 +586,25 @@
             return val;
         },
 
-        refresh: function () {
-            //console.log("refresh this.models ------------------------", this.models);
+        //return copy from current value
+        getClone : function () {
 
-            var models = $.extend( true , {} , this.models );
+            return $.extend( true, {} , this.setting() );
 
-            this.setting.set( models );
+        },
+
+        refresh: function ( models ) {
+
+            models = $.extend( true , {} , models );
+
+            var from = this.setting();
+
+            if( !_.isEqual( from , models  ) ){
+
+                this.setting.set( models );
+
+            }
+
         },
 
         update: function (themeId) {
@@ -702,9 +711,10 @@
         },
 
         getLayoutsByThemeId: function (themeId) {
-            var control = this, layouts = [];
 
-            $.each(this.models, function (layout, rows) {
+            var layouts = [];
+
+            $.each( this.getClone() , function (layout, rows) {
                 $.each(rows, function (idx, options) {
                     if (options.theme_id == themeId)
                         layouts.push(layout);
@@ -721,7 +731,9 @@
 
             layout = ( _.isUndefined(layout) || !layout ) ? this.currentLayout : layout;
 
-            _.each(this.models[layout], function (options) {
+            var models = this.getClone();
+
+            _.each( models[layout], function (options) {
                 if (options.theme_id == themeId) {
                     var index = $.inArray(api.currentPageInfo.id, options.exclude);
                     if (index > -1) {
@@ -730,6 +742,7 @@
                     }
                 }
             });
+
             return isCustom;
         },
 
@@ -752,8 +765,9 @@
             if( attr == "themeId" )
                 return themeId;
 
-            var val;
-            _.each(this.models[layout], function (options) {
+            var val , models = this.getClone();
+
+            _.each( models[layout], function (options) {
                 if ( options.theme_id == themeId && !_.isUndefined( options[attr] ) ) {
                     val = options[attr];
                 }
@@ -772,7 +786,9 @@
 
             layout = ( _.isUndefined(layout) || !layout ) ? this.currentLayout : layout;
 
-            _.each(this.models[layout], function (options) {
+            var models = this.getClone();
+
+            _.each( models[layout] , function (options) {
                 if (options.theme_id == themeId) {
                     var index = $.inArray(api.currentPageInfo.id, options.hidden);
                     if (index > -1) {
@@ -785,9 +801,12 @@
         },
 
         updateRowTitle: function (layout, themeId, title) {
+
             var control = this;
 
-            this.models[layout] = _.map(this.models[layout], function (options) {
+            var models = this.getClone();
+
+            models[layout] = _.map( models[layout] , function (options) {
                 if (options.theme_id == themeId) {
                     options.title = title;
                     return options;
@@ -796,13 +815,15 @@
 
             });
 
-            control.refresh();
+            control.refresh( models );
         },
 
         updateExcludeRows: function (type) {
             var control = this;
 
-            this.models[control.currentLayout] = _.map(this.models[control.currentLayout], function (options) {
+            var models = this.getClone();
+
+            models[control.currentLayout] = _.map( models[control.currentLayout] , function (options) {
                 if (options.theme_id == control.themeId) {
                     var index = $.inArray(api.currentPageInfo.id, options.exclude);
 
@@ -820,12 +841,17 @@
 
             });
 
+            control.refresh( models );
+
         },
 
         updateHiddenRows: function (type) {
+
             var control = this;
 
-            this.models[control.currentLayout] = _.map(this.models[control.currentLayout], function (options) {
+            var models = this.getClone();
+
+            models[control.currentLayout] = _.map(models[control.currentLayout], function (options) {
                 if (options.theme_id == control.themeId) {
                     var index = $.inArray(api.currentPageInfo.id, options.hidden);
 
@@ -843,6 +869,8 @@
 
             });
 
+            control.refresh( models );
+
         },
 
         generateThemeId: function () {
@@ -856,10 +884,16 @@
         },
 
         removeRowFromModel: function (leyout) {
+
             var control = this;
-            this.models[leyout] = _.filter(this.models[leyout], function (row) {
+
+            var models = this.getClone();
+
+            models[leyout] = _.filter(models[leyout], function (row) {
                 return row.theme_id != control.themeId;
             });
+
+            control.refresh( models );
 
         },
 
@@ -879,13 +913,16 @@
 
         existThemeIdInLayout: function (leyout) {
             var control = this;
-            if (_.isUndefined(this.models[leyout])) {
+
+            var models = this.getClone();
+
+            if (_.isUndefined(models[leyout])) {
                 return false;
             }
 
             var exist = false;
 
-            _.each(this.models[leyout], function (layoutModel) {
+            _.each(models[leyout], function (layoutModel) {
                 if (layoutModel.theme_id == control.themeId) {
                     exist = true;
                     return false;
@@ -909,10 +946,14 @@
                     title: ""
                 };
 
-            if (_.isUndefined(this.models[leyout]))
-                this.models[leyout] = [];
+            var models = this.getClone();
 
-            this.models[leyout].push(options);
+            if (_.isUndefined(models[leyout]))
+                models[leyout] = [];
+
+            models[leyout].push(options);
+
+            control.refresh( models );
 
         }
     });
