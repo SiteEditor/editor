@@ -18,7 +18,7 @@
 
             $.extend(this, options || {});
 
-            this.currentLayout;
+            this.currentLayout = '';
 
             this.ready();
         },
@@ -139,7 +139,7 @@
                     var currentElement = $("#website")[0].contentWindow.jQuery('[sed_model_id="' + api.currentTargetElementId + '"]'),
                         currentRow = currentElement.parents(".sed-pb-module-container:first").parent();
 
-                    var themeId = currentRow.data("themeId"); 
+                    var themeId = currentRow.data("themeId");
 
                     if (initLayoutScopeControl === false) {
                         api.Events.trigger("renderSettingsControls", 'main_layout_row_scope_control', api.settings.controls['main_layout_row_scope_control']);
@@ -160,6 +160,55 @@
             }, function () {
 
                 $(this).unbind("click.openScopeSettings");
+
+            });
+
+            var RowsPageBoxSelector = "#dialog_page_box_manage_layout_theme_rows";
+
+            $( RowsPageBoxSelector ).find(".layout-row-container").livequery(function () {
+
+                $(this).sortable({
+                    handle: ".sort.action" ,
+                    // Keep track of the starting position
+                    start: function (event, ui) {
+                        ui.item.startPos = ui.item.index();
+                    },
+
+                    update: function (e, ui) {
+                        var order = 0,
+                            themeRows = {};
+
+                        $( RowsPageBoxSelector ).find(".layout-row-container > .sed-layout-row-box").each(function () {
+                            var themeId = $(this).data("rowId");
+                            themeRows[themeId] = {
+                                order: order
+                            };
+                            order++;
+                        });
+
+                        var layout = $( RowsPageBoxSelector ).data("layout");
+
+                        if (initLayoutScopeControl === false) {
+                            api.Events.trigger("renderSettingsControls", 'main_layout_row_scope_control', api.settings.controls['main_layout_row_scope_control']);
+                            initLayoutScopeControl = true;
+                        }
+
+                        var control = api.control.instance("main_layout_row_scope_control");
+
+                        control.ordersRefresh(themeRows, layout);
+
+                        var endPos    = ui.item.index();
+                        var startPos  = ui.item.startPos;
+
+                        if( control.currentLayout == layout ){
+                            api.previewer.send( "syncLayoutPublicRowsSort" , {
+                                start   : startPos ,
+                                end     : endPos
+                            });
+                        }
+
+                    }
+                }).disableSelection();
 
             });
 

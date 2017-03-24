@@ -304,47 +304,6 @@
 
             var RowsPageBoxSelector = "#dialog_page_box_manage_layout_theme_rows";
 
-            $( RowsPageBoxSelector ).find(".layout-row-container").livequery(function () {
-                $(this).sortable({
-                    handle: ".sort.action" ,
-                    // Keep track of the starting position
-                    start: function (event, ui) {
-                        ui.item.startPos = ui.item.index();
-                    },
-
-                    update: function (e, ui) {
-                        var order = 0,
-                            themeRows = {};
-
-                        $( RowsPageBoxSelector ).find(".layout-row-container > .sed-layout-row-box").each(function () {
-                            var themeId = $(this).data("rowId");
-                            themeRows[themeId] = {
-                                order: order
-                            };
-                            order++;
-                        });
-
-                        var layout = $( RowsPageBoxSelector ).data("layout");
-
-                        control.ordersRefresh(themeRows, layout);
-
-                        var endPos    = ui.item.index();
-                        var startPos  = ui.item.startPos;
-
-                        if( control.currentLayout == layout ){
-                            api.previewer.send( "syncLayoutPublicRowsSort" , {
-                                start   : startPos ,
-                                end     : endPos
-                            });
-                        }
-
-                    }
-                }).disableSelection();
-            }, function() {
-                // unbind the change event
-                //$(this).unbind('click');
-            });
-
             var layoutRowItem = $( RowsPageBoxSelector ).find(".layout-row-container > .sed-layout-row-box");
 
             var _editRowTitle = function( $el ){
