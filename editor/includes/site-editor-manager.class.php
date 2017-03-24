@@ -1574,7 +1574,7 @@ class SiteEditorManager{
 	 *
 	 * @see add_dynamic_settings()
 	 */
-	public function register_dynamic_settings() {
+	public function register_dynamic_settings() { 
 		$this->add_dynamic_settings( array_keys( $this->unsanitized_post_values() ) );
 	}
 

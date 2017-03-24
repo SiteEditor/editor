@@ -44,7 +44,7 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
 
             'header_branding_settings_panel' =>  array(
                 'type'              => 'inner_box',
-                'title'             => __('Header Branding', 'textdomain'),
+                'title'             => __('Header Branding', 'site-editor'),
                 'btn_style'         => 'menu' ,
                 'has_border_box'    => false ,
                 'icon'              => 'sedico-animation' ,
@@ -58,7 +58,7 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
 
             'header_media_settings_panel' =>  array(
                 'type'              => 'inner_box',
-                'title'             => __('Header Media', 'textdomain'),
+                'title'             => __('Header Media', 'site-editor'),
                 'btn_style'         => 'menu' ,
                 'has_border_box'    => false ,
                 'icon'              => 'sedico-animation' ,

@@ -102,6 +102,10 @@ class SiteEditorStaticModule extends SiteEditorOptionsCategory{
 
         $this->option_group = $id;
 
+        add_filter( "{$this->option_group}_panels_filter" , array( $this , 'register_default_panels' ) );
+
+        add_filter( "{$this->option_group}_fields_filter" , array( $this , 'register_default_fields' ) );
+
         parent::__construct();
 
     }
@@ -193,20 +197,23 @@ class SiteEditorStaticModule extends SiteEditorOptionsCategory{
         return true;
     }
 
-    /**
-     * Register Site Default Options
-     */
-    protected function register_primary_options(){
+    public function register_default_panels( $panels ){
 
         $settings = $this->register_settings();
 
-        $this->fields = array_merge( $this->fields , $settings['fields'] );
+        $panels = array_merge( $panels , $settings['panels'] );
 
-        $this->panels = array_merge( $this->panels , $settings['panels'] );
+        return $panels;
 
-        $this->fields = apply_filters( "{$this->option_group}_fields_filter" , $this->fields );
+    }
 
-        $this->panels = apply_filters( "{$this->option_group}_panels_filter" , $this->panels );
+    public function register_default_fields( $fields ){
+
+        $settings = $this->register_settings();
+
+        $fields = array_merge( $fields , $settings['fields'] );
+
+        return $fields;
 
     }
 

@@ -290,7 +290,7 @@ class SiteEditorOptionsCategory {
             if( !isset( $args['option_type'] ) )
                 $args['option_type'] = $this->option_type;
 
-            $this->settings[$setting_id] = $args;
+            $this->settings[$setting_id] = $args; if( $this->option_group == "twenty_seventeen_header" ) echo $setting_id;
 
             if( isset( $args['partial_refresh'] ) ){
 
@@ -415,7 +415,7 @@ class SiteEditorOptionsCategory {
             $args = array_merge(
                 $args,
                 $registered
-            ); 
+            );
 
         }
 
