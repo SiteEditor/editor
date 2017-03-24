@@ -116,7 +116,21 @@
 <script type="text/html" id="change-public-to-private-confirm-tpl" >
     <div class="sed_message_box">
          <h3><?php echo __("Are You Sure?" , "site-editor");?></h3>
-         <p><?php echo __("if you continue this action , this module removed from all pages and layout it" , "site-editor");?></p>
+         <p><?php echo __("if you continue this action, this module will removed from all pages of these layouts and will lost your customize data" , "site-editor");?></p>
+    </div>
+</script>
+
+<script type="text/html" id="remove-layout-row-confirm-tpl" >
+    <div class="sed_message_box">
+        <h3><?php echo __("Are You Sure?" , "site-editor");?></h3>
+        <p><?php echo __("if you continue this action, this row will removed from all pages of this layout and will lost your customize data" , "site-editor");?></p>
+    </div>
+</script>
+
+<script type="text/html" id="remove-all-layout-row-confirm-tpl" >
+    <div class="sed_message_box">
+        <h3><?php echo __("Are You Sure?" , "site-editor");?></h3>
+        <p><?php echo __("if you continue this action, this row will removed from all pages of these layouts and will lost your customize data" , "site-editor");?></p>
     </div>
 </script>
 

@@ -92,22 +92,22 @@
                 }
             });
 
-            api.previewer.bind("sedPagesLayoutsInfo", function (info) {
+            api.previewer.bind("sedPagesLayoutsInfo", function (info) { 
                 api.defaultPageLayout = info.defaultPageLayout;
                 api.currentLayoutGroup = info.currentLayoutGroup;
 
-                self.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
+                self.currentLayout = api.fn.getPageLayout();
 
                 var scopeControl = api.control.instance("main_layout_row_scope_control");
 
-                if (!_.isUndefined(scopeControl)) {
-                    scopeControl.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
+                if (!_.isUndefined(scopeControl)) { 
+                    scopeControl.currentLayout = api.fn.getPageLayout();
                 }
 
                 var layoutsManagerControl = api.control.instance("sed_add_layout_layouts_manager");
 
-                if (!_.isUndefined(layoutsManagerControl)) {
-                    layoutsManagerControl.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
+                if (!_.isUndefined(layoutsManagerControl)) { 
+                    layoutsManagerControl.currentLayout = api.fn.getPageLayout();
                 }
 
             });
@@ -182,7 +182,7 @@
             });
 
             //before change page layout
-            api.Events.bind( 'beforeRefreshPreviewer' , function ( id ){
+            /*api.Events.bind( 'beforeRefreshPreviewer' , function ( id ){
 
                 var currGroupId = "sed_pages_layouts[" + api.currentLayoutGroup + "]";
 
@@ -190,7 +190,7 @@
                     //self.beforeUpdatePageLayout();
                 }
 
-            });
+            });*/
 
             //Update Layouts for controls
             _.each( [ "afterAppendSettingsTmpl" , "endInitAppendSettingsTmpl" ] , function( _EvSettingsAppend ){
@@ -215,7 +215,18 @@
 
                                 var control = api.control.instance( data.control_id );
 
-                                if ( !_.isUndefined( control ) ) {
+                                if ( !_.isUndefined( control ) ) { 
+
+                                    if( control.setting.id == api.currentPageLayoutSettingId ){  
+
+                                        control.currentValue = !_.isEmpty( api( api.currentPageLayoutSettingId )() ) ? api.fn.getPageLayout() : '';     
+
+                                    }else{
+
+                                        //don't support modules settings
+                                        control.currentValue = control.setting();        
+
+                                    }
 
                                     var currVal = control.currentValue;
 
@@ -237,13 +248,13 @@
 
                 var currGroupId = "sed_pages_layouts[" + api.currentLayoutGroup + "]";
 
-                if (_.isEmpty(api( api.currentPageLayoutSettingId )()) && id == currGroupId) {
+                if ( id == currGroupId && _.isEmpty( api( api.currentPageLayoutSettingId )() ) ) {
 
                     transport = "refresh";
 
                 }else if( id ==  api.currentPageLayoutSettingId ) {
 
-                    var newLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api( currGroupId )();
+                    var newLayout = api.fn.getPageLayout(); 
 
                     if( newLayout == self.currentLayout ) {
 
@@ -258,11 +269,11 @@
 
         },
 
-        beforeUpdatePageLayout : function(){
+        /*beforeUpdatePageLayout : function(){
 
             var currGroupId = "sed_pages_layouts[" + api.currentLayoutGroup + "]";
 
-            var newLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api( currGroupId )() ,
+            var newLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) && api.fn.existLayout( api( api.currentPageLayoutSettingId )() ) ? api( api.currentPageLayoutSettingId )() : api( currGroupId )() ,
                 curLayout = this.currentLayout;
 
             if( _.isUndefined( this.cacheChangeLayoutThemeContent ) )
@@ -274,7 +285,7 @@
                 api( api.currentPageThemeContentSettingId ).set(this.cacheChangeLayoutThemeContent[newLayout]);
             }
 
-        },
+        },*/
 
         updateRowTypeSelectField: function () {
 

@@ -17,7 +17,7 @@
             var control = this;
             this.model = $.extend( true, {} , control.setting() );
 
-            this.currentLayout = !_.isEmpty( api( api.currentPageLayoutSettingId )() ) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
+            this.currentLayout = api.fn.getPageLayout();
 
             this.view();
             this.updateView();
@@ -115,8 +115,11 @@
         },
 
         refresh : function () {
-            this.setting.set( this.model );
+            
+            this.setting.set( $.extend( true, {} , this.model ) );
+            
             this.updateView();
+            
         },
 
         printAlert : function ( ) {
@@ -220,20 +223,35 @@
             if( slug == "default" ){
                 this.errortext = api.I18n.remove_default_layout;
                 this.printAlert();
-            }else if( slug == this.currentLayout ){
+            /*}else if( slug == this.currentLayout ){
                 this.errortext = api.I18n.remove_current_layout;
-                this.printAlert();
+                this.printAlert();*/
             }else if( $.inArray( slug , _.keys( this.model ) ) > -1 ){
+
                 //remove from sed_layouts_settings
                 delete this.model[slug];
                 this.refresh();
 
                 //remove from sed_pages_layouts
-                _.each( pageLayouts , function( layout , pagesGroup ){
-                    if( layout == slug ){
-                        api('sed_pages_layouts[' + pagesGroup + ']').set( "default" );
+                $.each( api.settings.settings, function( id, data ) {
+
+                    if( id.indexOf("sed_pages_layouts[") == 0 ) {
+
+                        if ( api( id )() == slug ) {
+
+                            api( id ).set( "default" );
+
+                        }
+
                     }
+
                 });
+
+                if( !_.isEmpty( api( api.currentPageLayoutSettingId )() ) && api( api.currentPageLayoutSettingId )() == slug ){
+
+                    api( api.currentPageLayoutSettingId ).set( "default" );
+
+                }
 
                 //remove from sed_layouts_models
                 var layoutModels = $.extend( true, {} , api('sed_layouts_models')() );

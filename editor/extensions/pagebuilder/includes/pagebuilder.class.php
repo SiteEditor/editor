@@ -1623,6 +1623,20 @@ Class PageBuilderApplication {
 
                     $sed_data['theme_content'][$index]['rel_theme_id'] = $info['rel_theme_id'];
 
+                    $pattern = '/(sed_rel_theme_id\s*=\s*[\"|\'])('.$row['rel_theme_id'].')([\"|\'])/i';
+
+                    $replacement = '$1'.$info['rel_theme_id'].'$3';
+
+                    $content = preg_replace($pattern, $replacement, $sed_data['theme_content'][$index]['content'] );
+
+                    $pattern = '/(sed_row_type\s*=\s*[\"|\'])('.$row['row_type'].')([\"|\'])/i';
+
+                    $replacement = '$1'.$info['row_type'].'$3';
+
+                    $content = preg_replace($pattern, $replacement, $content );
+
+                    $sed_data['theme_content'][$index]['content'] = $content;
+
                     $changed = true;
 
                 }else if( isset( $row['theme_id'] ) && isset( $row['is_customize'] ) && $row['is_customize'] && ( ! in_array( $row['theme_id']  , $theme_ids ) || !in_array( $sed_data['page_id'] , $curr_row_model['exclude'] ) ) ){

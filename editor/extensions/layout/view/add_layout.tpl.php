@@ -56,6 +56,11 @@
     </div>
 </div>
 
+<?php
+/*
+ * && layout != data.currentLayout
+ */
+?>
 <script type="text/html" id="tmpl-sed-layouts-manager" >
     <#
         var num = 1;
@@ -73,7 +78,7 @@
                 <span class="sed-view-mode-title" data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}" >{{layoutTitle}} </span>
 
                 <div class="sed-view-mode-actions">
-                    <# if( layout != "default" && layout != data.currentLayout ){ #>
+                    <# if( layout != "default" ){ #>
                     <span data-action="delete" data-layout="{{layout}}" class="fa fa-trash" title="<?php echo __("Remove" , "site-editor");?>"></span>
                     <# } #>
                     <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}"  class="fa fa-edit" title="<?php echo __("Edit" , "site-editor");?>"></span>

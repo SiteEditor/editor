@@ -11,6 +11,52 @@
 
     var api = sedApp.editor;
 
+    /**
+     * A helper function for check exist layout or no?
+     * @param layout
+     * @returns {boolean}
+     */
+    api.fn.existLayout = function( layout ){
+
+        /**
+         * sed_layouts_settings is for layouts_manager control
+         */
+        var layoutsManagerControl = api.control.instance("sed_add_layout_layouts_manager"),
+            layoutsSettings;
+
+        if (!_.isUndefined(layoutsManagerControl)) {
+            layoutsSettings = layoutsManagerControl.model;
+        }else{
+            layoutsSettings = api( 'sed_layouts_settings' )();
+        }
+
+        if( _.isEmpty( layoutsSettings ) || !_.isObject( layoutsSettings ) ){
+            return false;
+        }
+
+        var layouts = _.keys( layoutsSettings );
+
+        return $.inArray( layout , layouts ) > -1;
+
+    };
+
+    /**
+     * Get Current Page Layout
+     */
+    api.fn.getPageLayout = function( ){
+
+        var currentLayout = !_.isEmpty( api( api.currentPageLayoutSettingId )() ) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
+
+        if( !api.fn.existLayout( currentLayout ) ){
+
+            return "default";
+
+        }
+
+        return currentLayout;
+
+    };
+
     api.LayoutsRowsContent = api.Class.extend({
 
         initialize: function (params, options) {

@@ -36,7 +36,7 @@
 
             this.lastThemeId = parseInt(api.instance('sed_last_theme_id').get());
 
-            this.currentLayout = !_.isEmpty(api( api.currentPageLayoutSettingId )()) ? api( api.currentPageLayoutSettingId )() : api.defaultPageLayout;
+            this.currentLayout = api.fn.getPageLayout();
 
             control.publicScopeEl = control.container.find('[name="sed_layout_scope_public"]');
 
@@ -55,9 +55,11 @@
             this.confirmDialogEl = $("#sed-confirm-message-dialog");
 
             this.confirmEventIds = {
-                "publicToPrivate"   : "changeScopePublicToPrivateConfirm",
-                "customizeToPublic" : "changeScopeCustomizeToPublicConfirm",
-                "customizeToHidden" : "changeScopeCustomizeToHiddenConfirm"
+                "publicToPrivate"       : "changeScopePublicToPrivateConfirm",
+                "customizeToPublic"     : "changeScopeCustomizeToPublicConfirm",
+                "customizeToHidden"     : "changeScopeCustomizeToHiddenConfirm",
+                "removeLayoutRow"       : "scopeRemoveLayoutRowConfirm",
+                "removeAllLayoutRow"    : "scopeRemoveAllLayoutRowConfirm"
             };
 
             api.previewer.bind("ok_" + this.confirmEventIds.publicToPrivate, function () {
@@ -84,6 +86,61 @@
                 control.updateRadioField( $(control.selector).find('[name="sed_layout_public_type"]') , "customize" );
             });
 
+            api.previewer.bind("ok_" + this.confirmEventIds.removeLayoutRow, function () {
+                
+                var $this = control.confirmDialogEl.data( "scopeLayoutEl" );
+                
+                control.removeRowFromModel( $this.val() );
+                
+                control.allLayoutCheckedEl.prop("checked", false);
+
+                $this.parents(".sub-theme-item:first").find(".edit-layout-rows").addClass("hide");
+                
+            });
+
+            api.previewer.bind("cancel_" + this.confirmEventIds.removeLayoutRow, function () {
+
+                var $this = control.confirmDialogEl.data( "scopeLayoutEl" );
+
+                $this.prop("checked", true);
+
+            });
+
+            api.previewer.bind("ok_" + this.confirmEventIds.removeAllLayoutRow, function () {
+
+                var sedScopeLayoutEl = control.confirmDialogEl.data( "scopeLayoutEl" );
+
+                sedScopeLayoutEl.prop("checked", false);
+
+                sedScopeLayoutEl.each(function () {
+
+                    var layout = $(this).val();
+
+                    if (layout == control.currentLayout) {
+                        $(this).prop("checked", true);
+                        return;
+                    }
+
+                    $(this).parents(".sub-theme-item:first").find(".edit-layout-rows").addClass("hide");
+
+                    if (control.existThemeIdInLayout(layout)) {
+                        api.Events.trigger( "beforeChangePublicRowLayout" , control.themeId , layout , false );
+
+                        control.removeRowFromModel(layout);
+                    }
+
+                });
+
+
+            });
+
+            api.previewer.bind("cancel_" + this.confirmEventIds.removeAllLayoutRow, function () {
+
+                var $this = control.confirmDialogEl.data( "scopeCheckedAllEl" );
+
+                $this.prop("checked", true);
+
+            });
 
             this.publicScopeEl.on("change", function () {
 
@@ -174,9 +231,15 @@
                         $(this).parents(".sub-theme-item:first").find(".edit-layout-rows").removeClass("hide");
 
                     } else {
-                        control.removeRowFromModel($(this).val());
-                        control.allLayoutCheckedEl.prop("checked", false);
-                        $(this).parents(".sub-theme-item:first").find(".edit-layout-rows").addClass("hide");
+
+                        control.confirmDialogEl.dialog("open");
+
+                        control.confirmDialogEl.data("confirmEventId", control.confirmEventIds.removeLayoutRow);
+
+                        control.confirmDialogEl.data( "scopeLayoutEl", $(this) );
+
+                        control.confirmDialogEl.html($("#remove-layout-row-confirm-tpl").html());
+                        
                     }
 
                 });
@@ -213,23 +276,16 @@
                     });
 
                 } else {
-                    sedScopeLayoutEl.prop("checked", false);
 
-                    sedScopeLayoutEl.each(function () {
-                        var layout = $(this).val();
-                        $(this).parents(".sub-theme-item:first").find(".edit-layout-rows").addClass("hide");
+                    control.confirmDialogEl.dialog("open");
 
-                        if (layout == control.currentLayout) {
-                            $(this).prop("checked", true);
-                            return;
-                        }
+                    control.confirmDialogEl.data("confirmEventId", control.confirmEventIds.removeAllLayoutRow);
 
-                        if (control.existThemeIdInLayout(layout)) {
-                            api.Events.trigger( "beforeChangePublicRowLayout" , control.themeId , layout , false );
+                    control.confirmDialogEl.data( "scopeLayoutEl", sedScopeLayoutEl );
 
-                            control.removeRowFromModel(layout);
-                        }
-                    });
+                    control.confirmDialogEl.data( "scopeCheckedAllEl", $(this) );
+
+                    control.confirmDialogEl.html( $("#remove-all-layout-row-confirm-tpl").html() );
 
                 }
 
@@ -823,21 +879,32 @@
 
             var models = this.getClone();
 
-            models[control.currentLayout] = _.map( models[control.currentLayout] , function (options) {
-                if (options.theme_id == control.themeId) {
-                    var index = $.inArray(api.currentPageInfo.id, options.exclude);
+            /**
+             * @Using included layout instade current layout
+             * Instade only using current layout, we using from all layouts that include this themeId
+             */
+            var layouts = this.getLayoutsByThemeId( control.themeId );
 
-                    if (type == "add" && index == -1) {
-                        options.exclude.push(api.currentPageInfo.id);
-                    }
+            _.each( layouts , function( layout ){
 
-                    if (type == "remove" && index != -1) {
-                        options.exclude.splice(index, 1);
-                    }
+                models[layout] = _.map( models[layout] , function (options) {
 
-                    return options;
-                } else
-                    return options;
+                    if (options.theme_id == control.themeId) {
+                        var index = $.inArray(api.currentPageInfo.id, options.exclude);
+
+                        if (type == "add" && index == -1) {
+                            options.exclude.push(api.currentPageInfo.id);
+                        }
+
+                        if (type == "remove" && index != -1) {
+                            options.exclude.splice(index, 1);
+                        }
+
+                        return options;
+                    } else
+                        return options;
+
+                });
 
             });
 
@@ -851,21 +918,31 @@
 
             var models = this.getClone();
 
-            models[control.currentLayout] = _.map(models[control.currentLayout], function (options) {
-                if (options.theme_id == control.themeId) {
-                    var index = $.inArray(api.currentPageInfo.id, options.hidden);
+            /**
+             * @Using included layout instade current layout
+             * Instade only using current layout, we using from all layouts that include this themeId
+             */
+            var layouts = this.getLayoutsByThemeId( control.themeId );
 
-                    if (type == "add" && index == -1) {
-                        options.hidden.push(api.currentPageInfo.id);
-                    }
+            _.each( layouts , function( layout ){
 
-                    if (type == "remove" && index != -1) {
-                        options.hidden.splice(index, 1);
-                    }
+                models[layout] = _.map(models[layout], function (options) {
+                    if (options.theme_id == control.themeId) {
+                        var index = $.inArray(api.currentPageInfo.id, options.hidden);
 
-                    return options;
-                } else
-                    return options;
+                        if (type == "add" && index == -1) {
+                            options.hidden.push(api.currentPageInfo.id);
+                        }
+
+                        if (type == "remove" && index != -1) {
+                            options.hidden.splice(index, 1);
+                        }
+
+                        return options;
+                    } else
+                        return options;
+
+                });
 
             });
 
