@@ -31,9 +31,7 @@ class PBfooterShortcode extends PBShortcodeClass{
 
     function get_atts(){
         $atts = array(
-        'default_width' => "200px" ,
-        'default_height' => "300px" ,
-        'footer_style'   => "footer-dark-style"
+        //'footer_style'   => "footer-dark-style"
         );
 
         return $atts;
@@ -44,10 +42,10 @@ class PBfooterShortcode extends PBShortcodeClass{
 
     }
 
-    function shortcode_settings(){
+    function shortcode_settings(){ 
 
         $params = array(
-            'footer_style' => array(
+            /*'footer_style' => array(
                 'type' => 'select',
                 'label' => __('Style', 'site-editor'),
                 'description' => '',// __('Action Click on this Image', 'site-editor'),
@@ -56,7 +54,7 @@ class PBfooterShortcode extends PBShortcodeClass{
                     'footer-light-style'            => __('Style2', 'site-editor'),
                 ),
                 'panel'    => 'image_settings_panel',
-            ),
+            ),*/
 
             'row_container' => array(
                 'type'          => 'row_container',
@@ -79,21 +77,12 @@ class PBfooterShortcode extends PBShortcodeClass{
     }
 
 
-    function custom_style_settings(){
+    function custom_style_settings(){  
         return array(
 
-            array(
-            'module-footer' , 'sed_current' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ) , __("Module Container" , "site-editor") ) ,
-            array(
-            'footer-inner' , '.footer-inner' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ) , __("Footer Inner" , "site-editor") ) ,
-            /*array(
-            'footer-bar' , '.footer-bar' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ) , __("Copyright Bar" , "site-editor") ) ,*/
-            array(
-            'widget-title' , '.widget-title' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Widget Title" , "site-editor") ) ,
+            array(    
+            'footer-inner' , '.footer-inner' ,  
+            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Footer Container" , "site-editor") ) ,
 
         );
     }

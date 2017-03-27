@@ -2,4 +2,4 @@
   [sed_button class="skin-default special-spr-center flex-nowrap" parent_module="separator"]
     	[sed_text_title tag="span" toolbar1="simple-text" toolbar2="simple-text" class="flex-nowrap-text" contextmenu_disabled = "disabled" settings_disabled = "disabled" parent_module="button"]Purchase Now[/sed_text_title]
   [/sed_button]
-[/sed_separator]
+[/sed_separator] 

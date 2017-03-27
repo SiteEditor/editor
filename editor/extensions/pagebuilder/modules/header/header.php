@@ -57,7 +57,7 @@ class PBheaderShortcode extends PBShortcodeClass{
 
 	function less(){
 		return array(
-			array('header-main-less')
+			//array('header-main-less')
 		);
 	}
 
@@ -90,52 +90,14 @@ class PBheaderShortcode extends PBShortcodeClass{
         return array(
 
             array(
-            'header' , 'sed_current' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Header Module Container" , "site-editor") ) ,
-
-            array(
-            'sed-navbar-header' , '> .sed-navbar-header' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_align' ) , __("Navbar Header Container" , "site-editor") ) ,
-
-            array(
-            'header-icon-bar' , '> .sed-navbar-header .icon-bar' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow','text_align' ) , __("Navbar Header Icon" , "site-editor") ) ,
-
-            array(
-            'menu-item-icon' , '.menu-item-icon' ,
-            array( 'text_shadow' , 'font' ,'line_height','text_align' ) , __("Nav Icon" , "site-editor") ) ,
-
-            array(
-            'shopping-cart-count' , '.shopping-cart-count' ,
-            array( 'background' , 'font' ) , __("Shopping Cart Count" , "site-editor") ) ,
-  
-            /*
-            array(
-            'header_social' , '.header_social ul span' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' , 'font' ) , __("Social Icon" , "site-editor") ) ,
-
-            array(
-            'header_social_hover' , '.header_social ul span:hover' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' , 'font' ) , __("Social Icon Hover" , "site-editor") ) ,
-
-            array(
-            'contact_details_item' , '.contact_details_item span' ,
-            array( 'text_shadow' , 'font' ,'line_height','text_align' ) , __("Contact Details" , "site-editor") ) ,
-
-            array(
-            'contact_details_item_hover' , '.contact_details_item span:hover' ,
-            array( 'text_shadow' , 'font' ,'line_height','text_align' ) , __("Contact Details Hover" , "site-editor") ) ,
-
-            array(
-            'brand-header' , '.brand-header .navbar-brand' ,
-            array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ) , __("Logo" , "site-editor") ) , */
-
+            'header' , '.header-inner' , 
+            array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Header Container" , "site-editor") ) ,
 
         );
     }
     function contextmenu( $context_menu ){
         $header_menu = $context_menu->create_menu( "header" , __("Header","site-editor") , 'header' , 'class' , 'element' , ''  , "sed_header" , array(
-            "duplicate"    => false
+            //"duplicate"    => false
         ));
     }
 

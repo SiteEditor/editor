@@ -40,7 +40,7 @@
 
 .module-single-image .roma > img {
     filter: grayscale(100%);
-    filter: url("http://localhost/site-editor-v1.0.0/wp-content/plugins/site-editor/editor/extensions/pagebuilder/modules/single-image/skins/greyscale/svg/sed-image.svg#greyscale");
+    filter: url("../skins/greyscale/svg/sed-image.svg#greyscale");
     filter: gray;
     -webkit-filter: grayscale(1);
 }
@@ -51,7 +51,7 @@
     -moz-filter: sepia(100%);
     -ms-filter: sepia(100%);
     -o-filter: sepia(100%);
-    filter: url("http://localhost/site-editor-v1.0.0/wp-content/plugins/site-editor/editor/extensions/pagebuilder/modules/single-image/skins/sepia-toning/svg/sed-image.svg#old-timey");
+    filter: url("../skins/sepia-toning/svg/sed-image.svg#old-timey"); 
     filter: sepia(100%);
     background-color: #5E2612;
     zoom: 1;

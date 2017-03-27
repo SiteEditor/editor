@@ -27,7 +27,7 @@ if ( ! $attachment_full_src ) {
 <div <?php echo $sed_attrs; ?> class="module module-single-image single-image-sepia-toning <?php echo $class;?>">  
 
     <?php if($image_click == "expand_mode"){ ?>
-        <a class="img sepia" href="<?php echo $attachment_full_src;?>" data-lightbox="<?php if( !empty($lightbox_id) ) echo $lightbox_id;else echo "sed-lightbox";?>" data-title="<?php echo $title;?>" title="<?php echo $title;?>">
+        <a class="img sepia" href="<?php echo $attachment_full_src;?>" data-lightbox="<?php if( !empty($lightbox_id) ) echo $lightbox_id; else echo "sed-lightbox";?>" data-title="<?php echo $title;?>" title="<?php echo $title;?>">
            <?php echo $img['thumbnail'];?>
         </a>
     <?php } ?>
@@ -39,9 +39,9 @@ if ( ! $attachment_full_src ) {
     <?php } ?>
 
     <?php if($image_click == "default" ){ ?>
-        <div class="img sepia">
+        <div class="img sepia"> 
             <?php echo $img['thumbnail'];?>
         </div>
     <?php }?>
 
-</div>
+</div> 
