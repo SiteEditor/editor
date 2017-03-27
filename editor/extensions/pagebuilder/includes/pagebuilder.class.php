@@ -1337,7 +1337,7 @@ Class PageBuilderApplication {
         require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
         $page_layout = SiteEditorLayoutManager::get_page_layout();
 
-        if( ! site_editor_app_on() ) {
+        /*if( ! site_editor_app_on() ) {
 
             ini_set('xdebug.var_display_max_children',1000 );
             ini_set('xdebug.var_display_max_depth',20 );
@@ -1371,7 +1371,7 @@ Class PageBuilderApplication {
 
             var_dump( $sed_data['theme_content'] );
 
-        }
+        }*/
 
         //Current Page Layout Models
         $curr_sub_themes_models = $sub_themes_models[ $page_layout ];
