@@ -1,8 +1,5 @@
 <?php
-
 /*
-
-
 $background_color
 $secondary_background_color
 $page_background_color
@@ -16,8 +13,6 @@ $main_bg_text_color
 $second_main_bg_text_color
 $border_color
 $secondary_border_color
-
-
 
 $border_radius
 
@@ -38,174 +33,6 @@ $body_line_height
 $headings_line_height
 
 */
-$arrayName = array(
-
-
-    /*--------------------------------------------------------------
-    5.0 Typography
-    --------------------------------------------------------------*/
-
-    'body_color'                                 => 'main_text_color' , 
-    'body_color'                                 => 'main_text_color' , 
-
-    /*--------------------------------------------------------------
-    6.0 Forms
-    --------------------------------------------------------------*/
-
-
-    'form_control_bg'                            => 'background_color',
-    'form_control_border'                        => 'border_color',
-    'form_control_color'                         => 'secondary_text_color',
-    'form_control_border_radius'                 => 'border_radius',
-    'placeholder_color'                          => 'main_text_color',
-
-    'form_control_active_border'                 => 'secondary_border_color',
-    'form_control_active_color'                  => 'main_text_color',
-
-    'button_bg'                                  => 'first_main_color',
-    'button_color'                               => 'main_bg_text_color',
-    'button_active_bg'                           => 'first_main_active_color',
-
-    'secondary_button_bg'                        => 'second_main_color',
-    'secondary_button_color'                     => 'second_main_bg_text_color',
-    'secondary_button_active_bg'                 => 'second_main_active_color',
-
-
-
-    /*--------------------------------------------------------------
-    12.0 Navigation
-    --------------------------------------------------------------*/
-
-
-    'navigation_bar_bg'                          => 'background_color',
-    'navigation_bar_border'                      => 'border_color',
-    'navigation_bar_color'                       => 'main_text_color',
-
-    'navigation_submenu_bg'                      => 'background_color',
-    'navigation_submenu_border'                  => 'border_color',
-    'navigation_submenu_color'                   => 'main_text_color',
-    'navigation_submenu_item_bg'                 => 'first_main_color',
-    'navigation_submenu_item_color'              => 'main_bg_text_color', 
-
-
-    /*--------------------------------------------------------------
-    13.1 Header
-    --------------------------------------------------------------*/
-
-
-    'header_bg'                                  => 'first_main_color', 
-    'header_title_color'                         => 'main_bg_text_color', 
-    'header_description_color'                   => 'first_main_active_color', 
-    'overlay_height'                             => 'rgba(0,0,0,0)', 
-    'overlay_background'                         => 'rgba(0,0,0,0)', 
-
-
-
-    /*--------------------------------------------------------------
-    13.6 Footer
-    --------------------------------------------------------------*/
-
-
-    'footer_border'                              => 'border_color', 
-
-    'social_bg'                                  => 'first_main_color', 
-    'social_color'                               => 'main_bg_text_color', 
-    'social_active_bg'                           => 'first_main_active_color', 
-
-    'site_info_color'                            => 'secondary_text_color', 
-
-
-    /*--------------------------------------------------------------
-    16.0 Media
-    --------------------------------------------------------------*/
-
-
-    'playlist_item_active_bg'                    => 'first_main_active_color',
-    'playlist_item_active_color'                 => 'main_bg_text_color',
-
-
-);
-
-$body_color                                 = (empty($body_color)) ? $main_text_color : $body_color;
-$headings_color                             = (empty($headings_color)) ? $main_text_color : $headings_color;
-
-
-/*--------------------------------------------------------------
-6.0 Forms
---------------------------------------------------------------*/
-
-
-$form_control_bg                            = (empty($form_control_bg)) ? $background_color : $form_control_bg;
-$form_control_border                        = (empty($form_control_border)) ? $border_color : $form_control_border;
-$form_control_color                         = (empty($form_control_color)) ? $secondary_text_color : $form_control_color;
-$form_control_border_radius                 = (empty($form_control_border_radius)) ? $border_radius : $form_control_border_radius;
-$placeholder_color                          = (empty($placeholder_color)) ? $main_text_color : $placeholder_color;
-
-$form_control_active_border                 = (empty($form_control_active_border)) ? $secondary_border_color : $form_control_active_border;
-$form_control_active_color                  = (empty($form_control_active_color)) ? $main_text_color : $form_control_active_color;
-
-$button_bg                                  = (empty($button_bg)) ? $first_main_color : $button_bg;
-$button_color                               = (empty($button_color)) ? $main_bg_text_color : $button_color;
-$button_active_bg                           = (empty($button_active_bg)) ? $first_main_active_color : $button_active_bg;
-
-$secondary_button_bg                        = (empty($secondary_button_bg)) ? $second_main_color : $secondary_button_bg;
-$secondary_button_color                     = (empty($secondary_button_color)) ? $second_main_bg_text_color : $secondary_button_color;
-$secondary_button_active_bg                 = (empty($secondary_button_active_bg)) ? $second_main_active_color : $secondary_button_active_bg;
-
-
-/*--------------------------------------------------------------
-12.0 Navigation
---------------------------------------------------------------*/
-
-
-$navigation_bar_bg                          = (empty($navigation_bar_bg)) ? $background_color : $navigation_bar_bg;
-$navigation_bar_border                      = (empty($navigation_bar_border)) ? $border_color : $navigation_bar_border;
-$navigation_bar_color                       = (empty($navigation_bar_color)) ? $main_text_color : $navigation_bar_color;
-
-$navigation_submenu_bg                      = (empty($navigation_submenu_bg)) ? $background_color : $navigation_submenu_bg;
-$navigation_submenu_border                  = (empty($navigation_submenu_border)) ? $border_color : $navigation_submenu_border;
-$navigation_submenu_color                   = (empty($navigation_submenu_color)) ? $main_text_color : $navigation_submenu_color;
-$navigation_submenu_item_bg                 = (empty($navigation_submenu_item_bg)) ? $first_main_color : $navigation_submenu_item_bg;
-$navigation_submenu_item_color              = (empty($navigation_submenu_item_color)) ? $main_bg_text_color : $navigation_submenu_item_color;
-
-
-/*--------------------------------------------------------------
-13.1 Header
---------------------------------------------------------------*/
-
-
-$header_bg                                  = (empty($header_bg)) ? $first_main_color : $header_bg;
-$header_title_color                         = (empty($header_title_color)) ? $main_bg_text_color : $header_title_color;
-$header_description_color                   = (empty($header_description_color)) ? $first_main_active_color : $header_description_color;
-$overlay_height                             = ($overlay_background == "rgba(0,0,0,0)" || $overlay_background == "transparent") ? "" : "100% !important";
-$overlay_background                         = (empty($overlay_background)) ? "rgba(0,0,0,0)" : $overlay_background;
-
-
-
-/*--------------------------------------------------------------
-13.6 Footer
---------------------------------------------------------------*/
-
-
-$footer_border                              = (empty($footer_border)) ? $border_color : $footer_border;
-
-$social_bg                                  = (empty($social_bg)) ? $first_main_color : $social_bg;
-$social_color                               = (empty($social_color)) ? $main_bg_text_color : $social_color;
-$social_active_bg                           = (empty($social_active_bg)) ? $first_main_active_color : $social_active_bg;
-
-$site_info_color                            = (empty($site_info_color)) ? $secondary_text_color : $site_info_color;
-
-
-/*--------------------------------------------------------------
-16.0 Media
---------------------------------------------------------------*/
-
-
-$playlist_item_active_bg                    = (empty($playlist_item_active_bg)) ? $first_main_active_color : $playlist_item_active_bg;
-$playlist_item_active_color                 = (empty($playlist_item_active_color)) ? $main_bg_text_color : $playlist_item_active_color;
-
-
-
 
 $css .= <<<CSS
         

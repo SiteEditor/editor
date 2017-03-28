@@ -33,7 +33,9 @@ class SiteEditorTwentyseventeenDynamicCss {
         add_filter( "sed_twentyseventeen_dynamic_css" , array( $this , "register_default_dynamic_css" ) , 10 , 2 );
 
         //before print color Scheme in css file
-        add_action( 'wp_enqueue_scripts' , array( $this , 'add_dynamic_css' ) , 99999 );
+        add_action( 'wp_enqueue_scripts' , array( $this , 'add_dynamic_css' ) , 999 );
+
+        add_action( 'init' , array( $this , 'remove_color_scheme_css' ) , 1001 );
 
         if( site_editor_app_on() ) {
 
@@ -55,6 +57,18 @@ class SiteEditorTwentyseventeenDynamicCss {
 
 
     public function register_default_dynamic_css( $css , $vars ){
+
+        $vars_reference = $this->dynamic_vars_reference();
+
+        foreach ( $vars AS $key => $value ){
+
+            if( isset( $vars_reference[$key] ) && isset( $vars[ $vars_reference[$key] ] ) ){
+
+                $vars[$key] = empty( $value ) ? $vars[ $vars_reference[$key] ] : $value;
+
+            }
+
+        }
 
         extract( $vars );
 
@@ -124,6 +138,98 @@ class SiteEditorTwentyseventeenDynamicCss {
 
     }
 
+    public function dynamic_vars_reference(){
+
+        $vars = array(
+
+            /*--------------------------------------------------------------
+            5.0 Typography
+            --------------------------------------------------------------*/
+
+            'body_color'                                 => 'main_text_color' ,
+            'headings_color'                             => 'main_text_color' ,
+
+            /*--------------------------------------------------------------
+            6.0 Forms
+            --------------------------------------------------------------*/
+
+            'form_control_bg'                            => 'background_color',
+            'form_control_border'                        => 'border_color',
+            'form_control_color'                         => 'secondary_text_color',
+            'form_control_border_radius'                 => 'border_radius',
+            'placeholder_color'                          => 'main_text_color',
+
+            'form_control_active_border'                 => 'secondary_border_color',
+            'form_control_active_color'                  => 'main_text_color',
+
+            'button_bg'                                  => 'first_main_color',
+            'button_color'                               => 'main_bg_text_color',
+            'button_active_bg'                           => 'first_main_active_color',
+
+            'secondary_button_bg'                        => 'second_main_color',
+            'secondary_button_color'                     => 'second_main_bg_text_color',
+            'secondary_button_active_bg'                 => 'second_main_active_color',
+
+
+
+            /*--------------------------------------------------------------
+            12.0 Navigation
+            --------------------------------------------------------------*/
+
+
+            'navigation_bar_bg'                          => 'background_color',
+            'navigation_bar_border'                      => 'border_color',
+            'navigation_bar_color'                       => 'main_text_color',
+
+            'navigation_submenu_bg'                      => 'background_color',
+            'navigation_submenu_border'                  => 'border_color',
+            'navigation_submenu_color'                   => 'main_text_color',
+            'navigation_submenu_item_bg'                 => 'first_main_color',
+            'navigation_submenu_item_color'              => 'main_bg_text_color',
+
+
+            /*--------------------------------------------------------------
+            13.1 Header
+            --------------------------------------------------------------*/
+
+
+            'header_bg'                                  => 'first_main_color',
+            'header_title_color'                         => 'main_bg_text_color',
+            'header_description_color'                   => 'first_main_active_color',
+            'overlay_height'                             => 'rgba(0,0,0,0)',
+            'overlay_background'                         => 'rgba(0,0,0,0)',
+
+
+
+            /*--------------------------------------------------------------
+            13.6 Footer
+            --------------------------------------------------------------*/
+
+
+            'footer_border'                              => 'border_color',
+
+            'social_bg'                                  => 'first_main_color',
+            'social_color'                               => 'main_bg_text_color',
+            'social_active_bg'                           => 'first_main_active_color',
+
+            'site_info_color'                            => 'secondary_text_color',
+
+
+            /*--------------------------------------------------------------
+            16.0 Media
+            --------------------------------------------------------------*/
+
+
+            'playlist_item_active_bg'                    => 'first_main_active_color',
+            'playlist_item_active_color'                 => 'main_bg_text_color',
+
+
+        );
+
+        return $vars;
+
+    }
+
     /**
      * Return All Dynamic Css
      *
@@ -137,6 +243,14 @@ class SiteEditorTwentyseventeenDynamicCss {
         $dynamic_css = apply_filters( 'sed_twentyseventeen_dynamic_css' , $css , $vars , $this );
 
         return $dynamic_css;
+
+    }
+
+    public function remove_color_scheme_css(){
+
+        $color_scheme = site_editor_app_on() ? sed_options()->color_scheme : SED()->framework->color_scheme;
+
+        remove_action( 'wp_enqueue_scripts' , array( $color_scheme , 'print_color_scheme_css' ) , 1000 );
 
     }
 
@@ -158,9 +272,39 @@ class SiteEditorTwentyseventeenDynamicCss {
 
         }
 
-        $color_scheme_css = $this->get_dynamic_css( $vars );
+        //Add Color Scheme Variables
+        if( site_editor_app_on() ) {
 
-        $sed_dynamic_css_string .= $color_scheme_css;
+            $customize_color_settings = sed_options()->color_scheme->get_customize_color_settings();
+
+        }else{
+
+            $customize_color_settings = SED()->framework->color_scheme->get_customize_color_settings();
+
+        }
+
+        foreach ( $customize_color_settings As $key => $options ){
+
+            $default = isset( $options['default'] ) ? $options['default'] : "";
+
+            $vars[$key] = get_theme_mod( $key , $default );
+
+        }
+
+        $dynamic_css = $this->get_dynamic_css( $vars );
+
+        //Add Color Scheme Dynamic Css
+        if( site_editor_app_on() ) {
+
+            $dynamic_css .= sed_options()->color_scheme->get_color_scheme_css( $vars );
+
+        }else{
+
+            $dynamic_css .= SED()->framework->color_scheme->get_color_scheme_css( $vars );
+
+        }
+
+        $sed_dynamic_css_string .= $dynamic_css;
     }
 
     /**
@@ -197,6 +341,25 @@ class SiteEditorTwentyseventeenDynamicCss {
 
         ?>
         <script type="text/html" id="tmpl-sed-twentyseventeen-dynamic-css">
+            <#
+
+                <?php
+
+                $vars_reference = $this->dynamic_vars_reference();
+
+                foreach ( $vars AS $key => $value ){
+
+                    if( isset( $vars_reference[$key] ) && isset( $vars[ $vars_reference[$key] ] ) ){
+
+                        echo "{$key} = _.isEmpty( {$key} ) ? {$vars_reference[$key]} : {$key};";
+
+                    }
+
+                }
+
+                ?>
+
+            #>
             <?php echo $dynamic_css_tpl; ?>
         </script>
         <?php

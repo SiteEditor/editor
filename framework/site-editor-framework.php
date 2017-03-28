@@ -54,6 +54,15 @@ final Class SiteEditorFramework {
     public $typography;
 
     /**
+     * Color Scheme
+     *
+     * @since 1.0.0
+     * @access public
+     * @var object instance of SiteEditorColorScheme
+     */
+    public $color_scheme;
+
+    /**
      * Is loaded infinite scroll ?
      *
      * @since 1.0.0
@@ -128,7 +137,7 @@ final Class SiteEditorFramework {
 
             require_once SED_EXT_PATH . DS . "options-engine" . DS . "includes" . DS . 'site-editor-color-scheme.class.php';
 
-            $color_scheme = new SiteEditorColorScheme();
+            $this->color_scheme = new SiteEditorColorScheme();
 
         }
 

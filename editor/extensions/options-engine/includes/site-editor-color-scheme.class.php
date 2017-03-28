@@ -38,7 +38,7 @@ class SiteEditorColorScheme{
 
         }
 
-        add_action( 'wp_enqueue_scripts' , array( $this , 'print_color_scheme_css' ) , 100000 );
+        add_action( 'wp_enqueue_scripts' , array( $this , 'print_color_scheme_css' ) , 1000 );
 
     }
 
@@ -425,7 +425,7 @@ class SiteEditorColorScheme{
 
         }
 
-        $settings = apply_filters( "sed_color_scheme_js_settings" , $settings , $this ); 
+        $settings = apply_filters( "sed_color_scheme_js_settings" , $settings , $this );
 
         ?>
         <script type="text/javascript">
