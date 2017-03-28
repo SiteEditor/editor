@@ -19,7 +19,7 @@ class PBMenuShortcode extends PBShortcodeClass{
                 "name"        => "sed_menu",                          //*require
                 "title"       => __("Menu","site-editor"),            //*require for toolbar
                 "description" => __("","site-editor"),
-                "icon"        => "icon-promenu",                         //*require for icon toolbar
+                "icon"        => "sedico-promenu",                         //*require for icon toolbar
                 "module"      =>  "menu" ,                             //*require
                 "scripts"           => array( 
                     array("menu-scripts" , SED_PB_MODULES_URL.'menu/js/scripts.js',array(),"1.0.0" , 1) 
@@ -81,8 +81,41 @@ class PBMenuShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        $this->add_panel( 'menu_settings_panel_outer' , array(
+            'title'                   =>  __('Menu Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'inner_box' ,
+            'priority'                => 9 ,
+            'btn_style'               => 'menu' ,
+            'has_border_box'          => false ,
+            'icon'                    => 'sedico-image' ,
+            'field_spacing'           => 'sm'
+        ) );
+
+        $this->add_panel( 'menu_settings_panel' , array(
+            'title'                   =>  __('Menu Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "menu_settings_panel_outer", 
+            'priority'                => 1 ,
+        ) );        
+
         $params = array(
 
+            'row_container' => array(
+                'type'                => 'row_container',
+                'label'               => __('Module Wrapper Settings', 'site-editor')
+            ), 
+
+            "animation"  =>  array(
+                "type"                => "animation" ,
+                "label"               => __("Animation Settings", "site-editor"),
+                'button_style'        => 'menu' ,
+                'has_border_box'      => false ,
+                'icon'                => 'sedico-animation' ,
+                'field_spacing'       => 'sm' ,
+                'priority'            => 530 ,
+            )
 
         );
 
@@ -115,8 +148,8 @@ $sed_pb_app->register_module(array(
     "name"        => "menu",
     "title"       => __("Menu","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "icon-promenu",
-    "shortcode"   => "sed_menu",
+    "icon"        => "sedico-menu",
+    "shortcode"   => "sed_menu", 
     "transport"   => "ajax" ,
 ));
 
