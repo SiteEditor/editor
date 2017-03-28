@@ -38,10 +38,93 @@ $body_line_height
 $headings_line_height
 
 */
+$arrayName = array(
 
-/*--------------------------------------------------------------
-5.0 Typography
---------------------------------------------------------------*/
+
+    /*--------------------------------------------------------------
+    5.0 Typography
+    --------------------------------------------------------------*/
+
+    'body_color'                                 => 'main_text_color' , 
+    'body_color'                                 => 'main_text_color' , 
+
+    /*--------------------------------------------------------------
+    6.0 Forms
+    --------------------------------------------------------------*/
+
+
+    'form_control_bg'                            => 'background_color',
+    'form_control_border'                        => 'border_color',
+    'form_control_color'                         => 'secondary_text_color',
+    'form_control_border_radius'                 => 'border_radius',
+    'placeholder_color'                          => 'main_text_color',
+
+    'form_control_active_border'                 => 'secondary_border_color',
+    'form_control_active_color'                  => 'main_text_color',
+
+    'button_bg'                                  => 'first_main_color',
+    'button_color'                               => 'main_bg_text_color',
+    'button_active_bg'                           => 'first_main_active_color',
+
+    'secondary_button_bg'                        => 'second_main_color',
+    'secondary_button_color'                     => 'second_main_bg_text_color',
+    'secondary_button_active_bg'                 => 'second_main_active_color',
+
+
+
+    /*--------------------------------------------------------------
+    12.0 Navigation
+    --------------------------------------------------------------*/
+
+
+    'navigation_bar_bg'                          => 'background_color',
+    'navigation_bar_border'                      => 'border_color',
+    'navigation_bar_color'                       => 'main_text_color',
+
+    'navigation_submenu_bg'                      => 'background_color',
+    'navigation_submenu_border'                  => 'border_color',
+    'navigation_submenu_color'                   => 'main_text_color',
+    'navigation_submenu_item_bg'                 => 'first_main_color',
+    'navigation_submenu_item_color'              => 'main_bg_text_color', 
+
+
+    /*--------------------------------------------------------------
+    13.1 Header
+    --------------------------------------------------------------*/
+
+
+    'header_bg'                                  => 'first_main_color', 
+    'header_title_color'                         => 'main_bg_text_color', 
+    'header_description_color'                   => 'first_main_active_color', 
+    'overlay_height'                             => 'rgba(0,0,0,0)', 
+    'overlay_background'                         => 'rgba(0,0,0,0)', 
+
+
+
+    /*--------------------------------------------------------------
+    13.6 Footer
+    --------------------------------------------------------------*/
+
+
+    'footer_border'                              => 'border_color', 
+
+    'social_bg'                                  => 'first_main_color', 
+    'social_color'                               => 'main_bg_text_color', 
+    'social_active_bg'                           => 'first_main_active_color', 
+
+    'site_info_color'                            => 'secondary_text_color', 
+
+
+    /*--------------------------------------------------------------
+    16.0 Media
+    --------------------------------------------------------------*/
+
+
+    'playlist_item_active_bg'                    => 'first_main_active_color',
+    'playlist_item_active_color'                 => 'main_bg_text_color',
+
+
+);
 
 $body_color                                 = (empty($body_color)) ? $main_text_color : $body_color;
 $headings_color                             = (empty($headings_color)) ? $main_text_color : $headings_color;
@@ -118,7 +201,7 @@ $site_info_color                            = (empty($site_info_color)) ? $secon
 --------------------------------------------------------------*/
 
 
-$playlist_item_active_bg                    = (empty($button_active_bg)) ? $first_main_active_color : $button_active_bg;
+$playlist_item_active_bg                    = (empty($playlist_item_active_bg)) ? $first_main_active_color : $playlist_item_active_bg;
 $playlist_item_active_color                 = (empty($playlist_item_active_color)) ? $main_bg_text_color : $playlist_item_active_color;
 
 
