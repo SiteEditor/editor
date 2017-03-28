@@ -290,21 +290,27 @@ class SiteEditorOptionsCategory {
             if( !isset( $args['option_type'] ) )
                 $args['option_type'] = $this->option_type;
 
-            $this->settings[$setting_id] = $args; if( $this->option_group == "twenty_seventeen_header" ) echo $setting_id;
+            $this->settings[$setting_id] = $args; 
 
             if( isset( $args['partial_refresh'] ) ){
 
                 $partial_args = $args['partial_refresh'];
 
                 if( is_array( $partial_args ) && isset( $partial_args['render_callback'] ) && isset( $partial_args['selector'] ) ) {
-                    $this->partials[$setting_id] = sed_options()->get_partial_args( $partial_args , $setting_id , $args );;
+
+                    $partial_id = ! isset( $partial_args['partial_id'] ) ? $setting_id : $partial_args['partial_id'];
+
+                    $this->partials[$partial_id] = sed_options()->get_partial_args( $partial_args , $setting_id , $args );
+
                 }elseif( is_array( $partial_args ) ) {
 
                     foreach ( $partial_args AS $curr_partial_id => $curr_partial_args ) {
 
                         if( is_array( $curr_partial_args ) && isset( $curr_partial_args['render_callback'] ) && isset( $curr_partial_args['selector'] ) ) {
 
-                            $this->partials[$curr_partial_id] = sed_options()->get_partial_args( $curr_partial_args , $setting_id , $args );
+                            $partial_id = isset( $curr_partial_args['partial_id'] ) ? $curr_partial_args['partial_id'] : $curr_partial_id;
+
+                            $this->partials[$partial_id] = sed_options()->get_partial_args( $curr_partial_args , $setting_id , $args );
 
                         }
 

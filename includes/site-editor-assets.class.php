@@ -41,6 +41,8 @@ if(!class_exists('SiteEditorAssetsManager'))
             $this->add( 'yepnope'   ,           SED_ASSETS_URL . '/js/yepnope/yepnope'.$this->suffix.'.js', array(), '2.5.6' );
             $this->add( 'modernizr' ,           SED_ASSETS_URL . '/js/modernizr/modernizr.custom'.$this->suffix.'.js', array('yepnope'), '2.8.1' );
 
+            $this->add( 'sed-custom-header' ,   SED_ASSETS_URL . '/js/custom-header/wp-custom-header'.$this->suffix.'.js', array( 'wp-a11y' ), false , 1 );
+
             //scrollbar
             $this->add( 'jquery-scrollbar',     SED_ASSETS_URL . '/js/scrollbar/jquery.mCustomScrollbar.concat'.$this->suffix.'.js', array('jquery'), '2.3' );
 

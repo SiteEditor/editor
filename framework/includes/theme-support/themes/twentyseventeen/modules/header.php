@@ -16,6 +16,7 @@
  */
 class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
 
+
     /**
      * Main Element Selector
      *
@@ -25,9 +26,299 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
     public $selector = '#masthead';
 
     /**
+     * Header & Main Navigation Dynamic Css Options
+     *
+     * @var string
+     * @access public
+     */
+    public $dynamic_css_options = array();
+
+    /**
+     * is added dynamic css options ?
+     *
+     * @var string
+     * @access public
+     */
+    public $is_added_dynamic_css_options = false;
+
+    /**
+     * Initialize Class after Initialize parent class
+     */
+    public function init(){
+
+        add_filter( 'sed_app_render_partials_response', array( $this, 'export_header_video_settings' ), 10, 3 );
+
+        add_filter( "sed_twentyseventeen_css_vars" , array( $this , "get_dynamic_css_vars" ) , 10 , 1 );
+
+
+        /*if( site_editor_app_on() || is_sed_save() ) {
+
+            add_action('sed_app_register'                           , array($this, 'set_custom_partials'));
+
+        }*/
+
+    }
+
+    /**
+     * Header & Navigation Dynamic Css Variables
+     * Add New variable to dynamic css
+     *
+     * @param $vars
+     * @return array
+     */
+    public function get_dynamic_css_vars( $vars ){
+
+        if( $this->is_added_dynamic_css_options === false ){
+
+            $this->register_dynamic_css_options();
+
+            $this->is_added_dynamic_css_options = true;
+
+        }
+
+        $new_vars = array();
+
+        foreach ( $this->dynamic_css_options As $field_id => $option ){
+
+            if( ! isset( $option['setting_id'] ) )
+                continue;
+
+            $new_vars[$field_id] = array(
+                'settingId'             =>  $option['setting_id'] ,
+                'default'               =>  ! isset( $option['default'] ) ? '' : $option['default']
+            );
+
+        }
+
+        return array_merge( $vars , $new_vars );
+
+    }
+
+    /**
+     * Export header video settings to facilitate selective refresh.
+     * Thanks WordPress 4.7
+     *
+     * @since 1.0.0
+     *
+     * @param array $response Response.
+     * @param WP_Customize_Selective_Refresh $selective_refresh Selective refresh component.
+     * @param array $partials Array of partials.
+     * @return array
+     */
+    public function export_header_video_settings( $response, $selective_refresh, $partials ) {
+        if ( isset( $partials['header_image'] ) || isset( $partials['header_video'] ) || isset( $partials['external_header_video'] ) ) {
+            $response['custom_header_settings'] = get_header_video_settings();
+        }
+
+        return $response;
+    }
+
+    /**
+     * Callback for sanitizing the external_header_video value.
+     *
+     * @since 4.7.1
+     *
+     * @param string $value URL.
+     * @return string Sanitized URL.
+     */
+    public function _sanitize_external_header_video( $value ) {
+        return esc_url_raw( trim( $value ) );
+    }
+
+    public function register_dynamic_css_options(){
+
+        $this->dynamic_css_options = array(
+
+            /**
+             * --------------------------------------------------------------
+             * 12.0 Navigation
+             * --------------------------------------------------------------
+             */
+
+            'menu_items_font_size' => array(
+                'setting_id'        => 'sed_menu_items_font_size',
+                'type'              => 'dimension',
+                'label'             => __('Menu Items Font Size', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            'navigation_bar_bg' => array(
+                'setting_id'        => 'sed_navigation_bar_bg',
+                'type'              => 'color',
+                'label'             => __('Background Color', 'site-editor'),
+                "description"       => __("Navigation Bar Background Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            'navigation_bar_border' => array(
+                'setting_id'        => 'sed_navigation_bar_border',
+                'type'              => 'color',
+                'label'             => __('Border Color', 'site-editor'),
+                "description"       => __("Navigation Bar Border Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            'navigation_bar_color' => array(
+                'setting_id'        => 'sed_navigation_bar_color',
+                'type'              => 'color',
+                'label'             => __('Text Color', 'site-editor'),
+                "description"       => __("Navigation Bar Text Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            'navigation_submenu_bg' => array(
+                'setting_id'        => 'sed_navigation_submenu_bg',
+                'type'              => 'color',
+                'label'             => __('Submenu Background Color', 'site-editor'),
+                "description"       => __("Navigation Submenu Background Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            'navigation_submenu_border' => array(
+                'setting_id'        => 'sed_navigation_submenu_border',
+                'type'              => 'color',
+                'label'             => __('Submenu Border Color', 'site-editor'),
+                "description"       => __("Navigation Submenu Border Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            'navigation_submenu_color' => array(
+                'setting_id'        => 'sed_navigation_submenu_color',
+                'type'              => 'color',
+                'label'             => __('Submenu Text Color', 'site-editor'),
+                "description"       => __("Navigation Submenu Text Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            'navigation_submenu_item_bg' => array(
+                'setting_id'        => 'sed_navigation_submenu_item_bg',
+                'type'              => 'color',
+                'label'             => __('Active Background Color', 'site-editor'),
+                "description"       => __("Submenu Active Item Background Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            'navigation_submenu_item_color' => array(
+                'setting_id'        => 'sed_navigation_submenu_item_color',
+                'type'              => 'color',
+                'label'             => __('Active Text Color', 'site-editor'),
+                "description"       => __("Submenu Active Item Text Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_menu_custom_styling' ,
+            ),
+
+            /**
+             * --------------------------------------------------------------
+             * 13.1 Header
+             * --------------------------------------------------------------
+             */
+
+            'site_title_font_size' => array(
+                'setting_id'        => 'sed_site_title_font_size',
+                'type'              => 'dimension',
+                'label'             => __('Site Title Font Size', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_custom_styling' ,
+            ),
+
+            'site_desc_font_size' => array(
+                'setting_id'        => 'sed_site_desc_font_size',
+                'type'              => 'dimension',
+                'label'             => __('Site Description Font Size', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_custom_styling' ,
+            ),
+
+            'header_bg' => array(
+                'setting_id'        => 'sed_header_bg',
+                'type'              => 'color',
+                'label'             => __('Background Color', 'site-editor'),
+                "description"       => __("Header Background Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_custom_styling' ,
+            ),
+
+            'header_title_color' => array(
+                'setting_id'        => 'sed_header_title_color',
+                'type'              => 'color',
+                'label'             => __('Site Title Color', 'site-editor'),
+                "description"       => __("Site Title Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_custom_styling' ,
+            ),
+
+            'header_description_color' => array(
+                'setting_id'        => 'sed_header_description_color',
+                'type'              => 'color',
+                'label'             => __('Site Description Color', 'site-editor'),
+                "description"       => __("Site Description Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_custom_styling' ,
+            ),
+
+            'overlay_background' => array(
+                'setting_id'        => 'sed_overlay_background',
+                'type'              => 'color',
+                'label'             => __('Overlay Background Color', 'site-editor'),
+                "description"       => __("Header Ooverlay Background Color", "site-editor"),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_custom_styling' ,
+            ),
+
+        );
+
+    }
+
+    /**
      * Register Module Settings & Panels
      */
     public function register_settings(){
+
+        if( $this->is_added_dynamic_css_options === false ){
+
+            $this->register_dynamic_css_options();
+
+            $this->is_added_dynamic_css_options = true;
+
+        }
 
         $menus = wp_get_nav_menus();
         $menu_options = array(
@@ -52,8 +343,15 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                 //'capability'        => '' ,
                 //'theme_supports'    => '' ,
                 'parent_id'         => "root",
-                'atts'              => array() ,
-                //'active_callback'   => ''
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "disable_header" ,
+                            "value"     => false ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
             ) ,
 
             'header_media_settings_panel' =>  array(
@@ -66,8 +364,58 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                 //'capability'        => '' ,
                 //'theme_supports'    => '' ,
                 'parent_id'         => "root",
-                'atts'              => array() ,
-                //'active_callback'   => ''
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "disable_header" ,
+                            "value"     => false ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
+            ) ,
+
+            'header_menu_settings_panel' =>  array(
+                'type'              => 'inner_box',
+                'title'             => __('Header Navigation', 'site-editor'),
+                'btn_style'         => 'menu' ,
+                'has_border_box'    => false ,
+                'icon'              => 'sedico-menu' ,
+                'field_spacing'     => 'sm' ,
+                //'capability'        => '' ,
+                //'theme_supports'    => '' ,
+                'parent_id'         => "root",
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "disable_header" ,
+                            "value"     => false ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
+            ) ,
+
+            'header_menu_custom_styling' =>  array(
+                'type'              => 'inner_box',
+                'title'             => __('Menu Custom Edit Style', 'site-editor'),
+                'btn_style'         => 'menu' ,
+                'has_border_box'    => false ,
+                'icon'              => 'sedico-change-style' ,
+                'field_spacing'     => 'sm' ,
+                'parent_id'         => "header_menu_settings_panel" ,
+                'priority'          => 40 ,
+            ) ,
+
+            'header_custom_styling' =>  array(
+                'type'              => 'inner_box',
+                'title'             => __('Header Custom Edit Style', 'site-editor'),
+                'btn_style'         => 'menu' ,
+                'has_border_box'    => false ,
+                'icon'              => 'sedico-change-style' ,
+                'field_spacing'     => 'sm' ,
+                'parent_id'         => "root" ,
+                'priority'          => 50 ,
             ) ,
 
         );
@@ -77,20 +425,111 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
             'disable_header' => array(
                 'setting_id'        => 'sed_disable_header',
                 'label'             => __('Disable Header', 'site-editor'),
-                'type'              => 'checkbox',
+                'type'              => 'switch',
                 'default'           => false,
+                'choices'           => array(
+                    "on"       =>    "Yes" ,
+                    "off"      =>    "No" ,
+                ) ,
                 'option_type'       => 'theme_mod',
                 'transport'         => 'postMessage' ,
             ),
-
+ 
             'top_nav_menu' => array(
                 'setting_id'        => 'nav_menu_locations[top]',
                 'label'             => __('Select Menu', 'site-editor'),
                 'type'              => 'select',
                 'default'           => '',
-                'transport'         => 'refresh' ,
+                'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'choices'           => $menu_options ,
+                'partial_refresh'   => array(
+                    'selector'            => '#masthead .twse-navigation-top',
+                    'render_callback'     => array( $this, '_render_top_navigation' ),
+                    'container_inclusive' => false
+                ),
+                'panel'             => 'header_menu_settings_panel',
+            ),
+
+            'select_header_type' => array(
+                'setting_id'        => 'sed_select_header_type',
+                'label'             => __('Select Header Type', 'site-editor'),
+                'type'              => 'radio',
+                'default'           => 'image',
+                'transport'         => 'postMessage' ,
+                'choices'           => array(
+                    "image"             =>    __('Image', 'site-editor'),
+                    "video"             =>    __('Self-Hosted Video', 'site-editor'),
+                    "youtube"           =>    __('Youtube', 'site-editor'),
+                ) ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'header_media_settings_panel',
+            ),
+
+            'header_image' => array(
+                'setting_id'        => 'header_image',//'sed_header_image',
+                'label'             => __('Header Image', 'site-editor'),
+                'type'              => 'image',
+                'default'           => '',
+                'theme_supports'    => 'custom-header',
+                'option_type'       => 'theme_mod',
+                'transport'         => 'postMessage' ,
+                'sanitize_callback' => array( $this , "get_header_image" ) ,
+                'panel'             => 'header_media_settings_panel',
+                'partial_refresh'   => $this->get_custom_header_partial_args(),
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "select_header_type" ,
+                            "value"     => "image" ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
+            ),
+
+            'header_video' => array( 
+                'setting_id'        => 'header_video',
+                'label'             => __('Header Video', 'site-editor'),
+                'type'              => 'video',
+                'default'           => '',
+                //'theme_supports'    => array( 'custom-header', 'video' ),
+                'option_type'       => 'theme_mod',
+                'transport'         => 'postMessage' ,
+                'sanitize_callback' => 'absint',
+                'panel'             => 'header_media_settings_panel',
+                'partial_refresh'   => $this->get_custom_header_partial_args(),
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "select_header_type" ,
+                            "value"     => "video" ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
+            ),
+
+            'external_header_video' => array(
+                'setting_id'        => 'external_header_video',
+                'label'             => __('YouTube URL:', 'site-editor'),
+                'type'              => 'text',
+                'default'           => '',
+                //'theme_supports'    => array( 'custom-header', 'video' ),
+                'option_type'       => 'theme_mod',
+                'transport'         => 'postMessage' ,
+                'sanitize_callback' => array( $this, '_sanitize_external_header_video' ),
+                'panel'             => 'header_media_settings_panel',
+                'partial_refresh'   => $this->get_custom_header_partial_args(),
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "select_header_type" ,
+                            "value"     => "youtube" ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
             ),
 
             'default_logo' => array(
@@ -99,74 +538,131 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                 'description'       => __( 'Select an image file for your logo.' , 'site-editor' ),
                 'setting_id'        => "custom_logo" ,
                 'remove_action'     => true ,
-                //'default'           => '',
+                'panel'             => 'header_branding_settings_panel',
+                'default'           => '',
                 'theme_supports'    => 'custom-logo',
                 'option_type'       => 'theme_mod',
-                'transport'         => 'postMessage' , 
-                /*'partial_refresh'   => array(
-                    'selector'            => '.custom-logo-link',
-                    'render_callback'     => array( $this, '_render_custom_logo_partial' ),
-                    'container_inclusive' => true,
-                ),*/
-                'panel'             => 'header_branding_settings_panel',
-            ),
-
-            'select_header_type' => array(
-                'setting_id'        => 'sed_select_header_type',
-                'label'             => __('Select Header Type', 'site-editor'),
-                'type'              => 'radio-buttonset',
-                'default'           => 'image',
-                'transport'         => 'refresh' ,
-                'choices'           => array(
-                    "image"      =>    __('Image', 'site-editor'),
-                    "video"      =>    __('Video', 'site-editor'),
-                ) ,
-                'option_type'       => 'option',
-                'panel'             => 'header_media_settings_panel',
-                //'has_border_box'    => false
-            ),
-
-
-            'header_image' => array(
-                'setting_id'        => 'sed_header_image',
-                'label'             => __('Header Image', 'site-editor'),
-                'type'              => 'image',
-                'default'           => '',
                 'transport'         => 'postMessage' ,
-                'panel'             => 'header_media_settings_panel',
+                'partial_refresh'   => array(
+                    'selector'            => '.custom-logo-link',
+                    'render_callback'     => array( 'SiteEditorThemeOptions' , '_render_custom_logo_partial' ),
+                    'container_inclusive' => true,
+                )
             ),
 
-            'header_video' => array( 
-                'setting_id'        => 'sed_header_video',
-                'label'             => __('Header Video', 'site-editor'),
-                'type'              => 'video',
-                'default'           => '',
-                'transport'         => 'postMessage' , 
-                'panel'             => 'header_media_settings_panel',
+            'display_header_text'  => array(
+                'type'                  => 'checkbox',
+                'label'                 => __( 'Display Header Title and Tagline' ),
+                'setting_id'            => "header_textcolor" ,
+                //'theme_supports'        => array( 'custom-header', 'header-text' ),
+                'default'               => get_theme_support( 'custom-header', 'default-text-color' ),
+                'transport'             => 'postMessage' ,
+                'sanitize_callback'     => array( $this, '_sanitize_header_textcolor' ),
+                'option_type'           => 'theme_mod',
+                'sanitize_js_callback'  => 'maybe_hash_hex_color',
+                'panel'                 => "header_branding_settings_panel" ,
             ),
 
             'select_header_title_type' => array(
-                'setting_id'        => 'sed_select_header_title_type',
+                'setting_id'        => 'sed_header_title_type',
                 'label'             => __('Header Title & Subtitle Type', 'site-editor'),
                 'type'              => 'radio-buttonset',
                 'default'           => 'default',
+                'option_type'       => 'theme_mod',
                 'transport'         => 'postMessage' ,
                 'choices'           => array(
                     "default"      =>    __('Default', 'site-editor'),
                     "custom"       =>    __('Custom', 'site-editor'),
                 ) ,
                 'panel'             => 'header_branding_settings_panel',
-                //'has_border_box'    => false
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "display_header_text" ,
+                            "value"     => true ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
             ),
+
+            'blogname' => array(
+                "type"              => "text" ,
+                "label"             => __("Site Title", "site-editor"),
+                'default'           => '',
+                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
+                'setting_id'        => "blogname" ,
+                'panel'             => "header_branding_settings_panel" ,
+                'option_type'       => 'option',
+                'capability'        => 'manage_options',
+                'transport'         => 'postMessage' ,
+                'dependency' => array(
+                    'queries'  =>  array(
+                        "relation"     =>  "AND" ,
+                        array(
+                            "key"       => "display_header_text" ,
+                            "value"     => true ,
+                            "compare"   => "==="
+                        ),
+                        array(
+                            "key"       => "select_header_title_type" ,
+                            "value"     => "default" ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
+            ) ,
+
+            'blogdescription' => array(
+                "type"              => "text" ,
+                "label"             => __("Tagline", "site-editor"),
+                'default'           => '',
+                "description"       => __("This option allows you to set a title for your image.", "site-editor"),
+                'setting_id'        => "blogdescription" ,
+                'panel'             => "header_branding_settings_panel" ,
+                'option_type'       => 'option',
+                'capability'        => 'manage_options' ,
+                'transport'         => 'postMessage' ,
+                'dependency' => array(
+                    'queries'  =>  array(
+                        "relation"     =>  "AND" ,
+                        array(
+                            "key"       => "display_header_text" ,
+                            "value"     => true ,
+                            "compare"   => "==="
+                        ),
+                        array(
+                            "key"       => "select_header_title_type" ,
+                            "value"     => "default" ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
+            ) ,
 
             'custom_header_title' => array(
                 'setting_id'        => 'sed_custom_header_title',
                 'label'             => __('Custom Header Title', 'site-editor'),
                 'type'              => 'text',
                 'default'           => '',
+                'option_type'       => 'theme_mod',
                 'transport'         => 'postMessage' ,
                 'panel'             =>  'header_branding_settings_panel',
-                //'has_border_box'    => false
+                'dependency' => array(
+                    'queries'  =>  array(
+                        "relation"     =>  "AND" ,
+                        array(
+                            "key"       => "display_header_text" ,
+                            "value"     => true ,
+                            "compare"   => "==="
+                        ),
+                        array(
+                            "key"       => "select_header_title_type" ,
+                            "value"     => "custom" ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
             ), 
 
             'custom_header_sub_title' => array(
@@ -174,18 +670,112 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                 'label'             => __('Custom Header Sub Title', 'site-editor'),
                 'type'              => 'text', 
                 'default'           => '',
+                'option_type'       => 'theme_mod',
                 'transport'         => 'postMessage' , 
                 'panel'             =>  'header_branding_settings_panel',
-                //'has_border_box'    => false
+                'dependency' => array(
+                    'queries'  =>  array(
+                        "relation"     =>  "AND" ,
+                        array(
+                            "key"       => "display_header_text" ,
+                            "value"     => true ,
+                            "compare"   => "==="
+                        ),
+                        array(
+                            "key"       => "select_header_title_type" ,
+                            "value"     => "custom" ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
             ),   
 
         );
+
+        $fields = array_merge( $fields , $this->dynamic_css_options );
 
         return array(
             'fields'    => $fields ,
             'panels'    => $panels
         );
 
+    }
+
+    public function get_custom_header_partial_args(){
+
+        $partial_args = array(
+            'selector'              => '#wp-custom-header',
+            'render_callback'       => 'sed_the_custom_header_markup',
+            'container_inclusive'   => true ,
+            'option_group'          => 'twenty_seventeen_header'
+        );
+
+        return $partial_args;
+
+    }
+
+    /*public function set_custom_partials(){
+
+        //for filter_dynamic_partial_args , filter_dynamic_partial_class
+        $this->partials[$this->get_custom_header_partial()['id']] = $this->get_custom_header_partial()['args'];
+
+    }*/
+
+    public function get_header_image( $value, $setting ){
+
+        $header_src = sed_get_image_src( array(
+            'attach_id'     => (int)$value,
+            'thumb_size'    => '2000x1200'
+        ) );
+
+        if( empty( $header_src ) ){
+            return 'remove-header';
+        }
+
+        return $header_src;
+
+    }
+
+    public function _render_top_navigation(){
+
+        ob_start();
+
+        if (has_nav_menu('top')) : ?>
+            <div class="navigation-top">
+                <div class="wrap">
+                    <?php get_template_part('template-parts/navigation/navigation', 'top'); ?>
+                </div><!-- .wrap -->
+            </div><!-- .navigation-top -->
+        <?php endif;
+
+        $content = ob_get_contents();
+
+        ob_end_clean();
+
+        return $content;
+
+    }
+
+    /**
+     * Callback for validating the header_textcolor value.
+     *
+     * Accepts 'blank', and otherwise uses sanitize_hex_color_no_hash().
+     * Returns default text color if hex color is empty.
+     *
+     * @since 3.4.0
+     *
+     * @param string $color
+     * @return mixed
+     */
+    public function _sanitize_header_textcolor( $color ) {
+        if ( 'blank' === $color )
+            return 'blank';
+
+        $color = sanitize_hex_color_no_hash( $color );
+        if ( empty( $color ) )
+            $color = get_theme_support( 'custom-header', 'default-text-color' );
+
+        return $color;
     }
 
 

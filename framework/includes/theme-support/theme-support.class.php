@@ -62,11 +62,10 @@ class SiteEditorThemeSupport{
 
         $theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
 
-
         if( $theme->get_stylesheet() == "twentysixteen" ){
             require_once dirname( __FILE__ ) . "/themes/twentysixteen/twentysixteen-sync.class.php" ;
             new SiteEditorTwentysixteenThemeSync( $this );
-        }else if( $theme->get_stylesheet() == "twentyseventeen" ){
+        }else if( in_array( $theme->get_stylesheet() , array( "twentyseventeen" , "twentyseventeen-plus" ) ) ){
             require_once dirname( __FILE__ ) . "/themes/twentyseventeen/twentyseventeen-sync.class.php" ;
             new SiteEditorTwentyseventeenThemeSync( $this );
         }

@@ -85,6 +85,15 @@ final class SiteEditorOptionsManager{
     public $post = array();
 
     /**
+     * instances of SiteEditorColorScheme.
+     *
+     * @since 1.0.0
+     * @access public
+     * @var object
+     */
+    public $color_scheme;
+
+    /**
      * SiteEditorOptionsManager constructor.
      * @param $editor object instance of SiteEditorApp
      */
@@ -125,9 +134,13 @@ final class SiteEditorOptionsManager{
 
         new SiteEditorSiteCustomCss();
 
+        require_once dirname( __FILE__ ) . DS . 'site-editor-color-scheme.class.php';
+
+        $this->color_scheme = new SiteEditorColorScheme();
+
         require_once dirname( __FILE__ ) . DS . 'site-editor-color-options.class.php';
 
-        new SiteEditorColorOptions();
+        new SiteEditorColorOptions( $this->color_scheme );
 
         require_once dirname( __FILE__ ) . DS . 'site-editor-font-options.class.php';
 

@@ -712,6 +712,81 @@ function sed_stringify_atts( $attributes ) {
     return implode( ' ', $atts );
 }
 
+function sed_get_image_src( $params ){
+
+    $params = array_merge( array(
+        'post_id' => null,
+        'attach_id' => null,
+        'thumb_size' => 'thumbnail'
+    ), $params );
+
+    if ( ! $params['thumb_size'] ) {
+        $params['thumb_size'] = 'thumbnail';
+    }
+
+    if ( ! $params['attach_id'] && ! $params['post_id'] ) {
+        return false;
+    }
+
+    $post_id = $params['post_id'];
+
+    $attach_id = $post_id ? get_post_thumbnail_id( $post_id ) : $params['attach_id'];
+    $attach_id = apply_filters( 'sed_attachment_id', $attach_id );
+    $thumb_size = $params['thumb_size'];
+
+    global $_wp_additional_image_sizes;
+    $image_src = '';
+
+    if ( is_string( $thumb_size ) && ( ( ! empty( $_wp_additional_image_sizes[ $thumb_size ] ) && is_array( $_wp_additional_image_sizes[ $thumb_size ] ) ) || in_array( $thumb_size, array(
+                'thumbnail',
+                'thumb',
+                'medium',
+                'large',
+                'full',
+            ) ) )
+    ) {
+
+        $thumbnail = wp_get_attachment_image_src( $attach_id, $thumb_size );
+
+        $image_src = $thumbnail[0];
+
+    } elseif ( $attach_id ) {
+
+        if ( is_string( $thumb_size ) ) {
+            preg_match_all( '/\d+/', $thumb_size, $thumb_matches );
+            if ( isset( $thumb_matches[0] ) ) {
+                $thumb_size = array();
+                if ( count( $thumb_matches[0] ) > 1 ) {
+                    $thumb_size[] = $thumb_matches[0][0]; // width
+                    $thumb_size[] = $thumb_matches[0][1]; // height
+                } elseif ( count( $thumb_matches[0] ) > 0 && count( $thumb_matches[0] ) < 2 ) {
+                    $thumb_size[] = $thumb_matches[0][0]; // width
+                    $thumb_size[] = $thumb_matches[0][0]; // height
+                } else {
+                    $thumb_size = false;
+                }
+            }
+        }
+
+        if ( is_array( $thumb_size ) ) {
+            // Resize image to custom size
+            $p_img = sed_resize( $attach_id, null, $thumb_size[0], $thumb_size[1], true );
+
+            $attachment = get_post( $attach_id );
+
+            if ( ! empty( $attachment ) && $p_img ) {
+
+                $image_src = $p_img['url'];
+
+            }
+        }
+
+    }
+
+    return $image_src;
+
+}
+
 /**
  * @param array $params
  *
@@ -1277,6 +1352,30 @@ function sed_site_icon() {
     foreach ( $meta_tags as $meta_tag ) {
         echo "$meta_tag\n";
     }
+}
+
+function sed_the_custom_header_markup() {
+
+    if ( ! has_custom_header() && ! is_customize_preview() && ! site_editor_app_on() ) {
+        return '';
+    }
+
+    $custom_header = sprintf(
+        '<div id="wp-custom-header" class="wp-custom-header">%s</div>',
+        get_header_image_tag()
+    );
+
+    if ( empty( $custom_header ) ) {
+        return;
+    }
+
+    echo $custom_header;
+
+    if ( is_header_video_active() && ( has_header_video() || is_customize_preview() || site_editor_app_on() ) ) {
+        wp_enqueue_script( 'sed-custom-header' );
+        wp_localize_script( 'sed-custom-header', '_wpCustomHeaderSettings', get_header_video_settings() );
+    }
+
 }
 
 /**

@@ -123,7 +123,7 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
             'capability'        => 'edit_theme_options' ,
             'type'              => 'inner_box' ,
             'description'       => '' ,
-            'priority'          => 7 ,
+            'priority'          => 50 ,
             'has_border_box'    => false ,
             'icon'              => 'fa icon-settings' ,
             'btn_style'         => 'menu' ,

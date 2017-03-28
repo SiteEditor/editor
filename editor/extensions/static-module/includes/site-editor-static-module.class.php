@@ -106,7 +106,16 @@ class SiteEditorStaticModule extends SiteEditorOptionsCategory{
 
         add_filter( "{$this->option_group}_fields_filter" , array( $this , 'register_default_fields' ) );
 
+        $this->init();
+
         parent::__construct();
+
+    }
+
+    /**
+     * For initialize in extended classes
+     */
+    protected function init(){
 
     }
 

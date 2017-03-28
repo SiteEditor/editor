@@ -338,7 +338,7 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
                 'transport'         => 'postMessage' ,
                 'partial_refresh'   => array(
                     'selector'            => '.custom-logo-link',
-                    'render_callback'     => array( $this, '_render_custom_logo_partial' ),
+                    'render_callback'     => array( __CLASS__ , '_render_custom_logo_partial' ),
                     'container_inclusive' => true,
                 )
             ),
@@ -382,7 +382,7 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
      *
      * @return string Custom logo.
      */
-    public function _render_custom_logo_partial() {
+    public static function _render_custom_logo_partial() {
         return get_custom_logo();
     }
 

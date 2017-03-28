@@ -122,7 +122,7 @@ class SiteEditorWrapping {
   // Stores the base name of the template file; e.g. 'page' for 'page.php' etc.
   public static $base;
 
-  public function __construct( $template = 'pl-base.php' ) {
+  public function __construct( $template = 'sed-base.php' ) {
 
     $this->slug = basename( $template, '.php' );
 
@@ -152,7 +152,7 @@ class SiteEditorWrapping {
     $path = locate_template( $this->templates );
 
     if ( '' == $path ) {
-      return SED_INC_FRAMEWORK_DIR . "/sed-base.php";
+      return apply_filters( 'sed_base_template_wrapping' , SED_INC_FRAMEWORK_DIR . "/sed-base.php" );
     } else {
       return $path;
     }

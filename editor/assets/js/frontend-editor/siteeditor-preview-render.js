@@ -1611,6 +1611,7 @@
 
         api.trigger( 'preview-ready' );
 
+
         var _filterFloat = function (value) {
             if(/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/
                     .test(value))

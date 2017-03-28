@@ -124,6 +124,14 @@ final Class SiteEditorFramework {
      */
     public function includes() {
 
+        if( !site_editor_app_on() ) {
+
+            require_once SED_EXT_PATH . DS . "options-engine" . DS . "includes" . DS . 'site-editor-color-scheme.class.php';
+
+            $color_scheme = new SiteEditorColorScheme();
+
+        }
+
         require_once SED_INC_FRAMEWORK_DIR . DS . 'typography.class.php';
         $this->typography = new SiteeditorTypography();
 
