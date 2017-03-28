@@ -49,6 +49,8 @@ class SiteEditorTwentyseventeenDynamicCss {
 
         }
 
+        add_filter( "sed_customize_color_settings" , array( $this , 'color_settings' ) );
+
     }
 
 
@@ -60,6 +62,13 @@ class SiteEditorTwentyseventeenDynamicCss {
 
         return $css;
 
+    }
+
+    public function color_settings( $settings ){
+
+        $settings['background_color']['default'] = "#FFFFFF";
+
+        return $settings;
     }
 
     public function remove_color_scheme_css_template(){
