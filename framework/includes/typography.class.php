@@ -10,7 +10,7 @@ Class SiteeditorTypography{
     public $base_loaded_fonts = array();
 
 
-	function __construct( ){
+	function __construct( ){ 
 
         add_action( 'init',    array( $this, 'set_fonts' ) );
 

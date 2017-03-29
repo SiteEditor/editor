@@ -215,6 +215,14 @@
             this.googleFontsSettings = "";
             this.baseLoadedFonts = [];
 
+            var self = this;
+
+            api.preview.bind( "changeFontFamilyControl" , function( fontFamily ){
+
+                self.loadFont( fontFamily );
+
+            });
+
             $.extend( this, params || {} );
 
         },

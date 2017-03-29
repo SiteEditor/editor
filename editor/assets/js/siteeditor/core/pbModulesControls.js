@@ -144,6 +144,8 @@
 
             this.refreshLockControls( val , lockMode );
 
+            api.Events.trigger( "after_control_value_refresh_event" , control , val );
+
         },
 
         setValue : function( val ){

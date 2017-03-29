@@ -479,7 +479,8 @@
 
                       break;
                       case "font_family":
-                          api.typography.loadFont( to );
+                          //======== load after refresh control for all 'font-family' control type ===== event : changeFontFamilyControl
+                          api.typography.loadFont( to ); 
                           var newVal = ( !to ) ? "initial" : to + " !important" ;
                           var css = api.currentCssSelector + "{" + prop + " : " + newVal + ";}";
                       break;

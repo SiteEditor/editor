@@ -570,6 +570,26 @@
           setting.set( value );
       });
 
+
+      /**
+       * @TYPOGRAPHY
+       * we sended all font families to site-iframe.js file for load & save google fonts & custom fonts
+       * All Control With 'font-family' type have "style_props" property with 'font-family' value in control js data
+       * after refresh control setting we send font family
+       */
+
+      api.Events.bind( "after_control_value_refresh_event" , function( control , val ){
+
+          if( !_.isUndefined( control.params ) && !_.isUndefined( control.params.style_props ) && control.params.style_props === 'font-family' ){ 
+
+              api.previewer.send( "changeFontFamilyControl" , val );
+
+          }
+
+      })
+      
+      
+
   });
 
 })( sedApp, jQuery );

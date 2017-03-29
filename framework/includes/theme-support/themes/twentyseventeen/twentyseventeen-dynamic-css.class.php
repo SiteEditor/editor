@@ -33,9 +33,9 @@ class SiteEditorTwentyseventeenDynamicCss {
         add_filter( "sed_twentyseventeen_dynamic_css" , array( $this , "register_default_dynamic_css" ) , 10 , 2 );
 
         //before print color Scheme in css file
-        add_action( 'wp_enqueue_scripts' , array( $this , 'add_dynamic_css' ) , 999 );
+        add_action( 'wp_enqueue_scripts' , array( $this , 'add_dynamic_css' ) , 9999999 );
 
-        add_action( 'init' , array( $this , 'remove_color_scheme_css' ) , 1001 );
+        add_action( 'init' , array( $this , 'remove_color_scheme_css' ) );
 
         if( site_editor_app_on() ) {
 
@@ -292,7 +292,7 @@ class SiteEditorTwentyseventeenDynamicCss {
 
         foreach ( $default_vars As $key => $option ){
 
-            $vars[$key] = get_theme_mod( $key , $option['default'] );
+            $vars[$key] = get_theme_mod( $option['settingId'] , $option['default'] );
 
         }
 
@@ -311,11 +311,11 @@ class SiteEditorTwentyseventeenDynamicCss {
 
             $default = isset( $options['default'] ) ? $options['default'] : "";
 
-            $vars[$key] = get_theme_mod( $key , $default );
+            $vars[$key] = get_theme_mod( $options['setting_id'] , $default );
 
         }
 
-        $dynamic_css = $this->get_dynamic_css( $vars );
+        $dynamic_css = $this->get_dynamic_css( $vars ); 
 
         //Add Color Scheme Dynamic Css
         if( site_editor_app_on() ) {
