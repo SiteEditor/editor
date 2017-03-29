@@ -183,7 +183,7 @@ class SiteEditorTwentyseventeenDynamicCss {
             'form_control_border_radius'                 => 'border_radius',
             'placeholder_color'                          => 'main_text_color',
 
-            'form_control_active_border'                 => 'secondary_border_color',
+            'form_control_active_border'                 => 'first_main_color',
             'form_control_active_color'                  => 'main_text_color',
 
             'button_bg'                                  => 'first_main_color',
