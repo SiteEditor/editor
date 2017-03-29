@@ -188,6 +188,8 @@ $css .= <<<CSS
                 -webkit-border-radius: {$form_control_border_radius};
                 border-radius: {$form_control_border_radius};
                 color: {$button_color};
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
 
             button.secondary,
@@ -424,16 +426,26 @@ $css .= <<<CSS
 
             .menu-toggle {
                 color: {$navigation_bar_color};
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+
+            /* Display the menu toggle when JavaScript is available. */
+
+            .menu-toggle:hover,
+            .menu-toggle:focus {
+                background-color: transparent;
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
 
             /* Dropdown Toggle */
 
             .dropdown-toggle {
                 color: {$navigation_bar_color};
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
-
-
-
 
 
             @media screen and (min-width: 48em) {
@@ -627,7 +639,7 @@ $css .= <<<CSS
             }
 
             .page-numbers.current {
-                color: {$first_main_color};
+                color: {$first_main_active_color};
             }
 
             .prev.page-numbers,
@@ -702,6 +714,8 @@ $css .= <<<CSS
                 -webkit-border-radius: {$form_control_border_radius};
                 border-radius: {$form_control_border_radius};
                 color: {$button_color};
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
  
             .entry-footer .edit-link a.post-edit-link:hover,
@@ -813,6 +827,8 @@ $css .= <<<CSS
             .widget.widget_tag_cloud a,
             .wp_widget_tag_cloud a {
                 border-color: {$border_color};
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
 
             .widget .tagcloud a:hover,
@@ -822,8 +838,9 @@ $css .= <<<CSS
             .wp_widget_tag_cloud a:hover,
             .wp_widget_tag_cloud a:focus {
                 border-color: {$secondary_border_color};
+                -webkit-box-shadow: none;
+                box-shadow: none;
             }
-
 
 
 
@@ -917,6 +934,26 @@ $css .= <<<CSS
             .site-content .wp-playlist-dark .wp-playlist-item:focus a {
                 color: {$playlist_item_active_color};;
             }
+
+            .site-content .wp-playlist-item a,
+            .site-content .wp-playlist-item a:focus,
+            .site-content .wp-playlist-item a:hover {
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }     
+
+
+            /*--------------------------------------------------------------
+            16.1 Galleries
+            --------------------------------------------------------------*/
+
+            .gallery-item a,
+            .gallery-item a:hover,
+            .gallery-item a:focus {
+                -webkit-box-shadow: none;
+                box-shadow: none;
+            }
+                          
 
             /*--------------------------------------------------------------
             18.0 SVGs Fallbacks

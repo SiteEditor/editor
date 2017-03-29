@@ -232,9 +232,9 @@ class SiteEditorTwentyseventeenDynamicCss {
 
             'footer_border'                              => 'border_color',
 
-            'social_bg'                                  => 'first_main_color',
+            'social_bg'                                  => 'first_main_active_color',
             'social_color'                               => 'main_bg_text_color',
-            'social_active_bg'                           => 'first_main_active_color',
+            'social_active_bg'                           => 'first_main_color', 
 
             'site_info_color'                            => 'secondary_text_color',
 
