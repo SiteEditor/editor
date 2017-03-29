@@ -732,6 +732,8 @@
                 return shortcode;
             });
 
+            api.Events.trigger( "afterShortcodesPatternFilter" , shortcodes );
+
             return shortcodes;
         },
 

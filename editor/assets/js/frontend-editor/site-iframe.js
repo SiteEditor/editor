@@ -155,7 +155,7 @@
                                 }
                             });
 
-                            api.typography.loadFont( e.originalEvent.value , _parentModelId , fonts );
+                            api.typography.loadFont( e.originalEvent.value , _cModelId , fonts );
                         }
                               //alert( $( tinymce.dom.getParent(e.target.selection.getNode(), 'span') ).html() );
                         //save content in shortcode models
@@ -217,9 +217,41 @@
 
             var self = this;
 
+            /**
+             * After refresh control setting Render This function
+             * @TODO: All 'font-family' type Controls Except "style-editor" category controls
+             */
             api.preview.bind( "changeFontFamilyControl" , function( fontFamily ){
 
                 self.loadFont( fontFamily );
+
+            });
+
+            /**
+             * After Apply Shortcodes Pattern Filters we load fonts that save in "sed_fonts" attributes
+             * ( find for each shortcode in pattern )
+             * we load fonts after load preset , skin , duplicate , create modules & patterns
+             * tinymce fonts save in "sed_fonts" attribute
+             */
+            api.Events.bind( "afterShortcodesPatternFilter" , function( shortcodes ){
+
+                _.each( shortcodes  , function( shortcode ){
+
+                    if(!_.isUndefined( shortcode.attrs ) && !_.isUndefined( shortcode.attrs.sed_fonts ) && _.isString( shortcode.attrs.sed_fonts ) ){
+
+                        var fonts = _.clone( shortcode.attrs.sed_fonts );
+
+                        fonts = fonts.split( "," );
+
+                        _.each( fonts  , function( fontFamily ) {
+
+                            self.loadFont( fontFamily );
+
+                        });
+
+                    }
+
+                });
 
             });
 
@@ -292,7 +324,7 @@
 
             editorFonts = editorFonts.join( "," );
 
-            api.contentBuilder.updateShortcodeAttr( "fonts" , editorFonts , editorParentId );
+            api.contentBuilder.updateShortcodeAttr( "sed_fonts" , editorFonts , editorParentId );
 
         }
 

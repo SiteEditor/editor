@@ -10,18 +10,28 @@ Class SiteeditorTypography{
     public $base_loaded_fonts = array();
 
 
-	function __construct( ){ 
+	function __construct( ){
 
         add_action( 'init',    array( $this, 'set_fonts' ) );
 
         //base fonts && design editor fonts
         add_action( "wp_head" , array( $this , "load_base_fonts" ) , 1  );
 
-        add_action( "wp_head" , array( $this , "load_mce_fonts" ) , 2  );
+        add_action( "wp_footer" , array( $this , "load_mce_fonts" )  );
+
+        /**
+         * Before Create Dynamic Css file
+         */
+        add_action( "sed_before_dynamic_css_output" , array( $this , "load_footer_fonts" ) , 100000 );
+
+        add_filter( "sed_load_dynamic_fonts_footer" , array( $this , "register_design_editor_fonts" ) , 10 , 1 );
 
         if( site_editor_app_on() ){
+
             add_action( "wp_footer" , array( $this , "print_fonts" )  );
+
             add_action( "wp_footer" , array( $this , "print_font_formats" )  );
+
         }
 
         //add_action( "sed_footer" , array( $this , "print_fonts" )  );
@@ -44,32 +54,65 @@ Class SiteeditorTypography{
 
             $this->load_custom_fonts($all_fonts);
 
-            $this->load_google_fonts($all_fonts);
+            $this->load_google_fonts($all_fonts , true);
 
         }
 
     }
 
-    function load_base_fonts(){
-        global $sed_general_data , $sed_data;
+    public function register_design_editor_fonts( $fonts ){
+
+        $css_data = SED()->framework->dynamic_css_data;
+
+        $all_fonts = array();
+
+        if(!empty($css_data)) {
+
+            foreach ($css_data AS $selector => $styles) {
+
+                foreach ($styles AS $property => $value) {
+
+                    if( $property == "font_family" ){
+
+                        $all_fonts[] = $value;
+
+                    }
+
+                }
+
+            }
+
+        }
+
+        $all_fonts = array_unique($all_fonts);
+
+        return array_merge( $fonts , $all_fonts );
+
+    }
+
+    function load_footer_fonts(){
+
+        $this->load_base_fonts( true );
+
+    }
+
+    function load_base_fonts( $footer = false ){
 
         $fonts = array();
-        /*if( isset($sed_data['font_family']) && !empty( $sed_data['font_family'] ) && is_array($sed_data['font_family']) ){
-            $fonts = array_values( $sed_data['font_family'] );
-            $fonts = array_unique( $fonts );
-        }*/
 
-        $fonts[] = $sed_general_data['font-family-base'] ;
-        $fonts[] = $sed_general_data['headings-font-family'];
+        $footer_mode = $footer ? "_footer" : "";
+
+        $fonts = apply_filters( "sed_load_dynamic_fonts{$footer_mode}" , $fonts , $this );
 
         $fonts = array_unique( $fonts );
 
         $this->load_custom_fonts( $fonts );
 
-    	$this->load_google_fonts( $fonts );
+    	$this->load_google_fonts( $fonts , $footer );
+
     }
 
-    function load_custom_fonts( $fonts){
+    function load_custom_fonts( $fonts ){
 
         $cfonts = array();
 
@@ -81,6 +124,9 @@ Class SiteeditorTypography{
 
         if( !empty( $cfonts ) ){
 
+            global $sed_dynamic_css_string;
+
+            ob_start();
             ?>
             <style type="text/css">
             <!--
@@ -111,8 +157,57 @@ Class SiteeditorTypography{
             -->
             </style>
             <?php
+
+            $sed_dynamic_css_string .= ob_get_clean();
+
             $this->base_loaded_fonts = array_merge( $this->base_loaded_fonts , $cfonts );
         }
+    }
+
+    function load_google_fonts( $fonts , $footer = false ){
+        //global $sed_general_data;
+        $gfonts = array();
+
+        foreach( $fonts AS $font ){
+            if( in_array( $font , $this->google_fonts ) ){
+                array_push( $gfonts , $font );
+            }
+        }
+
+        if( !empty( $gfonts ) ){
+
+            foreach( $gfonts as $font ) {
+                if( !in_array( $font , $this->base_loaded_fonts )  ){
+                    /*if( !empty( $sed_general_data['gfont_settings'] ) )
+                        $gfont_settings = ":" . $sed_general_data['gfont_settings'];
+                    else*/
+                        $gfont_settings = "";
+
+                    if( !$footer ) { 
+
+                        echo "<link href='http" . ((is_ssl()) ? 's' : '') . "://fonts.googleapis.com/css?family={$font}" . $gfont_settings . "' rel='stylesheet' type='text/css' />";
+                    }else{
+
+                        ?>
+                        <script type="text/javascript"> 
+                            (function ($) {
+
+                                var $style_sheet = "<link rel='stylesheet'  href='<?php echo "http" . ((is_ssl()) ? 's' : '') . "://fonts.googleapis.com/css?family={$font}" . $gfont_settings;?>' type='text/css' media='all' />";
+
+                                $($style_sheet).appendTo("head");
+
+                            }(jQuery));
+                        </script>
+                        <?php
+                        
+                    }
+                    
+                }
+            }
+
+            $this->base_loaded_fonts = array_merge( $this->base_loaded_fonts , $gfonts );
+        }
+
     }
 
     function print_font_formats(){
@@ -187,34 +282,6 @@ Class SiteeditorTypography{
             $fonts = array_merge( $custom_fonts , $fonts );
         }
         return $fonts;
-    }
-
-    function load_google_fonts( $fonts ){
-        global $sed_general_data;
-        $gfonts = array();
-
-        foreach( $fonts AS $font ){
-            if( in_array( $font , $this->google_fonts ) ){
-                array_push( $gfonts , $font );
-            }
-        }
-
-        if( !empty( $gfonts ) ){
-
-        	foreach( $gfonts as $font ) {
-        	    if( !in_array( $font , $this->base_loaded_fonts )  ){
-            	    if( !empty( $sed_general_data['gfont_settings'] ) )
-                        $gfont_settings = ":" . $sed_general_data['gfont_settings'];
-                    else
-                        $gfont_settings = "";
-
-            		echo "<link href='http" . ((is_ssl()) ? 's' : '') . "://fonts.googleapis.com/css?family={$font}" . $gfont_settings . "' rel='stylesheet' type='text/css' />";
-                }
-            }
-
-            $this->base_loaded_fonts = array_merge( $this->base_loaded_fonts , $gfonts );
-        }
-
     }
 
     function set_google_fonts(){

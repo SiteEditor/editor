@@ -44,6 +44,8 @@ class SiteEditorTwentyseventeenTypography {
 
         add_filter( "sed_typography_options_fields_filter" , array( $this , 'register_settings' ) );
 
+        add_filter( "sed_load_dynamic_fonts" , array( $this , "register_fonts" ) , 10 , 1 );
+
     }
 
     /**
@@ -78,6 +80,18 @@ class SiteEditorTwentyseventeenTypography {
         }
 
         return array_merge( $vars , $new_vars );
+
+    }
+
+    public function register_fonts( $fonts ){
+
+        $fonts[] = get_theme_mod( 'sed_body_font_family' , '' );
+
+        $fonts[] = get_theme_mod( 'sed_headings_font_family' , '' );
+
+        $fonts = array_filter( $fonts );
+
+        return $fonts;
 
     }
 

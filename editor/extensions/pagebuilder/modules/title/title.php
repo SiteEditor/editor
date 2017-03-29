@@ -35,7 +35,10 @@ class PBTitleShortcode extends PBShortcodeClass{
             'toolbar2'          => '',*/
             'default_width'     => "200px" ,
             'default_height'    => "40px" ,
-            'fonts'             => ''
+            /**
+             * Save Tinymce Fonts In Js ( site-iframe.js line 320 sendData Method )
+             */
+            'sed_fonts'         => ''
         );
 
         return $atts;
@@ -49,14 +52,14 @@ class PBTitleShortcode extends PBShortcodeClass{
 
     function add_fonts( $fonts ){
 
-        $new_fonts = ( !empty( $this->atts['fonts'] ) ) ? explode( "," , $this->atts['fonts']  ) : array();
+        $new_fonts = ( !empty( $this->atts['sed_fonts'] ) ) ? explode( "," , $this->atts['sed_fonts']  ) : array();
 
         $fonts = array_merge( $fonts , $new_fonts );
 
         return $fonts;
 
-    }     
-
+    }
+    
     function styles(){
         return array(
             array('title-style', SED_PB_MODULES_URL.'title/css/style.css' ,'1.0.0' ) ,

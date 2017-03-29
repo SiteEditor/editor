@@ -21,8 +21,8 @@ $css->add_settings_property(array(
 $style_properties = array();
 $elements = array();
 $retina_css = "";
-global $sed_apps;
-$css_data = $sed_apps->framework->dynamic_css_data;
+
+$css_data = $this->dynamic_css_data;
 
 if(!empty($css_data)){
     foreach( $css_data AS $selector => $styles ){
