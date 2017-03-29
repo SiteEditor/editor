@@ -56,7 +56,7 @@ class SiteEditorTwentyseventeenDynamicCss {
     }
 
 
-    public function register_default_dynamic_css( $css , $vars ){
+    public function register_default_dynamic_css( $css , $vars ){ 
 
         $vars_reference = $this->dynamic_vars_reference();
 
