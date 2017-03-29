@@ -30,7 +30,7 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
      * @var string
      * @access public
      */
-    public $design_options;
+    public $css_options;
 
     /**
      * Register Module Settings & Panels
@@ -38,11 +38,11 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
     public function register_settings(){
 
 
-        if( $this->design_options->is_added_dynamic_css_options === false ){
+        if( $this->css_options->is_added_dynamic_css_options === false ){
 
-            $this->design_options->register_dynamic_css_options();
+            $this->css_options->register_dynamic_css_options();
 
-            $this->design_options->is_added_dynamic_css_options = true;
+            $this->css_options->is_added_dynamic_css_options = true;
 
         }
 
@@ -171,7 +171,7 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
 
         );
 
-        $fields = array_merge( $fields , $this->design_options->dynamic_css_options );
+        $fields = array_merge( $fields , $this->css_options->dynamic_css_options );
 
         return array(
             'fields'    => $fields ,

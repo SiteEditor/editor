@@ -400,7 +400,7 @@ class SiteEditorTwentyseventeenThemeSync{
             )
         );
 
-        $header_module->design_options = $this->header_design_options;
+        $header_module->css_options = $this->header_design_options;
 
         $manager->add_static_module( $header_module );
 
@@ -412,7 +412,7 @@ class SiteEditorTwentyseventeenThemeSync{
             )
         );
 
-        $footer_module->design_options = $this->footer_design_options;
+        $footer_module->css_options = $this->footer_design_options;
 
         $manager->add_static_module( $footer_module );
 
