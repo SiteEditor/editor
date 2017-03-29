@@ -653,7 +653,7 @@ $css .= <<<CSS
             .prev.page-numbers:hover,
             .next.page-numbers:focus,
             .next.page-numbers:hover {
-                background-color: {$first_main_color};
+                background-color: {$first_main_active_color};
                 color: {$main_bg_text_color}; 
             }
 
@@ -697,6 +697,7 @@ $css .= <<<CSS
             .entry-footer {
                 border-bottom-color: {$border_color};
                 border-top-color: {$border_color};
+                border-collapse: initial;
             }
 
             .entry-footer .cat-links a,
@@ -733,7 +734,7 @@ $css .= <<<CSS
 
             .nav-subtitle {
                 background: transparent;
-                color: {$first_main_color};
+                color: {$first_main_active_color};
             }
 
             .nav-title {

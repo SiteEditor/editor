@@ -208,7 +208,7 @@ class SiteEditorTwentyseventeenDynamicCss {
             'navigation_submenu_bg'                      => 'page_background_color',
             'navigation_submenu_border'                  => 'border_color',
             'navigation_submenu_color'                   => 'main_text_color',
-            'navigation_submenu_item_bg'                 => 'first_main_color',
+            'navigation_submenu_item_bg'                 => 'first_main_active_color',
             'navigation_submenu_item_color'              => 'main_bg_text_color',
 
 
@@ -217,10 +217,10 @@ class SiteEditorTwentyseventeenDynamicCss {
             --------------------------------------------------------------*/
 
 
-            'header_bg'                                  => 'first_main_color',
+            'header_bg'                                  => 'first_main_active_color',
             'header_title_color'                         => 'main_bg_text_color',
-            'header_description_color'                   => 'first_main_active_color',
-            'overlay_height'                             => 'rgba(0,0,0,0)',
+            'header_description_color'                   => 'main_bg_text_color',
+            'overlay_height'                             => 'rgba(0,0,0,0)', 
             'overlay_background'                         => 'rgba(0,0,0,0)',
 
 
