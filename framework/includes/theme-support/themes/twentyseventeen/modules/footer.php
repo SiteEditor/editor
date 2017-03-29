@@ -25,134 +25,12 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
     public $selector = '#colophon';
 
     /**
-     * Header & Main Navigation Dynamic Css Options
+     * Instance Of TwentyseventeenHeaderDesignOptions class
      *
      * @var string
      * @access public
      */
-    public $dynamic_css_options = array();
-
-    /**
-     * is added dynamic css options ?
-     *
-     * @var string
-     * @access public
-     */
-    public $is_added_dynamic_css_options = false;
-
-    /**
-     * Initialize Class after Initialize parent class
-     */
-    public function init(){
-
-        add_filter( "sed_twentyseventeen_css_vars" , array( $this , "get_dynamic_css_vars" ) , 10 , 1 );
-
-    }
-
-    /**
-     * Footer Dynamic Css Variables
-     * Add New variable to dynamic css
-     *
-     * @param $vars
-     * @return array
-     */
-    public function get_dynamic_css_vars( $vars ){
-
-        if( $this->is_added_dynamic_css_options === false ){
-
-            $this->register_dynamic_css_options();
-
-            $this->is_added_dynamic_css_options = true;
-
-        }
-
-        $new_vars = array();
-
-        foreach ( $this->dynamic_css_options As $field_id => $option ){
-
-            if( ! isset( $option['setting_id'] ) )
-                continue;
-
-            $new_vars[$field_id] = array(
-                'settingId'             =>  $option['setting_id'] ,
-                'default'               =>  ! isset( $option['default'] ) ? '' : $option['default']
-            );
-
-        }
-
-        return array_merge( $vars , $new_vars );
-
-    }
-
-
-    public function register_dynamic_css_options(){
-
-        $this->dynamic_css_options = array(
-
-            /**
-             * --------------------------------------------------------------
-             * 13.6 Footer
-             * --------------------------------------------------------------
-             */
-
-            'footer_border' => array(
-                'setting_id'        => 'sed_footer_border',
-                'type'              => 'color',
-                'label'             => __('Border Color', 'site-editor'),
-                "description"       => __("Footer Border Color", "site-editor"),
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'panel'             => 'footer_custom_styling' ,
-            ),
-
-            'site_info_color' => array(
-                'setting_id'        => 'sed_site_info_color',
-                'type'              => 'color',
-                'label'             => __('Site Info Color', 'site-editor'),
-                "description"       => __("Site Info Color", "site-editor"),
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'panel'             => 'footer_custom_styling' ,
-            ),
-
-            'social_bg' => array(
-                'setting_id'        => 'sed_social_bg',
-                'type'              => 'color',
-                'label'             => __('Social Background Color', 'site-editor'),
-                "description"       => __("Social Background Color", "site-editor"),
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'panel'             => 'footer_custom_styling' ,
-            ),
-
-            'social_color' => array(
-                'setting_id'        => 'sed_social_color',
-                'type'              => 'color',
-                'label'             => __('Social Text Color', 'site-editor'),
-                "description"       => __("Social Text Color", "site-editor"),
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'panel'             => 'footer_custom_styling' ,
-            ),
-
-            'social_active_bg' => array(
-                'setting_id'        => 'sed_social_active_bg',
-                'type'              => 'color',
-                'label'             => __('Social Active Background Color', 'site-editor'),
-                "description"       => __("Social Active Background Color", "site-editor"),
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'panel'             => 'footer_custom_styling' ,
-            ),
-
-        );
-
-    }
+    public $design_options;
 
     /**
      * Register Module Settings & Panels
@@ -160,11 +38,11 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
     public function register_settings(){
 
 
-        if( $this->is_added_dynamic_css_options === false ){
+        if( $this->design_options->is_added_dynamic_css_options === false ){
 
-            $this->register_dynamic_css_options();
+            $this->design_options->register_dynamic_css_options();
 
-            $this->is_added_dynamic_css_options = true;
+            $this->design_options->is_added_dynamic_css_options = true;
 
         }
 
@@ -293,7 +171,7 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
 
         );
 
-        $fields = array_merge( $fields , $this->dynamic_css_options );
+        $fields = array_merge( $fields , $this->design_options->dynamic_css_options );
 
         return array(
             'fields'    => $fields ,

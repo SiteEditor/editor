@@ -40,6 +40,22 @@ class SiteEditorTwentyseventeenThemeSync{
     public $is_added_dynamic_css_options = false;
 
     /**
+     * instance of TwentyseventeenHeaderDesignOptions
+     *
+     * @var string
+     * @access public
+     */
+    public $header_design_options;
+
+    /**
+     * instance of TwentyseventeenFooterDesignOptions
+     *
+     * @var string
+     * @access public
+     */
+    public $footer_design_options;
+
+    /**
      * SiteEditorTwentyseventeenThemeSync constructor.
      * @param $theme_support object instance of SiteEditorThemeSupport Class
      */
@@ -82,6 +98,14 @@ class SiteEditorTwentyseventeenThemeSync{
         require_once dirname( __FILE__ ) . '/twentyseventeen-typography.class.php';
         
         new SiteEditorTwentyseventeenTypography();
+
+        require_once dirname( __FILE__ ) . '/modules/header-design-options.php';
+
+        $this->header_design_options = new TwentyseventeenHeaderDesignOptions();
+
+        require_once dirname( __FILE__ ) . '/modules/footer-design-options.php';
+
+        $this->footer_design_options = new TwentyseventeenFooterDesignOptions();
 
     }
 
@@ -370,19 +394,27 @@ class SiteEditorTwentyseventeenThemeSync{
 
         require_once dirname( __FILE__ ) . "/modules/header.php";
 
-        $manager->add_static_module( new TwentyseventeenHeaderStaticModule( $manager , 'twenty_seventeen_header' , array(
+        $header_module = new TwentyseventeenHeaderStaticModule( $manager , 'twenty_seventeen_header' , array(
                 'title'                 => __("Twentyseventeen Header" , "site-editor") ,
                 'description'           => __("Twentyseventeen Header Module" , "site-editor")
             )
-        ));
+        );
+
+        $header_module->design_options = $this->header_design_options;
+
+        $manager->add_static_module( $header_module );
 
         require_once dirname( __FILE__ ) . "/modules/footer.php";
 
-        $manager->add_static_module( new TwentyseventeenFooterStaticModule( $manager , 'twenty_seventeen_footer' , array(
+        $footer_module = new TwentyseventeenFooterStaticModule( $manager , 'twenty_seventeen_footer' , array(
                 'title'         => __("Twentyseventeen Footer" , "site-editor") ,
                 'description'   => __("Twentyseventeen Footer Module" , "site-editor") ,
             )
-        ));
+        );
+
+        $footer_module->design_options = $this->footer_design_options;
+
+        $manager->add_static_module( $footer_module );
 
     }
 
