@@ -310,8 +310,8 @@ $css .= <<<CSS
             .widget ul li a,
             .site-footer .widget-area ul li a,
             .site-footer .widget-area ul li a {
-                -webkit-box-shadow: inset 0 -1px 0 {$background_color};
-                box-shadow: inset 0 -1px 0 {$background_color}; 
+                -webkit-box-shadow: inset 0 -1px 0 {$page_background_color};
+                box-shadow: inset 0 -1px 0 {$page_background_color}; 
             }
 
             .entry-content a:focus,
@@ -370,8 +370,8 @@ $css .= <<<CSS
             /* Fixes linked images */
             .entry-content a img,
             .widget a img {
-                -webkit-box-shadow: 0 0 0 8px {$background_color};
-                box-shadow: 0 0 0 8px {$background_color};
+                -webkit-box-shadow: 0 0 0 8px {$page_background_color};
+                box-shadow: 0 0 0 8px {$page_background_color};
             }
 
             .post-navigation a:focus .icon,
@@ -495,7 +495,7 @@ $css .= <<<CSS
 
 
             body {
-                background: $background_color;
+                background: {$background_color};
                 /* Fallback for when there is no custom background color defined. */
             }
 
@@ -594,7 +594,7 @@ $css .= <<<CSS
             --------------------------------------------------------------*/
 
             .site-content-contain {
-                background-color: {$background_color};
+                background-color: {$page_background_color};
             }
 
             /*--------------------------------------------------------------
