@@ -127,36 +127,27 @@ Class SiteeditorTypography{
             global $sed_dynamic_css_string;
 
             ob_start();
-            ?>
-            <style type="text/css">
-            <!--
-            <?php
 
-            	foreach( $cfonts as $font => $font_data ) {
-            	    if( !in_array( $font , $this->base_loaded_fonts )  ){
+            foreach( $cfonts as $font => $font_data ) {
+                if( !in_array( $font , $this->base_loaded_fonts )  ){
 
-                    ?>
+                ?>
 
-                    @font-face {
-                    	font-family: <?php echo $font_data['font_family']; ?>;
-                    	src: url('<?php echo $font_data['font_eot']; ?>');
-                    	src:
-                    		url('<?php echo $font_data['font_eot']; ?>?#iefix') format('eot'),
-                    		url('<?php echo $font_data['font_woff']; ?>') format('woff'),
-                    		url('<?php echo $font_data['font_ttf']; ?>') format('truetype'),
-                    		url('<?php echo $font_data['font_svg']; ?>#<?php echo $font_data['font_family']; ?>') format('svg');
-                    	font-weight: 400;
-                    	font-style: normal;
-                    }
+                @font-face {
+                    font-family: <?php echo $font_data['font_family']; ?>;
+                    src: url('<?php echo $font_data['font_eot']; ?>');
+                    src:
+                        url('<?php echo $font_data['font_eot']; ?>?#iefix') format('eot'),
+                        url('<?php echo $font_data['font_woff']; ?>') format('woff'),
+                        url('<?php echo $font_data['font_ttf']; ?>') format('truetype'),
+                        url('<?php echo $font_data['font_svg']; ?>#<?php echo $font_data['font_family']; ?>') format('svg');
+                    font-weight: 400;
+                    font-style: normal;
+                }
 
-                    <?php
-                    }
-            	}
-
-            ?>
-            -->
-            </style>
-            <?php
+                <?php
+                }
+            }
 
             $sed_dynamic_css_string .= ob_get_clean();
 
@@ -183,7 +174,7 @@ Class SiteeditorTypography{
                     else*/
                         $gfont_settings = "";
 
-                    if( !$footer ) { 
+                    if( !$footer ) {
 
                         echo "<link href='http" . ((is_ssl()) ? 's' : '') . "://fonts.googleapis.com/css?family={$font}" . $gfont_settings . "' rel='stylesheet' type='text/css' />";
                     }else{

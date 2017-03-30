@@ -9,6 +9,14 @@ Version: 1.0.0
 */
 class PBParagraphShortcode extends PBShortcodeClass{
 
+    /**
+     * All used fonts in paragraph
+     *
+     * @var string
+     * @access public
+     */
+    public $used_fonts = array();
+
 	/**
 	 * Register module with siteeditor.
 	 */
@@ -21,6 +29,9 @@ class PBParagraphShortcode extends PBShortcodeClass{
                 "module"      =>  "paragraph"                                  //*require
             ) // Args
 		);
+
+        add_filter( "sed_page_mce_used_fonts" , array( $this , 'add_fonts' ) , 10 , 1 );
+
 	}
 
     function get_atts(){
@@ -43,20 +54,19 @@ class PBParagraphShortcode extends PBShortcodeClass{
 
     function add_shortcode( $atts , $content = null ){
 
-        add_filter( "sed_page_mce_used_fonts" , array( $this , 'add_fonts' ) , 10 , 1 );
+        $new_fonts = ( !empty( $this->atts['sed_fonts'] ) ) ? explode( "," , $this->atts['sed_fonts']  ) : array();
+
+        $this->used_fonts = array_merge( $this->used_fonts , $new_fonts );
 
     }
 
-    function add_fonts( $fonts ){
+    public function add_fonts( $fonts ){
 
-        $new_fonts = ( !empty( $this->atts['sed_fonts'] ) ) ? explode( "," , $this->atts['sed_fonts']  ) : array();
-
-        $fonts = array_merge( $fonts , $new_fonts );
+        $fonts = array_merge( $fonts , $this->used_fonts );
 
         return $fonts;
 
     }
-
 
     function styles(){
         return array(

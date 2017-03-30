@@ -146,7 +146,7 @@
 
                             var _parentModelId = _cModel['parent_id'];
 
-                            $('[sed_model_id="' + _parentModelId + '"]').find('[style]').each(function(){
+                            $('[sed_model_id="' + _cModelId + '"]').find('[style]').each(function(){
                                 var ffamily = $(this)[0].style.fontFamily;
                                 if( !_.isUndefined( ffamily ) && !_.isEmpty( ffamily )  ){
                                     ffamily = ffamily.replace(/\"/g, "");
@@ -154,6 +154,8 @@
                                     fonts.push( ffamily );
                                 }
                             });
+
+                            console.log( "--------fonts------------" , fonts );
 
                             api.typography.loadFont( e.originalEvent.value , _cModelId , fonts );
                         }
