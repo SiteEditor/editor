@@ -220,7 +220,6 @@ class SiteEditorTwentyseventeenDynamicCss {
             'header_bg'                                  => 'first_main_active_color',
             'header_title_color'                         => 'main_bg_text_color',
             'header_description_color'                   => 'main_bg_text_color',
-            'overlay_height'                             => 'rgba(0,0,0,0)', 
             'overlay_background'                         => 'rgba(0,0,0,0)',
 
 

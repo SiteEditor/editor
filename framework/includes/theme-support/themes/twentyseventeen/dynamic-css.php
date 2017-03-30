@@ -30,9 +30,10 @@ $h5_font_size
 $h6_font_size
 $body_font_size
 $body_line_height
-$headings_line_height
+$headings_line_height  
 
 */
+
 
 $css .= <<<CSS
         
@@ -65,7 +66,7 @@ $css .= <<<CSS
             textarea {
                 color: {$body_color};
                 font-family: {$body_font_family}, "Helvetica Neue", helvetica, arial, sans-serif;
-                font-size: {$body_font_size};
+                font-size: {$responsive_body_font_size};
                 line-height: {$body_line_height};
             }
 
@@ -82,28 +83,111 @@ $css .= <<<CSS
 
 
             h1 {
-                font-size: {$h1_font_size};
+                font-size: {$responsive_h1_font_size};
+            }
+
+            .prev.page-numbers,
+            .next.page-numbers {
+                font-size: {$responsive_h1_font_size}; 
             }
 
             h2 {
-                font-size: {$h2_font_size};
+                font-size: {$responsive_h2_font_size};
+            } 
+
+            .widget_rss li .rsswidget ,
+            .page .panel-content .recent-posts .entry-title,
+            .format-quote blockquote ,
+            .comments-title ,
+            .no-svg .dropdown-toggle .svg-fallback.icon-angle-down {
+                font-size: {$responsive_h2_font_size};
             }
 
             h3 {
-                font-size: {$h3_font_size};
+                font-size: {$responsive_h3_font_size};
+            }
+
+            blockquote {
+                font-size: {$responsive_h3_font_size};
             }
 
             h4 {
-                font-size: {$h4_font_size};
+                font-size: {$responsive_h4_font_size};
+            }
+
+            .dropdown-toggle ,
+            .social-navigation ,
+            .comment-author ,
+            .widget-grofile h4 ,
+            .no-svg .next.page-numbers .screen-reader-text,
+            .no-svg .prev.page-numbers .screen-reader-text,
+            .no-svg .social-navigation li a .screen-reader-text,
+            .no-svg .search-submit .screen-reader-text {
+                font-size: {$responsive_h4_font_size};
             }
 
             h5 {
-                font-size: {$h5_font_size};
+                font-size: {$responsive_h5_font_size};
             }
 
             h6 {
-                font-size: {$h6_font_size};
+                font-size: {$responsive_h6_font_size};
             }
+
+            .entry-content blockquote.alignleft,
+            .entry-content blockquote.alignrigh ,
+            .taxonomy-description ,
+            h2.widget-title ,
+            .wp-caption,
+            .gallery-caption,
+            pre ,
+            code,
+            kbd,
+            tt, 
+            var,
+            .site-footer,
+            .nav-title {
+                font-size: {$responsive_body_font_size};
+            }
+
+            button,
+            input[type="button"],
+            input[type="submit"],
+            .menu-toggle,
+            .twentyseventeen-panel .entry-header .edit-link,
+            .page .panel-content .entry-title,
+            .page-title,
+            body.page:not(.twentyseventeen-front-page) .entry-title ,
+            .pagination,
+            .comments-pagination,
+            .page-links ,
+            .entry-footer .edit-link a.post-edit-link ,
+            .page .entry-header .edit-link,
+            .site-info,
+            .comment-body,
+            .no-comments,
+            .comment-awaiting-moderation {
+                font-size: {$responsive_md_font_size};
+            }
+
+            .widget .tagcloud a,
+            .widget.widget_tag_cloud a,
+            .wp_widget_tag_cloud a {
+                font-size: {$responsive_md_font_size} !important;
+            }
+
+            .twentyseventeen-panel .recent-posts .entry-header .edit-link,
+            .entry-meta,
+            .entry-footer .cat-links,
+            .entry-footer .tags-links,
+            .nav-subtitle,
+            .search .page .entry-header .edit-link,
+            .comment-metadata,
+            .widget_rss .rss-date,
+            .widget_rss li cite , 
+            .site-content .wp-playlist-current-item .wp-playlist-item-artist {
+                font-size: {$responsive_sm_font_size}; 
+            } 
 
             blockquote {
                 color: {$secondary_text_color};
@@ -123,6 +207,131 @@ $css .= <<<CSS
                 background: {$secondary_background_color};
             }
 
+            /*--------------------------------------------------------------
+            19.0 Media Queries
+            --------------------------------------------------------------*/
+
+            @media screen and (min-width: 30em) {
+
+                /* Typography */
+
+                body,
+                button,
+                input,
+                select,
+                textarea {
+                    font-size: {$body_font_size};
+                }
+
+                h1 {
+                    font-size: {$h1_font_size};
+                }
+
+                h2 {
+                    font-size: {$h2_font_size};
+                } 
+
+                .single-post .entry-title,
+                .page .entry-title,
+                .widget_rss li .rsswidget ,
+                .page .panel-content .recent-posts .entry-title,
+                .format-quote blockquote ,
+                .comments-title ,
+                .no-svg .dropdown-toggle .svg-fallback.icon-angle-down {
+                    font-size: {$h2_font_size};
+                }
+
+                h3 {
+                    font-size: {$h3_font_size};
+                }
+
+                blockquote {
+                    font-size: {$h3_font_size};
+                }
+
+                h4 {
+                    font-size: {$h4_font_size};
+                }
+
+                .dropdown-toggle ,
+                .social-navigation ,
+                .comment-author ,
+                .widget-grofile h4 ,
+                .no-svg .next.page-numbers .screen-reader-text,
+                .no-svg .prev.page-numbers .screen-reader-text,
+                .no-svg .social-navigation li a .screen-reader-text,
+                .no-svg .search-submit .screen-reader-text {
+                    font-size: {$h4_font_size};
+                }
+
+                h5 {
+                    font-size: {$h5_font_size};
+                }
+
+                h6 {
+                    font-size: {$h6_font_size};
+                }
+
+                .entry-content blockquote.alignleft,
+                .entry-content blockquote.alignrigh ,
+                .taxonomy-description ,
+                h2.widget-title ,
+                .wp-caption,
+                .gallery-caption,
+                pre ,
+                code,
+                kbd,
+                tt, 
+                var,
+                .site-footer,
+                .nav-title {
+                    font-size: {$body_font_size};
+                }
+
+                .page-numbers.current,
+                #secondary,
+                button, 
+                input[type="button"],
+                input[type="submit"],
+                .menu-toggle,
+                .twentyseventeen-panel .entry-header .edit-link,
+                .page .panel-content .entry-title,
+                .page-title,
+                body.page:not(.twentyseventeen-front-page) .entry-title ,
+                .pagination,
+                .comments-pagination,
+                .page-links ,
+                .entry-footer .edit-link a.post-edit-link ,
+                .page .entry-header .edit-link,
+                .site-info,
+                .comment-body,
+                .no-comments,
+                .comment-awaiting-moderation {
+                    font-size: {$md_font_size};
+                }
+
+                .widget .tagcloud a,
+                .widget.widget_tag_cloud a,
+                .wp_widget_tag_cloud a { 
+                    font-size: {$md_font_size} !important;
+                }
+
+                h2.widget-title,
+                .twentyseventeen-panel .recent-posts .entry-header .edit-link,
+                .entry-meta,
+                .entry-footer .cat-links,
+                .entry-footer .tags-links,
+                .nav-subtitle,
+                .search .page .entry-header .edit-link,
+                .comment-metadata,
+                .widget_rss .rss-date,
+                .widget_rss li cite , 
+                .site-content .wp-playlist-current-item .wp-playlist-item-artist {
+                    font-size: {$sm_font_size}; 
+                } 
+
+            }          
+
 
             /*--------------------------------------------------------------
             6.0 Forms
@@ -130,7 +339,7 @@ $css .= <<<CSS
 
             label {
                 color: {$main_text_color};
-            }   input[type="text"] : color, 
+            }
 
             input[type="text"],
             input[type="email"],
@@ -226,23 +435,23 @@ $css .= <<<CSS
             /* Placeholder text color -- selectors need to be separate to work. */
             ::-webkit-input-placeholder {
                 color: {$placeholder_color};
-                font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
+                font-family: {$body_font_family} , "Helvetica Neue", helvetica, arial, sans-serif;
             }
 
             :-moz-placeholder {
                 color: {$placeholder_color};
-                font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
+                font-family: {$body_font_family} , "Helvetica Neue", helvetica, arial, sans-serif;
             }
 
             ::-moz-placeholder {
                 color: {$placeholder_color};
-                font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
+                font-family: {$body_font_family} , "Helvetica Neue", helvetica, arial, sans-serif;
                 /* Since FF19 lowers the opacity of the placeholder by default */
             }
 
             :-ms-input-placeholder {
                 color: {$placeholder_color};
-                font-family: "Libre Franklin", "Helvetica Neue", helvetica, arial, sans-serif;
+                font-family: {$body_font_family} , "Helvetica Neue", helvetica, arial, sans-serif;
             }
 
             /*--------------------------------------------------------------
@@ -390,6 +599,7 @@ $css .= <<<CSS
                 background: {$navigation_bar_bg};
                 border-bottom-color: {$navigation_bar_border};
                 border-top-color: {$navigation_bar_border};
+                font-size: {$menu_items_font_size}; 
             }
 
             .navigation-top a {
@@ -511,14 +721,6 @@ $css .= <<<CSS
                 /* Fallback for when there is no custom background color defined. */
             }
 
-            #page {
-
-            }
-
-            .wrap {
-
-            }
-
 
             /*--------------------------------------------------------------
             13.1 Header
@@ -533,7 +735,7 @@ $css .= <<<CSS
             .site-title,
             .site-title a {
                 color: {$header_title_color}; 
-                font-size: {$site_title_font_size};
+                font-size: {$responsive_site_title_font_size};
             }
 
             body.has-header-image .site-title,
@@ -545,7 +747,7 @@ $css .= <<<CSS
 
             .site-description {
                 color: {$header_description_color};
-                font-size: {$site_desc_font_size};
+                font-size: {$responsive_site_desc_font_size};
             }
 
             body.has-header-image .site-description,
@@ -573,6 +775,21 @@ $css .= <<<CSS
             }
             */
 
+
+            @media screen and (min-width: 48em) {
+
+                /* Site Branding */
+
+                .site-title,
+                .site-title a {
+                    font-size: {$site_title_font_size};
+                }
+
+                .site-description {
+                    font-size: {$site_desc_font_size};
+                } 
+
+            }
 
             /*--------------------------------------------------------------
             13.2 Front Page
@@ -685,7 +902,7 @@ $css .= <<<CSS
             }
 
             .page-links .page-number {
-                color: {$secondary_text_color};
+                color: {$first_main_active_color};
             }
 
             .page-links a .page-number {
@@ -966,6 +1183,19 @@ $css .= <<<CSS
                 background: transparent;
                 color: {$main_text_color};
             }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
