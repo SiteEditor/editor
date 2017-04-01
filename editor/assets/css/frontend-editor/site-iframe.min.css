@@ -1385,3 +1385,23 @@ body .megamenu-drag-area-mode  ul.cm_default, body .megamenu-drag-area-mode  ul.
 .sed-static-module{
     position: relative;
 }
+
+.sed-row-pb.sed-parent-highlight-row{
+    background-color: rgba( 240 , 240 , 240 , 0.7 );
+}
+
+.sed-row-pb.sed-current-highlight-row{
+    background-color: #ffffff;
+}
+
+/*.sed-row-pb.sed-parent-highlight-row > .sed-handle-sort-row .drag-content-sty{
+    top : -30px;
+}
+
+.sed-row-pb.sed-parent-highlight-row > .sed-pb-handle-row-top{
+    top : -15px;
+}
+
+.sed-row-pb.sed-parent-highlight-row > .sed-pb-handle-row-bottom {
+    bottom : -15px;
+}*/

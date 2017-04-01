@@ -1348,7 +1348,7 @@
 
                     $('.sed-bp-element , .sed-static-module').find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
 
-                    console.log( "-------element.offset().top------------" , element.offset().top );
+                    $('.sed-bp-element , .sed-static-module').removeClass("sed-current-highlight-row").removeClass("sed-parent-highlight-row");
 
                     if( element.offset().top <= 11 )
                         element.addClass("sed-pb-row-top-site");
@@ -1365,6 +1365,10 @@
 
                     dnp.show();
 
+                    $(this).addClass("sed-current-highlight-row");
+
+                    $(this).parents(".sed-row-pb:first").addClass("sed-parent-highlight-row");
+
                     $(this).parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
 
                 },function(e){
@@ -1378,7 +1382,25 @@
 
                     $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
 
-                    $(this).parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
+                    $(this).removeClass("sed-current-highlight-row");
+
+                    //$(this).parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
+
+                    if( $(this).parents(".sed-row-pb:first").length == 1 ) {
+
+                        $(this).parents(".sed-row-pb:first").removeClass("sed-parent-highlight-row");
+
+                        $(this).parents(".sed-row-pb:first").addClass("sed-current-highlight-row");
+
+                        if( $(this).parents(".sed-row-pb:first").parents(".sed-row-pb:first").length == 1 ) {
+
+                            $(this).parents(".sed-row-pb:first").parents(".sed-row-pb:first").addClass("sed-parent-highlight-row");
+
+                            $(this).parents(".sed-row-pb:first").parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
+
+                        }
+
+                    }
 
                 });
 
