@@ -98,8 +98,8 @@ $css .= <<<CSS
             .widget_rss li .rsswidget ,
             .page .panel-content .recent-posts .entry-title,
             .format-quote blockquote ,
-            .comments-title ,
-            .no-svg .dropdown-toggle .svg-fallback.icon-angle-down {
+            .comments-title /*,
+            .no-svg .dropdown-toggle .svg-fallback.icon-angle-down*/ {
                 font-size: {$responsive_h2_font_size};
             }
 
@@ -115,7 +115,7 @@ $css .= <<<CSS
                 font-size: {$responsive_h4_font_size};
             }
 
-            .dropdown-toggle ,
+            /*.dropdown-toggle ,*/
             .social-navigation ,
             .comment-author ,
             .widget-grofile h4 ,
@@ -236,14 +236,14 @@ $css .= <<<CSS
                 .widget_rss li .rsswidget ,
                 .page .panel-content .recent-posts .entry-title,
                 .format-quote blockquote ,
-                .comments-title ,
-                .no-svg .dropdown-toggle .svg-fallback.icon-angle-down {
+                .comments-title /*,
+                .no-svg .dropdown-toggle .svg-fallback.icon-angle-down*/ {
                     font-size: {$h2_font_size};
                 }
 
                 h3 {
                     font-size: {$h3_font_size};
-                }
+                } 
 
                 blockquote {
                     font-size: {$h3_font_size};
@@ -253,7 +253,7 @@ $css .= <<<CSS
                     font-size: {$h4_font_size};
                 }
 
-                .dropdown-toggle ,
+                /*.dropdown-toggle ,*/
                 .social-navigation ,
                 .comment-author ,
                 .widget-grofile h4 ,
@@ -1021,6 +1021,10 @@ $css .= <<<CSS
             15.0 Widgets
             --------------------------------------------------------------*/
 
+            /*.widget:last-child {
+                padding-bottom: 0em;
+            }*/
+
             h2.widget-title {
                 color: {$main_text_color};
             }
@@ -1185,14 +1189,101 @@ $css .= <<<CSS
             }
 
 
+            /*--------------------------------------------------------------
+            21.0 Layout
+            --------------------------------------------------------------*/
+
+
+            /*$home_content_padding_top :  6em;
+            $rps_home_content_padding_top :  3.5em;
+
+            $home_content_padding_bottom :  4.5em;
+            $rps_home_content_padding_bottom :  2em;            
+
+            $site_content_padding_top :  5.5em;
+            $rps_site_content_padding_top :  2.5em;
+
+            $page_content_padding_bottom :  3.25em;
+            $rps_page_content_padding_bottom :  1.5em;    
+
+            $page404_content_padding_bottom :  9em;
+            $rps_page404_content_padding_bottom :  4em;    
+
+            $site_footer_margin_top :  3.5em;*/
 
 
 
+            .page:not(.home) #content {
+                padding-bottom: {$rps_page_content_padding_bottom};
+            }         
+
+            /* Front Page */
+
+            .panel-content .wrap {
+                padding-bottom: {$rps_home_content_padding_bottom};
+                padding-top: {$rps_home_content_padding_top};
+            }
+
+            /* Posts */
+
+            .site-content {
+                padding: {$rps_site_content_padding_top} 0 0;
+            }
+
+            /* 404 page */
+
+            .error404 .page-content {
+                padding-bottom: {$rps_page404_content_padding_bottom};
+            } 
+
+            /* Footer */
+
+            .site-footer {
+                margin-top: 0em;
+            }
 
 
+            @media screen and (min-width: 48em) {
 
 
+                /* Layout 
+                .navigation-top .wrap ,
+                .wrap {
+                    max-width: 1100px;
+                    padding-left: 0;
+                    padding-right: 0;
+                }*/
 
+                .page:not(.home) #content {
+                    padding-bottom: {$page_content_padding_bottom};
+                }    
+
+                /* Front Page */
+
+                .panel-content .wrap {
+                    padding-bottom: {$home_content_padding_bottom};
+                    padding-top: {$home_content_padding_top};
+                }
+
+                /* Posts */
+
+                .site-content {
+                    padding: {$site_content_padding_top} 0 0;
+                }
+
+                /* 404 page */
+
+                .error404 .page-content {
+                    padding-bottom: {$page404_content_padding_bottom};
+                } 
+
+                /* Footer */
+
+                .site-footer {
+                    margin-top: {$site_footer_margin_top};
+                }
+
+            }   
 
 
 

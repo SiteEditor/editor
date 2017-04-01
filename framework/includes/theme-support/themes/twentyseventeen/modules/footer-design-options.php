@@ -86,6 +86,17 @@ class TwentyseventeenFooterDesignOptions {
              * --------------------------------------------------------------
              */
 
+            'site_footer_margin_top' => array(
+                'setting_id'        => 'sed_site_footer_margin_top',
+                'type'              => 'dimension',
+                'label'             => __('Footer Margin Top', 'site-editor'),
+                "description"       => __("Footer Margin Top", "site-editor"),
+                'default'           => '3em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'footer_custom_styling' ,
+            ),
+
             'footer_border' => array(
                 'setting_id'        => 'sed_footer_border',
                 'type'              => 'color',

@@ -652,6 +652,112 @@ class SiteEditorTwentyseventeenThemeSync{
                 'panel'             => 'media_custom_styling' ,
             ),
 
+
+        /*--------------------------------------------------------------
+        21.0 Layout
+        --------------------------------------------------------------*/            
+
+            'home_content_padding_top' => array(
+                'setting_id'        => 'sed_home_content_padding_top',
+                'type'              => 'dimension',
+                'label'             => __('Home Content Padding Top', 'site-editor'),
+                'default'           => '6em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),      
+
+            'rps_home_content_padding_top' => array(
+                'setting_id'        => 'sed_rps_home_content_padding_top',
+                'type'              => 'dimension',
+                'label'             => __('Home Content Responsive Padding Top', 'site-editor'),
+                'default'           => '3.5em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+            'home_content_padding_bottom' => array(
+                'setting_id'        => 'sed_home_content_padding_bottom',
+                'type'              => 'dimension',
+                'label'             => __('Home Content Padding Bottom', 'site-editor'),
+                'default'           => '4.5em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+            'rps_home_content_padding_bottom' => array(
+                'setting_id'        => 'sed_rps_home_content_padding_bottom',
+                'type'              => 'dimension', 
+                'label'             => __('Home Content Responsive Padding Bottom', 'site-editor'),
+                'default'           => '2em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+            'site_content_padding_top' => array(
+                'setting_id'        => 'sed_site_content_padding_top',
+                'type'              => 'dimension',
+                'label'             => __('Site Content Padding Top', 'site-editor'),
+                'default'           => '5.5em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+            'rps_site_content_padding_top' => array(
+                'setting_id'        => 'sed_rps_site_content_padding_top',
+                'type'              => 'dimension',
+                'label'             => __('Site Content Responsive Padding Top', 'site-editor'),
+                'default'           => '2.5em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+            'page_content_padding_bottom' => array(
+                'setting_id'        => 'sed_page_content_padding_bottom',
+                'type'              => 'dimension',
+                'label'             => __('Page Content Padding Bottom', 'site-editor'),
+                'default'           => '3.25em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+            'rps_page_content_padding_bottom' => array(
+                'setting_id'        => 'sed_rps_page_content_padding_bottom',
+                'type'              => 'dimension',
+                'label'             => __('Page Content Responsive Padding Bottom', 'site-editor'),
+                'default'           => '1.5em', 
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+            'page404_content_padding_bottom' => array(
+                'setting_id'        => 'sed_page404_content_padding_bottom',
+                'type'              => 'dimension',
+                'label'             => __('404 Page Content Padding Bottom', 'site-editor'),
+                'default'           => '9em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+            'rps_page404_content_padding_bottom' => array( 
+                'setting_id'        => 'sed_rps_page404_content_padding_bottom',
+                'type'              => 'dimension',
+                'label'             => __('404 Page Content Responsive Padding Bottom', 'site-editor'),
+                'default'           => '4em',  
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+
         );
 
     }
