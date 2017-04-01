@@ -134,6 +134,14 @@ class PBAPITestModule extends PBShortcodeClass{
         
     }
 
+    public function get_media_atts(){
+
+        return array(
+            'image_field_attr' , 'video_field_attr' , 'audio_field_attr' , 'file_field_attr' , 'attachment_id' , 'multi_image_field_attr'
+        );
+
+    }
+
     function shortcode_settings(){
 
         $this->add_panel( 'text_box_panel_parent' ,  array(

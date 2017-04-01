@@ -124,7 +124,7 @@ if ( ! class_exists( 'SiteEditorSelectControl' ) ) {
 		            foreach( $this->choices as $this->optgroup => $group_options )
 		            {
 		        ?>    	
-		                <optgroup label="<?php echo esc_attr( $this->groups[$this->optgroup] );?>">
+		                <optgroup class="<?php echo esc_attr( $this->optgroup );?>" label="<?php echo esc_attr( $this->groups[$this->optgroup] );?>">
 
 		                <?php
 		                foreach( $group_options as $key_val => $choice ){

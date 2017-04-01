@@ -816,8 +816,12 @@
 
   	api.MSElement.synchronizer.select = {
   		updateField: function( to ) {
-  		    if( this.element.attr("multiple") == "multiple" && to ){
-                to = to.split( "," );
+            
+  		    if( this.element.attr("multiple") == "multiple" ){
+
+                to = _.isString(to) ? to.split( "," ) : to;
+
+                to = $.isArray( to ) ? to : [];
   		    }
 
             this.element.val( to );

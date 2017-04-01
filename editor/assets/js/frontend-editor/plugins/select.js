@@ -37,20 +37,20 @@
             });
 
             $('body').on('click', function (e) {
-                $(".sed-pb-module-container").each(function () {
-                    //the 'is' for buttons that trigger popups
-                    //the 'has' for icons within a button that triggers a popup
-                    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 ) {
-                        api.preview.send( 'dialogSettingsClose' );
-                        api.isOpenDialogSettings = false;
-                        api.currentSedElementId = "";
-                    }
-                });
+
+                if( ! $(this).hasClass("sed-pb-module-container") && $(this).parents(".sed-pb-module-container").length == 0 ) {
+
+                    api.preview.send('dialogSettingsClose');
+                    api.isOpenDialogSettings = false;
+                    api.currentSedElementId = "";
+
+                }
+
             });
 
         },
 
-        select : function( element , forceOpen , reset ){ 
+        select : function( element , forceOpen , reset , ofrceRefresh ){
 
             if(api.appPreview.mode == "on")
                 return false;
@@ -58,6 +58,8 @@
             var self = this;
 
             forceOpen = _.isUndefined( forceOpen ) ? false : forceOpen;
+
+            ofrceRefresh = _.isUndefined( ofrceRefresh ) ? false : ofrceRefresh;
 
             if( element.hasClass( 'sed-static-module' ) ){
 
@@ -80,12 +82,11 @@
                 element = element.find(">.sed-pb-module-container .sed-pb-module-container:first");
             }
 
-
             var elementId = element.attr("sed_model_id");
 
 			var module_container = element.parents(".sed-pb-module-container:first");
 
-            if(!elementId || ( api.currentSedElementId == elementId && api.isOpenDialogSettings === true ) ){
+            if(!elementId || ( api.currentSedElementId == elementId && api.isOpenDialogSettings === true && ofrceRefresh === false ) ){
             	//api.log("Error : id and module class Should exist in one container on line 28  : siteeditor/site-iframe/plugin/select.min.js" , elementId);
                 return ;
             }
@@ -116,7 +117,7 @@
                 shortcodeName : shortcode.tag
             });
 
-            reset =  !_.isUndefined( reset ) ? reset : true;
+            reset =  !_.isUndefined( reset ) ? reset : true; 
 
             api.preview.send( 'currentModuleSelected' , {
                 selector  :  shortcode.tag ,    //"#sed-dialog-settings-" +
@@ -125,7 +126,7 @@
                 data : dialogData ,
                 extra :  {
                     attrs : api.contentBuilder.getAttrs( elementId , true )
-                },
+                }
             });
 
             /*

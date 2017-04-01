@@ -1273,9 +1273,16 @@
 
       		_.each( api.sedGroupControls[dataEl.shortcode_name] , function( data ) {
 
-                var id = dataEl.shortcode_name + "_" + data.attr_name;
-                api.previewer.trigger( "currentElementId" ,  dataEl.elementId );
-                self.updateSettings( id, data , dataEl.shortcode_name , {attrs : dataEl.attrs});
+                if( !_.isUndefined( data.attr_name ) ){
+
+                    var id = dataEl.shortcode_name + "_" + data.attr_name; 
+
+                    api.previewer.trigger( "currentElementId" ,  dataEl.elementId );
+
+                    self.updateSettings( id, data , dataEl.shortcode_name , {attrs : dataEl.attrs});
+
+                }
+
       		});
 
             api.Events.trigger(  "after_shortcode_update_setting" , dataEl.shortcode_name );

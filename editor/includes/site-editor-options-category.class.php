@@ -279,18 +279,12 @@ class SiteEditorOptionsCategory {
 
             $setting_id = $args['setting_id'];
 
-            unset( $args['setting_id'] );
-
-            if( isset( $args['id'] ) )
-                unset( $args['id'] );
-
-            if( isset( $args['type'] ) )
-                unset( $args['type'] );
+            $args['id'] = $id;
 
             if( !isset( $args['option_type'] ) )
                 $args['option_type'] = $this->option_type;
 
-            $this->settings[$setting_id] = $args; 
+            $this->settings[$setting_id] = $args;
 
             if( isset( $args['partial_refresh'] ) ){
 
@@ -367,6 +361,43 @@ class SiteEditorOptionsCategory {
 
             $registered = $this->settings[ $setting_id ];
 
+            $field = sed_options()->get_field( $registered['id'] );
+
+            if( !isset( $field ) ){
+
+                $field = sed_options()->add_field( $registered['id'] , $registered );
+
+            }
+
+            $base_args = get_object_vars( $field );
+
+            $primary_args = $base_args['primary_args'];
+
+            unset( $base_args['primary_args'] );
+
+            //$setting_id = $args['setting_id'];
+
+            unset( $base_args['setting_id'] );
+
+            if( isset( $primary_args['setting_id'] ) ){
+                unset( $primary_args['setting_id'] );
+            }
+
+            unset( $base_args['id'] );
+
+            if( isset( $primary_args['id'] ) ){
+                unset( $primary_args['id'] );
+            }
+
+            $setting_args = array_merge($primary_args, $base_args);
+
+            unset($setting_args['type']);
+
+            if( isset( $setting_args['category'] ) && $setting_args['category'] == "style-editor" ){
+                $setting_args['type'] = "style-editor";
+                $setting_args['option_type'] = "base";
+            }
+
             if ( isset( $registered['theme_supports'] ) && ! current_theme_supports( $registered['theme_supports'] )  && ! sed_current_theme_supports( $registered['theme_supports'] ) ) {
                 // We don't really need this because theme_supports will already filter it out of being exported.
                 return $args;
@@ -378,8 +409,8 @@ class SiteEditorOptionsCategory {
 
             $args = array_merge(
                 $args,
-                $registered
-            );
+                $setting_args
+            );  //var_dump( $setting_id ); var_dump( $setting_args );
 
         }
 

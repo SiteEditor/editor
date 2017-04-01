@@ -263,6 +263,50 @@
 
             return transport;
 
+        },
+
+        getPatternAttachmentIds : function( shortcodesModels ){
+
+            var attachmentIds = [];
+
+            _.each( shortcodesModels , function( shortcode ){
+
+                if( !_.isUndefined( api.shortcodes[shortcode.tag] ) && !_.isUndefined( shortcode.attrs ) && !_.isUndefined( api.shortcodes[shortcode.tag].mediaAtts ) && !_.isEmpty( api.shortcodes[shortcode.tag].mediaAtts ) ) {
+
+                    _.each( api.shortcodes[shortcode.tag].mediaAtts , function( attr ){
+
+                        if( !_.isUndefined( shortcode.attrs[attr] ) ){
+
+                            var value = _.isString( shortcode.attrs[attr] ) && shortcode.attrs[attr].indexOf( "," ) > -1 ? shortcode.attrs[attr].split( "," ) : parseInt( $.trim( shortcode.attrs[attr] ) );
+
+                            if( $.isArray( value ) ){
+
+                                _.each( value , function( attachId ){
+
+                                    attachId = parseInt( $.trim( attachId ) );
+
+                                    attachmentIds.push( attachId );
+
+                                });
+
+                            }else if( value > 0 ){
+
+                                attachmentIds.push( value );
+
+                            }
+
+                        }
+
+                    });
+
+                }
+
+            });
+
+            attachmentIds = _.uniq( attachmentIds );
+
+            return attachmentIds;
+
         }
 
 

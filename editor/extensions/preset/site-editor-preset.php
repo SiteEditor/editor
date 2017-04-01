@@ -109,6 +109,7 @@ class SiteEditorPreset{
         $title                  = isset( $_REQUEST['title'] ) ? $_REQUEST['title'] : '';
         $content_shortcodes     = isset( $_REQUEST['content'] ) ? $_REQUEST['content'] : '';
         $menu_order             = isset( $_REQUEST['menu_order'] ) ? $_REQUEST['menu_order'] : 0;
+        $attachment_ids         = isset( $_REQUEST['attachment_ids'] ) ? $_REQUEST['attachment_ids'] : array();
 
         if( empty( $shortcode ) || empty( $title ) || empty( $content_shortcodes ) ){
 
@@ -138,6 +139,8 @@ class SiteEditorPreset{
 
         }
 
+        self::update_preset_attachment_ids( $post_id , $attachment_ids );
+
         if ( ! $preset = self::prepare_preset_for_js( $post_id ) ) {
 
             $message = __("occurrence a problem in prepare preset data for js.","site-editor");
@@ -151,6 +154,26 @@ class SiteEditorPreset{
         }
 
         wp_send_json_success( $preset );
+
+    }
+
+    /**
+     * Add OR Update Attachment Ids For a preset
+     * using "api.sedShortcode.getPatternAttachmentIds" find all Attachment Ids for a preset shortcodes pattern( content )
+     *
+     * @param $post_id
+     * @param $new_value
+     */
+    public static function update_preset_attachment_ids( $post_id , $new_value ){
+
+        $option_name = 'sed_preset_attachment_ids';
+
+        if( $post_id && $post_id > 0 && !is_wp_error( $post_id ) ){
+
+            if( !update_post_meta( $post_id , $option_name , $new_value ) )
+                add_post_meta( $post_id , $option_name , $new_value, true );
+
+        }
 
     }
 
@@ -392,6 +415,9 @@ class SiteEditorPreset{
             if ( isset( $model_changes['content'] ) )
                 $post['post_content'] = self::create_preset_content( $model_changes['content'] );
 
+            if ( isset( $changes['attachment_ids'] ) )
+                self::update_preset_attachment_ids( $id , $changes['attachment_ids'] );
+
             wp_update_post( $post );
 
         }
@@ -459,6 +485,9 @@ class SiteEditorPreset{
 
         if ( isset( $changes['content'] ) )
             $post['post_content'] = self::create_preset_content( $changes['content'] );
+
+        if ( isset( $changes['attachment_ids'] ) )
+            self::update_preset_attachment_ids( $id , $changes['attachment_ids'] );
 
         wp_update_post( $post );
 
@@ -585,21 +614,24 @@ class SiteEditorPreset{
             $content = array();
         }
 
+        $attachment_ids = ! is_array( get_post_meta( $preset->ID , 'sed_preset_attachment_ids' , true ) ) ? array() : get_post_meta( $preset->ID , 'sed_preset_attachment_ids' , true );
+
         $response = array(
-            'id'            => $preset->ID,
-            'title'         => $preset->post_title,
-            'author'        => $preset->post_author,
-            'content'       => $content ,
-            'name'          => $preset->post_name,
-            'status'        => $preset->post_status,
-            'date'          => strtotime( $preset->post_date_gmt ) * 1000,
-            'modified'      => strtotime( $preset->post_modified_gmt ) * 1000,
-            'menuOrder'     => $preset->menu_order,
-            'isDefault'     => self::is_default_preset( $preset->ID , $shortcode_name ),
-            'shortcode'     => $shortcode_name,
-            'nonces'        => array(
-                'update'        => false,
-                'delete'        => false,
+            'id'                => $preset->ID,
+            'title'             => $preset->post_title,
+            'author'            => $preset->post_author,
+            'content'           => $content ,
+            'name'              => $preset->post_name,
+            'status'            => $preset->post_status,
+            'date'              => strtotime( $preset->post_date_gmt ) * 1000,
+            'modified'          => strtotime( $preset->post_modified_gmt ) * 1000,
+            'menuOrder'         => $preset->menu_order,
+            'isDefault'         => self::is_default_preset( $preset->ID , $shortcode_name ),
+            'shortcode'         => $shortcode_name ,
+            'attachment_ids'    => $attachment_ids ,
+            'nonces'            => array(
+                'update'            => false,
+                'delete'            => false,
                 //'edit'          => false
             ),
         );

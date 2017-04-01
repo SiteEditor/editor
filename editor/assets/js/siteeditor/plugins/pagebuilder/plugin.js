@@ -29,7 +29,7 @@
       api.childShortcode = {};
       api.moduleDragSync = false;
 
-      api.shortcodes          = window._sedRegisteredShortcodesSettings ;
+      api.shortcodes          = window._sedRegisteredShortcodesSettings ;    console.log( "-------------api.shortcodes--------------" , api.shortcodes );
       api.shortcodesScripts   = window._sedRegisteredShortcodesScripts;
       api.shortcodesStyles    = window._sedRegisteredShortcodesStyles;
       api.modulesSettings     = window._sedAppEditorPageBuilderModules;

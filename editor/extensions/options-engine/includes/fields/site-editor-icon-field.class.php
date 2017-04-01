@@ -24,7 +24,7 @@ if ( ! class_exists( 'SiteEditorIconField' ) ) {
 		 *
 		 * @access protected
 		 */
-		protected function set_sanitize_callback() {
+		/*protected function set_sanitize_callback() {
 
 			// If a custom sanitize_callback has been defined,
 			// then we don't need to proceed any further.
@@ -35,7 +35,8 @@ if ( ! class_exists( 'SiteEditorIconField' ) ) {
 
 			$this->sanitize_callback = 'sanitize_html_class';
 
-		}
+		}*/
+
 	}
 
 }

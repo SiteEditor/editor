@@ -801,6 +801,7 @@ Class PageBuilderApplication {
             "styles"            => array(),       //$handle, $src, $deps, $ver, $media
             "php_class"         => ""   ,
             "actions"           => array() ,
+            "mediaAtts"         => array() ,
             'object'            => $shortcode_object
         ), $options);
 

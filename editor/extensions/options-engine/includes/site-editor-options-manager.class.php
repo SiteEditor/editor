@@ -150,6 +150,10 @@ final class SiteEditorOptionsManager{
         
         add_action( 'sed_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );
 
+        add_action( 'sed_save_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );
+
+        add_action( 'sed_preview_after_init_manager', array( $this, 'register_components' ) , 10 , 1 );
+
         add_action( 'sed_app_register', array( $this, 'register_fields' ) , 1000 );
 
         add_action( 'site_editor_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options

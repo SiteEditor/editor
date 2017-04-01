@@ -40,7 +40,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
      * @access public
      * @var array
      */
-    public $option_type = "option";
+    public $option_type = "theme_mod";
 
     /**
      * default option type
@@ -111,6 +111,16 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'all' ,
             array(),
             array()
+        );
+
+    }
+
+    public function get_partial_refresh(){
+
+         return array(
+            'selector'            => '#sed-api-sample-option-test',
+            'render_callback'     => array( 'SiteEditorThemeFramework' , 'develper_sample_option_test' ),
+            'container_inclusive' => true,
         );
 
     }
@@ -191,10 +201,12 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 'atts'              => array() ,
                 //'active_callback'   => ''
                 'dependency' => array(
-                    'controls'  =>  array(
-                        "control"   => "sed_checkbox_settings_panel" ,
-                        "value"     => true,
-                        "is_panel"  => true
+                    'queries'  =>  array(
+                        array(
+                            "key"           => "sed_checkbox_settings_panel" ,
+                            "value"         => true,
+                            "compare"       => "==="
+                        )
                     )
                 ),
             ) ,
@@ -253,10 +265,12 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 'atts'              => array() ,
                 //'active_callback'   => ''
                 'dependency' => array(
-                    'controls'  =>  array(
-                        "control"   => "sed_radio_settings_panel" ,
-                        "value"     => true,
-                        "is_panel"  => true
+                    'queries'  =>  array(
+                        array(
+                            "key"           => "sed_radio_settings_panel" ,
+                            "value"         => true,
+                            "compare"       => "==="
+                        )
                     )
                 ),
             ) ,
@@ -349,7 +363,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'transport'         => 'postMessage' ,
             //panel or group
             'panel'             => 'checkbox_dependency_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'sed_checkbox_settings_panel' ] = array(
@@ -362,7 +377,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'transport'         => 'postMessage' ,
             //panel or group
             'panel'             => 'checkbox_dependency_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'sed_radio_settings_panel' ] = array(
@@ -375,7 +391,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'transport'         => 'postMessage' ,
             //panel or group
             'panel'             => 'checkbox_dependency_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         /*
@@ -387,7 +404,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'label'             => __('Text Field', 'translation_domain'),
             'type'              => 'text',
             'priority'          => 10,
-            'default'           => '',
+            'default'           => 'Test Value',
             "placeholder"       => __("Enter Your Text", "site-editor"),
             'option_group'      => 'sed_sample_options',
             'transport'         => 'postMessage' ,
@@ -398,7 +415,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'tel_section' ] = array(
@@ -418,7 +436,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'password_section' ] = array(
@@ -438,7 +457,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'search_section' ] = array(
@@ -458,7 +478,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'url_section' ] = array(
@@ -478,7 +499,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'email_section' ] = array(
@@ -498,7 +520,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'dimension_section' ] = array(
@@ -518,7 +541,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'date_section' ] = array(
@@ -542,7 +566,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'textarea_section' ] = array(
@@ -561,7 +586,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'text_box_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
 
@@ -574,9 +600,9 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'label'             => __('Checkbox', 'translation_domain'),
             'type'              => 'checkbox',
             'priority'          => 10,
-            'default'           => false,
+            'default'           => true,
             'option_group'      => 'sed_sample_options',
-            'option_type'       => 'option',
+            'option_type'       => 'theme_mod',
             'transport'         => 'postMessage' ,
             //'input_attrs'
             "atts"              => array(
@@ -584,7 +610,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             => 'check_box_settings_panel'
+            'panel'             => 'check_box_settings_panel',
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'multi-check_section' ] = array(
@@ -592,9 +619,9 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'label'             => __('Multi Checkbox', 'translation_domain'),
             'type'              => 'multi-check',
             'priority'          => 10,
-            'default'           => get_option( 'sed_multi-check_setting' , 'options3_key' ),
+            'default'           => array( 'options4_key' , 'options3_key' ),
             'option_group'      => 'sed_sample_options',
-            'option_type'       => 'option',
+            'option_type'       => 'theme_mod',
             'transport'         => 'postMessage' ,
             'choices'           => array(
                 "options1_key"      =>    "options1_value" ,
@@ -612,6 +639,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'check_box_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
 
         );
 
@@ -623,7 +651,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'default'           => true,
             'option_group'      => 'sed_sample_options',
             'transport'         => 'postMessage' ,
-            'option_type'       => 'option',
+            'option_type'       => 'theme_mod',
             //'input_attrs'
             "atts"              => array(
                 "class"         =>    "custom-textarea-class1 custom-textarea-class2" ,
@@ -631,6 +659,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'check_box_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         /*$fields[ 'sortable_section' ] = array(
@@ -641,7 +670,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'default'           => 'options3_key',
             'option_group'      => 'sed_sample_options',
             'transport'         => 'postMessage' ,
-            'option_type'       => 'option',
+            'option_type'       => 'theme_mod',
             'choices'           => array(
                 "options1_key"      =>    "One" ,
                 "options2_key"      =>    "Two" ,
@@ -666,7 +695,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'default'           => true,
             'option_group'      => 'sed_sample_options',
             'transport'         => 'postMessage' ,
-            'option_type'       => 'option',
+            'option_type'       => 'theme_mod',
             'choices'           => array(
                 "on"       =>    "ON" ,
                 "off"      =>    "OFF" ,
@@ -678,6 +707,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'check_box_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
 
@@ -703,6 +733,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'code_editor_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
 
@@ -724,6 +755,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'code_editor_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'css_code_section' ] = array(
@@ -744,6 +776,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'code_editor_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'wp_editor_section' ] = array(
@@ -761,6 +794,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'code_editor_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         /*
@@ -782,6 +816,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'color_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'multi-color_section' ] = array(
@@ -808,6 +843,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'color_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
 
@@ -836,7 +872,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'radio_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'radio_buttonset_section' ] = array(
@@ -853,16 +890,17 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "options3_key"      =>    "Three" ,
             ) ,
             'dependency' => array(
-                'controls'  =>  array(
-                    "relation"     =>  "and" ,
+                'queries'  =>  array(
+                    "relation"     =>  "AND" ,
                     array(
-                        "control"  => "radio_section" ,
-                        "value"    => "options2_key" , //value with @string , values with @array
-                        "type"     => "exclude"
+                        "key"           => "radio_section" ,
+                        "value"         => "options2_key" , //value with @string , values with @array
+                        "compare"       => "!=="
                     ),
                     array(
-                        "control"  => "radio_image_section" ,
-                        "value"    => "options3_key" , //value with @string , values with @array
+                        "key"       => "radio_image_section" ,
+                        "value"         => "options3_key" , //value with @string , values with @array
+                        "compare"       =>  "==="
                     ),
                 )
             ),
@@ -873,7 +911,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'radio_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'radio_image_section' ] = array(
@@ -896,7 +935,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'radio_settings_panel',
-            'has_border_box'    => false
+            'has_border_box'    => false,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
 
@@ -924,7 +964,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             =>  'select_settings_panel'
+            'panel'             =>  'select_settings_panel',
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
 
@@ -933,7 +974,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             'label'             => __('Multi Select', 'site-editor'),
             'type'              => 'multi-select',
             'priority'          => 10,
-            'default'           => 'options3_key',
+            'default'           => array( 'options3_key' , 'options2_key' ),
             'option_group'      => 'sed_sample_options',
             'transport'         => 'postMessage' ,
             'choices'           => array(
@@ -948,7 +989,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             =>  'select_settings_panel'
+            'panel'             =>  'select_settings_panel',
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
 
@@ -970,7 +1012,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             =>  'number_settings_panel'
+            'panel'             =>  'number_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'slider_section' ] = array(
@@ -991,7 +1034,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             =>  'number_settings_panel'
+            'panel'             =>  'number_settings_panel',
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         /*
@@ -1013,6 +1057,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             => 'icon_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'multi-icon_section' ] = array(
@@ -1030,6 +1075,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'icon_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         /*
@@ -1051,6 +1097,7 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
             ),
             //panel or group
             'panel'             =>  'media_settings_panel' ,
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'multi-image_section' ] = array(
@@ -1067,7 +1114,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             =>  'media_settings_panel'
+            'panel'             =>  'media_settings_panel',
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'file_section' ] = array(
@@ -1084,7 +1132,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             =>  'media_settings_panel'
+            'panel'             =>  'media_settings_panel',
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'audio_section' ] = array(
@@ -1101,7 +1150,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             =>  'media_settings_panel'
+            'panel'             =>  'media_settings_panel',
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
         $fields[ 'video_section' ] = array(
@@ -1118,7 +1168,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                 "data-custom"   =>    "test" ,
             ),
             //panel or group
-            'panel'             =>  'media_settings_panel'
+            'panel'             =>  'media_settings_panel',
+            'partial_refresh'   => $this->get_partial_refresh()
         );
 
 

@@ -131,6 +131,10 @@
                                 editor.settings.toolbar2 = self.getMceToolBar( $("#" + this.id).data("toolbar2") , 2 );
                         }
 
+                        /*setTimeout( function(){
+                            $(".mce-container-body").click();
+                        } , 500);*/
+
                     });
 
 

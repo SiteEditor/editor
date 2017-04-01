@@ -464,7 +464,7 @@ class SedAppSettings{
 	 * @return false|null False if cap check fails or value isn't set.
 	 */
 	public final function save() {
-		$value = $this->post_value();
+		$value = $this->post_value(); 
 
 		if ( ! $this->check_capabilities() || ! isset( $value ) )
 			return false;

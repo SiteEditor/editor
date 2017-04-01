@@ -65,6 +65,14 @@ class PBImageShortcode extends PBShortcodeClass{
           return $atts;
       }
 
+      public function get_media_atts(){
+
+          return array(
+              'attachment_id'
+          );
+
+      }
+
       function add_shortcode( $atts , $content = null ){
           extract($atts);
 

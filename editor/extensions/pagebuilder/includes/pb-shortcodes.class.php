@@ -571,7 +571,50 @@ class PBShortcodeClass{
 
         $shortcode['actions'] = $this->actions;
 
+        $media_atts = $this->get_media_atts();
+
+        if( !empty( $media_atts ) && is_array( $media_atts ) ){
+
+            foreach ( $media_atts AS $key => $attribute ){
+
+                if( !isset( $shortcode['attrs'][$attribute] ) ){
+
+                    unset( $media_atts[$key] );
+
+                }
+
+            }
+
+        }else{
+
+            $media_atts = array();
+
+        }
+
+        $shortcode['mediaAtts'] = $media_atts;
+
         $pagebuilder->register_shortcode( $shortcode , $this );
+
+    }
+
+    /**
+     * Get All shortcode Attributes that has Attachment ID Value
+     * Using For Preset & Template & ... Shortcodes patterns.
+     * Save Media Attachment ID for load a preset or a template
+     * Using For export Attachments with a preset or template
+     *
+     * Add New Property To api.shortcodes :
+     * mediaAtts Sample for sed_image shortcode :
+     * api.shortcodes['sed_image'].mediaAtts
+     *
+     * below method return all Attachment Ids for a pattern of shotcodes
+     * api.sedShortcode.getPatternAttachmentIds
+     *
+     * @return array
+     */
+    public function get_media_atts(){
+
+        return array();
 
     }
 

@@ -17,10 +17,10 @@
 
         _ready: function() {
 
-            var control = this ,
-                slider = this.container.find('.sed-bp-form-slider-container');
+			var control = this ,
+				slider = this.container.find('.sed-bp-form-slider-container');
 
-            this.sliderInputValue = this.container.find(".slider-demo-value");
+			this.sliderInputValue = this.container.find(".slider-demo-value");
 
             this.sliderOptions =  {
                 min     : 0 ,
@@ -53,11 +53,11 @@
             }, 50);
 
             this.sliderOptions.slide = function( event, ui ) {
-                control.sliderInputValue.val( parseFloat( ui.value ) );
+		        control.sliderInputValue.val( parseFloat( ui.value ) );
                 _lazyRefresh( ui.value );
-            };
+		    };
 
-            slider.slider( this.sliderOptions );
+			slider.slider( this.sliderOptions );
 
         },
 
@@ -119,7 +119,7 @@
 
             if( !_.isString( value ) ){
                 return false;
-            }
+            } 
 
             // If we're using calc() just return true.
             if ( 0 <= value.indexOf( 'calc(' ) && 0 <= value.indexOf( ')' ) ) {
@@ -275,8 +275,8 @@
 
         _ready: function() {
 
-            var control = this ,
-                sortableUl = this.container.find('.sed-bp-form-sortable');
+			var control = this ,
+				sortableUl = this.container.find('.sed-bp-form-sortable');
 
             this.sortableUl = sortableUl;
 
@@ -323,9 +323,9 @@
                     control._saveOrdersModels( currId );
                 }
 
-            });
+		    });  
 
-            sortableUl.disableSelection();
+			sortableUl.disableSelection();
 
             this.container.find('.sed-bp-checkbox-input').on("change", function(){
 
@@ -376,7 +376,7 @@
                 models = this.models[this.id];
             }
 
-            _.each( models , function( val ){
+            _.each( models , function( val ){ 
 
                 var $item = control.container.find('li.sed-bp-form-sortable-item[data-value="' + val + '"]');
 
@@ -398,8 +398,8 @@
 
         _ready: function() {
 
-            var control = this ,
-                element = this.container.find('.sed-pb-codemirror-editor');
+			var control = this ,
+				element = this.container.find('.sed-pb-codemirror-editor');
 
             this.code = element;
 
@@ -442,7 +442,7 @@
                 this.codeOptions.mode = { name: 'htmlmixed' };
             }
 
-            this.editor = CodeMirror.fromTextArea( element[0], this.codeOptions);
+			this.editor = CodeMirror.fromTextArea( element[0], this.codeOptions);
 
             setTimeout(function() {
                 control.editor.refresh();
@@ -552,7 +552,7 @@
 
             });
 
-            var __refresh = function( value ) {
+            var __refresh = function( value ) { 
 
                 control.refresh( value );
 
@@ -812,7 +812,7 @@
             this._updateControl();
 
         } ,
-
+        
         _updateControl : function () {
 
             var newVal = $.extend( true , {} , this.collection );
@@ -923,10 +923,10 @@
                     control.updateAttr( control.uploadSelector.parents(".sed-custom-font-fields:first").data("fontId") , "font_" + _fontType , attachment.attributes.url );
 
                     /*selector.find('.upload-button').unbind().addClass('remove-file').removeClass('upload-button').val(optionsframework_l10n.remove);
-                     /*selector.find('.of-background-properties').slideDown();
-                     /*selector.find('.remove-image, .remove-file').on('click', function() {
-                     optionsframework_remove_file( $(this).parents('.section') );
-                     });*/
+                    /*selector.find('.of-background-properties').slideDown();
+                    /*selector.find('.remove-image, .remove-file').on('click', function() {
+                        optionsframework_remove_file( $(this).parents('.section') );
+                    });*/
                 });
 
             }
@@ -940,38 +940,38 @@
 
     /*api.PageOptionsScopeControl = api.SiteEditorControls.extend({
 
-     _ready: function() {
+        _ready: function() {
 
-     var control = this,
-     element = control.container.find('.sed-module-element-control');
+            var control = this,
+                element = control.container.find('.sed-module-element-control');
 
-     this.element = element;
+            this.element = element;
 
-     this.element.on("change" , function(){
+            this.element.on("change" , function(){
 
-     var val = $(this).val() ,
-     pageId = $(this).data('pageId') ,
-     newVal = $.extend( true , {} , control.setting.get() );
+                var val = $(this).val() ,
+                    pageId = $(this).data('pageId') ,
+                    newVal = $.extend( true , {} , control.setting.get() );
 
-     newVal[pageId] = val;
+                newVal[pageId] = val;
 
-     control.refresh( newVal );
+                control.refresh( newVal );
 
-     });
+            });
 
-     } ,
+        } ,
 
-     _update: function( val ){ //alert( val );
+        _update: function( val ){ //alert( val );
 
-     val = ( !val ) ? '' : val;
+            val = ( !val ) ? '' : val;
 
-     this.element.filter( function() {
-     return this.value === val;
-     }).prop( 'checked', true );
+            this.element.filter( function() {
+                return this.value === val;
+            }).prop( 'checked', true );
 
-     }
+        }
 
-     });*/
+    });*/
 
 
     api.controlConstructor = $.extend( api.controlConstructor, {
@@ -1084,20 +1084,20 @@
                                 _customFontsString += '<option value="' + _key + '" ' + _selected + '>' + _title + '</option>';
 
                             });
-
+                            
                             $("#sed-app-control-" + data.control_id).find(".sed-control-font-family .custom_fonts").html( _customFontsString );
 
                             /*var control = api.control.instance( data.control_id );
 
-                             if ( !_.isUndefined( control ) ) {
+                            if ( !_.isUndefined( control ) ) {
 
-                             //control.currentValue = control.setting();
+                                //control.currentValue = control.setting();
 
-                             var currVal = control.currentValue;
+                                var currVal = control.currentValue;
 
-                             control.update( currVal );
+                                control.update( currVal );
 
-                             }*/
+                            }*/
 
                         }
 

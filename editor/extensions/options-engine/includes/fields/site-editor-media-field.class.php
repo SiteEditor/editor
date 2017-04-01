@@ -40,12 +40,13 @@ if ( ! class_exists( 'SiteEditorMediaField' ) ) {
 		 * The sanitize method that will be used as a falback
 		 *
 		 * @param string $value The control's value.
+		 * @return integer
 		 */
 		public static function sanitize( $value ) {
 
             $value = absint( $value );
 
-			if ( is_attachment( $value ) ) {
+			if ( get_post( $value ) ) {
 				return $value;
 			} else {
                 return 0;

@@ -48,7 +48,7 @@ if ( ! class_exists( 'SiteEditorMultiIconsField' ) ) {
 			}
 
 			$value = ( ! is_array( $value ) ) ? explode( ',', $value ) : $value;
-			return ( ! empty( $value ) ) ? array_map( 'sanitize_html_class', $value ) : array();
+			return ( ! empty( $value ) ) ? $value : array();
 
 		}
 

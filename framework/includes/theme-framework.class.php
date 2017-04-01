@@ -54,6 +54,10 @@ Class SiteEditorThemeFramework{
         require_once dirname( __FILE__ ) . '/theme-support/theme-support.class.php';
         $this->support = new SiteEditorThemeSupport();
 
+        //if( site_editor_app_on() ){
+            //add_action( "wp_footer" , array( __CLASS__ , "develper_sample_option_test" ) );
+        //}
+
 	}
 
     public function set_options_config( $args ){
@@ -448,6 +452,225 @@ Class SiteEditorThemeFramework{
         );*/
 
         return $design_options;
+
+    }
+
+
+    public static function develper_sample_option_test(){
+
+        ?>
+        <div id="sed-api-sample-option-test">
+            <div>
+
+                <div>
+                    <br>
+                    <div><h4 class="attr">Text Box Settings</h4></div>
+                    <div><span class="attr">Text Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_text_setting' , 'Test Value' ); ?></span></div>
+                    <div><span class="attr">Tel Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_tel_setting' , '' ); ?></span></div>
+                    <div><span class="attr">Password Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_password_setting' , '' ); ?></span></div>
+                    <div><span class="attr">Search Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_search_setting' , '' ); ?></span></div>
+                    <div><span class="attr">Url Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_url_setting' , '' ); ?></span></div>
+                    <div><span class="attr">Email Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_email_setting' , '' ); ?></span></div>
+                    <div><span class="attr">Date Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_date_setting' , '' ); ?></span></div>
+                    <div><span class="attr">Dimension Control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_dimension_setting' , '10px' ); ?></span></div>
+                    <div><span class="attr">Textarea Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_textarea_setting' , '' ); ?></span></div>
+
+                    <br>
+                    <div><h4 class="attr">Code Editor Settings</h4></div>
+                    <div><span class="attr">HTML Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'sed_pb_builder_module_content', get_theme_mod( 'sed_code_setting' , '' ) ); ?></span></div>
+                    <div><span class="attr">JavaScript Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'sed_pb_builder_module_content', get_theme_mod( 'sed_js_code_setting' , '' ) ); ?></span></div>
+                    <div><span class="attr">Custom Css Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'sed_pb_builder_module_content', get_theme_mod( 'sed_css_code_setting' , '' ) ); ?></span></div>
+                    <div><span class="attr">WordPress Text Editor:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'sed_pb_builder_module_content', get_theme_mod( 'sed_wp_editor_setting' , '' ) ); ?></span></div>
+
+                    <br>
+                    <div><h4 class="attr">Select Settings</h4></div>
+                    <div><span class="attr">Single Select Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_select_setting' , 'options3_key' ); ?></span></div>
+                    <div><span class="attr">Multiple Select Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php var_dump( get_theme_mod( 'sed_multiselect_setting' , array( 'options4_key' , 'options3_key' ) ) ); ?></span></div>
+
+                    <br>
+                    <div><h4 class="attr">Check Box Settings</h4></div>
+                    <div><span class="attr">Checkbox Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_checkbox_setting' , '1' ); ?></span></div>
+                    <div><span class="attr">Multi Checkbox Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php var_dump( get_theme_mod( 'sed_multi-check_setting' , array( 'options4_key' , 'options3_key' ) ) ); ?></span></div>
+                    <div><span class="attr">Toggle Control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_toggle_setting' , '1' ); ?></span></div>
+
+                    <div><span class="attr">Switch Control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_switch_setting' , '1' ); ?></span></div>
+
+                    <br>
+                    <div><h4 class="attr">Radio Settings</h4></div>
+                    <div><span class="attr">Radio Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_radio_setting' , 'options3_key' ); ?></span></div>
+                    <div><span class="attr">Radio Buttonset control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_radio-buttonset_setting' , 'options3_key' ); ?></span></div>
+                    <div><span class="attr">Radio Image control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_radio-image_setting' , 'options3_key' ); ?></span></div>
+
+                    <br>
+                    <div><h4 class="attr">Color Settings</h4></div>
+                    <div><span class="attr">Color Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_color_setting' , '' ); ?></span></div>
+                    <div><span class="attr">Multicolor control:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="value">
+                            <?php var_dump( get_theme_mod( 'sed_multi-color_setting' , array(
+                                'link'    => '#0088cc',
+                                'hover'   => '#00aaff',
+                                'active'  => '#00ffff',
+                            ) ) ); ?>
+                        </span>
+                    </div>
+
+                    <br>
+                    <div><h4 class="attr">Media Settings</h4></div>
+
+                    <?php
+
+                    $img_attachment = get_theme_mod( 'sed_image_setting' , 0 );
+
+                    if( site_editor_app_on() && get_post( $img_attachment ) ) {
+                        array_push(SED()->editor->attachments_loaded, $img_attachment);
+                    }
+
+                    ?>
+
+                    <div>
+                        <div>
+                            <div><span class="attr">Single Image Field:</span></div>
+                            <br>
+                            <?php
+                            $img = get_sed_attachment_image_html( $img_attachment , 'thumbnail' );
+                            echo $img['thumbnail'];
+                            ?>
+                        </div>
+                        <br>
+                    </div>
+
+                    <div>
+                        <div><span class="attr">Select Images Field:</span></div>
+                        <br>
+                        <div class="images-group">
+                            <?php
+
+                            $gallery = get_theme_mod( 'sed_multi-image_setting' , array() );
+
+                            foreach( $gallery AS $attachment_id ){
+
+                                if( site_editor_app_on() && get_post( $attachment_id ) ) {
+                                    array_push(SED()->editor->attachments_loaded, $attachment_id);
+                                }
+
+                                ?>
+                                    <span>
+                                        <?php
+                                        $img = get_sed_attachment_image_html( $attachment_id , 'thumbnail' );
+                                        echo $img['thumbnail'];
+                                        ?>
+                                    </span>
+                                <?php
+
+                            }
+                            ?>
+                        </div>
+                        <br>
+                    </div>
+
+                    <div>
+
+                        <?php
+                        $video_field_attr = get_theme_mod( 'sed_video_setting' , 0 );
+
+                        ?>
+                        <span class="attr">Video Field (MP4):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="value">ID : <?php echo $video_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;<span class="value">Url :
+                            <?php
+
+                            if( $video_field_attr > 0 ){
+                                if( get_post( $video_field_attr ) ) {
+
+                                    echo wp_get_attachment_url( $video_field_attr );
+
+                                    if( site_editor_app_on() ) {
+                                        array_push(SED()->editor->attachments_loaded, $video_field_attr);
+                                    }
+
+                                }
+                            }
+
+                            ?>
+            </span>
+                    </div>
+                    <?php $audio_field_attr = get_theme_mod( 'sed_audio_setting' , 0 );?>
+                    <div><span class="attr">Audio Field (MP3):</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : <?php echo $audio_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;<span class="value">Url :
+                            <?php
+
+                            if( $audio_field_attr > 0 ){
+                                if( get_post( $audio_field_attr ) ) {
+
+                                    echo wp_get_attachment_url( $audio_field_attr );
+
+                                    if( site_editor_app_on() ) {
+                                        array_push(SED()->editor->attachments_loaded, $audio_field_attr);
+                                    }
+
+                                }
+                            }
+
+                            ?>
+            </span>
+                    </div>
+                    <?php $file_field_attr = get_theme_mod( 'sed_file_setting' , 0 );?>
+                    <div><span class="attr">File Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value">ID : <?php echo $file_field_attr; ?> </span>&nbsp;&nbsp;&nbsp;
+            <span class="value">
+                Url :
+                <?php
+
+                if( $file_field_attr > 0 ){
+                    if( get_post( $file_field_attr ) ) {
+
+                        echo wp_get_attachment_url( $file_field_attr );
+
+                        if( site_editor_app_on() ) {
+                            array_push(SED()->editor->attachments_loaded, $file_field_attr);
+                        }
+
+                    }
+                }
+
+                ?>
+            </span>
+                    </div>
+
+                    <br>
+                    <div><h4 class="attr">Number Settings</h4></div>
+                    <div><span class="attr">Number Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_number_setting' , '' ); ?></span></div>
+                    <div><span class="attr">Range Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo get_theme_mod( 'sed_slider_setting' , '' ); ?></span></div>
+
+                    <br>
+                    <div><h4 class="attr">Icon Settings</h4></div>
+                    <div><span class="attr">Icon Field:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><span class="my-icon-single <?php echo esc_attr( get_theme_mod( 'sed_icon_setting' , '' ) ); ?>"></span></span></div>
+                    <div>
+                        <div><span class="attr">Select Icons Field</span></div>
+                        <br>
+                        <div class="icons-group">
+                            <?php
+
+                            $multi_icon_field_attr = get_theme_mod( 'sed_multi_icon_setting' , '' ) ;
+
+                            $iconsGroup = is_string( $multi_icon_field_attr ) ? explode( "," , $multi_icon_field_attr ) : $multi_icon_field_attr;
+
+                            $iconsGroup = is_array( $iconsGroup ) ? $iconsGroup : array();
+
+                            foreach( $iconsGroup AS $gIcon ){
+
+                                ?><span><span class="icon-group-single <?php echo $gIcon; ?>"></span></span>&nbsp;&nbsp;&nbsp;&nbsp;<?php
+
+                            }
+
+                            ?>
+                        </div>
+                        <br>
+                    </div>
+
+                </div>
+
+            </div>
+     
+        </div>
+        <?php
 
     }
 
