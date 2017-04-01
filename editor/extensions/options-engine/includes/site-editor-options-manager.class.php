@@ -1111,10 +1111,13 @@ final class SiteEditorOptionsManager{
 
             <?php
 
-            /** Remove 3rd party editor buttons.
+            /**
+             * Remove 3rd party editor buttons.
+             *
+
             remove_all_actions('media_buttons', 999999);
             remove_all_actions('media_buttons_context', 999999);
-            remove_all_filters('mce_external_plugins', 999999);**/
+            remove_all_filters('mce_external_plugins', 999999);*/
 
             // The settings passed in here are derived from those used in edit-form-advanced.php.
             wp_editor( '', 'sed-wp-tinymce-text-editor', array(

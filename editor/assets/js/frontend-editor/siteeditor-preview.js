@@ -56,8 +56,9 @@
 				 * Note the shift key is checked so shift+click on widgets or
 				 * nav menu items can just result on focusing on the corresponding
 				 * control instead of also navigating to the URL linked to.
+				 * only go to new page if we are in preview mode on
 				 */
-				if ( event.shiftKey || isInternalJumpLink ) {
+				if ( event.shiftKey || isInternalJumpLink || api.appPreview.mode == "off" ) {
 					return;
 				}
 				self.send( 'scroll', 0 );

@@ -17,11 +17,23 @@
 
             this.previewMode = "off";
 
+            this.changePreviewer = false;
+
             this.ready();
         },
 
         ready : function(){
             var self = this;
+
+            //when refresh previewer
+            api.addFilter( "sedPreviewerQueryFilter" , function( query ){
+
+                if( self.previewMode == "on" ) {
+                    self.changePreviewer = true;
+                }
+
+                return query;
+            });
 
             //TODO : fix loaded pages inlclude video && Embeded(exist delay for enable preview mode)
             api.previewer.bind( 'previewerActive', function( ) {
@@ -49,8 +61,14 @@
 
                 $("body").removeClass("sed-app-preview");
                 api.previewer.send("previewMode" , self.previewMode );
-                $("#website").css("width" , "100%" ); 
-                self.dialogsOpened();
+                $("#website").css("width" , "100%" );
+
+                if( self.changePreviewer === false ) {
+                    self.dialogsOpened();
+                }else{
+                    self.changePreviewer = false;
+                }
+
             });
 
             $(".preview-mode-toolbar .preview-mode").on("click" , function(){
@@ -102,7 +120,7 @@
             _.each( this.openDialogs , function( dialog ){
                 dialog.dialog("open");
             });
-        },
+        }
 
 
 	});

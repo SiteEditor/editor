@@ -160,7 +160,7 @@ class SEDPBModuleProvider{
 
 		<script type="text/javascript">
                 var _sedAppPageBuilderModulesInfo = <?php echo wp_json_encode( $modules_info ); ?>;
-                var _sedAppPBAttachmentsSettings = <?php if( !empty( $attachments ) ) echo wp_json_encode( $attachments ); else echo "{}"; ?>;
+                var _sedAppPBAttachmentsSettings = <?php if( !empty( $attachments ) ) echo wp_json_encode( $attachments ); else echo "[]"; ?>;
 		</script>
 
         <?php

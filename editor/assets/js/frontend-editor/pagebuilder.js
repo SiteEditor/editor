@@ -1348,6 +1348,8 @@
 
                     $('.sed-bp-element , .sed-static-module').find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
 
+                    console.log( "-------element.offset().top------------" , element.offset().top );
+
                     if( element.offset().top <= 11 )
                         element.addClass("sed-pb-row-top-site");
                     else
@@ -1363,6 +1365,8 @@
 
                     dnp.show();
 
+                    $(this).parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
+
                 },function(e){
                     //api.styleEditor.editorState == "on" ||
                     if( self.resizing === true)
@@ -1373,6 +1377,8 @@
                         $(this).parents(".sed-bp-element:first , .sed-static-module:first").eq(0).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
 
                     $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
+
+                    $(this).parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
 
                 });
 
@@ -1497,6 +1503,11 @@
                             modulesPrev = item.prev().find(".sed-pb-module-container");
                             modules.trigger( "sed.moduleResizeStart" );
                             modulesPrev.trigger( "sed.moduleResizeStart" );
+
+                            api.preview.send('dialogSettingsClose');
+                            api.isOpenDialogSettings = false;
+                            //api.currentSedElementId = "";
+
                            // console(item.prev().attr("class"));
                         },
                         resize : function(event, d, item, maxWidth , options) {

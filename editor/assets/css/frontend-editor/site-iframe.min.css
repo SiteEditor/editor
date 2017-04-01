@@ -945,9 +945,7 @@
    right: 0;
 }
 
-.sed-pb-row-top-site > .sed-handle-sort-row .remove_pb_btn ,
-.sed-pb-row-top-site > .sed-handle-sort-row .setting_btn ,
-.sed-pb-row-top-site > .sed-handle-sort-row .drag_pb_btn {
+.sed-pb-row-top-site > .sed-handle-sort-row .drag-content-sty{
    top: 0;
 }
 

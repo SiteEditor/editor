@@ -5,13 +5,12 @@
     api.DeletePlugin = api.Class.extend({
 
         initialize: function( params , options ){
-            var self = this;
 
             $.extend( this, options || {} );
 
             this.ready();
 
-            this.elementId;
+            this.elementId = null;
         },
 
         ready : function(){
@@ -29,6 +28,7 @@
             this.removeFromUsingModules();
             this.removeFromStyleEditor();
             this.removeFromDom();
+            this.closeSettingsDialog();
 
 
             api.Events.trigger( "sedAfterRemove" , elementId );
@@ -122,6 +122,14 @@
         },
 
         removeFromStyleEditor : function( ){
+
+        },
+
+        closeSettingsDialog : function(){
+
+            api.preview.send('dialogSettingsClose');
+            api.isOpenDialogSettings = false;
+            api.currentSedElementId = "";
 
         }
 
