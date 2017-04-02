@@ -1227,10 +1227,10 @@ $css .= <<<CSS
 
             /* Layout 
             .navigation-top .wrap ,*/
-            .sed-row-boxed .wrap {
+            .wrap {
                 /*max-width: 1100px;*/
-                padding-left: {$wrap_padding_left};
-                padding-right: {$wrap_padding_right};
+                padding-left: {$wrap_padding_left} !important;
+                padding-right: {$wrap_padding_right} !important;
             }
 
             .sed-row-wide .wrap {

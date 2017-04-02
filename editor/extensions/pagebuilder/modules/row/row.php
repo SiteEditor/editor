@@ -127,14 +127,14 @@ class PBRowShortcode extends PBShortcodeClass{
 
     }
 
-    /*function custom_style_settings(){
+    function custom_style_settings(){
         return array(                                                                      // , 'padding'
             array(
                 'row_container' , 'sed_current' ,
                 array( 'background','gradient','border','border_radius' ,'margin','trancparency','shadow' ) , __("Row Container" , "site-editor") ) ,
 
         );
-    }*/
+    }
 
 }
 
