@@ -158,27 +158,27 @@ table.sed-cols-table > tbody > tr > td {
 }
  @media (max-width: 768px){
 
-    .sed-pb-post-container > .sed-row-boxed{
+    /*.sed-pb-post-container > .sed-row-boxed{
         padding-left:30px !important;
         padding-right:30px !important;
     }
-   /*  .content-post > div > .sed-row-wide{
+     .content-post > div > .sed-row-wide{   
         padding: 0 15px !important;
     }
     .content-post > div > .sed-row-wide > .sed-bp-module > .row-container-module >.sed-pb-component > .sed-row-pb > .sed-bp-module {
         padding: 0 15px !important;
     }
-    */
+    
      .sed-pb-post-container > .sed-row-wide > .sed-bp-module > .row-container-module,
      .sed-site-main-part > .sed-row-wide > .sed-bp-module > .row-container-module{
-        /*padding-left:15px !important;
-         padding-right:15px !important;*/
+        padding-left:15px !important;
+        padding-right:15px !important;
     }
 
     #site-editor-main-part .sed-bp-module[id*="sed-bp-module-module"] {
         padding-left:0px !important;
         padding-right:0px !important;
-    }
+    }*/
     .sed-columns-pb.float-columns{
       text-align: center;
     }
