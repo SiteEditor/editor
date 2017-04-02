@@ -759,27 +759,47 @@ class SiteEditorTwentyseventeenThemeSync{
             ),
 
         /*--------------------------------------------------------------
-        22.0 Wrap
+        Wrap
         --------------------------------------------------------------*/            
 
             'wrap_padding_left' => array(
                 'setting_id'        => 'sed_wrap_padding_left',
                 'type'              => 'dimension',
                 'label'             => __('Wrap Padding Left', 'site-editor'),
-                'default'           => '20px',
+                'default'           => '3em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'general_settings' ,
             ),      
 
             'wrap_padding_right' => array(
                 'setting_id'        => 'sed_wrap_padding_right',
                 'type'              => 'dimension',
                 'label'             => __('Wrap Padding Right', 'site-editor'),
-                'default'           => '20px',
+                'default'           => '3em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'general_settings' ,
+            ),     
+
+            'rps_wrap_padding_left' => array(
+                'setting_id'        => 'sed_rps_wrap_padding_left',
+                'type'              => 'dimension',
+                'label'             => __('Wrap Responsive Padding Left', 'site-editor'),
+                'default'           => '2em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_settings' ,
+            ),      
+
+            'rps_wrap_padding_right' => array(
+                'setting_id'        => 'sed_rps_wrap_padding_right',
+                'type'              => 'dimension',
+                'label'             => __('Wrap Responsive Padding Right', 'site-editor'),
+                'default'           => '2em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_settings' ,
             ),
 
 

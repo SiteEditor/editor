@@ -1225,21 +1225,29 @@ $css .= <<<CSS
             }
 
 
-            /* Layout 
-            .navigation-top .wrap ,*/
+            /* Layout */
+
+            .sed-row-boxed , 
             .wrap {
-                /*max-width: 1100px;*/
-                padding-left: {$wrap_padding_left} !important;
-                padding-right: {$wrap_padding_right} !important;
+                padding-left: {$rps_wrap_padding_left};
+                padding-right: {$rps_wrap_padding_right}; 
             }
 
-            .sed-row-wide .wrap {
-                padding-left: 0;
-                padding-right: 0; 
+            .wrap .sed-row-boxed ,    
+            .sed-row-boxed .sed-row-boxed {
+                max-width: none !important; 
+                padding-right: 0px;
+                padding-left: 0px;  
             }
 
 
             @media screen and (min-width: 48em) {
+
+                .sed-row-boxed ,
+                .wrap {
+                    padding-left: {$wrap_padding_left};
+                    padding-right: {$wrap_padding_right};
+                }
 
                 .page:not(.home) #content {
                     padding-bottom: {$page_content_padding_bottom};
