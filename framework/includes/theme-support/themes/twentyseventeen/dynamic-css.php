@@ -1229,6 +1229,7 @@ $css .= <<<CSS
 
             .sed-row-boxed , 
             .wrap {
+                max-width: {$sheet_width}; 
                 padding-left: {$rps_wrap_padding_left};
                 padding-right: {$rps_wrap_padding_right}; 
             }
