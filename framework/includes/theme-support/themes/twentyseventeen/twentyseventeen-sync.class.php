@@ -374,7 +374,7 @@ class SiteEditorTwentyseventeenThemeSync{
         sed_add_theme_support( "site_layout_feature" , array(
             "default_page_length"   =>  'wide' ,
             "default_sheet_width"   =>  '1000px' ,
-            'selector'              =>  '.wrap'
+            'selector'              =>  '#page'
         ) );
 
         sed_add_theme_support( 'sed_custom_background' , array(

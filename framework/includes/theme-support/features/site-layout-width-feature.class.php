@@ -82,6 +82,8 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
             echo $selector; ?>,
             .sed-row-boxed{
                 max-width : <?php echo $sheet_width; ?> !important;
+                margin-left : auto !important;
+                margin-right : auto !important;
             }
             <?php
         }else{

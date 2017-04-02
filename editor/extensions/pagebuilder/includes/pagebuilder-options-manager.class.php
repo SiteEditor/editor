@@ -479,11 +479,11 @@ final class SedPageBuilderOptionsManager{
         $defaults = array(
             'type'          => 'radio-buttonset',
             'default'       => 'wide' ,
-            'label'         => __('Length', 'site-editor'),
-            'description'   => __('container Length', 'site-editor'),
+            'label'         => __('Width', 'site-editor'),
+            'description'   => __('Is Module Wrapper or Content Width, Full or Fixed?', 'site-editor'),
             'choices'       => array(
-                'wide'          => __('Wide', 'site-editor'),
-                'boxed'         => __('Boxed', 'site-editor')
+                'wide'          => __('Full Width', 'site-editor'),
+                'boxed'         => __('Fixed Width', 'site-editor')
             ),
             'priority'      => 500
         );

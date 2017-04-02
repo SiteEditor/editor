@@ -316,7 +316,7 @@ class PBRowContainerShortcode extends PBShortcodeClass{
 
             'length'                => array(
                 "type"                  => "length" ,
-                "label"                 => __("Length", "site-editor"),
+                "label"                 => __("Content Width", "site-editor"),
                 "default"               => "boxed",
                 'priority'              => 1 ,
                 "panel"                 => "row_container_settings_panel_outer", 

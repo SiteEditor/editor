@@ -75,7 +75,7 @@ class PBRowShortcode extends PBShortcodeClass{
 
             'length'    =>  array(
                 "type"          => "length" ,
-                "label"         => __("Length", "site-editor"),
+                "label"         => __("Wrapper Width", "site-editor"),
             ),
 
             "align"     =>  array(
