@@ -38,7 +38,15 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
      * @access public
      * @var string
      */
-    public $selector = 'body';
+    public $main_selector = 'body';
+
+    /**
+     * Selector For target element it's can change page length and sheet width
+     *
+     * @access public
+     * @var string
+     */
+    public $selectors = array();
 
     /**
      * Initialize class
@@ -61,7 +69,9 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
     public function feature_output(){
         global $sed_dynamic_css_string;
 
-        $selector = $this->selector;
+        $main_selector = $this->main_selector;
+
+        $selectors   = empty( $this->selectors ) || !is_array( $this->selectors ) ? "" : implode("," , $this->selectors );
 
         $sheet_width = get_theme_mod( 'sheet_width' );
 
@@ -79,7 +89,7 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
         ?>
         <?php
         if( $page_length == "boxed" ) {
-            echo $selector; ?>,
+            echo $main_selector; ?>,
             .sed-row-boxed{
                 max-width : <?php echo $sheet_width; ?> !important;
                 margin-left : auto !important;
@@ -87,7 +97,7 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
             }
             <?php
         }else{
-            echo $selector; ?>{
+            echo $main_selector; ?>{
                 max-width : 100% !important;
             }
 
@@ -97,6 +107,14 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
 
             <?php
         }
+
+        echo $selectors; ?>{
+            max-width : <?php echo $sheet_width; ?> !important;
+            margin-left : auto !important;
+            margin-right : auto !important;
+        }
+        <?php
+
         $css = ob_get_clean();
         $sed_dynamic_css_string .= $css;
     }
@@ -113,7 +131,10 @@ class SiteEditorSiteLayoutWidthFeature extends SiteEditorThemeFeature{
 
         $json_array = parent::json();
 
-        $json_array['selector']                 = $this->selector;
+        $selectors = empty( $this->selectors ) || !is_array( $this->selectors ) ? array( ) : $this->selectors;
+
+        $json_array['main_selector']            = $this->main_selector;
+        $json_array['selectors']                = $selectors;
         $json_array['default_page_length']      = $this->default_page_length;
         $json_array['default_sheet_width']      = $this->default_sheet_width;
 
