@@ -1225,16 +1225,21 @@ $css .= <<<CSS
             }
 
 
+            /* Layout 
+            .navigation-top .wrap ,*/
+            .sed-row-boxed .wrap {
+                /*max-width: 1100px;*/
+                padding-left: {$wrap_padding_left};
+                padding-right: {$wrap_padding_right};
+            }
+
+            .sed-row-wide .wrap {
+                padding-left: 0;
+                padding-right: 0; 
+            }
+
+
             @media screen and (min-width: 48em) {
-
-
-                /* Layout 
-                .navigation-top .wrap ,
-                .wrap {
-                    max-width: 1100px;
-                    padding-left: 0;
-                    padding-right: 0;
-                }*/
 
                 .page:not(.home) #content {
                     padding-bottom: {$page_content_padding_bottom};

@@ -757,6 +757,31 @@ class SiteEditorTwentyseventeenThemeSync{
                 'panel'             => 'general_custom_styling' ,
             ),
 
+        /*--------------------------------------------------------------
+        22.0 Wrap
+        --------------------------------------------------------------*/            
+
+            'wrap_padding_left' => array(
+                'setting_id'        => 'sed_wrap_padding_left',
+                'type'              => 'dimension',
+                'label'             => __('Wrap Padding Left', 'site-editor'),
+                'default'           => '20px',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),      
+
+            'wrap_padding_right' => array(
+                'setting_id'        => 'sed_wrap_padding_right',
+                'type'              => 'dimension',
+                'label'             => __('Wrap Padding Right', 'site-editor'),
+                'default'           => '20px',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'general_custom_styling' ,
+            ),
+
+
 
         );
 
