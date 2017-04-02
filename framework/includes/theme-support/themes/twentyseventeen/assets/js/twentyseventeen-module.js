@@ -278,6 +278,11 @@
 
             });
 
+            //Add Sheet Width && Page Length vars
+            _varsTpl['sheet_width'] = api( 'sheet_width' )();
+
+            //_varsTpl['page_length'] = api.pagesOptionsPreview.getPageSetting( 'page_length' );
+
             return _varsTpl;
 
         };

@@ -356,6 +356,9 @@ class SiteEditorTwentyseventeenDynamicCss {
             $vars[$key] = "{{ $key }}";
 
         }
+        
+        //Add Sheet Width vars
+        $vars["sheet_width"] = get_theme_mod( 'sheet_width' , sed_get_theme_support( 'site_layout_feature' , 'default_sheet_width' ) );
 
         $dynamic_css_tpl = $this->get_dynamic_css( $vars );
 
