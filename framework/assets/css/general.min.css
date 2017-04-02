@@ -104,8 +104,29 @@ table.sed-cols-table > tbody > tr > td {
     margin: 0 auto;
 }
 
-.sed-row-wide{
-    max-width: 100%;
+/*.sed-row-wide {
+    max-width: initial;
+    margin: 0 -48px;
+    width: auto !important; 
+}
+
+#site-editor-main-part > .sed-row-pb {
+  padding-right: 48px;
+  padding-left: 48px; 
+}*/
+
+.twentyseventeen-panel {
+    overflow: visible !important;
+    position: relative;
+}
+
+.wrap {
+    max-width: 10000px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.sed-row-wide .sed-row-wide {
     margin: 0 auto;
 }
 

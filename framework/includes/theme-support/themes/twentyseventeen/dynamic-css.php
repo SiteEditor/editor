@@ -1194,24 +1194,6 @@ $css .= <<<CSS
             --------------------------------------------------------------*/
 
 
-            /*$home_content_padding_top :  6em;
-            $rps_home_content_padding_top :  3.5em;
-
-            $home_content_padding_bottom :  4.5em;
-            $rps_home_content_padding_bottom :  2em;            
-
-            $site_content_padding_top :  5.5em;
-            $rps_site_content_padding_top :  2.5em;
-
-            $page_content_padding_bottom :  3.25em;
-            $rps_page_content_padding_bottom :  1.5em;    
-
-            $page404_content_padding_bottom :  9em;
-            $rps_page404_content_padding_bottom :  4em;    
-
-            $site_footer_margin_top :  3.5em;*/
-
-
 
             .page:not(.home) #content {
                 padding-bottom: {$rps_page_content_padding_bottom};

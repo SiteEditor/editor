@@ -288,7 +288,7 @@ function sed_primary_template() {
   $wide_boxed_class = "sed-row-wide";//( isset( $sed_data['page_length'] ) && $sed_data['page_length'] == "boxed" ) ? "sed-row-boxed" : "sed-row-wide";
   ?>
     <div id="site-editor-page-part" class="site-editor-page" sed-role="layout">
-      <div id="site-editor-main-part" class="sed-site-main-part sed-pb-main-component sed-pb-post-container <?php echo $wide_boxed_class;?>" data-post-id="<?php echo $sed_data['page_id'];?>" data-parent-id="root" data-page-type="<?php echo $sed_data['page_type'];?>" data-content-type="theme"  sed-layout="row" sed-type-row="static" sed-role="main-content">
+      <div id="site-editor-main-part" class="sed-site-main-part sed-pb-main-component sed-pb-post-container <?php //echo $wide_boxed_class;?>" data-post-id="<?php echo $sed_data['page_id'];?>" data-parent-id="root" data-page-type="<?php echo $sed_data['page_type'];?>" data-content-type="theme"  sed-layout="row" sed-type-row="static" sed-role="main-content">
         <?php
             do_action( 'sed_region_template', 'sed_region_template', 'templates' );
             //pl_template_hook( 'pl_region_template', 'templates' );
