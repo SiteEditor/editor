@@ -102,31 +102,18 @@ table.sed-cols-table > tbody > tr > td {
 .sed-row-boxed{
     max-width: 1100px;
     margin: 0 auto;
+    padding-right: 20px;
+    padding-left: 20px; 
 }
 
-/*.sed-row-wide {
-    max-width: initial;
-    margin: 0 -48px;
-    width: auto !important; 
+.sed-row-boxed .sed-row-boxed {
+    max-width: none !important; 
+    padding-right: 0px;
+    padding-left: 0px;  
 }
 
-#site-editor-main-part > .sed-row-pb {
-  padding-right: 48px;
-  padding-left: 48px; 
-}*/
-
-.twentyseventeen-panel {
-    overflow: visible !important;
-    position: relative;
-}
-
-.wrap {
-    max-width: 10000px !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.sed-row-wide .sed-row-wide {
+.sed-row-wide{
+    max-width: 100%;
     margin: 0 auto;
 }
 
