@@ -1,4 +1,4 @@
-WooCommerce - eCommerce for WordPress
+﻿WooCommerce - eCommerce for WordPress
 
 Copyright 2015 by the contributors
 
