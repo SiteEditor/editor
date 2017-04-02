@@ -49,6 +49,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
             'responsive_option'     => 'normal-columns',
             'equal_column_width'    => false ,
             'responsive_spacing'    =>  "",
+            'content_width'         =>  "wrap-layout-fixed-width",
         );
         return $atts;
     }
@@ -127,6 +128,18 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 'has_border_box'      => false ,
                 'panel'    => 'content_layout_settings_panel',
     		),
+
+            'content_width' => array(
+                "type"          => "radio-buttonset" ,
+                "label"         => __("Content Width", "site-editor"),
+                "choices"       =>  array(
+                    "wrap-layout-full-width"       =>    __('Full Width',"site-editor") ,
+                    "wrap-layout-fixed-width"      =>    __('Fixed Width',"site-editor") , 
+                ), 
+                'has_border_box'    => false ,
+                "panel"         => "content_layout_settings_panel" ,
+            ),
+
             'responsive_option' => array(
       			'type' => 'select',
       			'label' => __('Responsive Option', 'site-editor'),

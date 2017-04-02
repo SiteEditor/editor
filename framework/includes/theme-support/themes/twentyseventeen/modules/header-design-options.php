@@ -190,6 +190,20 @@ class TwentyseventeenHeaderDesignOptions{
              * --------------------------------------------------------------
              */
 
+            'header_content_width' => array(
+                'setting_id'        => 'sed_header_content_width', 
+                "type"              => "radio-buttonset" , 
+                "label"             => __("Header Content Width", "site-editor"),
+                "choices"           =>  array(
+                    "wrap-layout-full-width"       =>    __('Full Width',"site-editor") ,
+                    "wrap-layout-fixed-width"      =>    __('Fixed Width',"site-editor") , 
+                ), 
+                'default'           => 'wrap-layout-fixed-width',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                "panel"             => "header_custom_styling" ,
+            ), 
+
             'site_title_font_size' => array(
                 'setting_id'        => 'sed_site_title_font_size',
                 'type'              => 'dimension',

@@ -348,4 +348,36 @@
 
     });
 
+
+    var $length_options = {
+        "sed_footer_content_width" : "#colophon" ,
+        "sed_header_content_width" : "#masthead" ,
+    };
+
+    $.each( $length_options , function( settingId , selector ){
+
+        api( settingId , function( value ) {
+
+            value.bind( function( to ) {
+
+                if( to == "wrap-layout-fixed-width" ) { 
+
+                    $(selector).addClass("wrap-layout-fixed-width");
+
+                    $(selector).removeClass("wrap-layout-full-width");
+
+                }else{
+
+                    $(selector).addClass("wrap-layout-full-width");
+
+                    $(selector).removeClass("wrap-layout-fixed-width");
+
+                }
+
+            });
+
+        });
+
+    });
+
 }(sedApp, jQuery));

@@ -1233,11 +1233,17 @@ $css .= <<<CSS
                 padding-right: {$rps_wrap_padding_right}; 
             }
 
-            .wrap .sed-row-boxed ,    
+            .sed-main-content-layout-module .wrap-layout-full-width .wrap , 
+            .wrap-layout-fixed-width .wrap .sed-row-boxed ,     
+            .sed-row-boxed .wrap , 
             .sed-row-boxed .sed-row-boxed {
                 max-width: none !important; 
                 padding-right: 0px;
                 padding-left: 0px;  
+            }
+
+            .wrap-layout-full-width .wrap {
+                max-width: none !important;  
             }
 
 

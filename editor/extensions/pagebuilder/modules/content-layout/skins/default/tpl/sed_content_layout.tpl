@@ -1,5 +1,5 @@
 <table class="sed-cols-table sed-main-content-layout-module">
-<tr {{sed_attrs}} class="sed-columns-pb {{responsive_option}} {{className}}" sed-role="column-pb">
+<tr {{sed_attrs}} class="sed-columns-pb {{responsive_option}} {{className}} {{content_width}}" sed-role="column-pb">
     {{{content}}}
 </tr>
 <style type="text/css">
