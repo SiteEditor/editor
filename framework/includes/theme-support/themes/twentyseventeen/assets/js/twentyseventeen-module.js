@@ -332,6 +332,14 @@
             });
         });
 
+        api( 'sheet_width', function( value ) {
+            value.bind( function( to ) { 
+
+                _setDynamicCss();
+
+            });
+        });
+
         $.each( api.colorSchemeSettings.customize , function( key , settingId ){
 
             api( settingId , function( value ) {
