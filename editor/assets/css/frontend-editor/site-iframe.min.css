@@ -1386,11 +1386,11 @@ body .megamenu-drag-area-mode  ul.cm_default, body .megamenu-drag-area-mode  ul.
     position: relative;
 }
 
-.sed-row-pb.sed-parent-highlight-row{
+.sed-app-editor .sed-row-pb.sed-parent-highlight-row{
     background-color: rgba( 240 , 240 , 240 , 0.7 );
 }
 
-.sed-row-pb.sed-current-highlight-row{
+.sed-app-editor .sed-row-pb.sed-current-highlight-row{
     background-color: #ffffff;
 }
 

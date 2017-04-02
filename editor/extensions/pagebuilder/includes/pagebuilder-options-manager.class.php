@@ -478,7 +478,7 @@ final class SedPageBuilderOptionsManager{
          */
         $defaults = array(
             'type'          => 'radio-buttonset',
-            'default'         => 'wide' ,
+            'default'       => 'wide' ,
             'label'         => __('Length', 'site-editor'),
             'description'   => __('container Length', 'site-editor'),
             'choices'       => array(
