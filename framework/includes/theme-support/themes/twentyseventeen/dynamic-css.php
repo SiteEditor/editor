@@ -1228,6 +1228,7 @@ $css .= <<<CSS
             /* Layout */
 
             .sed-row-boxed , 
+            .navigation-top .wrap,
             .wrap {
                 max-width: {$sheet_width}; 
                 padding-left: {$rps_wrap_padding_left};
@@ -1243,14 +1244,25 @@ $css .= <<<CSS
                 padding-left: 0px;  
             }
 
+            .wrap-layout-full-width .navigation-top .wrap, 
             .wrap-layout-full-width .wrap {
                 max-width: none !important;  
+            }
+
+            .single-post:not(.has-sidebar) .wrap-layout-fixed-width .wrap #primary,
+            .page.page-one-column:not(.twentyseventeen-front-page) .wrap-layout-fixed-width .wrap #primary,
+            .archive.page-one-column:not(.has-sidebar) .wrap-layout-fixed-width .wrap #primary,
+            .single-post:not(.has-sidebar) .wrap-layout-full-width .wrap #primary,
+            .page.page-one-column:not(.twentyseventeen-front-page) .wrap-layout-full-width .wrap #primary,
+            .archive.page-one-column:not(.has-sidebar) .wrap-layout-full-width .wrap #primary {
+                max-width: none !important;
             }
 
 
             @media screen and (min-width: 48em) {
 
                 .sed-row-boxed ,
+                .navigation-top .wrap,
                 .wrap {
                     padding-left: {$wrap_padding_left};
                     padding-right: {$wrap_padding_right};
