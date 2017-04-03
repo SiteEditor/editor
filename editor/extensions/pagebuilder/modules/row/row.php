@@ -30,7 +30,7 @@ class PBRowShortcode extends PBShortcodeClass{
 
         $atts = array(
            	'type'                  => 'draggable-element', //draggable-element | static-element
-            'length'                => 'wide' ,
+            'length'                => 'boxed' ,
             'from_wp_editor'        => false ,
             //'sed_contextmenu_class' => ''
         );
@@ -86,7 +86,7 @@ class PBRowShortcode extends PBShortcodeClass{
             'spacing'   => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "default"       => "10 0 10 0" ,
+                "default"       => "10  10 " ,
             ),
 
             'id'        => array(

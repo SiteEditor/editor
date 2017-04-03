@@ -591,9 +591,9 @@
                 //rowPattern[0].attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
 
                 if(name == "row-container"){
-                    rowPattern[0].attrs.length = "boxed";
-                }else{
                     rowPattern[0].attrs.length = "wide";
+                }else{
+                    rowPattern[0].attrs.length = "boxed";
                 }
 
             }else if(self.currentDragType == "free"){

@@ -273,7 +273,7 @@ final class SedPageBuilderOptionsManager{
     }
 
     /**
-     * @Todo Move Spacing Control To Design Editor Controls
+     * Module Row Wrapper Spacing ( Using Style Editor )
      *
      * @param array $args
      * @return array
@@ -329,7 +329,7 @@ final class SedPageBuilderOptionsManager{
         $settings['spacing_left'] = array(
             'type'              => 'padding',
             'after_field'       => 'px',
-            'default'           => $padding_left,
+            'default'           => "",
             "prop_side"         => "left" ,
             'label'             => is_rtl() ? __('Right', 'site-editor') : __('Left', 'site-editor'),
             'description'       => __('Change Module Left Spacing', 'site-editor') ,
@@ -346,7 +346,7 @@ final class SedPageBuilderOptionsManager{
         $settings['spacing_right'] = array(
             'type'              => 'padding',
             'after_field'       => 'px',
-            'default'           => $padding_right,
+            'default'           => "",
             "prop_side"         => "right" ,
             'label'             => is_rtl() ? __('Left', 'site-editor') : __('Right', 'site-editor'),
             'description'       => __('Change Module Right Spacing', 'site-editor') ,
