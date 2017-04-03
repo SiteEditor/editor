@@ -46,31 +46,32 @@
 }
 
 table.sed-cols-table, 
-table.sed-cols-table > tbody > tr > th, 
+table.sed-cols-table > tbody > tr , 
+table.sed-cols-table > tbody > tr > th ,  
 table.sed-cols-table > tbody > tr > td {
     position: relative;
     vertical-align: top;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
     margin: 0;
     padding: 0; 
     border: 0 none;
     text-align: initial;  
     overflow: visible;
     background: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  -o-box-shadow: none;
-  box-shadow: none;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0; 
-  -o-border-radius: 0;
-  border-radius: 0;
-  pointer-events: auto;
-  clip: auto;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0; 
+    -o-border-radius: 0;
+    border-radius: 0;
+    pointer-events: auto;
+    clip: auto;
 }
 
 .sed-app-editor .sed-column-pb,
@@ -98,9 +99,17 @@ table.sed-cols-table > tbody > tr > td {
 }
 
 
-.sed-row-boxed{
+.sed-row-boxed {
     max-width: 1100px;
     margin: 0 auto;
+    padding-right: 20px;
+    padding-left: 20px; 
+}
+
+.sed-row-boxed .sed-row-boxed {
+    max-width: none !important; 
+    padding-right: 0px;
+    padding-left: 0px;  
 }
 
 .sed-row-wide{
@@ -149,27 +158,27 @@ table.sed-cols-table > tbody > tr > td {
 }
  @media (max-width: 768px){
 
-    .sed-pb-post-container > .sed-row-boxed{
+    /*.sed-pb-post-container > .sed-row-boxed{
         padding-left:30px !important;
         padding-right:30px !important;
     }
-   /*  .content-post > div > .sed-row-wide{
+     .content-post > div > .sed-row-wide{   
         padding: 0 15px !important;
     }
     .content-post > div > .sed-row-wide > .sed-bp-module > .row-container-module >.sed-pb-component > .sed-row-pb > .sed-bp-module {
         padding: 0 15px !important;
     }
-    */
+    
      .sed-pb-post-container > .sed-row-wide > .sed-bp-module > .row-container-module,
      .sed-site-main-part > .sed-row-wide > .sed-bp-module > .row-container-module{
-        /*padding-left:15px !important;
-         padding-right:15px !important;*/
+        padding-left:15px !important;
+        padding-right:15px !important;
     }
 
     #site-editor-main-part .sed-bp-module[id*="sed-bp-module-module"] {
         padding-left:0px !important;
         padding-right:0px !important;
-    }
+    }*/
     .sed-columns-pb.float-columns{
       text-align: center;
     }
@@ -203,7 +212,7 @@ table.sed-cols-table > tbody > tr > td {
 
 
 
-//  Spacing top and bottom
+/*   Spacing top and bottom   */
 
 .sed-stb-sm{  
     padding-top: 10px;
@@ -219,7 +228,7 @@ table.sed-cols-table > tbody > tr > td {
 }
 
 
-//  Spacing left and right
+/*   Spacing left and right  */
 
 .sed-slr-sm{  
     padding-left: 10px;
@@ -235,7 +244,7 @@ table.sed-cols-table > tbody > tr > td {
 }
 
 
-//  Spacing all side
+/*   Spacing all side  */
 
 .sed-sas-sm{  
     padding: 10px; 
@@ -247,7 +256,7 @@ table.sed-cols-table > tbody > tr > td {
     padding: 70px;   
 }
 
-//  align
+/*   Align  */ 
 
 .sed-ta-l { 
   text-align: left; 
@@ -263,4 +272,26 @@ table.sed-cols-table > tbody > tr > td {
 
 .sed-ta-j { 
   text-align: justify; 
+}
+
+
+/*   Hidden Theme Row  */  
+
+.sed-app-editor .sed-hidden-theme-row {
+    background-color: rgba(0,0,0,0.05);  
+}
+
+.sed-app-editor .sed-hidden-theme-row > .sed-bp-module {
+    display: none !important;
+} 
+
+.sed-app-editor .sed-hidden-theme-row:after {
+    content: "Hidden Module";
+    text-align: center;
+    display: block;
+    padding: 25px 10px;
+}
+
+.sed-app-preview .sed-hidden-theme-row {
+    display: none !important;
 }

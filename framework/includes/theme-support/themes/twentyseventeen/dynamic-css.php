@@ -599,6 +599,12 @@ $css .= <<<CSS
                 background: {$navigation_bar_bg};
                 border-bottom-color: {$navigation_bar_border};
                 border-top-color: {$navigation_bar_border};
+                font-size: initial; 
+            }
+
+            .main-navigation {
+                /*margin-left: -0.75em; 
+                margin-right: -0.75em; */ 
                 font-size: {$menu_items_font_size}; 
             }
 
@@ -657,6 +663,13 @@ $css .= <<<CSS
                 box-shadow: none;
             }
 
+
+            @media screen and ( min-width: 67em ) {
+
+                .navigation-top nav {
+                    margin-left: -1.25em;   
+                }
+            }    
 
             @media screen and (min-width: 48em) {
 
@@ -1249,9 +1262,9 @@ $css .= <<<CSS
                 max-width: none !important;  
             }
 
-            .single-post:not(.has-sidebar) .wrap-layout-fixed-width .wrap #primary,
+            /*.single-post:not(.has-sidebar) .wrap-layout-fixed-width .wrap #primary,
             .page.page-one-column:not(.twentyseventeen-front-page) .wrap-layout-fixed-width .wrap #primary,
-            .archive.page-one-column:not(.has-sidebar) .wrap-layout-fixed-width .wrap #primary,
+            .archive.page-one-column:not(.has-sidebar) .wrap-layout-fixed-width .wrap #primary,*/ 
             .single-post:not(.has-sidebar) .wrap-layout-full-width .wrap #primary,
             .page.page-one-column:not(.twentyseventeen-front-page) .wrap-layout-full-width .wrap #primary,
             .archive.page-one-column:not(.has-sidebar) .wrap-layout-full-width .wrap #primary {
