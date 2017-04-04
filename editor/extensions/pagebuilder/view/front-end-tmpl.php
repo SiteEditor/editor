@@ -97,17 +97,8 @@
             <# if( $.inArray( 'edit' , actions )  > -1 ) { #>
                 <div class="setting_btn sed_setting_btn_cmp">
                     <div class="sed_setting_btn_cmp drag-content" id="">
-                        <span class="sedico sedico-redo link sedico-lg sed_setting_btn_cmp"></span>
+                        <span class="sedico sedico-setting-item link sedico-lg sed_setting_btn_cmp"></span>
                         <span class="el_txt sed_setting_btn_cmp"><?php echo __( "Module Setting" , "site-editor");?></span>
-                    </div>
-                </div>
-            <# } #>
-
-            <# if( $.inArray( 'duplicate' , actions )  > -1 ) { #>
-                <div class="duplicate_pb_btn">
-                    <div class=" drag-content" id="">
-                        <span class="sedico sedico-pages link sedico-lg "></span>
-                        <span class="el_txt"><?php echo __( "Module Duplicate" , "site-editor");?></span>
                     </div>
                 </div>
             <# } #>
@@ -117,6 +108,15 @@
                     <div class=" drag-content" id="">
                         <span class="sedico sedico-cursor-move link sedico-lg "></span>
                         <span class="el_txt"><?php echo __( "Module Drag & Drop" , "site-editor");?></span>
+                    </div>
+                </div>
+            <# } #>
+
+            <# if( $.inArray( 'duplicate' , actions )  > -1 ) { #>
+                <div class="duplicate_pb_btn">
+                    <div class=" drag-content" id="">
+                        <span class="sedico sedico-pages link sedico-lg "></span>
+                        <span class="el_txt"><?php echo __( "Module Duplicate" , "site-editor");?></span>
                     </div>
                 </div>
             <# } #>
