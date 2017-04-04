@@ -50,19 +50,19 @@
 
 <script type="text/html" id="tmpl-drag-n-drop-helper">
     <div class="helper-drag">
-    <div class="helper-drag-content">
-    <div class="drag_btn_crt">
-    <button class="btn_helper" id="">
-      <span class="sedico sedico-cursor-move link"></span>
-      <span class="el_txt">drag</span>
-      </button>
-      </div>
-      <div class="drag_content">
-       <div><img src="<?php echo(SED_EDITOR_FOLDER_URL . 'libraries/siteeditor/site-iframe/images/browser_64px.png'); ?>" /></div>
-       <div><h5><?php echo __( "Drop and drop Module" , "site-editor");?></h5></div>
-      </div>
-      </div>
-      </div>
+        <div class="helper-drag-content">
+            <div class="drag_btn_crt">
+                <button class="btn_helper" id="">
+                    <span class="sedico sedico-cursor-move link"></span>
+                    <span class="el_txt">drag</span>
+                </button>
+            </div>
+            <div class="drag_content">
+               <div><span class="sedico sedico-page-title"></span></div>
+               <div><h5>Drop and drop Module</h5></div>
+            </div>
+        </div>
+    </div>
 </script>
 <script type="text/html" id="tmpl-dnp-el-hdl">
     <div class="sed-dnp-el-handle" handle-dnp="sed-dnp-el-handle" >

@@ -378,28 +378,33 @@
 }
 /* drag helper*/
 .helper-drag {
-    width: 218px !important;
-    height: 85px !important;
+    width: 200px !important;
+    height: 95px  !important;
+    margin: 0 auto;
 }
 .helper-drag-content {
-    width: 218px !important;
-    margin: 0 auto !important;
+    margin: 0 auto;
     position: relative;
     text-align: center;
 }
 .drag_btn_crt button {
-    background-color: #fff;
-    border-color: #24a9f1;
-    border-radius: 3px 3px 0 0;
-    border-width: 1px 1px 0;
-    box-shadow: 0 -2px 4px -3px #00ccff;
+    background-color: #f7f7f7;
+    border-color: transparent;
+    border-radius: 0;
+    border-width: 0;
 }
 
 .helper-drag-content .btn_helper {
-    border-style: solid;
     color: #24a9f1;
-    height: 25px;
-    width: 40px;
+    height: 29px;
+    width: 59px;
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+    border-width: 1px 1px 0;
+    border-style: solid;
+    border-color: #eee;
+    margin-bottom: -1px;
 }
 .helper-drag-content .btn_helper:hover{
  background: none repeat scroll 0 0 #fafafa !important;
@@ -408,37 +413,40 @@
   cursor: move;
 }
 .drag_content {
-    background-color: #fff;
-    border: 1px solid #24a9f1;
-    border-radius: 3px;
-    box-shadow: 0 0 3px #00ccff;
+    background-color: #f7f7f7;
+    border-radius: 0;
+    box-shadow: none;
     padding: 5px;
-    width: 218px !important;
+    color: #24a9f1;
+    clear: both;
+    display: table;
+    border: 1px solid #eee;
+    box-shadow: 0 0 103px rgba(0,0,0,0.05);
 }
 .drag_btn_crt {
-    margin: 0 auto -1px;
-    width: 40px;
+    position: relative;
+    margin: 0 auto;
 }
 
-.drag_content img {
-    height: 48px;
-    width: 48px;
+.drag_content .sedico {
+    font-size: 32px;
 }
 .drag_content h5 {
-    display: table-cell;
-    font-family: arial;
-    font-size: 13px;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 12px;
     font-weight: normal;
-    height: 50px;
-    vertical-align: middle;
+    color: #333;
+    text-transform: capitalize;
+    margin: 0;
+    letter-spacing: 0;
 }
 
 .drag_content > div {
-    display: inline-block;
-    margin: 0 3px;
-    vertical-align: top;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 7px;
 }
-.btn_helper .fa {
+.btn_helper {
     font-size: 16px;
 }
 /* end drag helper*/
