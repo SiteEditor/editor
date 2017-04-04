@@ -571,27 +571,27 @@
     top: -15px;
 }
 
-.sed-pb-row-module-special > .sed-pb-handle-row-top,
-.sed-pb-row-module-special > .sed-pb-handle-row-right,
-.sed-pb-row-module-special > .sed-pb-handle-row-bottom,
-.sed-pb-row-module-special > .sed-pb-handle-row-left{
+.sed-public-theme-row > .sed-pb-handle-row-top,
+.sed-public-theme-row > .sed-pb-handle-row-right,
+.sed-public-theme-row > .sed-pb-handle-row-bottom,
+.sed-public-theme-row > .sed-pb-handle-row-left{
     border-color: #FF910A;
 }
 
-.sed-pb-row-module-special > .sed-handle-sort-row .drag_pb_btn .drag-content{
+.sed-public-theme-row > .sed-handle-sort-row .drag_pb_btn .drag-content{
     background-color: #FF910A;
     border-color: #FF910A !important;
 }
-.sed-pb-row-module-special > .sed-handle-sort-row .duplicate_pb_btn .drag-content {
+.sed-public-theme-row > .sed-handle-sort-row .duplicate_pb_btn .drag-content {
     background: none repeat scroll 0 0 #f98a00;
     border-color: #f98a00 !important;
 }
-.sed-pb-row-module-special > .sed-handle-sort-row .setting_btn .drag-content {
+.sed-public-theme-row > .sed-handle-sort-row .setting_btn .drag-content {
     background: none repeat scroll 0 0 #ec8200;
     border-color: #ec8200 !important;
 }
 
-.sed-pb-row-module-special > .sed-handle-sort-row .remove_pb_btn .drag-content {
+.sed-public-theme-row > .sed-handle-sort-row .remove_pb_btn .drag-content {
     background: none repeat scroll 0 0 #ff9e25;
     border-color: #ff9e25;
 }
@@ -1463,10 +1463,10 @@ body .megamenu-drag-area-mode  ul.cm_default, body .megamenu-drag-area-mode  ul.
 }
 
 .sed-app-editor .sed-row-pb.sed-parent-highlight-row:before {
-    background-color: rgba(0, 0, 0, 0.1);
-}    
+    /*background-color: rgba(0, 0, 0, 0.1);*/
+}     
 
-.sed-app-editor .sed-row-pb.sed-current-highlight-row.sed-pb-row-module-special:before {
+.sed-app-editor .sed-row-pb.sed-current-highlight-row.sed-public-theme-row:before {
     background-color: rgba(255, 145, 10, 0.1);
 }
 
