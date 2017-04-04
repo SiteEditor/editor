@@ -1,3 +1,3 @@
-<li {{sed_attrs}} class="module module-icons {{className}} ">
+<li {{sed_attrs}} class="{{className}} ">
 	{{{content}}} 
 </li> 

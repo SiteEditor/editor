@@ -224,7 +224,7 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_social_bar",
     "tpl_type"    => "underscore" ,
     "has_extra_spacing"   =>  true ,
-    "sub_modules"   => array('icons'),
+    "sub_modules"   => array('icons','image'),
     //"js_plugin"   => 'image/js/image-plugin.min.js',
     "js_module"   => array( 'sed-social-bar-module', 'social-bar/js/social-bar-module.min.js', array('sed-frontend-editor') )
 ));

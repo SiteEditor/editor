@@ -105,34 +105,36 @@ class PBImageShortcode extends PBShortcodeClass{
           );
       }
 
-      function less(){
-          return array(
-            array('img-main-less')
-          );
-      }
-
       function shortcode_settings(){
 
-          $this->add_panel( 'image_settings_panel' , array(
-              'title'         =>  __('Image Settings',"site-editor")  ,
-              'capability'    => 'edit_theme_options' ,
-              'type'          => 'default' ,
-              'description'   => '' ,
-              'priority'      => 9 ,
+
+          $this->add_panel( 'image_settings_panel_outer' , array(
+              'title'                   =>  __('Image Settings',"site-editor")  ,
+              'capability'              => 'edit_theme_options' ,
+              'type'                    => 'inner_box' , 
+              'priority'                => 9 ,
+              'btn_style'               => 'menu' ,
+              'has_border_box'          => false ,
+              'icon'                    => 'sedico-image' ,
+              'field_spacing'           => 'sm'
           ) );
 
+          $this->add_panel( 'image_settings_panel' , array(
+              'title'                   =>  __('Image Settings',"site-editor")  ,
+              'capability'              => 'edit_theme_options' ,
+              'type'                    => 'default' ,
+              'parent_id'               => "image_settings_panel_outer",
+              'priority'                => 9 , 
+          ) );          
+
           $params = array(
-              'change_image_panel' => array(
-                  "type"          => "sed_image" ,
-                  "label"         => __("Select Image", "site-editor"),
-                  "panel_type"    => "default" ,
-                  'priority'      => 1 ,
-              ),
               'full_src'    => array(
                   'label'         => __('Image For Light Box', 'site-editor'),
                   'description'   => __('Big Image Url', 'site-editor'),
                   'type'          => 'text',
                   'panel'         => 'sed_select_image_panel' ,
+                  'has_border_box'      => false ,
+                  'priority'            => 100 ,
                   'dependency' => array(
                       'queries'  =>  array(
                           "relation"     =>  "AND" ,
@@ -150,54 +152,69 @@ class PBImageShortcode extends PBShortcodeClass{
 
                   )
               ),
+
               'image_click' => array(
                   'type' => 'select',
                   'label' => __('When image is clicked', 'site-editor'),
                   'description'  => __('This option allows you to set what is going to happen when the image is clicked.', 'site-editor'),
+                  'has_border_box'      => false ,
                   'choices'   =>array(
                       'default'             => __('Do Nothing', 'site-editor'),
                       'link_mode'           => __('Open Link', 'site-editor'),
                       'expand_mode'         => __('Open Expand Mode', 'site-editor'),
-                      'link_expand_mode'    => __('Both Link & Expand Mode', 'site-editor'),
+                      //'link_expand_mode'    => __('Both Link & Expand Mode', 'site-editor'),
                   ),
                   'panel'    => 'image_settings_panel',
               ),
+
+              'lightbox_id' =>  array(
+                  'type'            => 'text',
+                  'label'           => __('Lightbox ID', 'site-editor'),
+                  'description'     => __('Set group light box for images', 'site-editor'),
+                  'has_border_box'      => false ,
+                  'panel'           => 'image_settings_panel',
+                  'dependency' => array(
+                      'queries'  =>  array(
+                          array(
+                              "key"       => "image_click" ,
+                              "value"     => "expand_mode" ,
+                              "compare"   => "=="
+                          )
+                      )
+                  )
+              ),
+
               'title' =>  array(
-                  'type'          => 'text',
-                  'label'         => __('Title', 'site-editor'),
-                  'description'   => __('This option allows you to set a title for your image.', 'site-editor'),
-                  'panel'    => 'image_settings_panel',
+                  'type'                => 'text',
+                  'label'               => __('Title', 'site-editor'),
+                  'description'         => __('This option allows you to set a title for your image.', 'site-editor'),
+                  'has_border_box'      => false ,
+                  'panel'               => 'image_settings_panel',
               ),
-              'description' =>  array(
-                  'type'          => 'textarea',
-                  'label'         => __('Description', 'site-editor'),
-                  'description'   => __('This option allows you to add a description for your image.', 'site-editor'),
-                  'panel'    => 'image_settings_panel',
+
+              'change_image_panel' => array(
+                  "type"                => "sed_image" ,
+                  "label"               => __("Select Image", "site-editor"),
+                  "panel_type"          => "default" ,
+                  'parent_id'           => 'image_settings_panel_outer'
+              ),              
+
+              "link" => array(
+                  "type"                => "link" ,
+                  "label"               => __("Link Panel Settings", "site-editor"),
+                  "panel_type"          => "default" ,
+                  'parent_id'           => 'image_settings_panel_outer',
               ),
-              'alt' => array(
-                  'type' => 'text',
-                  'label' => __('Alt Text', 'site-editor'),
-                  'description'  => __('This option allows you to show a text for your images which will be shown if the image could not be loaded. This also helps your site’s SEO.', 'site-editor'),
-                  'panel'    => 'image_settings_panel',
-              ),
-              'link_to' => array(
-                  "type"          => "link" ,
-                  "label"         => __("Link Panel Settings", "site-editor"),
-              ),
-              'spacing' => array(
-                  "type"          => "spacing" ,
-                  "label"         => __("Spacing", "site-editor"),
-                  "default"       => "10 0 10 0" ,
-              ),
-              "align"  =>  array(
-                  "type"          => "align" ,
-                  "label"         => __("Align", "site-editor"),
-                  "default"       => "center"
-              ),
+
               "animation"  =>  array(
-                  "type"          => "animation" ,
-                  "label"         => __("Animation Settings", "site-editor"),
-              ),
+                  "type"                => "animation" ,
+                  "label"               => __("Animation Settings", "site-editor"),
+                  'button_style'        => 'menu' ,
+                  'has_border_box'      => false ,
+                  'icon'                => 'sedico-animation' ,
+                  'field_spacing'       => 'sm' ,
+                  'priority'            => 530 ,
+              )
 
           );
 
@@ -212,26 +229,8 @@ class PBImageShortcode extends PBShortcodeClass{
               'module-image' , 'sed_current' ,
               array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Module Container" , "site-editor") ) ,
               array(
-              'image-container' , '.img' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Image Container" , "site-editor") ) ,
-              array(
               'img' , 'img' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Image" , "site-editor") ) ,
-              array(
-              'hover_effect' , '.info' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Hover Effect" , "site-editor") ) ,
-              array(
-              'hover_effect_inner' , '.info .info-back' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Hover Effect Inner" , "site-editor") ) ,
-              array(
-              'title' , '.info h3' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Title" , "site-editor") ) ,
-              array(
-              'description' , '.info p' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Description" , "site-editor") ) ,
-              array(
-              'icons' , '.info a span' ,
-              array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ,'text_shadow' , 'font' ,'line_height','text_align' ) , __("Icons" , "site-editor") ) ,
+              array( 'background','border','border_radius' ,'padding','trancparency','shadow' ) , __("Image" , "site-editor") ) ,
 
           );
       }
@@ -249,9 +248,6 @@ class PBImageShortcode extends PBShortcodeClass{
 
 }
 
-
-
-
 new PBImageShortcode();
 global $sed_pb_app;
 
@@ -264,7 +260,5 @@ $sed_pb_app->register_module(array(
     "shortcode"   => "sed_image",
     "tpl_type"    => "underscore" ,
     "show_ui_in_toolbar"    =>  false ,
-    //"js_plugin"   => 'image/js/image-plugin.min.js',
-    "js_module"   => array( 'sed_image_module_script', 'image/js/image-module.min.js', array('sed-frontend-editor') )
 ));
                  

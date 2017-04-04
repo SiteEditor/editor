@@ -4,6 +4,7 @@
     outline: medium none;
     margin: 0 auto;
     position: relative;
+    font-size: 0;
 }
 
 .module-separator .separator  {
@@ -29,8 +30,9 @@
 .module-separator .spr-horizontal {
     width: 100%;
     height: 0px;
-    display: block;
-    margin: 0
+    display: inline-block;
+    margin: 0;
+    font-size: 14px;
 }
 
 .module-separator .spr-horizontal.spr-double {

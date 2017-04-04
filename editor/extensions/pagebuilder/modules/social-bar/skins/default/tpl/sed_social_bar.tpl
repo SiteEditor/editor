@@ -1,5 +1,5 @@
 <div {{sed_attrs}} class="{{className}}  module spcial-bar social-bar-default">
-	<ul class="social-bar-default social-bar-{{layout_mode}}">
+	<ul class="social-bar-{{layout_mode}}">
 		{{{content}}}
 	</ul>
 	<style type="text/css">
