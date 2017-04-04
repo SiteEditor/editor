@@ -261,8 +261,6 @@ class PBPageTitleShortcode extends PBShortcodeClass{
 
 new PBPageTitleShortcode();
 
-include SED_PB_MODULES_PATH . '/page-title/sub-shortcode/sub-shortcode.php';
-
 global $sed_pb_app;
 
 $sed_pb_app->register_module(array(
