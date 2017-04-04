@@ -1301,7 +1301,8 @@
                     var template = api.template("tmpl-sed-pb-element-handle"),
                         html = template({
                             type: type,
-                            actions: actions
+                            actions: actions,
+                            title : _Elm.hasClass( "sed-pb-row-module-special" ) ? "Row" : ""
                         });
 
                     dnp = $(html).appendTo(_Elm);

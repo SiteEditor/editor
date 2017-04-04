@@ -79,12 +79,20 @@
  </div>
 </script>
 
-<!-- add toolbar to Dynamic and Static Modules --->
+<!-- add toolbar to Dynamic and Static Modules -->
 <script type="text/html" id="tmpl-sed-pb-element-handle">
     <# $ = jQuery; #>
     <div class="sed-handle-sort-row sed-handle-sort-row-btm ">
 
         <div class="drag-content-sty drag-content-sty-active">
+
+            <# if( title ) { #>
+                <div class="sed_module_title">
+                    <div class="drag-content" >
+                        <?php echo __( "Row" , "site-editor");?>
+                    </div>
+                </div>
+            <# } #>
 
             <# if( $.inArray( 'edit' , actions )  > -1 ) { #>
                 <div class="setting_btn sed_setting_btn_cmp">
@@ -131,7 +139,7 @@
     <div class="sed-pb-handle-row-bottom "  ></div>
     <div class="sed-pb-handle-row-left "  > </div>
 </script>
-<!-- end add toolbar to Dynamic and Static Modules --->
+<!-- end add toolbar to Dynamic and Static Modules -->
 
 <script type="text/html" id="sed-static-module-handle-tmpl">
   <div class="sed-static-module-action-bar">
