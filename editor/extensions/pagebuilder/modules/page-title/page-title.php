@@ -46,13 +46,15 @@ class PBPageTitleShortcode extends PBShortcodeClass{
     }
 
     function get_atts(){
+
         $atts = array(
             'length'            => 'boxed' ,
             'show_sub_title'    => true ,
-            'sub_title'         => ''
+            'sub_title'         => __("Site Editor is the most powerful editor for WordPress","site-editor")
         );
 
         return $atts;
+
     }
 
     function add_shortcode( $atts , $content = null ){
