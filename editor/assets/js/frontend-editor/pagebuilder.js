@@ -1071,13 +1071,13 @@
                 //containment: '[sed-role="content"]',
                 appendTo: document.body,
                 containment: 'body',
-                cursorAt: { top: 15,left: 114 },
+                cursorAt: { top: 15,left: 114 },//
                 cursor: "move",
                 connectWith: '.sed-pb-component,.sed-pb-main-component',
                 cancel: ".empty-column",
                 items : ">.sed-row-pb" ,
                 zIndex: 1070 ,
-                revert : true ,
+                //revert : true ,
                 //cursorAt: { left: 5 },
                 //forceHelperSize: true,
                 //forcePlaceholderSize: true,
@@ -1096,6 +1096,12 @@
 
                     //$(".sed-app-editor #site-editor-main-part").css("padding" , "25px 0 40px");
                     $("body").addClass("module-dragging-mode");
+
+                    /*if( ui.item.hasClass("sed-row-wide") ){
+                        $( this ).sortable( "option", "cursorAt", { top: 15,left: 194 } );
+                    }else{
+                        $( this ).sortable( "option", "cursorAt", { top: 15,left: 114 } );
+                    }*/
 
                     //for sub_theme module-----
                     api.Events.trigger( "moduleSortableStartEvent" , ui );
