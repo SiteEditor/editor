@@ -213,6 +213,10 @@
 .sed-row-pb.sed-pb-row-module-special > .sed-handle-sort-row .drag-content-sty {
     top: -45px;
 }
+.sed-row-pb.sed-pb-row-module-special .sed-row-pb.sed-pb-row-module-special > .sed-handle-sort-row .drag-content-sty {
+    top: -30px;
+}
+
 .sed-row-pb.sed-parent-highlight-row > .sed-handle-sort-row .drag-content-sty {
 }
 
