@@ -1227,8 +1227,7 @@
         modulesHandles: function(){
             var self = this;
 
-            var moduleSelectors = [ '.sed-bp-element[sed_model_id]' ] ,
-                moduleHandlers = {};
+            var moduleSelectors = [ '.sed-bp-element[sed_model_id]' ];
 
             $.each( api.settings.staticModules , function( id , module ){
                 if( !_.isUndefined( module.selector ) ){
@@ -1251,6 +1250,102 @@
             });
 
             console.log( "------------moduleSelectors-------------" , moduleSelectors );
+
+            var _setModuleActions = function( _Elm ){
+
+                if( _Elm.hasClass("sed-bp-element") && _.isUndefined( _Elm.data( "sedModuleType" ) ) ){
+
+                    var elementId       = _Elm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
+                        shortcode       = api.contentBuilder.getShortcode( elementId ) ,
+                        ModuleActions   = api.shortcodes[shortcode.tag]['actions'];
+
+                    _Elm.data( "sedModuleAction" , ModuleActions );
+
+                }
+
+            };
+
+            var _setModuleHandles = function( _Elm ){
+
+                var type ,
+                    actions = _Elm.data( "sedModuleAction" ).slice();
+
+                if( !_.isUndefined( _Elm.data( "themeId" ) ) ){
+
+                    type = "public";
+
+                    var index = $.inArray( "move" , actions );
+
+                    if( index > -1 ){
+                        actions.splice( index , 1 );
+                    }
+
+                }else if( _Elm.hasClass( "sed-static-module" ) ){
+
+                    type = "static";
+
+                }else{
+
+                    type = "normal";
+
+                }
+
+                var dnp;
+
+                if( _.isUndefined( _Elm.data( "sedModuleType" ) ) || _Elm.data( "sedModuleType" ) != type ) {
+
+                    if( !_.isUndefined( _Elm.data( "sedModuleType" ) ) ){
+                        _Elm.find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").remove();
+                    }
+
+                    var template = api.template("tmpl-sed-pb-element-handle"),
+                        html = template({
+                            type: type,
+                            actions: actions
+                        });
+
+                    dnp = $(html).appendTo(_Elm);
+
+                    _Elm.data( "sedModuleType" , type );
+
+                }else{
+                    dnp = _Elm.find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left");
+                }
+
+                if( $.inArray( 'remove' , actions ) > -1 )
+                    dnp.find('.remove_pb_btn').data( "moduleRelId" , _Elm.attr("sed_model_id") );
+
+                return dnp;
+
+            };
+
+            var _clearHandles = function(){
+
+                var _modulesElm = $('.sed-bp-element , .sed-static-module');
+
+                _modulesElm.find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
+
+                _modulesElm.removeClass("sed-current-highlight-row").removeClass("sed-parent-highlight-row");
+
+            };
+
+            var _setModuleClasses = function( _Elm ){
+
+                if( _Elm.offset().top <= 11 )
+                    _Elm.addClass("sed-pb-row-top-site");
+                else
+                    _Elm.removeClass("sed-pb-row-top-site");
+
+                var offsetLeft = _Elm.offset().left ,
+                    offsetRight = $("body").outerWidth(true) - _Elm.outerWidth() - offsetLeft ;
+
+                if( offsetLeft <= 13 || offsetRight <= 13 )
+                    _Elm.addClass("sed-pb-row-full-width");
+                else
+                    _Elm.removeClass("sed-pb-row-full-width");
+
+            };
+
 
             var moduleSelectorsString = moduleSelectors.join(",");
 
@@ -1287,91 +1382,44 @@
 
                 element.not("[data-type-row='draggable-element']").hover(function(e){
                     //api.styleEditor.editorState == "on" ||
-                    if(self.resizing === true)
+                    if( self.resizing === true )
                         return ;
 
                     e.stopPropagation();
 
-                    if( element.hasClass("sed-bp-element") && _.isUndefined( $(this).data( "sedModuleType" ) ) ){
+                    _clearHandles();
 
-                        var elementId = element.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
-                            shortcode = api.contentBuilder.getShortcode( elementId ) ,
-                            ModuleActions = api.shortcodes[shortcode.tag]['actions'];
+                    _setModuleActions( $(this) );
 
-                        element.data( "sedModuleAction" , ModuleActions );
+                    var dnp = _setModuleHandles( $(this) );
 
-                    }
-
-                    var type , actions;
-
-                    if( !_.isUndefined( $(this).data( "themeId" ) ) ){
-                        type = "public";
-                        actions = $(this).data( "sedModuleAction" ).slice();
-
-                        var index = $.inArray( "move" , actions );
-
-                        if( index > -1 ){
-                            actions.splice( index , 1 );
-                        }
-
-                    }else if( $(this).hasClass( "sed-static-module" ) ){
-                        type = "static";
-                        actions = $(this).data( "sedModuleAction" ).slice() ;
-                    }else{
-                        type = "normal";
-                        actions = $(this).data( "sedModuleAction" ).slice();
-                    }
-
-                    if( _.isUndefined( $(this).data( "sedModuleType" ) ) || $(this).data( "sedModuleType" ) != type ) {
-
-                        if( !_.isUndefined( $(this).data( "sedModuleType" ) ) ){
-                            $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").remove();
-                        }
-
-                        var template = api.template("tmpl-sed-pb-element-handle"),
-                            html = template({
-                                type: type,
-                                actions: actions
-                            });
-
-                        var dnp = $(html).appendTo($(this));
-
-                        $(this).data( "sedModuleType" , type );
-
-                    }else{
-                        var dnp = $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left");
-                    }
-
-                    if( $.inArray( 'remove' , actions ) > -1 )
-                        dnp.find('.remove_pb_btn').data( "moduleRelId" , element.attr("sed_model_id") );
-
-
-                    $('.sed-bp-element , .sed-static-module').find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
-
-                    $('.sed-bp-element , .sed-static-module').removeClass("sed-current-highlight-row").removeClass("sed-parent-highlight-row");
-
-                    if( element.offset().top <= 11 )
-                        element.addClass("sed-pb-row-top-site");
-                    else
-                        element.removeClass("sed-pb-row-top-site");
-
-                    var offsetLeft = element.offset().left ,
-                        offsetRight = $("body").outerWidth(true) - element.outerWidth() - offsetLeft ;
-
-                    if( offsetLeft <= 13 || offsetRight <= 13 )
-                        element.addClass("sed-pb-row-full-width");
-                    else
-                        element.removeClass("sed-pb-row-full-width");
-
-                    dnp.show();
+                    _setModuleClasses( $(this) );
 
                     $(this).addClass("sed-current-highlight-row");
 
-                    $(this).parents(".sed-row-pb:first").addClass("sed-parent-highlight-row");
+                    dnp.show();
 
-                    $(this).parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
+                    var _parentElm = $(this).parents(".sed-row-pb:first");
+
+                    var _parentElementId = _parentElm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
+                        _parentShortcode       = api.contentBuilder.getShortcode( _parentElementId );
+
+                    if( _parentElm.length == 1 && _parentShortcode.tag != "sed_content_layout" ) {
+
+                        _setModuleActions( _parentElm );
+
+                        var _parentDnp = _setModuleHandles( _parentElm );
+
+                        _setModuleClasses( _parentElm );
+
+                        _parentElm.addClass("sed-parent-highlight-row");
+
+                        _parentDnp.show();
+
+                    }
 
                 },function(e){
+
                     //api.styleEditor.editorState == "on" ||
                     if( self.resizing === true)
                         return ;
@@ -1386,17 +1434,30 @@
 
                     //$(this).parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
 
-                    if( $(this).parents(".sed-row-pb:first").length == 1 ) {
+                    var _parentElm = $(this).parents(".sed-row-pb:first");
 
-                        $(this).parents(".sed-row-pb:first").removeClass("sed-parent-highlight-row");
+                    var _parentElementId = _parentElm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
+                        _parentShortcode       = api.contentBuilder.getShortcode( _parentElementId );
 
-                        $(this).parents(".sed-row-pb:first").addClass("sed-current-highlight-row");
+                    if( _parentElm.length == 1 && _parentShortcode.tag != "sed_content_layout"  ) {
 
-                        if( $(this).parents(".sed-row-pb:first").parents(".sed-row-pb:first").length == 1 ) {
+                        _parentElm.removeClass("sed-parent-highlight-row");
 
-                            $(this).parents(".sed-row-pb:first").parents(".sed-row-pb:first").addClass("sed-parent-highlight-row");
+                        _parentElm.addClass("sed-current-highlight-row");
 
-                            $(this).parents(".sed-row-pb:first").parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
+                        var _grandParentElm = _parentElm.parents(".sed-row-pb:first");
+
+                        if( _grandParentElm.length == 1 ) {
+
+                            _setModuleActions( _grandParentElm );
+
+                            var _grandParentDnp = _setModuleHandles( _grandParentElm );
+
+                            _setModuleClasses( _grandParentElm );
+
+                            _grandParentElm.addClass("sed-parent-highlight-row");
+
+                            _grandParentDnp.show();
 
                         }
 
@@ -1416,7 +1477,7 @@
 
                     cid = id + "-cover";
 
-                    $('<div id="' + cid + '" class="module-element-force-cover"></div').insertAfter( $(this) )
+                    $('<div id="' + cid + '" class="module-element-force-cover"></div>').insertAfter( $(this) )
                 }else{
                     id = $(this).attr("sed_model_id");
 
@@ -1434,7 +1495,7 @@
 
                     cid = id + "-cover";
 
-                    var cover = $('<div id="' + cid + '" class="module-element-force-cover"></div').insertAfter( $(this) );
+                    var cover = $('<div id="' + cid + '" class="module-element-force-cover"></div>').insertAfter( $(this) );
 
                     cover.addClass( $moduleContextmenuId + "_cover");
                 }
