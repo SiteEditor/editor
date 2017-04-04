@@ -1261,7 +1261,7 @@
 
                     _Elm.data( "sedModuleAction" , ModuleActions );
 
-                    //console.log()
+                    console.log( "-------Handle Module------" , shortcode.tag , api.shortcodes[shortcode.tag] );
 
                 }
 
@@ -1300,11 +1300,14 @@
                         _Elm.find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").remove();
                     }
 
+                    var elementId       = _Elm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
+                        shortcode       = api.contentBuilder.getShortcode( elementId ) ;
+
                     var template = api.template("tmpl-sed-pb-element-handle"),
                         html = template({
                             type: type,
                             actions: actions,
-                            title : _Elm.hasClass( "sed-pb-row-module-special" ) ? "Row" : ""
+                            title : _Elm.hasClass( "sed-pb-row-module-special" ) ? api.shortcodes[shortcode.tag].title : ""
                         });
 
                     dnp = $(html).appendTo(_Elm);
@@ -1428,14 +1431,13 @@
                         return ;
 
                     //e.stopPropagation();
-                    if( $(this).parents(".sed-bp-element:first , .sed-static-module:first").length > 0 )
+                    /*if( $(this).parents(".sed-bp-element:first , .sed-static-module:first").length > 0 )
                         $(this).parents(".sed-bp-element:first , .sed-static-module:first").eq(0).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
+                    */
 
                     $(this).find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
 
                     $(this).removeClass("sed-current-highlight-row");
-
-                    //$(this).parents(".sed-row-pb:first").find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").hide();
 
                     var _parentElm = $(this).parents(".sed-row-pb:first");
 

@@ -89,7 +89,7 @@
             <# if( title ) { #>
                 <div class="sed_handle_module_title">
                     <div class="drag-content" >
-                        <?php echo __( "Row" , "site-editor");?>
+                        {{title}}
                     </div>
                 </div>
             <# } #>
