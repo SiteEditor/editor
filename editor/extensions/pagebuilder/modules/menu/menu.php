@@ -19,7 +19,7 @@ class PBMenuShortcode extends PBShortcodeClass{
                 "name"        => "sed_menu",                          //*require
                 "title"       => __("Menu","site-editor"),            //*require for toolbar
                 "description" => __("","site-editor"),
-                "icon"        => "sedico-promenu",                         //*require for icon toolbar
+                "icon"        => "sedico-md-menu",                         //*require for icon toolbar
                 "module"      =>  "menu" ,                             //*require
                 "scripts"           => array( 
                     array("menu-scripts" , SED_PB_MODULES_URL.'menu/js/scripts.js',array(),"1.0.0" , 1) 
@@ -88,7 +88,7 @@ class PBMenuShortcode extends PBShortcodeClass{
             'priority'                => 9 ,
             'btn_style'               => 'menu' ,
             'has_border_box'          => false ,
-            'icon'                    => 'sedico-image' ,
+            'icon'                    => 'sedico-md-menu' ,
             'field_spacing'           => 'sm'
         ) );
 
@@ -148,7 +148,7 @@ $sed_pb_app->register_module(array(
     "name"        => "menu",
     "title"       => __("Menu","site-editor"),
     "description" => __("","site-editor"),
-    "icon"        => "sedico-menu",
+    "icon"        => "sedico-md-menu",
     "shortcode"   => "sed_menu", 
     "transport"   => "ajax" ,
 ));

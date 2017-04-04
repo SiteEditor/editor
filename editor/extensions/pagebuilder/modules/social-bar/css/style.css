@@ -30,7 +30,7 @@
     margin-top: 2px;
 }
 
-.module.spcial-bar li a {
+.module.spcial-bar li .module-icons {
     display: block;
 }
 
@@ -40,5 +40,8 @@
     width: 1em;
     line-height: 1em;
     text-align: center; 
-    display: block;
+    display: block;    
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
 }

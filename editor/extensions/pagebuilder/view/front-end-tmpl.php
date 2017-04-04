@@ -58,7 +58,7 @@
                 </button>
             </div>
             <div class="drag_content">
-               <div><span class="sedico sedico-page-title"></span></div>
+               <div><span class="sedico sedico-website"></span></div>
                <div><h5>Drop and drop Module</h5></div>
             </div>
         </div>

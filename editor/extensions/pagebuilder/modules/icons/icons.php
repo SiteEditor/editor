@@ -123,47 +123,12 @@ class PBIconsShortcode extends PBShortcodeClass{
                 'panel'               => 'icon_settings_panel' 
             ),
 
-            'background_color' => array(
-                "type"                => "background-color" ,
-                "label"               => __("Background Color", "site-editor"),
-                "description"         => __("Add Background Color For Element", "site-editor") ,
-                "category"            => 'style-editor' ,
-                "selector"            => '.hi-icon' ,
-                "default"             => 'transparent' ,
-                'has_border_box'      => false , 
-                'panel'               => 'icon_settings_panel',
-            ),    
-
-            'border_color' => array( 
-                "type"                => "color" , 
-                "label"               => __("Border Color", "site-editor"),
-                "description"         => __("Add Border Color For Element", "site-editor") ,
-                'has_border_box'      => false , 
-                'panel'               => 'icon_settings_panel',
-            ),      
-
-            'border_size' => array(                 
-                "type"                => "number",
-                "after_field"         => "px",
-                "label"               => __('Border Size', 'site-editor'),
-                "js_params"           =>  array(
-                    "min"             =>  0 ,
-                ),  
-                'has_border_box'      => false , 
-                'panel'               => 'icon_settings_panel',
-            ),  
-
             "link" => array(
                 "type"                => "link" ,
                 "label"               => __("Link Panel Settings", "site-editor"),
                 "panel_type"          => "default" ,
                 'parent_id'           => 'icon_settings_panel_outer',
             ),
-
-            /*'row_container' => array(
-                'type'                => 'row_container',
-                'label'               => __('Module Wrapper Settings', 'site-editor')
-            ),*/ 
 
             "animation"  =>  array(
                 "type"                => "animation" ,
@@ -185,12 +150,12 @@ class PBIconsShortcode extends PBShortcodeClass{
     function custom_style_settings(){
         return array(
 
-           array(
-            'social-icon' , '.hi-icon' ,
-            array('border_radius' ,'padding') , __("Icon Container" , "site-editor") ) ,
+           array( 
+            'icon' , '.hi-icon' ,
+            array('background','gradient','border','border_radius' ,'padding', 'font') , __("Icon Container" , "site-editor") ) ,
 
             array(
-            'social-icon-hover' , '.hi-icon:hover' ,
+            'icon-hover' , '.hi-icon:hover' ,
             array( 'background','gradient','border','border_radius', 'font') , __("Icon Hover" , "site-editor") ) ,
 
         );

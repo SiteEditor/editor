@@ -94,17 +94,6 @@ class PBSocialBarShortcode extends PBShortcodeClass{
         ) );
 
         $params = array(
-            /*"align_icon"   => array(
-                "type"  => "select",
-                "label" => __("Align Icons","site-editor"),
-                "description"  => __("","site-editor"),
-                "choices"   => array(
-                    "left"       => __("Left","site-editor"),
-                    "right"      => __("Right","site-editor"),
-                    "center"     => __("Center","site-editor"),
-                ),
-                "panel"     => "social_bar_settings_panel",
-            ),*/
             "layout_mode"   => array(
                 "type"  => "select",
                 "label" => __("Layout Mode","site-editor"),
@@ -128,16 +117,6 @@ class PBSocialBarShortcode extends PBShortcodeClass{
                 'has_border_box'          => false ,
                 "panel"     => "social_bar_settings_panel",
       		),
-            /*"size"   => array(
-      			'type' => 'number',
-                "after_field"       => "px",
-                "label" => __("Icons Size","site-editor"),
-                "description"  => __("","site-editor"),
-                'js_params'     =>  array(
-                    'min' => 0
-                ),
-                "panel"     => "social_bar_settings_panel",
-            ),*/
             "margin"   => array(
       			'type' => 'number',
                 "after_field"       => "px",
@@ -151,24 +130,28 @@ class PBSocialBarShortcode extends PBShortcodeClass{
 
             ),
 
-      		'group_icon_size' => array(
-      			'type' => 'number',
-                "after_field"  => "px",
-      			'label' => __('Icons Size', 'site-editor'),
-      			'description'  => __('This option allows you to set an arbitrary size for your icons.', 'site-editor'),
-                'js_params' => array(
-                    'min'     => 0
-                ),
-                'has_border_box'          => false ,
-                "panel"     => "social_bar_settings_panel",
-        	),
-            'group_icon_color' => array(
-       			'type'  => 'color',
-      			'label' => __('Icons Color', 'site-editor'),
-      			'description'  => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
-                'has_border_box'          => false ,
-                "panel"     => "social_bar_settings_panel",
+            'font_size' => array(
+                "type"                => "font-size" , 
+                "label"               => __("Icons Size", "site-editor"),
+                "description"         => __("This option allows you to set an arbitrary size for your icons.", "site-editor") ,
+                "category"            => 'style-editor' ,
+                "selector"            => 'li .hi-icon' ,
+                "default"             => '' , 
+                'has_border_box'      => false , 
+                'panel'               => 'social_bar_settings_panel'
+            ),  
+
+            'font_color' => array(
+                "type"                => "font-color" , 
+                'label'               => __('Icons Color', 'site-editor'),
+                'description'         => __('This option allows you to set whatever color you would like for the icons.', 'site-editor'),
+                "category"            => 'style-editor' ,
+                "selector"            => 'li .hi-icon' ,
+                "default"             => '' ,
+                'has_border_box'      => false , 
+                'panel'               => 'social_bar_settings_panel' 
             ),
+
 
             "skin"  =>  array(
                 "type"                => "skin" ,
@@ -203,11 +186,11 @@ class PBSocialBarShortcode extends PBShortcodeClass{
         return array(
 
             array(
-            'icons' , 'li a' ,
+            'social-icons' , 'li .hi-icon' ,
             array( 'background','gradient','border','border_radius' ,'padding','margin','shadow', 'font') , __("Icons Container" , "site-editor") ) ,
 
             array(
-            'icons-hover' , 'li a:hover' ,
+            'social-icons-hover' , 'li .hi-icon:hover' , 
             array( 'background','gradient','border','border_radius','shadow', 'font') , __("Icons Container Hover" , "site-editor") ) ,
 
         );

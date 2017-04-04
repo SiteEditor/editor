@@ -1,108 +1,112 @@
-.spcial-bar.social-bar-skin2 li a {
+.spcial-bar.social-bar-skin2 li .hi-icon {
     color: inherit;
     background: transparent;
     -webkit-border-radius: 99px;
-    padding: 8px;
+    padding: 0;
     border-radius: 100%;
     border: 1px solid transparent;
     text-align: center;
+    display: block;
+    height: 1.8em;
+    width: 1.8em;
+    line-height: 1.7em;
     -webkit-transition: all 500ms;
     -moz-transition: all 500ms;
     -ms-transition: all 500ms;
     -o-transition: all 500ms;
-    transition: all 500ms
+    transition: all 500ms;
 } 
 
-.spcial-bar.social-bar-skin2 li a:hover {
+.spcial-bar.social-bar-skin2 li .hi-icon:hover {
     color: #fff
 }
 
-.spcial-bar.social-bar-skin2 .vine a {
+.spcial-bar.social-bar-skin2 .vine .hi-icon {
     color: #7ac043;
     border-color: #7ac043
 }
 
-.spcial-bar.social-bar-skin2 .vine a:hover {
+.spcial-bar.social-bar-skin2 .vine .hi-icon:hover {
     background-color: #7ac043;
     border-color: #7ac043
 }
 
-.spcial-bar.social-bar-skin2 .linked-in a {
+.spcial-bar.social-bar-skin2 .linked-in .hi-icon {
     color: #0079bc;
     border-color: #0079bc
 }
 
-.spcial-bar.social-bar-skin2 .linked-in a:hover {
+.spcial-bar.social-bar-skin2 .linked-in .hi-icon:hover {
     background-color: #0079bc;
     border-color: #0079bc
 }
 
-.spcial-bar.social-bar-skin2 .tumblr a {
+.spcial-bar.social-bar-skin2 .tumblr .hi-icon {
     color: #395976;
     border-color: #395976
 }
 
-.spcial-bar.social-bar-skin2 .tumblr a:hover {
+.spcial-bar.social-bar-skin2 .tumblr .hi-icon:hover {
     background-color: #395976;
     border-color: #395976
 }
 
-.spcial-bar.social-bar-skin2 .facebook a {
+.spcial-bar.social-bar-skin2 .facebook .hi-icon {
     color: #3e5a9b;
     border-color: #3e5a9b
 }
 
-.spcial-bar.social-bar-skin2 .facebook a:hover {
+.spcial-bar.social-bar-skin2 .facebook .hi-icon:hover {
     background-color: #3e5a9b;
     border-color: #3e5a9b
 }
 
-.spcial-bar.social-bar-skin2 .pinterest a {
+.spcial-bar.social-bar-skin2 .pinterest .hi-icon {
     color: #c42122;
     border-color: #c42122
 }
 
-.spcial-bar.social-bar-skin2 .pinterest a:hover {
+.spcial-bar.social-bar-skin2 .pinterest .hi-icon:hover {
     background-color: #c42122;
     border-color: #c42122
 }
 
-.spcial-bar.social-bar-skin2 .dribbble a {
+.spcial-bar.social-bar-skin2 .dribbble .hi-icon {
     color: #f4498b;
     border-color: #f4498b
 }
 
-.spcial-bar.social-bar-skin2 .dribbble a:hover {
+.spcial-bar.social-bar-skin2 .dribbble .hi-icon:hover {
     background-color: #f4498b;
     border-color: #f4498b
 }
 
-.spcial-bar.social-bar-skin2 .twitter a {
+.spcial-bar.social-bar-skin2 .twitter .hi-icon {
     color: #28a9e0;
     border-color: #28a9e0
 }
 
-.spcial-bar.social-bar-skin2 .twitter a:hover {
+.spcial-bar.social-bar-skin2 .twitter .hi-icon:hover {
     background-color: #28a9e0;
     border-color: #28a9e0
 }
 
-.spcial-bar.social-bar-skin2 .google-plus a {
+.spcial-bar.social-bar-skin2 .google-plus .hi-icon {
     color: #dc4937;
     border-color: #dc4937
 }
 
-.spcial-bar.social-bar-skin2 .google-plus a:hover {
+.spcial-bar.social-bar-skin2 .google-plus .hi-icon:hover {
     background-color: #dc4937;
     border-color: #dc4937
 }
 
-.spcial-bar.social-bar-skin2 .behance a {
+.spcial-bar.social-bar-skin2 .behance .hi-icon {
     color: #0093fb;
     border-color: #0093fb
 }
 
-.spcial-bar.social-bar-skin2 .behance a:hover {
+.spcial-bar.social-bar-skin2 .behance .hi-icon:hover {
     background-color: #0093fb;
     border-color: #0093fb
 }
