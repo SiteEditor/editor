@@ -1216,11 +1216,12 @@
 
 
         disablePostsFullContentEditing : function(){
-            $(".sed-pb-post-container-disable-editing").find(".sed-bp-element").attr( "sed-disable-editing" , "yes" );
-            $(".sed-pb-post-container-disable-editing").find('[sed-module-cover="has-cover"]').attr( "sed-disable-editing" , "yes" );
-            $(".sed-pb-post-container-disable-editing").find('.sed-column-pb').attr( "sed-disable-editing" , "yes" );
-            $(".sed-pb-post-container-disable-editing").find('.sed-pb-component').addClass('sed-pb-component-no-editable').removeClass('sed-pb-component');
-            $(".sed-pb-post-container-disable-editing").find( ".sed-pb-module-container" ).attr( "sed-disable-editing" , "yes" );
+            var _Elm = $(".sed-pb-post-container-disable-editing");
+            _Elm.find(".sed-bp-element").attr( "sed-disable-editing" , "yes" );
+            _Elm.find('[sed-module-cover="has-cover"]').attr( "sed-disable-editing" , "yes" );
+            _Elm.find('.sed-column-pb').attr( "sed-disable-editing" , "yes" );
+            _Elm.find('.sed-pb-component').addClass('sed-pb-component-no-editable').removeClass('sed-pb-component');
+            _Elm.find( ".sed-pb-module-container" ).attr( "sed-disable-editing" , "yes" );
 
         },
 
@@ -1303,11 +1304,15 @@
                     var elementId       = _Elm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
                         shortcode       = api.contentBuilder.getShortcode( elementId ) ;
 
+                    var _handleTitle = _Elm.hasClass( "sed-pb-row-module-special" ) ? api.shortcodes[shortcode.tag].title : "";
+
+                    _handleTitle = ( type == "static" ) ? api.settings.staticModules[_Elm.data( "staticModuleId" )].title : _handleTitle;
+
                     var template = api.template("tmpl-sed-pb-element-handle"),
                         html = template({
-                            type: type,
-                            actions: actions,
-                            title : _Elm.hasClass( "sed-pb-row-module-special" ) ? api.shortcodes[shortcode.tag].title : ""
+                            type        : type,
+                            actions     : actions,
+                            title       : _handleTitle
                         });
 
                     dnp = $(html).appendTo(_Elm);
@@ -1387,6 +1392,7 @@
                 }
 
                 element.not("[data-type-row='draggable-element']").hover(function(e){
+
                     //api.styleEditor.editorState == "on" ||
                     if( self.resizing === true )
                         return ;
@@ -1405,22 +1411,30 @@
 
                     dnp.show();
 
-                    var _parentElm = $(this).parents(".sed-row-pb:first");
+                    if( ! $(this).hasClass( "sed-static-module" ) ) {
 
-                    var _parentElementId = _parentElm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
-                        _parentShortcode       = api.contentBuilder.getShortcode( _parentElementId );
+                        var _parentElm = $(this).parents(".sed-row-pb:first");
 
-                    if( _parentElm.length == 1 && _parentShortcode.tag != "sed_content_layout" ) {
+                        if ( _parentElm.length == 1 ) {
 
-                        _setModuleActions( _parentElm );
+                            var _parentElementId = _parentElm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id"),
+                                _parentShortcode = api.contentBuilder.getShortcode(_parentElementId);
 
-                        var _parentDnp = _setModuleHandles( _parentElm );
+                            _setModuleActions(_parentElm);
 
-                        _setModuleClasses( _parentElm );
+                            var _parentDnp = _setModuleHandles(_parentElm);
 
-                        _parentElm.addClass("sed-parent-highlight-row");
+                            _setModuleClasses(_parentElm);
 
-                        _parentDnp.show();
+                            if ( _parentShortcode.tag != "sed_content_layout" ) {
+
+                                _parentElm.addClass("sed-parent-highlight-row");
+
+                                _parentDnp.show();
+
+                            }
+
+                        }
 
                     }
 
@@ -1441,28 +1455,36 @@
 
                     var _parentElm = $(this).parents(".sed-row-pb:first");
 
-                    var _parentElementId = _parentElm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
-                        _parentShortcode       = api.contentBuilder.getShortcode( _parentElementId );
+                    if( _parentElm.length == 1 ) {
 
-                    if( _parentElm.length == 1 && _parentShortcode.tag != "sed_content_layout"  ) {
-
-                        _parentElm.removeClass("sed-parent-highlight-row");
+                        var _parentElementId = _parentElm.find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id") ,
+                            _parentShortcode = api.contentBuilder.getShortcode( _parentElementId );
 
                         _parentElm.addClass("sed-current-highlight-row");
 
-                        var _grandParentElm = _parentElm.parents(".sed-row-pb:first");
+                        if( _parentShortcode.tag != "sed_content_layout"  ) {
 
-                        if( _grandParentElm.length == 1 ) {
+                            _parentElm.removeClass("sed-parent-highlight-row");
 
-                            _setModuleActions( _grandParentElm );
+                            var _grandParentElm = _parentElm.parents(".sed-row-pb:first");
 
-                            var _grandParentDnp = _setModuleHandles( _grandParentElm );
+                            if (_grandParentElm.length == 1) {
 
-                            _setModuleClasses( _grandParentElm );
+                                _setModuleActions(_grandParentElm);
 
-                            _grandParentElm.addClass("sed-parent-highlight-row");
+                                var _grandParentDnp = _setModuleHandles(_grandParentElm);
 
-                            _grandParentDnp.show();
+                                _setModuleClasses(_grandParentElm);
+
+                                _grandParentElm.addClass("sed-parent-highlight-row");
+
+                                _grandParentDnp.show();
+
+                            }
+
+                        }else{
+
+                            _parentElm.find(">.sed-handle-sort-row,>.sed-pb-handle-row-top,>.sed-pb-handle-row-right,>.sed-pb-handle-row-bottom,>.sed-pb-handle-row-left").show();
 
                         }
 
