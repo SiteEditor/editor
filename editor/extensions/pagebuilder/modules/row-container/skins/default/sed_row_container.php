@@ -3,6 +3,24 @@
 $bg_type = 'other';
 $outer_html = "";
 
+if( $video_mp4 > 0 ){
+    if( get_post( $video_mp4 ) ) {
+        $video_mp4 = wp_get_attachment_url( $video_mp4 );
+    }
+}
+
+if( $video_ogg > 0 ){
+    if( get_post( $video_ogg ) ) {
+        $video_ogg = wp_get_attachment_url( $video_ogg );
+    }
+}
+
+if( $video_webm > 0 ){
+    if( get_post( $video_webm ) ) {
+        $video_webm = wp_get_attachment_url( $video_webm );
+    }
+}
+
 if( $video_mp4 || $video_ogg || $video_webm ) {
     $bg_type = 'video';
     $class .= " video-background";
@@ -46,12 +64,19 @@ if( $bg_type == 'video' ) {
 			$style .= sprintf( 'opacity:%s;', $video_overlay_opacity/100 );
 		}
 
-        $outer_html .= sprintf( '<div class="%s" style=""></div>', 'fullwidth-overlay' , $style );
+        $outer_html .= sprintf( '<div class="%s" style="%s"></div>', 'fullwidth-overlay' , $style );
     }
 
     $outer_html .= sprintf( '<div class="%s"><video %s>%s</video></div>', 'fullwidth-video', $video_attributes, $video_src );
 
     if( $video_preview_image ) {
+
+        if( $video_preview_image > 0 ){
+            if( get_post( $video_preview_image ) ) {
+                $video_preview_image = wp_get_attachment_url( $video_preview_image );
+            }
+        }
+
         $video_preview_image_style = sprintf('background-image:url(%s);', $video_preview_image );
         $outer_html .= sprintf( '<div class="%s" style="%s"></div>', 'fullwidth-video-image', $video_preview_image_style );
     }

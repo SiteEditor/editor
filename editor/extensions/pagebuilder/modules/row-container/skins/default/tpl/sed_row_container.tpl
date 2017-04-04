@@ -1,4 +1,7 @@
 <#
+
+var api = sedApp.editor ;
+
 var lengthClass;
 if(length == "boxed")
     lengthClass = "sed-row-boxed";
@@ -7,6 +10,29 @@ else
 
 var bg_type = 'other' ,
     outer_html = "";
+
+
+var _attachmentFilter = function( video_field_attr ){
+
+    var videoAttachment , videoUrl;
+
+    if( video_field_attr > 0 ){
+        videoAttachment = _.findWhere( api.attachmentsSettings , { id : parseInt( video_field_attr ) }  );
+    }
+
+    if( !_.isUndefined( videoAttachment ) && videoAttachment && !_.isUndefined( videoAttachment.url ) ){
+        videoUrl = videoAttachment.url;
+    }
+
+    return videoUrl;
+
+};
+
+video_mp4   = _attachmentFilter( video_mp4 );
+
+video_ogg   = _attachmentFilter( video_ogg );
+
+video_webm  = _attachmentFilter( video_webm );
 
 if( video_mp4 || video_ogg || video_webm ) {
     bg_type = 'video';
@@ -57,9 +83,13 @@ if( bg_type == 'video' ) {
     outer_html += '<div class="fullwidth-video"><video ' + video_attributes + '>' + video_src + '</video></div>';
 
     if( video_preview_image ) {
+
+        video_preview_image  = _attachmentFilter( video_preview_image );
+
         var video_preview_image_style = 'background-image:url(' + video_preview_image + ');';
         outer_html += '<div class="fullwidth-video-image" style="' + video_preview_image_style + '"></div>';
     }
+
 }
 
 

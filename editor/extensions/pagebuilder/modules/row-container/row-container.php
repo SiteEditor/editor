@@ -54,6 +54,14 @@ class PBRowContainerShortcode extends PBShortcodeClass{
         return $atts;
     }
 
+    public function get_media_atts(){
+
+        return array(
+            'video_mp4' , 'video_ogg' , 'video_webm' , 'video_preview_image'
+        );
+
+    }
+
     function styles(){
         return array(
             array( "row-container-style-main" , SED_PB_MODULES_URL . 'row-container/style/style.css' )
@@ -66,6 +74,26 @@ class PBRowContainerShortcode extends PBShortcodeClass{
 
         self::$sed_counter_id++;
         $module_html_id = "sed_row_container_module_html_id_" . self::$sed_counter_id;
+
+        if( $video_mp4 > 0 ){
+            if( get_post( $video_mp4 ) )
+                $this->set_media( $video_mp4 );
+        }
+
+        if( $video_ogg > 0 ){
+            if( get_post( $video_ogg ) )
+                $this->set_media( $video_ogg );
+        }
+
+        if( $video_webm > 0 ){
+            if( get_post( $video_webm ) )
+                $this->set_media( $video_webm );
+        }
+
+        if( $video_preview_image > 0 ){
+            if( get_post( $video_preview_image ) )
+                $this->set_media( $video_preview_image );
+        }
 
 
         if($length == "boxed")

@@ -47,7 +47,9 @@ class PBPageTitleShortcode extends PBShortcodeClass{
 
     function get_atts(){
         $atts = array(
-            'length'   => 'boxed' ,
+            'length'            => 'boxed' ,
+            'show_sub_title'    => true ,
+            'sub_title'         => ''
         );
 
         return $atts;
@@ -65,6 +67,7 @@ class PBPageTitleShortcode extends PBShortcodeClass{
 
 
     static function get_title(){
+
         /* === OPTIONS === */
         $text['home']     = __('Home','site-editor'); // text for the 'Home' link
         $text['category'] = "%s"; // text for a category page
@@ -173,6 +176,33 @@ class PBPageTitleShortcode extends PBShortcodeClass{
         ) );
 
         $params = array(
+
+            'show_sub_title' => array(
+                'label'             => __('Show Sub Title', 'site-editor'),
+                'type'              => 'switch',
+                'choices'           => array(
+                    "on"                =>    __("Yes" , "site-editor" ) ,
+                    "off"               =>    __("No" , "site-editor" ) ,
+                ),
+                "panel"             => "page_title_settings_panel" ,
+            ),
+
+            'sub_title' => array(
+                "type"              => "textarea" ,
+                "label"             => __("Sub Title", "site-editor"),
+                "description"       => __("This option allows you to set a sub title for yor page title", "site-editor"),
+                "placeholder"       => __("Enter Your Sub Title", "site-editor"),
+                "panel"             => "page_title_settings_panel",
+                'dependency' => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"       => "show_sub_title" ,
+                            "value"     => true ,
+                            "compare"   => "==="
+                        )
+                    )
+                )
+            ),
 
             'length' => array(
                 "type"          => "length" ,

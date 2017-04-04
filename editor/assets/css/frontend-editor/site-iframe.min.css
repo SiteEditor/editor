@@ -1055,7 +1055,7 @@ z-index: 5 !important;
 }
 
 .sed-pb-row-top-site > .sed-handle-sort-row .drag-content-sty{
-   top: 0;
+   top: 6px !important;
 }
 
 /*resizable-handle*/

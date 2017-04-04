@@ -236,7 +236,7 @@ if(!class_exists('SiteEditorLayoutManager')){
 
         public static function get_main_content_pattern( $main_row_theme_id ){
 
-            $default_layout = '[sed_row_outer_outer sed_theme_id="' . $main_row_theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="wide"]
+            $default_layout = '[sed_row_outer_outer sed_theme_id="' . $main_row_theme_id . '" sed_main_content_row="true" shortcode_tag="sed_row" type="static-element" length="boxed"]
                     [sed_module_outer_outer shortcode_tag="sed_module"]
                         [sed_content_layout layout="without-sidebar" title="columns"]
                             [sed_content_layout_column width="100%" sed_main_content="yes" parent_module="content-layout"]
