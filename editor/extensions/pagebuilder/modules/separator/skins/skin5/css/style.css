@@ -2,6 +2,10 @@
     display: table
 }
 
+.module-separator.separator-skin5 .module-separator-inner { 
+    display: inline-block;
+}
+
 .module-separator.separator-skin5 .special-spr-center {
     display: table-cell;
     line-height: normal;

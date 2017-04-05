@@ -1,10 +1,12 @@
 <div {{sed_attrs}} class="module module-separator separator-skin2 {{class}}">
-  <div class="separator-inner">
-      {{{content}}}
-      <div class="spr-container">
-        <div class="{{border_style}} spr-horizontal separator"></div>
-      </div>
-  </div>
+    <div class="module-separator-inner">
+        <div class="separator-inner">
+            {{{content}}}
+            <div class="spr-container">
+              <div class="{{border_style}} spr-horizontal separator"></div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <style type="text/css">
@@ -13,7 +15,7 @@
 	    border-color: {{separator_color}}; 
 	}
 
-    [sed_model_id="{{sed_model_id}}"] .spr-horizontal {
+    [sed_model_id="{{sed_model_id}}"] .module-separator-inner {
       max-width: {{max_width}}px;
     }
   

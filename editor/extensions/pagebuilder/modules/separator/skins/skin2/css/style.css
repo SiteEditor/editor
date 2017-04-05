@@ -2,6 +2,10 @@
     margin: 0
 }
 
+.module-separator.separator-skin2 .module-separator-inner { 
+    display: inline-block;
+}
+
 .module-separator.separator-skin2 .separator-inner {
     display: table
 }

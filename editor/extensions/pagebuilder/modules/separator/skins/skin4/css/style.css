@@ -3,6 +3,10 @@
     overflow: hidden
 }
 
+.module-separator.separator-skin4 .module-separator-inner { 
+    display: inline-block;
+}
+
 .module-separator.separator-skin4 .special-spr-center {
     display: table-cell;
     line-height: normal;

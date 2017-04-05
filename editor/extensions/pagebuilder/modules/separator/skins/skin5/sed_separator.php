@@ -1,13 +1,15 @@
 <div <?php echo $sed_attrs; ?>  class="module module-separator separator-skin5 <?php echo $class;?>" >
-  <div class="separator-inner">
-    <div class="spr-container spr-left">
-      <div class="<?php echo $border_style;?> spr-horizontal separator"></div>
+    <div class="module-separator-inner">
+        <div class="separator-inner">
+          <div class="spr-container spr-left">
+            <div class="<?php echo $border_style;?> spr-horizontal separator"></div>
+          </div>
+          <div class="separator-icon special-spr-center"><i class="<?php echo $icon; ?>"></i></div>
+          <div class="spr-container spr-right">
+            <div class="<?php echo $border_style;?> spr-horizontal separator"></div>
+          </div>
+        </div>
     </div>
-    <div class="separator-icon special-spr-center"><i class="<?php echo $icon; ?>"></i></div>
-    <div class="spr-container spr-right">
-      <div class="<?php echo $border_style;?> spr-horizontal separator"></div>
-    </div>
-  </div>
 </div>
 <?php
     global $sed_dynamic_css_string;
@@ -19,7 +21,7 @@
             border-color: <?php echo $separator_color;?>; 
         }
     
-        <?php echo $selector; ?> .spr-horizontal {
+        <?php echo $selector; ?> .module-separator-inner {
           max-width: <?php echo $max_width;?>px;
         }
 

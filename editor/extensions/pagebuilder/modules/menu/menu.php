@@ -26,35 +26,18 @@ class PBMenuShortcode extends PBShortcodeClass{
                 ),    
             ) // Args
         ); 
+
+        $this->menus = wp_get_nav_menus();
+
     }
 
     function get_atts(){
         $atts = array(
-            'class'                     => 'sed-menu-module' ,
             'menu'                      => (!empty($this->menus)) ? $this->menus[0]->name: "",
-            'orientation'               => 'horizontal',
-            'image_width'               => 32,
-            'image_height'              => 32,
-            'display_description'       => true,
-            'trigger'                   => 'hover',
-            'vertical_menu_width'       => 250,
             'sticky'                    => false,
-            'sticky_styles'             => 'sticky-menu-default',
-            'img_align'                 => 'left',
-            'icon_align'                => 'left',
-            'navbar_align'              => 'center',
-            'delay_hover'               => 500,
-            'icon_font_size'            => 15,
-            'show_search'               => false,
-            'image_icon_preference'     => 'icon' ,
             'scroll_animate_anchor'     => 'easeInOutQuint' ,
             'scroll_animate_duration'   =>  2000 ,
-            'show_cart'                 => false ,
-            'is_vertical_fixed'         =>  false ,
             'length'                    => "boxed" ,
-            'enable_draggable_area'     => false ,
-            'draggable_area_direction'  => "left" ,
-            'draggable_area_width'      => 100 ,
         );
 
         return $atts;
@@ -81,6 +64,17 @@ class PBMenuShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
+        $menus = $this->menus;
+        $menu_options = array(
+            "" => __('Select Menu' , 'site-editor')
+        );
+
+        if( !empty($menus) ){
+            foreach ( $menus as $menu ) {
+                $menu_options[$menu->name] = esc_html( $menu->name );
+            }
+        }        
+
         $this->add_panel( 'menu_settings_panel_outer' , array(
             'title'                   =>  __('Menu Settings',"site-editor")  ,
             'capability'              => 'edit_theme_options' ,
@@ -101,6 +95,22 @@ class PBMenuShortcode extends PBShortcodeClass{
         ) );        
 
         $params = array(
+
+
+            'menu' => array(
+                'type'                  => 'select',
+                'label'                 => __(' Select Menu ', 'site-editor'),
+                'description'           => __('This feature allows you to select your desired pre-made menu – in WordPress admin, Appearance> Menus section – to be loaded in the current place of the module.', 'site-editor'),
+                'choices'               => $menu_options ,
+                'panel'                 => 'menu_settings_panel',
+            ),
+
+            'length'                => array(
+                "type"                  => "length" ,
+                "label"                 => __("Content Width", "site-editor"),
+                'priority'              => 1 ,
+                "panel"                 => "row_container_settings_panel_outer", 
+            ),
 
             'row_container' => array(
                 'type'                => 'row_container',

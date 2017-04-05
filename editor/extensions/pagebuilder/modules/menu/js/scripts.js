@@ -2,49 +2,47 @@
 (function($) {
 
  
-    var responsiveMenu = function() {
-        var menuType = 'desktop';
+    var sedResponsiveMenu = function() {
+        var mediaType = 'desktop';
 
         $(window).on('load resize', function() {
-            var currMenuType = 'desktop';
+            var currentMediaType = 'desktop';
 
-            if ( matchMedia( 'only screen and (max-width: 1024px)' ).matches ) {
-                currMenuType = 'mobile';
+            if ( matchMedia( 'only screen and (max-width: 910px)' ).matches ) {
+                currentMediaType = 'mobile';
             }
 
-            if ( currMenuType !== menuType ) {
-                menuType = currMenuType;
+            if ( currentMediaType !== mediaType ) {
+                mediaType = currentMediaType;
 
-                if ( currMenuType === 'mobile' ) {
-                    var $mobileMenu = $('.navbar-wrap').attr('class', 'navbar-wrap-mobi').hide();
-                    var hasChildMenu = $('.navbar-wrap-mobi').find('li:has(ul)');
+                if ( currentMediaType === 'mobile' ) {
+                    var MobileMenu = $('.navbar-wrap').attr('class', 'navbar-wrap-mobile').hide();
+                    var hasChildrenMenu = $('.navbar-wrap-mobile').find('li:has(ul)');
 
-                    //$('.navigation-wrapper').after($mobileMenu);
-                    hasChildMenu.children('ul').hide();
-                    hasChildMenu.children('a').after('<span class="submenu-toggle-arrow"></span>');
+                    hasChildrenMenu.children('ul').hide();
+                    hasChildrenMenu.children('a').after('<span class="submenu-toggle-arrow"></span>');
                     $('.navbar-toggle-wrap').removeClass('active');  
                 } else {
-                    var $desktopMenu = $('.navbar-wrap-mobi').attr('class', 'navbar-wrap').removeAttr('style');
+                    var DesktopMenu = $('.navbar-wrap-mobile').attr('class', 'navbar-wrap').removeAttr('style');
 
-                    $desktopMenu.find('.submenu').removeAttr('style');
-                    //$('.navigation-wrapper').append($desktopMenu);
+                    DesktopMenu.find('.submenu').removeAttr('style');
                     $('.submenu-toggle-arrow').remove(); 
                 }
             }
         });
 
         $('.navbar-toggle-wrap').on('click', function() {
-            $('.navbar-wrap-mobi').slideToggle(300);
+            $('.navbar-wrap-mobile').slideToggle(300);
             $(this).toggleClass('active');
         });
 
-        $(document).on('click', '.navbar-wrap-mobi li .submenu-toggle-arrow', function(e) {
+        $(document).on('click', '.navbar-wrap-mobile li .submenu-toggle-arrow', function(e) {
             $(this).toggleClass('active').next('ul').slideToggle(300);
             e.stopImmediatePropagation()
         });
     }
 
-    responsiveMenu();
+    sedResponsiveMenu();
 
 })(jQuery);
 
