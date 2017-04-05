@@ -43,7 +43,7 @@
 	clear: both;
 }
 
-.navigation-wrapper .navbar-wrap ul.menu > li {
+.navigation-wrapper .navbar-wrap ul > li {
 	float: left;
 	padding: 10px 14px;
 }
@@ -124,9 +124,11 @@
 	padding-top: 0;
 	left: 100%;
 }
+.navigation-wrapper .navbar-wrap li ul.children,
 .navigation-wrapper .navbar-wrap .sub-menu {
 	z-index: 99999;
 }
+.navigation-wrapper .navbar-wrap li ul.children li a,
 .navigation-wrapper .navbar-wrap .sub-menu li a {
 	color: #9b9b9b;
 	display: block;
@@ -138,9 +140,11 @@
          -o-transition: all 0.3s ease;
             transition: all 0.3s ease;
 }
+.navigation-wrapper .navbar-wrap li ul.children li:hover > a,
 .navigation-wrapper .navbar-wrap .sub-menu li:hover > a {
 	color: #fff;
 }
+.navigation-wrapper .navbar-wrap li:hover > ul.children > li > a,
 .navigation-wrapper .navbar-wrap li:hover > .sub-menu > li > a {
 	padding: 8px 18px;
 }
@@ -156,6 +160,7 @@
 .navigation-wrapper .navbar-wrap ul li a {
 	float: left;
 }
+.navigation-wrapper .navbar-wrap li ul.children li:before,
 .navigation-wrapper .navbar-wrap .sub-menu li:before {
 	content: '';
 	margin: 0;
@@ -197,6 +202,7 @@
 	padding: 10px 30px;
 	color: #9b9b9b;
 }
+.navigation-wrapper .navbar-wrap-mobile li ul.children ,
 .navigation-wrapper .navbar-wrap-mobile ul.sub-menu {
 	top: 100%;
 	left: 0;
@@ -214,6 +220,7 @@
 .navigation-wrapper .navbar-wrap-mobile > ul > li > ul > li > ul > li a {
 	padding: 5px 60px;
 }
+.navigation-wrapper .navbar-wrap-mobile li ul.children > li > a,
 .navigation-wrapper .navbar-wrap-mobile ul.sub-menu > li > a {
 	display: block;
 	text-decoration: none;

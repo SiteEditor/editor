@@ -96,7 +96,6 @@ class PBMenuShortcode extends PBShortcodeClass{
 
         $params = array(
 
-
             'menu' => array(
                 'type'                  => 'select',
                 'label'                 => __(' Select Menu ', 'site-editor'),
