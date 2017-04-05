@@ -108,7 +108,7 @@ global $sed_pb_app;
 $sed_pb_app->register_module(array(
     "group"       => "theme" ,
     "name"        => "sidebar",
-    "title"       => __("Sidebar","site-editor"),
+    "title"       => __("Widget Area","site-editor"),
     "description" => __("Add Full Customize Sidebar","site-editor"),
     "icon"        => "sedico-sidebar",
     "type_icon"   => "font",

@@ -17,7 +17,7 @@
             this.removeAlert();
         },
 
-        remove : function( elementId , callback ){
+        remove : function( elementId , callback , closeDialog ){
             this.elementId = elementId;
 
             api.Events.trigger( "sedBeforeRemove" , elementId );
@@ -28,13 +28,18 @@
             this.removeFromUsingModules();
             this.removeFromStyleEditor();
             this.removeFromDom();
-            this.closeSettingsDialog();
+
+            closeDialog = _.isUndefined( closeDialog ) ? false : closeDialog;
+
+            if( closeDialog === true ) {
+                this.closeSettingsDialog();
+            }
 
 
             api.Events.trigger( "sedAfterRemove" , elementId );
             api.Events.trigger( "after-remove-" + elementId );
 
-            if(callback)
+            if( callback )
                 callback();
 
         },
@@ -65,7 +70,7 @@
 
                 var dropArea = $( '[sed_model_id="' + moduleId + '"]' ).parents(".sed-pb-component:first");
 
-                self.remove( moduleId );
+                self.remove( moduleId , '' , true );
 
                 if( dropArea.length > 0 )
                     api.pageBuilder.addRemoveSortableClass( dropArea );
@@ -140,8 +145,8 @@
 
         api.removePlugin = new api.DeletePlugin();
 
-        api.remove = function(elementId , callback){
-            api.removePlugin.remove(elementId , callback);
+        api.remove = function(elementId , callback , closeDialog ){
+            api.removePlugin.remove(elementId , callback , closeDialog );
         };
 
     });

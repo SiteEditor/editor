@@ -95,6 +95,7 @@ class PBheaderShortcode extends PBShortcodeClass{
 
         );
     }
+
     function contextmenu( $context_menu ){
         $header_menu = $context_menu->create_menu( "header" , __("Header","site-editor") , 'header' , 'class' , 'element' , ''  , "sed_header" , array(
             //"duplicate"    => false
