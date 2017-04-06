@@ -284,6 +284,7 @@ final class SedPageBuilderOptionsManager{
         $description = isset($args['description']) ?  $args['description'] : '' ;
         $priority = isset($args['priority']) ?  $args['priority'] : 100 ;
         $value = isset($args['default']) ?  $args['default'] : "0 0 0 0";
+        $parent_id = isset($args['parent_id']) ?  $args['parent_id'] : 'root';
 
         /**
          * Parse incoming $args into an array and merge it with $defaults
@@ -296,7 +297,7 @@ final class SedPageBuilderOptionsManager{
             'type'          => 'default' ,
             'description'   => $description ,
             'priority'      => $priority ,
-            'parent_id'     => 'root'
+            'parent_id'     => $parent_id
         ));
 
         $values = explode(" ", trim($value) );
@@ -400,6 +401,8 @@ final class SedPageBuilderOptionsManager{
      */
     function add_align_control( $args = array() ){
 
+        $parent_id      = isset($args['parent_id']) ?  $args['parent_id'] : 'root';
+
         /**
          * Define the array of defaults
          */
@@ -424,7 +427,7 @@ final class SedPageBuilderOptionsManager{
             "type"              => "text-align" ,
             'category'          => "style-editor" ,
             'selector'          => 'sed_current' ,
-            'panel'             => 'root'
+            'panel'             => $parent_id
         );
 
         $param = wp_parse_args( $required, $param ) ;

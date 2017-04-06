@@ -15,8 +15,8 @@ class PBRowShortcode extends PBShortcodeClass{
 	function __construct() {
 		parent::__construct( array(
                 "name"        => "sed_row",                                  //*require
-                "title"       => __("rows","site-editor"),
-                "description" => __("Add rows to page","site-editor"),       //*require for toolbar
+                "title"       => __("Module Wrapper","site-editor"),
+                "description" => '',//__("Add Module Wrapper to page","site-editor"),       //*require for toolbar
                 "icon"        => "sedico-row",                                  //*require for icon toolbar
                 "module"      =>  "row"         //*require
                 //"is_child"    =>  "false"       //for childe shortcodes like sed_tr , sed_td for table module
@@ -69,12 +69,20 @@ class PBRowShortcode extends PBShortcodeClass{
 
 
 
+
+        $this->add_panel( 'rows_settings_panel' , array(
+            'title'                   =>  __('Module Wrapper Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'priority'                => 1998 , 
+        ) );
+
         $this->add_panel( 'module_mobile_settings' , array(
             'title'         =>  __("Mobile Settings" , "site-editor") ,
             'capability'    => 'edit_theme_options' ,
             'type'          => 'default' ,
             //'description'   => __("Mobile Settings" , "site-editor") ,
-            'priority'      => 999 ,
+            'priority'      => 1999 ,
         ));
 
         $this->add_panel( 'module_mobile_spacing' , array(
@@ -82,8 +90,9 @@ class PBRowShortcode extends PBShortcodeClass{
             'capability'    => 'edit_theme_options' ,
             'type'          => 'default' ,
             'parent_id'     => "module_mobile_settings",
+            'has_border_box' => false ,
             //'description'   => __("Mobile Settings" , "site-editor") ,
-            'priority'      => 1000 ,
+            'priority'      => 2000 ,
         ));
 
         $params = array(
@@ -91,16 +100,19 @@ class PBRowShortcode extends PBShortcodeClass{
             'length'    =>  array(
                 "type"          => "length" ,
                 "label"         => __("Wrapper Width", "site-editor"),
+                'panel'         => "rows_settings_panel",
             ),
 
             "align"     =>  array(
                 "type"          => "align" ,
-                "label"         => __("Align", "site-editor")
+                "label"         => __("Align", "site-editor"),
+                'parent_id'         => "rows_settings_panel",
             ),
 
             'spacing'   => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
+                'parent_id'         => "rows_settings_panel",
                 "default"       => "10 0 10 0" ,
             ),
 
@@ -108,6 +120,8 @@ class PBRowShortcode extends PBShortcodeClass{
                 'type'          => 'text',
                 'label'         => __('Module Id', 'site-editor'),
                 'description'   => __('Module Id For Anchor And ...', 'site-editor') ,
+                'panel'         => "rows_settings_panel",
+                'has_border_box' => false ,
                 'priority'      => 1001 ,
             ),
 
@@ -115,6 +129,8 @@ class PBRowShortcode extends PBShortcodeClass{
                 'type'          => 'text',
                 'label'         => __('Extra class name', 'site-editor'),
                 'description'   => __('Style particular content element differently - add a class name and refer to it in custom CSS.', 'site-editor') ,
+                'panel'         => "rows_settings_panel",
+                'has_border_box' => false ,
                 'priority'      => 1000 ,
             ), 
 
@@ -230,8 +246,8 @@ global $sed_pb_app;
 $sed_pb_app->register_module(array(
     "group"                     => "basic" ,
     "name"                      => "row",
-    "title"                     => __("row","site-editor"),
-    "description"               => __("Add Full Customize Button","site-editor"),
+    "title"                     => __("Module Wrapper","site-editor"),
+    "description"               => '',//__("Add Full Customize Button","site-editor"),
     "icon"                      => "sedico-row",
     "shortcode"                 => "sed_row",
     "show_ui_in_toolbar"        => false,
