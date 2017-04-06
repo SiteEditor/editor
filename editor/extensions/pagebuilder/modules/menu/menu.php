@@ -108,7 +108,7 @@ class PBMenuShortcode extends PBShortcodeClass{
                 "type"                  => "length" ,
                 "label"                 => __("Content Width", "site-editor"),
                 'priority'              => 1 ,
-                "panel"                 => "row_container_settings_panel_outer", 
+                "panel"                 => "menu_settings_panel", 
             ),
 
             'row_container' => array(
@@ -132,11 +132,49 @@ class PBMenuShortcode extends PBShortcodeClass{
 
     }
 
+
     function custom_style_settings(){
         return array(                                                                      
             array(
-                'navbar-wrap' , 'sed_current' ,
-                array( 'background','gradient','border','border_radius' ,'padding','margin','position','trancparency','shadow' ) , __("Menu Wrapper" , "site-editor") ) ,
+                'menu-wrapper' , 'sed_current' ,
+                array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' ) , __("Menu Wrapper" , "site-editor") ) ,
+
+            array(
+                'menu_items' , '.navbar-wrap > nav > div > ul > li > a' ,
+                array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' , 'font' ,'line_height','text_align' ) , __("Menu Items" , "site-editor") ) ,
+
+            array(
+                'menu_items_hover' , '.navbar-wrap > nav > div > ul > li:hover > a' ,
+                array('background','gradient','border' , 'font'  ) , __("Menu Items Hover" , "site-editor") ) ,
+
+            array(
+                'current-menu-item' , '.navbar-wrap > nav > div > ul > li.current-menu-item > a' ,
+                array('background','gradient','border' , 'font'  ) , __("Current Menu Items" , "site-editor") ) ,
+
+            array(
+                'sub_menu_area' , '.navbar-wrap ul li ul' ,
+                array( 'background','gradient','border','border_radius' ,'padding','margin','trancparency','shadow' ) , __("Sub Menus" , "site-editor") ) ,
+
+            array(
+                'sub_menu_items' , '.navbar-wrap ul li ul li a' ,
+                array( 'background','gradient','border','border_radius' ,'padding','margin','shadow' , 'font' ,'line_height','text_align' ) , __("SubMenu Items" , "site-editor") ) ,
+
+            array(
+                'sub_menu_items_hover' , '.navbar-wrap ul li ul li:hover > a' ,
+                array( 'background','gradient','border' , 'font'  ) , __("SubMenu Items Hover" , "site-editor") ) ,
+
+            array(
+                'sub_menu_current' , '.navbar-wrap ul li ul li.current-menu-item > a' ,
+                array( 'background','gradient','padding' , 'font'  ) , __("Current SubMenu Items" , "site-editor") ) ,
+
+            array(
+                'navbar-toggle-wrap' , '.navbar-toggle-wrap' ,
+                array('padding' , 'font' ,'text_align') , __("Hamburger Wrapper" , "site-editor") ) ,
+
+            array(
+                'icon-bar' , '.navbar-toggle-wrap .icon-bar' ,
+                array( 'background' ) , __("Hamburger Icon" , "site-editor") ) ,
+
         );
     }
 
