@@ -379,7 +379,7 @@ class SiteEditorPageOptions {
 
     public function sed_app_preview_init(){
 
-        add_action( 'wp_enqueue_scripts'           , array( $this, 'preview_enqueue_scripts' ), 10 );
+        add_action( 'wp_footer'           , array( $this, 'preview_enqueue_scripts' ), 10 );
 
     }
 
@@ -399,7 +399,7 @@ class SiteEditorPageOptions {
 
         foreach ( $this->settings as $id => $args ) {
 
-            $setting = SED()->editor->manager->get_setting( "{$page_option_name}[{$id}]" );
+            $setting = SED()->editor->manager->get_setting( "{$page_option_name}[{$id}]" ); 
 
             if( ! is_object( $setting ) || ! method_exists( $setting , 'check_capabilities' ) || ! $setting->check_capabilities() ){
                 continue;

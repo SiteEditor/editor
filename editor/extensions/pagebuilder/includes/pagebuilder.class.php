@@ -72,7 +72,8 @@ Class PageBuilderApplication {
         $this->current_app = 'siteeditor';
 
         //remove extra p && br tag from site editor & add to default wp editor only
-        //remove_filter( 'the_content', 'wpautop' );
+        remove_filter( 'the_content', 'wpautop' );
+
 
         add_filter('the_excerpt', array($this, 'sed_excerpt_filter') );
 
@@ -221,7 +222,7 @@ Class PageBuilderApplication {
             }
         }
 
-        $sed_helper_shortcodes = apply_filters( "sed_helper_shortcodes" , $sed_helper_shortcodes );
+        $sed_helper_shortcodes = apply_filters( "sed_helper_shortcodes" , $sed_helper_shortcodes ); //var_dump( $sed_helper_shortcodes );
 
         if( !empty( $sed_helper_shortcodes ) ){
 

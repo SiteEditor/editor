@@ -174,7 +174,7 @@ class PBSkinLoaderClass{
 
             $file_name = (empty($ext)) ? $this->shortcode . '.php' : $this->shortcode . '-' . $ext . '.php';
 
-            $php_view = $path . DS . $file_name;
+            $php_view = $path . $file_name;
 
 
 
@@ -228,11 +228,11 @@ class PBSkinLoaderClass{
         //if( !in_array( $file , $all_files ) ){
             if(!empty($vars))
                 extract( $vars );
+
             if( file_exists($file) ) {
                 ob_start();
                     include $file;
-                $content = ob_get_contents();
-                ob_end_clean();
+                $content = ob_get_clean();
             }
 
             //$this->files_loaded[$file] = $content;

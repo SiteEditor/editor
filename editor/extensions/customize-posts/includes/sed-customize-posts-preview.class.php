@@ -110,20 +110,20 @@ final class SiteEditorCustomizePostsPreview {
 
 	}
 
-
+	/*
 	/**
 	 * Create dynamic post/postmeta settings and sections for posts queried in the page.
 	 *
 	 * @param array $posts Posts.
 	 * @return array
-	 */
+
 	public function filter_the_posts_to_add_dynamic_post_meta_settings( array $posts ) {
 		foreach ( $posts as &$post ) {
 
 			$this->component->register_post_type_meta_settings( $post->ID );
 		}
 		return $posts;
-	}
+	}*/
 
 
 	/**
@@ -132,11 +132,11 @@ final class SiteEditorCustomizePostsPreview {
 	 * @param null|array|string $value     The value get_metadata() should return - a single metadata value, or an array of values.
 	 * @param int               $object_id Object ID.
 	 * @return mixed Value.
-	 */
+
 	public function filter_get_post_meta_to_add_dynamic_postmeta_settings( $value, $object_id ) {
 		$this->component->register_post_type_meta_settings( $object_id );
 		return $value;
-	}
+	}*/
 
 	/**
 	 * Filter postmeta to inject customized post meta values.

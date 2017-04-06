@@ -202,8 +202,9 @@ $sed_pb_app->register_module(array(
     "description" => __("","site-editor"),
     "icon"        => "sedico-buttons",
     "shortcode"   => "sed_button",
-    "sub_modules"   => array('title'),
-    "tpl_type"    => "underscore"
+    "tpl_type"    => "underscore",
+    //@deprecated in 1.0.0
+    "sub_modules"   => array('title')
 ));
 
 

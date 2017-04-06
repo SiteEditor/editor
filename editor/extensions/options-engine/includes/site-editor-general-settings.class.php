@@ -79,9 +79,9 @@ class SiteEditorGeneralSettings {
 
         );
 
-        $settings = apply_filters( 'sed_app_register_general_options' , $settings ); 
+        $settings = apply_filters( 'sed_app_register_general_options' , $settings );
 
-        foreach( $settings  AS $id => $args ){
+        foreach( $settings  AS $id => $args ){ 
             $this->add_setting( $id , $args );
         }
 

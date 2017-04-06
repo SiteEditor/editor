@@ -427,7 +427,7 @@ class PBShortcodeClass{
         }
 
         $current_id = array_pop( $this->queue );
-
+        
         $content =  apply_filters( "sed_shortcode_content_".$this->shortcode->name , $content );
 
         $this->skin_vars[$current_id] = array_merge( $this->skin_vars[$current_id] ,  array( "content" => $content ) );
