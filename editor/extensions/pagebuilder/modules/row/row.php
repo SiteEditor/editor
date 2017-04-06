@@ -32,7 +32,13 @@ class PBRowShortcode extends PBShortcodeClass{
            	'type'                  => 'draggable-element', //draggable-element | static-element
             'length'                => 'boxed' ,
             'from_wp_editor'        => false ,
-            //'sed_contextmenu_class' => ''
+            'rps_spacing_top'       => '' ,
+            'rps_spacing_right'     => '' ,
+            'rps_spacing_bottom'    => '' ,
+            'rps_spacing_left'      => '' , 
+            'rps_align'             => '' ,
+            'rps_spacing_lock'      => false,
+            //'sed_contextmenu_class' => '' 
         );
 
         return $atts;
@@ -76,6 +82,8 @@ class PBRowShortcode extends PBShortcodeClass{
             'capability'    => 'edit_theme_options' ,
             'type'          => 'default' ,
             'parent_id'     => "module_mobile_settings",
+            //'description'   => __("Mobile Settings" , "site-editor") ,
+            'priority'      => 1000 ,
         ));
 
         $params = array(
@@ -114,7 +122,6 @@ class PBRowShortcode extends PBShortcodeClass{
                 'type'              => 'checkbox',
                 'label'             => __('Hidden In Mobile', 'site-editor'),
                 'description'       => __('Hidden Module In Mobile Version', 'site-editor') ,
-                'priority'          => 998 ,
                 'has_border_box'    => false ,
                 'panel'             => 'module_mobile_settings'
             ),
@@ -123,11 +130,21 @@ class PBRowShortcode extends PBShortcodeClass{
                 'type'              => 'checkbox',
                 'label'             => __('Show In Mobile Only', 'site-editor'),
                 'description'       => __('Show Module In Mobile Only', 'site-editor') ,
-                'priority'          => 999 ,
-                'has_border_box'    => false ,
                 'panel'             => 'module_mobile_settings'
-            ),     
+            ),  
 
+            'rps_align' => array(
+                "type"              => "radio-buttonset" ,
+                "label"             => __("Mobile Align", "site-editor"),
+                "description"       => __("Module container alignment", "site-editor"),
+                "choices"           =>  array(
+                    "left"          => __("Left", "site-editor"),
+                    "center"        => __("Center", "site-editor"),
+                    "right"         => __("Right", "site-editor"),
+                    "initial"       => __("Initial", "site-editor"), 
+                ), 
+                "panel"             => "module_mobile_settings" ,
+            ),     
 
             'rps_spacing_top' => array(
                 'type'              => 'number',
@@ -135,7 +152,7 @@ class PBRowShortcode extends PBShortcodeClass{
                 'label'             => __('Top', 'site-editor'),
                 'description'       => __('Change Module Top Spacing', 'site-editor'),
                 'js_params'         =>  array(
-                    'min'   =>  0  ,
+                    'min'           =>  0  ,
                 ),
                 "panel"             =>  'module_mobile_spacing' ,
                 'lock_id'           => 'rps_spacing_lock',
@@ -148,7 +165,7 @@ class PBRowShortcode extends PBShortcodeClass{
                 'label'             => is_rtl() ? __('Right', 'site-editor') : __('Left', 'site-editor'),
                 'description'       => __('Change Module Left Spacing', 'site-editor') ,
                 'js_params'         =>  array(
-                    'min'   =>  0  ,
+                    'min'           =>  0  ,
                 ),
                 "panel"             =>  'module_mobile_spacing' ,
                 'lock_id'           => 'rps_spacing_lock',
@@ -161,7 +178,7 @@ class PBRowShortcode extends PBShortcodeClass{
                 'label'             => is_rtl() ? __('Left', 'site-editor') : __('Right', 'site-editor'),
                 'description'       => __('Change Module Right Spacing', 'site-editor') ,
                 'js_params'         =>  array(
-                    'min'   =>  0  ,
+                    'min'           =>  0  ,
                 ),
                 "panel"             =>  'module_mobile_spacing' ,
                 'lock_id'           => 'rps_spacing_lock',
@@ -174,7 +191,7 @@ class PBRowShortcode extends PBShortcodeClass{
                 "label"             => __('Bottom', 'site-editor'),
                 'description'       => __('Change Module Bottom Spacing', 'site-editor') ,
                 'js_params'         =>  array(
-                    'min'   =>  0  ,
+                    'min'           =>  0  ,
                 ),
                 "panel"             => 'module_mobile_spacing' ,
                 'lock_id'           => 'rps_spacing_lock',
@@ -188,7 +205,7 @@ class PBRowShortcode extends PBShortcodeClass{
                 'description'       => __('Change Top , bottom , left and right Spacing Together', 'site-editor') ,
                 "panel"             =>  'module_mobile_spacing' ,
                 'has_border_box'    => false 
-            ),      
+            ),    
 
         );
 
