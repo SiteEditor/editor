@@ -46,6 +46,7 @@ class PBTextIconShortcode extends PBShortcodeClass{
             "default_image_size"  => "thumbnail" ,
             "custom_image_size"   => "" ,
             "external_image_size" => "" ,  
+            "image_width"         => '30px' ,  
             "icon"                => "fa fa-flag" ,     
         );
 
@@ -72,13 +73,42 @@ class PBTextIconShortcode extends PBShortcodeClass{
                 "label"               => __("Select Icon", "site-editor"),
                 "description"         => __("This option allows you to set a icon for your module.", "site-editor"),
                 'panel'               => 'text_icon_settings_panel' 
-            ),     
+            ),   
+
+            'font_size' => array(
+                "type"                => "font-size" , 
+                "label"               => __("Font Size", "site-editor"),
+                "description"         => __("Add Font Size For Element", "site-editor") ,
+                "category"            => 'style-editor' ,
+                "selector"            => '.text-icon' ,
+                "default"             => '' , 
+                //'has_border_box'      => false , 
+                'panel'               => 'text_icon_settings_panel'
+            ),  
+
+            'font_color' => array(
+                "type"                => "font-color" , 
+                "label"               => __("Font Color", "site-editor"),
+                "description"         => __("Add Font Color For Element", "site-editor") ,
+                "category"            => 'style-editor' ,
+                "selector"            => '.text-icon' ,
+                "default"             => '#ccc' ,
+                //'has_border_box'      => false , 
+                'panel'               => 'text_icon_settings_panel' 
+            ),  
 
             'change_image_panel' => array(
                 "type"                => "sed_image" ,
                 "label"               => __("Select Image", "site-editor"),
                 "panel_type"          => "default" ,
                 'parent_id'           => 'text_icon_settings_panel' 
+            ),
+
+            'image_width'  => array(
+                "type"                => "dimension" ,
+                "label"               => __("Image Width", "site-editor"),
+                "panel"               => "sed_select_image_panel",
+                'has_border_box'      => false
             ),
 
             'row_container' => array(

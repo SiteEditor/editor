@@ -71,6 +71,13 @@ class PBRowShortcode extends PBShortcodeClass{
             'priority'      => 999 ,
         ));
 
+        $this->add_panel( 'module_mobile_spacing' , array(
+            'title'         =>  __("Mobile Spacing" , "site-editor") ,
+            'capability'    => 'edit_theme_options' ,
+            'type'          => 'default' ,
+            'parent_id'     => "module_mobile_settings",
+        ));
+
         $params = array(
 
             'length'    =>  array(
@@ -86,7 +93,7 @@ class PBRowShortcode extends PBShortcodeClass{
             'spacing'   => array(
                 "type"          => "spacing" ,
                 "label"         => __("Spacing", "site-editor"),
-                "default"       => "10  10 " ,
+                "default"       => "10 0 10 0" ,
             ),
 
             'id'        => array(
@@ -119,7 +126,69 @@ class PBRowShortcode extends PBShortcodeClass{
                 'priority'          => 999 ,
                 'has_border_box'    => false ,
                 'panel'             => 'module_mobile_settings'
-            ),           
+            ),     
+
+
+            'rps_spacing_top' => array(
+                'type'              => 'number',
+                'after_field'       => 'px',
+                'label'             => __('Top', 'site-editor'),
+                'description'       => __('Change Module Top Spacing', 'site-editor'),
+                'js_params'         =>  array(
+                    'min'   =>  0  ,
+                ),
+                "panel"             =>  'module_mobile_spacing' ,
+                'lock_id'           => 'rps_spacing_lock',
+                'has_border_box'    => false
+            ),
+
+            'rps_spacing_left' => array(
+                'type'              => 'number',
+                'after_field'       => 'px',
+                'label'             => is_rtl() ? __('Right', 'site-editor') : __('Left', 'site-editor'),
+                'description'       => __('Change Module Left Spacing', 'site-editor') ,
+                'js_params'         =>  array(
+                    'min'   =>  0  ,
+                ),
+                "panel"             =>  'module_mobile_spacing' ,
+                'lock_id'           => 'rps_spacing_lock',
+                'has_border_box'    => false
+            ),
+
+            'rps_spacing_right' => array(
+                'type'              => 'number',
+                'after_field'       => 'px',
+                'label'             => is_rtl() ? __('Left', 'site-editor') : __('Right', 'site-editor'),
+                'description'       => __('Change Module Right Spacing', 'site-editor') ,
+                'js_params'         =>  array(
+                    'min'   =>  0  ,
+                ),
+                "panel"             =>  'module_mobile_spacing' ,
+                'lock_id'           => 'rps_spacing_lock',
+                'has_border_box'    => false
+            ),
+
+            'rps_spacing_bottom' => array(
+                "type"              => "number" ,
+                'after_field'       => 'px',
+                "label"             => __('Bottom', 'site-editor'),
+                'description'       => __('Change Module Bottom Spacing', 'site-editor') ,
+                'js_params'         =>  array(
+                    'min'   =>  0  ,
+                ),
+                "panel"             => 'module_mobile_spacing' ,
+                'lock_id'           => 'rps_spacing_lock',
+                'has_border_box'    => false
+            ),
+
+            'rps_spacing_lock' => array( 
+                'type'              => 'lock',
+                'default'           => false,
+                'label'             => __('lock Spacing Together', 'site-editor'),
+                'description'       => __('Change Top , bottom , left and right Spacing Together', 'site-editor') ,
+                "panel"             =>  'module_mobile_spacing' ,
+                'has_border_box'    => false 
+            ),      
 
         );
 

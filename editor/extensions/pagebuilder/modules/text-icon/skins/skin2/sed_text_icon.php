@@ -24,3 +24,17 @@
     	<?php echo $content; ?>
     </div>
 </div>
+<?php
+    global $sed_dynamic_css_string;
+    $selector = ( site_editor_app_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
+    ob_start();
+    ?>
+
+        <?php echo $selector; ?>.module-text-icon.text-icon-skin2 .text-icon img {
+            min-width: <?php echo $image_width;?>;  
+            width: <?php echo $image_width;?>;   
+        }
+
+    <?php
+    $css = ob_get_clean();
+    $sed_dynamic_css_string .= $css;

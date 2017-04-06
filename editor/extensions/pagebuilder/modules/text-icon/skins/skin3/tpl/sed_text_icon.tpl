@@ -11,3 +11,12 @@
 	    <div class="text-icon">{{{sedImageHtml}}}</div>
     </div>
 </div>
+
+<style type="text/css">
+
+    [sed_model_id="{{sed_model_id}}"].module-text-icon.text-icon-skin3 .text-icon img {
+        min-width: {{image_width}};  
+        width: {{image_width}};   
+    }
+
+</style>

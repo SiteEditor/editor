@@ -29,8 +29,6 @@ class PBRowContainerShortcode extends PBShortcodeClass{
     function get_atts(){
 
         $atts = array(
-            'responsive_spacing'        =>  "",
-            'responsive_option'         => '',
            	'type'                      => 'static-element', //draggable-element | static-element
             'length'                    => 'boxed' ,
             'video_mp4'                 =>  '' ,
@@ -320,26 +318,6 @@ class PBRowContainerShortcode extends PBShortcodeClass{
                 'label'                 => __('Video Overlay Opacity', 'site-editor'),
                 'description'           => __('You can set the video overlay opacity with this option. The value is between 0 and 100. 0 means no opacity and 100 means complete opacity.','site-editor'),
                 "panel"                 => "video_background_row_container"
-            ),
-
-            'responsive_option'     => array(
-      			'type'                  => 'select',
-      			'label'                 => __('Responsive Option', 'site-editor'),
-      			'description'           => __("This option allows you to set predefined styles such as black, white, main and none. This option is available in all skins except the default one.", "site-editor"),
-                'choices'               => array(
-                    ''                      => __('Full Width Row Container', 'site-editor'),
-                    'hidden-row-container'  => __('Hidden Row Container', 'site-editor'),
-                ),
-                "panel"                 => "row_container_responsive_panel",
-                'has_border_box'        => false
-      		),
-
-            "responsive_spacing"    => array(
-                'type'                  => 'text',
-                'label'                 => __('Module Responsive Spacing', 'site-editor'),
-                'description'           => __('','site-editor'),
-                "panel"                 => "row_container_responsive_panel",
-                'has_border_box'        => false
             ),
 
             'length'                => array(
