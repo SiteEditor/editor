@@ -15,6 +15,7 @@
     api.createRelations = api.createRelations || {};
     api.currenStyleEditorContolsValues = api.currenStyleEditorContolsValues || {};
     api.lockControlsCache = api.lockControlsCache || {};
+    api.currentModuleForceToSelect = api.currentModuleForceToSelect || "";
 
     api.SiteEditorControls = api.Control.extend({
 
@@ -2152,8 +2153,9 @@
 
       api.defaultHelperShortcodes  = window._sedAppDefaultHelperShortcodes;
 
-      api.previewer.bind( 'moduleForceRefresh', function(){
-          api.previewer.refresh();
+      api.previewer.bind( 'moduleForceRefresh', function( currentElementId ){
+          api.currentModuleForceToSelect = currentElementId;
+          api.previewer.refresh(  );
       });
 
       api.previewer.bind( 'addAttachmentSizes' , function( data ) {

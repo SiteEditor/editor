@@ -1876,6 +1876,11 @@
 
         api.pageStaticContentInfo = window._sedAppPageContentInfo;
 
+        /*if( $("#sed-post-content-container").length > 0 ){
+            var content = decodeURIComponent( $("#sed_template_post_content").html() );
+            $("#sed-post-content-container").html( content );
+        }*/
+
         api.pageBuilder = new api.PageBuilder({} , {
             preview         : api.preview,
             contentBuilder  : api.contentBuilder,
@@ -1888,11 +1893,6 @@
         api.preview.bind( 'moduleDragHandler', function( handle ) {
             api.pageBuilder.modulesDrag( handle.option , handle.args );
         });
-
-        if( $("#sed-post-content-container").length > 0 ){
-            var content = decodeURIComponent( $("#sed_template_post_content").html() );
-            $("#sed-post-content-container").html( content );
-        }
 
         //update current page settings
         api.preview.bind( 'active', function() {
@@ -1922,6 +1922,12 @@
                 changePage  : false ,
                 page        : api.currentPageInfo
             }); */
+        });
+
+        api.preview.bind( 'sed_force_select_module', function( elementId ) {
+
+            api.selectPlugin.select( $( '[sed_model_id="' + elementId + '"]' ) , false , false );
+
         });
 
         api.fn.getPostMetaSettingId = function( metaKey ){
@@ -2112,10 +2118,9 @@
                 }
 
                 if(api.currentAttrStatus == "force_refresh" && api.currentAttr != "skin"){
-                    api.preview.send( 'moduleForceRefresh' );
+                    api.preview.send( 'moduleForceRefresh' , elementId );
                     return ;
                 }
-
                                                           //&& api.currentAttr != "carousel_infinite"
                 if( api.currentAttr.search("carousel_") == 0   ){
                     var key_setting = api.currentAttr.substring( 9 );
@@ -2338,7 +2343,7 @@
                             break;
                             case "refresh":
 
-                                api.preview.send( 'moduleForceRefresh' );
+                                api.preview.send( 'moduleForceRefresh' , elementId );
                             break;
                         }
                 }
@@ -2656,7 +2661,7 @@
 
                     }else if( refresh === true ){
 
-                        api.preview.send( 'moduleForceRefresh' );
+                        api.preview.send( 'moduleForceRefresh' , newMainShortcode.id );
 
                     }else if( refresh == "ajax" ){
 
@@ -3141,6 +3146,31 @@
                         _width = parseInt(sizes[0]);
                         _height = parseInt(sizes[1]);
                         imgUrl = attachment.url;
+
+                        /*if( !_.isUndefined( attachment.subtype ) && $.inArray( attachment.subtype , ["png","jpeg","jpg","gif","bmp"] ) > -1 ){
+
+                            var _ext = "." + attachment.subtype;
+
+                            var _index = attachment.url.lastIndexOf( _ext );
+
+                            if( _index > 0 ){
+
+                                var newUrl = attachment.url.substring( 0 , _index ) + "-" + size;
+
+                                $masonry.imagesLoaded().done( function( instance ) {
+
+
+
+                                }).fail( function() {
+
+                                    console.log('all images loaded, at least one is broken');
+
+                                });
+
+                            }
+
+                        }*/
+
                     }
                 }
 

@@ -473,10 +473,16 @@
             if( _.isUndefined( id ) || !id || _.isUndefined( value ) )
                 return ;
 
-            var contentModel = this.getContentModel( ) ,
-                postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + id + '"]' ) );
+            if($( '[sed_model_id="' + id + '"]' ).length > 0){
+                var parentC = $( '[sed_model_id="' + id + '"]' ).parents(".sed-pb-post-container:first");
+                api.shortcodeCurrentPlace = parentC.data("contentType");
 
-            var $thisShortcode = _.findWhere( contentModel[postId] , { tag : "content" , parent_id : id } );
+                this.checkContentType();
+            }
+
+            var postId = api.pageBuilder.getPostId( $( '[sed_model_id="' + id + '"]' ) ); 
+
+            var $thisShortcode = _.findWhere( this.contentModel[postId] , { tag : "content" , parent_id : id } ); 
 
             if( !$thisShortcode ){
                 //api.log("for : " + id + " not found shortcode");
@@ -530,8 +536,13 @@
                     shortcode = this.getShortcode( moduleId ),
                     moduleName = api.shortcodes[shortcode.tag].moduleName;
 
-                if( _.isUndefined( api.modulesSettings[moduleName].refresh_in_drag_area ) || !api.modulesSettings[moduleName].refresh_in_drag_area )
+                var fastRefresh = _.isUndefined( api.modulesSettings[moduleName].refresh_in_drag_area ) || !api.modulesSettings[moduleName].refresh_in_drag_area;
+
+                fastRefresh = api.applyFilters( "sedFastDoShortcodesChildren" , fastRefresh );
+
+                if( fastRefresh )
                     return $( '[sed_model_id="' + id + '"]' )[0].outerHTML;
+
             }
 
             if( typeof id === 'undefined'){

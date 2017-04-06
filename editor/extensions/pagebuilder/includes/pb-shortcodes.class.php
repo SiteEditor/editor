@@ -418,9 +418,9 @@ class PBShortcodeClass{
 
         if(!empty( $content )){
             if( in_array( $this->shortcode->name , array("sed_paragraph" , "sed_text_title" , "sed_raw_js" , "sed_code_syntax_highlighter" ) ) && site_editor_app_on() ){
-                $content = $content;
+                $content = sed_js_remove_wpautop( $content , false , false );
             }else{
-                $content = do_shortcode($content);
+                $content = sed_js_remove_wpautop( $content , false );
             }
         }else{
             $content = '';//__('Module is empty.' , 'site-editor' );

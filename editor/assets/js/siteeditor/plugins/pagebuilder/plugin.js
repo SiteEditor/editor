@@ -66,6 +66,14 @@
             api.previewer.send( "sed_api_modules_settings" , api.modulesSettings );
 
             api.previewer.send( "sed_api_modules_editor_js" , api.ModulesEditorJs );
+            
+            if( api.currentModuleForceToSelect ){
+
+                api.previewer.send( "sed_force_select_module" , api.currentModuleForceToSelect );
+
+                api.currentModuleForceToSelect = "";
+
+            }
 
         });
 

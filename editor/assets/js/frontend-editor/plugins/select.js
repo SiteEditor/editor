@@ -15,7 +15,7 @@
 
             this.ready();
 
-            this.elementId;
+            this.elementId = null;
         },
 
         ready : function(){

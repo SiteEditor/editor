@@ -81,7 +81,8 @@ Class PageBuilderApplication {
 
         if( site_editor_app_on() ){
             add_action( 'the_post'      , array( $this  , 'preview_setup_post_content' ) );
-            add_action( 'the_post'      , array( &$this , 'parse_editable_content' ), 99999 );
+            add_action( 'the_content'   , array( &$this , 'parse_editable_content' ), -99999 );
+            add_filter( 'the_content'   , array( &$this, 'sed_editable_post_content' ) , 99999 );
             add_action( 'wp_footer'     , array( $this  , "get_pb_posts_shortcode_content") );
             add_action( 'wp_footer'     , array( $this  , 'load_front_end_tmpl' ) );
         }
@@ -226,10 +227,10 @@ Class PageBuilderApplication {
 
             self::$shortcodes_tagnames = array_merge( self::$shortcodes_tagnames , array_keys( $sed_helper_shortcodes ) );
 
-            self::$shortcodes_tagnames = array_unique( self::$shortcodes_tagnames ); //var_dump( $sed_helper_shortcodes );
+            self::$shortcodes_tagnames = array_unique( self::$shortcodes_tagnames );
 
             foreach( $sed_helper_shortcodes AS $shortcode => $main_shortcode_name ){
-                if( shortcode_exists( $main_shortcode_name ) ){ //var_dump( $shortcode_tags[$main_shortcode_name] );
+                if( shortcode_exists( $main_shortcode_name ) ){
                     add_shortcode( $shortcode , $shortcode_tags[$main_shortcode_name] );
                 }
             }
@@ -278,27 +279,26 @@ Class PageBuilderApplication {
 	/**
 	 * @param Wp_Post $post
 	 */
-	public function parse_editable_content( $post ) {
-        global $sed_apps;
+	public function parse_editable_content( $post_content ) {
+        //global $sed_apps;
 
-        $post_id = (int) $sed_apps->framework->sed_page_id;
+        //$post_id = (int) $sed_apps->framework->sed_page_id;
 
-        if ( $post_id > 0 && $post->ID === $post_id && ! defined( 'SED_LOADING_EDITABLE_CONTENT' )) {
-            define( 'SED_LOADING_EDITABLE_CONTENT', true );
+        if ( is_singular() && in_the_loop() && is_main_query() ) {
+            //define( 'SED_LOADING_EDITABLE_CONTENT', true );
 
-            remove_filter( 'the_content', 'wpautop' );
+            //remove_filter( 'the_content', 'wpautop' );
 
-			ob_start();
-			$this->get_shortcodes_model_by_content( $post->post_content );
+            $post_content = $this->get_shortcodes_model_by_content( $post_content ); //var_export( $post_content );
 
-			$post_content = ob_get_clean();
-
-            $this->sed_post_content_tpl = '<script type="template/html" id="sed_template_post_content" style="display:none">' . rawurlencode( apply_filters( 'the_content', $post_content ) ) . '</script>';
+            /*$this->sed_post_content_tpl = '<script type="template/html" id="sed_template_post_content" style="display:none">' . rawurlencode( apply_filters( 'the_content', $post_content ) ) . '</script>';
 			// We already used the_content filter, we need to remove it to avoid double-using
-			remove_all_filters( 'the_content' );
+			remove_all_filters( 'the_content' );*/
 			// Used for just returning $post->post_content
-			add_filter( 'the_content', array( &$this, 'sed_editable_post_content' ) );
+			//add_filter( 'the_content', array( &$this, 'sed_editable_post_content' ) );
         }
+
+        return $post_content;
 
 	}
 
@@ -308,13 +308,24 @@ Class PageBuilderApplication {
 	 * @return string
 	 */
 	public function sed_editable_post_content( $content ) {
-		// same addContentAnchor
-		do_shortcode( $content ); // this will not be outputted, but this is needed to enqueue needed js/styles.
 
-        global $post;
-        $id = $post->ID;
-        $output = '<div id="sed-post-content-container" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box sed-pb-component">';
-        $output .= '</div>';
+        if ( is_singular() && in_the_loop() && is_main_query() ) {
+
+            global $post;
+
+            $id = $post->ID;
+
+            $output = '<div id="sed-post-content-container" data-post-id="' . $id . '" data-content-type="post" drop-placeholder="' . __("Drop Each Module Into The Content Area", "site-editor") . '" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box sed-pb-component">';
+
+            $output .= $content;
+
+            $output .= '</div>';
+
+        }else{
+
+            $output = $content;
+
+        }
 
 		return $output;
 	}
@@ -343,11 +354,12 @@ Class PageBuilderApplication {
 
 	/**
 	 * @param $content
-	 *
+	 * @return string
 	 */
-	function get_shortcodes_model_by_content( $content ) {
+	public function get_shortcodes_model_by_content( $content ) {
+
 		if ( ! empty( $this->sed_post_shortcodes_model ) ) {
-			return;
+			return '';
 		}
 
         global $post;
@@ -358,7 +370,7 @@ Class PageBuilderApplication {
 
         $this->sed_post_shortcodes_model[ $post->ID ] = $shortcodes_models['shortcodes'];
 
-        echo $shortcodes_models['string'];
+        return $shortcodes_models['string'];
 	}
 
 
@@ -512,7 +524,7 @@ Class PageBuilderApplication {
             }
         }elseif( count($except_content) == 1 && !empty($content) ){
             $shortcodes[] = $content ;
-            $string .= do_shortcode( $ex_content );
+            $string .= $ex_content; //do_shortcode(
         }
 
 		return array(

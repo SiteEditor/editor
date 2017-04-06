@@ -63,9 +63,10 @@ final class SiteEditorCustomizePostsPreview {
 		
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
-		add_filter( 'the_posts', array( $this, 'filter_the_posts_to_add_dynamic_post_meta_settings' ), 1000 );
+		//add_filter( 'the_posts', array( $this, 'filter_the_posts_to_add_dynamic_post_meta_settings' ), 1000 );
+		add_filter( 'the_content'   , array( &$this, 'add_dynamic_post_meta_settings' ) , 0 );
 		
-		add_filter( 'get_post_metadata', array( $this, 'filter_get_post_meta_to_add_dynamic_postmeta_settings' ), 1000, 2 );
+		//add_filter( 'get_post_metadata', array( $this, 'filter_get_post_meta_to_add_dynamic_postmeta_settings' ), 1000, 2 );
 		
 		add_action( 'wp_footer', array( $this, 'export_preview_data' ), 10 );
 		
@@ -93,6 +94,20 @@ final class SiteEditorCustomizePostsPreview {
 	public function enqueue_scripts() {
 		//wp_enqueue_script( 'customize-post-field-partial' );
 		wp_enqueue_script( 'sed-app-preview-posts' );
+	}
+
+	public function add_dynamic_post_meta_settings( $post_content ){
+
+		if ( is_singular() && in_the_loop() && is_main_query() ) {
+
+			global $post;
+
+			$this->component->register_post_type_meta_settings( $post->ID );
+
+		}
+
+		return $post_content;
+
 	}
 
 

@@ -1453,14 +1453,16 @@ function sed_data_atts( $attributes ) {
 }
 
 
-function sed_js_remove_wpautop( $content, $autop = false ) {
+function sed_js_remove_wpautop( $content, $autop = false , $do_shortcode = true ) {
 
     if ( $autop ) { 
         $content = wpautop( preg_replace( '/<\/?p\>/', "\n", $content ) . "\n" );
     }
 
-    return do_shortcode( shortcode_unautop( $content ) );
+    return $do_shortcode === true ? do_shortcode( shortcode_unautop( $content ) ) : shortcode_unautop( $content );
 }
+
+
 
 /**
  * get general page options

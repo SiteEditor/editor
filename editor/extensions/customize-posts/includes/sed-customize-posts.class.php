@@ -63,7 +63,7 @@ final class SiteEditorCustomizePosts {
 	 *
 	 * @param SiteEditorManager $manager Customize manager bootstrap instance.
 	 */
-	public function __construct( SiteEditorManager $manager ) { 
+	public function __construct( SiteEditorManager $manager ) {   
 		$this->manager = $manager;
 
 		require_once dirname( __FILE__ ) . '/sed-customize-posts-preview.class.php';
@@ -76,7 +76,7 @@ final class SiteEditorCustomizePosts {
 		add_filter( 'sed_app_dynamic_setting_class', array( $this, 'filter_dynamic_setting_class' ), 5, 3 );
 
 		add_filter( 'map_meta_cap', array( $this, 'filter_map_meta_cap' ), 10, 4 );
-		
+
 		$this->preview = new SiteEditorCustomizePostsPreview( $this );
 	}
 
