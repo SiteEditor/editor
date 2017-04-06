@@ -36,7 +36,7 @@ class PBRowShortcode extends PBShortcodeClass{
             'rps_spacing_right'     => '' ,
             'rps_spacing_bottom'    => '' ,
             'rps_spacing_left'      => '' , 
-            'rps_align'             => '' ,
+            'rps_align'             => 'initial' ,
             'rps_spacing_lock'      => false,
             //'sed_contextmenu_class' => '' 
         );

@@ -23,11 +23,6 @@ class PBTextIconShortcode extends PBShortcodeClass{
 		);
 	}
 
-
-    function add_shortcode( $atts , $content = null ){
-
-    }
-
     function styles(){
         return array(
             array('text-icon-style-default', SED_PB_MODULES_URL.'text-icon/skins/default/css/style.css' ,'1.0.0' ) ,
@@ -51,6 +46,25 @@ class PBTextIconShortcode extends PBShortcodeClass{
         );
 
         return $atts;
+    }
+
+    public function get_media_atts(){
+
+        return array(
+            'attachment_id'
+        );
+
+    }
+
+    function add_shortcode( $atts , $content = null ){
+        extract($atts);
+
+        if( $attachment_id > 0 ){
+            if( get_post( $attachment_id ) )
+                $this->set_media( $attachment_id );
+        }
+        
+
     }
 
     function shortcode_settings(){

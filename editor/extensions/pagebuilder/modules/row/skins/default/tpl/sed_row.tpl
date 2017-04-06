@@ -22,10 +22,10 @@ var _rowDropEmpty = '<div class="empty-row"><span class="drop-module-icon"></spa
 
 	    @media (max-width: 768px){
 	        [sed_model_id="{{sed_model_id}}"] {
-	            <# alert(rps_spacing_top); if(!_.isEmpty(rps_spacing_top)){ #>     padding-top:    {{rps_spacing_top}}px !important;    <# } #>
-	            <# if(!_.isEmpty(rps_spacing_right)){ #>   padding-right:  {{rps_spacing_right}}px !important;  <# } #>
-	            <# if(!_.isEmpty(rps_spacing_bottom)){ #>  padding-bottom: {{rps_spacing_bottom}}px !important; <# } #>
-	            <# if(!_.isEmpty(rps_spacing_left)){ #>    padding-left:   {{rps_spacing_left}}px !important;   <# } #>
+	            <# if( rps_spacing_top || rps_spacing_top === 0 ){ #>     padding-top:    {{rps_spacing_top}}px !important;    <# } #>
+	            <# if( rps_spacing_right || rps_spacing_right === 0 ){ #>   padding-right:  {{rps_spacing_right}}px !important;  <# } #>
+	            <# if( rps_spacing_bottom || rps_spacing_bottom === 0 ){ #>  padding-bottom: {{rps_spacing_bottom}}px !important; <# } #>
+	            <# if( rps_spacing_left || rps_spacing_left === 0 ){ #>    padding-left:   {{rps_spacing_left}}px !important;   <# } #>
 	            <# if(!_.isEmpty(rps_align)){ #>           text-align:     {{rps_align}} !important;            <# } #>
 	        }         
 	    } 
