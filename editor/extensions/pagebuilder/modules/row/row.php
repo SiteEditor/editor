@@ -38,6 +38,7 @@ class PBRowShortcode extends PBShortcodeClass{
             'rps_spacing_left'      => '' , 
             'rps_align'             => 'initial' ,
             'rps_spacing_lock'      => false,
+            'is_sticky'             => false
             //'sed_contextmenu_class' => '' 
         );
 
@@ -101,6 +102,16 @@ class PBRowShortcode extends PBShortcodeClass{
                 "type"          => "length" ,
                 "label"         => __("Wrapper Width", "site-editor"),
                 'panel'         => "rows_settings_panel",
+            ),
+
+            'is_sticky' => array(
+                'label'         => __('Is Sticky?', 'site-editor'),
+                'type'          => 'switch',
+                'choices'       => array(
+                    "on"            =>    __('Yes', 'site-editor') ,
+                    "off"           =>    __('No', 'site-editor') ,
+                ),
+                "panel"         => "rows_settings_panel" ,
             ),
 
             "align"     =>  array(

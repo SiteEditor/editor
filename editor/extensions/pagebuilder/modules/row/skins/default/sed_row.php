@@ -3,7 +3,7 @@
 if(!empty($content)){
 $wp_class = ( $from_wp_editor ) ? " sed-wp-editor-content" : "";
 ?>
-       <div sed-layout-role="pb-module" class="sed-row-pb sed-bp-element sed-stb-sm <?php echo $class.$wp_class;?> <?php echo $length_class;?> <?php //echo $sed_contextmenu_class;?>" <?php echo $sed_attrs; ?> data-type-row="<?php echo $type; ?>" length_element sed-role="row-pb">
+       <div sed-layout-role="pb-module" class="<?php if($is_sticky) echo "sed-pb-row-sticky";?> sed-row-pb sed-bp-element sed-stb-sm <?php echo $class.$wp_class;?> <?php echo $length_class;?> <?php //echo $sed_contextmenu_class;?>" <?php echo $sed_attrs; ?> data-type-row="<?php echo $type; ?>" length_element sed-role="row-pb">
        <?php         
        if( $from_wp_editor )
           echo wpautop( $content );

@@ -58,6 +58,80 @@
             $(this).find(">td >.sed-column-contents-pb > .sed-row-pb > .sed-pb-module-container").find("")
         });*/
 
+
+
+        $(".sed-pb-row-sticky").livequery(function(){
+
+            var $element = $(this) ,
+                slideToggle = true ,
+                elementOffsetTop = $element.offset().top,
+                elementHeight = $element.outerHeight();
+
+            var sticky_top = 0 ,
+                wpadminbar = $( '#wpadminbar' ),
+                _position = wpadminbar.css("position");
+
+            if( wpadminbar.length > 0 && _position == "fixed" ) {
+                sticky_top += wpadminbar.outerHeight();
+            }
+
+            var _resetSticky = function(){
+
+                $element.removeClass("sed-active-sticky");
+
+                $element.css({
+                    position    : '' ,
+                    top         : '' ,
+                    zIndex      : ''
+                });
+
+            };
+
+            var _lazySticky = _.debounce(function(){
+
+                var wTopPos = $(window).scrollTop();
+
+                if ( wTopPos > elementOffsetTop ) {
+
+                    $element.addClass("sed-active-sticky");
+
+                    if( slideToggle ) {
+
+                        $element.css({
+                            position: 'fixed',
+                            top: ( sticky_top - elementHeight ) + 'px' ,
+                            right: '0px',
+                            left: '0px' ,
+                            zIndex : 99999
+                        });
+
+                        $element.animate({
+                            top         : sticky_top + 'px'
+                        }, 200 );
+
+                        slideToggle = false;
+
+                    }
+
+
+                }else{
+
+                    _resetSticky();
+
+                    slideToggle = true;
+
+                }
+
+            }, 10);
+
+            _resetSticky();
+
+            $(window).on("scroll.sedRowticky" , function(){
+                _lazySticky();
+            });
+
+        });
+
     });
 
 

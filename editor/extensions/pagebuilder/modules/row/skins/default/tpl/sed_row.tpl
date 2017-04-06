@@ -10,7 +10,7 @@ var _rowDropEmpty = '<div class="empty-row"><span class="drop-module-icon"></spa
 
  #>
 
-<div sed-layout-role="pb-module" class="sed-row-pb sed-bp-element sed-stb-sm {{className}} {{lengthClass}}" {{sed_attrs}} data-type-row="{{type}}" length_element sed-role="row-pb">
+<div sed-layout-role="pb-module" class="<# if( is_sticky ) { #>sed-pb-row-sticky<# } #> sed-row-pb sed-bp-element sed-stb-sm {{className}} {{lengthClass}}" {{sed_attrs}} data-type-row="{{type}}" length_element sed-role="row-pb">
 
 	<# if(content) { #>
 		{{{content}}}
