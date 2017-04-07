@@ -309,16 +309,20 @@ Class SiteeditorTypography{
 
         $valid_fonts = array();
 
-        foreach( $custom_fonts AS $font ) {
-            if (!empty($font['font_title']) && !empty($font['font_family']) &&
-                substr($font['font_woff'], -5) == ".woff" &&
-                substr($font['font_ttf'], -4) == ".ttf" &&
-                substr($font['font_svg'], -4) == ".svg" &&
-                substr($font['font_eot'], -4) == ".eot"
-            ) {
+        if( is_array($custom_fonts) && !empty($custom_fonts) ){
 
-                $valid_fonts[$font['font_family']] = $font;
+            foreach( $custom_fonts AS $font ) {
+                if (!empty($font['font_title']) && !empty($font['font_family']) &&
+                    substr($font['font_woff'], -5) == ".woff" &&
+                    substr($font['font_ttf'], -4) == ".ttf" &&
+                    substr($font['font_svg'], -4) == ".svg" &&
+                    substr($font['font_eot'], -4) == ".eot"
+                ) {
+
+                    $valid_fonts[$font['font_family']] = $font;
+                }
             }
+
         }
 
         if( !empty( $valid_fonts ) ){
