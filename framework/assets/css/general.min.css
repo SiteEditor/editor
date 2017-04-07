@@ -106,7 +106,7 @@ table.sed-cols-table > tbody > tr > td {
     padding-left: 20px; 
 }
 
-table.sed-cols-table .sed-row-boxed,
+table.sed-cols-table:not(.sed-main-content-layout-module) .sed-row-boxed,
 .sed-row-boxed .sed-row-boxed {
     max-width: none !important; 
     padding-right: 0px;

@@ -106,10 +106,11 @@
       position: relative;
 }
 .index {
-    bottom: 0;
+    display: block;
     position: absolute;
-    top: 113px;
     width: 100% !important;
+    top: 115px; 
+    bottom: 0;
     z-index: 9;
 }
 
