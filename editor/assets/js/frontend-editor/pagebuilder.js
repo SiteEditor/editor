@@ -2295,7 +2295,7 @@
                         if( !_.isUndefined( $( '[sed_model_id="' + elementId + '"]' ).attr("length_element") ) )
                             targEl = $( '[sed_model_id="' + elementId + '"]' );
                         else
-                            targEl = $( '[sed_model_id="' + elementId + '"]' ).find("[length_element]");
+                            targEl = $( '[sed_model_id="' + elementId + '"]' ).find("[length_element]").eq(0);
 
                         if(attrValue == "boxed")
                             targEl.addClass( "sed-row-boxed" ).removeClass("sed-row-wide");
