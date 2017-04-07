@@ -65,7 +65,8 @@ api	 * @param options
 			this.container = $( this.selector );
             this.container.addClass("sed-container-control-element");
 
-            control.active = new api.Value();
+            control.active = new api.Value(true , { stype : "force-refresh" });
+
             control.activeArgumentsQueue = [];
 
 			settings = $.map( this.params.settings, function( value ) {
@@ -84,11 +85,11 @@ api	 * @param options
 				control.ready();
 			}) );
 
-            control.active.bind( function ( active ) {
+            control.active.bind( function ( active ) { 
                 var args = control.activeArgumentsQueue.shift();
                 args = $.extend( {}, control.defaultActiveArguments, args );
                 control.onChangeActive( active, args );
-            } );
+            });
 
             //control.active.set( control.params.active );
 
@@ -134,7 +135,7 @@ api	 * @param options
          * @param {Number}   args.duration
          * @param {Callback} args.completeCallback
          */
-        onChangeActive: function ( active, args ) {
+        onChangeActive: function ( active, args ) {  
             if ( args.unchanged ) {
                 if ( args.completeCallback ) {
                     args.completeCallback();

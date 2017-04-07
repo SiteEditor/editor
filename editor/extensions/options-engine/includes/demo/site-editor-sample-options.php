@@ -166,8 +166,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                     'queries'  =>  array(
                         array(
                             "key"       => "sed_text_settings_panel" ,
-                            "value"     => true ,
-                            "compare"   => "==="
+                            "value"     => '1' ,
+                            "compare"   => "=="
                         )
                     )
                 )
@@ -204,8 +204,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                     'queries'  =>  array(
                         array(
                             "key"           => "sed_checkbox_settings_panel" ,
-                            "value"         => true,
-                            "compare"       => "==="
+                            "value"         => '1',
+                            "compare"       => "=="
                         )
                     )
                 ),
@@ -268,8 +268,8 @@ class SiteEditorSampleOptions extends SiteEditorOptionsCategory
                     'queries'  =>  array(
                         array(
                             "key"           => "sed_radio_settings_panel" ,
-                            "value"         => true,
-                            "compare"       => "==="
+                            "value"         => '1',
+                            "compare"       => "=="
                         )
                     )
                 ),

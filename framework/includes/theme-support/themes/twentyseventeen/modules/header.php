@@ -119,8 +119,8 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                     'queries'  =>  array(
                         array(
                             "key"       => "disable_header" ,
-                            "value"     => false ,
-                            "compare"   => "==="
+                            "value"     => '1' ,
+                            "compare"   => "!="
                         )
                     )
                 )
@@ -140,8 +140,8 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                     'queries'  =>  array(
                         array(
                             "key"       => "disable_header" ,
-                            "value"     => false ,
-                            "compare"   => "==="
+                            "value"     => '1' ,
+                            "compare"   => "!="
                         )
                     )
                 )
@@ -161,8 +161,8 @@ class TwentyseventeenHeaderStaticModule extends SiteEditorStaticModule{
                     'queries'  =>  array(
                         array(
                             "key"       => "disable_header" ,
-                            "value"     => false ,
-                            "compare"   => "==="
+                            "value"     => '1' ,
+                            "compare"   => "!="
                         )
                     )
                 )

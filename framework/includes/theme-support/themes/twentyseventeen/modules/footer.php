@@ -115,8 +115,8 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
                     'queries'  =>  array(
                         array(
                             "key"       => "disable_footer" ,
-                            "value"     => false ,
-                            "compare"   => "==="
+                            "value"     => '1' ,
+                            "compare"   => "!="
                         )
                     )
                 )
@@ -139,8 +139,8 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
                     'queries'  =>  array(
                         array(
                             "key"       => "disable_footer" ,
-                            "value"     => false ,
-                            "compare"   => "==="
+                            "value"     => '1' ,
+                            "compare"   => "!="
                         )
                     )
                 )
@@ -162,8 +162,8 @@ class TwentyseventeenFooterStaticModule extends SiteEditorStaticModule {
                     'queries'  =>  array(
                         array(
                             "key"       => "disable_footer" ,
-                            "value"     => false ,
-                            "compare"   => "==="
+                            "value"     => '1' ,
+                            "compare"   => "!="
                         )
                     )
                 )

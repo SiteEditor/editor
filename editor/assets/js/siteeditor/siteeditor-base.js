@@ -178,7 +178,7 @@ window.sedApp = window.sedApp || {};
 			to = this.validate( to );
 
 			// Bail if the sanitized value is null or unchanged.
-			if ( null === to  || (_.isEqual( from , to ) && $.inArray( this.stype , ["module" , "style-editor"] ) == -1 ) )    //  :: change by parsaatef
+			if ( null === to  || (_.isEqual( from , to ) && $.inArray( this.stype , ["module" , "style-editor" , "force-refresh"] ) == -1 ) )    //  :: change by parsaatef
 				return this;
     
 			this._value = to;
