@@ -10,7 +10,9 @@ Version: 1.0.0
 
 require_once dirname( __FILE__ ) . DS . "index.php";
 
-$pagebuilder = new PageBuilderApplication(); 
+$pagebuilder = new PageBuilderApplication();
+
+global $site_editor_app;
 
 $site_editor_app->pagebuilder = $pagebuilder;
 
