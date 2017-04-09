@@ -404,9 +404,17 @@ class PBShortcodeClass{
             $sed_attrs .= $this->set_attr( 'sed_model_id', trim($this->atts['sed_model_id']) ) . " ";
         }
 
-        if( isset( $this->atts['id'] ) && !empty( trim( $this->atts['id'] ) ) ){
 
-            $sed_attrs .= $this->set_attr( 'id', trim($this->atts['id']) );
+
+        if( isset( $this->atts['id'] ) ) {
+
+            $atts_id = trim($this->atts['id']);
+
+            if( !empty( $atts_id ) ){
+
+                $sed_attrs .= $this->set_attr('id', $atts_id );
+
+            }
 
         }
 

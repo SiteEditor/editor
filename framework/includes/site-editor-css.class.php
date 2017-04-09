@@ -311,7 +311,7 @@ class SiteEditorCss{
             $bg_image = $element_properties['background_image'];
         }
 
-        if( !$bg_image || $bg_image == "none" ){
+        if( ( !$bg_image || $bg_image == "none" ) && $this->chvv('external_background_image' , $element_properties) ){
             $bg_image = $element_properties['external_background_image'];
         }
 
