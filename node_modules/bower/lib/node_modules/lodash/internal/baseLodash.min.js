@@ -1,1 +1,0 @@
-function baseLodash(){}module.exports=baseLodash;

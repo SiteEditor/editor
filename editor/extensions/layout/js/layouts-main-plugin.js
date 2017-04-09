@@ -119,11 +119,11 @@
 
             api.previewer.bind("ok_sedRemoveModulesConfirm", function () {
                 api.previewer.send("sedRemoveModulesApply", $("#sed-confirm-message-dialog").data("moduleId"));
-                $("#sed-confirm-message-dialog").removeData("moduleId")
+                $("#sed-confirm-message-dialog").removeData("moduleId");
             });
 
             api.previewer.bind("cancel_sedRemoveModulesConfirm", function () {
-                $("#sed-confirm-message-dialog").removeData("moduleId")
+                $("#sed-confirm-message-dialog").removeData("moduleId");
             });
 
             api.previewer.bind("customThemeRowInfoChange", function () {
