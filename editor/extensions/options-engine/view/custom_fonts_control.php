@@ -3,13 +3,15 @@
     <div class="sed-custom-fonts-accordion">
 
         <?php
+        
+        if( is_array( $custom_fonts ) && !empty( $custom_fonts ) ){
 
-        foreach ( $custom_fonts AS $font ){
+            foreach ( $custom_fonts AS $font ){
 
-            echo $this->custom_font_template( $font );
+                echo $this->custom_font_template( $font );
 
+            }
         }
-
         ?>
 
     </div>
