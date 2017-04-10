@@ -340,11 +340,11 @@
 
             var id = $("#website")[0].contentWindow.jQuery('[sed_model_id="' + api.currentTargetElementId + '"]').parents(".sed-pb-module-container:first").parent().attr("sed_model_id");
 
-            console.log( "----------updateRowTypeSelectField----- id ------" , id );
-
             var shortcode = _.findWhere(api.pagesThemeContent[api.settings.page.id], {id: id});
 
-            console.log( "----------updateRowTypeSelectField----- shortcode ------" , shortcode );
+            if( _.isUndefined( shortcode ) || !_.isObject( shortcode ) ){
+                return ;
+            }
 
             if (!_.isUndefined(shortcode.theme_id)) {
 

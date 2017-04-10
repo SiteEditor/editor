@@ -279,16 +279,12 @@
 
 
                 //remove theme row only in this layout from sed_layouts_content
-                var layoutsContent = api.layoutsRowsContent.getClone();
-
                 _.each( themeIds, function( themeId ){
 
-                    if( !_.isUndefined( layoutsContent[themeId] ) )
-                        delete layoutsContent[themeId];
+                    api.layoutsRowsContent.removeRowFromLayoutsContent( themeId );
 
                 });
 
-                api.layoutsRowsContent.set( layoutsContent );
 
             }else{
                 this.errortext = api.I18n.layout_not_exist;
