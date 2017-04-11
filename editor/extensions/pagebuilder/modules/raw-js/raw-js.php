@@ -55,6 +55,11 @@ class PBRawJavascriptCodeShortcode extends PBShortcodeClass{
                 ),
             ) ,
 
+            'row_container'         => array(
+                'type'                  => 'row_container',
+                'label'                 => __('Module Wrapper Settings', 'site-editor')
+            ),
+
         );
 
     }
