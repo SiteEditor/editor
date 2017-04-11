@@ -770,7 +770,6 @@ $css .= <<<CSS
             /*==================================*/
             .custom-header-media:before { 
                 background-color: {$overlay_background}; 
-                height: {$overlay_height}; 
             }
 
             /*
