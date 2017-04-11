@@ -31,6 +31,9 @@ class PBButtonShortcode extends PBShortcodeClass{
               "module"      =>  "button"                         //*require
           ) // Args
 	  	);
+
+        add_filter( 'sed_theme_color_css', array( $this , 'sed_button_module_color_css' ) , 10 , 3 );
+
 	  }
   
     function get_atts(){
@@ -58,6 +61,15 @@ class PBButtonShortcode extends PBShortcodeClass{
             array('button-style', SED_PB_MODULES_URL.'button/css/style.css' ,'1.0.0' ) ,
         );
     } 
+
+    function sed_button_module_color_css( $css , $color_scheme , $colors ) { 
+
+        extract($colors);
+
+        include SED_PB_MODULES_PATH . '/button/includes/dynamic-css.php';
+
+        return $css;
+    }   
   
     function shortcode_settings(){
 

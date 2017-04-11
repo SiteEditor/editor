@@ -24,6 +24,8 @@ class PBSearchShortcode extends PBShortcodeClass{
           "module"      => "search"                     //*require
         ));
 
+        add_filter( 'sed_theme_color_css', array( $this , 'sed_search_module_color_css' ) , 10 , 3 );
+
     }
 
     function get_atts(){
@@ -65,11 +67,15 @@ class PBSearchShortcode extends PBShortcodeClass{
         );
     }
 
-    function less(){
-        return array(
-            //array('main-search')
-        );
-    }
+    function sed_search_module_color_css( $css , $color_scheme , $colors ) { 
+
+        extract($colors);
+
+        include SED_PB_MODULES_PATH . '/search/includes/dynamic-css.php';
+
+        return $css;
+    }    
+
 
     function shortcode_settings(){
 
@@ -150,7 +156,7 @@ class PBSearchShortcode extends PBShortcodeClass{
     }
 }
 new PBSearchShortcode;
-include SED_PB_MODULES_PATH . '/search/sub-shortcode/sub-shortcode.php';
+include SED_PB_MODULES_PATH . '/search/includes/sub-shortcode.php';
 
 global $sed_pb_app;
 

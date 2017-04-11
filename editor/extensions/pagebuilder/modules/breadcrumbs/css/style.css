@@ -40,11 +40,6 @@
     margin-top: -0.5em
 }
 
-.breadcrumbs-default ul li.current span ,
-.breadcrumbs-default ul li a:hover {
-    color: #e61a33
-}
-
 .breadcrumbs-default ul li:last-child a:after {
     content: "" !important
 }

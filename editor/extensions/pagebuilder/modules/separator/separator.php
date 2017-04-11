@@ -33,6 +33,8 @@ class PBSeparatorShortcode extends PBShortcodeClass{
                 //"is_child"    =>  "false"       //for childe shortcodes like sed_tr , sed_td for table module
             ) // Args
 		);
+
+        add_filter( 'sed_theme_color_css', array( $this , 'sed_separator_module_color_css' ) , 10 , 3 );
 	}
 
     function get_atts(){
@@ -75,6 +77,15 @@ class PBSeparatorShortcode extends PBShortcodeClass{
             //array('separator-main-less')
         );
     }
+
+    function sed_separator_module_color_css( $css , $color_scheme , $colors ) { 
+
+        extract($colors);
+
+        include SED_PB_MODULES_PATH . '/separator/includes/dynamic-css.php';
+
+        return $css;
+    }  
 
     function shortcode_settings(){
 

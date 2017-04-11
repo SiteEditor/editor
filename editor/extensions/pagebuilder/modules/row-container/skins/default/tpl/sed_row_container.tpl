@@ -92,50 +92,51 @@ if( bg_type == 'video' ) {
 
 }
 
+#>
 
-if(content) { #>
-       <div class="row-container-module {{className}} <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #>" {{sed_attrs}}>
-            <div class="sed-pb-component {{lengthClass}}" data-parent-id="{{sed_model_id}}" length_element>
-                {{{content}}}
-            </div>
-            {{{outer_html}}}
-       </div>
-<# }else{ #>
-      <div class="row-container-module {{className}}  <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #>" {{sed_attrs}}>
-          <div class="sed-pb-component {{lengthClass}}" data-parent-id="{{sed_model_id}}" drop-placeholder="Drop A Module Here" length_element>
+<div class="row-container-module {{className}} <# if(is_arrow){ #> {{arrow}} <# } #> <# if(overlay){ #> row-overlay <# } #> <# if(full_height){ #> row-flex row-full-height <# } #>" {{sed_attrs}}>
+    <# if(content) { #>
 
-          </div>
-          {{{outer_html}}}
-      </div>
-<# } #>
+        <div class="sed-pb-component {{lengthClass}}" data-parent-id="{{sed_model_id}}" length_element>
+            {{{content}}}    
+        </div>
 
-<style type="text/css">
-<# if(is_arrow){ #>
-    <# if(arrow == 'row-arrow-bottom' ){ #>
-    [sed_model_id="{{sed_model_id}}"].row-arrow-bottom::after{
-        border-bottom: {{arrow_size}}px solid {{arrow_color}};
-        border-left: {{arrow_size}}px solid transparent;
-        border-right: {{arrow_size}}px solid transparent;
-        /*margin-bottom: -{{arrow_size}}px;*/
-        margin-left: -{{arrow_size}}px;
-    }
+    <# }else{ #>
+        
+        <div class="sed-pb-component {{lengthClass}}" data-parent-id="{{sed_model_id}}" drop-placeholder="Drop A Module Here" length_element></div>
+
     <# } #>
-    <# if(arrow == 'row-arrow-top' ){ #>
-    [sed_model_id="{{sed_model_id}}"].row-arrow-top::after {
-        border-top: {{arrow_size}}px solid {{arrow_color}};
-        border-left: {{arrow_size}}px solid transparent;
-        border-right: {{arrow_size}}px solid transparent;
-        /*margin-top: -{{arrow_size}}px;*/
-        margin-left: -{{arrow_size}}px;
-    }
-    <# } #>
-<# } #>
-<# if(overlay){ #>
-    [sed_model_id="{{sed_model_id}}"].row-overlay.row-container-module::before{
-        background-color: {{overlay_color}};
-        opacity: {{overlay_opacity/100}};
-    }
-<# } #>
 
-</style>
+    {{{outer_html}}}
+
+    <style type="text/css">
+    <# if(is_arrow){ #>
+        <# if(arrow == 'row-arrow-bottom' ){ #>
+        [sed_model_id="{{sed_model_id}}"].row-arrow-bottom::after{
+            border-bottom: {{arrow_size}}px solid {{arrow_color}};
+            border-left: {{arrow_size}}px solid transparent;
+            border-right: {{arrow_size}}px solid transparent;
+            /*margin-bottom: -{{arrow_size}}px;*/
+            margin-left: -{{arrow_size}}px;
+        }
+        <# } #>
+        <# if(arrow == 'row-arrow-top' ){ #>
+        [sed_model_id="{{sed_model_id}}"].row-arrow-top::after {
+            border-top: {{arrow_size}}px solid {{arrow_color}};
+            border-left: {{arrow_size}}px solid transparent;
+            border-right: {{arrow_size}}px solid transparent;
+            /*margin-top: -{{arrow_size}}px;*/
+            margin-left: -{{arrow_size}}px;
+        }
+        <# } #>
+    <# } #>
+    <# if(overlay){ #>
+        [sed_model_id="{{sed_model_id}}"].row-overlay.row-container-module::before{
+            background-color: {{overlay_color}};
+            opacity: {{overlay_opacity/100}};
+        }
+    <# } #>
+    </style>
+
+</div>
 

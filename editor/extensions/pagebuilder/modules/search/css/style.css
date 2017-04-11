@@ -22,8 +22,6 @@
     line-height: 1em;
     padding: 0 12px;
     cursor: pointer;
-    background-color: #e61a33;
-    color: #fff;
     border-width: 0;
     position: absolute;
     right: 0;
@@ -41,7 +39,7 @@
     left: 0;
 }
 
-/* Placeholder text color */
+/* Placeholder text color 
 .module.module-search.search-default .search-box::-webkit-input-placeholder {
     color: inherit;
     opacity: 0.9;
@@ -61,3 +59,4 @@
     color: inherit;
     opacity: 0.9;
 }
+*/

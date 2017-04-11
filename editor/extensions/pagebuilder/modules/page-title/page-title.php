@@ -32,6 +32,8 @@ class PBPageTitleShortcode extends PBShortcodeClass{
             ) // Args
 		);
 
+        add_filter( 'sed_theme_color_css', array( $this , 'sed_page_title_module_color_css' ) , 10 , 3 );
+
         if( site_editor_app_on() )
             add_action( "wp_footer" , array( $this , "print_get_title" ) );
 	}
@@ -66,6 +68,15 @@ class PBPageTitleShortcode extends PBShortcodeClass{
             array('page-title-style', SED_PB_MODULES_URL.'page-title/css/style.css' ,'1.0.0' ) ,
         );
     } 
+
+    function sed_page_title_module_color_css( $css , $color_scheme , $colors ) { 
+
+        extract($colors);
+
+        include SED_PB_MODULES_PATH . '/page-title/includes/dynamic-css.php';
+
+        return $css;
+    }  
 
 
     static function get_title(){

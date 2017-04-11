@@ -24,6 +24,9 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
                 "module"      =>  "breadcrumbs"         //*require
             ) // Args
         );
+
+        add_filter( 'sed_theme_color_css', array( $this , 'sed_breadcrumbs_module_color_css' ) , 10 , 3 );
+        
         if( site_editor_app_on() )
             add_action( "wp_footer" , array( $this , "print_breadcrumbs" ) );
 	}
@@ -57,6 +60,15 @@ class PBBreadCrumbsShortcode extends PBShortcodeClass{
             array('breadcrumbs-style', SED_PB_MODULES_URL.'breadcrumbs/css/style.css' ,'1.0.0' ) ,
         );
     }           
+
+    function sed_breadcrumbs_module_color_css( $css , $color_scheme , $colors ) { 
+
+        extract($colors);
+
+        include SED_PB_MODULES_PATH . '/breadcrumbs/includes/dynamic-css.php';
+
+        return $css;
+    }   
 
     function shortcode_settings(){
 
