@@ -199,14 +199,14 @@ class PBShortcodeClass{
             }
         }
 
-        $lesses = $this->less();
+        /*$lesses = $this->less();
 
         if( !empty($lesses) ){
             foreach( $lesses AS $style ){
                 if($new_style = call_user_func_array( array( $this , "add_less" ) , $style ) )
                     $new_styles[] = $new_style;
             }
-        }
+        }*/
 
         return $new_styles;
     }

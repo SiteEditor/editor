@@ -29,22 +29,47 @@ class SEDPageBuilderModules extends SiteEditorModules{
 	}
 
     function get_modules_base(){
+
+        return array(
+            'columns'           =>  'columns/columns.php' ,
+            'content-layout'    =>  'content-layout/content-layout.php' ,
+            'icons'             =>  'icons/icons.php' ,
+            'image'             =>  'image/image.php' ,
+            'module'            =>  'module/module.php' ,
+            'paragraph'         =>  'paragraph/paragraph.php' ,
+            'row'               =>  'row/row.php' ,
+            'row-container'     =>  'row-container/row-container.php' ,
+            'separator'         =>  'separator/separator.php' ,
+            'sidebar'           =>  'sidebar/sidebar.php' ,
+            'single-icon'       =>  'single-icon/single-icon.php' ,
+            'single-image'      =>  'single-image/single-image.php' ,
+            'title'             =>  'title/title.php' ,
+            'wp-text-editor'    =>  'wp-text-editor/wp-text-editor.php'
+        );
+
+    }
+
+    function get_core_modules(){ 
         return parent::get_modules();
     }
 
     function is_module_base( $module ){
+
         $module_name = $this->get_module_name( $module );
 
-        $module_base = ( array ) $this->get_modules_base();
+        $base_modules = ( array ) $this->get_modules_base();
 
-        return isset( $module_base["{$module_name}/{$module_name}.php"] );
+        return isset( $base_modules[$module_name] );
+
     }
 
     function is_install( $module ){
-        $module_name = $this->get_module_name( $module );
+        /*$module_name = $this->get_module_name( $module );
 
         $module_info = (array) sed_get_setting("module_info");
-        return isset( $module_info[$module_name] );
+        return isset( $module_info[$module_name] );*/
+
+        return true;
     }
 
     function is_module( $module ){
@@ -74,7 +99,7 @@ class SEDPageBuilderModules extends SiteEditorModules{
 
         $modules = array_map( array( $this , 'get_module_name' ) , $modules );
 
-        $modules_info = (array) sed_get_setting("module_info");
+        //$modules_info = (array) sed_get_setting("module_info");
 
         $live_module = sed_get_setting( "live_module" );
 
@@ -97,7 +122,7 @@ class SEDPageBuilderModules extends SiteEditorModules{
             }
         }
 
-        if( !empty( $modules_info ) ){
+        /*if( !empty( $modules_info ) ){
             $update_needle = false;
 
             foreach( $modules_info AS $module_name => $info ){
@@ -114,11 +139,12 @@ class SEDPageBuilderModules extends SiteEditorModules{
                 sed_update_setting( "module_info" , $modules_info );
             }
 
-        }
+        }*/
 
     }
 
     function check_reapet_module_name( $module ){
+        
         $module_name = $this->get_module_name( $module );
 
         $modules_info = (array) sed_get_setting("module_info");
@@ -136,7 +162,7 @@ class SEDPageBuilderModules extends SiteEditorModules{
     }
 
     function get_modules(){
-        $sed_modules = ( array ) $this->get_modules_base();
+        $sed_modules = ( array ) $this->get_core_modules();
 
         $modules = array();
 
@@ -188,6 +214,7 @@ class SEDPageBuilderModules extends SiteEditorModules{
         return 0;
     }
 
+
     function activate_module( $module, $redirect = '' ) {
         $module = $this->module_basename( trim( $module ) );
 
@@ -206,22 +233,33 @@ class SEDPageBuilderModules extends SiteEditorModules{
             return $valid;
 
         if ( !in_array( $module, $current ) ) {
+
             if ( !empty($redirect) )
                 wp_redirect(add_query_arg('_error_nonce', wp_create_nonce('module-activation-error_' . $module), $redirect)); // we'll override this later if the plugin can be included without fatal error
 
             $module_name = $this->get_module_name( $module );
 
-            $activate_modules[$module_name] = $module;
-            sed_update_setting( "live_module" , $activate_modules );
+            //TODO : Remove Save Modules & Skins Info
+            $this->save_module_info( $module , array( "skins"  => array() ) );
 
+            if( !$this->install_skins( $module ) ){
+                $this->print_message( sprintf( __("Module %s not installed","site-editor" ) , $module_name ) , "error" );
+                return false;
+            }
+
+            $activate_modules[$module_name] = $module;
+
+            sed_update_setting( "live_module" , $activate_modules );
 
             do_action( 'sed_pb_activated_module', $module_name );
 
             return true;
+
         }
 
         return null;
     }
+
 
     function deactivate_module( $module, $redirect = '' ) {
         $module = $this->module_basename( trim( $module ) );
@@ -229,6 +267,11 @@ class SEDPageBuilderModules extends SiteEditorModules{
         if( !$this->is_install( $module ) ){
             $module_name = $this->get_module_name( $module );
             return new WP_Error( 'module_not_installed' , sprintf( __("The %s module not installed.","site-editor" ) , $module_name ) );
+        }
+
+        if( $this->is_module_base( $module ) ){
+            $module_name = $this->get_module_name( $module );
+            return new WP_Error( 'module_is_base' , sprintf( __("The %s module is a base module. you don't deactivate base modules.","site-editor" ) , $module_name ) );
         }
 
         $site_editor_settings = get_option('site-editor-settings');
@@ -335,6 +378,8 @@ class SEDPageBuilderModules extends SiteEditorModules{
         $module_name = $this->get_module_name( $module );
 
         $module_info = (array) sed_get_setting("module_info");
+
+        $module_info[$module_name] = isset( $module_info[$module_name] ) ? $module_info[$module_name] : array();
 
         $module_info[$module_name] = array_merge(  (array) $module_info[$module_name] , $curr_module_info );
 

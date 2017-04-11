@@ -6,7 +6,7 @@
 class SiteEditorSetup
 {
     private $steps;
-    private $modules_base;
+    private $core_modules;
     private $theme_name;
     private $themeURL;
     private $theme_folder_path;
@@ -48,7 +48,7 @@ class SiteEditorSetup
             "install_sample_data"   => false
         ) , (array) sed_get_setting("status_install_steps") );
 
-        $this->modules_base = $sed_pb_modules->get_modules_base();
+        $this->core_modules = $sed_pb_modules->get_core_modules();
 
         add_action( 'admin_enqueue_scripts', array(&$this,'sed_load_admin_scripts') );
 
@@ -287,7 +287,7 @@ class SiteEditorSetup
 
         $result_install = array();
 
-        foreach ( $this->modules_base as $name => $path ) {
+        foreach ( $this->core_modules as $name => $path ) {
             if( empty( $path ) )
                 $result_install[ $name ] = $sed_pb_modules->install( $name );
             else

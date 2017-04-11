@@ -127,9 +127,9 @@ final Class SiteEditor {
 
         $this->config = sed_array_to_object( $this->config );
 
-        $this->init_hooks();
-
         $this->includes();
+
+        $this->init_hooks();
 
     }
 
@@ -138,11 +138,14 @@ final Class SiteEditor {
      * @since  0.9
      */
     private function init_hooks() {
+        
         register_activation_hook( __FILE__, array( 'SiteEditorInstall', 'install' ) );
+
         add_action( 'init', array( $this, 'init' ), 0 );
 
         add_filter('upload_mimes', array( $this , 'filter_mime_types') );
     }
+
 
     public function filter_mime_types($mimes){
 
@@ -274,6 +277,7 @@ final Class SiteEditor {
      * Include required core files used in admin and on the frontend.
      */
     public function includes() {
+
         require_once  SED_INC_DIR . DS . 'site-editor-install.class.php' ;
         require_once  SED_INC_DIR . DS . 'site-editor-initialize.class.php' ;
         require_once  SED_INC_DIR . DS . 'site-editor-assets.class.php' ;

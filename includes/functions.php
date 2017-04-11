@@ -630,9 +630,11 @@ function sed_get_the_post_thumbnail($post = null, $size = 'post-thumbnail', $att
 }
 
 function sed_print_message( $msg , $type = "success"){
-    printf("<li><div class='install-process-module-%s'>%s</div></li>\n", $type , $msg );
+
+    return sprintf("<li><div class='install-process-module-%s'>%s</div></li>\n", $type , $msg );
+    /*printf("<li><div class='install-process-module-%s'>%s</div></li>\n", $type , $msg );
     ob_flush();
-    flush();
+    flush();*/
 
 }
 
@@ -1525,4 +1527,18 @@ function sed_hex2rgb( $color ) {
     }
 
     return array( 'red' => $r, 'green' => $g, 'blue' => $b );
+}
+
+/**
+ * you can using this function in 3rd party themes or plugins for activate && deactivate modules after install theme.
+ * @param $module_file
+ */
+function sed_activate_module( $module_file ){
+
+    SiteEditorAdminRender::load_page_builder_app();
+
+    global $sed_pb_modules;
+
+    $sed_pb_modules->activate_module( $module_file );
+
 }

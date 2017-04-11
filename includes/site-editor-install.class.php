@@ -18,33 +18,60 @@ if ( ! defined( 'ABSPATH' ) ) {
 class SiteEditorInstall {
 
 	/**
-	 * SiteEditorInstall constructor.
+	 * Install SiteEditor.
 	 */
-	public function __construct( ){
+	public static function install() {
 
-		add_action( 'init' , array( $this , 'options_init' ) );
+		/**
+		 * If there is "site-editor-settings" Setting, we exit from continue install process
+		 */
 
-	}
+		$settings = get_option('site-editor-settings');
 
-	public function options_init(){
+		if( $settings !== false && is_array( $settings ) && isset( $settings['site_editor_page_title'] ) ){
 
-        if ( get_option( 'page_options_scope' ) === false ) {
+			return ;
 
-            //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-            $deprecated = null;
-            $autoload = 'yes';
+		}
 
-            $scopes = array();
+		/**
+		 * First Step: Set Default Site Editor Settings
+		 */
+		$default_settings = array(
+			'site_editor_page_title' => __('SiteEditor','site-editor')
+		);
 
-            add_option( 'page_options_scope' , $scopes , $deprecated, $autoload );
-        }
+		$settings = wp_parse_args( (array) get_option('site-editor-settings'), $default_settings );
+
+		update_option( 'site-editor-settings', $settings );
+
+		/**
+		 * Second Step: Activate All Page Builder Core Modules
+		 */
+		self::activate_core_pb_modules();
 
 	}
 
 	/**
-	 * Install WC.
+	 * Activate All Page Builder Core Modules
+	 * @return bool
 	 */
-	public static function install() {
+	public static function activate_core_pb_modules(){
+
+		SiteEditorAdminRender::load_page_builder_app();
+
+		global $sed_pb_modules;
+
+		$core_modules = $sed_pb_modules->get_core_modules();
+
+		foreach ( $core_modules as $name => $path ) {
+
+			$module_file = SEDPageBuilderModules::$modules_base_rel . $name;
+
+			$sed_pb_modules->activate_module( $module_file );
+
+		}
 
 	}
+
 }

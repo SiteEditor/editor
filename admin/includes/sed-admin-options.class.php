@@ -152,7 +152,10 @@ class SED_Admin_Options{
 		$item_tabs = array();
 		foreach ( $this->tabs as $id => $title) {
 			$item_tabs[] = sprintf('<li><a href="#%1$s">%2$s</a></li>' , $id , $title ) ;
-			$this->set_content_tabs( $id , $title , $this->items[$id] );
+
+			$items = isset( $this->items[$id] ) ? $this->items[$id] : array();
+
+			$this->set_content_tabs( $id , $title , $items );
 		}
 		$out = '';
 		$out .='<div id="sed_admin_box_tabs">

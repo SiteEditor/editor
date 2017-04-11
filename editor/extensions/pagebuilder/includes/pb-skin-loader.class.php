@@ -32,12 +32,12 @@ class PBSkinLoaderClass{
 	}                 
 
     function shortcode_skin_js_tpl(){
+
        global $sed_apps;
 
        $activate_modules = SiteEditorModules::pb_module_active_list();
        $activate_modules_names = array_keys( $activate_modules );
        $modules = $sed_apps->module_info;
-       $not_compiled_files = array();
 
         foreach( $activate_modules_names AS $module_name  ){
             $module_info = $modules[$module_name];
@@ -59,6 +59,7 @@ class PBSkinLoaderClass{
 
             }
         }
+
 
     }
 
@@ -132,10 +133,10 @@ class PBSkinLoaderClass{
     }
 
 
-    function get_skin_info( $skin , $module , $type ){
+    /*function get_skin_info( $skin , $module , $type ){
         global $sed_apps;
         return $sed_apps->module_info[$module]['skins'][$skin][$type];
-    }
+    }*/
 
     function load_parent_skin($skin , $parent_module , $ext = ''){
 
@@ -182,7 +183,7 @@ class PBSkinLoaderClass{
 
             if( !in_array( $module_skin , $this->loaded_skins  ) ){
 
-                $scripts = $this->get_skin_info( $skin , $this->module , "scripts" );
+                /*$scripts = $this->get_skin_info( $skin , $this->module , "scripts" );
 
                 if( !is_null( $scripts ) && !empty( $scripts ) ){
                     foreach( $scripts AS $handle => $script ){
@@ -204,7 +205,7 @@ class PBSkinLoaderClass{
                     foreach( $lesses AS $handle => $style ){
                         wp_enqueue_style( $style['handle'] , SED_UPLOAD_URL. "/modules" . $style['src_rel'] , $style['deps'] , $style['ver'] , $style['media'] );
                     }
-                }
+                }*/
 
                 $this->loaded_skins[] = $module_skin;
 

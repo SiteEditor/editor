@@ -764,7 +764,7 @@
 
             //load ===="skin"====== scripts && skin styles
             if( _.isUndefined( has_mskin ) ){
-                var skinInfo = api.modulesInfo[module_name]['skins'][currentSkin];
+                /*var skinInfo = api.modulesInfo[module_name]['skins'][currentSkin];
                 if( !_.isUndefined( skinInfo ) ){
                     var scripts = skinInfo['scripts'];
 
@@ -776,7 +776,7 @@
                     if( $.isArray( styles ) && styles.length > 0 )
                         api.pageBuilder.moduleStylesLoad( styles );
 
-                }
+                }*/
 
                 this.loadedSkins.push( moduleSkin );
             }
@@ -949,7 +949,7 @@
         api.postsContent        = window._sedAppPostsContent ;
 
 
-        api.modulesInfo         = window._sedAppPageBuilderModulesInfo;
+        //api.modulesInfo         = window._sedAppPageBuilderModulesInfo;
         api.defaultPatterns     = window._sedShortcodesDefaultPatterns ;
 
         api.pagesThemeContent   = window._sedAppPagesThemeContent;

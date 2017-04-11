@@ -1,19 +1,20 @@
 <?php
 
 $tabs = array(
-    "general"                   => __('General Settings' , 'site-editor' ),
-    "favicon"                   => __('Favicon Options' , 'site-editor' ),
+    "dashboard"                 => __('Dashboard' , 'site-editor' ),
+    "general-settings"          => __('General Settings' , 'site-editor' ),
+    /*"favicon"                   => __('Favicon Options' , 'site-editor' ),
     "colors"                    => __( 'Colors' , 'site-editor' ) ,
     "custom_font"               => __( 'Custom Font' , 'site-editor' ) ,
     "typography"                => __( 'Typography' , 'site-editor' ) ,
-    "custom_css"                => __( 'Custom css' , 'site-editor' ) ,
+    "custom_css"                => __( 'Custom css' , 'site-editor' ) ,*/
     "edit_pages"                => __( 'Pages Edit' , 'site-editor' ) ,
-    "theme_less_compile"        => __( 'Theme Less Compile' , 'site-editor' ) ,
-    "import_export"             => __( 'import & export' , 'site-editor') ,
+    /*"theme_less_compile"        => __( 'Theme Less Compile' , 'site-editor' ) ,
+    "import_export"             => __( 'import & export' , 'site-editor') ,*/
 );
 
 $items = array(
-    "general"   => array(
+    /*"general"   => array(
         "tracking_code"      => array(
             "type"      =>"textarea",
             "label"     => __('Tracking Code' , 'site-editor' ) ,
@@ -122,7 +123,7 @@ $items = array(
             "desc"      => __('Paste your CSS code, do not include any tags or HTML in this field. Any custom CSS entered here will override the theme CSS. In some cases, the !important tag may be needed.' , 'site-editor' ),
             "std"       => ""
         ),
-    ),
+    ),*/
 
     "edit_pages"      => array(
         "edit_pages"      => array(
@@ -132,7 +133,7 @@ $items = array(
         ),
     ),
 
-    "theme_less_compile"      => array(
+    /*"theme_less_compile"      => array(
         "theme_less_compile"      => array(
             "type"          => "html",
             "label"         => __('Theme Less Compile' , 'site-editor' ) ,
@@ -240,6 +241,6 @@ $items = array(
             "type" => "text"
          )
 
-    ),
+    ),*/
 
 );

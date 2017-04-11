@@ -8,7 +8,7 @@ class SEDPBModuleProvider{
     function __construct(  ) {
         if( site_editor_app_on() ){
             add_action( 'wp_footer', array( $this, 'sed_app_pagebuilder_modules' ), 1000000 );
-            add_action( 'wp_footer', array( &$this, 'siteeditor_check_less_compailer' ), 10 );
+            //add_action( 'wp_footer', array( &$this, 'siteeditor_check_less_compailer' ), 10 );
         }
     }
 
@@ -105,12 +105,14 @@ class SEDPBModuleProvider{
         }else
             $attachments = array();
 
+        $modules_info = array();
+
+        /*
         if( ! $live_modules = sed_get_setting("live_module") )
             $modules_activate = array();
         else
             $modules_activate = array_keys( $live_modules );
-
-        $modules_info = array();
+    
         foreach( $modules_activate AS $module_name ){
             $module_info = $sed_apps->module_info[$module_name];
 
@@ -149,7 +151,7 @@ class SEDPBModuleProvider{
             }
 
  
-        }
+        }*/
 
 
                 /*var _sedAppPageBuilderModulesScripts = <?php echo wp_json_encode( $site_editor_app->pagebuilder->modules_scripts ); ?>;
@@ -159,7 +161,7 @@ class SEDPBModuleProvider{
 
 
 		<script type="text/javascript">
-                var _sedAppPageBuilderModulesInfo = <?php echo wp_json_encode( $modules_info ); ?>;
+                //var _sedAppPageBuilderModulesInfo = <?php echo wp_json_encode( $modules_info ); ?>;
                 var _sedAppPBAttachmentsSettings = <?php if( !empty( $attachments ) ) echo wp_json_encode( $attachments ); else echo "[]"; ?>;
 		</script>
 

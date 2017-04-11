@@ -9,20 +9,20 @@ Class site_editor_indexController Extends baseController {
 
         global $sed_error;
 
-        if( !class_exists( 'SiteEditorSetup' ) )
-            require_once( SED_ADMIN_INC_PATH . DS . 'sed-setup.class.php' );
+        /*if( !class_exists( 'SiteEditorSetup' ) )
+            require_once( SED_ADMIN_INC_PATH . DS . 'sed-setup.class.php' );*/
 
-        if( SiteEditorSetup::is_installed() ){
+        //if( SiteEditorSetup::is_installed() ){
             $this->show_options_page();
-        }else{
+        /*}else{
 
             $this->registry->template->massage = $sed_error->get_error();
             $this->registry->template->site_editor_install = new SiteEditorSetup;
 
             /*** load the index template ***/
-            $this->registry->template->show('install');
+            /*$this->registry->template->show('install');
 
-        }
+        }*/
 
     }
 

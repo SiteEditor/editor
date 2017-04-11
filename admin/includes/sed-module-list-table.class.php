@@ -260,7 +260,7 @@ class SiteEditorModuleListTable extends WP_List_Table {
         $actions = array(
             'activate-selected'    => __( 'Activate' , 'site-editor') ,
             'deactivate-selected'    => __('Deactivate' , 'site-editor' ) ,
-            'install-selected'    => __('Install' , 'site-editor' ) ,
+            /*'install-selected'    => __('Install' , 'site-editor' ) ,*/
 
         );
         return $actions;
@@ -297,24 +297,31 @@ class SiteEditorModuleListTable extends WP_List_Table {
         $is_complete_install = $sed_pb_modules->is_install( $module_file );
         $is_active = $sed_pb_modules->is_module_active( $module_file );
 
-        if( $is_complete_install ){
-            if ( $is_active ) {
-            	$actions['deactivate'] = '<a href="' . wp_nonce_url('admin.php?page=site_editor_module&amp;action=deactivate&amp;module=' . $module_file . '&amp;show_modules=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'sed-deactivate-module_' . $module_file) . '" title="' . esc_attr__('Deactivate this module') . '">' . __('Deactivate') . '</a>';
-            } else {
-            	$actions['activate'] = '<a href="' . wp_nonce_url('admin.php?page=site_editor_module&amp;action=activate&amp;module=' . $module_file . '&amp;show_modules=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'sed-activate-module_' . $module_file) . '" title="' . esc_attr__('Activate this module') . '" class="edit">' . __('Activate') . '</a>';
+		$is_base = $sed_pb_modules->is_module_base( $module_file );
 
-            } // end if $is_active
-        }else{
-            	$actions['activate'] = '<a href="' . wp_nonce_url('admin.php?page=site_editor_module&amp;action=install&amp;module=' . $module_file . '&amp;show_modules=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'sed-install-module_' . $module_file) . '" title="' . esc_attr__('Complete Install this module') . '" class="edit">' . __('Complete Install') . '</a>';
-        }
+		if( !$is_base ) {
 
-    	if ( ( ! is_multisite() || $screen->in_admin( 'network' ) ) && current_user_can('sed_edit_less') && is_writable( WP_CONTENT_DIR . '/' . $module_file) ){
+			if ($is_complete_install) {
+				if ($is_active) {
+					$actions['deactivate'] = '<a href="' . wp_nonce_url('admin.php?page=site_editor_module&amp;action=deactivate&amp;module=' . $module_file . '&amp;show_modules=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'sed-deactivate-module_' . $module_file) . '" title="' . esc_attr__('Deactivate this module') . '">' . __('Deactivate') . '</a>';
+				} else {
+					$actions['activate'] = '<a href="' . wp_nonce_url('admin.php?page=site_editor_module&amp;action=activate&amp;module=' . $module_file . '&amp;show_modules=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'sed-activate-module_' . $module_file) . '" title="' . esc_attr__('Activate this module') . '" class="edit">' . __('Activate') . '</a>';
+
+				} // end if $is_active
+			} else {
+				$actions['activate'] = '<a href="' . wp_nonce_url('admin.php?page=site_editor_module&amp;action=install&amp;module=' . $module_file . '&amp;show_modules=' . $context . '&amp;paged=' . $page . '&amp;s=' . $s, 'sed-install-module_' . $module_file) . '" title="' . esc_attr__('Complete Install this module') . '" class="edit">' . __('Complete Install') . '</a>';
+			}
+
+		}
+
+    	/*if ( ( ! is_multisite() || $screen->in_admin( 'network' ) ) && current_user_can('sed_edit_less') && is_writable( WP_CONTENT_DIR . '/' . $module_file) ){
             $href = wp_nonce_url('admin.php?page=site_editor_edit_module&amp;module=' . $module_file  , 'sed-edit-module_' . $module_file);
             $actions ['edit'] = sprintf('<a href="%1$s">%2$s</a>', $href ,__( 'Less Edit' , 'site-editor')) ;
         }
 
         $url_skin = 'admin.php?page=site_editor_skin&module=' . $module_file;
         $actions ['skins'] =  sprintf('<a href="%1$s">%2$s</a>', wp_nonce_url( self_admin_url(  $url_skin ) , 'sed-module-skin_' . $module_file) ,__( 'Skins' , 'site-editor') );
+		*/
 
 		$actions = apply_filters( 'sed_module_action_links', array_filter( $actions ), $module_file, $module_data, $context );
 
@@ -350,7 +357,13 @@ class SiteEditorModuleListTable extends WP_List_Table {
 
 			switch ( $column_name ) {
 				case 'cb':
-					echo "<th scope='row' class='check-column'>$checkbox</th>";
+
+					if( !$is_base ) {
+						echo "<th scope='row' class='check-column'>$checkbox</th>";
+					}else{
+						echo "<th scope='row' class='check-column'></th>";
+					}
+
 					break;
 				case 'name':
 					echo "<td class='module-title'$style><strong>$module_name</strong>";

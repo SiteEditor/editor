@@ -1,10 +1,11 @@
 <?php
 /**
- *
+ * Class SiteEditorAdminRender
  */
 class SiteEditorAdminRender{
 
     private $app_name = 'site_editor';
+
     var $_pagehooks = array();
 
     function __construct(){
@@ -12,24 +13,26 @@ class SiteEditorAdminRender{
         if( !defined( 'SED_ADMIN_INC_PATH' ) )
             define('SED_ADMIN_INC_PATH', SED_ADMIN_DIR . DS . 'includes');
 
-        if( !class_exists( 'SiteEditorSetup' ) )
-            require_once( SED_ADMIN_INC_PATH . DS . 'sed-setup.class.php' );
+        /*if( !class_exists( 'SiteEditorSetup' ) )
+            require_once( SED_ADMIN_INC_PATH . DS . 'sed-setup.class.php' );*/
 
         require_once( SED_ADMIN_INC_PATH . DS . 'class_sed_error.php' );
         $GLOBALS['sed_error'] = new SED_Error;
 
         
-        add_action("init" ,  array( $this ,"load_page_builder_app") );
+        add_action("init" ,  array( "SiteEditorAdminRender" ,"load_page_builder_app") );
 
         //add admin menu
         add_action( 'admin_menu', array( $this ,'app_create_menu') );
+        
         //add style & javascript to admin
         add_action( 'admin_enqueue_scripts', array( $this , 'render_scripts' ) );
 
         add_action('admin_init', array( $this, 'options_admin_init' ) );
+
         //add_action('admin_init', array( $this, 'sed_page_options_admin_init' ) );
 
-        if( SiteEditorSetup::is_installed() ){
+        //if( SiteEditorSetup::is_installed() ){
 
             // add button Edit With SiteEditor in default editor wordpress
             add_action('media_buttons',  array( $this , 'add_button_to_editor' ) );
@@ -45,23 +48,38 @@ class SiteEditorAdminRender{
 
             add_action( 'admin_init', array( $this , 'admin_init')  );
 
-        }else{
+        /*}else{
 
             add_action( 'admin_notices', array( $this , 'admin_notices'));
 
-        }
+        }*/
 
         add_filter('set-screen-option', array( $this , 'module_set_screen_option' ), 10, 3);
 
     }
 
-    function load_page_builder_app(){
+    public static function load_page_builder_app(){
+
+
+        //ini_set('xdebug.var_display_max_children',1000 );
+        //ini_set('xdebug.var_display_max_depth',20 );
+        //ini_set('xdebug.var_display_max_data' , 100000 );
+
+        //var_dump( get_option( 'site-editor-settings' ) );
+
         global $sed_pb_modules;
-        include_once( SED_INC_DIR . DS . "modules.class.php"  );
-        include_once( SED_INC_DIR . DS . "app_pb_modules.class.php"  );
-        $pb_modules = new SEDPageBuilderModules( );
-        $pb_modules->app_modules_dir = SED_PB_MODULES_PATH;
-        $sed_pb_modules = $pb_modules;
+
+        if ( !$sed_pb_modules instanceof SEDPageBuilderModules ) {
+
+            include_once(SED_INC_DIR . DS . "modules.class.php");
+            include_once(SED_INC_DIR . DS . "app_pb_modules.class.php");
+
+            $pb_modules = new SEDPageBuilderModules();
+            $pb_modules->app_modules_dir = SED_PB_MODULES_PATH;
+            $sed_pb_modules = $pb_modules;
+
+        }
+
     }
 
     function options_admin_init(){
@@ -139,8 +157,10 @@ class SiteEditorAdminRender{
     }
 
     function post_remove_from_exclude( $pid ) {
+
+        /*$model_changed = false;
+
         $sed_general_theme_options = get_option( 'sed_general_theme_options' );
-        $model_changed = false;
 
         foreach( $sed_general_theme_options AS  $settings_id => $options ){
             if( isset( $options['scope'] ) && isset( $options['scope']['exclude'] ) && !empty( $options['scope']['exclude'] ) ){
@@ -155,32 +175,36 @@ class SiteEditorAdminRender{
 
         if( $model_changed === true ){
             update_option('sed_general_theme_options', $sed_general_theme_options );
-        }
+        }*/
 
-        $sed_layouts_models = get_option( 'sed_layouts_models' );
+        $sed_layouts_models = get_option( 'sed_layouts_models' , array() );
         $model_changed = false;
 
-        foreach( $sed_layouts_models AS  $sub_theme => $rows ){
-            foreach( $rows AS  $row_idx => $row ){
-                if( !empty( $row['exclude'] ) ){
-                    foreach( $row['exclude'] AS  $index => $post_id ){
-                        if( $post_id == $pid ){
-                            $model_changed = true;
-                            unset( $sed_layouts_models[$sub_theme][$row_idx]['exclude'][$index] );
+        if( is_array( $sed_layouts_models ) && !empty( $sed_layouts_models ) ) {
+
+            foreach ($sed_layouts_models AS $sub_theme => $rows) {
+                foreach ($rows AS $row_idx => $row) {
+                    if (!empty($row['exclude'])) {
+                        foreach ($row['exclude'] AS $index => $post_id) {
+                            if ($post_id == $pid) {
+                                $model_changed = true;
+                                unset($sed_layouts_models[$sub_theme][$row_idx]['exclude'][$index]);
+                            }
                         }
                     }
                 }
             }
-        }
 
-        if( $model_changed === true ){
-            update_option('sed_layouts_models', $sed_layouts_models );
+            if ($model_changed === true) {
+                update_option('sed_layouts_models', $sed_layouts_models);
+            }
+
         }
 
     }
 
-    function filter_mime_types($mimes)
-    {
+    function filter_mime_types($mimes){
+
         $mimes['ttf'] = 'font/ttf';
         $mimes['woff'] = 'font/woff';
         $mimes['svg'] = 'font/svg';
@@ -227,13 +251,17 @@ class SiteEditorAdminRender{
 
 
     public function admin_notices( $msg = ''){
+
         if( isset( $_GET['page'] ) && $_GET['page'] == "site_editor_index" )
             return '';
 
         $msg = empty( $msg ) ? sprintf( __( '<a href="%1$s">complete install Site Editor plugin</a>', 'site-editor' ), admin_url('admin.php?page=site_editor_index') ) : $msg ;
+
         echo "<div class='error fade'><p>$msg</p></div>";
 
     }
+
+
     function app_create_menu(){
         //create new top-level menu
         $menu           = new stdClass;
@@ -305,9 +333,9 @@ class SiteEditorAdminRender{
         $this->_pagehooks['site-editor']         = $this->add_admin_menu( $menu,'menu');
         $this->_pagehooks['site-editor-settings']         = $this->add_admin_menu( $settings_menu, 'submenu' );
         $this->_pagehooks['site-editor-module']         = $this->add_admin_menu( $modules_menu, 'submenu' );
-        $this->_pagehooks['site-editor-extend']          = $this->add_admin_menu( $extend_menu, 'submenu' );
-        $this->_pagehooks['site-editor-skins']          = $this->add_admin_menu( $skins_menu, 'submenu' );
-        $this->_pagehooks['site-editor-edit-files']    = $this->add_admin_menu( $edit_module, 'submenu' );
+        //$this->_pagehooks['site-editor-extend']          = $this->add_admin_menu( $extend_menu, 'submenu' );
+        //$this->_pagehooks['site-editor-skins']          = $this->add_admin_menu( $skins_menu, 'submenu' );
+        //$this->_pagehooks['site-editor-edit-files']    = $this->add_admin_menu( $edit_module, 'submenu' );
 
         // Adds my_help_tab when my_admin_page loads
         add_action('load-'.$this->_pagehooks['site-editor-module'], array( $this , 'modules_page_add_help_tab' ) );
@@ -463,8 +491,6 @@ class SiteEditorAdminRender{
     function module_set_screen_option($status, $option, $value) {
         if ( 'sed_modules_per_page' == $option ) return $value;
     }
-
-
 
 }
 

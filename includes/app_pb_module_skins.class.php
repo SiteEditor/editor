@@ -146,9 +146,9 @@ class SEDPageBuilderModuleSkins
             return false;
 
         $skin_info = array(
-            'less'      => $this->less_skin_compile( $module , $skin ) ,
-            "scripts"   => $this->get_scripts_info( $module , $skin ),
-            "styles"    => $this->get_styles_info( $module , $skin ),
+            //'less'      => $this->less_skin_compile( $module , $skin ) ,
+            //"scripts"   => $this->get_scripts_info( $module , $skin ),
+            //"styles"    => $this->get_styles_info( $module , $skin ),
             "tpls"      => $this->get_tpls_info( $module , $skin ),
         );
 
@@ -279,6 +279,11 @@ class SEDPageBuilderModuleSkins
         $module_name = $sed_pb_modules->get_module_name( $module );
 
         $module_info = (array) sed_get_setting("module_info");
+
+        if( isset( $module_info[$module_name]['skins'][$skin] ) && $module_info[$module_name]['skins'][$skin] == $skin_info ){
+            return true;
+        }
+
         $module_info[$module_name]['skins'][$skin] = $skin_info;
         return sed_update_setting( "module_info" , $module_info );
 
@@ -305,9 +310,8 @@ class SEDPageBuilderModuleSkins
     }
 
     private function echo_message( $msg , $type = "success"){
-        printf("<li><div class='install-process-module-%s'>%s</div></li>\n", $type , $msg ); 
-        ob_flush();
-        flush();
+
+        sed_print_message( $msg , $type );
 
     }
 }
