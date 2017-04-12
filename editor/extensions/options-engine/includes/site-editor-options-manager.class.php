@@ -115,8 +115,12 @@ final class SiteEditorOptionsManager{
 
         $this->post = new SiteEditorPostOptions();
 
-        //include sample options
-        require_once dirname( __FILE__ ) . DS . 'demo' . DS . 'site-editor-sample-options.php';
+        $developer_options = sed_get_plugin_options("developer-sample-options");
+
+        if( $developer_options == "on" ) {
+            //include sample options
+            require_once dirname(__FILE__) . DS . 'demo' . DS . 'site-editor-sample-options.php';
+        }
 
         require_once dirname( __FILE__ ) . DS . 'site-editor-site-options.class.php';
 

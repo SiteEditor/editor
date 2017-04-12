@@ -183,7 +183,7 @@ class SiteEditorAssignLayoutsOptions extends SiteEditorOptionsCategory{
      */
     public function register_default_fields( $fields ){
 
-        $default_pages_layouts = $this->layout->default_pages_layouts_list();
+        $default_pages_layouts = SiteEditorLayoutManager::default_pages_layouts_list();
 
         $default_pages_layouts_labels = array(
             "posts_archive"     =>  __('Post Archive Pages Layout',"site-editor"),

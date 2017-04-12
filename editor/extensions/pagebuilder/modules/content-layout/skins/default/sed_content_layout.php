@@ -7,7 +7,7 @@
 <?php
 if(!empty($responsive_spacing)){
 	global $sed_dynamic_css_string;
-	$selector = ( site_editor_app_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
+	$selector = ( site_editor_app_on() || sed_loading_module_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
 	ob_start();
 	?>
 	  @media (max-width: 768px){

@@ -125,6 +125,27 @@ $items = array(
         ),
     ),*/
 
+    "dashboard"  => array(
+
+        "dashboard_settings"      => array(
+            "type"          => "html",
+            "label"         => __('Welcome to SiteEditor' , 'site-editor' ) ,
+            "html"          => 'dashboard'//$this->pages_edit_links( )
+        ),
+        
+    ),
+
+    "general-settings"      => array(
+
+        "developer-sample-options"      => array(
+            "type"          => "checkbox",
+            "label"         => __('Developer Sample Options' , 'site-editor' ) ,
+            "desc"          => __('Show Developer Sample Options on Site Editor Layout Tab' , 'site-editor' ) ,
+            "std"           => ''
+        ),
+
+    ),
+
     "edit_pages"      => array(
         "edit_pages"      => array(
             "type"          => "html",

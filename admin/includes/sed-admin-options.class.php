@@ -71,6 +71,7 @@ class SED_Admin_Options{
 		return $items;
 
 	}
+
 	private function create_text_option( $id , $attrs ){
  		$options = $this->options;
 		$value = isset( $options[$id] ) ? $options[$id] : ( isset( $attrs['std'] ) ? $attrs['std']  : '' ) ;
@@ -85,6 +86,30 @@ class SED_Admin_Options{
 				        					<div class="sed_admin_field_item">
 				        					<input id="'.$id.'" name="'.$id.'" type="text" class="sed_admin_text_field" value="' . $value . '"></div>'.
 				        					$desc.'
+				        				</div>
+			        				</div>';
+		return $item;
+
+	}
+
+	private function create_checkbox_option( $id , $attrs ){
+
+		$options = $this->options;
+
+		$value = isset( $options[$id] ) ? $options[$id] : ( isset( $attrs['std'] ) ? $attrs['std']  : false ) ;
+
+		//$value = stripslashes( $value );
+
+		$desc = isset( $attrs['desc'] )? '<div class="sed_admin_desc_item"><p>'.$attrs['desc'] .'</p></div>': ''; 
+
+		$checked = $value == "on" ? "checked='checked'" : "";
+
+		$item = '<div id="sed_admin_item'. $id .'" class="sed_admin_item_setting">
+			        					<div class="sed_admin_label_item"><label for="'.$id.'">'.$attrs['label'].'</label></div>
+				        				<div class="sed_admin_box_field_item">
+				        					<div class="sed_admin_field_item">
+				        					<input id="'.$id.'" name="'.$id.'" type="checkbox" class="sed_admin_text_field" value="on" '.$checked.'>  '. __("Enable","site-editor") .'</div>'.
+											$desc.'
 				        				</div>
 			        				</div>';
 		return $item;
@@ -269,20 +294,28 @@ class SED_Admin_Options{
 				foreach ( $this->items as $item ){
 					foreach ( $item as $id => $attrs ) {
 					
-						if( isset( $_REQUEST[ $id ]) )
-						{ 
+						if( isset( $_REQUEST[ $id ]) ) {
+
 							$options[$id] = $_REQUEST[ $id ];
-						} 
-						else 
-						{ 
-							if( isset( $options[$id] ))
-								unset( $options[$id] );
+
+						} else {
+
+							if( $attrs['type'] == "checkbox" ) {
+
+								$options[$id] = '';
+
+							}else if( isset( $options[$id] ) ) {
+
+								unset($options[$id]);
+
+							}
+
 						} 
 					}
 
 				}
 
-                save_theme_general_options( $options );
+                sed_save_plugin_options( $options );
 
 				$sed_error->set_error(array(
 						"update_setting" 	=> array(
@@ -294,7 +327,8 @@ class SED_Admin_Options{
 
 		    }elseif( 'reset' == $_REQUEST['action'] ){
 
-				save_theme_general_options( $this->get_default_values() );
+				sed_save_plugin_options( $this->get_default_values() );
+
 				$sed_error->set_error(array(
 						"update_setting" 	=> array(
 							"type"		=> "updated",
@@ -305,9 +339,10 @@ class SED_Admin_Options{
 
 			}
 		}
-		$this->options = get_theme_general_options();
+
+		$this->options = sed_get_plugin_options();
+
         $sed_general_data = $this->options;
 	}
-
-
+	
 }

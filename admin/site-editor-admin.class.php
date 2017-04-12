@@ -30,8 +30,6 @@ class SiteEditorAdminRender{
 
         add_action('admin_init', array( $this, 'options_admin_init' ) );
 
-        //add_action('admin_init', array( $this, 'sed_page_options_admin_init' ) );
-
         //if( SiteEditorSetup::is_installed() ){
 
             // add button Edit With SiteEditor in default editor wordpress
@@ -83,6 +81,7 @@ class SiteEditorAdminRender{
     }
 
     function options_admin_init(){
+        
         global $sed_general_data , $options_machine;
 
         include SED_ADMIN_INC_PATH . DS . 'options.php';
@@ -91,10 +90,10 @@ class SiteEditorAdminRender{
 
         $options_machine = new SED_Admin_Options( $tabs , $items );
 
-        $sed_general_data = get_theme_general_options();
+        $sed_general_data = sed_get_plugin_options();
         $data = $sed_general_data;
 
-        do_action('optionsframework_admin_init_before', array(
+        do_action('sed_plugin_options_admin_init_before', array(
             'options'		    => $items,
             'options_machine'	=> $options_machine,
             'sed_general_data'	=> $sed_general_data
@@ -104,52 +103,19 @@ class SiteEditorAdminRender{
 
             $defaults = $options_machine->get_default_values();
 
-            save_theme_general_options( $defaults );
-            save_theme_general_options(date('r'), 'sed_init');
-            $sed_general_data = get_theme_general_options();
+            sed_save_plugin_options( $defaults );
+            sed_save_plugin_options(date('r'), 'sed_init');
+            $sed_general_data = sed_get_plugin_options();
 
         }
 
-        do_action('optionsframework_admin_init_after', array(
+        do_action('sed_plugin_options_admin_init_after', array(
             'of_options'		=> $items,
             'options_machine'	=> $options_machine,
             'sed_general_data'	=> $sed_general_data
         ));
 
     }
-
-    function sed_page_options_admin_init(){
-
-        $sed_general_data = get_pages_default_options();
-
-        if (empty($sed_general_data['sed_init'])) { // Let's set the values if the theme's already been active
-
-            include_once SED_PLUGIN_DIR . DS . 'site-editor-main.php';
-            global $sed_apps;
-            //include_once( SED_BASE_DIR . DS . 'application' . DS . "modules.class.php"  );
-            include_once( SED_EDITOR_DIR . DS . 'applications' . DS . 'siteeditor' . DS . "siteeditor.class.php"  );
-            require_once SED_EDITOR_DIR . DS . 'applications' . DS . 'siteeditor' . DS . 'index.php';
-
-
-            do_action( 'sed_app_register', $sed_apps->editor->manager );
-
-            $settings = array();
-
-            $sed_app_settings = $sed_apps->editor->manager->settings();
-
-            foreach ( $sed_app_settings as $id => $setting ) {
-                if($setting->option_type == "base" || empty( $setting->option_type ) ){
-                    $settings[$id] = $setting->value();  //$setting->id
-                }
-            }
-
-            save_pages_default_options( $settings );
-            save_pages_default_options(date('r'), 'sed_init');
-
-        }
-
-    }
-
 
     function admin_init() {
         if ( current_user_can( 'delete_posts' ) )

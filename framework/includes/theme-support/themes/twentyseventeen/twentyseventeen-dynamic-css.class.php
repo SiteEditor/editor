@@ -35,7 +35,9 @@ class SiteEditorTwentyseventeenDynamicCss {
         //before print color Scheme in css file
         add_action( 'wp_enqueue_scripts' , array( $this , 'add_dynamic_css' ) , 9999999 );
 
-        add_action( 'wp' , array( $this , 'remove_color_scheme_css' ) );
+        if( ! is_admin() ) {
+            add_action('wp', array($this, 'remove_color_scheme_css'));
+        }
 
         if( site_editor_app_on() ) {
 

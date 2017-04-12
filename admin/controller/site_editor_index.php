@@ -124,4 +124,14 @@ Class site_editor_indexController Extends baseController {
     }
 
 
+    private function dashboard( $id , $value = '' ){
+
+        $this->registry->template->id    = $id;
+        $this->registry->template->value    = $value;
+        $content = $this->registry->template->get_content("dashboard");
+
+        return $content;
+    }
+
+
 }

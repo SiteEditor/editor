@@ -118,7 +118,7 @@ if(!class_exists('SiteEditorLayoutManager')){
             include_once dirname( dirname( __FILE__ ) ) . DS . "view" . DS . "layout-template.php";
         }
 
-        public function default_pages_layouts_list(){
+        public static function default_pages_layouts_list(){
 
             $default_pages_layouts = array(
                 "posts_archive"     =>  "archive" ,
@@ -269,8 +269,10 @@ if(!class_exists('SiteEditorLayoutManager')){
 
         }
 
-        public function register_settings( ){
-            $settings = array();
+        /**
+         * Only will call after activate plugin
+         */
+        public static function init_data_layout(){
 
             $default_layouts = array(
                 "archive"   =>  array(
@@ -305,14 +307,7 @@ if(!class_exists('SiteEditorLayoutManager')){
                 }
             }
 
-            $settings['sed_layouts_settings'] = array(
-    			'default'        => get_option( 'sed_layouts_settings' ),
-    			'capability'     => 'manage_options',
-    			'option_type'    => 'option' ,
-                'transport'      => 'postMessage'
-    		);
-
-            $default_pages_layouts = $this->default_pages_layouts_list();
+            $default_pages_layouts = self::default_pages_layouts_list();
 
             if ( get_option( 'sed_pages_layouts' ) === false ) {
 
@@ -323,9 +318,56 @@ if(!class_exists('SiteEditorLayoutManager')){
                 $current_pages_layouts = $default_pages_layouts;
 
                 add_option( 'sed_pages_layouts' , $default_pages_layouts , $deprecated, $autoload );
-            }else{
-                $current_pages_layouts = get_option('sed_pages_layouts');
             }
+
+            if ( get_option( 'sed_layouts_models' ) === false ) {
+
+                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+                $deprecated = null;
+                $autoload = 'yes';
+                add_option( 'sed_layouts_models' , array() , $deprecated, $autoload );
+            }
+
+            if ( get_option( 'sed_layouts_removed_rows' ) === false ) {
+
+                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+                $deprecated = null;
+                $autoload = 'yes';
+                add_option( 'sed_layouts_removed_rows' , array() , $deprecated, $autoload );
+            }
+
+            if ( get_option( 'sed_last_theme_id' ) === false ) {
+
+                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+                $deprecated = null;
+                $autoload = 'yes';
+                add_option( 'sed_last_theme_id' , 0 , $deprecated, $autoload );
+            }
+
+            if ( get_option( 'sed_layouts_content' ) === false ) {
+
+                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+                $deprecated = null;
+                $autoload = 'yes';
+                add_option( 'sed_layouts_content' , array() , $deprecated, $autoload );
+
+            }
+
+        }
+
+        public function register_settings( ){
+            $settings = array();
+
+            $settings['sed_layouts_settings'] = array(
+    			'default'        => get_option( 'sed_layouts_settings' ),
+    			'capability'     => 'manage_options',
+    			'option_type'    => 'option' ,
+                'transport'      => 'postMessage'
+    		);
+
+            $default_pages_layouts = self::default_pages_layouts_list();
+
+            $current_pages_layouts = get_option('sed_pages_layouts');
 
             foreach( $default_pages_layouts AS $group => $layout ){
 
@@ -342,6 +384,7 @@ if(!class_exists('SiteEditorLayoutManager')){
             $post_types = get_post_types( array( 'show_in_nav_menus' => true , 'public' => true ), 'object' );
 
             if ( !empty( $post_types ) ) {
+
                 foreach ($post_types AS $post_type_name => $post_type) {
 
                     if( in_array( $post_type_name , array( "post" , "page" ) ) )
@@ -404,14 +447,6 @@ if(!class_exists('SiteEditorLayoutManager')){
                 }
             }
 
-            if ( get_option( 'sed_layouts_models' ) === false ) {
-
-                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-                $deprecated = null;
-                $autoload = 'yes';
-                add_option( 'sed_layouts_models' , array() , $deprecated, $autoload );
-            }
-
             update_option( 'sed_pages_layouts' , $current_pages_layouts );
 
             $settings['sed_layouts_models'] = array(
@@ -421,16 +456,6 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'transport'      => 'postMessage'
     		);
 
-            if ( get_option( 'sed_layouts_removed_rows' ) === false ) {
-
-                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-                $deprecated = null;
-                $autoload = 'yes';
-                add_option( 'sed_layouts_removed_rows' , array() , $deprecated, $autoload );
-            }
-
-            update_option( 'sed_pages_layouts' , $current_pages_layouts );
-
             $settings['sed_layouts_removed_rows'] = array(
                 'default'        => get_option( 'sed_layouts_removed_rows' ),
                 'capability'     => 'manage_options',
@@ -438,31 +463,12 @@ if(!class_exists('SiteEditorLayoutManager')){
                 'transport'      => 'postMessage'
             );
 
-
-            if ( get_option( 'sed_last_theme_id' ) === false ) {
-
-                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-                $deprecated = null;
-                $autoload = 'yes';
-                add_option( 'sed_last_theme_id' , 0 , $deprecated, $autoload );
-            }
-
             $settings['sed_last_theme_id'] = array(
     			'default'        => get_option( 'sed_last_theme_id' ),
     			'capability'     => 'manage_options',
     			'option_type'    => 'option' ,
                 'transport'      => 'postMessage'
     		);
-
-
-            if ( get_option( 'sed_layouts_content' ) === false ) {
-
-                //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-                $deprecated = null;
-                $autoload = 'yes';
-                add_option( 'sed_layouts_content' , array() , $deprecated, $autoload );
-
-            }
 
             //register sed layouts content settings
             require_once dirname( __FILE__ ) . '/content-layout-setting.php';

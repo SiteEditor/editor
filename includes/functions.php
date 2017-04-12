@@ -5,24 +5,42 @@
  * @return array
  */
 
-function get_theme_general_options($key = null, $data = null) {
+function sed_get_plugin_options($key = null, $data = null) {
 
-    do_action('get_theme_general_options_before', array(
+    do_action('sed_get_plugin_options_before', array(
         'key'=>$key, 'data'=>$data
     ));
+
+    $options = get_option( 'sed_plugin_options' );
+
+    if ( get_option( 'sed_plugin_options' ) === false ) {
+
+        //The option hasn't been added yet. We'll add it with $autoload set to 'no'.
+        $deprecated = null;
+
+        $autoload = 'yes';
+
+        $options = array();
+
+        add_option( 'sed_plugin_options' , $options , $deprecated, $autoload );
+    }
 
     if ($key != null) { // Get one specific value
 
-        $data = get_theme_mod($key, $data);
+        $data = isset( $options[$key] ) ? $options[$key] : false;
+
     } else { // Get all values
-        $data = get_theme_mods();
+
+        $data = $options;
+
     }
 
-    $data = apply_filters('theme_general_options_after_load', $data);
+    $data = apply_filters('sed_plugin_options_after_load', $data);
 
-    do_action('theme_general_options_setup_before', array(
+    do_action('sed_plugin_options_setup_before', array(
         'key'=>$key, 'data'=>$data
     ));
+
     return $data;
 
 }
@@ -35,132 +53,41 @@ function get_theme_general_options($key = null, $data = null) {
  * @return void
  */
 
-function save_theme_general_options($data, $key = null) {
+function sed_save_plugin_options($data, $key = null) {
     global $sed_general_data;
+
     if (empty($data))
         return;
-    do_action('save_theme_general_options_before', array(
+
+    do_action('sed_save_plugin_options_before', array(
         'key'=>$key, 'data'=>$data
     ));
-    $data = apply_filters('theme_general_options_before_save', $data);
+
+    $options = get_option( 'sed_plugin_options' , array() );
+
+    $data = apply_filters('sed_plugin_options_before_save', $data);
+
     if ($key != null) { // Update one specific value
         /*if ($key == BACKUPS) {
             unset($data['sed_init']); // Don't want to change this.
         }*/
-        set_theme_mod($key, $data);
+        $options[$key] = $data;
+
     } else { // Update all values in $data
         foreach ( $data as $k=>$v ) {
             if (!isset($sed_general_data[$k]) || $sed_general_data[$k] != $v) { // Only write to the DB when we need to
-                set_theme_mod($k, $v);
-            }
-        }
-    }
-    do_action('save_theme_general_options_after', array(
-        'key'=>$key, 'data'=>$data
-    ));
-
-}
-
-function get_pages_default_options($key = null, $data = null) {
-
-    do_action('get_pages_default_options_before', array(
-        'key'=>$key, 'data'=>$data
-    ));
-
-    if ($key != null) { // Get one specific value
-
-        $data = get_sed_pages_mode($key, $data);
-    } else { // Get all values
-        $data = get_sed_pages_modes();
-    }
-
-    $data = apply_filters('pages_default_options_after_load', $data);
-
-    do_action('pages_default_options_setup_before', array(
-        'key'=>$key, 'data'=>$data
-    ));
-    return $data;
-
-}
-
-function save_pages_default_options($data, $key = null) {
-
-    if (empty($data))
-        return;
-
-    $sed_general_data = get_pages_default_options();
-
-    do_action('save_pages_default_options_before', array(
-        'key'=>$key, 'data'=>$data
-    ));
-
-    $data = apply_filters('pages_default_options_before_save', $data);
-    if ($key != null) { // Update one specific value
-
-        save_sed_pages_mode($key, $data);
-    } else { // Update all values in $data
-        foreach ( $data as $k=>$v ) {
-            if (!isset($sed_general_data[$k]) || $sed_general_data[$k] != $v) { // Only write to the DB when we need to
-                save_sed_pages_mode($k, $v);
+                $options[$k] = $v;
             }
         }
     }
 
-    do_action('save_pages_default_options_after', array(
+    update_option( 'sed_plugin_options' , $options );
+
+    do_action('sed_save_plugin_options_after', array(
         'key'=>$key, 'data'=>$data
     ));
 
 }
-
-
-function get_sed_pages_mode( $name, $default = false ) {
-    $pages_modes = get_sed_pages_modes();
-
-    if ( isset( $pages_modes[$name] ) ) {
-
-        return apply_filters( "get_sed_pages_mode_{$name}", $pages_modes[$name] );
-    }
-
-    return apply_filters( "get_sed_pages_mode_{$name}", $default );
-}
-
-function get_sed_pages_modes(){
-    $settings = get_option( "sed_pages_default_options" );
-
-    if ( $settings === false ) {
-
-        $settings = array();
-        // The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-        $deprecated = null;
-        $autoload = 'yes';
-        $res = add_option( "sed_pages_default_options", $settings, $deprecated, $autoload );
-        //var_dump($res , "add_option :: teeeeeeeeeeeeeeeeeeees...............");
-    }
-
-    return $settings;
-}
-
-
-function save_sed_pages_mode($key , $value ){
-    $settings = get_option( "sed_pages_default_options" );
-
-    if ( $settings !== false ) {
-
-        $settings[$key] = $value;
-        // The option already exists, so we just update it.
-        $res = update_option( "sed_pages_default_options", $settings );
-        //var_dump($res , "update_option :: teeeeeeeeeeeeeeeeeeees...............");
-    } else {
-        $settings = array();
-        $settings[$key] = $value;
-        // The option hasn't been added yet. We'll add it with $autoload set to 'no'.
-        $deprecated = null;
-        $autoload = 'yes';
-        $res = add_option( "sed_pages_default_options", $settings, $deprecated, $autoload );
-        //var_dump($res , "add_option :: teeeeeeeeeeeeeeeeeeees...............");
-    }
-}
-
 
 /*
  * @get_sed_url or @get_site_editor_url
@@ -1540,5 +1467,11 @@ function sed_activate_module( $module_file ){
     global $sed_pb_modules;
 
     $sed_pb_modules->activate_module( $module_file );
+
+}
+
+function sed_loading_module_on(){
+
+    return isset( $_POST['action'] ) && $_POST['action'] === "load_modules";
 
 }

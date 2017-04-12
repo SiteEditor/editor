@@ -17,6 +17,12 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class SiteEditorInstall {
 
+	public static function init(){
+
+		add_action("admin_init" , array( __CLASS__ , 'install' ) );
+
+	}
+
 	/**
 	 * Install SiteEditor.
 	 */
@@ -34,6 +40,15 @@ class SiteEditorInstall {
 
 		}
 
+		if ( ! defined( 'SED_INSTALLING' ) ) {
+			define( 'SED_INSTALLING', true );
+		}
+
+		/**
+		 * Hook Before Site Editor Installation Process
+		 */
+		do_action( "site_editor_after_installing" );
+
 		/**
 		 * First Step: Set Default Site Editor Settings
 		 */
@@ -49,6 +64,21 @@ class SiteEditorInstall {
 		 * Second Step: Activate All Page Builder Core Modules
 		 */
 		self::activate_core_pb_modules();
+
+		/**
+		 * Third Step: Initialize Site Editor Layout data
+		 */
+		self::init_layout();
+
+		/**
+		 * Forth Step: Save Footer && Header Default Presets
+		 */
+		self::save_default_presets();
+
+		/**
+		 * Hook After Site Editor Installation Process
+		 */
+		do_action( "site_editor_after_installing" );
 
 	}
 
@@ -74,4 +104,26 @@ class SiteEditorInstall {
 
 	}
 
+	public static function init_layout(){
+
+		if ( ! defined( 'SED_INSTALLING' ) || SED_INSTALLING !== true ) {
+
+			return ;
+
+		}
+
+		require_once SED_EXT_PATH . "/layout/includes/site-editor-layout.php";
+
+		SiteEditorLayoutManager::init_data_layout();
+
+	}
+
+	public static function save_default_presets(){
+
+
+
+	}
+
 }
+
+SiteEditorInstall::init();
