@@ -80,6 +80,9 @@ class SiteEditorAdminRender{
 
     }
 
+    /**
+     * TODO : Add to site editor install class
+     */
     function options_admin_init(){
         
         global $sed_general_data , $options_machine;

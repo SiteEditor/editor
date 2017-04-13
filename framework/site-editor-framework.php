@@ -107,6 +107,8 @@ final Class SiteEditorFramework {
 
         add_action( "wp_footer"         , array( $this , "add_custom_code_before_body" ) , 100000 );
 
+        add_action( "sed_before_dynamic_css_output"       , array( $this , 'pb_css_output' ) );
+
         /**
          * load page builder extension in front end
          */
@@ -546,6 +548,37 @@ final Class SiteEditorFramework {
         nocache_headers();
 
     }
+
+    /**
+     * Add Page Builder Settings Dynamic Css
+     *
+     * @since 1.0.0
+     * @access public
+     */
+    public function pb_css_output(){
+
+        global $sed_dynamic_css_string;
+
+        $rows_padding = get_theme_mod( 'sed_pb_rows_padding' , '20px' );
+
+        $rows_width = get_theme_mod( 'sed_pb_rows_width' , '1100px' );
+
+        $css = <<<CSS
+
+            .sed-row-boxed{
+                max-width       : {$rows_width} ;
+                margin-left     : auto ;
+                margin-right    : auto ;
+                padding-left    : {$rows_padding} ;
+                padding-right   : {$rows_padding} ;
+            }
+            
+CSS;
+
+        $sed_dynamic_css_string .= $css;
+
+    }
+
 
 }
 

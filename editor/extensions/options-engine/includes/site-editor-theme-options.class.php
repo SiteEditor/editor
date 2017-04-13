@@ -179,6 +179,19 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
             'field_spacing'         => 'sm'
         );
 
+        $panels['page_builder_settings'] = array(
+            'title'                 =>  __('Page Builder Settings',"site-editor")  ,
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            //'theme_supports'        => 'custom-logo',
+            'description'           => '' ,
+            'priority'              => 8 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-settings' ,
+            'field_spacing'         => 'sm'
+        );
+
         return $panels;
     }
 
@@ -360,11 +373,36 @@ class SiteEditorThemeOptions extends SiteEditorOptionsCategory{
                 'transport'         => 'postMessage'
             ),
 
+            'pb_rows_width' => array(
+                'setting_id'        => 'sed_pb_rows_width',
+                "type"              => "dimension" ,
+                "label"             => __("Rows Width", "site-editor"),
+                'default'           => '1100px',
+                "description"       => __("This option allows you to set Page Builder Rows Width.", "site-editor"),
+                'panel'             => 'page_builder_settings' ,
+                'option_type'       => 'theme_mod',
+                'transport'         => 'postMessage' ,
+                'priority'          => 6
+            ),
+
+            'pb_rows_padding' => array(
+                'setting_id'        => 'sed_pb_rows_padding',
+                "type"              => "dimension" ,
+                "label"             => __("Rows Spacing", "site-editor"),
+                'default'           => '20px',
+                "description"       => __("This option allows you to set Page Builder Rows Padding Left & Right.", "site-editor"),
+                'panel'             => 'page_builder_settings' ,
+                'option_type'       => 'theme_mod',
+                'transport'         => 'postMessage' ,
+                'priority'          => 7
+            ),
+
         );
 
         return array_merge( $fields , $new_fields );
 
     }
+
 
     /**
      * Callback for rendering the custom logo, used in the custom_logo partial.

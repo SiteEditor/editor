@@ -95,6 +95,8 @@
 
         $('<style type="text/css" id="sed_site_css_editor_generate"></style>').appendTo( $('head') );
 
+        $('<style type="text/css" id="sed_pb_customize_css"></style>').appendTo( $('head') );
+
         $('<style type="text/css" id="sed_page_css_editor_generate"></style>').appendTo( $('head') );
 
         $('<style type="text/css" id="sed_custom_css_editor_generate"></style>').appendTo( $('head') );
