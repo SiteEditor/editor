@@ -80,12 +80,15 @@
   display: none;
 }
 #other_modules_panel > a.btn, #other_widgets_panel > a.btn{
-    line-height: 70px;
+    line-height: 70px !important;
+    padding: 3px 6px;
 }
-#other_modules_panel > a.btn .icon-menu, #other_widgets_panel > a.btn .icon-menu{
-    font-size: 21px;
+
+#other_modules_panel > a.btn .sedico-2x, #other_widgets_panel > a.btn .sedico-2x {
+    font-size: 20px;
     color: #999;
 }
+
 #search-module-title{
   display: block !important;
 }

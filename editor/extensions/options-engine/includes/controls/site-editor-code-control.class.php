@@ -147,7 +147,10 @@ if ( ! class_exists( 'SiteEditorCodeControl' ) ) {
 				    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
 				<?php } ?>
                 <div class="sed-code-editor-wrapper">
-    				<button type="button" class="sed-resize-code-editor-toggle sed-btn-default"><?php echo esc_html__( "Expand" , "site-editor" );?></button>
+    				<button type="button" class="sed-resize-code-editor-toggle sed-btn-default">
+                        <span class="fullscreen sedico sedico-size-fullscreen sedico-lg"></span>
+                        <span class="actual sedico sedico-size-actual sedico-lg"></span>
+                    </button>
     				<!--<a href="#" class="sed-btn-blue">code</a>-->
     				<textarea class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" <?php echo $atts_string;?>>
     					<?php echo esc_textarea( $value ); ?>
