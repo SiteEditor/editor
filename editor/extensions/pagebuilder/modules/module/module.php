@@ -38,7 +38,14 @@ class PBModuleShortcode extends PBShortcodeClass{
     function add_shortcode( $atts , $content = null ){
         extract( $atts );
 
+    }  
+
+    function styles(){
+        return array(
+            array('module-style', SED_PB_MODULES_URL.'module/css/style.css' ,'1.0.0' ) ,
+        ); 
     }
+
 
 }
 

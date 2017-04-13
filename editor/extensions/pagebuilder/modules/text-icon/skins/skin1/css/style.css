@@ -1,11 +1,13 @@
 
 .module-text-icon.text-icon-skin1 {
-    font-size: 0;
+    display: inline-block;
+    margin: 0;
+    vertical-align: top;
 }
 
 .module-text-icon.text-icon-skin1 .text-icon-wrapper {
-    display: inline-block;
-    font-size: 14px;
+    display: table-cell;
+    table-layout: fixed;
 }
 
 .module-text-icon.text-icon-skin1 .text-icon {
