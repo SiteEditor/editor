@@ -976,19 +976,6 @@ text-decoration: none;
       -webkit-border-radius: 30px;
 }
 
-.sp-container {
-      border: 1px solid rgba(0, 0, 0, 0.13) !important;
-      border-radius: 4px !important;
-      -moz-border-radius:4px !important;
-      -webkit-border-radius: 4px !important;
-      box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.2) !important;
-      -moz-box-shadow:0 5px 6px -1px rgba(0, 0, 0, 0.2) !important;
-      -webkit-box-shadow:0 5px 6px -1px rgba(0, 0, 0, 0.2) !important;
-      padding: 0;
-}
-.sp-palette-container {
-      border-right: none;
-}
 
 .li-img-mg {
       height: 38px !important;

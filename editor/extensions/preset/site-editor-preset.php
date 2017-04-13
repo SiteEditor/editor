@@ -573,7 +573,7 @@ class SiteEditorPreset{
             //'description'       => __('Preset settings for save module as custom layouts', 'site-editor') ,
             'button_style'      => 'menu' ,
             'has_border_box'    => false ,
-            'icon'              => 'sedico-setting-item' ,
+            'icon'              => 'sedico-preset' ,
             'field_spacing'     => 'sm',
             'panel_title'       => __('Preset Settings', 'site-editor') ,
             'panel_content'     => $html ,

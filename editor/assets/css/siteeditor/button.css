@@ -125,6 +125,7 @@
     text-align: center;
 }
 
+.sp-container .sp-picker-container .sp-cancel,
 .sed-btn-default{
     background: none repeat scroll 0 0 #fff;
     border: 1px solid #ddd;
@@ -135,6 +136,7 @@
     padding: 6px 10px;
     text-align: center;
 }
+
 .sed-btn-black{
  background-color: #333;
     background-repeat: repeat-x;
@@ -146,9 +148,9 @@
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
+.sp-container .sp-picker-container button.sp-choose,
 .ui-dialog-buttons .ui-dialog-buttonset button,
 .sed-btn-blue,
-.sp-container button,
 .uplod_document,
 .uplod_image,
 .uplod_lg ,
@@ -166,6 +168,7 @@
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
+    text-shadow: none;
 }
 .sed-btn-red {
     background: none repeat scroll 0 0 #E21E18;
@@ -186,9 +189,13 @@
 .sed-btn-red:active{
     background: none repeat scroll 0 0 #C21A14;
 }
+
+.sp-container .sp-picker-container .sp-cancel:hover,
+.sp-container .sp-picker-container .sp-cancel:focus,
+.sp-container .sp-picker-container .sp-cancel:active,
 .sed-btn-default:hover,
 .sed-btn-default:focus,
-.sed-btn-default:active{
+.sed-btn-default:active {
     background: none repeat scroll 0 0 #f0f0f0;  
 }
 .sed-btn-black:hover,
@@ -199,9 +206,9 @@
 .ui-dialog-buttons .ui-dialog-buttonset button:hover,
 .ui-dialog-buttons .ui-dialog-buttonset button:active,
 .ui-dialog-buttons .ui-dialog-buttonset button:focus,
-.sp-container button:hover,
-.sp-container button:focus,
-.sp-container button:active,
+.sp-container .sp-picker-container button.sp-choose:hover,
+.sp-container .sp-picker-container button.sp-choose:focus,
+.sp-container .sp-picker-container button.sp-choose:active,
 .sed-btn-blue:hover,
 .sed-btn-blue:focus,
 .sed-btn-blue:active{

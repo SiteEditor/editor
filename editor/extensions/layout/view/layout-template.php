@@ -3,7 +3,7 @@
         <div class="row_setting_inner sed-app-container-control sed-app-container-control-panel-button spacing_sm">
             <div id='sed-scope-settings-<?php echo $control_id; ?>'  class="clearfix">
                 <button data-related-level-box="dialog_page_box_<?php echo $control_id; ?>" class="sed-btn-menu sed-btn-default sed_go_to_scope_settings"  name="sed_pb_<?php echo $control_id; ?>" id="sed_pb_<?php echo $control_id; ?>" >
-                    <span class="sedico fa-lg sedico-site-custom-css"></span>
+                    <span class="sedico sedico-lg sedico-scope"></span>
                     <?php echo __('Go To Scope Settings' , 'site-editor') ?><span class="sedico sedico-chevron-right sed-arrow-right sedico-lg"></span>
                 </button>
                 <div id="dialog_page_box_<?php echo $control_id; ?>" class=""  data-title="<?php echo __('Scope Settings' , 'site-editor') ?>" data-multi-level-box="true">
@@ -17,10 +17,12 @@
 <script type="text/html" id="layouts-scope-settings-content-tpl" >
     <div class="<?php echo $control_id; ?>_settings_container">
 
-       <div class="sed-scope-mode-label bg-primary"><span><?php echo __('Scope' , 'site-editor') ?>: </span><span class="scope-mode"><?php echo __('Private' , 'site-editor') ?></span></div>
-       <span class="field_desc flt-help sedico sedico-question sedico-lg " title=""></span>
-       <fieldset class="row_setting_box">
-       <legend id="sed_layout_scope_settings_panel_title"><?php echo __("Select Scope","site-editor");?></legend>
+        <fieldset class="row_setting_box">
+            <div class="sed-scope-mode-label bg-primary"><span><?php echo __('Scope' , 'site-editor') ?>: </span><span class="scope-mode"><?php echo __('Private' , 'site-editor') ?></span></div>
+            <span class="field_desc flt-help sedico sedico-question sedico-lg " title=""></span>
+        </fieldset>
+        <fieldset class="row_setting_box">
+        <legend id="sed_layout_scope_settings_panel_title"><?php echo __("Select Scope","site-editor");?></legend>
         <div class="row_settings">
           <div class="row_setting_inner">
             <div id="sed-app-control-<?php echo $control_id; ?>" class="clearfix sed-container-control-element">
@@ -96,7 +98,7 @@
             </div>
           </div>
         </div>
-       </fieldset>
+        </fieldset>
 
     </div>
 
@@ -209,8 +211,8 @@
             <li data-row-id="{{id}}" class="sed-layout-row-box {{className}}">
                 <label class="row-title-label" title="{{title}}">{{title}}</label>
                 <div class="layout-row-actions">
-                    <span data-action="edit" class="edit action"><span class="fa fa-pencil fa-lg"></span></span>
-                    <span data-action="sort" class="sort action"><span class="fa fa-arrows fa-lg"></span></span>
+                    <span data-action="edit" class="edit action"><span class="sedico sedico-pencil sedico-lg"></span></span>
+                    <span data-action="sort" class="sort action"><span class="sedico sedico-cursor-move-a sedico-lg"></span></span>
                 </div>
                 <input class="layout-row-title-edit" type="text" value="{{title}}" />
             </li>
@@ -237,7 +239,7 @@
         </label>
         <?php $action_page_box_id = "manage_layout_theme_rows"; ?>
         <a href="javascript:void(0);" data-layout="{{layout}}" data-related-level-box="dialog_page_box_<?php echo $action_page_box_id; ?>" class="edit-layout-rows hide field_desc"  title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>">
-            <span class="icon icon-edit fa fa-edit"></span>
+            <span class="icon icon-edit sedico sedico-setting sedico-lg"></span>
         </a>
     </li>
     <#

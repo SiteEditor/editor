@@ -752,6 +752,7 @@
       position: relative;
       width: 25px;
       padding: 0;
+      cursor: pointer;
 }
 .dropdown-menu .active_background_position,
 .dropdown-menu .background-psn-sq:hover{

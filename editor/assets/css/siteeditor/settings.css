@@ -138,8 +138,15 @@
 .clearfix label {
     margin: 0 !important;
     padding: 0 !important;
-    line-height: 25px;
+    line-height: 25px;    
 }
+
+.sed-bp-spinner-container label,
+.colorpicker label { 
+    max-width: 120px;
+    display: inline-block;
+}
+
 .row_setting_box .colorpicker .el_txt,
 .add-new-template input,
 .add-new-template textarea,
@@ -730,6 +737,18 @@ a.bg-gray:focus {
     padding-left: 20px;
 }
 
+.main_layout_row_scope_control_settings_container .sed-container-control-element ul .edit-layout-rows {
+    float: right;   
+} 
+
+.main_layout_row_scope_control_settings_container .sed-container-control-element ul .edit-layout-rows span {  
+    color: #888;
+} 
+
+.main_layout_row_scope_control_settings_container .sed-container-control-element ul .edit-layout-rows:hover span {
+    color: #00A9E8; 
+}
+
 .sed-scope-mode-label {
     color: #fff;
     padding: 4px 15px;
@@ -861,15 +880,15 @@ span.action{
     margin: 0 2px;
 }
 
-.layout-row-actions > span.action .fa {
+.layout-row-actions > span.action span {
     color: #888;
     font-size: 1.15em;
     cursor: pointer;
 }
-.layout-row-actions > span.action:hover .fa {
+.layout-row-actions > span.action:hover span {
     color: #00A9E8;
 }
-.layout-row-actions > span.sort .fa {
+.layout-row-actions > span.sort span {
     cursor: move;
 }
 
@@ -882,20 +901,17 @@ span.action{
 
 .sed-edit-mode .sed-layout-edit-close {
     color: #888;
-    border: 1px solid #888;
-    border-radius: 1000px;
-    margin-left: 3px;
-    font-size: 15px;
+    margin: 2px 0 2px 3px;
+    font-size: 20px;
     padding: 0;
-    width: 1.32em;
-    height: 1.32em;
-    line-height: 1.2em !important;
     text-align: center;
     cursor: pointer;
+    display: inline-block; 
+    vertical-align: middle;
 }
+
 .sed-edit-mode .sed-layout-edit-close:hover {
     color: #333;
-    border: 1px solid #777;
 }
 
 
@@ -976,14 +992,103 @@ span.sed-default.action{
 .preset-actions > span.sed-default.set-default.action > span:last-child {
     display: block;
 }
-.preset-actions > span.action .fa {
+.preset-actions > span.action span {
     color: #888;
     font-size: 1.15em;
     cursor: pointer;
 }
-.preset-actions > span.action:hover .fa {
+.preset-actions > span.action:hover span {
     color: #00A9E8;
 }
-.preset-actions > span.sort .fa {
+.preset-actions > span.sort.action span,
+.preset-actions > span.sort.action {
     cursor: move;
 }
+
+
+/***
+Spectrum Colorpicker
+***/
+
+body .sp-container { 
+    background-color: #f9f9f9;
+    border: 1px solid rgba(0, 0, 0, 0.13) ;
+    border-radius: 0px ;
+    -moz-border-radius:0px ;
+    -webkit-border-radius: 0px ;
+    box-shadow: 0 5px 6px -1px rgba(0, 0, 0, 0.2) ;
+    -moz-box-shadow:0 5px 6px -1px rgba(0, 0, 0, 0.2) ;
+    -webkit-box-shadow:0 5px 6px -1px rgba(0, 0, 0, 0.2) ;
+    padding: 0;
+}
+
+.sp-palette-container {
+      border-right: none;
+}
+
+.sp-container .sp-palette .sp-thumb-el {
+    border: 0 none;
+}
+
+.sp-container .sp-picker-container .sp-color, 
+.sp-container .sp-picker-container .sp-hue,  
+.sp-container .sp-picker-container .sp-clear {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sp-container .sp-picker-container .sp-dragger {
+    border-radius: 8x;
+    height: 8px;
+    width: 8px;
+    border: 1px solid #fff;
+    background: transparent;
+}
+
+.sp-clear-enabled .sp-picker-container .sp-clear {
+    height: 24px;
+    background-size: 64%;
+    border-color: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.sp-clear-enabled .sp-picker-container .sp-hue {
+    top: 26px;
+}
+
+.sp-container .sp-picker-container .sp-slider {
+    height: 4px;
+    border: 1px solid #fff;
+    background: transparent;
+}
+
+.sp-container .sp-picker-container .sp-input-container {
+    width: 85px;
+}
+
+.sp-container .sp-picker-container .sp-palette-row-initial {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.sp-container .sp-picker-container .sp-initial span {
+    background-size: 55%;
+}
+  
+.sp-container .sp-picker-container .sp-button-container.sp-cf {
+    margin-top: 27px;
+    width: 100%;
+}
+
+.sp-container .sp-picker-container button.sp-choose {
+    line-height: 1 !important;
+    display: block;
+    text-transform: capitalize;
+    float: right;
+}
+
+.sp-container .sp-picker-container .sp-cancel {
+    color: #333 !important;
+    text-decoration: none;
+    display: block;
+    float: left;
+}
+

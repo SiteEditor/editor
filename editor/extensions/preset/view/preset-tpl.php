@@ -7,11 +7,11 @@
             <label title="{{data.title}}">{{data.title}}</label>
             <div class="preset-actions">
                 <span data-action="load" class="load-preset action"><span class="sedico sedico-eye sedico-lg"></span></span>
-                <span data-action="edit" class="edit action"><span class="sedico sedico-edit sedico-lg"></span></span>
-                <span data-action="default" class="set-default action <# if(data.isDefault){ #>sed-default<# } #>"><span class="fa fa-star-o fa-lg"></span><span class="fa fa-star fa-lg"></span></span>
-                <span data-action="remove" class="trash destroy action"><span class="sedico sedico-trash sedico-lg"></span></span>
-                <span data-action="sort" class="sort action"><span class="sedico sedico-cursor-move sedico-lg"></span></span>
-            </div>
+                <span data-action="edit" class="edit action"><span class="sedico sedico-pencil sedico-lg"></span></span>
+                <span data-action="default" class="set-default action <# if(data.isDefault){ #>sed-default<# } #>"><span class="sedico sedico-star-sign sedico-lg"></span><span class="sedico sedico-little-black-star sedico-lg"></span></span>
+                <span data-action="remove" class="trash destroy action"><span class="sedico sedico-trash-container sedico-lg"></span></span>
+                <span data-action="sort" class="sort action"><span class="sedico sedico-cursor-move-a sedico-lg"></span></span>
+            </div> 
         </div>
         <input class="preset-edit" type="text" value="{{data.title}}" />
         <div class="sed-edit-preset-loading sed-loading-small-continer" >

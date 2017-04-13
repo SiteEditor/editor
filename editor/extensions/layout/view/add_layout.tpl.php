@@ -25,7 +25,7 @@
                     <div class="sed-layout-edit hide">
                         <input data-layout="" class="edit-title-input" name="edit-layout-title" value="">
                         <button data-action="save" class="btn button-primary"><?php echo __("Save" , "site-editor");?></button>
-                        <span data-action="save-close" class="fa fa-close sed-layout-edit-close"> </span>
+                        <span data-action="save-close" class="sedico sedico-delete-b sedico-lg sed-layout-edit-close"> </span>
                     </div>
 
                     <div class="sed-layout-error-box sed-error">
@@ -79,11 +79,11 @@
 
                 <div class="sed-view-mode-actions">
                     <# if( layout != "default" ){ #>
-                    <span data-action="delete" data-layout="{{layout}}" class="fa fa-trash" title="<?php echo __("Remove" , "site-editor");?>"></span>
+                    <span data-action="delete" data-layout="{{layout}}" class="sedico sedico-trash-container sedico-lg" title="<?php echo __("Remove" , "site-editor");?>"></span>
                     <# } #>
-                    <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}"  class="fa fa-edit" title="<?php echo __("Edit" , "site-editor");?>"></span>
+                    <span data-action="edit" data-layout-title="{{layoutTitle}}" data-layout="{{layout}}"  class="sedico sedico-pencil sedico-lg" title="<?php echo __("Edit" , "site-editor");?>"></span>
 
-                    <span data-action="manage" data-layout="{{layout}}" data-related-level-box="dialog_page_box_<?php echo $action_page_box_id; ?>" class="fa fa-share sed_go_to_manage_layout_rows"  title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>" ></span>
+                    <span data-action="manage" data-layout="{{layout}}" data-related-level-box="dialog_page_box_<?php echo $action_page_box_id; ?>" class="sedico sedico-setting sedico-lg sed_go_to_manage_layout_rows"  title="<?php echo __('Manage Layout Rows' , 'site-editor') ?>" ></span>
                 </div>
             </div>
 

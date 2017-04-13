@@ -58,14 +58,15 @@ if ( ! class_exists( 'SiteEditorNumberControl' ) ) {
             $value          = $this->value();
 
 			?>
+			<div class="sed-bp-spinner-container">
 
-			<?php if(!empty($this->description)){ ?> 
-				    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
-				<?php } ?>
-            <label for="<?php echo esc_attr( $sed_field_id );?>" ><?php echo esc_html( $this->label ); ?></label>
-            <span class="after_field"><?php echo esc_html( $this->after_field ); ?></span>
-            <input type="text" class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo esc_attr( $value ); ?>" <?php echo $atts_string;?> />
-
+				<?php if(!empty($this->description)){ ?> 
+					    <span class="field_desc flt-help sedico sedico-question sedico-lg " title="<?php echo esc_attr( $this->description );?>"></span> 
+					<?php } ?>
+	            <label for="<?php echo esc_attr( $sed_field_id );?>" ><?php echo esc_html( $this->label ); ?></label>
+	            <span class="after_field"><?php echo esc_html( $this->after_field ); ?></span>
+	            <input type="text" class="<?php echo esc_attr( $classes ); ?>" name="<?php echo esc_attr( $sed_field_id );?>" id="<?php echo esc_attr( $sed_field_id );?>" value="<?php echo esc_attr( $value ); ?>" <?php echo $atts_string;?> />
+			</div>
 
 			<?php
 		}

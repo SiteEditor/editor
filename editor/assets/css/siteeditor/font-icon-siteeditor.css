@@ -1,12 +1,13 @@
 @import url("font-extra.css");
 
+
 @font-face {
   font-family: 'siteeditor';
-  src:  url('../../fonts/siteeditor.eot?sh898b');
-  src:  url('../../fonts/siteeditor.eot?sh898b#iefix') format('embedded-opentype'),
-    url('../../fonts/siteeditor.ttf?sh898b') format('truetype'),
-    url('../../fonts/siteeditor.woff?sh898b') format('woff'),
-    url('../../fonts/siteeditor.svg?sh898b#siteeditor') format('svg');
+  src:  url('../../fonts/siteeditor.eot?te29ot');
+  src:  url('../../fonts/siteeditor.eot?te29ot#iefix') format('embedded-opentype'),
+    url('../../fonts/siteeditor.ttf?te29ot') format('truetype'),
+    url('../../fonts/siteeditor.woff?te29ot') format('woff'),
+    url('../../fonts/siteeditor.svg?te29ot#siteeditor') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -26,6 +27,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.sedico-preset:before {
+  content: "\ea0b";
+}
 .sedico-md-menu-a:before {
   content: "\e900";
 }
@@ -40,6 +44,9 @@
 }
 .sedico-post:before {
   content: "\e905";
+}
+.sedico-template:before {
+  content: "\ea09";
 }
 .sedico-sample-options:before {
   content: "\e907";
@@ -104,7 +111,7 @@
 .sedico-revolution-slider:before {
   content: "\e91a";
 }
-.sedico-separator-a2:before {
+.sedico-separator-b:before {
   content: "\e91b";
 }
 .sedico-google-map:before {
@@ -761,7 +768,7 @@
 .sedico-chat-c:before {
   content: "\e9ed";
 }
-.sedico-chat-b2:before {
+.sedico-chat-d:before {
   content: "\e9ee";
 }
 .sedico-collage-gallery:before {
@@ -1019,6 +1026,84 @@
 .sedico-tracking:before {
   content: "\eb41";
 }
+.sedico-cursor-move-a:before {
+  content: "\e023";
+}
+.sedico-size-fullscreen:before {
+  content: "\e057";
+}
+.sedico-size-actual:before {
+  content: "\e058";
+}
+.sedico-pencil:before {
+  content: "\e05f";
+}
+.sedico-note:before {
+  content: "\e060";
+}
+.sedico-setting:before {
+  content: "\e09a";
+}
+.sedico-dislike:before {
+  content: "\ea0c";
+}
+.sedico-like:before {
+  content: "\ea0d";
+}
+.sedico-down-arrow-1:before {
+  content: "\ea01";
+}
+.sedico-down-arrow-outline-1:before {
+  content: "\ea02";
+}
+.sedico-little-black-star:before {
+  content: "\ea03";
+}
+.sedico-little-thin-left-arrow:before {
+  content: "\ea00";
+}
+.sedico-lovers-heart:before {
+  content: "\ea04";
+}
+.sedico-loving-heart-shape:before {
+  content: "\ea05";
+}
+.sedico-magnifying-glass-searcher:before {
+  content: "\ea06";
+}
+.sedico-small-ribbon:before {
+  content: "\ea2e";
+}
+.sedico-star-sign:before {
+  content: "\ea3e";
+}
+.sedico-thin-left-down-arrow:before {
+  content: "\ea4c";
+}
+.sedico-thin-left-up-arrow:before {
+  content: "\ea4b";
+}
+.sedico-thin-right-arrow:before {
+  content: "\ea4d";
+}
+.sedico-trash-container:before {
+  content: "\ea50";
+}
+.sedico-up-arrow-1:before {
+  content: "\ea5d";
+}
+.sedico-up-sign:before {
+  content: "\ea60";
+}
+.sedico-wordpress-logo:before {
+  content: "\ea65";
+}
+.sedico-zoom-interface:before {
+  content: "\ea6a";
+}
+.sedico-zoom-out-symbol:before {
+  content: "\ea6b";
+}
 .sedico-delete:before {
   content: "\ea11";
 }
@@ -1031,8 +1116,14 @@
 .sedico-settings:before {
   content: "\ea58";
 }
-.sedico-eye:before {
+.sedico-eye-a:before {
   content: "\eab1";
+}
+.sedico-low-vision:before {
+  content: "\ea07";
+}
+.sedico-eye:before {
+  content: "\ea08";
 }
 .sedico-page:before {
   content: "\e005";
@@ -1046,6 +1137,9 @@
 .sedico-pictures:before {
   content: "\e010";
 }
+.sedico-tools:before {
+  content: "\e034";
+}
 .sedico-api-test-module:before {
   content: "\e03c";
 }
@@ -1055,9 +1149,10 @@
 .sedico-chat:before {
   content: "\e049";
 }
+.sedico-scope:before {
+  content: "\e05a";
+}
 .sedico-alarmclock:before {
   content: "\e059";
 }
-
-
 

@@ -30,7 +30,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 "name"        => "sed_content_layout",                               //*require
                 "title"       => __("Content Layout","site-editor"),                 //*require for toolbar
                 "description" => __("Add Content Layout to page","site-editor"),
-                "icon"        => "sedico-content-layout",                               //*require for icon toolbar
+                "icon"        => "sedico-post",                               //*require for icon toolbar
                 "module"      => "content-layout",         //*require
             ) // Args
 		);
@@ -103,7 +103,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
             'priority'                => 9 ,
             'btn_style'               => 'menu' ,
             'has_border_box'          => false ,
-            'icon'                    => 'sedico-content-layou' ,
+            'icon'                    => 'sedico-post' ,
             'field_spacing'           => 'sm'
         ) );
 
@@ -378,7 +378,7 @@ $sed_pb_app->register_module(array(
     "name"                  => "content-layout",
     "title"                 => __("Content Layout","site-editor"),
     "description"           => __("Add Full Customize Content Layout","site-editor"),
-    "icon"                  => "sedico-content-layout",
+    "icon"                  => "sedico-post",
     "type_icon"             => "font",
     "is_special"            => true ,
     "has_extra_spacing"     => true ,
