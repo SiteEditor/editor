@@ -349,7 +349,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
 
 new PBContentLayoutShortcode();
 
-include SED_PB_MODULES_PATH . '/content-layout/sub-shortcode/column.php';
+include SED_PB_MODULES_PATH . '/content-layout/includes/column.php';
 
 global $sed_pb_app;
 
