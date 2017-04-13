@@ -26,7 +26,19 @@ class PBIconsShortcode extends PBShortcodeClass{
 		);
 
         add_action( 'wp_enqueue_scripts', array( $this , 'load_default_font_icon' ) );
-	}
+
+        add_filter( 'sed_shortcode_has_preset' , array( $this , 'remove_preset_support' ) , 10 , 2 );
+    }
+
+    function remove_preset_support( $is_support , $shortcode ){
+
+        if( $shortcode == "sed_icons" ){
+            return false;
+        }
+
+        return $is_support;
+
+    }
 
     //loaded FontAwesome allways
     function load_default_font_icon(){

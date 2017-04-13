@@ -5,6 +5,8 @@
  * @class     SiteEditorThemeIntegration
  * @version   1.0.0
  * @author    SiteEditor
+ *
+ * @Source   Thanks from https://wordpress.org/plugins/pl-platform/
  */
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
@@ -15,28 +17,28 @@ class SiteEditorThemeIntegration {
   function __construct() {
 
     global $sed_static_template_output;
+
     global $sed_running_integration;
 
     $sed_static_template_output = false;
 
     add_action( 'sed_start_template', array( $this, 'do_footer' ) );
 
-    /** Capture template and output in content */
-    //if ( pl_is_static_template( 'int' )  ) {
 
-      add_action( 'sed_start_template', array( $this, 'start_integration' ) );
-      add_action( 'sed_after_template', array( $this, 'get_integration_output' ) );
-    //}
+    add_action( 'sed_start_template', array( $this, 'start_integration' ) );
+
+    add_action( 'sed_after_template', array( $this, 'get_integration_output' ) );
+
   }
 
 
   function do_footer() {
 
-    //remove_all_actions( 'pagelines_start_footer' );
+    remove_all_actions( 'sed_framework_start_footer' );
 
     /**
      * Problem / Solution Statement
-     * 1. All themes run get_footer in template which prevents PL from working correctly
+     * 1. All themes run get_footer in template which prevents Site Editor from working correctly
      * 2. However, some themes/shortcodes add stuff to globals or add new actions to wp_footer
      *
      * Solution:
@@ -250,9 +252,6 @@ function sed_get_footer() {
       do_action('wp_print_footer_scripts');
     }
 
-    /** All JSON data from PL */
-    do_action('pl_json_data');
-
     printf('</body></html><!-- Thanks for stopping by. Have an amazing day! -->');
 
   }
@@ -274,7 +273,7 @@ function sed_remove_closing_tags( $in ) {
 
 function sed_tpl_classes() {
 
-  $classes      = array( 'pl-region' );
+  $classes      = array( 'sed-region' );
   $attributes   = array( 'data-clone="template"' );
 
   return sprintf( 'class="%s" %s', join( ' ', $classes ), join( ' ', $attributes ) );
@@ -291,7 +290,6 @@ function sed_primary_template() {
       <div id="site-editor-main-part" class="sed-site-main-part sed-pb-main-component sed-pb-post-container <?php //echo $wide_boxed_class;?>" data-post-id="<?php echo $sed_data['page_id'];?>" data-parent-id="root" data-page-type="<?php echo $sed_data['page_type'];?>" data-content-type="theme"  sed-layout="row" sed-type-row="static" sed-role="main-content">
         <?php
             do_action( 'sed_region_template', 'sed_region_template', 'templates' );
-            //pl_template_hook( 'pl_region_template', 'templates' );
         ?>
       </div>
     </div>

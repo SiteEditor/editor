@@ -19,7 +19,7 @@ else
         </div>    
         <div class="navbar-wrap">
             <nav class="navbar-wrap-inner">
-    			<?php 
+    			<?php  
                     wp_nav_menu(array(
                         'menu'           => $menu, 
                     ));

@@ -1,9 +1,9 @@
 <?php
 /**
- * Basic page handler
+ * Site Editor Basic page handler
  *
- * @version   5.0.0
- * @author    PageLines
+ * @package SiteEditor
+ * @subpackage Framework
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; // Exit if accessed directly
 }

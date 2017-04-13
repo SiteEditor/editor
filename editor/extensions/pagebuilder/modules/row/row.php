@@ -24,7 +24,19 @@ class PBRowShortcode extends PBShortcodeClass{
 		);
 
         add_shortcode( 'sed_row_inner' , array( $this , 'shortcode_render') );
+
+        add_filter( 'sed_shortcode_has_preset' , array( $this , 'remove_preset_support' ) , 10 , 2 );
 	}
+
+    function remove_preset_support( $is_support , $shortcode ){
+
+        if( $shortcode == "sed_row" ){
+            return false;
+        }
+
+        return $is_support;
+
+    }
 
     function get_atts(){
 

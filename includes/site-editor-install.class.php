@@ -120,7 +120,21 @@ class SiteEditorInstall {
 
 	public static function save_default_presets(){
 
+		if ( ! defined( 'SED_INSTALLING' ) || SED_INSTALLING !== true ) {
 
+			return ;
+
+		}
+
+		require_once SED_EXT_PATH . "/preset/site-editor-preset.php";
+
+		$header_preset_content = '';
+
+		SiteEditorPreset::create_preset( 'sed_header' , __("Default Header" , "site-editor") ,  $header_preset_content , true );
+
+		$footer_preset_content = '';
+
+		SiteEditorPreset::create_preset( 'sed_footer' , __("Default Footer" , "site-editor") ,  $footer_preset_content , true );
 
 	}
 

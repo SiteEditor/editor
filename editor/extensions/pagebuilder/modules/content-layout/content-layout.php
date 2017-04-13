@@ -41,7 +41,18 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
 
         $this->set_layout_patterns();
 
-	}
+        add_filter( 'sed_shortcode_has_preset' , array( $this , 'remove_preset_support' ) , 10 , 2 );
+    }
+
+    function remove_preset_support( $is_support , $shortcode ){
+
+        if( $shortcode == "sed_content_layout" ){
+            return false;
+        }
+
+        return $is_support;
+
+    }
 
     function get_atts(){
         $atts = array(

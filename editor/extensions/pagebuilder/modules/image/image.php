@@ -32,6 +32,19 @@ class PBImageShortcode extends PBShortcodeClass{
               //add_action( "wp_footer" , array( $this , "add_image_svg") );
 
           add_filter( "sed_js_I18n", array($this,'js_I18n'));
+
+
+          add_filter( 'sed_shortcode_has_preset' , array( $this , 'remove_preset_support' ) , 10 , 2 );
+      }
+
+      function remove_preset_support( $is_support , $shortcode ){
+
+          if( $shortcode == "sed_image" ){
+              return false;
+          }
+
+          return $is_support;
+
       }
 
 

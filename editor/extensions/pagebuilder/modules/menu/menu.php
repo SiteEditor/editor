@@ -33,7 +33,7 @@ class PBMenuShortcode extends PBShortcodeClass{
 
     function get_atts(){
         $atts = array(
-            'menu'                      => (!empty($this->menus)) ? $this->menus[0]->name: "",
+            'menu'                      => (!empty($this->menus)) ? $this->menus[0]->term_id: "",
             'sticky'                    => false,
             'scroll_animate_anchor'     => 'easeInOutQuint' ,
             'scroll_animate_duration'   =>  2000 ,
@@ -71,7 +71,7 @@ class PBMenuShortcode extends PBShortcodeClass{
 
         if( !empty($menus) ){
             foreach ( $menus as $menu ) {
-                $menu_options[$menu->name] = esc_html( $menu->name );
+                $menu_options[$menu->term_id] = esc_html( $menu->name );
             }
         }        
 

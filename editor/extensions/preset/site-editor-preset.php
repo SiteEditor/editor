@@ -16,6 +16,12 @@ class SiteEditorPreset{
 
     public function __construct(){
 
+        if( defined( 'SED_INSTALLING' ) ) {
+
+            return ;
+
+        }
+
         //add_filter('sed_custom_js_plugins' , array( $this, 'add_js_plugin' ) );
         add_action('sed_enqueue_scripts' , array( $this, 'add_js_plugin' ) );
 
@@ -558,7 +564,9 @@ class SiteEditorPreset{
 
     public function add_preset_settings( $settings , $shortcode_obj ){
 
-        if ( ! current_user_can( 'manage_site_editor_preset' ) || $shortcode_obj->shortcode->name == "sed_row" )
+        $shortcode_has_preset = apply_filters( 'sed_shortcode_has_preset' , true , $shortcode_obj->shortcode->name );
+
+        if ( ! current_user_can( 'manage_site_editor_preset' ) || ! $shortcode_has_preset )
             return $settings;
 
         ob_start();

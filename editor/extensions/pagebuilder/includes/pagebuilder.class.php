@@ -559,7 +559,7 @@ Class PageBuilderApplication {
 			$temp = str_replace( array(
 				'<p>',
 				'</p>',
-			), '', $string ); // just to avoid autop @todo maybe do it better like vc_wpnop in js.
+			), '', $string ); 
 
             if( strlen(trim($temp))>0 ) {
                 $content = preg_replace_callback("/(".preg_quote($string, '/')."(?!\[\/))/", array( $this , 'add_row_synchronization' ) , $content);
