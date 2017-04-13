@@ -49,7 +49,6 @@
     background-position: 0 0;
 }
 .mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
-    background-image: url("../images/mCSB_buttons.png");
     background-repeat: no-repeat;
     opacity: 0.4;
 }
@@ -78,7 +77,6 @@
     margin-bottom: 3px !important;
 }
 .mCSB_scrollTools .mCSB_buttonUp, .mCSB_scrollTools .mCSB_buttonDown, .mCSB_scrollTools .mCSB_buttonLeft, .mCSB_scrollTools .mCSB_buttonRight {
-    background-image: url("../images/mCSB_buttons.png");
     background-repeat: no-repeat;
     opacity: 0.4;
 }

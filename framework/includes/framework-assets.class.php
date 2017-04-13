@@ -96,7 +96,7 @@ if(!class_exists('SEDFrameworkAssetsManager'))
         function enqueue_styles(){
 
             //call base styles( base less framework )
-            $main_style = array(
+            /*$main_style = array(
                 "handle"    => 'main-style' ,
                 'src'       => SED_UPLOAD_URL . '/style/siteeditor.css',
                 'deps'      => array(),
@@ -108,7 +108,7 @@ if(!class_exists('SEDFrameworkAssetsManager'))
 
             wp_register_style( $handle , $src , $deps , $ver , $media ) ;
             
-            wp_enqueue_style( $handle ) ;
+            wp_enqueue_style( $handle ) ;*/
 
             wp_enqueue_style( 'general' );
 
