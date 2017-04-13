@@ -42,7 +42,8 @@ class SiteEditorThemeSupport{
 
         $this->register_features( );
 
-        $this->register_current_theme();
+        //TODO : Recovery
+        //$this->register_current_theme();
 
         add_action( "wp_footer" , array( $this , "export_features_data" ) );
 
