@@ -1256,7 +1256,7 @@
                 
             });
 
-            console.log( "------------moduleSelectors-------------" , moduleSelectors );
+            //console.log( "------------moduleSelectors-------------" , moduleSelectors );
 
             var _setModuleActions = function( _Elm ){
 
@@ -1268,7 +1268,7 @@
 
                     _Elm.data( "sedModuleAction" , ModuleActions );
 
-                    console.log( "-------Handle Module------" , shortcode.tag , api.shortcodes[shortcode.tag] );
+                    //console.log( "-------Handle Module------" , shortcode.tag , api.shortcodes[shortcode.tag] );
 
                 }
 
@@ -1868,7 +1868,7 @@
 
               ////api.log( window._sedAppPageBuilderModulesStyles );
         api.currentPageInfo = window._sedAppCurrentPageInfo;
-        api.attachmentsSettings = window._sedAppPBAttachmentsSettings;  console.log( "api.attachmentsSettings---" , api.attachmentsSettings );
+        api.attachmentsSettings = window._sedAppPBAttachmentsSettings;  //console.log( "api.attachmentsSettings---" , api.attachmentsSettings );
         //api.mainContentShortcode = window._sedAppMainContentShortcode;
 
         api.contextMenuSettings = !_.isUndefined( window._sedAppEditorContextMenuSettings ) ? window._sedAppEditorContextMenuSettings : {};

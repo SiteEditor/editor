@@ -224,7 +224,7 @@
          * Override Default Site Editor Color Scheme Preview
          */
 
-        console.log( "-----api.colorSchemeSettings----" , api.colorSchemeSettings );
+        //console.log( "-----api.colorSchemeSettings----" , api.colorSchemeSettings );
 
         $('<style type="text/css" id="sed_twenty_seventeen_dynamic_css"></style>').insertAfter( $('#sed_color_scheme_css_code') );
 

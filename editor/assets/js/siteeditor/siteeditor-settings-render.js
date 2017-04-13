@@ -15,7 +15,7 @@
 
 		});
 
-        console.log( "---------------api.settings-----------" , api.settings );
+        //console.log( "---------------api.settings-----------" , api.settings );
 
         api.styleEditorSettings = api.styleEditorSettings || [];
   	    $.each( api.settings.settings, function( id, data ) {

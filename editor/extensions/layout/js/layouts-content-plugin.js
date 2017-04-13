@@ -161,7 +161,7 @@
 
                 api.previewer.send( "syncSedLayoutsContent" , to );
 
-                console.log("-----------layoutsRowsContent--------------", to );
+                //console.log("-----------layoutsRowsContent--------------", to );
 
             }
 
@@ -202,7 +202,7 @@
         createThemeContent: function () {
             var pagesThemeContent = [];
 
-            console.log("----------------pagesThemeContent NEW NEW -------------", api.pagesThemeContent[api.settings.page.id]);
+            //console.log("----------------pagesThemeContent NEW NEW -------------", api.pagesThemeContent[api.settings.page.id]);
 
             _.each(api.pagesThemeContent[api.settings.page.id], function( shortcode ) {
                 if (_.isUndefined(shortcode) || !_.isObject(shortcode))
@@ -233,7 +233,7 @@
 
             });
 
-            console.log("---------------- pagesThemeContent After Modify -------------", pagesThemeContent);
+            //console.log("---------------- pagesThemeContent After Modify -------------", pagesThemeContent);
 
             pagesThemeContent = encodeURI( JSON.stringify( pagesThemeContent ) );
 
@@ -278,7 +278,7 @@
 
             this.set( layoutsContent );
 
-            console.log("-----------layoutsRowsContent AFTER REMOVE--------------", layoutsContent );
+            //console.log("-----------layoutsRowsContent AFTER REMOVE--------------", layoutsContent );
 
         },
 

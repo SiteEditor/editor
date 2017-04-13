@@ -36,7 +36,7 @@
 
             this.currentLayout = !_.isEmpty(api( settingId )()) ? api( settingId )() : api.defaultPageLayout;
 
-            console.log( "####api.contentBuilder.pagesThemeContent[this.postId]#####" , api.contentBuilder.pagesThemeContent[this.postId] );
+            //console.log( "####api.contentBuilder.pagesThemeContent[this.postId]#####" , api.contentBuilder.pagesThemeContent[this.postId] );
 
             _.map( api.contentBuilder.pagesThemeContent[this.postId], function(shortcode){
                 if( !_.isUndefined( shortcode.theme_id )  ){
@@ -657,14 +657,14 @@
 
             hide = !_.isUndefined( hide ) ? hide : false;
 
-            console.log( "-----------rowContent-----------" , rowContent );
+            //console.log( "-----------rowContent-----------" , rowContent );
 
             var newPattern = api.sedShortcode.clone( rowContent );
 
             //create new pattern
             newPattern = api.pageBuilder.loadPattern( newPattern , rowShortcode.parent_id );
 
-            console.log( "-----------newPattern-----------" , newPattern );
+            //console.log( "-----------newPattern-----------" , newPattern );
 
             //set helper id for add shortcode pattern id
             newPattern = api.pageBuilder.setHelperShortcodes( newPattern , rowContent[2].tag , "tag" );

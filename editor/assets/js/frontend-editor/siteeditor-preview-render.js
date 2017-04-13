@@ -138,7 +138,7 @@
             $.each( values, setValue );
         });
 
-        console.log( "--------------api.settings.values----------------" , api.settings.values );
+        //console.log( "--------------api.settings.values----------------" , api.settings.values );
 
         api.preview.trigger( 'settings', api.settings.values );
 

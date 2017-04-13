@@ -227,7 +227,7 @@
                         groupRelations[self.currentSettingsId] = relations;
 
                         api.settingsRelations = $.extend( api.settingsRelations , groupRelations);
-                        console.log( " ---------api.settingsRelations2 ----------------- " , api.settingsRelations );
+                        //console.log( " ---------api.settingsRelations2 ----------------- " , api.settingsRelations );
                     }
 
                     if( !_.isEmpty( controls ) ){
@@ -244,7 +244,7 @@
                              control.update( );*/
 
                         });
-                        console.log( " ---------ajax control load ----------------- " , controls );
+                        //console.log( " ---------ajax control load ----------------- " , controls );
                         api.Events.trigger(  "after_group_settings_update" , self.currentSettingsId );
                     }
 

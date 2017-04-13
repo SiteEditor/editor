@@ -248,7 +248,7 @@
 
                 if( !_.isEmpty( self.needToRefreshGroups ) ){
 
-                    console.log( "----------self.needToRefreshGroups------------" , self.needToRefreshGroups );
+                    //console.log( "----------self.needToRefreshGroups------------" , self.needToRefreshGroups );
 
                     _.each( self.needToRefreshGroups , function( optionsGroup ){
 
@@ -257,11 +257,11 @@
                             isLoaded = optionsGroup == "sed_page_options" && $.inArray( settingId , self.pageOptionsLoaded ) > -1;
 
 
-                        console.log( "----------self.backgroundAjaxload[settingId]------------" , self.backgroundAjaxload[settingId] );
+                        //console.log( "----------self.backgroundAjaxload[settingId]------------" , self.backgroundAjaxload[settingId] );
 
-                        console.log( "----------self.dialogsContents[settingId]------------" , self.dialogsContents[settingId] );
+                        //console.log( "----------self.dialogsContents[settingId]------------" , self.dialogsContents[settingId] );
 
-                        console.log( "----------needToRefreshGroups ## settingId------------" , settingId );
+                        //console.log( "----------needToRefreshGroups ## settingId------------" , settingId );
 
                         if( _.isUndefined( self.backgroundAjaxload[settingId] ) && _.isUndefined( self.dialogsContents[settingId] ) && !isLoaded ) {
 

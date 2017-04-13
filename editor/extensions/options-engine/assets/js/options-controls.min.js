@@ -768,7 +768,7 @@
 
         } ,
 
-        updateAttr : function( id , attr , value ){ console.log( "----this.collection----" , this.collection );
+        updateAttr : function( id , attr , value ){ //console.log( "----this.collection----" , this.collection );
 
             this.collection = _.map( this.collection , function( font ){
 
@@ -897,7 +897,7 @@
 
                     control.mediaLibrary.close();
 
-                    console.log( "-------------attachment---------------" , attachment );
+                    //console.log( "-------------attachment---------------" , attachment );
 
                     var _fontType = control.uploadSelector.find('.upload-btn').data("fontType"),
                         _filename = attachment.attributes.filename,

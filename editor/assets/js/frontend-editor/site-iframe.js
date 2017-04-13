@@ -159,7 +159,7 @@
                                 }
                             });
 
-                            console.log( "--------fonts------------" , fonts );
+                            //console.log( "--------fonts------------" , fonts );
 
                             api.typography.loadFont( e.originalEvent.value , _cModelId , fonts );
                         }

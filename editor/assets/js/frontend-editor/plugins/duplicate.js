@@ -85,7 +85,7 @@
             newPattern = api.pageBuilder.setHelperShortcodes( newPattern , mainShortcode.tag , "tag" );
 
             //shortcode pattern filter
-            newPattern = api.pageBuilder.shortcodesPatternFilter( newPattern ); console.log( "----------------newPattern------------" , newPattern );
+            newPattern = api.pageBuilder.shortcodesPatternFilter( newPattern ); //console.log( "----------------newPattern------------" , newPattern );
 
             this.newElementId = newPattern[2].id;
 
@@ -94,7 +94,7 @@
             api.contentBuilder.addShortcodesToParent( rowSh.id , newPattern , postId , index );
 
             //apply design editor css in preview
-            api.pageBuilder.syncStyleEditorPreview( newPattern ); console.log( "------------newPattern--------" , newPattern );
+            api.pageBuilder.syncStyleEditorPreview( newPattern ); //console.log( "------------newPattern--------" , newPattern );
 
             var _completePatternLoad = function( html ){
 

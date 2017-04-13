@@ -1101,7 +1101,7 @@ api	 * @param options
 					}
 				} );
 
-				console.log( "-------------dirtyCustomized---------------" , dirtyCustomized );
+				//console.log( "-------------dirtyCustomized---------------" , dirtyCustomized );
 
                 _.extend( query, {
 					sed_app_editor          : 'on',
