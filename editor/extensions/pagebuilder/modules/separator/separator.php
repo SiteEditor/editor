@@ -78,14 +78,6 @@ class PBSeparatorShortcode extends PBShortcodeClass{
         );
     }
 
-    function sed_separator_module_color_css( $css , $color_scheme , $colors ) { 
-
-        extract($colors);
-
-        include SED_PB_MODULES_PATH . '/separator/includes/dynamic-css.php';
-
-        return $css;
-    }  
 
     function shortcode_settings(){
 

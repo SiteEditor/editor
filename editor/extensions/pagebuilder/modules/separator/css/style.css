@@ -13,6 +13,7 @@
 
 .module-separator .separator  {
     border-width: 0; 
+    border-color: #eee;
 }
 
 .module-separator .spr-dotted {

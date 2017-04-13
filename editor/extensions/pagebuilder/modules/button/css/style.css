@@ -64,6 +64,120 @@ fieldset[disabled] a.btn {
     pointer-events: none
 }
 
+.module.module-button .btn.btn-default {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #eee
+}
+
+.module.module-button .btn-default:hover,
+.module.module-button .btn-default:focus,
+.module.module-button .btn-default.focus,
+.module.module-button .btn-default:active,
+.module.module-button .btn-default.active {
+    color: #333;
+    background-color: #eee;
+    border-color: #eee
+}
+
+.module.module-button .btn.btn-default-outline {
+    color: #333;
+    background-color: transparent;
+    border-color: #eee
+}
+
+.module.module-button .btn-default-outline:focus,
+.module.module-button .btn-default-outline.focus,
+.module.module-button .btn-default-outline:hover,
+.module.module-button .btn-default-outline:active,
+.module.module-button .btn-default-outline.active {
+    color: #333;
+    background-color: #eee;
+    border-color: #eee
+}
+
+.module.module-button .btn.btn-primary {
+    color: #ffffff;
+    background-color: #c9166f;
+    border-color: #c9166f
+}
+
+.module.module-button .btn-primary:hover,
+.module.module-button .btn-primary:focus,
+.module.module-button .btn-primary.focus,
+.module.module-button .btn-primary:active,
+.module.module-button .btn-primary.active {
+    color: #ffffff;
+    background-color: #a8115c;
+    border-color: #a8115c
+}
+
+.module.module-button .btn.btn-primary-outline {
+    color: #c9166f;
+    background-color: transparent;
+    border-color: #c9166f
+}
+
+.module.module-button .btn-primary-outline:focus,
+.module.module-button .btn-primary-outline.focus,
+.module.module-button .btn-primary-outline:hover,
+.module.module-button .btn-primary-outline:active,
+.module.module-button .btn-primary-outline.active {
+    color: #ffffff;
+    background-color: #a8115c;
+    border-color: #a8115c
+}
+
+.module.module-button .btn.btn-perfect {
+    color: #ffffff;
+    background-color: #ff6600;
+    border-color: #ff6600
+}
+
+.module.module-button .btn-perfect:hover,
+.module.module-button .btn-perfect:focus,
+.module.module-button .btn-perfect.focus,
+.module.module-button .btn-perfect:active,
+.module.module-button .btn-perfect.active {
+    color: #ffffff;
+    background-color: #e25a00;
+    border-color: #e25a00
+}
+
+.module.module-button .btn.btn-perfect-outline {
+    color: #ff6600;
+    background-color: transparent;
+    border-color: #ff6600
+}
+
+.module.module-button .btn-perfect-outline:focus,
+.module.module-button .btn-perfect-outline.focus, 
+.module.module-button .btn-perfect-outline:hover,
+.module.module-button .btn-perfect-outline:active,
+.module.module-button .btn-perfect-outline.active {
+    color: #ffffff;
+    background-color: #e25a00;
+    border-color: #e25a00
+}
+
+
+.module.module-button .btn-link {
+    color: #333333;
+}
+
+.module.module-button .btn-link:hover,
+.module.module-button .btn-link:focus {
+    color: #c9166f;
+}
+
+.module.module-button .btn-link[disabled]:hover,
+fieldset[disabled] .btn-link:hover,
+.module.module-button .btn-link[disabled]:focus,
+fieldset[disabled] .btn-link:focus {
+    color: #777777;
+}
+
+
 .module.module-button .btn-success {
     color: #fff;
     background-color: #75bb15;

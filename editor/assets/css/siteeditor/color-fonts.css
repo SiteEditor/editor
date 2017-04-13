@@ -290,5 +290,21 @@
 .sed-custom-fonts-accordion > .sed-accordion-header , 
 .sed-custom-fonts-accordion > .sed-accordion-content {
     margin: 0 !important;
-    width: 100%;
+    width: 100%; 
+    position: relative; 
+}
+
+.sed-custom-fonts-accordion > .sed-accordion-header {
+    margin: 10px 0 0 0 !important;
+}
+
+.sed-custom-fonts-accordion > .sed-accordion-header:first-child {
+    margin: 0 !important; 
+}
+
+.sed-custom-fonts-accordion > .sed-accordion-header .ui-accordion-header-icon {
+    font-size: 11px;
+    line-height: 18px;
+    height: 18px;
+    vertical-align: middle;
 }

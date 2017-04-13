@@ -3,6 +3,8 @@
     border-width: 1px medium;
     padding: 15px 0;
     width: 100%;
+    background-color: #f5f5f5;
+    border-color: #eee;
 }
 
 .module-page-title.page-title-default .page-title-inner {

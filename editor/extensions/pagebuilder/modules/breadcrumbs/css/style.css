@@ -30,6 +30,11 @@
     position: relative
 }
 
+.breadcrumbs-default ul li.current span ,
+.breadcrumbs-default ul li a:hover {
+    color: #c9166f;
+}   
+
 .breadcrumbs-default ul li a:after {
     content: "\203A";
     position: absolute;

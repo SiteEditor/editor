@@ -78,7 +78,7 @@ class PBAddShortcode extends PBShortcodeClass{
 
 new PBAddShortcode();
 
-include SED_PB_MODULES_PATH . '/module/sub-shortcode/sub-shortcode.php';
+include SED_PB_MODULES_PATH . '/module/includes/sub-shortcode.php';
 
 global $sed_pb_app;
 

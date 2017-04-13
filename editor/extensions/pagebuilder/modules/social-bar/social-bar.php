@@ -211,7 +211,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
 
 }
 new PBSocialBarShortcode;
-include SED_PB_MODULES_PATH . '/social-bar/sub-shortcode/sub-shortcode.php';
+include SED_PB_MODULES_PATH . '/social-bar/includes/sub-shortcode.php';
 
 global $sed_pb_app;
 

@@ -112,7 +112,7 @@ class SiteEditorColorScheme{
                 ),
 
                 'main_bg_text_color' => array(
-                    'setting_id'        => 'sed_second_main_active_color',  
+                    'setting_id'        => 'sed_main_bg_text_color',  
                     'label'             => __('Main Background Text Color', 'site-editor'),
                     "description"       => __("Choose the second most dominant theme color", "site-editor"),
                     'default'           => '',

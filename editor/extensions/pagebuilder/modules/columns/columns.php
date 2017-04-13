@@ -129,7 +129,7 @@ class PBColumnsShortcode extends PBShortcodeClass{
 
 new PBColumnsShortcode();
 
-include SED_PB_MODULES_PATH . '/columns/sub-shortcode/column.php';
+include SED_PB_MODULES_PATH . '/columns/includes/column.php';
 
 global $sed_pb_app;
 

@@ -105,7 +105,7 @@ class PBheaderShortcode extends PBShortcodeClass{
 }
 
 new PBheaderShortcode();
-include SED_PB_MODULES_PATH . '/header/sub-shortcode/sub-shortcode.php';
+include SED_PB_MODULES_PATH . '/header/includes/sub-shortcode.php';
 
 global $sed_pb_app;
 

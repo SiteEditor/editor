@@ -127,14 +127,6 @@ class PBRowContainerShortcode extends PBShortcodeClass{
             'priority'                  => 10 ,
         ) );
 
-        $this->add_panel( 'row_container_responsive_panel' , array(
-            'title'                     =>  __('Responsive Settings',"site-editor")  ,
-            'capability'                => 'edit_theme_options' ,
-            'type'                      => 'default' ,
-            'parent_id'                 => "row_container_settings_panel_outer",
-            'priority'                  => 11 , 
-        ) );
-
         $this->add_panel( 'video_background_row_container' , array(
             'title'                     =>  __('Video Background',"site-editor")  ,
             'capability'                => 'edit_theme_options' ,
