@@ -61,7 +61,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
-        $dropdown_html = "";
+        /*$dropdown_html = "";
         $dropdown_control = "sed_content_layout_layout";
         ob_start();
         ?>
@@ -93,8 +93,15 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
         </div>
         <?php
         $dropdown_html = ob_get_contents();
-        ob_end_clean();
+        ob_end_clean();*/
 
+        $options = array( );
+
+        foreach( self::$content_layout_patterns AS $id => $pattern ) {
+
+            $options[$id] = $id;
+
+        }
 
         $this->add_panel( 'content_layout_settings_panel_outer' , array(
             'title'                   =>  __('Content Layout Settings',"site-editor")  ,
@@ -116,7 +123,8 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
         ) );        
 
         $params = array(
-    		'layout' => array(
+
+    		/*'layout' => array(
                 'type'              =>  'custom',
                 'js_type'           =>  'dropdown',
                 //'has_border_box'    =>   true ,
@@ -127,7 +135,15 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 ),
                 'has_border_box'      => false ,
                 'panel'    => 'content_layout_settings_panel',
-    		),
+    		),*/
+
+            'layout' => array(
+                'type'              =>  'select',
+                "label"             => __("Select Content Layout", "site-editor"),
+                //"description"       => __("Select Content Layout", "site-editor"),
+                "choices"           =>  $options,
+                'panel'    => 'content_layout_settings_panel',
+            ),
 
             'content_width' => array(
                 "type"          => "radio-buttonset" ,
@@ -140,45 +156,9 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 "panel"         => "content_layout_settings_panel" ,
             ),
 
-            'responsive_option' => array(
-      			'type' => 'select',
-      			'label' => __('Responsive Option', 'site-editor'),
-      			'description' => '',// __("Select the Icon's Style", "site-editor"),
-                'choices'   =>array(
-                    'normal-columns'         => __('Full Width Any Columns', 'site-editor'),
-                    'float-columns'          => __('Auto Mode Columns', 'site-editor'),
-                    'table-cell-columns'     => __('Inline Columns', 'site-editor'),
-                    'hidden-columns'         => __('Hidden Columns', 'site-editor'),
-                ),
-                'has_border_box'      => false ,
-                'panel'    => 'content_layout_settings_panel',
-      		),
-            /*'equal_column_width' => array(
-                'type' => 'checkbox',
-                'label' => __('Equal Column Width', 'site-editor'),
-                'description'  => __('This option allows to set equal column width for all the columns in this module.', 'site-editor'),
-            ),*/
-            "responsive_spacing"    => array(
-                'type'    => 'text',
-                'label'   => __('Module Responsive Spacing', 'site-editor'),
-                'description'    => '',// __('','site-editor'),
-                'has_border_box'      => false ,
-                'panel'    => 'content_layout_settings_panel',
-            ),
-
             'row_container' => array(
                 'type'                => 'row_container',
                 'label'               => __('Module Wrapper Settings', 'site-editor')
-            ), 
-
-            "skin"  =>  array(
-                "type"                => "skin" ,
-                "label"               => __("Change skin", "site-editor"),
-                'button_style'        => 'menu' ,
-                'has_border_box'      => false ,
-                'icon'                => 'sedico-change-skin' ,
-                'field_spacing'       => 'sm' ,
-                'priority'            => 540
             ),
 
             "animation"  =>  array(
