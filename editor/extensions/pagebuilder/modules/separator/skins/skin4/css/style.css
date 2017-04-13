@@ -5,6 +5,8 @@
 
 .module-separator.separator-skin4 .module-separator-inner { 
     display: inline-block;
+    margin: 0;
+    vertical-align: top;
 }
 
 .module-separator.separator-skin4 .special-spr-center {

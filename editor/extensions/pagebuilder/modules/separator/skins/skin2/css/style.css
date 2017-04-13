@@ -4,6 +4,8 @@
 
 .module-separator.separator-skin2 .module-separator-inner { 
     display: inline-block;
+    margin: 0;
+    vertical-align: top;
 }
 
 .module-separator.separator-skin2 .separator-inner {

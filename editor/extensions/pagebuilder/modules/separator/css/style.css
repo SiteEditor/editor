@@ -1,14 +1,12 @@
 .module-separator {
     border: 0 none;
-    clear: both;
+    display: block;
     outline: medium none;
-    margin: 0 auto;
     position: relative;
-    font-size: 0;
 }
 
-.module-separator > * {  
-    font-size: 14px;    
+.module-separator.separator-skin-default {
+    font-size: 0;
 }
 
 .module-separator .separator  {
@@ -35,8 +33,13 @@
 .module-separator .spr-horizontal {
     width: 100%;
     height: 0px;
+    display: block;
+}
+
+.module-separator.separator-skin-default {
     display: inline-block;
     margin: 0;
+    vertical-align: top;
 }
 
 .module-separator .spr-horizontal.spr-double {
@@ -51,6 +54,8 @@
     height: 100%;
     width: 0;
     display: inline-block;
+    margin: 0;
+    vertical-align: top;
 }
 
 .module-separator .spr-vertical.spr-double {
