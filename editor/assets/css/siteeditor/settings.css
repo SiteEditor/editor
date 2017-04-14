@@ -1120,3 +1120,19 @@ body .sp-container {
     float: left;
 }
 
+/**********  Tinymce  *********/
+
+.mce-container button, 
+.mce-container button, 
+.mce-container input[type="button"], 
+.mce-container input[type="button"], 
+.mce-container input[type="submit"], 
+.mce-container input[type="submit"],
+.mce-container button:hover, 
+.mce-container button:focus, 
+.mce-container input[type="button"]:hover, 
+.mce-container input[type="button"]:focus, 
+.mce-container input[type="submit"]:hover, 
+.mce-container input[type="submit"]:focus {
+    background-color: rgba(0,0,0,0.08);
+}
