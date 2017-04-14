@@ -128,13 +128,21 @@ class SiteEditorInstall {
 
 		require_once SED_EXT_PATH . "/preset/site-editor-preset.php";
 
-		$header_preset_content = '';
+		ob_start();
 
-		SiteEditorPreset::create_preset( 'sed_header' , __("Default Header" , "site-editor") ,  $header_preset_content , true );
+		require dirname( __FILE__ ) . "/demo/presets/header.txt";
 
-		$footer_preset_content = '';
+		$header_preset_content = ob_get_clean();
 
-		SiteEditorPreset::create_preset( 'sed_footer' , __("Default Footer" , "site-editor") ,  $footer_preset_content , true );
+		SiteEditorPreset::create_preset( 'sed_header' , __("Default Header" , "site-editor") ,  $header_preset_content , false );
+
+		ob_start();
+
+		require dirname( __FILE__ ) . "/demo/presets/footer.txt";
+
+		$footer_preset_content = ob_get_clean();
+
+		SiteEditorPreset::create_preset( 'sed_footer' , __("Default Footer" , "site-editor") ,  $footer_preset_content , false );
 
 	}
 
