@@ -1,13 +1,13 @@
 # Site Editor - WordPress Site Builder
 
 
-**Contributors:** [siteeditor](https://www.wordpress.org/)
+**Contributors:** [siteeditor](https://www.wordpress.org/)  
 **Tags:** site editor, site builder, page builder, theme builder, theme framework, design, inline editor, inline text editor, layout builder,live options, live, customizer, theme customizer, header builder, footer builder, fully customizable, design options,design editor, options framework, front end, page builder plugin, builder, responsive, front end editor, landing page, editor, drag-and-drop, shortcode, wordpress, ultra flexible, unlimited tools, elements, modules, support, seo, animation, absolute flexibility, live theme options, video backgrounds, font awesome, Optimized, fast, quick, ux, ui 
-**Requires at least:** 4.7
-**Tested up to:** 4.7.3
-**Stable tag:** 1.0.0
-**License:** GPLv3
-**License URI:** https://www.gnu.org/licenses/gpl-3.0.html
+**Requires at least:** 4.7  
+**Tested up to:** 4.7.3  
+**Stable tag:** 1.0.0  
+**License:** GPLv3  
+**License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
 
 **SiteEditor is The best solution for build your Wordpress site with The best drag and drop WordPress Site, theme and Page Builder.Any theme, any page, any design.**
 
@@ -93,15 +93,15 @@ You can easily edit the styles of all elements, theme modules and pages visually
 
 **Developer API**
 
-If you are a **Theme Developer**, you can build your themes with Site Editor very easy & fast. you can add all your theme options with front end options framework and you can add your modules for page builder and sync our modules with your design too.
-If you are a **Plugin Developer**, you can build your Plugins in our front end editor with front end options framework.  
+If you are a **Theme Developer**, you can build your themes with Site Editor very easy & fast. you can add all your theme options with front end options framework and you can add your modules for page builder and sync our modules with your design too.  
+If you are a **Plugin Developer**, you can build your Plugins in our front end editor with front end options framework.    
 
-We have a sample module for developers guide that for find it go to **"Site Editor Plugin Folder/editor/extensions/pagebuilder/modules/api-test-module"**
-you can test in module in our editor. it's active by default
+We have a sample module for developers guide that for find it go to **"Site Editor Plugin Folder/editor/extensions/pagebuilder/modules/api-test-module"**  
+you can test in module in our editor. it's active by default  
 
-Too We have a sample options file for developers guide( you can using for theme options and plugin options in front end editor mode ) that for find it go to **"Site Editor Plugin Folder/editor/extensions/options-engine/includes/demo/site-editor-sample-options.php"**
-**Notic 1:** for test this options in our editor you can need active it on WordPress Admin > SiteEditor > General Settings > Developer Sample Options.  
-**Notic 2:** Our Developer API documentation coming soon!
+Too We have a sample options file for developers guide( you can using for theme options and plugin options in front end editor mode ) that for find it go to **"Site Editor Plugin Folder/editor/extensions/options-engine/includes/demo/site-editor-sample-options.php"**  
+**Notic 1:** for test this options in our editor you can need active it on WordPress Admin > SiteEditor > General Settings > Developer Sample Options.    
+**Notic 2:** Our Developer API documentation coming soon!  
 
 
 **BE A CONTRIBUTOR**
