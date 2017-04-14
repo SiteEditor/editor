@@ -69,7 +69,7 @@ class PBTextIconShortcode extends PBShortcodeClass{
 
     function shortcode_settings(){
 
-        $this->add_panel( 'text_icon_settings_panel' , array(
+        $this->add_panel( 'text_icon_settings_panel_outer' , array(
             'title'                   =>  __('Text & Icon Settings',"site-editor")  ,
             'capability'              => 'edit_theme_options' ,
             'type'                    => 'inner_box' ,
@@ -77,7 +77,24 @@ class PBTextIconShortcode extends PBShortcodeClass{
             'btn_style'               => 'menu' ,
             'has_border_box'          => false ,
             'icon'                    => 'sedico-text-icon' ,
-            'field_spacing'           => 'sm'
+            'field_spacing'           => 'sm',
+        ) );
+
+        $this->add_panel( 'text_icon_settings_panel' , array(
+            'title'                   =>  __('Text & Icon Settings',"site-editor")  ,
+            'capability'              => 'edit_theme_options' ,
+            'type'                    => 'default' ,
+            'parent_id'               => "text_icon_settings_panel_outer",
+            'priority'                => 9 ,
+            "dependency"  => array(
+                'queries'  =>  array(
+                    array(
+                        "key"      =>  "skin" ,
+                        "value"    =>  array( "default" , "skin1" ),
+                        "compare"  =>  "IN"
+                    )
+                )
+            ),
         ) );
 
         $params = array(
@@ -86,18 +103,20 @@ class PBTextIconShortcode extends PBShortcodeClass{
                 "type"                => "icon" ,
                 "label"               => __("Select Icon", "site-editor"),
                 "description"         => __("This option allows you to set a icon for your module.", "site-editor"),
-                'panel'               => 'text_icon_settings_panel' 
+                'has_border_box'      => false , 
+                'panel'               => 'text_icon_settings_panel' , 
             ),   
 
             'font_size' => array(
                 "type"                => "font-size" , 
+                "after_field"         => "px",
                 "label"               => __("Font Size", "site-editor"),
                 "description"         => __("Add Font Size For Element", "site-editor") ,
                 "category"            => 'style-editor' ,
                 "selector"            => '.text-icon' ,
                 "default"             => '' , 
-                //'has_border_box'      => false , 
-                'panel'               => 'text_icon_settings_panel'
+                'has_border_box'      => false , 
+                'panel'               => 'text_icon_settings_panel',
             ),  
 
             'font_color' => array(
@@ -107,15 +126,24 @@ class PBTextIconShortcode extends PBShortcodeClass{
                 "category"            => 'style-editor' ,
                 "selector"            => '.text-icon' ,
                 "default"             => '#ccc' ,
-                //'has_border_box'      => false , 
-                'panel'               => 'text_icon_settings_panel' 
+                'has_border_box'      => false , 
+                'panel'               => 'text_icon_settings_panel' ,
             ),  
 
             'change_image_panel' => array(
                 "type"                => "sed_image" ,
                 "label"               => __("Select Image", "site-editor"),
                 "panel_type"          => "default" ,
-                'parent_id'           => 'text_icon_settings_panel' 
+                'parent_id'           => 'text_icon_settings_panel_outer' ,                 
+                "panel_dependency"  => array(
+                    'queries'  =>  array(
+                        array(
+                            "key"      =>  "skin" ,
+                            "value"    =>  array( "skin2" , "skin3" ),
+                            "compare"  =>  "IN"
+                        )
+                    )
+                ), 
             ),
 
             'image_width'  => array(

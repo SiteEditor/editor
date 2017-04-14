@@ -132,6 +132,7 @@ class PBSocialBarShortcode extends PBShortcodeClass{
 
             'font_size' => array(
                 "type"                => "font-size" , 
+                "after_field"         => "px",
                 "label"               => __("Icons Size", "site-editor"),
                 "description"         => __("This option allows you to set an arbitrary size for your icons.", "site-editor") ,
                 "category"            => 'style-editor' ,

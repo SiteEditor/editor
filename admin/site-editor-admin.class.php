@@ -184,6 +184,8 @@ class SiteEditorAdminRender{
 
     function render_scripts( $hook ){
 
+        wp_enqueue_style( "sed-admin-icon-font" , plugins_url('templates/default/css/sed-admin-icon-font.css', __FILE__ ) , array() , '1.0.0' , 'all');
+
         if( in_array( $hook , $this->_pagehooks ) ){
 
             wp_enqueue_script( "sed-admin-scripts" , plugins_url('templates/default/js/scripts.js', __FILE__ ) , array('jquery' , 'wp-color-picker') , '1.0.0' , false );

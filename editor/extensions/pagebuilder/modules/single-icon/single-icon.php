@@ -107,6 +107,7 @@ class PBSingleIconShortcode extends PBShortcodeClass{
 
             'font_size' => array(
                 "type"                => "font-size" , 
+                "after_field"         => "px",
                 "label"               => __("Font Size", "site-editor"),
                 "description"         => __("Add Font Size For Element", "site-editor") ,
                 "category"            => 'style-editor' ,

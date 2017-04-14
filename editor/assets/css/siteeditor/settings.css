@@ -311,9 +311,17 @@ input[type="rodio"]
     clear: both;
 }
 
+.pb-skins-modules {
+    margin: 15px 5px;
+}
+
 .pb-skins-modules-container li {
     display: inline-block;
+    width: 50%;
+    vertical-align: top;
+    margin: 0;
 }
+
 .pb-skins-modules-container a {
     display: block;
     margin: 5px 9px;
@@ -331,8 +339,11 @@ input[type="rodio"]
 }
 
 .pb-skins-modules-container li a img {
-    width: 100px;
+    width: 100%;
+    height: auto;
+    display: block;
 }
+
 button.change_image{
      cursor: pointer !important;
 }
