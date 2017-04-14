@@ -1,14 +1,23 @@
 <?php
 
 $tabs = array(
-    "dashboard"                 => __('Dashboard' , 'site-editor' ),
-    "general-settings"          => __('General Settings' , 'site-editor' ),
+    "dashboard"         => array(
+        "title"     =>  __('Dashboard' , 'site-editor' ),
+        "icon"      =>  "wpsedicon wpsedicon-dashboard"
+    ),
+    "general-settings"  => array(
+        "title"     =>  __('General Settings' , 'site-editor' ),
+        "icon"      =>  "wpsedicon wpsedicon-cogs"
+    ),
+    "edit_pages"        => array(
+        "title"     =>  __('Pages Edit' , 'site-editor' ),
+        "icon"      =>  "wpsedicon wpsedicon-file-text"
+    ),
     /*"favicon"                   => __('Favicon Options' , 'site-editor' ),
     "colors"                    => __( 'Colors' , 'site-editor' ) ,
     "custom_font"               => __( 'Custom Font' , 'site-editor' ) ,
     "typography"                => __( 'Typography' , 'site-editor' ) ,
     "custom_css"                => __( 'Custom css' , 'site-editor' ) ,*/
-    "edit_pages"                => __( 'Pages Edit' , 'site-editor' ) ,
     /*"theme_less_compile"        => __( 'Theme Less Compile' , 'site-editor' ) ,
     "import_export"             => __( 'import & export' , 'site-editor') ,*/
 );

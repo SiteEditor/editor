@@ -6,6 +6,7 @@
     display: inline-block;
     margin: 0;
     vertical-align: top;
+    width: 100%;
 }
 
 .module-separator.separator-skin2 .separator-inner {

@@ -1,23 +1,17 @@
 
-.navigation-wrapper {
-    text-align: initial;
-}
 
 @media only screen and (min-width: 911px) {
 
-	.navigation-wrapper .navbar-wrap {
-	    font-size: 0;
-	}
-
 	.navigation-wrapper .navbar-wrap-inner {
 	    display: inline-block;
-	    
+	    margin: 0;
+	    vertical-align: top; 
 	} 
 
 }		
 
 .navigation-wrapper .navbar-wrap-inner {
-    font-size: 13px;
+    text-align: initial;
 }
   
 .navigation-wrapper .navbar-wrap {  
@@ -69,6 +63,11 @@
 
 .rtl .navigation-wrapper .navbar-wrap ul li a {
 	margin: 0 0 0 30px;
+}
+
+.rtl .navigation-wrapper .navbar-wrap .navbar-wrap-inner ul li:last-child a,
+.navigation-wrapper .navbar-wrap .navbar-wrap-inner ul li:last-child a {
+	margin: 0
 }
 
 .navigation-wrapper .navbar-wrap ul li a:hover {

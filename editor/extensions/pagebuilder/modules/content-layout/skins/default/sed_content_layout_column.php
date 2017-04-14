@@ -1,3 +1,12 @@
+<?php
+$counter = 0;
+
+if($length == "boxed")
+    $length_class = "sed-row-boxed";
+else
+    $length_class = "sed-row-wide";
+
+?>
 <td class="sed-column-pb <?php echo $class;?>" <?php echo $sed_attrs; ?>" sed-role="column-pb">
 <?php
     if( $sed_main_content == "no" ) {

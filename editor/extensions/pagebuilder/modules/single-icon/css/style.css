@@ -9,7 +9,10 @@
     color: #ccc;
     -webkit-transition: all .35s ease;
     -o-transition: all .35s ease;
-    transition: all .35s ease
+    transition: all .35s ease;    
+    display: inline-block;
+    vertical-align: top;
+    margin: 0
 }
 
 .single-icon-default .hi-icon {

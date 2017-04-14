@@ -36,7 +36,7 @@
     display: block;
 }
 
-.module-separator.separator-skin-default {
+.module-separator.separator-skin-default .spr-horizontal {
     display: inline-block;
     margin: 0;
     vertical-align: top;

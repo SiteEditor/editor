@@ -15,7 +15,7 @@ if ( isset( $massage ) && $massage != "" ):?>
 ?>
 
     <div id="sed_admin_settings_head">
-        <H1><?php _e('Welcome to SiteEditor' , 'site-editor')?></H1>
+        <H1><i class="wpsedicon wpsedicon-logo"></i><?php _e('SiteEditor Settings' , 'site-editor')?></H1>
     </div>
 
     <form method="post">

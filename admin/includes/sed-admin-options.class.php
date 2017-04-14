@@ -175,8 +175,10 @@ class SED_Admin_Options{
 
 	function show(){
 		$item_tabs = array();
-		foreach ( $this->tabs as $id => $title) {
-			$item_tabs[] = sprintf('<li><a href="#%1$s">%2$s</a></li>' , $id , $title ) ;
+		foreach ( $this->tabs as $id => $props) {
+			$title = $props['title'];
+			$icon = $props['icon'];
+			$item_tabs[] = sprintf('<li><a href="#%1$s"><i class="%2$s"></i>%3$s</a></li>' , $id , $icon ,  $title ) ;
 
 			$items = isset( $this->items[$id] ) ? $this->items[$id] : array();
 
