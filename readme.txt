@@ -1,233 +1,203 @@
-=== WooCommerce ===
-Contributors: automattic, mikejolley, jameskoster, claudiosanches, jshreve, coderkevin, woothemes, BFTrick
-Tags: ecommerce, e-commerce, store, sales, sell, shop, cart, checkout, downloadable, downloads, paypal, storefront
-Requires at least: 4.4
-Tested up to: 4.5
-Stable tag: 2.6.1
-License: GPLv3
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
+=== Site Editor - WordPress Site Builder ===
+Contributors: siteeditor
+Tags: site editor, site builder, page builder, theme builder, theme framework, design, inline editor, inline text editor, layout builder,live options, live, customizer, theme customizer, header builder, footer builder, fully customizable, design options,design editor, options framework, front end, page builder plugin, builder, responsive, front end editor, landing page, editor, drag-and-drop, shortcode, wordpress, ultra flexible, unlimited tools, elements, modules, support, seo, animation, absolute flexibility, live theme options, video backgrounds, font awesome, Optimized, fast, quick, ux, ui 
+Requires at least: 4.7
+Tested up to: 4.7.3
+Stable tag: 1.0.0
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WooCommerce is a powerful, extendable eCommerce plugin that helps you sell anything. Beautifully.
+The best solution for build your Wordpress site with The best drag and drop WordPress Site, theme and Page Builder.Any theme, any page, any design.
 
 == Description ==
 
-WooCommerce is a free eCommerce plugin that allows you to sell anything, beautifully. Built to integrate seamlessly with WordPress, WooCommerce is the world’s favorite eCommerce solution that gives both store owners and developers complete control.
+**What is the Site Editor?**
 
-With endless flexibility and access to hundreds of free and premium WordPress extensions, WooCommerce now powers 30% of all online stores -- more than any other platform.
+Site Editor is the most powerful Site Builder which is designed for WordPress. it's a powerful, advanced, user-friendly front end editor and you can build your website via drag and drop and full live options.
+too Site Editor is a powerful front end platform for developer.
 
-[youtube https://www.youtube.com/watch?v=1KahlicghaE]
+**Why Site Editor?**
 
-= Sell anything, anywhere =
-With WooCommerce, you can sell both physical and digital goods in all shapes and sizes, offer product variations, multiple configurations, and instant downloads to shoppers, and even sell affiliate goods from online marketplaces.
+Because you can build your website in more efficient, more flexible and much Faster.
 
-With premium extensions, you can offer bookings, memberships, and recurring subscriptions. Perhaps you’d like to sell monthly subscriptions for physical goods, or offer your members a discount on digital downloads? It’s all possible.
+**User-End Friendly**
 
-= Ship wherever you like =
-Offer free shipping, flat rate shipping, or make real-time calculations. Limit your shipments to specific countries, or open your store up to the world. Shipping is highly configurable, and WooCommerce even supports drop shipping.
+**Developer Friendly**
 
-= Extensive payment options =
-WooCommerce comes bundled with the ability to accept major credit cards, PayPal, BACS (bank transfers), and cash on delivery. Need additional options? More than 140 region-specific gateways integrate with WooCommerce, including popular choices like Stripe, Authorize.Net, and Amazon Payments.
+**Layout Builder**
 
-= You control it all -- forever =
-WooCommerce gives you complete control of your store, from taxes to stock levels to customer accounts. Add and remove extensions, change your design, and switch settings as you please. It’s all under your control.
+Site Editor is help you build your custom layout for set of pages like single posts or portfolio pages or set of custom pages.( Like WordPress page templates and post type templates feature but our feature is full visual and don't need to any coding knowledge )
 
-One of the biggest risks of using a hosted eCommerce platform is what happens to your store if the provider closes up shop. With WooCommerce, you have complete control, so there’s never any reason to worry. Your data belongs to you -- and it’s kept secure, thanks to regular audits by industry leaders.
+**Theme Builder and Theme Customizer**
 
-= Define your style with Storefront =
+Site Editor is header builder, it allow to you create your custom header and apply to all pages or set of pages.too it's footer builder.
 
-[Storefront](https://wordpress.org/themes/storefront/) is a free WordPress theme available to any WooCommerce store. Along with deep WooCommerce integration, Storefront prioritizes speed and uptime while eliminating theme and plugin conflicts during major updates.
+**Page Builder**
 
-Define your style even further by customizing Storefront to your liking or choosing from one of our several [Storefront child themes](https://www.woothemes.com/product-category/themes/storefront-child-theme-themes/). It’s all up to you, and all open source.
+**Options Framework and Fully Live Options**
 
-= Built with developers in mind =
+**Inline Text Editor**
 
-Extendable, adaptable, and open source -- WooCommerce was created with developers in mind. With its strong, robust framework, you can scale your client’s store all the way from basic to high-end (infinity and beyond).
+**Awesome Design Options and Fully Live**
 
-Built with a REST API, WooCommerce can integrate with virtually any service. Your store’s data can be accessed anywhere, anytime, 100% securely. WooCommerce allows developers to easily create, modify, and grow a store that meets their specifications.
+**Developer API**
 
-No matter the size of the store you want to build, WooCommerce will scale to meet your requirements. With a growing collection of more than 300 extensions, you can enhance each store’s features to meet your client’s unique needs -- or even create your own solution.
+**BE A CONTRIBUTOR**
 
-If security is a concern, rest easy. WooCommerce is audited by a dedicated team of developers working around the clock to identify and patch any and all discovered bugs.
+If you want to contribute, go to our [SiteEditor GitHub Repository](https://github.com/SiteEditor/editor) and see where you can help.
 
-We also support WooCommerce and all its extensions with comprehensive, easily-accessible documentation. With our docs, you’ll learn how to create the exact site your client needs.
+You can also add a new language via translate.wordpress.org.
 
-= Extensions galore =
 
-WordPress.org is home to some amazing extensions for WooCommerce, including:
 
-- [Google Analytics](https://wordpress.org/plugins/woocommerce-google-analytics-integration/)
-- [Delivery Notes](https://wordpress.org/plugins/woocommerce-delivery-notes/)
-- [PDF Invoices and Packing Slips](https://wordpress.org/plugins/woocommerce-pdf-invoices-packing-slips/)
-- [Affiliates Integration Light](https://wordpress.org/plugins/affiliates-woocommerce-light/)
-- [New Product Badges](https://wordpress.org/plugins/woocommerce-new-product-badge/)
 
-Keen to see them all? Search WordPress.org for ‘WooCommerce’ to dive in.
+By using this Plugin, you can automatically convert your menu(s) to a modern and attractive hamburger shaped menu. 
+This Plugin allows you to add an interesting responsive mobile navigation menu to your website which is similar 
+to popular and native menus of Mobile Applications. You can completely customize the styles and other settings 
+of your menus using theme editor and easily build attractive, professional and special menus. Indeed, 
+the StarsMenu Plugin is a Menu Builder for WordPress which allows to build any layout for your menu by 
+Drag and Drop function.
 
-If you’re looking for something endorsed and maintained by the developers who built WooCommerce, there are a plethora of premium eCommerce extensions, the most popular of which include:
+https://www.youtube.com/watch?v=8Q3ReE9xr0U
 
-- [WooCommerce Subscriptions](https://www.woothemes.com/products/woocommerce-subscriptions/)
-- [WooCommerce Memberships](https://www.woothemes.com/products/woocommerce-memberships/)
-- [WooCommerce Bookings](https://www.woothemes.com/products/woocommerce-bookings/)
-- [Dynamic Pricing](https://www.woothemes.com/products/dynamic-pricing/)
-- [Table Rate Shipping](https://www.woothemes.com/products/table-rate-shipping/)
-- [Product CSV Import Suite](https://www.woothemes.com/products/product-csv-import-suite/)
+**How to compatible your theme with Stars menu?**: Go to **https://www.stars-menu.com/documentation/residual-styling/**
 
-And there’s plenty more where they came from. Visit our [extensions page](https://www.woothemes.com/product-category/woocommerce-extensions/) to find out everything you’re capable of and all that's possible with premium WooCommerce extensions.
+Documentation: **https://www.stars-menu.com/documentation/**
 
-= Join our growing community =
+Demo: **https://www.stars-menu.com**
 
-When you download WooCommerce, you join a community of more than a million store owners, developers, and WordPress enthusiasts. We’re one of the fastest-growing open source communities online, and whether you’re a n00b or a Ninja, we’d love to have you!
+Youtube channel link: **https://www.youtube.com/channel/UCTDBFh8yXEv-ljqPuF9TDBA**
 
-If you’re interested in contributing to WooCommerce we’ve got more than 350 contributors, and there’s always room for more. Head over to the [WooCommerce GitHub Repository](https://github.com/woothemes/woocommerce) to find out how you can pitch in.
+Support Link: **https://www.stars-menu.com/support/**
 
-Want to add a new language to WooCommerce? Swell! You can contribute via [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/woocommerce).
+Website Link: **https://www.stars-menu.com**
 
-And, finally, consider joining or spearheading a WooCommerce Meetup locally, more about those [here](https://www.woothemes.com/woocommerce/meetups/).
+###Features:
 
-== Installation ==
+* Merges with WordPress Menu Management System. You’ll be familiar with it.
+* Add an Awesome Mobile Menu to your site
+* Drag and drop menu layout builder
+* Menu Logo support
+* Supports multiple menus each with their own configuration
+* Create Normal Horizontal Menus and Hamburger Menus
+* Display WordPress Widgets & shortcodes in your menu
+* Quick and Easy UI
+* Advanced Layouts and Positions for Images and Icons
+* Hover or Click event to open sub menus
+* Works with your existing theme
+* Add icons and images to menu items
+* Customize colors, fonts, animation, layout, look and so much more
+* Menu item options including Hide Text, Disable Link, Hide on Mobile etc
+* Hide items for different screen sizes
+* Choose mobile responsive breaking point
+* ability to determine the height of the horizontal part of mobile menu
+* The opening capability of mobile menu sub-menus on left or right side
+* The capability of customization of mobile menu’s styles.
+* Automatic integration with one click for themes that meet the requirements
+* Manual integration code generated in the Control Panel for themes that do not support automatic integration
+* Includes a Stars Menu widget to place Stars Menus in your theme’s widgetized areas
+* Stars Menu Shortcode allows placement within site content (generator included)
+* More than 650 Google fonts available.
+* Works on every platform, including, mobile, pc and tablet.
+* Support Shift Nav for Inner Submenus
+* Smooth scroll to anchored element
+* Customize menu items
+* Allow Shortcodes in Navigation Labels & Descriptions
+* Supported RTL
+* Clean code with a low memory footprint
+* Basic Support
+* In depth documentation
+* Easy to search settings
+* Built in CSS3 transitions
+* submenus positions
 
-= Minimum Requirements =
+And Much More!
 
-* WordPress 3.8 or greater
-* PHP version 5.2.4 or greater
-* MySQL version 5.0 or greater
-* Some payment gateways require fsockopen support (for IPN access)
+####Pro Features:
 
-= Automatic installation =
+> * Sticky Menu
+> * WooCommerce Cart Icon Element
+> * Search Element
+> * Social Bar Element & social items
+> * add Multiple Sub Navigation to menu bar
+> * Manage Icons Sets ( Upload Custom icons set , delete sets , ... )
+> * 14 different hamburger bar animation
+> * 14 different hamburger background animation
+> * 17 different hamburger Icon animation
+> * Set Color, size and Position of hamburger Icon
+> * Separate logo for hamburger bar
+> * Submenus Transitions
+> * Top Level Hover Effects
+> * Custom Item Styling
+> * Automatically inherit featured images
+> * Mobile Logo
+> * The opening capability of the mobile menu’s vertical part on left or right side
+> * Overlay Background Color
+> * Background Image settings
+> * Automatic updates
+> * Priority Support
+>
+> Find out more: https://www.stars-menu.com
 
-Automatic installation is the easiest option as WordPress handles the file transfers itself and you don’t need to leave your web browser. To do an automatic install of WooCommerce, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
-
-In the search field type “WooCommerce” and click Search Plugins. Once you’ve found our eCommerce plugin you can view details about it such as the point release, rating and description. Most importantly of course, you can install it by simply clicking “Install Now”.
-
-= Manual installation =
-
-The manual installation method involves downloading our eCommerce plugin and uploading it to your webserver via your favourite FTP application. The WordPress codex contains [instructions on how to do this here](https://codex.wordpress.org/Managing_Plugins#Manual_Plugin_Installation).
-
-= Updating =
-
-Automatic updates should work like a charm; as always though, ensure you backup your site just in case.
-
-If on the off-chance you do encounter issues with the shop/category pages after an update you simply need to flush the permalinks by going to WordPress > Settings > Permalinks and hitting 'save'. That should return things to normal.
-
-= Dummy data =
-
-WooCommerce comes with some dummy data you can use to see how products look; either import dummy_data.xml via the [WordPress importer](https://wordpress.org/extend/plugins/wordpress-importer/) or use our [CSV Import Suite plugin](https://www.woothemes.com/products/product-csv-import-suite/) to import dummy_data.csv and dummy_data_variations.csv.
+And Much More!
 
 == Frequently Asked Questions ==
 
-= Where can I find WooCommerce documentation and user guides? =
+Troubleshooting:
 
-For help setting up and configuring WooCommerce please refer to our [user guide](https://docs.woothemes.com/documentation/plugins/woocommerce/getting-started/)
+https://www.stars-menu.com/documentation/faq/
 
-For extending or theming WooCommerce, see our [codex](https://docs.woothemes.com/documentation/plugins/woocommerce/woocommerce-codex/).
+Getting started:
 
-= Where can I get support or talk to other users? =
+https://www.stars-menu.com/documentation/plugin-installation/
 
-If you get stuck, you can ask for help in the [WooCommerce Plugin Forum](https://wordpress.org/support/plugin/woocommerce).
+Not working with your theme? Mobile menu not working? Multiple mobile menu toggle icons?
 
-For help with premium add-ons from WooThemes, use [our helpdesk](https://support.woothemes.com/).
+https://www.stars-menu.com/documentation/residual-styling/
 
-= Will WooCommerce work with my theme? =
+== Installation ==
 
-Yes; WooCommerce will work with any theme, but may require some styling to make it match nicely. Please see our [codex](https://docs.woothemes.com/documentation/plugins/woocommerce/woocommerce-codex/) for help. If you're looking for a theme with built in WooCommerce integration we recommend [Storefront](https://www.woothemes.com/storefront/).
+1. Go to the Plugins Menu in WordPress
+1. Search for "Stars Menu"
+1. Click "Install"
 
-= Where can I request new features, eCommerce themes and extensions? =
-
-You can vote on and request new features and extensions in our [WooIdeas board](http://ideas.woothemes.com/forums/133476-woocommerce)
-
-= Where can I report bugs or contribute to the project? =
-
-Bugs can be reported either in our support forum or preferably on the [WooCommerce GitHub repository](https://github.com/woothemes/woocommerce/issues).
-
-= Where can I find the REST API documentation? =
-
-You can find the documentation of our REST API on the [WooCommerce REST API Docs](https://woothemes.github.io/woocommerce-rest-api-docs/).
-
-= WooCommerce is awesome! Can I contribute? =
-
-Yes you can! Join in on our [GitHub repository](http://github.com/woothemes/woocommerce/) :)
+https://www.stars-menu.com/documentation/plugin-installation/
 
 == Screenshots ==
 
-1. The slick WooCommerce settings panel.
-2. WooCommerce products admin.
-3. Product data panel.
-4. WooCommerce sales reports.
-5. A single product page.
-6. A product archive (grid).
+See https://www.stars-menu.com/ for more screenshots
+
+1. The Modern & Powerful Responsive WordPress Plugin
+2. Featured Demos
+3. Menu Designer - Drag & Drop Menu Builder
+4. Responsive Mobile Menu
+5. Unlimited Custom Skins
+6. Smooth Animations - PRO
+7. Custom Content & Widgets
+8. Hamburger Options
+9. Sticky Menu - Pro
+10. Enabling Stars Menu
+11. Menu Item Settings Panel Fullscreen
+12. Stars Menu Themes
+13. menu theme editor settings
 
 == Changelog ==
 
-= 2.6.1 - 16/06/16 =
-* Fix - Added missing localized format for line taxes in orders screen to prevent total miscalculation in manual orders.
-* Fix - Improved the hour and time fields validation pattern on the orders screen.
-* Fix - PayPal does not allow free products, but paid shipping. Workaround by sending shipping as a line item if it is the only cost.
-* Fix - SKUs prop on products shortcode.
-* Fix - Layered nav counts when term_id does not match term_taxonomy_id (before splitting).
-* Fix - Fixed referer links from cart messages in WP 4.4.
-* Fix - Fix the showing/hiding of panels when terms do not exist by using wc_get_product_types() for retrieving product types.
-* Dev - content-product.php and content-product_cat.php contained the wrong version.
-* Dev - Show "matching zone" notice on the frontend when shipping debug mode is on.
-* Dev - Restored missing WC_Settings_API::init_form_fields() method to prevent potential errors in 3rd party gateways.
-* Dev - API - Fixed returned data from product images (changed `title` to `name`).
-* Dev - API - Fixed products schema for `grouped_products`.
-* Dev - API - Fixed products attribute options when contains `,`.
-* Tweak - Hide 'payment methods' screen if no methods support it.
-* Tweak - If shipping method count changes, reset to default.
-* Tweak - Avoid normalization of zone postcodes so wildcard matching can be performed on postcodes with spaces. E.g. SP1 *
-* Tweak - Allow max_fee in addition to min_fee in flat rate costs fields.
-* Tweak - Wrap order_schema_markup() output in hidden div in case script tag is stripped.
+= 1.0.1 =
 
-= 2.6.0 - 14/06/16 =
-* Feature - Introduced Shipping Zone functionality, and re-usable instance based shipping methods.
-* Feature - Tabbed "My Account" area.
-* Feature - Cart operations now use ajax (item quantities/remove, coupon apply/remove, shipping options).
-* Feature - Layered nav; filter by rating.
-* Feature - On-hold order emails.
-* Dev - All new REST API based on the WP REST API. The old WC REST API is still available, but the new one is preferred.
-* Dev - Added ability for shipping methods to store meta data to the order.
-* Dev - Added Payment Gateway Tokenization API for storing and retrieving tokens in a standardized manner.
-* Dev - Migrated custom term meta implementation to WP Term Meta.
-* Dev - Added new wc_get_orders() function to get order objects and ids instead of direct get_posts() calls.
-* Dev - Made coupon optional in cart has_discount() method.
-* Dev - Made the review template more editable.
-* Dev - Allowed product constructors to throw exceptions if invalid.
-* Dev - Wrapped currency symbols in a span to allow styling or replacement.
-* Fix - Update download permission user and email when changed.
-* Fix - Fixed shipping method unregistration.
-* Fix - Stopped create and update webhooks firing at the same time for products.
-* Fix - Allow COD to set on-hold status if the order contains downloads.
-* Fix - Force CURL to use TLS 1.2 for PayPal connections.
-* Tweak - Improved lost password flow.
-* Tweak - Show payment dates on order screen.
-* Tweak - Ignore catalog visibility on products shortcode when specifying IDs or SKUs.
-* Tweak - Added context to checkout error messages.
-* Tweak - Added SKU field to grouped products.
-* Tweak - Moved SKU field to inventory tab.
-* Tweak - Support qty display in cart messages.
-* Tweak - Hide min order amount field when not needed in shipping settings.
-* Tweak - If shipping < 999.99, use 'shipping' arg when passing values to PayPal.
-* Tweak - Show net sales on dashboard.
-* Tweak - Replaced credit card icons with SVG.
-* Tweak - Enqueue scripts on pages with checkout shortcodes.
-* Tweak - Color code the manual, system and customer notes.
-* Tweak - Layered Nav Refactoring to improve performance.
-* Tweak - Removed tag/cat classes from loops since WP does the same.
-* Tweak - Added hash check for orders so that if the cart changes before payment, a new order is made.
-* Tweak - Removed unused 'view mode' under screen options.
-* Tweak - Added 110 new currencies (including Bitcoin).
-* Tweak - New background updater for data upgrades.
-* Tweak - Blank slates in admin post screens.
-* Tweak - Added blockui when variations are being retrieved via ajax.
-* Tweak - Hide empty taxes by default (filterable).
-* Tweak - Allow failed orders to be edited.
-* Tweak - If there are no shipping methods setup, don’t prompt for shipping at checkout.
-* Tweak - Allowed country exclusion, rather than just inclusion, in ‘sell to’ setting.
-* Lots, lots more - [see the comparison here](https://github.com/woothemes/woocommerce/compare/2.5.5...2.6.0).
+* Fix Bug: Switch Unused Theme Locations For Enabling Start Menu
+* Upgrade to pro version is ready
+* Improve Animations
 
-[See changelog for all versions](https://raw.githubusercontent.com/woothemes/woocommerce/master/CHANGELOG.txt).
+= 1.0 =
+
+* Initial version
 
 == Upgrade Notice ==
 
-= 2.6 =
-2.6 is a major update. It is important that you make backups and ensure themes and extensions are 2.6 compatible before upgrading, in particular shipping method extensions (e.g. Table Rate Shipping) since 2.6 introduces Shipping Zone functionality. [Read more here](https://woocommerce.wordpress.com/2016/06/14/say-hello-to-woocommerce-2-6-zipping-zebra/).
+== Resources ==
+* simple line icon © October 21, 2013-2017 , Big thanks to Jamal Jama, http://graphicburger.com/simple-line-icons-webfont, GPL
+* Arrow Icon Set © 2013-2017 tanks freepik ,http://www.freepik.com/,http://www.flaticon.com/packs/arrow-icon-set, Flaticon Basic License
+* Elegant Font © 2013-2017 tanks elegant ,http://www.flaticon.com/packs/elegant-font, CC 3.0 BY
+* Solid Social Media Logos © 2013-2017 tanks freepik ,http://www.freepik.com/,http://www.flaticon.com/packs/solid-social-media-logos, Flaticon Basic License
+* some codes & descriptions © 2013-2017 , Big thanks to Tom Hemsley, https://wordpress.org/plugins/megamenu/,https://wordpress.org/plugins/megamenu/, GPL
