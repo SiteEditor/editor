@@ -121,7 +121,7 @@ can set of responsive options for each module and see the changes in our mobile 
 create amazing responsive design for your site.
 
 
-###Features:
+# Features:
 
 * Powerful front end page builder
 * Powerful front end theme builder & customizer
