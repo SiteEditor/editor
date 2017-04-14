@@ -5,7 +5,7 @@ Plugin URI: http://www.siteeditor.org/
 Description: SiteEditor is a powerful theme builder & page builder for wordpress
 Author: Site Editor Team
 Author URI: http://www.siteeditor.org/products/site-editor
-Version: 0.9.0
+Version: 1.0.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,7 +24,7 @@ final Class SiteEditor {
      *
      * @var string
      */
-    public $version = '0.9.0';
+    public $version = '1.0.0';
 
     /**
      * SiteEditor version type

@@ -4,8 +4,8 @@ Tags: site editor, site builder, page builder, theme builder, theme framework, d
 Requires at least: 4.7
 Tested up to: 4.7.3
 Stable tag: 1.0.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 The best solution for build your Wordpress site with The best drag and drop WordPress Site, theme and Page Builder.Any theme, any page, any design.
 
@@ -14,15 +14,21 @@ The best solution for build your Wordpress site with The best drag and drop Word
 **What is the Site Editor?**
 
 Site Editor is the most powerful Site Builder which is designed for WordPress. it's a powerful, advanced, user-friendly front end editor and you can build your website via drag and drop and full live options.
-too Site Editor is a powerful front end platform for developer.
+too Site Editor is a powerful front-end platform for the developer.
 
 **Why Site Editor?**
 
-Because you can build your website in more efficient, more flexible and much Faster.
+Because you can build your website in more efficient, more flexible and much Faster. Site Editor allows you build all of your website's parts like pages, theme, ... in a integrate front end editor easy and fast.
 
 **User-End Friendly**
 
+If you aren't a developer and you want to create an amazing and beautiful website, Site Editor is the best tools for it.you can build footer, header and other public theme rows with
+drag and drop and apply them to all pages or spcify pages. you can build all pages and posts with drag and drop too.
+Actually you don't need **CODING KNOWLEDGE** for create your website.
+
 **Developer Friendly**
+
+If you are a developer, you can develop your themes and plugins with our front end platform faster and easier and its result will be very user-friendly extensions and happier clients for you
 
 **Layout Builder**
 
@@ -30,114 +36,143 @@ Site Editor is help you build your custom layout for set of pages like single po
 
 **Theme Builder and Theme Customizer**
 
-Site Editor is header builder, it allow to you create your custom header and apply to all pages or set of pages.too it's footer builder.
+Site Editor is header builder, it allows to you create your custom header and apply to all pages or set of pages. it's footer builder too and you can your custom page titles And addition you can create any custom public rows for theme area and apply them to all pages or specify pages. Actually, you can completely your theme in our front end editor. this feature is The most exclusive our feature and there isn't on other WordPress plugins. this feature introduced for the first time by Site Editor
 
 **Page Builder**
 
+You can create all of website's pages content like content of pages, posts and custom post types with Site Editor. for it you need drag and drop modules to your content of pages easily and edit the module settings and simultaneously see exactly how it looks like. With Site Editor you can create content of pages very easy, fast and truly live.
+
+
 **Options Framework and Fully Live Options**
+
+See changes as you make them in a live environment(Front End Editor) and after change each option you can see changes on your page and no more need to switch between admin panel and site to see the changes. Our Options Framework have +30 type of option, these include :
+
+* text
+* tel
+* password
+* search
+* url
+* email
+* dimension
+* date
+* textarea
+* checkbox
+* multi-check
+* toggle
+* switch
+* code
+* wp-editor
+* color
+* multi-color
+* radio
+* radio-buttonset
+* radio-image
+* select
+* multi-select
+* number
+* slider
+* icon
+* multi-icon
+* image
+* multi-image
+* file
+* audio
+* video
+
+And etc.
 
 **Inline Text Editor**
 
-**Awesome Design Options and Fully Live**
+You can edit all texts on the pages easily with our inline text editor. This includes all the texts in titles, paragraphs, buttons, tables, pricing tables and even slide show texts. You can even edit all your posts and page contents and even theme texts with this powerful inline text editor.
+
+**Design Options and Fully Live**
+
+You can easily edit the styles of all elements, theme modules and pages visually and live without any prior coding knowledge. You can give life to your imagination and implement any sophisticated and professional layout in the visual editor and see the changes live as you make them.
 
 **Developer API**
+
+If you are a **Theme Developer**, you can build your themes with Site Editor very easy & fast. you can add all your theme options with front end options framework and you can add your modules for page builder and sync our modules with your design too.
+If you are a **Plugin Developer**, you can build your Plugins in our front end editor with front end options framework.
+
+We have a sample module for developers guide that for find it go to **"Site Editor Plugin Folder/editor/extensions/pagebuilder/modules/api-test-module"**
+you can test in module in our editor. it's active by default
+
+Too We have a sample options file for developers guide( you can using for theme options and plugin options in front end editor mode ) that for find it go to **"Site Editor Plugin Folder/editor/extensions/options-engine/includes/demo/site-editor-sample-options.php"**
+**Notic 1:** for test this options in our editor you can need active it on WordPress Admin > SiteEditor > General Settings > Developer Sample Options.
+**Notic 2:** Our Developer API documentation coming soon!
+
 
 **BE A CONTRIBUTOR**
 
 If you want to contribute, go to our [SiteEditor GitHub Repository](https://github.com/SiteEditor/editor) and see where you can help.
 
-You can also add a new language via translate.wordpress.org.
+You can also add a new language via [translate.wordpress.org](https://translate.wordpress.org).
 
+**IT WORKS WITH ANY THEMES.**
 
+You’re free to change themes as often as you like, Site Editor will work with them.
 
+**100% MOBILE FRIENDLY**
 
-By using this Plugin, you can automatically convert your menu(s) to a modern and attractive hamburger shaped menu. 
-This Plugin allows you to add an interesting responsive mobile navigation menu to your website which is similar 
-to popular and native menus of Mobile Applications. You can completely customize the styles and other settings 
-of your menus using theme editor and easily build attractive, professional and special menus. Indeed, 
-the StarsMenu Plugin is a Menu Builder for WordPress which allows to build any layout for your menu by 
-Drag and Drop function.
+Every part of a Site Editor like modules, skins, ... are well adjusted based on the size of the screen and you
+can set of responsive options for each module and see the changes in our mobile editor preview. Site Editor allow you
+create amazing responsive design for your site.
 
-https://www.youtube.com/watch?v=8Q3ReE9xr0U
-
-**How to compatible your theme with Stars menu?**: Go to **https://www.stars-menu.com/documentation/residual-styling/**
-
-Documentation: **https://www.stars-menu.com/documentation/**
-
-Demo: **https://www.stars-menu.com**
-
-Youtube channel link: **https://www.youtube.com/channel/UCTDBFh8yXEv-ljqPuF9TDBA**
-
-Support Link: **https://www.stars-menu.com/support/**
-
-Website Link: **https://www.stars-menu.com**
 
 ###Features:
 
-* Merges with WordPress Menu Management System. You’ll be familiar with it.
-* Add an Awesome Mobile Menu to your site
-* Drag and drop menu layout builder
-* Menu Logo support
-* Supports multiple menus each with their own configuration
-* Create Normal Horizontal Menus and Hamburger Menus
-* Display WordPress Widgets & shortcodes in your menu
+* Powerful front end page builder
+* Powerful front end theme builder & customizer
+* Powerful front end layout builder
+* Powerful front end Header builder
+* Powerful front end Footer builder
+* Powerful front end options framework
+* Create Beautiful Page Title
+* You can create any type of websites easily
+* Fully Drag and drop
+* Full live theme and options
+* Full live modules options
+* Powerful front end  Inline Text Editor
+* Powerful Design options
+* Fully customizable, Very Flexible, Unlimited Tools
+* Fully responsive & mobile friendly
+* Easy To Use
+* Powerful and flexible Modules
+* Resize Columns Ability
+* Faster Than Others
+* NO CODING KNOWLEDGE NECESSARY
+* Flexible Modules
+* Build With SEO Standards
+* You Can Create Any Layouts To Build Any Types Of Websites
+* Customize All Parts Of The Themes Visually
+* Resize ability on all modules and sections of a page
+* Duplicate Modules
+* You can fully sync Site Editor Modules with your theme design
+* you can save your customized rows and modules as a preset and use on the future
+* Integrate with font awesome and you can add your custom fonts icons too.
 * Quick and Easy UI
-* Advanced Layouts and Positions for Images and Icons
-* Hover or Click event to open sub menus
+* Use parallax images and backgrounds
+* Upload Custom Fonts
+* Support Video backgrounds
+* Drag & Drop widget Area and sidebar anywhere
 * Works with your existing theme
-* Add icons and images to menu items
-* Customize colors, fonts, animation, layout, look and so much more
-* Menu item options including Hide Text, Disable Link, Hide on Mobile etc
-* Hide items for different screen sizes
-* Choose mobile responsive breaking point
-* ability to determine the height of the horizontal part of mobile menu
-* The opening capability of mobile menu sub-menus on left or right side
-* The capability of customization of mobile menu’s styles.
-* Automatic integration with one click for themes that meet the requirements
-* Manual integration code generated in the Control Panel for themes that do not support automatic integration
-* Includes a Stars Menu widget to place Stars Menus in your theme’s widgetized areas
-* Stars Menu Shortcode allows placement within site content (generator included)
 * More than 650 Google fonts available.
 * Works on every platform, including, mobile, pc and tablet.
-* Support Shift Nav for Inner Submenus
 * Smooth scroll to anchored element
-* Customize menu items
-* Allow Shortcodes in Navigation Labels & Descriptions
 * Supported RTL
 * Clean code with a low memory footprint
 * Basic Support
-* In depth documentation
-* Easy to search settings
-* Built in CSS3 transitions
-* submenus positions
-
-And Much More!
-
-####Pro Features:
-
-> * Sticky Menu
-> * WooCommerce Cart Icon Element
-> * Search Element
-> * Social Bar Element & social items
-> * add Multiple Sub Navigation to menu bar
-> * Manage Icons Sets ( Upload Custom icons set , delete sets , ... )
-> * 14 different hamburger bar animation
-> * 14 different hamburger background animation
-> * 17 different hamburger Icon animation
-> * Set Color, size and Position of hamburger Icon
-> * Separate logo for hamburger bar
-> * Submenus Transitions
-> * Top Level Hover Effects
-> * Custom Item Styling
-> * Automatically inherit featured images
-> * Mobile Logo
-> * The opening capability of the mobile menu’s vertical part on left or right side
-> * Overlay Background Color
-> * Background Image settings
-> * Automatic updates
-> * Priority Support
->
-> Find out more: https://www.stars-menu.com
+* Support css3 Animations
+* Create Fully Animated Pages
+* Retina Ready
+* Support custom row width && padding
+* Optimized For Speed
+* Developer API and Sample
+* Custom Css
+* add custom Tracking Code
+* add custom code before </head>
+* add custom code before </body>
+* create one page parallax easily
 
 And Much More!
 
@@ -145,59 +180,49 @@ And Much More!
 
 Troubleshooting:
 
-https://www.stars-menu.com/documentation/faq/
-
-Getting started:
-
-https://www.stars-menu.com/documentation/plugin-installation/
-
-Not working with your theme? Mobile menu not working? Multiple mobile menu toggle icons?
-
-https://www.stars-menu.com/documentation/residual-styling/
+**https://wordpress.org/support/plugin/site-editor**
 
 == Installation ==
 
 1. Go to the Plugins Menu in WordPress
-1. Search for "Stars Menu"
+1. Search for "Site Editor"
 1. Click "Install"
-
-https://www.stars-menu.com/documentation/plugin-installation/
 
 == Screenshots ==
 
-See https://www.stars-menu.com/ for more screenshots
-
-1. The Modern & Powerful Responsive WordPress Plugin
-2. Featured Demos
-3. Menu Designer - Drag & Drop Menu Builder
-4. Responsive Mobile Menu
-5. Unlimited Custom Skins
-6. Smooth Animations - PRO
-7. Custom Content & Widgets
-8. Hamburger Options
-9. Sticky Menu - Pro
-10. Enabling Stars Menu
-11. Menu Item Settings Panel Fullscreen
-12. Stars Menu Themes
-13. menu theme editor settings
+1. Site Editor
+2. Page Builder
+3. Theme Builder
+3. Inline Text Editor
 
 == Changelog ==
 
-= 1.0.1 =
-
-* Fix Bug: Switch Unused Theme Locations For Enabling Start Menu
-* Upgrade to pro version is ready
-* Improve Animations
-
 = 1.0 =
 
-* Initial version
+* Released: April 14, 2017
+
+Initial release
 
 == Upgrade Notice ==
 
 == Resources ==
-* simple line icon © October 21, 2013-2017 , Big thanks to Jamal Jama, http://graphicburger.com/simple-line-icons-webfont, GPL
-* Arrow Icon Set © 2013-2017 tanks freepik ,http://www.freepik.com/,http://www.flaticon.com/packs/arrow-icon-set, Flaticon Basic License
-* Elegant Font © 2013-2017 tanks elegant ,http://www.flaticon.com/packs/elegant-font, CC 3.0 BY
-* Solid Social Media Logos © 2013-2017 tanks freepik ,http://www.freepik.com/,http://www.flaticon.com/packs/solid-social-media-logos, Flaticon Basic License
-* some codes & descriptions © 2013-2017 , Big thanks to Tom Hemsley, https://wordpress.org/plugins/megamenu/,https://wordpress.org/plugins/megamenu/, GPL
+
+* Font Awesome icons, Copyright Dave Gandy
+  License: SIL Open Font License, version 1.1.
+  Source: http://fontawesome.io/
+
+* Theme Integration, Copyright pagelines
+  License: GPLv3 or later
+  Source: https://wordpress.org/plugins/pl-platform/
+
+* Customize Posts, Copyright xwp, westonruter, valendesigns
+  License: GPLv2 or later
+  Source: https://wordpress.org/plugins/customize-posts/
+
+* Options Framework, Copyright aristath, fovoc, igmoweb
+  License: GPLv2 or later
+  Source: https://wordpress.org/plugins/kirki/
+
+* Editor Base, Copyright WordPress Customizer
+  License: GPLv2 or later
+  Source: http://wordpress.org/
