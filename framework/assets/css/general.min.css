@@ -98,7 +98,7 @@ table.sed-cols-table > tbody > tr > td {
  /* text-align: center;  */
 }
 
-
+.sed-cols-table.sed-row-boxed,
 .sed-row-boxed {
     max-width: 1100px;
     margin: 0 auto;

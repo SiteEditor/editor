@@ -1,5 +1,4 @@
 <?php
-$counter = 0;
 
 /*if($length == "boxed")
     $length_class = "sed-row-boxed";

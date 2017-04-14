@@ -57,9 +57,8 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
     function get_atts(){
         $atts = array(
             'layout'                => "without-sidebar" ,
-            'responsive_option'     => 'normal-columns',
+            'length'                => 'boxed' ,
             'equal_column_width'    => false ,
-            'responsive_spacing'    =>  "",
             'content_width'         =>  "wrap-layout-fixed-width",
         );
         return $atts;
@@ -156,6 +155,12 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 'panel'    => 'content_layout_settings_panel',
             ),
 
+            /*'length'                => array(
+                "type"                  => "length" ,
+                "label"                 => __("Length", "site-editor"),
+                'panel'                 => 'content_layout_settings_panel',
+            ), 
+
             'content_width' => array(
                 "type"          => "radio-buttonset" ,
                 "label"         => __("Content Width", "site-editor"),
@@ -165,7 +170,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 ), 
                 'has_border_box'    => false ,
                 "panel"         => "content_layout_settings_panel" ,
-            ),
+            ),*/
 
             'row_container' => array(
                 'type'                => 'row_container',
@@ -187,18 +192,21 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
 
     }
 
-    function custom_style_settings(){
-        return array(                                                                      // , 'padding'
+    function custom_style_settings(){   
+        return array(                                                                     
             array(
                 'columns' , 'sed_current' ,
-                array( 'background','gradient','border','border_radius' ,'padding','margin','trancparency','shadow' ) , __("Tr Columns" , "site-editor") ) ,
+                array( 'background','gradient','border','trancparency' ) , __("Tr Columns" , "site-editor") 
+            ) ,
 
             array(
                 'column' , '>td.sed-column-pb' ,
-                array( 'background','gradient','border','border_radius' ,'padding','margin','trancparency','shadow' ) , __("Td Column" , "site-editor") ) ,
+                array( 'background','gradient' ) , __("Td Column" , "site-editor") 
+            ) ,
 
         );
     }
+
 
     function contextmenu( $context_menu ){
       $content_layout_menu = $context_menu->create_menu( "content-layout" , __("Content Layout","site-editor") , 'content-layout' , 'class' , 'element' , '' , "sed_content_layout" , array(
