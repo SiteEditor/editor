@@ -175,25 +175,6 @@ if ( ! class_exists( 'SiteEditorTextShadowControl' ) ) {
                                 </li>
                             </ul>
                           </div>
-                          <div>
-                            <ul>
-                                <li>
-                                <a class="heading-item" data-position="topLeft"  href="#"><?php echo __("Complex Shadow" ,"site-editor");  ?></a>
-                                </li>
-                                <li>
-                                 <ul class=" text-shadow">
-                                    <li class="border-box-type1"><a class="text-shadow-box <?php $this->selected('0px 0px 5px') ;?>" data-value="0px 0px 5px"  href="#"><span  class="style-text-shadow13 "><?php echo __("text shadow" ,"site-editor");  ?></span></a></li>
-                                    <li class="border-box-type2"><a class="text-shadow-box <?php $this->selected('0 0 14px') ;?>" data-value="0 0 14px"  href="#"><span  class="style-text-shadow14"><?php echo __("text shadow" ,"site-editor");  ?></span></a></li>
-                                    <li class="border-box-type1"><a class="text-shadow-box <?php $this->selected('2px 2px 5px') ;?>" data-value="2px 2px 5px"  href="#"><span  class="style-text-shadow15"><?php echo __("text shadow" ,"site-editor");  ?></span></a></li>
-                                    <li class="border-box-type2"><a class="text-shadow-box <?php $this->selected('2px -2px 5px') ;?>" data-value="2px -2px 5px"  href="#"><span  class="style-text-shadow16"><?php echo __("text shadow" ,"site-editor");  ?></span></a></li>
-                                    <li class="border-box-type1"><a class="text-shadow-box <?php $this->selected('-2px 2px 5px') ;?>" data-value="-2px 2px 5px"  href="#"><span  class="style-text-shadow17"><?php echo __("text shadow" ,"site-editor");  ?></span></a></li>
-                                    <li class="border-box-type2"><a class="text-shadow-box <?php $this->selected('-2px -2px 5px') ;?>" data-value="-2px -2px 5px"  href="#"><span  class="style-text-shadow18"><?php echo __("text shadow" ,"site-editor");  ?></span></a></li>
-                                    <li class="border-box-type3"><a class="text-shadow-box <?php $this->selected('2px 0px 5px') ;?>" data-value="2px 0px 5px"  href="#"><span  class="style-text-shadow19"><?php echo __("text shadow" ,"site-editor");  ?></span></a></li>
-                                    <li class="border-box-type4"><a class="text-shadow-box <?php $this->selected('-2px 0px 5px') ;?>" data-value="-2px 0px 5px"  href="#"><span  class="style-text-shadow20"><?php echo __("text shadow" ,"site-editor");  ?></span></a></li>
-                                 </ul>
-                                </li>
-                            </ul>
-                          </div>
                       </div>
                     </form>
                 </div>
