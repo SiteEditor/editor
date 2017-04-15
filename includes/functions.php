@@ -162,10 +162,10 @@ function get_sed_url( $sed_page_id = '' , $sed_page_type = '' , $permalink = '' 
                         $permalink = site_url("/?page_id=55555555");
                         break;
                     case "general_author" :
-                        $permalink = get_year_link('');
+                        $permalink = get_author_posts_url(get_current_user_id());
                         break;
                     case "general_date_archive" :
-                        $permalink = get_author_posts_url(get_current_user_id());
+                        $permalink = get_year_link('');
                         break;
                     case "general_index_blog_page" :
 
