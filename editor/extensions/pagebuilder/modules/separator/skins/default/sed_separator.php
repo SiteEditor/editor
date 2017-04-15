@@ -1,10 +1,8 @@
 <div <?php echo $sed_attrs; ?>  class="module module-separator separator-skin-default <?php echo $class;?>" >
 	<div class="separator <?php echo $type; ?> <?php echo $border_style;?>"></div> 
-</div>
-<?php
-	global $sed_dynamic_css_string;
-	$selector = ( site_editor_app_on() || sed_loading_module_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
-	ob_start();
+	<?php
+		$selector = ( site_editor_app_on() || sed_loading_module_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
+		ob_start();
 	?>
 
 		<?php echo $selector; ?>.module-separator .separator {
@@ -35,6 +33,9 @@
 		}  
 
 
+
 	<?php
-	$css = ob_get_clean();
-	$sed_dynamic_css_string .= $css;
+		$css = ob_get_clean();
+		sed_module_dynamic_css( $css );
+	?>
+</div>

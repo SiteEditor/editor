@@ -98,10 +98,9 @@ if(!empty($content)){?>
           <?php echo $outer_html;?>
       </div>
 <?php } ?>
-<?php
-    global $sed_dynamic_css_string;
-    $selector = ( site_editor_app_on() || sed_loading_module_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
-    ob_start();
+    <?php
+        $selector = ( site_editor_app_on() || sed_loading_module_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
+        ob_start();
     ?>
         <?php
         if($is_arrow){
@@ -137,6 +136,8 @@ if(!empty($content)){?>
         <?php
         }
         ?>
+
     <?php
-    $css = ob_get_clean();
-    $sed_dynamic_css_string .= $css;
+        $css = ob_get_clean();
+        sed_module_dynamic_css( $css );
+    ?>
