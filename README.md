@@ -187,8 +187,8 @@ Troubleshooting:
 # Installation
 
 1. Go to the Plugins Menu in WordPress
-1. Search for "Site Editor"
-1. Click "Install"
+2. Search for "Site Editor"
+3. Click "Install"
 
 # Changelog
 
