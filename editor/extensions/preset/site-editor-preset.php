@@ -14,6 +14,8 @@ Version: 1.0.0
 */
 class SiteEditorPreset{
 
+    public static $helper_shortcodes = array();
+
     public function __construct(){
 
         if( defined( 'SED_INSTALLING' ) ) {
@@ -87,8 +89,17 @@ class SiteEditorPreset{
         $content_shortcodes = json_decode( wp_unslash( $content_shortcodes ), true );
 
         global $sed_apps;
+
+        //Reset helper shortcodes
+        $sed_apps->editor->save->reset_helper_shortcodes();
+
         $tree_shortcodes = $sed_apps->editor->save->build_tree_shortcode( $content_shortcodes , $content_shortcodes[0]['parent_id'] );
+
         $content = $sed_apps->editor->save->create_shortcode_content( $tree_shortcodes , array() );
+
+        $helper_shortcodes = $sed_apps->editor->save->helper_shortcodes;
+
+        self::$helper_shortcodes = $helper_shortcodes;
 
         return $content;
     }
@@ -129,6 +140,8 @@ class SiteEditorPreset{
         $content = self::create_preset_content( $content_shortcodes );
 
         $post_id = self::create_preset( $shortcode , $title , $content , false , $menu_order );
+
+        self::set_helper_shortcodes( $post_id , self::$helper_shortcodes );
 
         if ( !$post_id || is_wp_error( $post_id ) ) {
 
@@ -302,6 +315,33 @@ class SiteEditorPreset{
     }
 
     /**
+     * Set helper shortcodes for a preset id
+     *
+     * @param $id : preset post id
+     * @param $helper_shortcodes : array
+     */
+    public static function set_helper_shortcodes( $id , $helper_shortcodes ) {
+
+        if ( $id ) {
+            if ( is_numeric( $id ) ) {
+                // user preset
+                update_post_meta( $id, '_helper_shortcodes', $helper_shortcodes );
+            }
+        }
+
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public static function get_helper_shortcodes( $id ){
+
+        return get_post_meta( $id , '_helper_shortcodes' , true );
+
+    }
+
+        /**
      * Set existing preset as default
      *
      * If this is vendor preset, clone it and set new one as default
@@ -418,8 +458,13 @@ class SiteEditorPreset{
             if ( isset( $model_changes['menuOrder'] ) )
                 $post['menu_order'] = $model_changes['menuOrder'];
 
-            if ( isset( $model_changes['content'] ) )
-                $post['post_content'] = self::create_preset_content( $model_changes['content'] );
+            if ( isset( $model_changes['content'] ) ) {
+
+                $post['post_content'] = self::create_preset_content($model_changes['content']);
+
+                self::set_helper_shortcodes( $id , self::$helper_shortcodes );
+
+            }
 
             if ( isset( $changes['attachment_ids'] ) )
                 self::update_preset_attachment_ids( $id , $changes['attachment_ids'] );
@@ -489,8 +534,13 @@ class SiteEditorPreset{
         if ( isset( $changes['menuOrder'] ) )
             $post['menu_order'] = $changes['menuOrder'];
 
-        if ( isset( $changes['content'] ) )
-            $post['post_content'] = self::create_preset_content( $changes['content'] );
+        if ( isset( $changes['content'] ) ) {
+
+            $post['post_content'] = self::create_preset_content($changes['content']);
+
+            self::set_helper_shortcodes( $id , self::$helper_shortcodes );
+
+        }
 
         if ( isset( $changes['attachment_ids'] ) )
             self::update_preset_attachment_ids( $id , $changes['attachment_ids'] );
@@ -613,6 +663,44 @@ class SiteEditorPreset{
 
             if( ! did_action( 'sed_shortcode_register' ) ) { 
                 do_action('sed_shortcode_register');
+            }
+
+            $helper_shortcodes = self::get_helper_shortcodes( $preset->ID );
+
+            if( is_array( $helper_shortcodes ) && !empty( $helper_shortcodes ) ) {
+
+                global $site_editor_app;
+                /**
+                 * if import preset we will need to introduce helper shortcodes
+                 */
+                $sed_helper_shortcodes = $site_editor_app->pagebuilder->get_helper_shortcodes();
+
+                $sed_helper_shortcodes = ( $sed_helper_shortcodes && is_array( $sed_helper_shortcodes ) ) ? $sed_helper_shortcodes : array();
+
+                $has_change = false;
+
+                foreach ( $helper_shortcodes AS $helper_tag => $main_tag ){
+
+                    //update new tag in db
+                    if( !isset( $sed_helper_shortcodes[$helper_tag] ) ){
+                        $sed_helper_shortcodes[$helper_tag] = $main_tag;
+                        $has_change = true;
+                    }
+
+
+                }
+
+                //update new tag in db
+                if( $has_change === true ){
+
+                    $site_editor_app->pagebuilder->update_helper_shortcodes( $sed_helper_shortcodes );
+
+                }
+
+                //PageBuilderApplication::add_helper_shortcodes( $helper_shortcodes );
+
+                PageBuilderApplication::$shortcodes_tagnames = array_merge( PageBuilderApplication::$shortcodes_tagnames , array_keys( $helper_shortcodes ) );
+
             }
 
             $shortcodes_models = PageBuilderApplication::get_pattern_shortcodes( $preset->post_content );

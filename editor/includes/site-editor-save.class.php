@@ -1,8 +1,32 @@
 <?php
+/**
+ * Class SEDAppSave
+ */
 class SEDAppSave{
-    function __construct(  ) {
+
+    /**
+     * helper shortcodes
+     *
+     * @var    array
+     * @since  1.0.0
+     */
+    public $helper_shortcodes = array();
+
+    /**
+     * SEDAppSave constructor.
+     */
+    public function __construct(  ) {
+
         add_action("site_editor_ajax_customize_save", array(&$this,"site_editor_app_save") );
+
         $this->wp_theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
+
+    }
+
+    public function reset_helper_shortcodes(){
+
+        $this->helper_shortcodes = array();
+
     }
 
 	/**
@@ -218,7 +242,7 @@ class SEDAppSave{
                     $new_tag = $this->generate_helper_shortcodes( $shortcode['tag'] , $tree_path );
 
                     //update new tag in db
-                    if( !in_array( $new_tag , array_keys( $helper_shortcodes ) ) ){
+                    if( !isset( $helper_shortcodes[$new_tag] ) ){
                         $helper_shortcodes[$new_tag] = $shortcode['tag'];
                         $site_editor_app->pagebuilder->update_helper_shortcodes( $helper_shortcodes );
                     }
@@ -228,11 +252,20 @@ class SEDAppSave{
 
                         $post_helper_shortcodes = ( $post_helper_shortcodes && is_array( $post_helper_shortcodes ) ) ? $post_helper_shortcodes : array();
 
-                        if( !in_array( $new_tag , array_keys( $post_helper_shortcodes ) ) ){
+                        if( !isset( $post_helper_shortcodes[$new_tag] ) ){
+
                             $post_helper_shortcodes[$new_tag] = $shortcode['tag'];
+
                             $site_editor_app->pagebuilder->update_post_helper_shortcodes( $post_id , $post_helper_shortcodes );
-                        } 
+
+                        }
+
                     }
+
+                    /**
+                     * Add helper shortcodes To a array for using in presets and etc.
+                     */
+                    $this->helper_shortcodes[$new_tag] = $shortcode['tag'];
 
                     $shortcode_tag = $new_tag;
                     $attrs_string .= 'shortcode_tag="'. $shortcode['tag'] .'" ';

@@ -209,7 +209,6 @@ Class PageBuilderApplication {
     * Main purpose of this function is ready helper shortcodes for do_shortcode
     */
     public function register_helper_shortcodes(  ){
-        global $shortcode_tags;
 
         $sed_helper_shortcodes = $this->get_helper_shortcodes();
         $sed_helper_shortcodes = ( $sed_helper_shortcodes && is_array( $sed_helper_shortcodes ) ) ? $sed_helper_shortcodes : array();
@@ -224,17 +223,27 @@ Class PageBuilderApplication {
 
         $sed_helper_shortcodes = apply_filters( "sed_helper_shortcodes" , $sed_helper_shortcodes ); //var_dump( $sed_helper_shortcodes );
 
+        self::add_helper_shortcodes( $sed_helper_shortcodes );
+
+
+    }
+
+    public static function add_helper_shortcodes( $sed_helper_shortcodes ){
+
         if( !empty( $sed_helper_shortcodes ) ){
 
             self::$shortcodes_tagnames = array_merge( self::$shortcodes_tagnames , array_keys( $sed_helper_shortcodes ) );
 
             self::$shortcodes_tagnames = array_unique( self::$shortcodes_tagnames );
 
+            global $shortcode_tags;
+
             foreach( $sed_helper_shortcodes AS $shortcode => $main_shortcode_name ){
                 if( shortcode_exists( $main_shortcode_name ) ){
                     add_shortcode( $shortcode , $shortcode_tags[$main_shortcode_name] );
                 }
             }
+
         }
 
     }
