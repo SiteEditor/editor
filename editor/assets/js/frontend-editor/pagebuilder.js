@@ -63,10 +63,21 @@
                 name = $element.attrs["sed-module-name"] ,
                 $this;
 
-            var pattern = this.getPatternByModuleName(name),
-                modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
-                rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
-                newPattern = $.merge( $.merge( $.merge( [], rowPattern ), modulePattern ) , pattern );
+            var pattern = api.sedShortcode.clone( this.getPatternByModuleName(name) ),
+                newPattern;
+
+            if( pattern[0].tag !== "sed_row" ) {
+
+                var modulePattern = $.extend(true, {}, api.defaultPatterns['sed_module']),
+                    rowPattern = $.extend(true, {}, api.defaultPatterns['sed_row']);
+
+                newPattern = $.merge($.merge($.merge([], rowPattern), modulePattern), pattern);
+
+            }else{
+
+                newPattern = pattern;
+
+            }
 
             var transport = api.sedShortcode.getPatternTransport( newPattern );
 
@@ -266,10 +277,21 @@
 
             var _success = function( response ){
 
-                var pattern = self.getPatternByModuleName(name),
-                    modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
-                    rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
-                    newPattern = $.merge( $.merge( $.merge( [], rowPattern ), modulePattern ) , pattern );
+                var pattern = api.sedShortcode.clone( self.getPatternByModuleName(name) ),
+                    newPattern;
+
+                if( pattern[0].tag !== "sed_row" ) {
+
+                    var modulePattern = $.extend(true, {}, api.defaultPatterns['sed_module']),
+                        rowPattern = $.extend(true, {}, api.defaultPatterns['sed_row']);
+
+                    newPattern = $.merge($.merge($.merge([], rowPattern), modulePattern), pattern);
+
+                }else{
+
+                    newPattern = pattern;
+
+                }
 
                 var _callback = function(){
                     newItem.remove();
@@ -575,17 +597,22 @@
 
             //pattern = api.applyFilters( 'sedDefaultPatternFilter' , pattern , name );
 
-            var currPattern = $.extend( true, {} , pattern ) ,
-                modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
-                rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
-                moduleShortcode = api.modulesSettings[name].shortcode ,
-                attrs = {} , newPattern;
+            var currPattern = api.sedShortcode.clone( pattern ),
+                moduleShortcode = api.modulesSettings[name].shortcode,
+                attrs = {}, newPattern;
+
+            if( currPattern[0].tag !== "sed_row" ) {
+
+                var modulePattern = $.extend(true, {}, api.defaultPatterns['sed_module']),
+                    rowPattern = $.extend(true, {}, api.defaultPatterns['sed_row']);
+
+            }
 
             //attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
 
             //attrs = this.addAlignSpacingAttrToModule( name , attrs );
 
-            if( self.currentDragType == "regular" ){
+            if( self.currentDragType == "regular" && currPattern[0].tag !== "sed_row" ){
                 rowPattern[0].attrs.type = 'static-element';
 
                 //rowPattern[0].attrs.sed_contextmenu_class = self.getModuleContextmenuClass( moduleShortcode  );
@@ -600,25 +627,40 @@
                 attrs.class += "module-element-draggable";
             }
 
-            modulePattern[0].attrs = attrs;
+            if( currPattern[0].tag !== "sed_row" ) {
 
-            var mainModelParentId = _.clone( currPattern[0].parent_id );
-            currPattern = _.map( currPattern , function( shModel ){
-                if( shModel.parent_id == mainModelParentId ){
-                    shModel.parent_id = modulePattern[0].id;
-                }
-                return shModel;
-            });
+                modulePattern[0].attrs = attrs;
+
+                var mainModelParentId = _.clone( currPattern[0].parent_id );
+
+                currPattern = _.map( currPattern , function( shModel ){
+                    if( shModel.parent_id == mainModelParentId ){
+                        shModel.parent_id = modulePattern[0].id;
+                    }
+                    return shModel;
+                });
+
+            }
 
             if( self.currentDragType == "regular" ){
-                modulePattern[0].parent_id = rowPattern[0].id;
-                newPattern = $.merge( $.merge( $.merge( [], rowPattern ), modulePattern ) , currPattern );
+
+                if( currPattern[0].tag !== "sed_row" ) {
+                    modulePattern[0].parent_id = rowPattern[0].id;
+                    newPattern = $.merge($.merge($.merge([], rowPattern), modulePattern), currPattern);
+                }else{
+
+                    newPattern = currPattern;
+
+                }
+
             }else if(self.currentDragType == "free"){
                 newPattern = $.merge( $.merge( [], modulePattern ), currPattern ) ;
             }
 
+            console.log( parentId );
+
             var shortcodes = this.loadPattern( newPattern , parentId ),
-            postId , typeS;
+            postId , typeS; console.log( newPattern ); console.log( shortcodes );
             if(elementId == "root" && direction == "none"){
                 api.shortcodeCurrentPlace = dropItem.data("contentType");
                 postId = dropItem.data("postId");
@@ -837,10 +879,21 @@
                 _callback();*/
 
 
-            var pattern = self.getPatternByModuleName(name),
-                modulePattern = $.extend( true, {} , api.defaultPatterns['sed_module'] ) ,
-                rowPattern = $.extend( true, {} , api.defaultPatterns['sed_row'] ) ,
-                newPattern = $.merge( $.merge( $.merge( [], rowPattern ), modulePattern ) , pattern );
+            var pattern = api.sedShortcode.clone( this.getPatternByModuleName(name) ),
+                newPattern;
+
+            if( pattern[0].tag !== "sed_row" ) {
+
+                var modulePattern = $.extend(true, {}, api.defaultPatterns['sed_module']),
+                    rowPattern = $.extend(true, {}, api.defaultPatterns['sed_row']);
+
+                newPattern = $.merge($.merge($.merge([], rowPattern), modulePattern), pattern);
+
+            }else{
+
+                newPattern = pattern;
+
+            }
 
             var _callback = function(){
 
