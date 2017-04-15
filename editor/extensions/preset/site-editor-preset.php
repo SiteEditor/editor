@@ -341,17 +341,16 @@ class SiteEditorPreset{
 
     }
 
-        /**
+    /**
      * Set existing preset as default
      *
-     * If this is vendor preset, clone it and set new one as default
+     * @since 1.0
      *
-     * @param int $id If falsy, no default will be set
+     * @param int $id $post_id
      * @param string $shortcode_name
      *
      * @return boolean
      *
-     * @since 1.0
      */
     public static function set_as_default_preset( $id, $shortcode_name ) {
         $post_id = self::get_default_preset_id( $shortcode_name );
@@ -391,9 +390,10 @@ class SiteEditorPreset{
      *
      * @param string $shortcode_name
      *
-     * @return mixed int|null
+     * @return mixed int|boolean
      */
     public static function get_default_preset_id( $shortcode_name = null ) {
+
         if ( ! $shortcode_name ) {
             return null;
         }
