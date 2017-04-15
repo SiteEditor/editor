@@ -33,7 +33,7 @@ Class site_editor_indexController Extends baseController {
 
         $options_machine->options = $sed_general_data;
 
-        if( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'compile_framework' ){
+        /*if( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'compile_framework' ){
             
             if( !class_exists( 'SEDAppLess' ) )
                 require_once SED_INC_DIR . DS . 'sed_app_less.class.php';
@@ -43,7 +43,7 @@ Class site_editor_indexController Extends baseController {
                $massage =  __("Less Framework is compiled." ,"site-editor");
             else
                $massage = sprintf( __("Less Framework Error : %s" ,"site-editor") , $result );
-        }
+        }*/
 
 
         if( isset( $_REQUEST['action'] ) && ( $_REQUEST['action'] === 'save' || $_REQUEST['action'] === 'reset' ) ){
