@@ -8,8 +8,8 @@ Class site_editor_edit_moduleController Extends baseController {
         if( !class_exists( 'SEDFile' ) )
             require_once SED_INC_DIR . '/sed_file.class.php';
 
-        if( !class_exists( 'SEDAppLess' ) )
-            require_once SED_INC_DIR . '/sed_app_less.class.php';
+        /*if( !class_exists( 'SEDAppLess' ) )
+            require_once SED_INC_DIR . '/sed_app_less.class.php';*/
 
     }
 
