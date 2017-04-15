@@ -993,11 +993,11 @@ z-index: 5 !important;
     position: absolute;
     top: -15px;
 }
-
-.sed-app-editor .sed-pb-post-container[data-content-type="post"] {
+.sed-app-editor .sed-pb-empty-sortable-area {
     /*border: 1px dashed #aaa;
-    padding: 10px 5px;
-    position: relative;*/
+    border-radius: 1px;
+    padding: 28px 0 !important;
+    text-align: center;*/
 }
 
 .sed-app-editor .sed-pb-empty-sortable-area:after{
@@ -1011,11 +1011,14 @@ z-index: 5 !important;
     text-align: center;
 }
 
-.sed-app-editor .sed-pb-empty-sortable-area {
-    /*border: 1px dashed #aaa;
-    border-radius: 1px;
-    padding: 28px 0 !important;
-    text-align: center;*/
+.sed-app-editor .sed-pb-post-container[data-content-type="post"] {
+    border: 1px dashed #aaa;
+    padding: 10px 5px;
+    position: relative;
+}
+
+.sed-app-editor .sed-pb-post-container[data-content-type="post"]:after {
+    border: 0 none;
 }
 
 .sed-app-editor .sed-pb-row-extra-spacing {
