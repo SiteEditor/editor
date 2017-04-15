@@ -83,61 +83,84 @@ if( $bg_type == 'video' ) {
 }
 
 
-if(!empty($content)){?>
-       <div class="row-container-module <?php echo $class;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?>" <?php echo $sed_attrs; ?>>
+?>
+
+    <div class="row-container-module <?php echo $class;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?>" <?php echo $sed_attrs; ?>>
+
+        <?php if(!empty($content)){?>
+
             <div class="sed-pb-component <?php echo $length_class;?>" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> length_element>
                 <?php echo $content; ?>
             </div>
-            <?php echo $outer_html; ?>  
-       </div>
-<?php }else{  ?>
-      <div class="row-container-module <?php echo $class;?> <?php if($is_arrow) echo $arrow; ?> <?php if($overlay){?>row-overlay<?php } ?> <?php if($full_height){?>row-flex row-full-height<?php } ?>" <?php echo $sed_attrs; ?>>
-          <div class="sed-pb-component <?php echo $length_class;?>" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>" length_element>
 
-          </div>
-          <?php echo $outer_html;?>
-      </div>
-<?php } ?>
-    <?php
-        $selector = ( site_editor_app_on() || sed_loading_module_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
-        ob_start();
-    ?>
+        <?php }else{  ?>
+
+            <div class="sed-pb-component <?php echo $length_class;?>" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>" length_element></div>
+
+        <?php } ?>
+
+        <?php echo $outer_html; ?>  
+
         <?php
-        if($is_arrow){
-            if($arrow == "row-arrow-bottom"){
-            ?>
-            <?php echo $selector; ?>.row-arrow-bottom::after{
-                border-bottom: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
-                border-left: <?php echo $arrow_size; ?>px solid transparent;
-                border-right: <?php echo $arrow_size; ?>px solid transparent;
-                /*margin-bottom: -<?php //echo $arrow_size; ?>px;*/
-                margin-left: -<?php echo $arrow_size; ?>px;
-            }
-            <?php
-            }
-            if($arrow == "row-arrow-top"){
-            ?>
-            <?php echo $selector; ?>.row-arrow-top::after {
-                border-top: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
-                border-left: <?php echo $arrow_size; ?>px solid transparent;
-                border-right: <?php echo $arrow_size; ?>px solid transparent;
-                /*margin-top: -<?php //echo $arrow_size; ?>px;*/
-                margin-left: -<?php echo $arrow_size; ?>px;
-            }
-            <?php
-            }
-        }
-        if($overlay){
+            $selector = ( site_editor_app_on() || sed_loading_module_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
+            ob_start();
         ?>
-        <?php echo $selector; ?>.row-overlay.row-container-module::before{
-            background-color: <?php echo $overlay_color; ?>;
-            opacity: <?php echo $overlay_opacity/100; ?>;
-        }
+            <?php
+
+            if($is_arrow){
+
+                if( $arrow == "row-arrow-bottom" ){
+                    
+                ?>
+
+                <?php echo $selector; ?>.row-arrow-bottom::after {
+                    border-bottom: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
+                    border-left: <?php echo $arrow_size; ?>px solid transparent;
+                    border-right: <?php echo $arrow_size; ?>px solid transparent;
+                    /*margin-bottom: -<?php //echo $arrow_size; ?>px;*/
+                    margin-left: -<?php echo $arrow_size; ?>px;
+                }
+
+                <?php
+
+                }
+
+                if( $arrow == "row-arrow-top" ){
+
+                ?>
+
+                <?php echo $selector; ?>.row-arrow-top::after {
+                    border-top: <?php echo $arrow_size; ?>px solid <?php echo $arrow_color; ?>;
+                    border-left: <?php echo $arrow_size; ?>px solid transparent;
+                    border-right: <?php echo $arrow_size; ?>px solid transparent;
+                    /*margin-top: -<?php //echo $arrow_size; ?>px;*/
+                    margin-left: -<?php echo $arrow_size; ?>px;
+                }
+
+                <?php
+
+                }
+
+            }
+
+            if( $overlay ){
+
+            ?>
+                <?php echo $selector; ?>.row-overlay.row-container-module::before {
+                    background-color: <?php echo $overlay_color; ?>;
+                    opacity: <?php echo $overlay_opacity/100; ?>;
+                }
+
+            <?php
+
+            }
+
+            ?>
+
         <?php
-        }
+            $css = ob_get_clean();
+            sed_module_dynamic_css( $css );
         ?>
 
-    <?php
-        $css = ob_get_clean();
-        sed_module_dynamic_css( $css );
-    ?>
+    </div>
+

@@ -10,7 +10,7 @@
 	?>
 
 		<?php echo $selector; ?> {
-		width : <?php echo  $width;?>;
+			width : <?php echo  $width;?>;
 		}
 
 	<?php
