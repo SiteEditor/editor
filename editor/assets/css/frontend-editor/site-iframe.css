@@ -995,9 +995,9 @@ z-index: 5 !important;
 }
 
 .sed-app-editor .sed-pb-post-container[data-content-type="post"] {
-    border: 1px dashed #aaa;
+    /*border: 1px dashed #aaa;
     padding: 10px 5px;
-    position: relative;
+    position: relative;*/
 }
 
 .sed-app-editor .sed-pb-empty-sortable-area:after{
