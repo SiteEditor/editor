@@ -30,17 +30,17 @@ if(!empty($content)){
     ?>
 
 
-    <?php
+    <?php  
         $selector = ( site_editor_app_on() || sed_loading_module_on() ) ? '[sed_model_id="' . $sed_model_id . '"]' : '.'.$sed_custom_css_class;
         ob_start();
     ?>
 
         @media (max-width: 768px){
-            <?php echo $selector; ?> {
-                <?php if(!empty($rps_spacing_top)){ ?>     padding-top:    <?php echo $rps_spacing_top;?>px !important;    <?php } ?>
-                <?php if(!empty($rps_spacing_right)){ ?>   padding-right:  <?php echo $rps_spacing_right;?>px !important;  <?php } ?>
-                <?php if(!empty($rps_spacing_bottom)){ ?>  padding-bottom: <?php echo $rps_spacing_bottom;?>px !important; <?php } ?>
-                <?php if(!empty($rps_spacing_left)){ ?>    padding-left:   <?php echo $rps_spacing_left;?>px !important;   <?php } ?>
+            <?php echo $selector;  ?> {
+                <?php if(!empty($rps_spacing_top) || $rps_spacing_top === 0 || $rps_spacing_top === "0" ){ ?>     padding-top:    <?php echo $rps_spacing_top;?>px !important;    <?php } ?>
+                <?php if(!empty($rps_spacing_right) || $rps_spacing_right === 0 || $rps_spacing_right === "0" ){ ?>   padding-right:  <?php echo $rps_spacing_right;?>px !important;  <?php } ?>
+                <?php if(!empty($rps_spacing_bottom) || $rps_spacing_bottom === 0 || $rps_spacing_bottom === "0" ){ ?>  padding-bottom: <?php echo $rps_spacing_bottom;?>px !important; <?php } ?>
+                <?php if(!empty($rps_spacing_left) || $rps_spacing_left === 0 || $rps_spacing_left === "0"){ ?>    padding-left:   <?php echo $rps_spacing_left;?>px !important;   <?php } ?>
                 <?php if(!empty($rps_align)){ ?>           text-align:     <?php echo $rps_align;?> !important;            <?php } ?>
             }        
         }     
