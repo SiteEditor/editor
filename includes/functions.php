@@ -1475,3 +1475,19 @@ function sed_loading_module_on(){
     return isset( $_POST['action'] ) && $_POST['action'] === "load_modules";
 
 }
+
+function sed_module_dynamic_css( $css ){
+
+    if( sed_loading_module_on() ){
+
+        echo '<style>'. $css .'</style>';
+
+    }else{
+
+        global $sed_dynamic_css_string;
+
+        $sed_dynamic_css_string .= $css;
+
+    }
+
+}

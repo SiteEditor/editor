@@ -223,7 +223,7 @@ Class PageBuilderApplication {
 
         $sed_helper_shortcodes = apply_filters( "sed_helper_shortcodes" , $sed_helper_shortcodes ); //var_dump( $sed_helper_shortcodes );
 
-        self::add_helper_shortcodes( $sed_helper_shortcodes );
+        self::add_helper_shortcodes( $sed_helper_shortcodes ); //var_dump( $sed_helper_shortcodes );
 
 
     }
@@ -239,7 +239,7 @@ Class PageBuilderApplication {
             global $shortcode_tags;
 
             foreach( $sed_helper_shortcodes AS $shortcode => $main_shortcode_name ){
-                if( shortcode_exists( $main_shortcode_name ) ){
+                if( shortcode_exists( $main_shortcode_name ) && !shortcode_exists( $shortcode ) ){
                     add_shortcode( $shortcode , $shortcode_tags[$main_shortcode_name] );
                 }
             }
@@ -1155,8 +1155,13 @@ Class PageBuilderApplication {
 
         $content = $sed_apps->editor->save->create_shortcode_content( $tree_shortcodes , array() );
 
-        $output = apply_filters( 'the_content' , $content );
+        /**
+         * Register Helper Shortcodes
+         */
+        $this->register_helper_shortcodes();
 
+        $output = apply_filters( 'the_content' , $content );
+        
         //$output = do_shortcode( $content );
 
         wp_send_json_success( $output );

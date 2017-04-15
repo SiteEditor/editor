@@ -134,13 +134,13 @@ class SiteEditorInstall {
 
 		$header_preset_content = ob_get_clean();
 
-		$post_id = SiteEditorPreset::create_preset( 'sed_header' , __("Default Header" , "site-editor") ,  $header_preset_content , false );
+		$post_id = SiteEditorPreset::create_preset( 'sed_header' , __("Default Header" , "site-editor") ,  $header_preset_content , true );
 
 		$helper_shortcodes = array(
 			'sed_row_inner'				=> 'sed_row' ,
 			'sed_module_inner' 			=> 'sed_module' ,
-			'sed_row_inner_inner' 		=> 'sed_module' ,
-			'sed_module_inner_inner'	=> 'sed_row'
+			'sed_row_inner_inner' 		=> 'sed_row' ,
+			'sed_module_inner_inner'	=> 'sed_module'
 		);
 
 		SiteEditorPreset::set_helper_shortcodes( $post_id , $helper_shortcodes );
@@ -151,7 +151,7 @@ class SiteEditorInstall {
 
 		$footer_preset_content = ob_get_clean();
 
-		$post_id = SiteEditorPreset::create_preset( 'sed_footer' , __("Default Footer" , "site-editor") ,  $footer_preset_content , false );
+		$post_id = SiteEditorPreset::create_preset( 'sed_footer' , __("Default Footer" , "site-editor") ,  $footer_preset_content , true );
 
 		SiteEditorPreset::set_helper_shortcodes( $post_id , $helper_shortcodes );
 
