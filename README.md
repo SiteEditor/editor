@@ -192,7 +192,7 @@ Troubleshooting:
 
 # Changelog
 
-**1.0 - Released: April 14, 2017**
+**1.0 - Released: April 15th, 2017**
 
 * Initial release
 
