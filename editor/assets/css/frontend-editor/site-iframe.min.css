@@ -1538,3 +1538,26 @@ body .megamenu-drag-area-mode  ul.cm_default, body .megamenu-drag-area-mode  ul.
 .sed-row-pb.sed-parent-highlight-row > .sed-pb-handle-row-bottom {
     bottom : -15px;
 }*/
+
+
+/**********  Tinymce  *********/
+
+.mce-container button, 
+.mce-container button, 
+.mce-container input[type="button"], 
+.mce-container input[type="button"], 
+.mce-container input[type="submit"], 
+.mce-container input[type="submit"]{
+    background-color: rgba(0,0,0,0);    
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
+
+.mce-container button:hover, 
+.mce-container button:focus, 
+.mce-container input[type="button"]:hover, 
+.mce-container input[type="button"]:focus, 
+.mce-container input[type="submit"]:hover, 
+.mce-container input[type="submit"]:focus {
+    background-color: rgba(0,0,0,0.03);
+}
