@@ -15,3 +15,12 @@
     position: relative;
     width: 100%
 }
+
+.module-page-title.page-title-default .page-title-heading {
+    margin: 0; 
+}
+
+.module-page-title.page-title-default .page-title-description {
+    margin: 0;
+    margin-top: 10px;
+}

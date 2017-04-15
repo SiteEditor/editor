@@ -11,9 +11,9 @@ else
 
         <div class="page-title-continer">
 
-            <h3> <?php echo PBPageTitleShortcode::get_title(); ?> </h3>
+            <h3 class="page-title-heading"> <?php echo PBPageTitleShortcode::get_title(); ?> </h3>
             <?php if( $show_sub_title ){ ?>
-                <p><?php echo esc_html( $sub_title ); ?> </p>
+                <p class="page-title-description"><?php echo esc_html( $sub_title ); ?> </p>
             <?php } ?>
         </div>
 

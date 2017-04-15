@@ -152,6 +152,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 "label"             => __("Select Content Layout", "site-editor"),
                 //"description"       => __("Select Content Layout", "site-editor"),
                 "choices"           =>  $options,
+                'has_border_box'    => false ,
                 'panel'    => 'content_layout_settings_panel',
             ),
 
@@ -159,7 +160,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 "type"                  => "length" ,
                 "label"                 => __("Length", "site-editor"),
                 'panel'                 => 'content_layout_settings_panel',
-            ), 
+            ), */
 
             'content_width' => array(
                 "type"          => "radio-buttonset" ,
@@ -170,7 +171,7 @@ class PBContentLayoutShortcode extends PBShortcodeClass{
                 ), 
                 'has_border_box'    => false ,
                 "panel"         => "content_layout_settings_panel" ,
-            ),*/
+            ),
 
             'row_container' => array(
                 'type'                => 'row_container',

@@ -1003,14 +1003,19 @@ z-index: 5 !important;
 .sed-app-editor .sed-pb-empty-sortable-area:after{
     content : attr(drop-placeholder) ;
     color: #333;
-    font-size: 14px;
-}
-
-.sed-app-editor .sed-pb-empty-sortable-area {
+    font-size: 14px;   
+    display: block;
     border: 1px dashed #aaa;
     border-radius: 1px;
     padding: 28px 0 !important;
     text-align: center;
+}
+
+.sed-app-editor .sed-pb-empty-sortable-area {
+    /*border: 1px dashed #aaa;
+    border-radius: 1px;
+    padding: 28px 0 !important;
+    text-align: center;*/
 }
 
 .sed-app-editor .sed-pb-row-extra-spacing {

@@ -14,11 +14,11 @@ var pageTitle = window._sedAppPageTitle;
 
         <div class="page-title-continer">
 
-            <h3> {{{pageTitle}}} </h3>
+            <h3 class="page-title-heading"> {{{pageTitle}}} </h3>
 
             <# if( show_sub_title ){ #>
 
-                <p> {{{sub_title}}} </p>
+                <p class="page-title-description"> {{{sub_title}}} </p>
 
             <# } #>
 
