@@ -657,10 +657,8 @@
                 newPattern = $.merge( $.merge( [], modulePattern ), currPattern ) ;
             }
 
-            console.log( parentId );
-
             var shortcodes = this.loadPattern( newPattern , parentId ),
-            postId , typeS; console.log( newPattern ); console.log( shortcodes );
+            postId , typeS; 
             if(elementId == "root" && direction == "none"){
                 api.shortcodeCurrentPlace = dropItem.data("contentType");
                 postId = dropItem.data("postId");

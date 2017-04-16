@@ -79,6 +79,7 @@
             //dataType : "jsonp" ,
             data : {
                 action        : 'shortcodes_default_pattern',
+                ajax_path     : SED_AJAX_SHORTCODES_PATTERN.dir,
                 //nonce         : api.settings.nonce.module.load_patterns ,
                 sed_page_ajax : 'sed_ajax_default_patterns'
             },

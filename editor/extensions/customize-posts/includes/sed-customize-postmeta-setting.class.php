@@ -194,7 +194,7 @@ class SiteEditorPostmetaSetting extends SedAppSettings {
 				return $has_setting_validation ? $value : null;
 			}
 
-			/** This filter is documented in wp-includes/meta.php */
+		
 			$check = apply_filters( "update_{$meta_type}_metadata", null, $object_id, $meta_key, $value, $prev_value );
 			if ( null !== $check ) {
 				return $has_setting_validation ? new WP_Error( 'not_allowed', sprintf( __( 'Update to post meta "%s" blocked.', 'site-editor' ), $meta_key ) ) : null;

@@ -1608,7 +1608,7 @@
               browse_button         : id + '-browse',
               container             : id,
               runtimes              : "html5,flash,silverlight,html4",
-              url                   : SEDEXTBASE.url + "/media/includes/upload.php",
+              url                   : SED_UPLOAD_AJAX_URL,
               flash_swf_url         : SEDEXTBASE.url + "/media/js/Moxie.swf",
               silverlight_xap_url   : SEDEXTBASE.url + "/media/js/Moxie.xap",
               filedataname          : "file",

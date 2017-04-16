@@ -45,9 +45,9 @@ if(!class_exists('SiteEditorIconManager'))
 
             add_action( 'sed_enqueue_scripts' , array($this,'load_styles') );
 
-            add_action("site_editor_ajax_add_zipped_font", array($this,"add_zipped_font") );
+            add_action("wp_ajax_add_zipped_font", array($this,"add_zipped_font") );
 
-            add_action('site_editor_ajax_remove_icons_font', array($this, 'remove_icons_font'));
+            add_action('wp_ajax_remove_icons_font', array($this, 'remove_icons_font'));
 
             add_filter('sed_enqueue_scripts', array($this,'add_icons_library_js_plugin') );
 
@@ -239,6 +239,7 @@ if(!class_exists('SiteEditorIconManager'))
 			}
 
             $output = $this->get_icons_fonts();
+            
             $this->sed_ico_die(true , $output , $this->styles_added);
 
         }

@@ -96,7 +96,7 @@ Class PageBuilderApplication {
         add_action("sed_footer" , array( $this, "write_shortcode_settings") );
         //add_action("sed_footer" , array( $this, "write_style_editor_settings") );
 
-        add_action( "site_editor_ajax_load_modules" , array($this, "page_builder_load_modules") );
+        add_action( "wp_ajax_load_modules" , array($this, "page_builder_load_modules") );
         //add_filter( "sed_addon_settings" , array($this,'load_modules_settings') );
 
         add_filter( "sed_app_refresh_nonces" , array( $this, 'set_nonces' ) , 10 , 2 );
@@ -1065,7 +1065,7 @@ Class PageBuilderApplication {
 
         global $wp_filesystem;
         if( empty( $wp_filesystem ) ) {
-            require_once( ABSPATH .'/wp-admin/includes/file.php' );
+            require_once( sed_get_wp_admin_path() .'includes/file.php' );
             WP_Filesystem();
         }
 
@@ -1096,7 +1096,7 @@ Class PageBuilderApplication {
 
         global $wp_filesystem;
         if( empty( $wp_filesystem ) ) {
-            require_once( ABSPATH .'/wp-admin/includes/file.php' );
+            require_once( sed_get_wp_admin_path() .'includes/file.php' );
             WP_Filesystem();
         }
 
@@ -1366,10 +1366,6 @@ Class PageBuilderApplication {
         $page_layout = SiteEditorLayoutManager::get_page_layout();
 
         /*if( ! site_editor_app_on() ) {
-
-            ini_set('xdebug.var_display_max_children',1000 );
-            ini_set('xdebug.var_display_max_depth',20 );
-            ini_set('xdebug.var_display_max_data' , 100000 );
 
             echo "<h2 style='color:red;'>page_layout: </h2>";
 

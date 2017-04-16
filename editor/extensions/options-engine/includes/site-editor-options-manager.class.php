@@ -160,7 +160,7 @@ final class SiteEditorOptionsManager{
 
         add_action( 'sed_app_register', array( $this, 'register_fields' ) , 1000 );
 
-        add_action( 'site_editor_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options
+        add_action( 'wp_ajax_sed_load_options', array($this,'sed_ajax_load_options' ) );//wp_ajax_sed_load_options
 
         add_action( 'sed_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 
@@ -189,7 +189,7 @@ final class SiteEditorOptionsManager{
         return $nonces;
     }
 
-    public function sed_ajax_load_options(){
+    public function sed_ajax_load_options(){ 
 
         SED()->editor->manager->check_ajax_handler( 'sed_options_loader' , 'sed_app_options_load' , 'sed_manage_settings' );
 

@@ -13,9 +13,6 @@ class SiteEditorAdminRender{
         if( !defined( 'SED_ADMIN_INC_PATH' ) )
             define('SED_ADMIN_INC_PATH', SED_ADMIN_DIR . DS . 'includes');
 
-        /*if( !class_exists( 'SiteEditorSetup' ) )
-            require_once( SED_ADMIN_INC_PATH . DS . 'sed-setup.class.php' );*/
-
         require_once( SED_ADMIN_INC_PATH . DS . 'class_sed_error.php' );
         $GLOBALS['sed_error'] = new SED_Error;
 
@@ -30,21 +27,23 @@ class SiteEditorAdminRender{
 
         add_action('admin_init', array( $this, 'options_admin_init' ) );
 
+        // add button Edit With SiteEditor in default editor wordpress
+        add_action('media_buttons',  array( $this , 'add_button_to_editor' ) );
+
+        add_filter('tag_row_actions', array( $this , 'sed_tag_row_actions' ) , 10, 2);
+
+        // add row action edit for posts list and pages list
+        add_filter('post_row_actions', array( $this , 'add_actions_to_list' ) , 10, 2);
+
+        add_filter('page_row_actions', array( $this , 'add_actions_to_list' ) , 10, 2);
+
+        add_action( 'admin_enqueue_scripts', array( $this, 'options_media_scripts' ));
+
+        add_filter('upload_mimes', array( $this , 'filter_mime_types') );
+
+        add_action( 'admin_init', array( $this , 'admin_init')  );
+
         //if( SiteEditorSetup::is_installed() ){
-
-            // add button Edit With SiteEditor in default editor wordpress
-            add_action('media_buttons',  array( $this , 'add_button_to_editor' ) );
-
-            add_filter('tag_row_actions', array( $this , 'sed_tag_row_actions' ) , 10, 2);
-            // add row action edit for posts list and pages list
-            add_filter('post_row_actions', array( $this , 'add_actions_to_list' ) , 10, 2);
-            add_filter('page_row_actions', array( $this , 'add_actions_to_list' ) , 10, 2);
-
-            add_action( 'admin_enqueue_scripts', array( $this, 'options_media_scripts' ));
-
-            add_filter('upload_mimes', array( $this , 'filter_mime_types') );
-
-            add_action( 'admin_init', array( $this , 'admin_init')  );
 
         /*}else{
 
@@ -57,11 +56,6 @@ class SiteEditorAdminRender{
     }
 
     public static function load_page_builder_app(){
-
-
-        //ini_set('xdebug.var_display_max_children',1000 );
-        //ini_set('xdebug.var_display_max_depth',20 );
-        //ini_set('xdebug.var_display_max_data' , 100000 );
 
         //var_dump( get_option( 'site-editor-settings' ) );
 

@@ -1,16 +1,11 @@
 <?php
 
-/**
- * Disable error reporting
- *
- * Set this to error_reporting( E_ALL ) or error_reporting( E_ALL | E_STRICT ) for debugging
- */
-error_reporting(0);
+if( isset( $_REQUEST['ajax_path'] ) && file_exists( $_REQUEST['ajax_path'] ) ){
 
-/** Set ABSPATH for execution */
-define( 'SEDPATH', dirname(dirname(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))))) . '/' );
+    require_once $_REQUEST['ajax_path'];
 
-require_once SEDPATH."wp-content/uploads/site-editor/shortcodes.patterns.php";
+}
+
 
 function shortcodes_regexp( $tagnames = array() ){
     global $shortcodes_tagnames;

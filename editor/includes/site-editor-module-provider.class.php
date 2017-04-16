@@ -12,7 +12,7 @@ class SEDPBModuleProvider{
         }
     }
 
-    function siteeditor_check_less_compailer(){
+    /*function siteeditor_check_less_compailer(){
        global $sed_apps;
 
         if( ! $live_modules = sed_get_setting("live_module") )
@@ -43,9 +43,9 @@ class SEDPBModuleProvider{
             include SED_PLUGIN_DIR . DS . 'framework' . DS . 'SEDAjaxLess' . DS  .'view'. DS . 'modal_less_compile.php';
         }
 
-    }
+    }*/
 
-    function check_lesses_compiled( $lesses ){
+    /*function check_lesses_compiled( $lesses ){
         $not_compiled_files = array();
         foreach( $lesses AS $handle => $less_info ){
             $less_files = array();
@@ -93,7 +93,7 @@ class SEDPBModuleProvider{
         }
 
         return $not_compiled_files;
-    }
+    }*/
 
     public function sed_app_pagebuilder_modules(){
 

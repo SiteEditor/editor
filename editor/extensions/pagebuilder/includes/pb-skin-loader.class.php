@@ -21,7 +21,7 @@ class PBSkinLoaderClass{
 
         $this->skin_def_screenshot = SED_PB_IMAGES_URL . "skin_def_screenshot.png";
 
-        add_action( 'site_editor_ajax_load_skins' , array($this,'pb_module_load_skins') );
+        add_action( 'wp_ajax_load_skins' , array($this,'pb_module_load_skins') );
         add_action( 'sed_footer' , array($this,'add_tmpls_modules_skins') );
         add_filter( "sed_app_refresh_nonces", array($this,'set_nonces') , 10 , 2);
 

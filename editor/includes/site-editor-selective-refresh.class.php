@@ -100,10 +100,8 @@ final class SiteEditorSelectiveRefresh {
 		} else {
 			$class = 'SiteEditorPartial';
 
-			/** This filter (will be) documented in wp-includes/site-editor-manager.class.php */
 			$args = apply_filters( 'sed_app_dynamic_partial_args', $args, $id );
 
-			/** This filter (will be) documented in wp-includes/site-editor-manager.class.php */
 			$class = apply_filters( 'sed_app_dynamic_partial_class', $class, $id, $args );
 
 			$partial = new $class( $this, $id, $args );

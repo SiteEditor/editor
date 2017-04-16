@@ -9,16 +9,12 @@
 
 <?php
 
-ini_set('xdebug.var_display_max_children',1000 );
-ini_set('xdebug.var_display_max_depth',20 );
-ini_set('xdebug.var_display_max_data' , 100000 );
-
-var_dump( 'sed_layouts_models' ,  get_option( 'sed_layouts_models' ) );
-var_dump( 'sed_last_theme_id'         ,  get_option( 'sed_last_theme_id' ) );
-var_dump( 'sed_main_theme_content'    ,  get_option( 'sed_main_theme_content' ) );
-var_dump( 'sed_layouts_content'    ,  get_option( 'sed_layouts_content' ) );
-var_dump( 'sed_theme_options'         ,  get_option( 'sed_theme_options' ) );
-var_dump( 'sed_general_theme_options' ,  get_option( 'sed_general_theme_options' ) );
+//var_dump( 'sed_layouts_models' ,  get_option( 'sed_layouts_models' ) );
+//var_dump( 'sed_last_theme_id'         ,  get_option( 'sed_last_theme_id' ) );
+//var_dump( 'sed_main_theme_content'    ,  get_option( 'sed_main_theme_content' ) );
+//var_dump( 'sed_layouts_content'    ,  get_option( 'sed_layouts_content' ) );
+//var_dump( 'sed_theme_options'         ,  get_option( 'sed_theme_options' ) );
+//var_dump( 'sed_general_theme_options' ,  get_option( 'sed_general_theme_options' ) );
 
     $config = array(
         'sed_layouts_models'     =>  get_option( 'sed_layouts_models' ),

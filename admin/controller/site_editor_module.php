@@ -5,12 +5,6 @@ Class site_editor_moduleController Extends baseController {
     public function index() {
         global $sed_error, $sed_pb_modules ;
 
-        //ini_set('xdebug.var_display_max_children',1000 );
-        //ini_set('xdebug.var_display_max_depth',20 );
-        //ini_set('xdebug.var_display_max_data' , 100000 );
-        //var_dump( get_option('site-editor-settings') );
-        //var_dump( get_option('active_plugins') );
-
         do_action( "load-sed-module-page" );
 
         if(!class_exists('SiteEditorModuleListTable')){

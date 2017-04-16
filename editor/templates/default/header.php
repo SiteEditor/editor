@@ -58,6 +58,12 @@ $controls_l10n = array(
     'allowedFiles'       => __( 'Allowed Files' , 'site-editor' )
 );
 
+$wp_upload = wp_upload_dir();
+
+$sed_upload_url = $wp_upload['baseurl'] . "/site-editor/";
+
+$sed_ajax_shortcodes_pattern_path = $wp_upload['basedir'] . "/site-editor/shortcodes.patterns.php";
+
 do_action( 'sed_app_controls_init' );
 
 //wp_enqueue_script( 'sed-app-controls' );
@@ -94,14 +100,26 @@ do_action( 'sed_enqueue_scripts' );
     <meta name="description" content="<?php echo $application_desc; ?>">
     <meta name="siteeditor" content="notranslate">
 	<meta name="viewport" content="width=device-width">
+    <?php
+    $sed_ajax_url = array(
+        'url'   => admin_url( 'admin-ajax.php' )
+    );
+    ?>
     <script>
-        var SEDAJAX = {url : "<?php echo SED_EDITOR_FOLDER_URL . "includes/ajax/site_editor_ajax.php"?>"};
+        var SEDAJAX = <?php echo wp_json_encode( $sed_ajax_url );?>;
         var SEDEXTBASE = {url : "<?php echo SED_EXT_URL?>"};
         var SEDNOPIC = {url : "<?php echo SED_ASSETS_URL . "/images/no_pic.png";?>"};
         var SED_PB_MODULES_URL = "<?php echo SED_PB_MODULES_URL?>";
-        var SED_UPLOAD_URL = "<?php echo site_url("/wp-content/uploads/site-editor/");?>";
+        var SED_UPLOAD_URL = "<?php echo $sed_upload_url;?>";
         var SED_BASE_URL = "<?php echo SED_EDITOR_FOLDER_URL;?>";
         var SED_SITE_URL = "<?php echo site_url();?>";
+        var SED_AJAX_SHORTCODES_PATTERN = <?php echo wp_json_encode( array( 'dir' => $sed_ajax_shortcodes_pattern_path ) );?>;
+        var SED_UPLOAD_AJAX_URL = "<?php echo add_query_arg(
+            array(
+                'action'            => 'sed_upload_attachment' ,
+                'sed_app_editor'    => 'on'
+            ),
+            admin_url( 'admin-ajax.php' ) );?>";
         var _sedAssetsUrls = <?php echo wp_json_encode( $sed_apps->editor->manager->assets_urls ); ?>;
         var loadUploader = false;
         var SEDUploader = false;

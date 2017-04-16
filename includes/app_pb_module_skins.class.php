@@ -216,7 +216,7 @@ class SEDPageBuilderModuleSkins
                   if( file_exists( $css_file ) ){
                     global $wp_filesystem;
                     if( empty( $wp_filesystem ) ) {
-                        require_once( ABSPATH .'/wp-admin/includes/file.php' );
+                        require_once( sed_get_wp_admin_path() .'includes/file.php' );
                         WP_Filesystem();
                     }
                     // create directory when not exists

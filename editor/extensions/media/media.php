@@ -21,7 +21,7 @@ if(!class_exists('SiteEditorMediaManager'))
 
             add_action( 'sed_footer'                    , array( $this , 'add_tmpls_media_library') );
 
-            add_action( "site_editor_ajax_load_medias"  , array( $this , "library_load_medias") );
+            add_action( "wp_ajax_load_medias"  , array( $this , "library_load_medias") );
 
             add_filter( "sed_js_I18n"                   , array( $this , 'js_I18n'));
 
@@ -32,6 +32,8 @@ if(!class_exists('SiteEditorMediaManager'))
             add_action( 'sed_print_footer_scripts'      , array( $this , 'print_media_settings') );
 
             add_action( 'sed_app_refresh_nonces'        , array( $this , 'set_nonces') , 10 , 2 );
+
+            require_once dirname( __FILE__ ) . "/includes/upload.php";
 		}
 
         function default_scripts(){

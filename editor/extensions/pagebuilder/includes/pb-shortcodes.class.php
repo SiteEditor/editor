@@ -109,7 +109,6 @@ class PBShortcodeClass{
                    $src = site_url() . $src;
                }
 
-               /** This filter is documented in wp-includes/class.wp-scripts.php */
                $src = esc_url( apply_filters( 'script_loader_src', $src, $handle ) );
 
                if ( ! $src )

@@ -265,7 +265,7 @@ final Class SiteEditor {
             case 'ajax' :
                 return defined( 'DOING_AJAX' );
             case 'sed_wp_ajax' :
-                return defined( 'DOING_AJAX' ) && isset( $_POST['sed_app_editor'] ) && $_POST['sed_app_editor'] == "on";
+                return defined( 'DOING_AJAX' ) && isset( $_REQUEST['sed_app_editor'] ) && $_REQUEST['sed_app_editor'] == "on";
             case 'cron' :
                 return defined( 'DOING_CRON' );
             case 'frontend' :
@@ -299,7 +299,7 @@ final Class SiteEditor {
         }
 
         if ( $this->is_request( 'editor' ) || $this->is_request( 'editor_frontend' ) ||  $this->is_request( 'editor_ajax' ) || $this->is_request( 'sed_wp_ajax' ) ) {
-            $this->load_editor();
+            $this->load_editor(); 
         }
 
         if ( $this->is_request( 'frontend' ) && ! $this->is_request("sed_wp_ajax")  ) {

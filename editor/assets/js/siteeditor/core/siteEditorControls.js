@@ -278,9 +278,9 @@ api	 * @param options
             }
 
             if ( control.params.media_group ) {
-                this.uploader.url = SEDEXTBASE.url + "media/includes/upload.php?media_group=" + control.params.media_group;
+                this.uploader.url = SED_UPLOAD_AJAX_URL + "&media_group=" + control.params.media_group;
             }else{
-                this.uploader.url = SEDEXTBASE.url + "media/includes/upload.php";
+                this.uploader.url = SED_UPLOAD_AJAX_URL;
             }
 
             if ( control.params.multi_selection ) {

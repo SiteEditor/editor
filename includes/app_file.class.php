@@ -58,7 +58,7 @@
 
     static function upload( $file_name , $path ){
 
-        require_once(ABSPATH . 'wp-admin/includes/class-wp-upgrader.php');
+        require_once( sed_get_wp_admin_path() . 'includes/class-wp-upgrader.php');
         $zip = new File_Upload_Upgrader( $file_name, 'package');      //UPLOAD FILE
 
         $result = self::unpack_package( $zip->package , true , $path ) ;

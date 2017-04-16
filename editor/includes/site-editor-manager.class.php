@@ -544,10 +544,8 @@ class SiteEditorManager{
         } else {
             $class = 'SedAppSettings';
 
-            /** This filter is documented in wp-includes/class-wp-customize-manager.php */
             $args = apply_filters( 'sed_app_dynamic_setting_args', $args, $id );
 
-            /** This filter is documented in wp-includes/class-wp-customize-manager.php */
             $class = apply_filters( 'sed_app_dynamic_setting_class', $class, $id, $args );
 
             $setting = new $class( $this, $id, $args );
@@ -1062,7 +1060,7 @@ class SiteEditorManager{
 		if ( is_site_editor() && ! is_user_logged_in() )
 		    auth_redirect();
 
-		if ( $this->doing_ajax() && ! is_user_logged_in() ){
+		if ( sed_doing_ajax() && ! is_user_logged_in() ){
 		    $this->sed_die( 0 );
         }
 		show_admin_bar( false );
@@ -1120,7 +1118,7 @@ class SiteEditorManager{
 	 * @return string
 	 */
 	public function wp_die_handler() {
-		if ( $this->doing_ajax() || isset( $_POST['sed_page_customized'] ) ) {
+		if ( sed_doing_ajax() ) {
 			return '_ajax_wp_die_handler';
 		}
 
@@ -1292,17 +1290,25 @@ class SiteEditorManager{
 
         $sed_js_I18n = $site_editor_app->js_I18n();
 
+		$wp_upload = wp_upload_dir();
+
+		$sed_upload_url = $wp_upload['baseurl'] . "/site-editor/";
+
+		$sed_ajax_url = array(
+			'url'   => admin_url( 'admin-ajax.php' )
+		);
+		
 		?>
 
 		<script type="text/javascript">
                 var SED_PB_MODULES_URL = "<?php echo SED_PB_MODULES_URL?>";
-                var SED_UPLOAD_URL = "<?php echo site_url("/wp-content/uploads/site-editor/");?>";
+                var SED_UPLOAD_URL = "<?php echo $sed_upload_url;?>";
                 var SED_BASE_URL = "<?php echo SED_EDITOR_FOLDER_URL;?>";
 				var SED_SITE_URL = "<?php echo site_url();?>";
 				var SEDNOPIC = {url : "<?php echo SED_ASSETS_URL . "/images/no_pic.png";?>"};
                 var IS_SSL = <?php if( is_ssl() ) echo "true";else echo "false";?>;
 				var IS_RTL = <?php if( is_rtl() ) echo "true";else echo "false";?>;
-                var SEDAJAX = {url : "<?php echo SED_EDITOR_FOLDER_URL;?>includes/ajax/site_editor_ajax.php"};
+                var SEDAJAX = <?php echo wp_json_encode( $sed_ajax_url );?>;
 				var _sedAssetsUrls = <?php echo wp_json_encode( $this->assets_urls ); ?>;
                 //var _sedAppPageBuilderModulesScripts = <?php //echo wp_json_encode( $site_editor_app->pagebuilder->modules_scripts ); ?>;
                 //var _sedAppPageBuilderModulesStyles = <?php //echo wp_json_encode( $site_editor_app->pagebuilder->modules_styles ); ?>;
@@ -1369,21 +1375,11 @@ class SiteEditorManager{
         return $info;
     }
 
-	/**
-	 * Return true if it's an AJAX request.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @return bool
-	 */
-	public function doing_ajax() {
-		return isset( $_POST['sed_page_customized'] ) || ( defined( 'DOING_SITE_EDITOR_AJAX' ) && DOING_SITE_EDITOR_AJAX );
-	}
+	function check_ajax_handler($ajax , $nonce , $capability = 'edit_theme_options'){ 
 
-	function check_ajax_handler($ajax , $nonce , $capability = 'edit_theme_options'){
-		if ( is_admin() && ! $this->doing_ajax() )
+		if ( is_admin() && ! sed_doing_ajax() )
 			auth_redirect();
-		elseif ( $this->doing_ajax() && ! is_user_logged_in() ){
+		elseif ( sed_doing_ajax() && ! is_user_logged_in() ){
 			$this->sed_die( 0 );
 		}
 

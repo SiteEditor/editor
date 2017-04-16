@@ -246,7 +246,7 @@ if( !function_exists( "is_woocommerce_active" ) ):
                 return false;
         }
 
-        include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+        include_once( sed_get_wp_admin_path() . 'includes/plugin.php' );
 
         $is_active = is_plugin_active( "woocommerce/woocommerce.php" );
 
@@ -393,7 +393,7 @@ function site_editor_app_on(){
 }
 
 function sed_doing_ajax(){
-    return isset( $_POST['sed_page_customized'] ) || ( defined( 'DOING_SITE_EDITOR_AJAX' ) && DOING_SITE_EDITOR_AJAX );
+    return isset( $_POST['sed_page_customized'] ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX && isset( $_POST['sed_page_ajax'] ) );
 }
 
 function is_sed_save(){
@@ -1490,4 +1490,22 @@ function sed_module_dynamic_css( $css ){
 
     }
 
+}
+
+/**
+ * andrezrv
+ * https://gist.github.com/andrezrv/f7a083627f3bd89c3d9e
+ *
+ * Obtain the path to the admin directory.
+ *
+ * @return string
+ */
+function sed_get_wp_admin_path() {
+    // Replace the site base URL with the absolute path to its installation directory.
+    $admin_path = str_replace( get_bloginfo( 'url' ) . '/', ABSPATH, get_admin_url() );
+
+    // Make it filterable, so other plugins can hook into it.
+    $admin_path = apply_filters( 'sed_get_wp_admin_path', $admin_path );
+
+    return $admin_path;
 }

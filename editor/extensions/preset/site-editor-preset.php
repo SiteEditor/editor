@@ -16,7 +16,7 @@ class SiteEditorPreset{
 
     public static $helper_shortcodes = array();
 
-    public function __construct(){
+    public function __construct(){ 
 
         if( defined( 'SED_INSTALLING' ) ) {
 
@@ -33,19 +33,19 @@ class SiteEditorPreset{
 
         add_action( "sed_footer" , array( $this , "print_templates" ) );
 
-        add_action( "site_editor_ajax_sed_create_preset" , array( $this, "create_ajax_preset" ) );
+        add_action( "wp_ajax_sed_create_preset" , array( $this, "create_ajax_preset" ) );
 
-        add_action( "site_editor_ajax_sed_save_preset" , array( $this, "save_preset" ) );
+        add_action( "wp_ajax_sed_save_preset" , array( $this, "save_preset" ) );
 
-        add_action( "site_editor_ajax_sed_save_presets" , array( $this, "save_presets" ) );
+        add_action( "wp_ajax_sed_save_presets" , array( $this, "save_presets" ) );
 
-        add_action( "site_editor_ajax_sed_get_preset" , array( $this, "get_preset" ) );
+        add_action( "wp_ajax_sed_get_preset" , array( $this, "get_preset" ) );
 
-        add_action( "site_editor_ajax_sed_delete_preset" , array( $this, "delete_preset" ) );
+        add_action( "wp_ajax_sed_delete_preset" , array( $this, "delete_preset" ) );
 
         add_filter( "sed_shortcode_settings" , array( $this, "add_preset_settings" ) , 10 ,2 );
 
-        add_action( "site_editor_ajax_sed_module_presets" , array( __CLASS__ , "get_module_presets" ) );
+        add_action( "wp_ajax_sed_module_presets" , array( __CLASS__ , "get_module_presets" ) );
 
         //add_filter( "sed_addon_settings", array($this,'preset_settings'));
 

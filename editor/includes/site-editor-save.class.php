@@ -17,7 +17,7 @@ class SEDAppSave{
      */
     public function __construct(  ) {
 
-        add_action("site_editor_ajax_customize_save", array(&$this,"site_editor_app_save") );
+        add_action("wp_ajax_customize_save", array(&$this,"site_editor_app_save") );
 
         $this->wp_theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
 
@@ -38,17 +38,6 @@ class SEDAppSave{
 	 */
 	public function get_stylesheet() {
 		return $this->wp_theme->get_stylesheet();
-	}
-
-	/**
-	 * Return true if it's an AJAX request.
-	 *
-	 * @since 3.4.0
-	 *
-	 * @return bool
-	 */
-	public function doing_ajax() {
-		return isset( $_POST['sed_page_customized'] ) || ( defined( 'DOING_SITE_EDITOR_AJAX' ) && DOING_SITE_EDITOR_AJAX );
 	}
 
 	/**

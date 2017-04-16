@@ -6,12 +6,6 @@ global $sed_apps;
  */
 defined('_SEDEXEC') or die;
 
-
- /*** error reporting on ***/
- error_reporting(E_ALL);
-
-
-
  require_once SED_ADMIN_DIR . DS . 'includes'. DS .'defines.php';
 
  /*** include the init.php file ***/
