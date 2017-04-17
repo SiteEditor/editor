@@ -114,7 +114,7 @@ Class SiteEditorModules {
      *
      * This method extracts the name of a module from its filename.
      *
-     * @access private
+     * @access public
      *
      * @param string $file The filename of module.
      * @return string The name of a module.
