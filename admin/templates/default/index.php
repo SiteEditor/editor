@@ -46,7 +46,7 @@ if ( isset( $massage ) && $massage != "" ):?>
             <input type="submit" class="sed_button sed_button_red" value="<?php _e('Reset Options' , 'site-editor')?>" onclick="return confirm('<?php _e( 'Are you sure you want to reset bach to the default?' , 'site-editor' ) ?>');">
         </form>
 
-        <a href="<?php echo $url_editor ?>" class="sed_button sed_button_red"><?php _e('Go To site editor page' , 'site-editor')?></a>
+        <a href="<?php echo esc_url( $url_editor ); ?>" class="sed_button sed_button_red"><?php _e('Go To site editor page' , 'site-editor')?></a>
 
     </div>
 

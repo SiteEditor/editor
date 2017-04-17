@@ -2,7 +2,7 @@
 
     <div class="sed_admin_item_setting">
         <div class="sed_admin_box_field_item">
-              <a href="<?php echo admin_url( 'admin.php?page=site_editor_index&action=import_data_content&import_data_content=classic' ); ?>" class="button button-primary" ><?php echo __("Import Demo Data","site-editor")?> </a>
+              <a href="<?php echo esc_url( admin_url( 'admin.php?page=site_editor_index&action=import_data_content&import_data_content=classic' ) ); ?>" class="button button-primary" ><?php echo __("Import Demo Data","site-editor")?> </a>
         </div>
     </div>
 
@@ -17,10 +17,10 @@
 //var_dump( 'sed_general_theme_options' ,  get_option( 'sed_general_theme_options' ) );
 
     $config = array(
-        'sed_layouts_models'     =>  get_option( 'sed_layouts_models' ),
+        'sed_layouts_models'        =>  get_option( 'sed_layouts_models' ),
         'sed_last_theme_id'         =>  get_option( 'sed_last_theme_id' ),
         'sed_main_theme_content'    =>  get_option( 'sed_main_theme_content' ),
-        'sed_layouts_content'    =>  get_option( 'sed_layouts_content' ),
+        'sed_layouts_content'       =>  get_option( 'sed_layouts_content' ),
         'sed_theme_options'         =>  get_option( 'sed_theme_options' ),
         'sed_general_theme_options' =>  get_option( 'sed_general_theme_options' ),
         'show_on_front'             =>  get_option( 'show_on_front' ),
