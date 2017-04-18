@@ -258,7 +258,7 @@ class SiteEditorPostOptions {
             return ;
         }
 
-        $options = $this->get_post_options( $page_id , $page_type , $post_type );
+        $options = $this->get_post_options( $page_id , $page_type , $post_type->name );
 
         $panels = $options['panels']; //var_dump( $panels );
 
@@ -396,7 +396,7 @@ class SiteEditorPostOptions {
                 return ;
             }
 
-            $this->add_fields( $fields , $post_type );
+            $this->add_fields( $fields , $post_type->name );
 
         }
 
@@ -412,7 +412,7 @@ class SiteEditorPostOptions {
 
         $page_id = isset( $_POST['page_id'] ) ? sanitize_text_field( $_POST['page_id'] ) : '';
 
-        $options = apply_filters( "sed_post_design_options" , array() , $page_id , $post_type );
+        $options = apply_filters( "sed_post_design_options" , array() , $page_id , $post_type->name );
 
         if( !empty( $options ) ){
 

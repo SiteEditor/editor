@@ -251,7 +251,7 @@ class SiteEditorPageOptions {
             return ;
         }
 
-        $options = $this->get_page_options( $page_id , $page_type , $post_type );
+        $options = $this->get_page_options( $page_id , $page_type , $post_type->name );
 
         $panels = $options['panels']; //var_dump( $panels );
 
