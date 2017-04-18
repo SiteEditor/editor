@@ -39,8 +39,11 @@ function sed_ajax_upload_attachment() {
 
     add_post_meta($attachment_id, "_site_editor_uploaded", 'yes');
 
-    if (isset($_REQUEST['media_group']))
-        add_post_meta($attachment_id, "_site_editor_media_group", $_REQUEST['media_group']);
+    if (isset($_REQUEST['media_group'])){
+
+        add_post_meta( $attachment_id , "_site_editor_media_group", sanitize_text_field( $_REQUEST['media_group'] ) );
+        
+    }
 
     if (is_wp_error($attachment_id)) {
 

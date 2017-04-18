@@ -284,6 +284,25 @@ class SED_Admin_Options{
 		return $output;
 	}
 
+	public function field_sanitize( $id , $value , $attrs ){
+
+		return apply_filters( "sed_admin_fields_sanitize" , $value , $id , $attrs );
+
+	}
+
+	public function checkbox_sanitize( $id , $value , $attrs ){
+
+		$value = ( $value === "on" ) ? $value : '';
+
+		return apply_filters( "sed_checkbox_field_sanitize" , $value , $id , $attrs );
+
+	}
+
+	/**
+	 * In Version 1.0.0 , we have only one option for save that it is "Developer Sample Options" and
+	 * its type is "checkbox" and we sanitize only "checkbox" type
+	 * TODO: After Add Other field type to admin options we will need to sanitize them
+	 */
 	function save_options_admin() {
 
 		global $sed_error , $sed_general_data ;
@@ -298,7 +317,9 @@ class SED_Admin_Options{
 					
 						if( isset( $_REQUEST[ $id ]) ) {
 
-							$options[$id] = $_REQUEST[ $id ];
+							$sanitize_func = isset( $attrs['sanitize'] ) ? $attrs['sanitize'] . "_sanitize" : "field_sanitize";
+
+							$options[$id] = $this->$sanitize_func( $id , $_REQUEST[ $id ] , $attrs );
 
 						} else {
 

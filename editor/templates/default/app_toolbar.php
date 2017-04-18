@@ -1,5 +1,7 @@
 <!-- Editor Toolbar Part --->
 <?php
+global $site_editor_app;
+
 $toolbar = $site_editor_app->toolbar;
 $current_type = $site_editor_app->current_type;
 $tabs = $toolbar->tabs;
@@ -9,9 +11,9 @@ $tabs = current_type_elemans($current_type , $tabs);
 
     <ul class="preview-mode-toolbar">
         <li class="back-to-editor">
-            <button value="<?php echo __("Back To Editor" ,"site-editor");  ?>" class="btn button-primary save" id="back-to-editor-btn" name="back-to-editor-btn">
+            <button value="<?php echo esc_attr__("Back To Editor" ,"site-editor");  ?>" class="btn button-primary save" id="back-to-editor-btn" name="back-to-editor-btn">
             <span class="sedico sedico-chevron-left icon-back-to-editor sedico-lg "></span>
-            <span class="el_txt"><?php echo __("Back To Editor" ,"site-editor");  ?></span>
+            <span class="el_txt"><?php echo esc_html__("Back To Editor" ,"site-editor");  ?></span>
             </button>
         </li>
         <li class="preview-mode" data-preview-mode="desktop-mode">
@@ -43,16 +45,16 @@ $tabs = current_type_elemans($current_type , $tabs);
 
     <ul class="site-editor-app-tools-button">
         <li class="preview">
-            <button value="<?php echo __("Preview" ,"site-editor");  ?>" class="btn button-primary" id="app-preview-mode-btn" name="app-preview-mode-btn">
+            <button value="<?php echo esc_attr__("Preview" ,"site-editor");  ?>" class="btn button-primary" id="app-preview-mode-btn" name="app-preview-mode-btn">
             <span class="sedico sedico-eye sedico-lg "></span>
-            <span class="el_txt"><?php echo __("Preview" ,"site-editor");  ?></span>
+            <span class="el_txt"><?php echo esc_html__("Preview" ,"site-editor");  ?></span>
             </button>
         </li>
         <li class="save-publish">
-            <button value="<?php echo __("Saved" ,"site-editor");  ?>" class="btn button-primary save" id="save" name="save">
+            <button value="<?php echo esc_attr__("Saved" ,"site-editor");  ?>" class="btn button-primary save" id="save" name="save">
             <span class="sedico sedico-spiner sedico-spin sedico-lg "></span>
             <span class="sedico sedico-savepublish sedico-lg "></span>
-            <span class="el_txt"><?php echo __("Saved & Publish" ,"site-editor");  ?></span>
+            <span class="el_txt"><?php echo esc_html__("Saved & Publish" ,"site-editor");  ?></span>
             </button>
         </li>
         <li class="sed-module-gideline">
@@ -111,16 +113,16 @@ $tabs = current_type_elemans($current_type , $tabs);
 
         if($tab->type == "tab"){
     ?>
-          <li class="tab_b <?php if($ti == 0) echo "active"; ?> <?php echo $classes;?>" id="<?php echo $tab->name;?>">
+          <li class="tab_b <?php if($ti == 0) echo "active"; ?> <?php echo $classes;?>" id="<?php echo esc_attr( $tab->name );?>">
               <a data-toggle="tab" href="#<?php echo $tab->name;?>-tab-content" <?php echo $attr_string;?>>
               <?php
                if(!empty($tab->icon)){
               ?>
-               <span class="img_tab"><img src="<?php echo $tab->icon;?>" alt="<?php echo $tab->title;?>" /></span>
+               <span class="img_tab"><img src="<?php echo esc_url( $tab->icon );?>" alt="<?php echo esc_attr( $tab->title );?>" /></span>
               <?php
                 }
               ?>
-              <span class="el_txt"><?php echo $tab->title;?></span>
+              <span class="el_txt"><?php echo esc_attr( $tab->title );?></span>
               <span class="sedico sedico-settings sedico-lg "></span>
               </a>
           </li>
@@ -128,16 +130,16 @@ $tabs = current_type_elemans($current_type , $tabs);
         $ti++;
         }elseif($tab->type == "menu"){
     ?>
-          <li class="tab_b dropdown menu_item <?php echo $classes;?>" id="<?php echo $tab->name;?>">
+          <li class="tab_b dropdown menu_item <?php echo $classes;?>" id="<?php echo esc_attr( $tab->name );?>">
               <a data-toggle="dropdown" href="javascript:void(0)" <?php echo $attr_string;?>>
               <?php
                if(!empty($tab->icon)){
               ?>
-               <span class="img_tab"><img src="<?php echo $tab->icon;?>" alt="<?php echo $tab->title;?>" /></span>
+               <span class="img_tab"><img src="<?php echo esc_url( $tab->icon );?>" alt="<?php echo esc_attr( $tab->title );?>" /></span>
               <?php
                 }
               ?>
-              <span class="el_txt"><?php echo $tab->title;?></span>
+              <span class="el_txt"><?php echo esc_html( $tab->title );?></span>
               <span class="caret"></span>
              </a>
              <ul class="dropdown-menu menu" role="menu" aria-labelledby="dropdownMenu2">
@@ -171,7 +173,7 @@ $tabs = current_type_elemans($current_type , $tabs);
                                         }
                                     }
                               ?>
-                              <li role="presentation" class="">  <a role="menuitem" class="<?php echo $link_classes;?> " tabindex="-1" href="#"><span class="sedico <?php echo $classes;?> fa-lg "></span><span><?php echo $element->title;?></span>  </a>
+                              <li role="presentation" class="">  <a role="menuitem" class="<?php echo $link_classes;?> " tabindex="-1" href="#"><span class="sedico <?php echo $classes;?> fa-lg "></span><span><?php echo esc_html( $element->title );?></span>  </a>
                               <?php
                                 /*if(function_exists($element->def_content)){
                                     $function = $element->def_content; 
@@ -324,7 +326,7 @@ $tabs = current_type_elemans($current_type , $tabs);
                                 </tr>
                           </table>
                          </div>
-                         <div class="title" id="<?php echo $group->name;?>-group"><span><?php echo $group->title;?></span></div>
+                         <div class="title" id="<?php echo esc_attr( $group->name );?>-group"><span><?php echo esc_html( $group->title );?></span></div>
                          </div>
                          <?php if($ig != count($element_group_arr)){?><div class="spr"></div> <?php } ?>
                         <?php

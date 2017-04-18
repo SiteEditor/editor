@@ -193,10 +193,16 @@ final class SiteEditorOptionsManager{
 
         SED()->editor->manager->check_ajax_handler( 'sed_options_loader' , 'sed_app_options_load' , 'sed_manage_settings' );
 
-        if( !isset( $_POST['options_group'] ) || empty( $_POST['options_group'] ) || !isset( $_POST['setting_id'] ) || empty( $_POST['setting_id'] ) ){
+        $options_group = isset( $_POST['options_group'] ) ? sanitize_text_field( $_POST['options_group'] ) : '';
+
+        $settings_id = isset( $_POST['setting_id'] ) ? sanitize_text_field( $_POST['setting_id'] ) : '';
+
+        $settings_type = isset( $_POST['setting_type'] ) ? sanitize_text_field( $_POST['setting_type'] ) : '';
+
+        if( empty( $options_group ) || empty( $settings_id ) ){
 
             $data = array(
-                'settingId'   => isset( $_POST['setting_id'] ) ? $_POST['setting_id'] : '',
+                'settingId'   => $settings_id,
                 'message'     => __( 'Data is not valid.' , 'site-editor' ),
             );
 
@@ -204,16 +210,16 @@ final class SiteEditorOptionsManager{
 
         }
 
-        do_action( "sed_register_{$_POST['options_group']}_options" );
+        do_action( "sed_register_{$options_group}_options" );
 
         $this->register_fields();
 
-        $data = $this->get_settings_data( $_POST['options_group'] , $_POST['setting_type'] );
+        $data = $this->get_settings_data( $options_group , $settings_type );
 
         if( is_wp_error( $data ) ){
 
             $data = array(
-                'settingId'   => $_POST['setting_id'],
+                'settingId'   => $settings_id,
                 'message'     => $data->get_error_message(),
             );
 
@@ -233,7 +239,7 @@ final class SiteEditorOptionsManager{
             "panels"            =>  array() ,
             "relations"         =>  array() ,
             "output"            =>  "" ,
-            "settingId"         =>  $_POST['setting_id'] ,
+            "settingId"         =>  isset( $_POST['setting_id'] ) ? sanitize_text_field( $_POST['setting_id'] ) : '' ,
             "settingType"       =>  $group_type ,
             "groups"            =>  array() ,
             "designTemplate"    =>  "" ,

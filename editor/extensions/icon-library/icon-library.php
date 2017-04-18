@@ -218,13 +218,32 @@ if(!class_exists('SiteEditorIconManager'))
         }
 
         public function add_zipped_font(){
+
 			//check if referer is ok
             global $sed_apps;
+
             $sed_apps->editor->manager->check_ajax_handler('icon_font_loader' , 'sed_app_icon_font_load');
 
 			//get the file path of the zip file
-			$attachment = $_POST['filedata'];
+			$attachment = ( isset( $_POST['filedata'] ) ) ? $_POST['filedata'] : '';
+
+			if( !is_array( $attachment ) || !isset( $attachment['id'] ) ){
+
+				$this->sed_ico_die( false , __('Your font file is invalid' , 'site-editor') );
+
+			}
+
+			$attachment_id = $attachment['id'];
+
+			if( ! get_post( $attachment_id ) ){
+
+				$this->sed_ico_die( false , __('Your font file is not found' , 'site-editor') );
+
+			}
+
+
 			$path 		= realpath(get_attached_file($attachment['id']));
+
 			$unzipped 	= $this->zip_flatten( $path , array('\.eot','\.svg','\.ttf','\.woff','\.json','\.css'));
 				// if we were able to unzip the file and save it to our temp folder extract the svg file
 			if($unzipped)
@@ -532,21 +551,36 @@ if(!class_exists('SiteEditorIconManager'))
   			return $created;
   		}
 
-		function remove_icons_font()
-		{
+		function remove_icons_font(){
+
 		    global $sed_apps;
+
 			$sed_apps->editor->manager->check_ajax_handler('icon_font_remove' , 'sed_app_icon_font_remove');
-			//get the file path of the zip file
-			$font 		= $_POST['font_name'];
-			$list 		= self::load_iconfont_list();
-			$delete		= isset($list[$font]) ? $list[$font] : false;
-			if($delete)
-			{
-				$this->delete_folder($delete['include']);
-				$this->remove_font($font);
-					$this->sed_ico_die(true );
+
+			//Get Font Name
+			$font = isset( $_POST['font_name'] ) ? sanitize_text_field( $_POST['font_name'] ) : '';
+
+			if( empty( $font ) ){
+
+				$this->sed_ico_die(false ,__('Font not found' , 'site-editor') );
+
 			}
-			$this->sed_ico_die(false ,__('Was not able to remove Font' , 'site-editor') );
+
+			$list 		= self::load_iconfont_list();
+
+			$delete		= isset( $list[$font] ) ? $list[$font] : false;
+
+			if( $delete ) {
+
+				$this->delete_folder($delete['include']);
+
+				$this->remove_font($font);
+
+				$this->sed_ico_die(true );
+
+			}
+
+			$this->sed_ico_die( false ,__('Was not able to remove Font' , 'site-editor') );
 		}
 
 		static function load_iconfont_list()

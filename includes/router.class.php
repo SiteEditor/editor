@@ -103,13 +103,13 @@ private function getController() {
 
     if( $this->type == "front-end" )
     {
-        $route = (empty($_REQUEST['option'])) ? '' : $_REQUEST['option'];
+        $route = ( empty( $_REQUEST['option'] ) ) ? '' : sanitize_text_field( $_REQUEST['option'] );
     }else{
-        $route = (empty($_REQUEST['page'])) ? '' : $_REQUEST['page'];
+        $route = ( empty( $_REQUEST['page'] ) ) ? '' : sanitize_text_field( $_REQUEST['page'] );
 
     }
 	/*** get the route from the url ***/
-    $this->action = (empty($_GET['action'])) ? '' : $_GET['action'];
+    $this->action = (empty($_GET['action'])) ? '' : sanitize_text_field( $_GET['action'] );
 
 	if (empty($route))
 	{

@@ -162,8 +162,8 @@
   <?php echo __( "Do you want to delete this element?" , "site-editor");?>
 </p>
 <div class="button-popover" >
- <button class="sed-btn-red sed-module-remove-btn" > <?php echo __( "Delete" , "site-editor");?> </button>
- <button class="sed-btn-default close-popover" > <?php echo __( "Cancel" , "site-editor");?> </button>
+ <button class="sed-btn-red sed-module-remove-btn" > <?php echo esc_html__( "Delete" , "site-editor");?> </button>
+ <button class="sed-btn-default close-popover" > <?php echo esc_html__( "Cancel" , "site-editor");?> </button>
 </div>
 
 </script>

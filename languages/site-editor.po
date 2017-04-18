@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Site Editor\n"
-"POT-Creation-Date: 2017-04-16 01:33+0430\n"
-"PO-Revision-Date: 2017-04-16 01:34+0430\n"
+"POT-Creation-Date: 2017-04-18 20:12+0430\n"
+"PO-Revision-Date: 2017-04-18 20:13+0430\n"
 "Last-Translator: \n"
 "Language-Team: Site Editor Team <info@siteeditor.org>\n"
 "Language: en_US\n"
@@ -19,84 +19,20 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/controller/site_editor_edit_module.php:33
-#: admin/controller/site_editor_skin.php:19
-msgid "Does Not Exist Modules"
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:46
-msgid "Do not exist any less file in this module"
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:54
-msgid "No such file exists! Double check the name and try again."
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:61
-msgid "Files of this type are not editable."
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:81
-#, php-format
-msgid "Edit Module : %s"
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:104
-msgid "Send data is invalid"
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:141
-#: admin/templates/default/theme_less_compile.php:20
-#: includes/app_pb_modules.class.php:500 includes/app_pb_modules.class.php:560
-#, php-format
-msgid "less %s is compiled."
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:148
-#: admin/templates/default/theme_less_compile.php:24
-#: includes/app_pb_module_skins.class.php:244
-#: includes/app_pb_modules.class.php:505
-#, php-format
-msgid "Error LESS : %s"
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:156
-#, php-format
-msgid "less %s is updated."
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:165
-msgid "File is successfully updated."
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:174
-msgid "Module update failed."
-msgstr ""
-
-#: admin/controller/site_editor_edit_module.php:184
-msgid "File Not Found Module update failed."
-msgstr ""
-
 #: admin/controller/site_editor_index.php:31
 msgid "Site Editor Settings"
 msgstr ""
 
-#: admin/controller/site_editor_module.php:36
-#: admin/controller/site_editor_module.php:52
+#: admin/controller/site_editor_module.php:40
+#: admin/controller/site_editor_module.php:56
 msgid ""
 "You do not have sufficient permissions to activate modules for this site."
 msgstr ""
 
-#: admin/controller/site_editor_module.php:80
-#: admin/controller/site_editor_module.php:97
+#: admin/controller/site_editor_module.php:90
+#: admin/controller/site_editor_module.php:107
 msgid ""
 "You do not have sufficient permissions to deactivate modules for this site."
-msgstr ""
-
-#: admin/controller/site_editor_module.php:123
-#: admin/controller/site_editor_module.php:140
-msgid ""
-"You do not have sufficient permissions to install modules for this site."
 msgstr ""
 
 #: admin/includes/options.php:5
@@ -105,8 +41,8 @@ msgstr ""
 
 #: admin/includes/options.php:9
 #: editor/extensions/options-engine/includes/site-editor-theme-options.class.php:144
-#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:682
-#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:694
+#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:681
+#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:693
 msgid "General Settings"
 msgstr ""
 
@@ -139,7 +75,7 @@ msgid "No file chosen"
 msgstr ""
 
 #: admin/includes/sed-admin-options.class.php:250
-#: admin/site-editor-admin.class.php:218
+#: admin/site-editor-admin.class.php:212
 #: editor/extensions/icon-library/view/icon-library.php:13
 #: editor/extensions/media/view/media.php:13
 #: editor/extensions/options-engine/view/custom_font_tpl.php:60
@@ -150,7 +86,7 @@ msgid "Upload"
 msgstr ""
 
 #: admin/includes/sed-admin-options.class.php:252
-#: admin/site-editor-admin.class.php:219
+#: admin/site-editor-admin.class.php:213
 #: editor/extensions/layout/view/add_layout.tpl.php:82
 msgid "Remove"
 msgstr ""
@@ -163,11 +99,11 @@ msgstr ""
 msgid "View File"
 msgstr ""
 
-#: admin/includes/sed-admin-options.class.php:325
+#: admin/includes/sed-admin-options.class.php:346
 msgid "settings saved."
 msgstr ""
 
-#: admin/includes/sed-admin-options.class.php:337
+#: admin/includes/sed-admin-options.class.php:358
 msgid "Settings are reset."
 msgstr ""
 
@@ -276,137 +212,77 @@ msgstr ""
 msgid "Modules is incompletely installed."
 msgstr ""
 
-#: admin/includes/sed-setup.class.php:36
-msgid "SiteEditor requires WordPress version 4.0 or higher."
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:95
-#, php-format
-msgid "step %d : %s is not installed"
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:99
-#, php-format
-msgid "step %d : %s is not defined"
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:104
-#, php-format
-msgid "Step %d : %s is compelated already!"
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:112
-msgid "site editor successfully installed"
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:114
-msgid "Site editor is not installed"
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:186 admin/site-editor-admin.class.php:247
-#: admin/site-editor-admin.class.php:248
-#: includes/site-editor-install.class.php:56
-msgid "SiteEditor"
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:211
-#: admin/includes/sed-setup.class.php:215
-#: admin/includes/sed-setup.class.php:237
-msgid "step 2 : Install and active theme completly"
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:224
-msgid "Theme download is complete."
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:231
-msgid "Unzip process is complete."
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:234
-msgid "theme is not installed."
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:265
-msgid "Less Framework is compiled."
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:269
-#, php-format
-msgid "Less Framework Error : %s"
-msgstr ""
-
-#: admin/includes/sed-setup.class.php:296
-#, php-format
-msgid "Module %s is not installed"
-msgstr ""
-
-#: admin/site-editor-admin.class.php:229
+#: admin/site-editor-admin.class.php:223
 #, php-format
 msgid "<a href=\"%1$s\">complete install Site Editor plugin</a>"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:259 admin/templates/default/index.php:18
+#: admin/site-editor-admin.class.php:241 admin/site-editor-admin.class.php:242
+#: includes/site-editor-install.class.php:56
+msgid "SiteEditor"
+msgstr ""
+
+#: admin/site-editor-admin.class.php:253 admin/templates/default/index.php:18
 msgid "SiteEditor Settings"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:260
+#: admin/site-editor-admin.class.php:254
 #: editor/includes/components/app_contextmenu.class.php:271
 #: editor/site-editor-app.php:147
 msgid "Settings"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:268
+#: admin/site-editor-admin.class.php:262
 msgid "Installed Modules"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:269
+#: admin/site-editor-admin.class.php:263
 #: admin/templates/default/module/index.php:2
 #: editor/extensions/pagebuilder/pagebuilder.php:25
 msgid "Modules"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:277 admin/site-editor-admin.class.php:278
+#: admin/site-editor-admin.class.php:271 admin/site-editor-admin.class.php:272
 #: editor/extensions/pagebuilder/includes/pb-skin-loader.class.php:76
 msgid "Skins"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:286 admin/site-editor-admin.class.php:287
+#: admin/site-editor-admin.class.php:280 admin/site-editor-admin.class.php:281
 msgid "Extensions"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:295 admin/site-editor-admin.class.php:296
+#: admin/site-editor-admin.class.php:289 admin/site-editor-admin.class.php:290
 msgid "Less Editor"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:324
+#: admin/site-editor-admin.class.php:318
 msgctxt "items per page (screen options)"
 msgid "Number of items per page:"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:328
+#: admin/site-editor-admin.class.php:322
 msgid "Overview Modules"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:330
+#: admin/site-editor-admin.class.php:324
 msgid ""
 "All the files you&#8217;ve uploaded are listed in the Media Library, with "
 "the most recent uploads listed first. You can use the Screen Options tab to "
 "customize the display of this screen."
 msgstr ""
 
-#: admin/site-editor-admin.class.php:331
+#: admin/site-editor-admin.class.php:325
 msgid ""
 "You can narrow the list by file type/status using the text link filters at "
 "the top of the screen. You can also filter the list by date using the drop "
 "down menu above the media table."
 msgstr ""
 
-#: admin/site-editor-admin.class.php:336
+#: admin/site-editor-admin.class.php:330
 msgid "Adding Plugins"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:338
+#: admin/site-editor-admin.class.php:332
 msgid ""
 "If you know what you&#8217;re looking for, Search is your best bet. The "
 "Search screen has options to search the WordPress.org Plugin Directory for a "
@@ -415,45 +291,45 @@ msgid ""
 "labeled with that tag."
 msgstr ""
 
-#: admin/site-editor-admin.class.php:339
+#: admin/site-editor-admin.class.php:333
 msgid ""
 "If you just want to get an idea of what&#8217;s available, you can browse "
 "Featured and Popular plugins by using the links in the upper left of the "
 "screen. These sections rotate regularly."
 msgstr ""
 
-#: admin/site-editor-admin.class.php:340
+#: admin/site-editor-admin.class.php:334
 msgid ""
 "You can also browse a user&#8217;s favorite plugins, by using the Favorites "
 "link in the upper left of the screen and entering their WordPress.org "
 "username."
 msgstr ""
 
-#: admin/site-editor-admin.class.php:341
+#: admin/site-editor-admin.class.php:335
 msgid ""
 "If you want to install a plugin that you&#8217;ve downloaded elsewhere, "
 "click the Upload link in the upper left. You will be prompted to upload the ."
 "zip package, and once uploaded, you can activate the new plugin."
 msgstr ""
 
-#: admin/site-editor-admin.class.php:345
+#: admin/site-editor-admin.class.php:339
 msgid "For more information:"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:346
+#: admin/site-editor-admin.class.php:340
 msgid ""
 "<a href=\"https://codex.wordpress.org/Plugins_Add_New_Screen\" target="
 "\"_blank\">Documentation on Installing Plugins</a>"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:347
+#: admin/site-editor-admin.class.php:341
 msgid ""
 "<a href=\"https://wordpress.org/support/\" target=\"_blank\">Support Forums</"
 "a>"
 msgstr ""
 
-#: admin/site-editor-admin.class.php:415 admin/site-editor-admin.class.php:429
-#: admin/site-editor-admin.class.php:457
+#: admin/site-editor-admin.class.php:409 admin/site-editor-admin.class.php:423
+#: admin/site-editor-admin.class.php:451
 #: includes/site-editor-initialize.class.php:90
 msgid "Edit With SiteEditor"
 msgstr ""
@@ -476,127 +352,12 @@ msgid ""
 "downloaded <a href=\"%s\">here</a>"
 msgstr ""
 
-#: admin/templates/default/font-family.php:18
-msgid "Select Font Family"
-msgstr ""
-
-#: admin/templates/default/font-family.php:21
-#: editor/extensions/design-editor/modules/font/includes/site-editor-font-family-control.class.php:100
-#: editor/extensions/options-engine/includes/site-editor-font-options.class.php:122
-msgid "Custom Fonts"
-msgstr ""
-
-#: admin/templates/default/font-family.php:33
-#: editor/extensions/design-editor/modules/font/includes/site-editor-font-family-control.class.php:101
-msgid "Standard Fonts"
-msgstr ""
-
-#: admin/templates/default/font-family.php:44
-#: editor/extensions/design-editor/modules/font/includes/site-editor-font-family-control.class.php:102
-msgid "Google Fonts"
-msgstr ""
-
-#: admin/templates/default/import-demo-data.php:5
-msgid "Import Demo Data"
-msgstr ""
-
-#: admin/templates/default/import-demo-processing.php:4
-msgid "Import Demo Processing"
-msgstr ""
-
-#: admin/templates/default/import-demo-processing.php:10
-#: admin/templates/default/module-less-compile.php:21
-msgid "Back"
-msgstr ""
-
 #: admin/templates/default/index.php:29
 msgid "Save Options"
 msgstr ""
 
-#: admin/templates/default/install.php:4
-#: admin/templates/default/skin/install-skin.php:4
-msgid "SiteEditor Installer"
-msgstr ""
-
-#: admin/templates/default/install.php:8
-msgid "Installing SiteEditor Plugin ..."
-msgstr ""
-
-#: admin/templates/default/install.php:25
-msgid "Go To Site Editor"
-msgstr ""
-
-#: admin/templates/default/install.php:26
-msgid "Go To Settings Page"
-msgstr ""
-
-#: admin/templates/default/module-less-compile.php:4
-msgid "Module Less Compile"
-msgstr ""
-
-#: admin/templates/default/module-less-compile.php:8
-msgid "Compiling Less Files ..."
-msgstr ""
-
-#: admin/templates/default/module/edit.php:10
-#, php-format
-msgid "Editing <strong>%s</strong>"
-msgstr ""
-
-#: admin/templates/default/module/edit.php:10
-msgid "(active)"
-msgstr ""
-
-#: admin/templates/default/module/edit.php:19
-msgid "Select module to edit:"
-msgstr ""
-
-#: admin/templates/default/module/edit.php:34
-msgid "Select skin to edit:"
-msgstr ""
-
-#: admin/templates/default/module/edit.php:39
-msgid "All Skins And Other"
-msgstr ""
-
-#: admin/templates/default/module/edit.php:52
-#: admin/templates/default/skin/index.php:20
-#: editor/extensions/options-engine/includes/demo/site-editor-sample-options.php:949
-msgid "Select"
-msgstr ""
-
-#: admin/templates/default/module/edit.php:59
-msgid "Files"
-msgstr ""
-
-#: admin/templates/default/module/edit.php:90
-msgid "Update And Compile"
-msgstr ""
-
-#: admin/templates/default/module/edit.php:90
-msgid "Update File"
-msgstr ""
-
 #: admin/templates/default/module/index.php:11
 msgid "Search Installed modules"
-msgstr ""
-
-#: admin/templates/default/module/install.php:4
-msgid "SiteEditor Module Installer"
-msgstr ""
-
-#: admin/templates/default/module/install.php:8
-msgid "Start install Module"
-msgstr ""
-
-#: admin/templates/default/module/install.php:16
-#: includes/app_pb_modules.class.php:313
-#, php-format
-msgid "%s Module already installed"
-msgstr ""
-
-#: admin/templates/default/module/install.php:31
-msgid "Return to Modules Page"
 msgstr ""
 
 #: admin/templates/default/pages_edit_links.php:3
@@ -628,51 +389,6 @@ msgstr ""
 
 #: admin/templates/default/pages_edit_links.php:23
 msgid "Custom Post Type Pages"
-msgstr ""
-
-#: admin/templates/default/skin/index.php:4
-#, php-format
-msgid "Skins %s"
-msgstr ""
-
-#: admin/templates/default/skin/index.php:5
-msgid "Add New"
-msgstr ""
-
-#: admin/templates/default/skin/index.php:10
-msgid "Select module to show skins:"
-msgstr ""
-
-#: admin/templates/default/skin/index.php:48
-msgid "Less Edit"
-msgstr ""
-
-#: admin/templates/default/skin/index.php:52
-msgid "Install"
-msgstr ""
-
-#: admin/templates/default/skin/index.php:54
-msgid "Reinstall"
-msgstr ""
-
-#: admin/templates/default/skin/install-skin.php:9
-#, php-format
-msgid "Install skin for %s"
-msgstr ""
-
-#: admin/templates/default/skin/install-skin.php:17
-#: admin/templates/default/skin/install-skin.php:27
-#, php-format
-msgid "An error occurred in the skin installation : %s"
-msgstr ""
-
-#: admin/templates/default/skin/install-skin.php:19
-#: admin/templates/default/skin/install-skin.php:29
-msgid "An error occurred in the skin installation  "
-msgstr ""
-
-#: admin/templates/default/skin/install-skin.php:43
-msgid "Return to Skins Page"
 msgstr ""
 
 #: editor/extensions/customize-posts/includes/sed-customize-postmeta-setting.class.php:171
@@ -859,7 +575,7 @@ msgstr ""
 
 #: editor/extensions/design-editor/includes/design-editor-manager.class.php:602
 #: editor/extensions/design-editor/includes/design-editor-manager.class.php:612
-#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:666
+#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:665
 msgid "Custom Edit Style"
 msgstr ""
 
@@ -1407,6 +1123,19 @@ msgstr ""
 msgid "Text Decoration"
 msgstr ""
 
+#: editor/extensions/design-editor/modules/font/includes/site-editor-font-family-control.class.php:100
+#: editor/extensions/options-engine/includes/site-editor-font-options.class.php:122
+msgid "Custom Fonts"
+msgstr ""
+
+#: editor/extensions/design-editor/modules/font/includes/site-editor-font-family-control.class.php:101
+msgid "Standard Fonts"
+msgstr ""
+
+#: editor/extensions/design-editor/modules/font/includes/site-editor-font-family-control.class.php:102
+msgid "Google Fonts"
+msgstr ""
+
 #: editor/extensions/design-editor/modules/font/includes/site-editor-font-style-field.class.php:78
 #: editor/extensions/design-editor/modules/font/includes/site-editor-font-weight-field.class.php:79
 msgid "normal"
@@ -1675,7 +1404,7 @@ msgid "Add trancparency To each dom element"
 msgstr ""
 
 #: editor/extensions/icon-library/icon-library.php:72
-#: editor/extensions/media/media.php:281
+#: editor/extensions/media/media.php:283
 msgid "Sent Data, Invalid"
 msgstr ""
 
@@ -1720,47 +1449,59 @@ msgstr ""
 msgid "class Selector"
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:238
+#: editor/extensions/icon-library/icon-library.php:232
+msgid "Your font file is invalid"
+msgstr ""
+
+#: editor/extensions/icon-library/icon-library.php:240
+msgid "Your font file is not found"
+msgstr ""
+
+#: editor/extensions/icon-library/icon-library.php:257
 msgid "Was not able to retrieve the Font name from your Uploaded Folder"
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:252
+#: editor/extensions/icon-library/icon-library.php:272
 msgid "Wasn't able to create temp folder"
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:278
+#: editor/extensions/icon-library/icon-library.php:298
 msgid "Unable to extract the file."
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:288
+#: editor/extensions/icon-library/icon-library.php:308
 msgid "Wasn't able to work with Zip Archive"
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:302
+#: editor/extensions/icon-library/icon-library.php:322
 msgid ""
 "selection.json or SVG file not found. Was not able to create the necessary "
 "config files"
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:329
+#: editor/extensions/icon-library/icon-library.php:349
 msgid ""
 "It seems that the font with the same name is already exists! Please upload "
 "the font with different name."
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:443
+#: editor/extensions/icon-library/icon-library.php:463
 msgid "Was not able to write a config file"
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:461
+#: editor/extensions/icon-library/icon-library.php:481
 msgid "Unable to write css. Upload icons downloaded only from icomoon"
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:527
+#: editor/extensions/icon-library/icon-library.php:547
 msgid "Sorry, browsing the directory is not allowed!"
 msgstr ""
 
-#: editor/extensions/icon-library/icon-library.php:548
+#: editor/extensions/icon-library/icon-library.php:565
+msgid "Font not found"
+msgstr ""
+
+#: editor/extensions/icon-library/icon-library.php:583
 msgid "Was not able to remove Font"
 msgstr ""
 
@@ -1770,7 +1511,7 @@ msgstr ""
 
 #: editor/extensions/icon-library/view/icon-library.php:8
 #: editor/extensions/icon-library/view/icon-library.php:99
-#: editor/extensions/media/media.php:62
+#: editor/extensions/media/media.php:64
 #: editor/extensions/media/view/media.php:1
 #: editor/extensions/media/view/media.php:8
 #: editor/extensions/media/view/media.php:146
@@ -1779,7 +1520,7 @@ msgstr ""
 
 #: editor/extensions/icon-library/view/icon-library.php:30
 #: editor/extensions/media/view/media.php:123
-#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:1060
+#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:1066
 msgid "Error"
 msgstr ""
 
@@ -1970,7 +1711,7 @@ msgid "The item is not valid layout."
 msgstr ""
 
 #: editor/extensions/layout/includes/site-editor-layout.php:279
-#: editor/extensions/media/media.php:262 editor/site-editor-app.php:136
+#: editor/extensions/media/media.php:264 editor/site-editor-app.php:136
 msgid "Archive"
 msgstr ""
 
@@ -2170,43 +1911,43 @@ msgstr ""
 msgid "Using Default settings"
 msgstr ""
 
-#: editor/extensions/media/media.php:56
+#: editor/extensions/media/media.php:58
 msgid "Unknown Artist"
 msgstr ""
 
-#: editor/extensions/media/media.php:57
+#: editor/extensions/media/media.php:59
 #: editor/includes/components/app_contextmenu.class.php:541
 msgid "Audio Library"
 msgstr ""
 
-#: editor/extensions/media/media.php:58
+#: editor/extensions/media/media.php:60
 #: editor/extensions/options-engine/includes/demo/site-editor-sample-options.php:1141
 #: editor/includes/components/app_contextmenu.class.php:542
 #: editor/includes/components/app_contextmenu.class.php:548
 msgid "Change Audio"
 msgstr ""
 
-#: editor/extensions/media/media.php:59
+#: editor/extensions/media/media.php:61
 msgid "Media Format Is Not Valid"
 msgstr ""
 
-#: editor/extensions/media/media.php:60
+#: editor/extensions/media/media.php:62
 #: editor/includes/components/app_contextmenu.class.php:499
 msgid "Video Library"
 msgstr ""
 
-#: editor/extensions/media/media.php:61
+#: editor/extensions/media/media.php:63
 #: editor/extensions/options-engine/includes/demo/site-editor-sample-options.php:1159
 #: editor/includes/components/app_contextmenu.class.php:500
 #: editor/includes/components/app_contextmenu.class.php:506
 msgid "Change Video"
 msgstr ""
 
-#: editor/extensions/media/media.php:63
+#: editor/extensions/media/media.php:65
 msgid "Change File"
 msgstr ""
 
-#: editor/extensions/media/media.php:234
+#: editor/extensions/media/media.php:236
 #: editor/extensions/pagebuilder/modules/image/image.php:23
 #: editor/extensions/pagebuilder/modules/image/image.php:246
 #: editor/extensions/pagebuilder/modules/image/image.php:252
@@ -2216,32 +1957,32 @@ msgstr ""
 msgid "Image"
 msgstr ""
 
-#: editor/extensions/media/media.php:238
+#: editor/extensions/media/media.php:240
 msgid "Audio"
 msgstr ""
 
-#: editor/extensions/media/media.php:242
+#: editor/extensions/media/media.php:244
 msgid "Video"
 msgstr ""
 
-#: editor/extensions/media/media.php:246
+#: editor/extensions/media/media.php:248
 msgid "Document"
 msgstr ""
 
-#: editor/extensions/media/media.php:250
+#: editor/extensions/media/media.php:252
 msgid "Spreadsheet"
 msgstr ""
 
-#: editor/extensions/media/media.php:254
+#: editor/extensions/media/media.php:256
 msgid "Interactive"
 msgstr ""
 
-#: editor/extensions/media/media.php:258
+#: editor/extensions/media/media.php:260
 #: editor/extensions/pagebuilder/modules/page-title/page-title.php:256
 msgid "Text"
 msgstr ""
 
-#: editor/extensions/media/media.php:280
+#: editor/extensions/media/media.php:282
 #: editor/extensions/media/view/media.php:56
 msgid "There are no any media items"
 msgstr ""
@@ -2639,6 +2380,10 @@ msgstr ""
 msgid "Radio Image control"
 msgstr ""
 
+#: editor/extensions/options-engine/includes/demo/site-editor-sample-options.php:949
+msgid "Select"
+msgstr ""
+
 #: editor/extensions/options-engine/includes/demo/site-editor-sample-options.php:974
 msgid "Multi Select"
 msgstr ""
@@ -2849,25 +2594,24 @@ msgstr ""
 msgid "Typography Options"
 msgstr ""
 
-#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:200
+#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:206
 msgid "Data is not valid."
 msgstr ""
 
-#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:264
+#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:270
 msgid "This group not registered already"
 msgstr ""
 
-#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:268
+#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:274
 msgid "You can not access to this group options"
 msgstr ""
 
-#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:1109
+#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:1115
 msgid "Wp Text Editor"
 msgstr ""
 
-#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:1112
+#: editor/extensions/options-engine/includes/site-editor-options-manager.class.php:1118
 #: editor/templates/default/header.php:49
-#: includes/SEDAjaxLess/view/modal_less_compile.php:21
 msgid "Close"
 msgstr ""
 
@@ -2881,12 +2625,12 @@ msgstr ""
 msgid "Page general settings"
 msgstr ""
 
-#: editor/extensions/options-engine/includes/site-editor-post-options.class.php:170
+#: editor/extensions/options-engine/includes/site-editor-post-options.class.php:195
 #, php-format
 msgid "Single %s Options"
 msgstr ""
 
-#: editor/extensions/options-engine/includes/site-editor-post-options.class.php:182
+#: editor/extensions/options-engine/includes/site-editor-post-options.class.php:207
 #: editor/extensions/options-engine/view/post_options.php:2
 #: editor/extensions/options-engine/view/post_options.php:4
 msgid "Current Post Customize"
@@ -3372,37 +3116,37 @@ msgstr ""
 
 #: editor/extensions/pagebuilder/includes/pagebuilder.class.php:328
 #: editor/extensions/pagebuilder/includes/pagebuilder.class.php:351
-#: editor/extensions/pagebuilder/includes/pagebuilder.class.php:1131
+#: editor/extensions/pagebuilder/includes/pagebuilder.class.php:1137
 msgid "Drop Each Module Into The Content Area"
 msgstr ""
 
-#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:702
+#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:701
 #: editor/extensions/pagebuilder/modules/row/row.php:144
 msgid "Module Id"
 msgstr ""
 
-#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:703
+#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:702
 #: editor/extensions/pagebuilder/modules/row/row.php:145
 msgid "Module Id For Anchor And ..."
 msgstr ""
 
-#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:711
+#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:710
 #: editor/extensions/pagebuilder/modules/row/row.php:153
 msgid "Extra class name"
 msgstr ""
 
-#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:712
+#: editor/extensions/pagebuilder/includes/pb-shortcodes.class.php:711
 #: editor/extensions/pagebuilder/modules/row/row.php:154
 msgid ""
 "Style particular content element differently - add a class name and refer to "
 "it in custom CSS."
 msgstr ""
 
-#: editor/extensions/pagebuilder/includes/pb-skin-loader.class.php:91
+#: editor/extensions/pagebuilder/includes/pb-skin-loader.class.php:94
 msgid "No item exists for this module"
 msgstr ""
 
-#: editor/extensions/pagebuilder/includes/pb-skin-loader.class.php:111
+#: editor/extensions/pagebuilder/includes/pb-skin-loader.class.php:114
 msgid "invalid send data"
 msgstr ""
 
@@ -5180,8 +4924,8 @@ msgid "title"
 msgstr ""
 
 #: editor/extensions/preset/includes/preset-init.class.php:32
-#: editor/extensions/preset/site-editor-preset.php:630
-#: editor/extensions/preset/site-editor-preset.php:636
+#: editor/extensions/preset/site-editor-preset.php:662
+#: editor/extensions/preset/site-editor-preset.php:668
 msgid "Preset Settings"
 msgstr ""
 
@@ -5189,34 +4933,58 @@ msgstr ""
 msgid "Site Editor Presets"
 msgstr ""
 
-#: editor/extensions/preset/site-editor-preset.php:118
-#: editor/extensions/preset/site-editor-preset.php:426
-#: editor/extensions/preset/site-editor-preset.php:485
-#: editor/extensions/preset/site-editor-preset.php:559
-#: editor/extensions/preset/site-editor-preset.php:595
-#: editor/extensions/preset/site-editor-preset.php:757
+#: editor/extensions/preset/site-editor-preset.php:133
+#: editor/extensions/preset/site-editor-preset.php:451
+#: editor/extensions/preset/site-editor-preset.php:513
+#: editor/extensions/preset/site-editor-preset.php:591
+#: editor/extensions/preset/site-editor-preset.php:627
+#: editor/extensions/preset/site-editor-preset.php:789
 msgid "You don't have permission to manage presets."
 msgstr ""
 
-#: editor/extensions/preset/site-editor-preset.php:134
+#: editor/extensions/preset/site-editor-preset.php:157
 msgid "invalid preset. shortcode or title or content is incorrect."
 msgstr ""
 
-#: editor/extensions/preset/site-editor-preset.php:149
+#: editor/extensions/preset/site-editor-preset.php:172
 msgid "occurrence a problem in creating preset."
 msgstr ""
 
-#: editor/extensions/preset/site-editor-preset.php:165
-#: editor/extensions/preset/site-editor-preset.php:576
+#: editor/extensions/preset/site-editor-preset.php:188
+#: editor/extensions/preset/site-editor-preset.php:608
 msgid "occurrence a problem in prepare preset data for js."
 msgstr ""
 
-#: editor/extensions/preset/site-editor-preset.php:438
+#: editor/extensions/preset/site-editor-preset.php:466
 msgid "invalid data : not changed any data."
 msgstr ""
 
-#: editor/extensions/preset/site-editor-preset.php:503
+#: editor/extensions/preset/site-editor-preset.php:535
 msgid "invalid data : shortcode name is incorrect."
+msgstr ""
+
+#: editor/extensions/preset/view/preset-settings.php:15
+msgid "Preset Title"
+msgstr ""
+
+#: editor/extensions/preset/view/preset-settings.php:16
+msgid "Save As New Preset..."
+msgstr ""
+
+#: editor/extensions/preset/view/preset-settings.php:17
+msgid "Add Preset"
+msgstr ""
+
+#: editor/extensions/preset/view/preset-settings.php:25
+msgid "Save As Exist Preset"
+msgstr ""
+
+#: editor/extensions/preset/view/preset-settings.php:27
+msgid "Select Preset"
+msgstr ""
+
+#: editor/extensions/preset/view/preset-settings.php:29
+msgid "Save Preset"
 msgstr ""
 
 #: editor/extensions/preset/view/preset-tpl.php:40
@@ -5353,18 +5121,18 @@ msgstr ""
 msgid "Url"
 msgstr ""
 
-#: editor/includes/site-editor-manager.class.php:994
+#: editor/includes/site-editor-manager.class.php:992
 #, php-format
 msgid ""
 "Removing %1$s manually will cause PHP warnings. Use the %2$s filter instead."
 msgstr ""
 
-#: editor/includes/site-editor-manager.class.php:1605
+#: editor/includes/site-editor-manager.class.php:1601
 #, php-format
 msgid "Customize: %s"
 msgstr ""
 
-#: editor/includes/site-editor-manager.class.php:1608
+#: editor/includes/site-editor-manager.class.php:1604
 #, php-format
 msgid "Live Preview: %s"
 msgstr ""
@@ -5375,11 +5143,11 @@ msgid ""
 "array), but not both."
 msgstr ""
 
-#: editor/includes/site-editor-selective-refresh.class.php:186
+#: editor/includes/site-editor-selective-refresh.class.php:184
 msgid "Shift-click to edit this element."
 msgstr ""
 
-#: editor/includes/site-editor-selective-refresh.class.php:188
+#: editor/includes/site-editor-selective-refresh.class.php:186
 #, php-format
 msgid "%s is forbidden"
 msgstr ""
@@ -5404,22 +5172,22 @@ msgstr ""
 msgid "Template"
 msgstr ""
 
-#: editor/templates/default/app_toolbar.php:12
 #: editor/templates/default/app_toolbar.php:14
+#: editor/templates/default/app_toolbar.php:16
 msgid "Back To Editor"
 msgstr ""
 
-#: editor/templates/default/app_toolbar.php:46
 #: editor/templates/default/app_toolbar.php:48
+#: editor/templates/default/app_toolbar.php:50
 msgid "Preview"
 msgstr ""
 
-#: editor/templates/default/app_toolbar.php:52
+#: editor/templates/default/app_toolbar.php:54
 #: editor/templates/default/header.php:46
 msgid "Saved"
 msgstr ""
 
-#: editor/templates/default/app_toolbar.php:55
+#: editor/templates/default/app_toolbar.php:57
 msgid "Saved & Publish"
 msgstr ""
 
@@ -5471,15 +5239,15 @@ msgstr ""
 msgid "Allowed Files"
 msgstr ""
 
-#: editor/templates/default/header.php:86
+#: editor/templates/default/header.php:92
 msgid "Site Editor"
 msgstr ""
 
-#: editor/templates/default/header.php:122
+#: editor/templates/default/header.php:140
 msgid "choose"
 msgstr ""
 
-#: editor/templates/default/header.php:123
+#: editor/templates/default/header.php:141
 msgid "cancel"
 msgstr ""
 
@@ -6094,25 +5862,6 @@ msgstr ""
 msgid "No additional posts."
 msgstr ""
 
-#: includes/SEDAjaxLess/SEDAjaxLess.php:69
-msgid "not any valid file for compile"
-msgstr ""
-
-#: includes/SEDAjaxLess/view/modal_less_compile.php:3
-msgid "Less File Not Compiled"
-msgstr ""
-
-#: includes/SEDAjaxLess/view/modal_less_compile.php:11
-#, php-format
-msgid ""
-"Handle :( %s ) \n"
-" Url File : ...%s"
-msgstr ""
-
-#: includes/SEDAjaxLess/view/modal_less_compile.php:20
-msgid "Compiled Top File"
-msgstr ""
-
 #: includes/app_file.class.php:47
 msgid "Download failed"
 msgstr ""
@@ -6134,14 +5883,20 @@ msgstr ""
 
 #: includes/app_pb_module_skins.class.php:230
 #: includes/app_pb_module_skins.class.php:234
-#: includes/app_pb_modules.class.php:489 includes/app_pb_modules.class.php:493
+#: includes/app_pb_modules.class.php:415 includes/app_pb_modules.class.php:419
 msgid "Error : Css File Move Failed"
 msgstr ""
 
 #: includes/app_pb_module_skins.class.php:232
-#: includes/app_pb_modules.class.php:491
+#: includes/app_pb_modules.class.php:417
 #, php-format
 msgid "Css File Move successful : %s."
+msgstr ""
+
+#: includes/app_pb_module_skins.class.php:244
+#: includes/app_pb_modules.class.php:431
+#, php-format
+msgid "Error LESS : %s"
 msgstr ""
 
 #: includes/app_pb_modules.class.php:196
@@ -6171,7 +5926,7 @@ msgstr ""
 msgid "The %s module not installed."
 msgstr ""
 
-#: includes/app_pb_modules.class.php:246 includes/app_pb_modules.class.php:339
+#: includes/app_pb_modules.class.php:246
 #, php-format
 msgid "Module %s not installed"
 msgstr ""
@@ -6181,66 +5936,32 @@ msgstr ""
 msgid "The %s module is a base module. you don't deactivate base modules."
 msgstr ""
 
-#: includes/app_pb_modules.class.php:317 includes/app_pb_modules.class.php:350
-#, php-format
-msgid "Module %s success to installed and activited."
-msgstr ""
-
-#: includes/app_pb_modules.class.php:320
-#, php-format
-msgid "%s Module already installed but not activited"
-msgstr ""
-
-#: includes/app_pb_modules.class.php:327
-msgid "Exist another module with the same name"
-msgstr ""
-
-#: includes/app_pb_modules.class.php:328 includes/app_pb_modules.class.php:371
-#, php-format
-msgid "Module %s not success to installed."
-msgstr ""
-
-#: includes/app_pb_modules.class.php:336
-#, php-format
-msgid "Start install module %s"
-msgstr ""
-
-#: includes/app_pb_modules.class.php:353
-#, php-format
-msgid "Module %s success to installed but not activited"
-msgstr ""
-
-#: includes/app_pb_modules.class.php:361
-#, php-format
-msgid "Active %s"
-msgstr ""
-
-#: includes/app_pb_modules.class.php:363
-#, php-format
-msgid "Module %s success to installed."
-msgstr ""
-
-#: includes/app_pb_modules.class.php:402
+#: includes/app_pb_modules.class.php:328
 #, php-format
 msgid "skin not found for module %s."
 msgstr ""
 
-#: includes/app_pb_modules.class.php:406
+#: includes/app_pb_modules.class.php:332
 #, php-format
 msgid "begin install skins for module %s."
 msgstr ""
 
-#: includes/app_pb_modules.class.php:414
+#: includes/app_pb_modules.class.php:340
 #, php-format
 msgid "An error occurred in the installation skin %s"
 msgstr ""
 
-#: includes/app_pb_modules.class.php:442
+#: includes/app_pb_modules.class.php:368
 #, php-format
 msgid "Start less compilation for %s"
 msgstr ""
 
-#: includes/app_pb_modules.class.php:562
+#: includes/app_pb_modules.class.php:426 includes/app_pb_modules.class.php:486
+#, php-format
+msgid "less %s is compiled."
+msgstr ""
+
+#: includes/app_pb_modules.class.php:488
 #, php-format
 msgid "Error LESS : %1s in %2s"
 msgstr ""

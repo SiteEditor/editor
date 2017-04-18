@@ -218,9 +218,40 @@ class SiteEditorPageOptions {
 
     }
 
+    public function get_current_post_type(){
+
+        /**
+         * sanitize $_POST['post_type'] in get_post_type_object && checked validate post type
+         */
+        $post_type = isset( $_POST['post_type'] ) ? $_POST['post_type'] : '';
+
+        if( empty( $post_type ) ){
+            return false;
+        }
+
+        $post_type = get_post_type_object( $post_type );
+
+        if( is_null( $post_type ) ){
+            return false;
+        }
+
+        return $post_type;
+
+    }
+
     public function register_pages_options(){
 
-        $options = $this->get_page_options( $_POST['page_id'] , $_POST['page_type'] , $_POST['post_type'] );
+        $page_id = isset( $_POST['page_id'] ) ? sanitize_text_field( $_POST['page_id'] ) : '';
+
+        $page_type = isset( $_POST['page_type'] ) ? sanitize_text_field( $_POST['page_type'] ) : '';
+
+        $post_type = $this->get_current_post_type();
+
+        if( $post_type === false || empty( $page_id ) ){
+            return ;
+        }
+
+        $options = $this->get_page_options( $page_id , $page_type , $post_type );
 
         $panels = $options['panels']; //var_dump( $panels );
 
@@ -308,7 +339,11 @@ class SiteEditorPageOptions {
 
     public function add_design_field( $fields ){
 
-        if( ! isset( $_POST['setting_id'] ) || ! isset( $_POST['options_group'] ) || $_POST['options_group'] != $this->option_group ){
+        $options_group = isset( $_POST['options_group'] ) ? sanitize_text_field( $_POST['options_group'] ) : '';
+
+        $settings_id = isset( $_POST['setting_id'] ) ? sanitize_text_field( $_POST['setting_id'] ) : '';
+
+        if( empty( $options_group ) || empty( $settings_id ) || $options_group != $this->option_group ){
             return $fields;
         }
 
@@ -318,8 +353,13 @@ class SiteEditorPageOptions {
          * please not change "design_panel" field id , it is using in js
          */
         if( $this->has_styles_settings === true ){
-            $page_control_prefix = $this->control_prefix . "_" . $_POST['page_id'];
-            $fields[ 'design_panel' ] = SED()->editor->design->get_design_options_field( $_POST['setting_id'] , $this->css_setting_type , $page_control_prefix );
+
+            $page_id = isset( $_POST['page_id'] ) ? sanitize_text_field( $_POST['page_id'] ) : '';
+
+            $page_control_prefix = $this->control_prefix . "_" . $page_id;
+
+            $fields[ 'design_panel' ] = SED()->editor->design->get_design_options_field( $settings_id , $this->css_setting_type , $page_control_prefix );
+
         }
 
         return $fields;
@@ -338,7 +378,9 @@ class SiteEditorPageOptions {
 
             $control_prefix = $option_group;
 
-            $page_control_prefix = $this->control_prefix . "_" . $_POST['page_id'];
+            $page_id = isset( $_POST['page_id'] ) ? sanitize_text_field( $_POST['page_id'] ) : '';
+
+            $page_control_prefix = $this->control_prefix . "_" . $page_id;
 
             SED()->editor->design->add_style_options( $options , $option_group , $control_prefix , $page_control_prefix );// $this->option_group );
 
@@ -368,8 +410,10 @@ class SiteEditorPageOptions {
      */
     public function set_sub_category( $sub_category , $control ){
 
-        if( $control->option_group == $this->option_group && isset( $_POST['setting_id'] ) ){
-            $sub_category = $_POST['setting_id'];
+        $settings_id = isset( $_POST['setting_id'] ) ? sanitize_text_field( $_POST['setting_id'] ) : '';
+
+        if( $control->option_group == $this->option_group && !empty( $settings_id ) ){
+            $sub_category = $settings_id;
         }
 
         return $sub_category;

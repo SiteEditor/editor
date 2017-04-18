@@ -12,9 +12,9 @@
                     <div class="sed-add-preset">
 
                         <div class="row_field">
-                            <label>Preset Title</label>
-                            <input class="sed-new-preset" type="text" placeholder="Save As New Preset...">
-                            <button data-action="add" class="btn button-primary">Add Preset</button>
+                            <label><?php echo esc_html__('Preset Title' , 'site-editor');?></label>
+                            <input class="sed-new-preset" type="text" placeholder="<?php echo esc_attr__('Save As New Preset...' , 'site-editor');?>">
+                            <button data-action="add" class="btn button-primary"><?php echo esc_html__('Add Preset' , 'site-editor');?></button>
                             <div class="sed-add-preset-loading sed-loading-small-continer" >
                                 <div class="sed-loading"></div>
                             </div>
@@ -22,11 +22,11 @@
 
                         <div class="row_field">
                         <br>
-                            <label>Save As Exist Preset</label>
+                            <label><?php echo esc_html__('Save As Exist Preset' , 'site-editor');?></label>
                             <select class="sed-presets-list-select">
-                                <option value="">Select Preset</option>
+                                <option value=""><?php echo esc_html__('Select Preset' , 'site-editor');?></option>
                             </select>
-                            <button data-action="override" class="btn button-primary">Save Preset</button>
+                            <button data-action="override" class="btn button-primary"><?php echo esc_html__('Save Preset' , 'site-editor');?></button>
                             <div class="sed-override-preset-loading sed-loading-small-continer" >
                                 <div class="sed-loading"></div>  
                             </div> 

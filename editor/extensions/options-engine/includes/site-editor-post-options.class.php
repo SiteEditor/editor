@@ -145,7 +145,7 @@ class SiteEditorPostOptions {
 
         if( $this->is_post_options_group ) {
 
-            $this->option_group = $_POST['options_group'];
+            $this->option_group = sanitize_text_field( $_POST['options_group'] );
 
             $this->control_prefix = $this->option_group;
 
@@ -163,9 +163,34 @@ class SiteEditorPostOptions {
 
     }
 
+    public function get_current_post_type(){
+
+        /**
+         * sanitize $_POST['post_type'] in get_post_type_object && checked validate post type
+         */
+        $post_type = isset( $_POST['post_type'] ) ? $_POST['post_type'] : '';
+
+        if( empty( $post_type ) ){
+            return false;
+        }
+
+        $post_type = get_post_type_object( $post_type );
+
+        if( is_null( $post_type ) ){
+            return false;
+        }
+
+        return $post_type;
+
+    }
+
     public function set_post_settings_info(){
 
-        $post_type = get_post_type_object( $_POST['post_type'] );
+        $post_type = $this->get_current_post_type();
+
+        if( $post_type === false ){
+            return ;
+        }
 
         $this->title = sprintf(__("Single %s Options" , "site-editor") , $post_type->labels->name );
 
@@ -223,7 +248,17 @@ class SiteEditorPostOptions {
 
     public function register_post_options(){
 
-        $options = $this->get_post_options( $_POST['page_id'] , $_POST['page_type'] , $_POST['post_type'] );
+        $page_id = isset( $_POST['page_id'] ) ? sanitize_text_field( $_POST['page_id'] ) : '';
+
+        $page_type = isset( $_POST['page_type'] ) ? sanitize_text_field( $_POST['page_type'] ) : '';
+
+        $post_type = $this->get_current_post_type();
+
+        if( $post_type === false || empty( $page_id ) ){
+            return ;
+        }
+
+        $options = $this->get_post_options( $page_id , $page_type , $post_type );
 
         $panels = $options['panels']; //var_dump( $panels );
 
@@ -352,16 +387,32 @@ class SiteEditorPostOptions {
          * please not change "design_panel" field id , it is using in js
          */
         if( $this->has_styles_settings === true ){
+
             $fields[ 'design_panel' ] = SED()->editor->design->get_design_options_field( $this->option_group , $this->css_setting_type );
 
-            $this->add_fields( $fields , $_POST['post_type'] );
+            $post_type = $this->get_current_post_type();
+
+            if( $post_type === false ){
+                return ;
+            }
+
+            $this->add_fields( $fields , $post_type );
+
         }
 
     }
 
     public function register_style_options(){
 
-        $options = apply_filters( "sed_post_design_options" , array() , $_POST['page_id'] , $_POST['post_type'] );
+        $post_type = $this->get_current_post_type();
+
+        if( $post_type === false ){
+            return ;
+        }
+
+        $page_id = isset( $_POST['page_id'] ) ? sanitize_text_field( $_POST['page_id'] ) : '';
+
+        $options = apply_filters( "sed_post_design_options" , array() , $page_id , $post_type );
 
         if( !empty( $options ) ){
 

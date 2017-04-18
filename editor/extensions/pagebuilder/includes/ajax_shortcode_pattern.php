@@ -1,8 +1,18 @@
 <?php
 
-if( isset( $_REQUEST['ajax_path'] ) && file_exists( $_REQUEST['ajax_path'] ) ){
+if( isset( $_REQUEST['ajax_path'] ) && is_file( $_REQUEST['ajax_path'] ) && file_exists( $_REQUEST['ajax_path'] ) ){
 
     require_once $_REQUEST['ajax_path'];
+
+}else{
+
+    echo json_encode( array(
+            'success' => false,
+            'message' => "Error: didn't load shortcodes pattern file",
+        )
+    );
+
+    return ;
 
 }
 

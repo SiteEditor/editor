@@ -586,7 +586,13 @@ Class PageBuilderApplication {
         }
 
         if( isset( $_POST['default_helper_shortcodes'] ) && is_array( $_POST['default_helper_shortcodes'] ) ){
-            $tagnames = array_merge( $tagnames , $_POST['default_helper_shortcodes'] );
+
+            $default_helper_shortcodes = array_filter( $_POST['default_helper_shortcodes'] , 'sanitize_text_field' );
+
+            $default_helper_shortcodes = array_filter( $default_helper_shortcodes );
+
+            $tagnames = array_merge( $tagnames , $default_helper_shortcodes );
+
         }
 
     	$tagregexp = join( '|', array_map('preg_quote', $tagnames ) );
@@ -1147,7 +1153,9 @@ Class PageBuilderApplication {
         global $sed_apps ;  //@args ::: sed_page_ajax , nonce
         $sed_apps->editor->manager->check_ajax_handler('sed_load_modules' , 'sed_app_modules_load');
 
-        $parent_id = $_REQUEST['parent_id'];
+        $parent_id = trim( $_REQUEST['parent_id'] );
+
+        $parent_id = sanitize_text_field( $parent_id );
 
         $content_shortcodes = json_decode( wp_unslash( $_REQUEST['pattern'] ), true );
 

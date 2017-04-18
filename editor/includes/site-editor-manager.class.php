@@ -317,8 +317,8 @@ class SiteEditorManager{
     //only for siteeditor
     function get_page_editor_info(){
 
-        $sed_page_id    =  (isset($_REQUEST['sed_page_id']) && !empty($_REQUEST['sed_page_id'])) ? $_REQUEST['sed_page_id'] : "";
-        $sed_page_type  =  (isset($_REQUEST['sed_page_type']) && !empty($_REQUEST['sed_page_type'])) ? $_REQUEST['sed_page_type'] : "";
+        $sed_page_id    =  (isset($_REQUEST['sed_page_id']) && !empty($_REQUEST['sed_page_id'])) ? sanitize_text_field( $_REQUEST['sed_page_id'] ) : "";
+        $sed_page_type  =  (isset($_REQUEST['sed_page_type']) && !empty($_REQUEST['sed_page_type'])) ? sanitize_text_field( $_REQUEST['sed_page_type'] ) : "";
 
         if( empty( $_REQUEST['sed_page_id'] ) || empty( $_REQUEST['sed_page_type'] ) ) {
 

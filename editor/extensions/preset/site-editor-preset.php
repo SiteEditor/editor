@@ -105,6 +105,21 @@ class SiteEditorPreset{
     }
 
     /**
+     * Sanitize attachment ids before save in db
+     */
+    public static function sanitize_attachment_ids( $attachment_ids ){
+
+        $attachment_ids = ! is_array( $attachment_ids ) ? array() : $attachment_ids;
+
+        $attachment_ids = array_filter( $attachment_ids );
+
+        $attachment_ids = array_filter( $attachment_ids , 'absint' );
+
+        return $attachment_ids;
+
+    }
+
+    /**
      * Ajax handler for Creating Preset
      *
      * @since 1.0.0
@@ -122,11 +137,19 @@ class SiteEditorPreset{
 
         }
 
+        /**
+         * sanitize by wordprees(wp_insert_post) method after send to create_preset method
+         */
         $shortcode              = isset( $_REQUEST['shortcode'] ) ? $_REQUEST['shortcode'] : '';
         $title                  = isset( $_REQUEST['title'] ) ? $_REQUEST['title'] : '';
         $content_shortcodes     = isset( $_REQUEST['content'] ) ? $_REQUEST['content'] : '';
         $menu_order             = isset( $_REQUEST['menu_order'] ) ? $_REQUEST['menu_order'] : 0;
+
+        /**
+         * sanitize by sanitize_attachment_ids method after send to update_preset_attachment_ids method
+         */
         $attachment_ids         = isset( $_REQUEST['attachment_ids'] ) ? $_REQUEST['attachment_ids'] : array();
+
 
         if( empty( $shortcode ) || empty( $title ) || empty( $content_shortcodes ) ){
 
@@ -185,12 +208,14 @@ class SiteEditorPreset{
      */
     public static function update_preset_attachment_ids( $post_id , $new_value ){
 
+        $attachment_ids = self::sanitize_attachment_ids( $new_value );
+
         $option_name = 'sed_preset_attachment_ids';
 
         if( $post_id && $post_id > 0 && !is_wp_error( $post_id ) ){
 
-            if( !update_post_meta( $post_id , $option_name , $new_value ) )
-                add_post_meta( $post_id , $option_name , $new_value, true );
+            if( !update_post_meta( $post_id , $option_name , $attachment_ids ) )
+                add_post_meta( $post_id , $option_name , $attachment_ids, true );
 
         }
 
@@ -430,6 +455,9 @@ class SiteEditorPreset{
 
         }
 
+        /**
+         * sanitize by wordprees(wp_update_post) method 
+         */
         $changes  = isset( $_REQUEST['changes'] ) ? $_REQUEST['changes'] : '';
 
         if( empty( $changes ) ){
@@ -488,6 +516,10 @@ class SiteEditorPreset{
             wp_send_json_error( $data );
 
         }
+
+        /**
+         * $_REQUEST['changes'] , $_REQUEST['shortcode'] sanitize by wordprees(wp_update_post) method 
+         */        
 
         if ( ! isset( $_REQUEST['id'] ) || ! isset( $_REQUEST['changes'] ) )
             wp_send_json_error();
