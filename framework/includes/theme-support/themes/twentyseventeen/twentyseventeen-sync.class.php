@@ -69,7 +69,7 @@ class SiteEditorTwentyseventeenThemeSync{
 
         add_action( "sed_static_module_register" , array( $this , 'register_static_modules' ) , 10 , 1 );
 
-        add_filter( "sed_theme_options_panels_filter" , array( $this , 'register_theme_panels' ) );
+        add_filter( "sed_theme_options_panels_filter" , array( $this , 'register_theme_panels' ) , 100 );
 
         add_filter( "sed_theme_options_fields_filter" , array( $this , 'register_theme_fields' ) );
 
@@ -86,6 +86,8 @@ class SiteEditorTwentyseventeenThemeSync{
         //add_filter( 'sed_base_template_wrapping' , array( $this , 'sed_base_template_wrapping' ) , 100 , 2 );
 
         //add_filter( 'sed_color_schemes' , array( $this , 'color_schemes' ) );
+
+        add_action( 'wp' , array( $this, 'remove_page_builder_settings' ) );
 
     }
 
@@ -228,6 +230,13 @@ class SiteEditorTwentyseventeenThemeSync{
             'priority'          => 20 ,
         );
 
+        /**
+         * Remove Page Builder Settings Panel From Twentyseventeen Theme
+         *
+         */
+
+        unset($panels['page_builder_settings']);
+
         return $panels;
     }
 
@@ -322,6 +331,14 @@ class SiteEditorTwentyseventeenThemeSync{
             'style'             => 'menu' ,
             'field_spacing'     => 'sm'
         );
+
+        /**
+         * Remove Page Builder Settings Fields From Twentyseventeen Theme
+         *
+         */        
+
+        unset($fields['pb_rows_width']);
+        unset($fields['pb_rows_padding']);
 
         $fields = array_merge( $fields , $this->dynamic_css_options );
 
@@ -805,6 +822,16 @@ class SiteEditorTwentyseventeenThemeSync{
 
 
         );
+
+    }
+
+    /**
+     * Remove Page Builder Settings Dynamic Css From Twentyseventeen Theme
+     *
+     */
+    public function remove_page_builder_settings(){
+
+        remove_action( "sed_before_dynamic_css_output"       , array( SED()->framework , 'pb_css_output' ) );
 
     }
 

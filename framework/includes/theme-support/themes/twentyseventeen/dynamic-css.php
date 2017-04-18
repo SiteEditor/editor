@@ -521,8 +521,8 @@ $css .= <<<CSS
             .widget ul li a,
             .site-footer .widget-area ul li a,
             .site-footer .widget-area ul li a {
-                -webkit-box-shadow: inset 0 -1px 0 {$page_background_color};
-                box-shadow: inset 0 -1px 0 {$page_background_color}; 
+                -webkit-box-shadow: inset 0 -1px 0 {$background_color};
+                box-shadow: inset 0 -1px 0 {$background_color}; 
             }
 
             .entry-content a:focus,
@@ -581,8 +581,8 @@ $css .= <<<CSS
             /* Fixes linked images */
             .entry-content a img,
             .widget a img {
-                -webkit-box-shadow: 0 0 0 8px {$page_background_color};
-                box-shadow: 0 0 0 8px {$page_background_color};
+                -webkit-box-shadow: 0 0 0 8px {$background_color};
+                box-shadow: 0 0 0 8px {$background_color};
             }
 
             .post-navigation a:focus .icon,
@@ -835,7 +835,7 @@ $css .= <<<CSS
             --------------------------------------------------------------*/
 
             .site-content-contain {
-                background-color: {$page_background_color};
+                background-color: {$background_color};
             }
 
             /*--------------------------------------------------------------
@@ -1237,44 +1237,64 @@ $css .= <<<CSS
             }
 
 
+
             /* Layout */
 
-            .sed-row-boxed , 
-            .navigation-top .wrap,
+
+            @media screen and (min-width: 0) and (min-width: 30em) and (min-width: 48em) {
+
+                .wrap,
+                .sed-row-boxed ,
+                .navigation-top .wrap ,
+                .page-one-column .panel-content .wrap ,
+                .single-post:not(.has-sidebar) #primary,
+                .page.page-one-column:not(.twentyseventeen-front-page) #primary,
+                .archive.page-one-column:not(.has-sidebar) .page-header,
+                .archive.page-one-column:not(.has-sidebar) #primary {
+                    max-width: {$sheet_width}; 
+                }
+
+            }
+
+            @media screen and (min-width: 0) and (min-width: 30em) and (min-width: 48em) {
+
+                .sed-row-boxed .sed-row-boxed,
+                .wrap-layout-fixed-width .wrap .sed-row-boxed , 
+                .sed-main-content-layout-module .wrap-layout-full-width .wrap,
+                .page-one-column .sed-main-content-layout-module .wrap-layout-full-width .panel-content .wrap ,
+                .single-post:not(.has-sidebar) .sed-main-content-layout-module .wrap-layout-full-width #primary,
+                .page.page-one-column:not(.twentyseventeen-front-page) .sed-main-content-layout-module .wrap-layout-full-width #primary,
+                .archive.page-one-column:not(.has-sidebar) .sed-main-content-layout-module .wrap-layout-full-width .page-header,
+                .archive.page-one-column:not(.has-sidebar) .sed-main-content-layout-module .wrap-layout-full-width #primary,
+                .sed-row-boxed .wrap,
+                .sed-row-boxed .navigation-top .wrap ,
+                .page-one-column .sed-row-boxed .panel-content .wrap ,
+                .single-post:not(.has-sidebar) .sed-row-boxed #primary,
+                .page.page-one-column:not(.twentyseventeen-front-page) .sed-row-boxed #primary,
+                .archive.page-one-column:not(.has-sidebar) .sed-row-boxed .page-header,
+                .archive.page-one-column:not(.has-sidebar) .sed-row-boxed #primary {
+                    max-width: none !important; 
+                }
+
+            }            
+
+            .sed-row-boxed ,   
             .wrap {
-                max-width: {$sheet_width}; 
                 padding-left: {$rps_wrap_padding_left};
                 padding-right: {$rps_wrap_padding_right}; 
             }
-
-            .sed-main-content-layout-module .wrap-layout-full-width .wrap , 
-            .wrap-layout-fixed-width .wrap .sed-row-boxed ,     
+   
             .sed-row-boxed .wrap , 
-            .sed-row-boxed .sed-row-boxed {
-                max-width: none !important; 
+            .sed-row-boxed .sed-row-boxed ,
+            .wrap-layout-fixed-width .wrap .sed-row-boxed ,
+            .sed-main-content-layout-module .wrap-layout-full-width .wrap {
                 padding-right: 0px;
                 padding-left: 0px;  
             }
 
-            .wrap-layout-full-width .navigation-top .wrap, 
-            .wrap-layout-full-width .wrap {
-                max-width: none !important;  
-            }
-
-            /*.single-post:not(.has-sidebar) .wrap-layout-fixed-width .wrap #primary,
-            .page.page-one-column:not(.twentyseventeen-front-page) .wrap-layout-fixed-width .wrap #primary,
-            .archive.page-one-column:not(.has-sidebar) .wrap-layout-fixed-width .wrap #primary,*/ 
-            .single-post:not(.has-sidebar) .wrap-layout-full-width .wrap #primary,
-            .page.page-one-column:not(.twentyseventeen-front-page) .wrap-layout-full-width .wrap #primary,
-            .archive.page-one-column:not(.has-sidebar) .wrap-layout-full-width .wrap #primary {
-                max-width: none !important;
-            }
-
-
             @media screen and (min-width: 48em) {
 
                 .sed-row-boxed ,
-                .navigation-top .wrap,
                 .wrap {
                     padding-left: {$wrap_padding_left};
                     padding-right: {$wrap_padding_right};

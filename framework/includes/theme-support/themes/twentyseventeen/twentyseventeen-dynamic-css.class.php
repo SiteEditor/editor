@@ -86,7 +86,7 @@ class SiteEditorTwentyseventeenDynamicCss {
 
         $settings['secondary_background_color']['default']      = "#eeeeee"; 
 
-        $settings['page_background_color']['default']           = "#ffffff"; /* ...!!!!!!... */
+        /*$settings['page_background_color']['default']           = "#ffffff";  ...!!!!!!... */
 
         $settings['main_text_color']['default']                 = "#333333"; 
 
@@ -179,7 +179,7 @@ class SiteEditorTwentyseventeenDynamicCss {
             6.0 Forms
             --------------------------------------------------------------*/
 
-            'form_control_bg'                            => 'page_background_color',
+            'form_control_bg'                            => 'background_color',
             'form_control_border'                        => 'border_color',
             'form_control_color'                         => 'secondary_text_color',
             'form_control_border_radius'                 => 'border_radius',
@@ -203,11 +203,11 @@ class SiteEditorTwentyseventeenDynamicCss {
             --------------------------------------------------------------*/
 
 
-            'navigation_bar_bg'                          => 'page_background_color',
+            'navigation_bar_bg'                          => 'background_color',
             'navigation_bar_border'                      => 'border_color',
             'navigation_bar_color'                       => 'main_text_color',
 
-            'navigation_submenu_bg'                      => 'page_background_color',
+            'navigation_submenu_bg'                      => 'background_color',
             'navigation_submenu_border'                  => 'border_color',
             'navigation_submenu_color'                   => 'main_text_color',
             'navigation_submenu_item_bg'                 => 'first_main_active_color',
