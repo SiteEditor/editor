@@ -247,7 +247,7 @@ class SiteEditorPageOptions {
 
         $post_type = $this->get_current_post_type();
 
-        if( $post_type === false || empty( $page_id ) ){
+        if( ( $page_type == "post" && $post_type === false ) || empty( $page_id ) ){
             return ;
         }
 

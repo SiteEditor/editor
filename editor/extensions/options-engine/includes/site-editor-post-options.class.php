@@ -281,7 +281,7 @@ class SiteEditorPostOptions {
      */
     private function get_post_options( $page_id , $page_type , $post_type = '' ){
 
-        if( ! isset( $this->fields[$post_type] ) ){
+        if( !is_array( $this->fields ) || ! isset( $this->fields[$post_type] ) ){
 
             return array(
                 "fields"    => array() ,
