@@ -192,8 +192,15 @@ Troubleshooting:
 
 1. Site Editor
 2. Page Builder
-3. Theme Builder
-3. Inline Text Editor
+3. Theme Builder( Header && Footer Builder )
+4. Theme Customizer
+5. Layout Builder
+6. Inline Text Editor
+7. Color Option
+8. typography
+9. Page Settings
+10. Custom Code ( Css, Js, Tracking Code and html )
+11. WordPress Text Editor
 
 == Changelog ==
 
