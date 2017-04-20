@@ -1,3 +1,3 @@
 <div <?php echo $sed_attrs; ?> class="module module-wp-text-editor <?php echo $class;?> ">
-    <?php echo wpautop( $content ); ?>
+    <?php echo $content; ?>
 </div>
