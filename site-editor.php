@@ -127,6 +127,8 @@ final Class SiteEditor {
 
         $this->config = sed_array_to_object( $this->config );
 
+        $this->max_nesting_level();
+
         $this->includes();
 
         $this->init_hooks();
@@ -342,6 +344,21 @@ final Class SiteEditor {
         do_action( 'site_editor_init' );
     }
 
+    /**
+     * Site Editor Use the nesting level shortcodes like :
+     * [sed_row]
+     *  [sed_module]
+     *      [sed_row_inner]
+     *          [sed_row_inner_inner]
+     *              ...
+     * If you active xdebug extension on your server, it will use 100 nesting level and happen a error
+     * Increase max_nesting_level to 10000
+     */
+    private function max_nesting_level(){
+
+        @ini_set( 'xdebug.max_nesting_level', apply_filters( 'sed_max_nesting_level', 10000 ) );
+
+    }
 
     /**
      * Load Localisation files.
