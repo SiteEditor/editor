@@ -13,13 +13,31 @@ class PBWPTextEditorShortcode extends PBShortcodeClass{
     function __construct(){
 
         parent::__construct( array(
-          "name"        => "sed_wp_text_editor",                 //*require
-          "title"       => __("WP Text Editor","site-editor"),   //*require for toolbar
-          "description" => __("WP Text Editor","site-editor"),
-          "icon"        => "sedico-wp-text-editor",                       //*require for icon toolbar
-          "module"      => "wp-text-editor"                     //*require
-          //"is_child"    =>  "false"                         //for childe shortcodes like sed_tr , sed_td for table module
+            "name"              => "sed_wp_text_editor",                 //*require
+            "title"             => __("WP Text Editor","site-editor"),   //*require for toolbar
+            "description"       => __("WP Text Editor","site-editor"),
+            "icon"              => "sedico-wp-text-editor",                       //*require for icon toolbar
+            "module"            => "wp-text-editor" ,                    //*require
+            
         ));
+
+        if ( ! has_filter( "sed_before_module_content_do_shortcode" , array( __CLASS__ , 'before_module_content_do_shortcode' ) ) ) {
+
+            add_filter("sed_before_module_content_do_shortcode", array(__CLASS__, 'before_module_content_do_shortcode'), 10, 2);
+
+        }
+
+    }
+
+    public static function before_module_content_do_shortcode( $content , $shortcode ){
+
+        if( $shortcode == "sed_wp_text_editor" ){
+
+            $content = sed_remove_wpautop( $content , false );
+
+        }
+
+        return $content;
 
     }
 

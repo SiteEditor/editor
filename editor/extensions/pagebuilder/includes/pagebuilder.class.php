@@ -69,11 +69,10 @@ Class PageBuilderApplication {
     function __construct(  $args = array() ) {
 
         $this->template = 'default';
+
         $this->current_app = 'siteeditor';
 
-        //remove extra p && br tag from site editor & add to default wp editor only
-        remove_filter( 'the_content', 'wpautop' );
-
+        //add_filter( 'the_content', array( $this , 'prevent_shortcodes_content_from_wpautop' ) , 8 );
 
         add_filter('the_excerpt', array($this, 'sed_excerpt_filter') );
 
@@ -118,50 +117,23 @@ Class PageBuilderApplication {
 
         add_filter( "sed_end_page_customize_rows"  , array( $this, "get_end_page_rows" ) , 10 , 1 );
 
-        add_filter( 'sed_pb_builder_module_content', 'wptexturize');
+    }
 
-        add_filter( 'sed_pb_builder_module_content', 'convert_smilies');
+    /*public function encode_shortcodes_content( $matches ){ var_dump( $matches );
 
-        add_filter( 'sed_pb_builder_module_content', 'convert_chars');
-
-        add_filter( 'sed_pb_builder_module_content', array($this, 'the_module_content'));
-
-        /**
-         * WordPress 4.4 Responsive Images support */
-        global $wp_version;
-        if (version_compare($wp_version, '4.4', '>=')) {
-            add_filter('sed_pb_builder_module_content', 'wp_make_content_images_responsive');
-        }
+        return "[{$matches[2]} {$matches[3]}]" . htmlentities($matches[5]) . "[/{$matches[2]}]";
 
     }
 
-    /**
-     * Add filter to module content
-     * @param string $content
-     * @return string
-     */
-    function the_module_content($content) {
-        global $wp_embed;
-        $content = $wp_embed->run_shortcode($content);
-        $content = do_shortcode(shortcode_unautop($content));
-        $content = $this->autoembed_adjustments($content);
-        $content = $wp_embed->autoembed($content);
-        $content = htmlspecialchars_decode($content);
+    public function prevent_shortcodes_content_from_wpautop( $content ){
+
+        $pattern = self::shortcodes_regexp( array( "sed_title" , "sed_raw_html" , "sed_paragraph" ) );
+
+        $content = preg_replace_callback( '/'. $pattern .'/s' , array( $this , 'encode_shortcodes_content' ) , $content);
+
         return $content;
-    }
 
-    /**
-     * Adjust autoembed filter
-     * @param string $content
-     * @return string
-     */
-    function autoembed_adjustments($content) {
-        $pattern = '|<p>\s*(https?://[^\s"]+)\s*</p>|im'; // pattern to check embed url
-        $to = '<p>' . PHP_EOL . '$1' . PHP_EOL . '</p>'; // add line break
-        $content = preg_replace($pattern, $to, $content);
-        return $content;
-    }
-
+    }*/
 
     function preview_setup_post_content( $post ){
 

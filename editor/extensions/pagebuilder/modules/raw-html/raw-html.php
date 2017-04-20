@@ -19,12 +19,12 @@ class PBRawHTMLShortcode extends PBShortcodeClass{
     public function __construct(){
 
         parent::__construct( array(
-          "name"        => "sed_raw_html",                 //*require
-          "title"       => __("Raw HTML","site-editor"),   //*require for toolbar
-          "description" => __("Raw HTML","site-editor"),
-          "icon"        => "sedico-html",                       //*require for icon toolbar
-          "module"      => "raw-html"                     //*require
-          //"is_child"    =>  "false"                         //for childe shortcodes like sed_tr , sed_td for table module
+            "name"                  => "sed_raw_html",                 //*require
+            "title"                 => __("Raw HTML","site-editor"),   //*require for toolbar
+            "description"           => __("Raw HTML","site-editor"),
+            "icon"                  => "sedico-html",                       //*require for icon toolbar
+            "module"                => "raw-html" ,                    //*require
+            "remove_wpautop"        => true 
         ));
 
     }

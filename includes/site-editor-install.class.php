@@ -134,7 +134,7 @@ class SiteEditorInstall {
 
 		$header_preset_content = ob_get_clean();
 
-		$post_id = SiteEditorPreset::create_preset( 'sed_header' , __("Default Header" , "site-editor") ,  $header_preset_content , false );
+		$post_id = SiteEditorPreset::create_preset( 'sed_header' , __("Default Header" , "site-editor") ,  $header_preset_content , true );
 
 		$helper_shortcodes = array(
 			'sed_row_inner'				=> 'sed_row' ,

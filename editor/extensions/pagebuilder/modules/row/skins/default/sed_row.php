@@ -14,12 +14,9 @@ if(!empty($content)){
 
     <?php
 
-        if(!empty($content)){   
+        if( !empty($content) ){
 
-            if( $from_wp_editor )
-                echo wpautop( $content );
-            else
-                echo $content;
+            echo $content;
 
         }else{
 

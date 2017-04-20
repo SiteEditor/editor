@@ -19,22 +19,23 @@ if( !is_pb_module_active( "title" ) ){
 
 class PBButtonShortcode extends PBShortcodeClass{
 
-	  /**
-	   * Register module with siteeditor.
-	   */
-	  function __construct() {
-	  	parent::__construct( array(
-              "name"        => "sed_button",                     //*require
-              "title"       => __("Button","site-editor"),       //*require for toolbar
-              "description" => __(""),
-              "icon"        => "sedico-buttons",                    //*require for icon toolbar
-              "module"      =>  "button"                         //*require
+    /**
+    * Register module with siteeditor.
+    */
+    function __construct() {
+
+        parent::__construct( array(
+            "name"                  => "sed_button",                     //*require
+            "title"                 => __("Button","site-editor"),       //*require for toolbar
+            "description"           => __(""),
+            "icon"                  => "sedico-buttons",                    //*require for icon toolbar
+            "module"                =>  "button",                         //*require ,
           ) // Args
-	  	);
+        );
 
         add_filter( 'sed_theme_color_css', array( $this , 'sed_button_module_color_css' ) , 10 , 3 );
 
-	  }
+    }
   
     function get_atts(){
         $atts = array(

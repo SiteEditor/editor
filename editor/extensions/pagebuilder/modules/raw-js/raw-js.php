@@ -13,12 +13,12 @@ class PBRawJavascriptCodeShortcode extends PBShortcodeClass{
     function __construct(){
 
         parent::__construct( array(
-          "name"        => "sed_raw_js",                 //*require
-          "title"       => __("Raw Javascript Code","site-editor"),   //*require for toolbar
-          "description" => __("Raw Javascript Code","site-editor"),
-          "icon"        => "sedico-javascript",                       //*require for icon toolbar
-          "module"      => "raw-js"                     //*require
-          //"is_child"    =>  "false"                         //for childe shortcodes like sed_tr , sed_td for table module
+            "name"                  => "sed_raw_js",                 //*require
+            "title"                 => __("Raw Javascript Code","site-editor"),   //*require for toolbar
+            "description"           => __("Raw Javascript Code","site-editor"),
+            "icon"                  => "sedico-javascript",                       //*require for icon toolbar
+            "module"                => "raw-js"  ,                   //*require
+            "remove_wpautop"        => true 
         ));
 
     }

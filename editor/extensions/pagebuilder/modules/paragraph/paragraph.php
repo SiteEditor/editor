@@ -21,12 +21,15 @@ class PBParagraphShortcode extends PBShortcodeClass{
 	 * Register module with siteeditor.
 	 */
 	function __construct() {
+        
 		parent::__construct( array(
-                "name"        => "sed_paragraph",                        //*require
-                "title"       => __("Paragraph","site-editor"),               //*require for toolbar
-                "description" => __("Add Paragraph To Page","site-editor"),
-                "icon"        => "sedico-paragraph",                            //*require for icon toolbar
-                "module"      =>  "paragraph"                                  //*require
+                "name"                  => "sed_paragraph",                        //*require
+                "title"                 => __("Paragraph","site-editor"),               //*require for toolbar
+                "description"           => __("Add Paragraph To Page","site-editor"),
+                "icon"                  => "sedico-paragraph",                            //*require for icon toolbar
+                "module"                =>  "paragraph" ,                                  //*require
+                "remove_wpautop"        => true ,
+                "editor_do_shortcode"   => false
             ) // Args
 		);
 

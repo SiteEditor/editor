@@ -477,10 +477,10 @@ Class SiteEditorThemeFramework{
 
                     <br>
                     <div><h4 class="attr">Code Editor Settings</h4></div>
-                    <div><span class="attr">HTML Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'sed_pb_builder_module_content', get_theme_mod( 'sed_code_setting' , '' ) ); ?></span></div>
-                    <div><span class="attr">JavaScript Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'sed_pb_builder_module_content', get_theme_mod( 'sed_js_code_setting' , '' ) ); ?></span></div>
-                    <div><span class="attr">Custom Css Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'sed_pb_builder_module_content', get_theme_mod( 'sed_css_code_setting' , '' ) ); ?></span></div>
-                    <div><span class="attr">WordPress Text Editor:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'sed_pb_builder_module_content', get_theme_mod( 'sed_wp_editor_setting' , '' ) ); ?></span></div>
+                    <div><span class="attr">HTML Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'the_content', get_theme_mod( 'sed_code_setting' , '' ) ); ?></span></div>
+                    <div><span class="attr">JavaScript Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'the_content', get_theme_mod( 'sed_js_code_setting' , '' ) ); ?></span></div>
+                    <div><span class="attr">Custom Css Code:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'the_content', get_theme_mod( 'sed_css_code_setting' , '' ) ); ?></span></div>
+                    <div><span class="attr">WordPress Text Editor:</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="value"><?php echo apply_filters( 'the_content', get_theme_mod( 'sed_wp_editor_setting' , '' ) ); ?></span></div>
 
                     <br>
                     <div><h4 class="attr">Select Settings</h4></div>

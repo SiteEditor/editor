@@ -44,11 +44,19 @@ class PBShortcodeClass{
         global $sed_pb_app;
 
         $args = array_merge( array(
-            "type_icon"   => "font",
-            "shortcode_type" => "enclosing",
-            "is_child"       => false ,
-            "title"          => "" ,
-            "description"    => ""
+            "type_icon"             => "font",
+            "shortcode_type"        => "enclosing",
+            "is_child"              => false ,
+            "title"                 => "" ,
+            "description"           => "" ,
+            /**
+             * Remove wpautop from this shortcode content
+             */
+            "remove_wpautop"        => false ,
+            /**
+             * Prevent form content do_shortcode of this shortcode if site_editor_app_on()
+             */
+            "editor_do_shortcode"   => true
         ) , $args);
 
         extract( $args );
@@ -68,6 +76,7 @@ class PBShortcodeClass{
             array_push( PageBuilderApplication::$shortcodes_tagnames , $this->shortcode->name );
 
         add_action( 'sed_shortcode_register', array( $this , 'register_module_shortcode' ), 10   );
+
 
         //add_action( 'sed_ajax_pb', array( $this , 'ajax_register_shortcode' ), 10 , 1  );
 
@@ -259,12 +268,6 @@ class PBShortcodeClass{
         return $atts;
     }
 
-    function sed_remove_wpautop($content, $autop = false) {
-        $content = do_shortcode( shortcode_unautop($content) );
-        $content = preg_replace( '#^<\/p>|^<br \/>|<p>$#', '', $content );
-        return $content;
-    }
-
     function shortcode_render( $atts , $content = null){
         global $sed_pb_app;
 
@@ -424,13 +427,31 @@ class PBShortcodeClass{
         array_push( $this->queue , self::$shortcode_counter_id );
 
         if(!empty( $content )){
-            if( in_array( $this->shortcode->name , array("sed_paragraph" , "sed_text_title" , "sed_raw_js" , "sed_code_syntax_highlighter" ) ) && site_editor_app_on() ){
-                $content = sed_js_remove_wpautop( $content , false , false );
-            }else{
-                $content = sed_js_remove_wpautop( $content , false );
+
+            /*if( $this->shortcode->remove_wpautop == true ){
+
+                $content = html_entity_decode( $content );
+
+            }*/
+
+            $content = apply_filters( "sed_before_module_content_do_shortcode" , $content , $this->shortcode->name );
+
+            if( $this->shortcode->editor_do_shortcode === true || !site_editor_app_on() ){
+
+                $content = do_shortcode( shortcode_unautop($content) );
+
             }
+
+            if( $this->shortcode->remove_wpautop === true ){
+
+                $content = sed_remove_wpautop( $content , false );
+
+            }
+
         }else{
+
             $content = '';//__('Module is empty.' , 'site-editor' );
+
         }
 
         $current_id = array_pop( $this->queue );

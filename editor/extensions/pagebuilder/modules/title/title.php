@@ -23,11 +23,13 @@ class PBTitleShortcode extends PBShortcodeClass{
 	function __construct() {
 
 		parent::__construct( array(
-                "name"        => "sed_text_title",                        //*require
-                "title"       => __("Title","site-editor"),               //*require for toolbar
-                "description" => __("Add Title To Page","site-editor"),
-                "icon"        => "sedico-title",                            //*require for icon toolbar
-                "module"      =>  "title"                                  //*require
+                "name"                  => "sed_text_title",                        //*require
+                "title"                 => __("Title","site-editor"),               //*require for toolbar
+                "description"           => __("Add Title To Page","site-editor"),
+                "icon"                  => "sedico-title",                            //*require for icon toolbar
+                "module"                =>  "title" ,                                  //*require
+                "remove_wpautop"        => true ,
+                "editor_do_shortcode"   => false
             ) // Args
 		);
 

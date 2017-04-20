@@ -1381,14 +1381,15 @@ function sed_data_atts( $attributes ) {
     return implode( ' ', $atts );
 }
 
+function sed_remove_wpautop($content , $do_shortcode = true ) {
 
-function sed_js_remove_wpautop( $content, $autop = false , $do_shortcode = true ) {
-
-    if ( $autop ) { 
-        $content = wpautop( preg_replace( '/<\/?p\>/', "\n", $content ) . "\n" );
+    if( $do_shortcode === true ) {
+        $content = do_shortcode(shortcode_unautop($content));
     }
 
-    return $do_shortcode === true ? do_shortcode( shortcode_unautop( $content ) ) : shortcode_unautop( $content );
+    $content = preg_replace( '#^<\/p>|^<br \/>|<p>$#', '', $content );
+
+    return $content;
 }
 
 

@@ -307,7 +307,7 @@
 
             if( !_.isUndefined( postsContent ) ) {
 
-                var contents = $.extend( true , {} , postsContent );
+                var contents = $.extend( true , {} , postsContent ); console.log( "-------contents-------" , contents );
 
                 $.each( contents , function ( post_id, models ) { 
                     api.postsContent[post_id] = models;
