@@ -1332,7 +1332,10 @@ $css .= <<<CSS
             }   
 
 
-
+            .page.type-page > .panel-content > .wrap > .entry-header ,
+            .page.type-page > .entry-header {
+                display: {$pages_and_front_page_title};
+            }
 
 
 

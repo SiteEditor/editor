@@ -286,6 +286,21 @@ class SiteEditorTwentyseventeenThemeSync{
         );
 
 
+        $fields['disable_blog_sidebar'] = array(
+            'setting_id'        => 'sed_disable_blog_sidebar',
+            'label'             => __('Disable Blog Sidebar', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"       =>    "Yes" ,
+                "off"      =>    "No" ,
+            ) ,
+            'panel'             =>  'blog_settings',
+        );       
+        
+
         /**
          * Filter number of front page sections in Twenty Seventeen.
          *
@@ -497,6 +512,22 @@ class SiteEditorTwentyseventeenThemeSync{
                 'option_type'       => 'theme_mod',
                 'panel'             => 'general_custom_styling' ,
             ),
+
+
+            'pages_and_front_page_title' => array(
+                'setting_id'        => 'sed_pages_and_front_page_title',
+                'label'             => __('Pages and Front Page Title', 'site-editor'),
+                'type'              => 'radio-buttonset',
+                'default'           => 'block',
+                'transport'         => 'postMessage' ,
+                'choices'           => array(
+                    "none"          =>    "Hide" ,
+                    "block"         =>    "Show" ,
+                ) ,
+                'panel'             =>  'general_custom_styling',
+                //'has_border_box'    => false,
+            ),
+        
 
         /*--------------------------------------------------------------
         6.0 Forms

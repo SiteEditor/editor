@@ -36,6 +36,20 @@
 
         });
 
+        api( "sed_disable_blog_sidebar" , function( value ) {
+
+            value.bind( function( to ) {
+
+                if( !to ){
+                    $( "#secondary" ).removeClass("hide");
+                }else{
+                    $( "#secondary" ).addClass("hide");
+                }
+
+            });
+
+        });        
+
         api( "sed_footer_columns" , function( value ) {
 
             value.bind( function( to ) {
