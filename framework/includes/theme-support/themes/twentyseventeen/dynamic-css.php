@@ -341,6 +341,7 @@ $css .= <<<CSS
                 color: {$main_text_color};
             }
 
+            select,
             input[type="text"],
             input[type="email"],
             input[type="url"],
@@ -358,12 +359,18 @@ $css .= <<<CSS
             input[type="color"],
             textarea {
                 color: {$form_control_color};
-                background: {$form_control_bg};
+                background: {$form_control_bg}; 
                 border-color: {$form_control_border};
+                -moz-box-shadow:    {$form_control_box_shadow};
+                -webkit-box-shadow: {$form_control_box_shadow};
+                box-shadow:         {$form_control_box_shadow};
                 -webkit-border-radius: {$form_control_border_radius};
-                border-radius: {$form_control_border_radius};
+                border-radius:         {$form_control_border_radius};  
+                padding: {$form_control_padding};
+                border-width: {$form_control_border_width};
             }
 
+            select:focus,
             input[type="text"]:focus,
             input[type="email"]:focus,
             input[type="url"]:focus,
@@ -381,24 +388,40 @@ $css .= <<<CSS
             input[type="color"]:focus,
             textarea:focus {
                 color: {$form_control_active_color};
-                border-color: {$form_control_active_border};
+                background: {$form_control_active_bg}; 
+                border-color: {$form_control_active_border}; 
+                -moz-box-shadow:    {$form_control_active_box_shadow};
+                -webkit-box-shadow: {$form_control_active_box_shadow};
+                box-shadow:         {$form_control_active_box_shadow};
             }
 
-            select {
+            /*select {
                 border-color: {$form_control_border};
                 -webkit-border-radius: {$form_control_border_radius};
                 border-radius: {$form_control_border_radius};
-            }
+            }*/
 
             button,
             input[type="button"],
             input[type="submit"] {
-                background-color: {$button_bg};
-                -webkit-border-radius: {$form_control_border_radius};
-                border-radius: {$form_control_border_radius};
                 color: {$button_color};
+                background-color: {$button_bg};
+                border-color: {$button_border};
+                -webkit-border-radius: {$button_border_radius};
+                border-radius: {$button_border_radius};
+                padding: {$button_padding};
+                border-width: {$button_border_width};
+                border-style: solid;
                 -webkit-box-shadow: none;
                 box-shadow: none;
+            }
+
+
+            .module.module-button .btn {
+                -webkit-border-radius: {$button_border_radius};
+                border-radius: {$button_border_radius};
+                padding: {$button_padding};
+                border-width: {$button_border_width};
             }
 
             button.secondary,
@@ -406,8 +429,9 @@ $css .= <<<CSS
             input[type="button"].secondary,
             input[type="reset"].secondary,
             input[type="submit"].secondary {
-                background-color: {$secondary_button_bg};
                 color: {$secondary_button_color};
+                background-color: {$secondary_button_bg};
+                border-color: {$secondary_button_border};
             }
 
             button:hover,
@@ -416,7 +440,9 @@ $css .= <<<CSS
             input[type="button"]:focus,
             input[type="submit"]:hover,
             input[type="submit"]:focus {
+                color: {$button_active_color};
                 background: {$button_active_bg};
+                border-color: {$button_active_border};
             }
 
             button.secondary:hover,
@@ -429,7 +455,9 @@ $css .= <<<CSS
             input[type="reset"].secondary:focus,
             input[type="submit"].secondary:hover,
             input[type="submit"].secondary:focus {
+                color: {$secondary_button_active_color};
                 background: {$secondary_button_active_bg};
+                border-color: {$secondary_button_active_border};
             }
 
             /* Placeholder text color -- selectors need to be separate to work. */
@@ -452,6 +480,25 @@ $css .= <<<CSS
             :-ms-input-placeholder {
                 color: {$placeholder_color};
                 font-family: {$body_font_family} , "Helvetica Neue", helvetica, arial, sans-serif;
+            }
+
+
+            /* Placeholder text color -- selectors need to be separate to work. */
+            ::-webkit-input-placeholder:focus {
+                color: {$active_placeholder_color};
+            }
+
+            :-moz-placeholder:focus {
+                color: {$active_placeholder_color};
+            }
+
+            ::-moz-placeholder:focus {
+                color: {$active_placeholder_color};
+                /* Since FF19 lowers the opacity of the placeholder by default */
+            }
+
+            :-ms-input-placeholder:focus {
+                color: {$active_placeholder_color};
             }
 
             /*--------------------------------------------------------------

@@ -208,7 +208,7 @@ class SiteEditorTwentyseventeenThemeSync{
             'priority'          => 10 ,
         );
 
-        $panels['forms_custom_styling'] =  array(
+        $panels['forms_custom_styling_outer'] =  array(
             'type'              => 'inner_box',
             'title'             => __('Forms Custom Edit Style', 'site-editor'),
             'btn_style'         => 'menu' ,
@@ -216,6 +216,31 @@ class SiteEditorTwentyseventeenThemeSync{
             'icon'              => 'sedico-change-style' ,
             'field_spacing'     => 'sm' ,
             'parent_id'         => "theme_general_styling" ,
+            'priority'          => 10 ,
+        );
+
+        $panels['forms_custom_styling'] =  array(
+            'type'              => 'default',
+            'title'             => __('Forms Custom Edit Style', 'site-editor'),
+            'parent_id'         => "forms_custom_styling_outer" ,
+            'priority'          => 10 ,
+        );
+
+        $panels['buttons_custom_styling_outer'] =  array(
+            'type'              => 'inner_box',
+            'title'             => __('Buttons Custom Edit Style', 'site-editor'),
+            'btn_style'         => 'menu' ,
+            'has_border_box'    => false ,
+            'icon'              => 'sedico-change-style' ,
+            'field_spacing'     => 'sm' ,
+            'parent_id'         => "theme_general_styling" ,
+            'priority'          => 10 ,
+        );
+
+        $panels['buttons_custom_styling'] =  array(
+            'type'              => 'default',
+            'title'             => __('Button', 'site-editor'),
+            'parent_id'         => "buttons_custom_styling_outer" ,
             'priority'          => 10 ,
         );
 
@@ -228,6 +253,50 @@ class SiteEditorTwentyseventeenThemeSync{
             'field_spacing'     => 'sm' ,
             'parent_id'         => "theme_general_styling" ,
             'priority'          => 20 ,
+        );
+
+        $panels['home_custom_styling'] =  array(
+            'type'              => 'default',
+            'title'             => __('Home Styling', 'site-editor'),
+            'btn_style'         => 'menu' ,
+            'has_border_box'    => false ,
+            'icon'              => 'sedico-change-style' ,
+            'field_spacing'     => 'sm' ,
+            'parent_id'         => "general_custom_styling" ,
+            'priority'          => 10 ,
+        );
+
+        $panels['pages_custom_styling'] =  array(
+            'type'              => 'default',
+            'title'             => __('Pages Styling', 'site-editor'),
+            'btn_style'         => 'menu' ,
+            'has_border_box'    => false ,
+            'icon'              => 'sedico-change-style' ,
+            'field_spacing'     => 'sm' ,
+            'parent_id'         => "general_custom_styling" ,
+            'priority'          => 10 ,
+        );
+
+        $panels['blog_custom_styling'] =  array(
+            'type'              => 'default',
+            'title'             => __('Blog Styling', 'site-editor'),
+            'btn_style'         => 'menu' ,
+            'has_border_box'    => false ,
+            'icon'              => 'sedico-change-style' ,
+            'field_spacing'     => 'sm' ,
+            'parent_id'         => "general_custom_styling" ,
+            'priority'          => 10 ,
+        );
+
+        $panels['page_404_styling'] =  array(
+            'type'              => 'default',
+            'title'             => __('404 Page Styling', 'site-editor'),
+            'btn_style'         => 'menu' ,
+            'has_border_box'    => false ,
+            'icon'              => 'sedico-change-style' ,
+            'field_spacing'     => 'sm' ,
+            'parent_id'         => "general_custom_styling" ,
+            'priority'          => 10 ,
         );
 
         /**
@@ -533,37 +602,46 @@ class SiteEditorTwentyseventeenThemeSync{
         6.0 Forms
         --------------------------------------------------------------*/
 
+            'form_control_padding' => array(
+                'setting_id'        => 'sed_form_control_padding',
+                'type'              => 'text',
+                'label'             => __('Padding', 'site-editor'),
+                'default'           => '0.7em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'forms_custom_styling' ,
+            ),
+
+            'form_control_border_width' => array(
+                'setting_id'        => 'sed_form_control_border_width',
+                'type'              => 'text',
+                'label'             => __('Border Width', 'site-editor'),
+                'default'           => '1px',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'forms_custom_styling' ,
+            ),
+
             'form_control_border_radius' => array(
                 'setting_id'        => 'sed_form_control_border_radius',
                 'type'              => 'dimension',
-                'label'             => __('Form Control Border Radius', 'site-editor'),
-                "description"       => __("Border Radius for theme", "site-editor") ,
+                'label'             => __('Border Radius', 'site-editor'),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'panel'             => 'forms_custom_styling' ,
-            ),
-
+            ), 
 
             'form_control_bg' => array(
                 'setting_id'        => 'sed_form_control_bg',
                 'type'              => 'color', 
                 'label'             => __('Background Color', 'site-editor'),
-                "description"       => __("Form Control Background Color", "site-editor"),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'forms_custom_styling' ,
-            ),
-
-            'form_control_border' => array(
-                'setting_id'        => 'sed_form_control_border',
-                'type'              => 'color', 
-                'label'             => __('Border Color', 'site-editor'),
-                "description"       => __("Form Control Border Color", "site-editor"),
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
                 'panel'             => 'forms_custom_styling' ,
             ),
 
@@ -571,32 +649,53 @@ class SiteEditorTwentyseventeenThemeSync{
                 'setting_id'        => 'sed_form_control_color',
                 'type'              => 'color', 
                 'label'             => __('Text Color', 'site-editor'),
-                "description"       => __("Form Control Text Color", "site-editor"),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
                 'panel'             => 'forms_custom_styling' ,
-            ),
+            ), 
 
             'placeholder_color' => array(
                 'setting_id'        => 'sed_placeholder_color',
                 'type'              => 'color', 
                 'label'             => __('Placeholder Color', 'site-editor'),
-                "description"       => __("Form placeholder Text Color", "site-editor"),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
                 'panel'             => 'forms_custom_styling' ,
             ),
 
-            'form_control_active_border' => array(
-                'setting_id'        => 'sed_form_control_active_border',
+            'form_control_border' => array(
+                'setting_id'        => 'sed_form_control_border',
                 'type'              => 'color', 
-                'label'             => __('Active Border Color', 'site-editor'),
-                "description"       => __("Form Control Active Border Color", "site-editor"),
+                'label'             => __('Border Color', 'site-editor'),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'forms_custom_styling' ,
+            ),
+
+            'form_control_box_shadow' => array(
+                'setting_id'        => 'sed_form_control_box_shadow',
+                'type'              => 'text', 
+                'label'             => __('Shadow', 'site-editor'),
+                'default'           => 'none',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'forms_custom_styling' ,
+            ),  
+
+            'form_control_active_bg' => array(
+                'setting_id'        => 'sed_form_control_active_bg',
+                'type'              => 'color', 
+                'label'             => __('Active Background Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
                 'panel'             => 'forms_custom_styling' ,
             ),
 
@@ -604,78 +703,211 @@ class SiteEditorTwentyseventeenThemeSync{
                 'setting_id'        => 'sed_form_control_active_color',
                 'type'              => 'color', 
                 'label'             => __('Active Text Color', 'site-editor'),
-                "description"       => __("Form Control Active Text Color", "site-editor"),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
                 'panel'             => 'forms_custom_styling' ,
+            ),
+
+            'active_placeholder_color' => array(
+                'setting_id'        => 'sed_active_placeholder_color',
+                'type'              => 'color', 
+                'label'             => __('Active Placeholder Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'forms_custom_styling' , 
+            ), 
+
+            'form_control_active_border' => array(
+                'setting_id'        => 'sed_form_control_active_border',
+                'type'              => 'color', 
+                'label'             => __('Active Border Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'forms_custom_styling' ,
+            ),
+
+            'form_control_active_box_shadow' => array(
+                'setting_id'        => 'sed_form_control_active_box_shadow',
+                'type'              => 'text', 
+                'label'             => __('Active Shadow', 'site-editor'),
+                'default'           => 'none',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'forms_custom_styling' ,
+            ),   
+
+
+        /*--------------------------------------------------------------
+        6.0 Forms -> Button
+        --------------------------------------------------------------*/    
+
+            'button_padding' => array(
+                'setting_id'        => 'sed_button_padding',
+                'type'              => 'text', 
+                'label'             => __('Padding', 'site-editor'),
+                'default'           => '1em 2em',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
+            ),        
+
+            'button_border_width' => array(
+                'setting_id'        => 'sed_button_border_width',
+                'type'              => 'dimension',
+                'label'             => __('Border Width', 'site-editor'),
+                'default'           => '0px',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
+            ),
+
+            'button_border_radius' => array( 
+                'setting_id'        => 'sed_button_border_radius',
+                'type'              => 'dimension',
+                'label'             => __('Border Radius', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'buttons_custom_styling' ,
             ),
 
             'button_bg' => array(
                 'setting_id'        => 'sed_button_bg',
                 'type'              => 'color', 
-                'label'             => __('Button Background Color', 'site-editor'),
-                "description"       => __("Button Background Color", "site-editor"),
+                'label'             => __('Background Color', 'site-editor'),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'forms_custom_styling' ,
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
+            ),
+
+            'button_border' => array(
+                'setting_id'        => 'sed_button_border',
+                'type'              => 'color', 
+                'label'             => __('Border Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
             ),
 
             'button_color' => array(
                 'setting_id'        => 'sed_button_color',
                 'type'              => 'color', 
-                'label'             => __('Button Text Color', 'site-editor'),
-                "description"       => __("Button Text Color", "site-editor"),
+                'label'             => __('Text Color', 'site-editor'),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'forms_custom_styling' ,
+                'panel'             => 'buttons_custom_styling' ,
             ),       
 
             'button_active_bg' => array(
                 'setting_id'        => 'sed_button_active_bg',
                 'type'              => 'color',  
-                'label'             => __('Button Active Background Color', 'site-editor'),
-                "description"       => __("Button Active Background Color", "site-editor"),
+                'label'             => __('Active Background Color', 'site-editor'),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'forms_custom_styling' ,
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
             ),
+
+            'button_active_border' => array(
+                'setting_id'        => 'sed_button_active_border',
+                'type'              => 'color', 
+                'label'             => __('Active Border Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
+            ),
+
+            'button_active_color' => array(
+                'setting_id'        => 'sed_button_active_color',
+                'type'              => 'color', 
+                'label'             => __('Active Text Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'buttons_custom_styling' ,
+            ), 
 
             'secondary_button_bg' => array(
                 'setting_id'        => 'sed_secondary_button_bg',
                 'type'              => 'color', 
-                'label'             => __('Secondary Button Background Color', 'site-editor'),
-                "description"       => __("Secondary Button Background Color", "site-editor"),
+                'label'             => __('Secondary Background Color', 'site-editor'),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'forms_custom_styling' ,
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
+            ),
+
+            'secondary_button_border' => array(
+                'setting_id'        => 'sed_secondary_button_border',
+                'type'              => 'color', 
+                'label'             => __('Secondary Border Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
             ),
 
             'secondary_button_color' => array(
                 'setting_id'        => 'sed_secondary_button_color',
                 'type'              => 'color', 
-                'label'             => __('Secondary Button Text Color', 'site-editor'),
-                "description"       => __("Secondary Button Text Color", "site-editor"),
+                'label'             => __('Secondary Text Color', 'site-editor'),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'forms_custom_styling' ,
+                'panel'             => 'buttons_custom_styling' ,
             ),       
 
             'secondary_button_active_bg' => array(
                 'setting_id'        => 'sed_secondary_button_active_bg',
                 'type'              => 'color',  
-                'label'             => __('Secondary Button Active Background Color', 'site-editor'),
-                "description"       => __("Secondary Button Active Background Color", "site-editor"),
+                'label'             => __('Secondary Active Background Color', 'site-editor'),
                 'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'forms_custom_styling' ,
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
             ),
+
+            'secondary_button_active_border' => array(
+                'setting_id'        => 'sed_secondary_button_active_border',
+                'type'              => 'color', 
+                'label'             => __('Secondary Active Border Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
+            ),
+
+            'secondary_button_active_color' => array( 
+                'setting_id'        => 'sed_secondary_button_active_color',
+                'type'              => 'color', 
+                'label'             => __('Secondary Active Text Color', 'site-editor'),
+                'default'           => '',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'buttons_custom_styling' ,
+            ),  
 
 
         /*--------------------------------------------------------------
@@ -713,7 +945,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '6em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'home_custom_styling' ,
             ),      
 
             'rps_home_content_padding_top' => array(
@@ -723,7 +955,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '3.5em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'home_custom_styling' ,
             ),
 
             'home_content_padding_bottom' => array(
@@ -733,7 +965,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '4.5em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'home_custom_styling' ,
             ),
 
             'rps_home_content_padding_bottom' => array(
@@ -743,7 +975,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '2em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'home_custom_styling' ,
             ),
 
             'site_content_padding_top' => array(
@@ -753,7 +985,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '5.5em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'pages_custom_styling' ,
             ),
 
             'rps_site_content_padding_top' => array(
@@ -763,7 +995,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '2.5em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'pages_custom_styling' ,
             ),
 
             'page_content_padding_bottom' => array(
@@ -773,7 +1005,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '3.25em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'pages_custom_styling' ,
             ),
 
             'rps_page_content_padding_bottom' => array(
@@ -783,7 +1015,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '1.5em', 
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'pages_custom_styling' ,
             ),
 
             'page404_content_padding_bottom' => array(
@@ -793,7 +1025,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '9em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'page_404_styling' ,
             ),
 
             'rps_page404_content_padding_bottom' => array( 
@@ -803,7 +1035,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '4em',  
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'general_custom_styling' ,
+                'panel'             => 'page_404_styling' ,
             ),
 
         /*--------------------------------------------------------------
