@@ -297,3 +297,7 @@ table.sed-cols-table:not(.sed-main-content-layout-without-sidebar) .sed-row-boxe
 .sed-app-preview .sed-hidden-theme-row {
     display: none !important;
 }
+
+.sed-pb-post-container > p{
+    display: none;
+}

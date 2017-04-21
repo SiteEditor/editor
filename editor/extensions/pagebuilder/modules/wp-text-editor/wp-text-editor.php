@@ -30,10 +30,10 @@ class PBWPTextEditorShortcode extends PBShortcodeClass{
     }
 
     public static function before_module_content_do_shortcode( $content , $shortcode ){
-
+        
         if( $shortcode == "sed_wp_text_editor" ){
 
-            $content = sed_remove_wpautop( $content , false );
+            $content = preg_replace( '#^<\/p>|^<br\s*\/>|<p>$#', '', $content );
 
         }
 

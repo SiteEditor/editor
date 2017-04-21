@@ -1387,7 +1387,7 @@ function sed_remove_wpautop($content , $do_shortcode = true ) {
         $content = do_shortcode(shortcode_unautop($content));
     }
 
-    $content = preg_replace( '#^<\/p>|^<br \/>|<p>$#', '', $content );
+    $content = preg_replace( '#^<\/p>|<br\s*\/>|<p>$#', '', $content );
 
     return $content;
 }

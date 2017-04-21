@@ -41,6 +41,8 @@ Class PageBuilderApplication {
 
     public $sed_post_shortcodes_model = array();
 
+    public static $shortcodes_remove_wpautop = array();
+
     public static $shortcodes_tagnames = array();
 
     public $sed_theme_content = array();
@@ -54,6 +56,8 @@ Class PageBuilderApplication {
      * @var array
      */
     public $original_customized_shortcodes = array();
+
+    public $is_the_content_template = false;
 
     /**
     * Class constructor.
@@ -72,9 +76,11 @@ Class PageBuilderApplication {
 
         $this->current_app = 'siteeditor';
 
-        //add_filter( 'the_content', array( $this , 'prevent_shortcodes_content_from_wpautop' ) , 8 );
+        add_filter( 'the_content', array( $this , 'prevent_shortcodes_content_from_wpautop' ) , 8 );
 
-        add_filter('the_excerpt', array($this, 'sed_excerpt_filter') );
+        add_filter( 'the_content', array( $this , 'content_remove_autop' ) , 10 );
+
+        add_filter('the_excerpt', array($this, 'sed_excerpt_filter') , 100 );
 
         //load helper shortcodes & ready for do shortcode
         add_action( "wp_loaded" , array( $this , "register_helper_shortcodes" ) , 99999   ); //after_sed_pb_modules_loaded
@@ -88,7 +94,7 @@ Class PageBuilderApplication {
         }
 
         if( !site_editor_app_on() ){
-            add_filter('the_content', array($this, 'sed_post_ready'), 10);
+            add_filter('the_content', array($this, 'sed_post_ready'), 100);
         }
 
         add_action("sed_footer" , array( $this, 'registered_shortcodes_settings') , 10000 );
@@ -119,7 +125,7 @@ Class PageBuilderApplication {
 
     }
 
-    /*public function encode_shortcodes_content( $matches ){ var_dump( $matches );
+    public function encode_shortcodes_content( $matches ){
 
         return "[{$matches[2]} {$matches[3]}]" . htmlentities($matches[5]) . "[/{$matches[2]}]";
 
@@ -127,13 +133,28 @@ Class PageBuilderApplication {
 
     public function prevent_shortcodes_content_from_wpautop( $content ){
 
-        $pattern = self::shortcodes_regexp( array( "sed_title" , "sed_raw_html" , "sed_paragraph" ) );
+        $pattern = self::shortcodes_regexp( self::$shortcodes_remove_wpautop );
 
         $content = preg_replace_callback( '/'. $pattern .'/s' , array( $this , 'encode_shortcodes_content' ) , $content);
 
         return $content;
 
-    }*/
+    }
+
+    /**
+     * TODO : Remove WordPress Auto P from first and last of synced posts content
+     * @param $content
+     * @return mixed
+     */
+    public static function content_remove_autop( $content ){
+
+        //$pattern = self::shortcodes_regexp( array( "sed_row" ) );
+
+        //$content = preg_replace( '#^<\/p>|^<br \/>|<p>$#', '', $content );
+
+        return $content;
+
+    }
 
     function preview_setup_post_content( $post ){
 
@@ -297,7 +318,7 @@ Class PageBuilderApplication {
 
             $id = $post->ID;
 
-            $output = '<div id="sed-post-content-container" data-post-id="' . $id . '" data-content-type="post" drop-placeholder="' . __("Drop Each Module Into The Content Area", "site-editor") . '" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box sed-pb-component">';
+            $output = '<div id="sed-post-content-container" data-post-id="' . $id . '" data-content-type="post" drop-placeholder="' . __("Drop Each Module Into The Content Area", "site-editor") . '" data-parent-id="root" class="sed-pb-each-content-container sed-pb-post-container sed-pb-rows-box sed-pb-component">';
 
             $output .= $content;
 
@@ -305,30 +326,43 @@ Class PageBuilderApplication {
 
         }else{
 
-            $output = $content;
+            if( $this->is_the_content_template === false ){
+                $output = '<div class="sed-pb-each-content-container sed-pb-post-container-disable-editing" sed-disable-editing="yes">';
+                $output .= $content;
+                $output .= '</div>';
+            }else{
+                $output = $content;
+            }
 
         }
 
 		return $output;
 	}
 
-    function sed_post_ready($content){
-        global $post , $sed_data;
+    public function sed_post_ready($content){
 
-        if( !$post )
-            return $content;
+        if( is_singular() && in_the_loop() && is_main_query() ){
 
-        if( is_singular() && $sed_data['page_id'] == $post->ID  ){
+            global $post;
+
             $id = $post->ID;
-            $output = '<div id="sed-pb-post-container'.$id.'" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box sed-pb-component">';
+
+            $output = '<div id="sed-pb-post-container'.$id.'" data-post-id="'.$id.'" data-content-type="post" data-parent-id="root" class="sed-pb-each-content-container sed-pb-post-container sed-pb-rows-box sed-pb-component">';
+
             $output .= $content;
+
             $output .= '</div>';
-        }elseif( $post->ID ){
-            $output = '<div class="sed-pb-post-container-disable-editing" sed-disable-editing="yes">';
-            $output .= $content;
-            $output .= '</div>';
+
         }else{
-            $output = $content;
+
+            if( $this->is_the_content_template === false ){
+                $output = '<div class="sed-pb-each-content-container">';
+                $output .= $content;
+                $output .= '</div>';
+            }else{
+                $output = $content;
+            }
+
         }
 
         return $output;
@@ -517,7 +551,7 @@ Class PageBuilderApplication {
 
     function add_row_synchronization( $matches ){
 
-        $ex_content = wpautop( $matches[1] );
+        $ex_content = $matches[1];
 
         return '[sed_row type="static-element" from_wp_editor="true"]
                     [sed_module]
@@ -530,7 +564,6 @@ Class PageBuilderApplication {
     }
 
     function post_content_synchronization( $content ){
-         global $sed_apps;
 
         $content = shortcode_unautop( trim( $content ) );
         $not_shortcodes = preg_split('/'. self::shortcodes_regexp( ) .'/', $content );
@@ -605,11 +638,11 @@ Class PageBuilderApplication {
 
         if (empty($output) && !empty($post->post_content)) {
             $content = $post->post_content;
-            $text = strip_tags(do_shortcode( $content ) , "<style><script>");
+            $text = strip_tags( apply_filters( 'the_content' , $content ) , "<style><script>");
             $excerpt_length = apply_filters('excerpt_length', 250);
             $excerpt_more = apply_filters('excerpt_more', ' ' . '[...]');
             $text = wp_trim_words($text, $excerpt_length, $excerpt_more);
-            return $text; //wpautop($text)
+            return $text;
         }
 
         return $output;
@@ -1101,26 +1134,6 @@ Class PageBuilderApplication {
     }
 
 
-    function sed_page_builder_post_ready($content){
-        global $post , $sed_data;
-
-        if( is_singular() && $sed_data['page_id'] == $post->ID  ){
-            $id = $post->ID;
-            $output = '<div id="sed-pb-post-container'.$id.'" data-post-id="'.$id.'" data-content-type="post" drop-placeholder="'.__("Drop Each Module Into The Content Area" , "site-editor").'" data-parent-id="root" class="sed-pb-post-container sed-pb-rows-box sed-pb-component">';
-            $output .= $content;
-            $output .= '</div>';
-        }elseif( $post->ID ){
-            $output = '<div class="sed-pb-post-container-disable-editing" sed-disable-editing="yes">';
-            $output .= $content;
-            $output .= '</div>';
-        }else{
-            $output = $content;
-        }
-
-        return $output;
-    }
-
-
     function page_builder_load_modules(){
         global $sed_apps ;  //@args ::: sed_page_ajax , nonce
         $sed_apps->editor->manager->check_ajax_handler('sed_load_modules' , 'sed_app_modules_load');
@@ -1440,7 +1453,11 @@ Class PageBuilderApplication {
 
         $shortcodes_models = self::get_pattern_shortcodes( $shortcodes_pattern_string );
 
-        $content = do_shortcode( $shortcodes_models["string"] );//apply_filters( 'the_content' , $shortcodes_models["string"] );
+        $this->is_the_content_template = true;
+
+        $content = apply_filters( 'the_content' , $shortcodes_models["string"] );//do_shortcode( $shortcodes_models["string"] );
+
+        $this->is_the_content_template = false;
 
         //set current page content shortcodes models in @$this->sed_theme_content for js
         $this->sed_theme_content = $shortcodes_models["shortcodes"];

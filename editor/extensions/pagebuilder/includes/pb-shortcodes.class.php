@@ -75,6 +75,9 @@ class PBShortcodeClass{
         if( !in_array( $this->shortcode->name , PageBuilderApplication::$shortcodes_tagnames ) )
             array_push( PageBuilderApplication::$shortcodes_tagnames , $this->shortcode->name );
 
+        if( $this->shortcode->remove_wpautop === true && !in_array( $this->shortcode->name , PageBuilderApplication::$shortcodes_remove_wpautop ) )
+            array_push( PageBuilderApplication::$shortcodes_remove_wpautop , $this->shortcode->name );
+
         add_action( 'sed_shortcode_register', array( $this , 'register_module_shortcode' ), 10   );
 
 
@@ -428,23 +431,17 @@ class PBShortcodeClass{
 
         if(!empty( $content )){
 
-            /*if( $this->shortcode->remove_wpautop == true ){
-
-                $content = html_entity_decode( $content );
-
-            }*/
-
             $content = apply_filters( "sed_before_module_content_do_shortcode" , $content , $this->shortcode->name );
+
+            if( $this->shortcode->remove_wpautop === true ){
+
+                $content = sed_remove_wpautop( html_entity_decode( $content ) , false );
+
+            }
 
             if( $this->shortcode->editor_do_shortcode === true || !site_editor_app_on() ){
 
                 $content = do_shortcode( shortcode_unautop($content) );
-
-            }
-
-            if( $this->shortcode->remove_wpautop === true ){
-
-                $content = sed_remove_wpautop( $content , false );
 
             }
 

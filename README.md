@@ -5,7 +5,7 @@
 **Tags:** site editor, site builder, page builder, theme builder, theme framework, design, inline editor, inline text editor, layout builder,live options, live, customizer, theme customizer, header builder, footer builder, fully customizable, design options,design editor, options framework, front end, page builder plugin, builder, responsive, front end editor, landing page, editor, drag-and-drop, shortcode, wordpress, ultra flexible, unlimited tools, elements, modules, support, seo, animation, absolute flexibility, live theme options, video backgrounds, font awesome, Optimized, fast, quick, ux, ui  
 **Requires at least:** 4.7  
 **Tested up to:** 4.7.3  
-**Stable tag:** 1.0.0  
+**Stable tag:** 1.0.1  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -192,7 +192,15 @@ Troubleshooting:
 
 # Changelog
 
-**1.0 - Released: April 16th, 2017**
+**1.0.1 - Released: April 21th, 2017**
+
+* Remove wputop From Site Editor Shortcodes
+
+* Post Content Disable Edit Fixed issue #
+
+* Shortcodes nesting Level Fixed issue #
+
+**1.0 - Released: April 19th, 2017**
 
 * Initial release
 
