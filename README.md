@@ -1,4 +1,4 @@
-# Site Editor - WordPress Site Builder
+# Site Editor - WordPress Site Builder - Theme Builder and Page Builder
 
 
 **Contributors:** [wpsiteeditor](https://profiles.wordpress.org/wpsiteeditor/)  

@@ -1,4 +1,4 @@
-=== Site Editor - WordPress Site Builder ===
+=== Site Editor - WordPress Site Builder - Theme Builder and Page Builder ===
 Contributors: wpsiteeditor
 Tags: site editor, site builder, page builder, theme builder, theme framework, design, inline editor, inline text editor, layout builder,live options, live, customizer, theme customizer, header builder, footer builder, fully customizable, design options,design editor, options framework, front end, page builder plugin, builder, responsive, front end editor, landing page, editor, drag-and-drop, shortcode, wordpress, ultra flexible, unlimited tools, elements, modules, support, seo, animation, absolute flexibility, live theme options, video backgrounds, font awesome, Optimized, fast, quick, ux, ui
 Requires at least: 4.7
