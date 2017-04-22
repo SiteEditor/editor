@@ -63,10 +63,12 @@ class SiteEditorThemeSupport{
 
         $theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
 
+        $twentyseventeen_themes = in_array( $theme->get_stylesheet() , array( "twentyseventeen" , "twentyseventeen-plus-lite" ) ) || in_array( $theme->get_template() , array( "twentyseventeen" , "twentyseventeen-plus-lite" ) );
+
         if( $theme->get_stylesheet() == "twentysixteen" ){
             require_once dirname( __FILE__ ) . "/themes/twentysixteen/twentysixteen-sync.class.php" ;
             new SiteEditorTwentysixteenThemeSync( $this );
-        }else if( in_array( $theme->get_stylesheet() , array( "twentyseventeen" , "twentyseventeen-plus" , "twentyseventeen-plus-lite" , "sushico" ) ) ){
+        }else if( $twentyseventeen_themes ){
             require_once dirname( __FILE__ ) . "/themes/twentyseventeen/twentyseventeen-sync.class.php" ;
             new SiteEditorTwentyseventeenThemeSync( $this );
         }
