@@ -1419,13 +1419,7 @@ $css .= <<<CSS
                     margin-top: {$site_footer_margin_top};
                 }
 
-            }   
-
-
-            /*.page.type-page > .panel-content > .wrap > .entry-header ,
-            .page.type-page > .entry-header {
-                display: pages_and_front_page_title;
-            }*/
+            }  
 
 
 
