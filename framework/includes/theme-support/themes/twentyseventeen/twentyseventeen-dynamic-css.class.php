@@ -30,7 +30,7 @@ class SiteEditorTwentyseventeenDynamicCss {
      */
     public function __construct(){
 
-        add_filter( "sed_twentyseventeen_dynamic_css" , array( $this , "register_default_dynamic_css" ) , 10 , 2 );
+        add_filter( "sed_twentyseventeen_dynamic_css" , array( $this , "register_default_dynamic_css" ) , 10 , 4 );
 
         //before print color Scheme in css file
         add_action( 'wp_enqueue_scripts' , array( $this , 'add_dynamic_css' ) , 9999999 );
@@ -58,7 +58,7 @@ class SiteEditorTwentyseventeenDynamicCss {
     }
 
 
-    public function register_default_dynamic_css( $css , $vars ){ 
+    public function register_default_dynamic_css( $css , $vars , $dynamic_css , $tpl_mode ){
 
         $vars_reference = $this->dynamic_vars_reference();
 
@@ -271,11 +271,11 @@ class SiteEditorTwentyseventeenDynamicCss {
      * @param $vars
      * @return mixed|void
      */
-    public function get_dynamic_css( $vars ) {
+    public function get_dynamic_css( $vars , $tpl_mode = false ) {
 
         $css = '';
 
-        $dynamic_css = apply_filters( 'sed_twentyseventeen_dynamic_css' , $css , $vars , $this );
+        $dynamic_css = apply_filters( 'sed_twentyseventeen_dynamic_css' , $css , $vars , $this , $tpl_mode );
 
         return $dynamic_css;
 
@@ -379,7 +379,24 @@ class SiteEditorTwentyseventeenDynamicCss {
         //Add Sheet Width vars
         $vars["sheet_width"] = "{{ sheet_width }}";
 
-        $dynamic_css_tpl = $this->get_dynamic_css( $vars );
+        //Add Custom vars
+        $vars["link_underline_value"]               = "{{ link_underline_value }}";
+        $vars["second_link_underline_value"]        = "{{ second_link_underline_value }}";
+        $vars["link_hover_underline_value"]         = "{{ link_hover_underline_value }}";
+        $vars["img_hover_underline_value"]          = "{{ img_hover_underline_value }}";
+        $vars["page_content_padding_bottom"]        = "{{ page_content_padding_bottom }}";
+        $vars["rps_page_content_padding_bottom"]    = "{{ rps_page_content_padding_bottom }}";
+        $vars["home_content_padding_bottom"]        = "{{ home_content_padding_bottom }}";
+        $vars["rps_home_content_padding_bottom"]    = "{{ rps_home_content_padding_bottom }}";
+        $vars["home_content_padding_top"]           = "{{ home_content_padding_top }}";
+        $vars["rps_home_content_padding_top"]       = "{{ rps_home_content_padding_top }}";
+        $vars["site_content_padding_top"]           = "{{ site_content_padding_top }}";
+        $vars["rps_site_content_padding_top"]       = "{{ rps_site_content_padding_top }}";
+        $vars["page404_content_padding_bottom"]     = "{{ page404_content_padding_bottom }}";
+        $vars["rps_page404_content_padding_bottom"] = "{{ rps_page404_content_padding_bottom }}";
+        $vars["site_footer_margin_top"]             = "{{ site_footer_margin_top }}";
+
+        $dynamic_css_tpl = $this->get_dynamic_css( $vars , true );
 
         //Add Color Scheme Dynamic Css
         $dynamic_css_tpl .= sed_options()->color_scheme->get_color_scheme_css( $vars );
@@ -408,20 +425,26 @@ class SiteEditorTwentyseventeenDynamicCss {
 
                 link_hover_underline = link_hover_underline == "false"  ? false : link_hover_underline;
 
+                console.log( "-----------link_hover_underline-----" , link_hover_underline === true );
+
+                var link_underline_value;
+                var second_link_underline_value;
+                var link_hover_underline_value;
+                var img_hover_underline_value;
 
                 if( link_hover_underline === true ) {
 
-                    var link_underline_value           = "inset 0 -1px 0 " + first_main_color;
-                    var second_link_underline_value    = "inset 0 -1px 0 " + background_color;
-                    var link_hover_underline_value     = "inset 0 0 0 rgba(0, 0, 0, 0), 0 3px 0 " + first_main_color;
-                    var img_hover_underline_value      = "0 0 0 8px " + background_color;
+                    link_underline_value           = "inset 0 -1px 0 " + first_main_color;
+                    second_link_underline_value    = "inset 0 -1px 0 " + background_color;
+                    link_hover_underline_value     = "inset 0 0 0 rgba(0, 0, 0, 0), 0 3px 0 " + first_main_color;
+                    img_hover_underline_value      = "0 0 0 8px " + background_color;
 
-                }else{
+                }else{ 
 
-                    var link_underline_value           = "none";
-                    var second_link_underline_value    = "none";
-                    var link_hover_underline_value     = "none";
-                    var img_hover_underline_value      = "none";
+                    link_underline_value           = "none";
+                    second_link_underline_value    = "none";
+                    link_hover_underline_value     = "none";
+                    img_hover_underline_value      = "none";
 
                 }
 

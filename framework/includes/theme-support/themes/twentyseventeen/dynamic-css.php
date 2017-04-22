@@ -34,43 +34,46 @@ $headings_line_height
 
 */
 
+if( $tpl_mode === false ) {
 
-$link_hover_underline = (bool)$link_hover_underline;
-
-
-if( $link_hover_underline === true ) {
-
-    $link_underline_value           = "inset 0 -1px 0 {$first_main_color}";
-    $second_link_underline_value    = "inset 0 -1px 0 {$background_color}";
-    $link_hover_underline_value     = "inset 0 0 0 rgba(0, 0, 0, 0), 0 3px 0 {$first_main_color}";
-    $img_hover_underline_value      = "0 0 0 8px {$background_color}";
-
-}else{
-
-    $link_underline_value           = "none";
-    $second_link_underline_value    = "none";
-    $link_hover_underline_value     = "none";
-    $img_hover_underline_value      = "none";
-
-}
+    $link_hover_underline = (bool)$link_hover_underline;
 
 
-$reset_default_spacing = (bool)$reset_default_spacing;
+    if ($link_hover_underline === true) {
+
+        $link_underline_value = "inset 0 -1px 0 {$first_main_color}";
+        $second_link_underline_value = "inset 0 -1px 0 {$background_color}";
+        $link_hover_underline_value = "inset 0 0 0 rgba(0, 0, 0, 0), 0 3px 0 {$first_main_color}";
+        $img_hover_underline_value = "0 0 0 8px {$background_color}";
+
+    } else {
+
+        $link_underline_value = "none";
+        $second_link_underline_value = "none";
+        $link_hover_underline_value = "none";
+        $img_hover_underline_value = "none";
+
+    }
 
 
-if( $reset_default_spacing === true ) {
+    $reset_default_spacing = (bool)$reset_default_spacing;
 
-    $page_content_padding_bottom            = "0px";
-    $rps_page_content_padding_bottom        = "0px";
-    $home_content_padding_bottom            = "0px";
-    $rps_home_content_padding_bottom        = "0px";
-    $home_content_padding_top               = "0px";
-    $rps_home_content_padding_top           = "0px";
-    $site_content_padding_top               = "0px";
-    $rps_site_content_padding_top           = "0px";
-    $page404_content_padding_bottom         = "0px";
-    $rps_page404_content_padding_bottom     = "0px";
-    $site_footer_margin_top                 = "0px";
+
+    if ($reset_default_spacing === true) {
+
+        $page_content_padding_bottom = "0px";
+        $rps_page_content_padding_bottom = "0px";
+        $home_content_padding_bottom = "0px";
+        $rps_home_content_padding_bottom = "0px";
+        $home_content_padding_top = "0px";
+        $rps_home_content_padding_top = "0px";
+        $site_content_padding_top = "0px";
+        $rps_site_content_padding_top = "0px";
+        $page404_content_padding_bottom = "0px";
+        $rps_page404_content_padding_bottom = "0px";
+        $site_footer_margin_top = "0px";
+
+    }
 
 }
 
