@@ -66,7 +66,7 @@ class SiteEditorThemeSupport{
         if( $theme->get_stylesheet() == "twentysixteen" ){
             require_once dirname( __FILE__ ) . "/themes/twentysixteen/twentysixteen-sync.class.php" ;
             new SiteEditorTwentysixteenThemeSync( $this );
-        }else if( in_array( $theme->get_stylesheet() , array( "twentyseventeen" , "twentyseventeen-plus" , "twentyseventeen-plus-lite" ) ) ){
+        }else if( in_array( $theme->get_stylesheet() , array( "twentyseventeen" , "twentyseventeen-plus" , "twentyseventeen-plus-lite" , "sushico" ) ) ){
             require_once dirname( __FILE__ ) . "/themes/twentyseventeen/twentyseventeen-sync.class.php" ;
             new SiteEditorTwentyseventeenThemeSync( $this );
         }

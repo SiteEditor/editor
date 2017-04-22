@@ -587,7 +587,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'setting_id'        => 'sed_link_hover_underline',
                 'label'             => __('Link Hover Underline', 'site-editor'),
                 'type'              => 'switch',
-                'default'           => 'on',
+                'default'           => true, 
                 'transport'         => 'postMessage' ,
                 'choices'           => array(
                     "on"            =>    "Show" ,
@@ -602,7 +602,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'setting_id'        => 'sed_reset_default_spacing',  
                 'label'             => __('Reset Default Spacing', 'site-editor'),
                 'type'              => 'switch',
-                'default'           => 'off', 
+                'default'           => false, 
                 'transport'         => 'postMessage' ,
                 'choices'           => array(
                     "on"            =>    "Yes" ,
