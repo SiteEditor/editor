@@ -320,6 +320,10 @@ class SiteEditorTwentyseventeenDynamicCss {
 
         foreach ( $customize_color_settings As $key => $options ){
 
+            if( !isset( $options['setting_id'] ) ){
+                continue;
+            }
+
             $default = isset( $options['default'] ) ? $options['default'] : "";
 
             $vars[$key] = get_theme_mod( $options['setting_id'] , $default );
