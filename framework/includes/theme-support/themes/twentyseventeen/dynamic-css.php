@@ -411,17 +411,21 @@ $css .= <<<CSS
                 border-radius: {$button_border_radius};
                 padding: {$button_padding};
                 border-width: {$button_border_width};
+                font-weight: {$button_font_weight};
+                text-transform: {$button_text_transform};
                 border-style: solid;
                 -webkit-box-shadow: none;
                 box-shadow: none;
             }
 
 
-            .module.module-button .btn {
+            body .module.module-button .btn {
                 -webkit-border-radius: {$button_border_radius};
                 border-radius: {$button_border_radius};
                 padding: {$button_padding};
                 border-width: {$button_border_width};
+                font-weight: {$button_font_weight};
+                text-transform: {$button_text_transform};
             }
 
             button.secondary,

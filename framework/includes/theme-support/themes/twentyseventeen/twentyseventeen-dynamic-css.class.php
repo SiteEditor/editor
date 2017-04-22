@@ -182,14 +182,14 @@ class SiteEditorTwentyseventeenDynamicCss {
             'form_control_bg'                            => 'background_color',
             'form_control_border'                        => 'secondary_border_color',
             'form_control_color'                         => 'secondary_text_color',
-            'form_control_border_radius'                 => 'border_radius',
+            //'form_control_border_radius'                 => 'border_radius',
             'placeholder_color'                          => 'main_text_color',
 
             'form_control_active_bg'                     => 'background_color',
             'form_control_active_border'                 => 'first_main_color',
             'form_control_active_color'                  => 'main_text_color',
 
-            'button_border_radius'                       => 'border_radius',
+            //'button_border_radius'                       => 'border_radius',  
 
             'button_bg'                                  => 'first_main_color',
             'button_border'                              => 'first_main_color',
