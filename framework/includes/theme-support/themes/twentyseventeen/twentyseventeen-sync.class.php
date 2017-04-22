@@ -594,7 +594,21 @@ class SiteEditorTwentyseventeenThemeSync{
                     "off"           =>    "Hide" ,
                 ) ,
                 'panel'             =>  'general_custom_styling',
-                //'has_border_box'    => false,
+            ),
+
+
+
+            'reset_default_spacing' => array(
+                'setting_id'        => 'sed_reset_default_spacing',  
+                'label'             => __('Reset Default Spacing', 'site-editor'),
+                'type'              => 'switch',
+                'default'           => 'off', 
+                'transport'         => 'postMessage' ,
+                'choices'           => array(
+                    "on"            =>    "Yes" ,
+                    "off"           =>    "No" ,
+                ) ,
+                'panel'             =>  'general_custom_styling',
             ),
 
 

@@ -53,6 +53,25 @@ if( $link_hover_underline === true ) {
 
 }
 
+$reset_default_spacing = (bool)$link_hover_underline;
+
+
+if( $reset_default_spacing === true ) {
+
+    $page_content_padding_bottom            = "0px";
+    $rps_page_content_padding_bottom        = "0px";
+    $home_content_padding_bottom            = "0px";
+    $rps_home_content_padding_bottom        = "0px";
+    $home_content_padding_top               = "0px";
+    $rps_home_content_padding_top           = "0px";
+    $site_content_padding_top               = "0px";
+    $rps_site_content_padding_top           = "0px";
+    $page404_content_padding_bottom         = "0px";
+    $rps_page404_content_padding_bottom     = "0px";
+    $site_footer_margin_top                 = "0px";
+
+}
+
 
 
 $css .= <<<CSS
@@ -1405,7 +1424,7 @@ $css .= <<<CSS
 
             /*.page.type-page > .panel-content > .wrap > .entry-header ,
             .page.type-page > .entry-header {
-                display: {$pages_and_front_page_title};
+                display: pages_and_front_page_title;
             }*/
 
 
