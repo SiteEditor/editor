@@ -34,6 +34,26 @@ $headings_line_height
 
 */
 
+$link_hover_underline = (bool)$link_hover_underline;
+
+
+if( $link_hover_underline === true ) {
+
+    $link_underline_value           = "inset 0 -1px 0 {$first_main_color}";
+    $second_link_underline_value    = "inset 0 -1px 0 {$background_color}";
+    $link_hover_underline_value     = "inset 0 0 0 rgba(0, 0, 0, 0), 0 3px 0 {$first_main_color}";
+    $img_hover_underline_value      = "0 0 0 8px {$background_color}";
+
+}else{
+
+    $link_underline_value           = "none";
+    $second_link_underline_value    = "none";
+    $link_hover_underline_value     = "none";
+    $img_hover_underline_value      = "none";
+
+}
+
+
 
 $css .= <<<CSS
         
@@ -546,8 +566,8 @@ $css .= <<<CSS
             .site-footer .widget-area a,
             .posts-navigation a,
             .widget_authors a strong {
-                -webkit-box-shadow: inset 0 -1px 0 {$first_main_color};
-                box-shadow: inset 0 -1px 0 {$first_main_color};
+                -webkit-box-shadow: {$link_underline_value};
+                box-shadow: {$link_underline_value};
             }
 
             .entry-title a,
@@ -572,8 +592,8 @@ $css .= <<<CSS
             .widget ul li a,
             .site-footer .widget-area ul li a,
             .site-footer .widget-area ul li a {
-                -webkit-box-shadow: inset 0 -1px 0 {$background_color};
-                box-shadow: inset 0 -1px 0 {$background_color}; 
+                -webkit-box-shadow: {$second_link_underline_value};
+                box-shadow: {$second_link_underline_value}; 
             }
 
             .entry-content a:focus,
@@ -625,15 +645,15 @@ $css .= <<<CSS
             .widget ul li a:focus,
             .widget ul li a:hover {
                 color: {$first_main_color};
-                -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 3px 0 {$first_main_color};
-                box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 3px 0 {$first_main_color};
+                -webkit-box-shadow: {$link_hover_underline_value};
+                box-shadow: {$link_hover_underline_value};
             }
 
             /* Fixes linked images */
             .entry-content a img,
             .widget a img {
-                -webkit-box-shadow: 0 0 0 8px {$background_color};
-                box-shadow: 0 0 0 8px {$background_color};
+                -webkit-box-shadow: {$img_hover_underline_value};
+                box-shadow: {$img_hover_underline_value};
             }
 
             .post-navigation a:focus .icon,
@@ -1331,8 +1351,8 @@ $css .= <<<CSS
 
             .sed-row-boxed ,   
             .wrap {
-                padding-left: {$rps_wrap_padding_left};
-                padding-right: {$rps_wrap_padding_right}; 
+                padding-left: {$rps_wrap_padding_left_right};
+                padding-right: {$rps_wrap_padding_left_right};  
             }
    
             .sed-row-boxed .wrap , 
@@ -1347,8 +1367,8 @@ $css .= <<<CSS
 
                 .sed-row-boxed ,
                 .wrap {
-                    padding-left: {$wrap_padding_left};
-                    padding-right: {$wrap_padding_right};
+                    padding-left: {$wrap_padding_left_right};
+                    padding-right: {$wrap_padding_left_right};
                 }
 
                 .page:not(.home) #content {
@@ -1383,10 +1403,10 @@ $css .= <<<CSS
             }   
 
 
-            .page.type-page > .panel-content > .wrap > .entry-header ,
+            /*.page.type-page > .panel-content > .wrap > .entry-header ,
             .page.type-page > .entry-header {
                 display: {$pages_and_front_page_title};
-            }
+            }*/
 
 
 

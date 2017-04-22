@@ -400,6 +400,27 @@ class SiteEditorTwentyseventeenDynamicCss {
 
                 ?>
 
+                /*alert(link_hover_underline);*/
+
+                link_hover_underline = link_hover_underline == "false"  ? false : link_hover_underline;
+
+
+                if( link_hover_underline === true ) {
+
+                    var link_underline_value           = "inset 0 -1px 0 " + first_main_color;
+                    var second_link_underline_value    = "inset 0 -1px 0 " + background_color;
+                    var link_hover_underline_value     = "inset 0 0 0 rgba(0, 0, 0, 0), 0 3px 0 " + first_main_color;
+                    var img_hover_underline_value      = "0 0 0 8px " + background_color;
+
+                }else{
+
+                    var link_underline_value           = "none";
+                    var second_link_underline_value    = "none";
+                    var link_hover_underline_value     = "none";
+                    var img_hover_underline_value      = "none";
+
+                }
+
             #>
             <?php echo $dynamic_css_tpl; ?>
         </script>

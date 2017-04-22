@@ -168,10 +168,21 @@ class SiteEditorTwentyseventeenThemeSync{
             'title'                 =>  __('Content Layout Settings',"site-editor")  ,
             'capability'            => 'edit_theme_options' ,
             'type'                  => 'inner_box' ,
-            'priority'              => 30 ,
+            'priority'              => 11 ,
             'btn_style'             => 'menu' ,
             'has_border_box'        => false ,
             'icon'                  => 'sedico-layout' ,
+            'field_spacing'         => 'sm'
+        );
+
+        $panels['front_page_settings'] = array(
+            'title'                 =>  __('Front Page Options',"site-editor")  , 
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'priority'              => 30 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-current-post-customize' ,
             'field_spacing'         => 'sm'
         );
 
@@ -186,7 +197,40 @@ class SiteEditorTwentyseventeenThemeSync{
             'field_spacing'         => 'sm'
         );
 
-        $panels['theme_general_styling'] =  array(
+        $panels['pages_settings'] = array(
+            'title'                 =>  __('Pages Options',"site-editor")  ,
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'priority'              => 30 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-current-post-customize' ,
+            'field_spacing'         => 'sm'
+        ); 
+
+        $panels['404_page_settings'] = array(
+            'title'                 =>  __('404 Page Options',"site-editor")  , 
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'priority'              => 30 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-current-post-customize' ,
+            'field_spacing'         => 'sm'
+        );
+
+        $panels['search_results_page_settings'] = array(
+            'title'                 =>  __('Search Results Page Options',"site-editor")  , 
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'priority'              => 30 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'icon'                  => 'sedico-current-post-customize' ,
+            'field_spacing'         => 'sm'
+        );
+
+        $panels['theme_general_styling'] =  array( 
             'type'              => 'inner_box',
             'title'             => __('Theme General Styling', 'site-editor'),
             'btn_style'         => 'menu' ,
@@ -194,7 +238,7 @@ class SiteEditorTwentyseventeenThemeSync{
             'icon'              => 'sedico-change-style' ,
             'field_spacing'     => 'sm' ,
             'parent_id'         => "root" ,
-            'priority'          => 60 ,
+            'priority'          => 10 ,
         );
 
         $panels['general_custom_styling'] =  array(
@@ -255,50 +299,7 @@ class SiteEditorTwentyseventeenThemeSync{
             'priority'          => 20 ,
         );
 
-        $panels['home_custom_styling'] =  array(
-            'type'              => 'default',
-            'title'             => __('Home Styling', 'site-editor'),
-            'btn_style'         => 'menu' ,
-            'has_border_box'    => false ,
-            'icon'              => 'sedico-change-style' ,
-            'field_spacing'     => 'sm' ,
-            'parent_id'         => "general_custom_styling" ,
-            'priority'          => 10 ,
-        );
-
-        $panels['pages_custom_styling'] =  array(
-            'type'              => 'default',
-            'title'             => __('Pages Styling', 'site-editor'),
-            'btn_style'         => 'menu' ,
-            'has_border_box'    => false ,
-            'icon'              => 'sedico-change-style' ,
-            'field_spacing'     => 'sm' ,
-            'parent_id'         => "general_custom_styling" ,
-            'priority'          => 10 ,
-        );
-
-        $panels['blog_custom_styling'] =  array(
-            'type'              => 'default',
-            'title'             => __('Blog Styling', 'site-editor'),
-            'btn_style'         => 'menu' ,
-            'has_border_box'    => false ,
-            'icon'              => 'sedico-change-style' ,
-            'field_spacing'     => 'sm' ,
-            'parent_id'         => "general_custom_styling" ,
-            'priority'          => 10 ,
-        );
-
-        $panels['page_404_styling'] =  array(
-            'type'              => 'default',
-            'title'             => __('404 Page Styling', 'site-editor'),
-            'btn_style'         => 'menu' ,
-            'has_border_box'    => false ,
-            'icon'              => 'sedico-change-style' ,
-            'field_spacing'     => 'sm' ,
-            'parent_id'         => "general_custom_styling" ,
-            'priority'          => 10 ,
-        );
-
+ 
         /**
          * Remove Page Builder Settings Panel From Twentyseventeen Theme
          *
@@ -409,7 +410,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'data-settings-id'      => "twenty_seventeen_footer" ,
                 'class'                 => "open-new-group-settings" ,
             ),
-            'priority'          => 40 ,
+            'priority'          => 12 ,
             'has_border_box'    => false ,
             'icon'              => 'sedico-footer' ,
             'style'             => 'menu' ,
@@ -582,8 +583,24 @@ class SiteEditorTwentyseventeenThemeSync{
                 'panel'             => 'general_custom_styling' ,
             ),
 
+            'link_hover_underline' => array(
+                'setting_id'        => 'sed_link_hover_underline',
+                'label'             => __('Link Hover Underline', 'site-editor'),
+                'type'              => 'switch',
+                'default'           => 'on',
+                'transport'         => 'postMessage' ,
+                'choices'           => array(
+                    "on"            =>    "Show" ,
+                    "off"           =>    "Hide" ,
+                ) ,
+                'panel'             =>  'general_custom_styling',
+                //'has_border_box'    => false,
+            ),
 
-            'pages_and_front_page_title' => array(
+
+
+
+            /*'pages_and_front_page_title' => array(
                 'setting_id'        => 'sed_pages_and_front_page_title',
                 'label'             => __('Pages and Front Page Title', 'site-editor'),
                 'type'              => 'radio-buttonset',
@@ -595,7 +612,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 ) ,
                 'panel'             =>  'general_custom_styling',
                 //'has_border_box'    => false,
-            ),
+            ),*/
         
 
         /*--------------------------------------------------------------
@@ -990,7 +1007,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '6em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'home_custom_styling' ,
+                'panel'             => 'front_page_settings' ,
             ),      
 
             'rps_home_content_padding_top' => array(
@@ -1000,7 +1017,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '3.5em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'home_custom_styling' ,
+                'panel'             => 'front_page_settings' ,
             ),
 
             'home_content_padding_bottom' => array(
@@ -1010,7 +1027,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '4.5em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'home_custom_styling' ,
+                'panel'             => 'front_page_settings' ,
             ),
 
             'rps_home_content_padding_bottom' => array(
@@ -1020,7 +1037,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '2em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'home_custom_styling' ,
+                'panel'             => 'front_page_settings' ,
             ),
 
             'site_content_padding_top' => array(
@@ -1030,7 +1047,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '5.5em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'pages_custom_styling' ,
+                'panel'             => 'pages_settings' ,
             ),
 
             'rps_site_content_padding_top' => array(
@@ -1040,7 +1057,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '2.5em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'pages_custom_styling' ,
+                'panel'             => 'pages_settings' ,
             ),
 
             'page_content_padding_bottom' => array(
@@ -1050,7 +1067,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '3.25em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'pages_custom_styling' ,
+                'panel'             => 'pages_settings' ,
             ),
 
             'rps_page_content_padding_bottom' => array(
@@ -1060,7 +1077,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '1.5em', 
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'pages_custom_styling' ,
+                'panel'             => 'pages_settings' ,
             ),
 
             'page404_content_padding_bottom' => array(
@@ -1070,7 +1087,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '9em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'page_404_styling' ,
+                'panel'             => '404_page_settings' ,
             ),
 
             'rps_page404_content_padding_bottom' => array( 
@@ -1080,53 +1097,32 @@ class SiteEditorTwentyseventeenThemeSync{
                 'default'           => '4em',  
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
-                'panel'             => 'page_404_styling' ,
+                'panel'             => '404_page_settings' ,
             ),
 
         /*--------------------------------------------------------------
         Wrap
         --------------------------------------------------------------*/            
 
-            'wrap_padding_left' => array(
-                'setting_id'        => 'sed_wrap_padding_left',
+            'wrap_padding_left_right' => array(
+                'setting_id'        => 'sed_wrap_padding_left_right',
                 'type'              => 'dimension',
-                'label'             => __('Wrap Padding Left', 'site-editor'),
+                'label'             => __('Wrap Padding Left & Right', 'site-editor'),
                 'default'           => '3em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'panel'             => 'general_settings' ,
-            ),      
+            ),        
 
-            'wrap_padding_right' => array(
-                'setting_id'        => 'sed_wrap_padding_right',
+            'rps_wrap_padding_left_right' => array(
+                'setting_id'        => 'sed_rps_wrap_padding_left_right',
                 'type'              => 'dimension',
-                'label'             => __('Wrap Padding Right', 'site-editor'),
-                'default'           => '3em',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'panel'             => 'general_settings' ,
-            ),     
-
-            'rps_wrap_padding_left' => array(
-                'setting_id'        => 'sed_rps_wrap_padding_left',
-                'type'              => 'dimension',
-                'label'             => __('Wrap Responsive Padding Left', 'site-editor'),
+                'label'             => __('Wrap Responsive Padding Left & Right', 'site-editor'),
                 'default'           => '2em',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'panel'             => 'general_settings' ,
             ),      
-
-            'rps_wrap_padding_right' => array(
-                'setting_id'        => 'sed_rps_wrap_padding_right',
-                'type'              => 'dimension',
-                'label'             => __('Wrap Responsive Padding Right', 'site-editor'),
-                'default'           => '2em',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'panel'             => 'general_settings' ,
-            ),
-
 
 
         );
