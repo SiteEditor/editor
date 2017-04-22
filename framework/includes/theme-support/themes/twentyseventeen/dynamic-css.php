@@ -34,6 +34,7 @@ $headings_line_height
 
 */
 
+
 $link_hover_underline = (bool)$link_hover_underline;
 
 
@@ -53,7 +54,8 @@ if( $link_hover_underline === true ) {
 
 }
 
-$reset_default_spacing = (bool)$link_hover_underline;
+
+$reset_default_spacing = (bool)$reset_default_spacing;
 
 
 if( $reset_default_spacing === true ) {
@@ -1419,9 +1421,16 @@ $css .= <<<CSS
                     margin-top: {$site_footer_margin_top};
                 }
 
-            }  
+            }   
+
 
 
 
 CSS;
 
+
+
+            /*.page.type-page > .panel-content > .wrap > .entry-header ,
+            .page.type-page > .entry-header {
+                display: pages_and_front_page_title;
+            }*/

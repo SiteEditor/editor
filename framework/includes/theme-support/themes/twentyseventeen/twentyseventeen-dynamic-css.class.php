@@ -425,6 +425,25 @@ class SiteEditorTwentyseventeenDynamicCss {
 
                 }
 
+                /*reset_default_spacing = (bool)$link_hover_underline;*/
+
+
+                if( reset_default_spacing === true ) { 
+
+                    page_content_padding_bottom            = "0px";
+                    rps_page_content_padding_bottom        = "0px";
+                    home_content_padding_bottom            = "0px";
+                    rps_home_content_padding_bottom        = "0px";
+                    home_content_padding_top               = "0px";
+                    rps_home_content_padding_top           = "0px";
+                    site_content_padding_top               = "0px";
+                    rps_site_content_padding_top           = "0px";
+                    page404_content_padding_bottom         = "0px";
+                    rps_page404_content_padding_bottom     = "0px";
+                    site_footer_margin_top                 = "0px";
+
+                }
+
             #>
             <?php echo $dynamic_css_tpl; ?>
         </script>
