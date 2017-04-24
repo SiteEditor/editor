@@ -1315,6 +1315,7 @@ class SiteEditorManager{
                 var _sedAppEditorI18n = <?php echo wp_json_encode( $sed_js_I18n )?>;
                 var _sedAppEditorAddOnSettings = <?php echo wp_json_encode( $sed_addon_settings )?>;
                 var _sedAppPageContentInfo = <?php echo wp_json_encode( $this->get_page_content_info() )?>;
+				<?php do_action( "sed_front_end_print_js_settings" );?>
 		</script>
 
 		<!-- Full Iframe Loading -->
