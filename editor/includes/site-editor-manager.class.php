@@ -1503,7 +1503,7 @@ class SiteEditorManager{
 	 * @return string|mixed $post_value Sanitized value or the $default provided
 	 */
 	public function post_value( $setting, $default = null ) {
-		$post_values = $this->unsanitized_post_values();
+		$post_values = $this->unsanitized_post_values(); 
 		if ( array_key_exists( $setting->id, $post_values ) ) {
 			return $setting->sanitize( $post_values[ $setting->id ] );
 		} else {

@@ -72,9 +72,10 @@ class SEDAppSave{
            //save general settings( general settings is option_type != "base" OR option_type not empty  )
            foreach ( $sed_page_customized as $setting_id => $setting_val) {
 
-               $setting = SED()->editor->manager->get_setting( $setting_id );
+               $setting = SED()->editor->manager->get_setting( $setting_id ); 
 
                $setting->save();
+
            }
 
            /*

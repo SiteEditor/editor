@@ -464,7 +464,7 @@ class SedAppSettings{
 	 * @return false|null False if cap check fails or value isn't set.
 	 */
 	public final function save() {
-		$value = $this->post_value(); 
+		$value = $this->post_value();
 
 		if ( ! $this->check_capabilities() || ! isset( $value ) )
 			return false;
@@ -496,7 +496,7 @@ class SedAppSettings{
      * @param mixed $default A default value which is used as a fallback. Default is null.
      * @return mixed The default value on failure, otherwise the sanitized value.
      */
-    final public function post_value( $default = null ) {
+    final public function post_value( $default = null ) { 
         return $this->manager->post_value( $this, $default );
     }
 

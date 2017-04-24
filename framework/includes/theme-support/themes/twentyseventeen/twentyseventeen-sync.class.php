@@ -505,6 +505,21 @@ class SiteEditorTwentyseventeenThemeSync{
             'panel'             =>  'pages_settings',
         );
 
+
+        $fields['disable_featured_image_header'] = array(
+            'setting_id'        => 'sed_disable_featured_image_header',
+            'label'             => __('Disable Featured Image Header', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'choices'           => array(
+                "on"       =>    "Yes" ,
+                "off"      =>    "No" ,
+            ) ,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'panel'             =>  'general_settings',
+        );
+
         /**
          * Remove Page Builder Settings Fields From Twentyseventeen Theme
          *

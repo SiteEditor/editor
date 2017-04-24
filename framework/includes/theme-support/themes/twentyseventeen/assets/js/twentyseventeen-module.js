@@ -22,6 +22,20 @@
 
         });
 
+        api( "sed_disable_featured_image_header" , function( value ) {
+
+            value.bind( function( to ) {
+
+                if( !to ){
+                    $( ".single-featured-image-header" ).removeClass("hide");
+                }else{
+                    $( ".single-featured-image-header" ).addClass("hide");
+                }
+
+            });
+
+        });
+
         api( "sed_disable_footer" , function( value ) {
 
             value.bind( function( to ) {

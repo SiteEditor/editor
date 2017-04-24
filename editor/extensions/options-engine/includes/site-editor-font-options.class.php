@@ -144,9 +144,10 @@ class SiteEditorFontOptions extends SiteEditorOptionsCategory{
                 'setting_id'        => "sed_custom_fonts" ,
                 'type'              => 'custom',
                 'js_type'           => 'custom_font',
-                'default'           => get_theme_mod( 'sed_custom_fonts' , array() ),
+                'default'           => array(),
                 'has_border_box'    => false ,
                 'custom_template'   => $this->custom_fonts_template() ,
+                'option_type'       => 'theme_mod' ,
                 'transport'         => 'postMessage' ,
                 'priority'          => 6 ,
                 'panel'             => 'custom_fonts_panel'
