@@ -197,6 +197,18 @@ class SiteEditorTwentyseventeenThemeSync{
             'field_spacing'         => 'sm'
         );
 
+        $panels['blog_single_posts_settings'] = array(
+            'title'                 =>  __('Single Post Settings',"site-editor")  ,
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'priority'              => 30 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'parent_id'             => 'blog_settings',
+            'icon'                  => 'sedico-current-post-customize' ,
+            'field_spacing'         => 'sm'
+        );
+
         $panels['pages_settings'] = array(
             'title'                 =>  __('Pages Options',"site-editor")  ,
             'capability'            => 'edit_theme_options' ,
@@ -518,6 +530,66 @@ class SiteEditorTwentyseventeenThemeSync{
             'option_type'       => 'theme_mod',
             'transport'         => 'postMessage' ,
             'panel'             =>  'general_settings',
+        );
+
+        /**
+         * Single Post settings
+         */
+
+        $fields['disable_header_post_meta'] = array(
+            'setting_id'        => 'sed_disable_header_post_meta',
+            'label'             => __('Disable Header Post Meta', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'choices'           => array(
+                "on"       =>    "Yes" ,
+                "off"      =>    "No" ,
+            ) ,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'panel'             =>  'blog_single_posts_settings',
+        );
+
+        $fields['disable_footer_post_meta'] = array(
+            'setting_id'        => 'sed_disable_footer_post_meta',
+            'label'             => __('Disable Footer Post Meta', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'choices'           => array(
+                "on"       =>    "Yes" ,
+                "off"      =>    "No" ,
+            ) ,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'panel'             =>  'blog_single_posts_settings',
+        );
+
+        $fields['disable_single_post_comments'] = array(
+            'setting_id'        => 'sed_disable_single_post_comments',
+            'label'             => __('Disable Comments on single post', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'choices'           => array(
+                "on"       =>    "Yes" ,
+                "off"      =>    "No" ,
+            ) ,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'panel'             =>  'blog_single_posts_settings',
+        );
+
+        $fields['disable_post_nav'] = array(
+            'setting_id'        => 'sed_disable_post_nav',
+            'label'             => __('Disable Post Navigation', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'choices'           => array(
+                "on"       =>    "Yes" ,
+                "off"      =>    "No" ,
+            ) ,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'panel'             =>  'blog_single_posts_settings',
         );
 
         /**

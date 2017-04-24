@@ -121,6 +121,35 @@
         });
 
         /**
+         * Single Post options
+         */
+
+        var _singlePostOptions = {
+            "sed_disable_post_nav"              : ".sed-single-post-navigation" ,
+            "sed_disable_single_post_comments"  : ".sed-single-post-comments" ,
+            "sed_disable_header_post_meta"      : ".sed-single-header-post-meta" ,
+            "sed_disable_footer_post_meta"      : ".sed-single-footer-post-meta"
+        };
+
+        $.each( _singlePostOptions , function( settingId , _selector ){
+
+            api( settingId , function( value ) {
+
+                value.bind( function( to ) {
+
+                    if( !to ){
+                        $( _selector).removeClass("hide");
+                    }else{
+                        $( _selector ).addClass("hide");
+                    }
+
+                });
+
+            });
+
+        });
+
+        /**
          * 404 Sidebar Options
          */
         _.each( ["sed_disable_blog_sidebar" , "sed_disable_search_results_sidebar" ] , function( sidebarSettingId ){
