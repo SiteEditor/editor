@@ -207,7 +207,7 @@
     /*right: 50%;*/
     text-align: center;
     padding: 0;
-    min-width: 300px;
+    min-width: auto;
     font-size: 0;
 }
 .sed-row-pb.sed-pb-row-module-special > .sed-handle-sort-row .drag-content-sty {
