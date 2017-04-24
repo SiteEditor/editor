@@ -417,12 +417,100 @@ class SiteEditorTwentyseventeenThemeSync{
             'field_spacing'     => 'sm'
         );
 
+        $fields['404_content_layout'] = array(
+            'setting_id'        => 'sed_404_content_layout',
+            'label'             => __('404 Content Layout', 'site-editor'),
+            'description'       => __( 'When the two column layout is assigned, the page title is in one column and content is in the other.' , 'site-editor' ),
+            'type'              => 'radio-buttonset',
+            'default'           => 'two-column',
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "one-column"        =>    __('One Column', 'site-editor'),
+                "two-column"        =>    __('Two Column', 'site-editor'),
+            ) ,
+            'panel'             => '404_page_settings',
+        );
+
+        $fields['show_404_page_title'] = array(
+            'setting_id'        => 'sed_show_404_page_title',
+            'label'             => __('Show 404 page title', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => true,
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"            =>    "Show" ,
+                "off"           =>    "Hide" ,
+            ) ,
+            'panel'             =>  '404_page_settings',
+        );
+
+        $fields['404_page_title'] = array(
+            'setting_id'        => 'sed_404_page_title',
+            'label'             => __('404 Page Title', 'site-editor'),
+            'description'       => __( '404 Page Title' , 'site-editor' ),
+            'type'              => 'text',
+            'default'           => __( 'Oops! That page can&rsquo;t be found.', 'site-editor' ),
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'panel'             => '404_page_settings',
+            'dependency' => array(
+                'queries'  =>  array(
+                    array(
+                        "key"       => "show_404_page_title" ,
+                        "value"     => '1' ,
+                        "compare"   => "=="
+                    )
+                )
+            )
+        );
+
+        $fields['disable_search_results_sidebar'] = array(
+            'setting_id'        => 'sed_disable_search_results_sidebar',
+            'label'             => __('Disable search results sidebar', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"       =>    "Yes" ,
+                "off"      =>    "No" ,
+            ) ,
+            'panel'             =>  'search_results_page_settings',
+        );
+
+        $fields['show_front_page_titles'] = array(
+            'setting_id'        => 'sed_show_front_page_titles',
+            'label'             => __('Show front page titles', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => true,
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"            =>    "Show" ,
+                "off"           =>    "Hide" ,
+            ) ,
+            'panel'             =>  'front_page_settings',
+        );
+
+        $fields['show_pages_title'] = array(
+            'setting_id'        => 'sed_show_pages_title',
+            'label'             => __('Show pages title', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => true,
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"            =>    "Show" ,
+                "off"           =>    "Hide" ,
+            ) ,
+            'panel'             =>  'pages_settings',
+        );
+
         /**
          * Remove Page Builder Settings Fields From Twentyseventeen Theme
          *
-         */        
-
+         */
         unset($fields['pb_rows_width']);
+
         unset($fields['pb_rows_padding']);
 
         $fields = array_merge( $fields , $this->dynamic_css_options );

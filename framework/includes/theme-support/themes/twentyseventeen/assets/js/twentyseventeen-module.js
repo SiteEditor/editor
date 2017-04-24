@@ -36,19 +36,114 @@
 
         });
 
-        api( "sed_disable_blog_sidebar" , function( value ) {
+        api( "sed_show_pages_title" , function( value ) {
 
             value.bind( function( to ) {
 
-                if( !to ){
-                    $( "#secondary" ).removeClass("hide");
+                if( to ){
+                    $( "body.page:not(.home) .entry-header" ).removeClass("hide");
                 }else{
-                    $( "#secondary" ).addClass("hide");
+                    $( "body.page:not(.home) .entry-header" ).addClass("hide");
                 }
 
             });
 
-        });        
+        });
+
+        api( "sed_show_front_page_titles" , function( value ) {
+
+            value.bind( function( to ) {
+
+                if( to ){
+                    $( "body.twentyseventeen-front-page .entry-header" ).removeClass("hide");
+                }else{
+                    $( "body.twentyseventeen-front-page .entry-header" ).addClass("hide");
+                }
+
+            });
+
+        });
+
+        /**
+         * 404 Page Options
+         */
+        api( "sed_404_content_layout" , function( value ) {
+
+            value.bind( function( to ) {
+
+                var _layouts = [ 'one-column' , 'two-column' ],
+                    currClass = to == "two-column" ? "sed-404-one-column" : "sed-404-two-column",
+                    newClass = "sed-404-" + to;
+
+                $( "section.error-404" ).removeClass(currClass).addClass(newClass);
+
+
+            });
+
+        });
+
+        api( "sed_show_404_page_title" , function( value ) {
+
+            value.bind( function( to ) {
+
+                if( to ){
+                    $( "section.error-404 .page-header" ).removeClass("hide");
+                }else{
+                    $( "section.error-404 .page-header" ).addClass("hide");
+                }
+
+            });
+
+        });
+
+        api( "sed_404_page_title" , function( value ) {
+
+            value.bind( function( to ) {
+
+                $( "section.error-404 .page-header > .page-title" ).text( to );
+
+            });
+
+        });
+
+        /**
+         * 404 Sidebar Options
+         */
+        _.each( ["sed_disable_blog_sidebar" , "sed_disable_search_results_sidebar" ] , function( sidebarSettingId ){
+
+            var _activeSidebar = $("body").hasClass("has-sidebar");
+
+            api( sidebarSettingId , function (value) {
+
+                value.bind(function (to) {
+
+                    if (!to) {
+
+                        $("#secondary").removeClass("hide");
+
+                        $("body").removeClass("sed-no-sidebar");
+
+                        if( _activeSidebar ){
+                            $("body").addClass("has-sidebar");
+                        }
+
+                    } else {
+
+                        $("#secondary").addClass("hide");
+
+                        $("body").addClass("sed-no-sidebar");
+
+                        if( _activeSidebar ){
+                            $("body").removeClass("has-sidebar");
+                        }
+
+                    }
+
+                });
+
+            });
+
+        });
 
         api( "sed_footer_columns" , function( value ) {
 
