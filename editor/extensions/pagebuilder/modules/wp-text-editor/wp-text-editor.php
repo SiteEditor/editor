@@ -21,25 +21,27 @@ class PBWPTextEditorShortcode extends PBShortcodeClass{
             
         ));
 
-        /*if ( ! has_filter( "sed_before_module_content_do_shortcode" , array( __CLASS__ , 'before_module_content_do_shortcode' ) ) ) {
+        if ( ! has_filter( "sed_before_module_content_do_shortcode" , array( __CLASS__ , 'before_module_content_do_shortcode' ) ) ) {
 
             add_filter("sed_before_module_content_do_shortcode", array(__CLASS__, 'before_module_content_do_shortcode'), 10, 2);
 
-        }*/
+        }
 
     }
 
-    /*public static function before_module_content_do_shortcode( $content , $shortcode ){
+    public static function before_module_content_do_shortcode( $content , $shortcode ){
         
         if( $shortcode == "sed_wp_text_editor" ){
 
-            $content = preg_replace( '#^<\/p>|^<br\s*\/>|<p>$#', '', $content );
+            $content = wpautop( $content );
+
+            //$content = preg_replace( '#^<\/p>|^<br\s*\/>|<p>$#', '', $content );
 
         }
 
         return $content;
 
-    }*/
+    }
 
 
     function get_atts(){
