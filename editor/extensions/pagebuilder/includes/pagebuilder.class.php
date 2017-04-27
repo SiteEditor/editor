@@ -76,9 +76,11 @@ Class PageBuilderApplication {
 
         $this->current_app = 'siteeditor';
 
-        add_filter( 'the_content', array( $this , 'prevent_shortcodes_content_from_wpautop' ) , 8 );
+        remove_filter( 'the_content', 'wpautop');
 
-        add_filter( 'the_content', array( $this , 'content_remove_autop' ) , 10 );
+        //add_filter( 'the_content', array( $this , 'prevent_shortcodes_content_from_wpautop' ) , 8 );
+
+        //add_filter( 'the_content', array( $this , 'content_remove_autop' ) , 10 );
 
         add_filter('the_excerpt', array($this, 'sed_excerpt_filter') , 100 );
 

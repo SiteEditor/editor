@@ -433,11 +433,11 @@ class PBShortcodeClass{
 
             $content = apply_filters( "sed_before_module_content_do_shortcode" , $content , $this->shortcode->name );
 
-            if( $this->shortcode->remove_wpautop === true ){
+            /*if( $this->shortcode->remove_wpautop === true ){
 
                 $content = sed_remove_wpautop( html_entity_decode( $content ) , false );
 
-            }
+            }*/
 
             if( $this->shortcode->editor_do_shortcode === true || !site_editor_app_on() ){
 
