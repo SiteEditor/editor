@@ -76,11 +76,11 @@ Class PageBuilderApplication {
 
         $this->current_app = 'siteeditor';
 
-        remove_filter( 'the_content', 'wpautop');
+        //remove_filter( 'the_content', 'wpautop');
 
         //add_filter( 'the_content', array( $this , 'prevent_shortcodes_content_from_wpautop' ) , 8 );
 
-        //add_filter( 'the_content', array( $this , 'content_remove_autop' ) , 10 );
+        add_filter( 'the_content', array( $this , 'content_before_autop' ) , 9 );
 
         add_filter('the_excerpt', array($this, 'sed_excerpt_filter') , 100 );
 
@@ -144,15 +144,40 @@ Class PageBuilderApplication {
     }
 
     /**
-     * TODO : Remove WordPress Auto P from first and last of synced posts content
+     * Remove WordPress Auto P from all of $content synced with site editor
+     *
      * @param $content
      * @return mixed
      */
-    public static function content_remove_autop( $content ){
+    public static function content_before_autop( $content ){
 
-        //$pattern = self::shortcodes_regexp( array( "sed_row" ) );
+        $pattern = self::shortcodes_regexp( array( "sed_row" ) );
 
-        //$content = preg_replace( '#^<\/p>|^<br \/>|<p>$#', '', $content );
+        $is_sed_synced = false;
+
+        if (   preg_match_all(  '/'. $pattern .'/s'  , $content , $matches ) && array_key_exists( 2, $matches ) ){
+
+            $is_sed_synced = true;
+
+        }
+
+        if( $is_sed_synced === true ){
+
+            if ( has_filter( 'the_content', 'wpautop' ) ) {
+
+                remove_filter('the_content', 'wpautop');
+
+            }
+
+        }else{
+
+            if ( ! has_filter( 'the_content', 'wpautop' ) ) {
+
+                add_filter('the_content', 'wpautop');
+
+            }
+
+        }
 
         return $content;
 

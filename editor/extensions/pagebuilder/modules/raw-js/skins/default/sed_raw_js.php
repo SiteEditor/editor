@@ -2,7 +2,7 @@
 
       <script type="text/javascript">
 
-            <?php echo rawurldecode( strip_tags( $content ) ); ?>
+            <?php echo rawurldecode( $content );//rawurldecode( strip_tags( $content ) ) ?>
 
       </script>
 
