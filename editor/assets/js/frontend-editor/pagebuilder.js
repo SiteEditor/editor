@@ -396,6 +396,7 @@
 
             //for modules with default transport
             if( _.isUndefined( html ) ) {
+
                 module_id = this.createNewModule( name , dropItem , direction );
 
                 html = api.contentBuilder.do_shortcode( "sed_row" , module_id , module_id );
