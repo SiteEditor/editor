@@ -89,13 +89,13 @@ if( $bg_type == 'video' ) {
 
         <?php if(!empty($content)){?>
 
-            <div class="sed-pb-component <?php echo $length_class;?>" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> length_element>
+            <div class="sed-pb-component <?php echo $length_class;?>" <?php if( site_editor_app_on() || sed_loading_module_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> length_element>
                 <?php echo $content; ?>
             </div>
 
         <?php }else{  ?>
 
-            <div class="sed-pb-component <?php echo $length_class;?>" <?php if( site_editor_app_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>" length_element></div>
+            <div class="sed-pb-component <?php echo $length_class;?>" <?php if( site_editor_app_on() || sed_loading_module_on() ) echo 'data-parent-id="' . $sed_model_id . '"'; ?> drop-placeholder="<?php echo __('Drop A Module Here','site-editor'); ?>" length_element></div>
 
         <?php } ?>
 

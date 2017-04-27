@@ -7,7 +7,7 @@
       </script>
 
       <?php
-      if( site_editor_app_on() || ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == "load_modules" ) ) {
+      if( site_editor_app_on() || sed_loading_module_on() ) {
             echo __("This is a Raw Js Module.","site-editor");
       }
       ?>
