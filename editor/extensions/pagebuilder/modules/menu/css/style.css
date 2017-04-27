@@ -43,6 +43,11 @@
 .navigation-wrapper .navbar-wrap ul > li {
 	float: left;
 }
+
+.rtl .navigation-wrapper .navbar-wrap ul > li {
+	float: right;
+}
+
 .navigation-wrapper .navbar-wrap ul ul li {
 	padding: 0;
 }
@@ -121,6 +126,12 @@
 .navigation-wrapper .navbar-wrap ul li ul li ul {
 	left: 100%;
 }
+
+.rtl .navigation-wrapper .navbar-wrap ul li ul li ul {
+	left: auto;
+	right: 100%; 
+}
+
 .navigation-wrapper .navbar-wrap li:hover > ul {
     opacity: 1;
     visibility: visible;
