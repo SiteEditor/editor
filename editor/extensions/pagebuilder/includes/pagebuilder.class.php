@@ -328,7 +328,9 @@ Class PageBuilderApplication {
 
         }else{
 
-            if( $this->is_the_content_template === false ){
+            global $post;
+
+            if( $this->is_the_content_template === false && $post && in_the_loop() ){
                 $output = '<div class="sed-pb-each-content-container sed-pb-post-container-disable-editing" sed-disable-editing="yes">';
                 $output .= $content;
                 $output .= '</div>';
@@ -357,13 +359,13 @@ Class PageBuilderApplication {
 
         }else{
 
-            if( $this->is_the_content_template === false ){
+            /*if( $this->is_the_content_template === false ){
                 $output = '<div class="sed-pb-each-content-container">';
                 $output .= $content;
                 $output .= '</div>';
-            }else{
+            }else{*/
                 $output = $content;
-            }
+            //}
 
         }
 
