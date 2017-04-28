@@ -99,6 +99,6 @@ global $sed_dynamic_css_string;
 
 $site_custom_css = get_option( 'sed_site_custom_css' , '' );
 
-$site_custom_css = sed_get_page_setting( 'custom_css_code' );
+$page_custom_css = sed_get_page_setting( 'custom_css_code' );
 
-echo $output_css.$sed_dynamic_css_string.$site_custom_css.$retina_css;
+echo $output_css.$sed_dynamic_css_string.$site_custom_css.$page_custom_css.$retina_css;
