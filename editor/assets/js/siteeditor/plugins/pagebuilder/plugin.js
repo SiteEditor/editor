@@ -33,7 +33,7 @@
       api.shortcodesScripts   = window._sedRegisteredShortcodesScripts;
       api.shortcodesStyles    = window._sedRegisteredShortcodesStyles;
       api.modulesSettings     = window._sedAppEditorPageBuilderModules;
-      api.defaultPatterns     = window._sedShortcodesDefaultPatterns ;
+      api.defaultPatterns     = window._sedShortcodesDefaultPatterns ;   //console.log( "----api.defaultPatterns----" , api.defaultPatterns );
       //only javascript files using in editor and not loaded in front end
       api.ModulesEditorJs     = window._sedAppJsModulesForEditor;
 
@@ -307,7 +307,7 @@
 
             if( !_.isUndefined( postsContent ) ) {
 
-                var contents = $.extend( true , {} , postsContent ); console.log( "-------contents-------" , contents );
+                var contents = $.extend( true , {} , postsContent ); //console.log( "-------contents-------" , contents );
 
                 $.each( contents , function ( post_id, models ) { 
                     api.postsContent[post_id] = models;

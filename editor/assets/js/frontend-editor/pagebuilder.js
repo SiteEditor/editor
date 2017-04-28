@@ -68,8 +68,8 @@
 
             if( pattern[0].tag !== "sed_row" ) {
 
-                var modulePattern = $.extend(true, {}, api.defaultPatterns['sed_module']),
-                    rowPattern = $.extend(true, {}, api.defaultPatterns['sed_row']);
+                var modulePattern = api.sedShortcode.clone( api.defaultPatterns['sed_module'] ),
+                    rowPattern = api.sedShortcode.clone( api.defaultPatterns['sed_row'] );
 
                 newPattern = $.merge($.merge($.merge([], rowPattern), modulePattern), pattern);
 
@@ -282,8 +282,8 @@
 
                 if( pattern[0].tag !== "sed_row" ) {
 
-                    var modulePattern = $.extend(true, {}, api.defaultPatterns['sed_module']),
-                        rowPattern = $.extend(true, {}, api.defaultPatterns['sed_row']);
+                    var modulePattern = api.sedShortcode.clone( api.defaultPatterns['sed_module'] ),
+                        rowPattern = api.sedShortcode.clone( api.defaultPatterns['sed_row'] );
 
                     newPattern = $.merge($.merge($.merge([], rowPattern), modulePattern), pattern);
 
@@ -604,8 +604,8 @@
 
             if( currPattern[0].tag !== "sed_row" ) {
 
-                var modulePattern = $.extend(true, {}, api.defaultPatterns['sed_module']),
-                    rowPattern = $.extend(true, {}, api.defaultPatterns['sed_row']);
+                var modulePattern = api.sedShortcode.clone( api.defaultPatterns['sed_module'] ),
+                    rowPattern = api.sedShortcode.clone( api.defaultPatterns['sed_row'] );
 
             }
 
@@ -883,8 +883,8 @@
 
             if( pattern[0].tag !== "sed_row" ) {
 
-                var modulePattern = $.extend(true, {}, api.defaultPatterns['sed_module']),
-                    rowPattern = $.extend(true, {}, api.defaultPatterns['sed_row']);
+                var modulePattern = api.sedShortcode.clone( api.defaultPatterns['sed_module'] ),
+                    rowPattern = api.sedShortcode.clone( api.defaultPatterns['sed_row'] );
 
                 newPattern = $.merge($.merge($.merge([], rowPattern), modulePattern), pattern);
 
@@ -2370,13 +2370,16 @@
                     case "instance":
                         api.Events.trigger( "setWidgetInstance" , modules , elementId );
                     break;
+
                     case "thumbnail_using_size" :
                     case "main_using_size" :
                         api.Events.trigger( "mediaGroupUsingSize" , modules , elementId , api.currentShortcode , api.currentAttr );
                     break;
+
                     case "animation" :
                         api.Events.trigger( "set_animation" , modules , elementId );
                     break;
+
                     default:
 
                         switch ( transport ) {
@@ -2400,6 +2403,9 @@
                         }
                 }
     		});
+
+            api.currentShortcode = "";
+
         });
 
         api.Events.bind( "syncModuleTmpl" , function( elementId , shortcode_tag ){
@@ -2489,7 +2495,7 @@
                shModule = children[0];
 
             api.pageBuilder.currentPostId = postId;
-            var shortcodes = api.pageBuilder.loadPattern( pattern , shModule.id );
+            var shortcodes = api.pageBuilder.loadPattern( api.sedShortcode.clone( pattern ) , shModule.id );
 
             shortcodes = api.pageBuilder.setHelperShortcodes( shortcodes , name );
             shortcodes = api.pageBuilder.shortcodesPatternFilter( shortcodes );
@@ -2561,7 +2567,7 @@
                 modulesShortcodes.push( api.contentBuilder.getShortcode( id ) );
             });
 
-            var modulesShortcodesCopy = $.extend( true, {} , modulesShortcodes );//_.map( modulesShortcodes , _.clone );
+            var modulesShortcodesCopy = api.sedShortcode.clone( modulesShortcodes );//$.extend( true, {} , modulesShortcodes );//_.map( modulesShortcodes , _.clone );
                          
             //delete pre pattern && replace new pattren         , modulesShortcodes
             api.contentBuilder.deleteModule( elementId , postId);
@@ -2583,14 +2589,13 @@
 
                 }
                 //if(newMainShortcode.attrs.merge_skins == ) )
-                var arr1Copy = _.map(arr1 , _.clone);
+                var arr1Copy = api.sedShortcode.clone( arr1 );
 
                 var newArr = _.map(arr2, function(arr2obj , key) {
+
                     var arr1obj = _.find(arr1Copy, function(arr1obj) {
                         return arr1obj[prop] === arr2obj[prop];
                     });
-
-
 
                     if(!arr1obj){
 
@@ -2637,7 +2642,7 @@
                 return newArr;
             };
 
-            shortcodes = $.extend( true, {} , _mergeByProperty( modulesShortcodesCopy , shortcodes , "tag" )  );
+            shortcodes = api.sedShortcode.clone( _mergeByProperty( modulesShortcodesCopy , api.sedShortcode.clone( shortcodes ) , "tag" ) );
 
             shortcodes = api.pageBuilder.setHelperShortcodes( shortcodes , mainShortcode.tag , "tag" );
             shortcodes = api.pageBuilder.shortcodesPatternFilter( shortcodes );

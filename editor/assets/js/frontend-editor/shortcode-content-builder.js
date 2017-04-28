@@ -531,7 +531,15 @@
 
             var self = this , param , template , currModule , data;
 
-            if( mainShortcodeId != id && shortcode_name == "sed_row" && $( '[sed_model_id="' + id + '"]' ).length > 0 ){
+            var is_sed_row_change = ( mainShortcodeId != id ) && !_.isUndefined( api.currentShortcode ) && ( api.currentShortcode === "sed_row") && $( '[sed_model_id="' + id + '"]' ).length > 0;
+
+            if( is_sed_row_change ){
+
+                return $( '[sed_model_id="' + id + '"]' )[0].outerHTML;
+
+            }
+
+            if( ( mainShortcodeId != id || is_sed_row_change ) && shortcode_name == "sed_row" && $( '[sed_model_id="' + id + '"]' ).length > 0 ){
                 var moduleId = $( '[sed_model_id="' + id + '"]' ).find(">.sed-pb-module-container .sed-pb-module-container:first").attr("sed_model_id"),
                     shortcode = this.getShortcode( moduleId ),
                     moduleName = api.shortcodes[shortcode.tag].moduleName;
@@ -671,8 +679,7 @@
                 return ;
             }
 
-            atts = $.extend({} , shortcode_info.attrs , shortcode.attrs);
-
+            atts = $.extend({} , shortcode_info.attrs , shortcode.attrs); 
 
             if( $.inArray( shortcode_info.name , ["sed_module" , "sed_row"] ) == -1 && _.isUndefined( atts["contextmenu_disabled"] ) ){
                 if(!$.trim(atts['class']))

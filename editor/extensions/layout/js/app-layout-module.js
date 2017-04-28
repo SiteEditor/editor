@@ -18,10 +18,40 @@
             this.ready();
         },
 
+        initThemeRow : function( shortcode ){
+
+            var layoutModels = api('sed_layouts_models')(),
+                self = this;
+
+            if( !_.isUndefined( shortcode.theme_id )  ){
+                var rowElement = $('[sed_model_id="' + shortcode.id + '"]');
+
+                rowElement.data( "themeId" , shortcode.theme_id );
+                rowElement.addClass( "sed-public-theme-row" );
+
+                if( $.inArray( shortcode.theme_id , api.hiddenPublicRows ) > -1 ){
+                    rowElement.addClass("sed-hidden-theme-row");
+                }
+
+                _.each(layoutModels[self.currentLayout], function (layoutModel) {
+                    if (layoutModel.theme_id == shortcode.theme_id) {
+
+                        rowElement.data("themeOrder", layoutModel.order);
+
+                        return false;
+                    }
+                });
+
+                if( !_.isUndefined( shortcode.is_customize ) && shortcode.is_customize === true ){
+                    rowElement.data( "isCustomize" , "yes" );
+                }
+
+            }
+
+        },
 
         initThemeRows : function(){
-            var layoutModels = api('sed_layouts_models')(),
-                self = this,
+            var self = this,
                 settingId;
 
             if( api.currentPageInfo.type == "post" ) { //alert( obj.postType );
@@ -39,30 +69,9 @@
             //console.log( "####api.contentBuilder.pagesThemeContent[this.postId]#####" , api.contentBuilder.pagesThemeContent[this.postId] );
 
             _.map( api.contentBuilder.pagesThemeContent[this.postId], function(shortcode){
-                if( !_.isUndefined( shortcode.theme_id )  ){
-                    var rowElement = $('[sed_model_id="' + shortcode.id + '"]');
 
-                    rowElement.data( "themeId" , shortcode.theme_id );
-                    rowElement.addClass( "sed-public-theme-row" );
-
-                    if( $.inArray( shortcode.theme_id , api.hiddenPublicRows ) > -1 ){
-                        rowElement.addClass("sed-hidden-theme-row");
-                    }
-
-                    _.each(layoutModels[self.currentLayout], function (layoutModel) {
-                        if (layoutModel.theme_id == shortcode.theme_id) {
-
-                            rowElement.data("themeOrder", layoutModel.order);
-
-                            return false;
-                        }
-                    });
-
-                    if( !_.isUndefined( shortcode.is_customize ) && shortcode.is_customize === true ){
-                        rowElement.data( "isCustomize" , "yes" );
-                    }
-
-                }
+                self.initThemeRow( shortcode );
+                
             });
 
         },
@@ -308,6 +317,7 @@
             });
 
             api.Events.bind( "afterCreateModule" , function( moduleWrapper , moduleName , dropItem , direction ){
+
                 if( moduleWrapper.parent().hasClass("sed-site-main-part") ){
 
                     api.contentBuilder.pagesThemeContent[self.postId] = _.map( api.contentBuilder.pagesThemeContent[self.postId], function(shortcode){
@@ -327,8 +337,12 @@
 
                     //change info for current custom theme row
                     api.preview.send( 'customThemeRowInfoChange' );
+
                 }
+
             });
+            
+            
 
             api.Events.bind( "sedAfterDuplicate" , function( elementId , newElement ){
 
@@ -361,6 +375,23 @@
                 }
 
             });
+
+
+            api.Events.bind( "sedAfterChangePreset" , function( rowElId , newElementId ){
+
+                var newElement = $( '[sed_model_id="' + newElementId + '"]');
+
+                if( newElement.parent().hasClass("sed-site-main-part") ){
+
+                    var rowShortcode = api.contentBuilder.getShortcode( newElementId );
+
+                    //only for public row( test public row in initThemeRow )
+                    self.initThemeRow( rowShortcode );
+
+                }
+
+            });
+
 
             this.removeThemeRow();
 
