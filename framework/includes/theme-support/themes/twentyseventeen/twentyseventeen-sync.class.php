@@ -1233,7 +1233,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'setting_id'        => 'sed_widget_border_width',
                 'type'              => 'dimension',
                 'label'             => __('Border Width', 'site-editor'),
-                'default'           => '0px',
+                'default'           => '1px',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'has_border_box'    => false,

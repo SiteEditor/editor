@@ -1128,6 +1128,7 @@ $css .= <<<CSS
             15.0 Widgets
             --------------------------------------------------------------*/
 
+            .widget ul li a,
             .widget a,
             .widget {
                 color: {$widget_color};
@@ -1202,6 +1203,12 @@ $css .= <<<CSS
             .wp_widget_tag_cloud a:hover,
             .wp_widget_tag_cloud a:focus {
                 border-color: {$secondary_border_color}; 
+            }
+
+            /* Calendar widget */
+
+            .widget_calendar tr {
+                border-color: {$widget_border_color}; 
             }
 
 
