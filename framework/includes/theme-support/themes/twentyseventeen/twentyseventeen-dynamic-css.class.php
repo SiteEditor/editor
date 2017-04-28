@@ -250,6 +250,20 @@ class SiteEditorTwentyseventeenDynamicCss {
             'site_info_color'                            => 'secondary_text_color',
 
 
+
+            /*--------------------------------------------------------------
+            15.0 Widgets
+            --------------------------------------------------------------*/       
+            
+
+            'widget_color'                               => 'main_text_color',
+            'secondary_widget_color'                     => 'secondary_text_color',
+            'widget_border_color'                        => 'border_color', 
+            'widget_title_font_size'                     => 'md_font_size ',
+            'widget_title_color'                         => 'main_text_color',
+
+
+
             /*--------------------------------------------------------------
             16.0 Media
             --------------------------------------------------------------*/

@@ -1128,26 +1128,60 @@ $css .= <<<CSS
             15.0 Widgets
             --------------------------------------------------------------*/
 
-            /*.widget:last-child {
-                padding-bottom: 0em;
-            }*/
+            .widget a,
+            .widget {
+                color: {$widget_color};
+            }
 
             h2.widget-title {
-                color: {$main_text_color};
+                color: {$widget_title_color};
+                font-size: {$widget_title_font_size};
+                font-weight: {$widget_title_font_weight};
+                text-transform: {$widget_title_text_transform};    
             }
+
 
             /* widget lists */
 
             .widget ul li {
-                border-bottom-color: {$border_color};
-                border-top-color: {$border_color};
+                border-bottom: {$widget_border_width} {$widget_border_style} {$widget_border_color};
+                border-top: {$widget_border_width} {$widget_border_style} {$widget_border_color};
+                padding: {$widget_lists_padding};
+            }
+
+            .widget ul li + li {
+                margin-top: -{$widget_border_width};
+            }
+
+            /* widget markup */
+
+            .widget .post-date,
+            .widget .rss-date {
+                font-size: {$md_font_size};
             }
 
             /* RSS Widget */
 
+            .widget_rss li .rsswidget {
+                font-size: {$h3_font_size};
+            }
+
             .widget_rss .rss-date,
             .widget_rss li cite {
-                color: {$secondary_text_color};
+                color: {$secondary_widget_color};
+                font-size: {$sm_font_size};
+            }
+
+            /* Gravatar */
+
+            .widget-grofile h4 {
+                font-size: {$body_font_size};
+            }
+
+            /* Search */
+
+            .search-form input[type="search"] {
+
             }
 
             /* Tag cloud widget */
@@ -1155,9 +1189,10 @@ $css .= <<<CSS
             .widget .tagcloud a,
             .widget.widget_tag_cloud a,
             .wp_widget_tag_cloud a {
-                border-color: {$border_color};
-                -webkit-box-shadow: none;
-                box-shadow: none;
+                border: {$widget_border_width} solid {$widget_border_color};
+                font-size: {$md_font_size} !important;
+                -webkit-border-radius: {$widget_border_radius};
+                border-radius:         {$widget_border_radius}; 
             }
 
             .widget .tagcloud a:hover,
@@ -1166,11 +1201,8 @@ $css .= <<<CSS
             .widget.widget_tag_cloud a:focus,
             .wp_widget_tag_cloud a:hover,
             .wp_widget_tag_cloud a:focus {
-                border-color: {$secondary_border_color};
-                -webkit-box-shadow: none;
-                box-shadow: none;
+                border-color: {$secondary_border_color}; 
             }
-
 
 
             /*--------------------------------------------------------------
@@ -1426,6 +1458,30 @@ $css .= <<<CSS
 
             }   
 
+
+            /* error 404 */ /* search results */ /* blog */
+
+
+            body.sed-no-sidebar .wrap > header.page-header ,
+            body.sed-no-sidebar .wrap > #primary ,
+            body.sed-no-sidebar .wrap > #primary article ,
+            body.search.sed-no-sidebar .wrap > header.page-header ,
+            body.search.sed-no-sidebar .wrap > #primary ,
+            body.sed-no-sidebar.error404 #primary .sed-404-one-column > .page-header ,
+            body.sed-no-sidebar.error404 #primary .sed-404-one-column > .page-content , 
+            body.error404:not(.has-sidebar) #primary .sed-404-one-column > .page-header , 
+            body.has-sidebar.error404 #primary .sed-404-one-column > .page-header ,
+            .error404:not(.has-sidebar) #primary .sed-404-one-column > .page-content ,
+            .error404.has-sidebar #primary .sed-404-one-column > .page-content {
+                float: none;
+                width: 100%; 
+            }
+
+            body.search.sed-no-sidebar .wrap > #primary form.search-form,
+            .error404:not(.has-sidebar) #primary .sed-404-one-column > .page-content form.search-form,
+            .error404.has-sidebar #primary .sed-404-one-column > .page-content form.search-form {
+                width:400px;
+            }
 
 
 
