@@ -98,6 +98,8 @@ class SED_Admin_Options{
 
 		$value = isset( $options[$id] ) ? $options[$id] : ( isset( $attrs['std'] ) ? $attrs['std']  : false ) ;
 
+		$value = apply_filters( "sed_admin_options_get_value" , $value , $id , $attrs );
+
 		//$value = stripslashes( $value );
 
 		$desc = isset( $attrs['desc'] )? '<div class="sed_admin_desc_item"><p>'.$attrs['desc'] .'</p></div>': ''; 
@@ -317,15 +319,17 @@ class SED_Admin_Options{
 					
 						if( isset( $_REQUEST[ $id ]) ) {
 
-							$sanitize_func = isset( $attrs['sanitize'] ) ? $attrs['sanitize'] . "_sanitize" : "field_sanitize";
+							$sanitize_func = $this->get_sanitize_method( $attrs );
 
-							$options[$id] = $this->$sanitize_func( $id , $_REQUEST[ $id ] , $attrs );
+							$options[$id] = call_user_func_array( $sanitize_func , array( $id , $_REQUEST[ $id ] , $attrs ) );
 
 						} else {
 
 							if( $attrs['type'] == "checkbox" ) {
 
-								$options[$id] = '';
+								$sanitize_func = $this->get_sanitize_method( $attrs );
+
+								$options[$id] = call_user_func_array( $sanitize_func , array( $id , 'off' , $attrs ) );
 
 							}else if( isset( $options[$id] ) ) {
 
@@ -361,11 +365,33 @@ class SED_Admin_Options{
 				);
 
 			}
+
+			do_action( "sed_after_admin_settings_save" , $this );
 		}
 
 		$this->options = sed_get_plugin_options();
 
         $sed_general_data = $this->options;
+	}
+
+	public function get_sanitize_method( $attrs ){
+
+		if( isset( $attrs['sanitize'] ) ){
+
+			return $attrs['sanitize'];
+
+		}
+
+		$sanitize_func = $attrs['type'] . "_sanitize";
+
+		if( method_exists( $this , $sanitize_func ) ){
+
+			return array( $this , $sanitize_func );
+
+		}
+
+		return array( $this , "field_sanitize" );
+
 	}
 	
 }

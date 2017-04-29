@@ -153,6 +153,14 @@ $items = array(
             "std"           => ''
         ),
 
+        "sed_allow_user_tracking" => array(
+            "type"          => "checkbox",
+            "label"         => __('Usage Data Tracking' , 'site-editor' ) ,
+            "desc"          => __('Opt-in to our anonymous plugin data collection and to updates. We guarantee no sensitive data is collected.' , 'site-editor' ) ,
+            "std"           => '' ,
+            "sanitize"      => "sed_allow_user_tracking_sanitize"
+        ),
+
     ),
 
     "edit_pages"      => array(
@@ -274,3 +282,25 @@ $items = array(
     ),*/
 
 );
+
+function sed_allow_user_tracking_sanitize( $id , $value , $attrs ){
+
+    $value = ( $value === "on" ) ? "yes" : "skip";
+
+    return apply_filters( "sed_allow_user_tracking_sanitize" , $value , $id , $attrs );
+
+}
+
+function sed_allow_user_tracking_to_form( $value , $id , $attrs ){
+
+    if( $id == "sed_allow_user_tracking" ) {
+
+        $value = ($value === "yes") ? "on" : "off";
+
+    }
+
+    return $value;
+
+}
+
+add_filter( 'sed_admin_options_get_value' , 'sed_allow_user_tracking_to_form' , 10 , 3 );

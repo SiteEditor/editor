@@ -76,6 +76,11 @@ class SiteEditorInstall {
 		self::save_default_presets();
 
 		/**
+		 * Fifth Step: create cron jobs for send user tracking data
+		 */
+		self::create_cron_jobs();
+
+		/**
 		 * Hook After Site Editor Installation Process
 		 */
 		do_action( "site_editor_after_installing" );
@@ -154,6 +159,16 @@ class SiteEditorInstall {
 		$post_id = SiteEditorPreset::create_preset( 'sed_footer' , __("Default Footer" , "site-editor") ,  $footer_preset_content , true );
 
 		SiteEditorPreset::set_helper_shortcodes( $post_id , $helper_shortcodes );
+
+	}
+
+	public static function create_cron_jobs(){
+
+		wp_clear_scheduled_hook( 'sed_tracker_send_event' );
+
+		wp_schedule_event( time(), 'daily', 'sed_tracker_send_event' );
+
+		flush_rewrite_rules();
 
 	}
 

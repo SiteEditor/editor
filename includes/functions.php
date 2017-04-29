@@ -27,7 +27,7 @@ function sed_get_plugin_options($key = null, $data = null) {
 
     if ($key != null) { // Get one specific value
 
-        $data = isset( $options[$key] ) ? $options[$key] : false;
+        $data = isset( $options[$key] ) ? $options[$key] : ( !is_null( $data ) ? $data : false );
 
     } else { // Get all values
 

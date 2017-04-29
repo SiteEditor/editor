@@ -16,6 +16,9 @@ class SiteEditorAdminRender{
         require_once( SED_ADMIN_INC_PATH . DS . 'class_sed_error.php' );
         $GLOBALS['sed_error'] = new SED_Error;
 
+        require_once( SED_ADMIN_INC_PATH . DS . 'site-editor-admin-feedback.class.php' );
+
+        new SiteEditorAdminFeedback( $this );
         
         add_action("init" ,  array( "SiteEditorAdminRender" ,"load_page_builder_app") );
 
@@ -180,10 +183,12 @@ class SiteEditorAdminRender{
 
         wp_enqueue_style( "sed-admin-icon-font" , plugins_url('templates/default/css/sed-admin-icon-font.css', __FILE__ ) , array() , '1.0.0' , 'all');
 
-        if( in_array( $hook , $this->_pagehooks ) ){
+        if( in_array( $hook , $this->_pagehooks ) || in_array( get_current_screen()->id, array( 'plugins', 'plugins-network' ) ) ){
 
-            wp_enqueue_script( "sed-admin-scripts" , plugins_url('templates/default/js/scripts.js', __FILE__ ) , array('jquery' , 'wp-color-picker') , '1.0.0' , false );
+            wp_enqueue_script( "sed-admin-scripts" , plugins_url('templates/default/js/scripts.js', __FILE__ ) , array( 'jquery' , 'wp-color-picker' , 'jquery-ui-dialog' ) , '1.0.0' , false );
+
             wp_enqueue_style( "sed-admin-style" , plugins_url('templates/default/css/style.css', __FILE__ ) , array() , '1.0.0' , 'all');
+
         }
 
         if( !isset( $this->_pagehooks['site-editor-settings'] ) || !isset( $this->_pagehooks['site-editor'] ) )
@@ -191,6 +196,7 @@ class SiteEditorAdminRender{
 
         if( in_array( $hook , array( $this->_pagehooks['site-editor-settings'] , $this->_pagehooks['site-editor'] ) ) )
             wp_enqueue_style( 'wp-color-picker' );
+
     }
 
 
@@ -199,7 +205,6 @@ class SiteEditorAdminRender{
      */
     function options_media_scripts( $hook ) {
 
-
         if( !in_array( $hook , array( $this->_pagehooks['site-editor-settings'] , $this->_pagehooks['site-editor'] ) ) )
             return ;
 
@@ -207,11 +212,14 @@ class SiteEditorAdminRender{
             wp_enqueue_media();
 
         wp_register_script( 'of-media-uploader', SED_ADMIN_URL .'templates/default/js/media-uploader.js', array( 'jquery' ) );
+
         wp_enqueue_script( 'of-media-uploader' );
+
         wp_localize_script( 'of-media-uploader', 'optionsframework_l10n', array(
             'upload' => __( 'Upload', 'site-editor' ),
             'remove' => __( 'Remove', 'site-editor' )
         ) );
+
     }
 
 
