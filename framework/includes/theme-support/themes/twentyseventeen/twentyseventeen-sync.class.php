@@ -295,7 +295,7 @@ class SiteEditorTwentyseventeenThemeSync{
 
         $panels['buttons_custom_styling'] =  array(
             'type'              => 'default',
-            'title'             => __('Button', 'site-editor'),
+            'title'             => __('Buttons', 'site-editor'),
             'parent_id'         => "buttons_custom_styling_outer" ,
             'priority'          => 10 ,
         );
@@ -313,8 +313,33 @@ class SiteEditorTwentyseventeenThemeSync{
 
         $panels['widgets_custom_styling'] =  array(  
             'type'              => 'default',
-            'title'             => __('Widget', 'site-editor'),
+            'title'             => __('Widgets', 'site-editor'),
             'parent_id'         => "widgets_custom_styling_outer" ,
+            'priority'          => 10 ,  
+        );
+
+        $panels['dark_bg_widgets_custom_styling_outer'] =  array(
+            'type'              => 'inner_box',
+            'title'             => __('Widgets for Background Dark', 'site-editor'),
+            'btn_style'         => 'menu' ,
+            'has_border_box'    => false ,
+            'icon'              => 'sedico-change-style' ,
+            'field_spacing'     => 'sm' ,
+            'parent_id'         => "theme_general_styling" ,
+            'priority'          => 10 ,
+        );
+
+        $panels['dark_bg_widgets_custom_styling'] =  array(  
+            'type'              => 'default',
+            'title'             => __('Widgets', 'site-editor'),
+            'parent_id'         => "dark_bg_widgets_custom_styling_outer" ,
+            'priority'          => 10 ,  
+        );
+
+        $panels['dark_bg_widgets_forms_custom_styling'] =  array(  
+            'type'              => 'default',
+            'title'             => __('forms', 'site-editor'),
+            'parent_id'         => "dark_bg_widgets_custom_styling_outer" ,
             'priority'          => 10 ,  
         );
 
@@ -1205,18 +1230,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'option_type'       => 'theme_mod',
                 'has_border_box'    => false,
                 'panel'             => 'widgets_custom_styling' ,
-            ),  
-
-            'widget_active_color' => array(
-                'setting_id'        => 'sed_widget_active_color',
-                'type'              => 'color', 
-                'label'             => __('Active Text Color', 'site-editor'),
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'has_border_box'    => false,
-                'panel'             => 'widgets_custom_styling' ,
-            ),  
+            ),   
 
             'widget_border_color' => array(
                 'setting_id'        => 'sed_widget_border_color',
@@ -1297,7 +1311,6 @@ class SiteEditorTwentyseventeenThemeSync{
                 'setting_id'        => 'sed_widget_title_font_size',
                 'type'              => 'dimension',
                 'label'             => __('Title Font Size', 'site-editor'),
-                'default'           => '',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'has_border_box'    => false,
@@ -1353,61 +1366,115 @@ class SiteEditorTwentyseventeenThemeSync{
         --------------------------------------------------------------*/ 
 
 
-            'bg_dark_widget_color' => array( 
-                'setting_id'        => 'sed_bg_dark_widget_color',
+            'dark_bg_widget_color' => array( 
+                'setting_id'        => 'sed_dark_bg_widget_color',
                 'type'              => 'color', 
                 'label'             => __('Text Color', 'site-editor'),
-                'default'           => '',
+                'default'           => 'rgba(255,255,255,0.9)',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'has_border_box'    => false,
-                'panel'             => 'widgets_custom_styling' ,
+                'panel'             => 'dark_bg_widgets_custom_styling' ,
             ),   
 
-            'bg_dark_secondary_widget_color' => array(
-                'setting_id'        => 'sed_bg_dark_secondary_widget_color',
+            'dark_bg_secondary_widget_color' => array(
+                'setting_id'        => 'sed_dark_bg_secondary_widget_color',
                 'type'              => 'color', 
                 'label'             => __('Secondary Text Color', 'site-editor'),
-                'default'           => '',
+                'default'           => 'rgba(255,255,255,0.7)',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'has_border_box'    => false,
-                'panel'             => 'widgets_custom_styling' ,
-            ),  
+                'panel'             => 'dark_bg_widgets_custom_styling' ,
+            ),    
 
-            'bg_dark_widget_active_color' => array(
-                'setting_id'        => 'sed_bg_dark_widget_active_color',
-                'type'              => 'color', 
-                'label'             => __('Active Text Color', 'site-editor'),
-                'default'           => '',
-                'transport'         => 'postMessage' ,
-                'option_type'       => 'theme_mod',
-                'has_border_box'    => false,
-                'panel'             => 'widgets_custom_styling' ,
-            ),  
-
-            'bg_dark_widget_border_color' => array(
-                'setting_id'        => 'sed_bg_dark_widget_border_color',
+            'dark_bg_widget_border_color' => array(
+                'setting_id'        => 'sed_dark_bg_widget_border_color',
                 'type'              => 'color', 
                 'label'             => __('Border Color', 'site-editor'),
-                'default'           => '',
+                'default'           => 'rgba(255,255,255,0.2)',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'has_border_box'    => false,
-                'panel'             => 'widgets_custom_styling' ,
+                'panel'             => 'dark_bg_widgets_custom_styling' ,
             ),  
 
-            'bg_dark_widget_title_color' => array(
-                'setting_id'        => 'sed_bg_dark_widget_title_color',
+            'dark_bg_widget_title_color' => array(
+                'setting_id'        => 'sed_dark_bg_widget_title_color',
                 'type'              => 'color', 
                 'label'             => __('Title Color', 'site-editor'),
-                'default'           => '',
+                'default'           => '#fff',
                 'transport'         => 'postMessage' ,
                 'option_type'       => 'theme_mod',
                 'has_border_box'    => false,
-                'panel'             => 'widgets_custom_styling' ,
+                'panel'             => 'dark_bg_widgets_custom_styling' ,
             ),   
 
+            'dark_bg_form_control_bg' => array(
+                'setting_id'        => 'sed_dark_bg_form_control_bg',
+                'type'              => 'color', 
+                'label'             => __('Background Color', 'site-editor'),
+                'default'           => 'rgba(255,255,255,0.08)',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'dark_bg_widgets_forms_custom_styling' ,
+            ),
+
+            'dark_bg_form_control_color' => array(
+                'setting_id'        => 'sed_dark_bg_form_control_color',
+                'type'              => 'color', 
+                'label'             => __('Text Color', 'site-editor'),
+                'default'           => '#fff',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'dark_bg_widgets_forms_custom_styling' ,
+            ), 
+
+            'dark_bg_placeholder_color' => array(
+                'setting_id'        => 'sed_dark_bg_placeholder_color',
+                'type'              => 'color', 
+                'label'             => __('Placeholder Color', 'site-editor'),
+                'default'           => 'rgba(255,255,255,0.7)',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'dark_bg_widgets_forms_custom_styling' ,
+            ),
+
+            'dark_bg_form_control_border' => array(
+                'setting_id'        => 'sed_dark_bg_form_control_border',
+                'type'              => 'color', 
+                'label'             => __('Border Color', 'site-editor'),
+                'default'           => 'rgba(255,255,255,0.2)',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'dark_bg_widgets_forms_custom_styling' ,
+            ),
+
+            'dark_bg_form_control_active_bg' => array(
+                'setting_id'        => 'sed_dark_bg_form_control_active_bg',
+                'type'              => 'color', 
+                'label'             => __('Active Background Color', 'site-editor'),
+                'default'           => 'rgba(255,255,255,0.08)',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'dark_bg_widgets_forms_custom_styling' ,
+            ),
+
+            'dark_bg_form_control_active_border' => array(
+                'setting_id'        => 'sed_dark_bg_form_control_active_border',
+                'type'              => 'color', 
+                'label'             => __('Active Border Color', 'site-editor'),
+                'default'           => 'rgba(255,255,255,0.5)',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'has_border_box'    => false,
+                'panel'             => 'dark_bg_widgets_forms_custom_styling' ,
+            ),
 
         /*--------------------------------------------------------------
         16.0 Media

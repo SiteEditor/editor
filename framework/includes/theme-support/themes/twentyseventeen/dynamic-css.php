@@ -102,14 +102,41 @@ $css .= <<<CSS
             /*--------------------------------------------------------------
             5.0 Typography
             --------------------------------------------------------------*/
+                       
+            html[lang] body,
+            html[lang] button,
+            html[lang] input,
+            html[lang] select, 
+            html[lang] textarea,
+            body,
+            button,
+            input,
+            select,
+            textarea {
+                font-family: {$body_font_family}, "Helvetica Neue", helvetica, arial, sans-serif;
+            }
 
+            html[lang] h1,
+            html[lang] h2,
+            html[lang] h3,
+            html[lang] h4,
+            html[lang] h5,
+            html[lang] h6,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                font-family: {$headings_font_family}, "Helvetica Neue", helvetica, arial, sans-serif; 
+            }
+                       
             body,
             button,
             input,
             select,
             textarea {
                 color: {$body_color};
-                font-family: {$body_font_family}, "Helvetica Neue", helvetica, arial, sans-serif;
                 font-size: {$responsive_body_font_size};
                 line-height: {$body_line_height};
             }
@@ -121,7 +148,6 @@ $css .= <<<CSS
             h5,
             h6 {
                 color: {$headings_color};
-                font-family: {$headings_font_family}, "Helvetica Neue", helvetica, arial, sans-serif;
                 line-height: {$headings_line_height};
             }
 
@@ -866,6 +892,16 @@ $css .= <<<CSS
             .custom-header-media:before { 
                 background-color: {$overlay_background}; 
             }
+            
+            @media screen and (min-width: 48em){
+                .twentyseventeen-front-page.has-header-image .custom-header-media:before, 
+                .twentyseventeen-front-page.has-header-video .custom-header-media:before, 
+                .home.blog.has-header-image .custom-header-media:before, 
+                .home.blog.has-header-video .custom-header-media:before {
+                    height: {$overlay_height};
+                } 
+            }
+
 
             /*
             .wp-custom-header .wp-custom-header-video-button { /* Specificity prevents .color-dark button overrides *
@@ -1071,6 +1107,7 @@ $css .= <<<CSS
 
             .site-footer {
                 border-top-color: {$footer_border};
+                background-color: {$footer_background};
             }
 
             /* Social nav */
@@ -1136,11 +1173,15 @@ $css .= <<<CSS
 
             h2.widget-title {
                 color: {$widget_title_color};
-                font-size: {$widget_title_font_size};
                 font-weight: {$widget_title_font_weight};
                 text-transform: {$widget_title_text_transform};    
             }
 
+            @media screen and (min-width: 48em) {
+                h2.widget-title {
+                    font-size: {$widget_title_font_size};
+                }
+            }
 
             /* widget lists */
 
@@ -1154,35 +1195,9 @@ $css .= <<<CSS
                 margin-top: -{$widget_border_width};
             }
 
-            /* widget markup */
-
-            .widget .post-date,
-            .widget .rss-date {
-                font-size: {$md_font_size};
-            }
-
-            /* RSS Widget */
-
-            .widget_rss li .rsswidget {
-                font-size: {$h3_font_size};
-            }
-
             .widget_rss .rss-date,
             .widget_rss li cite {
                 color: {$secondary_widget_color};
-                font-size: {$sm_font_size};
-            }
-
-            /* Gravatar */
-
-            .widget-grofile h4 {
-                font-size: {$body_font_size};
-            }
-
-            /* Search */
-
-            .search-form input[type="search"] {
-
             }
 
             /* Tag cloud widget */
@@ -1191,7 +1206,6 @@ $css .= <<<CSS
             .widget.widget_tag_cloud a,
             .wp_widget_tag_cloud a {
                 border: {$widget_border_width} solid {$widget_border_color};
-                font-size: {$md_font_size} !important;
                 -webkit-border-radius: {$widget_border_radius};
                 border-radius:         {$widget_border_radius}; 
             }
@@ -1204,11 +1218,154 @@ $css .= <<<CSS
             .wp_widget_tag_cloud a:focus {
                 border-color: {$secondary_border_color}; 
             }
+ 
+            /* Calendar widget */
+
+            .widget_calendar thead th, 
+            .widget_calendar tr {
+                border-color: {$widget_border_color}; 
+            }
+
+
+
+            /*--------------------------------------------------------------
+            15.0 Widgets for Background Dark
+            --------------------------------------------------------------*/
+
+            .sed-dark-bg-widget .widget ul li a,
+            .sed-dark-bg-widget .widget a,
+            .sed-dark-bg-widget .widget {
+                color: {$dark_bg_widget_color};
+            }
+
+            .sed-dark-bg-widget .widget ul li a:hover,
+            .sed-dark-bg-widget .widget a:hover {
+                color: {$first_main_color};
+            }
+
+            .sed-dark-bg-widget h2.widget-title {
+                color: {$dark_bg_widget_title_color};   
+            }
+
+            /* widget lists */
+
+            .sed-dark-bg-widget .widget ul li {
+                border-bottom-color: {$dark_bg_widget_border_color};
+                border-top-colo: {$dark_bg_widget_border_color};
+            }
+
+            /* RSS Widget */
+
+            .sed-dark-bg-widget .widget_rss .rss-date,
+            .sed-dark-bg-widget .widget_rss li cite {
+                color: {$dark_bg_secondary_widget_color};
+            }
+
+            /* Tag cloud widget */
+
+            .sed-dark-bg-widget .widget .tagcloud a,
+            .sed-dark-bg-widget .widget.widget_tag_cloud a,
+            .sed-dark-bg-widget .wp_widget_tag_cloud a {
+                border-color: {$dark_bg_widget_border_color};
+            }
+
+            .sed-dark-bg-widget .widget .tagcloud a:hover,
+            .sed-dark-bg-widget .widget .tagcloud a:focus,
+            .sed-dark-bg-widget .widget.widget_tag_cloud a:hover,
+            .sed-dark-bg-widget .widget.widget_tag_cloud a:focus,
+            .sed-dark-bg-widget .wp_widget_tag_cloud a:hover,
+            .sed-dark-bg-widget .wp_widget_tag_cloud a:focus {
+                border-color: {$dark_bg_widget_border_color}; 
+            }
 
             /* Calendar widget */
 
-            .widget_calendar tr {
-                border-color: {$widget_border_color}; 
+            .sed-dark-bg-widget .widget_calendar thead th, 
+            .sed-dark-bg-widget .widget_calendar tr {
+                border-color: {$dark_bg_widget_border_color}; 
+            }
+
+            /* Forms */
+
+            .sed-dark-bg-widget select,
+            .sed-dark-bg-widget input[type="text"],
+            .sed-dark-bg-widget input[type="email"],
+            .sed-dark-bg-widget input[type="url"],
+            .sed-dark-bg-widget input[type="password"],
+            .sed-dark-bg-widget input[type="search"],
+            .sed-dark-bg-widget input[type="number"],
+            .sed-dark-bg-widget input[type="tel"],
+            .sed-dark-bg-widget input[type="range"],
+            .sed-dark-bg-widget input[type="date"],
+            .sed-dark-bg-widget input[type="month"],
+            .sed-dark-bg-widget input[type="week"],
+            .sed-dark-bg-widget input[type="time"],
+            .sed-dark-bg-widget input[type="datetime"],
+            .sed-dark-bg-widget input[type="datetime-local"],
+            .sed-dark-bg-widget input[type="color"],
+            .sed-dark-bg-widget textarea {
+                color: {$dark_bg_form_control_color};
+                background: {$dark_bg_form_control_bg}; 
+                border-color: {$dark_bg_form_control_border};
+            }
+
+            .sed-dark-bg-widget select:focus,
+            .sed-dark-bg-widget input[type="text"]:focus,
+            .sed-dark-bg-widget input[type="email"]:focus,
+            .sed-dark-bg-widget input[type="url"]:focus,
+            .sed-dark-bg-widget input[type="password"]:focus,
+            .sed-dark-bg-widget input[type="search"]:focus,
+            .sed-dark-bg-widget input[type="number"]:focus,
+            .sed-dark-bg-widget input[type="tel"]:focus,
+            .sed-dark-bg-widget input[type="range"]:focus,
+            .sed-dark-bg-widget input[type="date"]:focus,
+            .sed-dark-bg-widget input[type="month"]:focus,
+            .sed-dark-bg-widget input[type="week"]:focus,
+            .sed-dark-bg-widget input[type="time"]:focus,
+            .sed-dark-bg-widget input[type="datetime"]:focus,
+            .sed-dark-bg-widget input[type="datetime-local"]:focus,
+            .sed-dark-bg-widget input[type="color"]:focus,
+            .sed-dark-bg-widget textarea:focus {
+                color: {$dark_bg_form_control_color};
+                background: {$dark_bg_form_control_active_bg}; 
+                border-color: {$dark_bg_form_control_active_border}; 
+            }
+
+            /* Placeholder text color -- selectors need to be separate to work. */
+            .sed-dark-bg-widget ::-webkit-input-placeholder {
+                color: {$dark_bg_placeholder_color};
+            }
+
+            .sed-dark-bg-widget :-moz-placeholder {
+                color: {$dark_bg_placeholder_color};
+            }
+
+            .sed-dark-bg-widget ::-moz-placeholder {
+                color: {$dark_bg_placeholder_color};
+                /* Since FF19 lowers the opacity of the placeholder by default */
+            }
+
+            .sed-dark-bg-widget :-ms-input-placeholder {
+                color: {$dark_bg_placeholder_color};
+            }
+
+
+            /* Placeholder text color -- selectors need to be separate to work. */
+            .sed-dark-bg-widget ::-webkit-input-placeholder:focus {
+                color: {$dark_bg_placeholder_color};
+            }
+
+            .sed-dark-bg-widget :-moz-placeholder:focus {
+                color: {$dark_bg_placeholder_color};
+            }
+
+            .sed-dark-bg-widget ::-moz-placeholder:focus {
+                color: {$dark_bg_placeholder_color};
+                /* Since FF19 lowers the opacity of the placeholder by default */
+            }
+
+            .sed-dark-bg-widget :-ms-input-placeholder:focus {
+                color: {$dark_bg_placeholder_color};
             }
 
 
@@ -1471,8 +1628,11 @@ $css .= <<<CSS
 
             body.sed-no-sidebar .wrap > header.page-header ,
             body.sed-no-sidebar .wrap > #primary ,
-            body.sed-no-sidebar .wrap > #primary article ,
-            body.search.sed-no-sidebar .wrap > header.page-header ,
+            body.sed-no-sidebar.blog #primary article, 
+            body.sed-no-sidebar.archive:not(.page-one-column) #primary article, 
+            body.sed-no-sidebar.search #primary article,            
+            body.sed-no-sidebar .site-main > .post.type-post, 
+            body.search.sed-no-sidebar .wrap > header.page-header ,  
             body.search.sed-no-sidebar .wrap > #primary ,
             body.sed-no-sidebar.error404 #primary .sed-404-one-column > .page-header ,
             body.sed-no-sidebar.error404 #primary .sed-404-one-column > .page-content , 

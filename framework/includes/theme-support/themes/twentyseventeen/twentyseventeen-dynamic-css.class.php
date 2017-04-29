@@ -166,6 +166,9 @@ class SiteEditorTwentyseventeenDynamicCss {
 
     public function dynamic_vars_reference(){
 
+
+
+
         $vars = array(
 
             /*--------------------------------------------------------------
@@ -232,7 +235,6 @@ class SiteEditorTwentyseventeenDynamicCss {
             'header_bg'                                  => 'first_main_active_color',
             'header_title_color'                         => 'main_bg_text_color',
             'header_description_color'                   => 'main_bg_text_color',
-            'overlay_background'                         => 'rgba(0,0,0,0)',
 
 
 
@@ -258,9 +260,9 @@ class SiteEditorTwentyseventeenDynamicCss {
 
             'widget_color'                               => 'main_text_color',
             'secondary_widget_color'                     => 'secondary_text_color',
+            'widget_title_color'                         => 'main_text_color',
             'widget_border_color'                        => 'border_color', 
             'widget_title_font_size'                     => 'md_font_size',
-            'widget_title_color'                         => 'main_text_color',
 
 
 
