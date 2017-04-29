@@ -111,6 +111,17 @@ class TwentyseventeenFooterDesignOptions {
                 'panel'             => 'footer_custom_styling' ,
             ),
 
+            'footer_background' => array(
+                'setting_id'        => 'sed_footer_background',
+                'type'              => 'color',
+                'label'             => __('Background Color', 'site-editor'),
+                "description"       => __("Footer Background Color", "site-editor"),
+                'default'           => 'transparent',
+                'transport'         => 'postMessage' ,
+                'option_type'       => 'theme_mod',
+                'panel'             => 'footer_custom_styling' , 
+            ),
+
             'footer_border' => array(
                 'setting_id'        => 'sed_footer_border',
                 'type'              => 'color',
