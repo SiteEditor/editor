@@ -22,18 +22,7 @@ class SiteEditorAdminFeedback{
      * @var string
      * @static
      */
-    private static $_api_url = 'http://www.siteeditor.org/?api_type=user_tracker';
-
-    /**
-     * API Feedback URL
-     *
-     * @since 1.1.0
-     * @access private
-     * @var string
-     * @static
-     */
-    private static $_api_feedback_url = 'http://www.siteeditor.org/?api_type=user_feedback';
-
+    private static $_api_url = 'http://www.siteeditor.org/?api=1';
 
     /**
      * Site Editor Admin Manager Instance of SiteEditorAdminRender
@@ -266,6 +255,7 @@ class SiteEditorAdminFeedback{
                 'blocking'      => false,
                 //'sslverify'   => false,
                 'body'          => array(
+                    'action'        => "user_tracking" ,
                     'data'          => wp_json_encode( $params ),
                 ),
             )
@@ -521,13 +511,18 @@ class SiteEditorAdminFeedback{
 
     public static function send_feedback( $feedback_key, $feedback_text ) {
 
-        return wp_remote_post( self::$_api_feedback_url, array(
+        $params = array(
+            'api_version'   => SED_VERSION,
+            'site_lang'     => get_bloginfo( 'language' ),
+            'feedback_key'  => $feedback_key,
+            'feedback'      => $feedback_text,
+        );
+
+        return wp_remote_post( self::$_api_url, array(
             'timeout' => 30,
             'body' => array(
-                'api_version'   => SED_VERSION,
-                'site_lang'     => get_bloginfo( 'language' ),
-                'feedback_key'  => $feedback_key,
-                'feedback'      => $feedback_text,
+                'action'        => "deactivate_plugin" ,
+                'data'          => wp_json_encode( $params ),
             ),
         ) );
 
