@@ -8,7 +8,7 @@
         <h3><?php echo __("Confirm and enjoy from our advantages:" , "site-editor"); ?></h3>
 
         <ul>
-            <li><?php echo __("24/7 our online support!" , "site-editor"); ?> <a href="#"><?php echo __("More Information" , "site-editor"); ?></a></li>
+            <li><?php echo __("24/7 our online support!" , "site-editor"); ?> <a target="_blank" href="<?php echo "https://www.siteeditor.org/my-account"; ?>"><?php echo __("More Information" , "site-editor"); ?></a></li>
             <li><?php echo __("Never miss an important update - opt-in to our security and feature updates notifications" , "site-editor"); ?></li>
         </ul>
 

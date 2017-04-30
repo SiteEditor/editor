@@ -22,7 +22,7 @@ class SiteEditorAdminFeedback{
      * @var string
      * @static
      */
-    private static $_api_url = 'http://www.siteeditor.org/?api=1';
+    private static $_api_url = 'http://www.siteeditor.og/?sed_api=1';
 
     /**
      * Site Editor Admin Manager Instance of SiteEditorAdminRender
@@ -42,6 +42,15 @@ class SiteEditorAdminFeedback{
 	public function __construct( $admin_manager ) {
 
         $this->manager = $admin_manager;
+
+        /**
+         * Generate User Key after activate plugin
+         */
+        register_activation_hook( dirname( dirname( dirname( __FILE__ ) ) )."/site-editor.php" , array( $this , 'add_user_key' ) );
+
+        register_deactivation_hook( dirname( dirname( dirname( __FILE__ ) ) )."/site-editor.php" , array( $this , 'deactivate_plugin' ) );
+
+        add_action( 'admin_init', array( $this , 'add_user_key' ) , 0  );
 
         /**
          * After Activate Plugin Show one dialog
@@ -88,6 +97,69 @@ class SiteEditorAdminFeedback{
          */
         add_action( 'sed_save_plugin_options_after', array( $this, 'is_checked_save_user_tracking' ) , 1000 ,1 );
 
+        /**
+         * After Admin Settings Saved
+         */
+        add_action( 'sed_after_admin_settings_save', array( $this, 'settings_save_user_tracking_changed' ) , 1000 ,1 );
+
+    }
+
+    public function add_user_key(){
+
+        $user_key = sed_get_plugin_options( 'sed_plugin_user_key' );
+
+        if( ! $user_key ){
+
+            $new_key = self::rand_string();
+
+            sed_save_plugin_options( $new_key , 'sed_plugin_user_key' );
+
+            $params = array(
+                'api_version'       => SED_VERSION,
+                'site_lang'         => get_bloginfo( 'language' ),
+                'home'              => home_url() ,
+                'siteurl'           => site_url() ,
+            );
+
+            $date = date("Y-m-d H:i:s");
+
+            $response = wp_remote_post( self::$_api_url, array(
+                'timeout' => 30,
+                'body' => array(
+                    'action'        => "sed_api_activate_plugin" ,
+                    'user_key'      => $new_key ,
+                    'date'          => $date  ,
+                    'data'          => wp_json_encode( $params ),
+                )
+            ) );
+
+        }
+
+    }
+
+    public function deactivate_plugin(){
+
+        $params = array(
+            'api_version'   	=> SED_VERSION,
+            'site_lang'         => get_bloginfo( 'language' ),
+            'home'              => home_url() ,
+            'siteurl'           => site_url() ,
+        );
+
+        $user_key = sed_get_plugin_options( 'sed_plugin_user_key' );
+
+        $date = date("Y-m-d H:i:s");
+
+        wp_remote_post( self::$_api_url, array(
+            'timeout' => 30,
+            'body' => array(
+                'action'        => "sed_api_deactivate_plugin" ,
+                'user_key'      => $user_key ,
+                'date'      	=> $date ,
+                'data'          => wp_json_encode( $params ),
+            )
+        ) );
+
     }
 
     /**
@@ -106,6 +178,12 @@ class SiteEditorAdminFeedback{
             sed_save_plugin_options( '1' , 'sed_allow_user_tracking_changed');
 
         }
+
+    }
+
+    public function settings_save_user_tracking_changed( $option ){
+
+        sed_save_plugin_options( '1' , 'sed_allow_user_tracking_changed');
 
     }
 
@@ -238,6 +316,7 @@ class SiteEditorAdminFeedback{
 
         // Send here..
         $params = array(
+            'api_version'       => SED_VERSION,
             'system'            => $this->_get_system_reports_data(),
             'site_lang'         => get_bloginfo( 'language' ),
             'email'             => get_option( 'admin_email' ),
@@ -248,6 +327,10 @@ class SiteEditorAdminFeedback{
 
         add_filter( 'https_ssl_verify', '__return_false' );
 
+        $user_key = sed_get_plugin_options( 'sed_plugin_user_key' );
+
+        $date = date("Y-m-d H:i:s");
+
         $response = wp_safe_remote_post(
             self::$_api_url,
             array(
@@ -255,7 +338,9 @@ class SiteEditorAdminFeedback{
                 'blocking'      => false,
                 //'sslverify'   => false,
                 'body'          => array(
-                    'action'        => "user_tracking" ,
+                    'action'        => "sed_api_user_tracking" ,
+                    'user_key'      => $user_key ,
+                    'date'          => $date ,
                     'data'          => wp_json_encode( $params ),
                 ),
             )
@@ -320,8 +405,8 @@ class SiteEditorAdminFeedback{
             /**
              * WordPress Information
              */
-            'wp_home'               => get_bloginfo( 'home' ) ,
-            'wp_siteurl'            => get_bloginfo( 'siteurl' ) ,
+            'wp_home'               => home_url() ,
+            'wp_siteurl'            => site_url() ,
             'wp_version'            => get_bloginfo( 'version' ) ,
             'wp_site_title'         => get_bloginfo( 'name' ) ,
             'wp_site_tagline'       => get_bloginfo( 'description' ) ,
@@ -518,13 +603,37 @@ class SiteEditorAdminFeedback{
             'feedback'      => $feedback_text,
         );
 
+        $user_key = sed_get_plugin_options( 'sed_plugin_user_key' );
+
+        $date = date("Y-m-d H:i:s");
+
         return wp_remote_post( self::$_api_url, array(
             'timeout' => 30,
             'body' => array(
-                'action'        => "deactivate_plugin" ,
+                'action'        => "sed_api_deactivate_feedback_plugin" ,
+                'user_key'      => $user_key ,
+                'date'          => $date ,
                 'data'          => wp_json_encode( $params ),
             ),
         ) );
+
+    }
+
+    public static function rand_string( $length = 16 ) {
+
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        $str = "";
+
+        $size = strlen( $chars );
+
+        for( $i = 0; $i < $length; $i++ ) {
+
+            $str .= $chars[ rand( 0, $size - 1 ) ];
+
+        }
+
+        return $str;
 
     }
 
