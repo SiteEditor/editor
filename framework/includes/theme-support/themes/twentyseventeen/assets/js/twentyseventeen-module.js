@@ -22,15 +22,19 @@
 
         });
 
-        api( "sed_disable_featured_image_header" , function( value ) {
+        _.each( ["sed_disable_single_featured_image_header","sed_disable_page_featured_image_header"] , function( settingId ){
 
-            value.bind( function( to ) {
+            api( settingId , function( value ) {
 
-                if( !to ){
-                    $( ".single-featured-image-header" ).removeClass("hide");
-                }else{
-                    $( ".single-featured-image-header" ).addClass("hide");
-                }
+                value.bind( function( to ) {
+
+                    if( !to ){
+                        $( ".single-featured-image-header" ).removeClass("hide");
+                    }else{
+                        $( ".single-featured-image-header" ).addClass("hide");
+                    }
+
+                });
 
             });
 
@@ -144,6 +148,105 @@
                     }
 
                 });
+
+            });
+
+        });
+
+        if( $("body").hasClass( "archive" ) ) {
+
+            var _blogArchiveOptions = {
+                "sed_show_blog_archive_title": "body.group-blog .page-title",
+                "sed_show_blog_archive_description": "body.group-blog .taxonomy-description"
+            };
+
+            var _showHideBlogheader = function () {
+
+                if (api('sed_show_blog_archive_title')() || api('sed_show_blog_archive_description')()) {
+
+                    $("body.group-blog .page-header").removeClass("hide");
+
+                } else {
+
+                    $("body.group-blog .page-header").addClass("hide");
+
+                }
+
+            };
+
+            $.each(_blogArchiveOptions, function (settingId, _selector) {
+
+                api(settingId, function (value) {
+
+                    value.bind(function (to) {
+
+                        _showHideBlogheader();
+
+                        if (to) {
+                            $(_selector).removeClass("hide");
+                        } else {
+                            $(_selector).addClass("hide");
+                        }
+
+                    });
+
+                });
+
+            });
+
+        }else if( $("body").hasClass( "blog" ) ){
+
+            api( "sed_show_blog_archive_title" , function (value) {
+
+                value.bind(function (to) {
+
+                    if ( to ) {
+
+                        $("body.group-blog .page-header").removeClass("hide");
+
+                    } else {
+
+                        $("body.group-blog .page-header").addClass("hide");
+
+                    }
+
+                });
+
+            });
+
+        }
+
+        api( "sed_show_archive_featured_image" , function (value) {
+
+            value.bind(function (to) {
+
+                if ( to ) {
+
+                    $("body.group-blog .sed-archive-featured-image").removeClass("hide");
+
+                } else {
+
+                    $("body.group-blog .sed-archive-featured-image").addClass("hide");
+
+                }
+
+            });
+
+        });
+
+        api( "sed_show_single_post_title" , function (value) {
+
+            value.bind(function (to) {
+
+                if ( to ) {
+
+                    $("body.single.single-post .sed-single-post-title").removeClass("hide");
+
+                } else {
+
+                    $("body.single.single-post .sed-single-post-title").addClass("hide");
+
+                }
 
             });
 

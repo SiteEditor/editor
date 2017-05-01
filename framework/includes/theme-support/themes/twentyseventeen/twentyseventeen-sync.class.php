@@ -164,17 +164,6 @@ class SiteEditorTwentyseventeenThemeSync{
     public function register_theme_panels( $panels )
     {
 
-        $panels['content_layout_settings'] = array(
-            'title'                 =>  __('Content Layout Settings',"site-editor")  ,
-            'capability'            => 'edit_theme_options' ,
-            'type'                  => 'inner_box' ,
-            'priority'              => 11 ,
-            'btn_style'             => 'menu' ,
-            'has_border_box'        => false ,
-            'icon'                  => 'sedico-layout' ,
-            'field_spacing'         => 'sm'
-        );
-
         $panels['front_page_settings'] = array(
             'title'                 =>  __('Front Page Options',"site-editor")  , 
             'capability'            => 'edit_theme_options' ,
@@ -183,7 +172,15 @@ class SiteEditorTwentyseventeenThemeSync{
             'btn_style'             => 'menu' ,
             'has_border_box'        => false ,
             'icon'                  => 'sedico-current-post-customize' ,
-            'field_spacing'         => 'sm'
+            'field_spacing'         => 'sm',
+            'dependency'    => array(
+                'queries'          =>  array(
+                    array(
+                        'key'       => 'is_front_page' ,
+                        'type'      => 'page_condition'
+                    ) ,
+                )
+            )
         );
 
         $panels['blog_settings'] = array(
@@ -209,6 +206,18 @@ class SiteEditorTwentyseventeenThemeSync{
             'field_spacing'         => 'sm'
         );
 
+        $panels['blog_archive_settings'] = array(
+            'title'                 =>  __('Archive Settings',"site-editor")  ,
+            'capability'            => 'edit_theme_options' ,
+            'type'                  => 'inner_box' ,
+            'priority'              => 20 ,
+            'btn_style'             => 'menu' ,
+            'has_border_box'        => false ,
+            'parent_id'             => 'blog_settings',
+            'icon'                  => 'sedico-current-post-customize' ,
+            'field_spacing'         => 'sm'
+        );
+
         $panels['pages_settings'] = array(
             'title'                 =>  __('Pages Options',"site-editor")  ,
             'capability'            => 'edit_theme_options' ,
@@ -217,7 +226,15 @@ class SiteEditorTwentyseventeenThemeSync{
             'btn_style'             => 'menu' ,
             'has_border_box'        => false ,
             'icon'                  => 'sedico-current-post-customize' ,
-            'field_spacing'         => 'sm'
+            'field_spacing'         => 'sm' ,
+            'dependency'    => array(
+                'queries'          =>  array(
+                    array(
+                        'key'       => 'is_page' ,
+                        'type'      => 'page_condition'
+                    ) ,
+                )
+            )
         ); 
 
         $panels['404_page_settings'] = array(
@@ -228,7 +245,15 @@ class SiteEditorTwentyseventeenThemeSync{
             'btn_style'             => 'menu' ,
             'has_border_box'        => false ,
             'icon'                  => 'sedico-current-post-customize' ,
-            'field_spacing'         => 'sm'
+            'field_spacing'         => 'sm',
+            'dependency'    => array(
+                'queries'          =>  array(
+                    array(
+                        'key'       => 'is_404' ,
+                        'type'      => 'page_condition'
+                    ) ,
+                )
+            )
         );
 
         $panels['search_results_page_settings'] = array(
@@ -239,7 +264,15 @@ class SiteEditorTwentyseventeenThemeSync{
             'btn_style'             => 'menu' ,
             'has_border_box'        => false ,
             'icon'                  => 'sedico-current-post-customize' ,
-            'field_spacing'         => 'sm'
+            'field_spacing'         => 'sm',
+            'dependency'    => array(
+                'queries'          =>  array(
+                    array(
+                        'key'       => 'is_search' ,
+                        'type'      => 'page_condition'
+                    ) ,
+                )
+            )
         );
 
         $panels['theme_general_styling'] =  array( 
@@ -250,7 +283,7 @@ class SiteEditorTwentyseventeenThemeSync{
             'icon'              => 'sedico-change-style' ,
             'field_spacing'     => 'sm' ,
             'parent_id'         => "root" ,
-            'priority'          => 10 ,
+            'priority'          => 70 ,
         );
 
         $panels['general_custom_styling'] =  array(
@@ -380,6 +413,9 @@ class SiteEditorTwentyseventeenThemeSync{
 
         }
 
+        /**
+         * Header Settings
+         */
         $fields['header_settings'] = array(
             "type"              => "button",
             "label"             => __('Header Settings',"site-editor"),
@@ -395,6 +431,9 @@ class SiteEditorTwentyseventeenThemeSync{
             'field_spacing'     => 'sm'
         );
 
+        /**
+         * Page Options
+         */
         $fields['page_content_layout'] = array(
             'setting_id'        => 'page_layout',
             'label'             => __('Page Content Layout', 'site-editor'),
@@ -407,24 +446,52 @@ class SiteEditorTwentyseventeenThemeSync{
                 "one-column"        =>    __('One Column', 'site-editor'),
                 "two-column"        =>    __('Two Column', 'site-editor'),
             ) ,
-            'panel'             => 'content_layout_settings',
+            'panel'             => 'pages_settings',
+        );
+
+        $fields['show_pages_title'] = array(
+            'setting_id'        => 'sed_show_pages_title',
+            'label'             => __('Show pages title', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => true,
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"            =>    "Show" ,
+                "off"           =>    "Hide" ,
+            ) ,
+            'panel'             =>  'pages_settings',
+        );
+
+        $fields['disable_page_featured_image_header'] = array(
+            'setting_id'        => 'sed_disable_page_featured_image_header',
+            'label'             => __('Disable Featured Image Header', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'choices'           => array(
+                "on"                    =>    "Yes" ,
+                "off"                   =>    "No" ,
+            ) ,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'panel'             => 'pages_settings',
         );
 
 
-        $fields['disable_blog_sidebar'] = array(
-            'setting_id'        => 'sed_disable_blog_sidebar',
-            'label'             => __('Disable Blog Sidebar', 'site-editor'),
+        /**
+         * Home Page Options
+         */
+        $fields['show_front_page_titles'] = array(
+            'setting_id'        => 'sed_show_front_page_titles',
+            'label'             => __('Show front page titles', 'site-editor'),
             'type'              => 'switch',
-            'default'           => false,
-            'option_type'       => 'theme_mod',
+            'default'           => true,
             'transport'         => 'postMessage' ,
             'choices'           => array(
-                "on"       =>    "Yes" ,
-                "off"      =>    "No" ,
+                "on"            =>    "Show" ,
+                "off"           =>    "Hide" ,
             ) ,
-            'panel'             =>  'blog_settings',
-        );       
-        
+            'panel'             =>  'front_page_settings',
+        );
 
         /**
          * Filter number of front page sections in Twenty Seventeen.
@@ -447,7 +514,7 @@ class SiteEditorTwentyseventeenThemeSync{
                 'option_type'       => 'theme_mod',
                 'transport'         => 'postMessage' ,
                 'sanitize_callback' => 'absint',
-                'panel'             => 'content_layout_settings',
+                'panel'             => 'front_page_settings',
                 'partial_refresh'   => array(
                     'selector'            => '#panel' . $i,
                     'render_callback'     => 'twse_front_page_section',
@@ -457,6 +524,9 @@ class SiteEditorTwentyseventeenThemeSync{
 
         }
 
+        /**
+         * Footer Settings
+         */
         $fields['footer_settings'] = array(
             "type"              => "button",
             "label"             => __('Footer Settings',"site-editor"),
@@ -472,6 +542,9 @@ class SiteEditorTwentyseventeenThemeSync{
             'field_spacing'     => 'sm'
         );
 
+        /**
+         * 404 Page Settings
+         */
         $fields['404_content_layout'] = array(
             'setting_id'        => 'sed_404_content_layout',
             'label'             => __('404 Content Layout', 'site-editor'),
@@ -520,6 +593,9 @@ class SiteEditorTwentyseventeenThemeSync{
             )
         );
 
+        /**
+         * Search Result Settings
+         */
         $fields['disable_search_results_sidebar'] = array(
             'setting_id'        => 'sed_disable_search_results_sidebar',
             'label'             => __('Disable search results sidebar', 'site-editor'),
@@ -534,50 +610,22 @@ class SiteEditorTwentyseventeenThemeSync{
             'panel'             =>  'search_results_page_settings',
         );
 
-        $fields['show_front_page_titles'] = array(
-            'setting_id'        => 'sed_show_front_page_titles',
-            'label'             => __('Show front page titles', 'site-editor'),
-            'type'              => 'switch',
-            'default'           => true,
-            'transport'         => 'postMessage' ,
-            'choices'           => array(
-                "on"            =>    "Show" ,
-                "off"           =>    "Hide" ,
-            ) ,
-            'panel'             =>  'front_page_settings',
-        );
-
-        $fields['show_pages_title'] = array(
-            'setting_id'        => 'sed_show_pages_title',
-            'label'             => __('Show pages title', 'site-editor'),
-            'type'              => 'switch',
-            'default'           => true,
-            'transport'         => 'postMessage' ,
-            'choices'           => array(
-                "on"            =>    "Show" ,
-                "off"           =>    "Hide" ,
-            ) ,
-            'panel'             =>  'pages_settings',
-        );
-
-
-        $fields['disable_featured_image_header'] = array(
-            'setting_id'        => 'sed_disable_featured_image_header',
-            'label'             => __('Disable Featured Image Header', 'site-editor'),
+        /**
+         * Blog settings
+         */
+        $fields['disable_blog_sidebar'] = array(
+            'setting_id'        => 'sed_disable_blog_sidebar',
+            'label'             => __('Disable Blog Sidebar', 'site-editor'),
             'type'              => 'switch',
             'default'           => false,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
             'choices'           => array(
                 "on"       =>    "Yes" ,
                 "off"      =>    "No" ,
             ) ,
-            'option_type'       => 'theme_mod',
-            'transport'         => 'postMessage' ,
-            'panel'             =>  'general_settings',
+            'panel'             =>  'blog_settings',
         );
-
-        /**
-         * Single Post settings
-         */
 
         $fields['disable_header_post_meta'] = array(
             'setting_id'        => 'sed_disable_header_post_meta',
@@ -590,7 +638,7 @@ class SiteEditorTwentyseventeenThemeSync{
             ) ,
             'option_type'       => 'theme_mod',
             'transport'         => 'postMessage' ,
-            'panel'             =>  'blog_single_posts_settings',
+            'panel'             =>  'blog_settings',
         );
 
         $fields['disable_footer_post_meta'] = array(
@@ -604,7 +652,38 @@ class SiteEditorTwentyseventeenThemeSync{
             ) ,
             'option_type'       => 'theme_mod',
             'transport'         => 'postMessage' ,
+            'panel'             =>  'blog_settings',
+        );
+
+        /**
+         * Single Post settings
+         */
+
+        $fields['show_single_post_title'] = array(
+            'setting_id'        => 'sed_show_single_post_title',
+            'label'             => __('Show Post Title', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => true,
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"            =>    "Yes" ,
+                "off"           =>    "No"  ,
+            ) ,
             'panel'             =>  'blog_single_posts_settings',
+        );
+
+        $fields['disable_single_featured_image_header'] = array(
+            'setting_id'        => 'sed_disable_single_featured_image_header',
+            'label'             => __('Disable Featured Image Header', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => false,
+            'choices'           => array(
+                "on"                    =>    "Yes" ,
+                "off"                   =>    "No" ,
+            ) ,
+            'option_type'       => 'theme_mod',
+            'transport'         => 'postMessage' ,
+            'panel'             => 'blog_single_posts_settings',
         );
 
         $fields['disable_single_post_comments'] = array(
@@ -636,6 +715,115 @@ class SiteEditorTwentyseventeenThemeSync{
         );
 
         /**
+         * Blog && Archive settings
+         */
+        $archive_partial = $this->get_partial_refresh();
+
+        $fields['show_blog_archive_title'] = array(
+            'setting_id'        => 'sed_show_blog_archive_title',
+            'label'             => __('Show Archive Title', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => true,
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"            =>    "Show" ,
+                "off"           =>    "Hide" ,
+            ) ,
+            'panel'             =>  'blog_archive_settings',
+        );
+
+        $fields['show_blog_archive_description'] = array(
+            'setting_id'        => 'sed_show_blog_archive_description',
+            'label'             => __('Show Archive Description', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => true,
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"            =>    "Show" ,
+                "off"           =>    "Hide" ,
+            ) ,
+            'panel'             =>  'blog_archive_settings',
+        );
+
+        $fields['show_archive_featured_image'] = array(
+            'setting_id'        => 'sed_show_archive_featured_image',
+            'label'             => __('Show Archive Featured Images', 'site-editor'),
+            'type'              => 'switch',
+            'default'           => true,
+            'transport'         => 'postMessage' ,
+            'choices'           => array(
+                "on"            =>    "Show" ,
+                "off"           =>    "Hide" ,
+            ) ,
+            'panel'             =>  'blog_archive_settings',
+        );
+
+        $fields["blog_content_display"] = array(
+            'setting_id'        =>  "sed_blog_content_display",
+            "type"              => "radio-buttonset",
+            "label"             => __("Blog Content Display","site-editor"),
+            "description"       => __('This feature allows you to select if you want whole content of a post be loaded or only Excerpt and a summary of the post be displayed.',"site-editor"),
+            'choices'   => array(
+                "excerpt"           =>__("Excerpt","site-editor"),
+                "content"           =>__("Full Content","site-editor"),
+            ),
+            "default"           => 'content',
+            'option_type'       => 'theme_mod' ,
+            'transport'         => 'postMessage' ,
+            'partial_refresh'   => $archive_partial ,
+            'panel'             =>  'blog_archive_settings',
+        );
+
+        $fields["excerpt_length"] = array(
+            'setting_id'        =>  "sed_blog_excerpt_length",
+            "type"              => 'number',
+            "label"             => __("Excerpt Length","site-editor"),
+            "description"       => __('This feature allows you to specify the number of Excerpt characters in a post. In other words it enables you to define the number of your post summary’s characters.',"site-editor"),
+            "default"           => 250 ,
+            'option_type'       => 'theme_mod' ,
+            "js_params"         =>  array(
+                "min"  =>  10 ,
+            ),
+            'transport'         => 'postMessage' ,
+            'partial_refresh'   => $archive_partial ,
+            'panel'             =>  'blog_archive_settings',
+            "dependency"    => array(
+                'queries'  =>  array(
+                    array(
+                        "key"           => "blog_content_display" ,
+                        "value"         => "excerpt" ,
+                        "compare"       => "==="
+                    )
+                ),
+            )
+        );
+
+        $fields["excerpt_strip_html"] = array(
+            'setting_id'        =>  "sed_blog_excerpt_strip_html",
+            "type"              => "switch",
+            "label"             => __("Strip HTML from Excerpt","site-editor"),
+            "description"       => __('This feature allows to Html and Excerpt codes be overlooked for you.',"site-editor"),
+            "default"           => false,
+            'choices'           => array(
+                "on"                =>    __( "Yes","site-editor") ,
+                "off"               =>    __( "No","site-editor") ,
+            ) ,
+            'option_type'       => 'theme_mod' ,
+            'transport'         => 'postMessage' ,
+            'partial_refresh'   => $archive_partial ,
+            'panel'             =>  'blog_archive_settings',
+            "dependency"    => array(
+                'queries'  =>  array(
+                    array(
+                        "key"           => "blog_content_display" ,
+                        "value"         => "excerpt" ,
+                        "compare"       => "==="
+                    )
+                ),
+            )
+        );
+
+        /**
          * Remove Page Builder Settings Fields From Twentyseventeen Theme
          *
          */
@@ -646,6 +834,100 @@ class SiteEditorTwentyseventeenThemeSync{
         $fields = array_merge( $fields , $this->dynamic_css_options );
 
         return $fields;
+
+    }
+
+    protected function get_partial_refresh(){
+
+        return array(
+            'selector'            => '#main.site-main',
+            'render_callback'     => array( $this, '_render_archive_content' ),
+            'container_inclusive' => false,
+        );
+
+    }
+
+    public function _render_archive_content(){
+
+        ob_start();
+
+        if ( have_posts() ) :
+
+            /* Start the Loop */
+            while ( have_posts() ) : the_post();
+
+                /*
+                 * Include the Post-Format-specific template for the content.
+                 * If you want to override this in a child theme, then include a file
+                 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+                 */
+                get_template_part( 'template-parts/post/content', get_post_format() );
+
+            endwhile;
+
+            the_posts_pagination( array(
+                'prev_text' => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
+                'next_text' => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ),
+                'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
+            ) );
+
+        else :
+
+            get_template_part( 'template-parts/post/content', 'none' );
+
+        endif;
+
+        $content = ob_get_contents();
+
+        ob_end_clean();
+
+        return $content;
+
+    }
+
+    public static function the_blog_content(){
+
+        if ( is_single() ) {
+
+            the_content();
+
+        }else{
+
+            $blog_content_display = get_theme_mod( 'sed_blog_content_display' , 'content' );
+
+            $excerpt_length = get_theme_mod( 'sed_blog_excerpt_length' , 250 );
+
+            $strip_html = (bool)get_theme_mod( 'sed_blog_excerpt_strip_html' , '0' );
+
+            switch ( $blog_content_display ){
+
+                case "content" :
+
+                    the_content( sprintf(
+                        __( 'Continue reading<span class="screen-reader-text"> "%s"</span>', 'twentyseventeen' ),
+                        get_the_title()
+                    ) );
+
+                    break;
+
+                case "excerpt" :
+
+                    $content_post = apply_filters('the_excerpt', get_the_excerpt());
+
+                    # FILTER EXCERPT LENGTH
+                    if( strlen( $content_post ) > $excerpt_length )
+                        $content_post = mb_substr( $content_post , 0 , $excerpt_length - 3 ) . '...';
+
+                    if( $strip_html )
+                        $content_post = strip_tags( $content_post );
+
+                    echo $content_post;
+
+                    break;
+
+            }
+
+        }
 
     }
 
