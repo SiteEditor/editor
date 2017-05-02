@@ -5,7 +5,7 @@
 **Tags:** site editor, site builder, page builder, theme builder, theme framework, design, inline editor, inline text editor, layout builder,live options, live, customizer, theme customizer, header builder, footer builder, fully customizable, design options,design editor, options framework, front end, page builder plugin, builder, responsive, front end editor, landing page, editor, drag-and-drop, shortcode, wordpress, ultra flexible, unlimited tools, elements, modules, support, seo, animation, absolute flexibility, live theme options, video backgrounds, font awesome, Optimized, fast, quick, ux, ui  
 **Requires at least:** 4.7  
 **Tested up to:** 4.7.4  
-**Stable tag:** 1.1  
+**Stable tag:** 1.1.1  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -19,7 +19,7 @@ Site Editor is the most powerful Site Builder which is designed for WordPress. I
 
 **OUR OFFICIAL WEBSITE**
 
-[SiteEditor.ORG](https://www.siteeditor.org)
+[SiteEditor.ORG](http://www.siteeditor.org)
 
 **Why Site Editor?**
 
