@@ -22,7 +22,7 @@ class SiteEditorAdminFeedback{
      * @var string
      * @static
      */
-    private static $_api_url = 'http://www.siteeditor.og/?sed_api=1';
+    private static $_api_url = 'http://www.siteeditor.org/?sed_api=1';
 
     /**
      * Site Editor Admin Manager Instance of SiteEditorAdminRender
