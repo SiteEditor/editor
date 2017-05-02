@@ -1,4 +1,4 @@
-<div id="sed-deactivate-feedback-dialog-wrapper" title="<?php echo esc_attr__( 'Quick Feedback', 'site-editor' ); ?>">
+<div id="sed-deactivate-feedback-dialog-wrapper" class="sed-feedback-dialog" title="<?php echo esc_attr__( 'Quick Feedback', 'site-editor' ); ?>">
     
     <form id="sed-deactivate-feedback-dialog-form" method="post">
         
@@ -28,22 +28,23 @@
             <?php endforeach; ?>
             
         </div>
-
+        <br>
         <div class="action-bar">
 
-            <div>
-                <button type="button" class="sed-deactivate-feedback-send button button-primary" data-value="yes"><?php echo __("Submit & Deactivate" , "site-editor"); ?></button>
-            </div>
+
+                <button type="button" class="sed-deactivate-feedback-send button button-primary" data-value="yes"><div class="dashicons dashicons-admin-generic sedicon-admin-spin"></div><div class="sed-deactivate-feedback-send-text"><?php echo __("Submit & Deactivate" , "site-editor"); ?></div></button>
+
 
             <?php
             if( ! $this->_is_allow_track() ) {
 
                 ?>
 
-                <div>
+                    &emsp;
+
                     <button type="button" class="sed-deactivate-feedback-skip button button-default"
                             data-value="skip"><?php echo __("Skip & Deactivate", "site-editor"); ?></button>
-                </div>
+
 
                 <?php
 

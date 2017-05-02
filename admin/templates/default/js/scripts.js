@@ -68,6 +68,7 @@
 
 		$( "#sed_user_tracking_allow" ).dialog({
 			resizable	: false,
+            dialogClass: "sed-feedback-dialog-wrapper sed-admin-dialog-wrapper",
 			height		: 400,
 			width		: 500,
 			modal		: true
@@ -89,6 +90,7 @@
 
 		feedBackDialogEl.dialog({
 			resizable	: false,
+            dialogClass : "sed-feedback-dialog-wrapper sed-admin-dialog-wrapper",
 			height		: 400,
 			width		: 500,
 			modal		: true ,
@@ -115,7 +117,7 @@
 
 			var formData = $("#sed-deactivate-feedback-dialog-form").serialize();
 
-			feedBackDialogEl.find(".sed-deactivate-feedback-send").text( '' ).addClass( 'sed-ajax-loading' );
+			feedBackDialogEl.find(".sed-deactivate-feedback-send").addClass( 'sed-ajax-loading' );
 
 			$.post( ajaxurl, formData, function( data ) {
 
