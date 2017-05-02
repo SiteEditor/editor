@@ -4,8 +4,8 @@
 **Contributors:** [wpsiteeditor](https://profiles.wordpress.org/wpsiteeditor/)  
 **Tags:** site editor, site builder, page builder, theme builder, theme framework, design, inline editor, inline text editor, layout builder,live options, live, customizer, theme customizer, header builder, footer builder, fully customizable, design options,design editor, options framework, front end, page builder plugin, builder, responsive, front end editor, landing page, editor, drag-and-drop, shortcode, wordpress, ultra flexible, unlimited tools, elements, modules, support, seo, animation, absolute flexibility, live theme options, video backgrounds, font awesome, Optimized, fast, quick, ux, ui  
 **Requires at least:** 4.7  
-**Tested up to:** 4.7.3  
-**Stable tag:** 1.0.1  
+**Tested up to:** 4.7.4  
+**Stable tag:** 1.1  
 **License:** GPLv3  
 **License URI:** https://www.gnu.org/licenses/gpl-3.0.html  
 
@@ -15,39 +15,40 @@
 
 **What is the Site Editor?**
 
-Site Editor is the most powerful Site Builder which is designed for WordPress. it's a powerful, advanced, user-friendly front end editor and you can build your website via drag and drop and full live options.
-too Site Editor is a powerful front-end platform for the developer.
+Site Editor is the most powerful Site Builder which is designed for WordPress. It's a powerful, advanced, user-friendly front end editor and you can build your website via drag and drop and full live options. Site Editor is also a powerful front-end platform for the developer.
+
+**OUR OFFICIAL WEBSITE**
+
+[SiteEditor.ORG](https://www.siteeditor.org)
 
 **Why Site Editor?**
 
-Because you can build your website in more efficient, more flexible and much Faster. Site Editor allows you build all of your website's parts like pages, theme, ... in a integrate front end editor easy and fast.  
+Because you can build your website more efficiently, more flexibly and much faster. Site Editor allows you to build all of your website's parts like pages, theme, ... in an integrate front end editor; easy and fast. 
 
-**User-End Friendly**
+**End-User Friendly**
 
-If you aren't a developer and you want to create an amazing and beautiful website, Site Editor is the best tools for it.you can build footer, header and other public theme rows with
-drag and drop and apply them to all pages or spcify pages. you can build all pages and posts with drag and drop too. 
-Actually you don't need **CODING KNOWLEDGE** for create your website.
+If you aren't a developer and you want to create an amazing and beautiful website, Site Editor has the best tools for it. You can build footer, header and other public theme rows with drag and drop and apply them to all pages or specify pages. you can build all pages and posts with drag and drop too. In fact you don't need **CODING KNOWLEDGE** for create your website.
 
 **Developer Friendly**
 
-If you are a developer, you can develop your themes and plugins with our front end platform faster and easier and its result will be very user-friendly extensions and happier clients for you
+If you are a developer, you can develop your themes and plugins with our front end platform quickly and easily and its result will be very user-friendly extensions and happier clients.
 
 **Layout Builder**
 
-Site Editor is help you build your custom layout for set of pages like single posts or portfolio pages or set of custom pages.( Like WordPress page templates and post type templates feature but our feature is full visual and don't need to any coding knowledge )
+Site Editor helps you build your custom layout for set of pages like single posts or portfolio pages or set of custom pages.( Like WordPress page templates and post type templates feature but our feature is full visual and doesn't need any coding knowledge )
 
 **Theme Builder and Theme Customizer**
 
-Site Editor is header builder, it allows to you create your custom header and apply to all pages or set of pages. it's footer builder too and you can your custom page titles And addition you can create any custom public rows for theme area and apply them to all pages or specify pages. Actually, you can completely your theme in our front end editor. this feature is The most exclusive our feature and there isn't on other WordPress plugins. this feature introduced for the first time by Site Editor
+Site Editor's header builder allows to you create your custom header and apply to all pages or set of pages. Its footer builder acts the same; you can customize page titles, and in addition you can create any custom public rows for theme area and apply them to all pages or specify pages. Actually, you can completely your theme in our front end editor. This feature is our most exclusive feature and it doesn't exist on other WordPress plugins. This feature is introduced for the first time by Site Editor.
 
 **Page Builder**
 
-You can create all of website's pages content like content of pages, posts and custom post types with Site Editor. for it you need drag and drop modules to your content of pages easily and edit the module settings and simultaneously see exactly how it looks like. With Site Editor you can create content of pages very easy, fast and truly live.
+You can create all of website's pages content like content of pages, posts and custom post types with Site Editor. In order to do that you need drag and drop modules to your content of pages easily and edit the module settings and simultaneously see exactly how it looks like. With Site Editor you can create content of pages very easily, fast and truly live.
 
 
 **Options Framework and Fully Live Options**
 
-See changes as you make them in a live environment(Front End Editor) and after change each option you can see changes on your page and no more need to switch between admin panel and site to see the changes. Our Options Framework have +30 type of option, these include : 
+See changes as you make them in a live environment (Front End Editor) and after change each option you can see changes on your page and no more need to switch between admin panel and site to see the changes. Our Options Framework have +30 type of option, these include : 
 
 * text
 * tel
@@ -89,19 +90,20 @@ You can edit all texts on the pages easily with our inline text editor. This inc
 
 **Design Options and Fully Live**
 
-You can easily edit the styles of all elements, theme modules and pages visually and live without any prior coding knowledge. You can give life to your imagination and implement any sophisticated and professional layout in the visual editor and see the changes live as you make them. 
+You can easily edit the styles of all elements, theme modules and pages visually and live without any prior coding knowledge. You can give life to your imagination and implement any sophisticated and professional layout in the visual editor and see the changes live as you make them.
 
 **Developer API**
 
-If you are a **Theme Developer**, you can build your themes with Site Editor very easy & fast. you can add all your theme options with front end options framework and you can add your modules for page builder and sync our modules with your design too.  
-If you are a **Plugin Developer**, you can build your Plugins in our front end editor with front end options framework.    
+If you are a **Theme Developer**, you can build your themes with Site Editor very easily & quickly. You can add all your theme options with front end options framework and you can add your modules for page builder and sync our modules with your design too.
+If you are a **Plugin Developer**, you can build your Plugins in our front end editor with front end options framework.
 
-We have a sample module for developers guide that for find it go to **"Site Editor Plugin Folder/editor/extensions/pagebuilder/modules/api-test-module"**  
-you can test in module in our editor. it's active by default  
+We have a sample module for developers guide which you can find at **"Site Editor Plugin Folder/editor/extensions/pagebuilder/modules/api-test-module"**
+you can test in module in our editor. It's active by default.
 
-Too We have a sample options file for developers guide( you can using for theme options and plugin options in front end editor mode ) that for find it go to **"Site Editor Plugin Folder/editor/extensions/options-engine/includes/demo/site-editor-sample-options.php"**  
-**Notic 1:** for test this options in our editor you can need active it on WordPress Admin > SiteEditor > General Settings > Developer Sample Options.    
-**Notic 2:** Our Developer API documentation coming soon!  
+We also have a sample options file for developers guide( you can use for theme options and plugin options in front end editor mode ) which you find at **"Site Editor Plugin Folder/editor/extensions/options-engine/includes/demo/site-editor-sample-options.php"**
+
+**Notice 1:** To test this options in our editor you need to activate it on WordPress Admin > SiteEditor > General Settings > Developer Sample Options.
+**Notice 2:** Our Developer API documentation coming soon!
 
 
 **BE A CONTRIBUTOR**
@@ -116,9 +118,7 @@ You’re free to change themes as often as you like, Site Editor will work with 
 
 **100% MOBILE FRIENDLY**
 
-Every part of a Site Editor like modules, skins, ... are well adjusted based on the size of the screen and you
-can set of responsive options for each module and see the changes in our mobile editor preview. Site Editor allow you
-create amazing responsive design for your site.
+Every part of a Site Editor like modules, skins, ... are well adjusted based on the size of the screen and you can set responsive options for each module and see the changes in our mobile editor preview. Site Editor allow you create amazing responsive design for your site.
 
 
 # Features:
@@ -192,13 +192,23 @@ Troubleshooting:
 
 # Changelog
 
-**1.0.1 - Released: April 21th, 2017**
+**1.1 - Released: May 2th, 2017**
 
 * Remove wputop From Site Editor Shortcodes
 
 * Post Content Disable Edit Fixed issue #
 
 * Shortcodes nesting Level Fixed issue #
+
+* Add user feedback system
+
+* Site Custom Css Fixed issue #
+
+* Theme Row Preset Fixed issue #
+
+* Ajax module wrapper settings Fixed issue #
+
+* and some a little issues fixed
 
 **1.0 - Released: April 19th, 2017**
 
