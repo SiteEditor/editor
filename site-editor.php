@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Site Editor
-Plugin URI: http://www.siteeditor.org/
+Plugin URI: https://www.siteeditor.org
 Description: SiteEditor is a powerful theme builder & page builder for wordpress
 Author: Site Editor Team
-Author URI: http://www.siteeditor.org/products/site-editor
-Version: 1.0.1
+Author URI: https://www.siteeditor.org
+Version: 1.1
 */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,7 +24,7 @@ final Class SiteEditor {
      *
      * @var string
      */
-    public $version = '1.0.1';
+    public $version = '1.1';
 
     /**
      * SiteEditor version type
