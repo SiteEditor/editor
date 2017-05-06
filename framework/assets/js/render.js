@@ -43,7 +43,7 @@ jQuery(document).ready(function ($) {
         return stickyHeight;
     };
 
-    $('body').find('a[href*=#]').each(function(){
+    $('body').find('a.sed_scroll[href*=#]').each(function(){
         if( $(this).parents(".module.module-megamenu").length > 0 || $(this).attr("data-toggle") == "tab" ){
             return true;
         }
