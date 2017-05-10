@@ -293,11 +293,11 @@
 
                 }
 
-                var _callback = function(){
+                var _callback = function(){ 
                     newItem.remove();
                     self.addModuleToPost( name , dropItem , direction , response.data );
 
-                    var patternScripts = api.sedShortcode.getPatternScripts( newPattern );
+                    var patternScripts = api.sedShortcode.getPatternScripts( newPattern ); //console.log( "-----------patternScripts--------" , patternScripts );
 
                     var patternStyles = api.sedShortcode.getPatternStyles( newPattern );
 

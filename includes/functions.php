@@ -308,18 +308,6 @@ function sed_get_attachment( $attachment_id ){
 }
 
 
-function get_menu_parent_id( $post_id , $depth = 99 ){
-    if( empty( $post_id ) )
-        return null;
-
-    $parent_id = get_post_meta( $post_id , "_menu_item_menu_item_parent" , true );
-    if( empty( $parent_id ) || $depth == 0 || $parent_id == 0 )
-        return $post_id;
-
-    return get_menu_parent_id( $parent_id , $depth-- );
-}
-
-
 function sed_request_is_ajax(){
     return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH']==='XMLHttpRequest';
 }

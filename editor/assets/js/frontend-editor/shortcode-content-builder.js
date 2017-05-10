@@ -925,7 +925,7 @@
 
         sendData: function( currentPlace ){
 
-            this.checkContentType(); //console.log( "------------this.postsContent---------------" , this.postsContent );
+            this.checkContentType(); //console.log( "------------this.pagesThemeContent---------------" , this.pagesThemeContent );
 
             var place = ( !_.isUndefined( currentPlace ) ) ? currentPlace : api.shortcodeCurrentPlace;
 

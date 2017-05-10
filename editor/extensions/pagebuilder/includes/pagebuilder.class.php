@@ -1056,7 +1056,7 @@ Class PageBuilderApplication {
             var _sedAppEditorPageBuilderModules = <?php echo wp_json_encode( $modules_options ); ?>;
             var _sedRegisteredShortcodesSettings = <?php if( !empty( $shortcodes_settings ) ) echo wp_json_encode( $shortcodes_settings ); else "{}"; ?>;
             var _sedShortcodesDefaultPatterns = <?php echo wp_json_encode( $pattern_settings ); ?>;
-            var _sedRegisteredShortcodesScripts = <?php echo wp_json_encode( $scripts ); ?>;
+            var _sedRegisteredShortcodesScripts = <?php echo wp_json_encode( $scripts ); ?>; 
             var _sedRegisteredShortcodesStyles = <?php echo wp_json_encode( $styles ); ?>;
             var _sedAppJsModulesForEditor = <?php echo wp_json_encode( $js_modules ); ?>;
 
