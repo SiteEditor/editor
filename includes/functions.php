@@ -208,26 +208,35 @@ function get_site_editor_url( $sed_page_id = '' , $sed_page_type = '' , $permali
     return get_sed_url( $sed_page_id , $sed_page_type , $permalink , $args );
 }
 
-//@TODO FiX SiteEditor Url For WOOCOMMERCE ( Shop Page )
+
+/**
+ * FiX SiteEditor Url For WOOCOMMERCE ( Shop Page )
+ *
+ * @since 1.1.2
+ *
+ * @param $editor_url
+ * @param string $sed_page_id
+ * @param string $sed_page_type
+ * @param string $permalink
+ * @param array $args
+ * @return string
+ */
 function woo_shop_fix_sed_url( $editor_url , $sed_page_id = '' , $sed_page_type = '' , $permalink = '' , $args = array() ){
     global $post;
 
-    if( $sed_page_type != "post" || !$sed_page_id )
+    if( $sed_page_type != "post" || !$sed_page_id || !class_exists( 'WooCommerce' ) )
         return $editor_url;
 
     $shop_page_id = get_option('woocommerce_shop_page_id');
 
     if( $shop_page_id == $sed_page_id && $sed_page_id > 0 ){
 
-        $url = site_url();
+        $permalink = get_post_type_archive_link('product');
 
-        $parse_url = parse_url( $url );
-
-        if( isset( $parse_url['query'] ) ){
-            $editor_url = $url . "&editor=siteeditor&preview_url=" . urlencode( get_post_type_archive_link('product') ) ."&sed_page_id=post_type_product&sed_page_type=post_type" ;
-        }else{
-            $editor_url = $url . "?editor=siteeditor&preview_url=" . urlencode( get_post_type_archive_link('product') ) ."&sed_page_id=post_type_product&sed_page_type=post_type";
-        }
+        $editor_url = add_query_arg( 'editor'           , 'siteeditor', admin_url("/") );
+        $editor_url = add_query_arg( 'preview_url'      , urlencode($permalink) , $editor_url );
+        $editor_url = add_query_arg( 'sed_page_id'      , "post_type_product" , $editor_url );
+        $editor_url = add_query_arg( 'sed_page_type'    , "post_type" , $editor_url );
 
     }
 
@@ -264,22 +273,25 @@ if( !function_exists( "is_woocommerce_active" ) ):
     }
 endif;
 
-if( is_woocommerce_active() ) :
 
-    function woo_shop_fix_sed_page_info($info)
-    {
+function woo_shop_fix_sed_page_info($info){
 
-        if (is_shop()) {
+    if ( class_exists('WooCommerce') ) {
+
+        if( is_shop() ) {
+
             $info['type'] = "post_type";
+
             $info['id'] = "post_type_product";
+
         }
 
-        return $info;
     }
 
-    add_filter('sed_page_info_filter', 'woo_shop_fix_sed_page_info', 10, 1);
+    return $info;
+}
 
-endif;
+add_filter('sed_page_info_filter', 'woo_shop_fix_sed_page_info', 10, 1);
 
 function is_sed_installed(){
     $status_install_steps = array_merge( array(
@@ -554,7 +566,7 @@ function sed_print_message( $msg , $type = "success"){
 }
 
 function sed_is_mobile_version(){
-    if( class_exists( 'Mobile_Detect' ) ){
+    if( class_exists( 'Mobile_Detect' ) && function_exists('is_handheld') ){
         if( is_handheld() || ( isset( $_REQUEST['sed_mobile_test'] ) && $_REQUEST['sed_mobile_test'] == "yes" ) ){
             return apply_filters( "sed_is_mobile_version" , true );
         }else{
