@@ -129,24 +129,26 @@ Class SiteeditorTypography{
             ob_start();
 
             foreach( $cfonts as $font => $font_data ) {
-                if( !in_array( $font , $this->base_loaded_fonts )  ){
 
-                ?>
+                if( !isset( $this->base_loaded_fonts[$font] ) ){
 
-                @font-face {
-                    font-family: <?php echo $font_data['font_family']; ?>;
-                    src: url('<?php echo $font_data['font_eot']; ?>');
-                    src:
-                        url('<?php echo $font_data['font_eot']; ?>?#iefix') format('eot'),
-                        url('<?php echo $font_data['font_woff']; ?>') format('woff'),
-                        url('<?php echo $font_data['font_ttf']; ?>') format('truetype'),
-                        url('<?php echo $font_data['font_svg']; ?>#<?php echo $font_data['font_family']; ?>') format('svg');
-                    font-weight: 400;
-                    font-style: normal;
+                    ?>
+
+                    @font-face {
+                        font-family: <?php echo $font_data['font_family']; ?>;
+                        src: url('<?php echo $font_data['font_eot']; ?>');
+                        src:
+                            url('<?php echo $font_data['font_eot']; ?>?#iefix') format('eot'),
+                            url('<?php echo $font_data['font_woff']; ?>') format('woff'),
+                            url('<?php echo $font_data['font_ttf']; ?>') format('truetype'),
+                            url('<?php echo $font_data['font_svg']; ?>#<?php echo $font_data['font_family']; ?>') format('svg');
+                        font-weight: 400;
+                        font-style: normal;
+                    }
+
+                    <?php
                 }
 
-                <?php
-                }
             }
 
             $sed_dynamic_css_string .= ob_get_clean();
@@ -168,7 +170,7 @@ Class SiteeditorTypography{
         if( !empty( $gfonts ) ){
 
             foreach( $gfonts as $font ) {
-                if( !in_array( $font , $this->base_loaded_fonts )  ){
+                if( !isset( $this->base_loaded_fonts[$font] ) ){
                     /*if( !empty( $sed_general_data['gfont_settings'] ) )
                         $gfont_settings = ":" . $sed_general_data['gfont_settings'];
                     else*/
@@ -246,8 +248,6 @@ Class SiteeditorTypography{
             $gfont_settings = ":" . $sed_general_data['gfont_settings'];
         else
             $gfont_settings = "";
-
-        $this->base_loaded_fonts = array_unique( $this->base_loaded_fonts  );
 
         ?>
         <script>

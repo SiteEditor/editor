@@ -1822,6 +1822,8 @@
                                 previewArgs['selector'] = previewArgs['selector'].replace( "##current##" , '[sed_model_id="' + elementId + '"]' );
                             }
 
+                            api.contentBuilder.updateShortcodeAttr( api.currentAttr , attrValue , elementId);
+
                             _previewAutoUpdate( attrValue , previewArgs, previewType, _uniqeId);
 
                         };

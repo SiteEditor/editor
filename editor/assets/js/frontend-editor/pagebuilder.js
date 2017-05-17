@@ -2107,8 +2107,9 @@
                     return ;
                 }
 
-                if( api.currentAttr != "skin" &&  api.currentAttr != "sed_shortcode_content" )
-                    api.contentBuilder.updateShortcodeAttr( api.currentAttr  , attrValue , elementId );
+                if( api.currentAttr != "skin" &&  api.currentAttr != "sed_shortcode_content" ) {
+                    api.contentBuilder.updateShortcodeAttr(api.currentAttr, attrValue, elementId);
+                }
 
                 if( api.currentAttr == "sed_shortcode_content" ){
                     api.contentBuilder.updateShortcodeContent( elementId , attrValue );
