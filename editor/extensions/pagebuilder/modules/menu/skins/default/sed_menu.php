@@ -7,7 +7,7 @@ else
 
 ?>
 
-<div <?php echo $sed_attrs; ?> class="navigation-wrapper module module-menu module-menu-skin-defult <?php echo  $class;?>">
+<div <?php echo $sed_attrs; ?> class="navigation-wrapper module module-menu module-menu-skin-defult <?php echo $class;?>">
     <div class="navigation-wrapper-inner <?php echo  $length_class;?>" length_element>
         <div class="navbar-toggle-wrap">
             <div class="navbar-toggle">
@@ -15,7 +15,7 @@ else
                 <span class="icon-bar"></span> 
                 <span class="icon-bar"></span> 
             </div>
-            <span class="navbar-header-title">Menu</span>
+            <span class="navbar-header-title"><?php echo __("Menu","site-editor");?></span>
         </div>    
         <div class="navbar-wrap">
             <nav class="navbar-wrap-inner">
