@@ -310,7 +310,7 @@ final Class SiteEditorFramework {
             <script type="text/javascript">
                 (function ($) {
 
-                    var $style_sheet = "<link rel='stylesheet' id='<?php echo $this->sed_page_id . '_css';?>-css'  href='<?php echo $upload_dir['baseurl'] . '/siteeditor/' . $css_filename . '.css';?>' type='text/css' media='all' />";
+                    var $style_sheet = "<link rel='stylesheet' id='<?php echo $this->sed_page_id . '_css';?>-css'  href='<?php echo $upload_dir['baseurl'] . '/siteeditor/' . $css_filename . '.css?'. date("l jS F Y h:i:s A");?>' type='text/css' media='all' />";
 
                     $($style_sheet).appendTo("head");
 
