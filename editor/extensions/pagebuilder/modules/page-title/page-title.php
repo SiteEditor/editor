@@ -138,13 +138,19 @@ class PBPageTitleShortcode extends PBShortcodeClass{
             } elseif ( !is_single() && !is_page() && get_post_type() != 'post' && !is_404() ) {
                 $post_type  = get_post_type_object(get_post_type());
 
+                $page_title = "";
+
                 if( $post_type ){
                     $page_title = $post_type->labels->singular_name;
-                    if ( is_tax() ) {
-                        $page_title = single_term_title( "", false );//sprintf( __("%s Category %s" , "site-editor") , $page_title , single_term_title( "", false ) );
-                    }
-                    $title = $page_title;
+
                 }
+
+                if ( is_tax() ) {
+                    $page_title = single_term_title( "", false );//sprintf( __("%s Category %s" , "site-editor") , $page_title , single_term_title( "", false ) );
+                }
+
+                $title = $page_title;
+
 
             } elseif ( is_attachment() ) {
                 //$parent = get_post( $parent_id );
@@ -169,7 +175,7 @@ class PBPageTitleShortcode extends PBShortcodeClass{
                     $title = __('Page','site-editor') . ' : ' . get_query_var('paged');
             }*/
         }
-        if( empty( $title ) )
+        if( empty( $title ) && $post )
             $title = get_the_title( $post->ID );
 
         return apply_filters( "sed_page_title" , $title );

@@ -10,7 +10,7 @@ Class SiteeditorTypography{
     public $base_loaded_fonts = array();
 
 
-    function __construct( ){
+	function __construct( ){
 
         add_action( 'init',    array( $this, 'set_fonts' ) );
 
@@ -36,11 +36,11 @@ Class SiteeditorTypography{
 
         //add_action( "sed_footer" , array( $this , "print_fonts" )  );
 
-    }
+	}
 
     function set_fonts(){
-        $this->set_google_fonts();
-        $this->set_standard_fonts();
+		$this->set_google_fonts();
+		$this->set_standard_fonts();
         $this->set_custom_fonts();
     }
 
@@ -108,7 +108,7 @@ Class SiteeditorTypography{
 
         $this->load_custom_fonts( $fonts );
 
-        $this->load_google_fonts( $fonts , $footer );
+    	$this->load_google_fonts( $fonts , $footer );
 
     }
 
@@ -135,15 +135,15 @@ Class SiteeditorTypography{
                     ?>
 
                     @font-face {
-                    font-family: <?php echo $font_data['font_family']; ?>;
-                    src: url('<?php echo $font_data['font_eot']; ?>');
-                    src:
-                    url('<?php echo $font_data['font_eot']; ?>?#iefix') format('eot'),
-                    url('<?php echo $font_data['font_woff']; ?>') format('woff'),
-                    url('<?php echo $font_data['font_ttf']; ?>') format('truetype'),
-                    url('<?php echo $font_data['font_svg']; ?>#<?php echo $font_data['font_family']; ?>') format('svg');
-                    font-weight: 400;
-                    font-style: normal;
+                        font-family: <?php echo $font_data['font_family']; ?>;
+                        src: url('<?php echo $font_data['font_eot']; ?>');
+                        src:
+                            url('<?php echo $font_data['font_eot']; ?>?#iefix') format('eot'),
+                            url('<?php echo $font_data['font_woff']; ?>') format('woff'),
+                            url('<?php echo $font_data['font_ttf']; ?>') format('truetype'),
+                            url('<?php echo $font_data['font_svg']; ?>#<?php echo $font_data['font_family']; ?>') format('svg');
+                        font-weight: 400;
+                        font-style: normal;
                     }
 
                     <?php
@@ -174,7 +174,7 @@ Class SiteeditorTypography{
                     /*if( !empty( $sed_general_data['gfont_settings'] ) )
                         $gfont_settings = ":" . $sed_general_data['gfont_settings'];
                     else*/
-                    $gfont_settings = "";
+                        $gfont_settings = "";
 
                     if( !$footer ) {
 
@@ -182,7 +182,7 @@ Class SiteeditorTypography{
                     }else{
 
                         ?>
-                        <script type="text/javascript">
+                        <script type="text/javascript"> 
                             (function ($) {
 
                                 var $style_sheet = "<link rel='stylesheet'  href='<?php echo "http" . ((is_ssl()) ? 's' : '') . "://fonts.googleapis.com/css?family={$font}" . $gfont_settings;?>' type='text/css' media='all' />";
@@ -192,9 +192,9 @@ Class SiteeditorTypography{
                             }(jQuery));
                         </script>
                         <?php
-
+                        
                     }
-
+                    
                 }
             }
 
@@ -244,7 +244,7 @@ Class SiteeditorTypography{
 
         $font_groups['google_fonts']    = $this->google_fonts;
 
-        if( !empty( $sed_general_data['gfont_settings'] ) )
+	    if( !empty( $sed_general_data['gfont_settings'] ) )
             $gfont_settings = ":" . $sed_general_data['gfont_settings'];
         else
             $gfont_settings = "";
@@ -287,7 +287,7 @@ Class SiteeditorTypography{
         $google_fonts = apply_filters( 'sed_google_fonts_filter' , $google_fonts );
 
         return $google_fonts;
-
+        
     }
 
     function set_standard_fonts(){
