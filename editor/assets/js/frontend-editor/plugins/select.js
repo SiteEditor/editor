@@ -54,7 +54,10 @@
 
             if(api.appPreview.mode == "on")
                 return false;
-                                  
+
+            if( _.isUndefined( api.shortcodes ) )
+                return false;
+
             var self = this;
 
             forceOpen = _.isUndefined( forceOpen ) ? false : forceOpen;
