@@ -75,6 +75,11 @@
 	margin: 0
 }
 
+.navigation-wrapper .navbar-wrap ul ul li a ,
+.rtl .navigation-wrapper .navbar-wrap ul ul li a {
+	margin: 0;
+}
+
 .navigation-wrapper .navbar-wrap ul li a:hover {
 
 }
