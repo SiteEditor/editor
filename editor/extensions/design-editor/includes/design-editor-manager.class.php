@@ -78,8 +78,6 @@ class SedDesignEditorManager extends SiteEditorModules{
 
         );
 
-        add_action( "sed_before_dynamic_css_output" , array( $this , 'custom_design_output' ) , 10 );
-
         add_action( 'sed_app_register_general_options' , array( $this , 'register_page_custom_design_editor_setting' ) );
 
         add_action( "sed_app_register" , array( $this , "register_settings" ) );
@@ -192,24 +190,7 @@ class SedDesignEditorManager extends SiteEditorModules{
         sed_options()->add_panels( $new_panels );
 
     }
-
-    public function custom_design_output( ){
-
-        $site_design_settings = get_option( 'site_custom_design_settings' );
-
-        $css_data = ( $site_design_settings === false ) ? array() : $site_design_settings;
-
-        $page_design_settings = sed_get_page_setting( 'page_custom_design_settings' );
-
-        $page_design_settings = ( is_array( $page_design_settings ) ) ? $page_design_settings : array();
-
-        $css_data = array_merge( $css_data , $page_design_settings );
-
-        $css_data = array_merge( $css_data , SED()->framework->dynamic_css_data );
-
-        SED()->framework->dynamic_css_data = $css_data;
-    }
-
+    
     /**
      * @param $settings
      * @return mixed
